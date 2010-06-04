@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ZeroPositionKinematicTree>
+<ZeroPositionKinematicTree version="1.0" robotName="iCub">
+<branch name="rightArm">
+
+<!-- TORSO --> 
+<link name="torso" r=".05">
+    <u x="0" y="0" z="1"/>
+    <b x="0" y="-.15" z="0"/>
+
+<!-- 
+**** RIGHT ARM ****
+-->
+<!-- SHOULDER (3 DOF) -->   
+<motor name="shoulderRoll">
+<joint name="shoulderRoll" type="revolute" minPos="-.1" maxPos="2.5" r=".03">
+    <u x="0" y="0" z="1"/>
+    <b x="-.08" y="-.15" z="0"/>
+    <motor name="shoulderPitch">
+    <joint name="shoulderPitch" type="revolute" minPos="-1" maxPos="1.5" r=".03">
+        <u x="1" y="0" z="0"/>
+        <b x="0" y="0" z="0"/>
+        <motor name="shoulderYaw">
+        <joint name="shoulderYaw" type="revolute" minPos="-1.5" maxPos="1.5" r=".03">
+            <u x="0" y="1" z="0"/>
+            <b x="0" y="0" z="0"/>
+
+<!-- ELBOW -->
+<motor name="elbow">
+<joint name="elbow" type="revolute" minPos="0" maxPos="2" r=".02">
+    <u x="1" y="0" z="0"/>
+    <b x="0" y=".2" z="0"/>
+    
+<!-- WRIST (3 DOF) -->
+<motor name="wristRoll">
+<joint name="wristRoll" type="revolute" minPos="-.75" maxPos=".75" r=".02">
+    <u x="0" y="0" z="-1"/>
+    <b x="0" y=".18" z="0"/>
+    <motor name="wristPitch">
+    <joint name="wristPitch" type="revolute" minPos="-.6" maxPos=".6" r=".03">
+        <u x="-1" y="0" z="0"/>
+        <b x="0" y="0" z="0"/>
+        <motor name="wristYaw">
+        <joint name="wristYaw" type="revolute" minPos="-1.5" maxPos="1.5" r=".03">
+            <u x="0" y="1" z="0"/>
+            <b x="0" y="0" z="0"/>
+                            
+                                
+<!-- HAND -->
+<!-- thumb -->
+<motor name="thumbFirstKnuckle">
+    <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.012">
+        <u x="0.0" y="0.06" z="0.015"/>
+        <b x="0.0" y="0.0" z="0.0"/>
+        <motor name="thumbSecondKnuckle">
+            <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.008">
+                <u x="-0.2" y="1.0" z="-2.0"/>
+                <b x="0" y="0.04" z="0.03"/>
+                <motor name="thumbThirdKnuckle">
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.008">
+                        <u x="-0.2" y="1.0" z="-2.0"/>
+                        <b x="0" y="0.04" z="0.01"/>
+                        <link name="fingerTip" r="0.008">
+                            <u x="1" y="0" z="-0.005"/>
+                            <b x="0.001" y="0.03" z="0"/>
+                        </link>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+</motor>
+<!-- four fingers -->
+<motor name="spread">
+    <!-- index finger -->
+    <joint name="indexSpread" type="revolute" minPos="0" maxPos=".3" r="0.01">
+        <u x="1" y="0" z="0"/>
+        <b x="0.0" y="0.07" z="0.015"/>
+        <motor name="indexFirstKnuckle">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="-1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <motor name="indexSecondTwo">
+                    <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="-1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                        <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                            <u x="0" y="0" z="-1"/>
+                            <b x="0.0" y="0.02" z="0.0"/>
+                            <link name="fingerTip" r="0.005">
+                                <u x="1" y="0" z="0"/>
+                                <b x="0" y="0.02" z="0"/>
+                            </link>
+                        </joint>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+    <!-- middle finger -->
+    <joint name="middleSpread" type="revolute" minPos="0" maxPos=".1" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.075" z="0.0"/>
+        <motor name="middleFirstKnuckle">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="-1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <motor name="middleSecondTwo">
+                    <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="-1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                        <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                            <u x="0" y="0" z="-1"/>
+                            <b x="0.0" y="0.02" z="0.0"/>
+                            <link name="fingerTip" r="0.005">
+                                <u x="1" y="0" z="0"/>
+                                <b x="0" y="0.02" z="0"/>
+                            </link>
+                        </joint>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+    <!-- ring finger --> 
+    <joint name="ringSpread" type="revolute" minPos="0" maxPos=".2" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.07" z="-0.015"/>
+        <motor name="ringPinky">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="-1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="-1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                        <u x="0" y="0" z="-1"/>
+                        <b x="0.0" y="0.02" z="0.0"/>
+                        <link name="fingerTip" r="0.005">
+                            <u x="1" y="0" z="0"/>
+                            <b x="0" y="0.02" z="0"/>
+                        </link>
+                    </joint>
+                </joint>
+            </joint>
+        </motor>
+    </joint>
+    <!-- pinky finger -->
+    <joint name="pinkySpread" type="revolute" minPos="0" maxPos=".3" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.06" z="-0.03"/>
+        <motor name="ringPinky">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="-1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                <u x="0" y="0" z="-1"/>
+                <b x="0.0" y="0.03" z="0.0"/>
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                        <u x="0" y="0" z="-1"/>
+                        <b x="0.0" y="0.02" z="0.0"/>
+                        <link name="fingerTip" r="0.005">
+                            <u x="1" y="0" z="0"/>
+                            <b x="0" y="0.02" z="0"/>
+                        </link>
+                    </joint>
+                </joint>
+            </joint>
+        </motor>
+    </joint>
+</motor>
+
+<!-- /// WRIST -->
+        </joint>
+        </motor>
+    </joint>
+    </motor>
+</joint>
+</motor>
+
+<!-- /// ELBOW -->
+</joint>
+</motor>     
+
+<!-- /// SHOULDER -->
+        </joint>
+        </motor>
+    </joint>
+    </motor>
+</joint>
+</motor> 
+
+
+<!--
+**** LEFT ARM ****
+-->
+<!-- SHOULDER (3 DOF) -->   
+<motor name="LeftShoulderRoll">
+<joint name="shoulderRoll" type="revolute" minPos="-.1" maxPos="2.5" r=".03">
+    <u x="0" y="0" z="-1"/>
+    <b x=".08" y="-.15" z="0"/>
+    <motor name="LeftShoulderPitch">
+    <joint name="shoulderPitch" type="revolute" minPos="-1" maxPos="1.5" r=".03">
+        <u x="1" y="0" z="0"/>
+        <b x="0" y="0" z="0"/>
+        <motor name="LeftShoulderYaw">
+        <joint name="shoulderYaw" type="revolute" minPos="-1.5" maxPos="1.5" r=".03">
+            <u x="0" y="-1" z="0"/>
+            <b x="0" y="0" z="0"/>
+
+<!-- ELBOW -->
+<motor name="LeftElbow">
+<joint name="elbow" type="revolute" minPos="0" maxPos="2" r=".02">
+    <u x="1" y="0" z="0"/>
+    <b x="0" y=".2" z="0"/>
+    
+<!-- WRIST (3 DOF) -->
+<motor name="LeftWristRoll">
+<joint name="wristRoll" type="revolute" minPos="-.75" maxPos=".75" r=".02">
+    <u x="0" y="0" z="1"/>
+    <b x="0" y=".18" z="0"/>
+    <motor name="LeftWristPitch">
+    <joint name="wristPitch" type="revolute" minPos="-.6" maxPos=".6" r=".03">
+        <u x="-1" y="0" z="0"/>
+        <b x="0" y="0" z="0"/>
+        <motor name="LeftWristYaw">
+        <joint name="wristYaw" type="revolute" minPos="-1.5" maxPos="1.5" r=".03">
+            <u x="0" y="-1" z="0"/>
+            <b x="0" y="0" z="0"/>
+                            
+                                
+<!-- HAND -->
+<!-- thumb -->
+<motor name="LeftThumbFirstKnuckle">
+    <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.012">
+        <u x="0.0" y="-0.06" z="-0.015"/>
+        <b x="0.0" y="0.0" z="0.0"/>
+        <motor name="LeftThumbSecondKnuckle">
+            <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.008">
+                <u x="-0.2" y="-1.0" z="2.0"/>
+                <b x="0" y="0.04" z="0.03"/>
+                <motor name="LeftThumbThirdKnuckle">
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.008">
+                        <u x="-0.2" y="-1.0" z="2.0"/>
+                        <b x="0" y="0.04" z="0.01"/>
+                        <link name="fingerTip" r="0.008">
+                            <u x="1" y="0" z="-0.005"/>
+                            <b x="0.001" y="0.03" z="0"/>
+                        </link>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+</motor>
+<!-- four fingers -->
+<motor name="LeftSpread">
+    <!-- index finger -->
+    <joint name="indexSpread" type="revolute" minPos="0" maxPos=".3" r="0.01">
+        <u x="1" y="0" z="0"/>
+        <b x="0.0" y="0.07" z="0.015"/>
+        <motor name="LeftIndexFirstKnuckle">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <motor name="LeftIndexSecondTwo">
+                    <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                        <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                            <u x="0" y="0" z="1"/>
+                            <b x="0.0" y="0.02" z="0.0"/>
+                            <link name="fingerTip" r="0.005">
+                                <u x="1" y="0" z="0"/>
+                                <b x="0" y="0.02" z="0"/>
+                            </link>
+                        </joint>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+    <!-- middle finger -->
+    <joint name="middleSpread" type="revolute" minPos="0" maxPos=".1" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.075" z="0.0"/>
+        <motor name="LeftMiddleFirstKnuckle">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <motor name="LeftMiddleSecondTwo">
+                    <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                        <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                            <u x="0" y="0" z="1"/>
+                            <b x="0.0" y="0.02" z="0.0"/>
+                            <link name="fingerTip" r="0.005">
+                                <u x="1" y="0" z="0"/>
+                                <b x="0" y="0.02" z="0"/>
+                            </link>
+                        </joint>
+                    </joint>
+                </motor>
+            </joint>
+        </motor>
+    </joint>
+    <!-- ring finger --> 
+    <joint name="ringSpread" type="revolute" minPos="0" maxPos=".2" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.07" z="-0.015"/>
+        <motor name="LeftRingPinky">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                        <u x="0" y="0" z="1"/>
+                        <b x="0.0" y="0.02" z="0.0"/>
+                        <link name="fingerTip" r="0.005">
+                            <u x="1" y="0" z="0"/>
+                            <b x="0" y="0.02" z="0"/>
+                        </link>
+                    </joint>
+                </joint>
+            </joint>
+        </motor>
+    </joint>
+    <!-- pinky finger -->
+    <joint name="pinkySpread" type="revolute" minPos="0" maxPos=".3" r="0.01">
+        <u x="-1" y="0" z="0"/>
+        <b x="0.0" y="0.06" z="-0.03"/>
+        <motor name="LeftRingPinky">
+            <joint name="firstKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.01">
+                <u x="0" y="0" z="1"/>
+                <b x="0.0" y="0.0" z="0.0"/>
+                <joint name="secondKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                    <u x="0" y="0" z="1"/>
+                    <b x="0.0" y="0.03" z="0.0"/>
+                    <joint name="lastKnuckle" type="revolute" minPos="0" maxPos="1.5" r="0.005">
+                        <u x="0" y="0" z="1"/>
+                        <b x="0.0" y="0.02" z="0.0"/>
+                        <link name="fingerTip" r="0.005">
+                            <u x="1" y="0" z="0"/>
+                            <b x="0" y="0.02" z="0"/>
+                        </link>
+                    </joint>
+                </joint>
+            </joint>
+        </motor>
+    </joint>
+</motor>
+
+<!-- /// WRIST -->
+        </joint>
+        </motor>
+    </joint>
+    </motor>
+</joint>
+</motor>
+
+<!-- /// ELBOW -->
+</joint>
+</motor>     
+
+<!-- /// SHOULDER -->
+        </joint>
+        </motor>
+    </joint>
+    </motor>
+</joint>
+</motor> 
+
+
+<!-- ///TORSO -->
+</link>
+
+</branch>
+
+</ZeroPositionKinematicTree>

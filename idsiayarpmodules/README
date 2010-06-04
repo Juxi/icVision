@@ -1,0 +1,40 @@
+THIS DIRECTORY TREE CONTAINS SOURCE CODE, DOCUMENTATION AND BUILD SCRIPTS FOR
+EXTENSION MODULS FOR YARP DEVELOPED FOR USE IN IDSIA.
+
+INITIALLY IT CONTAINS THE FOLLOWING MODULES:
+- A DRIVER FOR FIREWIRE CAMERAS
+- A DRIVER FOR KATANA400 ROBOTS
+- SEVERAL FILTERS FOR YARP COMMUNICATION CHANNELS, INTENDED AS HOCK-IN POINTS
+  for e.g. COLLISION AVOIDANCE CONTROL
+- SEVERAL SIMPLE EXAMPLE PROGRAMS
+
+
+HOW TO BUILD THIS MODULES USING CMAKE
+------------------------------------
+
+1. Make sure you have CMake installed and working
+2. Make sure you have YARP installed and working
+3. Change into the build directory:  'cd build'
+4. Run 'cmake ..' several times (it takes 3 times for me) until
+   there are no more changes to in the command line output
+5. Run 'ccmake ..', 'cmake-gui ..' or an equivalent interface to
+   configure the CMake build process. Ensure that you have set
+   the following values:
+     - ENABLE_idsiayarpmod_firewirecamera2  on
+     - ENABLE_idsiayarpmod_katana400        on
+     - CMAKE_CXX_FLAGS                      -m32
+     - CMAKE_C_FLAGS                        -m32
+     - CMAKE_INSTALL_PREFIX                 <according to your needs> (this is optional)
+   Run configure several times until nothing changes anymore
+   Run generate
+   Quit the cmake configuration interface
+6. Run 'make clean'
+7. Run 'make'
+8. optional: Run 'make install'
+
+
+
+The initial content of this directory tree has been developed in the course of my
+master thesis at IDSIA's robotics lab.
+
+2010-06-04, Gregor Kaufmann

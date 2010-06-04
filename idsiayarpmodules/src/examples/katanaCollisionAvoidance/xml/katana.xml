@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ZeroPositionKinematicTree>
+<ZeroPositionKinematicTree version="1.0" robotName="icubSim">
+<!-- Device Name = "iCubSim/iCub/katana" -->
+<!-- Branch Name = "left/right arm" -->
+
+<branch name="right_arm">
+  
+<motor>
+<link  x="-.1" y="0" z="0" radius=".03">
+<joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
+        <motor>
+        <link  x="-.1" y="0" z="0" radius=".03">
+        <joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
+                <motor>
+                <link  x="-.1" y="0" z="0" radius=".03">
+                <joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
+                
+                </joint>
+                </link>
+                </motor>
+        </joint>
+        </link>
+        </motor>
+</joint>
+</link>
+</motor>
+
+</branch>
+
+</ZeroPositionKinematicTree>
