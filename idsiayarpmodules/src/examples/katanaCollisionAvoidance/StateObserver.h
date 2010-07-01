@@ -17,18 +17,18 @@
 
 #include <yarp/os/all.h>
 #include <yarp/os/IObserver.h>
-#include "robotinterface.h"
+#include "robot.h"
 
 class StateObserver: public yarp::os::IObserver {
 
 public:
-	StateObserver(RobotInterface &r, const int b);
+	StateObserver(Robot &r, const int b);
 	virtual ~StateObserver();
 
 	virtual void onDataObserved(yarp::os::Bottle &b);
 
 private:
-	RobotInterface &robot;
+	Robot &robot;
 	const int branch;
 };
 

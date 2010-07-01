@@ -6,9 +6,10 @@
 class RevoluteJoint : public Joint
 {
 public:
-    RevoluteJoint( Motor* motor);
+    RevoluteJoint( Robot* robot, Motor* motor );
+    RevoluteJoint( KinTreeNode* parent, Motor* motor);
 private:
-    void setM();
+    virtual void setM();
 };
 
 #endif // JOINT_REVOLUTE_H

@@ -15,7 +15,7 @@
 #ifndef ROBOTFILTER_H_
 #define ROBOTFILTER_H_
 
-#include "robotinterface.h"
+#include "robot.h"
 
 #include <QObject>
 #include <QVector>
@@ -38,11 +38,17 @@ public:
 	RobotFilter(QObject *parent = 0);
 	virtual ~RobotFilter();
 
-	bool open(RobotInterface &robot);
+	bool open(Robot &robot);
 	void close();
+	
+	Robot* getRobot();
+	
+public slots:
+	void stop();
 
 private:
 	bool isOpen;
+	Robot* robotModel;
 
 	// A vector of ControlBoardFilters - one for each of the kinematic branches
 	// of the robot. These filters have a 1-to-1 correspondence to the YARP

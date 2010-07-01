@@ -1,22 +1,23 @@
 #ifndef CYLINDER_H
 #define CYLINDER_H
 
-#include "physobject.h"
+#include "primitiveobject.h"
 
-class Cylinder : public PhysObject
+class Cylinder : public PrimitiveObject
 {
 public:
-    Cylinder();
-    Cylinder( const qreal& radius,
-              const qreal& height,
+    Cylinder( qreal radius,
+              qreal height,
               const QVector3D& cylPos,
-              const QVector3D& cylAxis );
+              const QVector3D& cylAxis,
+              int lod = 0);
     ~Cylinder();
 
     virtual void makeDisplayList();
 
 private:
     qreal radius, height;
+    int lod;
 };
 
 #endif // CYLINDER_H

@@ -2,7 +2,7 @@
 #define GLWIDGET_H
 
 #include <QGLWidget>
-#include "link.h"
+#include "displaylist.h"
 
 /*! \brief The QWidget responsible for holding the rendered OpenGL scene (see GLObject and GLObjectList)
  *
@@ -23,8 +23,7 @@ public:
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
 
-    //GLObjectList glObjectList;       // KAIL - objects to be rendered
-    QVector<Link*> linkList;
+    QVector<DisplayList*> listList;  // KAIL - objects to be rendered
 
 public slots:
     void setXRotation(int angle);
@@ -32,7 +31,7 @@ public slots:
     void setZRotation(int angle);
 
     /*** KAIL ***/
-    void createGLObject( Link* link );
+    void createGLObject( DisplayList* list );
     void callUpdateGL();                                                                               // call updateGL()
 
 signals:

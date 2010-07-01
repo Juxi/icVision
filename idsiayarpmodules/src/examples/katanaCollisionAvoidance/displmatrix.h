@@ -2,6 +2,7 @@
 #define DISPLMATRIX_H
 
 #include <QMatrix4x4>
+#include <math.h>
 
 class DisplMatrix : public QMatrix4x4
 {

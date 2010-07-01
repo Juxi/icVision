@@ -7,7 +7,8 @@
 class Robot;
 class Branch;
 class Motor;
-class Link;
+class KinTreeNode;
+class Object;
 class Joint;
 
 /*! \brief A custom handler for the Qt XML parser (see Robot)
@@ -27,20 +28,21 @@ public:
     bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
     bool characters(const QString &str);
     bool fatalError(const QXmlParseException &exception);
-    bool error(const QXmlParseException &exception);
-    bool warning(const QXmlParseException &exception);
+    //bool error(const QXmlParseException &exception);
+    //bool warning(const QXmlParseException &exception);
     QString errorString() const;
 
 private:
     Robot  *robot;
     Branch *branch;
     Motor  *motor;
-    Link   *link;
+    KinTreeNode *node;
+    Object *object;
 
     Branch *createChildBranch();
     Motor  *createChildMotor();
-    Link   *createChildLink();
-    bool   createJoint( const QString& type );
+    KinTreeNode *createChildLink();
+	Joint *createChildJoint( const QString& type );
 
     QString currentText;
     QString errorStr;

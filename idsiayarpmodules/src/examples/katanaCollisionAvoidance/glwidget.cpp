@@ -1,5 +1,7 @@
+#include <QtGui>
 #include <math.h>
 #include <iostream>
+#include "displaylist.h"
 #include "glwidget.h"
 
 using namespace std;
@@ -61,15 +63,19 @@ void GLWidget::setZRotation(int angle)
 
 void GLWidget::initializeGL()
 {
+    qglClearColor(trolltechPurple.dark());
+
+    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_CULL_FACE);
+    glShadeModel(GL_SMOOTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    qglClearColor(trolltechPurple.dark());
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);  // hides occluded faces (not always so good)
-    //glColor3f(0.0,1.0,0.0);
-    //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+    //glEnable(GL_LIGHT1);
+    //glEnable(GL_MULTISAMPLE);
+    static GLfloat lightPosition0[4] = { 0.5, 5.0, 7.0, 1.0 };
+    //static GLfloat lightPosition1[4] = { 7.0, -5.0, 3.0, 1.0 };
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
+    //glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 
 }
 
@@ -85,24 +91,32 @@ void GLWidget::paintGL()
     // draw the WorldCS
     drawCS();
 
-    // set default look of the robot
-    GLfloat gray[] = {0.5,0.5,0.5,1.0};
-    glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, gray);
-
     // call the display lists
-    QVector<Link*>::iterator i;
-    QVector<PhysObject*>::iterator j;
-
-    for ( i=linkList.begin(); i!=linkList.end(); ++i ) {
-        QVector<PhysObject*> list = (*i)->getPhysObjectList();
-        for ( j=list.begin(); j!=list.end(); ++j ) {
-            // if there is a collision change the color here
-            glPushMatrix();
-                glMultMatrixd( (*j)->txfrToWorld().data() );
-                glCallList( (*j)->displayList() );
-            glPopMatrix();
-        }
+    QVector<DisplayList*>::iterator i;
+    for ( i=listList.begin(); i!=listList.end(); ++i ) {
+        (*i)->render();
     }
+}
+
+void GLWidget::drawCS()
+{
+    GLfloat red[] = {1,0,0,1};
+    GLfloat green[] = {0,1,0,1};
+    GLfloat blue[] = {0,0,1,1};
+
+    glBegin(GL_LINES);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, red);
+        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, red);
+        glVertex3f(0,0,0); glVertex3f(1,0,0);
+
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, green);
+        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, green);
+        glVertex3f(0,0,0); glVertex3f(0,1,0);
+
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, blue);
+        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, blue);
+        glVertex3f(0,0,0); glVertex3f(0,0,1);
+    glEnd();
 }
 
 void GLWidget::resizeGL(int width, int height)
@@ -144,40 +158,16 @@ void GLWidget::normalizeAngle(int *angle)
         *angle -= 360 * 16;
 }
 
-void GLWidget::createGLObject( Link* link )
+void GLWidget::createGLObject( DisplayList* object )
 {
-    // write the display list(s) for this link
-    QVector<PhysObject*>::iterator j;
-    QVector<PhysObject*> list = link->getPhysObjectList();
-    for ( j=list.begin(); j!=list.end(); ++j ) {
-        (*j)->makeDisplayList();
-    }
+    object->makeDisplayList();
 
     // add this link to the list of links to be rendered
-    linkList.append( link );
+    listList.append( object );
+    cout << "appended an object to GLlistList... size = " << listList.size() << endl;
 }
 
 void GLWidget::callUpdateGL() {
-    //cout << "Calling updateGL();" << endl;
+    //cout << "Calling updateGL() for " << objectList.size() << " objects." << endl;
     updateGL();
-}
-
-void GLWidget::drawCS()
-{
-    GLfloat red[] = {1,0,0,1};
-    GLfloat green[] = {0,1,0,1};
-    GLfloat blue[] = {0,0,1,1};
-
-    glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, red);
-    glBegin(GL_LINES);
-        glVertex3f(0,0,0); glVertex3f(1,0,0);
-    glEnd();
-    glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, green);
-    glBegin(GL_LINES);
-        glVertex3f(0,0,0); glVertex3f(0,1,0);
-    glEnd();
-    glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, blue);
-    glBegin(GL_LINES);
-        glVertex3f(0,0,0); glVertex3f(0,0,1);
-    glEnd();
 }

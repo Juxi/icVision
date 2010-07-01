@@ -13,13 +13,15 @@ PROJECT( IdsiaYarpModules )
 ###
 
 INCLUDE_DIRECTORIES ( ${YARP_OS_INC} ${YARP_sig_INC} ${YARP_dev_INC} )
-IF ( WIN32 AND NOT CYGWIN )
-  LINK_LIBRARIES ( optimized YARP_dev debug YARP_devd )
-  LINK_LIBRARIES ( optimized YARP_sig debug YARP_sigd )
-  LINK_LIBRARIES ( optimized YARP_OS debug YARP_OSd )
-ELSE ( WIN32 AND NOT CYGWIN )
-  LINK_LIBRARIES ( YARP_dev YARP_sig YARP_OS )
-ENDIF ( WIN32 AND NOT CYGWIN )
+IF ( WIN32 )
+  IF ( NOT CYGWIN )
+    LINK_LIBRARIES ( optimized YARP_dev debug YARP_devd )
+    LINK_LIBRARIES ( optimized YARP_sig debug YARP_sigd )
+    LINK_LIBRARIES ( optimized YARP_OS debug YARP_OSd )
+  ELSE ( NOT CYGWIN )
+    LINK_LIBRARIES ( YARP_dev YARP_sig YARP_OS )
+  ENDIF ( NOT CYGWIN )
+ENDIF ( WIN32 )
 
 # This directory may be compiled independently of the rest of YARP,
 # so we need to pick up YARP explicitly.

@@ -25,28 +25,18 @@ public:
     Branch( Robot* robot, Branch* branch = 0 );
     ~Branch();
 
-    int idx() const;
-    const QString& name() const;
-    Branch* parent() const;
+    int idx() const { return index; }
+    const QString& name() const { return branchName; }
+    Branch* parent() const { return parentBranch; }
 
+    void setName( const QString& name ) { branchName = name; }
     bool setEncPos( const QVector<qreal>& x );
     //bool setNormPos( const QVector<qreal>& x );  // implement this later
 
 private:
-    void setName( const QString& name );
-
     int     index;
     Branch* parentBranch;
     QString branchName;
-
-    friend bool ZPHandler::startElement( const QString &namespaceURI,
-                                              const QString &localName,
-                                              const QString &qName,
-                                              const QXmlAttributes &attributes );
-    friend bool ZPHandler::endElement(const QString & /* namespaceURI */,
-                                           const QString & /* localName */,
-                                           const QString &qName);
-    //friend class KinTreeHandler;
 };
 
 #endif // BRANCH_H

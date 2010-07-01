@@ -17,7 +17,7 @@
 #include <QtGlobal>
 #include <QVector>
 
-StateObserver::StateObserver(RobotInterface &r, const int b) :
+StateObserver::StateObserver(Robot &r, const int b) :
 	IObserver(), robot(r), branch(b) {
 	// No special action to take for construction
 }
@@ -29,7 +29,7 @@ StateObserver::~StateObserver() {
 void StateObserver::onDataObserved(yarp::os::Bottle &b) {
 	QVector<qreal> poss;
 	for (int i = 0; i < b.size(); i++) {
-		poss.append((qreal) (((b.get(i).asDouble()) / 180.0) * 3.1415));
+		poss.append((qreal) (((b.get(i).asDouble()))));
 	}
-	robot.setPos(branch, poss);
+	robot.setEncoderPosition(branch, poss);
 }

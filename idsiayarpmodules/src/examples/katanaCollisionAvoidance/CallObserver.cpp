@@ -14,7 +14,7 @@
 
 #include "CallObserver.h"
 
-CallObserver::CallObserver(RobotInterface &r, const int b) :
+CallObserver::CallObserver(Robot &r, const int b) :
 	IObserver(), robot(r), branch(b), responseObserver(NULL) {
 	// No special action to take for construction
 }

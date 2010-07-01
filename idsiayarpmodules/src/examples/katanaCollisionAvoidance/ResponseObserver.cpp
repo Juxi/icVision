@@ -17,7 +17,7 @@
 
 #include <QtGlobal>
 
-ResponseObserver::ResponseObserver(RobotInterface &r, const int b) :
+ResponseObserver::ResponseObserver(Robot &r, const int b) :
 	IObserver(), robot(r), branch(b) {
 	// No special action to take for construction
 }
@@ -64,7 +64,7 @@ void ResponseObserver::onDataObserved(yarp::os::Bottle &b) {
 
 						if (BOTTLE_TAG_DOUBLE == v2.getCode() && BOTTLE_TAG_INT
 								== c2.getCode()) {
-							robot.setPos(branch, (int) c2.asInt(),
+							robot.setEncoderPosition(branch, (int) c2.asInt(),
 									(qreal) v2.asDouble());
 						}
 					}

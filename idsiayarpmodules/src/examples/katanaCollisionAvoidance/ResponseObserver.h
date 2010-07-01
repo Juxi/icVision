@@ -17,20 +17,20 @@
 
 #include <yarp/os/all.h>
 #include <yarp/os/IObserver.h>
-#include "robotinterface.h"
+#include "robot.h"
 
 class CallObserver;
 
 class ResponseObserver: public yarp::os::IObserver {
 
 public:
-	ResponseObserver(RobotInterface &r, const int b);
+	ResponseObserver(Robot &r, const int b);
 	virtual ~ResponseObserver();
 
 	virtual void onDataObserved(yarp::os::Bottle &b);
 
 private:
-	RobotInterface &robot;
+	Robot &robot;
 	const int branch;
 
 	// the actual open RPC call

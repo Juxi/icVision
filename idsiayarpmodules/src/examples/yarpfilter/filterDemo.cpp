@@ -103,7 +103,8 @@ int main(int argc, char **argv) {
 		simulator->setControlBoardFilter(&rightArmFilter);
 	}
 
-	rightArmFilter.open("/icubSimF/right_arm", "/icubSim/right_arm");
+//	rightArmFilter.open("/icubSimF/right_arm", "/icubSim/right_arm");
+	rightArmFilter.open("/katana400F/arm", "/katana400/arm");
 
 	// connect the observers to the Qt labels
 	QObject::connect(statObserver, SIGNAL(dataObserved(const QString&)),

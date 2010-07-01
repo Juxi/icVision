@@ -6,9 +6,10 @@
 class PrismaticJoint : public Joint
 {
 public:
-    PrismaticJoint( Motor* motor);
+    PrismaticJoint( Robot* robot, Motor* motor );
+    PrismaticJoint( KinTreeNode* parent, Motor* motor);
 private:
-    void setM();
+    virtual void setM();
 };
 
 #endif // JOINT_PRISMATIC_H

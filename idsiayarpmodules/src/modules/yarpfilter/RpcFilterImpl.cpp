@@ -76,10 +76,11 @@ bool RpcFilterImpl::injectCall(const Bottle &b) {
 	Bottle response;
 
 	// TODO: Complete
-
-	if (responseObserver != NULL) {
-		responseObserver->onDataObserved(response);
-	}
+	forwardCall(call, NULL);
+	
+//	if (responseObserver != NULL) {
+//		responseObserver->onDataObserved(response);
+//	}
 
 	return true;
 }

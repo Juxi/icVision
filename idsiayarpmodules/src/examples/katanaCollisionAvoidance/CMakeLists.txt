@@ -5,11 +5,43 @@
 ## The following section sets up YARP support 
 FIND_PACKAGE( YARP )
 
+# openGL
+FIND_PACKAGE ( OpenGL )
+
 ## The following section sets up QT support
 FIND_PACKAGE ( Qt4 REQUIRED )
+
 SET ( QT_USE_QTOPENGL TRUE )
 SET ( QT_USE_QTXML TRUE )
+
+# SET ( QT_DONT_USE_QTCORE )
+# SET ( QT_DONT_USE_QTGUI )
+# SET ( QT_USE_QT3SUPPORT )
+# SET ( QT_USE_QTASSISTANT )
+# SET ( QT_USE_QAXCONTAINER )
+# SET ( QT_USE_QAXSERVER )
+# SET ( QT_USE_QTDESIGNER )
+# SET ( QT_USE_QTMOTIF )
+# SET ( QT_USE_QTMAIN )
+# SET ( QT_USE_QTNETWORK )
+# SET ( QT_USE_QTNSPLUGIN )
+# SET ( QT_USE_QTOPENGL )
+# SET ( QT_USE_QTSQL )
+# SET ( QT_USE_QTXML )
+# SET ( QT_USE_QTSVG )
+# SET ( QT_USE_QTTEST )
+# SET ( QT_USE_QTUITOOLS )
+# SET ( QT_USE_QTDBUS )
+# SET ( QT_USE_QTSCRIPT )
+# SET ( QT_USE_QTASSISTANTCLIENT )
+# SET ( QT_USE_QTHELP )
+# SET ( QT_USE_QTWEBKIT )
+# SET ( QT_USE_QTXMLPATTERNS )
+# SET ( QT_USE_PHONON )
+
 INCLUDE ( ${QT_USE_FILE} )
+# MESSAGE ( " QT_USE_FILE: ${QT_USE_FILE}" )
+# MESSAGE ( "QT_LIBRARIES: ${QT_LIBRARIES}" )
 
 INCLUDE_DIRECTORIES ( "${CMAKE_SOURCE_DIR}/src/modules/yarpfilter/" )
 
@@ -27,13 +59,19 @@ SET ( kails_src_files
     glwidget.cpp
     motor.cpp
     branch.cpp
-    robotinterface.cpp
+#    robotinterface.cpp
     link.cpp
-    physobject.cpp
-    cylinder.cpp
-    joint.cpp
-    joint_prismatic.cpp
-    joint_revolute.cpp
+    primitiveobject.cpp 
+    cylinder.cpp 
+    joint.cpp 
+    joint_prismatic.cpp 
+    joint_revolute.cpp 
+    box.cpp 
+    world.cpp 
+    kintreenode.cpp 
+    object.cpp 
+    sphere.cpp 
+    displaylist.cpp
     RobotFilter.cpp
 	StateObserver.cpp
 	CallObserver.cpp
@@ -44,8 +82,9 @@ SET ( kails_src_files
 SET ( QT_MOC_FILES
 	glwidget.h
 	window.h
+	world.h
 	robot.h
-	timer.h
+	collisiondetector.h
 	RobotFilter.h
 	)	
 QT4_WRAP_CPP( kails_src_files ${QT_MOC_FILES} )
@@ -56,7 +95,7 @@ ADD_DEFINITIONS( -DUSE_GLUT )
 # Kail's original application
 ADD_EXECUTABLE ( KailsDemo ${kails_src_files} )
 TARGET_LINK_LIBRARIES ( KailsDemo FreeSOLID ${IDSIA_YARP_FILTER_LIB}
-	${YARP_LIBRARIES} ${QT_LIBRARIES} )
+	${YARP_LIBRARIES} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} )
 
 # The control board filter demo main application
 # ADD_EXECUTABLE ( CollisionAvoidanceDemo ${demo_src_files} )
@@ -75,3 +114,4 @@ TARGET_LINK_LIBRARIES ( KailsDemo FreeSOLID ${IDSIA_YARP_FILTER_LIB}
 # INSTALL_TARGETS ( /bin FilterDemo )
 # INSTALL_TARGETS ( /bin FilterDriver )
 # INSTALL_TARGETS ( /bin RobotFilterDemo )
+INSTALL_TARGETS ( /bin KailsDemo )

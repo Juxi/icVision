@@ -26,17 +26,23 @@ public:
     Motor( Robot* robot, Motor* motor = 0 );
     ~Motor();
 
-    int idx() const;
-    const QString& name() const;
-    Motor* parent() const;
-    qreal minPos() const;
-    qreal maxPos() const;
-    qreal encPos() const;
-    qreal normPos() const;
+    // get stuff
+    int idx() const { return index; }
+    const QString& name() const { return motorName; }
+    Motor* parent() const { return parentMotor; }
+    qreal minPos() const { return motorLimits.getMin(); }
+    qreal maxPos() const { return motorLimits.getMax(); }
+    qreal encPos() const { return encoderPosition; }
+    qreal normPos() const { return normalPosition; }
     void print();
 
+    // set stuff
+    void setName( const QString& name ) { motorName = name; }
+    void setMin( qreal min ) { motorLimits.setMin(min); }
+    void setMax( qreal max ) { motorLimits.setMax(max); }
     void setEncPos( qreal );
     //void setNormPos( qreal );
+
 
 private:
     int        index;
@@ -47,11 +53,6 @@ private:
                normalPosition;  // normalized position is >=0 and <=1
 
     void setJointPositions();
-
-    friend bool ZPHandler::startElement( const QString &namespaceURI,
-                                              const QString &localName,
-                                              const QString &qName,
-                                              const QXmlAttributes &attributes );
 };
 
 #endif // MOTOR_H

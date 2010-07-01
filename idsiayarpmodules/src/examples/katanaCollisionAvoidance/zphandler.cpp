@@ -1,9 +1,12 @@
 #include <iostream>
 #include "zphandler.h"
 #include "robot.h"
+#include "joint.h"
 #include "joint_revolute.h"
 #include "joint_prismatic.h"
 #include "cylinder.h"
+#include "sphere.h"
+#include "box.h"
 #include "displmatrix.h"
 
 using namespace std;
@@ -12,8 +15,8 @@ ZPHandler::ZPHandler(Robot *robot) : robot(robot)
 {
     branch = 0;
     motor = 0;
-    link = 0;
-    //joint = 0; // same as the link - just need this for the datatype
+    node = 0;
+    object = 0;
     metKinTreeTag = false;
 }
 
@@ -24,17 +27,17 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 {
     // READ THE DOCUMENT HEADER AND MAKE SURE IT IS ZERO-POSITION KINEMATIC TREE XML FILE
     if (!metKinTreeTag && qName != "ZeroPositionKinematicTree") {
-        cout << "The file is not a 'Zero Position Kinematic Tree' file." << endl;
+        errorStr = "The file is not a 'Zero Position Kinematic Tree' file.";
         return false;
     }
     if (qName == "ZeroPositionKinematicTree") {
         QString version = attributes.value("version");
         if (!version.isEmpty() && version != "1.0") {
-            cout << "The file is not  a 'Zero Position Kinematic Tree' version 1.0 file.";
+            errorStr = "The file is not  a 'Zero Position Kinematic Tree' version 1.0 file.";
             return false;
         }
         metKinTreeTag = true;
-        robot->robotName = attributes.value("robotName");
+        robot->setName( attributes.value("robotName") );
     }
 
     else if (qName == "branch") {
@@ -45,8 +48,8 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
             branch = existingBranch; // if the branch by this name already exists, use the prexisting one
         } else {
             // make a new one
-            if ( !(branch = createChildBranch()) ) { cout << "Failed to create child branch." << endl; return 0; }
-            if ( !attributes.value("name").isEmpty() ) { branch->setName( attributes.value("name") ); }
+            if ( !(branch = createChildBranch()) ) return 0;
+            if ( !attributes.value("name").isEmpty() ) branch->setName( attributes.value("name") );
         }
     }
 
@@ -57,49 +60,158 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
             motor = existingMotor; // if the motor by this name already exists, use the prexisting one
         } else {
             // make a new one
-            if ( !(motor = createChildMotor()) ) { cout << "Failed to create child motor." << endl; return 0; }
-            if ( !attributes.value("name").isEmpty() ) { motor->motorName = attributes.value("name"); }
-            if ( !attributes.value("minPos").isEmpty() ) { motor->motorLimits.setMin( attributes.value("minPos").toDouble() ); }
-            if ( !attributes.value("maxPos").isEmpty() ) { motor->motorLimits.setMax( attributes.value("maxPos").toDouble() ); }
+            if ( !(motor = createChildMotor()) ) return 0;
+            if ( !attributes.value("name").isEmpty() ) motor->setName(attributes.value("name"));
+            if ( !attributes.value("minPos").isEmpty() ) motor->setMin( attributes.value("minPos").toDouble() );
+            if ( !attributes.value("maxPos").isEmpty() ) motor->setMax( attributes.value("maxPos").toDouble() );
         }
     }
 
-    else if (qName == "link") {
-        QVector3D bodyVector = QVector3D( attributes.value("x").toDouble(),
-                                          attributes.value("y").toDouble(),
-                                          attributes.value("z").toDouble() );
+    else if (qName == "link" || qName == "joint") {
+        QVector3D axis = QVector3D( attributes.value("x").toDouble(),
+                                    attributes.value("y").toDouble(),
+                                    attributes.value("z").toDouble() );
         qreal radius = attributes.value("radius").toDouble(),
-              length = attributes.value("length").toDouble();
-        if ( !length ) length = bodyVector.length();
+              length = axis.length();
 
-        link = createChildLink();
-        link->linkName = attributes.value("name");
-        link->bodyVector = bodyVector;
-        link->M = DisplMatrix( QVector3D(0,0,0), bodyVector, 0, length );
-        link->physObjectList.append( new Cylinder( radius, length, length/2*bodyVector.normalized(), bodyVector) );
-    }
-    else if (qName == "joint") {
-        QVector3D jointAxis = QVector3D( attributes.value("x").toDouble(),
-                                         attributes.value("y").toDouble(),
-                                         attributes.value("z").toDouble() );
-        qreal radius = attributes.value("radius").toDouble(),
-              length = attributes.value("length").toDouble();
-        if ( !length ) length = jointAxis.length();
-
-        if ( jointAxis.length() == 0 ) {
-            cout << "XML PARSE ERROR: <joint> must have a non-zero joint axis vector!! You must specify at least one of x='' y='' z=''." << endl;
+        if ( radius < 0 ) {
+            // could cout a warning here
+            errorStr = "If the property 'radius' is specified, it must be >= 0.";
             return 0;
         }
 
-        createJoint( attributes.value("type") );
-        link->joint->axis = jointAxis;
-        if ( !attributes.value("minPosition").isEmpty() ) { link->joint->limits.setMin( attributes.value("minPosition").toDouble() ); }
-        if ( !attributes.value("maxPosition").isEmpty() ) { link->joint->limits.setMax( attributes.value("maxPosition").toDouble() ); }
-        link->physObjectList.append( new Cylinder( radius, length, link->bodyVector, link->joint->axis) );
+        if ( !attributes.value("length").isEmpty() ) {
+            if ( attributes.value("length").toDouble() <= 0 ) {
+                // could cout a warning here
+                errorStr = "If the property 'length' is specified, it must be > 0";
+                return 0;
+            }
+            length = attributes.value("length").toDouble();
+            axis = length * axis.normalized();
+        }
+
+        int lod = attributes.value("detail").toInt();
+        if ( lod < 0 ) {
+            errorStr = "The property 'detail' must be >= 0.";
+            return 0;
+        }
+
+        if ( qName == "joint" ) {
+			Joint* joint;
+            if ( !(joint = createChildJoint(attributes.value("type"))) ) return 0;
+			if ( !attributes.value("minPos").isEmpty() ) joint->setMin( attributes.value("minPos").toDouble()*M_PI/180 );
+            if ( !attributes.value("maxPos").isEmpty() ) joint->setMax( attributes.value("maxPos").toDouble()*M_PI/180 );
+			node = joint;
+        }
+        else if ( qName == "link" ) {
+            if ( !(node = createChildLink()) ) return 0;
+        }
+
+        if ( !attributes.value("name").isEmpty() ) node->setName(attributes.value("name"));
+        if ( !node->setAxis(axis) ) {
+            errorStr = "Axis must be non-zero.";
+            return 0;
+        }
+        if ( radius > 0 && axis.length() > 0 ) {
+            if (node->type() == KinTreeNode::LINK ) node->appendToObject( new Cylinder( radius, axis.length(), axis/2, axis, lod) );
+            else if (node->type() == KinTreeNode::RJOINT ) node->appendToObject( new Cylinder( radius, axis.length(), QVector3D(), axis, lod) );
+            else { errorStr = "Encountered KinTreeNode of unknown type"; return 0; }
+        }
     }
-    //else if (qName == "geom") {}
+
+    else if (qName == "object") {
+        object = new Object(object);
+    }
+
+    else if ( qName == "sphere" || qName == "cylinder" || qName == "box" ) {
+        PrimitiveObject* primitive;
+
+        QVector3D position;
+        if (node) position = node->axis()/2;
+        if ( !attributes.value("px").isEmpty() ||
+             !attributes.value("py").isEmpty() ||
+             !attributes.value("pz").isEmpty()    ){
+            position = QVector3D( attributes.value("px").toDouble(),
+                                  attributes.value("py").toDouble(),
+                                  attributes.value("pz").toDouble() );
+        }
+
+        QVector3D axis;
+        if (node) axis = node->axis();
+        if ( !attributes.value("vx").isEmpty() ||
+             !attributes.value("vy").isEmpty() ||
+             !attributes.value("vz").isEmpty()    ){
+            axis = QVector3D( attributes.value("vx").toDouble(),
+                              attributes.value("vy").toDouble(),
+                              attributes.value("vz").toDouble() );
+        }
+        if ( qFuzzyCompare(axis.length(),0) ) {
+            errorStr = "The requested geomotry requires an axis. use vx='', vy='', vz=''";
+            return 0;
+        }
+
+        //////////////////////////////////////////////////////////////////////
+        if (qName == "sphere") {
+            qreal radius = attributes.value("radius").toDouble();
+            if ( radius <= 0 ) {
+                errorStr = "The property 'radius' must be > 0.";
+                return 0;
+            }
+
+            int lod = attributes.value("detail").toInt();
+            if ( lod < 0 ) {
+                errorStr = "The property 'detail' must be >= 0.";
+                return 0;
+            }
+
+            primitive = new Sphere( radius, position, lod);
+        }
+        //////////////////////////////////////////////////////////////////////
+        else if (qName == "cylinder") {
+            qreal radius = attributes.value("radius").toDouble();
+            if ( radius <= 0 ) {
+                errorStr = "The property 'radius' must be > 0.";
+                return 0;
+            }
+
+            qreal height = attributes.value("height").toDouble();
+            if ( height <= 0 ) {
+                errorStr = "The property 'height' must be > 0.";
+                return 0;
+            }
+
+            int lod = attributes.value("detail").toInt();
+            if ( lod < 0 ) {
+                errorStr = "The property 'detail' must be >= 0.";
+                return 0;
+            }
+
+            primitive = new Cylinder( radius, height, position, axis, lod);
+        }
+        //////////////////////////////////////////////////////////////////////
+        else if (qName == "box") {
+            qreal angle = attributes.value("angle").toDouble();
+            qreal x = attributes.value("x").toDouble(); if ( x <= 0 ) {errorStr = "x must be > 0."; return 0;}
+            qreal y = attributes.value("y").toDouble(); if ( y <= 0 ) {y = node->axis().length();}
+            qreal z = attributes.value("z").toDouble(); if ( z <= 0 ) {errorStr = "z must be > 0."; return 0;}
+
+            if ( x == 0 || y == 0 || z == 0 ) { errorStr = "x or y or z must be > 0"; return 0;}
+
+            primitive = new Box( x, y, z, position, axis, angle );
+        }
+        //////////////////////////////////////////////////////////////////////
+        if (object)
+            object->append(primitive);
+        else if (node)
+            node->appendToObject(primitive);
+        else {
+            errorStr = "Encountered <sphere/>, <cylinder/>, or <box/> outside of <object>, <link>, and <joint>.";
+            return 0;
+        }
+    }
 
     else { cout << "WARNING: Encountered unknown tag '" << qName.toStdString() << "'" << endl; /*return false;*/ }
+
     currentText.clear();
     return true;
 }
@@ -108,17 +220,19 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /* localName */, const QString &qName)
 {
     if ( qName == "branch") {
-        //cout << "Encountered </branch>" << endl;
         branch = branch->parent();
     }
     else if ( qName == "motor" ) {
-        //cout << "  Encountered </motor>" << endl;
+        motor->setEncPos(0);
         motor = motor->parent();
     }
-    else if ( qName == "link" ) {
-        //cout << "    Encountered </link>" << endl;
-        link->emitFinished();
-        link = link->parent();
+    else if ( qName == "link" || qName == "joint" ) {
+        node->emitFinished();
+        node = node->parent();
+    }
+    else if ( qName == "object" ) {
+        robot->world.append(object);
+        object = object->parent();
     }
 
     return true;
@@ -127,94 +241,66 @@ bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /
 
 Branch* ZPHandler::createChildBranch()
 {
-    Branch* childBranch;
-    if (branch) {
-        if ( !(childBranch = new Branch( robot, branch )) ) {
-            cout << "Failed to allocate child branch." << endl;
-            return 0;
-        }
-    } else {
-        if ( !(childBranch = new Branch( robot )) ) {
-            cout << "Failed to allocate child branch." << endl;
-            return 0;
-        }
-    }
+    Branch* childBranch = 0;
+    if (branch) childBranch = new Branch( robot, branch );
+    else        childBranch = new Branch( robot );
+
+    if (!childBranch) errorStr = "Failed to allocate branch.";
     return childBranch;
 }
 
 Motor* ZPHandler::createChildMotor()
 {
     if ( !branch ) {
-        cout << "XML PARSE ERROR: Ecnountered <motor> outside of <branch>!!" << endl;
+        errorStr = "Ecnountered <motor> outside of <branch>!!";
         return 0;
     }
-    Motor* childMotor;
-    if (motor) {
-        if ( !(childMotor = new Motor( robot, motor )) ) {
-            cout << "Failed to allocate child motor." << endl;
-            return 0;
-        }
-    } else {
-        if ( !(childMotor = new Motor( robot )) ) {
-            cout << "Failed to allocate child motor." << endl;
-            return 0;
-        }
-    }
-    branch->append(childMotor);
+
+    Motor* childMotor = 0;
+    if (motor) childMotor = new Motor( robot, motor );
+    else       childMotor = new Motor( robot );
+
+    if (childMotor) branch->append(childMotor);
+    else errorStr = "Failed to allocate motor.";
     return childMotor;
 }
 
-Link* ZPHandler::createChildLink()
+KinTreeNode* ZPHandler::createChildLink()
 {
-    Link* child;
-    if (link) {
-        if ( !(child = new Link(link)) ) {
-            cout << "Failed to allocate child link." << endl;
-            return 0;
-        }
-    } else {
-        if ( !(child = new Link(robot)) ) {
-            cout << "Failed to allocate child link." << endl;
-            return 0;
-        }
-    }
-    return child;
+    KinTreeNode* link = 0;
+    if (node) link = new Link(node);
+    else      link = new Link(robot);
+
+    if (!link) errorStr = "Failed to allocate link.";
+    return link;
 }
 
-bool ZPHandler::createJoint( const QString& type )
+Joint* ZPHandler::createChildJoint( const QString& type )
 {
-    if ( !link ) {
-        cout << "XML PARSE ERROR: Ecnountered <joint> outside of <link>!!" << endl;
-        return 0;
-    }
     if ( !motor ) {
-        cout << "XML PARSE ERROR: Ecnountered <joint> outside of <motor>!!" << endl;
+        errorStr = "Ecnountered <joint> outside of <motor>!!";
         return 0;
     }
-    if ( link->getJoint() ) {
-        cout << "XML PARSE ERROR: More than one <joint> within <link>!!" << endl;
+    if ( type != "revolute" && type != "prismatic" && type != "" ) {
+        errorStr = "Tried to create <joint> of unknown type!! Known types are 'revolute' and 'prismatic'";
         return 0;
     }
-    if ( type != "revolute" && type != "reismatic" && type != "" ) {
-        cout << "XML PARSE ERROR: Tried to create <joint> of unknown type!! Known types are 'revolute' and 'prismatic'" << endl;
+    if ( type == "prismatic" ) {
+        errorStr = "Prismatic joints are not yet supported";
         return 0;
     }
 
-    Joint* joint;
-    if ( type == "revolute" || type == "" ) {
-        if ( !(joint = new RevoluteJoint(motor)) ) {
-            cout << "Failed to allocate joint." << endl;
-            return 0;
-        }
+    Joint* joint = 0;
+    if (node) {
+        if ( type == "revolute" || type == "" )  joint = new RevoluteJoint(node, motor);
+        else if ( type == "prismatic" )          joint = new PrismaticJoint(node, motor);
+    } else {
+        if ( type == "revolute" || type == "" )  joint = new RevoluteJoint(robot, motor);
+        else if ( type == "prismatic" )          joint = new PrismaticJoint(robot, motor);
     }
-    else if ( type == "prismatic" ) {
-        if ( !(joint = new PrismaticJoint(motor)) ) {
-            cout << "Failed to allocate joint." << endl;
-            return 0;
-        }
-    }
-    link->setJoint(joint);
-    return 1;
+
+    if (!joint) errorStr = "Failed to allocate joint.";
+    return joint;
 }
 
 bool ZPHandler::characters(const QString &str)
@@ -228,18 +314,18 @@ bool ZPHandler::fatalError(const QXmlParseException &exception)
          << exception.message().toStdString() << endl;
     return false;
 }
-bool ZPHandler::error(const QXmlParseException &exception)
+/*bool ZPHandler::error(const QXmlParseException &exception)
 {
     cout << "XML PARSE ERROR: line " << exception.lineNumber() << " column " << exception.columnNumber() << endl
          << exception.message().toStdString() << endl;
     return false;
-}
-bool ZPHandler::warning(const QXmlParseException &exception)
+}*/
+/*bool ZPHandler::warning(const QXmlParseException &exception)
 {
     cout << "XML PARSE WARNING: line " << exception.lineNumber() << " column " << exception.columnNumber() << endl
          << exception.message().toStdString() << endl;
     return false;
-}
+}*/
 QString ZPHandler::errorString() const
 {
     return errorStr;

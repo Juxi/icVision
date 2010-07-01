@@ -18,6 +18,7 @@
 #include "CallObserver.h"
 #include "ResponseObserver.h"
 
+#include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include <iostream>
 
@@ -54,7 +55,7 @@ static int getNumberOfAxes(std::string remoteBaseName) {
 }
 
 RobotFilter::RobotFilter(QObject *parent) :
-	QObject(parent), isOpen(false), cbFilters(), observers() {
+	QObject(parent), isOpen(false), robotModel(NULL), cbFilters(), observers() {
 	// No special action to take for construction
 }
 
@@ -64,7 +65,7 @@ RobotFilter::~RobotFilter() {
 	}
 }
 
-bool RobotFilter::open(RobotInterface &robot) {
+bool RobotFilter::open(Robot &robot) {
 	if (true == isOpen) {
 		close();
 	}
@@ -159,6 +160,7 @@ bool RobotFilter::open(RobotInterface &robot) {
 	}
 
 	isOpen = true;
+	robotModel = &robot;
 	return true;
 }
 
@@ -185,4 +187,23 @@ void RobotFilter::close() {
 	observers.clear();
 
 	isOpen = false;
+}
+
+Robot* RobotFilter::getRobot() {
+	return robotModel;
+}
+
+void RobotFilter::stop() {
+	std::cout << "STOP!!!" << std::endl;
+	QVector<yarp::os::ControlBoardFilter *>::iterator cbf;
+	for (cbf = cbFilters.begin(); cbf != cbFilters.end(); ++cbf ) {
+		// cut the connection
+		(*cbf)->cutConnection(true);
+	
+		// send stop to ALL motors
+		yarp::os::Bottle cmd;
+		cmd.addVocab(VOCAB_SET);
+		cmd.addVocab(VOCAB_STOPS);
+		(*cbf)->injectCall(cmd);
+	}
 }

@@ -1,30 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ZeroPositionKinematicTree>
-<ZeroPositionKinematicTree version="1.0" robotName="icubSim">
-<!-- Device Name = "iCubSim/iCub/katana" -->
-<!-- Branch Name = "left/right arm" -->
+<ZeroPositionKinematicTree version="1.0" robotName="katana400">
 
-<branch name="right_arm">
-  
-<motor>
-<link  x="-.1" y="0" z="0" radius=".03">
-<joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
-        <motor>
-        <link  x="-.1" y="0" z="0" radius=".03">
-        <joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
-                <motor>
-                <link  x="-.1" y="0" z="0" radius=".03">
-                <joint x="0"   y="0" z="1" radius=".03" length=".09" minPosition="-90.0" maxPosition="90.0">
-                
-                </joint>
+<!-- THE WORLD -->
+<object>
+    <cylinder radius="0.5" height="0.01" py=".0051" vy="1" detail="50"/>
+    <!--<sphere radius=".1" posY=".06" posZ=".15" detail="3"/>-->
+</object>
+
+<!---->
+<branch name="arm">
+
+    <motor minPos="6.65" maxPos="352.64">
+    <joint minPos="6.65" maxPos="352.64" y="1" radius="0">
+        <link y="-1" radius="0.04" length="0.212" detail="12"><!--LINK0-->
+            <motor minPos="-15.75" maxPos="124.25">
+            <joint minPos="-15.75" maxPos="124.25" x="-1" radius="0.03" length="0.1" detail="12">
+                <link z="-1" radius="0.01" length="0.19" detail="12"><!--UA-->
+                    <motor minPos="52.7" maxPos="302.69">
+                    <joint minPos="52.7" maxPos="302.69" x="-1" radius="0.03" length="0.1" detail="12">
+                        <link z="1" radius="0.01" length="0.139" detail="12"><!--FA-->
+                            <motor minPos="63.5" maxPos="293.5">
+                            <joint minPos="63.5" maxPos="293.5" x="1" radius="0.03" length="0.1" detail="12">
+                            
+                                <!--WRIST-->
+                                <motor minPos="8.5" maxPos="350.5">
+                                <joint minPos="8.5" maxPos="350.5" z="1" radius="0">
+                                    <link z="-1" radius="0.01" length="0.185" detail="12"><!--WR-->
+                                
+                                        <!--MANIPULATOR-->
+                                        <motor minPos="-121.58" maxPos="8.7">
+                                        <joint minPos="90" maxPos="180" y="1" radius="0">
+                                                <link z="-.13" radius="0">
+                                                    <box x=".01" z=".03"/>
+                                                </link><!---->
+                                        </joint>
+                                        <joint minPos="90" maxPos="180" y="-1" radius="0">
+                                                <link z="-.13" radius="0">
+                                                    <box x=".01" z=".03"/>
+                                                </link><!---->
+                                        </joint>
+                                        </motor>
+                                        <!--/MANIPULATOR-->
+
+                                    </link>
+                                </joint>
+                                </motor>
+                                <!--/WRIST-->
+                                
+                            </joint>
+                            </motor>
+                        </link>
+                    </joint>
+                    </motor>
                 </link>
-                </motor>
-        </joint>
+            </joint>
+            </motor>
         </link>
-        </motor>
-</joint>
-</link>
-</motor>
+    </joint>
+    </motor>
 
 </branch>
 

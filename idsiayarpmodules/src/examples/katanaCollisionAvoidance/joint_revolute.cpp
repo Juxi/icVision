@@ -1,11 +1,15 @@
 #include "joint_revolute.h"
 #include "displmatrix.h"
 
-RevoluteJoint::RevoluteJoint( Motor* motor ) : Joint( motor )
+RevoluteJoint::RevoluteJoint( Robot* robot, Motor* motor ) : Joint( robot, motor, RJOINT )
 {
     limits = Interval(-M_PI,M_PI);
 }
-void RevoluteJoint::setM( )
+RevoluteJoint::RevoluteJoint( KinTreeNode* parent, Motor* motor ) : Joint( parent, motor, RJOINT )
 {
-    M = DisplMatrix( axis, QVector3D(0,0,0), position, 0 );
+    limits = Interval(-M_PI,M_PI);
+}
+void RevoluteJoint::setM()
+{
+    M = DisplMatrix( nodeAxis, QVector3D(), position, 0 );
 }

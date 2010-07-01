@@ -3,7 +3,10 @@
 
 #include <QThread>
 #include <iostream>
-#include "robotinterface.h"
+//#include "SOLID/solid.h"
+#include "primitiveobject.h"
+#include "robot.h"
+//#include "RobotFilter.h"
 
 using namespace std;
 
@@ -15,62 +18,77 @@ using namespace std;
  * all motor positions on the Robot using the RobotInterface in conjunction with oscillate().
  */
 
-class Timer : public QThread
+class CollisionDetector : public QThread
 {
     Q_OBJECT
 
 public:
     //! The standard constructor
     /*! The object constructed updates the pose and emits a signal. */
-    Timer( RobotInterface* robot, double tick ) : robot(robot),
+    CollisionDetector( Robot* robot, double tick ) : robot(robot),
                                                   tick(tick),
                                                   poses(0),
                                                   count(0),
                                                   col_count(0),
                                                   oscillate(false),
-                                                  runThread(true) {}
+                                                  runThread(true)
+	{
+	}
     //! A constructor for testing new Robot models
     /*! The object constructed sets all joint positions, updates the pose, and emits a signal. */
-    Timer( RobotInterface* robot, double tick, int poses ) : robot(robot),
-                                                             tick(tick),
-                                                             poses(poses),
-                                                             count(0),
-                                                             col_count(0),
-                                                             oscillate(true),
-                                                             runThread(true) {}
+    //CollisionDetector( double tick, int poses ) : robot(robot),
+    //                                                         tick(tick),
+    //                                                         poses(poses),
+    //                                                         count(0),
+    //                                                         col_count(0),
+    //                                                         oscillate(true),
+    //                                                         runThread(true) {}
 
-    /* ARGSUSED */
-    static void collide1(void * client_data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData *coll_data)
+	//void setRobotFilter( RobotFilter* filter )
+	//{
+	//	robotFilter = filter;
+	//	robot = robotFilter->getRobot();
+	//}
+	
+    /* COLLISION HANDLER */
+	static void collide1(void * client_data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData *coll_data)
     {
-        ((Timer*)client_data)->col_count++;
-    }
-    static void collide2(void * client_data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData *coll_data)
-    {
+        PrimitiveObject* stupidObject1 = (PrimitiveObject*)obj1;
+        PrimitiveObject* stupidObject2 = (PrimitiveObject*)obj2;
+        stupidObject1->setColliding();
+        stupidObject2->setColliding();
+        ((CollisionDetector*)client_data)->col_count++;
+
+        /* ADD STUFF HERE */
+        // issue digital skin signal
+        // stop all motors
+		
+		//robotFilter->stop();
+		CollisionDetector* stupidDetector = (CollisionDetector*)client_data;
+		stupidDetector->emit collision();
     }
 
     //! Runs the thread
     /*!  */
     virtual void run()
     {
-        cout << "Starting timer thread..." << endl;
+        cout << "Starting collision detection thread..." << endl;
         dtSetDefaultResponse( collide1, DT_SIMPLE_RESPONSE, (void*) this);
-        robot->filterAdjacentCollisions( collide2 ); // ignore collisions between component objects of the same link and adjacent links
-
 
         while (runThread) {
 
             col_count = 0;
             msleep(tick);
 
-            if (oscillate) {
-                robot->setPos(oscillator());
-            }
+            //if (oscillate) {
+            //    robot->setEncoderPosition(oscillator());
+            //}
 
-            robot->updateTxfrMatrices();
+            robot->updatePose(); // compute the new pose
+            dtTest();                    // do collision detection
 
-
-            dtTest();
             cout << "Number of collisions: " << col_count << endl;
+			//robot->printBranches();
 
             emit tock();
             count++;
@@ -80,7 +98,7 @@ public:
 
     //! Stops the thread gracefully
     /*!  */
-    void stopThread()
+    void stop()
     {
         runThread = false;
         while ( this->isRunning() ){ /* wait */ }
@@ -90,9 +108,11 @@ signals:
     //! Signifies that the new pose has been calculated
     /*!  */
     void tock();
+	void collision();
 
 private:
-    RobotInterface* robot;      //! The Robot whose pose we are updating
+    Robot*			robot;      //! The Robot whose pose we are updating
+	//RobotFilter*    robotFilter;	
     double          tick;       //! The time to wait in between subsequent pose calculations (frame rate)
     int             poses,      //! The number of points oscillator() should interpolate on its sine wave
                     count,      //! The number of pose uptates computed
