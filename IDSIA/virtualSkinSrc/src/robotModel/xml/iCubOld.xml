@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ZeroPositionKinematicTree>
+<ZeroPositionKinematicTree version="1.0" robotName="icubSim">
+
+<bodypart name="torso">
+    <link y=".25" radius="0">
+    
+    <motor name="TorsoPitch" minPos="-10" maxPos="70" idx="2">
+    <joint type="revolute" x="-1" minPos="-10" maxPos="70" radius=".04" length=".08">
+    <link y="-1" radius="0" length=".08">
+    
+    <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
+    <joint type="revolute" z="1" minPos="-30" maxPos="30" radius=".04" length=".08">
+    <link y="-1" radius="0" length=".08">
+    
+    <motor name="TorsoYaw" minPos="-50" maxPos="50" idx="0">  
+    <joint type="revolute" y="-1" minPos="-50" maxPos="50" radius=".04" length=".08">
+
+    <bodypart name="head">
+        <link y="-1" radius="0.05" length=".2"><!-- last torso joint to base of neck -->
+        <link y="-1" radius="0" length=".02"><!-- base of neck to first neck joint -->
+        
+            <motor name="NeckPitch" minPos="-40" maxPos="30">
+            <joint name="NeckPitch" minPos="-40" maxPos="30" x="1" radius=".025" length=".05">
+            <link y="-1" radius="0" length=".05"><!-- first neck joint to second neck joint -->
+            
+                <motor name="NeckRoll" minPos="-70" maxPos="60">
+                <joint name="NeckRoll" minPos="-70" maxPos="60" z="-1" radius=".025" length=".05">
+                <motor name="NeckYaw" minPos="-55" maxPos="55">
+                <joint name="NeckYaw" minPos="-55" maxPos="55" y="1" radius="0">
+                        
+                    <!-- HEAD -->
+                    <link y="-1" radius="0" length=".07">
+                    <sphere py="-.07" radius=".09"/>
+                    <!--<cylinder radius="0.01" height="0.02" py="-.07" pz=".07" vz="1" detail="12"/>-->
+                                
+                        <!-- EYES -->
+                        <link x=".5" z="1" radius="0" length=".09">
+                            <motor name="eyeTilt" minPos="-35" maxPos="15"><joint name="leftEyeTilt" minPos="-35" maxPos="15" x="1" radius="0">
+                            <motor name="eyePan" minPos="-50" maxPos="50"><joint name="leftEyePan" minPos="-50" maxPos="50" y="-1" radius="0">
+                            <motor name="eyeVerg" minPos="0" maxPos="90"><joint name="leftEyeVerg" minPos="0" maxPos="90" y="-1" radius="0">
+                                <link z="1" radius=".001" length=".05"></link>
+                            </joint></motor>
+                            </joint></motor>
+                            </joint></motor>
+                        </link>
+                        <link x="-.5" z="1" radius="0" length=".09">
+                            <motor name="eyeTilt"><joint name="rightEyeTilt" minPos="-35" maxPos="15" x="1" radius="0">
+                            <motor name="eyePan"><joint name="rightEyePan" minPos="-50" maxPos="50" y="-1" radius="0">
+                            <motor name="eyeVerg"><joint name="rightEyeVerg" minPos="0" maxPos="90" y="1" radius="0">
+                                <link z="1" radius=".001" length=".05"></link>
+                            </joint></motor>
+                            </joint></motor>
+                            </joint></motor>
+                        </link>
+                        <!-- /EYES -->
+                    </link>
+                    <!-- /HEAD -->
+                        
+                        
+                </joint>
+                </motor>
+                </joint>
+                </motor>
+                    
+            </link>
+            </joint>
+            </motor>
+        
+        </link>
+        </link>
+    </bodypart>
+
+    <bodypart name="right_arm">
+        <link y="-1" x="-.5" radius=".03" length=".2">
+
+            <!-- SHOULDER (3 DOF) -->   
+            <motor name="RightShoulderPitch" minPos="-95" maxPos="90">
+            <joint name="RightShoulderPitch" minPos="-95" maxPos="90" x="-1" radius="0">
+            
+            <motor name="RightShoulderRoll" minPos="0" maxPos="161">
+            <joint name="RightShoulderRoll" minPos="0" maxPos="161" z="1" radius=".03" length=".06">
+            
+            <motor name="RightShoulderYaw" minPos="-37" maxPos="100">
+            <joint name="RightShoulderYaw" minPos="-37" maxPos="100" y="1" radius="0">
+                        
+            <!-- ELBOW -->
+            <link y="0.2" radius=".025">
+            <motor name="RightElbow" minPos="6" maxPos="106">
+            <joint name="RightElbow" minPos="6" maxPos="106" x="1" radius=".02" length=".05">
+            <link y="0.18" radius=".02">
+                    
+            <!-- WRIST (3 DOF) -->
+            <motor name="RightWristYaw" minPos="-90" maxPos="90">
+            <joint name="RightWristYaw" minPos="-90" maxPos="90" y="1" radius="0">
+            
+            <motor name="RightWristRoll" minPos="-90" maxPos="10">
+            <joint name="RightWristRoll" minPos="-90" maxPos="10" z="-1" radius="0">
+            
+            <motor name="RightWristPitch" minPos="-20" maxPos="40">
+            <joint name="RightWristPitch" minPos="-20" maxPos="40" x="-1" radius="0">
+                                       
+            <!-- HAND -->
+            <motor name="RightHandSpread" minPos="-20" maxPos="30">
+        
+                <!-- thumb -->
+                <link y="0.04" z="0.015" radius=".008">
+                <motor name="RightThumbFirstKnuckleA" minPos="-15" maxPos="105">
+                <joint name="RightThumbFirstKnuckleA" minPos="-15" maxPos="105" y="1" radius="0.012" length=".016">
+                <link z="1" radius=".008" length=".02">
+                
+                    <motor name="RightThumbFirstKnuckleB" minPos="0" maxPos="90">
+                    <joint name="RightThumbFirstKnuckleB" minPos="0" maxPos="90" x="-1" radius="0.008" length=".016">
+                    <link z="1" radius=".008" length=".02">
+            
+                        <motor name="RightThumbSecondTwo" minPos="0" maxPos="90">
+                        <joint name="RightThumbSecondKnuckle" minPos="0" maxPos="90" y="1" radius="0.008" length=".016">
+                        <link z="1" radius=".008" length=".02">
+                            <joint name="RightThumbThirdKnuckle" minPos="0" maxPos="90" y="1" radius="0.008" length=".016">
+                                <link z="1" radius="0.008" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor> 
+                        
+                    </link>
+                    </joint>
+                    </motor>
+                    
+                </link>    
+                </joint>
+                </motor>
+                </link>
+
+                <!-- index finger -->
+                <link y="0.07" z="0.015" radius=".01">
+                <joint name="RightIndexSpread" minPos="0" maxPos="30" x="1" radius="0" length=".02">
+                
+                    <motor name="RightIndexFirstKnuckle" minPos="0" maxPos="90">
+                    <joint name="RightIndexFirstKnuckle" minPos="0" maxPos="90" z="-1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                                    
+                        <motor name="RightIndexSecondTwo" minPos="0" maxPos="90">
+                        <joint name="RightIndexSecondKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="RightIndexThirdKnuckle" minPos="0" z="-1" maxPos="90" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor>
+                    
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+                
+                <!-- middle finger -->
+                <link y="0.075" radius=".01">
+                <joint name="RightMiddleSpread" minPos="0" maxPos="0" x="1" radius="0" length=".02">
+                
+                    <motor name="RightMiddleFirstKnuckle" minPos="0" maxPos="90">
+                    <joint name="RightMiddleFirstKnuckle" minPos="0" maxPos="90" z="-1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                                    
+                        <motor name="RightMiddleSecondTwo" minPos="0" maxPos="90">
+                        <joint name="RightMiddleSecondKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="RightMiddleThirdKnuckle" minPos="0" z="-1" maxPos="90" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor>
+                    
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+
+                <!-- ring finger -->
+                <link y="0.07" z="-0.015" radius=".01">
+                <joint name="RightRingSpread" minPos="0" maxPos="15" x="-1" radius="0" length=".02">
+                
+                    <motor name="RightRingAndPinky" minPos="0" maxPos="115">
+                    <joint name="RightRingFirstKnuckle" minPos="0" maxPos="90" z="-1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                        <joint name="RightRingSecondKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="RightRingThirdKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+                
+                <!-- pinky finger -->
+                <link y="0.06" z="-0.03" radius=".01" detail="12">
+                <joint name="RightPinkySpread" minPos="0" maxPos="30" x="-1" radius="0" length=".02">
+                
+                    <motor name="RightRingAndPinky">
+                    <joint name="RightPinkyFirstKnuckle" minPos="0" maxPos="90" z="-1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                        <joint name="RightPinkySecondKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="RightPinkyThirdKnuckle" minPos="0" maxPos="90" z="-1" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+        
+            </motor>
+
+            <!-- /WRIST -->
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+
+            <!-- /ELBOW -->
+            </link>
+            </joint>
+            </motor>
+            </link> 
+
+            <!-- /SHOULDER -->
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+
+        </link>
+    </bodypart>
+    
+    <bodypart name="left_arm">
+        <link y="-1" x=".5" radius=".03" length=".2">
+
+            <!-- SHOULDER (3 DOF) -->   
+            <motor name="LeftShoulderPitch" minPos="-95" maxPos="90">
+            <joint name="LeftShoulderPitch" minPos="-95" maxPos="90" x="-1" radius="0">
+            
+            <motor name="LeftShoulderRoll" minPos="0" maxPos="161">
+            <joint name="LeftShoulderRoll" minPos="0" maxPos="161" z="-1" radius=".03" length=".06">
+            
+            <motor name="LeftShoulderYaw" minPos="-37" maxPos="100">
+            <joint name="LeftShoulderYaw" minPos="-37" maxPos="100" y="-1" radius="0">
+                        
+            <!-- ELBOW -->
+            <link y="0.2" radius=".025">
+            <motor name="LeftElbow" minPos="6" maxPos="106">
+            <joint name="LeftElbow" minPos="6" maxPos="106" x="1" radius=".02" length=".05">
+            <link y="0.18" radius=".02">
+                    
+            <!-- WRIST (3 DOF) -->
+            <motor name="LeftWristYaw" minPos="-90" maxPos="90">
+            <joint name="LeftWristYaw" minPos="-90" maxPos="90" y="-1" radius="0">
+            
+            <motor name="LeftWristRoll" minPos="-90" maxPos="10">
+            <joint name="LeftWristRoll" minPos="-90" maxPos="10" z="1" radius="0">
+            
+            <motor name="LeftWristPitch" minPos="-20" maxPos="40">
+            <joint name="LeftWristPitch" minPos="-20" maxPos="40" x="-1" radius="0">
+                                       
+            <!-- HAND -->
+            <motor name="LeftHandSpread" minPos="-20" maxPos="30">
+        
+                <!-- thumb -->
+                <link y="0.04" z="0.015" radius=".008">
+                <motor name="LeftThumbFirstKnuckleA" minPos="-15" maxPos="105">
+                <joint name="LeftThumbFirstKnuckleA" minPos="-15" maxPos="105" y="-1" radius="0.012" length=".016">
+                <link z="1" radius=".008" length=".02">
+                
+                    <motor name="LeftThumbFirstKnuckleB" minPos="0" maxPos="90">
+                    <joint name="LeftThumbFirstKnuckleB" minPos="0" maxPos="90" x="-1" radius="0.008" length=".016">
+                    <link z="1" radius=".008" length=".02">
+            
+                        <motor name="LeftThumbSecondTwo" minPos="0" maxPos="90">
+                        <joint name="LeftThumbSecondKnuckle" minPos="0" maxPos="90" y="-1" radius="0.008" length=".016">
+                        <link z="1" radius=".008" length=".02">
+                            <joint name="LeftThumbThirdKnuckle" minPos="0" maxPos="90" y="-1" radius="0.008" length=".016">
+                                <link z="1" radius="0.008" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor> 
+                        
+                    </link>
+                    </joint>
+                    </motor>
+                    
+                </link>    
+                </joint>
+                </motor>
+                </link>
+
+                <!-- index finger -->
+                <link y="0.07" z="0.015" radius=".01">
+                <joint name="LeftIndexSpread" minPos="0" maxPos="30" x="1" radius="0" length=".02">
+                
+                    <motor name="LeftIndexFirstKnuckle" minPos="0" maxPos="90">
+                    <joint name="LeftIndexFirstKnuckle" minPos="0" maxPos="90" z="1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                                    
+                        <motor name="LeftIndexSecondTwo" minPos="0" maxPos="90">
+                        <joint name="LeftIndexSecondKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="LeftIndexThirdKnuckle" minPos="0" z="1" maxPos="90" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor>
+                    
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+                
+                <!-- middle finger -->
+                <link y="0.075" radius=".01">
+                <joint name="LeftMiddleSpread" minPos="0" maxPos="0" x="1" radius="0" length=".02">
+                
+                    <motor name="LeftMiddleFirstKnuckle" minPos="0" maxPos="90">
+                    <joint name="LeftMiddleFirstKnuckle" minPos="0" maxPos="90" z="1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                                    
+                        <motor name="LeftMiddleSecondTwo" minPos="0" maxPos="90">
+                        <joint name="LeftMiddleSecondKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="LeftMiddleThirdKnuckle" minPos="0" z="1" maxPos="90" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                        </motor>
+                    
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+
+                <!-- ring finger -->
+                <link y="0.07" z="-0.015" radius=".01">
+                <joint name="LeftRingSpread" minPos="0" maxPos="15" x="-1" radius="0" length=".02">
+                
+                    <motor name="LeftRingAndPinky" minPos="0" maxPos="115">
+                    <joint name="LeftRingFirstKnuckle" minPos="0" maxPos="90" z="1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                        <joint name="LeftRingSecondKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="LeftRingThirdKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+                
+                <!-- pinky finger -->
+                <link y="0.06" z="-0.03" radius=".01" detail="12">
+                <joint name="LeftPinkySpread" minPos="0" maxPos="30" x="-1" radius="0" length=".02">
+                
+                    <motor name="LeftRingAndPinky">
+                    <joint name="LeftPinkyFirstKnuckle" minPos="0" maxPos="90" z="1" radius="0.01" length=".01">
+                    <link y="1" radius=".005" length=".03">
+                        <joint name="LeftPinkySecondKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                        <link y="1" radius=".005" length=".02" detail="12">
+                            <joint name="LeftPinkyThirdKnuckle" minPos="0" maxPos="90" z="1" radius="0.005" length=".01">
+                                <link y="1" radius="0.005" length=".02"></link>
+                            </joint>
+                        </link>
+                        </joint>
+                    </link>
+                    </joint>
+                    </motor>
+                
+                </joint>
+                </link>
+        
+            </motor>
+
+            <!-- /WRIST -->
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+
+            <!-- /ELBOW -->
+            </link>
+            </joint>
+            </motor>
+            </link> 
+
+            <!-- /SHOULDER -->
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+            </joint>
+            </motor>
+
+        </link>
+    </bodypart>
+
+ 
+    
+            <!-- /TORSO -->
+            </joint>
+            </motor>
+            
+        </link>
+        </joint>
+        </motor>
+        
+    </link>
+    </joint>
+    </motor>
+
+    </link>
+</bodypart>
+</ZeroPositionKinematicTree>
