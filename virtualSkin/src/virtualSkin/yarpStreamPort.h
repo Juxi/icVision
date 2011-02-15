@@ -45,4 +45,4 @@ private:
 
 };
 
-#endif YARPSTREAMPORT_H
+#endif

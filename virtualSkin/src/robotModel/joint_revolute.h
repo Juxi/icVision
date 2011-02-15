@@ -1,7 +1,7 @@
 #ifndef JOINT_REVOLUTE_H
 #define JOINT_REVOLUTE_H
 
-#include "joint.h";
+#include "joint.h"
 
 namespace RobotModel {
 
