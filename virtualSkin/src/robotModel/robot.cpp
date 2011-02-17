@@ -1,5 +1,6 @@
 #include <iostream>
 #include "robot.h"
+#include <time.h>
 
 using namespace std;
 using namespace RobotModel;

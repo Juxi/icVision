@@ -1,14 +1,14 @@
+#include <qgl.h>
+
+#include "solid.h"
 #include "sphere.h"
 #include "displmatrix.h"
-#include <qgl.h>
-//#include <iostream>
-#include "solid.h"
 #include "robotmodelexception.h"
 
 using namespace RobotModel;
 
-float Sphere::X = 0.525731112119133606;
-float Sphere::Z = 0.850650808352039932;
+float Sphere::X = 0.525731112119133606f;
+float Sphere::Z = 0.850650808352039932f;
 GLfloat Sphere::vdata[12][3] = {	{-X, 0, Z}, { X, 0,  Z}, {-X,  0, -Z}, { X,  0, -Z},
 									{ 0, Z, X}, { 0, Z, -X}, { 0, -Z,  X}, { 0, -Z, -X},
 									{ Z, X, 0}, {-Z, X,  0}, { Z, -X,  0}, {-Z, -X,  0}	};

@@ -1,8 +1,7 @@
-#include "box.h"
-//#include "displmatrix.h"
 #include <qgl.h>
-//#include <iostream>
+
 #include "solid.h"
+#include "box.h"
 #include "robotmodelexception.h"
 
 using namespace RobotModel;

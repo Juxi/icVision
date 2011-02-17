@@ -18,6 +18,7 @@
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include <iostream>
+#include <time.h>
 
 RobotFilter::RobotFilter() : isOpen(false), /*emitCollisions(true),*/ robot(NULL), cbFilters(), stateObservers(), callObservers(), responseObservers() {
 	// No special action to take for construction

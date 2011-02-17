@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
 		window = new Window;
 
 		// for adding and removing OpenGL display lists
-		QObject::connect( robot, SIGNAL(appendedObject(DisplayList*)), window->glWidget, SLOT(addDisplayList(DisplayList*)) );
-		QObject::connect( world, SIGNAL(appendedObject(DisplayList*)), window->glWidget, SLOT(addDisplayList(DisplayList*)) );
+		QObject::connect( robot, SIGNAL(appendedObject(RobotModel::DisplayList*)), window->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
+		QObject::connect( world, SIGNAL(appendedObject(RobotModel::DisplayList*)), window->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
 		QObject::connect( world, SIGNAL(outdatedDisplayList(int)),		window->glWidget, SLOT(removeDisplayList(int)) );
 		QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),		window->glWidget, SLOT(removeDisplayList(int)) );
 		

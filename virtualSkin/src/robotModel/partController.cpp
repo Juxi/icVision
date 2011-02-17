@@ -1,4 +1,5 @@
 #include "partController.h"
+#include <time.h>
 
 using namespace RobotModel;
 
@@ -91,9 +92,14 @@ bool PartController::checkMotionDone( bool* flag )
 
 bool PartController::setRefSpeeds( const qreal speed )
 {
-	qreal speeds[numJoints];
+	qreal *speeds;
+	speeds = new qreal[numJoints];
+	
 	for ( int i=0; i<numJoints; i++ ) { speeds[i] = speed; }
-	return pos->setRefSpeeds(speeds);
+	bool result = pos->setRefSpeeds(speeds);
+	delete[] speeds;
+	
+	return result;
 }
 
 bool PartController::positionMove( const QVector<qreal>& positions )
