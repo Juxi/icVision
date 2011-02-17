@@ -1,0 +1,1 @@
+This is a first attempt for a device driver for a Katana400M6 robot.

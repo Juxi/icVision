@@ -1,0 +1,34 @@
+THIS DIRECTORY TREE CONTAINS SOURCE CODE, AND BUILD SCRIPTS FOR THE IM-CLEVER KINEMATICS COMMAND FILTER, ALSO CALLED
+
+VIRTUAL SKIN
+
+INITIALLY IT CONTAINS THE FOLLOWING:
+- A static library for building and moving a kinematic robot model
+- A static library containing a port filter for YARP communication channels (contributed by Gregor Kaufmann) which is also available as part of "idsiaYarpModules"
+- An example program that integrates these two libraries, providing reflexive response to collision (self collision or collision with objects in the environment)
+- A simple control program for the iCub robot that does motor babbling with position and velocity control
+
+DOCUMENTATION IS CURRENTLY INCOMPLETE, BUT IS COMING SOON.
+
+HOW TO BUILD THIS MODULES USING CMAKE
+------------------------------------
+
+1. Make sure you have all dependencies installed and working...
+	CMake >= 2.6
+	YARP >= 2.6
+	Qt >= 4
+	OpenGL
+	FreeSOLID
+2. From somewhereOnYourSystem/virtualSkin do the following:
+
+	mkdir build
+	cd build
+	cmake ..
+	(optional) ccmake ..		(to tweak build options i.e. to set build type to DEBUG)
+	make
+	(optional) make install		(this will install build products to	somewhereOnYourSystem/virtualSkin/bin
+										somewhereOnYourSystem/virtualSkin/lib
+
+
+The content of this directory was developed during the fist year of my PhD at IDSIA's robotics lab.
+2011-02-15, Kail Frank - kail@idsia.ch
