@@ -2,6 +2,11 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
+### MSVC WinSocket vs. WinSocket2 issue ###
+IF ( WIN32 )
+	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
+ENDIF( WIN32 )
+
 ### openGL ###
 FIND_PACKAGE ( OpenGL )
 
@@ -10,6 +15,12 @@ FIND_PACKAGE ( Qt4 REQUIRED )
 SET ( QT_USE_QTOPENGL TRUE )
 SET ( QT_USE_QTXML TRUE )
 INCLUDE ( ${QT_USE_FILE} )
+
+### FreeSOLID ###
+FIND_PACKAGE ( FreeSOLID REQUIRED )
+
+### ACE ###
+FIND_PACKAGE ( ACE REQUIRED )
 
 ### YARP ###
 FIND_PACKAGE ( YARP REQUIRED )
@@ -20,8 +31,8 @@ INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../robotModel/freeSolid/" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../yarpFilter/" )
 
 ### STATIC LIBRARIES 
-SET ( ROBOT_MODEL_LIB "${CMAKE_CURRENT_BINARY_DIR}/../robotModel/librobotModel.a" )
-SET ( IDSIA_YARP_FILTER_LIB "${CMAKE_CURRENT_BINARY_DIR}/../yarpFilter/libyarpFilter.a" )
+SET ( ROBOT_MODEL_LIB "robotModel" )
+SET ( IDSIA_YARP_FILTER_LIB "yarpFilter" )
 
 SET ( src_files	window.cpp
 		glwidget.cpp
@@ -53,7 +64,7 @@ QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_EXECUTABLE ( virtualSkin ${hdr_files} ${src_files} )
 ADD_DEPENDENCIES( virtualSkin robotModel yarpFilter )
-TARGET_LINK_LIBRARIES ( virtualSkin ${ROBOT_MODEL_LIB} ${IDSIA_YARP_FILTER_LIB} FreeSOLID ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${YARP_LIBRARIES} )
+TARGET_LINK_LIBRARIES ( virtualSkin ${ROBOT_MODEL_LIB} ${IDSIA_YARP_FILTER_LIB} ${FREE_SOLID_LIB} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${YARP_LIBRARIES} ${ACE_LIBRARIES} )
 
 # Tell XCode not to use /Debug and /Release directories for the binaries it builds
 SET_TARGET_PROPERTIES ( virtualSkin PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})

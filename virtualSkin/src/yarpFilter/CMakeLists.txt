@@ -6,8 +6,12 @@ PROJECT ( yarpFilter )
 SET ( yarpFilter_VERSION_MAJOR 0 )
 SET ( yarpFilter_VERSION_MINOR 1 )
 
+FIND_PACKAGE ( ACE REQUIRED )
+INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIRS} )
+
 FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
+
 INCLUDE_DIRECTORIES ( "${CMAKE_SOURCE_DIR}/modules/yarpfilter/" )
 
 SET ( headers 	yarp/os/impl/RpcFilterImpl.h
@@ -22,6 +26,8 @@ ADD_LIBRARY ( yarpFilter 	RpcFilterImpl.cpp
 				StreamFilter.cpp
 				ControlBoardFilter.cpp 
 				${headers} )
+
+TARGET_LINK_LIBRARIES ( yarpFilter ${YARP_LIBRARIES} )
 
 # Tell XCode not to put built targets in /Debug or /Release directories 
 SET_TARGET_PROPERTIES ( yarpFilter PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})

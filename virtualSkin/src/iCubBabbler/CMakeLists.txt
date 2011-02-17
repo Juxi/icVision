@@ -18,7 +18,7 @@ FIND_PACKAGE ( YARP REQUIRED )
 
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../robotModel/" )
 
-SET ( ROBOT_MODEL_LIB "${CMAKE_CURRENT_BINARY_DIR}/../robotModel/librobotModel.a" )
+SET ( ROBOT_MODEL_LIB "robotModel" )
 
 SET ( src_files	main.cpp
 		partBabbler.cpp
