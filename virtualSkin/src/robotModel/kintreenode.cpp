@@ -1,4 +1,4 @@
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "kintreenode.h"
 #include "primitiveobject.h"
 #include "robot.h"

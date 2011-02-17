@@ -9,10 +9,6 @@ PROJECT ( robotModel )
 SET ( robotModel_VERSION_MAJOR 0 )
 SET ( robotModel_VERSION_MINOR 1 )
 
-###
-### TODO: implement: FIND_PACKAGE( FreeSOLID ) 
-###
-
 ### OpenGL ###
 FIND_PACKAGE ( OpenGL )
 
@@ -24,11 +20,10 @@ INCLUDE ( ${QT_USE_FILE} )
 
 ### FreeSOLID ###
 FIND_PACKAGE ( FreeSOLID REQUIRED )
+INCLUDE_DIRECTORIES ( "${FREE_SOLID_INCLUDE_DIR}" )
 
 ### YARP ###
 FIND_PACKAGE ( YARP REQUIRED )
-
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/freeSolid/" )
 
 SET ( src_files	partController.cpp
 		renderList.cpp

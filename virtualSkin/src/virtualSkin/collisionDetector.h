@@ -2,7 +2,7 @@
 #define COLLISIONDETECTOR_H
 
 #include <QObject>
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "primitiveobject.h"
 #include "robot.h"
 #include "world.h"

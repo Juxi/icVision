@@ -1,5 +1,5 @@
 #include <qgl.h>
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "object.h"
 #include "displmatrix.h"
 #include "sphere.h"

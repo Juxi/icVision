@@ -1,6 +1,6 @@
 #include <qgl.h>
 
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "sphere.h"
 #include "displmatrix.h"
 #include "robotmodelexception.h"

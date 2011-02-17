@@ -1,7 +1,7 @@
 #include <qgl.h>
 #include <qmath.h>
 
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "cylinder.h"
 #include "displmatrix.h"
 #include "robotmodelexception.h"
