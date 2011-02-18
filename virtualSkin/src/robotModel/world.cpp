@@ -7,11 +7,11 @@ using namespace RobotModel;
 World::World() : numSpheres(0), numCylinders(0), numBoxes(0),
 				 numSSpheres(0),numSCylinders(0),numSBoxes(0)
 {
-	rpcInterface.setWorld(this);
+	//rpcInterface.setWorld(this);
 }
 World::~World()
 {
-	closeRpcInterface();
+	//closeRpcInterface();
 	
 	QVector<CompositeObject*>::iterator i;
 	QVector<PrimitiveObject*>::iterator j;

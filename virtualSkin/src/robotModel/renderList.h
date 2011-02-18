@@ -22,7 +22,7 @@ public slots:
 	void callLists() { render(); }
 	
 signals:
-	void appendedObject( DisplayList* list );
+	void appendedObject( RobotModel::DisplayList* list );
 	void outdatedDisplayList( int idx );
 	void changedState();
 };

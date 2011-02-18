@@ -22,10 +22,10 @@ public:
     World();
     ~World();
 	
-	void setPortName( const QString& name ) { rpcInterface.setName(name); }
-	void openRpcInterface() { rpcInterface.start(); }
-	void closeRpcInterface() { rpcInterface.stop(); }
-	const WorldRpcInterface& getRpcInterface() { return rpcInterface; }
+	//void setPortName( const QString& name ) { rpcInterface.setName(name); }
+	//void openRpcInterface() { rpcInterface.start(); }
+	//void closeRpcInterface() { rpcInterface.stop(); }
+	//const WorldRpcInterface& getRpcInterface() { return rpcInterface; }
 	
 	CompositeObject* newSphere( double r, const QVector3D& pos );
 	CompositeObject* newSSphere( double r, const QVector3D& pos );
@@ -50,13 +50,13 @@ public:
 	void notColliding();
 
 private:
-	WorldRpcInterface rpcInterface;
+	//WorldRpcInterface rpcInterface;
 	QVector<CompositeObject*> objectList;
 	int numSpheres, numCylinders, numBoxes,
 		numSSpheres,numSCylinders,numSBoxes;
 	QMutex mutex;
 	
-	friend class WorldRpcInterface;
+	//friend class WorldRpcInterface;
 };
 	
 }
