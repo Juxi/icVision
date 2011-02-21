@@ -1,4 +1,5 @@
 #include "iCubBabbler.h"
+#include <qthread.h>
 
 ICubBabbler::ICubBabbler() //: runThread(true)
 {
@@ -32,7 +33,8 @@ void ICubBabbler::crackBaby( qreal period, qreal velocity, bool hands )
 		leftArm.crackBaby( velocity, hands );
 		rightArm.crackBaby( velocity, hands );
 		printf("\n");
-		usleep(1000000*period);
+		//usleep(1000000*period);
+		wait(period/10);
 	}
 }
 
@@ -63,7 +65,8 @@ void ICubBabbler::doTheRobot( qreal period, qreal velocity, bool hands )
 			
 		//	usleep(1000000*period);
 		//}
-		usleep(1000000*period);
+		//usleep(1000000*period);
+		wait(period/10)
 	}
 }
 

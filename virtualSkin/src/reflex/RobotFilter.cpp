@@ -17,7 +17,6 @@
 
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
-#include <iostream>
 #include <time.h>
 
 RobotFilter::RobotFilter() : isOpen(false), /*emitCollisions(true),*/ robot(NULL), cbFilters(), stateObservers(), callObservers(), responseObservers() {
@@ -34,17 +33,17 @@ bool RobotFilter::open() {
 	if (true == isOpen) {
 		close();
 	}
-	std::cout << "Starting robot filter." << std::endl;
+	printf("Starting robot filter.\n");
 
     // check whether a network is available
     if (false == yarp::os::Network::checkNetwork()) {
-		std::cout << "network unavailable..." << std::endl;
+		printf("ROBOT FILTER ERROR: yarp network unavailable...\n");
     	return false;
     }
 	
 	// check whether there is a robotModel
 	if ( !robot ) {
-		std::cout << "no robot model has been set...  you must call setRobot(Robot&) before open()" << std::endl;
+		printf("ROBOT FILTER ERROR: no robot model has been set... call setRobot(Robot&) before open()\n");
 		return false;
 	}
 
@@ -66,10 +65,10 @@ bool RobotFilter::open() {
 	// Check for consistency in the number of controllable axes on the robotModel and the robot on the network
 	const QString robotName = robot->getName();
 	for (int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++) {
-		std::cout << std::endl << "----------------------------------------------------------------" << std::endl;
+		printf("----------------------------------------------------------------\n");
 		
 		const QString* partName = robot->getPartName(bodyPart);
-		std::cout << "connecting to " << robotName.toStdString() << ":" << partName->toStdString() << std::endl;
+		printf( "connecting to %s:%s\n", robotName.toStdString().c_str(), partName->toStdString().c_str() );
 		
 		p_ctrl = new RobotModel::PartController();
 		if ( p_ctrl->open( robotName.toStdString().c_str(), partName->toStdString().c_str() ) )
@@ -225,7 +224,7 @@ void RobotFilter::run()
 		while ( !motionDone )
 		{
 			partControllers.at(bodyPart)->checkMotionDone(&motionDone);
-			usleep(sleepPeriod);	
+			QThread::usleep(sleepPeriod);	
 		}
 
 		if ( time(NULL) - startTime >= POSITION_MOVE_TIMEOUT )

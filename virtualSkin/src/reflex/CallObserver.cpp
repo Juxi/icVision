@@ -24,7 +24,6 @@ CallObserver::~CallObserver() {
 }
 
 void CallObserver::onDataObserved(yarp::os::Bottle &b) {
-	//std::cout << "RPC Call --> bodyPart:" << branch << " yarpBottle: " << b.toString() << std::endl;
 	
 	if (NULL != responseObserver) {
 		responseObserver->activeCall = yarp::os::Bottle(b);

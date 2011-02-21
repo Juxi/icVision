@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <iostream>
 #include <yarp/os/Property.h>
 
 #include "skinWindow.h"
@@ -24,7 +23,7 @@ int main(int argc, char *argv[])
 		// path to the XML file that defines the robot model
 		QString xmlFile = "";
 		if ( !config.check("file") ) {
-			cout << "Please specify a robot model using '--file yourFileName.xml'." << endl;
+			printf("Please specify a robot model using '--file yourFileName.xml'\n");
 			return 1;
 		}
 		else xmlFile = config.find("file").asString();
@@ -34,11 +33,16 @@ int main(int argc, char *argv[])
 		if ( config.check("visualize") ) visualize = true;
 		
 		// print the configuration to the console
-		cout << "Launching... " << endl;
-		if ( visualize ) cout << "  ...with visualization" << endl;
-		else cout << "  ...without visualization" << endl;
-		cout << "  ...using robot model file: " << xmlFile.toStdString() << endl;
-	
+		printf("Launching... \n");
+		if ( visualize ) 
+		{
+			printf("  ...with visualization\n");
+		}
+		else
+		{
+			printf("  ...without visualization\n");
+			printf("  ...using robot model file: %s\n", xmlFile.toStdString().c_str());
+		}
 	/***********************************************************************/
 	
 	bool result = 0;

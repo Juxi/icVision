@@ -12,7 +12,6 @@
 
 #include <yarp/os/all.h>
 #include <QThread>
-#include <iostream>
 
 namespace RobotModel {
 

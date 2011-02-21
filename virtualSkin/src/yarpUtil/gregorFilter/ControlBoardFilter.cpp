@@ -45,11 +45,9 @@ bool ControlBoardFilter::open(ConstString filterName, ConstString targetName) {
 			ConstString callTargetPortName = targetName + "/rpc:i";
 			ConstString callClientsidePortName = filterName + "/rpc:i";
 
-			std::cout << "RPC port name: " << callTargetPortName << std::endl;
+			printf("RPC port name: %s\n",callTargetPortName.c_str());
 
-			isOpen
-					= callFilter.open(callTargetPortName,
-							callClientsidePortName);
+			isOpen = callFilter.open( callTargetPortName, callClientsidePortName );
 		}
 	}
 

@@ -21,21 +21,19 @@ YarpRpcPort::~YarpRpcPort()
 
 void YarpRpcPort::run() 
 {
-	std::cout << "Starting RPC server..." << std::endl;
+	printf("Starting RPC server...\n");
 	
 	// check whether a network is available
     if ( false == yarp::os::Network::checkNetwork() ) {
-		std::cout << "Error: network unavailable..." << std::endl;
+		printf("YARP RPC ERROR: yarp network unavailable...\n");
     	keepListening = false;
     }
 	
 	if ( portName.isEmpty() ) {
-		std::cout << "Error: no portName." << std::endl;
+		printf("Error: no portName.\n");
 		keepListening = false;
 	} else { port.open(portName.toStdString().c_str()); }
-	
-	//std::cout << "YARP RPC PORT '"<< portName.toStdString() <<"' is listening..." << std::endl;
-	
+
 	yarp::os::Bottle* cmd;
     while ( keepListening ) {
 		cmd = port.read(false);
@@ -46,13 +44,10 @@ void YarpRpcPort::run()
 			if ( !handler(*cmd,reply) ) { reply.addString("Unknown Command! Type 'help' for a list of valid commands."); }
 			port.write();
 		}
-		usleep(1);
+		usleep(YARP_PERIOD);
     }
 	
 	port.close();
-	
-	//std::cout << "YARP RPC PORT '"<< portName.toStdString() <<"' is no longer listening..." << std::endl;
-	
 }
 
 void YarpRpcPort::showBottle( yarp::os::Bottle& anUnknownBottle, int indentation)

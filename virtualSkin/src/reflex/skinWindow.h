@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QGLWidget>
-#include <iostream>
 #include "world.h"
 
 QT_BEGIN_NAMESPACE

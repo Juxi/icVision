@@ -46,7 +46,6 @@ void Sphere::makeDisplayList()
                       lod);
         }
     glEndList();
-    //cout << "made sphere display list #" << displayListIdx() << endl;
 }
 void Sphere::drawTriangle( float* v1, float* v2, float* v3 )
 {

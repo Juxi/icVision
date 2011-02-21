@@ -13,7 +13,6 @@
 #include <QVector3D>
 #include <yarp/os/all.h>
 #include "yarpRpcPort.h"
-#include <iostream>
 
 namespace RobotModel {
 	

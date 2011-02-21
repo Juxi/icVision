@@ -27,15 +27,15 @@ void YarpStreamPort::setBottle( const Bottle& aBottle )
 
 void YarpStreamPort::run() 
 {
-	if ( portName.isEmpty() ) {
-		std::cout << "ERROR STARTING YarpStreamPort: set the port name with setName( const QString& ) prior to calling start()" << std::endl;
+	if ( portName.isEmpty() )
+	{
+		printf("ERROR STARTING YarpStreamPort: set the port name with setName( const QString& ) prior to calling start()\n");
 		keepRunning = false;
 	} else port.open( portName.toStdString().c_str() );
 	
 	while ( keepRunning )
 	{
 		mutex.lock();
-			//std::cout << bottle.toString() << std::endl;
 			port.write( bottle );
         mutex.unlock();
 		usleep(YARP_PERIOD);

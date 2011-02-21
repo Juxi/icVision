@@ -27,44 +27,36 @@ RpcFilter::~RpcFilter() {
 	close();
 }
 
-bool RpcFilter::open(ConstString targetPortName, ConstString clientsidePortName) {
-	// std::cout << "Point 1" << std::endl;
-
-	if (isOpen == false) {
-		// std::cout << "Point 2" << std::endl;
-
-		if (impl.open(targetPortName) == true) {
-			// std::cout << "Point 3" << std::endl;
-
-			if (clientsidePort.open(clientsidePortName) == true) {
-				// std::cout << "Point 4" << std::endl;
-
+bool RpcFilter::open(ConstString targetPortName, ConstString clientsidePortName)
+{
+	if (isOpen == false)
+	{
+		if (impl.open(targetPortName) == true)
+		{
+			if (clientsidePort.open(clientsidePortName) == true)
+			{
 				clientsidePort.setReader(impl);
 				isOpen = true;
-
-				std::cout << "SUCCESS" << std::endl;
-
+				printf("Success!!");
 				return true;
-
-			} else {
-				// std::cout << "Point 5" << std::endl;
-
+			}
+			else
+			{
 				impl.close();
 			}
 		}
 	}
-	// std::cout << "Point 6" << std::endl;
-
 	return false;
 }
 
-bool RpcFilter::close() {
-	if (isOpen == true) {
+bool RpcFilter::close()
+{
+	if (isOpen == true)
+	{
 		clientsidePort.interrupt();
 		clientsidePort.close();
 		impl.close();
 		isOpen = false;
-
 		return true;
 	}
 	return false;

@@ -1,4 +1,3 @@
-#include <iostream>
 #include "zphandler.h"
 #include "robot.h"
 #include "joint_revolute.h"
@@ -31,7 +30,6 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 	*****************************************************************************************/
     if (!metKinTreeTag) {
 		if ( QString::compare(qName,"ZeroPositionKinematicTree",caseSensitivity) != 0 ) {
-			cout << QString::compare(qName,"ZeroPositionKinematicTree",caseSensitivity) << endl;
 			errorStr = "The file is not a 'ZeroPositionKinematicTree' file.";
 			return false;
 		} else {
@@ -42,7 +40,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			}
 			metKinTreeTag = true;
 			robot->setName( attributes.value("robotName") );
-			cout << "Robot Name: " << attributes.value("robotName").toStdString() << endl;
+			printf("Robot Name: %s\n",attributes.value("robotName").toStdString().c_str()); 
 		}
     }
    
@@ -50,7 +48,6 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 	*** HANDLE BODY PARTS ... i.e. torso, head, left and right arms ***
 	******************************************************************/
     else if ( QString::compare(qName,"bodyPart",caseSensitivity) == 0 ) {
-        //cout << "Encountered <bodyPart>" << endl;
         // check if the branch with this name already exists
         BodyPart* existingBodyPart;
         if ( !attributes.value("name").isEmpty() && (existingBodyPart = robot->getPartByName(attributes.value("name"))) ) {
@@ -66,7 +63,6 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 	*** HANDLE MOTORS ... i.e. the interface through which the robot should be moved ***
 	***********************************************************************************/
     else if (QString::compare(qName,"motor",caseSensitivity) == 0) {
-        //cout << "  Encountered <motor>" << endl;
         Motor* existingMotor;
         if ( !attributes.value("name").isEmpty() && (existingMotor = robot->getMotorByName(attributes.value("name"))) ) {
             motor = existingMotor; /* if the motor by this name already exists, use the prexisting one 
@@ -77,7 +73,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			if ( !attributes.value("idx").isEmpty() ) {
 				bool ok = false;
 				motorIdx = attributes.value("idx").toInt(&ok);
-				if ( !ok || motorIdx < 0 ) cout << "WARNING: Encountered Invalid Motor idx, which will be ignored. Configuration errors may occurr!" << endl;
+				if ( !ok || motorIdx < 0 ) printf("WARNING: Encountered Invalid Motor idx, which will be ignored. Configuration errors may occurr!\n");
 			}
 			
 			if ( !(motor = createChildMotor( motorIdx )) ) return 0;
@@ -189,7 +185,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 		primitive->translate(position);
     }
 
-    else { cout << "WARNING: Encountered unknown tag...  skipping it. '" << qName.toStdString() << "'" << endl; /*return false;*/ }
+    else { printf("WARNING: Encountered unknown tag: %s ...skipping it.\n",qName.toStdString().c_str()); }
 
     currentText.clear();
     return true;
@@ -248,9 +244,7 @@ Motor* ZPHandler::createChildMotor( int motorIdx )
 			if ( motorIdx >= 0 ) {
 				if ( bodyPart->at(motorIdx) ) 
 				{
-					cout << "WARNING: Replacing motor " << motorIdx
-					<< " in BodyPart: " << bodyPart->name().toStdString() 
-					<< ". Errors may occurr..." << endl;
+					printf("WARNING: Replacing motor '%d' in body part '%s'. Errors may occurr.\n", motorIdx, bodyPart->name().toStdString().c_str() );
 				}
 				bodyPart->replace(motorIdx,childMotor);
 			} else {
@@ -303,22 +297,12 @@ bool ZPHandler::characters(const QString &str)
 }
 bool ZPHandler::fatalError(const QXmlParseException &exception)
 {
-    cout << "XML PARSE FATAL ERROR: line " << exception.lineNumber() << " column " << exception.columnNumber() << endl
-         << exception.message().toStdString() << endl;
+	printf("XML PARSE FATAL ERROR: line %d column %d\n", exception.lineNumber(), exception.columnNumber());
+	printf("%s", exception.message().toStdString().c_str());
+	
     return false;
 }
-/*bool ZPHandler::error(const QXmlParseException &exception)
-{
-    cout << "XML PARSE ERROR: line " << exception.lineNumber() << " column " << exception.columnNumber() << endl
-         << exception.message().toStdString() << endl;
-    return false;
-}*/
-/*bool ZPHandler::warning(const QXmlParseException &exception)
-{
-    cout << "XML PARSE WARNING: line " << exception.lineNumber() << " column " << exception.columnNumber() << endl
-         << exception.message().toStdString() << endl;
-    return false;
-}*/
+
 QString ZPHandler::errorString() const
 {
     return errorStr;

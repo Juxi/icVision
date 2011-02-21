@@ -30,7 +30,6 @@ void ResponseObserver::onDataObserved(yarp::os::Bottle &b) {
 	// A matching bottle has the following structure
 	//   [is] [enc] 0.0 [ok]
 	// but the vocab values could also be encoded as strings
-	//std::cout << "RPC Response --> bodyPart:" << branch << " yarpBottle: " << b.toString() << std::endl;
 	
 	if (4 == b.size() && 3 == activeCall.size()) {
 		yarp::os::Value& v0 = b.get(0);

@@ -94,7 +94,6 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 		return false;
 	}
 
-	// std::cout << "Read bottle: " << call.toString() << std::endl;
 	if (NULL != callObserver) {
 		callObserver->onDataObserved(call);
 	}
@@ -112,11 +111,8 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 		if (replier != NULL) {
 			Bottle *pb = replier->getNextReponse();
 			while (NULL != pb) {
-				// std::cout << "Injected Response bottle: " << pb->toString()
-				//		<< std::endl;
-
 				if (returnResponse(*pb, returnToSender) == false) {
-					std::cout << "###" << std::endl;
+					printf("###\n");
 					return false;
 				}
 				responded = true;
@@ -129,10 +125,6 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 		if (false == responded) {
 			response.clear();
 			response.addVocab(Vocab::encode("fail"));
-
-			// std::cout << "Default Response bottle: " << response.toString()
-			//		<< std::endl;
-
 			response.write(*returnToSender);
 		}
 		return true;
@@ -140,8 +132,7 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 }
 
 bool RpcFilterImpl::setupOutputConnection() {
-	yarp::os::impl::NameClient& nic =
-			yarp::os::impl::NameClient::getNameClient();
+	yarp::os::impl::NameClient& nic = yarp::os::impl::NameClient::getNameClient();
 	yarp::os::impl::Address address = nic.queryName(targetPortName.c_str());
 	if (!address.isValid()) {
 		YARP_ERROR(yarp::os::impl::Logger::get(), "could not find port");
@@ -218,9 +209,6 @@ bool RpcFilterImpl::forwardCall(Bottle call, ConnectionWriter *responseWriter) {
 			// exit loop !!!!!
 			done = true;
 		} else {
-			// forward reply to caller
-			//std::cout << "Response bottle: " << resp.toString() << std::endl;
-
 			if (NULL != responseObserver) {
 				responseObserver->onDataObserved(resp);
 			}

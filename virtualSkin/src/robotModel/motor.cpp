@@ -1,4 +1,3 @@
-#include <iostream>
 #include "robot.h"
 #include "robotmodelexception.h"
 
@@ -70,18 +69,15 @@ void Motor::setJointPositions()
 }
 void Motor::print()
 {
-    cout << "      limits: [" << motorLimits.getMin() << ", " << motorLimits.getMax() << "]" << endl
-         << "      encoderPosition: " << encoderPosition << endl
-         << "      normalPosition:  " << normalPosition << endl
-         << "      Joint List: ";
+	printf("      limits: [%f,%f]\n", motorLimits.getMin(), motorLimits.getMax() );
+	printf("      encoderPosition: %f\n", encoderPosition);
+	printf("      normalPosition: %f\n", normalPosition);
+	printf("      jointList: ");
          QVector<Joint*>::iterator i;
-         for ( i=begin(); i!=end(); ++i ) {
-             //cout << (*i)->idx() << " ";
+         for ( i=begin(); i!=end(); ++i )
+		 {
+			 printf("%i ", (*i)->idx());
          }
-    cout << endl;
-    cout << "    ======================================" << endl;
-         for ( i=begin(); i!=end(); ++i ) {
-             //(*i)->print();
-         }
-
+	printf("\n");
+    printf("    ======================================\n");
 }

@@ -291,14 +291,11 @@ QString WorldRpcInterface::getName( const yarp::os::Bottle& command, int& n  )
 		 unknownData == VOCAB_BOX || unknownData == VOCAB_SBOX )
 	{
 		name = command.get(n).asString(); n++;
-		//std::cout << name.toStdString() << std::endl;
 		name += QString::number( command.get(n).asInt() ); n++;
-		//std::cout << name.toStdString() << std::endl;
 	}
 	else // otherwise treat the vocab as a name directly
 	{
 		name = command.get(n).asString(); n++;
-		//std::cout << name.toStdString() << std::endl;
 	}
 	return name;
 }

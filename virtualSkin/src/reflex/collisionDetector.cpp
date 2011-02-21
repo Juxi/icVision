@@ -26,8 +26,9 @@ void CollisionDetector::armDetector()
 
 bool CollisionDetector::computePose()
 {
-	if ( !robot ) {
-		std::cout << "the robot has not been set...  call setRobot(Robot&) before computePose()" << std::endl;
+	if ( !robot )
+	{
+		printf("COLLISION DETECTOR ERROR: the robot has not been set...  call setRobot(Robot&) before computePose()\n");
 		return 0;
 	}
 

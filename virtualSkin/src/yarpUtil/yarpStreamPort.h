@@ -13,7 +13,6 @@
 #include <yarp/os/all.h>
 #include <QThread>
 #include <QMutex>
-#include <iostream>
 
 using namespace yarp::os;
 
