@@ -12,6 +12,7 @@ option (YARP_AUTO_LINK "... and this off" ON)
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cMakeScripts )
 
 ### Locations of headers contained within this project ###
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/robotModel/" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/gregorFilter/" )

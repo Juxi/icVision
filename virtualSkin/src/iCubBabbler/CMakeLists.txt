@@ -13,6 +13,10 @@ SET ( hdr_files	partBabbler.h
 		iCubBabbler.h
 )
 
+SET ( QT_MOC_FILES 	iCubBabbler.h
+)	
+QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
+
 ADD_EXECUTABLE ( iCubBabble ${hdr_files} ${src_files} )
 
 ADD_DEPENDENCIES( iCubBabble yarpUtil )

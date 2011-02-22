@@ -60,8 +60,7 @@ SET ( src_files	renderList.cpp
 		displmatrix.cpp
 		displaylist.cpp )
 
-SET ( hdr_files	constants.h
-		renderList.h
+SET ( hdr_files	renderList.h
 		robotmodelexception.h
 		zphandler.h
 		robot.h

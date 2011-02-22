@@ -2,6 +2,7 @@
 #define ICUBBABBLER
 
 #include <QString>
+#include <QThread>
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include "partBabbler.h"
@@ -12,8 +13,10 @@ using namespace yarp::dev;
 /*! \brief Facilitates Motor Babbling
  */
 
-class ICubBabbler
+class ICubBabbler : private QThread
 {
+	Q_OBJECT
+	
 public:
     ICubBabbler();
     ~ICubBabbler();

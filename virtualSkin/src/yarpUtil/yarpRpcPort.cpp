@@ -8,6 +8,7 @@
  */
 
 #include "yarpRpcPort.h"
+#include "constants.h"
 
 using namespace RobotModel;
 

@@ -1,0 +1,9 @@
+# Hashes of file build rules.
+65a525d02c8869a8817f09655ad2a26c src/iCubBabbler/moc_iCubBabbler.cxx
+795cef47cf0e286b417199f6df941038 src/reflex/moc_RobotFilter.cxx
+2ce42d259ad452eb4440c43b85058d03 src/reflex/moc_collisionDetector.cxx
+89cb9dce19fcc0fda1465416e7cbb46d src/reflex/moc_glwidget.cxx
+42a4cedac336be315a347dbc596676bd src/reflex/moc_skinWindow.cxx
+d4101ee440f022088d1f5fd275576125 src/robotModel/moc_renderList.cxx
+e64917163406eeffc924f24e3bea6461 src/yarpUtil/moc_yarpRpcPort.cxx
+4d8d0a1062a5a37e796ba5282ad4504f src/yarpUtil/moc_yarpStreamPort.cxx
