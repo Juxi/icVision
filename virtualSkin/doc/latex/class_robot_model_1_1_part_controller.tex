@@ -1,0 +1,118 @@
+\hypertarget{class_robot_model_1_1_part_controller}{
+\section{RobotModel::PartController Class Reference}
+\label{class_robot_model_1_1_part_controller}\index{RobotModel::PartController@{RobotModel::PartController}}
+}
+
+
+Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: \href{http://eris.liralab.it/wiki/Motor_control.}{\tt http://eris.liralab.it/wiki/Motor\_\-control.}  
+
+
+{\ttfamily \#include $<$partController.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_model_1_1_part_controller_a9e5274fba78804eb936fc84048f21e73}{PartController} ()
+\item 
+\hyperlink{class_robot_model_1_1_part_controller_aee568c7268577894104e0739a99c33f5}{$\sim$PartController} ()
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_a20331379a94c33ef330792e6b9e8b94f}{open} (const char $\ast$\_\-robotName, const char $\ast$\_\-partName)
+\item 
+void \hyperlink{class_robot_model_1_1_part_controller_a7e0fbd5bd25cebb78cd1b095c2055dac}{close} ()
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_a02d325bdc7bd18023e47f97894a2de49}{isValid} ()
+\item 
+int \hyperlink{class_robot_model_1_1_part_controller_a2fb04bfb6b1da63201fdaf3dac6591dc}{getNumJoints} ()
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_a4052252cc91ea1387d5a33c968e9a84a}{checkMotionDone} (bool $\ast$)
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_aeb479f7ffd70c0cf80beabf38b1073f7}{stop} ()
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_a3082aaf9c98045fb3309dcaef6416fbe}{setRefSpeeds} (const qreal)
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_a5481c9f2cbbd8370fd2e5b62c38c7d2f}{setRefSpeeds} (const QVector$<$ qreal $>$ \&speeds)
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_aeb2bca8add9b083ebd19d0d2d07fdfd4}{positionMove} (const QVector$<$ qreal $>$ \&)
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_ac5476493b51412c7b6008cf58111543b}{velocityMove} (int i, qreal v)
+\item 
+bool \hyperlink{class_robot_model_1_1_part_controller_af513e2aa6934bcfeef7d2bf73e9b3cc3}{randomPosMove} (qreal maxSpeed, bool hands)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: \href{http://eris.liralab.it/wiki/Motor_control.}{\tt http://eris.liralab.it/wiki/Motor\_\-control.} 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_robot_model_1_1_part_controller_a9e5274fba78804eb936fc84048f21e73}{
+\index{RobotModel::PartController@{RobotModel::PartController}!PartController@{PartController}}
+\index{PartController@{PartController}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{PartController}]{\setlength{\rightskip}{0pt plus 5cm}PartController::PartController ()}}
+\label{class_robot_model_1_1_part_controller_a9e5274fba78804eb936fc84048f21e73}
+\hypertarget{class_robot_model_1_1_part_controller_aee568c7268577894104e0739a99c33f5}{
+\index{RobotModel::PartController@{RobotModel::PartController}!$\sim$PartController@{$\sim$PartController}}
+\index{$\sim$PartController@{$\sim$PartController}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{$\sim$PartController}]{\setlength{\rightskip}{0pt plus 5cm}PartController::$\sim$PartController ()}}
+\label{class_robot_model_1_1_part_controller_aee568c7268577894104e0739a99c33f5}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_part_controller_a4052252cc91ea1387d5a33c968e9a84a}{
+\index{RobotModel::PartController@{RobotModel::PartController}!checkMotionDone@{checkMotionDone}}
+\index{checkMotionDone@{checkMotionDone}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{checkMotionDone}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::checkMotionDone (bool $\ast$ {\em flag})}}
+\label{class_robot_model_1_1_part_controller_a4052252cc91ea1387d5a33c968e9a84a}
+\hypertarget{class_robot_model_1_1_part_controller_a7e0fbd5bd25cebb78cd1b095c2055dac}{
+\index{RobotModel::PartController@{RobotModel::PartController}!close@{close}}
+\index{close@{close}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void PartController::close ()}}
+\label{class_robot_model_1_1_part_controller_a7e0fbd5bd25cebb78cd1b095c2055dac}
+\hypertarget{class_robot_model_1_1_part_controller_a2fb04bfb6b1da63201fdaf3dac6591dc}{
+\index{RobotModel::PartController@{RobotModel::PartController}!getNumJoints@{getNumJoints}}
+\index{getNumJoints@{getNumJoints}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{getNumJoints}]{\setlength{\rightskip}{0pt plus 5cm}int RobotModel::PartController::getNumJoints ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_part_controller_a2fb04bfb6b1da63201fdaf3dac6591dc}
+\hypertarget{class_robot_model_1_1_part_controller_a02d325bdc7bd18023e47f97894a2de49}{
+\index{RobotModel::PartController@{RobotModel::PartController}!isValid@{isValid}}
+\index{isValid@{isValid}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{isValid}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::isValid ()}}
+\label{class_robot_model_1_1_part_controller_a02d325bdc7bd18023e47f97894a2de49}
+\hypertarget{class_robot_model_1_1_part_controller_a20331379a94c33ef330792e6b9e8b94f}{
+\index{RobotModel::PartController@{RobotModel::PartController}!open@{open}}
+\index{open@{open}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::open (const char $\ast$ {\em \_\-robotName}, \/  const char $\ast$ {\em \_\-partName})}}
+\label{class_robot_model_1_1_part_controller_a20331379a94c33ef330792e6b9e8b94f}
+\hypertarget{class_robot_model_1_1_part_controller_aeb2bca8add9b083ebd19d0d2d07fdfd4}{
+\index{RobotModel::PartController@{RobotModel::PartController}!positionMove@{positionMove}}
+\index{positionMove@{positionMove}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{positionMove}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::positionMove (const QVector$<$ qreal $>$ \& {\em positions})}}
+\label{class_robot_model_1_1_part_controller_aeb2bca8add9b083ebd19d0d2d07fdfd4}
+\hypertarget{class_robot_model_1_1_part_controller_af513e2aa6934bcfeef7d2bf73e9b3cc3}{
+\index{RobotModel::PartController@{RobotModel::PartController}!randomPosMove@{randomPosMove}}
+\index{randomPosMove@{randomPosMove}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{randomPosMove}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::randomPosMove (qreal {\em maxSpeed}, \/  bool {\em hands})}}
+\label{class_robot_model_1_1_part_controller_af513e2aa6934bcfeef7d2bf73e9b3cc3}
+\hypertarget{class_robot_model_1_1_part_controller_a5481c9f2cbbd8370fd2e5b62c38c7d2f}{
+\index{RobotModel::PartController@{RobotModel::PartController}!setRefSpeeds@{setRefSpeeds}}
+\index{setRefSpeeds@{setRefSpeeds}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{setRefSpeeds}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::PartController::setRefSpeeds (const QVector$<$ qreal $>$ \& {\em speeds})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_part_controller_a5481c9f2cbbd8370fd2e5b62c38c7d2f}
+\hypertarget{class_robot_model_1_1_part_controller_a3082aaf9c98045fb3309dcaef6416fbe}{
+\index{RobotModel::PartController@{RobotModel::PartController}!setRefSpeeds@{setRefSpeeds}}
+\index{setRefSpeeds@{setRefSpeeds}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{setRefSpeeds}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::setRefSpeeds (const qreal {\em speed})}}
+\label{class_robot_model_1_1_part_controller_a3082aaf9c98045fb3309dcaef6416fbe}
+\hypertarget{class_robot_model_1_1_part_controller_aeb479f7ffd70c0cf80beabf38b1073f7}{
+\index{RobotModel::PartController@{RobotModel::PartController}!stop@{stop}}
+\index{stop@{stop}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::PartController::stop ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_part_controller_aeb479f7ffd70c0cf80beabf38b1073f7}
+\hypertarget{class_robot_model_1_1_part_controller_ac5476493b51412c7b6008cf58111543b}{
+\index{RobotModel::PartController@{RobotModel::PartController}!velocityMove@{velocityMove}}
+\index{velocityMove@{velocityMove}!RobotModel::PartController@{RobotModel::PartController}}
+\subsubsection[{velocityMove}]{\setlength{\rightskip}{0pt plus 5cm}bool PartController::velocityMove (int {\em i}, \/  qreal {\em v})}}
+\label{class_robot_model_1_1_part_controller_ac5476493b51412c7b6008cf58111543b}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/\hyperlink{part_controller_8h}{partController.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/\hyperlink{part_controller_8cpp}{partController.cpp}\end{DoxyCompactItemize}

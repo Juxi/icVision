@@ -1,0 +1,126 @@
+\hypertarget{class_robot_filter}{
+\section{RobotFilter Class Reference}
+\label{class_robot_filter}\index{RobotFilter@{RobotFilter}}
+}
+
+
+{\ttfamily \#include $<$RobotFilter.h$>$}\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_robot_filter_a63edcdd59785cfbf70d099ba14766180}{takeControl} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_robot_filter_a98520b2362e5f41732c0ce9ea06ec1a7}{dataReceived} ()
+\begin{DoxyCompactList}\small\item\em Signifies that the new pose has been computed. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_robot_filter_abe61e61fc213e9c407bade47a0cf6fc1}{haveControl} ()
+\item 
+void \hyperlink{class_robot_filter_a7027209482d22e7e7650fda0311ff7ec}{returnControl} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_filter_ac8b34c364fc76fedb9f44ab6c551b8fd}{RobotFilter} ()
+\item 
+virtual \hyperlink{class_robot_filter_a023b1465a80479e54bd4a47ca958a5af}{$\sim$RobotFilter} ()
+\item 
+void \hyperlink{class_robot_filter_a2044bbedf65a8ec40c65650d295d6376}{setRobot} (\hyperlink{class_robot_model_1_1_robot}{RobotModel::Robot} $\ast$r)
+\item 
+\hyperlink{class_robot_model_1_1_robot}{RobotModel::Robot} $\ast$ \hyperlink{class_robot_filter_af5f8ca3a34dc3e2d2f7a1e8b54f794a5}{getRobot} ()
+\item 
+void \hyperlink{class_robot_filter_a870f04dabea13ff84cd2ba5d0d172d44}{setPortName} (const QString \&name)
+\item 
+bool \hyperlink{class_robot_filter_ae6aa98d5ac9ff1dbb7d4d2881dfa70bf}{open} ()
+\item 
+void \hyperlink{class_robot_filter_af727d2bba23531237fdd21ac198a4726}{close} ()
+\item 
+virtual void \hyperlink{class_robot_filter_ab9eb900478b4c2836666570c79f9d1f2}{run} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_robot_filter_a298aa88af98a8b88e7f9a11ded16a587}{StateObserver}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_robot_filter_ac8b34c364fc76fedb9f44ab6c551b8fd}{
+\index{RobotFilter@{RobotFilter}!RobotFilter@{RobotFilter}}
+\index{RobotFilter@{RobotFilter}!RobotFilter@{RobotFilter}}
+\subsubsection[{RobotFilter}]{\setlength{\rightskip}{0pt plus 5cm}RobotFilter::RobotFilter ()}}
+\label{class_robot_filter_ac8b34c364fc76fedb9f44ab6c551b8fd}
+\hypertarget{class_robot_filter_a023b1465a80479e54bd4a47ca958a5af}{
+\index{RobotFilter@{RobotFilter}!$\sim$RobotFilter@{$\sim$RobotFilter}}
+\index{$\sim$RobotFilter@{$\sim$RobotFilter}!RobotFilter@{RobotFilter}}
+\subsubsection[{$\sim$RobotFilter}]{\setlength{\rightskip}{0pt plus 5cm}RobotFilter::$\sim$RobotFilter ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_filter_a023b1465a80479e54bd4a47ca958a5af}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_robot_filter_af727d2bba23531237fdd21ac198a4726}{
+\index{RobotFilter@{RobotFilter}!close@{close}}
+\index{close@{close}!RobotFilter@{RobotFilter}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::close ()}}
+\label{class_robot_filter_af727d2bba23531237fdd21ac198a4726}
+\hypertarget{class_robot_filter_a98520b2362e5f41732c0ce9ea06ec1a7}{
+\index{RobotFilter@{RobotFilter}!dataReceived@{dataReceived}}
+\index{dataReceived@{dataReceived}!RobotFilter@{RobotFilter}}
+\subsubsection[{dataReceived}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::dataReceived ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_filter_a98520b2362e5f41732c0ce9ea06ec1a7}
+
+
+Signifies that the new pose has been computed. \hypertarget{class_robot_filter_af5f8ca3a34dc3e2d2f7a1e8b54f794a5}{
+\index{RobotFilter@{RobotFilter}!getRobot@{getRobot}}
+\index{getRobot@{getRobot}!RobotFilter@{RobotFilter}}
+\subsubsection[{getRobot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RobotModel::Robot}$\ast$ RobotFilter::getRobot ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_filter_af5f8ca3a34dc3e2d2f7a1e8b54f794a5}
+\hypertarget{class_robot_filter_abe61e61fc213e9c407bade47a0cf6fc1}{
+\index{RobotFilter@{RobotFilter}!haveControl@{haveControl}}
+\index{haveControl@{haveControl}!RobotFilter@{RobotFilter}}
+\subsubsection[{haveControl}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::haveControl ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_filter_abe61e61fc213e9c407bade47a0cf6fc1}
+\hypertarget{class_robot_filter_ae6aa98d5ac9ff1dbb7d4d2881dfa70bf}{
+\index{RobotFilter@{RobotFilter}!open@{open}}
+\index{open@{open}!RobotFilter@{RobotFilter}}
+\subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotFilter::open ()}}
+\label{class_robot_filter_ae6aa98d5ac9ff1dbb7d4d2881dfa70bf}
+\hypertarget{class_robot_filter_a7027209482d22e7e7650fda0311ff7ec}{
+\index{RobotFilter@{RobotFilter}!returnControl@{returnControl}}
+\index{returnControl@{returnControl}!RobotFilter@{RobotFilter}}
+\subsubsection[{returnControl}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::returnControl ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_filter_a7027209482d22e7e7650fda0311ff7ec}
+\hypertarget{class_robot_filter_ab9eb900478b4c2836666570c79f9d1f2}{
+\index{RobotFilter@{RobotFilter}!run@{run}}
+\index{run@{run}!RobotFilter@{RobotFilter}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::run ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_filter_ab9eb900478b4c2836666570c79f9d1f2}
+\hypertarget{class_robot_filter_a870f04dabea13ff84cd2ba5d0d172d44}{
+\index{RobotFilter@{RobotFilter}!setPortName@{setPortName}}
+\index{setPortName@{setPortName}!RobotFilter@{RobotFilter}}
+\subsubsection[{setPortName}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::setPortName (const QString \& {\em name})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_filter_a870f04dabea13ff84cd2ba5d0d172d44}
+\hypertarget{class_robot_filter_a2044bbedf65a8ec40c65650d295d6376}{
+\index{RobotFilter@{RobotFilter}!setRobot@{setRobot}}
+\index{setRobot@{setRobot}!RobotFilter@{RobotFilter}}
+\subsubsection[{setRobot}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::setRobot ({\bf RobotModel::Robot} $\ast$ {\em r})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_filter_a2044bbedf65a8ec40c65650d295d6376}
+\hypertarget{class_robot_filter_a63edcdd59785cfbf70d099ba14766180}{
+\index{RobotFilter@{RobotFilter}!takeControl@{takeControl}}
+\index{takeControl@{takeControl}!RobotFilter@{RobotFilter}}
+\subsubsection[{takeControl}]{\setlength{\rightskip}{0pt plus 5cm}void RobotFilter::takeControl ()\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{class_robot_filter_a63edcdd59785cfbf70d099ba14766180}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_robot_filter_a298aa88af98a8b88e7f9a11ded16a587}{
+\index{RobotFilter@{RobotFilter}!StateObserver@{StateObserver}}
+\index{StateObserver@{StateObserver}!RobotFilter@{RobotFilter}}
+\subsubsection[{StateObserver}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf StateObserver}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{class_robot_filter_a298aa88af98a8b88e7f9a11ded16a587}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/reflex/\hyperlink{_robot_filter_8h}{RobotFilter.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/reflex/\hyperlink{_robot_filter_8cpp}{RobotFilter.cpp}\end{DoxyCompactItemize}

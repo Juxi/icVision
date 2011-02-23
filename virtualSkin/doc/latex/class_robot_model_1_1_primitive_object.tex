@@ -1,0 +1,197 @@
+\hypertarget{class_robot_model_1_1_primitive_object}{
+\section{RobotModel::PrimitiveObject Class Reference}
+\label{class_robot_model_1_1_primitive_object}\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+}
+
+
+{\ttfamily \#include $<$primitiveobject.h$>$}Inheritance diagram for RobotModel::PrimitiveObject::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{class_robot_model_1_1_primitive_object}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_model_1_1_primitive_object_ad8db4622c9ec75d92c70f4fba00863bf}{PrimitiveObject} ()
+\item 
+virtual \hyperlink{class_robot_model_1_1_primitive_object_a30e56bb8d777bf91ec7627fdfa0073b2}{$\sim$PrimitiveObject} ()
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a61c7cffdac933e1f363fa7d4715f669c}{setName} (const QString \&aName)
+\item 
+const QString \& \hyperlink{class_robot_model_1_1_primitive_object_a2bad14bd18e70f3e95b6ebfca7014d2e}{getName} ()
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_afdcf8007d5aebfa88356d5551afb9775}{setParent} (\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$object)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_primitive_object_a6981588496b77d1942435296631d1ef0}{getParent} ()
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a2d5bb08b04bf39964106c981cdca7d0e}{setL} (const QMatrix4x4 \&txfr)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_ac87b33448b7e82dddbca79f57ea8cbb5}{update} (const QMatrix4x4 \&txfr)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a0a7cfefb126e4f37c208c516f8ffd9bb}{setCartesianRotation} (const QVector3D \&rot)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a69c30287deb6549fbde68d1ba37424a8}{cartesianRotate} (const QVector3D \&rot)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a3ae3782ae64f5fc07f4d18646e04ed21}{setAxisAngleRotation} (const QVector3D \&axis, qreal angle)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a97b449302680b96410ff7296c794f640}{axisAngleRotate} (const QVector3D \&axis, qreal angle)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a07ece283ed8f0f0e3cdf6f36ac7b34dd}{specialRotate} (const QVector3D \&axis, qreal angle=0)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_ae6c417003b52df18a52711031e95c44a}{setTranslation} (const QVector3D \&trans)
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_ae41a1dcacd77b59c44409a77b0183a77}{translate} (const QVector3D \&trans)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_robot_model_1_1_primitive_object_a8fc60e9e4a29b895d45871d842081605}{doNotCollideWith} (\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$object)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QString \hyperlink{class_robot_model_1_1_primitive_object_ae14d0349fba88a7de488c28934bf38ce}{name}
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_primitive_object_a70273cf8bb51ec693445e804f2c1eb34}{parent}
+\item 
+DtShapeRef \hyperlink{class_robot_model_1_1_primitive_object_ac0e31de5b780652446fdaa06eeec47d6}{shape}
+\item 
+\hyperlink{class_robot_model_1_1_displ_matrix}{DisplMatrix} \hyperlink{class_robot_model_1_1_primitive_object_a920286d17b47f5fb033de4418f4755a5}{L}
+\item 
+QMutex \hyperlink{class_robot_model_1_1_primitive_object_a04f683e6cd9c4acc4bd8436cd8c52e15}{mutex}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_robot_model_1_1_primitive_object_ad8db4622c9ec75d92c70f4fba00863bf}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!PrimitiveObject@{PrimitiveObject}}
+\index{PrimitiveObject@{PrimitiveObject}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{PrimitiveObject}]{\setlength{\rightskip}{0pt plus 5cm}PrimitiveObject::PrimitiveObject ()}}
+\label{class_robot_model_1_1_primitive_object_ad8db4622c9ec75d92c70f4fba00863bf}
+\hypertarget{class_robot_model_1_1_primitive_object_a30e56bb8d777bf91ec7627fdfa0073b2}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!$\sim$PrimitiveObject@{$\sim$PrimitiveObject}}
+\index{$\sim$PrimitiveObject@{$\sim$PrimitiveObject}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{$\sim$PrimitiveObject}]{\setlength{\rightskip}{0pt plus 5cm}PrimitiveObject::$\sim$PrimitiveObject ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a30e56bb8d777bf91ec7627fdfa0073b2}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_primitive_object_a97b449302680b96410ff7296c794f640}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!axisAngleRotate@{axisAngleRotate}}
+\index{axisAngleRotate@{axisAngleRotate}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{axisAngleRotate}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::axisAngleRotate (const QVector3D \& {\em axis}, \/  qreal {\em angle})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a97b449302680b96410ff7296c794f640}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a9a7084168997ac285ee1e9f4041a8d57}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_a69c30287deb6549fbde68d1ba37424a8}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!cartesianRotate@{cartesianRotate}}
+\index{cartesianRotate@{cartesianRotate}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{cartesianRotate}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::cartesianRotate (const QVector3D \& {\em rot})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a69c30287deb6549fbde68d1ba37424a8}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a023ba88eaac38b26dc9ea6a358467637}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_a8fc60e9e4a29b895d45871d842081605}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!doNotCollideWith@{doNotCollideWith}}
+\index{doNotCollideWith@{doNotCollideWith}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{doNotCollideWith}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::doNotCollideWith ({\bf CompositeObject} $\ast$ {\em object})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a8fc60e9e4a29b895d45871d842081605}
+\hypertarget{class_robot_model_1_1_primitive_object_a2bad14bd18e70f3e95b6ebfca7014d2e}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!getName@{getName}}
+\index{getName@{getName}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{getName}]{\setlength{\rightskip}{0pt plus 5cm}const QString\& RobotModel::PrimitiveObject::getName ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a2bad14bd18e70f3e95b6ebfca7014d2e}
+\hypertarget{class_robot_model_1_1_primitive_object_a6981588496b77d1942435296631d1ef0}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!getParent@{getParent}}
+\index{getParent@{getParent}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{getParent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject}$\ast$ RobotModel::PrimitiveObject::getParent ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a6981588496b77d1942435296631d1ef0}
+\hypertarget{class_robot_model_1_1_primitive_object_a3ae3782ae64f5fc07f4d18646e04ed21}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setAxisAngleRotation@{setAxisAngleRotation}}
+\index{setAxisAngleRotation@{setAxisAngleRotation}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setAxisAngleRotation}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::setAxisAngleRotation (const QVector3D \& {\em axis}, \/  qreal {\em angle})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a3ae3782ae64f5fc07f4d18646e04ed21}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a56a652740c494995c0ff55d1a5fd896d}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_a0a7cfefb126e4f37c208c516f8ffd9bb}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setCartesianRotation@{setCartesianRotation}}
+\index{setCartesianRotation@{setCartesianRotation}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setCartesianRotation}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::setCartesianRotation (const QVector3D \& {\em rot})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a0a7cfefb126e4f37c208c516f8ffd9bb}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a7d52ea010f54755bcb3bfae9e26dd0c2}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_a2d5bb08b04bf39964106c981cdca7d0e}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setL@{setL}}
+\index{setL@{setL}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setL}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::setL (const QMatrix4x4 \& {\em txfr})}}
+\label{class_robot_model_1_1_primitive_object_a2d5bb08b04bf39964106c981cdca7d0e}
+\hypertarget{class_robot_model_1_1_primitive_object_a61c7cffdac933e1f363fa7d4715f669c}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setName@{setName}}
+\index{setName@{setName}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setName}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::PrimitiveObject::setName (const QString \& {\em aName})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a61c7cffdac933e1f363fa7d4715f669c}
+\hypertarget{class_robot_model_1_1_primitive_object_afdcf8007d5aebfa88356d5551afb9775}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setParent@{setParent}}
+\index{setParent@{setParent}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setParent}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::setParent ({\bf CompositeObject} $\ast$ {\em object})}}
+\label{class_robot_model_1_1_primitive_object_afdcf8007d5aebfa88356d5551afb9775}
+\hypertarget{class_robot_model_1_1_primitive_object_ae6c417003b52df18a52711031e95c44a}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!setTranslation@{setTranslation}}
+\index{setTranslation@{setTranslation}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{setTranslation}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::setTranslation (const QVector3D \& {\em trans})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_ae6c417003b52df18a52711031e95c44a}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a6c9c1298e237ab25037ad9d7163b118c}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_a07ece283ed8f0f0e3cdf6f36ac7b34dd}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!specialRotate@{specialRotate}}
+\index{specialRotate@{specialRotate}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{specialRotate}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::specialRotate (const QVector3D \& {\em axis}, \/  qreal {\em angle} = {\ttfamily 0})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a07ece283ed8f0f0e3cdf6f36ac7b34dd}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_abd15964fcf47dbfdcb06d89517871152}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_ae41a1dcacd77b59c44409a77b0183a77}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!translate@{translate}}
+\index{translate@{translate}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::translate (const QVector3D \& {\em trans})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_ae41a1dcacd77b59c44409a77b0183a77}
+
+
+Reimplemented from \hyperlink{class_robot_model_1_1_display_list_a6eb574d1f9929d9e2141dbacdeeb1b6a}{RobotModel::DisplayList}.\hypertarget{class_robot_model_1_1_primitive_object_ac87b33448b7e82dddbca79f57ea8cbb5}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!update@{update}}
+\index{update@{update}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void PrimitiveObject::update (const QMatrix4x4 \& {\em txfr})}}
+\label{class_robot_model_1_1_primitive_object_ac87b33448b7e82dddbca79f57ea8cbb5}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_robot_model_1_1_primitive_object_a920286d17b47f5fb033de4418f4755a5}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!L@{L}}
+\index{L@{L}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{L}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DisplMatrix} {\bf RobotModel::PrimitiveObject::L}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a920286d17b47f5fb033de4418f4755a5}
+\hypertarget{class_robot_model_1_1_primitive_object_a04f683e6cd9c4acc4bd8436cd8c52e15}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!mutex@{mutex}}
+\index{mutex@{mutex}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{mutex}]{\setlength{\rightskip}{0pt plus 5cm}QMutex {\bf RobotModel::PrimitiveObject::mutex}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a04f683e6cd9c4acc4bd8436cd8c52e15}
+\hypertarget{class_robot_model_1_1_primitive_object_ae14d0349fba88a7de488c28934bf38ce}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!name@{name}}
+\index{name@{name}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}QString {\bf RobotModel::PrimitiveObject::name}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_ae14d0349fba88a7de488c28934bf38ce}
+\hypertarget{class_robot_model_1_1_primitive_object_a70273cf8bb51ec693445e804f2c1eb34}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!parent@{parent}}
+\index{parent@{parent}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject}$\ast$ {\bf RobotModel::PrimitiveObject::parent}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_a70273cf8bb51ec693445e804f2c1eb34}
+\hypertarget{class_robot_model_1_1_primitive_object_ac0e31de5b780652446fdaa06eeec47d6}{
+\index{RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}!shape@{shape}}
+\index{shape@{shape}!RobotModel::PrimitiveObject@{RobotModel::PrimitiveObject}}
+\subsubsection[{shape}]{\setlength{\rightskip}{0pt plus 5cm}DtShapeRef {\bf RobotModel::PrimitiveObject::shape}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_primitive_object_ac0e31de5b780652446fdaa06eeec47d6}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{primitiveobject_8h}{primitiveobject.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{primitiveobject_8cpp}{primitiveobject.cpp}\end{DoxyCompactItemize}

@@ -29,7 +29,7 @@ void GLWidget::initializeGL()
     glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);
-    glEnable(GL_MULTISAMPLE);
+    //glEnable(GL_MULTISAMPLE);
 	
     static GLfloat lightPosition0[4] = { -.2, -.5, 1, 0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);

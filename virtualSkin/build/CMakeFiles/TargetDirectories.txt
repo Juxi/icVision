@@ -1,5 +1,0 @@
-/Users/kail/imClever/dev/virtualSkin/build/src/iCubBabbler/CMakeFiles/iCubBabble.dir
-/Users/kail/imClever/dev/virtualSkin/build/src/reflex/CMakeFiles/reflex.dir
-/Users/kail/imClever/dev/virtualSkin/build/src/robotModel/CMakeFiles/robotModel.dir
-/Users/kail/imClever/dev/virtualSkin/build/src/yarpUtil/gregorFilter/CMakeFiles/yarpFilter.dir
-/Users/kail/imClever/dev/virtualSkin/build/src/yarpUtil/CMakeFiles/yarpUtil.dir
