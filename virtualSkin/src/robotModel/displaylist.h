@@ -3,7 +3,6 @@
 
 #include "displmatrix.h"
 #include <qgl.h>
-#include <iostream>
 
 namespace RobotModel {
 

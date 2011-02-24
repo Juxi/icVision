@@ -1,4 +1,3 @@
-#include <iostream>
 #include "interval.h"
 
 using namespace std;
@@ -12,7 +11,7 @@ void Interval::setMin( const qreal minimum )
     if ( minimum > max )
 	{
         max = min;
-        cout << "WARNING: Minimum joint value was set larger than maximum. Using minJointVal = maxJointVal = " << min << endl;
+		printf("WARNING: Minimum joint value was set larger than maximum. Using minJointVal = maxJointVal = %f\n", min);
     }
 }
 void Interval::setMax( const qreal maximum )
@@ -21,7 +20,7 @@ void Interval::setMax( const qreal maximum )
     if ( maximum < min )
 	{
         min = max;
-        cout << "WARNING: Maximum joint value was set less than minimum. Using maxJointVal = minJointVal = " << max << endl;
+		printf("WARNING: Maximum joint value was set less than minimum. Using maxJointVal = minJointVal = %f\n", max);
     }
 }
 qreal Interval::getMin() const { return min; }

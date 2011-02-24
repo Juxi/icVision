@@ -1,0 +1,162 @@
+\hypertarget{class_collision_detector}{
+\section{CollisionDetector Class Reference}
+\label{class_collision_detector}\index{CollisionDetector@{CollisionDetector}}
+}
+
+
+Computes the current pose of the Robot and does collision detection using the FreeSOLID library.  
+
+
+{\ttfamily \#include $<$collisionDetector.h$>$}\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_collision_detector_ad75885bcd649c22da007c91e91b17dfc}{armDetector} ()
+\begin{DoxyCompactList}\small\item\em When armed, the collisionDetector will emit the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal if collision(s) occurr(s). \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a0ff5daf20c76c64a2e284f93bd5e50a3}{disarmDetector} ()
+\begin{DoxyCompactList}\small\item\em When disarmed, the collisionDetector will not emit the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal regardless. \item\end{DoxyCompactList}\item 
+bool \hyperlink{class_collision_detector_a92faad68f69ade7020a58f105f7d3aa8}{computePose} ()
+\begin{DoxyCompactList}\small\item\em Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_collision_detector_a9540d0ce34c4721abb8bf9bfcb1f67dd}{newPoseReady} ()
+\begin{DoxyCompactList}\small\item\em Signifies that a new pose (in cartesian space) has been computed. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash} ()
+\begin{DoxyCompactList}\small\item\em Signifies that a collision(s) has/have occurred. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_collision_detector_ab3f66bd8d272a21674e38bf46d4d31e0}{CollisionDetector} ()
+\begin{DoxyCompactList}\small\item\em Constructs an armed collisionDetector object. \item\end{DoxyCompactList}\item 
+\hyperlink{class_collision_detector_a1a0f7a386920e0cf83a101be92f04598}{$\sim$CollisionDetector} ()
+\begin{DoxyCompactList}\small\item\em Just stops the YARP port if its running. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a2c768facee0187d691dcc268b91d9652}{setRobot} (\hyperlink{class_robot_model_1_1_robot}{RobotModel::Robot} $\ast$aRobot)
+\begin{DoxyCompactList}\small\item\em Binds this collision detector to a robot model. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a7490b9d8f95f73b55b3add14ea58a737}{setWorld} (\hyperlink{class_robot_model_1_1_world}{RobotModel::World} $\ast$aWorld)
+\begin{DoxyCompactList}\small\item\em Binds this collision detector to a world model. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_acd233230c6fd897f206e1fe016b7521d}{setPortName} (const QString \&aName)
+\begin{DoxyCompactList}\small\item\em Sets the name of the YARP stream port where collision info will be published. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a1fa9e503fff5d46bd3b068dc8cd98fe4}{openPort} ()
+\begin{DoxyCompactList}\small\item\em Opens the YARP stream port. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_collision_detector_a2a9b9c210d15989278ec9ff3e88b67c7}{closePort} ()
+\begin{DoxyCompactList}\small\item\em Closes the YARP stream port. \item\end{DoxyCompactList}\item 
+bool \hyperlink{class_collision_detector_adda71d45cdd4a428945f6a8e9c750296}{detectorIsArmed} ()
+\begin{DoxyCompactList}\small\item\em Returns whether or not the collisionDetector is armed. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_collision_detector_a4899ce7cf1ba8c2efe37329e49aff128}{collisionHandler} (void $\ast$client\_\-data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData $\ast$coll\_\-data)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Computes the current pose of the Robot and does collision detection using the FreeSOLID library. To use this class: First prepare the object by calling the constructor, setRobot(Robot$\ast$) and setWorld(World$\ast$). If you want to publish collision information on the network via YARP, call setPortName(QString\&) and \hyperlink{class_collision_detector_a1fa9e503fff5d46bd3b068dc8cd98fe4}{openPort()}. Call/activate the slot \hyperlink{class_collision_detector_a92faad68f69ade7020a58f105f7d3aa8}{computePose()} when you suspect the robot's state has changed. When the pose has been computed and collision detection is finished, the signal \hyperlink{class_collision_detector_a9540d0ce34c4721abb8bf9bfcb1f67dd}{newPoseReady()} will be emitted. If one or more collisions have occurred, the signal \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} will also be emitted, provided that the \hyperlink{class_collision_detector}{CollisionDetector} is armed. Finally, use the slots \hyperlink{class_collision_detector_ad75885bcd649c22da007c91e91b17dfc}{armDetector()} and \hyperlink{class_collision_detector_a0ff5daf20c76c64a2e284f93bd5e50a3}{disarmDetector()} to control whether or not to emit the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal if a collision has occurred. This is useful if the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal triggers some kind of collision handling control code, as you can supress subsequent crash signals until the collision handling is complete.
+
+NOTE: Collision detection is only carried out between the robot and itself O(n$^\wedge$2) where n=$|$robot$|$, as well as between the robot and the world O(n) where n=$|$world$|$. Thus the computational complexity of the collision detection grows linearly with the size of the world. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_collision_detector_ab3f66bd8d272a21674e38bf46d4d31e0}{
+\index{CollisionDetector@{CollisionDetector}!CollisionDetector@{CollisionDetector}}
+\index{CollisionDetector@{CollisionDetector}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{CollisionDetector}]{\setlength{\rightskip}{0pt plus 5cm}CollisionDetector::CollisionDetector ()}}
+\label{class_collision_detector_ab3f66bd8d272a21674e38bf46d4d31e0}
+
+
+Constructs an armed collisionDetector object. \hypertarget{class_collision_detector_a1a0f7a386920e0cf83a101be92f04598}{
+\index{CollisionDetector@{CollisionDetector}!$\sim$CollisionDetector@{$\sim$CollisionDetector}}
+\index{$\sim$CollisionDetector@{$\sim$CollisionDetector}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{$\sim$CollisionDetector}]{\setlength{\rightskip}{0pt plus 5cm}CollisionDetector::$\sim$CollisionDetector ()}}
+\label{class_collision_detector_a1a0f7a386920e0cf83a101be92f04598}
+
+
+Just stops the YARP port if its running. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_collision_detector_ad75885bcd649c22da007c91e91b17dfc}{
+\index{CollisionDetector@{CollisionDetector}!armDetector@{armDetector}}
+\index{armDetector@{armDetector}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{armDetector}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::armDetector ()\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{class_collision_detector_ad75885bcd649c22da007c91e91b17dfc}
+
+
+When armed, the collisionDetector will emit the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal if collision(s) occurr(s). \hypertarget{class_collision_detector_a2a9b9c210d15989278ec9ff3e88b67c7}{
+\index{CollisionDetector@{CollisionDetector}!closePort@{closePort}}
+\index{closePort@{closePort}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{closePort}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::closePort ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_collision_detector_a2a9b9c210d15989278ec9ff3e88b67c7}
+
+
+Closes the YARP stream port. \hypertarget{class_collision_detector_a4899ce7cf1ba8c2efe37329e49aff128}{
+\index{CollisionDetector@{CollisionDetector}!collisionHandler@{collisionHandler}}
+\index{collisionHandler@{collisionHandler}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{collisionHandler}]{\setlength{\rightskip}{0pt plus 5cm}static void CollisionDetector::collisionHandler (void $\ast$ {\em client\_\-data}, \/  DtObjectRef {\em obj1}, \/  DtObjectRef {\em obj2}, \/  const DtCollData $\ast$ {\em coll\_\-data})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static\mbox{]}}}}
+\label{class_collision_detector_a4899ce7cf1ba8c2efe37329e49aff128}
+This callback is executed whenever FreeSOLID encounters a collision between Objects. It sets a flag that collision(s) has/have occurred, and encodes the collision state into a YARP bottle. \hypertarget{class_collision_detector_a92faad68f69ade7020a58f105f7d3aa8}{
+\index{CollisionDetector@{CollisionDetector}!computePose@{computePose}}
+\index{computePose@{computePose}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{computePose}]{\setlength{\rightskip}{0pt plus 5cm}bool CollisionDetector::computePose ()\hspace{0.3cm}{\ttfamily  \mbox{[}slot\mbox{]}}}}
+\label{class_collision_detector_a92faad68f69ade7020a58f105f7d3aa8}
+
+
+Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID. \hypertarget{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{
+\index{CollisionDetector@{CollisionDetector}!crash@{crash}}
+\index{crash@{crash}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{crash}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::crash ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}
+
+
+Signifies that a collision(s) has/have occurred. \hypertarget{class_collision_detector_adda71d45cdd4a428945f6a8e9c750296}{
+\index{CollisionDetector@{CollisionDetector}!detectorIsArmed@{detectorIsArmed}}
+\index{detectorIsArmed@{detectorIsArmed}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{detectorIsArmed}]{\setlength{\rightskip}{0pt plus 5cm}bool CollisionDetector::detectorIsArmed ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_collision_detector_adda71d45cdd4a428945f6a8e9c750296}
+
+
+Returns whether or not the collisionDetector is armed. \hypertarget{class_collision_detector_a0ff5daf20c76c64a2e284f93bd5e50a3}{
+\index{CollisionDetector@{CollisionDetector}!disarmDetector@{disarmDetector}}
+\index{disarmDetector@{disarmDetector}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{disarmDetector}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::disarmDetector ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, slot\mbox{]}}}}
+\label{class_collision_detector_a0ff5daf20c76c64a2e284f93bd5e50a3}
+
+
+When disarmed, the collisionDetector will not emit the \hyperlink{class_collision_detector_a7a6c1a9b11907db7252b6544ee1ce8b4}{crash()} signal regardless. \hypertarget{class_collision_detector_a9540d0ce34c4721abb8bf9bfcb1f67dd}{
+\index{CollisionDetector@{CollisionDetector}!newPoseReady@{newPoseReady}}
+\index{newPoseReady@{newPoseReady}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{newPoseReady}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::newPoseReady ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_collision_detector_a9540d0ce34c4721abb8bf9bfcb1f67dd}
+
+
+Signifies that a new pose (in cartesian space) has been computed. \hypertarget{class_collision_detector_a1fa9e503fff5d46bd3b068dc8cd98fe4}{
+\index{CollisionDetector@{CollisionDetector}!openPort@{openPort}}
+\index{openPort@{openPort}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{openPort}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::openPort ()}}
+\label{class_collision_detector_a1fa9e503fff5d46bd3b068dc8cd98fe4}
+
+
+Opens the YARP stream port. \hypertarget{class_collision_detector_acd233230c6fd897f206e1fe016b7521d}{
+\index{CollisionDetector@{CollisionDetector}!setPortName@{setPortName}}
+\index{setPortName@{setPortName}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{setPortName}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::setPortName (const QString \& {\em aName})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_collision_detector_acd233230c6fd897f206e1fe016b7521d}
+
+
+Sets the name of the YARP stream port where collision info will be published. \hypertarget{class_collision_detector_a2c768facee0187d691dcc268b91d9652}{
+\index{CollisionDetector@{CollisionDetector}!setRobot@{setRobot}}
+\index{setRobot@{setRobot}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{setRobot}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::setRobot ({\bf RobotModel::Robot} $\ast$ {\em aRobot})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_collision_detector_a2c768facee0187d691dcc268b91d9652}
+
+
+Binds this collision detector to a robot model. \hypertarget{class_collision_detector_a7490b9d8f95f73b55b3add14ea58a737}{
+\index{CollisionDetector@{CollisionDetector}!setWorld@{setWorld}}
+\index{setWorld@{setWorld}!CollisionDetector@{CollisionDetector}}
+\subsubsection[{setWorld}]{\setlength{\rightskip}{0pt plus 5cm}void CollisionDetector::setWorld ({\bf RobotModel::World} $\ast$ {\em aWorld})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_collision_detector_a7490b9d8f95f73b55b3add14ea58a737}
+
+
+Binds this collision detector to a world model. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/reflex/\hyperlink{collision_detector_8h}{collisionDetector.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/reflex/\hyperlink{collision_detector_8cpp}{collisionDetector.cpp}\end{DoxyCompactItemize}

@@ -1,4 +1,5 @@
 #include "iCubBabbler.h"
+#include <qthread.h>
 
 ICubBabbler::ICubBabbler() //: runThread(true)
 {
@@ -15,10 +16,10 @@ bool ICubBabbler::configure( const char* _robotName )
 
 bool ICubBabbler::configure()
 {
-	if ( !torso.open( robotName.toStdString().c_str(), "torso" )) { return 0; }
-	if ( !head.open( robotName.toStdString().c_str(), "head" )) { return 0; }
-	if ( !leftArm.open( robotName.toStdString().c_str(), "left_arm" )) { return 0; }
-	if ( !rightArm.open( robotName.toStdString().c_str(), "right_arm" )) { return 0; }
+	if ( !torso.open( robotName.toAscii().data(), "torso" )) { return 0; }
+	if ( !head.open( robotName.toAscii().data(), "head" )) { return 0; }
+	if ( !leftArm.open( robotName.toAscii().data(), "left_arm" )) { return 0; }
+	if ( !rightArm.open( robotName.toAscii().data(), "right_arm" )) { return 0; }
 
 	return 1;
 }
@@ -33,6 +34,7 @@ void ICubBabbler::crackBaby( qreal period, qreal velocity, bool hands )
 		rightArm.crackBaby( velocity, hands );
 		printf("\n");
 		usleep(1000000*period);
+		//wait(period/10);
 	}
 }
 
@@ -64,6 +66,7 @@ void ICubBabbler::doTheRobot( qreal period, qreal velocity, bool hands )
 		//	usleep(1000000*period);
 		//}
 		usleep(1000000*period);
+		//wait(period/10)
 	}
 }
 

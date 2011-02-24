@@ -1,4 +1,3 @@
-#include <iostream>
 #include "robot.h"
 #include "robotmodelexception.h"
 
@@ -15,13 +14,13 @@ BodyPart::~BodyPart()
 }
 bool BodyPart::setEncPos( const QVector<qreal>& x )
 {
-    if ( x.size() > size() ) {
-        cout << "WARNING BodyPart " << name().toStdString() << endl
-             << "Position vector size > " << size() << ". Some values will be ignored." << endl;
-        return 0;
-    } else if ( x.size() < size() ) {
-        cout << "WARNING BodyPart " << name().toStdString() << endl
-             << "Position vector size < " << size() << ". Some motor positions will not be set." << endl;
+    if ( x.size() > size() )
+	{
+		printf("WARNING: BodyPart %s - position vector size > %d. Some values will be ignored.\n", name().toStdString().c_str(), size() );
+    }
+	else if ( x.size() < size() )
+	{
+		printf("WARNING: BodyPart %s - position vector size < %d. Some values will not be affected.\n", name().toStdString().c_str(), size() );
     }
     QVector<Motor*>::iterator i;
     QVector<qreal>::const_iterator j;

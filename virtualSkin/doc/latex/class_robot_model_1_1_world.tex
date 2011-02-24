@@ -1,0 +1,157 @@
+\hypertarget{class_robot_model_1_1_world}{
+\section{RobotModel::World Class Reference}
+\label{class_robot_model_1_1_world}\index{RobotModel::World@{RobotModel::World}}
+}
+
+
+{\ttfamily \#include $<$world.h$>$}Inheritance diagram for RobotModel::World::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_robot_model_1_1_world}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_model_1_1_world_afa39d4e6f714a7a3691ac0c656f5e8a8}{World} ()
+\item 
+\hyperlink{class_robot_model_1_1_world_a8c73fba541a5817fff65147ba47cd827}{$\sim$World} ()
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_af9b942f5df468adf15a285b509bc69e5}{newSphere} (double r, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_aee6474d33f4ec03a15fa908f06db9748}{newSSphere} (double r, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_a8dd79f7cf657eda9de58181bc9fbb564}{newCylinder} (double r, double h, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_a36ee6c4337fbe9097f2bc30a1843cdb5}{newSCylinder} (double r, double h, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_a9c100912af0adb5275b73b6660efe475}{newBox} (const QVector3D \&size, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_adf2304f9f78471e03d2962b326fe4ce9}{newSBox} (const QVector3D \&size, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_a82289c85d931bffc967a90a12e04477a}{newObject} (const QString \&name, const QVector3D \&pos)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_adbfd8acea10b8375ed35c737afd5b929}{append} (\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$obj)
+\item 
+\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$ \hyperlink{class_robot_model_1_1_world_a2ccf0c4dd817ecae42edbb82f54289a2}{getObjectByName} (const QString \&name)
+\item 
+bool \hyperlink{class_robot_model_1_1_world_a40f4e4bfed5121602f993bf561932b07}{remove} (\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$object)
+\item 
+bool \hyperlink{class_robot_model_1_1_world_a498c5d79bc95bd308680c2a8c5e475b0}{removePrimitive} (\hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$object, \hyperlink{class_robot_model_1_1_primitive_object}{PrimitiveObject} $\ast$primitive)
+\item 
+void \hyperlink{class_robot_model_1_1_world_a24f6906f2e4f0c761653a8f9e42588a6}{clear} ()
+\item 
+void \hyperlink{class_robot_model_1_1_world_a530cb18d1249f7c6e94c4ba6879cf36a}{filterCollisions} (const \hyperlink{class_robot_model_1_1_composite_object}{CompositeObject} $\ast$)
+\item 
+void \hyperlink{class_robot_model_1_1_world_a38aea4885454231131d4ccb7945138dc}{filterCollisions} (\hyperlink{class_robot_model_1_1_primitive_object}{PrimitiveObject} $\ast$)
+\item 
+void \hyperlink{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}{render} ()
+\item 
+void \hyperlink{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}{notColliding} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_robot_model_1_1_world_afa39d4e6f714a7a3691ac0c656f5e8a8}{
+\index{RobotModel::World@{RobotModel::World}!World@{World}}
+\index{World@{World}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{World}]{\setlength{\rightskip}{0pt plus 5cm}World::World ()}}
+\label{class_robot_model_1_1_world_afa39d4e6f714a7a3691ac0c656f5e8a8}
+\hypertarget{class_robot_model_1_1_world_a8c73fba541a5817fff65147ba47cd827}{
+\index{RobotModel::World@{RobotModel::World}!$\sim$World@{$\sim$World}}
+\index{$\sim$World@{$\sim$World}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{$\sim$World}]{\setlength{\rightskip}{0pt plus 5cm}World::$\sim$World ()}}
+\label{class_robot_model_1_1_world_a8c73fba541a5817fff65147ba47cd827}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_world_adbfd8acea10b8375ed35c737afd5b929}{
+\index{RobotModel::World@{RobotModel::World}!append@{append}}
+\index{append@{append}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{append}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::append ({\bf CompositeObject} $\ast$ {\em obj})}}
+\label{class_robot_model_1_1_world_adbfd8acea10b8375ed35c737afd5b929}
+\hypertarget{class_robot_model_1_1_world_a24f6906f2e4f0c761653a8f9e42588a6}{
+\index{RobotModel::World@{RobotModel::World}!clear@{clear}}
+\index{clear@{clear}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void World::clear ()}}
+\label{class_robot_model_1_1_world_a24f6906f2e4f0c761653a8f9e42588a6}
+\hypertarget{class_robot_model_1_1_world_a38aea4885454231131d4ccb7945138dc}{
+\index{RobotModel::World@{RobotModel::World}!filterCollisions@{filterCollisions}}
+\index{filterCollisions@{filterCollisions}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{filterCollisions}]{\setlength{\rightskip}{0pt plus 5cm}void World::filterCollisions ({\bf PrimitiveObject} $\ast$ {\em prim})}}
+\label{class_robot_model_1_1_world_a38aea4885454231131d4ccb7945138dc}
+\hypertarget{class_robot_model_1_1_world_a530cb18d1249f7c6e94c4ba6879cf36a}{
+\index{RobotModel::World@{RobotModel::World}!filterCollisions@{filterCollisions}}
+\index{filterCollisions@{filterCollisions}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{filterCollisions}]{\setlength{\rightskip}{0pt plus 5cm}void World::filterCollisions (const {\bf CompositeObject} $\ast$ {\em obj})}}
+\label{class_robot_model_1_1_world_a530cb18d1249f7c6e94c4ba6879cf36a}
+\hypertarget{class_robot_model_1_1_world_a2ccf0c4dd817ecae42edbb82f54289a2}{
+\index{RobotModel::World@{RobotModel::World}!getObjectByName@{getObjectByName}}
+\index{getObjectByName@{getObjectByName}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{getObjectByName}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::getObjectByName (const QString \& {\em name})}}
+\label{class_robot_model_1_1_world_a2ccf0c4dd817ecae42edbb82f54289a2}
+\hypertarget{class_robot_model_1_1_world_a9c100912af0adb5275b73b6660efe475}{
+\index{RobotModel::World@{RobotModel::World}!newBox@{newBox}}
+\index{newBox@{newBox}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newBox}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newBox (const QVector3D \& {\em size}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_a9c100912af0adb5275b73b6660efe475}
+\hypertarget{class_robot_model_1_1_world_a8dd79f7cf657eda9de58181bc9fbb564}{
+\index{RobotModel::World@{RobotModel::World}!newCylinder@{newCylinder}}
+\index{newCylinder@{newCylinder}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newCylinder}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newCylinder (double {\em r}, \/  double {\em h}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_a8dd79f7cf657eda9de58181bc9fbb564}
+\hypertarget{class_robot_model_1_1_world_a82289c85d931bffc967a90a12e04477a}{
+\index{RobotModel::World@{RobotModel::World}!newObject@{newObject}}
+\index{newObject@{newObject}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newObject}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newObject (const QString \& {\em name}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_a82289c85d931bffc967a90a12e04477a}
+\hypertarget{class_robot_model_1_1_world_adf2304f9f78471e03d2962b326fe4ce9}{
+\index{RobotModel::World@{RobotModel::World}!newSBox@{newSBox}}
+\index{newSBox@{newSBox}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newSBox}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newSBox (const QVector3D \& {\em size}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_adf2304f9f78471e03d2962b326fe4ce9}
+\hypertarget{class_robot_model_1_1_world_a36ee6c4337fbe9097f2bc30a1843cdb5}{
+\index{RobotModel::World@{RobotModel::World}!newSCylinder@{newSCylinder}}
+\index{newSCylinder@{newSCylinder}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newSCylinder}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newSCylinder (double {\em r}, \/  double {\em h}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_a36ee6c4337fbe9097f2bc30a1843cdb5}
+\hypertarget{class_robot_model_1_1_world_af9b942f5df468adf15a285b509bc69e5}{
+\index{RobotModel::World@{RobotModel::World}!newSphere@{newSphere}}
+\index{newSphere@{newSphere}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newSphere}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newSphere (double {\em r}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_af9b942f5df468adf15a285b509bc69e5}
+\hypertarget{class_robot_model_1_1_world_aee6474d33f4ec03a15fa908f06db9748}{
+\index{RobotModel::World@{RobotModel::World}!newSSphere@{newSSphere}}
+\index{newSSphere@{newSSphere}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{newSSphere}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CompositeObject} $\ast$ World::newSSphere (double {\em r}, \/  const QVector3D \& {\em pos})}}
+\label{class_robot_model_1_1_world_aee6474d33f4ec03a15fa908f06db9748}
+\hypertarget{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}{
+\index{RobotModel::World@{RobotModel::World}!notColliding@{notColliding}}
+\index{notColliding@{notColliding}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{notColliding}]{\setlength{\rightskip}{0pt plus 5cm}void World::notColliding ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}
+
+
+Implements \hyperlink{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9bd1da9b3d96}{RobotModel::RenderList}.\hypertarget{class_robot_model_1_1_world_a40f4e4bfed5121602f993bf561932b07}{
+\index{RobotModel::World@{RobotModel::World}!remove@{remove}}
+\index{remove@{remove}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}bool World::remove ({\bf CompositeObject} $\ast$ {\em object})}}
+\label{class_robot_model_1_1_world_a40f4e4bfed5121602f993bf561932b07}
+\hypertarget{class_robot_model_1_1_world_a498c5d79bc95bd308680c2a8c5e475b0}{
+\index{RobotModel::World@{RobotModel::World}!removePrimitive@{removePrimitive}}
+\index{removePrimitive@{removePrimitive}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{removePrimitive}]{\setlength{\rightskip}{0pt plus 5cm}bool World::removePrimitive ({\bf CompositeObject} $\ast$ {\em object}, \/  {\bf PrimitiveObject} $\ast$ {\em primitive})}}
+\label{class_robot_model_1_1_world_a498c5d79bc95bd308680c2a8c5e475b0}
+\hypertarget{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}{
+\index{RobotModel::World@{RobotModel::World}!render@{render}}
+\index{render@{render}!RobotModel::World@{RobotModel::World}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void World::render ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}
+
+
+Implements \hyperlink{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}{RobotModel::RenderList}.
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{world_8h}{world.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{world_8cpp}{world.cpp}\end{DoxyCompactItemize}

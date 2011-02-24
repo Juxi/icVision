@@ -1,5 +1,5 @@
 #include <qgl.h>
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "object.h"
 #include "displmatrix.h"
 #include "sphere.h"
@@ -161,8 +161,9 @@ PrimitiveObject* CompositeObject::getPrimitiveByName( const QString& name ) cons
 void CompositeObject::makeDisplayList()
 {
 	int error = glGetError();
-	if (error != GL_NO_ERROR) {
-		std::cout << "An OpenGL error has occured: " << gluErrorString(error) << std::endl;
+	if (error != GL_NO_ERROR)
+	{
+		printf("An OpenGL error has occured: %s\n", gluErrorString(error));
 	}
 	
     // get a unique display list index and define the list
@@ -189,7 +190,6 @@ void CompositeObject::makeDisplayList()
         glEnd();
 
     glEndList();
-    //cout << "made object display list #" << displayListIdx() << endl;
 
     // make display lists for primitives
     QVector<PrimitiveObject*>::const_iterator i;
@@ -209,11 +209,8 @@ void CompositeObject::notColliding()
 
 void CompositeObject::render()
 {
-    //DisplayList::render();
-    //cout << "called render() on object" << endl;
     QVector<PrimitiveObject*>::const_iterator i;
     for ( i=begin(); i!=end(); ++i ) {
         (*i)->render();
-        //cout << "called render() on primitive" << endl;
     }
 }

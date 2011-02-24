@@ -1,4 +1,4 @@
-#include "solid.h"
+#include <SOLID/solid.h>
 #include "kintreenode.h"
 #include "primitiveobject.h"
 #include "robot.h"
@@ -56,7 +56,6 @@ bool KinTreeNode::remove( PrimitiveObject* anObject )
 
 void KinTreeNode::filterCollisionPairs()
 {
-    //cout << "Called " << this->name().toStdString() << ".filterCollisionPairs()" << endl;
     QVector<KinTreeNode*>::iterator i;
 
     // do not do collision detection between this link and its siblings (or itself)
@@ -146,20 +145,20 @@ void KinTreeNode::print() const
 {
     const qreal* m = M.constData();
     const qreal* t = T.constData();
-    //Alex: QDataStream??
-	std::cout << "   ---------------------------------------------------" << std::endl
-              //<< "    Node " << index << ": " << nodeName.toStdString()   << std::endl
-              << "   ---------------------------------------------------" << std::endl
-              << "      Axis:     " << nodeAxis.x() << " " << nodeAxis.y() << " " << nodeAxis.z() << std::endl
-              << "      M:        " << m[0] << " " << m[4] << " " << m[8]  << " " << m[12] << std::endl
-              << "                " << m[1] << " " << m[5] << " " << m[9]  << " " << m[13] << std::endl
-              << "                " << m[2] << " " << m[6] << " " << m[10] << " " << m[14] << std::endl
-              << "                " << m[3] << " " << m[7] << " " << m[11] << " " << m[15] << std::endl
-              << "      T:        " << t[0] << " " << t[4] << " " << t[8]  << " " << t[12] << std::endl
-              << "                " << t[1] << " " << t[5] << " " << t[9]  << " " << t[13] << std::endl
-              << "                " << t[2] << " " << t[6] << " " << t[10] << " " << t[14] << std::endl
-              << "                " << t[3] << " " << t[7] << " " << t[11] << " " << t[15] << std::endl
-              << "   ---------------------------------------------------" << std::endl;
+   
+	printf("   ---------------------------------------------------\n");
+	printf("     Node: %d\n", index);
+	printf("   ---------------------------------------------------\n");
+	printf("       Axis: %f, %f, %f\n", nodeAxis.x(),nodeAxis.y(),nodeAxis.z());
+	printf("       M: %f, %f, %f, %f\n",	m[0],	m[4],	m[8],	m[12]);
+	printf("          %f, %f, %f, %f\n",	m[1],	m[5],	m[9],	m[13]);
+	printf("          %f, %f, %f, %f\n",	m[2],	m[6],	m[10],	m[14]);
+	printf("          %f, %f, %f, %f\n",	m[3],	m[7],	m[11],	m[15]);
+	printf("       T: %f, %f, %f, %f\n",	t[0],	t[4],	t[8],	t[12]);
+	printf("          %f, %f, %f, %f\n",	t[1],	t[5],	t[9],	t[13]);
+	printf("          %f, %f, %f, %f\n",	t[2],	t[6],	t[10],	t[14]);
+	printf("          %f, %f, %f, %f\n",	t[3],	t[7],	t[11],	t[15]);
+	printf("   ---------------------------------------------------\n");
 }
 
 void KinTreeNode::printAll()

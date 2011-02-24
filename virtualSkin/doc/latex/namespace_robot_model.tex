@@ -1,0 +1,64 @@
+\hypertarget{namespace_robot_model}{
+\section{RobotModel Namespace Reference}
+\label{namespace_robot_model}\index{RobotModel@{RobotModel}}
+}
+
+
+To set the positions of several motors at once (see \hyperlink{class_robot_model_1_1_motor}{Motor}, \hyperlink{class_robot_model_1_1_joint}{Joint}, and \hyperlink{class_robot_model_1_1_robot}{Robot}).  
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_robot_model_1_1_body_part}{BodyPart}
+\item 
+class \hyperlink{class_robot_model_1_1_box}{Box}
+\item 
+class \hyperlink{class_robot_model_1_1_cylinder}{Cylinder}
+\item 
+class \hyperlink{class_robot_model_1_1_display_list}{DisplayList}
+\item 
+class \hyperlink{class_robot_model_1_1_displ_matrix}{DisplMatrix}
+\item 
+class \hyperlink{class_robot_model_1_1_interval}{Interval}
+\item 
+class \hyperlink{class_robot_model_1_1_joint}{Joint}
+\item 
+class \hyperlink{class_robot_model_1_1_prismatic_joint}{PrismaticJoint}
+\item 
+class \hyperlink{class_robot_model_1_1_revolute_joint}{RevoluteJoint}
+\item 
+class \hyperlink{class_robot_model_1_1_kin_tree_node}{KinTreeNode}
+\item 
+class \hyperlink{class_robot_model_1_1_link}{Link}
+\begin{DoxyCompactList}\small\item\em Represents a link in the robot. \item\end{DoxyCompactList}\item 
+class \hyperlink{class_robot_model_1_1_motor}{Motor}
+\begin{DoxyCompactList}\small\item\em Affords control of one or more joints (see Branch and \hyperlink{class_robot_model_1_1_joint}{Joint}). \item\end{DoxyCompactList}\item 
+class \hyperlink{class_robot_model_1_1_composite_object}{CompositeObject}
+\item 
+class \hyperlink{class_robot_model_1_1_primitive_object}{PrimitiveObject}
+\item 
+class \hyperlink{class_robot_model_1_1_render_list}{RenderList}
+\item 
+class \hyperlink{class_robot_model_1_1_robot}{Robot}
+\begin{DoxyCompactList}\small\item\em A kinematic model of a robot. \item\end{DoxyCompactList}\item 
+class \hyperlink{class_robot_model_1_1_robot_model_exception}{RobotModelException}
+\item 
+class \hyperlink{class_robot_model_1_1_sphere}{Sphere}
+\item 
+class \hyperlink{class_robot_model_1_1_world}{World}
+\item 
+class \hyperlink{class_robot_model_1_1_z_p_handler}{ZPHandler}
+\begin{DoxyCompactList}\small\item\em A custom handler for the Qt XML parser (see \hyperlink{class_robot_model_1_1_robot}{Robot}). \item\end{DoxyCompactList}\item 
+class \hyperlink{class_robot_model_1_1_part_controller}{PartController}
+\begin{DoxyCompactList}\small\item\em Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: \href{http://eris.liralab.it/wiki/Motor_control.}{\tt http://eris.liralab.it/wiki/Motor\_\-control.} \item\end{DoxyCompactList}\item 
+class \hyperlink{class_robot_model_1_1_world_rpc_interface}{WorldRpcInterface}
+\item 
+class \hyperlink{class_robot_model_1_1_yarp_rpc_port}{YarpRpcPort}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+To set the positions of several motors at once (see \hyperlink{class_robot_model_1_1_motor}{Motor}, \hyperlink{class_robot_model_1_1_joint}{Joint}, and \hyperlink{class_robot_model_1_1_robot}{Robot}). A simple representation of a 1D interval (see \hyperlink{class_robot_model_1_1_joint}{Joint} and \hyperlink{class_robot_model_1_1_motor}{Motor}).
+
+This class facilitates grouping of the motors (and therefore joints) into subsystems, such that we can replicate the YARP interface to the iCub (or another robot). This allows us to seamlessly wrap the YARP server and filter the commands being sent to the robot, without the need to change the client side code at all. Consider the following: The iCub robot is configured such that a control program connects to a YARP port, which offers interfaces to several motors. For example, one could connect to an RPC port called 'torso', which offers three motor interfaces, roll, pitch and yaw. A control program can set the motor positions (or read encoder values) individually, or alternatively it can set all positions belonging to the group 'torso' with a command of the form setAllTorsoPositions(roll,pitch,yaw), and the same is true for reading encoder positions. In this case 'torso' is a Branch, so named because its three motors correspond to joints, which constitute a 'branch' of the kinematic tree.
+
+The interval is inclusive of 'min' and 'max'. 

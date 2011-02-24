@@ -1,17 +1,16 @@
 #include "world.h"
 #include <QMatrix4x4>
-#include <iostream>
 
 using namespace RobotModel;
 
 World::World() : numSpheres(0), numCylinders(0), numBoxes(0),
 				 numSSpheres(0),numSCylinders(0),numSBoxes(0)
 {
-	rpcInterface.setWorld(this);
+	//rpcInterface.setWorld(this);
 }
 World::~World()
 {
-	closeRpcInterface();
+	//closeRpcInterface();
 	
 	QVector<CompositeObject*>::iterator i;
 	QVector<PrimitiveObject*>::iterator j;
@@ -118,7 +117,7 @@ CompositeObject* World::getObjectByName( const QString& name )
 	QVector<CompositeObject*>::iterator i;
     for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
         if ( name == (*i)->getName() ) { 
-			std::cout << "FoundName: " << (*i)->getName().toStdString() << std::endl;
+			printf("FoundName: %s\n",(*i)->getName().toStdString().c_str());
 			object =  *i;
 		}
     }
@@ -151,8 +150,6 @@ bool World::remove( CompositeObject* obj )
 	
 	mutex.lock();
 	
-	printf("\n MUTEX LOCKED - REMOVING OBJECT");
-	
 		QVector<CompositeObject*>::iterator i;
 		for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
 			if ( *i == obj ) {
@@ -169,8 +166,6 @@ bool World::remove( CompositeObject* obj )
 		delete(obj);
 	
 	mutex.unlock();
-	
-	printf("\n MUTEX UNLOCKED - RETURNING");
 	
 	return foundObject;
 }

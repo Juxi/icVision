@@ -1,6 +1,5 @@
 #include "primitiveobject.h"
 #include "object.h"
-#include "solid.h"
 
 using namespace RobotModel;
 

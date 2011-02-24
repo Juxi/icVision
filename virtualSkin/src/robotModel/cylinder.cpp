@@ -1,8 +1,9 @@
+#include <qgl.h>
+#include <qmath.h>
+
+#include <SOLID/solid.h>
 #include "cylinder.h"
 #include "displmatrix.h"
-#include <qgl.h>
-//#include <iostream>
-#include "solid.h"
 #include "robotmodelexception.h"
 
 using namespace RobotModel;
@@ -34,11 +35,14 @@ void Cylinder::makeDisplayList()
 
     QVector4D p0 = QVector4D( radius, -height/2, 0, 1 ),
               q0 = QVector4D( radius,  height/2, 0, 1 ),
-              n0 = QVector4D( radius, 0, 0, 1 ),
-              p[numSegments+1],
-              q[numSegments+1],
-              pn[numSegments+1],
-              qn[numSegments+1];
+			  n0 = QVector4D( radius, 0, 0, 1 );
+	
+	QVector4D *p,*q,*pn,*qn;
+	
+	p = new QVector4D[numSegments+1];
+	q = new QVector4D[numSegments+1];
+	pn = new QVector4D[numSegments+1];
+	qn = new QVector4D[numSegments+1];
 
     DisplMatrix M,N;
 
@@ -92,4 +96,9 @@ void Cylinder::makeDisplayList()
         glEnd();
 	
     glEndList();
+	
+	delete[] p;
+	delete[] q;
+	delete[] pn;
+	delete[] qn;
 }

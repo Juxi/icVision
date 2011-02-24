@@ -1,0 +1,177 @@
+\hypertarget{class_robot_model_1_1_display_list}{
+\section{RobotModel::DisplayList Class Reference}
+\label{class_robot_model_1_1_display_list}\index{RobotModel::DisplayList@{RobotModel::DisplayList}}
+}
+
+
+{\ttfamily \#include $<$displaylist.h$>$}Inheritance diagram for RobotModel::DisplayList::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.97872cm]{class_robot_model_1_1_display_list}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_model_1_1_display_list_a71d74802d0190f52c0c4ad7c6d5351f9}{DisplayList} ()
+\item 
+virtual \hyperlink{class_robot_model_1_1_display_list_a4c2105212d624723af920c798c1712cf}{$\sim$DisplayList} ()
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a842de97924298c7363e50aebd69e5a50}{makeDisplayList} ()=0
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a5f95e85c192a2bc8f06f18075e6fefd7}{render} ()
+\item 
+const \hyperlink{class_robot_model_1_1_displ_matrix}{DisplMatrix} \& \hyperlink{class_robot_model_1_1_display_list_a2e08e72148fc8bb77a693b769a16711a}{getT} ()
+\item 
+void \hyperlink{class_robot_model_1_1_display_list_a78c642f12487ea830475a0e860aeee38}{setDisplayListIdx} (int idx)
+\item 
+int \hyperlink{class_robot_model_1_1_display_list_a2c405729d9a5d904b9c292fd87c3be05}{displayListIdx} ()
+\item 
+void \hyperlink{class_robot_model_1_1_display_list_aab3355867d2a992c208f2173fc29e221}{setColliding} ()
+\item 
+void \hyperlink{class_robot_model_1_1_display_list_a7440037838409ae852e02183245b338d}{unSetColliding} ()
+\item 
+bool \hyperlink{class_robot_model_1_1_display_list_a32f1a046e32b479110977c5efec41cc3}{isColliding} () const 
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a7d52ea010f54755bcb3bfae9e26dd0c2}{setCartesianRotation} (const QVector3D \&rot)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a023ba88eaac38b26dc9ea6a358467637}{cartesianRotate} (const QVector3D \&rot)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a56a652740c494995c0ff55d1a5fd896d}{setAxisAngleRotation} (const QVector3D \&axis, qreal angle)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a9a7084168997ac285ee1e9f4041a8d57}{axisAngleRotate} (const QVector3D \&axis, qreal angle)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_abd15964fcf47dbfdcb06d89517871152}{specialRotate} (const QVector3D \&axis, qreal angle=0)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a6c9c1298e237ab25037ad9d7163b118c}{setTranslation} (const QVector3D \&trans)
+\item 
+virtual void \hyperlink{class_robot_model_1_1_display_list_a6eb574d1f9929d9e2141dbacdeeb1b6a}{translate} (const QVector3D \&trans)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_robot_model_1_1_displ_matrix}{DisplMatrix} \hyperlink{class_robot_model_1_1_display_list_a9058babda6102fe41186f806990aa350}{T}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_robot_model_1_1_display_list_a71d74802d0190f52c0c4ad7c6d5351f9}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!DisplayList@{DisplayList}}
+\index{DisplayList@{DisplayList}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{DisplayList}]{\setlength{\rightskip}{0pt plus 5cm}DisplayList::DisplayList ()}}
+\label{class_robot_model_1_1_display_list_a71d74802d0190f52c0c4ad7c6d5351f9}
+\hypertarget{class_robot_model_1_1_display_list_a4c2105212d624723af920c798c1712cf}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!$\sim$DisplayList@{$\sim$DisplayList}}
+\index{$\sim$DisplayList@{$\sim$DisplayList}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{$\sim$DisplayList}]{\setlength{\rightskip}{0pt plus 5cm}DisplayList::$\sim$DisplayList ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a4c2105212d624723af920c798c1712cf}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_display_list_a9a7084168997ac285ee1e9f4041a8d57}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!axisAngleRotate@{axisAngleRotate}}
+\index{axisAngleRotate@{axisAngleRotate}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{axisAngleRotate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::axisAngleRotate (const QVector3D \& {\em axis}, \/  qreal {\em angle})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a9a7084168997ac285ee1e9f4041a8d57}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_a357f5ed3f49e0889df511271e468f866}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_a97b449302680b96410ff7296c794f640}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_a023ba88eaac38b26dc9ea6a358467637}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!cartesianRotate@{cartesianRotate}}
+\index{cartesianRotate@{cartesianRotate}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{cartesianRotate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::cartesianRotate (const QVector3D \& {\em rot})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a023ba88eaac38b26dc9ea6a358467637}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_adadc29cccbba9cb615eaf0ad2fbdd337}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_a69c30287deb6549fbde68d1ba37424a8}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_a2c405729d9a5d904b9c292fd87c3be05}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!displayListIdx@{displayListIdx}}
+\index{displayListIdx@{displayListIdx}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{displayListIdx}]{\setlength{\rightskip}{0pt plus 5cm}int RobotModel::DisplayList::displayListIdx ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a2c405729d9a5d904b9c292fd87c3be05}
+\hypertarget{class_robot_model_1_1_display_list_a2e08e72148fc8bb77a693b769a16711a}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!getT@{getT}}
+\index{getT@{getT}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{getT}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf DisplMatrix}\& RobotModel::DisplayList::getT ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a2e08e72148fc8bb77a693b769a16711a}
+\hypertarget{class_robot_model_1_1_display_list_a32f1a046e32b479110977c5efec41cc3}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!isColliding@{isColliding}}
+\index{isColliding@{isColliding}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{isColliding}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::DisplayList::isColliding () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a32f1a046e32b479110977c5efec41cc3}
+\hypertarget{class_robot_model_1_1_display_list_a842de97924298c7363e50aebd69e5a50}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!makeDisplayList@{makeDisplayList}}
+\index{makeDisplayList@{makeDisplayList}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{makeDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::makeDisplayList ()\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a842de97924298c7363e50aebd69e5a50}
+
+
+Implemented in \hyperlink{class_robot_model_1_1_box_a29420d81c8b3622c95a1976593e2cc4b}{RobotModel::Box}, \hyperlink{class_robot_model_1_1_cylinder_a9f0361117d5f20344f543c9e20df1113}{RobotModel::Cylinder}, \hyperlink{class_robot_model_1_1_composite_object_a5aa475cb09f0e9b9089a941848f9e189}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_sphere_a838b5ae4f743aabe24a255dd61d2843c}{RobotModel::Sphere}.\hypertarget{class_robot_model_1_1_display_list_a5f95e85c192a2bc8f06f18075e6fefd7}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!render@{render}}
+\index{render@{render}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void DisplayList::render ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a5f95e85c192a2bc8f06f18075e6fefd7}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_kin_tree_node_a85f4364980f9144471b9d92e175c539e}{RobotModel::KinTreeNode}, and \hyperlink{class_robot_model_1_1_composite_object_aee43da74b22f6272736844effe7a1dd6}{RobotModel::CompositeObject}.\hypertarget{class_robot_model_1_1_display_list_a56a652740c494995c0ff55d1a5fd896d}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!setAxisAngleRotation@{setAxisAngleRotation}}
+\index{setAxisAngleRotation@{setAxisAngleRotation}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{setAxisAngleRotation}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::setAxisAngleRotation (const QVector3D \& {\em axis}, \/  qreal {\em angle})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a56a652740c494995c0ff55d1a5fd896d}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_a43f99ed52def7114d310e29fc6db83f3}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_a3ae3782ae64f5fc07f4d18646e04ed21}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_a7d52ea010f54755bcb3bfae9e26dd0c2}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!setCartesianRotation@{setCartesianRotation}}
+\index{setCartesianRotation@{setCartesianRotation}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{setCartesianRotation}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::setCartesianRotation (const QVector3D \& {\em rot})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a7d52ea010f54755bcb3bfae9e26dd0c2}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_a12e8961ebc63d8a253d915b29b356162}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_a0a7cfefb126e4f37c208c516f8ffd9bb}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_aab3355867d2a992c208f2173fc29e221}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!setColliding@{setColliding}}
+\index{setColliding@{setColliding}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{setColliding}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::DisplayList::setColliding ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_aab3355867d2a992c208f2173fc29e221}
+\hypertarget{class_robot_model_1_1_display_list_a78c642f12487ea830475a0e860aeee38}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!setDisplayListIdx@{setDisplayListIdx}}
+\index{setDisplayListIdx@{setDisplayListIdx}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{setDisplayListIdx}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::DisplayList::setDisplayListIdx (int {\em idx})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a78c642f12487ea830475a0e860aeee38}
+\hypertarget{class_robot_model_1_1_display_list_a6c9c1298e237ab25037ad9d7163b118c}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!setTranslation@{setTranslation}}
+\index{setTranslation@{setTranslation}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{setTranslation}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::setTranslation (const QVector3D \& {\em trans})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a6c9c1298e237ab25037ad9d7163b118c}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_ae925e59246174c9d3b74d459b32835e3}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_ae6c417003b52df18a52711031e95c44a}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_abd15964fcf47dbfdcb06d89517871152}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!specialRotate@{specialRotate}}
+\index{specialRotate@{specialRotate}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{specialRotate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::specialRotate (const QVector3D \& {\em axis}, \/  qreal {\em angle} = {\ttfamily 0})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_abd15964fcf47dbfdcb06d89517871152}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_ad44b9c1759209367754dafd77c984d6f}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_a07ece283ed8f0f0e3cdf6f36ac7b34dd}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_a6eb574d1f9929d9e2141dbacdeeb1b6a}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!translate@{translate}}
+\index{translate@{translate}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::DisplayList::translate (const QVector3D \& {\em trans})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a6eb574d1f9929d9e2141dbacdeeb1b6a}
+
+
+Reimplemented in \hyperlink{class_robot_model_1_1_composite_object_afd942b7fa3b18bcc01c3fba417a6c027}{RobotModel::CompositeObject}, and \hyperlink{class_robot_model_1_1_primitive_object_ae41a1dcacd77b59c44409a77b0183a77}{RobotModel::PrimitiveObject}.\hypertarget{class_robot_model_1_1_display_list_a7440037838409ae852e02183245b338d}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!unSetColliding@{unSetColliding}}
+\index{unSetColliding@{unSetColliding}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{unSetColliding}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::DisplayList::unSetColliding ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a7440037838409ae852e02183245b338d}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_robot_model_1_1_display_list_a9058babda6102fe41186f806990aa350}{
+\index{RobotModel::DisplayList@{RobotModel::DisplayList}!T@{T}}
+\index{T@{T}!RobotModel::DisplayList@{RobotModel::DisplayList}}
+\subsubsection[{T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DisplMatrix} {\bf RobotModel::DisplayList::T}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_display_list_a9058babda6102fe41186f806990aa350}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{displaylist_8h}{displaylist.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{displaylist_8cpp}{displaylist.cpp}\end{DoxyCompactItemize}

@@ -9,29 +9,38 @@ PROJECT ( robotModel )
 SET ( robotModel_VERSION_MAJOR 0 )
 SET ( robotModel_VERSION_MINOR 1 )
 
-###
-### TODO: implement: FIND_PACKAGE( FreeSOLID ) 
-###
+MESSAGE(STATUS " ")
+MESSAGE(STATUS "*** Sub-Project robotModel ***")
 
-### OpenGL ###
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cMakeScripts )
+
+### Find Libraries ###
 FIND_PACKAGE ( OpenGL )
-
-### QT ###
 FIND_PACKAGE ( Qt4 REQUIRED )
-SET ( QT_USE_QTOPENGL TRUE )
-SET ( QT_USE_QTXML TRUE )
-INCLUDE ( ${QT_USE_FILE} )
+	SET ( QT_USE_QTOPENGL TRUE )
+	SET ( QT_USE_QTXML TRUE )
+	INCLUDE ( ${QT_USE_FILE} )
+FIND_PACKAGE ( FreeSOLID REQUIRED )
 
-### YARP ###
-FIND_PACKAGE ( YARP REQUIRED )
+### Set some platform-specific variables ###
+SET (Q_WS_MAC FALSE)
+SET (Q_WS_X11 FALSE)
+SET (Q_WS_WIN FALSE)
+IF ( UNIX )
+	IF ( APPLE )
+		SET (Q_WS_MAC TRUE)
+		SET (QT_MAC_USE_COCOA TRUE)
+	ELSE ( APPLE )
+		SET (Q_WS_X11 TRUE)
+	ENDIF ( APPLE )
+ENDIF ( UNIX )
+IF ( WIN32 )
+	SET (Q_WS_WIN TRUE)
+	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
+ENDIF ( WIN32 )
 
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/freeSolid/" )
-
-SET ( src_files	partController.cpp
-		renderList.cpp
+SET ( src_files	renderList.cpp
 		robotmodelexception.cpp
-		worldRpcInterface.cpp
-		yarpRpcPort.cpp
 		zphandler.cpp
 		robot.cpp
 		interval.cpp
@@ -51,12 +60,8 @@ SET ( src_files	partController.cpp
 		displmatrix.cpp
 		displaylist.cpp )
 
-SET ( hdr_files	partController.h
-		constants.h
-		renderList.h
+SET ( hdr_files	renderList.h
 		robotmodelexception.h
-		worldRpcInterface.h
-		yarpRpcPort.h
 		zphandler.h
 		robot.h
 		interval.h
@@ -77,18 +82,15 @@ SET ( hdr_files	partController.h
 		displaylist.h )
 
 SET ( QT_MOC_FILES 	renderList.h
-			yarpRpcPort.h
-			worldRpcInterface.h )	
+			#world.h
+)	
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_LIBRARY ( robotModel STATIC ${hdr_files} ${src_files} )
 
-# Tell XCode not to use /Debug and /Release directories for the binaries it builds
-SET_TARGET_PROPERTIES ( robotModel PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR})
-
-TARGET_LINK_LIBRARIES ( robotModel FreeSOLID  ${YARP_LIBRARIES} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} )
+TARGET_LINK_LIBRARIES ( robotModel ${FREE_SOLID_LIBRARY} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} )
 
 INSTALL ( TARGETS   robotModel 	 DESTINATION ${CMAKE_SOURCE_DIR}/lib )
 INSTALL ( FILES     ${hdr_files} DESTINATION ${CMAKE_SOURCE_DIR}/include/robotModel)
-INSTALL ( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/freeSolid DESTINATION ${CMAKE_SOURCE_DIR}/include )
+
 

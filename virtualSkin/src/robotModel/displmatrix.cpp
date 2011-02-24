@@ -7,6 +7,8 @@
  *
  */
 
+#include <qmath.h>
+
 #include "displmatrix.h"
 
 using namespace RobotModel;
