@@ -48,20 +48,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::Link Class Reference</h1><!-- doxytag: class="RobotModel::Link" --><!-- doxytag: inherits="RobotModel::KinTreeNode" -->
+<h1>RobotModel::Link Class Reference</h1><!-- doxytag: class="RobotModel::Link" --><!-- doxytag: inherits="RobotModel::KinTreeNode,RobotModel::KinTreeNode" -->
 <p>Represents a link in the robot.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="link_8h_source.html">link.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2robot_model_2link_8h_source.html">link.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::Link:</div>
 <div class="dynsection">
  <div class="center">
   <img src="class_robot_model_1_1_link.png" usemap="#RobotModel::Link_map" alt=""/>
   <map id="RobotModel::Link_map" name="RobotModel::Link_map">
-<area href="class_robot_model_1_1_kin_tree_node.html" alt="RobotModel::KinTreeNode" shape="rect" coords="0,112,180,136"/>
-<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="0,56,180,80"/>
-<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="0,0,180,24"/>
+<area href="class_robot_model_1_1_kin_tree_node.html" alt="RobotModel::KinTreeNode" shape="rect" coords="190,168,370,192"/>
+<area href="class_robot_model_1_1_kin_tree_node.html" alt="RobotModel::KinTreeNode" shape="rect" coords="950,168,1130,192"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="0,112,180,136"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="380,112,560,136"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="760,112,940,136"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="1140,112,1320,136"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="1330,56,1510,80"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="1330,0,1510,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="950,56,1130,80"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="950,0,1130,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="570,56,750,80"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="570,0,750,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="190,56,370,80"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="190,0,370,24"/>
 </map>
  </div>
 </div>
@@ -71,6 +82,8 @@ Inheritance diagram for RobotModel::Link:</div>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_link.html#adf46ff7e38787594ac9941a478083f21">Link</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *robot, <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *parent)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_link.html#a666e442abb3122fe5eb1705f1b2d650d">~Link</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_link.html#a51f1c1b6b739dac1ecdff9e803db2499">Link</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *robot, <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *parent)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_link.html#a8d7151624da1aa2dc7675ab63ec29a1c">~Link</a> ()</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Represents a link in the robot. </p>
@@ -119,8 +132,53 @@ Inheritance diagram for RobotModel::Link:</div>
 
 </div>
 </div>
+<a class="anchor" id="a51f1c1b6b739dac1ecdff9e803db2499"></a><!-- doxytag: member="RobotModel::Link::Link" ref="a51f1c1b6b739dac1ecdff9e803db2499" args="(Robot *robot, KinTreeNode *parent)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RobotModel::Link::Link </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td>
+          <td class="paramname"> <em>robot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td>
+          <td class="paramname"> <em>parent</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8d7151624da1aa2dc7675ab63ec29a1c"></a><!-- doxytag: member="RobotModel::Link::~Link" ref="a8d7151624da1aa2dc7675ab63ec29a1c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RobotModel::Link::~Link </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="link_8h_source.html">link.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/robotModel/<a class="el" href="include_2robot_model_2link_8h_source.html">link.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="src_2robot_model_2link_8h_source.html">link.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="link_8cpp.html">link.cpp</a></li>
 </ul>
 </div>

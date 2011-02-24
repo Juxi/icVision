@@ -48,20 +48,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::KinTreeNode Class Reference</h1><!-- doxytag: class="RobotModel::KinTreeNode" --><!-- doxytag: inherits="RobotModel::CompositeObject" -->
-<p><code>#include &lt;<a class="el" href="kintreenode_8h_source.html">kintreenode.h</a>&gt;</code></p>
+<h1>RobotModel::KinTreeNode Class Reference</h1><!-- doxytag: class="RobotModel::KinTreeNode" --><!-- doxytag: inherits="RobotModel::CompositeObject,RobotModel::CompositeObject" -->
+<p><code>#include &lt;<a class="el" href="include_2robot_model_2kintreenode_8h_source.html">kintreenode.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::KinTreeNode:</div>
 <div class="dynsection">
  <div class="center">
   <img src="class_robot_model_1_1_kin_tree_node.png" usemap="#RobotModel::KinTreeNode_map" alt=""/>
   <map id="RobotModel::KinTreeNode_map" name="RobotModel::KinTreeNode_map">
-<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="190,56,370,80"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="285,56,465,80"/>
+<area href="class_robot_model_1_1_composite_object.html" alt="RobotModel::CompositeObject" shape="rect" coords="665,56,845,80"/>
 <area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="190,0,370,24"/>
-<area href="class_robot_model_1_1_joint.html" alt="RobotModel::Joint" shape="rect" coords="95,168,275,192"/>
-<area href="class_robot_model_1_1_link.html" alt="RobotModel::Link" shape="rect" coords="285,168,465,192"/>
-<area href="class_robot_model_1_1_prismatic_joint.html" alt="RobotModel::PrismaticJoint" shape="rect" coords="0,224,180,248"/>
-<area href="class_robot_model_1_1_revolute_joint.html" alt="RobotModel::RevoluteJoint" shape="rect" coords="190,224,370,248"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="380,0,560,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="570,0,750,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="760,0,940,24"/>
+<area href="class_robot_model_1_1_joint.html" alt="RobotModel::Joint" shape="rect" coords="0,168,180,192"/>
+<area href="class_robot_model_1_1_joint.html" alt="RobotModel::Joint" shape="rect" coords="380,168,560,192"/>
+<area href="class_robot_model_1_1_link.html" alt="RobotModel::Link" shape="rect" coords="570,168,750,192"/>
+<area href="class_robot_model_1_1_link.html" alt="RobotModel::Link" shape="rect" coords="760,168,940,192"/>
+<area href="class_robot_model_1_1_prismatic_joint.html" alt="RobotModel::PrismaticJoint" shape="rect" coords="190,224,370,248"/>
+<area href="class_robot_model_1_1_prismatic_joint.html" alt="RobotModel::PrismaticJoint" shape="rect" coords="190,280,370,304"/>
+<area href="class_robot_model_1_1_revolute_joint.html" alt="RobotModel::RevoluteJoint" shape="rect" coords="190,336,370,360"/>
+<area href="class_robot_model_1_1_revolute_joint.html" alt="RobotModel::RevoluteJoint" shape="rect" coords="190,392,370,416"/>
+<area href="class_robot_model_1_1_prismatic_joint.html" alt="RobotModel::PrismaticJoint" shape="rect" coords="570,224,750,248"/>
+<area href="class_robot_model_1_1_prismatic_joint.html" alt="RobotModel::PrismaticJoint" shape="rect" coords="570,280,750,304"/>
+<area href="class_robot_model_1_1_revolute_joint.html" alt="RobotModel::RevoluteJoint" shape="rect" coords="570,336,750,360"/>
+<area href="class_robot_model_1_1_revolute_joint.html" alt="RobotModel::RevoluteJoint" shape="rect" coords="570,392,750,416"/>
 </map>
  </div>
 </div>
@@ -69,12 +81,28 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <p><a href="class_robot_model_1_1_kin_tree_node-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> { <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">LINK</a>, 
-<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105">RJOINT</a>, 
-<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176">PJOINT</a>
+<tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> { <br/>
+&nbsp;&nbsp;<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83">LINK</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441">RJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e">PJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83">LINK</a>, 
+<br/>
+&nbsp;&nbsp;<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441">RJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e">PJOINT</a>
+<br/>
+ }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> { <br/>
+&nbsp;&nbsp;<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83">LINK</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441">RJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e">PJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83">LINK</a>, 
+<br/>
+&nbsp;&nbsp;<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441">RJOINT</a>, 
+<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e">PJOINT</a>
+<br/>
  }</td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a48236a64352c2187db6193069d598c86">KinTreeNode</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> type=LINK)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a48236a64352c2187db6193069d598c86">KinTreeNode</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#aabd31bc0263bb2a830bde65af0eba1a6">parentRobot</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#af2a0ed90edef2013eeadcd5b5174c420">parentNode</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> type=LINK)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a629cf524084ee233b402674cb371195f">~KinTreeNode</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae62ad98d6c2151232c20f1542c81a38b">setNodeAxis</a> (const QVector3D &amp;vector)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">parent</a> () const </td></tr>
@@ -92,14 +120,33 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae5d72a496f39cad4e266c11d75d4731c">notColliding</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a788349199227101ec9e5a478842a1959">print</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af682a96a09f754e0fb82066560538241">printAll</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a0ee910d623799e97855e387b052cb83a">KinTreeNode</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#aabd31bc0263bb2a830bde65af0eba1a6">parentRobot</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *<a class="el" href="class_robot_model_1_1_kin_tree_node.html#af2a0ed90edef2013eeadcd5b5174c420">parentNode</a>, <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> type=LINK)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#acff03d8aed8a974e50082449f289992c">~KinTreeNode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a5621900c9c0d0fba3ce350dd446403e8">setNodeAxis</a> (const QVector3D &amp;vector)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">parent</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">robot</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#aec76eade3020c48bd3767e5acd330a49">idx</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#aac3f58f3a0535b2983e2b328d9eee65a">getNodeType</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const QVector3D &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af6a4b3bd148bf6aba766c367e13d59b6">getNodeAxis</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const QMatrix4x4 &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a5c91c678cc74412ec298e61a39b47e3e">getM</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae488de9b7fc97fb20690f66fead07391">append</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *primitive)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a9612cdc54c0a34148ca5350b19a1d385">remove</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *primitive)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a7ccf98213f418d0e5efa4f699d898f2d">render</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a560df50c25717025df7a4682968b7319">filterCollisionPairs</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ac1aaeb1bf262448d159f9648a190c167">serialFilter</a> (<a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *node, bool link=false, bool joint=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a035b82b85c6a5f54e027bc05684f1032">update</a> (const QMatrix4x4 &amp;txfr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a08e95447cbb2963b03afbac17215aa00">notColliding</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae59d71f257f19e074d6f88cd2dd3c710">print</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab3136d2833d86ee76b22066de34a562c">printAll</a> ()</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a47574c65af53990455540547d8d00e9f">setM</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a47574c65af53990455540547d8d00e9f">setM</a> ()=0</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#aabd31bc0263bb2a830bde65af0eba1a6">parentRobot</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af2a0ed90edef2013eeadcd5b5174c420">parentNode</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">index</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">nodeType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">children</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#abf6a5c4792673635a7733ce24a749890">children</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector3D&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab2b663f51d01546b6e45be794a425438">mutex</a></td></tr>
@@ -116,11 +163,46 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a"></a><!-- doxytag: member="LINK" ref="a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a" args="" -->LINK</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83"></a><!-- doxytag: member="LINK" ref="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83" args="" -->LINK</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105"></a><!-- doxytag: member="RJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105" args="" -->RJOINT</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441"></a><!-- doxytag: member="RJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441" args="" -->RJOINT</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176"></a><!-- doxytag: member="PJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176" args="" -->PJOINT</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e"></a><!-- doxytag: member="PJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e" args="" -->PJOINT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83"></a><!-- doxytag: member="LINK" ref="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83" args="" -->LINK</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441"></a><!-- doxytag: member="RJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441" args="" -->RJOINT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e"></a><!-- doxytag: member="PJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e" args="" -->PJOINT</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176"></a><!-- doxytag: member="RobotModel::KinTreeNode::Type" ref="a6cc10fb82046bd1d9f61b806756ad176" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">RobotModel::KinTreeNode::Type</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83"></a><!-- doxytag: member="LINK" ref="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83" args="" -->LINK</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441"></a><!-- doxytag: member="RJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441" args="" -->RJOINT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e"></a><!-- doxytag: member="PJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e" args="" -->PJOINT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83"></a><!-- doxytag: member="LINK" ref="a6cc10fb82046bd1d9f61b806756ad176abdf4c8f9138f4bfeb895532fbcbdcc83" args="" -->LINK</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441"></a><!-- doxytag: member="RJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176a0f1b46f1ecc3b25851daa282aba9f441" args="" -->RJOINT</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e"></a><!-- doxytag: member="PJOINT" ref="a6cc10fb82046bd1d9f61b806756ad176ae49f45df694b20639cda99b5bc3dc15e" args="" -->PJOINT</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
@@ -179,7 +261,77 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
+<a class="anchor" id="a0ee910d623799e97855e387b052cb83a"></a><!-- doxytag: member="RobotModel::KinTreeNode::KinTreeNode" ref="a0ee910d623799e97855e387b052cb83a" args="(Robot *parentRobot, KinTreeNode *parentNode, Type type=LINK)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RobotModel::KinTreeNode::KinTreeNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td>
+          <td class="paramname"> <em>parentRobot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td>
+          <td class="paramname"> <em>parentNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>&nbsp;</td>
+          <td class="paramname"> <em>type</em> = <code>LINK</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acff03d8aed8a974e50082449f289992c"></a><!-- doxytag: member="RobotModel::KinTreeNode::~KinTreeNode" ref="acff03d8aed8a974e50082449f289992c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RobotModel::KinTreeNode::~KinTreeNode </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ae488de9b7fc97fb20690f66fead07391"></a><!-- doxytag: member="RobotModel::KinTreeNode::append" ref="ae488de9b7fc97fb20690f66fead07391" args="(PrimitiveObject *primitive)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::append </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *&nbsp;</td>
+          <td class="paramname"> <em>primitive</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#ad33452f1246939d366ffbf02d1022a91">RobotModel::CompositeObject</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="af043fc57074a449364d2a6ec09be46a3"></a><!-- doxytag: member="RobotModel::KinTreeNode::append" ref="af043fc57074a449364d2a6ec09be46a3" args="(PrimitiveObject *primitive)" -->
 <div class="memitem">
 <div class="memproto">
@@ -197,6 +349,23 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#ad33452f1246939d366ffbf02d1022a91">RobotModel::CompositeObject</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a560df50c25717025df7a4682968b7319"></a><!-- doxytag: member="RobotModel::KinTreeNode::filterCollisionPairs" ref="a560df50c25717025df7a4682968b7319" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::filterCollisionPairs </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -223,6 +392,40 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
       <table class="memname">
         <tr>
           <td class="memname">const QMatrix4x4&amp; RobotModel::KinTreeNode::getM </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c91c678cc74412ec298e61a39b47e3e"></a><!-- doxytag: member="RobotModel::KinTreeNode::getM" ref="a5c91c678cc74412ec298e61a39b47e3e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QMatrix4x4&amp; RobotModel::KinTreeNode::getM </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af6a4b3bd148bf6aba766c367e13d59b6"></a><!-- doxytag: member="RobotModel::KinTreeNode::getNodeAxis" ref="af6a4b3bd148bf6aba766c367e13d59b6" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QVector3D&amp; RobotModel::KinTreeNode::getNodeAxis </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -268,6 +471,23 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
+<a class="anchor" id="aac3f58f3a0535b2983e2b328d9eee65a"></a><!-- doxytag: member="RobotModel::KinTreeNode::getNodeType" ref="aac3f58f3a0535b2983e2b328d9eee65a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>&amp; RobotModel::KinTreeNode::getNodeType </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aec76eade3020c48bd3767e5acd330a49"></a><!-- doxytag: member="RobotModel::KinTreeNode::idx" ref="aec76eade3020c48bd3767e5acd330a49" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -282,6 +502,42 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aec76eade3020c48bd3767e5acd330a49"></a><!-- doxytag: member="RobotModel::KinTreeNode::idx" ref="aec76eade3020c48bd3767e5acd330a49" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int RobotModel::KinTreeNode::idx </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a08e95447cbb2963b03afbac17215aa00"></a><!-- doxytag: member="RobotModel::KinTreeNode::notColliding" ref="a08e95447cbb2963b03afbac17215aa00" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::notColliding </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#a00db0d1a45893ef058e7abbad5083b6b">RobotModel::CompositeObject</a>.</p>
 
 </div>
 </div>
@@ -321,6 +577,40 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
+<a class="anchor" id="a58fa5e8933de90d3f4896d39292baa39"></a><!-- doxytag: member="RobotModel::KinTreeNode::parent" ref="a58fa5e8933de90d3f4896d39292baa39" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* RobotModel::KinTreeNode::parent </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae59d71f257f19e074d6f88cd2dd3c710"></a><!-- doxytag: member="RobotModel::KinTreeNode::print" ref="ae59d71f257f19e074d6f88cd2dd3c710" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::print </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a788349199227101ec9e5a478842a1959"></a><!-- doxytag: member="RobotModel::KinTreeNode::print" ref="a788349199227101ec9e5a478842a1959" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -331,6 +621,23 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab3136d2833d86ee76b22066de34a562c"></a><!-- doxytag: member="RobotModel::KinTreeNode::printAll" ref="ab3136d2833d86ee76b22066de34a562c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::printAll </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -355,6 +662,26 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
+<a class="anchor" id="a9612cdc54c0a34148ca5350b19a1d385"></a><!-- doxytag: member="RobotModel::KinTreeNode::remove" ref="a9612cdc54c0a34148ca5350b19a1d385" args="(PrimitiveObject *primitive)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RobotModel::KinTreeNode::remove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *&nbsp;</td>
+          <td class="paramname"> <em>primitive</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#ac63de1955b6bda820d39c01616af8665">RobotModel::CompositeObject</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac87cf9db956705dcee63f4dbc01cc664"></a><!-- doxytag: member="RobotModel::KinTreeNode::remove" ref="ac87cf9db956705dcee63f4dbc01cc664" args="(PrimitiveObject *primitive)" -->
 <div class="memitem">
 <div class="memproto">
@@ -372,6 +699,25 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#ac63de1955b6bda820d39c01616af8665">RobotModel::CompositeObject</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ccf98213f418d0e5efa4f699d898f2d"></a><!-- doxytag: member="RobotModel::KinTreeNode::render" ref="a7ccf98213f418d0e5efa4f699d898f2d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::render </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#aee43da74b22f6272736844effe7a1dd6">RobotModel::CompositeObject</a>.</p>
 
 </div>
 </div>
@@ -404,6 +750,56 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7bd810e1df470e3d8801ac8f1aa0a60f"></a><!-- doxytag: member="RobotModel::KinTreeNode::robot" ref="a7bd810e1df470e3d8801ac8f1aa0a60f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a>* RobotModel::KinTreeNode::robot </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac1aaeb1bf262448d159f9648a190c167"></a><!-- doxytag: member="RobotModel::KinTreeNode::serialFilter" ref="ac1aaeb1bf262448d159f9648a190c167" args="(KinTreeNode *node, bool link=false, bool joint=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::serialFilter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td>
+          <td class="paramname"> <em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>link</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>joint</em> = <code>false</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -459,7 +855,44 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>.</p>
+<p>Implemented in <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>, and <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a47574c65af53990455540547d8d00e9f"></a><!-- doxytag: member="RobotModel::KinTreeNode::setM" ref="a47574c65af53990455540547d8d00e9f" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RobotModel::KinTreeNode::setM </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>, and <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5621900c9c0d0fba3ce350dd446403e8"></a><!-- doxytag: member="RobotModel::KinTreeNode::setNodeAxis" ref="a5621900c9c0d0fba3ce350dd446403e8" args="(const QVector3D &amp;vector)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::setNodeAxis </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>vector</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -472,6 +905,24 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
           <td>(</td>
           <td class="paramtype">const QVector3D &amp;&nbsp;</td>
           <td class="paramname"> <em>vector</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a035b82b85c6a5f54e027bc05684f1032"></a><!-- doxytag: member="RobotModel::KinTreeNode::update" ref="a035b82b85c6a5f54e027bc05684f1032" args="(const QMatrix4x4 &amp;txfr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::KinTreeNode::update </td>
+          <td>(</td>
+          <td class="paramtype">const QMatrix4x4 &amp;&nbsp;</td>
+          <td class="paramname"> <em>txfr</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -500,12 +951,12 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="aa954f7e7939949e2e1a72ed9f7be3aaa"></a><!-- doxytag: member="RobotModel::KinTreeNode::children" ref="aa954f7e7939949e2e1a72ed9f7be3aaa" args="" -->
+<a class="anchor" id="abf6a5c4792673635a7733ce24a749890"></a><!-- doxytag: member="RobotModel::KinTreeNode::children" ref="abf6a5c4792673635a7733ce24a749890" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QVector&lt;<a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>*&gt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">RobotModel::KinTreeNode::children</a><code> [protected]</code></td>
+          <td class="memname">QVector&lt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> * &gt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html#abf6a5c4792673635a7733ce24a749890">RobotModel::KinTreeNode::children</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -580,12 +1031,12 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
-<a class="anchor" id="ae708a7912fe1338f03ab9ebb2207a0e7"></a><!-- doxytag: member="RobotModel::KinTreeNode::parentNode" ref="ae708a7912fe1338f03ab9ebb2207a0e7" args="" -->
+<a class="anchor" id="af2a0ed90edef2013eeadcd5b5174c420"></a><!-- doxytag: member="RobotModel::KinTreeNode::parentNode" ref="af2a0ed90edef2013eeadcd5b5174c420" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">RobotModel::KinTreeNode::parentNode</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> * <a class="el" href="class_robot_model_1_1_kin_tree_node.html#af2a0ed90edef2013eeadcd5b5174c420">RobotModel::KinTreeNode::parentNode</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -593,12 +1044,12 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
-<a class="anchor" id="a135634b0e34e02ded1c61b29ef4d3c02"></a><!-- doxytag: member="RobotModel::KinTreeNode::parentRobot" ref="a135634b0e34e02ded1c61b29ef4d3c02" args="" -->
+<a class="anchor" id="aabd31bc0263bb2a830bde65af0eba1a6"></a><!-- doxytag: member="RobotModel::KinTreeNode::parentRobot" ref="aabd31bc0263bb2a830bde65af0eba1a6" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a>* <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">RobotModel::KinTreeNode::parentRobot</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> * <a class="el" href="class_robot_model_1_1_kin_tree_node.html#aabd31bc0263bb2a830bde65af0eba1a6">RobotModel::KinTreeNode::parentRobot</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -607,7 +1058,8 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="kintreenode_8h_source.html">kintreenode.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/robotModel/<a class="el" href="include_2robot_model_2kintreenode_8h_source.html">kintreenode.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="src_2robot_model_2kintreenode_8h_source.html">kintreenode.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="kintreenode_8cpp.html">kintreenode.cpp</a></li>
 </ul>
 </div>

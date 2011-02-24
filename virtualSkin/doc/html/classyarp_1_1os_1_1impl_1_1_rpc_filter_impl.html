@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>yarp::os::impl::RpcFilterImpl Class Reference</h1><!-- doxytag: class="yarp::os::impl::RpcFilterImpl" -->
-<p><code>#include &lt;<a class="el" href="_rpc_filter_impl_8h_source.html">RpcFilterImpl.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2yarp_2os_2impl_2_rpc_filter_impl_8h_source.html">RpcFilterImpl.h</a>&gt;</code></p>
 
 <p><a href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -64,6 +64,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#aa7595e915624ac4c6126919c00761a23">setReplier</a> (<a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *r)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a0f795cf3383a030884a7fde9843de1f7">injectCall</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#ab8ff43bc5f1f926aa49185818fdfe3b7">read</a> (ConnectionReader &amp;connection)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a542f5e2eed695cf4d8435d4426113c8b">RpcFilterImpl</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a2d71b3e5d746ff637419ee48fa8f2d3e">~RpcFilterImpl</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a430fa4ad4d3f633a1e9b91f3ad0a0df4">open</a> (ConstString targetPortName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#af8bff36f13d6f2a7460e5e4fd894cd9e">close</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#ae5de0a409d788cb9f1c910adb586c32c">cutConnection</a> (bool cut=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a2d719a7c593fd21b8a7c4225c66a0234">setCallObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a7ab74acd4a4e69fce8fed0d54741bdc2">setResponseObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#aecdd28fdc2cefb6e387b10aeeae47a2d">setReplier</a> (<a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *r)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a289b662c96ec6189b0ed385ff4f135cf">injectCall</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html#a58d85a00cf2de35238822d7674d98cf1">read</a> (ConnectionReader &amp;connection)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Implementation details for the <code><a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a></code> class. The provided services implement the inner workings of RpcFilters.</p>
@@ -105,7 +115,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a542f5e2eed695cf4d8435d4426113c8b"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::RpcFilterImpl" ref="a542f5e2eed695cf4d8435d4426113c8b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">yarp::os::impl::RpcFilterImpl::RpcFilterImpl </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>Describe state of a newly created instance </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2d71b3e5d746ff637419ee48fa8f2d3e"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::~RpcFilterImpl" ref="a2d71b3e5d746ff637419ee48fa8f2d3e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual yarp::os::impl::RpcFilterImpl::~RpcFilterImpl </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af8bff36f13d6f2a7460e5e4fd894cd9e"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::close" ref="af8bff36f13d6f2a7460e5e4fd894cd9e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::impl::RpcFilterImpl::close </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Document </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a6617044e3948a5fa890a68a918d93c72"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::close" ref="a6617044e3948a5fa890a68a918d93c72" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -121,6 +184,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Document </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae5de0a409d788cb9f1c910adb586c32c"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::cutConnection" ref="ae5de0a409d788cb9f1c910adb586c32c" args="(bool cut=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::impl::RpcFilterImpl::cutConnection </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>cut</em> = <code>true</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the cut status of the filter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>cut</em>&nbsp;</td><td>The new cut status. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -146,6 +234,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a289b662c96ec6189b0ed385ff4f135cf"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::injectCall" ref="a289b662c96ec6189b0ed385ff4f135cf" args="(const Bottle &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool yarp::os::impl::RpcFilterImpl::injectCall </td>
+          <td>(</td>
+          <td class="paramtype">const Bottle &amp;&nbsp;</td>
+          <td class="paramname"> <em>b</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Injects a call to the target port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>b</em>&nbsp;</td><td>The call to be injected. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the call is passed on to the target port. </dd></dl>
 
 </div>
 </div>
@@ -175,6 +289,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a430fa4ad4d3f633a1e9b91f3ad0a0df4"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::open" ref="a430fa4ad4d3f633a1e9b91f3ad0a0df4" args="(ConstString targetPortName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool yarp::os::impl::RpcFilterImpl::open </td>
+          <td>(</td>
+          <td class="paramtype">ConstString&nbsp;</td>
+          <td class="paramname"> <em>targetPortName</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>Document </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a9ee7fb8756ba19285866308cdf1d60c2"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::open" ref="a9ee7fb8756ba19285866308cdf1d60c2" args="(ConstString targetPortName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -191,6 +324,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Document </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a58d85a00cf2de35238822d7674d98cf1"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::read" ref="a58d85a00cf2de35238822d7674d98cf1" args="(ConnectionReader &amp;connection)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool yarp::os::impl::RpcFilterImpl::read </td>
+          <td>(</td>
+          <td class="paramtype">ConnectionReader &amp;&nbsp;</td>
+          <td class="paramname"> <em>connection</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Implements the PortReader interface. This callback function is called whenever a call is received on the clientside port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>connection</em>&nbsp;</td><td>Provides access to read the call. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true iff the call and the corresponding reponse(s) can be read resp. forwarded succesfully. <em><b>This does not imply that the call could be processed successfully by the target</b></em>. </dd></dl>
 
 </div>
 </div>
@@ -220,6 +379,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a2d719a7c593fd21b8a7c4225c66a0234"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::setCallObserver" ref="a2d719a7c593fd21b8a7c4225c66a0234" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::impl::RpcFilterImpl::setCallObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the observer to be informed when a call is received from a client. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>o</em>&nbsp;</td><td>The observer to be set. May be <code>NULL</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="aeca9c8a9d37355dd222a825bdb121c35"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::setCallObserver" ref="aeca9c8a9d37355dd222a825bdb121c35" args="(IObserver *o)" -->
 <div class="memitem">
 <div class="memproto">
@@ -245,6 +429,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="aecdd28fdc2cefb6e387b10aeeae47a2d"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::setReplier" ref="aecdd28fdc2cefb6e387b10aeeae47a2d" args="(IReplier *r)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::impl::RpcFilterImpl::setReplier </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *&nbsp;</td>
+          <td class="paramname"> <em>r</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the replier to be asked for replies to a call from a client. This replier will only be asked for replies to be passed on to the calling client when the connection is cut. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>r</em>&nbsp;</td><td>The replier to be set. May be <code>NULL</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="aa7595e915624ac4c6126919c00761a23"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::setReplier" ref="aa7595e915624ac4c6126919c00761a23" args="(IReplier *r)" -->
 <div class="memitem">
 <div class="memproto">
@@ -264,6 +473,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>r</em>&nbsp;</td><td>The replier to be set. May be <code>NULL</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7ab74acd4a4e69fce8fed0d54741bdc2"></a><!-- doxytag: member="yarp::os::impl::RpcFilterImpl::setResponseObserver" ref="a7ab74acd4a4e69fce8fed0d54741bdc2" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::impl::RpcFilterImpl::setResponseObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the observer to be informed when a response to a call is received from the target port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>o</em>&nbsp;</td><td>The observer to be set. May be <code>NULL</code>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -296,7 +530,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/impl/<a class="el" href="_rpc_filter_impl_8h_source.html">RpcFilterImpl.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/yarp/os/impl/<a class="el" href="include_2yarp_2os_2impl_2_rpc_filter_impl_8h_source.html">RpcFilterImpl.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/impl/<a class="el" href="src_2yarp_util_2gregor_filter_2yarp_2os_2impl_2_rpc_filter_impl_8h_source.html">RpcFilterImpl.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/<a class="el" href="_rpc_filter_impl_8cpp.html">RpcFilterImpl.cpp</a></li>
 </ul>
 </div>

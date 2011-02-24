@@ -7,13 +7,13 @@
 {\ttfamily \#include $<$joint.h$>$}Inheritance diagram for RobotModel::Joint::\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=5cm]{class_robot_model_1_1_joint}
+\includegraphics[height=2.23404cm]{class_robot_model_1_1_joint}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_robot_model_1_1_joint_ac0077acd1f45742c84c3468cce889600}{Joint} (\hyperlink{class_robot_model_1_1_robot}{Robot} $\ast$robot, \hyperlink{class_robot_model_1_1_kin_tree_node}{KinTreeNode} $\ast$parent, \hyperlink{class_robot_model_1_1_motor}{Motor} $\ast$\hyperlink{class_robot_model_1_1_joint_a9fe40b0c9b6562d7a4cce3dd8715f945}{motor}, \hyperlink{class_robot_model_1_1_kin_tree_node_a6cc10fb82046bd1d9f61b806756ad176}{Type} type)
+\hyperlink{class_robot_model_1_1_joint_ac0077acd1f45742c84c3468cce889600}{Joint} (\hyperlink{class_robot_model_1_1_robot}{Robot} $\ast$robot, \hyperlink{class_robot_model_1_1_kin_tree_node}{KinTreeNode} $\ast$parent, \hyperlink{class_robot_model_1_1_motor}{Motor} $\ast$\hyperlink{class_robot_model_1_1_joint_a8e8165df2271b16ab446028ee6bfa1c6}{motor}, \hyperlink{class_robot_model_1_1_kin_tree_node_a6cc10fb82046bd1d9f61b806756ad176}{Type} type)
 \item 
 virtual \hyperlink{class_robot_model_1_1_joint_a42aca0bd1832136984923713127c28f1}{$\sim$Joint} ()
 \item 
@@ -22,16 +22,28 @@ void \hyperlink{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}{s
 void \hyperlink{class_robot_model_1_1_joint_a48523fd1cf98af4b0856257cde75f486}{setMax} (qreal pos)
 \item 
 void \hyperlink{class_robot_model_1_1_joint_a4fc5a8c53c2a2c5839409d90fb0825e1}{setPos} ()
+\item 
+\hyperlink{class_robot_model_1_1_joint_ace81033ec821f5bcb7e15c5ac1a84946}{Joint} (\hyperlink{class_robot_model_1_1_robot}{Robot} $\ast$robot, \hyperlink{class_robot_model_1_1_kin_tree_node}{KinTreeNode} $\ast$parent, \hyperlink{class_robot_model_1_1_motor}{Motor} $\ast$\hyperlink{class_robot_model_1_1_joint_a8e8165df2271b16ab446028ee6bfa1c6}{motor}, \hyperlink{class_robot_model_1_1_kin_tree_node_a6cc10fb82046bd1d9f61b806756ad176}{Type} type)
+\item 
+virtual \hyperlink{class_robot_model_1_1_joint_a191470d2376b08f2f3debc15d5e89ad0}{$\sim$Joint} ()
+\item 
+void \hyperlink{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}{setMin} (qreal pos)
+\item 
+void \hyperlink{class_robot_model_1_1_joint_a48523fd1cf98af4b0856257cde75f486}{setMax} (qreal pos)
+\item 
+void \hyperlink{class_robot_model_1_1_joint_a816fef4ec39f5a4239540ba5a7011d6a}{setPos} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_robot_model_1_1_joint_a485f5fc46f5156a7383bee7edbfc6643}{setM} ()=0
 \item 
 virtual void \hyperlink{class_robot_model_1_1_joint_a485f5fc46f5156a7383bee7edbfc6643}{setM} ()=0
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_robot_model_1_1_motor}{Motor} $\ast$ \hyperlink{class_robot_model_1_1_joint_a9fe40b0c9b6562d7a4cce3dd8715f945}{motor}
+\hyperlink{class_robot_model_1_1_motor}{Motor} $\ast$ \hyperlink{class_robot_model_1_1_joint_a8e8165df2271b16ab446028ee6bfa1c6}{motor}
 \item 
 qreal \hyperlink{class_robot_model_1_1_joint_aada2db465b0f51975a3c928656a9924c}{position}
 \item 
@@ -50,10 +62,27 @@ qreal \hyperlink{class_robot_model_1_1_joint_aada2db465b0f51975a3c928656a9924c}{
 \index{$\sim$Joint@{$\sim$Joint}!RobotModel::Joint@{RobotModel::Joint}}
 \subsubsection[{$\sim$Joint}]{\setlength{\rightskip}{0pt plus 5cm}Joint::$\sim$Joint ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{class_robot_model_1_1_joint_a42aca0bd1832136984923713127c28f1}
+\hypertarget{class_robot_model_1_1_joint_ace81033ec821f5bcb7e15c5ac1a84946}{
+\index{RobotModel::Joint@{RobotModel::Joint}!Joint@{Joint}}
+\index{Joint@{Joint}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{Joint}]{\setlength{\rightskip}{0pt plus 5cm}RobotModel::Joint::Joint ({\bf Robot} $\ast$ {\em robot}, \/  {\bf KinTreeNode} $\ast$ {\em parent}, \/  {\bf Motor} $\ast$ {\em motor}, \/  {\bf Type} {\em type})}}
+\label{class_robot_model_1_1_joint_ace81033ec821f5bcb7e15c5ac1a84946}
+\hypertarget{class_robot_model_1_1_joint_a191470d2376b08f2f3debc15d5e89ad0}{
+\index{RobotModel::Joint@{RobotModel::Joint}!$\sim$Joint@{$\sim$Joint}}
+\index{$\sim$Joint@{$\sim$Joint}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{$\sim$Joint}]{\setlength{\rightskip}{0pt plus 5cm}virtual RobotModel::Joint::$\sim$Joint ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_joint_a191470d2376b08f2f3debc15d5e89ad0}
 
 
 \subsection{Member Function Documentation}
 \hypertarget{class_robot_model_1_1_joint_a485f5fc46f5156a7383bee7edbfc6643}{
+\index{RobotModel::Joint@{RobotModel::Joint}!setM@{setM}}
+\index{setM@{setM}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{setM}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::Joint::setM ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected, pure virtual\mbox{]}}}}
+\label{class_robot_model_1_1_joint_a485f5fc46f5156a7383bee7edbfc6643}
+
+
+Implements \hyperlink{class_robot_model_1_1_kin_tree_node_a47574c65af53990455540547d8d00e9f}{RobotModel::KinTreeNode}.\hypertarget{class_robot_model_1_1_joint_a485f5fc46f5156a7383bee7edbfc6643}{
 \index{RobotModel::Joint@{RobotModel::Joint}!setM@{setM}}
 \index{setM@{setM}!RobotModel::Joint@{RobotModel::Joint}}
 \subsubsection[{setM}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::Joint::setM ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected, pure virtual\mbox{]}}}}
@@ -65,11 +94,26 @@ Implements \hyperlink{class_robot_model_1_1_kin_tree_node_a47574c65af53990455540
 \index{setMax@{setMax}!RobotModel::Joint@{RobotModel::Joint}}
 \subsubsection[{setMax}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Joint::setMax (qreal {\em pos})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{class_robot_model_1_1_joint_a48523fd1cf98af4b0856257cde75f486}
+\hypertarget{class_robot_model_1_1_joint_a48523fd1cf98af4b0856257cde75f486}{
+\index{RobotModel::Joint@{RobotModel::Joint}!setMax@{setMax}}
+\index{setMax@{setMax}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{setMax}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Joint::setMax (qreal {\em pos})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_joint_a48523fd1cf98af4b0856257cde75f486}
 \hypertarget{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}{
 \index{RobotModel::Joint@{RobotModel::Joint}!setMin@{setMin}}
 \index{setMin@{setMin}!RobotModel::Joint@{RobotModel::Joint}}
 \subsubsection[{setMin}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Joint::setMin (qreal {\em pos})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}
+\hypertarget{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}{
+\index{RobotModel::Joint@{RobotModel::Joint}!setMin@{setMin}}
+\index{setMin@{setMin}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{setMin}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Joint::setMin (qreal {\em pos})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_robot_model_1_1_joint_ad982580bf8c0d721babaf93d990cf5d7}
+\hypertarget{class_robot_model_1_1_joint_a816fef4ec39f5a4239540ba5a7011d6a}{
+\index{RobotModel::Joint@{RobotModel::Joint}!setPos@{setPos}}
+\index{setPos@{setPos}!RobotModel::Joint@{RobotModel::Joint}}
+\subsubsection[{setPos}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Joint::setPos ()}}
+\label{class_robot_model_1_1_joint_a816fef4ec39f5a4239540ba5a7011d6a}
 \hypertarget{class_robot_model_1_1_joint_a4fc5a8c53c2a2c5839409d90fb0825e1}{
 \index{RobotModel::Joint@{RobotModel::Joint}!setPos@{setPos}}
 \index{setPos@{setPos}!RobotModel::Joint@{RobotModel::Joint}}
@@ -83,11 +127,11 @@ Implements \hyperlink{class_robot_model_1_1_kin_tree_node_a47574c65af53990455540
 \index{limits@{limits}!RobotModel::Joint@{RobotModel::Joint}}
 \subsubsection[{limits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Interval} {\bf RobotModel::Joint::limits}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
 \label{class_robot_model_1_1_joint_a3991756cd74729b87bde02b679c95b4c}
-\hypertarget{class_robot_model_1_1_joint_a9fe40b0c9b6562d7a4cce3dd8715f945}{
+\hypertarget{class_robot_model_1_1_joint_a8e8165df2271b16ab446028ee6bfa1c6}{
 \index{RobotModel::Joint@{RobotModel::Joint}!motor@{motor}}
 \index{motor@{motor}!RobotModel::Joint@{RobotModel::Joint}}
-\subsubsection[{motor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Motor}$\ast$ {\bf RobotModel::Joint::motor}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
-\label{class_robot_model_1_1_joint_a9fe40b0c9b6562d7a4cce3dd8715f945}
+\subsubsection[{motor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Motor} $\ast$ {\bf RobotModel::Joint::motor}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_robot_model_1_1_joint_a8e8165df2271b16ab446028ee6bfa1c6}
 \hypertarget{class_robot_model_1_1_joint_aada2db465b0f51975a3c928656a9924c}{
 \index{RobotModel::Joint@{RobotModel::Joint}!position@{position}}
 \index{position@{position}!RobotModel::Joint@{RobotModel::Joint}}
@@ -97,5 +141,6 @@ Implements \hyperlink{class_robot_model_1_1_kin_tree_node_a47574c65af53990455540
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{joint_8h}{joint.h}\item 
+/Users/kail/imClever/dev/virtualSkin/include/robotModel/\hyperlink{include_2robot_model_2joint_8h}{joint.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{src_2robot_model_2joint_8h}{joint.h}\item 
 /Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{joint_8cpp}{joint.cpp}\end{DoxyCompactItemize}

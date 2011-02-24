@@ -7,16 +7,24 @@
 {\ttfamily \#include $<$renderList.h$>$}Inheritance diagram for RobotModel::RenderList::\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2cm]{class_robot_model_1_1_render_list}
+\includegraphics[height=1.83007cm]{class_robot_model_1_1_render_list}
 \end{center}
 \end{figure}
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{class_robot_model_1_1_render_list_a7cd62d6e6376bc02bd4244dcc174b465}{callLists} ()
+\item 
+void \hyperlink{class_robot_model_1_1_render_list_a7cd62d6e6376bc02bd4244dcc174b465}{callLists} ()
 \end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_robot_model_1_1_render_list_a635908222fa71402918e31eb2d725844}{appendedObject} (\hyperlink{class_robot_model_1_1_display_list}{RobotModel::DisplayList} $\ast$list)
+\item 
+void \hyperlink{class_robot_model_1_1_render_list_a22724d5d6878f19b639b5b6b16963ee2}{outdatedDisplayList} (int idx)
+\item 
+void \hyperlink{class_robot_model_1_1_render_list_a9ad71d6ea6d0d1008e0705ced20f6aea}{changedState} ()
 \item 
 void \hyperlink{class_robot_model_1_1_render_list_a635908222fa71402918e31eb2d725844}{appendedObject} (\hyperlink{class_robot_model_1_1_display_list}{RobotModel::DisplayList} $\ast$list)
 \item 
@@ -30,6 +38,14 @@ void \hyperlink{class_robot_model_1_1_render_list_a9ad71d6ea6d0d1008e0705ced20f6
 \hyperlink{class_robot_model_1_1_render_list_a98651fa6cd408cce14d6d245cd95fde4}{RenderList} ()
 \item 
 virtual \hyperlink{class_robot_model_1_1_render_list_ae66a9f72d814771e42d7e50946053ef7}{$\sim$RenderList} ()
+\item 
+virtual void \hyperlink{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}{render} ()=0
+\item 
+virtual void \hyperlink{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9bd1da9b3d96}{notColliding} ()=0
+\item 
+\hyperlink{class_robot_model_1_1_render_list_adf7ac2a28169e82bc8de6436aa16b521}{RenderList} ()
+\item 
+virtual \hyperlink{class_robot_model_1_1_render_list_aed38c9aad54e5869e4ee48e2cdf4c89b}{$\sim$RenderList} ()
 \item 
 virtual void \hyperlink{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}{render} ()=0
 \item 
@@ -48,9 +64,24 @@ virtual void \hyperlink{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9
 \index{$\sim$RenderList@{$\sim$RenderList}!RobotModel::RenderList@{RobotModel::RenderList}}
 \subsubsection[{$\sim$RenderList}]{\setlength{\rightskip}{0pt plus 5cm}RenderList::$\sim$RenderList ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{class_robot_model_1_1_render_list_ae66a9f72d814771e42d7e50946053ef7}
+\hypertarget{class_robot_model_1_1_render_list_adf7ac2a28169e82bc8de6436aa16b521}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!RenderList@{RenderList}}
+\index{RenderList@{RenderList}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{RenderList}]{\setlength{\rightskip}{0pt plus 5cm}RobotModel::RenderList::RenderList ()}}
+\label{class_robot_model_1_1_render_list_adf7ac2a28169e82bc8de6436aa16b521}
+\hypertarget{class_robot_model_1_1_render_list_aed38c9aad54e5869e4ee48e2cdf4c89b}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!$\sim$RenderList@{$\sim$RenderList}}
+\index{$\sim$RenderList@{$\sim$RenderList}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{$\sim$RenderList}]{\setlength{\rightskip}{0pt plus 5cm}virtual RobotModel::RenderList::$\sim$RenderList ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_aed38c9aad54e5869e4ee48e2cdf4c89b}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_render_list_a635908222fa71402918e31eb2d725844}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!appendedObject@{appendedObject}}
+\index{appendedObject@{appendedObject}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{appendedObject}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::appendedObject ({\bf RobotModel::DisplayList} $\ast$ {\em list})\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_a635908222fa71402918e31eb2d725844}
 \hypertarget{class_robot_model_1_1_render_list_a635908222fa71402918e31eb2d725844}{
 \index{RobotModel::RenderList@{RobotModel::RenderList}!appendedObject@{appendedObject}}
 \index{appendedObject@{appendedObject}!RobotModel::RenderList@{RobotModel::RenderList}}
@@ -61,6 +92,16 @@ virtual void \hyperlink{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9
 \index{callLists@{callLists}!RobotModel::RenderList@{RobotModel::RenderList}}
 \subsubsection[{callLists}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::callLists ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, slot\mbox{]}}}}
 \label{class_robot_model_1_1_render_list_a7cd62d6e6376bc02bd4244dcc174b465}
+\hypertarget{class_robot_model_1_1_render_list_a7cd62d6e6376bc02bd4244dcc174b465}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!callLists@{callLists}}
+\index{callLists@{callLists}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{callLists}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::callLists ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, slot\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_a7cd62d6e6376bc02bd4244dcc174b465}
+\hypertarget{class_robot_model_1_1_render_list_a9ad71d6ea6d0d1008e0705ced20f6aea}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!changedState@{changedState}}
+\index{changedState@{changedState}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{changedState}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::changedState ()\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_a9ad71d6ea6d0d1008e0705ced20f6aea}
 \hypertarget{class_robot_model_1_1_render_list_a9ad71d6ea6d0d1008e0705ced20f6aea}{
 \index{RobotModel::RenderList@{RobotModel::RenderList}!changedState@{changedState}}
 \index{changedState@{changedState}!RobotModel::RenderList@{RobotModel::RenderList}}
@@ -73,7 +114,19 @@ virtual void \hyperlink{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9
 \label{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9bd1da9b3d96}
 
 
-Implemented in \hyperlink{class_robot_model_1_1_robot_af9d5c7808f2d11ec66d905bb8606447e}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}{RobotModel::World}.\hypertarget{class_robot_model_1_1_render_list_a22724d5d6878f19b639b5b6b16963ee2}{
+Implemented in \hyperlink{class_robot_model_1_1_robot_af9d5c7808f2d11ec66d905bb8606447e}{RobotModel::Robot}, \hyperlink{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}{RobotModel::World}, \hyperlink{class_robot_model_1_1_robot_a355a98d015e6aad905e4d2e5cf42c442}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_ac0ee5060cc743f6ffb991dc86dbff43e}{RobotModel::World}.\hypertarget{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9bd1da9b3d96}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!notColliding@{notColliding}}
+\index{notColliding@{notColliding}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{notColliding}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::RenderList::notColliding ()\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_a78436c997913ce9ad41a9bd1da9b3d96}
+
+
+Implemented in \hyperlink{class_robot_model_1_1_robot_af9d5c7808f2d11ec66d905bb8606447e}{RobotModel::Robot}, \hyperlink{class_robot_model_1_1_world_a2300046adaa75a432476dbef1934bb01}{RobotModel::World}, \hyperlink{class_robot_model_1_1_robot_a355a98d015e6aad905e4d2e5cf42c442}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_ac0ee5060cc743f6ffb991dc86dbff43e}{RobotModel::World}.\hypertarget{class_robot_model_1_1_render_list_a22724d5d6878f19b639b5b6b16963ee2}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!outdatedDisplayList@{outdatedDisplayList}}
+\index{outdatedDisplayList@{outdatedDisplayList}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{outdatedDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::outdatedDisplayList (int {\em idx})\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_a22724d5d6878f19b639b5b6b16963ee2}
+\hypertarget{class_robot_model_1_1_render_list_a22724d5d6878f19b639b5b6b16963ee2}{
 \index{RobotModel::RenderList@{RobotModel::RenderList}!outdatedDisplayList@{outdatedDisplayList}}
 \index{outdatedDisplayList@{outdatedDisplayList}!RobotModel::RenderList@{RobotModel::RenderList}}
 \subsubsection[{outdatedDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::RenderList::outdatedDisplayList (int {\em idx})\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
@@ -85,9 +138,17 @@ Implemented in \hyperlink{class_robot_model_1_1_robot_af9d5c7808f2d11ec66d905bb8
 \label{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}
 
 
-Implemented in \hyperlink{class_robot_model_1_1_robot_a47e480a4cad58266d12efce34f3fb563}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}{RobotModel::World}.
+Implemented in \hyperlink{class_robot_model_1_1_robot_a47e480a4cad58266d12efce34f3fb563}{RobotModel::Robot}, \hyperlink{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}{RobotModel::World}, \hyperlink{class_robot_model_1_1_robot_a3be7d3c8d21aeb68633d9e176a3fbf08}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_a3a197c0bac0b3dbbdd73942a56168a29}{RobotModel::World}.\hypertarget{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}{
+\index{RobotModel::RenderList@{RobotModel::RenderList}!render@{render}}
+\index{render@{render}!RobotModel::RenderList@{RobotModel::RenderList}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}virtual void RobotModel::RenderList::render ()\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_robot_model_1_1_render_list_ac8646765beee22bf11582049dc3cf195}
+
+
+Implemented in \hyperlink{class_robot_model_1_1_robot_a47e480a4cad58266d12efce34f3fb563}{RobotModel::Robot}, \hyperlink{class_robot_model_1_1_world_a150eab10c21532162bb698d72aecec16}{RobotModel::World}, \hyperlink{class_robot_model_1_1_robot_a3be7d3c8d21aeb68633d9e176a3fbf08}{RobotModel::Robot}, and \hyperlink{class_robot_model_1_1_world_a3a197c0bac0b3dbbdd73942a56168a29}{RobotModel::World}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{render_list_8h}{renderList.h}\item 
+/Users/kail/imClever/dev/virtualSkin/include/robotModel/\hyperlink{include_2robot_model_2render_list_8h}{renderList.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{src_2robot_model_2render_list_8h}{renderList.h}\item 
 /Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{render_list_8cpp}{renderList.cpp}\end{DoxyCompactItemize}

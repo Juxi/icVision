@@ -22,9 +22,8 @@ ADD_EXECUTABLE ( iCubBabble ${hdr_files} ${src_files} )
 ADD_DEPENDENCIES( iCubBabble yarpUtil )
 
 TARGET_LINK_LIBRARIES ( iCubBabble 	${YARP_UTILITIES_LIB}
+					#${YARP_LIBRARIES}
 					${QT_LIBRARIES}
-					${YARP_LIBRARIES}
-					${ACE_LIBRARY}
 )
 
 INSTALL ( TARGETS iCubBabble DESTINATION ${CMAKE_SOURCE_DIR}/bin )

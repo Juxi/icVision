@@ -32,6 +32,32 @@ void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a379021d871cc1d375d8ea2
 void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a329bcebdddb5afbd7a5e7303e6941311}{injectCommand} (const Bottle \&b)
 \item 
 void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a46da5eabf941da5694107bf2d4adc075}{injectCall} (const Bottle \&b)
+\item 
+\hyperlink{classyarp_1_1os_1_1_control_board_filter_a7bbad9a004ca2a98836aad0bf2c61a7e}{ControlBoardFilter} ()
+\item 
+virtual \hyperlink{classyarp_1_1os_1_1_control_board_filter_a137af6adba9f24aea3bcf274332dbff9}{$\sim$ControlBoardFilter} ()
+\item 
+bool \hyperlink{classyarp_1_1os_1_1_control_board_filter_a333ebfc5235d2e8dcf6e226a1d00924b}{open} (ConstString filterName, ConstString targetName)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_acb354b5aea9ec25a99aa57ce4781b56d}{close} ()
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a7d49e4c935446a6523f9504510d556c6}{cutConnection} (bool cut=true)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a17305fdd2e2f51d790e5787245471eb9}{setStateObserver} (\hyperlink{classyarp_1_1os_1_1_i_observer}{IObserver} $\ast$o)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_af40e1e2c791dcbe740e480a257db76b4}{setCommandObserver} (\hyperlink{classyarp_1_1os_1_1_i_observer}{IObserver} $\ast$o)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a534651daebaa7a8324ee8749aeba2469}{setCallObserver} (\hyperlink{classyarp_1_1os_1_1_i_observer}{IObserver} $\ast$o)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a9e6db13ba589309cfca6667735c29297}{setResponseObserver} (\hyperlink{classyarp_1_1os_1_1_i_observer}{IObserver} $\ast$o)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a67e1c7b532ab58bb42f7c20ec2d5d2ce}{setReplier} (\hyperlink{classyarp_1_1os_1_1_i_replier}{IReplier} $\ast$r)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a3386103cf773f04fb16fb451b8e301fe}{injectState} (const Bottle \&b)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a8fcab8021e1d19529dd6de96312f9ce6}{injectCommand} (const Bottle \&b)
+\item 
+void \hyperlink{classyarp_1_1os_1_1_control_board_filter_ab78bfa155e19e516ec6cf7cb39b3d8ac}{injectCall} (const Bottle \&b)
 \end{DoxyCompactItemize}
 
 
@@ -46,59 +72,124 @@ void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a46da5eabf941da5694107b
 \index{$\sim$ControlBoardFilter@{$\sim$ControlBoardFilter}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{$\sim$ControlBoardFilter}]{\setlength{\rightskip}{0pt plus 5cm}ControlBoardFilter::$\sim$ControlBoardFilter ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{classyarp_1_1os_1_1_control_board_filter_a5c3f6dd113745a570fd06d616cc4e16a}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a7bbad9a004ca2a98836aad0bf2c61a7e}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!ControlBoardFilter@{ControlBoardFilter}}
+\index{ControlBoardFilter@{ControlBoardFilter}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{ControlBoardFilter}]{\setlength{\rightskip}{0pt plus 5cm}yarp::os::ControlBoardFilter::ControlBoardFilter ()}}
+\label{classyarp_1_1os_1_1_control_board_filter_a7bbad9a004ca2a98836aad0bf2c61a7e}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a137af6adba9f24aea3bcf274332dbff9}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!$\sim$ControlBoardFilter@{$\sim$ControlBoardFilter}}
+\index{$\sim$ControlBoardFilter@{$\sim$ControlBoardFilter}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{$\sim$ControlBoardFilter}]{\setlength{\rightskip}{0pt plus 5cm}virtual yarp::os::ControlBoardFilter::$\sim$ControlBoardFilter ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classyarp_1_1os_1_1_control_board_filter_a137af6adba9f24aea3bcf274332dbff9}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_acb354b5aea9ec25a99aa57ce4781b56d}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!close@{close}}
+\index{close@{close}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::close ()}}
+\label{classyarp_1_1os_1_1_control_board_filter_acb354b5aea9ec25a99aa57ce4781b56d}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a6224733f849144002f5b0f89f30ffb17}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!close@{close}}
 \index{close@{close}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::close ()}}
 \label{classyarp_1_1os_1_1_control_board_filter_a6224733f849144002f5b0f89f30ffb17}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a7d49e4c935446a6523f9504510d556c6}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!cutConnection@{cutConnection}}
+\index{cutConnection@{cutConnection}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{cutConnection}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::cutConnection (bool {\em cut} = {\ttfamily true})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a7d49e4c935446a6523f9504510d556c6}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a97baafa3310ec3ecad9c348c29c8b09c}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!cutConnection@{cutConnection}}
 \index{cutConnection@{cutConnection}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{cutConnection}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::cutConnection (bool {\em cut} = {\ttfamily true})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a97baafa3310ec3ecad9c348c29c8b09c}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_ab78bfa155e19e516ec6cf7cb39b3d8ac}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectCall@{injectCall}}
+\index{injectCall@{injectCall}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{injectCall}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::injectCall (const Bottle \& {\em b})}}
+\label{classyarp_1_1os_1_1_control_board_filter_ab78bfa155e19e516ec6cf7cb39b3d8ac}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a46da5eabf941da5694107bf2d4adc075}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectCall@{injectCall}}
 \index{injectCall@{injectCall}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{injectCall}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::injectCall (const Bottle \& {\em b})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a46da5eabf941da5694107bf2d4adc075}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a8fcab8021e1d19529dd6de96312f9ce6}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectCommand@{injectCommand}}
+\index{injectCommand@{injectCommand}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{injectCommand}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::injectCommand (const Bottle \& {\em b})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a8fcab8021e1d19529dd6de96312f9ce6}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a329bcebdddb5afbd7a5e7303e6941311}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectCommand@{injectCommand}}
 \index{injectCommand@{injectCommand}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{injectCommand}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::injectCommand (const Bottle \& {\em b})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a329bcebdddb5afbd7a5e7303e6941311}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a3386103cf773f04fb16fb451b8e301fe}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectState@{injectState}}
+\index{injectState@{injectState}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{injectState}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::injectState (const Bottle \& {\em b})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a3386103cf773f04fb16fb451b8e301fe}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a379021d871cc1d375d8ea2107b74911d}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!injectState@{injectState}}
 \index{injectState@{injectState}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{injectState}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::injectState (const Bottle \& {\em b})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a379021d871cc1d375d8ea2107b74911d}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a333ebfc5235d2e8dcf6e226a1d00924b}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!open@{open}}
+\index{open@{open}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}bool yarp::os::ControlBoardFilter::open (ConstString {\em filterName}, \/  ConstString {\em targetName})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a333ebfc5235d2e8dcf6e226a1d00924b}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a27f3aa5419bce6ad6e421ddcb2e52131}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!open@{open}}
 \index{open@{open}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}bool ControlBoardFilter::open (ConstString {\em filterName}, \/  ConstString {\em targetName})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a27f3aa5419bce6ad6e421ddcb2e52131}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a534651daebaa7a8324ee8749aeba2469}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setCallObserver@{setCallObserver}}
+\index{setCallObserver@{setCallObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{setCallObserver}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::setCallObserver ({\bf IObserver} $\ast$ {\em o})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a534651daebaa7a8324ee8749aeba2469}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a72b5abaf68eb361c79d9de5071eb36b9}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setCallObserver@{setCallObserver}}
 \index{setCallObserver@{setCallObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{setCallObserver}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::setCallObserver ({\bf IObserver} $\ast$ {\em o})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a72b5abaf68eb361c79d9de5071eb36b9}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_af40e1e2c791dcbe740e480a257db76b4}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setCommandObserver@{setCommandObserver}}
+\index{setCommandObserver@{setCommandObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{setCommandObserver}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::setCommandObserver ({\bf IObserver} $\ast$ {\em o})}}
+\label{classyarp_1_1os_1_1_control_board_filter_af40e1e2c791dcbe740e480a257db76b4}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a2500ae8300c6ca835f5b25133e1d04ed}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setCommandObserver@{setCommandObserver}}
 \index{setCommandObserver@{setCommandObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{setCommandObserver}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::setCommandObserver ({\bf IObserver} $\ast$ {\em o})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a2500ae8300c6ca835f5b25133e1d04ed}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a67e1c7b532ab58bb42f7c20ec2d5d2ce}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setReplier@{setReplier}}
+\index{setReplier@{setReplier}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{setReplier}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::setReplier ({\bf IReplier} $\ast$ {\em r})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a67e1c7b532ab58bb42f7c20ec2d5d2ce}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_a6d3b3916553af9221093518d93c49c99}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setReplier@{setReplier}}
 \index{setReplier@{setReplier}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{setReplier}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::setReplier ({\bf IReplier} $\ast$ {\em r})}}
 \label{classyarp_1_1os_1_1_control_board_filter_a6d3b3916553af9221093518d93c49c99}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a9e6db13ba589309cfca6667735c29297}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setResponseObserver@{setResponseObserver}}
+\index{setResponseObserver@{setResponseObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{setResponseObserver}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::setResponseObserver ({\bf IObserver} $\ast$ {\em o})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a9e6db13ba589309cfca6667735c29297}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_acf3896d97b179e36d41d275087c33c4e}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setResponseObserver@{setResponseObserver}}
 \index{setResponseObserver@{setResponseObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
 \subsubsection[{setResponseObserver}]{\setlength{\rightskip}{0pt plus 5cm}void ControlBoardFilter::setResponseObserver ({\bf IObserver} $\ast$ {\em o})}}
 \label{classyarp_1_1os_1_1_control_board_filter_acf3896d97b179e36d41d275087c33c4e}
+\hypertarget{classyarp_1_1os_1_1_control_board_filter_a17305fdd2e2f51d790e5787245471eb9}{
+\index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setStateObserver@{setStateObserver}}
+\index{setStateObserver@{setStateObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
+\subsubsection[{setStateObserver}]{\setlength{\rightskip}{0pt plus 5cm}void yarp::os::ControlBoardFilter::setStateObserver ({\bf IObserver} $\ast$ {\em o})}}
+\label{classyarp_1_1os_1_1_control_board_filter_a17305fdd2e2f51d790e5787245471eb9}
 \hypertarget{classyarp_1_1os_1_1_control_board_filter_af23fad9bab89b2a57c4fb32eb99d76ef}{
 \index{yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}!setStateObserver@{setStateObserver}}
 \index{setStateObserver@{setStateObserver}!yarp::os::ControlBoardFilter@{yarp::os::ControlBoardFilter}}
@@ -108,5 +199,6 @@ void \hyperlink{classyarp_1_1os_1_1_control_board_filter_a46da5eabf941da5694107b
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/\hyperlink{_control_board_filter_8h}{ControlBoardFilter.h}\item 
+/Users/kail/imClever/dev/virtualSkin/include/yarp/os/\hyperlink{include_2yarp_2os_2_control_board_filter_8h}{ControlBoardFilter.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/\hyperlink{src_2yarp_util_2gregor_filter_2yarp_2os_2_control_board_filter_8h}{ControlBoardFilter.h}\item 
 /Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/\hyperlink{_control_board_filter_8cpp}{ControlBoardFilter.cpp}\end{DoxyCompactItemize}

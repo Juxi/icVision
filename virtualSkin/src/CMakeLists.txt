@@ -5,33 +5,38 @@
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
 ### Create some options for use with ccmake ###
-option (LINK_ACE "If you have problems finding ace, turn this on" OFF)
-option (YARP_AUTO_LINK "... and this off" ON)
+option (LINK_ACE ON)
 
 ### Location of scripts to find Ace and FreeSOLID ###
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cMakeScripts )
 
-### Locations of headers contained within this project ###
+### Headers within this project ###
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/robotModel/" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/gregorFilter/" )
 
-### Names of static libraries built by this project ###
+### Static libraries built by this project ###
 SET ( ROBOT_MODEL_LIB "robotModel" )
 SET ( YARP_UTILITIES_LIB "yarpUtil" )
 SET ( IDSIA_YARP_FILTER_LIB "yarpFilter" )
 
-### Find libraries ###
+### Find External Libraries ###
 FIND_PACKAGE ( OpenGL )
+
 FIND_PACKAGE ( Qt4 REQUIRED )
 	SET ( QT_USE_QTOPENGL TRUE )
 	SET ( QT_USE_QTXML TRUE )
 	INCLUDE ( ${QT_USE_FILE} )
+
 FIND_PACKAGE ( FreeSOLID REQUIRED )
+
 FIND_PACKAGE ( YARP REQUIRED )
+INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
+
 IF ( LINK_ACE )
 	FIND_PACKAGE ( ACE REQUIRED )
+	INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
 ENDIF ( LINK_ACE )
 
 ### Set some platform-specific variables ###

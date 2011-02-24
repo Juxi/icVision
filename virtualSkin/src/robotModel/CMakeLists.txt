@@ -82,7 +82,6 @@ SET ( hdr_files	renderList.h
 		displaylist.h )
 
 SET ( QT_MOC_FILES 	renderList.h
-			#world.h
 )	
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 

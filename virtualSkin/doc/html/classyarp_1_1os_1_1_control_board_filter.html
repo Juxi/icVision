@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>yarp::os::ControlBoardFilter Class Reference</h1><!-- doxytag: class="yarp::os::ControlBoardFilter" -->
-<p><code>#include &lt;<a class="el" href="_control_board_filter_8h_source.html">ControlBoardFilter.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2yarp_2os_2_control_board_filter_8h_source.html">ControlBoardFilter.h</a>&gt;</code></p>
 
 <p><a href="classyarp_1_1os_1_1_control_board_filter-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -67,6 +67,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a379021d871cc1d375d8ea2107b74911d">injectState</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a329bcebdddb5afbd7a5e7303e6941311">injectCommand</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a46da5eabf941da5694107bf2d4adc075">injectCall</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a7bbad9a004ca2a98836aad0bf2c61a7e">ControlBoardFilter</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a137af6adba9f24aea3bcf274332dbff9">~ControlBoardFilter</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a333ebfc5235d2e8dcf6e226a1d00924b">open</a> (ConstString filterName, ConstString targetName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#acb354b5aea9ec25a99aa57ce4781b56d">close</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a7d49e4c935446a6523f9504510d556c6">cutConnection</a> (bool cut=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a17305fdd2e2f51d790e5787245471eb9">setStateObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#af40e1e2c791dcbe740e480a257db76b4">setCommandObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a534651daebaa7a8324ee8749aeba2469">setCallObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a9e6db13ba589309cfca6667735c29297">setResponseObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a67e1c7b532ab58bb42f7c20ec2d5d2ce">setReplier</a> (<a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *r)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a3386103cf773f04fb16fb451b8e301fe">injectState</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a8fcab8021e1d19529dd6de96312f9ce6">injectCommand</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#ab78bfa155e19e516ec6cf7cb39b3d8ac">injectCall</a> (const Bottle &amp;b)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4cd0bdff78668dd46a8a567b3ce60144"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::ControlBoardFilter" ref="a4cd0bdff78668dd46a8a567b3ce60144" args="()" -->
@@ -103,7 +116,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a7bbad9a004ca2a98836aad0bf2c61a7e"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::ControlBoardFilter" ref="a7bbad9a004ca2a98836aad0bf2c61a7e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">yarp::os::ControlBoardFilter::ControlBoardFilter </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a137af6adba9f24aea3bcf274332dbff9"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::~ControlBoardFilter" ref="a137af6adba9f24aea3bcf274332dbff9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual yarp::os::ControlBoardFilter::~ControlBoardFilter </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="acb354b5aea9ec25a99aa57ce4781b56d"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::close" ref="acb354b5aea9ec25a99aa57ce4781b56d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::close </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6224733f849144002f5b0f89f30ffb17"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::close" ref="a6224733f849144002f5b0f89f30ffb17" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -112,6 +176,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="memname">void ControlBoardFilter::close </td>
           <td>(</td>
           <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7d49e4c935446a6523f9504510d556c6"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::cutConnection" ref="a7d49e4c935446a6523f9504510d556c6" args="(bool cut=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::cutConnection </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>cut</em> = <code>true</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -139,12 +221,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="ab78bfa155e19e516ec6cf7cb39b3d8ac"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectCall" ref="ab78bfa155e19e516ec6cf7cb39b3d8ac" args="(const Bottle &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::injectCall </td>
+          <td>(</td>
+          <td class="paramtype">const Bottle &amp;&nbsp;</td>
+          <td class="paramname"> <em>b</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a46da5eabf941da5694107bf2d4adc075"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectCall" ref="a46da5eabf941da5694107bf2d4adc075" args="(const Bottle &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ControlBoardFilter::injectCall </td>
+          <td>(</td>
+          <td class="paramtype">const Bottle &amp;&nbsp;</td>
+          <td class="paramname"> <em>b</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8fcab8021e1d19529dd6de96312f9ce6"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectCommand" ref="a8fcab8021e1d19529dd6de96312f9ce6" args="(const Bottle &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::injectCommand </td>
           <td>(</td>
           <td class="paramtype">const Bottle &amp;&nbsp;</td>
           <td class="paramname"> <em>b</em></td>
@@ -175,6 +293,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a3386103cf773f04fb16fb451b8e301fe"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectState" ref="a3386103cf773f04fb16fb451b8e301fe" args="(const Bottle &amp;b)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::injectState </td>
+          <td>(</td>
+          <td class="paramtype">const Bottle &amp;&nbsp;</td>
+          <td class="paramname"> <em>b</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a379021d871cc1d375d8ea2107b74911d"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectState" ref="a379021d871cc1d375d8ea2107b74911d" args="(const Bottle &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
@@ -186,6 +322,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>b</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a333ebfc5235d2e8dcf6e226a1d00924b"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::open" ref="a333ebfc5235d2e8dcf6e226a1d00924b" args="(ConstString filterName, ConstString targetName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool yarp::os::ControlBoardFilter::open </td>
+          <td>(</td>
+          <td class="paramtype">ConstString&nbsp;</td>
+          <td class="paramname"> <em>filterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ConstString&nbsp;</td>
+          <td class="paramname"> <em>targetName</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -220,12 +383,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a534651daebaa7a8324ee8749aeba2469"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setCallObserver" ref="a534651daebaa7a8324ee8749aeba2469" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::setCallObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a72b5abaf68eb361c79d9de5071eb36b9"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setCallObserver" ref="a72b5abaf68eb361c79d9de5071eb36b9" args="(IObserver *o)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ControlBoardFilter::setCallObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af40e1e2c791dcbe740e480a257db76b4"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setCommandObserver" ref="af40e1e2c791dcbe740e480a257db76b4" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::setCommandObserver </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
           <td class="paramname"> <em>o</em></td>
@@ -256,6 +455,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a67e1c7b532ab58bb42f7c20ec2d5d2ce"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setReplier" ref="a67e1c7b532ab58bb42f7c20ec2d5d2ce" args="(IReplier *r)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::setReplier </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *&nbsp;</td>
+          <td class="paramname"> <em>r</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6d3b3916553af9221093518d93c49c99"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setReplier" ref="a6d3b3916553af9221093518d93c49c99" args="(IReplier *r)" -->
 <div class="memitem">
 <div class="memproto">
@@ -274,12 +491,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a9e6db13ba589309cfca6667735c29297"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setResponseObserver" ref="a9e6db13ba589309cfca6667735c29297" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::setResponseObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="acf3896d97b179e36d41d275087c33c4e"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setResponseObserver" ref="acf3896d97b179e36d41d275087c33c4e" args="(IObserver *o)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ControlBoardFilter::setResponseObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
+          <td class="paramname"> <em>o</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a17305fdd2e2f51d790e5787245471eb9"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setStateObserver" ref="a17305fdd2e2f51d790e5787245471eb9" args="(IObserver *o)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void yarp::os::ControlBoardFilter::setStateObserver </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td>
           <td class="paramname"> <em>o</em></td>
@@ -311,7 +564,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="_control_board_filter_8h_source.html">ControlBoardFilter.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/yarp/os/<a class="el" href="include_2yarp_2os_2_control_board_filter_8h_source.html">ControlBoardFilter.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="src_2yarp_util_2gregor_filter_2yarp_2os_2_control_board_filter_8h_source.html">ControlBoardFilter.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/<a class="el" href="_control_board_filter_8cpp.html">ControlBoardFilter.cpp</a></li>
 </ul>
 </div>

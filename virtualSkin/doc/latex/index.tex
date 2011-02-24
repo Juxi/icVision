@@ -9,18 +9,19 @@ VirtualSkin is a collection of tools intended to facilitate your research on com
 \end{DoxyItemize}\hypertarget{index_upcoming}{}\section{Coming Soon}\label{index_upcoming}
 
 \begin{DoxyItemize}
-\item A new YARP interface to move the robot model directly using position and velocity commands (a planner that functions independently from an external robot or simulated robot)
-\item Collision events will be reported in a 2D parameterized \char`\"{}Skin Space\char`\"{} that preserves neighborhood information for adjacent body parts
+\item A new YARP RPC interface to move the robot model directly using position and velocity commands (facilitates planner-\/mode, decoupling the model from an external robot or simulated robot)
+\item Collision events reported in a 2D parameterized \char`\"{}Skin Space\char`\"{} that preserves neighborhood information for adjacent body parts
+\item Cartesian positions/orientations of arbitrary body parts published on the network via YARP
 \end{DoxyItemize}\hypertarget{index_install}{}\section{Installation}\label{index_install}
 
 \begin{DoxyEnumerate}
 \item Make sure you have all dependencies installed and working.
 \begin{DoxyItemize}
-\item CMake $>$= 2.6
-\item YARP $>$= 2.6
-\item Qt $>$= 4
-\item OpenGL
-\item FreeSOLID
+\item CMake $>$= 2.6 \href{http://www.cmake.org/}{\tt http://www.cmake.org/}
+\item YARP $>$= 2.6 \href{http://eris.liralab.it/yarp/}{\tt http://eris.liralab.it/yarp/}
+\item Qt $>$= 4 \href{http://qt.nokia.com/products/}{\tt http://qt.nokia.com/products/}
+\item OpenGL (comes with Qt) \href{http://www.opengl.org/}{\tt http://www.opengl.org/}
+\item FreeSOLID \href{http://www.win.tue.nl/~gino/solid/}{\tt http://www.win.tue.nl/$\sim$gino/solid/}
 \end{DoxyItemize}
 \item Clone the IDSIA IM-\/CLeVeR GIT repository using the following command: \begin{DoxyVerb}git clone http://git.ti-edu.ch/repogit/IM-CLeVeR.git PATH_TO_YOUR_LOCAL_GIT_REPOSITORY \end{DoxyVerb}
  \begin{DoxyNote}{Note}
@@ -49,6 +50,8 @@ Questions concerning the GIT repository should be directed to -\/ \href{mailto:v
 \item PATH\_\-TO\_\-YOUR\_\-LOCAL\_\-GIT\_\-REPOSITORY/virtualSkin/include
 \end{DoxyItemize}
 \end{DoxyItemize}
-\end{DoxyEnumerate}This project was developed during the fist year of my PhD at IDSIA's robotics lab.
+\end{DoxyEnumerate}Once you have everything installed, you can try out the \hyperlink{reflex_demo}{Reflex Demonstration}
+
+This project was developed during the fist year of my PhD at IDSIA's robotics lab.
 
 2011-\/01-\/01, Kail Frank -\/ \href{mailto:kail@idsia.ch}{\tt kail@idsia.ch} 

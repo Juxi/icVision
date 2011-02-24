@@ -52,7 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A custom handler for the Qt XML parser (see <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>).  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="zphandler_8h_source.html">zphandler.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2robot_model_2zphandler_8h_source.html">zphandler.h</a>&gt;</code></p>
 
 <p><a href="class_robot_model_1_1_z_p_handler-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -63,6 +63,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#a246f066600bede52d4321d0ccebd5cec">characters</a> (const QString &amp;str)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#a442f6837417a1baa0d60641ddd854109">fatalError</a> (const QXmlParseException &amp;exception)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#aca3c34530b327d635a4e915992f576de">errorString</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#a190c3fda1bc3ad017b9b2e44744c3057">ZPHandler</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *tree)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#a5ed52c5d331fa5e54c41b905898fd936">startElement</a> (const QString &amp;namespaceURI, const QString &amp;localName, const QString &amp;qName, const QXmlAttributes &amp;attributes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#ae58bf36c338a6c4c7cc021d0e0534c5c">endElement</a> (const QString &amp;namespaceURI, const QString &amp;localName, const QString &amp;qName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#af3771144675a93929a3926bafbad2a99">characters</a> (const QString &amp;str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#ad56355b01366e4d0cb9137ad094d1280">fatalError</a> (const QXmlParseException &amp;exception)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#aefc7dde46f775b9fe6f30cf46d1b7b3c">errorString</a> () const </td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A custom handler for the Qt XML parser (see <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>). </p>
@@ -87,7 +93,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a190c3fda1bc3ad017b9b2e44744c3057"></a><!-- doxytag: member="RobotModel::ZPHandler::ZPHandler" ref="a190c3fda1bc3ad017b9b2e44744c3057" args="(Robot *tree)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RobotModel::ZPHandler::ZPHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td>
+          <td class="paramname"> <em>tree</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af3771144675a93929a3926bafbad2a99"></a><!-- doxytag: member="RobotModel::ZPHandler::characters" ref="af3771144675a93929a3926bafbad2a99" args="(const QString &amp;str)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RobotModel::ZPHandler::characters </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>str</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a246f066600bede52d4321d0ccebd5cec"></a><!-- doxytag: member="RobotModel::ZPHandler::characters" ref="a246f066600bede52d4321d0ccebd5cec" args="(const QString &amp;str)" -->
 <div class="memitem">
 <div class="memproto">
@@ -99,6 +141,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>str</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae58bf36c338a6c4c7cc021d0e0534c5c"></a><!-- doxytag: member="RobotModel::ZPHandler::endElement" ref="ae58bf36c338a6c4c7cc021d0e0534c5c" args="(const QString &amp;namespaceURI, const QString &amp;localName, const QString &amp;qName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RobotModel::ZPHandler::endElement </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>namespaceURI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>localName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>qName</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -139,6 +214,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="aefc7dde46f775b9fe6f30cf46d1b7b3c"></a><!-- doxytag: member="RobotModel::ZPHandler::errorString" ref="aefc7dde46f775b9fe6f30cf46d1b7b3c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString RobotModel::ZPHandler::errorString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aca3c34530b327d635a4e915992f576de"></a><!-- doxytag: member="RobotModel::ZPHandler::errorString" ref="aca3c34530b327d635a4e915992f576de" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -149,6 +241,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad56355b01366e4d0cb9137ad094d1280"></a><!-- doxytag: member="RobotModel::ZPHandler::fatalError" ref="ad56355b01366e4d0cb9137ad094d1280" args="(const QXmlParseException &amp;exception)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RobotModel::ZPHandler::fatalError </td>
+          <td>(</td>
+          <td class="paramtype">const QXmlParseException &amp;&nbsp;</td>
+          <td class="paramname"> <em>exception</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -167,6 +277,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>exception</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ed52c5d331fa5e54c41b905898fd936"></a><!-- doxytag: member="RobotModel::ZPHandler::startElement" ref="a5ed52c5d331fa5e54c41b905898fd936" args="(const QString &amp;namespaceURI, const QString &amp;localName, const QString &amp;qName, const QXmlAttributes &amp;attributes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RobotModel::ZPHandler::startElement </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>namespaceURI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>localName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>qName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QXmlAttributes &amp;&nbsp;</td>
+          <td class="paramname"> <em>attributes</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -214,7 +363,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="zphandler_8h_source.html">zphandler.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/robotModel/<a class="el" href="include_2robot_model_2zphandler_8h_source.html">zphandler.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="src_2robot_model_2zphandler_8h_source.html">zphandler.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="zphandler_8cpp.html">zphandler.cpp</a></li>
 </ul>
 </div>

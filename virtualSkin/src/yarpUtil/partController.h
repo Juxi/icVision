@@ -44,6 +44,7 @@ private:
 	QString partName;
 	int numJoints;
 	
+	yarp::os::Network network;
 	yarp::dev::PolyDriver *dd;
 	yarp::dev::IPositionControl *pos;
 	yarp::dev::IVelocityControl *vel;

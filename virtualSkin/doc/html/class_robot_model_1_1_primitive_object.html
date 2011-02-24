@@ -48,18 +48,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::PrimitiveObject Class Reference</h1><!-- doxytag: class="RobotModel::PrimitiveObject" --><!-- doxytag: inherits="RobotModel::DisplayList" -->
-<p><code>#include &lt;<a class="el" href="primitiveobject_8h_source.html">primitiveobject.h</a>&gt;</code></p>
+<h1>RobotModel::PrimitiveObject Class Reference</h1><!-- doxytag: class="RobotModel::PrimitiveObject" --><!-- doxytag: inherits="RobotModel::DisplayList,RobotModel::DisplayList" -->
+<p><code>#include &lt;<a class="el" href="include_2robot_model_2primitiveobject_8h_source.html">primitiveobject.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::PrimitiveObject:</div>
 <div class="dynsection">
  <div class="center">
   <img src="class_robot_model_1_1_primitive_object.png" usemap="#RobotModel::PrimitiveObject_map" alt=""/>
   <map id="RobotModel::PrimitiveObject_map" name="RobotModel::PrimitiveObject_map">
-<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="180,0,350,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="360,0,530,24"/>
+<area href="class_robot_model_1_1_display_list.html" alt="RobotModel::DisplayList" shape="rect" coords="540,0,710,24"/>
 <area href="class_robot_model_1_1_box.html" alt="RobotModel::Box" shape="rect" coords="0,112,170,136"/>
-<area href="class_robot_model_1_1_cylinder.html" alt="RobotModel::Cylinder" shape="rect" coords="180,112,350,136"/>
-<area href="class_robot_model_1_1_sphere.html" alt="RobotModel::Sphere" shape="rect" coords="360,112,530,136"/>
+<area href="class_robot_model_1_1_box.html" alt="RobotModel::Box" shape="rect" coords="180,112,350,136"/>
+<area href="class_robot_model_1_1_cylinder.html" alt="RobotModel::Cylinder" shape="rect" coords="360,112,530,136"/>
+<area href="class_robot_model_1_1_cylinder.html" alt="RobotModel::Cylinder" shape="rect" coords="540,112,710,136"/>
+<area href="class_robot_model_1_1_sphere.html" alt="RobotModel::Sphere" shape="rect" coords="720,112,890,136"/>
+<area href="class_robot_model_1_1_sphere.html" alt="RobotModel::Sphere" shape="rect" coords="900,112,1070,136"/>
 </map>
  </div>
 </div>
@@ -82,11 +86,27 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a07ece283ed8f0f0e3cdf6f36ac7b34dd">specialRotate</a> (const QVector3D &amp;axis, qreal angle=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ae6c417003b52df18a52711031e95c44a">setTranslation</a> (const QVector3D &amp;trans)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ae41a1dcacd77b59c44409a77b0183a77">translate</a> (const QVector3D &amp;trans)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a93382341d2ad150badc6b28300e8047b">PrimitiveObject</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#aaa5d9d16c5eb4122376afc32ad9fd3d8">~PrimitiveObject</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a61c7cffdac933e1f363fa7d4715f669c">setName</a> (const QString &amp;aName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const QString &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a2bad14bd18e70f3e95b6ebfca7014d2e">getName</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a9097dd663246a16af3da8a4b193e6c14">setParent</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *object)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a6981588496b77d1942435296631d1ef0">getParent</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a299181992bf3af3dab1a119e03b2944e">setL</a> (const QMatrix4x4 &amp;txfr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ad6d1d0cfd2808ecf051a0d49689dfa86">update</a> (const QMatrix4x4 &amp;txfr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#afa2afdbe412aadfe4d7bb951e4d7b8fa">setCartesianRotation</a> (const QVector3D &amp;rot)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#aa490f6642a6a02d48cf8ed9cd49a47f7">cartesianRotate</a> (const QVector3D &amp;rot)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a4a91537e10478b31fb8a025c0faac770">setAxisAngleRotation</a> (const QVector3D &amp;axis, qreal angle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ae57db819937782138821a30960a72aa0">axisAngleRotate</a> (const QVector3D &amp;axis, qreal angle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a33c01b56d7daf2e1d94419f25b9fa902">specialRotate</a> (const QVector3D &amp;axis, qreal angle=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a58f3d8655dd442ee1032f3582027604a">setTranslation</a> (const QVector3D &amp;trans)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#aeddf2c45f6a3d60f2566e58728cc2a96">translate</a> (const QVector3D &amp;trans)</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a8fc60e9e4a29b895d45871d842081605">doNotCollideWith</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *object)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a498038d3817c1c24ddc5b8e9ca7afdf9">doNotCollideWith</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *object)</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ae14d0349fba88a7de488c28934bf38ce">name</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a70273cf8bb51ec693445e804f2c1eb34">parent</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a242ae58660af2bf8f7e3354f55486c47">parent</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">DtShapeRef&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#ac0e31de5b780652446fdaa06eeec47d6">shape</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a920286d17b47f5fb033de4418f4755a5">L</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_primitive_object.html#a04f683e6cd9c4acc4bd8436cd8c52e15">mutex</a></td></tr>
@@ -126,7 +146,70 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="a93382341d2ad150badc6b28300e8047b"></a><!-- doxytag: member="RobotModel::PrimitiveObject::PrimitiveObject" ref="a93382341d2ad150badc6b28300e8047b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RobotModel::PrimitiveObject::PrimitiveObject </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaa5d9d16c5eb4122376afc32ad9fd3d8"></a><!-- doxytag: member="RobotModel::PrimitiveObject::~PrimitiveObject" ref="aaa5d9d16c5eb4122376afc32ad9fd3d8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RobotModel::PrimitiveObject::~PrimitiveObject </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ae57db819937782138821a30960a72aa0"></a><!-- doxytag: member="RobotModel::PrimitiveObject::axisAngleRotate" ref="ae57db819937782138821a30960a72aa0" args="(const QVector3D &amp;axis, qreal angle)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::axisAngleRotate </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qreal&nbsp;</td>
+          <td class="paramname"> <em>angle</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a9a7084168997ac285ee1e9f4041a8d57">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a97b449302680b96410ff7296c794f640"></a><!-- doxytag: member="RobotModel::PrimitiveObject::axisAngleRotate" ref="a97b449302680b96410ff7296c794f640" args="(const QVector3D &amp;axis, qreal angle)" -->
 <div class="memitem">
 <div class="memproto">
@@ -156,6 +239,26 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="aa490f6642a6a02d48cf8ed9cd49a47f7"></a><!-- doxytag: member="RobotModel::PrimitiveObject::cartesianRotate" ref="aa490f6642a6a02d48cf8ed9cd49a47f7" args="(const QVector3D &amp;rot)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::cartesianRotate </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>rot</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a023ba88eaac38b26dc9ea6a358467637">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a69c30287deb6549fbde68d1ba37424a8"></a><!-- doxytag: member="RobotModel::PrimitiveObject::cartesianRotate" ref="a69c30287deb6549fbde68d1ba37424a8" args="(const QVector3D &amp;rot)" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,6 +279,24 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="a498038d3817c1c24ddc5b8e9ca7afdf9"></a><!-- doxytag: member="RobotModel::PrimitiveObject::doNotCollideWith" ref="a498038d3817c1c24ddc5b8e9ca7afdf9" args="(CompositeObject *object)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::doNotCollideWith </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td>
+          <td class="paramname"> <em>object</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8fc60e9e4a29b895d45871d842081605"></a><!-- doxytag: member="RobotModel::PrimitiveObject::doNotCollideWith" ref="a8fc60e9e4a29b895d45871d842081605" args="(CompositeObject *object)" -->
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +308,23 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
           <td class="paramname"> <em>object</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2bad14bd18e70f3e95b6ebfca7014d2e"></a><!-- doxytag: member="RobotModel::PrimitiveObject::getName" ref="a2bad14bd18e70f3e95b6ebfca7014d2e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QString&amp; RobotModel::PrimitiveObject::getName </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -228,6 +366,52 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="a6981588496b77d1942435296631d1ef0"></a><!-- doxytag: member="RobotModel::PrimitiveObject::getParent" ref="a6981588496b77d1942435296631d1ef0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a>* RobotModel::PrimitiveObject::getParent </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4a91537e10478b31fb8a025c0faac770"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setAxisAngleRotation" ref="a4a91537e10478b31fb8a025c0faac770" args="(const QVector3D &amp;axis, qreal angle)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setAxisAngleRotation </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qreal&nbsp;</td>
+          <td class="paramname"> <em>angle</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a56a652740c494995c0ff55d1a5fd896d">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3ae3782ae64f5fc07f4d18646e04ed21"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setAxisAngleRotation" ref="a3ae3782ae64f5fc07f4d18646e04ed21" args="(const QVector3D &amp;axis, qreal angle)" -->
 <div class="memitem">
 <div class="memproto">
@@ -257,6 +441,26 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="afa2afdbe412aadfe4d7bb951e4d7b8fa"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setCartesianRotation" ref="afa2afdbe412aadfe4d7bb951e4d7b8fa" args="(const QVector3D &amp;rot)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setCartesianRotation </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>rot</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a7d52ea010f54755bcb3bfae9e26dd0c2">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a0a7cfefb126e4f37c208c516f8ffd9bb"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setCartesianRotation" ref="a0a7cfefb126e4f37c208c516f8ffd9bb" args="(const QVector3D &amp;rot)" -->
 <div class="memitem">
 <div class="memproto">
@@ -274,6 +478,24 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a7d52ea010f54755bcb3bfae9e26dd0c2">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a299181992bf3af3dab1a119e03b2944e"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setL" ref="a299181992bf3af3dab1a119e03b2944e" args="(const QMatrix4x4 &amp;txfr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setL </td>
+          <td>(</td>
+          <td class="paramtype">const QMatrix4x4 &amp;&nbsp;</td>
+          <td class="paramname"> <em>txfr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -313,6 +535,42 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="a61c7cffdac933e1f363fa7d4715f669c"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setName" ref="a61c7cffdac933e1f363fa7d4715f669c" args="(const QString &amp;aName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setName </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&nbsp;</td>
+          <td class="paramname"> <em>aName</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9097dd663246a16af3da8a4b193e6c14"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setParent" ref="a9097dd663246a16af3da8a4b193e6c14" args="(CompositeObject *object)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setParent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td>
+          <td class="paramname"> <em>object</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="afdcf8007d5aebfa88356d5551afb9775"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setParent" ref="afdcf8007d5aebfa88356d5551afb9775" args="(CompositeObject *object)" -->
 <div class="memitem">
 <div class="memproto">
@@ -328,6 +586,26 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a58f3d8655dd442ee1032f3582027604a"></a><!-- doxytag: member="RobotModel::PrimitiveObject::setTranslation" ref="a58f3d8655dd442ee1032f3582027604a" args="(const QVector3D &amp;trans)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::setTranslation </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>trans</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a6c9c1298e237ab25037ad9d7163b118c">RobotModel::DisplayList</a>.</p>
 
 </div>
 </div>
@@ -348,6 +626,35 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a6c9c1298e237ab25037ad9d7163b118c">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a33c01b56d7daf2e1d94419f25b9fa902"></a><!-- doxytag: member="RobotModel::PrimitiveObject::specialRotate" ref="a33c01b56d7daf2e1d94419f25b9fa902" args="(const QVector3D &amp;axis, qreal angle=0)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::specialRotate </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qreal&nbsp;</td>
+          <td class="paramname"> <em>angle</em> = <code>0</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#abd15964fcf47dbfdcb06d89517871152">RobotModel::DisplayList</a>.</p>
 
 </div>
 </div>
@@ -380,6 +687,26 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
+<a class="anchor" id="aeddf2c45f6a3d60f2566e58728cc2a96"></a><!-- doxytag: member="RobotModel::PrimitiveObject::translate" ref="aeddf2c45f6a3d60f2566e58728cc2a96" args="(const QVector3D &amp;trans)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::translate </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&nbsp;</td>
+          <td class="paramname"> <em>trans</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a6eb574d1f9929d9e2141dbacdeeb1b6a">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ae41a1dcacd77b59c44409a77b0183a77"></a><!-- doxytag: member="RobotModel::PrimitiveObject::translate" ref="ae41a1dcacd77b59c44409a77b0183a77" args="(const QVector3D &amp;trans)" -->
 <div class="memitem">
 <div class="memproto">
@@ -397,6 +724,24 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a6eb574d1f9929d9e2141dbacdeeb1b6a">RobotModel::DisplayList</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad6d1d0cfd2808ecf051a0d49689dfa86"></a><!-- doxytag: member="RobotModel::PrimitiveObject::update" ref="ad6d1d0cfd2808ecf051a0d49689dfa86" args="(const QMatrix4x4 &amp;txfr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotModel::PrimitiveObject::update </td>
+          <td>(</td>
+          <td class="paramtype">const QMatrix4x4 &amp;&nbsp;</td>
+          <td class="paramname"> <em>txfr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -458,12 +803,12 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 
 </div>
 </div>
-<a class="anchor" id="a70273cf8bb51ec693445e804f2c1eb34"></a><!-- doxytag: member="RobotModel::PrimitiveObject::parent" ref="a70273cf8bb51ec693445e804f2c1eb34" args="" -->
+<a class="anchor" id="a242ae58660af2bf8f7e3354f55486c47"></a><!-- doxytag: member="RobotModel::PrimitiveObject::parent" ref="a242ae58660af2bf8f7e3354f55486c47" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a>* <a class="el" href="class_robot_model_1_1_primitive_object.html#a70273cf8bb51ec693445e804f2c1eb34">RobotModel::PrimitiveObject::parent</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> * <a class="el" href="class_robot_model_1_1_primitive_object.html#a242ae58660af2bf8f7e3354f55486c47">RobotModel::PrimitiveObject::parent</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -485,7 +830,8 @@ Inheritance diagram for RobotModel::PrimitiveObject:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="primitiveobject_8h_source.html">primitiveobject.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/include/robotModel/<a class="el" href="include_2robot_model_2primitiveobject_8h_source.html">primitiveobject.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="src_2robot_model_2primitiveobject_8h_source.html">primitiveobject.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="primitiveobject_8cpp.html">primitiveobject.cpp</a></li>
 </ul>
 </div>

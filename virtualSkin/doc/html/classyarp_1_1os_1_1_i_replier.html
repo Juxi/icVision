@@ -49,18 +49,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>yarp::os::IReplier Class Reference</h1><!-- doxytag: class="yarp::os::IReplier" -->
-<p><code>#include &lt;<a class="el" href="_i_replier_8h_source.html">IReplier.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2yarp_2os_2_i_replier_8h_source.html">IReplier.h</a>&gt;</code></p>
 
 <p><a href="classyarp_1_1os_1_1_i_replier-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_replier.html#a197fe86812f17bc97cc7bf1b94473e84">~IReplier</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual Bottle *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_replier.html#a6b14c9b19625876caa5843b15537dcbd">getNextReponse</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_replier.html#a197fe86812f17bc97cc7bf1b94473e84">~IReplier</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual Bottle *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_replier.html#a6b14c9b19625876caa5843b15537dcbd">getNextReponse</a> ()=0</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Interface that must be implemented to be able to inject responses into <a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> s.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Use auto_ptr to return the bottle (I always get the error ISO C++ forbids declaration of 'auto_ptr' with no type) </dd></dl>
+<p>Interface that must be implemented to be able to inject responses into <a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> s.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>Use auto_ptr to return the bottle (I always get the error ISO C++ forbids declaration of 'auto_ptr' with no type) </dd></dl>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a197fe86812f17bc97cc7bf1b94473e84"></a><!-- doxytag: member="yarp::os::IReplier::~IReplier" ref="a197fe86812f17bc97cc7bf1b94473e84" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual yarp::os::IReplier::~IReplier </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a197fe86812f17bc97cc7bf1b94473e84"></a><!-- doxytag: member="yarp::os::IReplier::~IReplier" ref="a197fe86812f17bc97cc7bf1b94473e84" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -96,8 +117,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="_i_replier_8h_source.html">IReplier.h</a></li>
+<a class="anchor" id="a6b14c9b19625876caa5843b15537dcbd"></a><!-- doxytag: member="yarp::os::IReplier::getNextReponse" ref="a6b14c9b19625876caa5843b15537dcbd" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Bottle* yarp::os::IReplier::getNextReponse </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/Users/kail/imClever/dev/virtualSkin/include/yarp/os/<a class="el" href="include_2yarp_2os_2_i_replier_8h_source.html">IReplier.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="src_2yarp_util_2gregor_filter_2yarp_2os_2_i_replier_8h_source.html">IReplier.h</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

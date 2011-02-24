@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>yarp::os::IObserver Class Reference</h1><!-- doxytag: class="yarp::os::IObserver" -->
-<p><code>#include &lt;<a class="el" href="_i_observer_8h_source.html">IObserver.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2yarp_2os_2_i_observer_8h_source.html">IObserver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for yarp::os::IObserver:</div>
 <div class="dynsection">
@@ -68,10 +68,29 @@ Inheritance diagram for yarp::os::IObserver:</div>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">~IObserver</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790">onDataObserved</a> (yarp::os::Bottle &amp;b)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">~IObserver</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790">onDataObserved</a> (yarp::os::Bottle &amp;b)=0</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Interface that must be implemented to be able to be informed about information flowing in and out of filters (<a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> as well as <a class="el" href="classyarp_1_1os_1_1_stream_filter.html">StreamFilter</a>). </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6e20a4a7baa318b53d6a7e3f198699f6"></a><!-- doxytag: member="yarp::os::IObserver::~IObserver" ref="a6e20a4a7baa318b53d6a7e3f198699f6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual yarp::os::IObserver::~IObserver </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6e20a4a7baa318b53d6a7e3f198699f6"></a><!-- doxytag: member="yarp::os::IObserver::~IObserver" ref="a6e20a4a7baa318b53d6a7e3f198699f6" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -111,8 +130,30 @@ Inheritance diagram for yarp::os::IObserver:</div>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="_i_observer_8h_source.html">IObserver.h</a></li>
+<a class="anchor" id="a4829e5a6f2ba6666b9539a4a30f20790"></a><!-- doxytag: member="yarp::os::IObserver::onDataObserved" ref="a4829e5a6f2ba6666b9539a4a30f20790" args="(yarp::os::Bottle &amp;b)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void yarp::os::IObserver::onDataObserved </td>
+          <td>(</td>
+          <td class="paramtype">yarp::os::Bottle &amp;&nbsp;</td>
+          <td class="paramname"> <em>b</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This function is called by filters to inform the implementing objects on data flowing in or out a the calling filter (<a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> as well as <a class="el" href="classyarp_1_1os_1_1_stream_filter.html">StreamFilter</a>). </p>
+
+<p>Implemented in <a class="el" href="class_call_observer.html#abc1974fe2f04101dbbb1ae3ce83e7bfe">CallObserver</a>, <a class="el" href="class_response_observer.html#a2d847c448b31b5aa880b9282f7bf223d">ResponseObserver</a>, and <a class="el" href="class_state_observer.html#af104fa553abf31754d9acc084e9aa31f">StateObserver</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/Users/kail/imClever/dev/virtualSkin/include/yarp/os/<a class="el" href="include_2yarp_2os_2_i_observer_8h_source.html">IObserver.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/gregorFilter/yarp/os/<a class="el" href="src_2yarp_util_2gregor_filter_2yarp_2os_2_i_observer_8h_source.html">IObserver.h</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

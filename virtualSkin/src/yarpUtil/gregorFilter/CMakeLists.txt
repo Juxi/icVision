@@ -12,7 +12,7 @@ SET ( yarpFilter_VERSION_MINOR 1 )
 
 ### Create some options for use with ccmake ###
 option (LINK_ACE "If you have problems finding ace, turn this on" OFF)
-option (YARP_AUTO_LINK "... and this off" ON)
+#option (YARP_AUTO_LINK "... and this off" ON)
 
 ### Location of script to find Ace ###
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../cMakeScripts )
@@ -20,6 +20,7 @@ SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../cMakeScripts )
 ### Find libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
+
 IF ( LINK_ACE )
 	FIND_PACKAGE ( ACE REQUIRED )
 	INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
@@ -29,14 +30,16 @@ SET ( headers 	yarp/os/impl/RpcFilterImpl.h
 		yarp/os/RpcFilter.h
 		yarp/os/impl/StreamFilterImpl.h
 		yarp/os/StreamFilter.h
-		yarp/os/ControlBoardFilter.h )
+		yarp/os/ControlBoardFilter.h
+)
 
 ADD_LIBRARY ( yarpFilter 	RpcFilterImpl.cpp
 				RpcFilter.cpp
 				StreamFilterImpl.cpp
 				StreamFilter.cpp
 				ControlBoardFilter.cpp 
-				${headers} )
+				${headers}
+)
 
 TARGET_LINK_LIBRARIES ( yarpFilter ${YARP_LIBRARIES} ${ACE_LIBRARY} )
 

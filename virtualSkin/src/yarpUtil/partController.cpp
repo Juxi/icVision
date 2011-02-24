@@ -30,6 +30,12 @@ bool PartController::open()
 {
 	printf("CONFIGURING: %s %s\n", robotName.toStdString().c_str(), partName.toStdString().c_str());
 	
+	if ( !network.checkNetwork() )
+	{
+		printf("Cannot find YARP network.\n");
+		return 0;
+	}
+	
 	yarp::os::Property options;
 	options.put( "robot", robotName.toStdString().c_str() ); // typically from the command line.
 	options.put( "device", "remote_controlboard" );

@@ -16,23 +16,20 @@ int main(int argc, char *argv[])
 	int type;
 	if ( config.check("type") )
 	{
-		if ( config.find("type").asString() == "crackBaby" ) { type = 0; }
-		else if ( config.find("type").asString() == "doTheRobot" ) { type = 1; }
+		if ( config.find("type").asString() == "velocity" ) { type = 0; }
+		else if ( config.find("type").asString() == "position" ) { type = 1; }
 		else
 		{
-			printf("The only motion types currently supported are 'crackBaby' and 'doTheRobot'.\n");
+			printf("The only motion types currently supported are 'position' and 'velocity'.\n");
 			return 1;
 		}
 	}
-	else
-	{
-		printf("Please specify the type of motion with '--type' followed by 'crackBaby' or 'doTheRobot'.\n");
-		return 1;
-	}
+	else { type = 0; }
 	
-	qreal freq;
-	if ( config.check("freq") ) { freq = config.find("freq").asDouble(); }
-	else { freq = 1.0; }
+	qreal period;
+	if ( config.check("period") ) { period = config.find("period").asDouble(); }
+	else { period = 1.0; }
+	period *= 1000000;
 	
 	qreal speed;
 	if ( config.check("speed") ) { speed = config.find("speed").asDouble(); }
@@ -51,8 +48,8 @@ int main(int argc, char *argv[])
 	
 	switch ( type )
 	{
-		case 0 : babbler.crackBaby( 1/freq, speed, hands );
-		case 1 : babbler.doTheRobot( 1/freq, speed, hands );
+		case 0 : babbler.crackBaby( period, speed, hands );
+		case 1 : babbler.doTheRobot( period, speed, hands );
 	}
 	
 	return 0;

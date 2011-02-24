@@ -15,18 +15,19 @@ VirtualSkin is a collection of tools intended to facilitate your research on com
 
 \section upcoming Coming Soon
 
-- A new YARP interface to move the robot model directly using position and velocity commands (a planner that functions independently from an external robot or simulated robot)
-- Collision events will be reported in a 2D parameterized "Skin Space" that preserves neighborhood information for adjacent body parts
+- A new YARP RPC interface to move the robot model directly using position and velocity commands (facilitates planner-mode, decoupling the model from an external robot or simulated robot)
+- Collision events reported in a 2D parameterized "Skin Space" that preserves neighborhood information for adjacent body parts
+- Cartesian positions/orientations of arbitrary body parts published on the network via YARP
 
 
 \section install Installation
 
 -# Make sure you have all dependencies installed and working.
-	- CMake >= 2.6
-	- YARP >= 2.6
-	- Qt >= 4
-	- OpenGL
-	- FreeSOLID
+	- CMake >= 2.6 			<a href="http://www.cmake.org/">http://www.cmake.org/</a>
+	- YARP >= 2.6 			<a href="http://eris.liralab.it/yarp/">http://eris.liralab.it/yarp/</a>
+	- Qt >= 4 			<a href="http://qt.nokia.com/products/">http://qt.nokia.com/products/</a>
+	- OpenGL (comes with Qt) 	<a href="http://www.opengl.org/">http://www.opengl.org/</a>
+	- FreeSOLID 			<a href="http://www.win.tue.nl/~gino/solid/">http://www.win.tue.nl/~gino/solid/</a>
 -# Clone the IDSIA IM-CLeVeR GIT repository using the following command:
 	\verbatim git clone http://git.ti-edu.ch/repogit/IM-CLeVeR.git PATH_TO_YOUR_LOCAL_GIT_REPOSITORY \endverbatim
 	\note The directory PATH_TO_YOUR_LOCAL_GIT_REPOSITORY should not exist yet... it will be created.
@@ -45,6 +46,7 @@ VirtualSkin is a collection of tools intended to facilitate your research on com
 	.
 .
 
+Once you have everything installed, you can try out the \ref reflexDemo
 
 This project was developed during the fist year of my PhD at IDSIA's robotics lab.
 

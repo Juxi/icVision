@@ -24,6 +24,24 @@ bool \hyperlink{class_robot_model_1_1_interval_a26125787902f3761e303ba3999d0eb71
 bool \hyperlink{class_robot_model_1_1_interval_a15ffb7f16e3bad02073761ecd23d9695}{isTooSmall} (const qreal num)
 \item 
 bool \hyperlink{class_robot_model_1_1_interval_ae8da5063cbb210bdc856e30ea2b01f19}{isTooBig} (const qreal num)
+\item 
+\hyperlink{class_robot_model_1_1_interval_a84b5182a1624031b0793d938dcdfa63d}{Interval} ()
+\item 
+\hyperlink{class_robot_model_1_1_interval_a0bcaeeb61bc82c2d3e900786ebfe2bd9}{$\sim$Interval} ()
+\item 
+void \hyperlink{class_robot_model_1_1_interval_a70965c586d4e6e9d1c8d8d103de64165}{setMin} (const qreal minimum)
+\item 
+void \hyperlink{class_robot_model_1_1_interval_a91f49b3d27fda4b214d599508db7bf12}{setMax} (const qreal maximum)
+\item 
+qreal \hyperlink{class_robot_model_1_1_interval_ac13db1c8d06222b4cc9247204e1e92f6}{getMin} () const 
+\item 
+qreal \hyperlink{class_robot_model_1_1_interval_ab64bca0594297b837f9f53b8b5d26b45}{getMax} () const 
+\item 
+bool \hyperlink{class_robot_model_1_1_interval_ae201eab3cef8bf4d1f9e7c0aa92c307b}{isInRange} (const qreal num)
+\item 
+bool \hyperlink{class_robot_model_1_1_interval_a712f69fa532fee66dc25944372886ddc}{isTooSmall} (const qreal num)
+\item 
+bool \hyperlink{class_robot_model_1_1_interval_a37e63af3b85ca706b9f5f62945709dce}{isTooBig} (const qreal num)
 \end{DoxyCompactItemize}
 
 
@@ -38,39 +56,84 @@ bool \hyperlink{class_robot_model_1_1_interval_ae8da5063cbb210bdc856e30ea2b01f19
 \index{$\sim$Interval@{$\sim$Interval}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{$\sim$Interval}]{\setlength{\rightskip}{0pt plus 5cm}Interval::$\sim$Interval ()}}
 \label{class_robot_model_1_1_interval_a923e1717a3dedfe1ba90f81fcb26d5c5}
+\hypertarget{class_robot_model_1_1_interval_a84b5182a1624031b0793d938dcdfa63d}{
+\index{RobotModel::Interval@{RobotModel::Interval}!Interval@{Interval}}
+\index{Interval@{Interval}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{Interval}]{\setlength{\rightskip}{0pt plus 5cm}RobotModel::Interval::Interval ()}}
+\label{class_robot_model_1_1_interval_a84b5182a1624031b0793d938dcdfa63d}
+\hypertarget{class_robot_model_1_1_interval_a0bcaeeb61bc82c2d3e900786ebfe2bd9}{
+\index{RobotModel::Interval@{RobotModel::Interval}!$\sim$Interval@{$\sim$Interval}}
+\index{$\sim$Interval@{$\sim$Interval}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{$\sim$Interval}]{\setlength{\rightskip}{0pt plus 5cm}RobotModel::Interval::$\sim$Interval ()}}
+\label{class_robot_model_1_1_interval_a0bcaeeb61bc82c2d3e900786ebfe2bd9}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_robot_model_1_1_interval_ab64bca0594297b837f9f53b8b5d26b45}{
+\index{RobotModel::Interval@{RobotModel::Interval}!getMax@{getMax}}
+\index{getMax@{getMax}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{getMax}]{\setlength{\rightskip}{0pt plus 5cm}qreal RobotModel::Interval::getMax () const}}
+\label{class_robot_model_1_1_interval_ab64bca0594297b837f9f53b8b5d26b45}
 \hypertarget{class_robot_model_1_1_interval_a26857944f58e736ed0abdf534e2f56d8}{
 \index{RobotModel::Interval@{RobotModel::Interval}!getMax@{getMax}}
 \index{getMax@{getMax}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{getMax}]{\setlength{\rightskip}{0pt plus 5cm}qreal Interval::getMax () const}}
 \label{class_robot_model_1_1_interval_a26857944f58e736ed0abdf534e2f56d8}
+\hypertarget{class_robot_model_1_1_interval_ac13db1c8d06222b4cc9247204e1e92f6}{
+\index{RobotModel::Interval@{RobotModel::Interval}!getMin@{getMin}}
+\index{getMin@{getMin}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{getMin}]{\setlength{\rightskip}{0pt plus 5cm}qreal RobotModel::Interval::getMin () const}}
+\label{class_robot_model_1_1_interval_ac13db1c8d06222b4cc9247204e1e92f6}
 \hypertarget{class_robot_model_1_1_interval_abb8aac06ae73b9dfc7c3caf3f8b56399}{
 \index{RobotModel::Interval@{RobotModel::Interval}!getMin@{getMin}}
 \index{getMin@{getMin}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{getMin}]{\setlength{\rightskip}{0pt plus 5cm}qreal Interval::getMin () const}}
 \label{class_robot_model_1_1_interval_abb8aac06ae73b9dfc7c3caf3f8b56399}
+\hypertarget{class_robot_model_1_1_interval_ae201eab3cef8bf4d1f9e7c0aa92c307b}{
+\index{RobotModel::Interval@{RobotModel::Interval}!isInRange@{isInRange}}
+\index{isInRange@{isInRange}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{isInRange}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::Interval::isInRange (const qreal {\em num})}}
+\label{class_robot_model_1_1_interval_ae201eab3cef8bf4d1f9e7c0aa92c307b}
 \hypertarget{class_robot_model_1_1_interval_a26125787902f3761e303ba3999d0eb71}{
 \index{RobotModel::Interval@{RobotModel::Interval}!isInRange@{isInRange}}
 \index{isInRange@{isInRange}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{isInRange}]{\setlength{\rightskip}{0pt plus 5cm}bool Interval::isInRange (const qreal {\em num})}}
 \label{class_robot_model_1_1_interval_a26125787902f3761e303ba3999d0eb71}
+\hypertarget{class_robot_model_1_1_interval_a37e63af3b85ca706b9f5f62945709dce}{
+\index{RobotModel::Interval@{RobotModel::Interval}!isTooBig@{isTooBig}}
+\index{isTooBig@{isTooBig}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{isTooBig}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::Interval::isTooBig (const qreal {\em num})}}
+\label{class_robot_model_1_1_interval_a37e63af3b85ca706b9f5f62945709dce}
 \hypertarget{class_robot_model_1_1_interval_ae8da5063cbb210bdc856e30ea2b01f19}{
 \index{RobotModel::Interval@{RobotModel::Interval}!isTooBig@{isTooBig}}
 \index{isTooBig@{isTooBig}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{isTooBig}]{\setlength{\rightskip}{0pt plus 5cm}bool Interval::isTooBig (const qreal {\em num})}}
 \label{class_robot_model_1_1_interval_ae8da5063cbb210bdc856e30ea2b01f19}
+\hypertarget{class_robot_model_1_1_interval_a712f69fa532fee66dc25944372886ddc}{
+\index{RobotModel::Interval@{RobotModel::Interval}!isTooSmall@{isTooSmall}}
+\index{isTooSmall@{isTooSmall}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{isTooSmall}]{\setlength{\rightskip}{0pt plus 5cm}bool RobotModel::Interval::isTooSmall (const qreal {\em num})}}
+\label{class_robot_model_1_1_interval_a712f69fa532fee66dc25944372886ddc}
 \hypertarget{class_robot_model_1_1_interval_a15ffb7f16e3bad02073761ecd23d9695}{
 \index{RobotModel::Interval@{RobotModel::Interval}!isTooSmall@{isTooSmall}}
 \index{isTooSmall@{isTooSmall}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{isTooSmall}]{\setlength{\rightskip}{0pt plus 5cm}bool Interval::isTooSmall (const qreal {\em num})}}
 \label{class_robot_model_1_1_interval_a15ffb7f16e3bad02073761ecd23d9695}
+\hypertarget{class_robot_model_1_1_interval_a91f49b3d27fda4b214d599508db7bf12}{
+\index{RobotModel::Interval@{RobotModel::Interval}!setMax@{setMax}}
+\index{setMax@{setMax}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{setMax}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Interval::setMax (const qreal {\em maximum})}}
+\label{class_robot_model_1_1_interval_a91f49b3d27fda4b214d599508db7bf12}
 \hypertarget{class_robot_model_1_1_interval_a7deeccee610088a7aebef94919fd6f36}{
 \index{RobotModel::Interval@{RobotModel::Interval}!setMax@{setMax}}
 \index{setMax@{setMax}!RobotModel::Interval@{RobotModel::Interval}}
 \subsubsection[{setMax}]{\setlength{\rightskip}{0pt plus 5cm}void Interval::setMax (const qreal {\em maximum})}}
 \label{class_robot_model_1_1_interval_a7deeccee610088a7aebef94919fd6f36}
+\hypertarget{class_robot_model_1_1_interval_a70965c586d4e6e9d1c8d8d103de64165}{
+\index{RobotModel::Interval@{RobotModel::Interval}!setMin@{setMin}}
+\index{setMin@{setMin}!RobotModel::Interval@{RobotModel::Interval}}
+\subsubsection[{setMin}]{\setlength{\rightskip}{0pt plus 5cm}void RobotModel::Interval::setMin (const qreal {\em minimum})}}
+\label{class_robot_model_1_1_interval_a70965c586d4e6e9d1c8d8d103de64165}
 \hypertarget{class_robot_model_1_1_interval_a093471bdcba90e074543fb2781287145}{
 \index{RobotModel::Interval@{RobotModel::Interval}!setMin@{setMin}}
 \index{setMin@{setMin}!RobotModel::Interval@{RobotModel::Interval}}
@@ -80,5 +143,6 @@ bool \hyperlink{class_robot_model_1_1_interval_ae8da5063cbb210bdc856e30ea2b01f19
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{interval_8h}{interval.h}\item 
+/Users/kail/imClever/dev/virtualSkin/include/robotModel/\hyperlink{include_2robot_model_2interval_8h}{interval.h}\item 
+/Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{src_2robot_model_2interval_8h}{interval.h}\item 
 /Users/kail/imClever/dev/virtualSkin/src/robotModel/\hyperlink{interval_8cpp}{interval.cpp}\end{DoxyCompactItemize}

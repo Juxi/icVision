@@ -31,6 +31,7 @@ public:
 	
 private:
 	QString robotName;
+	Network yarp;
 	PartBabbler	torso, head, leftArm, rightArm;
 };
 
