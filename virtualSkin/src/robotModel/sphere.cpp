@@ -77,7 +77,7 @@ void Sphere::subdivide( float* v1, float* v2, float* v3, int depth )
     subdivide(v3, v31, v23, depth - 1);
     subdivide(v12, v23, v31, depth - 1);
 }
-void Sphere::normalize(float v[3]) {
+void Sphere::normalize( float v[3] ) {
     float d = sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
     if (d != 0) {
         v[0] = v[0]/d;

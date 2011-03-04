@@ -34,6 +34,7 @@ public:
 	void resizeMotorList( int size )		{ motorList.resize(size); }
     void appendNode( KinTreeNode* node )	{ tree.append(node); }
 	
+	bool isReady()							{ return isConfigured; }
 	const QString& getName() const			{ return robotName; }
 	int getNumBodyParts() const				{ return partList.size(); }
     int nextPartIdx() const					{ return partList.size(); }
@@ -103,7 +104,7 @@ private:
     QVector<Motor*>			motorList;
     QVector<KinTreeNode*>	tree;     // root nodes of the link/joint trees
     int						numLinks;     // link counter
-	//QMutex					mutex;
+	bool					isConfigured;
 	
 
     // check validity of indices

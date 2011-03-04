@@ -18,8 +18,8 @@
 
 namespace RobotModel {
 	
-	class Robot;
-	class Motor;
+class Robot;
+class Motor;
 
 class BodyPart : public QVector<Motor*>
 {

@@ -4,7 +4,7 @@
 using namespace std;
 using namespace RobotModel;
 
-Robot::Robot() : robotName("unNamedRobot"), numLinks(0)
+Robot::Robot() : robotName("unNamedRobot"), numLinks(0), isConfigured(false)
 {
     srand ( time(0) ); // for oscillators
 }
@@ -34,22 +34,26 @@ bool Robot::configure( const QString& fileName)
     reader.setContentHandler(&handler);
     reader.setErrorHandler(&handler);
     QFile file(fileName);
-    if ( !file.open(QFile::ReadOnly | QFile::Text) ) {
+	
+    if ( !file.open(QFile::ReadOnly | QFile::Text) )
+	{
         printf("Failed to open file: %s\n",fileName.toStdString().c_str());
         return false;
     }
+	
     QXmlInputSource xmlInputSource( &file );
-    if ( reader.parse( xmlInputSource ) ) {
-        printf("Created Robot: %s\n",getName().toStdString().c_str());
-        filterCollisionPairs();
-        home();
-        return true;
-    }
-    else
+	
+    if ( !reader.parse( xmlInputSource ) )
 	{
 		printf("Failed to create Robot: %s", getName().toStdString().c_str());
 		return false;
 	}
+	
+	printf("Created Robot: %s\n",getName().toStdString().c_str());
+	filterCollisionPairs();
+	home();
+	
+	return isConfigured = true;
 }
 
 void Robot::filterCollisionPairs()

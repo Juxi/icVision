@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>RobotModel::YarpRpcPort Class Reference</h1><!-- doxytag: class="RobotModel::YarpRpcPort" -->
-<p><code>#include &lt;<a class="el" href="include_2yarp_util_2yarp_rpc_port_8h_source.html">yarpRpcPort.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="yarp_rpc_port_8h_source.html">yarpRpcPort.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::YarpRpcPort:</div>
 <div class="dynsection">
@@ -57,7 +57,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
   <img src="class_robot_model_1_1_yarp_rpc_port.png" usemap="#RobotModel::YarpRpcPort_map" alt=""/>
   <map id="RobotModel::YarpRpcPort_map" name="RobotModel::YarpRpcPort_map">
 <area href="class_robot_model_1_1_world_rpc_interface.html" alt="RobotModel::WorldRpcInterface" shape="rect" coords="0,56,190,80"/>
-<area href="class_robot_model_1_1_world_rpc_interface.html" alt="RobotModel::WorldRpcInterface" shape="rect" coords="200,56,390,80"/>
 </map>
  </div>
 </div>
@@ -75,16 +74,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#ae26626cb99ca15bfec5e5162845018c2">showBottle</a> (yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a1554e6c2e38cb71f2521280f65bbab05">stop</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a93d242e15bb04534f7db4fe6636a0086">restart</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a056dd5174b17abd2a530eb9c77c1badb">YarpRpcPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#acc982a6fdf62ef56ff39bd4ca56375cd">~YarpRpcPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a6fe22d6e8403cb3560964dd31d66c243">useDebug</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a87e299eb43783a25cd71def0e50eb9dc">noDebug</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#aa30cabbf5681b128766ad8556c33cd65">setName</a> (const QString &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a1d70c28615104cd25ce2d2e7b61a592c">run</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a156879aeb8b6641c0f63a6633af8c568">handler</a> (const yarp::os::Bottle &amp;cmd, yarp::os::Bottle &amp;reply)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#abb0330c695bd22838cee0d2578b66d2d">showBottle</a> (yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#a7c02179416d26e3e741a385cc1320278">stop</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_yarp_rpc_port.html#ac72752818661170c795ed1c4c10dcac2">restart</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a393b44f37d77b25d8c5cb7f14609c4d5"></a><!-- doxytag: member="RobotModel::YarpRpcPort::YarpRpcPort" ref="a393b44f37d77b25d8c5cb7f14609c4d5" args="()" -->
@@ -110,40 +99,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
       <table class="memname">
         <tr>
           <td class="memname">YarpRpcPort::~YarpRpcPort </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a056dd5174b17abd2a530eb9c77c1badb"></a><!-- doxytag: member="RobotModel::YarpRpcPort::YarpRpcPort" ref="a056dd5174b17abd2a530eb9c77c1badb" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RobotModel::YarpRpcPort::YarpRpcPort </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acc982a6fdf62ef56ff39bd4ca56375cd"></a><!-- doxytag: member="RobotModel::YarpRpcPort::~YarpRpcPort" ref="acc982a6fdf62ef56ff39bd4ca56375cd" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual RobotModel::YarpRpcPort::~YarpRpcPort </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -183,33 +138,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
 
 </div>
 </div>
-<a class="anchor" id="a156879aeb8b6641c0f63a6633af8c568"></a><!-- doxytag: member="RobotModel::YarpRpcPort::handler" ref="a156879aeb8b6641c0f63a6633af8c568" args="(const yarp::os::Bottle &amp;cmd, yarp::os::Bottle &amp;reply)=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool RobotModel::YarpRpcPort::handler </td>
-          <td>(</td>
-          <td class="paramtype">const yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>cmd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>reply</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a87e299eb43783a25cd71def0e50eb9dc"></a><!-- doxytag: member="RobotModel::YarpRpcPort::noDebug" ref="a87e299eb43783a25cd71def0e50eb9dc" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -220,40 +148,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a87e299eb43783a25cd71def0e50eb9dc"></a><!-- doxytag: member="RobotModel::YarpRpcPort::noDebug" ref="a87e299eb43783a25cd71def0e50eb9dc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::noDebug </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac72752818661170c795ed1c4c10dcac2"></a><!-- doxytag: member="RobotModel::YarpRpcPort::restart" ref="ac72752818661170c795ed1c4c10dcac2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::restart </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
         </tr>
       </table>
 </div>
@@ -271,23 +165,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1d70c28615104cd25ce2d2e7b61a592c"></a><!-- doxytag: member="RobotModel::YarpRpcPort::run" ref="a1d70c28615104cd25ce2d2e7b61a592c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void RobotModel::YarpRpcPort::run </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -330,51 +207,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
 
 </div>
 </div>
-<a class="anchor" id="aa30cabbf5681b128766ad8556c33cd65"></a><!-- doxytag: member="RobotModel::YarpRpcPort::setName" ref="aa30cabbf5681b128766ad8556c33cd65" args="(const QString &amp;name)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::setName </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&nbsp;</td>
-          <td class="paramname"> <em>name</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abb0330c695bd22838cee0d2578b66d2d"></a><!-- doxytag: member="RobotModel::YarpRpcPort::showBottle" ref="abb0330c695bd22838cee0d2578b66d2d" args="(yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::showBottle </td>
-          <td>(</td>
-          <td class="paramtype">yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>anUnknownBottle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>indentation</em> = <code>0</code></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae26626cb99ca15bfec5e5162845018c2"></a><!-- doxytag: member="RobotModel::YarpRpcPort::showBottle" ref="ae26626cb99ca15bfec5e5162845018c2" args="(yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)" -->
 <div class="memitem">
 <div class="memproto">
@@ -395,23 +227,6 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
           <td></td>
           <td>)</td>
           <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7c02179416d26e3e741a385cc1320278"></a><!-- doxytag: member="RobotModel::YarpRpcPort::stop" ref="a7c02179416d26e3e741a385cc1320278" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::stop </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
         </tr>
       </table>
 </div>
@@ -453,26 +268,8 @@ Inheritance diagram for RobotModel::YarpRpcPort:</div>
 
 </div>
 </div>
-<a class="anchor" id="a6fe22d6e8403cb3560964dd31d66c243"></a><!-- doxytag: member="RobotModel::YarpRpcPort::useDebug" ref="a6fe22d6e8403cb3560964dd31d66c243" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::YarpRpcPort::useDebug </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/include/yarpUtil/<a class="el" href="include_2yarp_util_2yarp_rpc_port_8h_source.html">yarpRpcPort.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="src_2yarp_util_2yarp_rpc_port_8h_source.html">yarpRpcPort.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="yarp_rpc_port_8h_source.html">yarpRpcPort.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="yarp_rpc_port_8cpp.html">yarpRpcPort.cpp</a></li>
 </ul>
 </div>

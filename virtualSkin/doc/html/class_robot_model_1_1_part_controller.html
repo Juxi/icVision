@@ -52,7 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a>  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2yarp_util_2part_controller_8h_source.html">partController.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="part_controller_8h_source.html">partController.h</a>&gt;</code></p>
 
 <p><a href="class_robot_model_1_1_part_controller-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -70,19 +70,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#aeb2bca8add9b083ebd19d0d2d07fdfd4">positionMove</a> (const QVector&lt; qreal &gt; &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#ac5476493b51412c7b6008cf58111543b">velocityMove</a> (int i, qreal v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#af513e2aa6934bcfeef7d2bf73e9b3cc3">randomPosMove</a> (qreal maxSpeed, bool hands)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#aa710415b09f5e55af5be9518926c427e">PartController</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a3af4c72e4e237805328951a0b4392a46">~PartController</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#ad7344d850243e282749bd9fa5f84df5c">open</a> (const char *_robotName, const char *_partName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a2042c9595ee1dd1e87f0095bc10cc2be">close</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a03d04564ed45e8f991075a059a5d557f">isValid</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a2fb04bfb6b1da63201fdaf3dac6591dc">getNumJoints</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#aeebcb6a50ff927c552f6e41cc355902b">checkMotionDone</a> (bool *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#aeb479f7ffd70c0cf80beabf38b1073f7">stop</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a8fda7fd0b7914ec93b349b0b11f8d757">setRefSpeeds</a> (const qreal)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a5481c9f2cbbd8370fd2e5b62c38c7d2f">setRefSpeeds</a> (const QVector&lt; qreal &gt; &amp;speeds)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a9ab9fab080b18fa2fe162ccedb928460">positionMove</a> (const QVector&lt; qreal &gt; &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#a8ac6b4519903ab433a7474e0491333f3">velocityMove</a> (int i, qreal v)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_part_controller.html#aa7dfbc575182f6eeb56c4190ea0e50f7">randomPosMove</a> (qreal maxSpeed, bool hands)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a> </p>
@@ -121,59 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<a class="anchor" id="aa710415b09f5e55af5be9518926c427e"></a><!-- doxytag: member="RobotModel::PartController::PartController" ref="aa710415b09f5e55af5be9518926c427e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RobotModel::PartController::PartController </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3af4c72e4e237805328951a0b4392a46"></a><!-- doxytag: member="RobotModel::PartController::~PartController" ref="a3af4c72e4e237805328951a0b4392a46" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RobotModel::PartController::~PartController </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aeebcb6a50ff927c552f6e41cc355902b"></a><!-- doxytag: member="RobotModel::PartController::checkMotionDone" ref="aeebcb6a50ff927c552f6e41cc355902b" args="(bool *)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::checkMotionDone </td>
-          <td>(</td>
-          <td class="paramtype">bool *&nbsp;</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a4052252cc91ea1387d5a33c968e9a84a"></a><!-- doxytag: member="RobotModel::PartController::checkMotionDone" ref="a4052252cc91ea1387d5a33c968e9a84a" args="(bool *)" -->
 <div class="memitem">
 <div class="memproto">
@@ -183,23 +118,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramtype">bool *&nbsp;</td>
           <td class="paramname"> <em>flag</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2042c9595ee1dd1e87f0095bc10cc2be"></a><!-- doxytag: member="RobotModel::PartController::close" ref="a2042c9595ee1dd1e87f0095bc10cc2be" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::PartController::close </td>
-          <td>(</td>
-          <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -243,40 +161,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<a class="anchor" id="a2fb04bfb6b1da63201fdaf3dac6591dc"></a><!-- doxytag: member="RobotModel::PartController::getNumJoints" ref="a2fb04bfb6b1da63201fdaf3dac6591dc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int RobotModel::PartController::getNumJoints </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a03d04564ed45e8f991075a059a5d557f"></a><!-- doxytag: member="RobotModel::PartController::isValid" ref="a03d04564ed45e8f991075a059a5d557f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::isValid </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a02d325bdc7bd18023e47f97894a2de49"></a><!-- doxytag: member="RobotModel::PartController::isValid" ref="a02d325bdc7bd18023e47f97894a2de49" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -287,33 +171,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad7344d850243e282749bd9fa5f84df5c"></a><!-- doxytag: member="RobotModel::PartController::open" ref="ad7344d850243e282749bd9fa5f84df5c" args="(const char *_robotName, const char *_partName)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::open </td>
-          <td>(</td>
-          <td class="paramtype">const char *&nbsp;</td>
-          <td class="paramname"> <em>_robotName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&nbsp;</td>
-          <td class="paramname"> <em>_partName</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -348,24 +205,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<a class="anchor" id="a9ab9fab080b18fa2fe162ccedb928460"></a><!-- doxytag: member="RobotModel::PartController::positionMove" ref="a9ab9fab080b18fa2fe162ccedb928460" args="(const QVector&lt; qreal &gt; &amp;)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::positionMove </td>
-          <td>(</td>
-          <td class="paramtype">const QVector&lt; qreal &gt; &amp;&nbsp;</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aeb2bca8add9b083ebd19d0d2d07fdfd4"></a><!-- doxytag: member="RobotModel::PartController::positionMove" ref="aeb2bca8add9b083ebd19d0d2d07fdfd4" args="(const QVector&lt; qreal &gt; &amp;)" -->
 <div class="memitem">
 <div class="memproto">
@@ -377,33 +216,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>positions</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa7dfbc575182f6eeb56c4190ea0e50f7"></a><!-- doxytag: member="RobotModel::PartController::randomPosMove" ref="aa7dfbc575182f6eeb56c4190ea0e50f7" args="(qreal maxSpeed, bool hands)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::randomPosMove </td>
-          <td>(</td>
-          <td class="paramtype">qreal&nbsp;</td>
-          <td class="paramname"> <em>maxSpeed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&nbsp;</td>
-          <td class="paramname"> <em>hands</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -431,42 +243,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td></td>
           <td>)</td>
           <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5481c9f2cbbd8370fd2e5b62c38c7d2f"></a><!-- doxytag: member="RobotModel::PartController::setRefSpeeds" ref="a5481c9f2cbbd8370fd2e5b62c38c7d2f" args="(const QVector&lt; qreal &gt; &amp;speeds)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::setRefSpeeds </td>
-          <td>(</td>
-          <td class="paramtype">const QVector&lt; qreal &gt; &amp;&nbsp;</td>
-          <td class="paramname"> <em>speeds</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8fda7fd0b7914ec93b349b0b11f8d757"></a><!-- doxytag: member="RobotModel::PartController::setRefSpeeds" ref="a8fda7fd0b7914ec93b349b0b11f8d757" args="(const qreal)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::setRefSpeeds </td>
-          <td>(</td>
-          <td class="paramtype">const &nbsp;</td>
-          <td class="paramname"> <em>qreal</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
         </tr>
       </table>
 </div>
@@ -527,50 +303,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<a class="anchor" id="aeb479f7ffd70c0cf80beabf38b1073f7"></a><!-- doxytag: member="RobotModel::PartController::stop" ref="aeb479f7ffd70c0cf80beabf38b1073f7" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::stop </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8ac6b4519903ab433a7474e0491333f3"></a><!-- doxytag: member="RobotModel::PartController::velocityMove" ref="a8ac6b4519903ab433a7474e0491333f3" args="(int i, qreal v)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool RobotModel::PartController::velocityMove </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">qreal&nbsp;</td>
-          <td class="paramname"> <em>v</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ac5476493b51412c7b6008cf58111543b"></a><!-- doxytag: member="RobotModel::PartController::velocityMove" ref="ac5476493b51412c7b6008cf58111543b" args="(int i, qreal v)" -->
 <div class="memitem">
 <div class="memproto">
@@ -599,8 +331,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/include/yarpUtil/<a class="el" href="include_2yarp_util_2part_controller_8h_source.html">partController.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="src_2yarp_util_2part_controller_8h_source.html">partController.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="part_controller_8h_source.html">partController.h</a></li>
 <li>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/<a class="el" href="part_controller_8cpp.html">partController.cpp</a></li>
 </ul>
 </div>

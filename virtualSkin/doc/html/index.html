@@ -47,9 +47,10 @@ What's In The Box</a></h2>
 <ul>
 <li><b>librobotModel.a</b> - a static library for building and moving a kinematic robot model</li>
 <li><b>libyarpFilter.a</b> - a static library containing a port filter for YARP communication channels (contributed by Gregor Kaufmann - also available as part of "idsiaYarpModules")</li>
-<li><b>reflex</b> - an executable that integrates these two libraries. It tracks a YARP robot (currently iCub or iCubSim but you can model any robot quickly and easily in xml), reports collision events (as described above). In case of collision, it takes control away from the user, executes a reflexive response to a previous collision free pose, then returns control to the user.</li>
+<li><b>reflex</b> - an executable that integrates these two libraries. It tracks a YARP robot (currently iCub or iCubSim but you can model any robot quickly and easily in xml) and reports collision events as described above. In case of collision, it takes control away from the user, executes a reflexive response to a previous collision free pose, then returns control to the user.</li>
 <li><b>iCubBabble</b> - a simple control program for the iCub robot (only) that issues random position or velocity commands.</li>
 </ul>
+<p>Throughout this manual, when I refer to 'Virtual Skin', I mean some program that integrates <code>librobotModel.a</code> and <code>libyarpFilter.a</code> to protect a robot from physical collision. Such a 'Virtual Skin' program may also provide response to collision events as in the demo program 'Reflex'.</p>
 <h2><a class="anchor" id="upcoming">
 Coming Soon</a></h2>
 <ul>
@@ -87,7 +88,7 @@ Questions concerning the GIT repository should be directed to - <a href="mailto:
 </ul>
 </li>
 </ol>
-<p>Once you have everything installed, you can try out the <a class="el" href="reflex_demo.html">Reflex Demonstration</a></p>
+<p>Once you have everything installed, you can try out the <a class="el" href="reflexdemo.html">Reflex Demo Tutorial</a></p>
 <p>This project was developed during the fist year of my PhD at IDSIA's robotics lab.</p>
 <p>2011-01-01, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a> </p>
 </div>

@@ -4,23 +4,22 @@
 
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
-PROJECT ( robotModel )
+PROJECT ( RobotModel )
 
-SET ( robotModel_VERSION_MAJOR 0 )
-SET ( robotModel_VERSION_MINOR 1 )
+SET ( RobotModel_VERSION_MAJOR 0 )
+SET ( RobotModel_VERSION_MINOR 1 )
 
-MESSAGE(STATUS " ")
-MESSAGE(STATUS "*** Sub-Project robotModel ***")
+MESSAGE(STATUS "*** RobotModel Sub-Project ***")
 
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cMakeScripts )
 
 ### Find Libraries ###
+FIND_PACKAGE ( FreeSOLID REQUIRED )
 FIND_PACKAGE ( OpenGL )
 FIND_PACKAGE ( Qt4 REQUIRED )
 	SET ( QT_USE_QTOPENGL TRUE )
 	SET ( QT_USE_QTXML TRUE )
 	INCLUDE ( ${QT_USE_FILE} )
-FIND_PACKAGE ( FreeSOLID REQUIRED )
 
 ### Set some platform-specific variables ###
 SET (Q_WS_MAC FALSE)
@@ -36,7 +35,6 @@ IF ( UNIX )
 ENDIF ( UNIX )
 IF ( WIN32 )
 	SET (Q_WS_WIN TRUE)
-	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
 ENDIF ( WIN32 )
 
 SET ( src_files	renderList.cpp
@@ -58,7 +56,8 @@ SET ( src_files	renderList.cpp
     		object.cpp 
     		sphere.cpp
 		displmatrix.cpp
-		displaylist.cpp )
+		displaylist.cpp
+)
 
 SET ( hdr_files	renderList.h
 		robotmodelexception.h
@@ -79,17 +78,22 @@ SET ( hdr_files	renderList.h
     		object.h 
     		sphere.h
 		displmatrix.h
-		displaylist.h )
+		displaylist.h
+)
 
 SET ( QT_MOC_FILES 	renderList.h
 )	
+
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
-ADD_LIBRARY ( robotModel STATIC ${hdr_files} ${src_files} )
+ADD_LIBRARY ( RobotModel STATIC ${hdr_files} ${src_files} )
 
-TARGET_LINK_LIBRARIES ( robotModel ${FREE_SOLID_LIBRARY} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} )
+TARGET_LINK_LIBRARIES ( RobotModel 	${FREE_SOLID_LIBRARY}
+					${QT_LIBRARIES}
+					${OPENGL_LIBRARIES}
+)
 
-INSTALL ( TARGETS   robotModel 	 DESTINATION ${CMAKE_SOURCE_DIR}/lib )
-INSTALL ( FILES     ${hdr_files} DESTINATION ${CMAKE_SOURCE_DIR}/include/robotModel)
+INSTALL ( TARGETS   RobotModel 	 DESTINATION ${CMAKE_SOURCE_DIR}/lib )
+INSTALL ( FILES     ${hdr_files} DESTINATION ${CMAKE_SOURCE_DIR}/include/RobotModel)
 
 

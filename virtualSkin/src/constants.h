@@ -5,4 +5,4 @@
 #define POSE_BUFFER_SIZE 100
 #define REFLEX_SPEED 30
 #define POSITION_MOVE_TIMEOUT 10 //seconds
-//#define NEGLIGIBLE_ANGLE 5 //degrees
+#define NEGLIGIBLE_ANGLE 5 //degrees

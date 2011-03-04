@@ -19,7 +19,7 @@ private:
 
     void drawTriangle( float* v1, float* v2, float* v3 );
     void subdivide( float* v1, float* v2, float* v3, int lod );
-    void normalize( float* v );
+    void normalize( float v[3] );
 	
 	static float X,Z;
 	static GLfloat vdata[12][3];

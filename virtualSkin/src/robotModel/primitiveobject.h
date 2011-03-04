@@ -3,7 +3,7 @@
 
 #include <QMutex>
 #include <QMatrix4x4>
-#include <SOLID/solid.h>
+#include "SOLID/solid.h"
 #include "displaylist.h"
 
 namespace RobotModel {

@@ -7,7 +7,6 @@
 
 #include "renderList.h"
 #include "object.h"
-#include "worldRpcInterface.h"
 #include "sphere.h"
 #include "cylinder.h"
 #include "box.h"

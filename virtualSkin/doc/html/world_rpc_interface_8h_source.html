@@ -99,37 +99,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a>00054         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_world_rpc_interface.html#a6b990fdbe2cb39fc2d0e2ef9e8139250">~WorldRpcInterface</a>();
 <a name="l00055"></a>00055         
 <a name="l00056"></a><a class="code" href="class_robot_model_1_1_world_rpc_interface.html#ae5a8361ea49e3bfb4218d7bcfd791587">00056</a>         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_world_rpc_interface.html#ae5a8361ea49e3bfb4218d7bcfd791587">setWorld</a>( <a class="code" href="class_robot_model_1_1_world.html">World</a>* aWorld ) { world = aWorld; }
-<a name="l00057"></a>00057         
-<a name="l00058"></a>00058 <span class="comment">//signals:</span>
-<a name="l00059"></a>00059 <span class="comment">//      void requestDeleteObject( CompositeObject* object );</span>
-<a name="l00060"></a>00060 <span class="comment">//      void requestDeletePrimitive( CompositeObject* object, PrimitiveObject* primitive );</span>
-<a name="l00061"></a>00061 <span class="comment">//      void requestClearWorld();</span>
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="keyword">private</span>:
-<a name="l00064"></a>00064         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> handler( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply );
-<a name="l00065"></a>00065         
-<a name="l00066"></a>00066         <span class="keywordtype">void</span> make( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00067"></a>00067         <span class="keywordtype">void</span> setPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00068"></a>00068         <span class="keywordtype">void</span> pSetPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00069"></a>00069         <span class="keywordtype">void</span> setRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00070"></a>00070         <span class="keywordtype">void</span> pSetRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00071"></a>00071         <span class="keywordtype">void</span> append( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="keyword">private</span>:
+<a name="l00059"></a>00059         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> handler( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply );
+<a name="l00060"></a>00060         
+<a name="l00061"></a>00061         <span class="keywordtype">void</span> make( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00062"></a>00062         <span class="keywordtype">void</span> setPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00063"></a>00063         <span class="keywordtype">void</span> pSetPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00064"></a>00064         <span class="keywordtype">void</span> setRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00065"></a>00065         <span class="keywordtype">void</span> pSetRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00066"></a>00066         <span class="keywordtype">void</span> append( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00067"></a>00067         
+<a name="l00068"></a>00068         <span class="keywordtype">void</span> removeObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00069"></a>00069         <span class="keywordtype">void</span> removePrimitive( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00070"></a>00070         
+<a name="l00071"></a>00071         <span class="keywordtype">void</span> clearWorld() { <span class="comment">/*world-&gt;clear();*/</span> }
 <a name="l00072"></a>00072         
-<a name="l00073"></a>00073         <span class="keywordtype">void</span> removeObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00074"></a>00074         <span class="keywordtype">void</span> removePrimitive( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00075"></a>00075         
-<a name="l00076"></a>00076         <span class="keywordtype">void</span> clearWorld() { <span class="comment">/*world-&gt;clear();*/</span> }
-<a name="l00077"></a>00077         
-<a name="l00078"></a>00078         CompositeObject* getObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00079"></a>00079         PrimitiveObject* getPrimitive( <span class="keyword">const</span> CompositeObject* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00080"></a>00080         QString getName( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00081"></a>00081         
-<a name="l00082"></a>00082         World* world;
-<a name="l00083"></a>00083 };
-<a name="l00084"></a>00084         
-<a name="l00085"></a>00085 }
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
+<a name="l00073"></a>00073         CompositeObject* getObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00074"></a>00074         PrimitiveObject* getPrimitive( <span class="keyword">const</span> CompositeObject* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00075"></a>00075         QString getName( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00076"></a>00076         
+<a name="l00077"></a>00077         World* world;
+<a name="l00078"></a>00078 };
+<a name="l00079"></a>00079         
+<a name="l00080"></a>00080 }
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="preprocessor">#endif</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

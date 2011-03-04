@@ -85,18 +85,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044         QString partName;
 <a name="l00045"></a>00045         <span class="keywordtype">int</span> numJoints;
 <a name="l00046"></a>00046         
-<a name="l00047"></a>00047         yarp::dev::PolyDriver *dd;
-<a name="l00048"></a>00048         yarp::dev::IPositionControl *pos;
-<a name="l00049"></a>00049         yarp::dev::IVelocityControl *vel;
-<a name="l00050"></a>00050         yarp::dev::IEncoders *enc;
-<a name="l00051"></a>00051         yarp::dev::IPidControl *pid;
-<a name="l00052"></a>00052         yarp::dev::IAmplifierControl *amp;
-<a name="l00053"></a>00053         yarp::dev::IControlLimits *lim;
-<a name="l00054"></a>00054 };
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056 }
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 <span class="preprocessor">#endif</span>
+<a name="l00047"></a>00047         yarp::os::Network network;
+<a name="l00048"></a>00048         yarp::dev::PolyDriver *dd;
+<a name="l00049"></a>00049         yarp::dev::IPositionControl *pos;
+<a name="l00050"></a>00050         yarp::dev::IVelocityControl *vel;
+<a name="l00051"></a>00051         yarp::dev::IEncoders *enc;
+<a name="l00052"></a>00052         yarp::dev::IPidControl *pid;
+<a name="l00053"></a>00053         yarp::dev::IAmplifierControl *amp;
+<a name="l00054"></a>00054         yarp::dev::IControlLimits *lim;
+<a name="l00055"></a>00055 };
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
