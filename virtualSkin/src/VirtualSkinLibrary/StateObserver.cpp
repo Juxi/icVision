@@ -38,10 +38,20 @@ void StateObserver::onDataObserved(yarp::os::Bottle &b)
 		poss.append((qreal) (((b.get(i).asDouble()))));
 	}
 	
-	poseBuffer.put(poss);
-	robotFilter->getRobot()->setEncoderPosition(bodyPart, poss);
-	if ( !robotFilter->computePose() )
+	// set the current position
+	//robotFilter->mutex.lock();
+		 poseBuffer.put(poss);
+	
+	
+		 //robotFilter->getRobot()->setEncoderPosition(bodyPart, poss);
+		 //bool feasible = robotFilter->computePose();
+		bool feasible = robotFilter->setPosition(bodyPart, poss);
+	//robotFilter->mutex.unlock();
+		 
+	if ( !feasible )
 	{
 		robotFilter->takeControl();
 	}
+	
+	
 }

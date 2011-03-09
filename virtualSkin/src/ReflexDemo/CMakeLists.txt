@@ -13,11 +13,11 @@ ADD_EXECUTABLE ( ReflexDemo ${hdr_files} ${src_files} )
 
 ADD_DEPENDENCIES( ReflexDemo VirtualSkin RobotModel YarpFilter )
 
-TARGET_LINK_LIBRARIES ( ReflexDemo 	
-					${ROBOT_MODEL_LIB}
-					${YARP_FILTER_LIB}
-					${VIRTUAL_SKIN_LIB}
-					#${FREE_SOLID_LIBRARY}
+TARGET_LINK_LIBRARIES ( ReflexDemo 	${VIRTUAL_SKIN_LIB}
+					#${ROBOT_MODEL_LIB}
+					#${YARP_FILTER_LIB}
+					
+					${FREE_SOLID_LIBRARY}
 					#${QT_LIBRARIES}
 					#${OPENGL_LIBRARIES}
 					#${YARP_LIBRARIES}

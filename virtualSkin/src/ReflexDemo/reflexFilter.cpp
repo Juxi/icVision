@@ -14,6 +14,7 @@
 
 #include "constants.h"
 #include "reflexFilter.h"
+#include <yarp/dev/all.h>
 
 ReflexFilter::ReflexFilter( bool visualize ) : VirtualSkin::RobotFilter(visualize)
 {
@@ -29,6 +30,7 @@ ReflexFilter::~ReflexFilter()
 
 void ReflexFilter::extraOpenStuff()
 {
+	originalPose.resize(robot->getNumBodyParts());
 	targetPose.resize(robot->getNumBodyParts());
 }
 
@@ -69,6 +71,7 @@ void ReflexFilter::collisionHandler()
 		bool poseReached;
 		double dstToPose;
 		QVector<qreal>::const_iterator original,current,target;
+		//QVector<qreal>& currentPose;
 		
 		//TODO: Use Qtime to implement a timeout
 		time_t startTime = time(NULL);

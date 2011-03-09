@@ -136,12 +136,10 @@ void World::render()
 
 void World::notColliding()
 {
-	//mutex.lock();
 	QVector<CompositeObject*>::iterator i;
     for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
         (*i)->notColliding();
     }
-	//mutex.unlock();
 }
 
 bool World::remove( CompositeObject* obj )

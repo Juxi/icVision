@@ -2,7 +2,13 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cMakeScripts )
+CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
+PROJECT ( VirtualSkin )
+MESSAGE(STATUS "*** Sub-Project VirtualSkin ***")
+SET ( VirtualSkin_VERSION_MAJOR 0 )
+SET ( VirtualSkin_VERSION_MINOR 1 )
+
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../cMakeScripts )
 
 ### Find Libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
@@ -26,6 +32,14 @@ FIND_PACKAGE ( Qt4 REQUIRED )
 	SET ( QT_USE_QTOPENGL TRUE )
 	SET ( QT_USE_QTXML TRUE )
 	INCLUDE ( ${QT_USE_FILE} )
+
+### Headers for static libraries built by sub-projects ###
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/RobotModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/YarpFilter" )
+
+### Paths to static libraries built by sub-projects ###
+SET ( ROBOT_MODEL_LIB "RobotModel" )
+SET ( YARP_FILTER_LIB "YarpFilter" )
 	
 SET ( src_files	skinWindow.cpp
 		glwidget.cpp
@@ -65,11 +79,14 @@ ADD_DEPENDENCIES( VirtualSkin RobotModel YarpFilter )
 
 TARGET_LINK_LIBRARIES ( VirtualSkin 	${ROBOT_MODEL_LIB}
 					${YARP_FILTER_LIB}
-					#${FREE_SOLID_LIBRARY}
+					${FREE_SOLID_LIBRARY}
 					#${QT_LIBRARIES}
 					#${OPENGL_LIBRARIES}
 					#${YARP_LIBRARIES}
 )
 
 INSTALL ( TARGETS VirtualSkin DESTINATION ${CMAKE_SOURCE_DIR}/lib )
+
+ADD_SUBDIRECTORY ( RobotModel )
+ADD_SUBDIRECTORY ( YarpFilter )
 

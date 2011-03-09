@@ -18,14 +18,16 @@ namespace VirtualSkin {
 
 class YarpStreamPort: public QThread
 {
-	Q_OBJECT
-		
+	
 public:
 	YarpStreamPort();
-	~YarpStreamPort();
+	virtual ~YarpStreamPort();
 	
 	void setName( const QString& name ) { portName = name; }
+	bool hasName() { return !portName.isNull(); }
+	
 	void setBottle( const yarp::os::Bottle& aBottle );
+	bool hasBottle() { return !bottle.isNull(); }
 
 	void run();
 	

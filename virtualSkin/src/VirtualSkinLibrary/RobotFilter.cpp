@@ -21,7 +21,7 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : /*emitCollisions(true),*/ robot(NULL), isOpen(false), cbFilters(), stateObservers(), callObservers(), responseObservers()
+RobotFilter::RobotFilter( bool visualize ) : robot(NULL), isOpen(false), cbFilters(), stateObservers(), callObservers(), responseObservers()
 {
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
@@ -31,6 +31,8 @@ RobotFilter::RobotFilter( bool visualize ) : /*emitCollisions(true),*/ robot(NUL
 		skinWindow = new SkinWindow();
 		skinWindow->show();
 	}
+	
+	statusPort.setBottle("0");
 }
 
 RobotFilter::~RobotFilter()
@@ -110,6 +112,16 @@ void RobotFilter::close()
 	//partControllers.clear();
 
 	isOpen = false;
+}
+
+bool RobotFilter::setPosition( int bodyPart, QVector<qreal> poss )
+{
+	mutex.lock();
+		robot->setEncoderPosition( bodyPart, poss );
+		bool result = collisionDetector.computePose();
+	mutex.unlock();
+	
+	return result;
 }
 
 void RobotFilter::takeControl()

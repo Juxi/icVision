@@ -19,6 +19,7 @@ FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	FreeSOLID solid SOLID Solid FreeSolid
 						$ENV{FREE_SOLID_ROOT}/build
 						/usr/lib
 						/usr/local/lib
+						~/Library/FreeSOLID
 )
 
 ########################################################################

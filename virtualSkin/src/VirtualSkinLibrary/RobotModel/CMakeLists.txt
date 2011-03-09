@@ -11,7 +11,7 @@ SET ( RobotModel_VERSION_MINOR 1 )
 
 MESSAGE(STATUS "*** RobotModel Sub-Project ***")
 
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cMakeScripts )
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../cMakeScripts )
 
 ### Find Libraries ###
 FIND_PACKAGE ( FreeSOLID REQUIRED )

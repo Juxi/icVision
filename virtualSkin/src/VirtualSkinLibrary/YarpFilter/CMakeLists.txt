@@ -13,7 +13,7 @@ SET ( YarpFilter_VERSION_MINOR 1 )
 option (LINK_ACE OFF)
 
 ### Location of script to find Ace ###
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../cMakeScripts )
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../cMakeScripts )
 
 ### Find libraries ###
 FIND_PACKAGE ( YARP REQUIRED )

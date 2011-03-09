@@ -104,18 +104,18 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
 
 void KinTreeNode::render()
 { 
-	mutex.lock();
+	//mutex.lock();
 		CompositeObject::render();
 		QVector<KinTreeNode*>::iterator j;
 		for ( j=children.begin(); j!=children.end(); ++j ) {
 			(*j)->render();
 		}
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 void KinTreeNode::update( const QMatrix4x4& txfr )
 {
-	mutex.lock();
+	//mutex.lock();
 	
 		// update the physical objects that constitute this link
 		setT( txfr );
@@ -127,18 +127,18 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 			(*j)->update(nextT);
 		}
 	
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 void KinTreeNode::notColliding()
 {
-	mutex.lock();
+	//mutex.lock();
 		CompositeObject::notColliding();
 		QVector<KinTreeNode*>::iterator j;
 		for ( j=children.begin(); j!=children.end(); ++j ) {
 			(*j)->notColliding();
 		}
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 void KinTreeNode::print() const

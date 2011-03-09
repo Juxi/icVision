@@ -1,7 +1,7 @@
 #ifndef CIRCULARBUFFER_H
 #define CIRCULARBUFFER_H
 
-#include <QMutex>
+//#include <QMutex>
 #include <QVector>
 
 namespace VirtualSkin {

@@ -1,6 +1,7 @@
 #ifndef COLLISIONDETECTOR_H
 #define COLLISIONDETECTOR_H
 
+#include <QMutex>
 #include <QObject>
 #include <SOLID/solid.h>
 #include "primitiveobject.h"
@@ -37,7 +38,7 @@ public:
 	void setWorld( RobotModel::World* aWorld ) { world = aWorld; }	//!< Binds this collision detector to a world model
 	
 	void setPortName( const QString& aName ) { solidPort.setName(aName); }	//!< Sets the name of the YARP stream port where collision info will be published
-	void openPort();														//!< Opens the YARP stream port
+	void openPort() { solidPort.start(); }														//!< Opens the YARP stream port
 	void closePort() { solidPort.stop(); }									//!< Closes the YARP stream port
 	
 	void arm();							//!< When armed, the collisionDetector will emit the crash() signal if collision(s) occurr(s)
@@ -84,6 +85,7 @@ public:
 	}
 
 private:
+	QMutex				mutex;
     RobotModel::Robot*	robot;			//!< The Robot whose pose we are updating
 	RobotModel::World*  world;			//!< All the other Objects not belonging to the Robot's body. (we just need this so we can change colors when things collide or not)
     

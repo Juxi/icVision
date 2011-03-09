@@ -17,8 +17,7 @@ namespace VirtualSkin {
 
 class YarpRpcPort: public QThread
 {
-	Q_OBJECT
-		
+
 public:
 	YarpRpcPort();
 	virtual ~YarpRpcPort();
@@ -28,7 +27,7 @@ public:
 	
 	void setName( const QString& name ) { portName = name; }
 	
-	virtual void run();
+	void run();
 	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply ) = 0;
 	void showBottle( yarp::os::Bottle& anUnknownBottle, int indentation = 0 );
 	

@@ -15,12 +15,12 @@
 #ifndef ROBOTFILTER_H_
 #define ROBOTFILTER_H_
 
+#include <QMutex>
 #include <QObject>
 #include <QVector>
 #include <yarp/os/ControlBoardFilter.h>
 
 #include "robot.h"
-#include "partController.h"
 #include "CallObserver.h"
 #include "StateObserver.h"
 #include "ResponseObserver.h"
@@ -42,9 +42,12 @@ public:
 	RobotModel::World* getWorld() { return world; }
 	
 	void setStatusPortName( const QString& name ) { statusPort.setName(name); }
-	void setCollisionPortName( const QString& name ) { statusPort.setName(name); }
+	void openStatusPort() { statusPort.start(); }
+	void closeStatusPort() { statusPort.stop(); }
 	
-	bool computePose() { return collisionDetector.computePose(); }
+	void setCollisionPortName( const QString& name ) { statusPort.setName(name); }
+	void openCollisionPort() { collisionDetector.openPort(); }
+	void closeCollisionPort() { collisionDetector.closePort(); }
 	
 	template <class someStateObserver, class someCallObserver, class someResponseObserver>
 	bool open()
@@ -119,11 +122,13 @@ public:
 		} 
 		
 		isOpen = true;
-		statusPort.setBottle( yarp::os::Bottle("1") );
-		statusPort.start();
+		statusPort.setBottle("1");
+		
+		extraOpenStuff();
 		
 		return true;
 	}
+	
 	void close();
 	
 	virtual void extraOpenStuff() = 0;
@@ -134,6 +139,7 @@ public:
 protected:
 	
 	CollisionDetector	collisionDetector;
+	YarpStreamPort		statusPort;
 	SkinWindow			*skinWindow;
 	
 	RobotModel::Robot		*robot;
@@ -142,6 +148,7 @@ protected:
 	yarp::os::Bottle	stop_command;
 	
 	bool isOpen;
+	
 	QVector<bool> isBusy;
 	
 	// A vector of ControlBoardFilters - one for each of the body parts
@@ -164,9 +171,12 @@ protected:
 	// for collision recovery
 	//QVector<RobotModel::PartController*>	partControllers;
 	//QVector< QVector<qreal> > originalPose, targetPose;
-	YarpStreamPort statusPort;
 	
-	//friend class StateObserver;
+	QMutex mutex;
+	
+	bool setPosition( int bodyPart, QVector<qreal> poss );
+	//bool computePose() { return collisionDetector.computePose(); }
+	friend class StateObserver;
 };
 }
 #endif

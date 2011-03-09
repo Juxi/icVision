@@ -61,7 +61,7 @@ protected:
     QVector<KinTreeNode*> children;
     QVector3D             nodeAxis;     // joint axis or link body vector
     DisplMatrix           M;            // transformation (displacement and rotation) matrix from the next CS to this CS
-	QMutex				  mutex;
+	//QMutex				  mutex;
 
     virtual void setM() = 0;
 

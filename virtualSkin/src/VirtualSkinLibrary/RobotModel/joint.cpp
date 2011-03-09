@@ -16,8 +16,8 @@ Joint::~Joint()
 }
 void Joint::setPos()
 {
-	mutex.lock();
+	//mutex.lock();
 		position = limits.getMin() + motor->normPos()*( limits.getMax() - limits.getMin() );
 		setM();
-	mutex.unlock();
+	//mutex.unlock();
 }

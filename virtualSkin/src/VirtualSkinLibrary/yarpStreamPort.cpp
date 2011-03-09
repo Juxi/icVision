@@ -22,9 +22,9 @@ YarpStreamPort::~YarpStreamPort()
 
 void YarpStreamPort::setBottle( const yarp::os::Bottle& aBottle )
 {
-	mutex.lock();
+	//mutex.lock();
 	bottle = aBottle;
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 void YarpStreamPort::run() 
@@ -33,13 +33,17 @@ void YarpStreamPort::run()
 	{
 		printf("ERROR STARTING YarpStreamPort: set the port name with setName( const QString& ) prior to calling start()\n");
 		keepRunning = false;
-	} else port.open( portName.toStdString().c_str() );
+	}
+	else 
+	{
+		port.open( portName.toStdString().c_str() );
+	}
 	
 	while ( keepRunning )
 	{
-		mutex.lock();
+		//mutex.lock();
 			port.write( bottle );
-        mutex.unlock();
+        //mutex.unlock();
 		usleep(YARP_PERIOD);
 	}
 	

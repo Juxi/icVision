@@ -35,4 +35,5 @@ void DisplayList::render()
 			 glCallList( index );
 		glPopMatrix();
 	}
+	unSetColliding();
 }
