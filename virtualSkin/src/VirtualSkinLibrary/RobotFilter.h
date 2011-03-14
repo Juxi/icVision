@@ -16,41 +16,46 @@
 #define ROBOTFILTER_H_
 
 #include <QMutex>
-#include <QObject>
+#include <QThread>
 #include <QVector>
 #include <yarp/os/ControlBoardFilter.h>
 
 #include "robot.h"
-#include "CallObserver.h"
-#include "StateObserver.h"
-#include "ResponseObserver.h"
-#include "collisionDetector.h"
-#include "skinWindow.h"
+#include "callObserver.h"
+#include "stateObserver.h"
+#include "responseObserver.h"
+#include "yarpModel.h"
+#include "yarpStreamPort.h"
 
 namespace VirtualSkin {
 
-class RobotFilter
+	class RobotFilter : public QThread
 {
+	Q_OBJECT
 
 public:
 	RobotFilter( bool visualize = false );
 	virtual ~RobotFilter();
 	
-	void setRobot( RobotModel::Robot* r );
-	void setWorld( RobotModel::World *w );
-	RobotModel::Robot* getRobot() { return robot; }
-	RobotModel::World* getWorld() { return world; }
+	//void setRobot( RobotModel::Robot* r );
+	//void setWorld( RobotModel::World *w );
+	//RobotModel::Robot* getRobot() { return robot; }
+	//RobotModel::World* getWorld() { return world; }
 	
 	void setStatusPortName( const QString& name ) { statusPort.setName(name); }
 	void openStatusPort() { statusPort.start(); }
 	void closeStatusPort() { statusPort.stop(); }
 	
-	void setCollisionPortName( const QString& name ) { statusPort.setName(name); }
-	void openCollisionPort() { collisionDetector.openPort(); }
-	void closeCollisionPort() { collisionDetector.closePort(); }
+	void setCollisionPortName( const QString& name ) { robotModel.setCollisionPortName(name); }
+	void openCollisionPort() { robotModel.openCollisionPort(); }
+	void closeCollisionPort() { robotModel.closeCollisionPort(); }
+	
+	void setWorldRpcPortName( const QString& name ) { robotModel.setWorldRpcPortName(name); }
+	void openWorldRpcPort() { robotModel.openWorldRpcPort(); }
+	void closeWorldRpcPort() { robotModel.closeWorldRpcPort(); }
 	
 	template <class someStateObserver, class someCallObserver, class someResponseObserver>
-	bool open()
+	bool open( const QString& fileName )
 	{
 		if ( isOpen ) { close(); }
 		
@@ -61,15 +66,11 @@ public:
 			return false;
 		}
 		
-		// check whether there is a robotModel
-		if ( !robot )
-		{
-			printf("ROBOT FILTER ERROR: no robot model has been set... call setRobot(Robot&) before open()\n");
-			return false;
-		}
+		robotModel.robot.open(fileName);
+		robotModel.start();
 		
-		const QString deviceBaseName( robot->getName() );
-		const QString filterBaseName( robot->getName() + "F" );
+		const QString deviceBaseName( robotModel.robot.getName() );
+		const QString filterBaseName( robotModel.robot.getName() + "F" );
 		
 		// TODO: create CommandObserver
 		// TODO: create Replier
@@ -81,15 +82,15 @@ public:
 		QString targetName;
 		QString filterName;
 		
-		for (int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++)
+		for (int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
 		{
 			p_cbf = new yarp::os::ControlBoardFilter();
 			
-			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
-			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
+			filterName = "/" + robotModel.robot.getName() + "F/" + *(robotModel.robot.getPartName(bodyPart));
+			targetName = "/" + robotModel.robot.getName() + "/" + *(robotModel.robot.getPartName(bodyPart));
 			
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
+			printf( "connecting to %s:%s\n", robotModel.robot.getName().toStdString().c_str(), robotModel.robot.getPartName(bodyPart)->toStdString().c_str() );
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -101,15 +102,18 @@ public:
 				stateObservers.append(p_so);
 				
 				// create and set call observer
-				p_co = new someCallObserver(robot, bodyPart);
+				p_co = new someCallObserver(this, bodyPart);
 				p_cbf->setCallObserver(p_co);
 				callObservers.append(p_co);
 				
 				// create and set response observer
-				p_ro = new someResponseObserver(robot, bodyPart);
+				p_ro = new someResponseObserver(this, bodyPart);
 				p_co->setResponseObsever(p_ro);
 				p_cbf->setResponseObserver(p_ro);
 				responseObservers.append(p_ro);
+				
+				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	&robotModel.robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
+				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				&robotModel.robot, SLOT(setEncoderPosition(int,int,qreal)) );
 				
 			}
 			else
@@ -121,10 +125,10 @@ public:
 			}
 		} 
 		
+		extraOpenStuff();
+
 		isOpen = true;
 		statusPort.setBottle("1");
-		
-		extraOpenStuff();
 		
 		return true;
 	}
@@ -132,22 +136,20 @@ public:
 	void close();
 	
 	virtual void extraOpenStuff() = 0;
-	virtual void collisionHandler() = 0;
+	virtual void collisionResponse() = 0;
+	
+	void run();
+	
+public slots:
 	
 	void takeControl();
 
 protected:
 	
-	CollisionDetector	collisionDetector;
 	YarpStreamPort		statusPort;
-	SkinWindow			*skinWindow;
-	
-	RobotModel::Robot		*robot;
-	RobotModel::World		*world;
-	
+	YarpModel			robotModel;
 	yarp::os::Bottle	stop_command;
-	
-	bool isOpen;
+	bool				isOpen,haveControl;
 	
 	QVector<bool> isBusy;
 	
@@ -168,15 +170,6 @@ protected:
 	QVector<CallObserver*>		callObservers;
 	QVector<ResponseObserver*>	responseObservers;
 	
-	// for collision recovery
-	//QVector<RobotModel::PartController*>	partControllers;
-	//QVector< QVector<qreal> > originalPose, targetPose;
-	
-	QMutex mutex;
-	
-	bool setPosition( int bodyPart, QVector<qreal> poss );
-	//bool computePose() { return collisionDetector.computePose(); }
-	friend class StateObserver;
 };
 }
 #endif

@@ -14,7 +14,7 @@
 
 #include "StateObserver.h"
 #include "RobotFilter.h"
-#include "collisionDetector.h"
+//#include "collisionDetector.h"
 #include "constants.h"
 #include <QtGlobal>
 #include <QVector>
@@ -38,20 +38,11 @@ void StateObserver::onDataObserved(yarp::os::Bottle &b)
 		poss.append((qreal) (((b.get(i).asDouble()))));
 	}
 	
-	// set the current position
-	//robotFilter->mutex.lock();
-		 poseBuffer.put(poss);
+	poseBuffer.put(poss);
 	
+	int i = bodyPart;
+	const QVector<qreal>& v = poss;
+	emit setPosition(i,v);
 	
-		 //robotFilter->getRobot()->setEncoderPosition(bodyPart, poss);
-		 //bool feasible = robotFilter->computePose();
-		bool feasible = robotFilter->setPosition(bodyPart, poss);
-	//robotFilter->mutex.unlock();
-		 
-	if ( !feasible )
-	{
-		robotFilter->takeControl();
-	}
-	
-	
+	//printf("Emitted set position\n");
 }

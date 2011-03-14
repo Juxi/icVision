@@ -5,7 +5,7 @@
 #include "displaylist.h"
 #include <QTime>
 
-namespace VirtualSkin {
+namespace RobotModel {
 
 /*! \brief The QWidget responsible for rendering the scene with OpenGL (should be a member of Window)
  *

@@ -10,11 +10,9 @@ class QSlider;
 QT_END_NAMESPACE
 
 namespace RobotModel {
+	
 	class DisplayList;
 	class Robot;
-}
-
-namespace VirtualSkin {
 
 /*! \brief This QWidget is the window for the optional GUI used to visualize the Robot. (see GLWidget)
  *

@@ -16,7 +16,7 @@ public:
     virtual ~RenderList();
 	
 	virtual void render() = 0;
-	virtual void notColliding() = 0;
+	//virtual void notColliding() = 0;
 
 public slots:
 	void callLists() { render(); }

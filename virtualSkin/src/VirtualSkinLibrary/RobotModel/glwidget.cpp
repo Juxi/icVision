@@ -2,7 +2,7 @@
 #include "glwidget.h"
 #include "displmatrix.h"
 
-using namespace VirtualSkin;
+using namespace RobotModel;
 
 GLWidget::GLWidget(QWidget *parent)
     : QGLWidget(parent)

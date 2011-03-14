@@ -1,6 +1,6 @@
 #include <qgl.h>
 #include <SOLID/solid.h>
-#include "object.h"
+#include "compositeObject.h"
 #include "displmatrix.h"
 #include "sphere.h"
 #include "cylinder.h"
@@ -198,14 +198,14 @@ void CompositeObject::makeDisplayList()
     }
 }
 
-void CompositeObject::notColliding()
+/*void CompositeObject::notColliding()
 {
     QVector<PrimitiveObject*>::const_iterator i;
     for ( i=begin(); i!=end(); ++i )
 	{
         (*i)->unSetColliding();
     }
-}
+}*/
 
 void CompositeObject::render()
 {

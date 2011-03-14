@@ -45,7 +45,7 @@ void YarpRpcPort::run()
 			if ( !handler(*cmd,reply) ) { reply.addString("Unknown Command! Type 'help' for a list of valid commands."); }
 			port.write();
 		}
-		usleep(YARP_PERIOD);
+		usleep(YARP_PERIOD_us);
     }
 	
 	port.close();

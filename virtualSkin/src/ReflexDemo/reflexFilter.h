@@ -29,7 +29,7 @@ public:
 	virtual ~ReflexFilter();
 
 	virtual void extraOpenStuff();
-	virtual void collisionHandler();
+	virtual void collisionResponse();
 
 private:
 	

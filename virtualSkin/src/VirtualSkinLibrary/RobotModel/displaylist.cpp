@@ -1,4 +1,5 @@
 #include "displaylist.h"
+#include "constants.h"
 
 using namespace RobotModel;
 
@@ -6,19 +7,23 @@ using namespace RobotModel;
 GLfloat DisplayList::red[4] =  { 1.0, 0.0, 0.0, 1.0 };
 GLfloat DisplayList::gray[4] = { 0.3, 0.3, 0.3, 1.0 };
 
-DisplayList::DisplayList() : index(0), colliding(0)
+DisplayList::DisplayList() : index(0) //, colliding(0)
 {
 }
+
 DisplayList::~DisplayList()
 {
 }
 
+bool DisplayList::isColliding() const
+{
+	return timeSinceLastCollision.elapsed() < 20 * YARP_PERIOD_ms;
+}
+
 void DisplayList::render()
 {
-	//printf("\n checking list %d", index);
 	if ( glIsList(index) )
 	{
-		//printf("\n    rendering %d", index);
 		if ( isColliding() )
 		{
 			glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, red);
@@ -35,5 +40,4 @@ void DisplayList::render()
 			 glCallList( index );
 		glPopMatrix();
 	}
-	unSetColliding();
 }

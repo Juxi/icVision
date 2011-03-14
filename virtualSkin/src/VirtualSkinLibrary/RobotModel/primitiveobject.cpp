@@ -1,5 +1,5 @@
 #include "primitiveobject.h"
-#include "object.h"
+#include "compositeObject.h"
 
 using namespace RobotModel;
 

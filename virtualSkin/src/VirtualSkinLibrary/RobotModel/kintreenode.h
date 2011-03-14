@@ -3,7 +3,7 @@
 
 #include <QMutex>
 #include <QtGui>
-#include "object.h"
+#include "compositeObject.h"
 
 namespace RobotModel {
 	

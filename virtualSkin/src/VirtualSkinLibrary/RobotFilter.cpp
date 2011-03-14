@@ -21,55 +21,26 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : robot(NULL), isOpen(false), cbFilters(), stateObservers(), callObservers(), responseObservers()
+RobotFilter::RobotFilter( bool visualize ) : robotModel(visualize), isOpen(false), haveControl(false)
 {
+	QObject::connect( &robotModel, SIGNAL(collision()),	this, SLOT(takeControl()) );
+	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
-	
-	if ( visualize )
-	{ 
-		skinWindow = new SkinWindow();
-		skinWindow->show();
-	}
-	
+
 	statusPort.setBottle("0");
 }
 
 RobotFilter::~RobotFilter()
 {
-	if ( skinWindow ) { delete skinWindow; }
 	if ( isOpen ) { close(); }
-}
-
-void RobotFilter::setRobot( RobotModel::Robot* r )
-{
-	robot = r;
-	collisionDetector.setRobot(r);
-	
-	if ( robot && skinWindow )
-	{
-		QObject::connect( robot, SIGNAL(appendedObject(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),					skinWindow->glWidget, SLOT(removeDisplayList(int)) );
-		QObject::connect( robot, SIGNAL(changedState()),							skinWindow->glWidget, SLOT(update()) );
-		QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),				robot, SLOT(callLists()) );
-	}
-}
-void RobotFilter::setWorld( RobotModel::World *w )
-{
-	world = w;
-	collisionDetector.setWorld(w);
-	
-	if ( world && skinWindow )
-	{
-		QObject::connect( world, SIGNAL(appendedObject(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		QObject::connect( world, SIGNAL(outdatedDisplayList(int)),					skinWindow->glWidget, SLOT(removeDisplayList(int)) );
-		QObject::connect( world, SIGNAL(changedState()),							skinWindow->glWidget, SLOT(update()) );
-		QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),				world, SLOT(callLists()) );
-	}
 }
 
 void RobotFilter::close()
 {
+	robotModel.stop();
+	robotModel.robot.close();
+	robotModel.world.clear();
 	statusPort.stop();
 	
 	// remove all observers from the ControlBoardFilters, close the filters and delete them
@@ -103,57 +74,41 @@ void RobotFilter::close()
 		delete (*k);
 	}
 	responseObservers.clear();
-	
-	// delete controllers
-	//QVector<RobotModel::PartController*>::const_iterator n;
-	//for (n = partControllers.begin(); n != partControllers.end(); ++n) {
-	//	delete (*n);
-	//}
-	//partControllers.clear();
 
 	isOpen = false;
 }
 
-bool RobotFilter::setPosition( int bodyPart, QVector<qreal> poss )
-{
-	mutex.lock();
-		robot->setEncoderPosition( bodyPart, poss );
-		bool result = collisionDetector.computePose();
-	mutex.unlock();
-	
-	return result;
-}
-
 void RobotFilter::takeControl()
 {
+	if ( !haveControl )
+	{
+		haveControl = true;
+		start();
+	}
+}
+
+void RobotFilter::run()
+{
 	// first stop the robot
-	for ( int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++)
+	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
 	{
 		cbFilters.at(bodyPart)->cutConnection(true);		// take control away from the user
-		cbFilters.at(bodyPart)->injectCall(stop_command);	// stop the robot
 	}
-
+	
 	// inform the user
 	printf("*** COLLISION RECOVERY ***\n");
 	statusPort.setBottle( yarp::os::Bottle("0") );
 	
-	// disarm the collision detector (so it doesn't complain during recovery)
-	collisionDetector.disarm();
-	
-	// pure virtual handler
-	collisionHandler();
-	
-	// rearm the collision detector
-	collisionDetector.arm();
+	// pure virtual response to collision
+	collisionResponse();
 	
 	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++ ) {
+	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++ ) {
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	
 	//inform the user
 	statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("CONTROL RESTORED\n");
-	
+	haveControl = false;
 }
-

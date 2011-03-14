@@ -16,8 +16,8 @@
 
 using namespace VirtualSkin;
 
-CallObserver::CallObserver( RobotModel::Robot* r, const int b) :
-	IObserver(), robot(r), branch(b), responseObserver(NULL) {
+CallObserver::CallObserver( RobotFilter* r, const int b) :
+	IObserver(), robotFilter(r), bodyPart(b), responseObserver(NULL) {
 	// No special action to take for construction
 }
 

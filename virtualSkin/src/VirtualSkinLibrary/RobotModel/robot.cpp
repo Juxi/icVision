@@ -1,18 +1,20 @@
 #include "robot.h"
 #include <time.h>
 
-using namespace std;
 using namespace RobotModel;
 
-Robot::Robot() : robotName("unNamedRobot"), numLinks(0), isConfigured(false)
+Robot::Robot( bool visualize ) : robotName("unNamedRobot"), numLinks(0), isConfigured(false)
 {
-    srand ( time(0) ); // for oscillators
+	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 }
 Robot::~Robot()
 {
-	printf("deleting the robot\n");
-	
-    QVector<KinTreeNode*>::iterator k;
+	if ( isOpen() ) { close(); }
+}
+
+void Robot::close()
+{	
+	QVector<KinTreeNode*>::iterator k;
     for ( k=tree.begin(); k!=tree.end(); ++k ) {
         delete (*k);
     }
@@ -24,10 +26,9 @@ Robot::~Robot()
     for ( i=partList.begin(); i!=partList.end(); ++i ) {
         delete (*i);
     }
-	printf("deleted the robot\n");
 }
 
-bool Robot::configure( const QString& fileName)
+bool Robot::open( const QString& fileName)
 {
     ZPHandler handler(this);
     QXmlSimpleReader reader;
@@ -50,6 +51,7 @@ bool Robot::configure( const QString& fileName)
 	}
 	
 	printf("Created Robot: %s\n",getName().toStdString().c_str());
+	
 	filterCollisionPairs();
 	home();
 	
@@ -92,6 +94,7 @@ void Robot::setEncoderPosition( qreal pos )                                     
 
 bool Robot::setEncoderPosition(int partNum, const QVector<qreal>& pos)           // for an entire branch (using encoder positions)
 {
+	//printf("called setEncoderPosition() - size %i \n", pos.size() );
     if ( partIdxInRange(partNum) ) {
         return partList.at(partNum)->setEncPos(pos);
     }
@@ -126,13 +129,13 @@ void Robot::render()
     }
 }
 
-void Robot::notColliding()
-{
-    QVector<KinTreeNode*>::iterator i;
-    for ( i=tree.begin(); i!=tree.end(); ++i ) {
-        (*i)->notColliding();
-    }
-}
+//void Robot::notColliding()
+//{
+//    QVector<KinTreeNode*>::iterator i;
+//    for ( i=tree.begin(); i!=tree.end(); ++i ) {
+//        (*i)->notColliding();
+//    }
+//}
 
 /**********************
  ***	GET STUFF	***

@@ -2,7 +2,7 @@
 #include "skinWindow.h"
 #include "glwidget.h"
 
-using namespace VirtualSkin;
+using namespace RobotModel;
 
 SkinWindow::SkinWindow()
 {

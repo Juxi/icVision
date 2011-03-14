@@ -20,26 +20,29 @@ ReflexFilter::ReflexFilter( bool visualize ) : VirtualSkin::RobotFilter(visualiz
 {
 }
 
-//ReflexFilter::ReflexFilter( RobotModel::Robot* aRobot, RobotModel::World* aWorld, bool visualize ) : VirtualSkin::RobotFilter(aRobot, aWorld, visualize)
-//{
-//}
-
 ReflexFilter::~ReflexFilter()
 {
 }
 
 void ReflexFilter::extraOpenStuff()
 {
-	originalPose.resize(robot->getNumBodyParts());
-	targetPose.resize(robot->getNumBodyParts());
+	originalPose.resize(robotModel.robot.nextPartIdx());
+	targetPose.resize(robotModel.robot.nextPartIdx());
 }
 
-void ReflexFilter::collisionHandler()
+void ReflexFilter::collisionResponse()
 {
 	yarp::os::Bottle rewind;
 	QVector<qreal>::const_iterator joint;
 	
-	for ( int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++)
+	// stop the whole robot
+	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+	{
+		cbFilters.at(bodyPart)->injectCall(stop_command);
+	}
+	
+	// move the robot back to a safe configuration
+	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
 	{
 		// build a position move bottle
 		rewind.clear();
@@ -64,45 +67,44 @@ void ReflexFilter::collisionHandler()
 		
 		// send the position move command
 		cbFilters.at(bodyPart)->injectCall(rewind);
+	}
 		
-		/******************************************************************************************************/
-		
-		// wait for the robot to reach the target pose
-		bool poseReached;
-		double dstToPose;
-		QVector<qreal>::const_iterator original,current,target;
-		//QVector<qreal>& currentPose;
-		
-		//TODO: Use Qtime to implement a timeout
-		time_t startTime = time(NULL);
-		
-		for ( int bodyPart = 0; bodyPart < robot->getNumBodyParts(); bodyPart++)
+	// wait for the robot to reach the target pose
+	bool poseReached = false;
+	QVector<qreal> dstToTarget;
+	QVector<qreal>::const_iterator original,current,target;
+	//QVector<qreal>& currentPose;
+	
+	//TODO: Use Qtime to implement a timeout
+	time_t startTime = time(NULL);
+	dstToTarget.resize(robotModel.robot.nextPartIdx());
+	
+	while ( !poseReached )
+	{
+		// compute the current distance to target pose (1-norm of the joint space displacement vector)
+		for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
 		{
-			do
+			dstToTarget[bodyPart] = 0;
+			const QVector<qreal>& currentPose = stateObservers.at(bodyPart)->currentPose();
+			for ( original  = originalPose.at(bodyPart).begin(), current  = currentPose.begin(), target  = targetPose.at(bodyPart).begin();
+				 original != originalPose.at(bodyPart).end() && current != currentPose.end() && target != targetPose.at(bodyPart).end();
+				 ++original, ++current, ++target )
 			{
-				usleep(YARP_PERIOD);
-				poseReached = true;
-				
-				// get the robot's current pose from the pose buffer
-				const QVector<qreal>& currentPose = stateObservers.at(bodyPart)->currentPose();
-
-				for ( original  = originalPose.at(bodyPart).begin(), current  = currentPose.begin(), target  = targetPose.at(bodyPart).begin();
-					  original != originalPose.at(bodyPart).end() && current != currentPose.end() && target != targetPose.at(bodyPart).end();
-					 ++original, ++current, ++target )
-				{
-					dstToPose = (*target-*original)/qAbs(*target-*original) * (*target-*current);
-					if ( dstToPose > NEGLIGIBLE_ANGLE ) { poseReached = false; }
-				}
-				
-				if ( time(NULL) - startTime >= POSITION_MOVE_TIMEOUT )
-				{
-					printf("Position move for collision recovery timed out!\n");
-					break;
-				}
-				
-			} while ( poseReached == false );
-			
-			if ( time(NULL) - startTime >= POSITION_MOVE_TIMEOUT ) { break; }
+				//perCentToPose += (*target-*original)/qAbs(*target-*original) * (*target-*current);
+				dstToTarget[bodyPart] += qAbs(*target-*current);
+			}
+		}
+		
+		poseReached = true;
+		for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+		{
+			if ( dstToTarget.at(bodyPart) > NEGLIGIBLE_ANGLE ) { poseReached = false; }
+		}
+		
+		if ( time(NULL) - startTime >= POSITION_MOVE_TIMEOUT )
+		{
+			printf("Position move for collision recovery timed out!\n");
+			break;
 		}
 	}
 }

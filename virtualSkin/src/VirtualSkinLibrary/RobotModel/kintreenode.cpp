@@ -130,7 +130,7 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 	//mutex.unlock();
 }
 
-void KinTreeNode::notColliding()
+/*void KinTreeNode::notColliding()
 {
 	//mutex.lock();
 		CompositeObject::notColliding();
@@ -139,7 +139,7 @@ void KinTreeNode::notColliding()
 			(*j)->notColliding();
 		}
 	//mutex.unlock();
-}
+}*/
 
 void KinTreeNode::print() const
 {

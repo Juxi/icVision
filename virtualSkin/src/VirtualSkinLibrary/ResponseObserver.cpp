@@ -18,8 +18,7 @@
 
 using namespace VirtualSkin;
 
-ResponseObserver::ResponseObserver(RobotModel::Robot* r, const int b) :
-	IObserver(), robot(r), branch(b) {
+ResponseObserver::ResponseObserver(RobotFilter* r, const int b) : IObserver(), robotFilter(r), bodyPart(b) {
 	// No special action to take for construction
 }
 
@@ -64,7 +63,8 @@ void ResponseObserver::onDataObserved(yarp::os::Bottle &b) {
 						yarp::os::Value& v2 = b.get(2);
 						yarp::os::Value& c2 = activeCall.get(2);
 						if (BOTTLE_TAG_DOUBLE == v2.getCode() && BOTTLE_TAG_INT == c2.getCode()) {
-							robot->setEncoderPosition(branch, (int) c2.asInt(), (qreal) v2.asDouble());
+							//robot->setEncoderPosition(branch, (int) c2.asInt(), (qreal) v2.asDouble());
+							emit setPosition( bodyPart, (int) c2.asInt(), (qreal) v2.asDouble() );
 						}
 					}
 				}

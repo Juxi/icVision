@@ -44,7 +44,7 @@ void YarpStreamPort::run()
 		//mutex.lock();
 			port.write( bottle );
         //mutex.unlock();
-		usleep(YARP_PERIOD);
+		usleep(YARP_PERIOD_us);
 	}
 	
 	port.close();

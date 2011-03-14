@@ -15,6 +15,7 @@
 #ifndef STATEOBSERVER_H_
 #define STATEOBSERVER_H_
 
+#include <QObject>
 #include <yarp/os/all.h>
 #include <yarp/os/IObserver.h>
 #include "circularBuffer.h"
@@ -24,9 +25,10 @@ namespace VirtualSkin {
 	
 class RobotFilter;
 
-class StateObserver: public yarp::os::IObserver
+class StateObserver: public QObject, public yarp::os::IObserver
 {
-
+	Q_OBJECT
+	
 public:
 	
 	StateObserver(RobotFilter *f, const int b);
@@ -37,6 +39,9 @@ public:
 	QVector<qreal> nonCollidingPose() { return poseBuffer.getOldest(); }
 	QVector<qreal> currentPose() { return poseBuffer.getCurrent(); }
 	void initPoseBuffer( const QVector<qreal>& v ) { poseBuffer.init(v); }
+	
+signals:
+	void setPosition( int i, const QVector<qreal>& v);
 
 private:
 	

@@ -41,34 +41,32 @@ INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/YarpFilter" )
 SET ( ROBOT_MODEL_LIB "RobotModel" )
 SET ( YARP_FILTER_LIB "YarpFilter" )
 	
-SET ( src_files	skinWindow.cpp
-		glwidget.cpp
-		collisionDetector.cpp
-		StateObserver.cpp
-		ResponseObserver.cpp
-		RobotFilter.cpp
-		CallObserver.cpp
+SET ( src_files	yarpModel.cpp
+		stateObserver.cpp
+		responseObserver.cpp
+		robotFilter.cpp
+		callObserver.cpp
 		circularBuffer.cpp
 		yarpRpcPort.cpp
 		worldRpcInterface.cpp
 		yarpStreamPort.cpp
 )
 
-SET ( hdr_files	skinWindow.h
-		glwidget.h
-		collisionDetector.h
-		StateObserver.h
-		ResponseObserver.h
-		RobotFilter.h
-		CallObserver.h
+SET ( hdr_files	yarpModel.h
+		stateObserver.h
+		responseObserver.h
+		robotFilter.h
+		callObserver.h
 		circularBuffer.h
 		yarpRpcPort.h
 		worldRpcInterface.h
 		yarpStreamPort.h
+		constants.h
 )
 
-SET ( QT_MOC_FILES 	skinWindow.h
-			glwidget.h
+SET ( QT_MOC_FILES 	robotFilter.h
+					responseObserver.h
+					stateObserver.h
 )
 
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
@@ -78,11 +76,11 @@ ADD_LIBRARY ( VirtualSkin STATIC ${hdr_files} ${src_files} )
 ADD_DEPENDENCIES( VirtualSkin RobotModel YarpFilter )
 
 TARGET_LINK_LIBRARIES ( VirtualSkin 	${ROBOT_MODEL_LIB}
-					${YARP_FILTER_LIB}
-					${FREE_SOLID_LIBRARY}
-					#${QT_LIBRARIES}
-					#${OPENGL_LIBRARIES}
-					#${YARP_LIBRARIES}
+										${YARP_FILTER_LIB}
+										${FREE_SOLID_LIBRARY}
+										${QT_LIBRARIES}
+										${OPENGL_LIBRARIES}
+										${YARP_LIBRARIES}
 )
 
 INSTALL ( TARGETS VirtualSkin DESTINATION ${CMAKE_SOURCE_DIR}/lib )

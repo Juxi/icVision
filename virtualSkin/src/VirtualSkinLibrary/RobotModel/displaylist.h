@@ -3,6 +3,8 @@
 
 #include "displmatrix.h"
 #include <qgl.h>
+#include <QTime>
+
 
 namespace RobotModel {
 
@@ -21,9 +23,9 @@ public:
     void setDisplayListIdx( int idx ) { index = idx; }
     int displayListIdx() { return index; }
 
-    void setColliding() { colliding = true; }
-    void unSetColliding() { colliding = false; }
-    bool isColliding() const { return colliding; }
+    void setColliding() { timeSinceLastCollision.restart(); }
+    bool isColliding() const;
+    //void unSetColliding() { colliding = false; }
 	
 	virtual void setCartesianRotation( const QVector3D& rot ) { T.setCartesianRotation(rot); }
 	virtual void cartesianRotate( const QVector3D& rot ) { T.cartesianRotate(rot); }
@@ -38,7 +40,8 @@ protected:
 	
 private:
     int  index;
-    bool colliding;
+    //bool colliding;
+	QTime timeSinceLastCollision;
     
     static GLfloat red[4];
     static GLfloat gray[4];

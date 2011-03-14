@@ -15,25 +15,32 @@
 #ifndef RESPONSEOBSERVER_H_
 #define RESPONSEOBSERVER_H_
 
+#include <QObject>
 #include <yarp/os/all.h>
 #include <yarp/os/IObserver.h>
-#include "robot.h"
 
 namespace VirtualSkin {
 	
 class CallObserver;
+class RobotFilter;
 
-class ResponseObserver: public yarp::os::IObserver {
-
+class ResponseObserver: public QObject, public yarp::os::IObserver
+{
+	Q_OBJECT
+	
 public:
-	ResponseObserver(RobotModel::Robot* r, const int b);
+	ResponseObserver(RobotFilter* r, const int b);
 	virtual ~ResponseObserver();
 
 	virtual void onDataObserved(yarp::os::Bottle &b);
+	
+signals:
+	
+	void setPosition(int,int,qreal);
 
 private:
-	RobotModel::Robot* robot;
-	const int branch;
+	RobotFilter* robotFilter;
+	const int bodyPart;
 
 	// the actual open RPC call
 	yarp::os::Bottle activeCall;

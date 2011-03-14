@@ -43,7 +43,7 @@ public:
 	void doNotCheckCollision( const CompositeObject* a ) const;
 	void doNotCheckCollision( PrimitiveObject* a ) const;
 	
-    virtual void notColliding();
+    //virtual void notColliding();
 	virtual void update();
 
 protected:

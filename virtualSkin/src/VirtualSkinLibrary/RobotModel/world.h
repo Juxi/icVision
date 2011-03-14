@@ -6,7 +6,7 @@
 #include <QVector>
 
 #include "renderList.h"
-#include "object.h"
+#include "compositeObject.h"
 #include "sphere.h"
 #include "cylinder.h"
 #include "box.h"
@@ -15,8 +15,7 @@ namespace RobotModel {
 
 class World : public RenderList
 {
-	//Q_OBJECT
-	
+
 public:
     World();
     ~World();
