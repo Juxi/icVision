@@ -26,8 +26,8 @@ ReflexFilter::~ReflexFilter()
 
 void ReflexFilter::extraOpenStuff()
 {
-	originalPose.resize(robotModel.robot.nextPartIdx());
-	targetPose.resize(robotModel.robot.nextPartIdx());
+	originalPose.resize(model.robot.nextPartIdx());
+	targetPose.resize(model.robot.nextPartIdx());
 }
 
 void ReflexFilter::collisionResponse()
@@ -36,13 +36,13 @@ void ReflexFilter::collisionResponse()
 	QVector<qreal>::const_iterator joint;
 	
 	// stop the whole robot
-	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 	{
 		cbFilters.at(bodyPart)->injectCall(stop_command);
 	}
 	
 	// move the robot back to a safe configuration
-	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 	{
 		// build a position move bottle
 		rewind.clear();
@@ -77,12 +77,12 @@ void ReflexFilter::collisionResponse()
 	
 	//TODO: Use Qtime to implement a timeout
 	time_t startTime = time(NULL);
-	dstToTarget.resize(robotModel.robot.nextPartIdx());
+	dstToTarget.resize(model.robot.nextPartIdx());
 	
 	while ( !poseReached )
 	{
 		// compute the current distance to target pose (1-norm of the joint space displacement vector)
-		for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+		for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 		{
 			dstToTarget[bodyPart] = 0;
 			const QVector<qreal>& currentPose = stateObservers.at(bodyPart)->currentPose();
@@ -96,7 +96,7 @@ void ReflexFilter::collisionResponse()
 		}
 		
 		poseReached = true;
-		for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+		for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 		{
 			if ( dstToTarget.at(bodyPart) > NEGLIGIBLE_ANGLE ) { poseReached = false; }
 		}

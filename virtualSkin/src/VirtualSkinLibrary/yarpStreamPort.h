@@ -23,14 +23,18 @@ public:
 	YarpStreamPort();
 	virtual ~YarpStreamPort();
 	
-	void setName( const QString& name ) { portName = name; }
-	bool hasName() { return !portName.isNull(); }
+	//void setName( const QString& name ) { portName = name; }
+	//bool hasName() { return !portName.isNull(); }
+	//bool hasBottle() { return !bottle.isNull(); }
+	
+	void open( const QString& name );
+	void close();
+	bool isOpen() { return portIsOpen; }
+	
+	void write( const yarp::os::Bottle& aBottle );
 	
 	void setBottle( const yarp::os::Bottle& aBottle );
-	bool hasBottle() { return !bottle.isNull(); }
-
 	void run();
-	
 	void stop();
 	void restart();
 
@@ -41,8 +45,8 @@ protected:
 private:
 	yarp::os::Network yarp;
 	yarp::os::Port port;
-	bool keepRunning;
-	QString portName;
+	bool portIsOpen,keepRunning;
+	//QString portName;
 
 };
 }

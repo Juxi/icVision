@@ -29,14 +29,14 @@ public:
 	YarpModel( bool visualize = false );	//!< Constructs an armed collisionDetector object
 	~YarpModel();	//!< Just stops the YARP port if its running
 
-	void setCollisionPortName( const QString& aName ) { collisionPort.setName(aName); }	//!< Sets the name of the YARP stream port where collision info will be published
-	void openCollisionPort() { collisionPort.start(); }									//!< Opens the YARP stream port
-	void closeCollisionPort() { collisionPort.stop(); }									//!< Closes the YARP stream port
+	void openCollisionPort( const QString& name ) { collisionPort.open(name); }
+	void closeCollisionPort() { collisionPort.close(); }
 	
-	void setWorldRpcPortName( const QString& aName ) { worldPort.setName(aName); }	//!< Sets the name of the YARP stream port where collision info will be published
-	void openWorldRpcPort() { worldPort.start(); }									//!< Opens the YARP stream port
-	void closeWorldRpcPort() { worldPort.stop(); }									//!< Closes the YARP stream port
+	void openWorldRpcPort( const QString& name ) { worldPort.open(name); }	//!< Sets the name of the YARP stream port where collision info will be published
+	void closeWorldRpcPort() { worldPort.stop(); }							//!< Closes the YARP stream port
 
+	void computePosePrefix();
+	void computePoseSuffix();
 	void collisionHandlerAddendum( RobotModel::PrimitiveObject*, RobotModel::PrimitiveObject*, const DtCollData* );
 
 private:

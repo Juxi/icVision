@@ -21,9 +21,9 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : robotModel(visualize), isOpen(false), haveControl(false)
+RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false)
 {
-	QObject::connect( &robotModel, SIGNAL(collision()),	this, SLOT(takeControl()) );
+	QObject::connect( &model, SIGNAL(collision()),	this, SLOT(takeControl()) );
 	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
@@ -38,9 +38,9 @@ RobotFilter::~RobotFilter()
 
 void RobotFilter::close()
 {
-	robotModel.stop();
-	robotModel.robot.close();
-	robotModel.world.clear();
+	model.stop();
+	model.robot.close();
+	model.world.clear();
 	statusPort.stop();
 	
 	// remove all observers from the ControlBoardFilters, close the filters and delete them
@@ -82,15 +82,15 @@ void RobotFilter::takeControl()
 {
 	if ( !haveControl )
 	{
-		haveControl = true;
-		start();
+		//haveControl = true;
+		//start();
 	}
 }
 
 void RobotFilter::run()
 {
 	// first stop the robot
-	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 	{
 		cbFilters.at(bodyPart)->cutConnection(true);		// take control away from the user
 	}
@@ -103,7 +103,7 @@ void RobotFilter::run()
 	collisionResponse();
 	
 	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++ ) {
+	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++ ) {
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	

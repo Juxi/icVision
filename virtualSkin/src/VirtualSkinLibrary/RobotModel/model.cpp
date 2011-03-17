@@ -38,10 +38,11 @@ bool Model::computePose()
 		return 0;
 	}
 	
-	//crashed = false;
-	col_count = 0;
-
-	robot.updatePose();
+	// Prepare to do collision detection
+	col_count = 0;			// reset collision counter
+	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations
+	
+	robot.updatePose();		// do forward kinematics
 	dtTest();				// do collision detection
 	
 	emit newStateReady();
@@ -50,10 +51,11 @@ bool Model::computePose()
 	{
 		emit collision();
 		printf("%i Collisions!\n", col_count);
-		return false;
 	}
+	
+	computePoseSuffix();
 
-	return true;
+	return col_count == 0;
 }
 
 void Model::run()
@@ -62,6 +64,7 @@ void Model::run()
 	{
 		computePose();
 		usleep(YARP_PERIOD_us);
+		//usleep(1);
 	}
 }
 

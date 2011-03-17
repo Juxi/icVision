@@ -58,12 +58,13 @@ public:
 		
 		Model* detector = (Model*)client_data;
 		
-		//detector->crashed = true;
 		detector->col_count++;
 		
 		detector->collisionHandlerAddendum( object1, object2, coll_data );
 	}
 	
+	virtual void computePosePrefix() = 0;	
+	virtual void computePoseSuffix() = 0;
 	virtual void collisionHandlerAddendum( PrimitiveObject*, PrimitiveObject*, const DtCollData* ) = 0;
 	
 signals:
@@ -71,13 +72,13 @@ signals:
 	void newStateReady();
 	void collision();
 
-private:
+protected:
 	
     SkinWindow	*skinWindow;
 	bool		keepRunning;
-	//bool		crashed;		//!< Whether or not the current configuration has at least one pair of colliding objects
 	int			col_count;		//!< The number of collisions in the current robot/world configuration
 };
+	
 }
 
 #endif

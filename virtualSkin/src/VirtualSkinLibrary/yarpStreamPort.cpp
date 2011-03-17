@@ -12,42 +12,49 @@
 
 using namespace VirtualSkin;
 
-YarpStreamPort::YarpStreamPort() : keepRunning(true)
+YarpStreamPort::YarpStreamPort() : portIsOpen(false), keepRunning(true)
 {
 }
 YarpStreamPort::~YarpStreamPort()
 {
-	if ( isRunning() ) stop();
+	if ( portIsOpen ) { close(); }
 }
 
 void YarpStreamPort::setBottle( const yarp::os::Bottle& aBottle )
 {
-	//mutex.lock();
 	bottle = aBottle;
-	//mutex.unlock();
+}
+
+void YarpStreamPort::open( const QString& name )
+{
+	port.open( name.toStdString().c_str() );
+	portIsOpen = true;
+}
+
+void YarpStreamPort::close()
+{
+	if ( isRunning() ) { stop(); }
+	bottle.clear();
+	port.close();
+	portIsOpen = false;
 }
 
 void YarpStreamPort::run() 
 {
-	if ( portName.isEmpty() )
+	if ( portIsOpen )
 	{
-		printf("ERROR STARTING YarpStreamPort: set the port name with setName( const QString& ) prior to calling start()\n");
-		keepRunning = false;
-	}
-	else 
-	{
-		port.open( portName.toStdString().c_str() );
-	}
-	
-	while ( keepRunning )
-	{
-		//mutex.lock();
+		while ( keepRunning )
+		{
 			port.write( bottle );
-        //mutex.unlock();
-		usleep(YARP_PERIOD_us);
+			usleep(YARP_PERIOD_us);
+		}
 	}
-	
-	port.close();
+}
+
+void YarpStreamPort::write( const yarp::os::Bottle& aBottle )
+{
+	bottle = aBottle;
+	port.write( bottle );
 }
 
 void YarpStreamPort::stop()
@@ -58,6 +65,7 @@ void YarpStreamPort::stop()
 
 void YarpStreamPort::restart()
 {
+	if ( isRunning() ) { stop(); }
 	keepRunning = true;
 	start();
 }

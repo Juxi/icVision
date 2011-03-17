@@ -25,7 +25,7 @@ public:
 	void useDebug() { debug = true; }
 	void noDebug() { debug = false; }
 	
-	void setName( const QString& name ) { portName = name; }
+	bool open( const QString& name );
 	
 	void run();
 	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply ) = 0;
@@ -38,7 +38,7 @@ private:
 	yarp::os::Network yarp;
 	yarp::os::BufferedPort<yarp::os::Bottle> port;
 	bool keepListening,debug;
-	QString portName;
+	//QString portName;
 
 };
 

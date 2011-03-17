@@ -36,23 +36,20 @@ namespace VirtualSkin {
 public:
 	RobotFilter( bool visualize = false );
 	virtual ~RobotFilter();
+
+	void openStatusPort( const QString& name ) { statusPort.open(name); }
+	void startStatusPort()		{ statusPort.start(); }
+	void stopStatusPort()		{ statusPort.stop(); }
+	void restartStatusPort()	{ statusPort.restart(); }
+	void closeStatusPort()		{ statusPort.close(); }
 	
-	//void setRobot( RobotModel::Robot* r );
-	//void setWorld( RobotModel::World *w );
-	//RobotModel::Robot* getRobot() { return robot; }
-	//RobotModel::World* getWorld() { return world; }
+	//void setCollisionPortName( const QString& name ) { model.setCollisionPortName(name); }
+	//void openCollisionPort() { model.openCollisionPort(); }
+	//void closeCollisionPort() { model.closeCollisionPort(); }
 	
-	void setStatusPortName( const QString& name ) { statusPort.setName(name); }
-	void openStatusPort() { statusPort.start(); }
-	void closeStatusPort() { statusPort.stop(); }
-	
-	void setCollisionPortName( const QString& name ) { robotModel.setCollisionPortName(name); }
-	void openCollisionPort() { robotModel.openCollisionPort(); }
-	void closeCollisionPort() { robotModel.closeCollisionPort(); }
-	
-	void setWorldRpcPortName( const QString& name ) { robotModel.setWorldRpcPortName(name); }
-	void openWorldRpcPort() { robotModel.openWorldRpcPort(); }
-	void closeWorldRpcPort() { robotModel.closeWorldRpcPort(); }
+	//void setWorldRpcPortName( const QString& name ) { model.setWorldRpcPortName(name); }
+	//void openWorldRpcPort() { model.openWorldRpcPort(); }
+	//void closeWorldRpcPort() { model.closeWorldRpcPort(); }
 	
 	template <class someStateObserver, class someCallObserver, class someResponseObserver>
 	bool open( const QString& fileName )
@@ -66,11 +63,11 @@ public:
 			return false;
 		}
 		
-		robotModel.robot.open(fileName);
-		robotModel.start();
+		model.robot.open(fileName);
+		model.start();
 		
-		const QString deviceBaseName( robotModel.robot.getName() );
-		const QString filterBaseName( robotModel.robot.getName() + "F" );
+		const QString deviceBaseName( model.robot.getName() );
+		const QString filterBaseName( model.robot.getName() + "F" );
 		
 		// TODO: create CommandObserver
 		// TODO: create Replier
@@ -82,15 +79,15 @@ public:
 		QString targetName;
 		QString filterName;
 		
-		for (int bodyPart = 0; bodyPart < robotModel.robot.nextPartIdx(); bodyPart++)
+		for (int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
 		{
 			p_cbf = new yarp::os::ControlBoardFilter();
 			
-			filterName = "/" + robotModel.robot.getName() + "F/" + *(robotModel.robot.getPartName(bodyPart));
-			targetName = "/" + robotModel.robot.getName() + "/" + *(robotModel.robot.getPartName(bodyPart));
+			filterName = "/" + model.robot.getName() + "F/" + *(model.robot.getPartName(bodyPart));
+			targetName = "/" + model.robot.getName() + "/" + *(model.robot.getPartName(bodyPart));
 			
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", robotModel.robot.getName().toStdString().c_str(), robotModel.robot.getPartName(bodyPart)->toStdString().c_str() );
+			printf( "connecting to %s:%s\n", model.robot.getName().toStdString().c_str(), model.robot.getPartName(bodyPart)->toStdString().c_str() );
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -112,8 +109,8 @@ public:
 				p_cbf->setResponseObserver(p_ro);
 				responseObservers.append(p_ro);
 				
-				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	&robotModel.robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				&robotModel.robot, SLOT(setEncoderPosition(int,int,qreal)) );
+				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	&model.robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
+				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				&model.robot, SLOT(setEncoderPosition(int,int,qreal)) );
 				
 			}
 			else
@@ -140,6 +137,8 @@ public:
 	
 	void run();
 	
+	YarpModel			model;
+	
 public slots:
 	
 	void takeControl();
@@ -147,7 +146,6 @@ public slots:
 protected:
 	
 	YarpStreamPort		statusPort;
-	YarpModel			robotModel;
 	yarp::os::Bottle	stop_command;
 	bool				isOpen,haveControl;
 	

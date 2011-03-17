@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 	/******************************************************************************
 	*** Create a configuration for the robot model from command line arguments	***
 	***	currently supported arguments are:										***
-	***		--visualize															***
 	***		--file yourRobotModel.xml (required)								***
+	***		--visualize															***
 	******************************************************************************/
 	
 		yarp::os::Property config;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 		}
 	/***********************************************************************/
 	
-	// First, create the QApplication
+	// Create the QApplication
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
 	// Virtual Skin Command Filter
@@ -51,6 +51,16 @@ int main(int argc, char *argv[])
 	
 	// start the Virtual Skin command filter
 	if ( !filter.open< VirtualSkin::StateObserver, VirtualSkin::CallObserver, VirtualSkin::ResponseObserver >( xmlFile ) ) { return 1; }
+	
+	// open a port to report collision events
+	filter.model.openCollisionPort("/" + filter.model.robot.getName() + "F/collisions");
+	
+	// open a port to interact with the world model
+	filter.model.openWorldRpcPort("/" + filter.model.robot.getName() + "F/world");
+	
+	// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
+	filter.openStatusPort("/" + filter.model.robot.getName() + "F/status");
+	filter.startStatusPort();
 	
 	bool result = 0;
 	result = app.exec();						// run the Qt application

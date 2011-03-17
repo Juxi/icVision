@@ -1,0 +1,196 @@
+Determining if the Q_WS_X11 exist failed with the following output:
+Change Dir: /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/opt/local/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec -configuration Debug
+** BUILD FAILED **
+
+The following build commands failed:
+cmTryCompileExec:
+	CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+(1 failure)
+
+=== BUILDING NATIVE TARGET cmTryCompileExec OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-10029E010029E010029E0000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-10029E010029E010029E0000.sh
+make: `CMakeFiles/cmake.check_cache' is up to date.
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources/i386 -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources -F/Library/Frameworks -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c -o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: ‘Q_WS_X11’ undeclared (first use in this function)
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-10031B010031B010031B0000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-10031B010031B010031B0000.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make all.Debug
+/bin/rm -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec
+
+File /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_X11
+  cmakeRequireSymbol(0,&Q_WS_X11);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/opt/local/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec -configuration Debug
+** BUILD FAILED **
+
+The following build commands failed:
+cmTryCompileExec:
+	CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+(1 failure)
+
+=== BUILDING NATIVE TARGET cmTryCompileExec OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F09905F09905F0990000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F09905F09905F0990000000.sh
+make: `CMakeFiles/cmake.check_cache' is up to date.
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources/i386 -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources -F/Library/Frameworks -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c -o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: ‘Q_WS_WIN’ undeclared (first use in this function)
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F11A05F11A05F11A0000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F11A05F11A05F11A0000000.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make all.Debug
+/bin/rm -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec
+
+File /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_WIN
+  cmakeRequireSymbol(0,&Q_WS_WIN);
+#endif
+  return 0;
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/opt/local/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec -configuration Debug
+** BUILD FAILED **
+
+The following build commands failed:
+cmTryCompileExec:
+	CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+(1 failure)
+
+=== BUILDING NATIVE TARGET cmTryCompileExec OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F09305F09305F0930000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F09305F09305F0930000000.sh
+make: `CMakeFiles/cmake.check_cache' is up to date.
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources/i386 -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources -F/Library/Frameworks -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c -o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: ‘Q_WS_QWS’ undeclared (first use in this function)
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F11405F11405F1140000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F11405F11405F1140000000.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make all.Debug
+/bin/rm -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec
+
+File /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qglobal.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef Q_WS_QWS
+  cmakeRequireSymbol(0,&Q_WS_QWS);
+#endif
+  return 0;
+}
+
+Determining if the QT_MAC_USE_COCOA exist failed with the following output:
+Change Dir: /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/opt/local/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec -configuration Debug
+** BUILD FAILED **
+
+The following build commands failed:
+cmTryCompileExec:
+	CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+(1 failure)
+
+=== BUILDING NATIVE TARGET cmTryCompileExec OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F0C605F0C605F0C60000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F0C605F0C605F0C60000000.sh
+make: `CMakeFiles/cmake.check_cache' is up to date.
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources/i386 -I/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/DerivedSources -F/Library/Frameworks -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c -o /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Objects-normal/i386/CheckSymbolExists.o
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: ‘QT_MAC_USE_COCOA’ undeclared (first use in this function)
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+
+PhaseScriptExecution /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F14705F14705F1470000000.sh
+    cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec.build/Script-5F14705F14705F1470000000.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make all.Debug
+/bin/rm -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec
+
+File /Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <QtCore/qconfig.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef QT_MAC_USE_COCOA
+  cmakeRequireSymbol(0,&QT_MAC_USE_COCOA);
+#endif
+  return 0;
+}
+

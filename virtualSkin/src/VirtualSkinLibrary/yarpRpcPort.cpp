@@ -20,21 +20,26 @@ YarpRpcPort::~YarpRpcPort()
 	port.close();
 }
 
+bool YarpRpcPort::open( const QString& name )
+{
+	// check whether a network is available
+    if ( false == yarp::os::Network::checkNetwork() ) {
+		printf("YARP RPC ERROR: yarp network unavailable...\n");
+    	return false;
+    }
+	
+	if ( port.open( name.toStdString().c_str() ) )
+	{
+		start();
+		return true;
+	}
+	else { return 0; }
+}
+
 void YarpRpcPort::run() 
 {
 	printf("Starting RPC server...\n");
 	
-	// check whether a network is available
-    if ( false == yarp::os::Network::checkNetwork() ) {
-		printf("YARP RPC ERROR: yarp network unavailable...\n");
-    	keepListening = false;
-    }
-	
-	if ( portName.isEmpty() ) {
-		printf("Error: no portName.\n");
-		keepListening = false;
-	} else { port.open(portName.toStdString().c_str()); }
-
 	yarp::os::Bottle* cmd;
     while ( keepListening ) {
 		cmd = port.read(false);
@@ -94,6 +99,7 @@ void YarpRpcPort::stop()
 
 void YarpRpcPort::restart()
 {
+	stop();
 	keepListening = true;
 	start();
 }
