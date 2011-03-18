@@ -1,0 +1,2925 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		10AD4D010AD4D010AD4D0000 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 10AE3E010AE3E010AE3E0000 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				10AD6B010AD6B010AD6B0000 /* CMake ReRun */,
+				10ADD8010ADD8010ADD80000 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				10FA05010FA05010FA050000 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		10B2F3010B2F3010B2F30000 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 10B3F3010B3F3010B3F30000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				10B315010B315010B3150000 /* CMake ReRun */,
+				10B382010B382010B3820000 /* CMake Rules */,
+			);
+			dependencies = (
+				10F79F010F79F010F79F0000 /* PBXTargetDependency */,
+				10F816010F816010F8160000 /* PBXTargetDependency */,
+				10F888010F888010F8880000 /* PBXTargetDependency */,
+				10F901010F901010F9010000 /* PBXTargetDependency */,
+				10F97F010F97F010F97F0000 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		100E730100E730100E730000 /* moc_stateObserver.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 1091C401091C401091C40000 /* moc_stateObserver.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		103F390103F390103F390000 /* responseObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103F180103F180103F180000 /* responseObserver.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10617F010617F010617F0000 /* moc_renderList.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 10DBA8010DBA8010DBA80000 /* moc_renderList.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		10624F010624F010624F0000 /* moc_model.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 1061D101061D101061D10000 /* moc_model.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		106302010630201063020000 /* moc_robot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 106284010628401062840000 /* moc_robot.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		10692A010692A010692A0000 /* StreamFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 106911010691101069110000 /* StreamFilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		106A230106A230106A230000 /* ControlBoardFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1069C201069C201069C20000 /* ControlBoardFilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		106D0D0106D0D0106D0D0000 /* RpcFilterImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D615010D615010D6150000 /* RpcFilterImpl.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		106DB90106DB90106DB90000 /* RpcFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 106DA00106DA00106DA00000 /* RpcFilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		106EB20106EB20106EB20000 /* StreamFilterImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 106E530106E530106E530000 /* StreamFilterImpl.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108C680108C680108C680000 /* robotFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108C470108C470108C470000 /* robotFilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108D150108D150108D150000 /* callObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108CF40108CF40108CF40000 /* callObserver.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108DC80108DC80108DC80000 /* circularBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108DA70108DA70108DA70000 /* circularBuffer.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108E750108E750108E750000 /* yarpRpcPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108E540108E540108E540000 /* yarpRpcPort.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108F220108F220108F220000 /* worldRpcInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108F010108F010108F010000 /* worldRpcInterface.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		108FCC0108FCC0108FCC0000 /* yarpStreamPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108FB20108FB20108FB20000 /* yarpStreamPort.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10907B010907B010907B0000 /* moc_robotFilter.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 109065010906501090650000 /* moc_robotFilter.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		10916D010916D010916D0000 /* moc_responseObserver.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 109111010911101091110000 /* moc_responseObserver.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		109618010961801096180000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 109918010991801099180000 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		109643010964301096430000 /* reflexFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10931B010931B010931B0000 /* reflexFilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10A121010A121010A1210000 /* yarpModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10A2C1010A2C1010A2C10000 /* yarpModel.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CA76010CA76010CA760000 /* skinWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CA60010CA60010CA600000 /* skinWindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CB30010CB30010CB300000 /* glWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CB0F010CB0F010CB0F0000 /* glWidget.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CBD8010CBD8010CBD80000 /* renderList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CBBF010CBBF010CBBF0000 /* renderList.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CCD0010CCD0010CCD00000 /* robotmodelexception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CC72010CC72010CC720000 /* robotmodelexception.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CD3F010CD3F010CD3F0000 /* zphandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CD26010CD26010CD260000 /* zphandler.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CDFC010CDFC010CDFC0000 /* robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CDDB010CDDB010CDDB0000 /* robot.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CEAA010CEAA010CEAA0000 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CE89010CE89010CE890000 /* interval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10CF58010CF58010CF580000 /* motor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CF37010CF37010CF370000 /* motor.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D006010D006010D0060000 /* bodyPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CFE5010CFE5010CFE50000 /* bodyPart.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D0B7010D0B7010D0B70000 /* link.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D099010D099010D0990000 /* link.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D1A2010D1A2010D1A20000 /* primitiveobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D145010D145010D1450000 /* primitiveobject.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D218010D218010D2180000 /* cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D1F7010D1F7010D1F70000 /* cylinder.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D2C6010D2C6010D2C60000 /* joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D2A5010D2A5010D2A50000 /* joint.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D3B1010D3B1010D3B10000 /* joint_prismatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D354010D354010D3540000 /* joint_prismatic.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D464010D464010D4640000 /* joint_revolute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D407010D407010D4070000 /* joint_revolute.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D4DA010D4DA010D4DA0000 /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D4B9010D4B9010D4B90000 /* box.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D588010D588010D5880000 /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D567010D567010D5670000 /* world.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D63A010D63A010D63A0000 /* kintreenode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D624010D624010D6240000 /* kintreenode.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D72D010D72D010D72D0000 /* compositeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D6D0010D6D0010D6D00000 /* compositeObject.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D7A3010D7A3010D7A30000 /* sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D782010D782010D7820000 /* sphere.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D84A010D84A010D84A0000 /* displmatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D831010D831010D8310000 /* displmatrix.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D8FB010D8FB010D8FB0000 /* displaylist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D8E2010D8E2010D8E20000 /* displaylist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10D9B3010D9B3010D9B30000 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10D992010D992010D9920000 /* model.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10DAA3010DAA3010DAA30000 /* moc_skinWindow.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 10DA41010DA41010DA410000 /* moc_skinWindow.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		10DB73010DB73010DB730000 /* moc_glWidget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 10DAF5010DAF5010DAF50000 /* moc_glWidget.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		10DC56010DC56010DC560000 /* stateObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10DC38010DC38010DC380000 /* stateObserver.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10E4A9010E4A9010E4A90000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E42B010E42B010E42B0000 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10E557010E557010E5570000 /* partController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E4DA010E4DA010E4DA0000 /* partController.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10E605010E605010E6050000 /* partBabbler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E588010E588010E5880000 /* partBabbler.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10E6A7010E6A7010E6A70000 /* iCubBabbler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E636010E636010E6360000 /* iCubBabbler.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10E6FB010E6FB010E6FB0000 /* moc_iCubBabbler.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 10E6DE010E6DE010E6DE0000 /* moc_iCubBabbler.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		10F752010F752010F7520000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1098F401098F401098F40000;
+			remoteInfo = ReflexDemo;
+		};
+		10F7C7010F7C7010F7C70000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1067D201067D201067D20000;
+			remoteInfo = RobotModel;
+		};
+		10F83C010F83C010F83C0000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 107A730107A730107A730000;
+			remoteInfo = VirtualSkin;
+		};
+		10F8B5010F8B5010F8B50000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10E930010E930010E9300000;
+			remoteInfo = iCubBabble;
+		};
+		10F930010F930010F9300000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 105C9A0105C9A0105C9A0000;
+			remoteInfo = YarpFilter;
+		};
+		10F9A9010F9A9010F9A90000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1087B901087B901087B90000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10B2F3010B2F3010B2F30000;
+			remoteInfo = ALL_BUILD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		103F180103F180103F180000 /* responseObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = responseObserver.cpp; path = src/VirtualSkinLibrary/responseObserver.cpp; sourceTree = SOURCE_ROOT; };
+		105887010588701058870000 /* StreamFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamFilterImpl.h; path = src/VirtualSkinLibrary/YarpFilter/yarp/os/impl/StreamFilterImpl.h; sourceTree = SOURCE_ROOT; };
+		105935010593501059350000 /* StreamFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamFilter.h; path = src/VirtualSkinLibrary/YarpFilter/yarp/os/StreamFilter.h; sourceTree = SOURCE_ROOT; };
+		1059EC01059EC01059EC0000 /* ControlBoardFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlBoardFilter.h; path = src/VirtualSkinLibrary/YarpFilter/yarp/os/ControlBoardFilter.h; sourceTree = SOURCE_ROOT; };
+		105AA00105AA00105AA00000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = src/VirtualSkinLibrary/YarpFilter/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		1061D101061D101061D10000 /* moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_model.cxx; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx; sourceTree = SOURCE_ROOT; };
+		106284010628401062840000 /* moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_robot.cxx; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx; sourceTree = SOURCE_ROOT; };
+		106337010633701063370000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = src/VirtualSkinLibrary/RobotModel/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		1063EB01063EB01063EB0000 /* moc_skinWindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_skinWindow.cxx.rule; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule; sourceTree = SOURCE_ROOT; };
+		1064A001064A001064A00000 /* moc_glWidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_glWidget.cxx.rule; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_glWidget.cxx.rule; sourceTree = SOURCE_ROOT; };
+		106552010655201065520000 /* moc_renderList.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_renderList.cxx.rule; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule; sourceTree = SOURCE_ROOT; };
+		106607010660701066070000 /* moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_model.cxx.rule; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule; sourceTree = SOURCE_ROOT; };
+		1066B701066B701066B70000 /* moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_robot.cxx.rule; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule; sourceTree = SOURCE_ROOT; };
+		106911010691101069110000 /* StreamFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StreamFilter.cpp; path = src/VirtualSkinLibrary/YarpFilter/StreamFilter.cpp; sourceTree = SOURCE_ROOT; };
+		1069C201069C201069C20000 /* ControlBoardFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ControlBoardFilter.cpp; path = src/VirtualSkinLibrary/YarpFilter/ControlBoardFilter.cpp; sourceTree = SOURCE_ROOT; };
+		106A790106A790106A790000 /* RpcFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RpcFilterImpl.h; path = src/VirtualSkinLibrary/YarpFilter/yarp/os/impl/RpcFilterImpl.h; sourceTree = SOURCE_ROOT; };
+		106B2E0106B2E0106B2E0000 /* RpcFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RpcFilter.h; path = src/VirtualSkinLibrary/YarpFilter/yarp/os/RpcFilter.h; sourceTree = SOURCE_ROOT; };
+		106C8A0106C8A0106C8A0000 /* libRobotModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRobotModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		106DA00106DA00106DA00000 /* RpcFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RpcFilter.cpp; path = src/VirtualSkinLibrary/YarpFilter/RpcFilter.cpp; sourceTree = SOURCE_ROOT; };
+		106E530106E530106E530000 /* StreamFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StreamFilterImpl.cpp; path = src/VirtualSkinLibrary/YarpFilter/StreamFilterImpl.cpp; sourceTree = SOURCE_ROOT; };
+		107D030107D030107D030000 /* moc_robotFilter.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_robotFilter.cxx.rule; path = xcode/src/VirtualSkinLibrary/moc_robotFilter.cxx.rule; sourceTree = SOURCE_ROOT; };
+		107DB50107DB50107DB50000 /* moc_responseObserver.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_responseObserver.cxx.rule; path = xcode/src/VirtualSkinLibrary/moc_responseObserver.cxx.rule; sourceTree = SOURCE_ROOT; };
+		107E660107E660107E660000 /* moc_stateObserver.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_stateObserver.cxx.rule; path = xcode/src/VirtualSkinLibrary/moc_stateObserver.cxx.rule; sourceTree = SOURCE_ROOT; };
+		1088B601088B601088B60000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = src/VirtualSkinLibrary/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		10893F010893F010893F0000 /* robotFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = robotFilter.h; path = src/VirtualSkinLibrary/robotFilter.h; sourceTree = SOURCE_ROOT; };
+		1089EE01089EE01089EE0000 /* callObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callObserver.h; path = src/VirtualSkinLibrary/callObserver.h; sourceTree = SOURCE_ROOT; };
+		108A9E0108A9E0108A9E0000 /* circularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circularBuffer.h; path = src/VirtualSkinLibrary/circularBuffer.h; sourceTree = SOURCE_ROOT; };
+		108B4D0108B4D0108B4D0000 /* yarpRpcPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yarpRpcPort.h; path = src/VirtualSkinLibrary/yarpRpcPort.h; sourceTree = SOURCE_ROOT; };
+		108BFB0108BFB0108BFB0000 /* worldRpcInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = worldRpcInterface.h; path = src/VirtualSkinLibrary/worldRpcInterface.h; sourceTree = SOURCE_ROOT; };
+		108C470108C470108C470000 /* robotFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = robotFilter.cpp; path = src/VirtualSkinLibrary/robotFilter.cpp; sourceTree = SOURCE_ROOT; };
+		108CF40108CF40108CF40000 /* callObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = callObserver.cpp; path = src/VirtualSkinLibrary/callObserver.cpp; sourceTree = SOURCE_ROOT; };
+		108DA70108DA70108DA70000 /* circularBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = circularBuffer.cpp; path = src/VirtualSkinLibrary/circularBuffer.cpp; sourceTree = SOURCE_ROOT; };
+		108E540108E540108E540000 /* yarpRpcPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = yarpRpcPort.cpp; path = src/VirtualSkinLibrary/yarpRpcPort.cpp; sourceTree = SOURCE_ROOT; };
+		108F010108F010108F010000 /* worldRpcInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = worldRpcInterface.cpp; path = src/VirtualSkinLibrary/worldRpcInterface.cpp; sourceTree = SOURCE_ROOT; };
+		108FB20108FB20108FB20000 /* yarpStreamPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = yarpStreamPort.cpp; path = src/VirtualSkinLibrary/yarpStreamPort.cpp; sourceTree = SOURCE_ROOT; };
+		109065010906501090650000 /* moc_robotFilter.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_robotFilter.cxx; path = xcode/src/VirtualSkinLibrary/moc_robotFilter.cxx; sourceTree = SOURCE_ROOT; };
+		109111010911101091110000 /* moc_responseObserver.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_responseObserver.cxx; path = xcode/src/VirtualSkinLibrary/moc_responseObserver.cxx; sourceTree = SOURCE_ROOT; };
+		1091C401091C401091C40000 /* moc_stateObserver.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_stateObserver.cxx; path = xcode/src/VirtualSkinLibrary/moc_stateObserver.cxx; sourceTree = SOURCE_ROOT; };
+		10931B010931B010931B0000 /* reflexFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reflexFilter.cpp; path = src/ReflexDemo/reflexFilter.cpp; sourceTree = SOURCE_ROOT; };
+		10948B010948B010948B0000 /* reflexFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reflexFilter.h; path = src/ReflexDemo/reflexFilter.h; sourceTree = SOURCE_ROOT; };
+		109519010951901095190000 /* libYarpFilter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYarpFilter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		109675010967501096750000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = src/ReflexDemo/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		109918010991801099180000 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/ReflexDemo/main.cpp; sourceTree = SOURCE_ROOT; };
+		10A217010A217010A2170000 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = src/VirtualSkinLibrary/constants.h; sourceTree = SOURCE_ROOT; };
+		10A2C1010A2C1010A2C10000 /* yarpModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = yarpModel.cpp; path = src/VirtualSkinLibrary/yarpModel.cpp; sourceTree = SOURCE_ROOT; };
+		10A34B010A34B010A34B0000 /* yarpStreamPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yarpStreamPort.h; path = src/VirtualSkinLibrary/yarpStreamPort.h; sourceTree = SOURCE_ROOT; };
+		10A632010A632010A6320000 /* yarpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yarpModel.h; path = src/VirtualSkinLibrary/yarpModel.h; sourceTree = SOURCE_ROOT; };
+		10A6E4010A6E4010A6E40000 /* stateObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stateObserver.h; path = src/VirtualSkinLibrary/stateObserver.h; sourceTree = SOURCE_ROOT; };
+		10A790010A790010A7900000 /* responseObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = responseObserver.h; path = src/VirtualSkinLibrary/responseObserver.h; sourceTree = SOURCE_ROOT; };
+		10AC6E010AC6E010AC6E0000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		10BA31010BA31010BA310000 /* libVirtualSkin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libVirtualSkin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		10BAAA010BAAA010BAAA0000 /* skinWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skinWindow.h; path = src/VirtualSkinLibrary/RobotModel/skinWindow.h; sourceTree = SOURCE_ROOT; };
+		10BB50010BB50010BB500000 /* glWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glWidget.h; path = src/VirtualSkinLibrary/RobotModel/glWidget.h; sourceTree = SOURCE_ROOT; };
+		10BBFC010BBFC010BBFC0000 /* renderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = renderList.h; path = src/VirtualSkinLibrary/RobotModel/renderList.h; sourceTree = SOURCE_ROOT; };
+		10BCAC010BCAC010BCAC0000 /* robotmodelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = robotmodelexception.h; path = src/VirtualSkinLibrary/RobotModel/robotmodelexception.h; sourceTree = SOURCE_ROOT; };
+		10BD61010BD61010BD610000 /* zphandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zphandler.h; path = src/VirtualSkinLibrary/RobotModel/zphandler.h; sourceTree = SOURCE_ROOT; };
+		10BE12010BE12010BE120000 /* robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = robot.h; path = src/VirtualSkinLibrary/RobotModel/robot.h; sourceTree = SOURCE_ROOT; };
+		10BEC2010BEC2010BEC20000 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = src/VirtualSkinLibrary/RobotModel/interval.h; sourceTree = SOURCE_ROOT; };
+		10BF6F010BF6F010BF6F0000 /* motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = motor.h; path = src/VirtualSkinLibrary/RobotModel/motor.h; sourceTree = SOURCE_ROOT; };
+		10C01C010C01C010C01C0000 /* bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bodyPart.h; path = src/VirtualSkinLibrary/RobotModel/bodyPart.h; sourceTree = SOURCE_ROOT; };
+		10C0CF010C0CF010C0CF0000 /* link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = link.h; path = src/VirtualSkinLibrary/RobotModel/link.h; sourceTree = SOURCE_ROOT; };
+		10C17A010C17A010C17A0000 /* primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = primitiveobject.h; path = src/VirtualSkinLibrary/RobotModel/primitiveobject.h; sourceTree = SOURCE_ROOT; };
+		10C229010C229010C2290000 /* cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cylinder.h; path = src/VirtualSkinLibrary/RobotModel/cylinder.h; sourceTree = SOURCE_ROOT; };
+		10C2D6010C2D6010C2D60000 /* joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joint.h; path = src/VirtualSkinLibrary/RobotModel/joint.h; sourceTree = SOURCE_ROOT; };
+		10C384010C384010C3840000 /* joint_prismatic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joint_prismatic.h; path = src/VirtualSkinLibrary/RobotModel/joint_prismatic.h; sourceTree = SOURCE_ROOT; };
+		10C434010C434010C4340000 /* joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joint_revolute.h; path = src/VirtualSkinLibrary/RobotModel/joint_revolute.h; sourceTree = SOURCE_ROOT; };
+		10C4E3010C4E3010C4E30000 /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = src/VirtualSkinLibrary/RobotModel/box.h; sourceTree = SOURCE_ROOT; };
+		10C590010C590010C5900000 /* world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = world.h; path = src/VirtualSkinLibrary/RobotModel/world.h; sourceTree = SOURCE_ROOT; };
+		10C64C010C64C010C64C0000 /* kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kintreenode.h; path = src/VirtualSkinLibrary/RobotModel/kintreenode.h; sourceTree = SOURCE_ROOT; };
+		10C6F6010C6F6010C6F60000 /* compositeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compositeObject.h; path = src/VirtualSkinLibrary/RobotModel/compositeObject.h; sourceTree = SOURCE_ROOT; };
+		10C7A5010C7A5010C7A50000 /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sphere.h; path = src/VirtualSkinLibrary/RobotModel/sphere.h; sourceTree = SOURCE_ROOT; };
+		10C853010C853010C8530000 /* displmatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = displmatrix.h; path = src/VirtualSkinLibrary/RobotModel/displmatrix.h; sourceTree = SOURCE_ROOT; };
+		10C903010C903010C9030000 /* displaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = displaylist.h; path = src/VirtualSkinLibrary/RobotModel/displaylist.h; sourceTree = SOURCE_ROOT; };
+		10C9B2010C9B2010C9B20000 /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = src/VirtualSkinLibrary/RobotModel/model.h; sourceTree = SOURCE_ROOT; };
+		10CA60010CA60010CA600000 /* skinWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skinWindow.cpp; path = src/VirtualSkinLibrary/RobotModel/skinWindow.cpp; sourceTree = SOURCE_ROOT; };
+		10CB0F010CB0F010CB0F0000 /* glWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glWidget.cpp; path = src/VirtualSkinLibrary/RobotModel/glWidget.cpp; sourceTree = SOURCE_ROOT; };
+		10CBBF010CBBF010CBBF0000 /* renderList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = renderList.cpp; path = src/VirtualSkinLibrary/RobotModel/renderList.cpp; sourceTree = SOURCE_ROOT; };
+		10CC72010CC72010CC720000 /* robotmodelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = robotmodelexception.cpp; path = src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp; sourceTree = SOURCE_ROOT; };
+		10CD26010CD26010CD260000 /* zphandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zphandler.cpp; path = src/VirtualSkinLibrary/RobotModel/zphandler.cpp; sourceTree = SOURCE_ROOT; };
+		10CDDB010CDDB010CDDB0000 /* robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = robot.cpp; path = src/VirtualSkinLibrary/RobotModel/robot.cpp; sourceTree = SOURCE_ROOT; };
+		10CE89010CE89010CE890000 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = src/VirtualSkinLibrary/RobotModel/interval.cpp; sourceTree = SOURCE_ROOT; };
+		10CF37010CF37010CF370000 /* motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = motor.cpp; path = src/VirtualSkinLibrary/RobotModel/motor.cpp; sourceTree = SOURCE_ROOT; };
+		10CFE5010CFE5010CFE50000 /* bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bodyPart.cpp; path = src/VirtualSkinLibrary/RobotModel/bodyPart.cpp; sourceTree = SOURCE_ROOT; };
+		10D099010D099010D0990000 /* link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = link.cpp; path = src/VirtualSkinLibrary/RobotModel/link.cpp; sourceTree = SOURCE_ROOT; };
+		10D145010D145010D1450000 /* primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = primitiveobject.cpp; path = src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp; sourceTree = SOURCE_ROOT; };
+		10D1F7010D1F7010D1F70000 /* cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cylinder.cpp; path = src/VirtualSkinLibrary/RobotModel/cylinder.cpp; sourceTree = SOURCE_ROOT; };
+		10D2A5010D2A5010D2A50000 /* joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = joint.cpp; path = src/VirtualSkinLibrary/RobotModel/joint.cpp; sourceTree = SOURCE_ROOT; };
+		10D354010D354010D3540000 /* joint_prismatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = joint_prismatic.cpp; path = src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp; sourceTree = SOURCE_ROOT; };
+		10D407010D407010D4070000 /* joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = joint_revolute.cpp; path = src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp; sourceTree = SOURCE_ROOT; };
+		10D4B9010D4B9010D4B90000 /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = src/VirtualSkinLibrary/RobotModel/box.cpp; sourceTree = SOURCE_ROOT; };
+		10D567010D567010D5670000 /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = world.cpp; path = src/VirtualSkinLibrary/RobotModel/world.cpp; sourceTree = SOURCE_ROOT; };
+		10D615010D615010D6150000 /* RpcFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RpcFilterImpl.cpp; path = src/VirtualSkinLibrary/YarpFilter/RpcFilterImpl.cpp; sourceTree = SOURCE_ROOT; };
+		10D624010D624010D6240000 /* kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kintreenode.cpp; path = src/VirtualSkinLibrary/RobotModel/kintreenode.cpp; sourceTree = SOURCE_ROOT; };
+		10D6D0010D6D0010D6D00000 /* compositeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compositeObject.cpp; path = src/VirtualSkinLibrary/RobotModel/compositeObject.cpp; sourceTree = SOURCE_ROOT; };
+		10D782010D782010D7820000 /* sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sphere.cpp; path = src/VirtualSkinLibrary/RobotModel/sphere.cpp; sourceTree = SOURCE_ROOT; };
+		10D831010D831010D8310000 /* displmatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = displmatrix.cpp; path = src/VirtualSkinLibrary/RobotModel/displmatrix.cpp; sourceTree = SOURCE_ROOT; };
+		10D8E2010D8E2010D8E20000 /* displaylist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = displaylist.cpp; path = src/VirtualSkinLibrary/RobotModel/displaylist.cpp; sourceTree = SOURCE_ROOT; };
+		10D992010D992010D9920000 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = model.cpp; path = src/VirtualSkinLibrary/RobotModel/model.cpp; sourceTree = SOURCE_ROOT; };
+		10DA41010DA41010DA410000 /* moc_skinWindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_skinWindow.cxx; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx; sourceTree = SOURCE_ROOT; };
+		10DAF5010DAF5010DAF50000 /* moc_glWidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_glWidget.cxx; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_glWidget.cxx; sourceTree = SOURCE_ROOT; };
+		10DBA8010DBA8010DBA80000 /* moc_renderList.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_renderList.cxx; path = xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx; sourceTree = SOURCE_ROOT; };
+		10DC38010DC38010DC380000 /* stateObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stateObserver.cpp; path = src/VirtualSkinLibrary/stateObserver.cpp; sourceTree = SOURCE_ROOT; };
+		10E1BB010E1BB010E1BB0000 /* ReflexDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = ReflexDemo; sourceTree = BUILT_PRODUCTS_DIR; };
+		10E230010E230010E2300000 /* partController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = partController.h; path = src/iCubBabble/partController.h; sourceTree = SOURCE_ROOT; };
+		10E2D9010E2D9010E2D90000 /* partBabbler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = partBabbler.h; path = src/iCubBabble/partBabbler.h; sourceTree = SOURCE_ROOT; };
+		10E385010E385010E3850000 /* iCubBabbler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCubBabbler.h; path = src/iCubBabble/iCubBabbler.h; sourceTree = SOURCE_ROOT; };
+		10E42B010E42B010E42B0000 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/iCubBabble/main.cpp; sourceTree = SOURCE_ROOT; };
+		10E4DA010E4DA010E4DA0000 /* partController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = partController.cpp; path = src/iCubBabble/partController.cpp; sourceTree = SOURCE_ROOT; };
+		10E588010E588010E5880000 /* partBabbler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = partBabbler.cpp; path = src/iCubBabble/partBabbler.cpp; sourceTree = SOURCE_ROOT; };
+		10E636010E636010E6360000 /* iCubBabbler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iCubBabbler.cpp; path = src/iCubBabble/iCubBabbler.cpp; sourceTree = SOURCE_ROOT; };
+		10E6DE010E6DE010E6DE0000 /* moc_iCubBabbler.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_iCubBabbler.cxx; path = xcode/src/iCubBabble/moc_iCubBabbler.cxx; sourceTree = SOURCE_ROOT; };
+		10E78A010E78A010E78A0000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = src/iCubBabble/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		10E838010E838010E8380000 /* moc_iCubBabbler.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_iCubBabbler.cxx.rule; path = xcode/src/iCubBabble/moc_iCubBabbler.cxx.rule; sourceTree = SOURCE_ROOT; };
+		10F6E2010F6E2010F6E20000 /* iCubBabble */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = iCubBabble; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		100669010066901006690000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				10BAAA010BAAA010BAAA0000 /* skinWindow.h */,
+				10BB50010BB50010BB500000 /* glWidget.h */,
+				10BBFC010BBFC010BBFC0000 /* renderList.h */,
+				10BCAC010BCAC010BCAC0000 /* robotmodelexception.h */,
+				10BD61010BD61010BD610000 /* zphandler.h */,
+				10BE12010BE12010BE120000 /* robot.h */,
+				10BEC2010BEC2010BEC20000 /* interval.h */,
+				10BF6F010BF6F010BF6F0000 /* motor.h */,
+				10C01C010C01C010C01C0000 /* bodyPart.h */,
+				10C0CF010C0CF010C0CF0000 /* link.h */,
+				10C17A010C17A010C17A0000 /* primitiveobject.h */,
+				10C229010C229010C2290000 /* cylinder.h */,
+				10C2D6010C2D6010C2D60000 /* joint.h */,
+				10C384010C384010C3840000 /* joint_prismatic.h */,
+				10C434010C434010C4340000 /* joint_revolute.h */,
+				10C4E3010C4E3010C4E30000 /* box.h */,
+				10C590010C590010C5900000 /* world.h */,
+				10C64C010C64C010C64C0000 /* kintreenode.h */,
+				10C6F6010C6F6010C6F60000 /* compositeObject.h */,
+				10C7A5010C7A5010C7A50000 /* sphere.h */,
+				10C853010C853010C8530000 /* displmatrix.h */,
+				10C903010C903010C9030000 /* displaylist.h */,
+				10C9B2010C9B2010C9B20000 /* model.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		100FBA0100FBA0100FBA0000 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				10BA31010BA31010BA310000 /* libVirtualSkin.a */,
+				106C8A0106C8A0106C8A0000 /* libRobotModel.a */,
+				109519010951901095190000 /* libYarpFilter.a */,
+				10E1BB010E1BB010E1BB0000 /* ReflexDemo */,
+				10F6E2010F6E2010F6E20000 /* iCubBabble */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		101163010116301011630000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		1011B101011B101011B10000 = {
+			isa = PBXGroup;
+			children = (
+				105071010507101050710000 /* Sources */,
+				1071D701071D701071D70000 /* Resources */,
+				100FBA0100FBA0100FBA0000 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		103840010384001038400000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				10A632010A632010A6320000 /* yarpModel.h */,
+				10A6E4010A6E4010A6E40000 /* stateObserver.h */,
+				10A790010A790010A7900000 /* responseObserver.h */,
+				10893F010893F010893F0000 /* robotFilter.h */,
+				1089EE01089EE01089EE0000 /* callObserver.h */,
+				108A9E0108A9E0108A9E0000 /* circularBuffer.h */,
+				108B4D0108B4D0108B4D0000 /* yarpRpcPort.h */,
+				108BFB0108BFB0108BFB0000 /* worldRpcInterface.h */,
+				10A34B010A34B010A34B0000 /* yarpStreamPort.h */,
+				10A217010A217010A2170000 /* constants.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		105071010507101050710000 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1053F301053F301053F30000 /* ALL_BUILD */,
+				10DC71010DC71010DC710000 /* VirtualSkin */,
+				10B550010B550010B5500000 /* RobotModel */,
+				108419010841901084190000 /* YarpFilter */,
+				108551010855101085510000 /* ReflexDemo */,
+				108641010864101086410000 /* iCubBabble */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		1053F301053F301053F30000 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				101163010116301011630000 /* CMake Rules */,
+				10AC6E010AC6E010AC6E0000 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		1068CA01068CA01068CA0000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				107D030107D030107D030000 /* moc_robotFilter.cxx.rule */,
+				107DB50107DB50107DB50000 /* moc_responseObserver.cxx.rule */,
+				107E660107E660107E660000 /* moc_stateObserver.cxx.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		1071D701071D701071D70000 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		10822F010822F010822F0000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				10CA60010CA60010CA600000 /* skinWindow.cpp */,
+				10CB0F010CB0F010CB0F0000 /* glWidget.cpp */,
+				10CBBF010CBBF010CBBF0000 /* renderList.cpp */,
+				10CC72010CC72010CC720000 /* robotmodelexception.cpp */,
+				10CD26010CD26010CD260000 /* zphandler.cpp */,
+				10CDDB010CDDB010CDDB0000 /* robot.cpp */,
+				10CE89010CE89010CE890000 /* interval.cpp */,
+				10CF37010CF37010CF370000 /* motor.cpp */,
+				10CFE5010CFE5010CFE50000 /* bodyPart.cpp */,
+				10D099010D099010D0990000 /* link.cpp */,
+				10D145010D145010D1450000 /* primitiveobject.cpp */,
+				10D1F7010D1F7010D1F70000 /* cylinder.cpp */,
+				10D2A5010D2A5010D2A50000 /* joint.cpp */,
+				10D354010D354010D3540000 /* joint_prismatic.cpp */,
+				10D407010D407010D4070000 /* joint_revolute.cpp */,
+				10D4B9010D4B9010D4B90000 /* box.cpp */,
+				10D567010D567010D5670000 /* world.cpp */,
+				10D624010D624010D6240000 /* kintreenode.cpp */,
+				10D6D0010D6D0010D6D00000 /* compositeObject.cpp */,
+				10D782010D782010D7820000 /* sphere.cpp */,
+				10D831010D831010D8310000 /* displmatrix.cpp */,
+				10D8E2010D8E2010D8E20000 /* displaylist.cpp */,
+				10D992010D992010D9920000 /* model.cpp */,
+				10DA41010DA41010DA410000 /* moc_skinWindow.cxx */,
+				10DAF5010DAF5010DAF50000 /* moc_glWidget.cxx */,
+				10DBA8010DBA8010DBA80000 /* moc_renderList.cxx */,
+				1061D101061D101061D10000 /* moc_model.cxx */,
+				106284010628401062840000 /* moc_robot.cxx */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		108392010839201083920000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				1063EB01063EB01063EB0000 /* moc_skinWindow.cxx.rule */,
+				1064A001064A001064A00000 /* moc_glWidget.cxx.rule */,
+				106552010655201065520000 /* moc_renderList.cxx.rule */,
+				106607010660701066070000 /* moc_model.cxx.rule */,
+				1066B701066B701066B70000 /* moc_robot.cxx.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		108419010841901084190000 /* YarpFilter */ = {
+			isa = PBXGroup;
+			children = (
+				10845B010845B010845B0000 /* Source Files */,
+				1084D001084D001084D00000 /* Header Files */,
+				105AA00105AA00105AA00000 /* CMakeLists.txt */,
+			);
+			name = YarpFilter;
+			sourceTree = "<group>";
+		};
+		10845B010845B010845B0000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				10D615010D615010D6150000 /* RpcFilterImpl.cpp */,
+				106DA00106DA00106DA00000 /* RpcFilter.cpp */,
+				106E530106E530106E530000 /* StreamFilterImpl.cpp */,
+				106911010691101069110000 /* StreamFilter.cpp */,
+				1069C201069C201069C20000 /* ControlBoardFilter.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		1084D001084D001084D00000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				106A790106A790106A790000 /* RpcFilterImpl.h */,
+				106B2E0106B2E0106B2E0000 /* RpcFilter.h */,
+				105887010588701058870000 /* StreamFilterImpl.h */,
+				105935010593501059350000 /* StreamFilter.h */,
+				1059EC01059EC01059EC0000 /* ControlBoardFilter.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		108551010855101085510000 /* ReflexDemo */ = {
+			isa = PBXGroup;
+			children = (
+				108592010859201085920000 /* Header Files */,
+				1085DB01085DB01085DB0000 /* Source Files */,
+				109675010967501096750000 /* CMakeLists.txt */,
+			);
+			name = ReflexDemo;
+			sourceTree = "<group>";
+		};
+		108592010859201085920000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				10948B010948B010948B0000 /* reflexFilter.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		1085DB01085DB01085DB0000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				109918010991801099180000 /* main.cpp */,
+				10931B010931B010931B0000 /* reflexFilter.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		108641010864101086410000 /* iCubBabble */ = {
+			isa = PBXGroup;
+			children = (
+				108682010868201086820000 /* Header Files */,
+				1086DD01086DD01086DD0000 /* Source Files */,
+				108758010875801087580000 /* CMake Rules */,
+				10E78A010E78A010E78A0000 /* CMakeLists.txt */,
+			);
+			name = iCubBabble;
+			sourceTree = "<group>";
+		};
+		108682010868201086820000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				10E230010E230010E2300000 /* partController.h */,
+				10E2D9010E2D9010E2D90000 /* partBabbler.h */,
+				10E385010E385010E3850000 /* iCubBabbler.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		1086DD01086DD01086DD0000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				10E42B010E42B010E42B0000 /* main.cpp */,
+				10E4DA010E4DA010E4DA0000 /* partController.cpp */,
+				10E588010E588010E5880000 /* partBabbler.cpp */,
+				10E636010E636010E6360000 /* iCubBabbler.cpp */,
+				10E6DE010E6DE010E6DE0000 /* moc_iCubBabbler.cxx */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		108758010875801087580000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				10E838010E838010E8380000 /* moc_iCubBabbler.cxx.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		1091EF01091EF01091EF0000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				10A2C1010A2C1010A2C10000 /* yarpModel.cpp */,
+				10DC38010DC38010DC380000 /* stateObserver.cpp */,
+				103F180103F180103F180000 /* responseObserver.cpp */,
+				108C470108C470108C470000 /* robotFilter.cpp */,
+				108CF40108CF40108CF40000 /* callObserver.cpp */,
+				108DA70108DA70108DA70000 /* circularBuffer.cpp */,
+				108E540108E540108E540000 /* yarpRpcPort.cpp */,
+				108F010108F010108F010000 /* worldRpcInterface.cpp */,
+				108FB20108FB20108FB20000 /* yarpStreamPort.cpp */,
+				109065010906501090650000 /* moc_robotFilter.cxx */,
+				109111010911101091110000 /* moc_responseObserver.cxx */,
+				1091C401091C401091C40000 /* moc_stateObserver.cxx */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		10B550010B550010B5500000 /* RobotModel */ = {
+			isa = PBXGroup;
+			children = (
+				100669010066901006690000 /* Header Files */,
+				10822F010822F010822F0000 /* Source Files */,
+				108392010839201083920000 /* CMake Rules */,
+				106337010633701063370000 /* CMakeLists.txt */,
+			);
+			name = RobotModel;
+			sourceTree = "<group>";
+		};
+		10DC71010DC71010DC710000 /* VirtualSkin */ = {
+			isa = PBXGroup;
+			children = (
+				103840010384001038400000 /* Header Files */,
+				1091EF01091EF01091EF0000 /* Source Files */,
+				1068CA01068CA01068CA0000 /* CMake Rules */,
+				1088B601088B601088B60000 /* CMakeLists.txt */,
+			);
+			name = VirtualSkin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		105C9A0105C9A0105C9A0000 /* YarpFilter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 105CAF0105CAF0105CAF0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */;
+			buildPhases = (
+				105B970105B970105B970000 /* CMake ReRun */,
+				105B4E0105B4E0105B4E0000 /* Sources */,
+				105C040105C040105C040000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YarpFilter;
+			productName = YarpFilter;
+			productReference = 109519010951901095190000 /* libYarpFilter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		1067D201067D201067D20000 /* RobotModel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 106815010681501068150000 /* Build configuration list for PBXNativeTarget "RobotModel" */;
+			buildPhases = (
+				1067AC01067AC01067AC0000 /* CMake ReRun */,
+				10DCC6010DCC6010DCC60000 /* CMake Rules */,
+				106762010676201067620000 /* Sources */,
+				104584010458401045840000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RobotModel;
+			productName = RobotModel;
+			productReference = 106C8A0106C8A0106C8A0000 /* libRobotModel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		107A730107A730107A730000 /* VirtualSkin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 107A960107A960107A960000 /* Build configuration list for PBXNativeTarget "VirtualSkin" */;
+			buildPhases = (
+				107A840107A840107A840000 /* CMake ReRun */,
+				107B060107B060107B060000 /* CMake Rules */,
+				107A240107A240107A240000 /* Sources */,
+				107B7D0107B7D0107B7D0000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10F816010F816010F8160000 /* PBXTargetDependency */,
+				10F97F010F97F010F97F0000 /* PBXTargetDependency */,
+			);
+			name = VirtualSkin;
+			productName = VirtualSkin;
+			productReference = 10BA31010BA31010BA310000 /* libVirtualSkin.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		1098F401098F401098F40000 /* ReflexDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 109B950109B950109B950000 /* Build configuration list for PBXNativeTarget "ReflexDemo" */;
+			buildPhases = (
+				1097F201097F201097F20000 /* CMake ReRun */,
+				1099A401099A401099A40000 /* Sources */,
+				10985F010985F010985F0000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10F816010F816010F8160000 /* PBXTargetDependency */,
+				10F888010F888010F8880000 /* PBXTargetDependency */,
+				10F97F010F97F010F97F0000 /* PBXTargetDependency */,
+			);
+			name = ReflexDemo;
+			productName = ReflexDemo;
+			productReference = 10E1BB010E1BB010E1BB0000 /* ReflexDemo */;
+			productType = "com.apple.product-type.tool";
+		};
+		10E930010E930010E9300000 /* iCubBabble */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10EAB1010EAB1010EAB10000 /* Build configuration list for PBXNativeTarget "iCubBabble" */;
+			buildPhases = (
+				10E937010E937010E9370000 /* CMake ReRun */,
+				10E99F010E99F010E99F0000 /* CMake Rules */,
+				10E8DF010E8DF010E8DF0000 /* Sources */,
+				10EA10010EA10010EA100000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iCubBabble;
+			productName = iCubBabble;
+			productReference = 10F6E2010F6E2010F6E20000 /* iCubBabble */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1087B901087B901087B90000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 10884B010884B010884B0000 /* Build configuration list for PBXProject "virtualSkin" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 0;
+			mainGroup = 1011B101011B101011B10000;
+			projectDirPath = ..;
+			projectRoot = "";
+			targets = (
+				10B2F3010B2F3010B2F30000 /* ALL_BUILD */,
+				10AD4D010AD4D010AD4D0000 /* install */,
+				107A730107A730107A730000 /* VirtualSkin */,
+				1067D201067D201067D20000 /* RobotModel */,
+				105C9A0105C9A0105C9A0000 /* YarpFilter */,
+				1098F401098F401098F40000 /* ReflexDemo */,
+				10E930010E930010E9300000 /* iCubBabble */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		104584010458401045840000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_postBuildPhase.make$CONFIGURATION all";
+		};
+		105B970105B970105B970000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		105C040105C040105C040000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/CMakeScripts/YarpFilter_postBuildPhase.make$CONFIGURATION all";
+		};
+		1067AC01067AC01067AC0000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		107A840107A840107A840000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		107B060107B060107B060000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/CMakeScripts/VirtualSkin_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		107B7D0107B7D0107B7D0000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/CMakeScripts/VirtualSkin_postBuildPhase.make$CONFIGURATION all";
+		};
+		1097F201097F201097F20000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		10985F010985F010985F0000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo -f /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/CMakeScripts/ReflexDemo_postBuildPhase.make$CONFIGURATION all";
+		};
+		10AD6B010AD6B010AD6B0000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		10ADD8010ADD8010ADD80000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+		};
+		10B315010B315010B3150000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		10B382010B382010B3820000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		10DCC6010DCC6010DCC60000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		10E937010E937010E9370000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		10E99F010E99F010E99F0000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble -f /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/CMakeScripts/iCubBabble_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		10EA10010EA10010EA100000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble -f /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/CMakeScripts/iCubBabble_postBuildPhase.make$CONFIGURATION all";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		105B4E0105B4E0105B4E0000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				106D0D0106D0D0106D0D0000 /* RpcFilterImpl.cpp in Sources */,
+				106DB90106DB90106DB90000 /* RpcFilter.cpp in Sources */,
+				106EB20106EB20106EB20000 /* StreamFilterImpl.cpp in Sources */,
+				10692A010692A010692A0000 /* StreamFilter.cpp in Sources */,
+				106A230106A230106A230000 /* ControlBoardFilter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		106762010676201067620000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10CA76010CA76010CA760000 /* skinWindow.cpp in Sources */,
+				10CB30010CB30010CB300000 /* glWidget.cpp in Sources */,
+				10CBD8010CBD8010CBD80000 /* renderList.cpp in Sources */,
+				10CCD0010CCD0010CCD00000 /* robotmodelexception.cpp in Sources */,
+				10CD3F010CD3F010CD3F0000 /* zphandler.cpp in Sources */,
+				10CDFC010CDFC010CDFC0000 /* robot.cpp in Sources */,
+				10CEAA010CEAA010CEAA0000 /* interval.cpp in Sources */,
+				10CF58010CF58010CF580000 /* motor.cpp in Sources */,
+				10D006010D006010D0060000 /* bodyPart.cpp in Sources */,
+				10D0B7010D0B7010D0B70000 /* link.cpp in Sources */,
+				10D1A2010D1A2010D1A20000 /* primitiveobject.cpp in Sources */,
+				10D218010D218010D2180000 /* cylinder.cpp in Sources */,
+				10D2C6010D2C6010D2C60000 /* joint.cpp in Sources */,
+				10D3B1010D3B1010D3B10000 /* joint_prismatic.cpp in Sources */,
+				10D464010D464010D4640000 /* joint_revolute.cpp in Sources */,
+				10D4DA010D4DA010D4DA0000 /* box.cpp in Sources */,
+				10D588010D588010D5880000 /* world.cpp in Sources */,
+				10D63A010D63A010D63A0000 /* kintreenode.cpp in Sources */,
+				10D72D010D72D010D72D0000 /* compositeObject.cpp in Sources */,
+				10D7A3010D7A3010D7A30000 /* sphere.cpp in Sources */,
+				10D84A010D84A010D84A0000 /* displmatrix.cpp in Sources */,
+				10D8FB010D8FB010D8FB0000 /* displaylist.cpp in Sources */,
+				10D9B3010D9B3010D9B30000 /* model.cpp in Sources */,
+				10DAA3010DAA3010DAA30000 /* moc_skinWindow.cxx in Sources */,
+				10DB73010DB73010DB730000 /* moc_glWidget.cxx in Sources */,
+				10617F010617F010617F0000 /* moc_renderList.cxx in Sources */,
+				10624F010624F010624F0000 /* moc_model.cxx in Sources */,
+				106302010630201063020000 /* moc_robot.cxx in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		107A240107A240107A240000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10A121010A121010A1210000 /* yarpModel.cpp in Sources */,
+				10DC56010DC56010DC560000 /* stateObserver.cpp in Sources */,
+				103F390103F390103F390000 /* responseObserver.cpp in Sources */,
+				108C680108C680108C680000 /* robotFilter.cpp in Sources */,
+				108D150108D150108D150000 /* callObserver.cpp in Sources */,
+				108DC80108DC80108DC80000 /* circularBuffer.cpp in Sources */,
+				108E750108E750108E750000 /* yarpRpcPort.cpp in Sources */,
+				108F220108F220108F220000 /* worldRpcInterface.cpp in Sources */,
+				108FCC0108FCC0108FCC0000 /* yarpStreamPort.cpp in Sources */,
+				10907B010907B010907B0000 /* moc_robotFilter.cxx in Sources */,
+				10916D010916D010916D0000 /* moc_responseObserver.cxx in Sources */,
+				100E730100E730100E730000 /* moc_stateObserver.cxx in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1099A401099A401099A40000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				109618010961801096180000 /* main.cpp in Sources */,
+				109643010964301096430000 /* reflexFilter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10E8DF010E8DF010E8DF0000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10E4A9010E4A9010E4A90000 /* main.cpp in Sources */,
+				10E557010E557010E5570000 /* partController.cpp in Sources */,
+				10E605010E605010E6050000 /* partBabbler.cpp in Sources */,
+				10E6A7010E6A7010E6A70000 /* iCubBabbler.cpp in Sources */,
+				10E6FB010E6FB010E6FB0000 /* moc_iCubBabbler.cxx in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		10F79F010F79F010F79F0000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1098F401098F401098F40000 /* ReflexDemo */;
+			targetProxy = 10F752010F752010F7520000 /* PBXContainerItemProxy */;
+		};
+		10F816010F816010F8160000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1067D201067D201067D20000 /* RobotModel */;
+			targetProxy = 10F7C7010F7C7010F7C70000 /* PBXContainerItemProxy */;
+		};
+		10F888010F888010F8880000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 107A730107A730107A730000 /* VirtualSkin */;
+			targetProxy = 10F83C010F83C010F83C0000 /* PBXContainerItemProxy */;
+		};
+		10F901010F901010F9010000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10E930010E930010E9300000 /* iCubBabble */;
+			targetProxy = 10F8B5010F8B5010F8B50000 /* PBXContainerItemProxy */;
+		};
+		10F97F010F97F010F97F0000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 105C9A0105C9A0105C9A0000 /* YarpFilter */;
+			targetProxy = 10F930010F930010F9300000 /* PBXContainerItemProxy */;
+		};
+		10FA05010FA05010FA050000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10B2F3010B2F3010B2F30000 /* ALL_BUILD */;
+			targetProxy = 10F9A9010F9A9010F9A90000 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		103E280103E280103E280000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		104630010463001046300000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+					QT_DEBUG,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RobotModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		104A550104A550104A550000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RobotModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		104BCE0104BCE0104BCE0000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = VirtualSkin;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		104D2C0104D2C0104D2C0000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RobotModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10521C010521C010521C0000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RobotModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		105797010579701057970000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = YarpFilter;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		105CE50105CE50105CE50000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = YarpFilter;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		106050010605001060500000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = YarpFilter;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		1073A001073A001073A00000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = VirtualSkin;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10756C010756C010756C0000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = VirtualSkin;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		107C310107C310107C310000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = VirtualSkin;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		108018010801801080180000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = YarpFilter;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		108864010886401088640000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/build;
+			};
+			name = Debug;
+		};
+		109BCB0109BCB0109BCB0000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Debug/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Debug/libYarpFilter.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Debug/libVirtualSkin.a,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Debug/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Debug/libYarpFilter.a,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ReflexDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		109D230109D230109D230000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Release/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Release/libYarpFilter.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Release/libVirtualSkin.a,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Release/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Release/libYarpFilter.a,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ReflexDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10A017010A017010A0170000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/MinSizeRel/libYarpFilter.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/MinSizeRel/libVirtualSkin.a,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/MinSizeRel/libYarpFilter.a,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ReflexDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10A48B010A48B010A48B0000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		10A848010A848010A8480000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		10A9C7010A9C7010A9C70000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10AB28010AB28010AB280000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10AF17010AF17010AF170000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10B078010B078010B0780000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10B1BC010B1BC010B1BC0000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/build;
+			};
+			name = RelWithDebInfo;
+		};
+		10B441010B441010B4410000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		10B58C010B58C010B58C0000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/build;
+			};
+			name = Release;
+		};
+		10B5AB010B5AB010B5AB0000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/build;
+			};
+			name = MinSizeRel;
+		};
+		10DEA2010DEA2010DEA20000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/RelWithDebInfo/libYarpFilter.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RelWithDebInfo/libVirtualSkin.a,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo/libRobotModel.a,
+					/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/RelWithDebInfo/libYarpFilter.a,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					/usr/local/lib/libFreeSOLID.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ReflexDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		10EAE4010EAE4010EAE40000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = iCubBabble;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		10EDE2010EDE2010EDE20000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = iCubBabble;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10F0CB010F0CB010F0CB0000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = iCubBabble;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10F3C0010F3C0010F3C00000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					YARP_PRESENT,
+					_REENTRANT,
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/Library/ace/ACE_wrappers,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include",
+					/opt/local/include,
+					"/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include",
+					"/Users/kail/Library/yarp-2.2.6/include",
+					/Users/kail/Library/FreeSOLID/include,
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel,
+					/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a",
+					/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = iCubBabble;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		105CAF0105CAF0105CAF0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				105CE50105CE50105CE50000 /* Debug */,
+				106050010605001060500000 /* Release */,
+				105797010579701057970000 /* MinSizeRel */,
+				108018010801801080180000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		106815010681501068150000 /* Build configuration list for PBXNativeTarget "RobotModel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				104630010463001046300000 /* Debug */,
+				104A550104A550104A550000 /* Release */,
+				104D2C0104D2C0104D2C0000 /* MinSizeRel */,
+				10521C010521C010521C0000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		107A960107A960107A960000 /* Build configuration list for PBXNativeTarget "VirtualSkin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				107C310107C310107C310000 /* Debug */,
+				1073A001073A001073A00000 /* Release */,
+				10756C010756C010756C0000 /* MinSizeRel */,
+				104BCE0104BCE0104BCE0000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		10884B010884B010884B0000 /* Build configuration list for PBXProject "virtualSkin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				108864010886401088640000 /* Debug */,
+				10B58C010B58C010B58C0000 /* Release */,
+				10B5AB010B5AB010B5AB0000 /* MinSizeRel */,
+				10B1BC010B1BC010B1BC0000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		109B950109B950109B950000 /* Build configuration list for PBXNativeTarget "ReflexDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				109BCB0109BCB0109BCB0000 /* Debug */,
+				109D230109D230109D230000 /* Release */,
+				10A017010A017010A0170000 /* MinSizeRel */,
+				10DEA2010DEA2010DEA20000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		10AE3E010AE3E010AE3E0000 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10A848010A848010A8480000 /* Debug */,
+				10A9C7010A9C7010A9C70000 /* Release */,
+				10AB28010AB28010AB280000 /* MinSizeRel */,
+				10A48B010A48B010A48B0000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		10B3F3010B3F3010B3F30000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10B441010B441010B4410000 /* Debug */,
+				10AF17010AF17010AF170000 /* Release */,
+				10B078010B078010B0780000 /* MinSizeRel */,
+				103E280103E280103E280000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		10EAB1010EAB1010EAB10000 /* Build configuration list for PBXNativeTarget "iCubBabble" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10EAE4010EAE4010EAE40000 /* Debug */,
+				10EDE2010EDE2010EDE20000 /* Release */,
+				10F0CB010F0CB010F0CB0000 /* MinSizeRel */,
+				10F3C0010F3C0010F3C00000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1087B901087B901087B90000 /* Project object */;
+}

@@ -4,40 +4,21 @@
 
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
-### Create some options for use with ccmake ###
-option (LINK_ACE "If you have problems finding ace, turn this on" OFF)
-option (YARP_AUTO_LINK "... and this off" ON)
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cMakeScripts )
 
-### Location of scripts to find Ace and FreeSOLID ###
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cMakeScripts )
-
-### Locations of headers contained within this project ###
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/robotModel/" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/yarpUtil/gregorFilter/" )
-
-### Names of static libraries built by this project ###
-SET ( ROBOT_MODEL_LIB "robotModel" )
-SET ( YARP_UTILITIES_LIB "yarpUtil" )
-SET ( IDSIA_YARP_FILTER_LIB "yarpFilter" )
-
-### Find libraries ###
-FIND_PACKAGE ( OpenGL )
+### Find Libraries ###
+FIND_PACKAGE ( YARP REQUIRED )
+FIND_PACKAGE ( FreeSOLID REQUIRED )
+FIND_PACKAGE ( OpenGL REQUIRED )
 FIND_PACKAGE ( Qt4 REQUIRED )
+	SET (Q_WS_MAC FALSE)
+	SET (Q_WS_X11 FALSE)
+	SET (Q_WS_WIN FALSE)
 	SET ( QT_USE_QTOPENGL TRUE )
 	SET ( QT_USE_QTXML TRUE )
 	INCLUDE ( ${QT_USE_FILE} )
-FIND_PACKAGE ( FreeSOLID REQUIRED )
-FIND_PACKAGE ( YARP REQUIRED )
-IF ( LINK_ACE )
-	FIND_PACKAGE ( ACE REQUIRED )
-ENDIF ( LINK_ACE )
 
-### Set some platform-specific variables ###
-SET (Q_WS_MAC FALSE)
-SET (Q_WS_X11 FALSE)
-SET (Q_WS_WIN FALSE)
+### Platform Specific Config ###
 IF ( UNIX )
 	IF ( APPLE )
 		SET (Q_WS_MAC TRUE)
@@ -51,8 +32,16 @@ IF ( WIN32 )
 	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
 ENDIF ( WIN32 )
 
-### Include the directories where build targets are ###
-ADD_SUBDIRECTORY ( yarpUtil )
-ADD_SUBDIRECTORY ( robotModel )
-ADD_SUBDIRECTORY ( reflex )
-ADD_SUBDIRECTORY ( iCubBabbler )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary" )	
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/RobotModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/YarpFilter" )
+
+### Paths to static libraries built by sub-projects ###
+SET ( VIRTUAL_SKIN_LIB "VirtualSkin" )
+SET ( ROBOT_MODEL_LIB "RobotModel" )
+SET ( YARP_FILTER_LIB "YarpFilter" )
+
+### Parse the directories where build targets are ###
+ADD_SUBDIRECTORY ( VirtualSkinLibrary )
+ADD_SUBDIRECTORY ( ReflexDemo )
+ADD_SUBDIRECTORY ( iCubBabble )

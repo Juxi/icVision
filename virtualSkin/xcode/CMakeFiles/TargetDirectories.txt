@@ -1,0 +1,6 @@
+/Users/kail/imClever/dev/virtualSkin/xcode/CMakeFiles/ALL_BUILD.dir
+/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/CMakeFiles/ReflexDemo.dir
+/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeFiles/RobotModel.dir
+/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/CMakeFiles/VirtualSkin.dir
+/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/CMakeFiles/YarpFilter.dir
+/Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/CMakeFiles/iCubBabble.dir
