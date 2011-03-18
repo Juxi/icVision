@@ -1,3 +1,8 @@
+#########################################
+### Name: iCub_init.py
+### Author: Varun Raj Kompella
+### Affliation: IDSIA-Manno Switzerland
+######################################### 
 
 import yarp
 from opencv import cv
@@ -206,33 +211,40 @@ class sim_World():
 
 class iCub_Body():
   def __init__(self):
+    
+    robotname = "/icubSim/"
+    
     self.headOptions = yarp.Property()
     self.headOptions.put("device", "remote_controlboard")
     self.headOptions.put("local", "/iCub_Control/head")
-    self.headOptions.put("remote", "/icubSim/head")
+    self.headOptions.put("remote", str(robotname + "head"))
 
     self.right_armOptions = yarp.Property()
     self.right_armOptions.put("device", "remote_controlboard")
     self.right_armOptions.put("local", "/iCub_Control/right_arm")
-    self.right_armOptions.put("remote", "/icubSim/right_arm")
+    self.right_armOptions.put("remote", str(robotname + "right_arm"))
 
     self.left_armOptions = yarp.Property()
     self.left_armOptions.put("device", "remote_controlboard")
     self.left_armOptions.put("local", "/iCub_Control/left_arm")
-    self.left_armOptions.put("remote", "/icubSim/left_arm")
+    self.left_armOptions.put("remote", str(robotname + "left_arm"))
 
     self.torsoOptions = yarp.Property()
     self.torsoOptions.put("device", "remote_controlboard")
     self.torsoOptions.put("local", "/iCub_Control/torso")
-    self.torsoOptions.put("remote", "/icubSim/torso")
+    self.torsoOptions.put("remote", str(robotname + "torso"))
 
     self.head = yarp.PolyDriver(self.headOptions)
     self.right_arm = yarp.PolyDriver(self.right_armOptions)
     self.left_arm = yarp.PolyDriver(self.left_armOptions)
     self.torso = yarp.PolyDriver(self.torsoOptions)
-    
+
+    fh = open('./iCub_home_vals','r')
+    self.iCub_Home = cPickle.load(fh)
+    fh.close()
+
     self.body = [self.head, self.right_arm, self.left_arm, self.torso]
-    
+
     self.bodypos = list()
     self.bodylim = list()
     self.bodyjnts = list()
@@ -245,8 +257,8 @@ class iCub_Body():
       partlimits = np.zeros([self.bodyjnts[i],2])
       partWrkSpace = list()
       for j in range(self.bodyjnts[i]):
-	partWrkSpace.append(0)
-	self.bodypos[i].setRefSpeed(j,40.0)
+	partWrkSpace.append(self.iCub_Home[i][j])
+	self.bodypos[i].setRefSpeed(j,10.0)
 	mi = yarp.DVector(1)
 	ma = yarp.DVector(1)
 	self.bodylim[i].getLimits(j,mi,ma)
@@ -276,4 +288,17 @@ class iCub_Body():
     for i in range(len(self.body)):
       self.body[i].close()
 
+  def checkMotionDone(self,bodyId,motorId):
+    if bodyId is None or motorId is None:
+      return 0
+    c = yarp.BVector(1)
+    self.bodypos[bodyId].checkMotionDone(motorId,c)
+    return c[0]
+  
+  def bodyReset(self):
+    for i in range(len(self.bodyWrkSpace)):
+      for j in range(len(self.bodyWrkSpace[i])):
+	self.bodyWrkSpace[i][j] = self.iCub_Home[i][j]
+	self.movePosition(i, j, self.iCub_Home[i][j], 'absolute')
 
+    
