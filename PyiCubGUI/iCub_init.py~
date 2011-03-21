@@ -24,57 +24,6 @@ robot_name = "/icubSim/"	#for simulator
 
 
 ####################################################################################1
-class workspace:
-  def __init__(self):
-    #Set up working directory
-    while(1):
-      projDir = raw_input("Hello! Kindly enter the project workspace directory: ")
-      if not(os.path.exists(projDir)):
-	print "Creating the project directory...";sys.stdout.flush()
-	os.mkdir(projDir)
-	break
-      else:
-	response = raw_input("Directory already exists, Do you want to continue? (y/n): ")
-	if response == 'y':
-	  break
-    self.workDir = []
-    self.dircount = 0
-    self.workDir.append(projDir)				#workDir[0] - <projDir>/
-    self.dircount +=1
-    if not(os.path.exists(self.workDir[0] + 'pics_dump')):    
-      os.mkdir(self.workDir[0] + 'pics_dump')
-    self.workDir.append(self.workDir[0] + 'pics_dump/')		#workDir[1] - <projDir>/pics_dump/
-    self.dircount +=1
-    if not(os.path.exists(self.workDir[1] + 'training')):    
-      os.mkdir(self.workDir[1] + 'training')
-    self.workDir.append(self.workDir[1] + 'training/')		#workDir[2] - <projDir>/pics_dump/training/
-    self.dircount +=1
-    if not(os.path.exists(self.workDir[1] + 'testing')):    
-      os.mkdir(self.workDir[1] + 'testing')
-    self.workDir.append(self.workDir[1] + 'testing/')		#workDir[3] - <projDir>/pics_dump/testing/
-    self.dircount +=1
-    if not(os.path.exists(self.workDir[0] + 'state_tables')):    
-      os.mkdir(self.workDir[0] + 'state_tables')
-    self.workDir.append(self.workDir[0] + 'state_tables/')	#workDir[4] - <projDir>/state_tabels/
-    self.dircount +=1
-  
-  def addDir(self,newDir):
-    os.mkdir(self.workDir[0] + newDir)
-    self.workDir.append(self.workDir[0] + newDir)
-    self.dircount +=1
-    return self.dircount
-  
-  def getDir(self):
-    return self.workDir
-  
-  def setDir(self,newDir,dirno):
-    self.workDir[dirno] = self.workDir[0] + newDir
-  
-  def reset(self):
-    self.__init__();
-
-
-
 
 class iCub_Eyes():
   ''' This class takes image/video input from iCub Eyes 

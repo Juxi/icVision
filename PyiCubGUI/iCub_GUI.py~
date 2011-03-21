@@ -67,8 +67,7 @@ class iCubSimGui():
 
     if ProgramPanel:
       ### User Program Panel
-      wspce = workspace()
-      win3=ProgramGui(self.body,self.eyes,wspce=wspce)
+      win3=ProgramGui(self.body,self.eyes)
       win3.show()
       winlist.append(win3)
 

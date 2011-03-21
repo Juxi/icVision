@@ -211,7 +211,7 @@ class UserProgram(QtCore.QThread):
     self.fixedlim = np.array([[self.lim[0,0],55],[self.lim[1,0],40]])
     self.rw = randomWalk(self.fixedlim,self.train_dataset_len)	#initialize randomwalk states
     self.rw.generateStateTable()			#Generate state table
-    self.rw.printStateTable('training_state_table', wp=self.wspce)#Print the state table (For ground truth)
+    self.rw.printStateTable('training_state_table')	#Print the state table (For ground truth)
 
     ##Grid Test Dataset
     #self.gw = gridWalk(self.wspce)			#initialize gridwalk states
