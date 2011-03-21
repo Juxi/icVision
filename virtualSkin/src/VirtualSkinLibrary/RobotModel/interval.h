@@ -1,39 +1,46 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef INTERVAL_H
 #define INTERVAL_H
 
 #include <QtGui>
 
-/*! \brief A simple representation of a 1D interval (see Joint and Motor)
+namespace RobotModel { class Interval; }
+	
+/** \brief A simple representation of a 1D interval
  *
- * The interval is inclusive of 'min' and 'max'.
+ * The interval is inclusive of its limits, 'min' and 'max'.
  */
 
-namespace RobotModel {
-
-class Interval
+class RobotModel::Interval
 {
-private:
-    qreal   min,
-            max;
+
 public:
-    // constructor and destructor
     Interval();
     ~Interval();
 
-    // set stuff
     void setMin( const qreal minimum );
     void setMax( const qreal maximum );
 
-    // get stuff
     qreal getMin() const;
     qreal getMax() const;
 
-    // other
-    bool isInRange( const qreal num );
-    bool isTooSmall( const qreal num );
-    bool isTooBig( const qreal num );
-};
+    bool isInRange( const qreal num );		//!< Returns true iff min <= num <= max
+    bool isTooSmall( const qreal num );		//!< Returns true iff num < min
+    bool isTooBig( const qreal num );		//!< Returns true iff num > max
 	
-}
+private:
+    qreal   min,	//!< The lower limit of the Interval
+			max;	//!< The upper limit of the Interval
+};
 
 #endif
+
+/** @} */

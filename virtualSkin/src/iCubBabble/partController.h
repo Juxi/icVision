@@ -5,7 +5,6 @@
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 
-namespace RobotModel {
 
 /*! \brief Provides a remote device driver for a YARP port
  *  This could be a motor control interface for one part of the iCub for example. see: http://eris.liralab.it/wiki/Motor_control
@@ -53,7 +52,5 @@ private:
 	yarp::dev::IAmplifierControl *amp;
 	yarp::dev::IControlLimits *lim;
 };
-
-}
 
 #endif

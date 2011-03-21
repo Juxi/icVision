@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef RPCFILTERIMPL_H_
 #define RPCFILTERIMPL_H_
 
@@ -140,4 +144,5 @@ private:
 	bool returnResponse(Bottle response, ConnectionWriter *writer);
 };
 
-#endif /* RPCFILTERIMPL_H_ */
+#endif
+/** @} */

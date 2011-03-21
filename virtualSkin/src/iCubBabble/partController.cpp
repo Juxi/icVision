@@ -1,7 +1,6 @@
 #include "partController.h"
 #include <time.h>
 
-using namespace RobotModel;
 
 PartController::PartController() : numJoints(0)
 {

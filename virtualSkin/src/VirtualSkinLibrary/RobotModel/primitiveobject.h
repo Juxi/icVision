@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef PHYSOBJECT_H
 #define PHYSOBJECT_H
 
@@ -6,26 +15,28 @@
 #include "SOLID/solid.h"
 #include "displaylist.h"
 
-namespace RobotModel {
+namespace RobotModel
+{
+	class CompositeObject;
+	class PrimitiveObject;
+}
 
-class CompositeObject;
-
-class PrimitiveObject : public DisplayList
+class RobotModel::PrimitiveObject : public DisplayList
 {
 	
 public:
 	
-    PrimitiveObject();
-    virtual ~PrimitiveObject();
+	PrimitiveObject();
+	virtual ~PrimitiveObject();
 	
 	void setName( const QString& aName ) { name = aName; }
 	const QString& getName() { return name; }
 
-    void setParent( CompositeObject* object );
+	void setParent( CompositeObject* object );
 	CompositeObject* getParent() { return parent; }
 	
-    void setL( const QMatrix4x4& txfr );
-    void update( const QMatrix4x4& txfr );
+	void setL( const QMatrix4x4& txfr );
+	void update( const QMatrix4x4& txfr );
 	
 	void setCartesianRotation( const QVector3D& rot );
 	void cartesianRotate( const QVector3D& rot );
@@ -38,14 +49,14 @@ public:
 protected:
 	
 	QString		name;
-    CompositeObject*     parent;
+	CompositeObject*     parent;
 	DtShapeRef	shape;
-    DisplMatrix L;      // transformation from the PrimitiveObjectCS to the ObjectCS
+	DisplMatrix L;      // transformation from the PrimitiveObjectCS to the ObjectCS
 	QMutex mutex;
 
-    void doNotCollideWith( CompositeObject* object );
+	void doNotCollideWith( CompositeObject* object );
 };
-	
-}
 
 #endif
+
+/** @} */

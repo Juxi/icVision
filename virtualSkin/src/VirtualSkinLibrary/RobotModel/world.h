@@ -1,8 +1,17 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef WORLD_H
 #define WORLD_H
 
 #include <QThread>
-#include <qmutex.h>
+#include <QMutex>
 #include <QVector>
 
 #include "renderList.h"
@@ -11,19 +20,15 @@
 #include "cylinder.h"
 #include "box.h"
 
-namespace RobotModel {
+namespace RobotModel { class World; }
 
-class World : public RenderList
+class RobotModel::World : public RenderList
 {
 
 public:
-    World();
-    ~World();
 	
-	//void setPortName( const QString& name ) { rpcInterface.setName(name); }
-	//void openRpcInterface() { rpcInterface.start(); }
-	//void closeRpcInterface() { rpcInterface.stop(); }
-	//const WorldRpcInterface& getRpcInterface() { return rpcInterface; }
+	World();
+	~World();
 	
 	CompositeObject* newSphere( double r, const QVector3D& pos );
 	CompositeObject* newSSphere( double r, const QVector3D& pos );
@@ -48,15 +53,13 @@ public:
 	void notColliding();
 
 private:
-	//WorldRpcInterface rpcInterface;
+
 	QVector<CompositeObject*> objectList;
 	int numSpheres, numCylinders, numBoxes,
 		numSSpheres,numSCylinders,numSBoxes;
 	QMutex mutex;
-	
-	//friend class WorldRpcInterface;
 };
-	
-}
 
 #endif
+
+/** @} */

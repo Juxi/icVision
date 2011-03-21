@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/yarpUtil/partController.h Source File</title>
+<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/iCubBabble/partController.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -43,61 +44,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>/Users/kail/imClever/dev/virtualSkin/src/yarpUtil/partController.h</h1><a href="part_controller_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef PARTCONTROLLER_H</span>
+<h1>/Users/kail/imClever/dev/virtualSkin/src/iCubBabble/partController.h</h1><a href="part_controller_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef PARTCONTROLLER_H</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define PARTCONTROLLER_H</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QtCore&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;yarp/os/all.h&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;yarp/dev/all.h&gt;</span>
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>RobotModel {
-<a name="l00009"></a>00009 
-<a name="l00014"></a><a class="code" href="class_robot_model_1_1_part_controller.html">00014</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_part_controller.html" title="Provides a remote device driver for a YARP port This could be a motor control interface...">PartController</a>
-<a name="l00015"></a>00015 {
-<a name="l00016"></a>00016 <span class="keyword">public</span>:
-<a name="l00017"></a>00017     <a class="code" href="class_robot_model_1_1_part_controller.html#a9e5274fba78804eb936fc84048f21e73">PartController</a>();
-<a name="l00018"></a>00018     <a class="code" href="class_robot_model_1_1_part_controller.html#aee568c7268577894104e0739a99c33f5">~PartController</a>();
-<a name="l00019"></a>00019         
-<a name="l00020"></a>00020         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a20331379a94c33ef330792e6b9e8b94f">open</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* _robotName, <span class="keyword">const</span> <span class="keywordtype">char</span>* _partName );
-<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a7e0fbd5bd25cebb78cd1b095c2055dac">close</a>();
-<a name="l00022"></a>00022         
-<a name="l00023"></a>00023         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a02d325bdc7bd18023e47f97894a2de49">isValid</a>();
-<a name="l00024"></a><a class="code" href="class_robot_model_1_1_part_controller.html#a2fb04bfb6b1da63201fdaf3dac6591dc">00024</a>         <span class="keywordtype">int</span>     <a class="code" href="class_robot_model_1_1_part_controller.html#a2fb04bfb6b1da63201fdaf3dac6591dc">getNumJoints</a>() { <span class="keywordflow">return</span> numJoints; }
-<a name="l00025"></a>00025         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a4052252cc91ea1387d5a33c968e9a84a">checkMotionDone</a>( <span class="keywordtype">bool</span>* );
-<a name="l00026"></a>00026         
-<a name="l00027"></a><a class="code" href="class_robot_model_1_1_part_controller.html#aeb479f7ffd70c0cf80beabf38b1073f7">00027</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#aeb479f7ffd70c0cf80beabf38b1073f7">stop</a>() { <span class="keywordflow">return</span> vel-&gt;stop(); }
-<a name="l00028"></a>00028         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a3082aaf9c98045fb3309dcaef6416fbe">setRefSpeeds</a>( <span class="keyword">const</span> qreal );
-<a name="l00029"></a><a class="code" href="class_robot_model_1_1_part_controller.html#a5481c9f2cbbd8370fd2e5b62c38c7d2f">00029</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#a5481c9f2cbbd8370fd2e5b62c38c7d2f">setRefSpeeds</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; speeds) { <span class="keywordflow">return</span> pos-&gt;setRefSpeeds(speeds.constData()); }
-<a name="l00030"></a>00030         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#aeb2bca8add9b083ebd19d0d2d07fdfd4">positionMove</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; );
-<a name="l00031"></a>00031         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#ac5476493b51412c7b6008cf58111543b">velocityMove</a>( <span class="keywordtype">int</span> i, qreal v);
-<a name="l00032"></a>00032         
-<a name="l00033"></a>00033         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_part_controller.html#af513e2aa6934bcfeef7d2bf73e9b3cc3">randomPosMove</a>( qreal maxSpeed, <span class="keywordtype">bool</span> hands );
-<a name="l00034"></a>00034         
-<a name="l00035"></a>00035         <span class="comment">//bool getLimits( QVector&lt;qreal&gt;* min, QVector&lt;qreal&gt;* max );</span>
-<a name="l00036"></a>00036         
-<a name="l00037"></a>00037         <span class="comment">//bool normPosition( int, qreal norm, qreal* enc );</span>
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">private</span>:
-<a name="l00040"></a>00040         
-<a name="l00041"></a>00041         <span class="keywordtype">bool</span> open();
-<a name="l00042"></a>00042         
-<a name="l00043"></a>00043         QString robotName;
-<a name="l00044"></a>00044         QString partName;
-<a name="l00045"></a>00045         <span class="keywordtype">int</span> numJoints;
-<a name="l00046"></a>00046         
-<a name="l00047"></a>00047         yarp::os::Network network;
-<a name="l00048"></a>00048         yarp::dev::PolyDriver *dd;
-<a name="l00049"></a>00049         yarp::dev::IPositionControl *pos;
-<a name="l00050"></a>00050         yarp::dev::IVelocityControl *vel;
-<a name="l00051"></a>00051         yarp::dev::IEncoders *enc;
-<a name="l00052"></a>00052         yarp::dev::IPidControl *pid;
-<a name="l00053"></a>00053         yarp::dev::IAmplifierControl *amp;
-<a name="l00054"></a>00054         yarp::dev::IControlLimits *lim;
-<a name="l00055"></a>00055 };
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 }
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
+<a name="l00008"></a>00008 
+<a name="l00013"></a><a class="code" href="class_part_controller.html">00013</a> <span class="keyword">class </span><a class="code" href="class_part_controller.html" title="Provides a remote device driver for a YARP port This could be a motor control interface...">PartController</a>
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015 <span class="keyword">public</span>:
+<a name="l00016"></a>00016     <a class="code" href="class_part_controller.html#a9e5274fba78804eb936fc84048f21e73">PartController</a>();
+<a name="l00017"></a>00017     <a class="code" href="class_part_controller.html#aee568c7268577894104e0739a99c33f5">~PartController</a>();
+<a name="l00018"></a>00018         
+<a name="l00019"></a>00019         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a20331379a94c33ef330792e6b9e8b94f">open</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* _robotName, <span class="keyword">const</span> <span class="keywordtype">char</span>* _partName );
+<a name="l00020"></a>00020         <span class="keywordtype">void</span> <a class="code" href="class_part_controller.html#a7e0fbd5bd25cebb78cd1b095c2055dac">close</a>();
+<a name="l00021"></a>00021         
+<a name="l00022"></a>00022         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a02d325bdc7bd18023e47f97894a2de49">isValid</a>();
+<a name="l00023"></a><a class="code" href="class_part_controller.html#a39c9759cbeb96b49d1ab61d47a808468">00023</a>         <span class="keywordtype">int</span>     <a class="code" href="class_part_controller.html#a39c9759cbeb96b49d1ab61d47a808468">getNumJoints</a>() { <span class="keywordflow">return</span> numJoints; }
+<a name="l00024"></a>00024         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a4052252cc91ea1387d5a33c968e9a84a">checkMotionDone</a>( <span class="keywordtype">bool</span>* );
+<a name="l00025"></a>00025         
+<a name="l00026"></a><a class="code" href="class_part_controller.html#a6026784f8301487735a11aad4064fa00">00026</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a6026784f8301487735a11aad4064fa00">stop</a>() { <span class="keywordflow">return</span> vel-&gt;stop(); }
+<a name="l00027"></a>00027         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a3082aaf9c98045fb3309dcaef6416fbe">setRefSpeeds</a>( <span class="keyword">const</span> qreal );
+<a name="l00028"></a><a class="code" href="class_part_controller.html#a758a071e20b76c24dde812f11620313c">00028</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#a758a071e20b76c24dde812f11620313c">setRefSpeeds</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; speeds) { <span class="keywordflow">return</span> pos-&gt;setRefSpeeds(speeds.constData()); }
+<a name="l00029"></a>00029         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#aeb2bca8add9b083ebd19d0d2d07fdfd4">positionMove</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; );
+<a name="l00030"></a>00030         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#ac5476493b51412c7b6008cf58111543b">velocityMove</a>( <span class="keywordtype">int</span> i, qreal v);
+<a name="l00031"></a>00031         
+<a name="l00032"></a>00032         <span class="keywordtype">bool</span> <a class="code" href="class_part_controller.html#af513e2aa6934bcfeef7d2bf73e9b3cc3">randomPosMove</a>( qreal maxSpeed, <span class="keywordtype">bool</span> hands );
+<a name="l00033"></a>00033         
+<a name="l00034"></a>00034         <span class="comment">//bool getLimits( QVector&lt;qreal&gt;* min, QVector&lt;qreal&gt;* max );</span>
+<a name="l00035"></a>00035         
+<a name="l00036"></a>00036         <span class="comment">//bool normPosition( int, qreal norm, qreal* enc );</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 <span class="keyword">private</span>:
+<a name="l00039"></a>00039         
+<a name="l00040"></a>00040         <span class="keywordtype">bool</span> open();
+<a name="l00041"></a>00041         
+<a name="l00042"></a>00042         QString robotName;
+<a name="l00043"></a>00043         QString partName;
+<a name="l00044"></a>00044         <span class="keywordtype">int</span> numJoints;
+<a name="l00045"></a>00045         
+<a name="l00046"></a>00046         yarp::os::Network network;
+<a name="l00047"></a>00047         yarp::dev::PolyDriver *dd;
+<a name="l00048"></a>00048         yarp::dev::IPositionControl *pos;
+<a name="l00049"></a>00049         yarp::dev::IVelocityControl *vel;
+<a name="l00050"></a>00050         yarp::dev::IEncoders *enc;
+<a name="l00051"></a>00051         yarp::dev::IPidControl *pid;
+<a name="l00052"></a>00052         yarp::dev::IAmplifierControl *amp;
+<a name="l00053"></a>00053         yarp::dev::IControlLimits *lim;
+<a name="l00054"></a>00054 };
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="preprocessor">#endif</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

@@ -13,7 +13,6 @@ VirtualSkin is a collection of tools intended to facilitate your research on com
 
 Throughout this manual, when I refer to 'Virtual Skin', I mean some program that integrates \c librobotModel.a and \c libyarpFilter.a to protect a robot from physical collision. Such a 'Virtual Skin' program may also provide response to collision events as in the demo program 'Reflex'.
 
-
 \section upcoming Coming Soon
 
 - A new YARP RPC interface to move the robot model directly using position and velocity commands (facilitates planner-mode, decoupling the model from an external robot or simulated robot)

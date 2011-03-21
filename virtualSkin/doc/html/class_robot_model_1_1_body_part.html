@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -48,22 +49,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::BodyPart Class Reference</h1><!-- doxytag: class="RobotModel::BodyPart" -->
+<h1>RobotModel::BodyPart Class Reference<br/>
+<small>
+[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+</h1><!-- doxytag: class="RobotModel::BodyPart" -->
+<p>Allows motors to be controlled via groups such as 'torso', 'head' and 'arm'.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="body_part_8h_source.html">bodyPart.h</a>&gt;</code></p>
 
 <p><a href="class_robot_model_1_1_body_part-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a1f6265932a76d89dc77b0b6185966913">BodyPart</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *robot, <a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *bodyPart=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a9bd4c1a133fb45a66bbbd90319555cd4">BodyPart</a> (<a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *aRobot, <a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *aParentBodyPart=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The constructor immediately appends the new object to the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>.  <a href="#a9bd4c1a133fb45a66bbbd90319555cd4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a0d51eaacbf15745175b21bf44f67a92a">~BodyPart</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const QString &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a61b6e309edb55f764400dac2b8659a5f">name</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc">parent</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to destroy here.  <a href="#a0d51eaacbf15745175b21bf44f67a92a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#ae67c833c817776f9b922d967a2654df2">setName</a> (const QString &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#adc934dcfdac5a14fe88dd5a21b9055d7">setEncPos</a> (const QVector&lt; qreal &gt; &amp;x)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets a human readable name for the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>.  <a href="#ae67c833c817776f9b922d967a2654df2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const QString &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a61b6e309edb55f764400dac2b8659a5f">name</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the human readable name of the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>.  <a href="#a61b6e309edb55f764400dac2b8659a5f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc">parent</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a pointer to the parent object.  <a href="#abc2ab2a0e1da50aa7465bc1b92ed3abc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#ad5ceb22c00423ebeace914db0276dc83">setEncPos</a> (const QVector&lt; qreal &gt; &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets all motor positions by calling <a class="el" href="class_robot_model_1_1_motor.html#a80d5a42cb4cc119afe0bdd4ed90a4152">Motor.setEncPos( qreal )</a> on each motor.  <a href="#ad5ceb22c00423ebeace914db0276dc83"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_body_part.html#a6b52676f58b9da5bef87ef2fac1a7a94">verify</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns 'true' if there are no void pointers in the QVector and 'false' otherwise.  <a href="#a6b52676f58b9da5bef87ef2fac1a7a94"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Allows motors to be controlled via groups such as 'torso', 'head' and 'arm'. </p>
+<p>This class facilitates grouping of the motors (and therefore joints) into subsystems, as in the YARP interface to the iCub. An instance of <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> therefore inherits a QVector of motors and provides a method <a class="el" href="class_robot_model_1_1_body_part.html#ad5ceb22c00423ebeace914db0276dc83" title="Sets all motor positions by calling Motor.setEncPos( qreal ) on each motor.">setEncPos( const QVector&lt;qreal&gt;&amp; x )</a>, to set the encoder positions of the motors. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1f6265932a76d89dc77b0b6185966913"></a><!-- doxytag: member="RobotModel::BodyPart::BodyPart" ref="a1f6265932a76d89dc77b0b6185966913" args="(Robot *robot, BodyPart *bodyPart=0)" -->
+<a class="anchor" id="a9bd4c1a133fb45a66bbbd90319555cd4"></a><!-- doxytag: member="RobotModel::BodyPart::BodyPart" ref="a9bd4c1a133fb45a66bbbd90319555cd4" args="(Robot *aRobot, BodyPart *aParentBodyPart=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -71,13 +88,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="memname">BodyPart::BodyPart </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a> *&nbsp;</td>
-          <td class="paramname"> <em>robot</em>, </td>
+          <td class="paramname"> <em>aRobot</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *&nbsp;</td>
-          <td class="paramname"> <em>bodyPart</em> = <code>0</code></td><td>&nbsp;</td>
+          <td class="paramname"> <em>aParentBodyPart</em> = <code>0</code></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -87,6 +104,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>The constructor immediately appends the new object to the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>. </p>
+<p>...by calling <a class="el" href="class_robot_model_1_1_robot.html#a44d1922d7d9ea6c7c90360c2443b1ec3">Robot.appendBodyPart( BodyPart* this )</a> </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>aRobot</em>&nbsp;</td><td>The robot to which this <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> should be appended </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>aParentBodyPart</em>&nbsp;</td><td>Facilitates robot creation via the Qt XML parser and <a class="el" href="class_robot_model_1_1_z_p_handler.html" title="A custom handler for the Qt XML parser.">ZPHandler</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -104,6 +131,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to destroy here. </p>
 
 </div>
 </div>
@@ -123,6 +152,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns the human readable name of the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="abc2ab2a0e1da50aa7465bc1b92ed3abc"></a><!-- doxytag: member="RobotModel::BodyPart::parent" ref="abc2ab2a0e1da50aa7465bc1b92ed3abc" args="() const " -->
@@ -140,9 +171,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns a pointer to the parent object. </p>
+<p>This is currently used only by <a class="el" href="class_robot_model_1_1_z_p_handler.html" title="A custom handler for the Qt XML parser.">ZPHandler</a> for building the robot from a hierarchical XML file. There is nothing inherently heirarchical about a group of <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> objects. It is the underlying <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> objects (<a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">Link</a>, <a class="el" href="class_robot_model_1_1_revolute_joint.html">RevoluteJoint</a> and <a class="el" href="class_robot_model_1_1_prismatic_joint.html">PrismaticJoint</a>) that reflect the hierarchy of the kinematic tree </p>
+
 </div>
 </div>
-<a class="anchor" id="adc934dcfdac5a14fe88dd5a21b9055d7"></a><!-- doxytag: member="RobotModel::BodyPart::setEncPos" ref="adc934dcfdac5a14fe88dd5a21b9055d7" args="(const QVector&lt; qreal &gt; &amp;x)" -->
+<a class="anchor" id="ad5ceb22c00423ebeace914db0276dc83"></a><!-- doxytag: member="RobotModel::BodyPart::setEncPos" ref="ad5ceb22c00423ebeace914db0276dc83" args="(const QVector&lt; qreal &gt; &amp;pos)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -150,13 +184,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="memname">bool BodyPart::setEncPos </td>
           <td>(</td>
           <td class="paramtype">const QVector&lt; qreal &gt; &amp;&nbsp;</td>
-          <td class="paramname"> <em>x</em></td>
+          <td class="paramname"> <em>pos</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Sets all motor positions by calling <a class="el" href="class_robot_model_1_1_motor.html#a80d5a42cb4cc119afe0bdd4ed90a4152">Motor.setEncPos( qreal )</a> on each motor. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pos</em>&nbsp;</td><td>A vector of encoder positions. If there are too few or too many positions in the vector, a warning will be printed to the console, and all valid motor positions will be set. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -176,6 +218,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Sets a human readable name for the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a6b52676f58b9da5bef87ef2fac1a7a94"></a><!-- doxytag: member="RobotModel::BodyPart::verify" ref="a6b52676f58b9da5bef87ef2fac1a7a94" args="()" -->
@@ -193,11 +237,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns 'true' if there are no void pointers in the QVector and 'false' otherwise. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="body_part_8h_source.html">bodyPart.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="body_part_8cpp.html">bodyPart.cpp</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="body_part_8h_source.html">bodyPart.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="body_part_8cpp.html">bodyPart.cpp</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

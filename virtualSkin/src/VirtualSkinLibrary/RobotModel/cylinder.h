@@ -1,11 +1,20 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef CYLINDER_H
 #define CYLINDER_H
 
 #include "primitiveobject.h"
 
-namespace RobotModel {
+namespace RobotModel { class Cylinder; }
 
-class Cylinder : public PrimitiveObject
+class RobotModel::Cylinder : public PrimitiveObject
 {
 public:
     Cylinder( qreal radius, qreal height, int lod = 12);
@@ -17,7 +26,7 @@ private:
     qreal radius, height;
     int lod;
 };
-	
-}
 
 #endif
+
+/** @} */

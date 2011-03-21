@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 
@@ -5,15 +14,15 @@
 #include "displaylist.h"
 #include <QTime>
 
-namespace RobotModel {
+namespace RobotModel { class GLWidget; }
 
-/*! \brief The QWidget responsible for rendering the scene with OpenGL (should be a member of Window)
+/*! \brief The QWidget responsible for rendering the scene with OpenGL
  *
- * This class, as well as Window have been almost entirely borrowed from the QT HelloGL example. The only difference is that here
+ * This class, as well as Window have been almost entirely borrowed from the Qt HelloGL example. The only difference is that here
  * arbitrary OpenGL display lists can be rendered. This is intended to be done in conjunction with the class RenderList.
  *
  * To use this class:
- *	Simply construct a Window with a member GLWidget. Then use the signals and slots as follows:
+ *	Simply construct a SkinWindow with a member GLWidget. Then use the signals and slots as follows:
  *	Call/activate the slot addDisplayList(DisplayList*) whenever a new Object is constructed that should be rendered.
  *	Call/activate the slot removeDisplayList(int) whenever such an object is deleted.
  *	Call/activate the slot update() whenever the scene should be redrawn, and the signal renderStuff() will be emitted. Clearly renderStuff()
@@ -21,15 +30,15 @@ namespace RobotModel {
  *
  * NOTE:
  *	This all may seem a bit convaluded, but the signal slot mechanism described above is necessary to ensure that display lists are created, destroyed
- *	and called by the same thread. This is necessary because OpenGL does not seem to be thread safe.
+ *	and called by the same thread. This is necessary because OpenGL is not thread safe.
  */
 
-class GLWidget : public QGLWidget
+class RobotModel::GLWidget : public QGLWidget
 {
     Q_OBJECT
 
 public:
-    GLWidget(QWidget *parent = 0);	//!< Just initializes some colors and the camera rotation
+    GLWidget(QWidget *parent = 0);	//!< Just initializes some colors and the camera position/rotation
     ~GLWidget();					//!< Nothing to clean up
 
 	QSize minimumSizeHint() const;	//!< see HelloGL example
@@ -37,9 +46,9 @@ public:
 
 public slots:
 	
-	void addDisplayList( RobotModel::DisplayList* displayList );	//!< Calls DisplayList.makeDisplayList();
-	void removeDisplayList( int idx );					//!< Calls glDeleteLists(int,1);
-	void update();										//!< Calls updateGL();
+	void addDisplayList( RobotModel::DisplayList* displayList );	//!< Calls displayList.makeDisplayList();
+	void removeDisplayList( int idx );								//!< Calls glDeleteLists(int,1);
+	void update();													//!< Calls updateGL();
 	
     void setXRotation(int angle);	//!< see HelloGL example
     void setYRotation(int angle);	//!< see HelloGL example
@@ -73,5 +82,7 @@ private:
 	
 	QTime timeSinceLastRender;
 };
-}
+
 #endif
+
+/** @} */

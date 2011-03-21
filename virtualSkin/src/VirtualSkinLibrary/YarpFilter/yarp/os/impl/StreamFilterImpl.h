@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef STREAMFILTERIMPL_H_
 #define STREAMFILTERIMPL_H_
 
@@ -69,4 +73,6 @@ private:
 	IObserver *observer;
 };
 
-#endif /* STREAMFILTERIMPL_H_ */
+#endif
+
+/** @} */

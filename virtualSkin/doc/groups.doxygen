@@ -1,0 +1,11 @@
+/**
+ *	\defgroup RobotModel Robot Model
+ *	\defgroup YarpFilter YARP Filter
+ *	\defgroup VirtualSkin Virtual Skin
+ *	\defgroup Demo Demo Programs
+ *	\ingroup Demo @{	
+ *		\defgroup ReflexDemo Reflex Demo
+ *		\defgroup iCubBabble iCubBabble
+ *	@}
+ *
+ */

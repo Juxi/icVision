@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef DISPLAYLIST_H
 #define DISPLAYLIST_H
 
@@ -5,12 +14,13 @@
 #include <qgl.h>
 #include <QTime>
 
+namespace RobotModel { class DisplayList; }
 
-namespace RobotModel {
-
-class DisplayList
+class RobotModel::DisplayList
 {
+	
 public:
+	
     DisplayList();
     virtual ~DisplayList();
 
@@ -36,17 +46,18 @@ public:
 	virtual void translate( const QVector3D& trans ) { T.translate(trans); }
 	
 protected:
+	
 	DisplMatrix T;
 	
 private:
+	
     int  index;
-    //bool colliding;
 	QTime timeSinceLastCollision;
     
     static GLfloat red[4];
     static GLfloat gray[4];
 };
-	
-}
 
 #endif
+
+/** @} */

@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef RPCFILTER_H_
 #define RPCFILTER_H_
 
@@ -141,4 +145,5 @@ private:
 	bool isOpen;
 };
 
-#endif /* RPCFILTER_H_ */
+#endif
+/** @} */

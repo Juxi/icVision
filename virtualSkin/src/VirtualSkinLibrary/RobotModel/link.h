@@ -1,29 +1,39 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef LINK_H
 #define LINK_H
 
 #include "kintreenode.h"
 
-namespace RobotModel {
+namespace RobotModel
+{
+	class Robot;
+	class Link;
+}
 
-class Robot;
-
-/*! \brief Represents a link in the robot
+/*! \brief A translation in the kinematic tree that models the robot. Intuitively, a link acts like a bone in the robot's skeleton.
  *
  */
 
-class Link : public KinTreeNode
+class RobotModel::Link : public KinTreeNode
 {
+	
 public:
-    Link( Robot* robot, KinTreeNode* parent );
-    //Link( KinTreeNode* parent );
-    ~Link();
-
-    //virtual bool setAxis( const QVector3D& vector );
+	
+	Link( Robot* robot, KinTreeNode* parent );
+	~Link();
 
 private:
-    virtual void setM();
+	virtual void setM();
 };
-	
-}
 
 #endif
+
+/** @} */

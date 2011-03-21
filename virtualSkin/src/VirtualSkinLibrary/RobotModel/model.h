@@ -1,36 +1,42 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef COLLISIONDETECTOR_H
 #define COLLISIONDETECTOR_H
 
 #include <QThread>
 #include <QMutex>
 #include <QObject>
+
 #include <SOLID/solid.h>
+
+#include "skinWindow.h"
 #include "primitiveobject.h"
 #include "robot.h"
 #include "world.h"
 #include "robotmodelexception.h"
 
-namespace RobotModel {
-	
+namespace RobotModel
+{
 	class Robot;
 	class World;
+	class Model;
+}
 
 /*! \brief Computes the current pose of the Robot and does collision detection using the FreeSOLID library
  *
- * To use this class:
- *   First prepare the object by calling the constructor, setRobot(Robot*) and setWorld(World*).
- *   If you want to publish collision information on the network via YARP, call setPortName(QString&) and openPort().
- *   Call/activate the slot computePose() when you suspect the robot's state has changed.
- *   When the pose has been computed and collision detection is finished, the signal newPoseReady() will be emitted.
- *   If one or more collisions have occurred, the signal crash() will also be emitted, provided that the CollisionDetector is armed.
- *	 Finally, use the slots armDetector() and disarmDetector() to control whether or not to emit the crash() signal if a collision has occurred.
- *   This is useful if the crash() signal triggers some kind of collision handling control code, as you can supress subsequent crash signals until the collision handling is complete.
- *
+ *  Can be either in a thread or not
  *	 NOTE: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|.
  *	 Thus the computational complexity of the collision detection grows linearly with the size of the world. 
  */
 
-class Model : public QThread
+class RobotModel::Model : public QThread
 {
 	Q_OBJECT
 
@@ -74,11 +80,12 @@ signals:
 
 protected:
 	
-    SkinWindow	*skinWindow;
-	bool		keepRunning;
-	int			col_count;		//!< The number of collisions in the current robot/world configuration
-};
+	RobotModel::SkinWindow	*skinWindow;
 	
-}
+	bool keepRunning;
+	int	 col_count;		//!< The number of collisions in the current robot/world configuration
+};
 
 #endif
+
+/** @} */

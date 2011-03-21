@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef CONTROLBOARDFILTER_H_
 #define CONTROLBOARDFILTER_H_
 
@@ -59,4 +63,5 @@ private:
 	bool isOpen;
 };
 
-#endif /* CONTROLBOARDFILTER_H_ */
+#endif
+/** @} */

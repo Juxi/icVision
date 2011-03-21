@@ -21,6 +21,7 @@ KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  pare
 	
 	parentRobot->emit appendedObject(static_cast<DisplayList*>(this));
 }
+
 KinTreeNode::~KinTreeNode()
 {
 	QVector<KinTreeNode*>::iterator i;
@@ -31,8 +32,6 @@ KinTreeNode::~KinTreeNode()
 	QVector<PrimitiveObject*>::iterator j;
 	for ( j=begin(); j!=end(); ++j ) { parentRobot->emit outdatedDisplayList( (*j)->displayListIdx() ); }
 	parentRobot->emit outdatedDisplayList( displayListIdx() );
-	
-	//printf("\n Deleting KinTreeNode %d with DisplayList %d !!!", index, displayListIdx() );
 }
 
 void KinTreeNode::setNodeAxis( const QVector3D& vector )
@@ -104,19 +103,15 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
 
 void KinTreeNode::render()
 { 
-	//mutex.lock();
 		CompositeObject::render();
 		QVector<KinTreeNode*>::iterator j;
 		for ( j=children.begin(); j!=children.end(); ++j ) {
 			(*j)->render();
 		}
-	//mutex.unlock();
 }
 
 void KinTreeNode::update( const QMatrix4x4& txfr )
 {
-	//mutex.lock();
-	
 		// update the physical objects that constitute this link
 		setT( txfr );
 
@@ -126,20 +121,7 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 		for ( j=children.begin(); j!=children.end(); ++j ) {
 			(*j)->update(nextT);
 		}
-	
-	//mutex.unlock();
 }
-
-/*void KinTreeNode::notColliding()
-{
-	//mutex.lock();
-		CompositeObject::notColliding();
-		QVector<KinTreeNode*>::iterator j;
-		for ( j=children.begin(); j!=children.end(); ++j ) {
-			(*j)->notColliding();
-		}
-	//mutex.unlock();
-}*/
 
 void KinTreeNode::print() const
 {

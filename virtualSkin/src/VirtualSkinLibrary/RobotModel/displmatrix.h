@@ -1,14 +1,25 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef DISPLMATRIX_H
 #define DISPLMATRIX_H
 
 #include <QMatrix4x4>
 #include <math.h>
 
-namespace RobotModel {
+namespace RobotModel { class DisplMatrix; }
 
-class DisplMatrix : public QMatrix4x4
+class RobotModel::DisplMatrix : public QMatrix4x4
 {
+	
 public:
+	
     DisplMatrix();
 	DisplMatrix( const QMatrix4x4& m );
 	
@@ -25,7 +36,7 @@ public:
 	
 	void operator =( const QMatrix4x4& m ) { QMatrix4x4::operator=(m); }
 };
-	
-}
 
 #endif
+
+/** @} */

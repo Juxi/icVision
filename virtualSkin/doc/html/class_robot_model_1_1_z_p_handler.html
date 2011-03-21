@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -48,8 +49,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::ZPHandler Class Reference</h1><!-- doxytag: class="RobotModel::ZPHandler" -->
-<p>A custom handler for the Qt XML parser (see <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>).  
+<h1>RobotModel::ZPHandler Class Reference<br/>
+<small>
+[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+</h1><!-- doxytag: class="RobotModel::ZPHandler" -->
+<p>A custom handler for the Qt XML parser.  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="zphandler_8h_source.html">zphandler.h</a>&gt;</code></p>
@@ -65,9 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_z_p_handler.html#aca3c34530b327d635a4e915992f576de">errorString</a> () const </td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>A custom handler for the Qt XML parser (see <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>). </p>
-<p>This code is mostly borrowed from the QtXML example. The functions startElement(...), and endElement(...) have been reimplemented to handle our XML specification, and the function createChildItem() in the QtXML example has become createChildBranch(), createChildMotor(), and createChildJoint().</p>
-<p>The XML specification is as follows: ***ADD XML SPEC HERE*** </p>
+<p>A custom handler for the Qt XML parser. </p>
+<p>This code is mostly borrowed from the QtXML example. The functions startElement(...), and endElement(...) have been reimplemented to handle our XML specification, and the function createChildItem() in the QtXML example has become createChildBodyPart(), createChildMotor(), and createChildJoint().TODO: Document XML Spec </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa418554ca19e4c6f79cf7c2b3e747723"></a><!-- doxytag: member="RobotModel::ZPHandler::ZPHandler" ref="aa418554ca19e4c6f79cf7c2b3e747723" args="(Robot *tree)" -->
 <div class="memitem">
@@ -214,8 +217,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="zphandler_8h_source.html">zphandler.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="zphandler_8cpp.html">zphandler.cpp</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="zphandler_8h_source.html">zphandler.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="zphandler_8cpp.html">zphandler.cpp</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

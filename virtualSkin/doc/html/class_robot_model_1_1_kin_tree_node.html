@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -48,7 +49,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::KinTreeNode Class Reference</h1><!-- doxytag: class="RobotModel::KinTreeNode" --><!-- doxytag: inherits="RobotModel::CompositeObject" -->
+<h1>RobotModel::KinTreeNode Class Reference<br/>
+<small>
+[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+</h1><!-- doxytag: class="RobotModel::KinTreeNode" --><!-- doxytag: inherits="RobotModel::CompositeObject" -->
 <p><code>#include &lt;<a class="el" href="kintreenode_8h_source.html">kintreenode.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::KinTreeNode:</div>
@@ -89,7 +93,6 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a51113339b5ffc471c058218f1294d73a">filterCollisionPairs</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#adc5e295285315ab45b65c1dceeee1770">serialFilter</a> (<a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *node, bool link=false, bool joint=false)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a7edaa7f382637f6a15c3af68f4dfc7ab">update</a> (const QMatrix4x4 &amp;txfr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ae5d72a496f39cad4e266c11d75d4731c">notColliding</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#a788349199227101ec9e5a478842a1959">print</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af682a96a09f754e0fb82066560538241">printAll</a> ()</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
@@ -102,7 +105,6 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">children</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector3D&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab2b663f51d01546b6e45be794a425438">mutex</a></td></tr>
 </table>
 <hr/><h2>Member Enumeration Documentation</h2>
 <a class="anchor" id="a6cc10fb82046bd1d9f61b806756ad176"></a><!-- doxytag: member="RobotModel::KinTreeNode::Type" ref="a6cc10fb82046bd1d9f61b806756ad176" args="" -->
@@ -282,25 +284,6 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae5d72a496f39cad4e266c11d75d4731c"></a><!-- doxytag: member="RobotModel::KinTreeNode::notColliding" ref="ae5d72a496f39cad4e266c11d75d4731c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void KinTreeNode::notColliding </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_robot_model_1_1_composite_object.html#a00db0d1a45893ef058e7abbad5083b6b">RobotModel::CompositeObject</a>.</p>
 
 </div>
 </div>
@@ -541,19 +524,6 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 </div>
 </div>
-<a class="anchor" id="ab2b663f51d01546b6e45be794a425438"></a><!-- doxytag: member="RobotModel::KinTreeNode::mutex" ref="ab2b663f51d01546b6e45be794a425438" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QMutex <a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab2b663f51d01546b6e45be794a425438">RobotModel::KinTreeNode::mutex</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="af69707fb14705d4c1ab4ec6480e18b7e"></a><!-- doxytag: member="RobotModel::KinTreeNode::nodeAxis" ref="af69707fb14705d4c1ab4ec6480e18b7e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -607,8 +577,8 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="kintreenode_8h_source.html">kintreenode.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="kintreenode_8cpp.html">kintreenode.cpp</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="kintreenode_8h_source.html">kintreenode.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="kintreenode_8cpp.html">kintreenode.cpp</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

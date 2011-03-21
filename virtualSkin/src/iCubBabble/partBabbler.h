@@ -28,7 +28,7 @@ public:
 	bool checkMotionDone( bool* flag ) { return partController.checkMotionDone(flag); } 
 	
 private:
-	RobotModel::PartController partController;
+	PartController partController;
 	
 	// for the oscillator
 	QVector<qreal> minPos,maxPos;

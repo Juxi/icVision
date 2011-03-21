@@ -1,7 +1,6 @@
 #include "robot.h"
 #include "robotmodelexception.h"
 
-using namespace std;
 using namespace RobotModel;
 
 BodyPart::BodyPart( Robot* robot, BodyPart* parentPart ) : parentPart(parentPart)
@@ -33,8 +32,9 @@ bool BodyPart::verify()
 {
 	bool result = true;
 	QVector<Motor*>::iterator i;
-    for ( i=begin(); i!=end(); ++i ) {
-        if ( !(*i) ) result = false;
+    for ( i=begin(); i!=end(); ++i )
+	{
+        if ( !(*i) ) { result = false; }
 	}
 	return result;
 }

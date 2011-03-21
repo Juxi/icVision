@@ -3,7 +3,6 @@
 /*
  * Copyright (C) 2010 Gregor Kaufmann
  * CopyPolicy: Released under the terms of the GNU GPL v2.0.
- *
  */
 
 /** @file StreamFilter.h Header file for the \c StreamFilter class.
@@ -12,6 +11,10 @@
  *
  * $Date$
  *
+ */
+
+/** \addtogroup YarpFilter
+ *	@{
  */
 
 #ifndef STREAMFILTER_H_
@@ -46,4 +49,5 @@ private:
 	bool isOpen;
 };
 
-#endif /* STREAMFILTER_H_ */
+#endif 
+/** @} */

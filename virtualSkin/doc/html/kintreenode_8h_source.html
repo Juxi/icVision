@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/robotModel/kintreenode.h Source File</title>
+<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -43,78 +44,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>/Users/kail/imClever/dev/virtualSkin/src/robotModel/kintreenode.h</h1><a href="kintreenode_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef KINTREENODE_H</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define KINTREENODE_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QMutex&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QtGui&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="object_8h.html">object.h</a>&quot;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>RobotModel {
-<a name="l00009"></a>00009         
-<a name="l00010"></a>00010 <span class="keyword">class </span>PrimitiveObject;
-<a name="l00011"></a>00011 <span class="keyword">class </span>Robot;
-<a name="l00012"></a>00012 
-<a name="l00013"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html">00013</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_composite_object.html">CompositeObject</a>
-<a name="l00014"></a>00014 {
-<a name="l00015"></a>00015 <span class="keyword">public</span>:
-<a name="l00016"></a>00016         
-<a name="l00017"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">00017</a>         <span class="keyword">enum</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> {
-<a name="l00018"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">00018</a>                                 <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">LINK</a>,
-<a name="l00019"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105">00019</a>                                 <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105">RJOINT</a>,
-<a name="l00020"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176">00020</a>                                 <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176">PJOINT</a>
-<a name="l00021"></a>00021         };
+<h1>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h</h1><a href="kintreenode_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment"> ***               Copyright (C) 2011 Mikhail Frank              ***</span>
+<a name="l00003"></a>00003 <span class="comment"> ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***</span>
+<a name="l00004"></a>00004 <span class="comment"> ******************************************************************/</span>
+<a name="l00005"></a>00005 
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef KINTREENODE_H</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define KINTREENODE_H</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;QtGui&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="composite_object_8h.html">compositeObject.h</a>&quot;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="keyword">namespace </span>RobotModel
+<a name="l00017"></a>00017 {
+<a name="l00018"></a>00018         <span class="keyword">class </span>PrimitiveObject;
+<a name="l00019"></a>00019         <span class="keyword">class </span>Robot;
+<a name="l00020"></a>00020         <span class="keyword">class </span>KinTreeNode;
+<a name="l00021"></a>00021 }
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023     <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a48236a64352c2187db6193069d598c86">KinTreeNode</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> type = <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">LINK</a> );
-<a name="l00024"></a>00024     <span class="comment">//KinTreeNode( KinTreeNode* parent, Type type = LINK );</span>
-<a name="l00025"></a>00025     <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a629cf524084ee233b402674cb371195f">~KinTreeNode</a>();
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027     <span class="comment">// set stuff</span>
-<a name="l00028"></a>00028     <span class="comment">//void setNodeName( const QString&amp; name ) { nodeName = name; }</span>
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae62ad98d6c2151232c20f1542c81a38b">setNodeAxis</a>( <span class="keyword">const</span> QVector3D&amp; vector );
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031     <span class="comment">// get stuff</span>
-<a name="l00032"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">00032</a>     <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>; }
-<a name="l00033"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">00033</a>     <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">robot</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>; }
-<a name="l00034"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aec76eade3020c48bd3767e5acd330a49">00034</a>     <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aec76eade3020c48bd3767e5acd330a49">idx</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">index</a>; }
-<a name="l00035"></a>00035         
-<a name="l00036"></a>00036     <span class="comment">//const QString&amp; getNodeName() const { return nodeName; }</span>
-<a name="l00037"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aac3f58f3a0535b2983e2b328d9eee65a">00037</a>     <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aac3f58f3a0535b2983e2b328d9eee65a">getNodeType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">nodeType</a>; }
-<a name="l00038"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#af6a4b3bd148bf6aba766c367e13d59b6">00038</a>     <span class="keyword">const</span> QVector3D&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af6a4b3bd148bf6aba766c367e13d59b6">getNodeAxis</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a>; }
-<a name="l00039"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a5c91c678cc74412ec298e61a39b47e3e">00039</a>     <span class="keyword">const</span> QMatrix4x4&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a5c91c678cc74412ec298e61a39b47e3e">getM</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a>; } <span class="comment">// to transform children relative to this node coordinate system</span>
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041         <span class="comment">//append geometries</span>
-<a name="l00042"></a>00042         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af043fc57074a449364d2a6ec09be46a3">append</a>( <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>* primitive );
-<a name="l00043"></a>00043         <span class="keywordtype">bool</span> <span class="keyword">remove</span>( <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>* primitive );
-<a name="l00044"></a>00044         
-<a name="l00045"></a>00045         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a85f4364980f9144471b9d92e175c539e">render</a>();
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a51113339b5ffc471c058218f1294d73a">filterCollisionPairs</a>();
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc5e295285315ab45b65c1dceeee1770">serialFilter</a>( <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* node, <span class="keywordtype">bool</span> link = <span class="keyword">false</span>, <span class="keywordtype">bool</span> joint = <span class="keyword">false</span> );
-<a name="l00049"></a>00049         
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_composite_object.html#aacfefeee128f748e4e705708b9d958e3">update</a>( <span class="keyword">const</span> QMatrix4x4&amp; txfr );
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae5d72a496f39cad4e266c11d75d4731c">notColliding</a>();
+<a name="l00023"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html">00023</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_kin_tree_node.html">RobotModel::KinTreeNode</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_composite_object.html">CompositeObject</a>
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025         
+<a name="l00026"></a>00026 <span class="keyword">public</span>:
+<a name="l00027"></a>00027         
+<a name="l00028"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">00028</a>         <span class="keyword">enum</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> { <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">LINK</a>,
+<a name="l00029"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105">00029</a>                                 <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a04cef19c06748b4e24b11813c61c8105">RJOINT</a>,
+<a name="l00030"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176">00030</a>                                 <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a73c47d9082d873a40490ad0efb9a5176">PJOINT</a> };
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032         <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a48236a64352c2187db6193069d598c86">KinTreeNode</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a> type = <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176a7f93636bcf2ed7eff9b36ed8da60777a">LINK</a> );
+<a name="l00033"></a>00033         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a629cf524084ee233b402674cb371195f">~KinTreeNode</a>();
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae62ad98d6c2151232c20f1542c81a38b">setNodeAxis</a>( <span class="keyword">const</span> QVector3D&amp; vector );
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">00037</a>         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>; }
+<a name="l00038"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">00038</a>         <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">robot</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>; }
+<a name="l00039"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aec76eade3020c48bd3767e5acd330a49">00039</a>         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aec76eade3020c48bd3767e5acd330a49">idx</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">index</a>; }
+<a name="l00040"></a>00040         
+<a name="l00041"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aac3f58f3a0535b2983e2b328d9eee65a">00041</a>         <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aac3f58f3a0535b2983e2b328d9eee65a">getNodeType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">nodeType</a>; }
+<a name="l00042"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#af6a4b3bd148bf6aba766c367e13d59b6">00042</a>         <span class="keyword">const</span> QVector3D&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af6a4b3bd148bf6aba766c367e13d59b6">getNodeAxis</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a>; }
+<a name="l00043"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a5c91c678cc74412ec298e61a39b47e3e">00043</a>         <span class="keyword">const</span> QMatrix4x4&amp; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a5c91c678cc74412ec298e61a39b47e3e">getM</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a>; }
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af043fc57074a449364d2a6ec09be46a3">append</a>( <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>* primitive );
+<a name="l00046"></a>00046         <span class="keywordtype">bool</span> <span class="keyword">remove</span>( <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>* primitive );
+<a name="l00047"></a>00047         
+<a name="l00048"></a>00048         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a85f4364980f9144471b9d92e175c539e">render</a>();
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a51113339b5ffc471c058218f1294d73a">filterCollisionPairs</a>();
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc5e295285315ab45b65c1dceeee1770">serialFilter</a>( <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* node, <span class="keywordtype">bool</span> link = <span class="keyword">false</span>, <span class="keywordtype">bool</span> joint = <span class="keyword">false</span> );
 <a name="l00052"></a>00052         
-<a name="l00053"></a>00053         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a788349199227101ec9e5a478842a1959">print</a>() <span class="keyword">const</span>;
-<a name="l00054"></a>00054     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af682a96a09f754e0fb82066560538241">printAll</a>();
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056 <span class="keyword">protected</span>:
-<a name="l00057"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">00057</a>     <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>*                <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>;
-<a name="l00058"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">00058</a>         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>*          <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>;
-<a name="l00059"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">00059</a>     <span class="keywordtype">int</span>                   <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">index</a>;
-<a name="l00060"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">00060</a>     <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>                  <a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">nodeType</a>;
-<a name="l00061"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">00061</a>     QVector&lt;KinTreeNode*&gt; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">children</a>;
-<a name="l00062"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">00062</a>     QVector3D             <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a>;     <span class="comment">// joint axis or link body vector</span>
-<a name="l00063"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">00063</a>     <a class="code" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>           <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a>;            <span class="comment">// transformation (displacement and rotation) matrix from the next CS to this CS</span>
-<a name="l00064"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab2b663f51d01546b6e45be794a425438">00064</a>         QMutex                            <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab2b663f51d01546b6e45be794a425438">mutex</a>;
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a47574c65af53990455540547d8d00e9f">setM</a>() = 0;
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 };
-<a name="l00069"></a>00069         
-<a name="l00070"></a>00070 }
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="preprocessor">#endif</span>
+<a name="l00053"></a>00053         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_composite_object.html#aacfefeee128f748e4e705708b9d958e3">update</a>( <span class="keyword">const</span> QMatrix4x4&amp; txfr );
+<a name="l00054"></a>00054         
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a788349199227101ec9e5a478842a1959">print</a>() <span class="keyword">const</span>;
+<a name="l00056"></a>00056         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af682a96a09f754e0fb82066560538241">printAll</a>();
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="keyword">protected</span>:
+<a name="l00059"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">00059</a>         <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>*                <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a135634b0e34e02ded1c61b29ef4d3c02">parentRobot</a>;
+<a name="l00060"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">00060</a>         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>*          <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ae708a7912fe1338f03ab9ebb2207a0e7">parentNode</a>;
+<a name="l00061"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">00061</a>         <span class="keywordtype">int</span>                   <a class="code" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">index</a>;
+<a name="l00062"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">00062</a>         <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a6cc10fb82046bd1d9f61b806756ad176">Type</a>                  <a class="code" href="class_robot_model_1_1_kin_tree_node.html#acc89f79d42901042ca47a7b56761d4b1">nodeType</a>;
+<a name="l00063"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">00063</a>         QVector&lt;KinTreeNode*&gt; <a class="code" href="class_robot_model_1_1_kin_tree_node.html#aa954f7e7939949e2e1a72ed9f7be3aaa">children</a>;
+<a name="l00064"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">00064</a>         QVector3D             <a class="code" href="class_robot_model_1_1_kin_tree_node.html#af69707fb14705d4c1ab4ec6480e18b7e">nodeAxis</a>;     <span class="comment">// joint axis or link body vector</span>
+<a name="l00065"></a><a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">00065</a>         <a class="code" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>           <a class="code" href="class_robot_model_1_1_kin_tree_node.html#adc4909829a61513d89a23ebbf69d8243">M</a>;            <span class="comment">// transformation (displacement and rotation) matrix from the next CS to this CS</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a47574c65af53990455540547d8d00e9f">setM</a>() = 0;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 };
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="preprocessor">#endif</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

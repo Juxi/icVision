@@ -11,6 +11,5 @@ PrismaticJoint::PrismaticJoint( Robot* robot, KinTreeNode* parent, Motor* motor 
 }
 void PrismaticJoint::setM( )
 {
-    //M = DisplMatrix( QVector3D(), nodeAxis, 0, position );
 	M.setTranslation( nodeAxis + position*nodeAxis.normalized() );
 }

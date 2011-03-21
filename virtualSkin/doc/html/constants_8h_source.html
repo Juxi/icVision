@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/constants.h Source File</title>
+<title>VirtualSkin: /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/constants.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -43,14 +44,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>/Users/kail/imClever/dev/virtualSkin/src/constants.h</h1><a href="constants_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// approx time between stream packets from robot</span>
-<a name="l00002"></a><a class="code" href="constants_8h.html#a3180a643a859ad60c6ab9479f4356b6c">00002</a> <span class="preprocessor">#define YARP_PERIOD 20000 //microseconds</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="comment">// for reflex behavior</span>
-<a name="l00005"></a><a class="code" href="constants_8h.html#a071ce837e6313254c3881cb70dd50aec">00005</a> <span class="preprocessor">#define POSE_BUFFER_SIZE 100</span>
-<a name="l00006"></a><a class="code" href="constants_8h.html#a93d81ddcb38526cbd57fc2291cdb46ae">00006</a> <span class="preprocessor"></span><span class="preprocessor">#define REFLEX_SPEED 30</span>
-<a name="l00007"></a><a class="code" href="constants_8h.html#a8e73ea60dcd76c56464c74e189fe900c">00007</a> <span class="preprocessor"></span><span class="preprocessor">#define POSITION_MOVE_TIMEOUT 10 //seconds</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="comment">//#define NEGLIGIBLE_ANGLE 5 //degrees</span>
+<h1>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/constants.h</h1><a href="constants_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// approx time between stream packets from robot</span>
+<a name="l00002"></a><a class="code" href="constants_8h.html#a3180a643a859ad60c6ab9479f4356b6c">00002</a> <span class="preprocessor">#define YARP_PERIOD 0.02                                        // seconds</span>
+<a name="l00003"></a><a class="code" href="constants_8h.html#a3ae50cbf062b463aa94541d9d9ae75d3">00003</a> <span class="preprocessor"></span><span class="preprocessor">#define YARP_PERIOD_ms YARP_PERIOD*1000         // milliseconds</span>
+<a name="l00004"></a><a class="code" href="constants_8h.html#a495bdc89531def7d27710e00060deda2">00004</a> <span class="preprocessor"></span><span class="preprocessor">#define YARP_PERIOD_us YARP_PERIOD_ms*1000      // microseconds</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a>00006 <span class="comment">// for reflex behavior</span>
+<a name="l00007"></a><a class="code" href="constants_8h.html#a071ce837e6313254c3881cb70dd50aec">00007</a> <span class="preprocessor">#define POSE_BUFFER_SIZE 100</span>
+<a name="l00008"></a><a class="code" href="constants_8h.html#a93d81ddcb38526cbd57fc2291cdb46ae">00008</a> <span class="preprocessor"></span><span class="preprocessor">#define REFLEX_SPEED 30</span>
+<a name="l00009"></a><a class="code" href="constants_8h.html#a8e73ea60dcd76c56464c74e189fe900c">00009</a> <span class="preprocessor"></span><span class="preprocessor">#define POSITION_MOVE_TIMEOUT 10 //seconds</span>
+<a name="l00010"></a><a class="code" href="constants_8h.html#a5b57353029a939762d93e2da7a188cd4">00010</a> <span class="preprocessor"></span><span class="preprocessor">#define NEGLIGIBLE_ANGLE 5 //degrees</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

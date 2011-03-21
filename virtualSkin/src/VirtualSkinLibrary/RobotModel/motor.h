@@ -1,12 +1,21 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup RobotModel
+ *	@{
+ */
+
 #ifndef MOTOR_H
 #define MOTOR_H
 
 #include "joint.h"
 #include "interval.h"
 
-namespace RobotModel {
+namespace RobotModel { class Motor; }
 
-/*! \brief Affords control of one or more joints (see Branch and Joint)
+/*! \brief Affords control of one or more joints (see Joint)
  *
  * This class can control an arbitrary number of joints via a linear mapping between the motor position and each joint
  * position. The mapping is implicitly defined by the intervals motor.limits and joint.limits, and it works as follows:
@@ -17,45 +26,43 @@ namespace RobotModel {
  * relevent joint positions.
  */
 
-class Motor : public QVector<Joint*>
+class RobotModel::Motor : public QVector<Joint*>
 {
+	
 public:
+	
 	Motor( Robot* robot, Motor* motor = 0 );
-    ~Motor();
+	~Motor();
 
-    // get stuff
-    //int idx() const { return index; }
-    const QString& name() const { return motorName; }
-    Motor* parent() const { return parentMotor; }
-    qreal minPos() const { return motorLimits.getMin(); }
-    qreal maxPos() const { return motorLimits.getMax(); }
-    qreal encPos() const { return encoderPosition; }
-    qreal normPos() const { return normalPosition; }
-    void print();
+	const QString& name() const { return motorName; }
+	Motor* parent() const { return parentMotor; }
+	qreal minPos() const { return motorLimits.getMin(); }
+	qreal maxPos() const { return motorLimits.getMax(); }
+	qreal encPos() const { return encoderPosition; }
+	qreal normPos() const { return normalPosition; }
+	void print();
 
-    // set stuff
-    void setName( const QString& name ) { motorName = name; }
-    void setMin( qreal );
-    void setMax( qreal );
-    void setEncPos( qreal );
+	void setName( const QString& name ) { motorName = name; }
+	void setMin( qreal );
+	void setMax( qreal );
+	void setEncPos( qreal );
 	void setHomePos( qreal );
-    void setNormPos( qreal );
+	void setNormPos( qreal );
 	
 	void home();
 
 private:
-    //int        index;
-    Motor*		parentMotor;
-    QString		motorName;
-    Interval	motorLimits;          // encoder position limits
-    qreal		encoderPosition, // encoder position is on the interval 'limits'
+	
+	Motor*		parentMotor;
+	QString		motorName;
+	Interval	motorLimits;          // encoder position limits
+	qreal		encoderPosition, // encoder position is on the interval 'limits'
 				homePosition,
 				normalPosition;  // normalized position is >=0 and <=1
 	
-    //Oscillator oscillator;
-    void setJointPositions();
+	void setJointPositions();
 };
-	
-}
 
 #endif 
+
+/** @} */

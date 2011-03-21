@@ -19,6 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -48,7 +49,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>RobotModel::Interval Class Reference</h1><!-- doxytag: class="RobotModel::Interval" -->
+<h1>RobotModel::Interval Class Reference<br/>
+<small>
+[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+</h1><!-- doxytag: class="RobotModel::Interval" -->
+<p>A simple representation of a 1D interval.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="interval_8h_source.html">interval.h</a>&gt;</code></p>
 
 <p><a href="class_robot_model_1_1_interval-members.html">List of all members.</a></p>
@@ -61,9 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#abb8aac06ae73b9dfc7c3caf3f8b56399">getMin</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#a26857944f58e736ed0abdf534e2f56d8">getMax</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#a26125787902f3761e303ba3999d0eb71">isInRange</a> (const qreal num)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns true iff min &lt;= num &lt;= max.  <a href="#a26125787902f3761e303ba3999d0eb71"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#a15ffb7f16e3bad02073761ecd23d9695">isTooSmall</a> (const qreal num)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns true iff num &lt; min.  <a href="#a15ffb7f16e3bad02073761ecd23d9695"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#ae8da5063cbb210bdc856e30ea2b01f19">isTooBig</a> (const qreal num)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns true iff num &gt; max.  <a href="#ae8da5063cbb210bdc856e30ea2b01f19"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A simple representation of a 1D interval. </p>
+<p>The interval is inclusive of its limits, 'min' and 'max'. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae48b9a9e9f672f81977627b609e32429"></a><!-- doxytag: member="RobotModel::Interval::Interval" ref="ae48b9a9e9f672f81977627b609e32429" args="()" -->
 <div class="memitem">
@@ -150,6 +163,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns true iff min &lt;= num &lt;= max. </p>
+
 </div>
 </div>
 <a class="anchor" id="ae8da5063cbb210bdc856e30ea2b01f19"></a><!-- doxytag: member="RobotModel::Interval::isTooBig" ref="ae8da5063cbb210bdc856e30ea2b01f19" args="(const qreal num)" -->
@@ -168,6 +183,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns true iff num &gt; max. </p>
+
 </div>
 </div>
 <a class="anchor" id="a15ffb7f16e3bad02073761ecd23d9695"></a><!-- doxytag: member="RobotModel::Interval::isTooSmall" ref="a15ffb7f16e3bad02073761ecd23d9695" args="(const qreal num)" -->
@@ -185,6 +202,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns true iff num &lt; min. </p>
 
 </div>
 </div>
@@ -225,8 +244,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="interval_8h_source.html">interval.h</a></li>
-<li>/Users/kail/imClever/dev/virtualSkin/src/robotModel/<a class="el" href="interval_8cpp.html">interval.cpp</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="interval_8h_source.html">interval.h</a></li>
+<li>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/<a class="el" href="interval_8cpp.html">interval.cpp</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->

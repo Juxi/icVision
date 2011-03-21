@@ -82,8 +82,8 @@ void RobotFilter::takeControl()
 {
 	if ( !haveControl )
 	{
-		//haveControl = true;
-		//start();
+		haveControl = true;
+		start();
 	}
 }
 

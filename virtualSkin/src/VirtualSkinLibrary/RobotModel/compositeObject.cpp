@@ -15,13 +15,11 @@ CompositeObject::CompositeObject( const QString& aName ) : objectName(aName), nu
 
 CompositeObject::~CompositeObject()
 {
-	//printf("\n entering delete object");
 	QVector<PrimitiveObject*>::iterator i;
 	for ( i=begin(); i!=end(); ++i ) {
 		delete(*i);
 	}
 	resize(0);
-	//printf("\n exiting delete object");
 }
 
 void CompositeObject::setT( const QMatrix4x4& txfr )
@@ -197,15 +195,6 @@ void CompositeObject::makeDisplayList()
         (*i)->makeDisplayList();
     }
 }
-
-/*void CompositeObject::notColliding()
-{
-    QVector<PrimitiveObject*>::const_iterator i;
-    for ( i=begin(); i!=end(); ++i )
-	{
-        (*i)->unSetColliding();
-    }
-}*/
 
 void CompositeObject::render()
 {

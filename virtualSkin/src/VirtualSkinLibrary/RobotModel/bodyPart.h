@@ -1,47 +1,69 @@
-#ifndef BODYPART_H
-#define BODYPART_H
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
 
-#include "zphandler.h"
-
-/*! \brief To set the positions of several motors at once (see Motor, Joint, and Robot)
- *
- * This class facilitates grouping of the motors (and therefore joints) into subsystems, such that we can replicate
- * the YARP interface to the iCub (or another robot). This allows us to seamlessly wrap the YARP server and filter the
- * commands being sent to the robot, without the need to change the client side code at all. Consider the following:
- * The iCub robot is configured such that a control program connects to a YARP port, which offers interfaces to several
- * motors. For example, one could connect to an RPC port called 'torso', which offers three motor interfaces, roll, pitch
- * and yaw. A control program can set the motor positions (or read encoder values) individually, or alternatively it can
- * set all positions belonging to the group 'torso' with a command of the form setAllTorsoPositions(roll,pitch,yaw), and
- * the same is true for reading encoder positions. In this case 'torso' is a Branch, so named because its three motors
- * correspond to joints, which constitute a 'branch' of the kinematic tree.
+/** \addtogroup RobotModel
+ *	@{
  */
 
-namespace RobotModel {
-	
-class Robot;
-class Motor;
+#ifndef BODYPART_H
+#define BODYPART_H
+ 
+#include "zphandler.h"
+#include "motor.h"
 
-class BodyPart : public QVector<Motor*>
+/** \brief Contains classes relevant to the robot model.
+ *
+ * The CMake project RobotModel in YOUR_GIT_REPOSITORY/virtualSkin/src/VirtualSkinLibrary/RobotModel can be built independantly to produce the static library libRobotModel.a. The project requires:
+ *		- Qt (4.x)
+ *		- OpenGL
+ *		- FreeSOLID
+ * YARP is not required. A robot model wrapped in YARP ports is implemented in YarpModel.
+ */
+namespace RobotModel
 {
+	class BodyPart;
+	class Robot;
+}
+	
+/** \brief Allows motors to be controlled via groups such as 'torso', 'head' and 'arm'
+ *
+ * This class facilitates grouping of the motors (and therefore joints) into subsystems, as in the YARP interface to the iCub. 
+ * An instance of BodyPart therefore inherits a QVector of motors and provides a method setEncPos( const QVector<qreal>& x ), to set
+ * the encoder positions of the motors.
+ */
+class RobotModel::BodyPart : public QVector<Motor*>
+{
+	
 public:
-    BodyPart( Robot* robot, BodyPart* bodyPart = 0 );
-    ~BodyPart();
-
-    //int idx() const { return index; }
-    const QString& name() const { return partName; }
-    BodyPart* parent() const { return parentPart; }
-
-    void setName( const QString& name ) { partName = name; }
-    bool setEncPos( const QVector<qreal>& x );
-    //bool setNormPos( const QVector<qreal>& x );  // implement this later
-	bool verify();
-
+	
+    BodyPart( Robot* aRobot, BodyPart* aParentBodyPart = 0 );	//!< \brief The constructor immediately appends the new object to the Robot
+																/**< ...by calling Robot.appendBodyPart( BodyPart* this )
+																	 \param aRobot The robot to which this BodyPart should be appended
+																	 \param aParentBodyPart Facilitates robot creation via the Qt XML parser and ZPHandler */
+    ~BodyPart();												//!< Nothing special to destroy here
+    
+    void setName( const QString& name ) { partName = name; }	//!< Sets a human readable name for the BodyPart
+	const QString& name() const { return partName; }			//!< Returns the human readable name of the BodyPart
+    BodyPart* parent() const { return parentPart; }				//!< Returns a pointer to the parent object
+																/**< This is currently used only by ZPHandler for building the robot from a hierarchical
+																	 XML file. There is nothing inherently heirarchical about a group of BodyPart objects.
+																	 It is the underlying KinTreeNode objects (Link, RevoluteJoint and PrismaticJoint) that
+																	 reflect the hierarchy of the kinematic tree */
+    bool setEncPos( const QVector<qreal>& pos );				//!< Sets all motor positions by calling Motor.setEncPos( qreal ) on each motor
+																/**< \param pos A vector of encoder positions. If there are too few or too many
+																	 positions in the vector, a warning will be printed to the console, and all
+																	 valid motor positions will be set. */
+	bool verify();												//!< Returns 'true' if there are no void pointers in the QVector and 'false' otherwise
+	
+	// TODO: implement: bool setNormPos( const QVector<qreal>& x );
+	
 private:
-    //int       index;
-    BodyPart* parentPart;
-    QString   partName;
+    BodyPart* parentPart;	//!< Requires a parent object for compatibility with the hierarchical ZPHandler
+    QString   partName;		//!< A human readable name
 };
 
-}
-
 #endif
+
+/** @} */
