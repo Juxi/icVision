@@ -89,7 +89,7 @@ SET ( hdr_files	skinWindow.h
 )
 
 SET ( QT_MOC_FILES 	skinWindow.h
-					glwidget.h
+					glWidget.h
 					renderList.h
 					model.h
 					robot.h
