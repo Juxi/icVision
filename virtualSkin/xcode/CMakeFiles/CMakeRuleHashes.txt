@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+c90d9f6ad2f4711e91b785c54b77ba61 src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx
+cca8bab126938e68044d5db59a7c823e src/VirtualSkinLibrary/RobotModel/moc_model.cxx
+e0e3d6371d65870a51287589e849a705 src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx
+fddf3a2b0020b2710d86b8ac3124f586 src/VirtualSkinLibrary/RobotModel/moc_robot.cxx
+64e22f8844e6d191202a261a796a36e4 src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx
+ad2fa14ded2ae40783061edd11d9b22d src/VirtualSkinLibrary/moc_responseObserver.cxx
+5eed7eb83106dd2c5c78af6f16f89901 src/VirtualSkinLibrary/moc_robotFilter.cxx
+520e75927e6e7b764155bd3806921c5f src/VirtualSkinLibrary/moc_stateObserver.cxx
+b339ee50afa60379f19ecf42092e9a4b src/iCubBabble/moc_iCubBabbler.cxx
