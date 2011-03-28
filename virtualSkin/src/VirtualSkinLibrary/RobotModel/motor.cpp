@@ -5,14 +5,13 @@ using namespace std;
 using namespace RobotModel;
 
 Motor::Motor( Robot* robot, Motor* motor ) : parentMotor(motor),
-											 encoderPosition(0.0),
-											 homePosition(0.0),
-											 normalPosition(0.0)
+											 homePosition(0.0)
 {
 	if ( !robot ) { throw RobotModelException("The Motor constructor requires a pointer to a valid Robot."); }
-	motorLimits = Interval();
+	//motorLimits = Interval();
 	motorLimits.setMin(-1.0);
 	motorLimits.setMax(1.0);
+	setEncPos(0.0);
 	robot->appendMotor(this);
 }
 Motor::~Motor()

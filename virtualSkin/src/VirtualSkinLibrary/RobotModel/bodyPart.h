@@ -46,7 +46,7 @@ public:
     
     void setName( const QString& name ) { partName = name; }	//!< Sets a human readable name for the BodyPart
 	const QString& name() const { return partName; }			//!< Returns the human readable name of the BodyPart
-    BodyPart* parent() const { return parentPart; }				//!< Returns a pointer to the parent object
+    BodyPart* parent() const { return parentPart; }				//!< Returns a pointer to the parent BodyPart
 																/**< This is currently used only by ZPHandler for building the robot from a hierarchical
 																	 XML file. There is nothing inherently heirarchical about a group of BodyPart objects.
 																	 It is the underlying KinTreeNode objects (Link, RevoluteJoint and PrismaticJoint) that

@@ -19,20 +19,31 @@ namespace RobotModel
 	class Motor;
 }
 
+/** \brief Defines a kinematic 'joint'
+ *
+ * This joint class is intended to be a building block for a kinematic model that is embedded in a tree structure, and therefore inherits KinTreeNode.
+ */
 class RobotModel::Joint : public KinTreeNode
 {
 public:
-    Joint( Robot* robot, KinTreeNode* parent, Motor* motor, Type type );	//!< \param robot The robot to which this joint belongs
+    Joint( Robot* robot, KinTreeNode* parent, Motor* motor, Type type );	//!< Simply initializes member variables and calls KinTreeNode constructor
+																			//!< \param robot The robot to which this joint belongs
 																			//!< \param parent The parent KinTreeNode in the kinematic tree structure
 																			//!< \param motor The motor that controls this joint
 																			//!< \param type Indicates whether the Joint is RevoluteJoint or PrismaticJoint
-    virtual ~Joint();
+    virtual ~Joint();														//!< Nothing special to do here (hierarchy is handled by KinTreeNode)
 
-    void setMin( qreal pos ) { limits.setMin(pos); }	//!< Sets the minimum physical joint position (radians)
-    void setMax( qreal pos ) { limits.setMax(pos); }	//!< Sets the maximum physical joint position (radians)
-    void setPos();
+    void setMin( qreal pos );	//!< Sets the minimum physical joint position (radians)
+								/**< The joint limits are stored in an Interval, which ensures that min <= max */
+    void setMax( qreal pos );	//!< Sets the maximum physical joint position (radians)
+								/**< The joint limits are stored in an Interval, which ensures that min <= max */
+    void setPos();				//!< Sets the physical position of the joint.
+								/**< The position is computed as a function of the position of the Motor. If the Joint's Motor is null, 
+									 position is set to 0. If 0 is out of the range of the joint limits, the position is set to 
+									 limits.getMin() or limits.getMax() accordingly. */
 
 protected:
+	
     Motor*   motor;				//!< The motor that controls this joint
     qreal    position;			//!< The current joint position
     Interval limits;			//!< The physical limits of the joint position (radians)

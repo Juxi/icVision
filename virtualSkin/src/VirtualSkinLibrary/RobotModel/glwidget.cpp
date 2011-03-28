@@ -57,7 +57,7 @@ void GLWidget::paintGL()
 	glMultMatrixd( flip.constData() );
 	
 	RobotModel::DisplMatrix rot;
-	rot.setCartesianRotation( QVector3D(-90, 0, 90) );
+	rot.setCartesianOrientation( QVector3D(-90, 0, 90) );
 	glMultMatrixd( rot.constData() );
 	
 		drawCS();

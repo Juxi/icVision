@@ -21,11 +21,13 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
 CMAKE_BUILD_TYPE:STRING=
 
-//Enable/Disable color output during build.
-CMAKE_COLOR_MAKEFILE:BOOL=ON
+//Semicolon separated list of supported configuration types, only
+// supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything
+// else will be ignored.
+CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release;MinSizeRel;RelWithDebInfo
 
-//CXX compiler.
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
+//C++ compiler
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++
 
 //Flags used by the compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
@@ -44,7 +46,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the compiler during Release with Debug Info builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g
 
-//C compiler.
+//C compiler
 CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc
 
 //Flags used by the compiler during all build types.
@@ -88,8 +90,8 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/usr/bin/ld
 
-//Path to a program.
-CMAKE_MAKE_PROGRAM:FILEPATH=/opt/local/bin/gmake
+//make program
+CMAKE_MAKE_PROGRAM:FILEPATH=/opt/local/bin/cmakexbuild
 
 //Flags used by the linker during the creation of modules.
 CMAKE_MODULE_LINKER_FLAGS:STRING=
@@ -214,7 +216,7 @@ QT_MOC_EXECUTABLE:FILEPATH=/Developer/Tools/Qt/moc
 QT_PHONON_INCLUDE_DIR:PATH=/Library/Frameworks/phonon.framework/Headers
 
 //The Qt PHONON library
-QT_PHONON_LIBRARY:STRING=/Library/Frameworks/phonon.framework
+QT_PHONON_LIBRARY:STRING=optimized;/Library/Frameworks/phonon.framework;debug;/Library/Frameworks/phonon.framework
 
 //Path to a library.
 QT_PHONON_LIBRARY_DEBUG:FILEPATH=QT_PHONON_LIBRARY_DEBUG-NOTFOUND
@@ -235,7 +237,7 @@ QT_QMAKE_EXECUTABLE:FILEPATH=/usr/bin/qmake
 QT_QT3SUPPORT_INCLUDE_DIR:PATH=/Library/Frameworks/Qt3Support.framework/Headers
 
 //The Qt QT3SUPPORT library
-QT_QT3SUPPORT_LIBRARY:STRING=/Library/Frameworks/Qt3Support.framework
+QT_QT3SUPPORT_LIBRARY:STRING=optimized;/Library/Frameworks/Qt3Support.framework;debug;/Library/Frameworks/Qt3Support.framework
 
 //Path to a library.
 QT_QT3SUPPORT_LIBRARY_DEBUG:FILEPATH=QT_QT3SUPPORT_LIBRARY_DEBUG-NOTFOUND
@@ -256,7 +258,7 @@ QT_QTASSISTANTCLIENT_LIBRARY_RELEASE:FILEPATH=QT_QTASSISTANTCLIENT_LIBRARY_RELEA
 QT_QTASSISTANT_INCLUDE_DIR:PATH=/Library/Frameworks/QtAssistant.framework/Headers
 
 //The Qt QTASSISTANT library
-QT_QTASSISTANT_LIBRARY:STRING=/Library/Frameworks/QtAssistant.framework
+QT_QTASSISTANT_LIBRARY:STRING=optimized;/Library/Frameworks/QtAssistant.framework;debug;/Library/Frameworks/QtAssistant.framework
 
 //Path to a library.
 QT_QTASSISTANT_LIBRARY_DEBUG:FILEPATH=QT_QTASSISTANT_LIBRARY_DEBUG-NOTFOUND
@@ -265,7 +267,7 @@ QT_QTASSISTANT_LIBRARY_DEBUG:FILEPATH=QT_QTASSISTANT_LIBRARY_DEBUG-NOTFOUND
 QT_QTASSISTANT_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtAssistant.framework
 
 //The Qt QTCLUCENE library
-QT_QTCLUCENE_LIBRARY:STRING=/usr/lib/libQtCLucene.dylib
+QT_QTCLUCENE_LIBRARY:STRING=optimized;/usr/lib/libQtCLucene.dylib;debug;/usr/lib/libQtCLucene.dylib
 
 //Path to a library.
 QT_QTCLUCENE_LIBRARY_DEBUG:FILEPATH=QT_QTCLUCENE_LIBRARY_DEBUG-NOTFOUND
@@ -277,7 +279,7 @@ QT_QTCLUCENE_LIBRARY_RELEASE:FILEPATH=/usr/lib/libQtCLucene.dylib
 QT_QTCORE_INCLUDE_DIR:PATH=/Library/Frameworks/QtCore.framework/Headers
 
 //The Qt QTCORE library
-QT_QTCORE_LIBRARY:STRING=/Library/Frameworks/QtCore.framework
+QT_QTCORE_LIBRARY:STRING=optimized;/Library/Frameworks/QtCore.framework;debug;/Library/Frameworks/QtCore.framework
 
 //Path to a library.
 QT_QTCORE_LIBRARY_DEBUG:FILEPATH=QT_QTCORE_LIBRARY_DEBUG-NOTFOUND
@@ -289,7 +291,7 @@ QT_QTCORE_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtCore.framework
 QT_QTDBUS_INCLUDE_DIR:PATH=QT_QTDBUS_INCLUDE_DIR-NOTFOUND
 
 //The Qt QTDBUS library
-QT_QTDBUS_LIBRARY:STRING=/Library/Frameworks/QtDBus.framework
+QT_QTDBUS_LIBRARY:STRING=optimized;/Library/Frameworks/QtDBus.framework;debug;/Library/Frameworks/QtDBus.framework
 
 //Path to a library.
 QT_QTDBUS_LIBRARY_DEBUG:FILEPATH=QT_QTDBUS_LIBRARY_DEBUG-NOTFOUND
@@ -310,7 +312,7 @@ QT_QTDECLARATIVE_LIBRARY_RELEASE:FILEPATH=QT_QTDECLARATIVE_LIBRARY_RELEASE-NOTFO
 QT_QTDESIGNERCOMPONENTS_INCLUDE_DIR:PATH=/Library/Frameworks/QtDesigner.framework/Headers
 
 //The Qt QTDESIGNERCOMPONENTS library
-QT_QTDESIGNERCOMPONENTS_LIBRARY:STRING=/Library/Frameworks/QtDesignerComponents.framework
+QT_QTDESIGNERCOMPONENTS_LIBRARY:STRING=optimized;/Library/Frameworks/QtDesignerComponents.framework;debug;/Library/Frameworks/QtDesignerComponents.framework
 
 //Path to a library.
 QT_QTDESIGNERCOMPONENTS_LIBRARY_DEBUG:FILEPATH=QT_QTDESIGNERCOMPONENTS_LIBRARY_DEBUG-NOTFOUND
@@ -322,7 +324,7 @@ QT_QTDESIGNERCOMPONENTS_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtDesignerC
 QT_QTDESIGNER_INCLUDE_DIR:PATH=/Library/Frameworks/QtDesigner.framework/Headers
 
 //The Qt QTDESIGNER library
-QT_QTDESIGNER_LIBRARY:STRING=/Library/Frameworks/QtDesigner.framework
+QT_QTDESIGNER_LIBRARY:STRING=optimized;/Library/Frameworks/QtDesigner.framework;debug;/Library/Frameworks/QtDesigner.framework
 
 //Path to a library.
 QT_QTDESIGNER_LIBRARY_DEBUG:FILEPATH=QT_QTDESIGNER_LIBRARY_DEBUG-NOTFOUND
@@ -334,7 +336,7 @@ QT_QTDESIGNER_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtDesigner.framework
 QT_QTGUI_INCLUDE_DIR:PATH=/Library/Frameworks/QtGui.framework/Headers
 
 //The Qt QTGUI library
-QT_QTGUI_LIBRARY:STRING=/Library/Frameworks/QtGui.framework
+QT_QTGUI_LIBRARY:STRING=optimized;/Library/Frameworks/QtGui.framework;debug;/Library/Frameworks/QtGui.framework
 
 //Path to a library.
 QT_QTGUI_LIBRARY_DEBUG:FILEPATH=QT_QTGUI_LIBRARY_DEBUG-NOTFOUND
@@ -346,7 +348,7 @@ QT_QTGUI_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtGui.framework
 QT_QTHELP_INCLUDE_DIR:PATH=/Library/Frameworks/QtHelp.framework/Headers
 
 //The Qt QTHELP library
-QT_QTHELP_LIBRARY:STRING=/Library/Frameworks/QtHelp.framework
+QT_QTHELP_LIBRARY:STRING=optimized;/Library/Frameworks/QtHelp.framework;debug;/Library/Frameworks/QtHelp.framework
 
 //Path to a library.
 QT_QTHELP_LIBRARY_DEBUG:FILEPATH=QT_QTHELP_LIBRARY_DEBUG-NOTFOUND
@@ -358,7 +360,7 @@ QT_QTHELP_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtHelp.framework
 QT_QTMULTIMEDIA_INCLUDE_DIR:PATH=/Library/Frameworks/QtMultimedia.framework/Headers
 
 //The Qt QTMULTIMEDIA library
-QT_QTMULTIMEDIA_LIBRARY:STRING=/Library/Frameworks/QtMultimedia.framework
+QT_QTMULTIMEDIA_LIBRARY:STRING=optimized;/Library/Frameworks/QtMultimedia.framework;debug;/Library/Frameworks/QtMultimedia.framework
 
 //Path to a library.
 QT_QTMULTIMEDIA_LIBRARY_DEBUG:FILEPATH=QT_QTMULTIMEDIA_LIBRARY_DEBUG-NOTFOUND
@@ -370,7 +372,7 @@ QT_QTMULTIMEDIA_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtMultimedia.framew
 QT_QTNETWORK_INCLUDE_DIR:PATH=/Library/Frameworks/QtNetwork.framework/Headers
 
 //The Qt QTNETWORK library
-QT_QTNETWORK_LIBRARY:STRING=/Library/Frameworks/QtNetwork.framework
+QT_QTNETWORK_LIBRARY:STRING=optimized;/Library/Frameworks/QtNetwork.framework;debug;/Library/Frameworks/QtNetwork.framework
 
 //Path to a library.
 QT_QTNETWORK_LIBRARY_DEBUG:FILEPATH=QT_QTNETWORK_LIBRARY_DEBUG-NOTFOUND
@@ -391,7 +393,7 @@ QT_QTNSPLUGIN_LIBRARY_RELEASE:FILEPATH=QT_QTNSPLUGIN_LIBRARY_RELEASE-NOTFOUND
 QT_QTOPENGL_INCLUDE_DIR:PATH=/Library/Frameworks/QtOpenGL.framework/Headers
 
 //The Qt QTOPENGL library
-QT_QTOPENGL_LIBRARY:STRING=/Library/Frameworks/QtOpenGL.framework
+QT_QTOPENGL_LIBRARY:STRING=optimized;/Library/Frameworks/QtOpenGL.framework;debug;/Library/Frameworks/QtOpenGL.framework
 
 //Path to a library.
 QT_QTOPENGL_LIBRARY_DEBUG:FILEPATH=QT_QTOPENGL_LIBRARY_DEBUG-NOTFOUND
@@ -403,7 +405,7 @@ QT_QTOPENGL_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtOpenGL.framework
 QT_QTSCRIPTTOOLS_INCLUDE_DIR:PATH=/Library/Frameworks/QtScriptTools.framework/Headers
 
 //The Qt QTSCRIPTTOOLS library
-QT_QTSCRIPTTOOLS_LIBRARY:STRING=/Library/Frameworks/QtScriptTools.framework
+QT_QTSCRIPTTOOLS_LIBRARY:STRING=optimized;/Library/Frameworks/QtScriptTools.framework;debug;/Library/Frameworks/QtScriptTools.framework
 
 //Path to a library.
 QT_QTSCRIPTTOOLS_LIBRARY_DEBUG:FILEPATH=QT_QTSCRIPTTOOLS_LIBRARY_DEBUG-NOTFOUND
@@ -415,7 +417,7 @@ QT_QTSCRIPTTOOLS_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtScriptTools.fram
 QT_QTSCRIPT_INCLUDE_DIR:PATH=/Library/Frameworks/QtScript.framework/Headers
 
 //The Qt QTSCRIPT library
-QT_QTSCRIPT_LIBRARY:STRING=/Library/Frameworks/QtScript.framework
+QT_QTSCRIPT_LIBRARY:STRING=optimized;/Library/Frameworks/QtScript.framework;debug;/Library/Frameworks/QtScript.framework
 
 //Path to a library.
 QT_QTSCRIPT_LIBRARY_DEBUG:FILEPATH=QT_QTSCRIPT_LIBRARY_DEBUG-NOTFOUND
@@ -427,7 +429,7 @@ QT_QTSCRIPT_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtScript.framework
 QT_QTSQL_INCLUDE_DIR:PATH=/Library/Frameworks/QtSql.framework/Headers
 
 //The Qt QTSQL library
-QT_QTSQL_LIBRARY:STRING=/Library/Frameworks/QtSql.framework
+QT_QTSQL_LIBRARY:STRING=optimized;/Library/Frameworks/QtSql.framework;debug;/Library/Frameworks/QtSql.framework
 
 //Path to a library.
 QT_QTSQL_LIBRARY_DEBUG:FILEPATH=QT_QTSQL_LIBRARY_DEBUG-NOTFOUND
@@ -439,7 +441,7 @@ QT_QTSQL_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtSql.framework
 QT_QTSVG_INCLUDE_DIR:PATH=/Library/Frameworks/QtSvg.framework/Headers
 
 //The Qt QTSVG library
-QT_QTSVG_LIBRARY:STRING=/Library/Frameworks/QtSvg.framework
+QT_QTSVG_LIBRARY:STRING=optimized;/Library/Frameworks/QtSvg.framework;debug;/Library/Frameworks/QtSvg.framework
 
 //Path to a library.
 QT_QTSVG_LIBRARY_DEBUG:FILEPATH=QT_QTSVG_LIBRARY_DEBUG-NOTFOUND
@@ -451,7 +453,7 @@ QT_QTSVG_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtSvg.framework
 QT_QTTEST_INCLUDE_DIR:PATH=/Library/Frameworks/QtTest.framework/Headers
 
 //The Qt QTTEST library
-QT_QTTEST_LIBRARY:STRING=/Library/Frameworks/QtTest.framework
+QT_QTTEST_LIBRARY:STRING=optimized;/Library/Frameworks/QtTest.framework;debug;/Library/Frameworks/QtTest.framework
 
 //Path to a library.
 QT_QTTEST_LIBRARY_DEBUG:FILEPATH=QT_QTTEST_LIBRARY_DEBUG-NOTFOUND
@@ -463,7 +465,7 @@ QT_QTTEST_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtTest.framework
 QT_QTUITOOLS_INCLUDE_DIR:PATH=/usr/include/QtUiTools
 
 //The Qt QTUITOOLS library
-QT_QTUITOOLS_LIBRARY:STRING=/usr/lib/libQtUiTools.a
+QT_QTUITOOLS_LIBRARY:STRING=optimized;/usr/lib/libQtUiTools.a;debug;/usr/lib/libQtUiTools.a
 
 //Path to a library.
 QT_QTUITOOLS_LIBRARY_DEBUG:FILEPATH=QT_QTUITOOLS_LIBRARY_DEBUG-NOTFOUND
@@ -475,7 +477,7 @@ QT_QTUITOOLS_LIBRARY_RELEASE:FILEPATH=/usr/lib/libQtUiTools.a
 QT_QTWEBKIT_INCLUDE_DIR:PATH=/Library/Frameworks/QtWebKit.framework/Headers
 
 //The Qt QTWEBKIT library
-QT_QTWEBKIT_LIBRARY:STRING=/Library/Frameworks/QtWebKit.framework
+QT_QTWEBKIT_LIBRARY:STRING=optimized;/Library/Frameworks/QtWebKit.framework;debug;/Library/Frameworks/QtWebKit.framework
 
 //Path to a library.
 QT_QTWEBKIT_LIBRARY_DEBUG:FILEPATH=QT_QTWEBKIT_LIBRARY_DEBUG-NOTFOUND
@@ -487,7 +489,7 @@ QT_QTWEBKIT_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtWebKit.framework
 QT_QTXMLPATTERNS_INCLUDE_DIR:PATH=/Library/Frameworks/QtXmlPatterns.framework/Headers
 
 //The Qt QTXMLPATTERNS library
-QT_QTXMLPATTERNS_LIBRARY:STRING=/Library/Frameworks/QtXmlPatterns.framework
+QT_QTXMLPATTERNS_LIBRARY:STRING=optimized;/Library/Frameworks/QtXmlPatterns.framework;debug;/Library/Frameworks/QtXmlPatterns.framework
 
 //Path to a library.
 QT_QTXMLPATTERNS_LIBRARY_DEBUG:FILEPATH=QT_QTXMLPATTERNS_LIBRARY_DEBUG-NOTFOUND
@@ -499,7 +501,7 @@ QT_QTXMLPATTERNS_LIBRARY_RELEASE:FILEPATH=/Library/Frameworks/QtXmlPatterns.fram
 QT_QTXML_INCLUDE_DIR:PATH=/Library/Frameworks/QtXml.framework/Headers
 
 //The Qt QTXML library
-QT_QTXML_LIBRARY:STRING=/Library/Frameworks/QtXml.framework
+QT_QTXML_LIBRARY:STRING=optimized;/Library/Frameworks/QtXml.framework;debug;/Library/Frameworks/QtXml.framework
 
 //Path to a library.
 QT_QTXML_LIBRARY_DEBUG:FILEPATH=QT_QTXML_LIBRARY_DEBUG-NOTFOUND
@@ -529,7 +531,7 @@ QT_ZLIB_LIBRARY:FILEPATH=/usr/lib/libz.dylib
 RobotModel_BINARY_DIR:STATIC=/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel
 
 //Dependencies for the target
-RobotModel_LIB_DEPENDS:STATIC=general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;general;/usr/local/lib/libFreeSOLID.dylib;general;/Library/Frameworks/QtOpenGL.framework;general;/Library/Frameworks/QtGui.framework;general;/Library/Frameworks/QtXml.framework;general;/Library/Frameworks/QtCore.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;
+RobotModel_LIB_DEPENDS:STATIC=general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;general;/usr/local/lib/libFreeSOLID.dylib;optimized;/Library/Frameworks/QtOpenGL.framework;debug;/Library/Frameworks/QtOpenGL.framework;optimized;/Library/Frameworks/QtGui.framework;debug;/Library/Frameworks/QtGui.framework;optimized;/Library/Frameworks/QtXml.framework;debug;/Library/Frameworks/QtXml.framework;optimized;/Library/Frameworks/QtCore.framework;debug;/Library/Frameworks/QtCore.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
 RobotModel_SOURCE_DIR:STATIC=/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel
@@ -538,7 +540,7 @@ RobotModel_SOURCE_DIR:STATIC=/Users/kail/imClever/dev/virtualSkin/src/VirtualSki
 VirtualSkin_BINARY_DIR:STATIC=/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary
 
 //Dependencies for the target
-VirtualSkin_LIB_DEPENDS:STATIC=general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;general;RobotModel;general;YarpFilter;general;/usr/local/lib/libFreeSOLID.dylib;general;/Library/Frameworks/QtOpenGL.framework;general;/Library/Frameworks/QtGui.framework;general;/Library/Frameworks/QtXml.framework;general;/Library/Frameworks/QtCore.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;
+VirtualSkin_LIB_DEPENDS:STATIC=general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;general;RobotModel;general;YarpFilter;general;/usr/local/lib/libFreeSOLID.dylib;optimized;/Library/Frameworks/QtOpenGL.framework;debug;/Library/Frameworks/QtOpenGL.framework;optimized;/Library/Frameworks/QtGui.framework;debug;/Library/Frameworks/QtGui.framework;optimized;/Library/Frameworks/QtXml.framework;debug;/Library/Frameworks/QtXml.framework;optimized;/Library/Frameworks/QtCore.framework;debug;/Library/Frameworks/QtCore.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/System/Library/Frameworks/AGL.framework;general;/System/Library/Frameworks/OpenGL.framework;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_dev.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_math.a;general;/opt/local/lib/libgsl.dylib;general;/opt/local/lib/libgslcblas.dylib;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_sig.a;general;/Users/kail/Library/yarp-2.2.6/lib/libYARP_OS.a;general;/Users/kail/Library/ace/ACE_wrappers/lib/libACE.dylib;
 
 //Value Computed by CMake
 VirtualSkin_SOURCE_DIR:STATIC=/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary
@@ -571,7 +573,7 @@ CMAKE_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_BUILD_TOOL
 CMAKE_BUILD_TOOL-ADVANCED:INTERNAL=1
 //What is the target build tool cmake is generating for.
-CMAKE_BUILD_TOOL:INTERNAL=/opt/local/bin/gmake
+CMAKE_BUILD_TOOL:INTERNAL=/opt/local/bin/cmakexbuild
 //This is the directory where this CMakeCache.txt was created
 CMAKE_CACHEFILE_DIR:INTERNAL=/Users/kail/imClever/dev/virtualSkin/xcode
 //Major version of cmake used to create the current loaded cache
@@ -580,8 +582,6 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=2
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=1
-//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
-CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=/opt/local/bin/cmake
 //Path to cpack program executable.
@@ -633,7 +633,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Name of generator.
-CMAKE_GENERATOR:INTERNAL=Unix Makefiles
+CMAKE_GENERATOR:INTERNAL=Xcode
 //Start directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/Users/kail/imClever/dev/virtualSkin
@@ -686,7 +686,7 @@ CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Qt4
-FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/Library/Frameworks][/usr/include;/Library/Frameworks/QtCore.framework][/Developer/Tools/Qt/moc][/Developer/Tools/Qt/uic][/Developer/Tools/Qt/rcc]
+FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/Library/Frameworks][/usr/include;optimized;/Library/Frameworks/QtCore.framework;debug;/Library/Frameworks/QtCore.framework][/Developer/Tools/Qt/moc][/Developer/Tools/Qt/uic][/Developer/Tools/Qt/rcc]
 //ADVANCED property for variable: OPENGL_INCLUDE_DIR
 OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY

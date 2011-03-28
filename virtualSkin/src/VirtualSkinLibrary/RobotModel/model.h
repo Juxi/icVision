@@ -41,19 +41,23 @@ class RobotModel::Model : public QThread
 	Q_OBJECT
 
 public:
-	Model( bool visualize = 0 );	//!< Constructs an armed collisionDetector object
-	virtual ~Model();				//!< Just stops the YARP port if its running
+	Model( bool visualize = 0 );	//!< Sets the default collision response for FreeSOLID to DT_WITNESSED_RESPONSE
+									/**< \param visualize If true, a SkinWindow (with its associated GLWidget) is constructed and its signals and slots are
+										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
+	virtual ~Model();				//!< Nothing special to do here
 	
 	Robot	robot;			//!< The Robot whose pose we are updating
-	World	world;			//!< All the other Objects not belonging to the Robot's body. (we just need this so we can change colors when things collide or not)
+	World	world;			//!< All the other Objects not belonging to the Robot's body.
 
-	bool computePose();					//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID
-	void run();
-	void stop();
-	void restart();
+	bool computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID
+							/**< Call this function if you want to be in control of which poses are computed when */
+	void run();				//!< Allows a thread to call computePose() periodically
+							/**< \note IMPORTANT: Call start() not run() !!! */
+	void stop();			//!< Stops the collision thread
+	void restart();			//!< Restarts the collision thread
 	
 	/*! This callback is executed whenever FreeSOLID encounters a collision between Objects.
-	 It sets a flag that collision(s) has/have occurred, and encodes the collision state into a YARP bottle.
+	 *  It refreshes the timestamp on the objects indicating when the last collision has occurred.
 	 */
 	static void collisionHandler( void * client_data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData *coll_data )
 	{
@@ -75,15 +79,15 @@ public:
 	
 signals:
 	
-	void newStateReady();
-	void collision();
+	void newStateReady();	//! Indicates that a new state has been computed (useful when running collision detection in a separate thread)
+	void collision();		//! Indicates that a collision has occurred (useful when running collision detection in a separate thread)
 
 protected:
 	
-	RobotModel::SkinWindow	*skinWindow;
+	RobotModel::SkinWindow	*skinWindow;	//! The visualization
 	
-	bool keepRunning;
-	int	 col_count;		//!< The number of collisions in the current robot/world configuration
+	bool keepRunning;	//!< Facilitates stopping and restarting the thread
+	int	 col_count;		//!< The number of (pairwise) collisions in the current robot/world configuration
 };
 
 #endif

@@ -8,7 +8,7 @@ using namespace RobotModel;
 
 KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  parentRobot(robot),
 																		    parentNode(parent),
-																		    index(robot->nextLinkIdx()),
+																		    index(robot->numNodes()),
 																		    nodeType(type)
 {
 	if ( !robot ) { throw RobotModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
@@ -31,6 +31,7 @@ KinTreeNode::~KinTreeNode()
 	
 	QVector<PrimitiveObject*>::iterator j;
 	for ( j=begin(); j!=end(); ++j ) { parentRobot->emit outdatedDisplayList( (*j)->displayListIdx() ); }
+	
 	parentRobot->emit outdatedDisplayList( displayListIdx() );
 }
 
@@ -75,19 +76,16 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
     // to control recursion down serial chains
     if ( this->parent() && this->parent() != node->parent() )
 	{
-        if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) {
-			//if ( (node->getNodeType() == LINK && getNodeType() == RJOINT) ||
-			//	(node->getNodeType() == RJOINT) && getNodeType() == ) 
-			//{ 
-				return;
-			//}
-			// TODO: handle PJOINT
+        if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
+		{
+			return;
 		}
-
-        if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !isEmpty() ) {
+        if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !isEmpty() )
+		{
             foundLink = true;
         }
-        else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !isEmpty() ) {
+        else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !isEmpty() )
+		{
             foundJoint = true;
         }
     }

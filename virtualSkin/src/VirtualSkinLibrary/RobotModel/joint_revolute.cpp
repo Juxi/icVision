@@ -11,5 +11,5 @@ RevoluteJoint::RevoluteJoint( Robot* robot, KinTreeNode* parent, Motor* motor ) 
 }
 void RevoluteJoint::setM()
 {
-	M.setAxisAngleRotation(nodeAxis, position);
+	M.setAxisAngleOrientation(nodeAxis, position);
 }

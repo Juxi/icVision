@@ -184,7 +184,7 @@ void WorldRpcInterface::setPos( const yarp::os::Bottle& command, yarp::os::Bottl
 		double x = command.get(n).asDouble(); n++;  //std::cout << x << std::endl; // x position
 		double y = command.get(n).asDouble(); n++;  //std::cout << y << std::endl; // y position  
 		double z = command.get(n).asDouble(); n++;  //std::cout << z << std::endl; // z position
-		object->setTranslation( QVector3D(x,y,z) );
+		object->setPosition( QVector3D(x,y,z) );
 		reply.addString("Set Cartesian position of object.");
 	}
 }
@@ -198,7 +198,7 @@ void WorldRpcInterface::pSetPos( const yarp::os::Bottle& command, yarp::os::Bott
 		double x = command.get(n).asDouble(); n++;  //std::cout << x << std::endl; // x position
 		double y = command.get(n).asDouble(); n++;  //std::cout << y << std::endl; // y position  
 		double z = command.get(n).asDouble(); n++;  //std::cout << z << std::endl; // z position
-		primitive->setTranslation( QVector3D(x,y,z) );
+		primitive->setPosition( QVector3D(x,y,z) );
 		reply.addString("Set Cartesian position of primitive relative to object.");
 	}
 }
@@ -211,7 +211,7 @@ void WorldRpcInterface::setRot( const yarp::os::Bottle& command, yarp::os::Bottl
 		double x = command.get(n).asDouble(); n++;  //std::cout << x << std::endl; // x position
 		double y = command.get(n).asDouble(); n++;  //std::cout << y << std::endl; // y position  
 		double z = command.get(n).asDouble(); n++;  //std::cout << z << std::endl; // z position
-		object->setCartesianRotation( QVector3D(x,y,z) );
+		object->setCartesianOrientation( QVector3D(x,y,z) );
 		reply.addString("Set rotation (about x,y,z in degrees) of object.");
 	}
 }
@@ -225,7 +225,7 @@ void WorldRpcInterface::pSetRot( const yarp::os::Bottle& command, yarp::os::Bott
 		double x = command.get(n).asDouble(); n++;  //std::cout << x << std::endl; // x position
 		double y = command.get(n).asDouble(); n++;  //std::cout << y << std::endl; // y position  
 		double z = command.get(n).asDouble(); n++;  //std::cout << z << std::endl; // z position
-		primitive->setCartesianRotation( QVector3D(x,y,z) );
+		primitive->setCartesianOrientation( QVector3D(x,y,z) );
 		reply.addString("Set rotation (about x,y,z in degrees) of primitive relative to object.");
 	}
 }

@@ -31,7 +31,7 @@ CompositeObject* World::newSphere( double r, const QVector3D& pos )
 	
 	CompositeObject* object = new CompositeObject( name );	
 	object->newSphere(r);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newSSphere( double r, const QVector3D& pos )
@@ -40,7 +40,7 @@ CompositeObject* World::newSSphere( double r, const QVector3D& pos )
 	
 	CompositeObject* object = new CompositeObject( name );		
 	object->newSphere(r);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newCylinder( double r, double h, const QVector3D& pos )
@@ -49,7 +49,7 @@ CompositeObject* World::newCylinder( double r, double h, const QVector3D& pos )
 
 	CompositeObject* object = new CompositeObject( name );		
 	object->newCylinder(r, h);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newSCylinder( double r, double h, const QVector3D& pos )
@@ -58,7 +58,7 @@ CompositeObject* World::newSCylinder( double r, double h, const QVector3D& pos )
 	
 	CompositeObject* object = new CompositeObject( name );		
 	object->newCylinder(r, h);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newBox( const QVector3D& size, const QVector3D& pos )
@@ -67,7 +67,7 @@ CompositeObject* World::newBox( const QVector3D& size, const QVector3D& pos )
 
 	CompositeObject* object = new CompositeObject( name );		
 	object->newBox(size);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newSBox( const QVector3D& size, const QVector3D& pos )
@@ -76,13 +76,13 @@ CompositeObject* World::newSBox( const QVector3D& size, const QVector3D& pos )
 	
 	CompositeObject* object = new CompositeObject( name );		
 	object->newBox(size);
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );
 }
 CompositeObject* World::newObject( const QString& name, const QVector3D& pos )
 {
 	CompositeObject* object = new CompositeObject( name );
-	object->setTranslation(pos);
+	object->setPosition(pos);
 	return append( object );	// this copies the object into the list
 }
 CompositeObject* World::append( CompositeObject* obj )
@@ -133,14 +133,6 @@ void World::render()
     }
 	mutex.unlock();
 }
-
-/*void World::notColliding()
-{
-	QVector<CompositeObject*>::iterator i;
-    for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
-        (*i)->notColliding();
-    }
-}*/
 
 bool World::remove( CompositeObject* obj )
 {

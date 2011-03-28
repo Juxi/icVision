@@ -22,9 +22,9 @@ void PrimitiveObject::setL( const QMatrix4x4& txfr )
     if (parent) { update(parent->getT()); }
 }
 
-void PrimitiveObject::setTranslation( const QVector3D& pos )
+void PrimitiveObject::setPosition( const QVector3D& pos )
 {
-	L.setTranslation( pos );
+	L.setPosition( pos );
 	if (parent) { update(parent->getT()); }
 }
 void PrimitiveObject::translate( const QVector3D& pos )
@@ -33,9 +33,9 @@ void PrimitiveObject::translate( const QVector3D& pos )
 	if (parent) { update(parent->getT()); }
 }
 
-void PrimitiveObject::setCartesianRotation( const QVector3D& rot )
+void PrimitiveObject::setCartesianOrientation( const QVector3D& rot )
 {
-	L.setCartesianRotation( rot );
+	L.setCartesianOrientation( rot );
 	if (parent) { update(parent->getT()); }
 }
 void PrimitiveObject::cartesianRotate( const QVector3D& rot )
@@ -44,9 +44,9 @@ void PrimitiveObject::cartesianRotate( const QVector3D& rot )
 	if (parent) { update(parent->getT()); }
 }
 
-void PrimitiveObject::setAxisAngleRotation( const QVector3D& axis, qreal angle )
+void PrimitiveObject::setAxisAngleOrientation( const QVector3D& axis, qreal angle )
 {
-	L.setAxisAngleRotation(axis, angle);
+	L.setAxisAngleOrientation(axis, angle);
 	if (parent) { update(parent->getT()); }
 }
 void PrimitiveObject::axisAngleRotate( const QVector3D& axis, qreal angle )
@@ -55,11 +55,17 @@ void PrimitiveObject::axisAngleRotate( const QVector3D& axis, qreal angle )
 	if (parent) { update(parent->getT()); }
 }
 
-void PrimitiveObject::specialRotate( const QVector3D& axis, qreal angle )
+void PrimitiveObject::setSpecialEulerOrientation( const QVector3D& axis, qreal angle )
 {
-	L.specialRotate(axis, angle);
+	L.setSpecialEulerOrientation(axis, angle);
 	if (parent) { update(parent->getT()); }
 }
+
+//void PrimitiveObject::specialEulerRotate( const QVector3D& axis, qreal angle )
+//{
+//	L.specialEulerRotate(axis, angle);
+//	if (parent) { update(parent->getT()); }
+//}
 
 void PrimitiveObject::update( const QMatrix4x4& txfr )
 {

@@ -115,7 +115,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			if ( radius > 0 )
 			{
 				PrimitiveObject* cylinder = node->newCylinder( radius, height );
-				cylinder->specialRotate(axis);
+				cylinder->setSpecialEulerOrientation(axis);
 				
 				if (node->getNodeType() == KinTreeNode::LINK ) { cylinder->translate( axis/2 ); }
 				else if ( node->getNodeType() != KinTreeNode::RJOINT &&  node->getNodeType() != KinTreeNode::PJOINT ) { 
@@ -174,7 +174,11 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 		
 		if ( qFuzzyIsNull( heightAxis.length() ) ) { heightAxis.setY(1); }
 		
-		primitive->specialRotate( heightAxis, rotAngle );
+		//primitive->setCartesianOrientation(QVector3D(1,2,3));
+		
+		//primitive->specialEulerRotate(heightAxis,rotAngle);
+		
+		primitive->setSpecialEulerOrientation( heightAxis, rotAngle );
 		
 		/*
 		 *	SET ITS POSITION

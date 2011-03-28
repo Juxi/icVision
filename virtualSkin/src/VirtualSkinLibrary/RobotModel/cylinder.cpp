@@ -56,13 +56,13 @@ void Cylinder::makeDisplayList()
             for ( int t=0; t<=numSegments; t++ )
 			{
 
-				M.setAxisAngleRotation(yAxis, t*dt);
+				M.setAxisAngleOrientation(yAxis, t*dt);
                 p[t] = M*p0;
                 pn[t] = M*n0;
                 pN = pn[t].toVector3D();
                 pN.normalize();
 
-				N.setAxisAngleRotation(yAxis, (t+0.5)*dt);
+				N.setAxisAngleOrientation(yAxis, (t+0.5)*dt);
                 q[t] = N*q0;
                 qn[t] = N*n0;
                 qN = qn[t].toVector3D();

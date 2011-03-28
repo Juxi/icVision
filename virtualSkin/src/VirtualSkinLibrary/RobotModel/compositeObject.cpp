@@ -28,9 +28,9 @@ void CompositeObject::setT( const QMatrix4x4& txfr )
 	update();
 }
 
-void CompositeObject::setTranslation( const QVector3D& pos )
+void CompositeObject::setPosition( const QVector3D& pos )
 {
-	T.setTranslation( pos );
+	T.setPosition( pos );
 	update();
 }
 
@@ -40,9 +40,9 @@ void CompositeObject::translate( const QVector3D& pos )
 	update();
 }
 
-void CompositeObject::setCartesianRotation( const QVector3D& rot )
+void CompositeObject::setCartesianOrientation( const QVector3D& rot )
 {
-	T.setCartesianRotation( rot );
+	T.setCartesianOrientation( rot );
 	update();
 }
 
@@ -52,9 +52,9 @@ void CompositeObject::cartesianRotate( const QVector3D& rot )
 	update();
 }
 
-void CompositeObject::setAxisAngleRotation( const QVector3D& axis, qreal angle )
+void CompositeObject::setAxisAngleOrientation( const QVector3D& axis, qreal angle )
 {
-	T.setAxisAngleRotation(axis, angle);
+	T.setAxisAngleOrientation(axis, angle);
 	update();
 }
 
@@ -64,11 +64,17 @@ void CompositeObject::axisAngleRotate( const QVector3D& axis, qreal angle )
 	update();
 }
 
-void CompositeObject::specialRotate( const QVector3D& axis, qreal angle )
+void CompositeObject::setSpecialEulerOrientation( const QVector3D& axis, qreal angle )
 {
-	T.specialRotate(axis, angle);
+	T.setSpecialEulerOrientation(axis, angle);
 	update();
 }
+
+//void CompositeObject::specialEulerRotate( const QVector3D& axis, qreal angle )
+//{
+//	T.specialEulerRotate(axis, angle);
+//	update();
+//}
 
 PrimitiveObject* CompositeObject::newSphere( double r, const QVector3D& pos )
 {
@@ -76,7 +82,7 @@ PrimitiveObject* CompositeObject::newSphere( double r, const QVector3D& pos )
 	
 	PrimitiveObject* primitive = new Sphere( r );
 	primitive->setName( name );
-	primitive->setTranslation( pos );
+	primitive->setPosition( pos );
 	append( primitive );
 	return primitive;
 }
@@ -87,7 +93,7 @@ PrimitiveObject* CompositeObject::newCylinder( double r, double h, const QVector
 	
 	PrimitiveObject* primitive = new Cylinder( r, h );
 	primitive->setName( name );
-	primitive->setTranslation( pos );
+	primitive->setPosition( pos );
 	append( primitive );
 	return primitive;
 }
@@ -98,7 +104,7 @@ PrimitiveObject* CompositeObject::newBox( const QVector3D& size, const QVector3D
 	
 	PrimitiveObject* primitive = new Box( size );
 	primitive->setName( name );
-	primitive->setTranslation( pos );
+	primitive->setPosition( pos );
 	append( primitive );
 	return primitive;
 }

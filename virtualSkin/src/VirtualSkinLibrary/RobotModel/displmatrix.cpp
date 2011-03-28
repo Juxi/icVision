@@ -13,13 +13,7 @@
 
 using namespace RobotModel;
 
-DisplMatrix::DisplMatrix()
-{
-}
-DisplMatrix::DisplMatrix( const QMatrix4x4& m) : QMatrix4x4(m)
-{
-}
-void DisplMatrix::setTranslation( const QVector3D& trans )
+void DisplMatrix::setPosition( const QVector3D& trans )
 {
 	operator()(0,3) = trans.x();
 	operator()(1,3) = trans.y();
@@ -35,12 +29,14 @@ void DisplMatrix::translate( const QVector3D& trans )
 	
 	*this = translation * (*this);
 }
-void DisplMatrix::specialRotate( const QVector3D& axis, qreal angle )
+void DisplMatrix::setSpecialEulerOrientation( const QVector3D& axis, qreal angle )
 {	
 	QVector3D xAxis = QVector3D(1,0,0);
 	QVector3D yAxis = QVector3D(0,1,0);
+	
+	setCartesianOrientation( QVector3D(0,0,0) );
 
-	QVector3D xzProj = QVector3D(axis.x(),0,axis.y()).normalized();
+	QVector3D xzProj = QVector3D(axis.x(),0,axis.z()).normalized();
 	
 	if ( !qFuzzyIsNull(xzProj.length()) )
 	{
@@ -54,13 +50,41 @@ void DisplMatrix::specialRotate( const QVector3D& axis, qreal angle )
 	
 	axisAngleRotate(axis, angle);
 }
-void DisplMatrix::setCartesianRotation( const QVector3D& angle )
+/*void DisplMatrix::specialEulerRotate( const QVector3D& axis, qreal angle )
+{	
+	QMatrix4x4 rot;
+	rot.setToIdentity();
+	rot(0,0) = operator()(0,0);	rot(0,1) = operator()(0,1); rot(0,2) = operator()(0,2);
+	rot(1,0) = operator()(1,0);	rot(1,1) = operator()(1,1); rot(1,2) = operator()(1,2);
+	rot(2,0) = operator()(2,0);	rot(2,1) = operator()(2,1); rot(2,2) = operator()(2,2);
+	
+	// principal directions of the current transformation
+	QVector3D xAxis = (rot*QVector3D(1,0,0)).normalized();	
+	QVector3D yAxis = (rot*QVector3D(0,1,0)).normalized();
+	QVector3D zAxis = (rot*QVector3D(0,0,1)).normalized();
+	
+	// projection of 'axis' onto the xz plane of the current transformation CS
+	QVector3D xzProj = QVector3D( QVector3D::dotProduct(xAxis,axis), 0, QVector3D::dotProduct(zAxis,axis) ).normalized();
+	
+	if ( !qFuzzyIsNull(xzProj.length()) )
+	{
+		qreal rotY = acos( QVector3D::dotProduct(QVector3D(1,0,0),xzProj) );
+		axisAngleRotate(yAxis,rotY);
+	}
+	
+	QVector3D commonNorm = QVector3D::crossProduct( yAxis, axis );
+	qreal rotCommonNorm = acos( QVector3D::dotProduct(yAxis,axis.normalized()) );
+	axisAngleRotate(commonNorm, rotCommonNorm);
+	
+	axisAngleRotate(axis, angle);
+}*/
+void DisplMatrix::setCartesianOrientation( const QVector3D& angle )
 {
 	// rotates about z then y then x
-	QVector3D v = angle*M_PI/180;
-	const qreal sG = sin( v.x() ),  cG = cos( v.x() ),
-				sB = sin( v.y() ),  cB = cos( v.y() ),
-				sA = sin( v.z() ),  cA = cos( v.z() );
+	//QVector3D v = angle*M_PI/180;
+	const qreal sG = sin( angle.x() ),  cG = cos( angle.x() ),
+				sB = sin( angle.y() ),  cB = cos( angle.y() ),
+				sA = sin( angle.z() ),  cA = cos( angle.z() );
 	
 	operator()(0,0) = cA*cB;			operator()(0,1) = -sA*cB;				operator()(0,2) =  sB;
 	operator()(1,0) = sA*cG + cA*sB*sG;	operator()(1,1) =  cA*cG + sA*sB*sG;	operator()(1,2) =  -cB*sG;
@@ -69,10 +93,10 @@ void DisplMatrix::setCartesianRotation( const QVector3D& angle )
 void DisplMatrix::cartesianRotate( const QVector3D& angle )
 {
 	// rotates about z then y then x
-	QVector3D v = angle*M_PI/180;
-	const qreal sG = sin( v.x() ),  cG = cos( v.x() ),
-				sB = sin( v.y() ),  cB = cos( v.y() ),
-				sA = sin( v.z() ),  cA = cos( v.z() );
+	//QVector3D v = angle*M_PI/180;
+	const qreal sG = sin( angle.x() ),  cG = cos( angle.x() ),
+				sB = sin( angle.y() ),  cB = cos( angle.y() ),
+				sA = sin( angle.z() ),  cA = cos( angle.z() );
 	
 	QMatrix4x4 rot;
 	
@@ -82,7 +106,7 @@ void DisplMatrix::cartesianRotate( const QVector3D& angle )
 	
 	*this = rot * (*this);
 }
-void DisplMatrix::setAxisAngleRotation( const QVector3D& anAxis, qreal angle )
+void DisplMatrix::setAxisAngleOrientation( const QVector3D& anAxis, qreal angle )
 {
 	// rotates 'angle' about 'axis'
 	const qreal Cos=cos( angle ),

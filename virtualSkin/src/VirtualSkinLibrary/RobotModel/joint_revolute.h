@@ -14,6 +14,9 @@
 
 namespace RobotModel { class RevoluteJoint; }
 
+/** \brief Implements Joint::setM() for a revolute (rotational) joint
+ *
+ */
 class RobotModel::RevoluteJoint : public Joint
 {
 	

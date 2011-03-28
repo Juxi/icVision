@@ -7,7 +7,7 @@ using namespace RobotModel;
 GLfloat DisplayList::red[4] =  { 1.0, 0.0, 0.0, 1.0 };
 GLfloat DisplayList::gray[4] = { 0.3, 0.3, 0.3, 1.0 };
 
-DisplayList::DisplayList() : index(0) //, colliding(0)
+DisplayList::DisplayList() : index(0)
 {
 }
 
@@ -37,7 +37,7 @@ void DisplayList::render()
 		
 		glPushMatrix();
 			glMultMatrixd( T.constData() );
-			 glCallList( index );
+			glCallList( index );
 		glPopMatrix();
 	}
 }

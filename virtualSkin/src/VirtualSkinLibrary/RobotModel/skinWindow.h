@@ -26,8 +26,6 @@ namespace RobotModel
 }
 
 /*! \brief This QWidget is the window for the optional GUI used to visualize the Robot. (see GLWidget)
- *
- * The code is mostly borrowed from the Qt HelloGL example.
  */
 class RobotModel::SkinWindow : public QWidget
 {
@@ -35,9 +33,8 @@ class RobotModel::SkinWindow : public QWidget
 
 public:
 	
-	SkinWindow();
-	
-	QGLWidget *glWidget;
+	SkinWindow();			//!< Borrowed from the Qt HelloGL example.
+	QGLWidget *glWidget;	//!< Customized to render arbitrary OpenGL display lists
 
 };
 

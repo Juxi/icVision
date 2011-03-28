@@ -23,14 +23,14 @@ class RobotModel::Interval
 {
 
 public:
-    Interval();
-    ~Interval();
+    Interval();								//!< Initializes 'min' and 'max' to 0
+    ~Interval();							//!< Nothing to do here
 
-    void setMin( const qreal minimum );
-    void setMax( const qreal maximum );
+    void setMin( const qreal minimum );		//!< Sets the value of 'min'. If min > max, min is set equal to max and a warning is printed.
+    void setMax( const qreal maximum );		//!< Sets the value of 'max'. If max < min, max is set equal to max and a warning is printed.
 
-    qreal getMin() const;
-    qreal getMax() const;
+    qreal getMin() const;	//!< Returns the value of 'min'.
+    qreal getMax() const;	//!< Returns the value of 'max'.
 
     bool isInRange( const qreal num );		//!< Returns true iff min <= num <= max
     bool isTooSmall( const qreal num );		//!< Returns true iff num < min

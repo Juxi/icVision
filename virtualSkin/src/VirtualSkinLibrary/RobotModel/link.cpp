@@ -10,5 +10,5 @@ Link::~Link()
 {
 }
 void Link::setM() {
-	M.setTranslation(nodeAxis);
+	M.setPosition(nodeAxis);
 }

@@ -15,7 +15,7 @@
 
 namespace RobotModel { class Motor; }
 
-/*! \brief Affords control of one or more joints (see Joint)
+/*! \brief Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)
  *
  * This class can control an arbitrary number of joints via a linear mapping between the motor position and each joint
  * position. The mapping is implicitly defined by the intervals motor.limits and joint.limits, and it works as follows:
@@ -31,36 +31,53 @@ class RobotModel::Motor : public QVector<Joint*>
 	
 public:
 	
-	Motor( Robot* robot, Motor* motor = 0 );
-	~Motor();
+	Motor( Robot* robot, Motor* motor = 0 );				//!< \brief Appends the new motor to the Robot and initializes member vars
+															/**< \param robot The robot to which this BodyPart should be appended
+																 \param motor Facilitates robot creation via the Qt XML parser and ZPHandler
+																 Calls Robot.appendMotor( Motor* this ), initializes the Motor.limits to [-1,1],
+																 and initializes encoderPosition = 0.0, normalPosition = 0.5, and homePosition = 0.0
+															 */
+	~Motor();												//!< Nothing to destroy here
 
-	const QString& name() const { return motorName; }
-	Motor* parent() const { return parentMotor; }
-	qreal minPos() const { return motorLimits.getMin(); }
-	qreal maxPos() const { return motorLimits.getMax(); }
-	qreal encPos() const { return encoderPosition; }
-	qreal normPos() const { return normalPosition; }
-	void print();
+	const QString& name() const { return motorName; }		//!< Returns a human readable name for the motor
+	Motor* parent() const { return parentMotor; }			//!< Returns a pointer to the parent Motor
+															/**< This is currently used only by ZPHandler for building the robot from a hierarchical
+																 XML file. There is nothing inherently heirarchical about a group of Motor objects.
+																 It is the underlying KinTreeNode objects (Link, RevoluteJoint and PrismaticJoint) that
+																 reflect the hierarchy of the kinematic tree */
+	qreal minPos() const { return motorLimits.getMin(); }	//!< Returns the minimum encoderPosition
+	qreal maxPos() const { return motorLimits.getMax(); }	//!< Returns the maximum encoderPosition
+	qreal encPos() const { return encoderPosition; }		//!< Returns the current encoderPosition
+	qreal normPos() const { return normalPosition; }		//!< Returns the current normalPosition
+	void print();											//!< Prints the Motor's member variables to the terminal
 
 	void setName( const QString& name ) { motorName = name; }
-	void setMin( qreal );
-	void setMax( qreal );
-	void setEncPos( qreal );
-	void setHomePos( qreal );
-	void setNormPos( qreal );
-	
-	void home();
+	void setMin( qreal );										//!< Sets the minimum encoderPosition
+																/**< If the new minimum is greater than homePosition and/or encoderPosition, then
+																	 they will be reset to the new minimum as needed */
+	void setMax( qreal );										//!< Sets the maximum encoderPosition
+																/**< If the new maximum is less than homePosition and/or encoderPosition, then
+																	 they will be reset to the new maximum as needed */
+	void setEncPos( qreal );									//!< Sets the current encoderPosition
+																/**< If the requested encoderPosition is outside the interval motorLimits, either
+																	 either the maximum or minimum value will be used as is appropriate */ 
+	void setHomePos( qreal );									//!< Sets the homePosition (the position in which the real robot hardware calibrates)
+																/**< If the requested homePosition is outside the interval motorLimits, either
+																	 either the maximum or minimum value will be used as is appropriate */ 
+	void setNormPos( qreal );									//!< Sets the normalPosition directly
+																/**< Values outside the interval [0,1] will be replaced by either 0 or 1 as is appropriate */
+	void home();												//!< Sets encoderPosition = homePosition
 
 private:
 	
-	Motor*		parentMotor;
-	QString		motorName;
-	Interval	motorLimits;          // encoder position limits
-	qreal		encoderPosition, // encoder position is on the interval 'limits'
-				homePosition,
-				normalPosition;  // normalized position is >=0 and <=1
+	Motor*		parentMotor;		//!< Just for the XML parser
+	QString		motorName;			//!< A human readable name 
+	Interval	motorLimits;        //!< Encoder position limits
+	qreal		encoderPosition,	//!< The position of the motor encoder... is always on the interval 'limits'
+				homePosition,		//!< The position in which the real robot (hardware) calibrates... always on the interval 'limits'
+				normalPosition;		//!< Normalized encoder position... on the interval [0,1]
 	
-	void setJointPositions();
+	void setJointPositions();		//!< Update the positions of the joints belonging to this motor
 };
 
 #endif 

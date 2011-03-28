@@ -14,19 +14,21 @@
 
 namespace RobotModel { class RobotModelException; }
 	
+/*! \brief A simple exception for the RobotModel namespace
+ */
 class RobotModel::RobotModelException
 {
 	
 public:
 	
-	RobotModelException( const QString& msg = "" );
-	~RobotModelException();
+	RobotModelException( const QString& msg = "" );	//!< Sets the error message
+	~RobotModelException();							//!< Nothing special
 	
-	const char* what();
+	const char* what();								//!< Returns the error message
 
 private:
 	
-	QString errStr;
+	QString errStr;									//!< The error message
 };
 
 #endif

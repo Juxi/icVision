@@ -90,7 +90,7 @@ void RobotFilter::takeControl()
 void RobotFilter::run()
 {
 	// first stop the robot
-	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
+	for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
 	{
 		cbFilters.at(bodyPart)->cutConnection(true);		// take control away from the user
 	}
@@ -103,7 +103,7 @@ void RobotFilter::run()
 	collisionResponse();
 	
 	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++ ) {
+	for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++ ) {
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	

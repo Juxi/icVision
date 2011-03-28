@@ -3,7 +3,7 @@
 
 using namespace RobotModel;
 
-Robot::Robot( bool visualize ) : robotName("unNamedRobot"), numLinks(0), isConfigured(false)
+Robot::Robot() : robotName("unNamedRobot"), numLinks(0), isConfigured(false)
 {
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 }
@@ -16,7 +16,7 @@ void Robot::close()
 {	
 	QVector<KinTreeNode*>::iterator k;
     for ( k=tree.begin(); k!=tree.end(); ++k ) {
-        delete (*k);
+        delete *k;
     }
     QVector<Motor*>::iterator j;
     for ( j=motorList.begin(); j!=motorList.end(); ++j ) {
@@ -26,6 +26,8 @@ void Robot::close()
     for ( i=partList.begin(); i!=partList.end(); ++i ) {
         delete (*i);
     }
+	
+	isConfigured = false;
 }
 
 bool Robot::open( const QString& fileName)

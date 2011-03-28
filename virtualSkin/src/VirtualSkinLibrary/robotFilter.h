@@ -79,7 +79,7 @@ public:
 		QString targetName;
 		QString filterName;
 		
-		for (int bodyPart = 0; bodyPart < model.robot.nextPartIdx(); bodyPart++)
+		for (int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
 		{
 			p_cbf = new yarp::os::ControlBoardFilter();
 			
