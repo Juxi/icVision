@@ -29,11 +29,20 @@ namespace RobotModel
 	class Model;
 }
 
-/*! \brief Computes the current pose of the Robot and does collision detection using the FreeSOLID library
+/** \brief Computes the current pose of the Robot and does collision detection using the FreeSOLID library
  *
- *  Can be either in a thread or not
- *	 NOTE: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|.
- *	 Thus the computational complexity of the collision detection grows linearly with the size of the world. 
+ * To use this class:
+ *   First prepare the object by calling the constructor, setRobot(Robot*) and setWorld(World*).
+ *   Call/activate the slot computePose() when you suspect the robot's state has changed.
+ *	 Alternatively, call start() to begin doing collision detection computations periodically in a thread.
+ *   When the pose has been computed and collision detection is finished, the signal newStateReady() will be emitted.
+ *   If one or more collisions have occurred, the signal collision() will also be emitted.
+ *
+ *	 \note Although it can be used as-is, this class is intended to be extended via computePosePrefix(), computePoseSuffix() and
+ *	 collisionHandlerAddendum(  PrimitiveObject*, PrimitiveObject*, const DtCollData* ). For an example of this, see VirtualSkin::YarpModel.
+ *	 Also, a note on computational complexity: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, 
+ *	 as well as between the robot and the world O(n) where n=|world|. Thus the computational complexity of the collision detection grows 
+ *	 linearly with the size of the world. 
  */
 
 class RobotModel::Model : public QThread
@@ -67,15 +76,13 @@ public:
 		object2->setColliding();
 		
 		Model* detector = (Model*)client_data;
-		
 		detector->col_count++;
-		
 		detector->collisionHandlerAddendum( object1, object2, coll_data );
 	}
 	
-	virtual void computePosePrefix() = 0;	
-	virtual void computePoseSuffix() = 0;
-	virtual void collisionHandlerAddendum( PrimitiveObject*, PrimitiveObject*, const DtCollData* ) = 0;
+	virtual void computePosePrefix() {}																	//!< This is executed by computePose() just before forward kinematics is computed 
+	virtual void computePoseSuffix() {}																	//!< This is executed by computePose() just after collision detection is computed
+	virtual void collisionHandlerAddendum( PrimitiveObject*, PrimitiveObject*, const DtCollData* ) {}	//!< This is executed by collisionHandler() just before it returns
 	
 signals:
 	

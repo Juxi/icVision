@@ -56,20 +56,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00014"></a>00014 
 <a name="l00015"></a>00015 <span class="keyword">namespace </span>RobotModel { <span class="keyword">class </span>Box; }
 <a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="class_robot_model_1_1_box.html">00017</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_box.html">RobotModel::Box</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>
-<a name="l00018"></a>00018 {
-<a name="l00019"></a>00019 <span class="keyword">public</span>:
-<a name="l00020"></a>00020     <a class="code" href="class_robot_model_1_1_box.html#a4f394975b4dadbd1fa34d124f33772cb">Box</a>( <span class="keyword">const</span> QVector3D&amp; size );
-<a name="l00021"></a>00021     <a class="code" href="class_robot_model_1_1_box.html#a6a5e09398e85d602a046b429062fb9c2">~Box</a>();
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_box.html#a29420d81c8b3622c95a1976593e2cc4b">makeDisplayList</a>();
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="keyword">private</span>:
-<a name="l00026"></a>00026     qreal x, y, z;
-<a name="l00027"></a>00027 };
+<a name="l00022"></a><a class="code" href="class_robot_model_1_1_box.html">00022</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_box.html" title="Represents a box using FreeSOLID and OpenGL.">RobotModel::Box</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024 <span class="keyword">public</span>:
+<a name="l00025"></a>00025     <a class="code" href="class_robot_model_1_1_box.html#a4f394975b4dadbd1fa34d124f33772cb" title="Creates the FreeSOLID object.">Box</a>( <span class="keyword">const</span> QVector3D&amp; size );       
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027     <a class="code" href="class_robot_model_1_1_box.html#a6a5e09398e85d602a046b429062fb9c2" title="Destroys the FreeSOLID object.">~Box</a>();                                                     
 <a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="preprocessor">#endif</span>
-<a name="l00030"></a>00030 <span class="preprocessor"></span>
+<a name="l00029"></a>00029         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_box.html#a29420d81c8b3622c95a1976593e2cc4b" title="Make an OpenGL display list for the box using 6 GL_QUADS.">makeDisplayList</a>();                 
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="keyword">private</span>:
+<a name="l00032"></a>00032     qreal x, y, z;                                      
+<a name="l00033"></a>00033 };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="preprocessor">#endif</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

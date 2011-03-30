@@ -1,15 +1,11 @@
-/*
- * Copyright (C) 2010 Gregor Kaufmann
- * CopyPolicy: Released under the terms of the GNU GPL v2.0.
- *
- */
+/*******************************************************************
+ ***              Copyright (C) 2010 Gregor Kaufmann             ***
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
 
-/** @file ResponseObserver.h Header file for the ResponseObserver class.
- *
- * Version: $Rev$
- *
- * $Date$
- *
+/** \addtogroup VirtualSkin
+ *	@{
  */
 
 #ifndef RESPONSEOBSERVER_H_
@@ -24,28 +20,34 @@ namespace VirtualSkin {
 class CallObserver;
 class RobotFilter;
 
+/** \brief An IObserver implemented to monitor RPC responses
+ */
 class ResponseObserver: public QObject, public yarp::os::IObserver
 {
 	Q_OBJECT
 	
 public:
-	ResponseObserver(RobotFilter* r, const int b);
-	virtual ~ResponseObserver();
+	ResponseObserver(RobotFilter* r, const int b);		//!< Nothing special to do here
+														/**< \param r The RobotFilter to which this Observer belongs
+															 \param b The index of the RobotModel::BodyPart to which this Observer applies */
+	virtual ~ResponseObserver();						//!< Nothing special to do here
 
-	virtual void onDataObserved(yarp::os::Bottle &b);
+	virtual void onDataObserved(yarp::os::Bottle &b);	//!< The handler function is called whenever an RPC response passes through the filter
 	
 signals:
 	
-	void setPosition(int,int,qreal);
+	void setPosition(int b,int j, qreal pos);			//!< Sets the position of a RobotModel::Motor in the RobotModel::Robot
+														/** \param b The index of the relevant RobotModel::BodyPart
+															\param j The index of the relevant RobotModel::Motor
+															\param pos The encoder position to use */
 
 private:
-	RobotFilter* robotFilter;
-	const int bodyPart;
-
-	// the actual open RPC call
-	yarp::os::Bottle activeCall;
+	RobotFilter* robotFilter;			//!< The RobotFilter to which this Observer belongs
+	const int bodyPart;					//!< The RobotModel::BodyPart to which this Observer applies
+	yarp::os::Bottle activeCall;		//!< The current open RPC call
 
 	friend class CallObserver;
 };
 }
 #endif /* RESPONSEOBSERVER_H_ */
+/** @} */

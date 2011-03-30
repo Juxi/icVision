@@ -10,10 +10,9 @@ CircularBuffer::~CircularBuffer()
 }
 void CircularBuffer::setBufferSize( int len )
 {
-	//mutex.lock();
-		buffer.resize(len);
-		i=buffer.begin();
-	//mutex.unlock();
+	buffer.clear();
+	buffer.resize(len);
+	i=buffer.begin();
 }
 void CircularBuffer::put( const QVector<qreal> v )
 {
@@ -25,36 +24,30 @@ void CircularBuffer::put( const QVector<qreal> v )
 }
 void CircularBuffer::next()
 {
-	//mutex.lock();
-		if ( i + 1 == buffer.end() )
-		{
-			i = buffer.begin();
-		}
-		else ++i;
-	//mutex.unlock();
+	if ( i + 1 == buffer.end() )
+	{
+		i = buffer.begin();
+	}
+	else ++i;
 }
 void CircularBuffer::init( const QVector<qreal> v )
 {
-	//mutex.lock();
-		for ( i=buffer.begin(); i!=buffer.end(); ++i )
-		{
-			*i = v;
-		}
-	//mutex.unlock();
+	for ( i=buffer.begin(); i!=buffer.end(); ++i )
+	{
+		*i = v;
+	}
 	i=buffer.begin();
 }
 QVector<qreal>& CircularBuffer::getCurrent()
 {
-	//mutex.lock();
-		if ( i == buffer.begin() )
-		{
-			return *(buffer.end()-1);
-		}
-		else
-		{
-			return *(i-1);
-		}
-	//mutex.unlock();
+	if ( i == buffer.begin() )
+	{
+		return *(buffer.end()-1);
+	}
+	else
+	{
+		return *(i-1);
+	}
 }
 QVector<qreal>& CircularBuffer::getOldest()
 {

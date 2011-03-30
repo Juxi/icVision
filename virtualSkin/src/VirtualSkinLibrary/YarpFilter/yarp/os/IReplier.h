@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef IREPLIER_H_
 #define IREPLIER_H_
 
@@ -25,9 +29,7 @@ namespace yarp {
 	}
 }
 
-/**
- * Interface that must be implemented to be able to inject responses into
- * RpcFilter s.
+/** \brief An interface for an object that replies to RPC calls when the RpcFilter is cut
  *
  * \todo Use auto_ptr to return the bottle  (I always get the error ISO C++
  * 		forbids declaration of 'auto_ptr' with no type)
@@ -35,8 +37,9 @@ namespace yarp {
 class yarp::os::IReplier {
 
 public:
-	virtual ~IReplier(){}
-	virtual Bottle* getNextReponse() = 0;
+	virtual ~IReplier(){}						//!< Nothing special to do here
+	virtual Bottle* getNextReponse() = 0;		//!< Get a reply bottle
+	
 };
-
-#endif /* IREPLIER_H_ */
+#endif
+/** @} */

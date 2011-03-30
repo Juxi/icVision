@@ -72,20 +72,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046     
 <a name="l00047"></a><a class="code" href="class_robot_model_1_1_body_part.html#ae67c833c817776f9b922d967a2654df2">00047</a>     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_body_part.html#ae67c833c817776f9b922d967a2654df2" title="Sets a human readable name for the BodyPart.">setName</a>( <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_body_part.html#a61b6e309edb55f764400dac2b8659a5f" title="Returns the human readable name of the BodyPart.">name</a> ) { partName = name; }    
 <a name="l00048"></a><a class="code" href="class_robot_model_1_1_body_part.html#a61b6e309edb55f764400dac2b8659a5f">00048</a>         <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_body_part.html#a61b6e309edb55f764400dac2b8659a5f" title="Returns the human readable name of the BodyPart.">name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> partName; }                        
-<a name="l00049"></a><a class="code" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc">00049</a>     <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* <a class="code" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc" title="Returns a pointer to the parent object.">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> parentPart; }                             
+<a name="l00049"></a><a class="code" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc">00049</a>     <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* <a class="code" href="class_robot_model_1_1_body_part.html#abc2ab2a0e1da50aa7465bc1b92ed3abc" title="Returns a pointer to the parent BodyPart.">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> parentPart; }                             
 <a name="l00050"></a>00050 
 <a name="l00054"></a>00054     <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_body_part.html#ad5ceb22c00423ebeace914db0276dc83" title="Sets all motor positions by calling Motor.setEncPos( qreal ) on each motor.">setEncPos</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; pos );                                
 <a name="l00055"></a>00055 
 <a name="l00058"></a>00058         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_body_part.html#a6b52676f58b9da5bef87ef2fac1a7a94" title="Returns &amp;#39;true&amp;#39; if there are no void pointers in the QVector and &amp;#39;false&amp;#39;...">verify</a>();                                                                                          
-<a name="l00059"></a>00059         <span class="comment">// TODO: implement: bool setNormPos( const QVector&lt;qreal&gt;&amp; x );</span>
-<a name="l00060"></a>00060         
-<a name="l00061"></a>00061 <span class="keyword">private</span>:
-<a name="l00062"></a>00062     <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* parentPart;       
-<a name="l00063"></a>00063     QString   partName;         
-<a name="l00064"></a>00064 };
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>
+<a name="l00059"></a>00059         
+<a name="l00060"></a>00060         <span class="comment">// TODO: implement: bool setNormPos( const QVector&lt;qreal&gt;&amp; x );</span>
+<a name="l00061"></a>00061         
+<a name="l00062"></a>00062 <span class="keyword">private</span>:
+<a name="l00063"></a>00063     <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* parentPart;       
+<a name="l00064"></a>00064     QString   partName;         
+<a name="l00065"></a>00065 };
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 <span class="preprocessor">#endif</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

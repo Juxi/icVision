@@ -1,10 +1,10 @@
-/*
- *  vectorRpcPort.h
- *  virtualSkin
- *
- *  Created by Kail Frank on 11/10/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
- *
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup VirtualSkin
+ *	@{
  */
 
 #ifndef YARPRPCPORT_H
@@ -15,17 +15,19 @@
 
 namespace VirtualSkin {
 
+/** \brief A simple call/response style YARP port
+ */
 class YarpRpcPort: public QThread
 {
 
 public:
-	YarpRpcPort();
-	virtual ~YarpRpcPort();
+	YarpRpcPort();				//!< Nothing special to do here
+	virtual ~YarpRpcPort();		//!< Calls close() if necessary
 	
-	void useDebug() { debug = true; }
-	void noDebug() { debug = false; }
+	void useDebug() { debug = true; }	//!< Causes the port to print bottles to the terminal
+	void noDebug() { debug = false; }	//!< Prevents the port from printing bottles
 	
-	bool open( const QString& name );
+	bool open( const QString& name );	//!< Starts the RPC port running in a separate
 	
 	void run();
 	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply ) = 0;
@@ -41,7 +43,6 @@ private:
 	//QString portName;
 
 };
-
 }
-
 #endif
+/** @} */

@@ -60,14 +60,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00023"></a>00023 {
 <a name="l00024"></a>00024 
 <a name="l00025"></a>00025 <span class="keyword">public</span>:
-<a name="l00026"></a>00026     <a class="code" href="class_robot_model_1_1_interval.html#ae48b9a9e9f672f81977627b609e32429">Interval</a>();
-<a name="l00027"></a>00027     <a class="code" href="class_robot_model_1_1_interval.html#a923e1717a3dedfe1ba90f81fcb26d5c5">~Interval</a>();
+<a name="l00026"></a>00026     <a class="code" href="class_robot_model_1_1_interval.html#ae48b9a9e9f672f81977627b609e32429" title="Initializes &amp;#39;min&amp;#39; and &amp;#39;max&amp;#39; to 0.">Interval</a>();                                                         
+<a name="l00027"></a>00027     <a class="code" href="class_robot_model_1_1_interval.html#a923e1717a3dedfe1ba90f81fcb26d5c5" title="Nothing to do here.">~Interval</a>();                                                        
 <a name="l00028"></a>00028 
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_interval.html#a093471bdcba90e074543fb2781287145">setMin</a>( <span class="keyword">const</span> qreal minimum );
-<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_interval.html#a7deeccee610088a7aebef94919fd6f36">setMax</a>( <span class="keyword">const</span> qreal maximum );
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_interval.html#a093471bdcba90e074543fb2781287145" title="Sets the value of &amp;#39;min&amp;#39;. If min &amp;gt; max, min is set equal to max and a warning...">setMin</a>( <span class="keyword">const</span> qreal minimum );         
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_interval.html#a7deeccee610088a7aebef94919fd6f36" title="Sets the value of &amp;#39;max&amp;#39;. If max &amp;lt; min, max is set equal to max and a warning...">setMax</a>( <span class="keyword">const</span> qreal maximum );         
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032     qreal <a class="code" href="class_robot_model_1_1_interval.html#abb8aac06ae73b9dfc7c3caf3f8b56399">getMin</a>() <span class="keyword">const</span>;
-<a name="l00033"></a>00033     qreal <a class="code" href="class_robot_model_1_1_interval.html#a26857944f58e736ed0abdf534e2f56d8">getMax</a>() <span class="keyword">const</span>;
+<a name="l00032"></a>00032     qreal <a class="code" href="class_robot_model_1_1_interval.html#abb8aac06ae73b9dfc7c3caf3f8b56399" title="Returns the value of &amp;#39;min&amp;#39;.">getMin</a>() <span class="keyword">const</span>;       
+<a name="l00033"></a>00033     qreal <a class="code" href="class_robot_model_1_1_interval.html#a26857944f58e736ed0abdf534e2f56d8" title="Returns the value of &amp;#39;max&amp;#39;.">getMax</a>() <span class="keyword">const</span>;       
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035     <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_interval.html#a26125787902f3761e303ba3999d0eb71" title="Returns true iff min &amp;lt;= num &amp;lt;= max.">isInRange</a>( <span class="keyword">const</span> qreal num );          
 <a name="l00036"></a>00036     <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_interval.html#a15ffb7f16e3bad02073761ecd23d9695" title="Returns true iff num &amp;lt; min.">isTooSmall</a>( <span class="keyword">const</span> qreal num );         

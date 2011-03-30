@@ -14,6 +14,10 @@
  *
  */
 
+/** \addtogroup YarpFilter
+ *	@{
+ */
+
 #ifndef IOBSERVER_H_
 #define IOBSERVER_H_
 
@@ -25,22 +29,18 @@ namespace yarp {
 	}
 }
 
-/**
- * Interface that must be implemented to be able to be informed about
- * information flowing in and out of filters
- * (RpcFilter as well as StreamFilter).
+/** \brief An interface that defines a handler for data arriving on YARP ports
+ * 
+ * The handler is called by filters (RpcFilter and StreamFilter) and provides access to the data flowing through the filter.
+ * See VirtualSkin::StateObserver, VirtualSkin::CallObserver and VirtualSkin::ResponseObserver
  */
 class yarp::os::IObserver {
 
 public:
 
-	virtual ~IObserver(){}
-	/**
-	 * This function is called by filters to inform the implementing objects
-	 * on data flowing in or out a the calling filter
-	 * (RpcFilter as well as StreamFilter).
-	 */
-	virtual void onDataObserved(yarp::os::Bottle &b) = 0;
+	virtual ~IObserver(){}									//!< Nothing to do here
+	virtual void onDataObserved(yarp::os::Bottle &b) = 0;	//!< The handler function 
+	
 };
-
-#endif /* IOBSERVER_H_ */
+#endif
+/** @} */

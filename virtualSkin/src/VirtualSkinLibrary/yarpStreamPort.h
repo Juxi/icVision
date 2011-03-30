@@ -1,10 +1,10 @@
-/*
- *  vectorStreamPort.h
- *  virtualSkin
- *
- *  Created by Kail Frank on 11/10/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
- *
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup VirtualSkin
+ *	@{
  */
 
 #ifndef YARPSTREAMPORT_H
@@ -22,21 +22,17 @@ class YarpStreamPort: public QThread
 public:
 	YarpStreamPort();
 	virtual ~YarpStreamPort();
-	
-	//void setName( const QString& name ) { portName = name; }
-	//bool hasName() { return !portName.isNull(); }
-	//bool hasBottle() { return !bottle.isNull(); }
-	
+
 	void open( const QString& name );
 	void close();
 	bool isOpen() { return portIsOpen; }
 	
-	void write( const yarp::os::Bottle& aBottle );
+	//void write( const yarp::os::Bottle& aBottle );
 	
 	void setBottle( const yarp::os::Bottle& aBottle );
 	void run();
 	void stop();
-	void restart();
+	//void restart();
 
 protected:
 	QMutex mutex;
@@ -46,8 +42,8 @@ private:
 	yarp::os::Network yarp;
 	yarp::os::Port port;
 	bool portIsOpen,keepRunning;
-	//QString portName;
 
 };
 }
 #endif
+/** @} */

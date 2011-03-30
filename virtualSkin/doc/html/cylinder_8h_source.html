@@ -56,21 +56,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00014"></a>00014 
 <a name="l00015"></a>00015 <span class="keyword">namespace </span>RobotModel { <span class="keyword">class </span>Cylinder; }
 <a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="class_robot_model_1_1_cylinder.html">00017</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_cylinder.html">RobotModel::Cylinder</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a>
-<a name="l00018"></a>00018 {
-<a name="l00019"></a>00019 <span class="keyword">public</span>:
-<a name="l00020"></a>00020     <a class="code" href="class_robot_model_1_1_cylinder.html#aa738cca8df1e6a449662f33a814e67f8">Cylinder</a>( qreal radius, qreal height, <span class="keywordtype">int</span> lod = 12);
-<a name="l00021"></a>00021     <a class="code" href="class_robot_model_1_1_cylinder.html#a05ab556f0ae3cd6e99d9d1f3caca80b3">~Cylinder</a>();
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_cylinder.html#a9f0361117d5f20344f543c9e20df1113">makeDisplayList</a>();
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="keyword">private</span>:
-<a name="l00026"></a>00026     qreal radius, height;
-<a name="l00027"></a>00027     <span class="keywordtype">int</span> lod;
-<a name="l00028"></a>00028 };
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="preprocessor">#endif</span>
-<a name="l00031"></a>00031 <span class="preprocessor"></span>
+<a name="l00022"></a><a class="code" href="class_robot_model_1_1_cylinder.html">00022</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_cylinder.html" title="Represents a cylinder using FreeSOLID and OpenGL.">RobotModel::Cylinder</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024 <span class="keyword">public</span>:
+<a name="l00025"></a>00025     <a class="code" href="class_robot_model_1_1_cylinder.html#aa738cca8df1e6a449662f33a814e67f8" title="Creates the FreeSOLID object.">Cylinder</a>( qreal radius, qreal height, <span class="keywordtype">int</span> lod = 12);        
+<a name="l00026"></a>00026 
+<a name="l00029"></a>00029     <a class="code" href="class_robot_model_1_1_cylinder.html#a05ab556f0ae3cd6e99d9d1f3caca80b3" title="Destroys the FreeSOLID object.">~Cylinder</a>();                                                                                        
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_cylinder.html#a9f0361117d5f20344f543c9e20df1113" title="Make an OpenGL display list for the cylinder using GL_TRIANGLE_FAN and a GL_TRIANGLE_STRIP...">makeDisplayList</a>();                                                     
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="keyword">private</span>:
+<a name="l00034"></a>00034     qreal       radius,                                                                 
+<a name="l00035"></a>00035                         height;                                                                 
+<a name="l00036"></a>00036     <span class="keywordtype">int</span>         lod;                                                                    
+<a name="l00037"></a>00037 };
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#endif</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

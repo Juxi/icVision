@@ -60,20 +60,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00018"></a>00018         <span class="keyword">class </span>Link;
 <a name="l00019"></a>00019 }
 <a name="l00020"></a>00020 
-<a name="l00025"></a><a class="code" href="class_robot_model_1_1_link.html">00025</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">RobotModel::Link</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>
-<a name="l00026"></a>00026 {
-<a name="l00027"></a>00027         
-<a name="l00028"></a>00028 <span class="keyword">public</span>:
-<a name="l00029"></a>00029         
-<a name="l00030"></a>00030         <a class="code" href="class_robot_model_1_1_link.html#adf46ff7e38787594ac9941a478083f21">Link</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f">robot</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39">parent</a> );
-<a name="l00031"></a>00031         <a class="code" href="class_robot_model_1_1_link.html#a666e442abb3122fe5eb1705f1b2d650d">~Link</a>();
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keyword">private</span>:
-<a name="l00034"></a>00034         <span class="keyword">virtual</span> <span class="keywordtype">void</span> setM();
-<a name="l00035"></a>00035 };
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037 <span class="preprocessor">#endif</span>
-<a name="l00038"></a>00038 <span class="preprocessor"></span>
+<a name="l00026"></a><a class="code" href="class_robot_model_1_1_link.html">00026</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot.">RobotModel::Link</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a>
+<a name="l00027"></a>00027 {
+<a name="l00028"></a>00028         
+<a name="l00029"></a>00029 <span class="keyword">public</span>:
+<a name="l00030"></a>00030         
+<a name="l00031"></a>00031         <a class="code" href="class_robot_model_1_1_link.html#adf46ff7e38787594ac9941a478083f21" title="Calls the KinTreeNode constructor.">Link</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a7bd810e1df470e3d8801ac8f1aa0a60f" title="Returns the Robot to which this KinTreeNode belongs.">robot</a>, <a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a>* <a class="code" href="class_robot_model_1_1_kin_tree_node.html#a58fa5e8933de90d3f4896d39292baa39" title="Returns the parent KinTreeNode of this object in the kinematic tree structure.">parent</a> );      
+<a name="l00032"></a>00032         <a class="code" href="class_robot_model_1_1_link.html#a666e442abb3122fe5eb1705f1b2d650d" title="Nothing special to do here.">~Link</a>();                                                                        
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 <span class="keyword">private</span>:
+<a name="l00035"></a>00035         
+<a name="l00036"></a>00036         <span class="keyword">virtual</span> <span class="keywordtype">void</span> setM();                                            
+<a name="l00037"></a>00037         
+<a name="l00038"></a>00038 };
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="preprocessor">#endif</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

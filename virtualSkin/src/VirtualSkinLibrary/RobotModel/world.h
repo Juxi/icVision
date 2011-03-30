@@ -25,7 +25,7 @@ namespace RobotModel { class World; }
 /*! \brief A list of objects that define the Robots environment
  *
  * The World is compatible with the world of the iCub simulator in terms of the kinds of geometries supported as well as the
- * way those geometries are named.  However in addition to individual primitives, the World supports CompositeObjects, made upi of unions of PrimitiveObjects.
+ * way those geometries are named.  However in addition to individual primitives, the World supports CompositeObjects, made up of unions of PrimitiveObjects.
  */
 class RobotModel::World : public RenderList
 {

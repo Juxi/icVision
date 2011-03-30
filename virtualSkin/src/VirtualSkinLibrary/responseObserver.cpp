@@ -62,8 +62,8 @@ void ResponseObserver::onDataObserved(yarp::os::Bottle &b) {
 					if (c1Str == "enc") {
 						yarp::os::Value& v2 = b.get(2);
 						yarp::os::Value& c2 = activeCall.get(2);
-						if (BOTTLE_TAG_DOUBLE == v2.getCode() && BOTTLE_TAG_INT == c2.getCode()) {
-							//robot->setEncoderPosition(branch, (int) c2.asInt(), (qreal) v2.asDouble());
+						if (BOTTLE_TAG_DOUBLE == v2.getCode() && BOTTLE_TAG_INT == c2.getCode())
+						{
 							emit setPosition( bodyPart, (int) c2.asInt(), (qreal) v2.asDouble() );
 						}
 					}

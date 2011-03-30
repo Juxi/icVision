@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup VirtualSkin
+ *	@{
+ */
+
 #ifndef REFLEXDETECTOR_H
 #define REFLEXDETECTOR_H
 
@@ -7,45 +16,43 @@
 
 namespace VirtualSkin {
 
-/*! \brief Computes the current pose of the Robot and does collision detection using the FreeSOLID library
+/*! \brief Wraps RobotModel::Model with YARP functionality
+ *
+ * This class allows the results of collision detection to be published via ethernet and provides an RPC interface to the 
+ * robot's environment (RobotModel::World) such that geometries can be added/updated/and removed remotely.
  *
  * To use this class:
- *   First prepare the object by calling the constructor, setRobot(Robot*) and setWorld(World*).
- *   If you want to publish collision information on the network via YARP, call setPortName(QString&) and openPort().
- *   Call/activate the slot computePose() when you suspect the robot's state has changed.
- *   When the pose has been computed and collision detection is finished, the signal newPoseReady() will be emitted.
- *   If one or more collisions have occurred, the signal crash() will also be emitted, provided that the CollisionDetector is armed.
- *	 Finally, use the slots armDetector() and disarmDetector() to control whether or not to emit the crash() signal if a collision has occurred.
- *   This is useful if the crash() signal triggers some kind of collision handling control code, as you can supress subsequent crash signals until the collision handling is complete.
- *
- *	 NOTE: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|.
- *	 Thus the computational complexity of the collision detection grows linearly with the size of the world. 
+ *   If you want to publish collision information on the network via YARP, call openCollisionPort(QString&).
+ *	 To start the RPC interface to the RobotModel::World, call openWorldRpcPort(QString&).
  */
 
 class YarpModel : public RobotModel::Model
 {
 
 public:
-	YarpModel( bool visualize = false );	//!< Constructs an armed collisionDetector object
-	~YarpModel();	//!< Just stops the YARP port if its running
+	YarpModel( bool visualize = false );	//!< Connects the WorldRpcInterface to the RobotModel::World and calls the super-class constructor	
+	~YarpModel();							//!< Just stops the YARP port if its running
 
-	void openCollisionPort( const QString& name ) { collisionPort.open(name); }
-	void closeCollisionPort() { collisionPort.close(); }
+	void openCollisionPort( const QString& name ) { collisionPort.open(name); }	//!< Starts a YARP Port that streams the results of collision detection (see \ref yarpPorts)
+	void closeCollisionPort() { collisionPort.close(); }						//!< Close the port that streams collision information
 	
-	void openWorldRpcPort( const QString& name ) { worldPort.open(name); }	//!< Sets the name of the YARP stream port where collision info will be published
-	void closeWorldRpcPort() { worldPort.stop(); }							//!< Closes the YARP stream port
-
-	void computePosePrefix();
-	void computePoseSuffix();
-	void collisionHandlerAddendum( RobotModel::PrimitiveObject*, RobotModel::PrimitiveObject*, const DtCollData* );
-
+	void openWorldRpcPort( const QString& name ) { worldPort.open(name); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	void closeWorldRpcPort() { worldPort.stop(); }								//!< Closes the RPC interface to the RobotModel::Model
+	
+	virtual void computePosePrefix();											//!< Clears the yarp::os::bottle bottle
+	virtual void computePoseSuffix();											//!< Publishes the yarp::os::bottle bottle
+	virtual void collisionHandlerAddendum( RobotModel::PrimitiveObject*,
+										   RobotModel::PrimitiveObject*,
+										   const DtCollData* );					//!< This puts the results of collision detection into the yarp::os::bottle bottle
+	
 private:
 
-	QString				cPortName, wPortName;	//!< The name of the YARP stream port that broadcasts the collision information
-	YarpStreamPort		collisionPort;			//!< The YARP stream port itself
-	WorldRpcInterface	worldPort;
-	yarp::os::Bottle	bottle;				//!< The bottle, containing the collision information, that is broadcast in the stream every time computePose() is called
+	QString				cPortName,		//!< The name of the YARP stream port that broadcasts the collision information
+						wPortName;		//!< The name of the YARP stream port that provides the RPC interface to the RobotModel::World
+	YarpStreamPort		collisionPort;	//!< The YARP stream port that broadcasts the collision information
+	WorldRpcInterface	worldPort;		//!< The YARP RPC port that provides an interface to the RobotModel::World
+	yarp::os::Bottle	bottle;			//!< The bottle containing the collision information, that is streamed by collisionPort
 };
 }
-
 #endif
+/** @} */

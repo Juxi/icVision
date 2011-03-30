@@ -29,6 +29,7 @@ void YarpStreamPort::open( const QString& name )
 {
 	port.open( name.toStdString().c_str() );
 	portIsOpen = true;
+	start();
 }
 
 void YarpStreamPort::close()
@@ -51,11 +52,11 @@ void YarpStreamPort::run()
 	}
 }
 
-void YarpStreamPort::write( const yarp::os::Bottle& aBottle )
+/*void YarpStreamPort::write( const yarp::os::Bottle& aBottle )
 {
 	bottle = aBottle;
 	port.write( bottle );
-}
+}*/
 
 void YarpStreamPort::stop()
 {
@@ -63,9 +64,9 @@ void YarpStreamPort::stop()
 	while (isRunning()) {}
 }
 
-void YarpStreamPort::restart()
+/*void YarpStreamPort::restart()
 {
 	if ( isRunning() ) { stop(); }
 	keepRunning = true;
 	start();
-}
+}*/

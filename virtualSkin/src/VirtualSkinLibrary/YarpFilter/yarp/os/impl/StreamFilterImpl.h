@@ -72,7 +72,5 @@ private:
 	bool isCut;
 	IObserver *observer;
 };
-
 #endif
-
 /** @} */

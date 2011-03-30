@@ -53,58 +53,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <small>
 [<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
 </h1><!-- doxytag: class="RobotModel::DisplMatrix" -->
+<p>Represents a 4x4 rigid-body transformation matrix.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="displmatrix_8h_source.html">displmatrix.h</a>&gt;</code></p>
 
 <p><a href="class_robot_model_1_1_displ_matrix-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a97463ac04605597575600274a23109de">DisplMatrix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a6934f8d81e8e5b9c8dbcc1d6fd68c560">DisplMatrix</a> (const QMatrix4x4 &amp;m)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a9ea9b65326be614baea1ea86a2a1b258">setTranslation</a> (const QVector3D &amp;trans)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a37b0335836c88f71293d44a769c6ab0d">setPosition</a> (const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the absolute position of the object.  <a href="#a37b0335836c88f71293d44a769c6ab0d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#ae9aa3671b52f8300ac2f11648fa1fddf">translate</a> (const QVector3D &amp;trans)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a8654f5029974e0154c3c46ec2bb3dbe3">setCartesianRotation</a> (const QVector3D &amp;rot)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of the object relative to its current position.  <a href="#ae9aa3671b52f8300ac2f11648fa1fddf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#aa30a48ff4fea40156d1161632588d29f">setCartesianOrientation</a> (const QVector3D &amp;rot)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Replace the rotational part of the transformation with a new 3x3 matrix that rotates about the z, then y, then x axes.  <a href="#aa30a48ff4fea40156d1161632588d29f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a337c49b52435255a7f36966c7047f6ff">cartesianRotate</a> (const QVector3D &amp;rot)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#ab976907c6be66c0aee20a24991ce4159">setAxisAngleRotation</a> (const QVector3D &amp;axis, qreal angle)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Concatenate the current transformation and a new rotational transformation that rotates about the z, then y, then x axes.  <a href="#a337c49b52435255a7f36966c7047f6ff"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a7bf76cfbe91fab6ae795c4f1d48d8a23">setAxisAngleOrientation</a> (const QVector3D &amp;axis, qreal angle)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Replace the rotational part of the transformation with a new 3x3 matrix that rotates a particular angle about a particular axis.  <a href="#a7bf76cfbe91fab6ae795c4f1d48d8a23"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#aaf591b95247e1a80332ba0033427af7e">axisAngleRotate</a> (const QVector3D &amp;axis, qreal angle)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#ac77a7ddd42d4a58251823c1fe06d65a2">specialRotate</a> (const QVector3D &amp;axis, qreal angle=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Concatenate the current transformation and a new rotational transformation that rotates a particular angle about a particular axis.  <a href="#aaf591b95247e1a80332ba0033427af7e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a4901106d34ed290ec0a256c6d10d55c5">setSpecialEulerOrientation</a> (const QVector3D &amp;axis, qreal angle=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Concatenate the current transformation and a new rotational transformation that.  <a href="#a4901106d34ed290ec0a256c6d10d55c5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_displ_matrix.html#a3baf235c0c2c7eee46506dc2b2114fe2">operator=</a> (const QMatrix4x4 &amp;m)</td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a97463ac04605597575600274a23109de"></a><!-- doxytag: member="RobotModel::DisplMatrix::DisplMatrix" ref="a97463ac04605597575600274a23109de" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DisplMatrix::DisplMatrix </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6934f8d81e8e5b9c8dbcc1d6fd68c560"></a><!-- doxytag: member="RobotModel::DisplMatrix::DisplMatrix" ref="a6934f8d81e8e5b9c8dbcc1d6fd68c560" args="(const QMatrix4x4 &amp;m)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DisplMatrix::DisplMatrix </td>
-          <td>(</td>
-          <td class="paramtype">const QMatrix4x4 &amp;&nbsp;</td>
-          <td class="paramname"> <em>m</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Represents a 4x4 rigid-body transformation matrix. </p>
+<p>This class wraps QMatrix4x4, providing some functions to encode rigid-body transformations in the QMatrix4x4. </p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aaf591b95247e1a80332ba0033427af7e"></a><!-- doxytag: member="RobotModel::DisplMatrix::axisAngleRotate" ref="aaf591b95247e1a80332ba0033427af7e" args="(const QVector3D &amp;axis, qreal angle)" -->
 <div class="memitem">
@@ -131,6 +106,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Concatenate the current transformation and a new rotational transformation that rotates a particular angle about a particular axis. </p>
+<p>The concatenation is done as follows: Let [R] be the new axis-angle rotation, let [T*] be the new transformation resultant of concatenation, and let [T] be the old transformation. Then, [T*]=[R][T], which has the effect that a point P (a 1x4 column vector representing a point in 3D), transformed by [T*] is first transformed by the old matrix [T] and then by the new rotation [R]. </p>
+
 </div>
 </div>
 <a class="anchor" id="a337c49b52435255a7f36966c7047f6ff"></a><!-- doxytag: member="RobotModel::DisplMatrix::cartesianRotate" ref="a337c49b52435255a7f36966c7047f6ff" args="(const QVector3D &amp;rot)" -->
@@ -148,6 +126,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Concatenate the current transformation and a new rotational transformation that rotates about the z, then y, then x axes. </p>
+<p>The new transformation is built as follows... Let [Rx], [Ry] and [Rz] be 4x4 rotation matrices that rotate (in 3D only) by some angles about the x, y and z axes respectively. Let [T*] be the new transformation and let [T] be the current transformation. Then [T*]=[Rx][Ry][Rz][T], which has the effect that a point P (a 1x4 column vector representing a point in 3D), transformed by [T*] is first transformed by the old matrix [T] and then by the new rotation [Rx][Ry][Rz]. </p>
 
 </div>
 </div>
@@ -169,12 +150,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
-<a class="anchor" id="ab976907c6be66c0aee20a24991ce4159"></a><!-- doxytag: member="RobotModel::DisplMatrix::setAxisAngleRotation" ref="ab976907c6be66c0aee20a24991ce4159" args="(const QVector3D &amp;axis, qreal angle)" -->
+<a class="anchor" id="a7bf76cfbe91fab6ae795c4f1d48d8a23"></a><!-- doxytag: member="RobotModel::DisplMatrix::setAxisAngleOrientation" ref="a7bf76cfbe91fab6ae795c4f1d48d8a23" args="(const QVector3D &amp;axis, qreal angle)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void DisplMatrix::setAxisAngleRotation </td>
+          <td class="memname">void DisplMatrix::setAxisAngleOrientation </td>
           <td>(</td>
           <td class="paramtype">const QVector3D &amp;&nbsp;</td>
           <td class="paramname"> <em>axis</em>, </td>
@@ -194,14 +175,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Replace the rotational part of the transformation with a new 3x3 matrix that rotates a particular angle about a particular axis. </p>
+
 </div>
 </div>
-<a class="anchor" id="a8654f5029974e0154c3c46ec2bb3dbe3"></a><!-- doxytag: member="RobotModel::DisplMatrix::setCartesianRotation" ref="a8654f5029974e0154c3c46ec2bb3dbe3" args="(const QVector3D &amp;rot)" -->
+<a class="anchor" id="aa30a48ff4fea40156d1161632588d29f"></a><!-- doxytag: member="RobotModel::DisplMatrix::setCartesianOrientation" ref="aa30a48ff4fea40156d1161632588d29f" args="(const QVector3D &amp;rot)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void DisplMatrix::setCartesianRotation </td>
+          <td class="memname">void DisplMatrix::setCartesianOrientation </td>
           <td>(</td>
           <td class="paramtype">const QVector3D &amp;&nbsp;</td>
           <td class="paramname"> <em>rot</em></td>
@@ -212,17 +195,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Replace the rotational part of the transformation with a new 3x3 matrix that rotates about the z, then y, then x axes. </p>
+<p>The new 3x3 rotation matrix is built as follows... Let [Rx], [Ry] and [Rz] be 3x3 rotation matrices that rotate by some angles about the x, y and z axes respectively. Letting [R]=[Rx][Ry][Rz], a point P (a 1x3 column vector) thus transformed: P*=[R]P, is rotated first about z, then about y and finally about x. </p>
+
 </div>
 </div>
-<a class="anchor" id="a9ea9b65326be614baea1ea86a2a1b258"></a><!-- doxytag: member="RobotModel::DisplMatrix::setTranslation" ref="a9ea9b65326be614baea1ea86a2a1b258" args="(const QVector3D &amp;trans)" -->
+<a class="anchor" id="a37b0335836c88f71293d44a769c6ab0d"></a><!-- doxytag: member="RobotModel::DisplMatrix::setPosition" ref="a37b0335836c88f71293d44a769c6ab0d" args="(const QVector3D &amp;pos)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void DisplMatrix::setTranslation </td>
+          <td class="memname">void DisplMatrix::setPosition </td>
           <td>(</td>
           <td class="paramtype">const QVector3D &amp;&nbsp;</td>
-          <td class="paramname"> <em>trans</em></td>
+          <td class="paramname"> <em>pos</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -230,14 +216,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Set the absolute position of the object. </p>
+
 </div>
 </div>
-<a class="anchor" id="ac77a7ddd42d4a58251823c1fe06d65a2"></a><!-- doxytag: member="RobotModel::DisplMatrix::specialRotate" ref="ac77a7ddd42d4a58251823c1fe06d65a2" args="(const QVector3D &amp;axis, qreal angle=0)" -->
+<a class="anchor" id="a4901106d34ed290ec0a256c6d10d55c5"></a><!-- doxytag: member="RobotModel::DisplMatrix::setSpecialEulerOrientation" ref="a4901106d34ed290ec0a256c6d10d55c5" args="(const QVector3D &amp;axis, qreal angle=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void DisplMatrix::specialRotate </td>
+          <td class="memname">void DisplMatrix::setSpecialEulerOrientation </td>
           <td>(</td>
           <td class="paramtype">const QVector3D &amp;&nbsp;</td>
           <td class="paramname"> <em>axis</em>, </td>
@@ -257,6 +245,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Concatenate the current transformation and a new rotational transformation that. </p>
+
 </div>
 </div>
 <a class="anchor" id="ae9aa3671b52f8300ac2f11648fa1fddf"></a><!-- doxytag: member="RobotModel::DisplMatrix::translate" ref="ae9aa3671b52f8300ac2f11648fa1fddf" args="(const QVector3D &amp;trans)" -->
@@ -274,6 +264,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set the position of the object relative to its current position. </p>
 
 </div>
 </div>

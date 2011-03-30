@@ -53,6 +53,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <small>
 [<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
 </h1><!-- doxytag: class="RobotModel::World" --><!-- doxytag: inherits="RobotModel::RenderList" -->
+<p>A list of objects that define the Robots environment.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="world_8h_source.html">world.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RobotModel::World:</div>
@@ -69,24 +72,43 @@ Inheritance diagram for RobotModel::World:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#afa39d4e6f714a7a3691ac0c656f5e8a8">World</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes counters for naming purposes.  <a href="#afa39d4e6f714a7a3691ac0c656f5e8a8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a8c73fba541a5817fff65147ba47cd827">~World</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a8c73fba541a5817fff65147ba47cd827"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#af9b942f5df468adf15a285b509bc69e5">newSphere</a> (double r, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new sphere and names it by appending the value of numSpheres to the identifier 'sph'.  <a href="#af9b942f5df468adf15a285b509bc69e5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#aee6474d33f4ec03a15fa908f06db9748">newSSphere</a> (double r, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new sphere and names it by appending the value of numSSpheres to the identifier 'ssph'.  <a href="#aee6474d33f4ec03a15fa908f06db9748"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a8dd79f7cf657eda9de58181bc9fbb564">newCylinder</a> (double r, double h, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new cylinder and names it by appending the value of numCylinders to the identifier 'cyl'.  <a href="#a8dd79f7cf657eda9de58181bc9fbb564"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a36ee6c4337fbe9097f2bc30a1843cdb5">newSCylinder</a> (double r, double h, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new cylinder and names it by appending the value of numSCylinders to the identifier 'scyl'.  <a href="#a36ee6c4337fbe9097f2bc30a1843cdb5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a9c100912af0adb5275b73b6660efe475">newBox</a> (const QVector3D &amp;size, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new box and names it by appending the value of numBoxes to the identifier 'box'.  <a href="#a9c100912af0adb5275b73b6660efe475"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#adf2304f9f78471e03d2962b326fe4ce9">newSBox</a> (const QVector3D &amp;size, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new box and names it by appending the value of numSBoxes to the identifier 'sbox'.  <a href="#adf2304f9f78471e03d2962b326fe4ce9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a82289c85d931bffc967a90a12e04477a">newObject</a> (const QString &amp;name, const QVector3D &amp;pos)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates a new empty <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a>.  <a href="#a82289c85d931bffc967a90a12e04477a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#adbfd8acea10b8375ed35c737afd5b929">append</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *obj)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Appends an existing <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> to the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#adbfd8acea10b8375ed35c737afd5b929"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a2ccf0c4dd817ecae42edbb82f54289a2">getObjectByName</a> (const QString &amp;name)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a pointer to a <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> in the world by looking up its name.  <a href="#a2ccf0c4dd817ecae42edbb82f54289a2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a40f4e4bfed5121602f993bf561932b07">remove</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *object)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Removes a <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> from the list and deletes it.  <a href="#a40f4e4bfed5121602f993bf561932b07"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a498c5d79bc95bd308680c2a8c5e475b0">removePrimitive</a> (<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *object, <a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *primitive)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Removes a <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> from one of the CompositeObjects.  <a href="#a498c5d79bc95bd308680c2a8c5e475b0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a24f6906f2e4f0c761653a8f9e42588a6">clear</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes everything in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> and resets counters.  <a href="#a24f6906f2e4f0c761653a8f9e42588a6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a530cb18d1249f7c6e94c4ba6879cf36a">filterCollisions</a> (const <a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a530cb18d1249f7c6e94c4ba6879cf36a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a38aea4885454231131d4ccb7945138dc">filterCollisions</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a38aea4885454231131d4ccb7945138dc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a150eab10c21532162bb698d72aecec16">render</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#ac0ee5060cc743f6ffb991dc86dbff43e">notColliding</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls display lists for all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> using glCallLists( int ).  <a href="#a150eab10c21532162bb698d72aecec16"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A list of objects that define the Robots environment. </p>
+<p>The <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> is compatible with the world of the iCub simulator in terms of the kinds of geometries supported as well as the way those geometries are named. However in addition to individual primitives, the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> supports CompositeObjects, made upi of unions of PrimitiveObjects. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afa39d4e6f714a7a3691ac0c656f5e8a8"></a><!-- doxytag: member="RobotModel::World::World" ref="afa39d4e6f714a7a3691ac0c656f5e8a8" args="()" -->
 <div class="memitem">
@@ -102,6 +124,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Initializes counters for naming purposes. </p>
 
 </div>
 </div>
@@ -119,6 +143,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Deletes all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>. </p>
 
 </div>
 </div>
@@ -139,6 +165,9 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Appends an existing <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> to the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>. </p>
+<p>To append a primitive to a composite object, see <a class="el" href="class_robot_model_1_1_composite_object.html#ad33452f1246939d366ffbf02d1022a91" title="Append a PrimitiveObject to the CompositeObject.">CompositeObject.append( PrimitiveObject* )</a> </p>
+
 </div>
 </div>
 <a class="anchor" id="a24f6906f2e4f0c761653a8f9e42588a6"></a><!-- doxytag: member="RobotModel::World::clear" ref="a24f6906f2e4f0c761653a8f9e42588a6" args="()" -->
@@ -155,6 +184,9 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Deletes everything in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> and resets counters. </p>
+<p>This returns the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> to the state it was in just after construction </p>
 
 </div>
 </div>
@@ -174,6 +206,8 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a530cb18d1249f7c6e94c4ba6879cf36a"></a><!-- doxytag: member="RobotModel::World::filterCollisions" ref="a530cb18d1249f7c6e94c4ba6879cf36a" args="(const CompositeObject *)" -->
@@ -192,6 +226,8 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a2ccf0c4dd817ecae42edbb82f54289a2"></a><!-- doxytag: member="RobotModel::World::getObjectByName" ref="a2ccf0c4dd817ecae42edbb82f54289a2" args="(const QString &amp;name)" -->
@@ -209,6 +245,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns a pointer to a <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> in the world by looking up its name. </p>
 
 </div>
 </div>
@@ -236,6 +274,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Creates a new box and names it by appending the value of numBoxes to the identifier 'box'. </p>
 
 </div>
 </div>
@@ -270,6 +310,8 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Creates a new cylinder and names it by appending the value of numCylinders to the identifier 'cyl'. </p>
+
 </div>
 </div>
 <a class="anchor" id="a82289c85d931bffc967a90a12e04477a"></a><!-- doxytag: member="RobotModel::World::newObject" ref="a82289c85d931bffc967a90a12e04477a" args="(const QString &amp;name, const QVector3D &amp;pos)" -->
@@ -297,6 +339,8 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Creates a new empty <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="adf2304f9f78471e03d2962b326fe4ce9"></a><!-- doxytag: member="RobotModel::World::newSBox" ref="adf2304f9f78471e03d2962b326fe4ce9" args="(const QVector3D &amp;size, const QVector3D &amp;pos)" -->
@@ -323,6 +367,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Creates a new box and names it by appending the value of numSBoxes to the identifier 'sbox'. </p>
 
 </div>
 </div>
@@ -357,6 +403,8 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Creates a new cylinder and names it by appending the value of numSCylinders to the identifier 'scyl'. </p>
+
 </div>
 </div>
 <a class="anchor" id="af9b942f5df468adf15a285b509bc69e5"></a><!-- doxytag: member="RobotModel::World::newSphere" ref="af9b942f5df468adf15a285b509bc69e5" args="(double r, const QVector3D &amp;pos)" -->
@@ -383,6 +431,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Creates a new sphere and names it by appending the value of numSpheres to the identifier 'sph'. </p>
 
 </div>
 </div>
@@ -411,22 +461,7 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ac0ee5060cc743f6ffb991dc86dbff43e"></a><!-- doxytag: member="RobotModel::World::notColliding" ref="ac0ee5060cc743f6ffb991dc86dbff43e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::World::notColliding </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Creates a new sphere and names it by appending the value of numSSpheres to the identifier 'ssph'. </p>
 
 </div>
 </div>
@@ -445,6 +480,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Removes a <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> from the list and deletes it. </p>
 
 </div>
 </div>
@@ -473,6 +510,9 @@ Inheritance diagram for RobotModel::World:</div>
 </div>
 <div class="memdoc">
 
+<p>Removes a <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> from one of the CompositeObjects. </p>
+<p>This is implemented in <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> because we need to emit the signal <a class="el" href="class_robot_model_1_1_render_list.html#a22724d5d6878f19b639b5b6b16963ee2" title="Indicates that an object has been deleted and that its corresponding display list...">outdatedDisplayList( int )</a> to inform <a class="el" href="class_robot_model_1_1_g_l_widget.html" title="The QWidget responsible for rendering the scene with OpenGL.">GLWidget</a> that the <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> is gone </p>
+
 </div>
 </div>
 <a class="anchor" id="a150eab10c21532162bb698d72aecec16"></a><!-- doxytag: member="RobotModel::World::render" ref="a150eab10c21532162bb698d72aecec16" args="()" -->
@@ -489,6 +529,8 @@ Inheritance diagram for RobotModel::World:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Calls display lists for all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> using glCallLists( int ). </p>
 
 <p>Implements <a class="el" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195">RobotModel::RenderList</a>.</p>
 

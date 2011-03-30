@@ -57,45 +57,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00015"></a>00015 
 <a name="l00016"></a>00016 <span class="keyword">namespace </span>RobotModel { <span class="keyword">class </span>Motor; }
 <a name="l00017"></a>00017 
-<a name="l00029"></a><a class="code" href="class_robot_model_1_1_motor.html">00029</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">RobotModel::Motor</a> : <span class="keyword">public</span> QVector&lt;Joint*&gt;
+<a name="l00029"></a><a class="code" href="class_robot_model_1_1_motor.html">00029</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">RobotModel::Motor</a> : <span class="keyword">public</span> QVector&lt;Joint*&gt;
 <a name="l00030"></a>00030 {
 <a name="l00031"></a>00031         
 <a name="l00032"></a>00032 <span class="keyword">public</span>:
 <a name="l00033"></a>00033         
-<a name="l00034"></a>00034         <a class="code" href="class_robot_model_1_1_motor.html#afa8d3bb8b2ad45bdc8064efa0052dd04">Motor</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* robot, <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>* motor = 0 );
-<a name="l00035"></a>00035         <a class="code" href="class_robot_model_1_1_motor.html#a2e57c7b2681efea1d3b7f253ee88ecd4">~Motor</a>();
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17">00037</a>         <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17">name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorName; }
-<a name="l00038"></a><a class="code" href="class_robot_model_1_1_motor.html#a31de5801eb1a089723a7f6980baff4a2">00038</a>         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>* <a class="code" href="class_robot_model_1_1_motor.html#a31de5801eb1a089723a7f6980baff4a2">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> parentMotor; }
-<a name="l00039"></a><a class="code" href="class_robot_model_1_1_motor.html#af2cc406d7443e2cf350408d12b8e544b">00039</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#af2cc406d7443e2cf350408d12b8e544b">minPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorLimits.<a class="code" href="class_robot_model_1_1_interval.html#abb8aac06ae73b9dfc7c3caf3f8b56399">getMin</a>(); }
-<a name="l00040"></a><a class="code" href="class_robot_model_1_1_motor.html#abd6baf3a9ae74dcf970663e5ee303131">00040</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#abd6baf3a9ae74dcf970663e5ee303131">maxPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorLimits.<a class="code" href="class_robot_model_1_1_interval.html#a26857944f58e736ed0abdf534e2f56d8">getMax</a>(); }
-<a name="l00041"></a><a class="code" href="class_robot_model_1_1_motor.html#a8f95b65d6bf72038a4aca3a394609354">00041</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#a8f95b65d6bf72038a4aca3a394609354">encPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> encoderPosition; }
-<a name="l00042"></a><a class="code" href="class_robot_model_1_1_motor.html#a99de4f0e475ec8bea35fa3977fa8731f">00042</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#a99de4f0e475ec8bea35fa3977fa8731f">normPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> normalPosition; }
-<a name="l00043"></a>00043         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a35ae467be2d96ea6acca0860e5bda22f">print</a>();
+<a name="l00034"></a>00034         <a class="code" href="class_robot_model_1_1_motor.html#afa8d3bb8b2ad45bdc8064efa0052dd04" title="Appends the new motor to the Robot and initializes member vars.">Motor</a>( <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>* robot, <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>* motor = 0 );                                
+<a name="l00035"></a>00035 
+<a name="l00040"></a>00040         <a class="code" href="class_robot_model_1_1_motor.html#a2e57c7b2681efea1d3b7f253ee88ecd4" title="Nothing to destroy here.">~Motor</a>();                                                                                               
+<a name="l00041"></a>00041 
+<a name="l00042"></a><a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17">00042</a>         <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17" title="Returns a human readable name for the motor.">name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorName; }               
+<a name="l00043"></a><a class="code" href="class_robot_model_1_1_motor.html#a31de5801eb1a089723a7f6980baff4a2">00043</a>         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>* <a class="code" href="class_robot_model_1_1_motor.html#a31de5801eb1a089723a7f6980baff4a2" title="Returns a pointer to the parent Motor.">parent</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> parentMotor; }                   
 <a name="l00044"></a>00044 
-<a name="l00045"></a><a class="code" href="class_robot_model_1_1_motor.html#a9efaa43179205b53df370f7811023eb6">00045</a>         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a9efaa43179205b53df370f7811023eb6">setName</a>( <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17">name</a> ) { motorName = name; }
-<a name="l00046"></a>00046         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a404e359dac5e3af43860948d9e35f725">setMin</a>( qreal );
-<a name="l00047"></a>00047         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#ad52f8d0e1aa0b5f60b388188147a1ded">setMax</a>( qreal );
-<a name="l00048"></a>00048         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a80d5a42cb4cc119afe0bdd4ed90a4152">setEncPos</a>( qreal );
-<a name="l00049"></a>00049         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a2467c521c141e2cc9cf21d85d56dd20b">setHomePos</a>( qreal );
-<a name="l00050"></a>00050         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a2c26ea7475deaef6e1546edbadf88729">setNormPos</a>( qreal );
-<a name="l00051"></a>00051         
-<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#ae8e0845a9284fbf8013137bf6b1f9293">home</a>();
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054 <span class="keyword">private</span>:
-<a name="l00055"></a>00055         
-<a name="l00056"></a>00056         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>*          parentMotor;
-<a name="l00057"></a>00057         QString         motorName;
-<a name="l00058"></a>00058         <a class="code" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>        motorLimits;          <span class="comment">// encoder position limits</span>
-<a name="l00059"></a>00059         qreal           encoderPosition, <span class="comment">// encoder position is on the interval &#39;limits&#39;</span>
-<a name="l00060"></a>00060                                 homePosition,
-<a name="l00061"></a>00061                                 normalPosition;  <span class="comment">// normalized position is &gt;=0 and &lt;=1</span>
-<a name="l00062"></a>00062         
-<a name="l00063"></a>00063         <span class="keywordtype">void</span> setJointPositions();
-<a name="l00064"></a>00064 };
+<a name="l00048"></a><a class="code" href="class_robot_model_1_1_motor.html#abd6baf3a9ae74dcf970663e5ee303131">00048</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#af2cc406d7443e2cf350408d12b8e544b" title="Returns the minimum encoderPosition.">minPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorLimits.<a class="code" href="class_robot_model_1_1_interval.html#abb8aac06ae73b9dfc7c3caf3f8b56399" title="Returns the value of &amp;#39;min&amp;#39;.">getMin</a>(); }   
+<a name="l00049"></a><a class="code" href="class_robot_model_1_1_motor.html#a8f95b65d6bf72038a4aca3a394609354">00049</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#abd6baf3a9ae74dcf970663e5ee303131" title="Returns the maximum encoderPosition.">maxPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> motorLimits.<a class="code" href="class_robot_model_1_1_interval.html#a26857944f58e736ed0abdf534e2f56d8" title="Returns the value of &amp;#39;max&amp;#39;.">getMax</a>(); }   
+<a name="l00050"></a><a class="code" href="class_robot_model_1_1_motor.html#a99de4f0e475ec8bea35fa3977fa8731f">00050</a>         qreal <a class="code" href="class_robot_model_1_1_motor.html#a8f95b65d6bf72038a4aca3a394609354" title="Returns the current encoderPosition.">encPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> encoderPosition; }                
+<a name="l00051"></a>00051         qreal <a class="code" href="class_robot_model_1_1_motor.html#a99de4f0e475ec8bea35fa3977fa8731f" title="Returns the current normalPosition.">normPos</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> normalPosition; }                
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a35ae467be2d96ea6acca0860e5bda22f" title="Prints the Motor&amp;#39;s member variables to the terminal.">print</a>();                                                                                   
+<a name="l00053"></a><a class="code" href="class_robot_model_1_1_motor.html#a9efaa43179205b53df370f7811023eb6">00053</a> 
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a9efaa43179205b53df370f7811023eb6">setName</a>( <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_motor.html#a35eeb7f97a9339ee23c0689af2463c17" title="Returns a human readable name for the motor.">name</a> ) { motorName = name; }
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a404e359dac5e3af43860948d9e35f725" title="Sets the minimum encoderPosition.">setMin</a>( qreal );                                                                           
+<a name="l00056"></a>00056 
+<a name="l00058"></a>00058         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#ad52f8d0e1aa0b5f60b388188147a1ded" title="Sets the maximum encoderPosition.">setMax</a>( qreal );                                                                           
+<a name="l00059"></a>00059 
+<a name="l00061"></a>00061         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a80d5a42cb4cc119afe0bdd4ed90a4152" title="Sets the current encoderPosition.">setEncPos</a>( qreal );                                                                        
+<a name="l00062"></a>00062 
+<a name="l00064"></a>00064         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a2467c521c141e2cc9cf21d85d56dd20b" title="Sets the homePosition (the position in which the real robot hardware calibrates)...">setHomePos</a>( qreal );                                                                       
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#endif </span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>
+<a name="l00067"></a>00067         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#a2c26ea7475deaef6e1546edbadf88729" title="Sets the normalPosition directly.">setNormPos</a>( qreal );                                                                       
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_motor.html#ae8e0845a9284fbf8013137bf6b1f9293" title="Sets encoderPosition = homePosition.">home</a>();                                                                                            
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="keyword">private</span>:
+<a name="l00072"></a>00072         
+<a name="l00073"></a>00073         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>*          parentMotor;            
+<a name="l00074"></a>00074         QString         motorName;                      
+<a name="l00075"></a>00075         <a class="code" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>        motorLimits;        
+<a name="l00076"></a>00076         qreal           encoderPosition,        
+<a name="l00077"></a>00077                                 homePosition,           
+<a name="l00078"></a>00078                                 normalPosition;         
+<a name="l00079"></a>00079         
+<a name="l00080"></a>00080         <span class="keywordtype">void</span> setJointPositions();               
+<a name="l00081"></a>00081 };
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="preprocessor">#endif </span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

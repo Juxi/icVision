@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a>00054         <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a214bbac16ce3a3a94aa1bd600090ae2b">WorldRpcInterface</a>();
 <a name="l00055"></a>00055         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a6b990fdbe2cb39fc2d0e2ef9e8139250">~WorldRpcInterface</a>();
 <a name="l00056"></a>00056         
-<a name="l00057"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">00057</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">setWorld</a>( <a class="code" href="class_robot_model_1_1_world.html">RobotModel::World</a>* aWorld ) { world = aWorld; }
+<a name="l00057"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">00057</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">setWorld</a>( <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* aWorld ) { world = aWorld; }
 <a name="l00058"></a>00058 
 <a name="l00059"></a>00059 <span class="keyword">private</span>:
 <a name="l00060"></a>00060         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> handler( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply );
@@ -117,11 +117,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00071"></a>00071         
 <a name="l00072"></a>00072         <span class="keywordtype">void</span> clearWorld();
 <a name="l00073"></a>00073         
-<a name="l00074"></a>00074         <a class="code" href="class_robot_model_1_1_composite_object.html">RobotModel::CompositeObject</a>* getObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
-<a name="l00075"></a>00075         <a class="code" href="class_robot_model_1_1_primitive_object.html">RobotModel::PrimitiveObject</a>* getPrimitive( <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_composite_object.html">RobotModel::CompositeObject</a>* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00074"></a>00074         <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* getObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
+<a name="l00075"></a>00075         <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">RobotModel::PrimitiveObject</a>* getPrimitive( <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );
 <a name="l00076"></a>00076         QString getName( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, <span class="keywordtype">int</span>&amp; n  );
 <a name="l00077"></a>00077         
-<a name="l00078"></a>00078         <a class="code" href="class_robot_model_1_1_world.html">RobotModel::World</a>* world;
+<a name="l00078"></a>00078         <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* world;
 <a name="l00079"></a>00079 };
 <a name="l00080"></a>00080         
 <a name="l00081"></a>00081 }

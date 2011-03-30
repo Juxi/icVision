@@ -64,7 +64,6 @@ void Model::run()
 	{
 		computePose();
 		usleep(YARP_PERIOD_us);
-		//usleep(1);
 	}
 }
 

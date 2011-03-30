@@ -1,4 +1,4 @@
-/*! \page reflexports Reflex Demo - YARP Ports
+/*! \page yarpPorts Reflex Demo - YARP Ports
 
 In addition to the filtered motor control ports, the reflex demonstration starts the following additional YARP ports. If you are working with the iCub robot, then "NameOfYourRobot" should be replaced by "icub" or "icubSim" depending on whether you have connected the filter to the hardware or the simulator.
 

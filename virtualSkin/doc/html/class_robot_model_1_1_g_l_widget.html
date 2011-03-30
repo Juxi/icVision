@@ -62,7 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#acd20f92385f2b2190ca708a57d3c3c42">addDisplayList</a> (<a class="el" href="class_robot_model_1_1_display_list.html">RobotModel::DisplayList</a> *displayList)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls displayList.makeDisplayList();.  <a href="#acd20f92385f2b2190ca708a57d3c3c42"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls <a class="el" href="class_robot_model_1_1_display_list.html#a842de97924298c7363e50aebd69e5a50" title="Implemented by the sub-classes Sphere, Cylinder and Box.">DisplayList.makeDisplayList()</a>;.  <a href="#acd20f92385f2b2190ca708a57d3c3c42"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a8b370af6f9b50bb5ae868664fd94eae6">removeDisplayList</a> (int idx)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls glDeleteLists(int,1);.  <a href="#a8b370af6f9b50bb5ae868664fd94eae6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a6c9d382ddf46097bccb2b69410f7563e">update</a> ()</td></tr>
@@ -75,7 +75,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a6f6b4fbbcc566d999db7e53aadeba889"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a85d43a2bafbbfc018ef8f3664e2d026d">renderStuff</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Connect to <a class="el" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465">RenderList.callLists()</a> or anything that calls <a class="el" href="class_robot_model_1_1_display_list.html#a5f95e85c192a2bc8f06f18075e6fefd7">DisplayList.render()</a>.  <a href="#a85d43a2bafbbfc018ef8f3664e2d026d"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Connect to <a class="el" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465" title="Causes the display lists to be called.">RenderList.callLists()</a> or anything that calls <a class="el" href="class_robot_model_1_1_display_list.html#a5f95e85c192a2bc8f06f18075e6fefd7" title="Renders the display list with glCallList(int index).">DisplayList.render()</a>.  <a href="#a85d43a2bafbbfc018ef8f3664e2d026d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a1d7f2ef4c6974cb5fa3a815aa2aa1eab">xRotationChanged</a> (int angle)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a1d7f2ef4c6974cb5fa3a815aa2aa1eab"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a9c4efd853b5598b53de426b34440af95">yRotationChanged</a> (int angle)</td></tr>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a22b872b6255e1be1a88eb80695bc24c7"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#ab79c391c86de1ffb76f6950b49d82c0c">GLWidget</a> (QWidget *parent=0)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Just initializes some colors and the camera position/rotation.  <a href="#ab79c391c86de1ffb76f6950b49d82c0c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes some colors and the camera position/rotation.  <a href="#ab79c391c86de1ffb76f6950b49d82c0c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a535192a4262b4501e5493303834f45d3">~GLWidget</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing to clean up.  <a href="#a535192a4262b4501e5493303834f45d3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QSize&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#ade3142625c1bfda0576e419b176cf8b1">minimumSizeHint</a> () const </td></tr>
@@ -105,9 +105,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>The QWidget responsible for rendering the scene with OpenGL. </p>
-<p>This class, as well as Window have been almost entirely borrowed from the Qt HelloGL example. The only difference is that here arbitrary OpenGL display lists can be rendered. This is intended to be done in conjunction with the class <a class="el" href="class_robot_model_1_1_render_list.html">RenderList</a>.</p>
-<p>To use this class: Simply construct a <a class="el" href="class_robot_model_1_1_skin_window.html" title="This QWidget is the window for the optional GUI used to visualize the Robot. (see...">SkinWindow</a> with a member <a class="el" href="class_robot_model_1_1_g_l_widget.html" title="The QWidget responsible for rendering the scene with OpenGL.">GLWidget</a>. Then use the signals and slots as follows: Call/activate the slot <a class="el" href="class_robot_model_1_1_g_l_widget.html#acd20f92385f2b2190ca708a57d3c3c42" title="Calls displayList.makeDisplayList();.">addDisplayList(DisplayList*)</a> whenever a new Object is constructed that should be rendered. Call/activate the slot <a class="el" href="class_robot_model_1_1_g_l_widget.html#a8b370af6f9b50bb5ae868664fd94eae6" title="Calls glDeleteLists(int,1);.">removeDisplayList(int)</a> whenever such an object is deleted. Call/activate the slot <a class="el" href="class_robot_model_1_1_g_l_widget.html#a6c9d382ddf46097bccb2b69410f7563e" title="Calls updateGL();.">update()</a> whenever the scene should be redrawn, and the signal <a class="el" href="class_robot_model_1_1_g_l_widget.html#a85d43a2bafbbfc018ef8f3664e2d026d" title="Connect to RenderList.callLists() or anything that calls DisplayList.render().">renderStuff()</a> will be emitted. Clearly <a class="el" href="class_robot_model_1_1_g_l_widget.html#a85d43a2bafbbfc018ef8f3664e2d026d" title="Connect to RenderList.callLists() or anything that calls DisplayList.render().">renderStuff()</a> should be connected to some class that can call one or more display lists. The interface to such a class should look like that of <a class="el" href="class_robot_model_1_1_render_list.html">RenderList</a>.</p>
-<p>NOTE: This all may seem a bit convaluded, but the signal slot mechanism described above is necessary to ensure that display lists are created, destroyed and called by the same thread. This is necessary because OpenGL is not thread safe. </p>
+<p>This class, as well as Window have been almost entirely borrowed from the Qt HelloGL example. The only difference is that here arbitrary OpenGL display lists can be rendered. This is done in conjunction with the class <a class="el" href="class_robot_model_1_1_render_list.html" title="An abstract class that provides the signal/slot interface between GLWidget and the...">RenderList</a>.</p>
+<p>The signals and slots between <a class="el" href="class_robot_model_1_1_render_list.html" title="An abstract class that provides the signal/slot interface between GLWidget and the...">RenderList</a> and this class work as follows: SIGNAL <a class="el" href="class_robot_model_1_1_render_list.html#a635908222fa71402918e31eb2d725844" title="Indicates that a new physical object has been created, and that its corresponding...">RenderList::appendedObject( RobotModel::DisplayList* )</a> ---&gt; SLOT <a class="el" href="class_robot_model_1_1_g_l_widget.html#acd20f92385f2b2190ca708a57d3c3c42" title="Calls DisplayList.makeDisplayList();.">GLWidget::addDisplayList(DisplayList*)</a> SIGNAL <a class="el" href="class_robot_model_1_1_render_list.html#a22724d5d6878f19b639b5b6b16963ee2" title="Indicates that an object has been deleted and that its corresponding display list...">RenderList::outdatedDisplayList( int idx )</a> ---&gt; SLOT <a class="el" href="class_robot_model_1_1_g_l_widget.html#a8b370af6f9b50bb5ae868664fd94eae6" title="Calls glDeleteLists(int,1);.">GLWidget::removeDisplayList(int)</a> SIGNAL <a class="el" href="class_robot_model_1_1_render_list.html#a9ad71d6ea6d0d1008e0705ced20f6aea" title="Indicates that one or more objects (from the sub-class) have moved, and that the...">RenderList::changedState()</a> ---&gt; SLOT <a class="el" href="class_robot_model_1_1_g_l_widget.html#a6c9d382ddf46097bccb2b69410f7563e" title="Calls updateGL();.">GLWidget::update()</a> SIGNAL <a class="el" href="class_robot_model_1_1_g_l_widget.html#a85d43a2bafbbfc018ef8f3664e2d026d" title="Connect to RenderList.callLists() or anything that calls DisplayList.render().">GLWidget::renderStuff()</a> ---&gt; SLOT <a class="el" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465" title="Causes the display lists to be called.">RenderList::callLists()</a></p>
+<p>NOTE: The signal slot mechanism ensures that display lists are created, destroyed and called by the same thread. This is necessary because OpenGL is not thread safe. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab79c391c86de1ffb76f6950b49d82c0c"></a><!-- doxytag: member="RobotModel::GLWidget::GLWidget" ref="ab79c391c86de1ffb76f6950b49d82c0c" args="(QWidget *parent=0)" -->
 <div class="memitem">
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-<p>Just initializes some colors and the camera position/rotation. </p>
+<p>Initializes some colors and the camera position/rotation. </p>
 
 </div>
 </div>
@@ -165,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-<p>Calls displayList.makeDisplayList();. </p>
+<p>Calls <a class="el" href="class_robot_model_1_1_display_list.html#a842de97924298c7363e50aebd69e5a50" title="Implemented by the sub-classes Sphere, Cylinder and Box.">DisplayList.makeDisplayList()</a>;. </p>
 
 </div>
 </div>
@@ -301,7 +301,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-<p>Connect to <a class="el" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465">RenderList.callLists()</a> or anything that calls <a class="el" href="class_robot_model_1_1_display_list.html#a5f95e85c192a2bc8f06f18075e6fefd7">DisplayList.render()</a>. </p>
+<p>Connect to <a class="el" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465" title="Causes the display lists to be called.">RenderList.callLists()</a> or anything that calls <a class="el" href="class_robot_model_1_1_display_list.html#a5f95e85c192a2bc8f06f18075e6fefd7" title="Renders the display list with glCallList(int index).">DisplayList.render()</a>. </p>
 
 </div>
 </div>

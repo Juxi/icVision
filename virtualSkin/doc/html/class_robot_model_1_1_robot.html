@@ -74,24 +74,26 @@ Inheritance diagram for RobotModel::Robot:</div>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3">setEncoderPosition</a> (qreal pos=0)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of every joint on the robot.  <a href="#a72ff62b72e0e9d34d3ca0c241dec50d3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a08017bce09f838437534aec53d615ff6">setEncoderPosition</a> (int partNum, int motorNum, qreal pos)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of a single <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>.  <a href="#a08017bce09f838437534aec53d615ff6"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of a single <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>.  <a href="#a08017bce09f838437534aec53d615ff6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ad68d3bd2d8edbca49704f8a5b01055a1">setEncoderPosition</a> (int partNum, const QVector&lt; qreal &gt; &amp;pos)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the positions of all motors in the group branchNum.  <a href="#ad68d3bd2d8edbca49704f8a5b01055a1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the positions of each <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> in a particular <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>.  <a href="#ad68d3bd2d8edbca49704f8a5b01055a1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a3096a55b87b4e539f49646250ab98505">numBodyParts</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the number of BodyParts currently in the list, which is also the index of the next one to be added.  <a href="#a3096a55b87b4e539f49646250ab98505"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ab5348714451392c3c66e7caf0622ed43">numMotors</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the number of Motors currently in the list, which is also the index of the next one to be added.  <a href="#ab5348714451392c3c66e7caf0622ed43"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a18b34558cde201791c9cabf642fec0f2">numNodes</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added.  <a href="#a18b34558cde201791c9cabf642fec0f2"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a445b3d7a1b0adba5633bd81c3199c61d">Robot</a> (bool visualize=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a4fc7c70ae20623f05e06f2ecb388b6c4">Robot</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing to do here.  <a href="#a4fc7c70ae20623f05e06f2ecb388b6c4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a924320124b09c2f2ac1621aa210d5f38">~Robot</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing to do here.  <a href="#a924320124b09c2f2ac1621aa210d5f38"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a548f772300529a29dbdbf12656825e24">open</a> (const QString &amp;fileName)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">To Initialize The <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>.  <a href="#a548f772300529a29dbdbf12656825e24"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model.  <a href="#a548f772300529a29dbdbf12656825e24"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a5e1378920767fe6552809c4609c05888">isOpen</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns whether or not <a class="el" href="class_robot_model_1_1_robot.html#a548f772300529a29dbdbf12656825e24" title="Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints...">open( const QString&amp; )</a> has been called (and has succeeded).  <a href="#a5e1378920767fe6552809c4609c05888"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a904ffd633cc9b03b51a90563c70dd1e6">close</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a0e3187d8a543ab03029138ea836ed546">setName</a> (const QString &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a44d1922d7d9ea6c7c90360c2443b1ec3">appendBodyPart</a> (<a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *part)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#aa4db18e00b4e4c56a37943a0b45d1c3b">appendMotor</a> (<a class="el" href="class_robot_model_1_1_motor.html">Motor</a> *motor)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a2521948f148183c97428155be0eea923">resizeMotorList</a> (int size)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#aa6a72690fe4b0d1a2178f5478d3829bf">appendNode</a> (<a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *node)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ad2827f8919f3cce0d39b89fb3fb33217">nextPartIdx</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ac9919cc40764e47d97fa591018bfbe67">nextMotorIdx</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a465bb3898172af37d6dec1885da0fec0">nextLinkIdx</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Delete the BodyParts, Motors, Links and RevoluteJoints, returning the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> to the state it was in just after construction.  <a href="#a904ffd633cc9b03b51a90563c70dd1e6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const QString &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a07a4dcd2c34da89415576c53b42d9406">getName</a> () const </td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the name of the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>.  <a href="#a07a4dcd2c34da89415576c53b42d9406"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const QString *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a108ec79a213fbc7655595f1716150436">getPartName</a> (int partNum) const </td></tr>
@@ -101,39 +103,45 @@ Inheritance diagram for RobotModel::Robot:</div>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#af23f77831c87476ad0a43c624dd4b254">getPartByName</a> (const QString &amp;partName)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> itself, given its name.  <a href="#af23f77831c87476ad0a43c624dd4b254"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const QString *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a18b266083c6b87d05d1dc3479409e287">getMotorName</a> (int partNum, int motorNum) const </td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the name of a <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>, given its index and the index of its body part.  <a href="#a18b266083c6b87d05d1dc3479409e287"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the name of a <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>, given its index and the index of its body part.  <a href="#a18b266083c6b87d05d1dc3479409e287"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_motor.html">Motor</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a41d959b8a9f469ee1caa5e3881a9445f">getMotorByName</a> (const QString &amp;motorName)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the moter itself, given its name.  <a href="#a41d959b8a9f469ee1caa5e3881a9445f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a791f90ebca15e9a1e61e9e903f7dc594">printLinks</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints the kinematic tree depth first.  <a href="#a791f90ebca15e9a1e61e9e903f7dc594"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ad67fe62de4ea2b7b6da0521fc0bf0e5a">printBodyParts</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Print a list of the <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> objects in each <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>.  <a href="#ad67fe62de4ea2b7b6da0521fc0bf0e5a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca">updatePose</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Do forward kinematics, pushing results down the link/joint trees.  <a href="#a7338994f0ab4baa6e5d08751272b63ca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a47e480a4cad58266d12efce34f3fb563">render</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Recursively calls <a class="el" href="class_robot_model_1_1_robot.html#a47e480a4cad58266d12efce34f3fb563" title="Recursively calls render() on the link/joint trees, updating the OpenGL display lists...">render()</a> on the link/joint trees, updating the OpenGL display lists.  <a href="#a47e480a4cad58266d12efce34f3fb563"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a791f90ebca15e9a1e61e9e903f7dc594">printLinks</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Print the <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">Link</a> Tree.  <a href="#a791f90ebca15e9a1e61e9e903f7dc594"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#ad67fe62de4ea2b7b6da0521fc0bf0e5a">printBodyParts</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Print the <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a> control groups.  <a href="#ad67fe62de4ea2b7b6da0521fc0bf0e5a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a2fd7c2a0cd53593361f38f52de41d73c">home</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca">updatePose</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of the robot to the home position (also calls <a class="el" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca" title="Do forward kinematics, pushing results down the link/joint trees.">updatePose()</a>).  <a href="#a2fd7c2a0cd53593361f38f52de41d73c"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Friends</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a40513bec1d0f28109b20c1f29c142484">BodyPart</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a2abea0a22831274b2894ed2675e909b4">Motor</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a2133a69fbecb2cd6583a1439af3ab61c">KinTreeNode</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_robot.html#a4a11e1baa5d6e0a5e7e2e5a8a3525f96">ZPHandler</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A kinematic model of a robot. </p>
-<p>The model consists of a tree of <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> objects of type <a class="el" href="class_robot_model_1_1_revolute_joint.html">RevoluteJoint</a>, <a class="el" href="class_robot_model_1_1_prismatic_joint.html">PrismaticJoint</a> and <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">Link</a>, as well as a list of <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a> objects and a list of <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> objects. A <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a> is bound to one or more joints and control the joints' position according to a linear mapping. A <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> is a groups of motors, the positions of which can be set all at once. </p>
+<p>The robot model consists of a tree of <a class="el" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a> objects of type <a class="el" href="class_robot_model_1_1_revolute_joint.html" title="Implements Joint::setM() for a revolute (rotational) joint.">RevoluteJoint</a>, <a class="el" href="class_robot_model_1_1_prismatic_joint.html" title="Implements Joint::setM() for a prismatic (telescoping) joint.">PrismaticJoint</a> and <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot.">Link</a>, as well as a list of <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> objects and a list of <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> objects. A <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> is bound to one or more joints and control the joints' position according to a linear mapping. A <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> is a groups of motors, the positions of which can be set all at once. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a445b3d7a1b0adba5633bd81c3199c61d"></a><!-- doxytag: member="RobotModel::Robot::Robot" ref="a445b3d7a1b0adba5633bd81c3199c61d" args="(bool visualize=0)" -->
+<a class="anchor" id="a4fc7c70ae20623f05e06f2ecb388b6c4"></a><!-- doxytag: member="RobotModel::Robot::Robot" ref="a4fc7c70ae20623f05e06f2ecb388b6c4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Robot::Robot </td>
           <td>(</td>
-          <td class="paramtype">bool&nbsp;</td>
-          <td class="paramname"> <em>visualize</em> = <code>0</code></td>
+          <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing to do here. </p>
 
 </div>
 </div>
@@ -152,63 +160,11 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
+<p>Nothing to do here. </p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a44d1922d7d9ea6c7c90360c2443b1ec3"></a><!-- doxytag: member="RobotModel::Robot::appendBodyPart" ref="a44d1922d7d9ea6c7c90360c2443b1ec3" args="(BodyPart *part)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::Robot::appendBodyPart </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a> *&nbsp;</td>
-          <td class="paramname"> <em>part</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa4db18e00b4e4c56a37943a0b45d1c3b"></a><!-- doxytag: member="RobotModel::Robot::appendMotor" ref="aa4db18e00b4e4c56a37943a0b45d1c3b" args="(Motor *motor)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::Robot::appendMotor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_robot_model_1_1_motor.html">Motor</a> *&nbsp;</td>
-          <td class="paramname"> <em>motor</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa6a72690fe4b0d1a2178f5478d3829bf"></a><!-- doxytag: member="RobotModel::Robot::appendNode" ref="aa6a72690fe4b0d1a2178f5478d3829bf" args="(KinTreeNode *node)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::Robot::appendNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *&nbsp;</td>
-          <td class="paramname"> <em>node</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a904ffd633cc9b03b51a90563c70dd1e6"></a><!-- doxytag: member="RobotModel::Robot::close" ref="a904ffd633cc9b03b51a90563c70dd1e6" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -223,6 +179,8 @@ Inheritance diagram for RobotModel::Robot:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Delete the BodyParts, Motors, Links and RevoluteJoints, returning the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> to the state it was in just after construction. </p>
 
 </div>
 </div>
@@ -271,7 +229,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>Get the name of a <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>, given its index and the index of its body part. </p>
+<p>Get the name of a <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>, given its index and the index of its body part. </p>
 
 </div>
 </div>
@@ -369,6 +327,8 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
+<p>Set the position of the robot to the home position (also calls <a class="el" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca" title="Do forward kinematics, pushing results down the link/joint trees.">updatePose()</a>). </p>
+
 </div>
 </div>
 <a class="anchor" id="a5e1378920767fe6552809c4609c05888"></a><!-- doxytag: member="RobotModel::Robot::isOpen" ref="a5e1378920767fe6552809c4609c05888" args="() const " -->
@@ -386,56 +346,71 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
+<p>Returns whether or not <a class="el" href="class_robot_model_1_1_robot.html#a548f772300529a29dbdbf12656825e24" title="Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints...">open( const QString&amp; )</a> has been called (and has succeeded). </p>
+
 </div>
 </div>
-<a class="anchor" id="a465bb3898172af37d6dec1885da0fec0"></a><!-- doxytag: member="RobotModel::Robot::nextLinkIdx" ref="a465bb3898172af37d6dec1885da0fec0" args="()" -->
+<a class="anchor" id="a3096a55b87b4e539f49646250ab98505"></a><!-- doxytag: member="RobotModel::Robot::numBodyParts" ref="a3096a55b87b4e539f49646250ab98505" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int RobotModel::Robot::nextLinkIdx </td>
+          <td class="memname">int RobotModel::Robot::numBodyParts </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
+          <td> const<code> [inline, slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Returns the number of BodyParts currently in the list, which is also the index of the next one to be added. </p>
+<p>Returns 0 if branchNum is out of range. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pos</em>&nbsp;</td><td>A QVector of encoder positions. If one or more of these values is out of range, the maximum or minimum value will be used accordingly. Motors are numbered as they are encountered by the parser (see configure()). To see how Motors and BodyParts are numbered, try looking at the output of printJoints() and <a class="el" href="class_robot_model_1_1_robot.html#ad67fe62de4ea2b7b6da0521fc0bf0e5a" title="Print a list of the Motor objects in each BodyPart.">printBodyParts()</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a class="anchor" id="ac9919cc40764e47d97fa591018bfbe67"></a><!-- doxytag: member="RobotModel::Robot::nextMotorIdx" ref="ac9919cc40764e47d97fa591018bfbe67" args="() const " -->
+<a class="anchor" id="ab5348714451392c3c66e7caf0622ed43"></a><!-- doxytag: member="RobotModel::Robot::numMotors" ref="ab5348714451392c3c66e7caf0622ed43" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int RobotModel::Robot::nextMotorIdx </td>
+          <td class="memname">int RobotModel::Robot::numMotors </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td> const<code> [inline]</code></td>
+          <td> const<code> [inline, slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Returns the number of Motors currently in the list, which is also the index of the next one to be added. </p>
+
 </div>
 </div>
-<a class="anchor" id="ad2827f8919f3cce0d39b89fb3fb33217"></a><!-- doxytag: member="RobotModel::Robot::nextPartIdx" ref="ad2827f8919f3cce0d39b89fb3fb33217" args="() const " -->
+<a class="anchor" id="a18b34558cde201791c9cabf642fec0f2"></a><!-- doxytag: member="RobotModel::Robot::numNodes" ref="a18b34558cde201791c9cabf642fec0f2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int RobotModel::Robot::nextPartIdx </td>
+          <td class="memname">int RobotModel::Robot::numNodes </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td> const<code> [inline]</code></td>
+          <td><code> [inline, slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added. </p>
 
 </div>
 </div>
@@ -455,8 +430,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>To Initialize The <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>. </p>
-<p>Parse the robot configuration XML file and call constructors of <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">Link</a>, <a class="el" href="class_robot_model_1_1_joint.html">Joint</a>, <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>, and Branch, to build up the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>. </p>
+<p>Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model. </p>
 
 </div>
 </div>
@@ -475,8 +449,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>Print the <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a> control groups. </p>
-<p>Print a list of the <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a> objects in each group. </p>
+<p>Print a list of the <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> objects in each <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>. </p>
 
 </div>
 </div>
@@ -495,8 +468,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>Print the <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot. Intuitively, a link acts...">Link</a> Tree. </p>
-<p>Prints the tree of links with all properties depth first. </p>
+<p>Prints the kinematic tree depth first. </p>
 
 </div>
 </div>
@@ -518,24 +490,6 @@ Inheritance diagram for RobotModel::Robot:</div>
 <p>Recursively calls <a class="el" href="class_robot_model_1_1_robot.html#a47e480a4cad58266d12efce34f3fb563" title="Recursively calls render() on the link/joint trees, updating the OpenGL display lists...">render()</a> on the link/joint trees, updating the OpenGL display lists. </p>
 
 <p>Implements <a class="el" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195">RobotModel::RenderList</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2521948f148183c97428155be0eea923"></a><!-- doxytag: member="RobotModel::Robot::resizeMotorList" ref="a2521948f148183c97428155be0eea923" args="(int size)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::Robot::resizeMotorList </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>size</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -564,8 +518,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>Set the positions of all motors in the group branchNum. </p>
-<p>Returns 0 if branchNum is out of range. If the value is out of range, the maximum or minimum value will be used accordingly. Motors are numbered as they are encountered by the parser (see configure()). To understand this better, try looking at the output of printJoints() and printBranches(). </p>
+<p>Set the positions of each <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a> in a particular <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a>. </p>
 
 </div>
 </div>
@@ -600,7 +553,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
-<p>Set the position of a single <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>. </p>
+<p>Set the position of a single <a class="el" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>. </p>
 <p>If the value is out of range, the maximum or minimum value will be used accordingly. </p>
 
 </div>
@@ -622,25 +575,7 @@ Inheritance diagram for RobotModel::Robot:</div>
 <div class="memdoc">
 
 <p>Set the position of every joint on the robot. </p>
-<p>Usually to zero position. If the value is out of range, the maximum or minimum value will be used accordingly. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0e3187d8a543ab03029138ea836ed546"></a><!-- doxytag: member="RobotModel::Robot::setName" ref="a0e3187d8a543ab03029138ea836ed546" args="(const QString &amp;name)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotModel::Robot::setName </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&nbsp;</td>
-          <td class="paramname"> <em>name</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>If the value is out of range, the maximum or minimum value will be used accordingly. </p>
 
 </div>
 </div>
@@ -659,15 +594,56 @@ Inheritance diagram for RobotModel::Robot:</div>
 </div>
 <div class="memdoc">
 
+<p>Do forward kinematics, pushing results down the link/joint trees. </p>
+
 </div>
 </div>
 <hr/><h2>Friends And Related Function Documentation</h2>
+<a class="anchor" id="a40513bec1d0f28109b20c1f29c142484"></a><!-- doxytag: member="RobotModel::Robot::BodyPart" ref="a40513bec1d0f28109b20c1f29c142484" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="class_robot_model_1_1_body_part.html">BodyPart</a><code> [friend]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2133a69fbecb2cd6583a1439af3ab61c"></a><!-- doxytag: member="RobotModel::Robot::KinTreeNode" ref="a2133a69fbecb2cd6583a1439af3ab61c" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">friend class <a class="el" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a><code> [friend]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2abea0a22831274b2894ed2675e909b4"></a><!-- doxytag: member="RobotModel::Robot::Motor" ref="a2abea0a22831274b2894ed2675e909b4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="class_robot_model_1_1_motor.html">Motor</a><code> [friend]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4a11e1baa5d6e0a5e7e2e5a8a3525f96"></a><!-- doxytag: member="RobotModel::Robot::ZPHandler" ref="a4a11e1baa5d6e0a5e7e2e5a8a3525f96" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="class_robot_model_1_1_z_p_handler.html">ZPHandler</a><code> [friend]</code></td>
         </tr>
       </table>
 </div>

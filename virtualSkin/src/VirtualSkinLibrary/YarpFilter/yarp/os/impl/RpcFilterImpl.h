@@ -142,7 +142,7 @@ private:
 	bool setupOutputConnection();
 	bool forwardCall(Bottle call, ConnectionWriter *writer = NULL);
 	bool returnResponse(Bottle response, ConnectionWriter *writer);
+	
 };
-
 #endif
 /** @} */

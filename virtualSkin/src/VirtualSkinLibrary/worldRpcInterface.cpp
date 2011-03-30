@@ -24,7 +24,6 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 {
 	int n = 0;	// identifier of the current bottle element
 	int cmd;	// the command (see command vocabs in header)
-	//int geom;	// the geometry to which the command applies (see geometries vocabs in header)
 	
 	yarp::os::ConstString prefix = command.get(n).asString();
 	if (prefix=="help") {

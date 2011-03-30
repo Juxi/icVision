@@ -60,30 +60,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00018"></a>00018         <span class="keyword">class </span>RenderList;
 <a name="l00019"></a>00019 }
 <a name="l00020"></a>00020 
-<a name="l00021"></a><a class="code" href="class_robot_model_1_1_render_list.html">00021</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_render_list.html">RobotModel::RenderList</a> : <span class="keyword">public</span> QObject
-<a name="l00022"></a>00022 {
-<a name="l00023"></a>00023         Q_OBJECT
-<a name="l00024"></a>00024         
-<a name="l00025"></a>00025 <span class="keyword">public</span>:
-<a name="l00026"></a>00026         
-<a name="l00027"></a>00027         <a class="code" href="class_robot_model_1_1_render_list.html#a98651fa6cd408cce14d6d245cd95fde4">RenderList</a>();
-<a name="l00028"></a>00028         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_render_list.html#ae66a9f72d814771e42d7e50946053ef7">~RenderList</a>();
+<a name="l00026"></a><a class="code" href="class_robot_model_1_1_render_list.html">00026</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_render_list.html" title="An abstract class that provides the signal/slot interface between GLWidget and the...">RobotModel::RenderList</a> : <span class="keyword">public</span> QObject
+<a name="l00027"></a>00027 {
+<a name="l00028"></a>00028         Q_OBJECT
 <a name="l00029"></a>00029         
-<a name="l00030"></a>00030         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195">render</a>() = 0;
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="keyword">public</span> slots:
-<a name="l00033"></a>00033         
-<a name="l00034"></a><a class="code" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465">00034</a>         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465">callLists</a>() { <a class="code" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195">render</a>(); }
-<a name="l00035"></a>00035         
-<a name="l00036"></a>00036 signals:
-<a name="l00037"></a>00037         
-<a name="l00038"></a>00038         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a635908222fa71402918e31eb2d725844">appendedObject</a>( <a class="code" href="class_robot_model_1_1_display_list.html">RobotModel::DisplayList</a>* list );
-<a name="l00039"></a>00039         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a22724d5d6878f19b639b5b6b16963ee2">outdatedDisplayList</a>( <span class="keywordtype">int</span> idx );
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a9ad71d6ea6d0d1008e0705ced20f6aea">changedState</a>();
-<a name="l00041"></a>00041 };
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#endif</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>
+<a name="l00030"></a>00030 <span class="keyword">public</span>:
+<a name="l00031"></a>00031         
+<a name="l00032"></a>00032         <a class="code" href="class_robot_model_1_1_render_list.html#a98651fa6cd408cce14d6d245cd95fde4" title="Nothing to do here.">RenderList</a>();                           
+<a name="l00033"></a>00033         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_render_list.html#ae66a9f72d814771e42d7e50946053ef7" title="Nothing to do here.">~RenderList</a>();          
+<a name="l00034"></a>00034         
+<a name="l00035"></a>00035         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195" title="This should call display lists with glCallList( int ).">render</a>() = 0;      
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="keyword">public</span> slots:
+<a name="l00038"></a>00038         
+<a name="l00039"></a><a class="code" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465">00039</a>         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a7cd62d6e6376bc02bd4244dcc174b465" title="Causes the display lists to be called.">callLists</a>() { <a class="code" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195" title="This should call display lists with glCallList( int ).">render</a>(); }  
+<a name="l00040"></a>00040         
+<a name="l00041"></a>00041 signals:
+<a name="l00042"></a>00042         
+<a name="l00043"></a>00043         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a635908222fa71402918e31eb2d725844" title="Indicates that a new physical object has been created, and that its corresponding...">appendedObject</a>( <a class="code" href="class_robot_model_1_1_display_list.html" title="A container for an OpenGL display list and its associated 4x4 displacement matrix...">RobotModel::DisplayList</a>* list );   
+<a name="l00044"></a>00044         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a22724d5d6878f19b639b5b6b16963ee2" title="Indicates that an object has been deleted and that its corresponding display list...">outdatedDisplayList</a>( <span class="keywordtype">int</span> idx );                                    
+<a name="l00045"></a>00045         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_render_list.html#a9ad71d6ea6d0d1008e0705ced20f6aea" title="Indicates that one or more objects (from the sub-class) have moved, and that the...">changedState</a>();                                                                    
+<a name="l00046"></a>00046 };
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <span class="preprocessor">#endif</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

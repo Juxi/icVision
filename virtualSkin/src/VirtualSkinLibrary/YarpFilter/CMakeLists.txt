@@ -29,6 +29,9 @@ SET ( headers 	yarp/os/impl/RpcFilterImpl.h
 		yarp/os/impl/StreamFilterImpl.h
 		yarp/os/StreamFilter.h
 		yarp/os/ControlBoardFilter.h
+		yarp/os/IObserver.h
+		yarp/os/IReplier.h
+		yarp/os/RpcFilter.h
 )
 
 ADD_LIBRARY ( YarpFilter STATIC	RpcFilterImpl.cpp

@@ -73,16 +73,20 @@ Inheritance diagram for RobotModel::Model:</div>
 <tr><td colspan="2"><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a30ae14c4eaa0518c72f5e2804f25f5c3">newStateReady</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ab45c30ded04e2e9c83648f0d838b698e">collision</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates that a new state has been computed (useful when running collision detection in a separate thread).  <a href="#ab45c30ded04e2e9c83648f0d838b698e"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a0a603c2f3ee5c56fc40efc02ccef92b5">Model</a> (bool visualize=0)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructs an armed collisionDetector object.  <a href="#a0a603c2f3ee5c56fc40efc02ccef92b5"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the default collision response for FreeSOLID to DT_WITNESSED_RESPONSE.  <a href="#a0a603c2f3ee5c56fc40efc02ccef92b5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ad6ebd2062a0b823db841a0b88baac4c0">~Model</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Just stops the YARP port if its running.  <a href="#ad6ebd2062a0b823db841a0b88baac4c0"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#ad6ebd2062a0b823db841a0b88baac4c0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d">computePose</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID.  <a href="#a71e892d2162a6f5f8089f68bad2d124d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#aef475e4724f28b31c2dabb4525e3d55e">run</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allows a thread to call <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> periodically.  <a href="#aef475e4724f28b31c2dabb4525e3d55e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#af9470eeec514706e86a5ce9eb105b3e3">stop</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops the collision thread.  <a href="#af9470eeec514706e86a5ce9eb105b3e3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a324bda2be10f0dd6c50a36dc2bee6971">restart</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Restarts the collision thread.  <a href="#a324bda2be10f0dd6c50a36dc2bee6971"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ac613f217636c3129fb0dafb2e7dd0797">computePosePrefix</a> ()=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ac5d6a83365a6add93699e11b69afdedd">computePoseSuffix</a> ()=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a005954b405d7e3f6c7c9397039503966">collisionHandlerAddendum</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, <a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, const DtCollData *)=0</td></tr>
@@ -92,12 +96,14 @@ Inheritance diagram for RobotModel::Model:</div>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_robot.html">Robot</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a424bec13b2fcc23f27709ceb7abf565e">robot</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> whose pose we are updating.  <a href="#a424bec13b2fcc23f27709ceb7abf565e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_world.html">World</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a46580e7b1f421e9deadbb045d87dbcbc">world</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">All the other Objects not belonging to the Robot's body. (we just need this so we can change colors when things collide or not).  <a href="#a46580e7b1f421e9deadbb045d87dbcbc"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">All the other Objects not belonging to the Robot's body.  <a href="#a46580e7b1f421e9deadbb045d87dbcbc"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_skin_window.html">RobotModel::SkinWindow</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a2788cdb9e1c31f981bb0e457ebfc9fce">skinWindow</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates that a collision has occurred (useful when running collision detection in a separate thread).  <a href="#a2788cdb9e1c31f981bb0e457ebfc9fce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a84816fb122153030d999ede6e54751fe">keepRunning</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The visualization.  <a href="#a84816fb122153030d999ede6e54751fe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294">col_count</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The number of collisions in the current robot/world configuration.  <a href="#a401d1ac94f904ed3250045f572fe0294"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The number of (pairwise) collisions in the current robot/world configuration.  <a href="#a401d1ac94f904ed3250045f572fe0294"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Computes the current pose of the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> and does collision detection using the FreeSOLID library. </p>
@@ -119,7 +125,13 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
-<p>Constructs an armed collisionDetector object. </p>
+<p>Sets the default collision response for FreeSOLID to DT_WITNESSED_RESPONSE. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>visualize</em>&nbsp;</td><td>If true, a <a class="el" href="class_robot_model_1_1_skin_window.html" title="This QWidget is the window for the optional GUI used to visualize the Robot. (see...">SkinWindow</a> (with its associated <a class="el" href="class_robot_model_1_1_g_l_widget.html" title="The QWidget responsible for rendering the scene with OpenGL.">GLWidget</a>) is constructed and its signals and slots are connected to <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> and <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> (both of which are RenderLists) as described in the docs for <a class="el" href="class_robot_model_1_1_g_l_widget.html" title="The QWidget responsible for rendering the scene with OpenGL.">GLWidget</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -138,7 +150,7 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
-<p>Just stops the YARP port if its running. </p>
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -157,6 +169,8 @@ Inheritance diagram for RobotModel::Model:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Indicates that a new state has been computed (useful when running collision detection in a separate thread). </p>
 
 </div>
 </div>
@@ -196,7 +210,7 @@ Inheritance diagram for RobotModel::Model:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>This callback is executed whenever FreeSOLID encounters a collision between Objects. It sets a flag that collision(s) has/have occurred, and encodes the collision state into a YARP bottle. </p>
+<p>This callback is executed whenever FreeSOLID encounters a collision between Objects. It refreshes the timestamp on the objects indicating when the last collision has occurred. </p>
 
 </div>
 </div>
@@ -251,6 +265,7 @@ Inheritance diagram for RobotModel::Model:</div>
 <div class="memdoc">
 
 <p>Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID. </p>
+<p>Call this function if you want to be in control of which poses are computed when </p>
 
 </div>
 </div>
@@ -324,6 +339,8 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
+<p>Restarts the collision thread. </p>
+
 </div>
 </div>
 <a class="anchor" id="aef475e4724f28b31c2dabb4525e3d55e"></a><!-- doxytag: member="RobotModel::Model::run" ref="aef475e4724f28b31c2dabb4525e3d55e" args="()" -->
@@ -340,6 +357,9 @@ Inheritance diagram for RobotModel::Model:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Allows a thread to call <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> periodically. </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>IMPORTANT: Call start() not <a class="el" href="class_robot_model_1_1_model.html#aef475e4724f28b31c2dabb4525e3d55e" title="Allows a thread to call computePose() periodically.">run()</a> !!! </dd></dl>
 
 </div>
 </div>
@@ -358,6 +378,8 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
+<p>Stops the collision thread. </p>
+
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -372,7 +394,7 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
-<p>The number of collisions in the current robot/world configuration. </p>
+<p>The number of (pairwise) collisions in the current robot/world configuration. </p>
 
 </div>
 </div>
@@ -386,6 +408,9 @@ Inheritance diagram for RobotModel::Model:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>The visualization. </p>
+<p>Facilitates stopping and restarting the thread </p>
 
 </div>
 </div>
@@ -415,6 +440,8 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
+<p>Indicates that a collision has occurred (useful when running collision detection in a separate thread). </p>
+
 </div>
 </div>
 <a class="anchor" id="a46580e7b1f421e9deadbb045d87dbcbc"></a><!-- doxytag: member="RobotModel::Model::world" ref="a46580e7b1f421e9deadbb045d87dbcbc" args="" -->
@@ -428,7 +455,7 @@ Inheritance diagram for RobotModel::Model:</div>
 </div>
 <div class="memdoc">
 
-<p>All the other Objects not belonging to the Robot's body. (we just need this so we can change colors when things collide or not). </p>
+<p>All the other Objects not belonging to the Robot's body. </p>
 
 </div>
 </div>

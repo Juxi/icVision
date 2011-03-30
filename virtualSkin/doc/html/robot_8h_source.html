@@ -52,94 +52,81 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#ifndef KINTREE_H</span>
 <a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define KINTREE_H</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
-<a name="l00013"></a>00013 <span class="comment">//#include &quot;skinWindow.h&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="render_list_8h.html">renderList.h</a>&quot;</span>
-<a name="l00015"></a>00015 <span class="comment">//#include &quot;world.h&quot;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="body_part_8h.html">bodyPart.h</a>&quot;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="motor_8h.html">motor.h</a>&quot;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="link_8h.html">link.h</a>&quot;</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="keyword">namespace </span>RobotModel { <span class="keyword">class </span>Robot; }
-<a name="l00021"></a>00021         
-<a name="l00028"></a><a class="code" href="class_robot_model_1_1_robot.html">00028</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">RobotModel::Robot</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_render_list.html">RenderList</a>
-<a name="l00029"></a>00029 {
-<a name="l00030"></a>00030         Q_OBJECT
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="keyword">public</span>:
-<a name="l00033"></a>00033         <a class="code" href="class_robot_model_1_1_robot.html#a445b3d7a1b0adba5633bd81c3199c61d">Robot</a>( <span class="keywordtype">bool</span> visualize = 0 );
-<a name="l00034"></a>00034         <a class="code" href="class_robot_model_1_1_robot.html#a924320124b09c2f2ac1621aa210d5f38">~Robot</a>();
-<a name="l00035"></a>00035         
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a548f772300529a29dbdbf12656825e24" title="To Initialize The Robot.">open</a>( <span class="keyword">const</span> QString&amp; fileName );
-<a name="l00039"></a><a class="code" href="class_robot_model_1_1_robot.html#a5e1378920767fe6552809c4609c05888">00039</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a5e1378920767fe6552809c4609c05888">isOpen</a>()<span class="keyword"> const     </span>{ <span class="keywordflow">return</span> isConfigured; }
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a904ffd633cc9b03b51a90563c70dd1e6">close</a>();
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042                 <span class="comment">// These functions are used by ZPRobotHandler to build up the Robot from an XML description.</span>
-<a name="l00043"></a>00043                 <span class="comment">// Should they be private perhaps?</span>
-<a name="l00044"></a><a class="code" href="class_robot_model_1_1_robot.html#a0e3187d8a543ab03029138ea836ed546">00044</a>                 <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a0e3187d8a543ab03029138ea836ed546">setName</a>( <span class="keyword">const</span> QString&amp; name )             { robotName = name; }
-<a name="l00045"></a><a class="code" href="class_robot_model_1_1_robot.html#a44d1922d7d9ea6c7c90360c2443b1ec3">00045</a>                 <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a44d1922d7d9ea6c7c90360c2443b1ec3">appendBodyPart</a>( <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* part )   { partList.append(part); }
-<a name="l00046"></a><a class="code" href="class_robot_model_1_1_robot.html#aa4db18e00b4e4c56a37943a0b45d1c3b">00046</a>                 <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#aa4db18e00b4e4c56a37943a0b45d1c3b">appendMotor</a>( <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>* motor )                { motorList.append(motor); }
-<a name="l00047"></a><a class="code" href="class_robot_model_1_1_robot.html#a2521948f148183c97428155be0eea923">00047</a>                 <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a2521948f148183c97428155be0eea923">resizeMotorList</a>( <span class="keywordtype">int</span> size )                { motorList.resize(size); }
-<a name="l00048"></a><a class="code" href="class_robot_model_1_1_robot.html#aa6a72690fe4b0d1a2178f5478d3829bf">00048</a>                 <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#aa6a72690fe4b0d1a2178f5478d3829bf">appendNode</a>( <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>* node )    { tree.append(node); }
-<a name="l00049"></a><a class="code" href="class_robot_model_1_1_robot.html#ad2827f8919f3cce0d39b89fb3fb33217">00049</a>                 <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#ad2827f8919f3cce0d39b89fb3fb33217">nextPartIdx</a>()<span class="keyword"> const                                 </span>{ <span class="keywordflow">return</span> partList.size(); }
-<a name="l00050"></a><a class="code" href="class_robot_model_1_1_robot.html#ac9919cc40764e47d97fa591018bfbe67">00050</a>                 <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#ac9919cc40764e47d97fa591018bfbe67">nextMotorIdx</a>()<span class="keyword"> const                                </span>{ <span class="keywordflow">return</span> motorList.size(); }
-<a name="l00051"></a><a class="code" href="class_robot_model_1_1_robot.html#a465bb3898172af37d6dec1885da0fec0">00051</a>                 <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#a465bb3898172af37d6dec1885da0fec0">nextLinkIdx</a>()                                               { <span class="keywordflow">return</span> numLinks++; }
-<a name="l00052"></a>00052         
-<a name="l00053"></a>00053         <span class="comment">// These are generic &#39;get&#39; functions that may be useful</span>
-<a name="l00054"></a><a class="code" href="class_robot_model_1_1_robot.html#a07a4dcd2c34da89415576c53b42d9406">00054</a>         <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_robot.html#a07a4dcd2c34da89415576c53b42d9406" title="Get the name of the Robot.">getName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> robotName; }                            
-<a name="l00055"></a>00055         <span class="keyword">const</span> QString* <a class="code" href="class_robot_model_1_1_robot.html#a108ec79a213fbc7655595f1716150436" title="Get the name of a BodyPart, given its index (usually for printing messages).">getPartName</a>( <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;                                        
-<a name="l00056"></a>00056         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#ac291608df7ce0cbe818d2da837ca008a" title="Get the number of motors in a BodyPart, given its index.">getNumMotors</a>( <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;                                                          
-<a name="l00057"></a>00057         <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* <a class="code" href="class_robot_model_1_1_robot.html#af23f77831c87476ad0a43c624dd4b254" title="Get the BodyPart itself, given its name.">getPartByName</a>( <span class="keyword">const</span> QString&amp; partName );                                     
-<a name="l00058"></a>00058         <span class="keyword">const</span> QString* <a class="code" href="class_robot_model_1_1_robot.html#a18b266083c6b87d05d1dc3479409e287" title="Get the name of a Motor, given its index and the index of its body part.">getMotorName</a>( <span class="keywordtype">int</span> partNum, <span class="keywordtype">int</span> motorNum ) <span class="keyword">const</span>;         
-<a name="l00059"></a>00059         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>* <a class="code" href="class_robot_model_1_1_robot.html#a41d959b8a9f469ee1caa5e3881a9445f" title="Get the moter itself, given its name.">getMotorByName</a>( <span class="keyword">const</span> QString&amp; motorName );                                      
-<a name="l00060"></a>00060         
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a47e480a4cad58266d12efce34f3fb563" title="Recursively calls render() on the link/joint trees, updating the OpenGL display lists...">render</a>();                  
-<a name="l00063"></a>00063         <span class="comment">//virtual void notColliding();  //!</span>
-<a name="l00064"></a>00064         
-<a name="l00065"></a>00065         <span class="comment">// PRINT STUFF FOR HUMANS TO READ</span>
-<a name="l00067"></a>00067 <span class="comment"></span>
-<a name="l00068"></a>00068         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a791f90ebca15e9a1e61e9e903f7dc594" title="Print the Link Tree.">printLinks</a>();
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#ad67fe62de4ea2b7b6da0521fc0bf0e5a" title="Print the Motor control groups.">printBodyParts</a>();
-<a name="l00072"></a>00072         
-<a name="l00073"></a>00073         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a2fd7c2a0cd53593361f38f52de41d73c">home</a>();            <span class="comment">// Go to home position</span>
-<a name="l00074"></a>00074         
-<a name="l00075"></a>00075         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca">updatePose</a>();      <span class="comment">// Do forward kinematics, pushing results down the link/joint trees</span>
-<a name="l00076"></a>00076         
-<a name="l00077"></a>00077         <span class="comment">//void emitAppended( DisplayList* list ) { emit appendedObject( list ); }</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="render_list_8h.html">renderList.h</a>&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="body_part_8h.html">bodyPart.h</a>&quot;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="motor_8h.html">motor.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="link_8h.html">link.h</a>&quot;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="keyword">namespace </span>RobotModel { <span class="keyword">class </span>Robot; }
+<a name="l00019"></a>00019         
+<a name="l00026"></a><a class="code" href="class_robot_model_1_1_robot.html">00026</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">RobotModel::Robot</a> : <span class="keyword">public</span> <a class="code" href="class_robot_model_1_1_render_list.html" title="An abstract class that provides the signal/slot interface between GLWidget and the...">RenderList</a>
+<a name="l00027"></a>00027 {
+<a name="l00028"></a>00028         Q_OBJECT
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="keyword">public</span>:
+<a name="l00031"></a>00031         
+<a name="l00032"></a>00032         <a class="code" href="class_robot_model_1_1_robot.html#a4fc7c70ae20623f05e06f2ecb388b6c4" title="Nothing to do here.">Robot</a>();                
+<a name="l00033"></a>00033         <a class="code" href="class_robot_model_1_1_robot.html#a924320124b09c2f2ac1621aa210d5f38" title="Nothing to do here.">~Robot</a>();               
+<a name="l00034"></a>00034         
+<a name="l00035"></a>00035         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a548f772300529a29dbdbf12656825e24" title="Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints...">open</a>( <span class="keyword">const</span> QString&amp; fileName );                   
+<a name="l00036"></a><a class="code" href="class_robot_model_1_1_robot.html#a5e1378920767fe6552809c4609c05888">00036</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a5e1378920767fe6552809c4609c05888" title="Returns whether or not open( const QString&amp;amp; ) has been called (and has succeeded)...">isOpen</a>()<span class="keyword"> const     </span>{ <span class="keywordflow">return</span> isConfigured; }        
+<a name="l00037"></a>00037         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a904ffd633cc9b03b51a90563c70dd1e6" title="Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the...">close</a>();                                                                   
+<a name="l00038"></a>00038         
+<a name="l00039"></a>00039         <span class="comment">// These are generic &#39;get&#39; functions that may be useful</span>
+<a name="l00040"></a><a class="code" href="class_robot_model_1_1_robot.html#a07a4dcd2c34da89415576c53b42d9406">00040</a>         <span class="keyword">const</span> QString&amp; <a class="code" href="class_robot_model_1_1_robot.html#a07a4dcd2c34da89415576c53b42d9406" title="Get the name of the Robot.">getName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> robotName; }                            
+<a name="l00041"></a>00041         <span class="keyword">const</span> QString* <a class="code" href="class_robot_model_1_1_robot.html#a108ec79a213fbc7655595f1716150436" title="Get the name of a BodyPart, given its index (usually for printing messages).">getPartName</a>( <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;                                        
+<a name="l00042"></a>00042         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#ac291608df7ce0cbe818d2da837ca008a" title="Get the number of motors in a BodyPart, given its index.">getNumMotors</a>( <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;                                                          
+<a name="l00043"></a>00043         <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>* <a class="code" href="class_robot_model_1_1_robot.html#af23f77831c87476ad0a43c624dd4b254" title="Get the BodyPart itself, given its name.">getPartByName</a>( <span class="keyword">const</span> QString&amp; partName );                                     
+<a name="l00044"></a>00044         <span class="keyword">const</span> QString* <a class="code" href="class_robot_model_1_1_robot.html#a18b266083c6b87d05d1dc3479409e287" title="Get the name of a Motor, given its index and the index of its body part.">getMotorName</a>( <span class="keywordtype">int</span> partNum, <span class="keywordtype">int</span> motorNum ) <span class="keyword">const</span>;         
+<a name="l00045"></a>00045         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>* <a class="code" href="class_robot_model_1_1_robot.html#a41d959b8a9f469ee1caa5e3881a9445f" title="Get the moter itself, given its name.">getMotorByName</a>( <span class="keyword">const</span> QString&amp; motorName );                                      
+<a name="l00046"></a>00046         
+<a name="l00047"></a>00047         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a791f90ebca15e9a1e61e9e903f7dc594" title="Prints the kinematic tree depth first.">printLinks</a>();                      
+<a name="l00048"></a>00048         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#ad67fe62de4ea2b7b6da0521fc0bf0e5a" title="Print a list of the Motor objects in each BodyPart.">printBodyParts</a>();          
+<a name="l00049"></a>00049         
+<a name="l00050"></a>00050         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a7338994f0ab4baa6e5d08751272b63ca" title="Do forward kinematics, pushing results down the link/joint trees.">updatePose</a>();              
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a47e480a4cad58266d12efce34f3fb563" title="Recursively calls render() on the link/joint trees, updating the OpenGL display lists...">render</a>();                  
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a2fd7c2a0cd53593361f38f52de41d73c" title="Set the position of the robot to the home position (also calls updatePose()).">home</a>();                    
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="keyword">public</span> slots:
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( qreal pos = 0 );                                                       
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( <span class="keywordtype">int</span> partNum, <span class="keywordtype">int</span> motorNum, qreal pos );        
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( <span class="keywordtype">int</span> partNum, <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; pos );      
+<a name="l00060"></a>00060 
+<a name="l00066"></a><a class="code" href="class_robot_model_1_1_robot.html#a3096a55b87b4e539f49646250ab98505">00066</a>         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#a3096a55b87b4e539f49646250ab98505" title="Returns the number of BodyParts currently in the list, which is also the index of...">numBodyParts</a>()<span class="keyword"> const        </span>{ <span class="keywordflow">return</span> partList.size(); }             
+<a name="l00067"></a><a class="code" href="class_robot_model_1_1_robot.html#ab5348714451392c3c66e7caf0622ed43">00067</a>         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#ab5348714451392c3c66e7caf0622ed43" title="Returns the number of Motors currently in the list, which is also the index of the...">numMotors</a>()<span class="keyword"> const           </span>{ <span class="keywordflow">return</span> motorList.size(); }    
+<a name="l00068"></a><a class="code" href="class_robot_model_1_1_robot.html#a18b34558cde201791c9cabf642fec0f2">00068</a>         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_robot.html#a18b34558cde201791c9cabf642fec0f2" title="Returns the number of KinTreeNodes currently in the list, which is also the index...">numNodes</a>()                  { <span class="keywordflow">return</span> numLinks++; }                  
+<a name="l00069"></a>00069         
+<a name="l00070"></a>00070 <span class="keyword">private</span>:
+<a name="l00071"></a>00071         QString                                 robotName;      
+<a name="l00072"></a>00072         QVector&lt;BodyPart*&gt;              partList;       
+<a name="l00073"></a>00073         QVector&lt;Motor*&gt;                 motorList;      
+<a name="l00074"></a>00074         QVector&lt;KinTreeNode*&gt;   tree;           
+<a name="l00075"></a>00075         
+<a name="l00076"></a>00076         <span class="keywordtype">int</span>                                             numLinks;               
+<a name="l00077"></a>00077         <span class="keywordtype">bool</span>                                    isConfigured;   
 <a name="l00078"></a>00078         
-<a name="l00079"></a>00079 <span class="keyword">public</span> slots:
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( qreal pos = 0 );
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( <span class="keywordtype">int</span> partNum, <span class="keywordtype">int</span> motorNum, qreal pos );
-<a name="l00087"></a>00087 
-<a name="l00090"></a>00090         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_robot.html#a72ff62b72e0e9d34d3ca0c241dec50d3" title="Set the position of every joint on the robot.">setEncoderPosition</a>( <span class="keywordtype">int</span> partNum, <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; pos );
-<a name="l00091"></a>00091         
-<a name="l00092"></a>00092 <span class="keyword">private</span>:
-<a name="l00093"></a>00093         QString                                 robotName;      <span class="comment">// Yarp name of robot</span>
-<a name="l00094"></a>00094         QVector&lt;BodyPart*&gt;              partList;       <span class="comment">// &quot;Body Parts&quot; correspond to Yarp motor control groups such as &#39;torso&#39; and &#39;leftArm&#39;</span>
-<a name="l00095"></a>00095         QVector&lt;Motor*&gt;                 motorList;      <span class="comment">// &quot;Motors&quot; serve as an interface to set the position of one or more joints</span>
-<a name="l00096"></a>00096         QVector&lt;KinTreeNode*&gt;   tree;           <span class="comment">// root nodes of the link/joint trees</span>
-<a name="l00097"></a>00097         
-<a name="l00098"></a>00098         <span class="keywordtype">int</span>                                             numLinks;               <span class="comment">// link counter</span>
-<a name="l00099"></a>00099         <span class="keywordtype">bool</span>                                    isConfigured;   <span class="comment">// indicates rediness for setting positions, ect</span>
-<a name="l00100"></a>00100         
-<a name="l00101"></a>00101         <span class="comment">// check validity of indices</span>
-<a name="l00102"></a>00102         <span class="keywordtype">bool</span> partIdxInRange( <span class="keywordtype">int</span> idx ) <span class="keyword">const</span>;
-<a name="l00103"></a>00103         <span class="keywordtype">bool</span> motorIdxInRange( <span class="keywordtype">int</span> idx, <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105         <span class="comment">// to filter out collision pairs we don&#39;t need to check</span>
-<a name="l00106"></a>00106         <span class="keywordtype">void</span> filterCollisionPairs();
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108         <span class="comment">/*** FRIENDS  ***/</span>
-<a name="l00109"></a><a class="code" href="class_robot_model_1_1_robot.html#a2133a69fbecb2cd6583a1439af3ab61c">00109</a>         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>;       <span class="comment">// root nodes of the link/joint trees must be able to request other root nodes to filterCollisionPairs().</span>
-<a name="l00110"></a>00110                                                                 <span class="comment">// This may be worth fixing at some point to avoid the need for friendship.</span>
-<a name="l00111"></a>00111 };
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 <span class="preprocessor">#endif</span>
-<a name="l00114"></a>00114 <span class="preprocessor"></span>
+<a name="l00079"></a>00079         <span class="keywordtype">bool</span> partIdxInRange( <span class="keywordtype">int</span> idx ) <span class="keyword">const</span>;                                   
+<a name="l00080"></a>00080         <span class="keywordtype">bool</span> motorIdxInRange( <span class="keywordtype">int</span> idx, <span class="keywordtype">int</span> partNum ) <span class="keyword">const</span>;             
+<a name="l00081"></a>00081         <span class="keywordtype">void</span> filterCollisionPairs();                                                    
+<a name="l00082"></a>00082         
+<a name="l00087"></a>00087         <span class="keywordtype">void</span> setName( <span class="keyword">const</span> QString&amp; name )             { robotName = name; }                   
+<a name="l00088"></a>00088         <span class="keywordtype">void</span> appendBodyPart( <a class="code" href="class_robot_model_1_1_robot.html#a40513bec1d0f28109b20c1f29c142484">BodyPart</a>* part )   { partList.append(part); }              
+<a name="l00089"></a>00089         <span class="keywordtype">void</span> appendMotor( <a class="code" href="class_robot_model_1_1_robot.html#a2abea0a22831274b2894ed2675e909b4">Motor</a>* motor )                { motorList.append(motor); }    
+<a name="l00090"></a>00090         <span class="keywordtype">void</span> resizeMotorList( <span class="keywordtype">int</span> size )                { motorList.resize(size); }             
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092         <span class="keywordtype">void</span> appendNode( <a class="code" href="class_robot_model_1_1_robot.html#a2133a69fbecb2cd6583a1439af3ab61c">KinTreeNode</a>* node )    { tree.append(node); }                  
+<a name="l00093"></a>00093 
+<a name="l00095"></a><a class="code" href="class_robot_model_1_1_robot.html#a40513bec1d0f28109b20c1f29c142484">00095</a>         <span class="comment">/*** FRIENDS  ***/</span>
+<a name="l00096"></a><a class="code" href="class_robot_model_1_1_robot.html#a2abea0a22831274b2894ed2675e909b4">00096</a>         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>;
+<a name="l00097"></a><a class="code" href="class_robot_model_1_1_robot.html#a2133a69fbecb2cd6583a1439af3ab61c">00097</a>         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>;
+<a name="l00098"></a><a class="code" href="class_robot_model_1_1_robot.html#a4a11e1baa5d6e0a5e7e2e5a8a3525f96">00098</a>         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a>;       <span class="comment">// root nodes of the link/joint trees must be able to request other root nodes to filterCollisionPairs().</span>
+<a name="l00099"></a>00099         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_z_p_handler.html" title="A custom handler for the Qt XML parser.">ZPHandler</a>;         
+<a name="l00100"></a>00100 };
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 <span class="preprocessor">#endif</span>
+<a name="l00103"></a>00103 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

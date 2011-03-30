@@ -78,13 +78,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042         
 <a name="l00043"></a>00043         <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>           *robot;
 <a name="l00044"></a>00044         <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>        *bodyPart;
-<a name="l00045"></a>00045         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>           *motor;
-<a name="l00046"></a>00046         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a> *node;
+<a name="l00045"></a>00045         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>           *motor;
+<a name="l00046"></a>00046         <a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a> *node;
 <a name="l00047"></a>00047 
 <a name="l00048"></a>00048         <a class="code" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &amp;#39;torso&amp;#39;, &amp;#39;head&amp;#39;...">BodyPart</a>*               createChildPart();
-<a name="l00049"></a>00049         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint).">Motor</a>*                  createChildMotor( <span class="keyword">const</span> <span class="keywordtype">int</span> motorIdx );
-<a name="l00050"></a>00050         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>*    createChildLink();
-<a name="l00051"></a>00051         <a class="code" href="class_robot_model_1_1_kin_tree_node.html">KinTreeNode</a>*    createChildJoint( <span class="keyword">const</span> QString&amp; type );
+<a name="l00049"></a>00049         <a class="code" href="class_robot_model_1_1_motor.html" title="Affords control of one or more joints (see Joint, RevoluteJoint and PrismaticJoint)...">Motor</a>*                  createChildMotor( <span class="keyword">const</span> <span class="keywordtype">int</span> motorIdx );
+<a name="l00050"></a>00050         <a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a>*    createChildLink();
+<a name="l00051"></a>00051         <a class="code" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a>*    createChildJoint( <span class="keyword">const</span> QString&amp; type );
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053         QString currentText;
 <a name="l00054"></a>00054         QString errorStr;
