@@ -5,16 +5,18 @@
 ########################################################################
 ##  general find
 
-IF( $ENV{FREE_SOLID_ROOT} )
-	FIND_PATH( FREE_SOLID_ROOT		NAMES 	/include/SOLID/solid.h
+IF( $ENV{FREE_SOLID_DIR} )
+	MESSAGE(STATUS "Found FREE_SOLID_DIR as an environment variable")
+	FIND_PATH( FREE_SOLID_DIR		NAMES 	/include/SOLID/solid.h
 							/include/SOLID/broad.h
 							/include/SOLID/types.h
 							/libsolid/.libs/libFreeSOLID.a
-						PATHS	$ENV{FREE_SOLID_ROOT}
+						PATHS	$ENV{FREE_SOLID_DIR}
 						NO_DEFAULT_PATH
 	)
-ELSE( $ENV{FREE_SOLID_ROOT} )
-	FIND_PATH( FREE_SOLID_ROOT		NAMES 		/include/SOLID/solid.h
+ELSE( $ENV{FREE_SOLID_DIR} )
+	MESSAGE(STATUS "No FREE_SOLID_DIR environment variable")
+	FIND_PATH( FREE_SOLID_DIR		NAMES 		/include/SOLID/solid.h
 								/include/SOLID/broad.h
 								/include/SOLID/types.h
 								/libsolid/.libs/libFreeSOLID.a
@@ -27,15 +29,15 @@ ELSE( $ENV{FREE_SOLID_ROOT} )
 						PATH_SUFFIXES	FreeSOLID-2.1.1
 								FreeSOLID
 	)
-ENDIF( $ENV{FREE_SOLID_ROOT} )
+ENDIF( $ENV{FREE_SOLID_DIR} )
 ########################################################################
-IF( FREE_SOLID_ROOT )
-	SET( FREE_SOLID_INCLUDE_DIR ${FREE_SOLID_ROOT}/include )
+IF( FREE_SOLID_DIR )
+	SET( FREE_SOLID_INCLUDE_DIR ${FREE_SOLID_DIR}/include )
 	FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	FreeSOLID
-						PATHS	${FREE_SOLID_ROOT}/libsolid/.libs
+						PATHS	${FREE_SOLID_DIR}/libsolid/.libs
 						NO_DEFAULT_PATH
 	)
-ELSE( FREE_SOLID_ROOT )
+ELSE( FREE_SOLID_DIR )
 	FIND_PATH( FREE_SOLID_INCLUDE_DIR 	NAMES 	/SOLID/solid.h
 							/SOLID/broad.h
 							/SOLID/types.h		
@@ -48,7 +50,7 @@ ELSE( FREE_SOLID_ROOT )
 							/usr/lib
 							/lib
 	)
-ENDIF( FREE_SOLID_ROOT )
+ENDIF( FREE_SOLID_DIR )
 
 ########################################################################
 
