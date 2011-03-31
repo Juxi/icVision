@@ -10,7 +10,7 @@ YarpModel::~YarpModel()
 {
 	//TODO: implement if (isOpen) kinda thing here
 	collisionPort.close();
-	worldPort.stop();
+	worldPort.close();
 }
 void YarpModel::collisionHandlerAddendum( RobotModel::PrimitiveObject *object1, RobotModel::PrimitiveObject *object2, const DtCollData *coll_data )
 {	

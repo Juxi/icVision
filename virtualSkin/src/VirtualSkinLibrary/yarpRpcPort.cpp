@@ -91,7 +91,7 @@ void YarpRpcPort::showBottle( yarp::os::Bottle& anUnknownBottle, int indentation
     }
 }
 
-void YarpRpcPort::stop()
+void YarpRpcPort::close()
 {
 	keepListening = false;
 	while (isRunning()) {}
@@ -99,7 +99,7 @@ void YarpRpcPort::stop()
 
 void YarpRpcPort::restart()
 {
-	stop();
+	close();
 	keepListening = true;
 	start();
 }

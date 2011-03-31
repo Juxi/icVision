@@ -96,15 +96,15 @@ public:
 			{
 				cbFilters.append(p_cbf);
 				
-				p_so = new someStateObserver(this, bodyPart);		// create and set state observer
+				p_so = new aStateObserver(this, bodyPart);		// create and set state observer
 				p_cbf->setStateObserver(p_so);
 				stateObservers.append(p_so);
 				
-				p_co = new someCallObserver(this, bodyPart);		// create and set call observer
+				p_co = new aCallObserver(this, bodyPart);		// create and set call observer
 				p_cbf->setCallObserver(p_co);
 				callObservers.append(p_co);
 				
-				p_ro = new someResponseObserver(this, bodyPart);	// create and set response observer
+				p_ro = new aResponseObserver(this, bodyPart);	// create and set response observer
 				p_co->setResponseObsever(p_ro);
 				p_cbf->setResponseObserver(p_ro);
 				responseObservers.append(p_ro);

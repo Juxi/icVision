@@ -37,7 +37,7 @@ public:
 	void closeCollisionPort() { collisionPort.close(); }						//!< Close the port that streams collision information
 	
 	void openWorldRpcPort( const QString& name ) { worldPort.open(name); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
-	void closeWorldRpcPort() { worldPort.stop(); }								//!< Closes the RPC interface to the RobotModel::Model
+	void closeWorldRpcPort() { worldPort.close(); }								//!< Closes the RPC interface to the RobotModel::Model
 	
 	virtual void computePosePrefix();											//!< Clears the yarp::os::bottle bottle
 	virtual void computePoseSuffix();											//!< Publishes the yarp::os::bottle bottle
