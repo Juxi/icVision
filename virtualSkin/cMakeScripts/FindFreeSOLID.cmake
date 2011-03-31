@@ -11,7 +11,7 @@ IF( FreeSolidDIR )
 							/include/SOLID/broad.h
 							/include/SOLID/types.h
 							/libsolid/.libs/libFreeSOLID.a
-						PATHS	FreeSolidDIR
+						PATHS	${FreeSolidDIR}
 						NO_DEFAULT_PATH
 	)
 ELSE( FreeSolidDIR )
