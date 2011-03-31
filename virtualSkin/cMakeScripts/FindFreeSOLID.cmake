@@ -10,8 +10,10 @@ FIND_PATH( FREE_SOLID_INCLUDE_DIR 	NAMES 	SOLID/solid.h SOLID/broad.h SOLID/type
 						$ENV{FREE_SOLID_ROOT}/include
 						/usr/include
 						/usr/local/include
-						~/Library/FreeSOLID
-						~/Library/FreeSOLID/include
+						~/Library/FreeSOLID*
+						~/Library/FreeSOLID*/include
+						${CMAKE_SOURCE_DIR}/../FreeSOLID*
+						${CMAKE_SOURCE_DIR}/../../FreeSOLID*/include
 )
 
 FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	FreeSOLID solid SOLID Solid FreeSolid
@@ -19,7 +21,10 @@ FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	FreeSOLID solid SOLID Solid FreeSolid
 						$ENV{FREE_SOLID_ROOT}/build
 						/usr/lib
 						/usr/local/lib
-						~/Library/FreeSOLID
+						~/Library/FreeSOLID*
+						${CMAKE_SOURCE_DIR}/../FreeSOLID*
+						${CMAKE_SOURCE_DIR}/../../FreeSOLID*
+
 )
 
 ########################################################################

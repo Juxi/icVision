@@ -107,7 +107,7 @@ public:
 	 * \todo Implement and document this function
 	 * kail says:  why? what's it for?
 	 */
-	virtual bool configure(Searchable &config){}
+	//virtual bool configure(Searchable &config){ return true; }
 
 private:
 	
