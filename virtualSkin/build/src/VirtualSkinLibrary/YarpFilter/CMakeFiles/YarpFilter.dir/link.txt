@@ -1,0 +1,2 @@
+/usr/bin/ar cr libYarpFilter.a  CMakeFiles/YarpFilter.dir/RpcFilterImpl.cpp.o CMakeFiles/YarpFilter.dir/RpcFilter.cpp.o CMakeFiles/YarpFilter.dir/StreamFilterImpl.cpp.o CMakeFiles/YarpFilter.dir/StreamFilter.cpp.o CMakeFiles/YarpFilter.dir/ControlBoardFilter.cpp.o
+/usr/bin/ranlib libYarpFilter.a
