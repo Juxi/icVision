@@ -50,7 +50,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>VirtualSkin::YarpModel Class Reference</h1><!-- doxytag: class="VirtualSkin::YarpModel" --><!-- doxytag: inherits="RobotModel::Model" -->
-<p>Computes the current pose of the Robot and does collision detection using the FreeSOLID library.  
+<p>Wraps <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> with YARP functionality.  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="yarp_model_8h_source.html">yarpModel.h</a>&gt;</code></p>
@@ -69,23 +69,28 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a964ea619d22232d0488970339c0fd331">YarpModel</a> (bool visualize=false)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructs an armed collisionDetector object.  <a href="#a964ea619d22232d0488970339c0fd331"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Connects the <a class="el" href="class_virtual_skin_1_1_world_rpc_interface.html" title="Provides an RPC interface (via YARP) to RobotModel::World.">WorldRpcInterface</a> to the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a> and calls the super-class constructor.  <a href="#a964ea619d22232d0488970339c0fd331"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#aee8b6a2deb7e598ebfd39ec3b99a9deb">~YarpModel</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Just stops the YARP port if its running.  <a href="#aee8b6a2deb7e598ebfd39ec3b99a9deb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a1bff5ac543095cd7d6e26a5b0e867c1f">openCollisionPort</a> (const QString &amp;name)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Starts a YARP Port that streams the results of collision detection (see <a class="el" href="yarp_ports.html">Reflex Demo - YARP Ports</a>).  <a href="#a1bff5ac543095cd7d6e26a5b0e867c1f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a741191b7eeb767089e90c77ca4acad91">closeCollisionPort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Close the port that streams collision information.  <a href="#a741191b7eeb767089e90c77ca4acad91"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#aedc10b8f0c98c4693fd5789f8ad9d482">openWorldRpcPort</a> (const QString &amp;name)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the name of the YARP stream port where collision info will be published.  <a href="#aedc10b8f0c98c4693fd5789f8ad9d482"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Start a YARP port that provides an RPC interface to the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a>.  <a href="#aedc10b8f0c98c4693fd5789f8ad9d482"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a414b000a6ed2e43a4288344ce63244b6">closeWorldRpcPort</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Closes the YARP stream port.  <a href="#a414b000a6ed2e43a4288344ce63244b6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#afcaff17a5fd0babe774647957f0ead67">computePosePrefix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a01d1e1fa37a27298edd0f7bc451fb78a">computePoseSuffix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a6ae0980a5386930a19b0ee32a9d5a8c2">collisionHandlerAddendum</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">RobotModel::PrimitiveObject</a> *, <a class="el" href="class_robot_model_1_1_primitive_object.html">RobotModel::PrimitiveObject</a> *, const DtCollData *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Closes the RPC interface to the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a>.  <a href="#a414b000a6ed2e43a4288344ce63244b6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#afcaff17a5fd0babe774647957f0ead67">computePosePrefix</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Clears the yarp::os::bottle bottle.  <a href="#afcaff17a5fd0babe774647957f0ead67"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a01d1e1fa37a27298edd0f7bc451fb78a">computePoseSuffix</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Publishes the yarp::os::bottle bottle.  <a href="#a01d1e1fa37a27298edd0f7bc451fb78a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_model.html#a6ae0980a5386930a19b0ee32a9d5a8c2">collisionHandlerAddendum</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">RobotModel::PrimitiveObject</a> *, <a class="el" href="class_robot_model_1_1_primitive_object.html">RobotModel::PrimitiveObject</a> *, const DtCollData *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This puts the results of collision detection into the yarp::os::bottle bottle.  <a href="#a6ae0980a5386930a19b0ee32a9d5a8c2"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Computes the current pose of the Robot and does collision detection using the FreeSOLID library. </p>
-<p>To use this class: First prepare the object by calling the constructor, setRobot(Robot*) and setWorld(World*). If you want to publish collision information on the network via YARP, call setPortName(QString&amp;) and openPort(). Call/activate the slot <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> when you suspect the robot's state has changed. When the pose has been computed and collision detection is finished, the signal newPoseReady() will be emitted. If one or more collisions have occurred, the signal crash() will also be emitted, provided that the CollisionDetector is armed. Finally, use the slots armDetector() and disarmDetector() to control whether or not to emit the crash() signal if a collision has occurred. This is useful if the crash() signal triggers some kind of collision handling control code, as you can supress subsequent crash signals until the collision handling is complete.</p>
-<p>NOTE: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|. Thus the computational complexity of the collision detection grows linearly with the size of the world. </p>
+<p>Wraps <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> with YARP functionality. </p>
+<p>This class allows the results of collision detection to be published via ethernet and provides an RPC interface to the robot's environment (<a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>) such that geometries can be added/updated/and removed remotely.</p>
+<p>To use this class: If you want to publish collision information on the network via YARP, call openCollisionPort(QString&amp;). To start the RPC interface to the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>, call openWorldRpcPort(QString&amp;). </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a964ea619d22232d0488970339c0fd331"></a><!-- doxytag: member="VirtualSkin::YarpModel::YarpModel" ref="a964ea619d22232d0488970339c0fd331" args="(bool visualize=false)" -->
 <div class="memitem">
@@ -103,7 +108,7 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Constructs an armed collisionDetector object. </p>
+<p>Connects the <a class="el" href="class_virtual_skin_1_1_world_rpc_interface.html" title="Provides an RPC interface (via YARP) to RobotModel::World.">WorldRpcInterface</a> to the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a> and calls the super-class constructor. </p>
 
 </div>
 </div>
@@ -142,6 +147,8 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
+<p>Close the port that streams collision information. </p>
+
 </div>
 </div>
 <a class="anchor" id="a414b000a6ed2e43a4288344ce63244b6"></a><!-- doxytag: member="VirtualSkin::YarpModel::closeWorldRpcPort" ref="a414b000a6ed2e43a4288344ce63244b6" args="()" -->
@@ -159,7 +166,7 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Closes the YARP stream port. </p>
+<p>Closes the RPC interface to the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a>. </p>
 
 </div>
 </div>
@@ -194,7 +201,9 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_robot_model_1_1_model.html#a005954b405d7e3f6c7c9397039503966">RobotModel::Model</a>.</p>
+<p>This puts the results of collision detection into the yarp::os::bottle bottle. </p>
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729">RobotModel::Model</a>.</p>
 
 </div>
 </div>
@@ -213,7 +222,9 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_robot_model_1_1_model.html#ac613f217636c3129fb0dafb2e7dd0797">RobotModel::Model</a>.</p>
+<p>Clears the yarp::os::bottle bottle. </p>
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_model.html#a7f8e1593b45351d9811b1dd71610b2b7">RobotModel::Model</a>.</p>
 
 </div>
 </div>
@@ -232,7 +243,9 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_robot_model_1_1_model.html#ac5d6a83365a6add93699e11b69afdedd">RobotModel::Model</a>.</p>
+<p>Publishes the yarp::os::bottle bottle. </p>
+
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_model.html#a551e0bab1c33ccc7d6b3fc6c7373897d">RobotModel::Model</a>.</p>
 
 </div>
 </div>
@@ -252,6 +265,8 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
+<p>Starts a YARP Port that streams the results of collision detection (see <a class="el" href="yarp_ports.html">Reflex Demo - YARP Ports</a>). </p>
+
 </div>
 </div>
 <a class="anchor" id="aedc10b8f0c98c4693fd5789f8ad9d482"></a><!-- doxytag: member="VirtualSkin::YarpModel::openWorldRpcPort" ref="aedc10b8f0c98c4693fd5789f8ad9d482" args="(const QString &amp;name)" -->
@@ -270,7 +285,7 @@ Inheritance diagram for VirtualSkin::YarpModel:</div>
 </div>
 <div class="memdoc">
 
-<p>Sets the name of the YARP stream port where collision info will be published. </p>
+<p>Start a YARP port that provides an RPC interface to the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a>. </p>
 
 </div>
 </div>

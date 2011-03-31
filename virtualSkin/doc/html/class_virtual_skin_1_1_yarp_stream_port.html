@@ -50,25 +50,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>VirtualSkin::YarpStreamPort Class Reference</h1><!-- doxytag: class="VirtualSkin::YarpStreamPort" -->
+<p>A YARP port that broadcasts a stream.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="yarp_stream_port_8h_source.html">yarpStreamPort.h</a>&gt;</code></p>
 
 <p><a href="class_virtual_skin_1_1_yarp_stream_port-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#aa9bc88cfd89f533676960ba59629af84">YarpStreamPort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#aa9bc88cfd89f533676960ba59629af84"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#ac0923822f1b4ab48ef2fd7600184be98">~YarpStreamPort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#ac0923822f1b4ab48ef2fd7600184be98"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#ab7d9fff0fa4f2022e8d526563e50b22e">open</a> (const QString &amp;name)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Opens the port and starts the thread to stream bottles.  <a href="#ab7d9fff0fa4f2022e8d526563e50b22e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#a1e5daf8f884511c4894b699c79c2b20a">close</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#a54e9a7530a6e73f6cbf10f4b375f365e">isOpen</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#a5cb9d0da20b2a45b16fee463b47ef8f3">write</a> (const yarp::os::Bottle &amp;aBottle)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops the thread and closes the port.  <a href="#a1e5daf8f884511c4894b699c79c2b20a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#aa34609bf9d4a6c3e678ce2b78e913d65">setBottle</a> (const yarp::os::Bottle &amp;aBottle)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#aaeea4c0a2bae6c5a257935227df3cddb">run</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#ae1c105a567b759d0f0c0c0068e0279a1">stop</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#acc997d769ece47a6c88b1437225c0039">restart</a> ()</td></tr>
-<tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#accad0909033d4d57793ce30b8663aa2c">mutex</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">yarp::os::Bottle&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#a2b313619b02810a136d4ffc8482fb658">bottle</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the value of the bottle that is streamed.  <a href="#aa34609bf9d4a6c3e678ce2b78e913d65"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A YARP port that broadcasts a stream. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa9bc88cfd89f533676960ba59629af84"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::YarpStreamPort" ref="aa9bc88cfd89f533676960ba59629af84" args="()" -->
 <div class="memitem">
@@ -84,6 +86,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -101,6 +105,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -120,22 +126,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a54e9a7530a6e73f6cbf10f4b375f365e"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::isOpen" ref="a54e9a7530a6e73f6cbf10f4b375f365e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool VirtualSkin::YarpStreamPort::isOpen </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Stops the thread and closes the port. </p>
 
 </div>
 </div>
@@ -155,39 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="acc997d769ece47a6c88b1437225c0039"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::restart" ref="acc997d769ece47a6c88b1437225c0039" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpStreamPort::restart </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaeea4c0a2bae6c5a257935227df3cddb"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::run" ref="aaeea4c0a2bae6c5a257935227df3cddb" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpStreamPort::run </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Opens the port and starts the thread to stream bottles. </p>
 
 </div>
 </div>
@@ -207,67 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ae1c105a567b759d0f0c0c0068e0279a1"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::stop" ref="ae1c105a567b759d0f0c0c0068e0279a1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpStreamPort::stop </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5cb9d0da20b2a45b16fee463b47ef8f3"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::write" ref="a5cb9d0da20b2a45b16fee463b47ef8f3" args="(const yarp::os::Bottle &amp;aBottle)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpStreamPort::write </td>
-          <td>(</td>
-          <td class="paramtype">const yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>aBottle</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a2b313619b02810a136d4ffc8482fb658"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::bottle" ref="a2b313619b02810a136d4ffc8482fb658" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">yarp::os::Bottle <a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#a2b313619b02810a136d4ffc8482fb658">VirtualSkin::YarpStreamPort::bottle</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="accad0909033d4d57793ce30b8663aa2c"></a><!-- doxytag: member="VirtualSkin::YarpStreamPort::mutex" ref="accad0909033d4d57793ce30b8663aa2c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QMutex <a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html#accad0909033d4d57793ce30b8663aa2c">VirtualSkin::YarpStreamPort::mutex</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Sets the value of the bottle that is streamed. </p>
 
 </div>
 </div>

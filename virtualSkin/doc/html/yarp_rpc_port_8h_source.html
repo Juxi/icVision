@@ -44,15 +44,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/yarpRpcPort.h</h1><a href="yarp_rpc_port_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> *  vectorRpcPort.h</span>
-<a name="l00003"></a>00003 <span class="comment"> *  virtualSkin</span>
-<a name="l00004"></a>00004 <span class="comment"> *</span>
-<a name="l00005"></a>00005 <span class="comment"> *  Created by Kail Frank on 11/10/10.</span>
-<a name="l00006"></a>00006 <span class="comment"> *  Copyright 2010 __MyCompanyName__. All rights reserved.</span>
-<a name="l00007"></a>00007 <span class="comment"> *</span>
-<a name="l00008"></a>00008 <span class="comment"> */</span>
-<a name="l00009"></a>00009 
+<h1>/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/yarpRpcPort.h</h1><a href="yarp_rpc_port_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment"> ***               Copyright (C) 2011 Mikhail Frank              ***</span>
+<a name="l00003"></a>00003 <span class="comment"> ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***</span>
+<a name="l00004"></a>00004 <span class="comment"> ******************************************************************/</span>
+<a name="l00005"></a>00005 
 <a name="l00010"></a>00010 <span class="preprocessor">#ifndef YARPRPCPORT_H</span>
 <a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define YARPRPCPORT_H</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
@@ -61,36 +57,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00015"></a>00015 
 <a name="l00016"></a>00016 <span class="keyword">namespace </span>VirtualSkin {
 <a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html">00018</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html">YarpRpcPort</a>: <span class="keyword">public</span> QThread
-<a name="l00019"></a>00019 {
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="keyword">public</span>:
-<a name="l00022"></a>00022         <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a393b44f37d77b25d8c5cb7f14609c4d5">YarpRpcPort</a>();
-<a name="l00023"></a>00023         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#acf21bbb8e38b69fd9c3769a2f9b45743">~YarpRpcPort</a>();
-<a name="l00024"></a>00024         
-<a name="l00025"></a><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a277b0b5583f5c6bee76b9435538febc0">00025</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a277b0b5583f5c6bee76b9435538febc0">useDebug</a>() { debug = <span class="keyword">true</span>; }
-<a name="l00026"></a><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a5d30f15e11bab65e111df04643363bfc">00026</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a5d30f15e11bab65e111df04643363bfc">noDebug</a>() { debug = <span class="keyword">false</span>; }
-<a name="l00027"></a>00027         
-<a name="l00028"></a>00028         <span class="keywordtype">bool</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#af1c20b815f76f58135c89bf21116210d">open</a>( <span class="keyword">const</span> QString&amp; name );
-<a name="l00029"></a>00029         
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a3e4c1be7ae685d9478b38d71255b1bcd">run</a>();
-<a name="l00031"></a>00031         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a5d01a64c6b1ff1b67c9a079bf36b76bb">handler</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply ) = 0;
-<a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#ae26626cb99ca15bfec5e5162845018c2">showBottle</a>( yarp::os::Bottle&amp; anUnknownBottle, <span class="keywordtype">int</span> indentation = 0 );
-<a name="l00033"></a>00033         
-<a name="l00034"></a>00034         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a1554e6c2e38cb71f2521280f65bbab05">stop</a>();
-<a name="l00035"></a>00035         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a93d242e15bb04534f7db4fe6636a0086">restart</a>();
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037 <span class="keyword">private</span>:
-<a name="l00038"></a>00038         yarp::os::Network yarp;
-<a name="l00039"></a>00039         yarp::os::BufferedPort&lt;yarp::os::Bottle&gt; port;
-<a name="l00040"></a>00040         <span class="keywordtype">bool</span> keepListening,debug;
-<a name="l00041"></a>00041         <span class="comment">//QString portName;</span>
+<a name="l00020"></a><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html">00020</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html" title="A call/response style YARP port.">YarpRpcPort</a>: <span class="keyword">public</span> QThread
+<a name="l00021"></a>00021 {
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="keyword">public</span>:
+<a name="l00024"></a>00024         <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a393b44f37d77b25d8c5cb7f14609c4d5" title="Nothing special to do here.">YarpRpcPort</a>();                                                                  
+<a name="l00025"></a>00025         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#acf21bbb8e38b69fd9c3769a2f9b45743" title="Calls close() if necessary.">~YarpRpcPort</a>();                                                 
+<a name="l00026"></a>00026         
+<a name="l00027"></a><a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#ae719ad3401930f4d03d471094fd77eb6">00027</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#ae719ad3401930f4d03d471094fd77eb6" title="Controls whether or not to print bottles to the terminal.">useDebug</a>( <span class="keywordtype">bool</span> b = <span class="keyword">true</span> ) { debug = b; }   
+<a name="l00028"></a>00028         
+<a name="l00029"></a>00029         <span class="keywordtype">bool</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#af1c20b815f76f58135c89bf21116210d" title="Starts the RPC port running in a separate thread.">open</a>( <span class="keyword">const</span> QString&amp; name );                               
+<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a960fc3e267730835af02f1e2cd198e1b" title="Stop the thread and closes the port.">close</a>();                                                                   
+<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html#a93d242e15bb04534f7db4fe6636a0086" title="Restart the thread.">restart</a>();                                                                 
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="keyword">private</span>:
+<a name="l00034"></a>00034         yarp::os::Network yarp;                                                 
+<a name="l00035"></a>00035         yarp::os::BufferedPort&lt;yarp::os::Bottle&gt; port;  
+<a name="l00036"></a>00036         <span class="keywordtype">bool</span>    keepListening,                                                  
+<a name="l00037"></a>00037                         debug;                                                                  
+<a name="l00038"></a>00038         
+<a name="l00039"></a>00039         <span class="keywordtype">void</span> run();                                                                                                                                                     
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> handler( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply ) = 0;       
+<a name="l00041"></a>00041         <span class="keywordtype">void</span> showBottle( yarp::os::Bottle&amp; anUnknownBottle, <span class="keywordtype">int</span> indentation = 0 );                      
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 };
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 }
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

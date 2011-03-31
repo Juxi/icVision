@@ -75,20 +75,6 @@ bool PartController::open()
 	return 1;
 }
 
-//bool PartController::getLimits( QVector<qreal>* min, QVector<qreal>* max )
-//{
-//	qreal a,b;
-//	for ( int i=0; i<numJoints; i++ )
-//	{
-//		if ( lim->getLimits(i, &a, &b) ) 
-//		{
-//			min->append(a);
-//			max->append(b);
-//		} else { return false; }
-//	}
-//	return true;
-//}
-
 bool PartController::checkMotionDone( bool* flag )
 {
 	if ( !pos ) { return false; }

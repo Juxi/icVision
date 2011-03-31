@@ -49,7 +49,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>yarp::os::IObserver Class Reference</h1><!-- doxytag: class="yarp::os::IObserver" -->
+<h1>yarp::os::IObserver Class Reference<br/>
+<small>
+[<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
+</h1><!-- doxytag: class="yarp::os::IObserver" -->
+<p>An interface that defines a handler for data arriving on YARP ports.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_i_observer_8h_source.html">IObserver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for yarp::os::IObserver:</div>
@@ -68,10 +74,13 @@ Inheritance diagram for yarp::os::IObserver:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">~IObserver</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing to do here.  <a href="#a6e20a4a7baa318b53d6a7e3f198699f6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790">onDataObserved</a> (yarp::os::Bottle &amp;b)=0</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The handler function.  <a href="#a4829e5a6f2ba6666b9539a4a30f20790"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Interface that must be implemented to be able to be informed about information flowing in and out of filters (<a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> as well as <a class="el" href="classyarp_1_1os_1_1_stream_filter.html">StreamFilter</a>). </p>
+<p>An interface that defines a handler for data arriving on YARP ports. </p>
+<p>The handler is called by filters (<a class="el" href="classyarp_1_1os_1_1_rpc_filter.html" title="A proxy for a YARP RPC port that can also filter data.">RpcFilter</a> and <a class="el" href="classyarp_1_1os_1_1_stream_filter.html" title="A proxy for a YARP Stream port that can also filter data.">StreamFilter</a>) and provides access to the data flowing through the filter. See <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">VirtualSkin::StateObserver</a>, <a class="el" href="class_virtual_skin_1_1_call_observer.html" title="An IObserver implemented to monitor RPC calls.">VirtualSkin::CallObserver</a> and <a class="el" href="class_virtual_skin_1_1_response_observer.html" title="An IObserver implemented to monitor RPC responses.">VirtualSkin::ResponseObserver</a> </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6e20a4a7baa318b53d6a7e3f198699f6"></a><!-- doxytag: member="yarp::os::IObserver::~IObserver" ref="a6e20a4a7baa318b53d6a7e3f198699f6" args="()" -->
 <div class="memitem">
@@ -87,6 +96,8 @@ Inheritance diagram for yarp::os::IObserver:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing to do here. </p>
 
 </div>
 </div>
@@ -106,7 +117,8 @@ Inheritance diagram for yarp::os::IObserver:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>This function is called by filters to inform the implementing objects on data flowing in or out a the calling filter (<a class="el" href="classyarp_1_1os_1_1_rpc_filter.html">RpcFilter</a> as well as <a class="el" href="classyarp_1_1os_1_1_stream_filter.html">StreamFilter</a>). </p>
+
+<p>The handler function. </p>
 
 <p>Implemented in <a class="el" href="class_virtual_skin_1_1_call_observer.html#abc1974fe2f04101dbbb1ae3ce83e7bfe">VirtualSkin::CallObserver</a>, <a class="el" href="class_virtual_skin_1_1_response_observer.html#a2d847c448b31b5aa880b9282f7bf223d">VirtualSkin::ResponseObserver</a>, and <a class="el" href="class_virtual_skin_1_1_state_observer.html#af104fa553abf31754d9acc084e9aa31f">VirtualSkin::StateObserver</a>.</p>
 

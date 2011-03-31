@@ -50,6 +50,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>VirtualSkin::StateObserver Class Reference</h1><!-- doxytag: class="VirtualSkin::StateObserver" --><!-- doxytag: inherits="yarp::os::IObserver" -->
+<p>An IObserver implemented to monitor streaming state information (motor encoder values).  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="state_observer_8h_source.html">stateObserver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VirtualSkin::StateObserver:</div>
@@ -66,14 +69,23 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#a5e911b16df05da5e7580aa0fc0b707ec">setPosition</a> (int i, const QVector&lt; qreal &gt; &amp;v)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the motor encoder positions for an enitre <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> of the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">RobotModel::Robot</a>.  <a href="#a5e911b16df05da5e7580aa0fc0b707ec"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#a2c4bfeb55e24f75987cadadc3f89ecca">StateObserver</a> (<a class="el" href="class_virtual_skin_1_1_robot_filter.html">RobotFilter</a> *f, const int b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a2c4bfeb55e24f75987cadadc3f89ecca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#af4bf0f323eff464401227a01db686edb">~StateObserver</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#af4bf0f323eff464401227a01db686edb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#af104fa553abf31754d9acc084e9aa31f">onDataObserved</a> (yarp::os::Bottle &amp;b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The handler function is called whenever state information passes through the filter.  <a href="#af104fa553abf31754d9acc084e9aa31f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#a7bbf96d3c5b03b62b4d893b19d0863c8">nonCollidingPose</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the oldest pose in the PoseBuffer (which can't be colliding).  <a href="#a7bbf96d3c5b03b62b4d893b19d0863c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#af5503bae3beef74c0a34821d8c0b0555">currentPose</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the most recent pose written to the PoseBuffer.  <a href="#af5503bae3beef74c0a34821d8c0b0555"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_state_observer.html#a2c21836febaed2b79c605947036d19d0">initPoseBuffer</a> (const QVector&lt; qreal &gt; &amp;v)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fills every slot in the PoseBuffer with the vector passed in as a parameter.  <a href="#a2c21836febaed2b79c605947036d19d0"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>An IObserver implemented to monitor streaming state information (motor encoder values). </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2c4bfeb55e24f75987cadadc3f89ecca"></a><!-- doxytag: member="VirtualSkin::StateObserver::StateObserver" ref="a2c4bfeb55e24f75987cadadc3f89ecca" args="(RobotFilter *f, const int b)" -->
 <div class="memitem">
@@ -100,6 +112,15 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
 </div>
 <div class="memdoc">
 
+<p>Nothing special to do here. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>r</em>&nbsp;</td><td>The <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> to which this Observer belongs </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>b</em>&nbsp;</td><td>The index of the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> to which this Observer applies </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af4bf0f323eff464401227a01db686edb"></a><!-- doxytag: member="VirtualSkin::StateObserver::~StateObserver" ref="af4bf0f323eff464401227a01db686edb" args="()" -->
@@ -116,6 +137,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -135,6 +158,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
 </div>
 <div class="memdoc">
 
+<p>Returns the most recent pose written to the PoseBuffer. </p>
+
 </div>
 </div>
 <a class="anchor" id="a2c21836febaed2b79c605947036d19d0"></a><!-- doxytag: member="VirtualSkin::StateObserver::initPoseBuffer" ref="a2c21836febaed2b79c605947036d19d0" args="(const QVector&lt; qreal &gt; &amp;v)" -->
@@ -153,6 +178,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
 </div>
 <div class="memdoc">
 
+<p>Fills every slot in the PoseBuffer with the vector passed in as a parameter. </p>
+
 </div>
 </div>
 <a class="anchor" id="a7bbf96d3c5b03b62b4d893b19d0863c8"></a><!-- doxytag: member="VirtualSkin::StateObserver::nonCollidingPose" ref="a7bbf96d3c5b03b62b4d893b19d0863c8" args="()" -->
@@ -169,6 +196,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the oldest pose in the PoseBuffer (which can't be colliding). </p>
 
 </div>
 </div>
@@ -187,7 +216,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>This function is called by filters to inform the implementing objects on data flowing in or out a the calling filter (RpcFilter as well as StreamFilter). </p>
+
+<p>The handler function is called whenever state information passes through the filter. </p>
 
 <p>Implements <a class="el" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790">yarp::os::IObserver</a>.</p>
 
@@ -217,6 +247,8 @@ Inheritance diagram for VirtualSkin::StateObserver:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set the motor encoder positions for an enitre <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> of the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">RobotModel::Robot</a>. </p>
 
 </div>
 </div>

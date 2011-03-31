@@ -47,8 +47,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>PartController Class Reference</h1><!-- doxytag: class="PartController" -->
-<p>Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a>  
+<h1>PartController Class Reference<br/>
+<small>
+[<a class="el" href="group__i_cub_babbler.html">ICubBabbler</a>]</small>
+</h1><!-- doxytag: class="PartController" -->
+<p>Wraps YARP's remote device driver interface neatly This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a>  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="part_controller_8h_source.html">partController.h</a>&gt;</code></p>
@@ -57,21 +60,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a9e5274fba78804eb936fc84048f21e73">PartController</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special.  <a href="#a9e5274fba78804eb936fc84048f21e73"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#aee568c7268577894104e0739a99c33f5">~PartController</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special.  <a href="#aee568c7268577894104e0739a99c33f5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a20331379a94c33ef330792e6b9e8b94f">open</a> (const char *_robotName, const char *_partName)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Connects to the remote device.  <a href="#a20331379a94c33ef330792e6b9e8b94f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a7e0fbd5bd25cebb78cd1b095c2055dac">close</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Closes the connection to the remote device.  <a href="#a7e0fbd5bd25cebb78cd1b095c2055dac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a02d325bdc7bd18023e47f97894a2de49">isValid</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Checks if the remote device is ready and the interface is working.  <a href="#a02d325bdc7bd18023e47f97894a2de49"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a39c9759cbeb96b49d1ab61d47a808468">getNumJoints</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the number of controllable axes.  <a href="#a39c9759cbeb96b49d1ab61d47a808468"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a4052252cc91ea1387d5a33c968e9a84a">checkMotionDone</a> (bool *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Checks if a position move has finished.  <a href="#a4052252cc91ea1387d5a33c968e9a84a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a6026784f8301487735a11aad4064fa00">stop</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops all joints immediately.  <a href="#a6026784f8301487735a11aad4064fa00"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a3082aaf9c98045fb3309dcaef6416fbe">setRefSpeeds</a> (const qreal)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the reference velocity for position move commands.  <a href="#a3082aaf9c98045fb3309dcaef6416fbe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#a758a071e20b76c24dde812f11620313c">setRefSpeeds</a> (const QVector&lt; qreal &gt; &amp;speeds)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the reference velocity for position move commands.  <a href="#a758a071e20b76c24dde812f11620313c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#aeb2bca8add9b083ebd19d0d2d07fdfd4">positionMove</a> (const QVector&lt; qreal &gt; &amp;)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Moves the device to a specified position.  <a href="#aeb2bca8add9b083ebd19d0d2d07fdfd4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#ac5476493b51412c7b6008cf58111543b">velocityMove</a> (int i, qreal v)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Move the robot (indefinitely) with a specified velocity (you should stop it eventually).  <a href="#ac5476493b51412c7b6008cf58111543b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_controller.html#af513e2aa6934bcfeef7d2bf73e9b3cc3">randomPosMove</a> (qreal maxSpeed, bool hands)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">do a random position move with all controllable axes  <a href="#af513e2aa6934bcfeef7d2bf73e9b3cc3"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Provides a remote device driver for a YARP port This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a> </p>
+<p>Wraps YARP's remote device driver interface neatly This could be a motor control interface for one part of the iCub for example. see: <a href="http://eris.liralab.it/wiki/Motor_control.">http://eris.liralab.it/wiki/Motor_control.</a> </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9e5274fba78804eb936fc84048f21e73"></a><!-- doxytag: member="PartController::PartController" ref="a9e5274fba78804eb936fc84048f21e73" args="()" -->
 <div class="memitem">
@@ -87,6 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special. </p>
 
 </div>
 </div>
@@ -104,6 +122,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special. </p>
 
 </div>
 </div>
@@ -124,6 +144,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Checks if a position move has finished. </p>
+
 </div>
 </div>
 <a class="anchor" id="a7e0fbd5bd25cebb78cd1b095c2055dac"></a><!-- doxytag: member="PartController::close" ref="a7e0fbd5bd25cebb78cd1b095c2055dac" args="()" -->
@@ -140,6 +162,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Closes the connection to the remote device. </p>
 
 </div>
 </div>
@@ -158,6 +182,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns the number of controllable axes. </p>
+
 </div>
 </div>
 <a class="anchor" id="a02d325bdc7bd18023e47f97894a2de49"></a><!-- doxytag: member="PartController::isValid" ref="a02d325bdc7bd18023e47f97894a2de49" args="()" -->
@@ -174,6 +200,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Checks if the remote device is ready and the interface is working. </p>
 
 </div>
 </div>
@@ -202,6 +230,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Connects to the remote device. </p>
+
 </div>
 </div>
 <a class="anchor" id="aeb2bca8add9b083ebd19d0d2d07fdfd4"></a><!-- doxytag: member="PartController::positionMove" ref="aeb2bca8add9b083ebd19d0d2d07fdfd4" args="(const QVector&lt; qreal &gt; &amp;)" -->
@@ -219,6 +249,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Moves the device to a specified position. </p>
 
 </div>
 </div>
@@ -247,6 +279,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>do a random position move with all controllable axes </p>
+
 </div>
 </div>
 <a class="anchor" id="a758a071e20b76c24dde812f11620313c"></a><!-- doxytag: member="PartController::setRefSpeeds" ref="a758a071e20b76c24dde812f11620313c" args="(const QVector&lt; qreal &gt; &amp;speeds)" -->
@@ -264,6 +298,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Sets the reference velocity for position move commands. </p>
 
 </div>
 </div>
@@ -283,6 +319,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Sets the reference velocity for position move commands. </p>
+
 </div>
 </div>
 <a class="anchor" id="a6026784f8301487735a11aad4064fa00"></a><!-- doxytag: member="PartController::stop" ref="a6026784f8301487735a11aad4064fa00" args="()" -->
@@ -299,6 +337,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Stops all joints immediately. </p>
 
 </div>
 </div>
@@ -326,6 +366,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Move the robot (indefinitely) with a specified velocity (you should stop it eventually). </p>
 
 </div>
 </div>

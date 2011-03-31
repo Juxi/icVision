@@ -47,7 +47,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>ReflexFilter Class Reference</h1><!-- doxytag: class="ReflexFilter" --><!-- doxytag: inherits="VirtualSkin::RobotFilter" -->
+<h1>ReflexFilter Class Reference<br/>
+<small>
+[<a class="el" href="group___reflex_demo.html">Reflex Demo</a>]</small>
+</h1><!-- doxytag: class="ReflexFilter" --><!-- doxytag: inherits="VirtualSkin::RobotFilter" -->
+<p>A <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">VirtualSkin::RobotFilter</a> with reflexive collision response.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="reflex_filter_8h_source.html">reflexFilter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ReflexFilter:</div>
@@ -64,10 +70,17 @@ Inheritance diagram for ReflexFilter:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a235cc6248244445d361a8190f5543a6a">ReflexFilter</a> (bool visualize=true)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a235cc6248244445d361a8190f5543a6a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a51452aa2062afc86b5147e03024ea5e9">~ReflexFilter</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a51452aa2062afc86b5147e03024ea5e9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#af7d17a4e115d9260ff00271fdd7ac6fd">extraOpenStuff</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Resizes the QVectors according to the robot model.  <a href="#af7d17a4e115d9260ff00271fdd7ac6fd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a3a9baca5af392208099867d8d9340fd4">collisionResponse</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provides reflexive response to collision.  <a href="#a3a9baca5af392208099867d8d9340fd4"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">VirtualSkin::RobotFilter</a> with reflexive collision response. </p>
+<p>This Filter forwards commands from the client (a control program) until the internal robot model detects a dangerous configuration. At that time, the client is cut off from the robot, the Filter moves the robot back to a "safe" configuration, and then control is returned to the client program. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a235cc6248244445d361a8190f5543a6a"></a><!-- doxytag: member="ReflexFilter::ReflexFilter" ref="a235cc6248244445d361a8190f5543a6a" args="(bool visualize=true)" -->
 <div class="memitem">
@@ -84,6 +97,8 @@ Inheritance diagram for ReflexFilter:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -102,6 +117,8 @@ Inheritance diagram for ReflexFilter:</div>
 </div>
 <div class="memdoc">
 
+<p>Nothing special to do here. </p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -119,6 +136,9 @@ Inheritance diagram for ReflexFilter:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Provides reflexive response to collision. </p>
+<p>Moves the robot back to a past "safe" state </p>
 
 <p>Implements <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a6b3e2916c744c2c26e83010f0b60cbcc">VirtualSkin::RobotFilter</a>.</p>
 
@@ -139,7 +159,9 @@ Inheritance diagram for ReflexFilter:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a96d765a00bb1136b8d5420e6e2736467">VirtualSkin::RobotFilter</a>.</p>
+<p>Resizes the QVectors according to the robot model. </p>
+
+<p>Reimplemented from <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a3ce7a6f5265b93915ef04789f6042d3c">VirtualSkin::RobotFilter</a>.</p>
 
 </div>
 </div>

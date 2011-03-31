@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup iCubBabbler
+ *	@{
+ */
+
 #ifndef PARTCONTROLLER_H
 #define PARTCONTROLLER_H
 
@@ -6,34 +15,29 @@
 #include <yarp/dev/all.h>
 
 
-/*! \brief Provides a remote device driver for a YARP port
+/*! \brief Wraps YARP's remote device driver interface neatly
  *  This could be a motor control interface for one part of the iCub for example. see: http://eris.liralab.it/wiki/Motor_control
  */
 
 class PartController
 {
 public:
-    PartController();
-    ~PartController();
+    PartController();	//!< Nothing special
+    ~PartController();	//!< Nothing special
 	
-	bool open( const char* _robotName, const char* _partName );
-	void close();
+	bool open( const char* _robotName, const char* _partName );	//!< Connects to the remote device
+	void close();												//!< Closes the connection to the remote device
 	
-	bool isValid();
-	int	getNumJoints() { return numJoints; }
-	bool checkMotionDone( bool* );
+	bool isValid();												//!< Checks if the remote device is ready and the interface is working
+	int	getNumJoints() { return numJoints; }					//!< Returns the number of controllable axes
+	bool checkMotionDone( bool* );								//!< Checks if a position move has finished
 	
-	bool stop() { return vel->stop(); }
-	bool setRefSpeeds( const qreal );
-	bool setRefSpeeds( const QVector<qreal>& speeds) { return pos->setRefSpeeds(speeds.constData()); }
-	bool positionMove( const QVector<qreal>& );
-	bool velocityMove( int i, qreal v);
-	
-	bool randomPosMove( qreal maxSpeed, bool hands );
-	
-	//bool getLimits( QVector<qreal>* min, QVector<qreal>* max );
-	
-	//bool normPosition( int, qreal norm, qreal* enc );
+	bool stop() { return vel->stop(); }							//!< Stops all joints immediately
+	bool setRefSpeeds( const qreal );							//!< Sets the reference velocity for position move commands
+	bool setRefSpeeds( const QVector<qreal>& speeds) { return pos->setRefSpeeds(speeds.constData()); }	//!< Sets the reference velocity for position move commands
+	bool positionMove( const QVector<qreal>& );					//!< Moves the device to a specified position
+	bool velocityMove( int i, qreal v);							//!< Move the robot (indefinitely) with a specified velocity (you should stop it eventually)
+	bool randomPosMove( qreal maxSpeed, bool hands );			//!< do a random position move with all controllable axes
 
 private:
 	
@@ -52,5 +56,5 @@ private:
 	yarp::dev::IAmplifierControl *amp;
 	yarp::dev::IControlLimits *lim;
 };
-
 #endif
+/** @} */

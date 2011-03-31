@@ -1,7 +1,7 @@
 #include "iCubBabbler.h"
 #include <qthread.h>
 
-ICubBabbler::ICubBabbler() //: runThread(true)
+ICubBabbler::ICubBabbler() 
 {
 }
 ICubBabbler::~ICubBabbler()
@@ -66,30 +66,3 @@ void ICubBabbler::doTheRobot( qreal period, qreal velocity, bool hands )
 		usleep(period);
 	}
 }
-
-/*void ICubBabbler::oscillate()
-{
-	while (true)
-	{
-		torso.oscillate();
-		head.oscillate();
-		leftArm.oscillate();
-		rightArm.oscillate();
-		usleep(1000);
-	}
-}
-
-
-void ICubBabbler::crackBabySafe( int period, int magnitude )
-{
-	while (true) //TODO: put this in a thread that we can stop
-	{
-		torso.crackBabySafe( magnitude );
-		head.crackBabySafe( magnitude );
-		leftArm.crackBabySafe( magnitude );
-		rightArm.crackBabySafe( magnitude );
-		
-		usleep(1000*period);
-	}
-}
-*/

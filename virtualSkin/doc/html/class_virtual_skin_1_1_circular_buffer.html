@@ -56,14 +56,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a8c5de0e610bb50bac684f4707e23431c">CircularBuffer</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a8c5de0e610bb50bac684f4707e23431c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a916f9506cf86010056d189b51fd72c91">~CircularBuffer</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a916f9506cf86010056d189b51fd72c91"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#ae9f2d25b6b0a7f2eda25147a0bfbac93">setBufferSize</a> (int bufferLength)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#aa79025f00e3b84355eb037a5755b2700">init</a> (const QVector&lt; qreal &gt;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a279c6c54d6a7f1f94d3d5311dc8a631f">put</a> (const QVector&lt; qreal &gt;)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Clear and then resize the buffer.  <a href="#ae9f2d25b6b0a7f2eda25147a0bfbac93"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#accc0710337540977a87597e848bf5e26">init</a> (const QVector&lt; qreal &gt; v)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fill the buffer with the QVector v.  <a href="#accc0710337540977a87597e848bf5e26"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#ac7ac086ece8da3458237080172456f52">put</a> (const QVector&lt; qreal &gt; v)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Write the QVector v to the buffer and advance the 'current' position.  <a href="#ac7ac086ece8da3458237080172456f52"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#aa90e1d3b23077235958bfc60e7b02805">next</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Advances the 'current' position in the buffer.  <a href="#aa90e1d3b23077235958bfc60e7b02805"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a9f6b11ef3601e32beac4d5525211ce52">getOldest</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a reference to the oldest value in the buffer.  <a href="#a9f6b11ef3601e32beac4d5525211ce52"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a7c4096d1efc8e1cdc9f5be5be3c349e1">getCurrent</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a reference to the current value.  <a href="#a7c4096d1efc8e1cdc9f5be5be3c349e1"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A simple circular buffer of QVectors</p>
+<p>In <a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a>, this is used to store the history of poses for a <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a>. The history is written to the buffer by <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>. The outer QVector contains states of the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a>, and the inner QVector (each state) contains a tuple of motor encoder positions. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8c5de0e610bb50bac684f4707e23431c"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::CircularBuffer" ref="a8c5de0e610bb50bac684f4707e23431c" args="()" -->
 <div class="memitem">
@@ -79,6 +90,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -96,6 +109,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -115,6 +130,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns a reference to the current value. </p>
+
 </div>
 </div>
 <a class="anchor" id="a9f6b11ef3601e32beac4d5525211ce52"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::getOldest" ref="a9f6b11ef3601e32beac4d5525211ce52" args="()" -->
@@ -132,9 +149,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Returns a reference to the oldest value in the buffer. </p>
+
 </div>
 </div>
-<a class="anchor" id="aa79025f00e3b84355eb037a5755b2700"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::init" ref="aa79025f00e3b84355eb037a5755b2700" args="(const QVector&lt; qreal &gt;)" -->
+<a class="anchor" id="accc0710337540977a87597e848bf5e26"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::init" ref="accc0710337540977a87597e848bf5e26" args="(const QVector&lt; qreal &gt; v)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -149,6 +168,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Fill the buffer with the QVector v. </p>
 
 </div>
 </div>
@@ -167,9 +188,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Advances the 'current' position in the buffer. </p>
+
 </div>
 </div>
-<a class="anchor" id="a279c6c54d6a7f1f94d3d5311dc8a631f"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::put" ref="a279c6c54d6a7f1f94d3d5311dc8a631f" args="(const QVector&lt; qreal &gt;)" -->
+<a class="anchor" id="ac7ac086ece8da3458237080172456f52"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::put" ref="ac7ac086ece8da3458237080172456f52" args="(const QVector&lt; qreal &gt; v)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -184,6 +207,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Write the QVector v to the buffer and advance the 'current' position. </p>
 
 </div>
 </div>
@@ -202,6 +227,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Clear and then resize the buffer. </p>
 
 </div>
 </div>

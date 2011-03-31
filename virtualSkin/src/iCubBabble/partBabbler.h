@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup iCubBabbler
+ *	@{
+ */
+
 #ifndef PARTBABBLER_H
 #define PARTBABBLER_H
 
@@ -35,5 +44,5 @@ private:
 	qreal freq,t;
 
 };
-
-#endif // PARTBABBLER_H
+#endif 
+/** @} */

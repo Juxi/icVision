@@ -72,9 +72,3 @@ void Model::stop()
 	keepRunning = false;
 	while ( isRunning() ) {}
 }
-
-void Model::restart()
-{
-	keepRunning = true;
-	start();
-}

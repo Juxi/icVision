@@ -81,15 +81,16 @@ Inheritance diagram for RobotModel::Model:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#ad6ebd2062a0b823db841a0b88baac4c0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d">computePose</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID.  <a href="#a71e892d2162a6f5f8089f68bad2d124d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#aef475e4724f28b31c2dabb4525e3d55e">run</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allows a thread to call <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> periodically.  <a href="#aef475e4724f28b31c2dabb4525e3d55e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a530ef6ce292db5be7b116fa93e8cd487">start</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Starts a thread to do collision detection periodically.  <a href="#a530ef6ce292db5be7b116fa93e8cd487"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#af9470eeec514706e86a5ce9eb105b3e3">stop</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops the collision thread.  <a href="#af9470eeec514706e86a5ce9eb105b3e3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a324bda2be10f0dd6c50a36dc2bee6971">restart</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Restarts the collision thread.  <a href="#a324bda2be10f0dd6c50a36dc2bee6971"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ac613f217636c3129fb0dafb2e7dd0797">computePosePrefix</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#ac5d6a83365a6add93699e11b69afdedd">computePoseSuffix</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a005954b405d7e3f6c7c9397039503966">collisionHandlerAddendum</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, <a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, const DtCollData *)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a7f8e1593b45351d9811b1dd71610b2b7">computePosePrefix</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This is executed by <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> just before forward kinematics is computed.  <a href="#a7f8e1593b45351d9811b1dd71610b2b7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a551e0bab1c33ccc7d6b3fc6c7373897d">computePoseSuffix</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This is executed by <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> just after collision detection is computed.  <a href="#a551e0bab1c33ccc7d6b3fc6c7373897d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729">collisionHandlerAddendum</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, <a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *, const DtCollData *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This is executed by <a class="el" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">collisionHandler()</a> just before it returns.  <a href="#a347d56ffc4a1aefd4266bd453d626729"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">collisionHandler</a> (void *client_data, DtObjectRef obj1, DtObjectRef obj2, const DtCollData *coll_data)</td></tr>
 <tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
@@ -107,7 +108,8 @@ Inheritance diagram for RobotModel::Model:</div>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Computes the current pose of the <a class="el" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a> and does collision detection using the FreeSOLID library. </p>
-<p>Can be either in a thread or not NOTE: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|. Thus the computational complexity of the collision detection grows linearly with the size of the world. </p>
+<p>To use this class: First prepare the object by calling the constructor, setRobot(Robot*) and setWorld(World*). Call/activate the slot <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> when you suspect the robot's state has changed. Alternatively, call <a class="el" href="class_robot_model_1_1_model.html#a530ef6ce292db5be7b116fa93e8cd487" title="Starts a thread to do collision detection periodically.">start()</a> to begin doing collision detection computations periodically in a thread. When the pose has been computed and collision detection is finished, the signal <a class="el" href="class_robot_model_1_1_model.html#a30ae14c4eaa0518c72f5e2804f25f5c3">newStateReady()</a> will be emitted. If one or more collisions have occurred, the signal <a class="el" href="class_robot_model_1_1_model.html#ab45c30ded04e2e9c83648f0d838b698e" title="Indicates that a new state has been computed (useful when running collision detection...">collision()</a> will also be emitted.</p>
+<dl class="note"><dt><b>Note:</b></dt><dd>Although it can be used as-is, this class is intended to be extended via <a class="el" href="class_robot_model_1_1_model.html#a7f8e1593b45351d9811b1dd71610b2b7" title="This is executed by computePose() just before forward kinematics is computed.">computePosePrefix()</a>, <a class="el" href="class_robot_model_1_1_model.html#a551e0bab1c33ccc7d6b3fc6c7373897d" title="This is executed by computePose() just after collision detection is computed.">computePoseSuffix()</a> and <a class="el" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729" title="This is executed by collisionHandler() just before it returns.">collisionHandlerAddendum(  PrimitiveObject*, PrimitiveObject*, const DtCollData* )</a>. For an example of this, see <a class="el" href="class_virtual_skin_1_1_yarp_model.html" title="Wraps RobotModel::Model with YARP functionality.">VirtualSkin::YarpModel</a>. Also, a note on computational complexity: Collision detection is only carried out between the robot and itself O(n^2) where n=|robot|, as well as between the robot and the world O(n) where n=|world|. Thus the computational complexity of the collision detection grows linearly with the size of the world. </dd></dl>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a0a603c2f3ee5c56fc40efc02ccef92b5"></a><!-- doxytag: member="RobotModel::Model::Model" ref="a0a603c2f3ee5c56fc40efc02ccef92b5" args="(bool visualize=0)" -->
 <div class="memitem">
@@ -214,7 +216,7 @@ Inheritance diagram for RobotModel::Model:</div>
 
 </div>
 </div>
-<a class="anchor" id="a005954b405d7e3f6c7c9397039503966"></a><!-- doxytag: member="RobotModel::Model::collisionHandlerAddendum" ref="a005954b405d7e3f6c7c9397039503966" args="(PrimitiveObject *, PrimitiveObject *, const DtCollData *)=0" -->
+<a class="anchor" id="a347d56ffc4a1aefd4266bd453d626729"></a><!-- doxytag: member="RobotModel::Model::collisionHandlerAddendum" ref="a347d56ffc4a1aefd4266bd453d626729" args="(PrimitiveObject *, PrimitiveObject *, const DtCollData *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -239,13 +241,15 @@ Inheritance diagram for RobotModel::Model:</div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td><code> [pure virtual]</code></td>
+          <td></td><td></td><td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#a6ae0980a5386930a19b0ee32a9d5a8c2">VirtualSkin::YarpModel</a>.</p>
+<p>This is executed by <a class="el" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">collisionHandler()</a> just before it returns. </p>
+
+<p>Reimplemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#a6ae0980a5386930a19b0ee32a9d5a8c2">VirtualSkin::YarpModel</a>.</p>
 
 </div>
 </div>
@@ -265,11 +269,11 @@ Inheritance diagram for RobotModel::Model:</div>
 <div class="memdoc">
 
 <p>Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID. </p>
-<p>Call this function if you want to be in control of which poses are computed when </p>
+<p>Call this function directly if you want to be in control of which poses are computed when </p>
 
 </div>
 </div>
-<a class="anchor" id="ac613f217636c3129fb0dafb2e7dd0797"></a><!-- doxytag: member="RobotModel::Model::computePosePrefix" ref="ac613f217636c3129fb0dafb2e7dd0797" args="()=0" -->
+<a class="anchor" id="a7f8e1593b45351d9811b1dd71610b2b7"></a><!-- doxytag: member="RobotModel::Model::computePosePrefix" ref="a7f8e1593b45351d9811b1dd71610b2b7" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -278,17 +282,19 @@ Inheritance diagram for RobotModel::Model:</div>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#afcaff17a5fd0babe774647957f0ead67">VirtualSkin::YarpModel</a>.</p>
+<p>This is executed by <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> just before forward kinematics is computed. </p>
+
+<p>Reimplemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#afcaff17a5fd0babe774647957f0ead67">VirtualSkin::YarpModel</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac5d6a83365a6add93699e11b69afdedd"></a><!-- doxytag: member="RobotModel::Model::computePoseSuffix" ref="ac5d6a83365a6add93699e11b69afdedd" args="()=0" -->
+<a class="anchor" id="a551e0bab1c33ccc7d6b3fc6c7373897d"></a><!-- doxytag: member="RobotModel::Model::computePoseSuffix" ref="a551e0bab1c33ccc7d6b3fc6c7373897d" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -297,13 +303,15 @@ Inheritance diagram for RobotModel::Model:</div>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#a01d1e1fa37a27298edd0f7bc451fb78a">VirtualSkin::YarpModel</a>.</p>
+<p>This is executed by <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> just after collision detection is computed. </p>
+
+<p>Reimplemented in <a class="el" href="class_virtual_skin_1_1_yarp_model.html#a01d1e1fa37a27298edd0f7bc451fb78a">VirtualSkin::YarpModel</a>.</p>
 
 </div>
 </div>
@@ -324,42 +332,22 @@ Inheritance diagram for RobotModel::Model:</div>
 
 </div>
 </div>
-<a class="anchor" id="a324bda2be10f0dd6c50a36dc2bee6971"></a><!-- doxytag: member="RobotModel::Model::restart" ref="a324bda2be10f0dd6c50a36dc2bee6971" args="()" -->
+<a class="anchor" id="a530ef6ce292db5be7b116fa93e8cd487"></a><!-- doxytag: member="RobotModel::Model::start" ref="a530ef6ce292db5be7b116fa93e8cd487" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Model::restart </td>
+          <td class="memname">void RobotModel::Model::start </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Restarts the collision thread. </p>
-
-</div>
-</div>
-<a class="anchor" id="aef475e4724f28b31c2dabb4525e3d55e"></a><!-- doxytag: member="RobotModel::Model::run" ref="aef475e4724f28b31c2dabb4525e3d55e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Model::run </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Allows a thread to call <a class="el" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&#39;s pose to be computed in cartesian space and the collision detection...">computePose()</a> periodically. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>IMPORTANT: Call start() not <a class="el" href="class_robot_model_1_1_model.html#aef475e4724f28b31c2dabb4525e3d55e" title="Allows a thread to call computePose() periodically.">run()</a> !!! </dd></dl>
+<p>Starts a thread to do collision detection periodically. </p>
 
 </div>
 </div>

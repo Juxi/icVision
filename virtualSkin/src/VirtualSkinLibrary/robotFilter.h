@@ -136,7 +136,6 @@ public:
 	virtual void collisionResponse() = 0;	//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
 											/**< This is executed once the RobotFilter has detected collisions and cut its connection. Control
 												 is not restored to the user until this function returns. */
-	void run();								//!< Collision response is handled in a separate thread so as not to interrupt anything
 	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
 																			/**< A 1 indicates the filter is connected and motor commands are being forwarded, 
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
@@ -165,6 +164,11 @@ protected:
 	QVector<StateObserver*>		stateObservers;			//!< A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a CircularBuffer
 	QVector<CallObserver*>		callObservers;			//!< A QVector of IObservers that monitor RPC calls
 	QVector<ResponseObserver*>	responseObservers;		//!< A QVector of IObservers that monitor RPC responses
+	
+private:
+	
+	void start() { QThread::start(); }	//!< Starts collision response
+	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
 	
 };
 }

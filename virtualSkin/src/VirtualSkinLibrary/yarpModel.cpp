@@ -43,9 +43,9 @@ void YarpModel::computePosePrefix()
 
 void YarpModel::computePoseSuffix()
 {
-	if ( collisionPort.isOpen() )
-	{
+	//if ( collisionPort.isOpen() )
+	//{
 		if ( !col_count ) { bottle.addInt(0); }
 		collisionPort.setBottle(bottle);
-	}
+	//}
 }

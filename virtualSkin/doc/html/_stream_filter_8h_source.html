@@ -64,27 +64,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00030"></a>00030         }
 <a name="l00031"></a>00031 }
 <a name="l00032"></a>00032 
-<a name="l00033"></a><a class="code" href="classyarp_1_1os_1_1_stream_filter.html">00033</a> <span class="keyword">class </span><a class="code" href="classyarp_1_1os_1_1_stream_filter.html">yarp::os::StreamFilter</a>: <span class="keyword">public</span> TypedReaderCallback&lt;Bottle&gt; {
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="keyword">public</span>:
-<a name="l00036"></a>00036         <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a687a3082652cb3163619fa04bfe9db1f">StreamFilter</a>();
-<a name="l00037"></a>00037         <span class="keyword">virtual</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a39cc5195a93b8146c2f9117298f97581">~StreamFilter</a>();
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039         <span class="keywordtype">bool</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#aa2203de7321cabb2eb8e8a28b66cc470">open</a>(ConstString inPortName, ConstString outPortName);
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a833b30281a0c6039cdfcded6986fe36e">close</a>();
+<a name="l00040"></a><a class="code" href="classyarp_1_1os_1_1_stream_filter.html">00040</a> <span class="keyword">class </span><a class="code" href="classyarp_1_1os_1_1_stream_filter.html" title="A proxy for a YARP Stream port that can also filter data.">yarp::os::StreamFilter</a>: <span class="keyword">public</span> TypedReaderCallback&lt;Bottle&gt; {
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a3c72e672f88e6f9e8d77f7af8bcd31ee">cutConnection</a>(<span class="keywordtype">bool</span> cut = <span class="keyword">true</span>);
-<a name="l00043"></a>00043         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a6f911f0b7818d212d58f05fe82c096a1">setObserver</a>(<a class="code" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o);
-<a name="l00044"></a>00044         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a0dad0b2389fa998afc9336509569a01f">injectData</a>(<span class="keyword">const</span> Bottle &amp;b);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">private</span>:
-<a name="l00047"></a>00047         BufferedPort&lt;Bottle&gt; inPort;
-<a name="l00048"></a>00048         <a class="code" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html">yarp::os::impl::StreamFilterImpl</a> impl;
-<a name="l00049"></a>00049         <span class="keywordtype">bool</span> isOpen;
-<a name="l00050"></a>00050 };
+<a name="l00042"></a>00042 <span class="keyword">public</span>:
+<a name="l00043"></a>00043         
+<a name="l00044"></a>00044         <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a687a3082652cb3163619fa04bfe9db1f" title="The filter is cut (not forwarding commands) when it is constructed.">StreamFilter</a>();                         
+<a name="l00045"></a>00045         <span class="keyword">virtual</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a39cc5195a93b8146c2f9117298f97581" title="Calls close() if necessary.">~StreamFilter</a>();        
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         <span class="keywordtype">bool</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#aa2203de7321cabb2eb8e8a28b66cc470" title="Creates two YARP ports, and causes the filter to begin forwarding messages between...">open</a>(ConstString inPortName, ConstString outPortName);     
+<a name="l00048"></a>00048 
+<a name="l00050"></a>00050         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a833b30281a0c6039cdfcded6986fe36e" title="Stops forwarding messages, and closes the ports, returning the object to the state...">close</a>();                                                                                           
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif </span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a3c72e672f88e6f9e8d77f7af8bcd31ee" title="Controls whether or not data is forwarded from the &amp;#39;in&amp;#39; port to the &amp;#39;out&amp;#39;...">cutConnection</a>(<span class="keywordtype">bool</span> cut = <span class="keyword">true</span>);                                            
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a6f911f0b7818d212d58f05fe82c096a1" title="Set an Observer to handle data arriving on the &amp;#39;in&amp;#39; port.">setObserver</a>(<a class="code" href="classyarp_1_1os_1_1_i_observer.html" title="An interface that defines a handler for data arriving on YARP ports.">IObserver</a> *o);                                                         
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_stream_filter.html#a0dad0b2389fa998afc9336509569a01f" title="Injects data into the stream.">injectData</a>(<span class="keyword">const</span> Bottle &amp;b);                                                       
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <span class="keyword">private</span>:
+<a name="l00058"></a>00058         BufferedPort&lt;Bottle&gt; inPort;                                                            
+<a name="l00059"></a>00059         <a class="code" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html">yarp::os::impl::StreamFilterImpl</a> impl;                                          
+<a name="l00060"></a>00060         <span class="keywordtype">bool</span> isOpen;                                                                                            
+<a name="l00061"></a>00061         
+<a name="l00062"></a>00062 };
+<a name="l00063"></a>00063 <span class="preprocessor">#endif </span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

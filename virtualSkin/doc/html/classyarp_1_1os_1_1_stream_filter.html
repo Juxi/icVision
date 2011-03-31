@@ -53,19 +53,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <small>
 [<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
 </h1><!-- doxytag: class="yarp::os::StreamFilter" -->
+<p>A proxy for a YARP Stream port that can also filter data.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_stream_filter_8h_source.html">StreamFilter.h</a>&gt;</code></p>
 
 <p><a href="classyarp_1_1os_1_1_stream_filter-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a687a3082652cb3163619fa04bfe9db1f">StreamFilter</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The filter is cut (not forwarding commands) when it is constructed.  <a href="#a687a3082652cb3163619fa04bfe9db1f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a39cc5195a93b8146c2f9117298f97581">~StreamFilter</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls <a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a833b30281a0c6039cdfcded6986fe36e" title="Stops forwarding messages, and closes the ports, returning the object to the state...">close()</a> if necessary.  <a href="#a39cc5195a93b8146c2f9117298f97581"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#aa2203de7321cabb2eb8e8a28b66cc470">open</a> (ConstString inPortName, ConstString outPortName)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates two YARP ports, and causes the filter to begin forwarding messages between them.  <a href="#aa2203de7321cabb2eb8e8a28b66cc470"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a833b30281a0c6039cdfcded6986fe36e">close</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops forwarding messages, and closes the ports, returning the object to the state it was in just after construction.  <a href="#a833b30281a0c6039cdfcded6986fe36e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a3c72e672f88e6f9e8d77f7af8bcd31ee">cutConnection</a> (bool cut=true)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Controls whether or not data is forwarded from the 'in' port to the 'out' port.  <a href="#a3c72e672f88e6f9e8d77f7af8bcd31ee"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a6f911f0b7818d212d58f05fe82c096a1">setObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set an Observer to handle data arriving on the 'in' port.  <a href="#a6f911f0b7818d212d58f05fe82c096a1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a0dad0b2389fa998afc9336509569a01f">injectData</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Injects data into the stream.  <a href="#a0dad0b2389fa998afc9336509569a01f"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A proxy for a YARP Stream port that can also filter data. </p>
+<p>Creates a YARP stream port to mimic the existing one and connects the two such that:</p>
+<ul>
+<li>Incomming data can be monitored by setting an Observer (see StreamFilterImpl).</li>
+<li>The communication between the client and the target port can be cut.</li>
+<li>Data can be injected into the stream </li>
+</ul>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a687a3082652cb3163619fa04bfe9db1f"></a><!-- doxytag: member="yarp::os::StreamFilter::StreamFilter" ref="a687a3082652cb3163619fa04bfe9db1f" args="()" -->
 <div class="memitem">
@@ -81,6 +99,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>The filter is cut (not forwarding commands) when it is constructed. </p>
 
 </div>
 </div>
@@ -98,6 +118,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Calls <a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a833b30281a0c6039cdfcded6986fe36e" title="Stops forwarding messages, and closes the ports, returning the object to the state...">close()</a> if necessary. </p>
 
 </div>
 </div>
@@ -117,6 +139,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Stops forwarding messages, and closes the ports, returning the object to the state it was in just after construction. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>inPortName</em>&nbsp;</td><td>The port where data arrives </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>outPortName</em>&nbsp;</td><td>The port where data is forwarded </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a3c72e672f88e6f9e8d77f7af8bcd31ee"></a><!-- doxytag: member="yarp::os::StreamFilter::cutConnection" ref="a3c72e672f88e6f9e8d77f7af8bcd31ee" args="(bool cut=true)" -->
@@ -135,6 +166,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Controls whether or not data is forwarded from the 'in' port to the 'out' port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>cut</em>&nbsp;</td><td>cut=true stops the forwarding, cut=false starts it again </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a0dad0b2389fa998afc9336509569a01f"></a><!-- doxytag: member="yarp::os::StreamFilter::injectData" ref="a0dad0b2389fa998afc9336509569a01f" args="(const Bottle &amp;b)" -->
@@ -152,6 +191,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Injects data into the stream. </p>
 
 </div>
 </div>
@@ -180,6 +221,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Creates two YARP ports, and causes the filter to begin forwarding messages between them. </p>
+
 </div>
 </div>
 <a class="anchor" id="a6f911f0b7818d212d58f05fe82c096a1"></a><!-- doxytag: member="yarp::os::StreamFilter::setObserver" ref="a6f911f0b7818d212d58f05fe82c096a1" args="(IObserver *o)" -->
@@ -197,6 +240,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set an Observer to handle data arriving on the 'in' port. </p>
 
 </div>
 </div>

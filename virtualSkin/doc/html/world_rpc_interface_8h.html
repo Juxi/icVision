@@ -54,6 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_world_rpc_interface.html">VirtualSkin::WorldRpcInterface</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provides an RPC interface (via YARP) to <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>.  <a href="class_virtual_skin_1_1_world_rpc_interface.html#_details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2>Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robot_model.html">RobotModel</a></td></tr>
 
@@ -61,233 +62,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <br/></td></tr>
 </p>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_virtual_skin.html">VirtualSkin</a></td></tr>
+
+<p><tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><p>Contains classes relevant to the virtual skin static library. </p>
+<br/></td></tr>
+</p>
 <tr><td colspan="2"><h2>Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a8b32026b2a68060710aa8460fc8f9002">VOCAB_MK</a>&nbsp;&nbsp;&nbsp;VOCAB2('m','k')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#aec5615baa74d09de8e4a836e933623bd">VOCAB_SET</a>&nbsp;&nbsp;&nbsp;VOCAB3('s','e','t')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a17b3675d8b0698180d78043ded316b04">VOCAB_ROT</a>&nbsp;&nbsp;&nbsp;VOCAB3('r','o','t')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#aaf18e13341cf849b4b211ddf30b8c08a">VOCAB_REM</a>&nbsp;&nbsp;&nbsp;VOCAB2('r','m')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a2b7fd4c379b8415e799b959dca03a473">VOCAB_APP</a>&nbsp;&nbsp;&nbsp;VOCAB3('a','p','p')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#adab35edb00a4f24c7fa6c2a57db1c8f3">VOCAB_PSET</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','e','t','p')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a76b9df767fe3175d55af7bc428ee9f7a">VOCAB_PROT</a>&nbsp;&nbsp;&nbsp;VOCAB4('r','o','t','p')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#ad7fc99adf0f99aeb21e0e8c282a952a4">VOCAB_PREM</a>&nbsp;&nbsp;&nbsp;VOCAB3('r','m','p')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#aa8d1af1249038fc04e0c14f61077a8df">VOCAB_CSG</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','s','g')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#acda28e98905ab22f6952d5d8bd04a201">VOCAB_SPH</a>&nbsp;&nbsp;&nbsp;VOCAB3('s','p','h')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a9628cdd5ec72bab3a54dcc99520cc591">VOCAB_CYL</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','y','l')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a32cf2469c339b363727614521f29b357">VOCAB_BOX</a>&nbsp;&nbsp;&nbsp;VOCAB3('b','o','x')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a51eaf5d8f1c305cb5d72a93058070b86">VOCAB_SSPH</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','s','p','h')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a16bb49beabf29c974b2eb426733f0318">VOCAB_SCYL</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','c','y','l')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a6fa38324752445e8d11da58e0436e3b2">VOCAB_SBOX</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','b','o','x')</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="world_rpc_interface_8h.html#a0d8540a4c9284876f7e1dc1ed8f30de3">VOCAB_CLEAR</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','l','r')</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga8b32026b2a68060710aa8460fc8f9002">VOCAB_MK</a>&nbsp;&nbsp;&nbsp;VOCAB2('m','k')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Make a new object.  <a href="group___yarp_vocabs.html#ga8b32026b2a68060710aa8460fc8f9002"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gaec5615baa74d09de8e4a836e933623bd">VOCAB_SET</a>&nbsp;&nbsp;&nbsp;VOCAB3('s','e','t')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of an object.  <a href="group___yarp_vocabs.html#gaec5615baa74d09de8e4a836e933623bd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga17b3675d8b0698180d78043ded316b04">VOCAB_ROT</a>&nbsp;&nbsp;&nbsp;VOCAB3('r','o','t')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Rotate an object.  <a href="group___yarp_vocabs.html#ga17b3675d8b0698180d78043ded316b04"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gaaf18e13341cf849b4b211ddf30b8c08a">VOCAB_REM</a>&nbsp;&nbsp;&nbsp;VOCAB2('r','m')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Remove an object.  <a href="group___yarp_vocabs.html#gaaf18e13341cf849b4b211ddf30b8c08a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga2b7fd4c379b8415e799b959dca03a473">VOCAB_APP</a>&nbsp;&nbsp;&nbsp;VOCAB3('a','p','p')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Append a primitive to an object.  <a href="group___yarp_vocabs.html#ga2b7fd4c379b8415e799b959dca03a473"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gadab35edb00a4f24c7fa6c2a57db1c8f3">VOCAB_PSET</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','e','t','p')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the position of a primitive relative to its parent object.  <a href="group___yarp_vocabs.html#gadab35edb00a4f24c7fa6c2a57db1c8f3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga76b9df767fe3175d55af7bc428ee9f7a">VOCAB_PROT</a>&nbsp;&nbsp;&nbsp;VOCAB4('r','o','t','p')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Rotate a primitive relative to its parent object.  <a href="group___yarp_vocabs.html#ga76b9df767fe3175d55af7bc428ee9f7a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gad7fc99adf0f99aeb21e0e8c282a952a4">VOCAB_PREM</a>&nbsp;&nbsp;&nbsp;VOCAB3('r','m','p')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Remove a primitive from its parent object.  <a href="group___yarp_vocabs.html#gad7fc99adf0f99aeb21e0e8c282a952a4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gaa8d1af1249038fc04e0c14f61077a8df">VOCAB_CSG</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','s','g')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructive Solid Geometry object.  <a href="group___yarp_vocabs.html#gaa8d1af1249038fc04e0c14f61077a8df"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#gacda28e98905ab22f6952d5d8bd04a201">VOCAB_SPH</a>&nbsp;&nbsp;&nbsp;VOCAB3('s','p','h')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sphere.  <a href="group___yarp_vocabs.html#gacda28e98905ab22f6952d5d8bd04a201"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga9628cdd5ec72bab3a54dcc99520cc591">VOCAB_CYL</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','y','l')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Cylinder.  <a href="group___yarp_vocabs.html#ga9628cdd5ec72bab3a54dcc99520cc591"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga32cf2469c339b363727614521f29b357">VOCAB_BOX</a>&nbsp;&nbsp;&nbsp;VOCAB3('b','o','x')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Box.  <a href="group___yarp_vocabs.html#ga32cf2469c339b363727614521f29b357"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga51eaf5d8f1c305cb5d72a93058070b86">VOCAB_SSPH</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','s','p','h')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Static Sphere (exactly the same as a sphere but with a different naming scheme).  <a href="group___yarp_vocabs.html#ga51eaf5d8f1c305cb5d72a93058070b86"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga16bb49beabf29c974b2eb426733f0318">VOCAB_SCYL</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','c','y','l')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Static Cylinder (exactly the same as a cylinder but with a different naming scheme).  <a href="group___yarp_vocabs.html#ga16bb49beabf29c974b2eb426733f0318"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga6fa38324752445e8d11da58e0436e3b2">VOCAB_SBOX</a>&nbsp;&nbsp;&nbsp;VOCAB4('s','b','o','x')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Static Box (exactly the same as a box but with a different naming scheme).  <a href="group___yarp_vocabs.html#ga6fa38324752445e8d11da58e0436e3b2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___yarp_vocabs.html#ga0d8540a4c9284876f7e1dc1ed8f30de3">VOCAB_CLEAR</a>&nbsp;&nbsp;&nbsp;VOCAB3('c','l','r')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Clears the world model and resets all counters.  <a href="group___yarp_vocabs.html#ga0d8540a4c9284876f7e1dc1ed8f30de3"></a><br/></td></tr>
 </table>
-<hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a2b7fd4c379b8415e799b959dca03a473"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_APP" ref="a2b7fd4c379b8415e799b959dca03a473" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_APP&nbsp;&nbsp;&nbsp;VOCAB3('a','p','p')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a32cf2469c339b363727614521f29b357"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_BOX" ref="a32cf2469c339b363727614521f29b357" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_BOX&nbsp;&nbsp;&nbsp;VOCAB3('b','o','x')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0d8540a4c9284876f7e1dc1ed8f30de3"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_CLEAR" ref="a0d8540a4c9284876f7e1dc1ed8f30de3" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_CLEAR&nbsp;&nbsp;&nbsp;VOCAB3('c','l','r')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa8d1af1249038fc04e0c14f61077a8df"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_CSG" ref="aa8d1af1249038fc04e0c14f61077a8df" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_CSG&nbsp;&nbsp;&nbsp;VOCAB3('c','s','g')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9628cdd5ec72bab3a54dcc99520cc591"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_CYL" ref="a9628cdd5ec72bab3a54dcc99520cc591" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_CYL&nbsp;&nbsp;&nbsp;VOCAB3('c','y','l')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8b32026b2a68060710aa8460fc8f9002"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_MK" ref="a8b32026b2a68060710aa8460fc8f9002" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_MK&nbsp;&nbsp;&nbsp;VOCAB2('m','k')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad7fc99adf0f99aeb21e0e8c282a952a4"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_PREM" ref="ad7fc99adf0f99aeb21e0e8c282a952a4" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_PREM&nbsp;&nbsp;&nbsp;VOCAB3('r','m','p')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a76b9df767fe3175d55af7bc428ee9f7a"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_PROT" ref="a76b9df767fe3175d55af7bc428ee9f7a" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_PROT&nbsp;&nbsp;&nbsp;VOCAB4('r','o','t','p')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adab35edb00a4f24c7fa6c2a57db1c8f3"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_PSET" ref="adab35edb00a4f24c7fa6c2a57db1c8f3" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_PSET&nbsp;&nbsp;&nbsp;VOCAB4('s','e','t','p')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaf18e13341cf849b4b211ddf30b8c08a"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_REM" ref="aaf18e13341cf849b4b211ddf30b8c08a" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_REM&nbsp;&nbsp;&nbsp;VOCAB2('r','m')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a17b3675d8b0698180d78043ded316b04"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_ROT" ref="a17b3675d8b0698180d78043ded316b04" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_ROT&nbsp;&nbsp;&nbsp;VOCAB3('r','o','t')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6fa38324752445e8d11da58e0436e3b2"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_SBOX" ref="a6fa38324752445e8d11da58e0436e3b2" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_SBOX&nbsp;&nbsp;&nbsp;VOCAB4('s','b','o','x')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a16bb49beabf29c974b2eb426733f0318"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_SCYL" ref="a16bb49beabf29c974b2eb426733f0318" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_SCYL&nbsp;&nbsp;&nbsp;VOCAB4('s','c','y','l')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aec5615baa74d09de8e4a836e933623bd"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_SET" ref="aec5615baa74d09de8e4a836e933623bd" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_SET&nbsp;&nbsp;&nbsp;VOCAB3('s','e','t')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acda28e98905ab22f6952d5d8bd04a201"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_SPH" ref="acda28e98905ab22f6952d5d8bd04a201" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_SPH&nbsp;&nbsp;&nbsp;VOCAB3('s','p','h')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a51eaf5d8f1c305cb5d72a93058070b86"></a><!-- doxytag: member="worldRpcInterface.h::VOCAB_SSPH" ref="a51eaf5d8f1c305cb5d72a93058070b86" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VOCAB_SSPH&nbsp;&nbsp;&nbsp;VOCAB4('s','s','p','h')</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

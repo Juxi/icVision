@@ -41,7 +41,141 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>Virtual Skin</h1><table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Namespaces</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_virtual_skin.html">VirtualSkin</a></td></tr>
+
+<p><tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><p>Contains classes relevant to the virtual skin static library. </p>
+<br/></td></tr>
+</p>
+<tr><td class="memItemLeft" align="right" valign="top">namespace &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robot_model.html">RobotModel</a></td></tr>
+
+<p><tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><p>Contains classes relevant to the robot model. </p>
+<br/></td></tr>
+</p>
+<tr><td colspan="2"><h2>Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga3180a643a859ad60c6ab9479f4356b6c">YARP_PERIOD</a>&nbsp;&nbsp;&nbsp;0.02</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">seconds  <a href="#ga3180a643a859ad60c6ab9479f4356b6c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga3ae50cbf062b463aa94541d9d9ae75d3">YARP_PERIOD_ms</a>&nbsp;&nbsp;&nbsp;YARP_PERIOD*1000</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">milliseconds  <a href="#ga3ae50cbf062b463aa94541d9d9ae75d3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga495bdc89531def7d27710e00060deda2">YARP_PERIOD_us</a>&nbsp;&nbsp;&nbsp;YARP_PERIOD_ms*1000</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">microseconds  <a href="#ga495bdc89531def7d27710e00060deda2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga071ce837e6313254c3881cb70dd50aec">POSE_BUFFER_SIZE</a>&nbsp;&nbsp;&nbsp;100</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Length of the pose history stored by <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">VirtualSkin::StateObserver</a>.  <a href="#ga071ce837e6313254c3881cb70dd50aec"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga93d81ddcb38526cbd57fc2291cdb46ae">REFLEX_SPEED</a>&nbsp;&nbsp;&nbsp;30</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The velovity to use for the reflexive position move command.  <a href="#ga93d81ddcb38526cbd57fc2291cdb46ae"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga8e73ea60dcd76c56464c74e189fe900c">POSITION_MOVE_TIMEOUT</a>&nbsp;&nbsp;&nbsp;10</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Max time (seconds) to wait for the robot to finish the reflexive position move.  <a href="#ga8e73ea60dcd76c56464c74e189fe900c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___virtual_skin.html#ga5b57353029a939762d93e2da7a188cd4">NEGLIGIBLE_ANGLE</a>&nbsp;&nbsp;&nbsp;5</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Tolerance around target position (degrees) for reflexive position move command.  <a href="#ga5b57353029a939762d93e2da7a188cd4"></a><br/></td></tr>
 </table>
+<hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ga5b57353029a939762d93e2da7a188cd4"></a><!-- doxytag: member="constants.h::NEGLIGIBLE_ANGLE" ref="ga5b57353029a939762d93e2da7a188cd4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEGLIGIBLE_ANGLE&nbsp;&nbsp;&nbsp;5</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Tolerance around target position (degrees) for reflexive position move command. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga071ce837e6313254c3881cb70dd50aec"></a><!-- doxytag: member="constants.h::POSE_BUFFER_SIZE" ref="ga071ce837e6313254c3881cb70dd50aec" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define POSE_BUFFER_SIZE&nbsp;&nbsp;&nbsp;100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Length of the pose history stored by <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">VirtualSkin::StateObserver</a>. </p>
+<p>For the reflex behavior </p>
+
+</div>
+</div>
+<a class="anchor" id="ga8e73ea60dcd76c56464c74e189fe900c"></a><!-- doxytag: member="constants.h::POSITION_MOVE_TIMEOUT" ref="ga8e73ea60dcd76c56464c74e189fe900c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define POSITION_MOVE_TIMEOUT&nbsp;&nbsp;&nbsp;10</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Max time (seconds) to wait for the robot to finish the reflexive position move. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga93d81ddcb38526cbd57fc2291cdb46ae"></a><!-- doxytag: member="constants.h::REFLEX_SPEED" ref="ga93d81ddcb38526cbd57fc2291cdb46ae" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REFLEX_SPEED&nbsp;&nbsp;&nbsp;30</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The velovity to use for the reflexive position move command. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga3180a643a859ad60c6ab9479f4356b6c"></a><!-- doxytag: member="constants.h::YARP_PERIOD" ref="ga3180a643a859ad60c6ab9479f4356b6c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define YARP_PERIOD&nbsp;&nbsp;&nbsp;0.02</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>seconds </p>
+<p>Approximate time between stream packets from robot... </p>
+
+</div>
+</div>
+<a class="anchor" id="ga3ae50cbf062b463aa94541d9d9ae75d3"></a><!-- doxytag: member="constants.h::YARP_PERIOD_ms" ref="ga3ae50cbf062b463aa94541d9d9ae75d3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define YARP_PERIOD_ms&nbsp;&nbsp;&nbsp;YARP_PERIOD*1000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>milliseconds </p>
+
+</div>
+</div>
+<a class="anchor" id="ga495bdc89531def7d27710e00060deda2"></a><!-- doxytag: member="constants.h::YARP_PERIOD_us" ref="ga495bdc89531def7d27710e00060deda2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define YARP_PERIOD_us&nbsp;&nbsp;&nbsp;YARP_PERIOD_ms*1000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>microseconds </p>
+
+</div>
+</div>
 </div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

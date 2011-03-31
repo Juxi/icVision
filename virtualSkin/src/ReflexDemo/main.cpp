@@ -60,7 +60,6 @@ int main(int argc, char *argv[])
 	
 	// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
 	filter.openStatusPort("/" + filter.model.robot.getName() + "F/status");
-	//filter.startStatusPort();
 	
 	bool result = 0;
 	result = app.exec();						// run the Qt application

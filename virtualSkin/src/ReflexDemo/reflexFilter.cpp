@@ -56,9 +56,7 @@ void ReflexFilter::collisionResponse()
 		// get the desired pose from the pose buffer
 		targetPose.replace(bodyPart, stateObservers.at(bodyPart)->nonCollidingPose());
 		
-		//TODO: set ref speeds
-		// set velocities and do the position move
-		//partControllers.at(bodyPart)->setRefSpeeds(REFLEX_SPEED);
+		//TODO: set ref speeds here...   may or may not want to do this
 		
 		// put the desired pose into the position move bottle
 		for ( joint = targetPose.at(bodyPart).begin(); joint != targetPose.at(bodyPart).end(); ++joint ) {
@@ -95,6 +93,7 @@ void ReflexFilter::collisionResponse()
 			}
 		}
 		
+		// determine whether or not the target bose has been "reached"
 		poseReached = true;
 		for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
 		{

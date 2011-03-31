@@ -50,6 +50,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>VirtualSkin::RobotFilter Class Reference</h1><!-- doxytag: class="VirtualSkin::RobotFilter" -->
+<p>This class provides a safety mechanism to protect a YARP device from unwanted collisions.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="robot_filter_8h_source.html">robotFilter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VirtualSkin::RobotFilter:</div>
@@ -66,34 +69,50 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a63edcdd59785cfbf70d099ba14766180">takeControl</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provides a thread-safe mechanism to cut the filter connection and begin collision recovery.  <a href="#a63edcdd59785cfbf70d099ba14766180"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a360450f28d32c0ce8c9fefee77ace3be">RobotFilter</a> (bool visualize=false)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Connects the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> to the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a>, and initializes some members.  <a href="#a360450f28d32c0ce8c9fefee77ace3be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a023b1465a80479e54bd4a47ca958a5af">~RobotFilter</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ad0091b67c21e0c57e77749e3ed205931">openStatusPort</a> (const QString &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#aef857e8074ba63f95f126eaecdbd04b8">startStatusPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a0f5b2fcf783fd4565789a9e44a7f0918">stopStatusPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#aa650556a1f8d4ed0a202e3626b945b17">restartStatusPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a4bd1aaf8a79af150a720a6d070fa3906">closeStatusPort</a> ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class someStateObserver , class someCallObserver , class someResponseObserver &gt; </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls <a class="el" href="class_virtual_skin_1_1_robot_filter.html#af727d2bba23531237fdd21ac198a4726" title="Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the...">close()</a>.  <a href="#a023b1465a80479e54bd4a47ca958a5af"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class aStateObserver , class aCallObserver , class aResponseObserver &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#abd0bb555d57f9d978ac1b4a7c52a573d">open</a> (const QString &amp;fileName)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Builds a <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> for the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> described in the requested config file.  <a href="#abd0bb555d57f9d978ac1b4a7c52a573d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#af727d2bba23531237fdd21ac198a4726">close</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a96d765a00bb1136b8d5420e6e2736467">extraOpenStuff</a> ()=0</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes all ControlBoardFilters and IObservers, returning the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> to the state it was in just after construction.  <a href="#af727d2bba23531237fdd21ac198a4726"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a3ce7a6f5265b93915ef04789f6042d3c">extraOpenStuff</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This is called shortly before <a class="el" href="class_virtual_skin_1_1_robot_filter.html#abd0bb555d57f9d978ac1b4a7c52a573d" title="Builds a RobotFilter for the RobotModel::Model described in the requested config...">open&lt;&gt;(const QString&amp;)</a> returns.  <a href="#a3ce7a6f5265b93915ef04789f6042d3c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a6b3e2916c744c2c26e83010f0b60cbcc">collisionResponse</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ab9eb900478b4c2836666570c79f9d1f2">run</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provides a mechanism to respond to collision events by injecting control code. See the implementation in <a class="el" href="class_reflex_filter.html" title="A VirtualSkin::RobotFilter with reflexive collision response.">ReflexFilter</a>.  <a href="#a6b3e2916c744c2c26e83010f0b60cbcc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ad0091b67c21e0c57e77749e3ed205931">openStatusPort</a> (const QString &amp;name)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Open a YARP port that streams a boolean indicating the status of the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a>.  <a href="#ad0091b67c21e0c57e77749e3ed205931"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a4bd1aaf8a79af150a720a6d070fa3906">closeStatusPort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Closes the Yarp stream port indicating whether or not the filter is connected.  <a href="#a4bd1aaf8a79af150a720a6d070fa3906"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_virtual_skin_1_1_yarp_model.html">YarpModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#aecb6bb54472069b368a06fb0b81374dd">model</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The model that controls the opening and closing of the filter.  <a href="#aecb6bb54472069b368a06fb0b81374dd"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_virtual_skin_1_1_yarp_stream_port.html">YarpStreamPort</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a1475beef6b4a16d17eb2a8c8871a44aa">statusPort</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">yarp::os::Bottle&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a4ccd5c3a929028ed7a14976f97d35893">stop_command</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">TODO: Make this not iCub specific.  <a href="#a4ccd5c3a929028ed7a14976f97d35893"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a049c9a7ce112f3134208916c4f94cc19">isOpen</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates whether or not filter is forwarding commands.  <a href="#a049c9a7ce112f3134208916c4f94cc19"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a83c5e63327e46f0d5ab225a5b72835c2">haveControl</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; bool &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a7224702c421491a756ba3cd593333924">isBusy</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates whether or not the filter currently has control of the robot.  <a href="#a83c5e63327e46f0d5ab225a5b72835c2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector<br class="typebreak"/>
 &lt; <a class="el" href="classyarp_1_1os_1_1_control_board_filter.html">yarp::os::ControlBoardFilter</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a47c2dd6bbac0a09416a5c04e16530318">cbFilters</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of ControlBoardFilters - one for each of the robot's BodyParts.  <a href="#a47c2dd6bbac0a09416a5c04e16530318"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_state_observer.html">StateObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ae6ee22251bdf7a13f2c779d617eca740">stateObservers</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html">CircularBuffer</a>.  <a href="#ae6ee22251bdf7a13f2c779d617eca740"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_call_observer.html">CallObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#aeccf2ace0ba56a2eeecc47be3fe9549f">callObservers</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers that monitor RPC calls.  <a href="#aeccf2ace0ba56a2eeecc47be3fe9549f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_response_observer.html">ResponseObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a2ad49c69af7d91dd3539ce8fdfae9a74">responseObservers</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers that monitor RPC responses.  <a href="#a2ad49c69af7d91dd3539ce8fdfae9a74"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>This class provides a safety mechanism to protect a YARP device from unwanted collisions. </p>
+<p>The <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> is intended to protect the robot by filtering motor control commands that may lead to unwanted collisions. It duplicates the motor control ports for your robot, and forwards commands from the duplicates to the real ones as long as the filter is connected. The filter is controlled by a kinematic model of the robot (see <a class="el" href="class_virtual_skin_1_1_yarp_model.html" title="Wraps RobotModel::Model with YARP functionality.">YarpModel</a> and <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a>) that reads the streams of encoder positions from the real robot, computes the forward kinematics and does collision detection. If unwanted collisions are found, the filter cuts its connection between the duplicate ports and the real ones, thereby effectively ignoring the user until a pure virutal handler function (<a class="el" href="class_virtual_skin_1_1_robot_filter.html#a6b3e2916c744c2c26e83010f0b60cbcc" title="Provides a mechanism to respond to collision events by injecting control code. See...">collisionResponse()</a>) returns.</p>
+<p>The user is free to implement <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a6b3e2916c744c2c26e83010f0b60cbcc" title="Provides a mechanism to respond to collision events by injecting control code. See...">collisionResponse()</a> in any way they like. An example of a simple reflexive response to collision is implemented in <a class="el" href="class_reflex_filter.html" title="A VirtualSkin::RobotFilter with reflexive collision response.">ReflexFilter</a>. The implementation of <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> is built on YarpFilter. In order to empower the user to gather the data needed to handle collisions in arbitrary ways, the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> supports the extension helper-classes of YarpFilter (<a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>, <a class="el" href="class_virtual_skin_1_1_call_observer.html" title="An IObserver implemented to monitor RPC calls.">CallObserver</a> and <a class="el" href="class_virtual_skin_1_1_response_observer.html" title="An IObserver implemented to monitor RPC responses.">ResponseObserver</a>) can be extended, and the resulting sub-classes passed to the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> via the templated <a class="el" href="class_virtual_skin_1_1_robot_filter.html#abd0bb555d57f9d978ac1b4a7c52a573d" title="Builds a RobotFilter for the RobotModel::Model described in the requested config...">open&lt;aStateObserver,aCallObserver,aResponseObserver&gt;( const QString&amp; )</a> function. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a360450f28d32c0ce8c9fefee77ace3be"></a><!-- doxytag: member="VirtualSkin::RobotFilter::RobotFilter" ref="a360450f28d32c0ce8c9fefee77ace3be" args="(bool visualize=false)" -->
 <div class="memitem">
@@ -111,6 +130,8 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 </div>
 <div class="memdoc">
 
+<p>Connects the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> to the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a>, and initializes some members. </p>
+
 </div>
 </div>
 <a class="anchor" id="a023b1465a80479e54bd4a47ca958a5af"></a><!-- doxytag: member="VirtualSkin::RobotFilter::~RobotFilter" ref="a023b1465a80479e54bd4a47ca958a5af" args="()" -->
@@ -127,6 +148,8 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Calls <a class="el" href="class_virtual_skin_1_1_robot_filter.html#af727d2bba23531237fdd21ac198a4726" title="Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the...">close()</a>. </p>
 
 </div>
 </div>
@@ -146,6 +169,8 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 </div>
 <div class="memdoc">
 
+<p>Deletes all ControlBoardFilters and IObservers, returning the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> to the state it was in just after construction. </p>
+
 </div>
 </div>
 <a class="anchor" id="a4bd1aaf8a79af150a720a6d070fa3906"></a><!-- doxytag: member="VirtualSkin::RobotFilter::closeStatusPort" ref="a4bd1aaf8a79af150a720a6d070fa3906" args="()" -->
@@ -162,6 +187,8 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Closes the Yarp stream port indicating whether or not the filter is connected. </p>
 
 </div>
 </div>
@@ -180,11 +207,14 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 </div>
 <div class="memdoc">
 
+<p>Provides a mechanism to respond to collision events by injecting control code. See the implementation in <a class="el" href="class_reflex_filter.html" title="A VirtualSkin::RobotFilter with reflexive collision response.">ReflexFilter</a>. </p>
+<p>This is executed once the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> has detected collisions and cut its connection. Control is not restored to the user until this function returns. </p>
+
 <p>Implemented in <a class="el" href="class_reflex_filter.html#a3a9baca5af392208099867d8d9340fd4">ReflexFilter</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a96d765a00bb1136b8d5420e6e2736467"></a><!-- doxytag: member="VirtualSkin::RobotFilter::extraOpenStuff" ref="a96d765a00bb1136b8d5420e6e2736467" args="()=0" -->
+<a class="anchor" id="a3ce7a6f5265b93915ef04789f6042d3c"></a><!-- doxytag: member="VirtualSkin::RobotFilter::extraOpenStuff" ref="a3ce7a6f5265b93915ef04789f6042d3c" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -193,13 +223,16 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_reflex_filter.html#af7d17a4e115d9260ff00271fdd7ac6fd">ReflexFilter</a>.</p>
+<p>This is called shortly before <a class="el" href="class_virtual_skin_1_1_robot_filter.html#abd0bb555d57f9d978ac1b4a7c52a573d" title="Builds a RobotFilter for the RobotModel::Model described in the requested config...">open&lt;&gt;(const QString&amp;)</a> returns. </p>
+<p>In your sub-classes, replace the empty implementation with any initialization code required. For an example of this, see <a class="el" href="class_reflex_filter.html" title="A VirtualSkin::RobotFilter with reflexive collision response.">ReflexFilter</a>. </p>
+
+<p>Reimplemented in <a class="el" href="class_reflex_filter.html#af7d17a4e115d9260ff00271fdd7ac6fd">ReflexFilter</a>.</p>
 
 </div>
 </div>
@@ -207,7 +240,7 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class someStateObserver , class someCallObserver , class someResponseObserver &gt; </div>
+template&lt;class aStateObserver , class aCallObserver , class aResponseObserver &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool VirtualSkin::RobotFilter::open </td>
@@ -220,6 +253,10 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
       </table>
 </div>
 <div class="memdoc">
+
+<p>Builds a <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> for the <a class="el" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> described in the requested config file. </p>
+<p>The filter consists of a <a class="el" href="classyarp_1_1os_1_1_control_board_filter.html" title="A proxy for a YARP device driver that can also filter data.">yarp::os::ControlBoardFilter</a> for each <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> specified in the config file. The ControlBoardFilters require some helper classes (<a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>, <a class="el" href="class_virtual_skin_1_1_call_observer.html" title="An IObserver implemented to monitor RPC calls.">CallObserver</a> and <a class="el" href="class_virtual_skin_1_1_response_observer.html" title="An IObserver implemented to monitor RPC responses.">ResponseObserver</a>), which can be extended to provide additional functionality. To open a 'standard' <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> full of 'standard' ControlBoardFilters, call open&lt;StateObserver,CallObserver,ResponseObserver&gt;( "configFile.xml" ). For an example of this, see PATH_TO_YOUR_GIT_REPOSITORY/virtualSkin/ReflexDemo/main.cpp. If you need a custom ControlBoardFilter, extend <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>, <a class="el" href="class_virtual_skin_1_1_call_observer.html" title="An IObserver implemented to monitor RPC calls.">CallObserver</a> and <a class="el" href="class_virtual_skin_1_1_response_observer.html" title="An IObserver implemented to monitor RPC responses.">ResponseObserver</a>, and pass the sub-types to the <a class="el" href="class_virtual_skin_1_1_robot_filter.html#abd0bb555d57f9d978ac1b4a7c52a573d" title="Builds a RobotFilter for the RobotModel::Model described in the requested config...">open&lt;aStateObserver,aCallObserver,aResponseObserver&gt;(const QString&amp;)</a> method.</p>
+<dl class="note"><dt><b>Note:</b></dt><dd>aStateObserver,aCallObserver,aResponseObserver MUST be sub-classes of <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>,<a class="el" href="class_virtual_skin_1_1_call_observer.html" title="An IObserver implemented to monitor RPC calls.">CallObserver</a>,<a class="el" href="class_virtual_skin_1_1_response_observer.html" title="An IObserver implemented to monitor RPC responses.">ResponseObserver</a> respectively </dd></dl>
 
 </div>
 </div>
@@ -239,73 +276,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="aa650556a1f8d4ed0a202e3626b945b17"></a><!-- doxytag: member="VirtualSkin::RobotFilter::restartStatusPort" ref="aa650556a1f8d4ed0a202e3626b945b17" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VirtualSkin::RobotFilter::restartStatusPort </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab9eb900478b4c2836666570c79f9d1f2"></a><!-- doxytag: member="VirtualSkin::RobotFilter::run" ref="ab9eb900478b4c2836666570c79f9d1f2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RobotFilter::run </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aef857e8074ba63f95f126eaecdbd04b8"></a><!-- doxytag: member="VirtualSkin::RobotFilter::startStatusPort" ref="aef857e8074ba63f95f126eaecdbd04b8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VirtualSkin::RobotFilter::startStatusPort </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0f5b2fcf783fd4565789a9e44a7f0918"></a><!-- doxytag: member="VirtualSkin::RobotFilter::stopStatusPort" ref="a0f5b2fcf783fd4565789a9e44a7f0918" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VirtualSkin::RobotFilter::stopStatusPort </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Open a YARP port that streams a boolean indicating the status of the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a>. </p>
+<p>A 1 indicates the filter is connected and motor commands are being forwarded, whereas a 0 indicates that the filter has been cut and motor commands are being ignored. </p>
 
 </div>
 </div>
@@ -324,6 +296,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
+<p>Provides a thread-safe mechanism to cut the filter connection and begin collision recovery. </p>
+
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -338,6 +312,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
+<p>A QVector of IObservers that monitor RPC calls. </p>
+
 </div>
 </div>
 <a class="anchor" id="a47c2dd6bbac0a09416a5c04e16530318"></a><!-- doxytag: member="VirtualSkin::RobotFilter::cbFilters" ref="a47c2dd6bbac0a09416a5c04e16530318" args="" -->
@@ -350,6 +326,9 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
       </table>
 </div>
 <div class="memdoc">
+
+<p>A QVector of ControlBoardFilters - one for each of the robot's BodyParts. </p>
+<p>These filters have a 1-to-1 correspondence to the YARP (server) control board drivers of the robot. </p>
 
 </div>
 </div>
@@ -364,18 +343,7 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a7224702c421491a756ba3cd593333924"></a><!-- doxytag: member="VirtualSkin::RobotFilter::isBusy" ref="a7224702c421491a756ba3cd593333924" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector&lt;bool&gt; <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a7224702c421491a756ba3cd593333924">VirtualSkin::RobotFilter::isBusy</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Indicates whether or not the filter currently has control of the robot. </p>
 
 </div>
 </div>
@@ -390,6 +358,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
+<p>Indicates whether or not filter is forwarding commands. </p>
+
 </div>
 </div>
 <a class="anchor" id="aecb6bb54472069b368a06fb0b81374dd"></a><!-- doxytag: member="VirtualSkin::RobotFilter::model" ref="aecb6bb54472069b368a06fb0b81374dd" args="" -->
@@ -402,6 +372,9 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
       </table>
 </div>
 <div class="memdoc">
+
+<p>The model that controls the opening and closing of the filter. </p>
+<p>It is public so that the user has access to the information that was read out of the robot configuration file, such as the name of the robot and the number of controllable axes for example </p>
 
 </div>
 </div>
@@ -416,6 +389,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
+<p>A QVector of IObservers that monitor RPC responses. </p>
+
 </div>
 </div>
 <a class="anchor" id="ae6ee22251bdf7a13f2c779d617eca740"></a><!-- doxytag: member="VirtualSkin::RobotFilter::stateObservers" ref="ae6ee22251bdf7a13f2c779d617eca740" args="" -->
@@ -429,6 +404,8 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
 </div>
 <div class="memdoc">
 
+<p>A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html">CircularBuffer</a>. </p>
+
 </div>
 </div>
 <a class="anchor" id="a1475beef6b4a16d17eb2a8c8871a44aa"></a><!-- doxytag: member="VirtualSkin::RobotFilter::statusPort" ref="a1475beef6b4a16d17eb2a8c8871a44aa" args="" -->
@@ -441,6 +418,7 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
       </table>
 </div>
 <div class="memdoc">
+<p>Published the (open/closed) status of the filter </p>
 
 </div>
 </div>
@@ -454,6 +432,10 @@ template&lt;class someStateObserver , class someCallObserver , class someRespons
       </table>
 </div>
 <div class="memdoc">
+
+<p>TODO: Make this not iCub specific. </p>
+<p>Stores an RPC command to stop the iCub robot </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>This is iCub specific, and it should be done differently in the future </dd></dl>
 
 </div>
 </div>

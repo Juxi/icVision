@@ -53,25 +53,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <small>
 [<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
 </h1><!-- doxytag: class="yarp::os::ControlBoardFilter" -->
+<p>A proxy for a YARP device driver that can also filter data.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_control_board_filter_8h_source.html">ControlBoardFilter.h</a>&gt;</code></p>
 
 <p><a href="classyarp_1_1os_1_1_control_board_filter-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a4cd0bdff78668dd46a8a567b3ce60144">ControlBoardFilter</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The filter is cut (not forwarding commands) when it is constructed.  <a href="#a4cd0bdff78668dd46a8a567b3ce60144"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a5c3f6dd113745a570fd06d616cc4e16a">~ControlBoardFilter</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a5c3f6dd113745a570fd06d616cc4e16a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a27f3aa5419bce6ad6e421ddcb2e52131">open</a> (ConstString filterName, ConstString targetName)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates YARP ports, connects them to eachother and to a YARP device driver and causes the filter to begin forwarding messages.  <a href="#a27f3aa5419bce6ad6e421ddcb2e52131"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a6224733f849144002f5b0f89f30ffb17">close</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stops forwarding messages and closes the filtered ports, returning the object to the state it was in just after construction.  <a href="#a6224733f849144002f5b0f89f30ffb17"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a97baafa3310ec3ecad9c348c29c8b09c">cutConnection</a> (bool cut=true)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Causes the filter to stop forwarding data (effectively cutting off the user from the device driver).  <a href="#a97baafa3310ec3ecad9c348c29c8b09c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#af23fad9bab89b2a57c4fb32eb99d76ef">setStateObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set a handler for data arriving on /filterName/state:i (called each time a yarp::os::bottle arrives).  <a href="#af23fad9bab89b2a57c4fb32eb99d76ef"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a2500ae8300c6ca835f5b25133e1d04ed">setCommandObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set a handler for data arriving on /filterName/command:i (called each time a yarp::os::bottle arrives).  <a href="#a2500ae8300c6ca835f5b25133e1d04ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a72b5abaf68eb361c79d9de5071eb36b9">setCallObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set a handler for RPC calls arriving on /filterName/rpc:i (called each time a yarp::os::bottle arrives).  <a href="#a72b5abaf68eb361c79d9de5071eb36b9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#acf3896d97b179e36d41d275087c33c4e">setResponseObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set a handler for RPC responses arriving on /filterName/rpc:o (called each time a yarp::os::bottle arrives).  <a href="#acf3896d97b179e36d41d275087c33c4e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a6d3b3916553af9221093518d93c49c99">setReplier</a> (<a class="el" href="classyarp_1_1os_1_1_i_replier.html">IReplier</a> *r)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set a handler that replies to RPC calls arriving on /filterName/rpc:i while the filter is cut.  <a href="#a6d3b3916553af9221093518d93c49c99"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a379021d871cc1d375d8ea2107b74911d">injectState</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inject a yarp::os::bottle into the state stream on /filterName/state:o.  <a href="#a379021d871cc1d375d8ea2107b74911d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a329bcebdddb5afbd7a5e7303e6941311">injectCommand</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inject a yarp::os::bottle into the command stream on /filterName/command:o.  <a href="#a329bcebdddb5afbd7a5e7303e6941311"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_control_board_filter.html#a46da5eabf941da5694107bf2d4adc075">injectCall</a> (const Bottle &amp;b)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Inject an RPC call (yarp::os::bottle) on /filterName/rpc:o.  <a href="#a46da5eabf941da5694107bf2d4adc075"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A proxy for a YARP device driver that can also filter data. </p>
+<p>A YARP device driver has three ports:</p>
+<ul>
+<li>/targetName/state:o</li>
+<li>/targetName/command:i</li>
+<li>/targetName/rpc:i</li>
+</ul>
+<p>This class creates three more ports to mimic the device driver: </p>
+<div class="fragment"><pre class="fragment">
+ * 		- /filterName/state:o		|		 |		/targetName/state:o
+ *		- /filterName/command:i		| FILTER |		/targetName/command:i
+ *		- /filterName/rpc:i			|		 |		/targetName/rpc:i
+ *
+ * </pre></div><p> Thus the filter provides a transparent interface to the device driver. Furthermore, it provides a mechanism to cut the connection (effectively cutting off the user from the YARP device driver) as well as inject data into the exchange between user and device driver. </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>When the filter is cut, it still allows the state port to transmit data </dd></dl>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4cd0bdff78668dd46a8a567b3ce60144"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::ControlBoardFilter" ref="a4cd0bdff78668dd46a8a567b3ce60144" args="()" -->
 <div class="memitem">
@@ -87,6 +119,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>The filter is cut (not forwarding commands) when it is constructed. </p>
 
 </div>
 </div>
@@ -104,6 +138,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -123,6 +159,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Stops forwarding messages and closes the filtered ports, returning the object to the state it was in just after construction. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>targetname</em>&nbsp;</td><td>The name of the device driver to connect to. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>filterName</em>&nbsp;</td><td>The base name of the new interface to the device driver. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a97baafa3310ec3ecad9c348c29c8b09c"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::cutConnection" ref="a97baafa3310ec3ecad9c348c29c8b09c" args="(bool cut=true)" -->
@@ -140,6 +185,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Causes the filter to stop forwarding data (effectively cutting off the user from the device driver). </p>
 
 </div>
 </div>
@@ -159,6 +206,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Inject an RPC call (yarp::os::bottle) on /filterName/rpc:o. </p>
+
 </div>
 </div>
 <a class="anchor" id="a329bcebdddb5afbd7a5e7303e6941311"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectCommand" ref="a329bcebdddb5afbd7a5e7303e6941311" args="(const Bottle &amp;b)" -->
@@ -177,6 +226,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Inject a yarp::os::bottle into the command stream on /filterName/command:o. </p>
+
 </div>
 </div>
 <a class="anchor" id="a379021d871cc1d375d8ea2107b74911d"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::injectState" ref="a379021d871cc1d375d8ea2107b74911d" args="(const Bottle &amp;b)" -->
@@ -194,6 +245,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Inject a yarp::os::bottle into the state stream on /filterName/state:o. </p>
 
 </div>
 </div>
@@ -222,6 +275,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Creates YARP ports, connects them to eachother and to a YARP device driver and causes the filter to begin forwarding messages. </p>
+
 </div>
 </div>
 <a class="anchor" id="a72b5abaf68eb361c79d9de5071eb36b9"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setCallObserver" ref="a72b5abaf68eb361c79d9de5071eb36b9" args="(IObserver *o)" -->
@@ -239,6 +294,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set a handler for RPC calls arriving on /filterName/rpc:i (called each time a yarp::os::bottle arrives). </p>
 
 </div>
 </div>
@@ -258,6 +315,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Set a handler for data arriving on /filterName/command:i (called each time a yarp::os::bottle arrives). </p>
+
 </div>
 </div>
 <a class="anchor" id="a6d3b3916553af9221093518d93c49c99"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setReplier" ref="a6d3b3916553af9221093518d93c49c99" args="(IReplier *r)" -->
@@ -275,6 +334,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set a handler that replies to RPC calls arriving on /filterName/rpc:i while the filter is cut. </p>
 
 </div>
 </div>
@@ -294,6 +355,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="memdoc">
 
+<p>Set a handler for RPC responses arriving on /filterName/rpc:o (called each time a yarp::os::bottle arrives). </p>
+
 </div>
 </div>
 <a class="anchor" id="af23fad9bab89b2a57c4fb32eb99d76ef"></a><!-- doxytag: member="yarp::os::ControlBoardFilter::setStateObserver" ref="af23fad9bab89b2a57c4fb32eb99d76ef" args="(IObserver *o)" -->
@@ -311,6 +374,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Set a handler for data arriving on /filterName/state:i (called each time a yarp::os::bottle arrives). </p>
 
 </div>
 </div>

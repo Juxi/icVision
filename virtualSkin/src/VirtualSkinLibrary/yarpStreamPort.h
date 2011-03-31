@@ -12,36 +12,33 @@
 
 #include <yarp/os/all.h>
 #include <QThread>
-#include <QMutex>
 
 namespace VirtualSkin {
 
+/** \brief A YARP port that broadcasts a stream
+*/
 class YarpStreamPort: public QThread
 {
 	
 public:
-	YarpStreamPort();
-	virtual ~YarpStreamPort();
+	YarpStreamPort();				//!< Nothing special to do here
+	virtual ~YarpStreamPort();		//!< Nothing special to do here
 
-	void open( const QString& name );
-	void close();
-	bool isOpen() { return portIsOpen; }
+	void open( const QString& name );	//!< Opens the port and starts the thread to stream bottles
+	void close();						//!< Stops the thread and closes the port
 	
-	//void write( const yarp::os::Bottle& aBottle );
-	
-	void setBottle( const yarp::os::Bottle& aBottle );
-	void run();
-	void stop();
-	//void restart();
-
-protected:
-	QMutex mutex;
-	yarp::os::Bottle bottle;
+	void setBottle( const yarp::os::Bottle& aBottle );	//!< Sets the value of the bottle that is streamed
 	
 private:
-	yarp::os::Network yarp;
-	yarp::os::Port port;
-	bool portIsOpen,keepRunning;
+	yarp::os::Network yarp;	//!< Identifies the yarp network
+	yarp::os::Port port;	//!< The port we are wrapping
+	bool keepRunning;		//!< Provides a graceful way to control when the run() method returns
+
+	//QMutex mutex;
+	yarp::os::Bottle bottle;
+	
+	void run();		//!< Runs the thread
+	void stop();	//!< Stops the thread
 
 };
 }

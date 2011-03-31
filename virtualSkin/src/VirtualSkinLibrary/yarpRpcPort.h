@@ -33,7 +33,7 @@ public:
 private:
 	yarp::os::Network yarp;							//!< Identifies the yarp network
 	yarp::os::BufferedPort<yarp::os::Bottle> port;	//!< The port we are wrapping
-	bool	keepListening,							//!< Provides a graceful way to control when the run() method 
+	bool	keepListening,							//!< Provides a graceful way to control when the run() method returns
 			debug;									//!< Controls whether or not to print bottles to the terminal
 	
 	void run();																			//!< Don't call this call start() instead

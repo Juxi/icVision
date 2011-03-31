@@ -50,6 +50,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>VirtualSkin::YarpRpcPort Class Reference</h1><!-- doxytag: class="VirtualSkin::YarpRpcPort" -->
+<p>A call/response style YARP port.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="yarp_rpc_port_8h_source.html">yarpRpcPort.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
@@ -66,16 +69,20 @@ Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a393b44f37d77b25d8c5cb7f14609c4d5">YarpRpcPort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nothing special to do here.  <a href="#a393b44f37d77b25d8c5cb7f14609c4d5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#acf21bbb8e38b69fd9c3769a2f9b45743">~YarpRpcPort</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a277b0b5583f5c6bee76b9435538febc0">useDebug</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a5d30f15e11bab65e111df04643363bfc">noDebug</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls <a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a960fc3e267730835af02f1e2cd198e1b" title="Stop the thread and closes the port.">close()</a> if necessary.  <a href="#acf21bbb8e38b69fd9c3769a2f9b45743"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#ae719ad3401930f4d03d471094fd77eb6">useDebug</a> (bool b=true)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Controls whether or not to print bottles to the terminal.  <a href="#ae719ad3401930f4d03d471094fd77eb6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#af1c20b815f76f58135c89bf21116210d">open</a> (const QString &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a3e4c1be7ae685d9478b38d71255b1bcd">run</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a5d01a64c6b1ff1b67c9a079bf36b76bb">handler</a> (const yarp::os::Bottle &amp;cmd, yarp::os::Bottle &amp;reply)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#ae26626cb99ca15bfec5e5162845018c2">showBottle</a> (yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a1554e6c2e38cb71f2521280f65bbab05">stop</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Starts the RPC port running in a separate thread.  <a href="#af1c20b815f76f58135c89bf21116210d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a960fc3e267730835af02f1e2cd198e1b">close</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stop the thread and closes the port.  <a href="#a960fc3e267730835af02f1e2cd198e1b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a93d242e15bb04534f7db4fe6636a0086">restart</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Restart the thread.  <a href="#a93d242e15bb04534f7db4fe6636a0086"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A call/response style YARP port. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a393b44f37d77b25d8c5cb7f14609c4d5"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::YarpRpcPort" ref="a393b44f37d77b25d8c5cb7f14609c4d5" args="()" -->
 <div class="memitem">
@@ -91,6 +98,8 @@ Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Nothing special to do here. </p>
 
 </div>
 </div>
@@ -109,50 +118,27 @@ Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
 </div>
 <div class="memdoc">
 
+<p>Calls <a class="el" href="class_virtual_skin_1_1_yarp_rpc_port.html#a960fc3e267730835af02f1e2cd198e1b" title="Stop the thread and closes the port.">close()</a> if necessary. </p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a5d01a64c6b1ff1b67c9a079bf36b76bb"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::handler" ref="a5d01a64c6b1ff1b67c9a079bf36b76bb" args="(const yarp::os::Bottle &amp;cmd, yarp::os::Bottle &amp;reply)=0" -->
+<a class="anchor" id="a960fc3e267730835af02f1e2cd198e1b"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::close" ref="a960fc3e267730835af02f1e2cd198e1b" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool VirtualSkin::YarpRpcPort::handler </td>
+          <td class="memname">void YarpRpcPort::close </td>
           <td>(</td>
-          <td class="paramtype">const yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>cmd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
           <td></td>
-          <td class="paramtype">yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>reply</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a5d30f15e11bab65e111df04643363bfc"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::noDebug" ref="a5d30f15e11bab65e111df04643363bfc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VirtualSkin::YarpRpcPort::noDebug </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Stop the thread and closes the port. </p>
 
 </div>
 </div>
@@ -172,6 +158,8 @@ Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
 </div>
 <div class="memdoc">
 
+<p>Starts the RPC port running in a separate thread. </p>
+
 </div>
 </div>
 <a class="anchor" id="a93d242e15bb04534f7db4fe6636a0086"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::restart" ref="a93d242e15bb04534f7db4fe6636a0086" args="()" -->
@@ -189,83 +177,27 @@ Inheritance diagram for VirtualSkin::YarpRpcPort:</div>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a3e4c1be7ae685d9478b38d71255b1bcd"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::run" ref="a3e4c1be7ae685d9478b38d71255b1bcd" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpRpcPort::run </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Restart the thread. </p>
 
 </div>
 </div>
-<a class="anchor" id="ae26626cb99ca15bfec5e5162845018c2"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::showBottle" ref="ae26626cb99ca15bfec5e5162845018c2" args="(yarp::os::Bottle &amp;anUnknownBottle, int indentation=0)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpRpcPort::showBottle </td>
-          <td>(</td>
-          <td class="paramtype">yarp::os::Bottle &amp;&nbsp;</td>
-          <td class="paramname"> <em>anUnknownBottle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>indentation</em> = <code>0</code></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1554e6c2e38cb71f2521280f65bbab05"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::stop" ref="a1554e6c2e38cb71f2521280f65bbab05" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YarpRpcPort::stop </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a277b0b5583f5c6bee76b9435538febc0"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::useDebug" ref="a277b0b5583f5c6bee76b9435538febc0" args="()" -->
+<a class="anchor" id="ae719ad3401930f4d03d471094fd77eb6"></a><!-- doxytag: member="VirtualSkin::YarpRpcPort::useDebug" ref="ae719ad3401930f4d03d471094fd77eb6" args="(bool b=true)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void VirtualSkin::YarpRpcPort::useDebug </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>b</em> = <code>true</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Controls whether or not to print bottles to the terminal. </p>
 
 </div>
 </div>

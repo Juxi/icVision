@@ -52,26 +52,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 <span class="comment"> *</span>
 <a name="l00007"></a>00007 <span class="comment"> */</span>
 <a name="l00008"></a>00008 
-<a name="l00017"></a>00017 <span class="preprocessor">#ifndef IOBSERVER_H_</span>
-<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#define IOBSERVER_H_</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;yarp/os/all.h&gt;</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="keyword">namespace </span>yarp {
-<a name="l00023"></a>00023         <span class="keyword">namespace </span>os {
-<a name="l00024"></a>00024                 <span class="keyword">class </span>IObserver;
-<a name="l00025"></a>00025         }
-<a name="l00026"></a>00026 }
-<a name="l00027"></a>00027 
-<a name="l00033"></a><a class="code" href="classyarp_1_1os_1_1_i_observer.html">00033</a> <span class="keyword">class </span><a class="code" href="classyarp_1_1os_1_1_i_observer.html">yarp::os::IObserver</a> {
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="keyword">public</span>:
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">00037</a>         <span class="keyword">virtual</span> <a class="code" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">~IObserver</a>(){}
-<a name="l00043"></a>00043         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790">onDataObserved</a>(yarp::os::Bottle &amp;b) = 0;
+<a name="l00021"></a>00021 <span class="preprocessor">#ifndef IOBSERVER_H_</span>
+<a name="l00022"></a>00022 <span class="preprocessor"></span><span class="preprocessor">#define IOBSERVER_H_</span>
+<a name="l00023"></a>00023 <span class="preprocessor"></span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &lt;yarp/os/all.h&gt;</span>
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026 <span class="keyword">namespace </span>yarp {
+<a name="l00027"></a>00027         <span class="keyword">namespace </span>os {
+<a name="l00028"></a>00028                 <span class="keyword">class </span>IObserver;
+<a name="l00029"></a>00029         }
+<a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 
+<a name="l00037"></a><a class="code" href="classyarp_1_1os_1_1_i_observer.html">00037</a> <span class="keyword">class </span><a class="code" href="classyarp_1_1os_1_1_i_observer.html" title="An interface that defines a handler for data arriving on YARP ports.">yarp::os::IObserver</a> {
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keyword">public</span>:
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6">00041</a>         <span class="keyword">virtual</span> <a class="code" href="classyarp_1_1os_1_1_i_observer.html#a6e20a4a7baa318b53d6a7e3f198699f6" title="Nothing to do here.">~IObserver</a>(){}                                                                  
+<a name="l00042"></a>00042         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classyarp_1_1os_1_1_i_observer.html#a4829e5a6f2ba6666b9539a4a30f20790" title="The handler function.">onDataObserved</a>(yarp::os::Bottle &amp;b) = 0;   
+<a name="l00043"></a>00043         
 <a name="l00044"></a>00044 };
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="preprocessor">#endif </span><span class="comment">/* IOBSERVER_H_ */</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

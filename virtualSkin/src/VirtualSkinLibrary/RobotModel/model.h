@@ -59,11 +59,11 @@ public:
 	World	world;			//!< All the other Objects not belonging to the Robot's body.
 
 	bool computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID
-							/**< Call this function if you want to be in control of which poses are computed when */
-	void run();				//!< Allows a thread to call computePose() periodically
-							/**< \note IMPORTANT: Call start() not run() !!! */
-	void stop();			//!< Stops the collision thread
-	void restart();			//!< Restarts the collision thread
+							/**< Call this function directly if you want to be in control of which poses are computed when */
+	
+	void start() { QThread::start(); }	//!< Starts a thread to do collision detection periodically
+	void stop();						//!< Stops the collision thread
+	
 	
 	/*! This callback is executed whenever FreeSOLID encounters a collision between Objects.
 	 *  It refreshes the timestamp on the objects indicating when the last collision has occurred.
@@ -95,6 +95,11 @@ protected:
 	
 	bool keepRunning;	//!< Facilitates stopping and restarting the thread
 	int	 col_count;		//!< The number of (pairwise) collisions in the current robot/world configuration
+	
+private:
+	
+	void run();				//!< Allows a thread to call computePose() periodically
+							/**< \note IMPORTANT: Call start() not run() !!! */
 };
 
 #endif

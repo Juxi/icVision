@@ -1,3 +1,12 @@
+/*******************************************************************
+ ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup iCubBabbler
+ *	@{
+ */
+
 #ifndef ICUBBABBLER
 #define ICUBBABBLER
 
@@ -18,21 +27,19 @@ class ICubBabbler : private QThread
 	Q_OBJECT
 	
 public:
-    ICubBabbler();
-    ~ICubBabbler();
+    ICubBabbler();												//!< Nothing special here
+    ~ICubBabbler();												//!< Nothing special here
 	
-	bool configure( const char* _robotName );
-	bool configure();
+	bool configure( const char* _robotName );					//!< Connect to an iCub via a YARP remote device driver
 
-	void crackBaby( qreal period, qreal velocity, bool hands );
-	void doTheRobot( qreal period, qreal velocity, bool hands );
-	//void oscillate();
-	//void crackBabySafe( int period, int magnitude );
+	void crackBaby( qreal period, qreal velocity, bool hands );	//!< For velocity-control-based babbling 
+	void doTheRobot( qreal period, qreal velocity, bool hands );//!< For position-control-based babbling
 	
 private:
 	QString robotName;
 	Network yarp;
 	PartBabbler	torso, head, leftArm, rightArm;
+	bool configure();
 };
-
-#endif // ICUBBABBLER
+#endif
+/** @} */

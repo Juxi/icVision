@@ -71,58 +71,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00029"></a>00029         <span class="keyword">class </span>Model;
 <a name="l00030"></a>00030 }
 <a name="l00031"></a>00031 
-<a name="l00039"></a><a class="code" href="class_robot_model_1_1_model.html">00039</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> : <span class="keyword">public</span> QThread
-<a name="l00040"></a>00040 {
-<a name="l00041"></a>00041         Q_OBJECT
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="keyword">public</span>:
-<a name="l00044"></a>00044         <a class="code" href="class_robot_model_1_1_model.html#a0a603c2f3ee5c56fc40efc02ccef92b5" title="Sets the default collision response for FreeSOLID to DT_WITNESSED_RESPONSE.">Model</a>( <span class="keywordtype">bool</span> visualize = 0 );    
-<a name="l00045"></a>00045 
-<a name="l00047"></a>00047         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_model.html#ad6ebd2062a0b823db841a0b88baac4c0" title="Nothing special to do here.">~Model</a>();                               
-<a name="l00048"></a>00048         
-<a name="l00049"></a><a class="code" href="class_robot_model_1_1_model.html#a424bec13b2fcc23f27709ceb7abf565e">00049</a>         <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>   <a class="code" href="class_robot_model_1_1_model.html#a424bec13b2fcc23f27709ceb7abf565e" title="The Robot whose pose we are updating.">robot</a>;                  
-<a name="l00050"></a><a class="code" href="class_robot_model_1_1_model.html#a46580e7b1f421e9deadbb045d87dbcbc">00050</a>         <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>   <a class="code" href="class_robot_model_1_1_model.html#a46580e7b1f421e9deadbb045d87dbcbc" title="All the other Objects not belonging to the Robot&amp;#39;s body.">world</a>;                  
+<a name="l00048"></a><a class="code" href="class_robot_model_1_1_model.html">00048</a> <span class="keyword">class </span><a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">RobotModel::Model</a> : <span class="keyword">public</span> QThread
+<a name="l00049"></a>00049 {
+<a name="l00050"></a>00050         Q_OBJECT
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&amp;#39;s pose to be computed in cartesian space and the collision detection...">computePose</a>();             
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#aef475e4724f28b31c2dabb4525e3d55e" title="Allows a thread to call computePose() periodically.">run</a>();                             
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#af9470eeec514706e86a5ce9eb105b3e3" title="Stops the collision thread.">stop</a>();                    
-<a name="l00057"></a>00057         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a324bda2be10f0dd6c50a36dc2bee6971" title="Restarts the collision thread.">restart</a>();                 
-<a name="l00058"></a>00058         
-<a name="l00062"></a><a class="code" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">00062</a>         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">collisionHandler</a>( <span class="keywordtype">void</span> * client_data, DtObjectRef obj1, DtObjectRef obj2, <span class="keyword">const</span> DtCollData *coll_data )
-<a name="l00063"></a>00063         {
-<a name="l00064"></a>00064                 <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>* object1 = (<a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*)obj1;
-<a name="l00065"></a>00065                 <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>* object2 = (<a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*)obj2;
-<a name="l00066"></a>00066                 object1-&gt;<a class="code" href="class_robot_model_1_1_display_list.html#aab3355867d2a992c208f2173fc29e221" title="Sets the time of last collision to now.">setColliding</a>();
-<a name="l00067"></a>00067                 object2-&gt;<a class="code" href="class_robot_model_1_1_display_list.html#aab3355867d2a992c208f2173fc29e221" title="Sets the time of last collision to now.">setColliding</a>();
-<a name="l00068"></a>00068                 
-<a name="l00069"></a>00069                 <a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">Model</a>* detector = (<a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">Model</a>*)client_data;
-<a name="l00070"></a>00070                 
-<a name="l00071"></a>00071                 detector-&gt;<a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294" title="The number of (pairwise) collisions in the current robot/world configuration.">col_count</a>++;
-<a name="l00072"></a>00072                 
-<a name="l00073"></a>00073                 detector-&gt;<a class="code" href="class_robot_model_1_1_model.html#a005954b405d7e3f6c7c9397039503966">collisionHandlerAddendum</a>( object1, object2, coll_data );
-<a name="l00074"></a>00074         }
-<a name="l00075"></a>00075         
-<a name="l00076"></a>00076         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#ac613f217636c3129fb0dafb2e7dd0797">computePosePrefix</a>() = 0;   
-<a name="l00077"></a>00077         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#ac5d6a83365a6add93699e11b69afdedd">computePoseSuffix</a>() = 0;
-<a name="l00078"></a>00078         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a005954b405d7e3f6c7c9397039503966">collisionHandlerAddendum</a>( <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*, <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*, <span class="keyword">const</span> DtCollData* ) = 0;
-<a name="l00079"></a>00079         
-<a name="l00080"></a>00080 signals:
-<a name="l00081"></a>00081         
-<a name="l00082"></a>00082         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a30ae14c4eaa0518c72f5e2804f25f5c3">newStateReady</a>();   
-<a name="l00083"></a>00083         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#ab45c30ded04e2e9c83648f0d838b698e" title="Indicates that a new state has been computed (useful when running collision detection...">collision</a>();               
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="keyword">protected</span>:
+<a name="l00052"></a>00052 <span class="keyword">public</span>:
+<a name="l00053"></a>00053         <a class="code" href="class_robot_model_1_1_model.html#a0a603c2f3ee5c56fc40efc02ccef92b5" title="Sets the default collision response for FreeSOLID to DT_WITNESSED_RESPONSE.">Model</a>( <span class="keywordtype">bool</span> visualize = 0 );    
+<a name="l00054"></a>00054 
+<a name="l00056"></a>00056         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_model.html#ad6ebd2062a0b823db841a0b88baac4c0" title="Nothing special to do here.">~Model</a>();                               
+<a name="l00057"></a>00057         
+<a name="l00058"></a><a class="code" href="class_robot_model_1_1_model.html#a424bec13b2fcc23f27709ceb7abf565e">00058</a>         <a class="code" href="class_robot_model_1_1_robot.html" title="A kinematic model of a robot.">Robot</a>   <a class="code" href="class_robot_model_1_1_model.html#a424bec13b2fcc23f27709ceb7abf565e" title="The Robot whose pose we are updating.">robot</a>;                  
+<a name="l00059"></a><a class="code" href="class_robot_model_1_1_model.html#a46580e7b1f421e9deadbb045d87dbcbc">00059</a>         <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>   <a class="code" href="class_robot_model_1_1_model.html#a46580e7b1f421e9deadbb045d87dbcbc" title="All the other Objects not belonging to the Robot&amp;#39;s body.">world</a>;                  
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_model.html#a71e892d2162a6f5f8089f68bad2d124d" title="Causes the Robot&amp;#39;s pose to be computed in cartesian space and the collision detection...">computePose</a>();             
+<a name="l00062"></a>00062 
+<a name="l00064"></a><a class="code" href="class_robot_model_1_1_model.html#a530ef6ce292db5be7b116fa93e8cd487">00064</a>         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a530ef6ce292db5be7b116fa93e8cd487" title="Starts a thread to do collision detection periodically.">start</a>() { <a class="code" href="class_robot_model_1_1_model.html#a530ef6ce292db5be7b116fa93e8cd487" title="Starts a thread to do collision detection periodically.">QThread::start</a>(); }      
+<a name="l00065"></a>00065         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#af9470eeec514706e86a5ce9eb105b3e3" title="Stops the collision thread.">stop</a>();                                            
+<a name="l00066"></a>00066         
+<a name="l00067"></a>00067         
+<a name="l00071"></a><a class="code" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">00071</a>         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a002eaccb3dca4c41714a5c7ec6de1b2a">collisionHandler</a>( <span class="keywordtype">void</span> * client_data, DtObjectRef obj1, DtObjectRef obj2, <span class="keyword">const</span> DtCollData *coll_data )
+<a name="l00072"></a>00072         {
+<a name="l00073"></a>00073                 <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>* object1 = (<a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*)obj1;
+<a name="l00074"></a>00074                 <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>* object2 = (<a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*)obj2;
+<a name="l00075"></a>00075                 object1-&gt;<a class="code" href="class_robot_model_1_1_display_list.html#aab3355867d2a992c208f2173fc29e221" title="Sets the time of last collision to now.">setColliding</a>();
+<a name="l00076"></a>00076                 object2-&gt;<a class="code" href="class_robot_model_1_1_display_list.html#aab3355867d2a992c208f2173fc29e221" title="Sets the time of last collision to now.">setColliding</a>();
+<a name="l00077"></a>00077                 
+<a name="l00078"></a>00078                 <a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">Model</a>* detector = (<a class="code" href="class_robot_model_1_1_model.html" title="Computes the current pose of the Robot and does collision detection using the FreeSOLID...">Model</a>*)client_data;
+<a name="l00079"></a>00079                 detector-&gt;<a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294" title="The number of (pairwise) collisions in the current robot/world configuration.">col_count</a>++;
+<a name="l00080"></a>00080                 detector-&gt;<a class="code" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729" title="This is executed by collisionHandler() just before it returns.">collisionHandlerAddendum</a>( object1, object2, coll_data );
+<a name="l00081"></a>00081         }
+<a name="l00082"></a>00082         
+<a name="l00083"></a><a class="code" href="class_robot_model_1_1_model.html#a7f8e1593b45351d9811b1dd71610b2b7">00083</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a7f8e1593b45351d9811b1dd71610b2b7" title="This is executed by computePose() just before forward kinematics is computed.">computePosePrefix</a>() {}                                                                                                                                     
+<a name="l00084"></a><a class="code" href="class_robot_model_1_1_model.html#a551e0bab1c33ccc7d6b3fc6c7373897d">00084</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a551e0bab1c33ccc7d6b3fc6c7373897d" title="This is executed by computePose() just after collision detection is computed.">computePoseSuffix</a>() {}                                                                                                                                     
+<a name="l00085"></a><a class="code" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729">00085</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a347d56ffc4a1aefd4266bd453d626729" title="This is executed by collisionHandler() just before it returns.">collisionHandlerAddendum</a>( <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*, <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a>*, <span class="keyword">const</span> DtCollData* ) {}       
 <a name="l00086"></a>00086         
-<a name="l00087"></a><a class="code" href="class_robot_model_1_1_model.html#a2788cdb9e1c31f981bb0e457ebfc9fce">00087</a>         <a class="code" href="class_robot_model_1_1_skin_window.html" title="This QWidget is the window for the optional GUI used to visualize the Robot. (see...">RobotModel::SkinWindow</a>  *<a class="code" href="class_robot_model_1_1_model.html#a2788cdb9e1c31f981bb0e457ebfc9fce" title="Indicates that a collision has occurred (useful when running collision detection...">skinWindow</a>;    
+<a name="l00087"></a>00087 signals:
 <a name="l00088"></a>00088         
-<a name="l00089"></a><a class="code" href="class_robot_model_1_1_model.html#a84816fb122153030d999ede6e54751fe">00089</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_model.html#a84816fb122153030d999ede6e54751fe" title="The visualization.">keepRunning</a>;       
-<a name="l00090"></a><a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294">00090</a>         <span class="keywordtype">int</span>      <a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294" title="The number of (pairwise) collisions in the current robot/world configuration.">col_count</a>;             
-<a name="l00091"></a>00091 };
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 <span class="preprocessor">#endif</span>
-<a name="l00094"></a>00094 <span class="preprocessor"></span>
+<a name="l00089"></a>00089         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#a30ae14c4eaa0518c72f5e2804f25f5c3">newStateReady</a>();   
+<a name="l00090"></a>00090         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_model.html#ab45c30ded04e2e9c83648f0d838b698e" title="Indicates that a new state has been computed (useful when running collision detection...">collision</a>();               
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keyword">protected</span>:
+<a name="l00093"></a>00093         
+<a name="l00094"></a><a class="code" href="class_robot_model_1_1_model.html#a2788cdb9e1c31f981bb0e457ebfc9fce">00094</a>         <a class="code" href="class_robot_model_1_1_skin_window.html" title="This QWidget is the window for the optional GUI used to visualize the Robot. (see...">RobotModel::SkinWindow</a>  *<a class="code" href="class_robot_model_1_1_model.html#a2788cdb9e1c31f981bb0e457ebfc9fce" title="Indicates that a collision has occurred (useful when running collision detection...">skinWindow</a>;    
+<a name="l00095"></a>00095         
+<a name="l00096"></a><a class="code" href="class_robot_model_1_1_model.html#a84816fb122153030d999ede6e54751fe">00096</a>         <span class="keywordtype">bool</span> <a class="code" href="class_robot_model_1_1_model.html#a84816fb122153030d999ede6e54751fe" title="The visualization.">keepRunning</a>;       
+<a name="l00097"></a><a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294">00097</a>         <span class="keywordtype">int</span>      <a class="code" href="class_robot_model_1_1_model.html#a401d1ac94f904ed3250045f572fe0294" title="The number of (pairwise) collisions in the current robot/world configuration.">col_count</a>;             
+<a name="l00098"></a>00098         
+<a name="l00099"></a>00099 <span class="keyword">private</span>:
+<a name="l00100"></a>00100         
+<a name="l00101"></a>00101         <span class="keywordtype">void</span> run();                             
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103 };
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

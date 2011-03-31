@@ -41,7 +41,7 @@ void RobotFilter::close()
 	model.stop();
 	model.robot.close();
 	model.world.clear();
-	statusPort.stop();
+	statusPort.close();
 	
 	// remove all observers from the ControlBoardFilters, close the filters and delete them
 	QVector<yarp::os::ControlBoardFilter*>::const_iterator cbfIter;

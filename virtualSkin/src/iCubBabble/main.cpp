@@ -2,19 +2,20 @@
 
 int main(int argc, char *argv[])
 {
+	/******************************************
+	 *** Get arguments off the command line ***
+	 ******************************************/
 	yarp::os::Property config;
 	config.fromCommand(argc,argv);
 	
-	// path to the XML file that defines the robot model
-	QString xmlFile = "";
-	if ( !config.check("robot") )
+	if ( !config.check("robot") )	// the name of the robot to connect to
 	{
 		printf("Please specify a robot name using '--robot yourRobotName'.\n");
 		return 1;
 	}
 	
 	int type;
-	if ( config.check("type") )
+	if ( config.check("type") )  // the type of motor babbling to do
 	{
 		if ( config.find("type").asString() == "velocity" ) { type = 0; }
 		else if ( config.find("type").asString() == "position" ) { type = 1; }
@@ -26,19 +27,22 @@ int main(int argc, char *argv[])
 	}
 	else { type = 0; }
 	
-	qreal period;
+	qreal period;	// the time between commands that will be sent
 	if ( config.check("period") ) { period = config.find("period").asDouble(); }
 	else { period = 1.0; }
 	period *= 1000000;
 	
-	qreal speed;
+	qreal speed;	// the speed to use for both position and velocity commands
 	if ( config.check("speed") ) { speed = config.find("speed").asDouble(); }
 	else { speed = 20.0; }
 	
-	bool hands;
+	bool hands;		// whether or not to include the hands in babbling
 	if ( config.check("hands") ) { hands = true; }
 	else { hands = false; }
 
+	/**********************
+	 *** START BABBLING ***
+	 **********************/
 	ICubBabbler babbler;
 	if ( !babbler.configure(config.find("robot").asString().c_str()) )
 	{
