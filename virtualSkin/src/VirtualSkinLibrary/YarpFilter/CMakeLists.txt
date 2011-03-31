@@ -10,7 +10,7 @@ SET ( YarpFilter_VERSION_MAJOR 0 )
 SET ( YarpFilter_VERSION_MINOR 1 )
 
 ### Create some options for use with ccmake ###
-option (LINK_ACE OFF)
+OPTION (LINK_ACE OFF)
 
 ### Location of script to find Ace ###
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../cMakeScripts )
