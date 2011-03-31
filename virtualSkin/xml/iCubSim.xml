@@ -52,7 +52,7 @@
    
         <link z=".0825" radius="0">
         
-        <sphere pz=".07" radius=".11"/>
+        <!--<sphere pz=".07" radius=".11"/>-->
         
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
@@ -106,7 +106,7 @@
     <bodypart name="right_arm">
       
             <link x="-.2588" y=".9659" radius=".03" length=".10774">
-            <box width=".15" height=".14" depth=".07" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" />
+            <box depth=".15" height=".14" width=".07" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" />
       
             <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x=".2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
@@ -368,7 +368,7 @@
     <bodypart name="left_arm">
     
             <link x="-.2588" y="-.9659" radius=".03" length=".10774">
-            <box width=".15" height=".14" depth=".07" px="-0.0116" py="-0.0440" pz="-.04" hz="-1" angle="15" />
+            <box depth=".15" height=".14" width=".07" px="-0.0116" py="-0.0440" pz="-.04" hz="-1" angle="15" />
             
             <motor name="LeftShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x="-.2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
