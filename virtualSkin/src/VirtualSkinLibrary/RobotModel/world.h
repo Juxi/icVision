@@ -57,9 +57,9 @@ public:
 	void filterCollisions( const CompositeObject* );								//!< Turns off FreeSOLID collision response between the CompositeObject passed as a parameter and all objects in the World
 	void filterCollisions( PrimitiveObject* );										//!< Turns off FreeSOLID collision response between the PrimitiveObject passed as a parameter and all objects in the World
 	
-	void render();																	//!< Calls display lists for all objects in the World using glCallLists( int )
-
 private:
+	
+	void render();							//!< Calls display lists for all objects in the World using glCallLists( int )
 
 	QVector<CompositeObject*> objectList;	//!< The list of objects in the World
 	
@@ -76,6 +76,7 @@ private:
 						/**< Sboxes are included for compatibility with the iCub simulator, however they 
 							 are functionally equivalent to normal boxes as this model does not include dynamics */
 	QMutex mutex;		//!< To prevent reading past the end of objectList
+
 };
 
 #endif

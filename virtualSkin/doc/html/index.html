@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>VirtualSkin: VirtualSkin Documentation</title>
+<title>VirtualSkin: Welcome to...</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -40,18 +40,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1><a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a> Documentation </h1><h2><a class="anchor" id="intro">
+<h1>Welcome to... </h1><div align="center">
+<img src="roadmap.png" alt="roadmap.png"/>
+</div>
+<h2><a class="anchor" id="intro">
 Introduction</a></h2>
-<p><a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a> is a collection of tools intended to facilitate your research on complex robotic platforms such as humanoids. It is particularly well suited to reaching, grasping and manipulation, however some parts of the <a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a> distribution could certainly be applied to other research topics as well. The idea behind <a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a> is that having a cartesian space representation of the geometry of the robot's pose, which is light-weight and fast (provided by a forward kinematic model and attached geometries), is a useful thing to have. Such a representation, driven by streams of encoder positions from the real hardware (run online), can be used to protect the robot from damage resulting from collision with itself or with immovable objects in the environment. Moreover, it can be used offline to facilitate motion planning by searching for feasible motions much faster than real-time. Whether run online or offline, <a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a> reports collision information in bodypart-centric cartesian coordinates, which provides a pose-invariant representation of the location of collision events on the body.</p>
+<p>The idea behind Virtual Skin is that a cartesian space representation of the geometry of a robot's pose, which is light-weight and fast, is a useful thing to have. Such a representation, driven by streams of encoder positions from the real hardware, can be used to protect a robot from damage resulting from collision with itself or with immovable objects in the environment. Moreover, it can be used offline to facilitate motion planning by searching for feasible motions much faster than real-time. Whether run online or offline, Virtual Skin reports collision information in bodypart-centric cartesian coordinates, which provides a pose-invariant representation of the location of collision events on the robot's body.</p>
 <h2><a class="anchor" id="contents">
 What's In The Box</a></h2>
 <ul>
-<li><b>librobotModel.a</b> - a static library for building and moving a kinematic robot model</li>
-<li><b>libyarpFilter.a</b> - a static library containing a port filter for YARP communication channels (contributed by Gregor Kaufmann - also available as part of "idsiaYarpModules")</li>
-<li><b>reflex</b> - an executable that integrates these two libraries. It tracks a YARP robot (currently iCub or iCubSim but you can model any robot quickly and easily in xml) and reports collision events as described above. In case of collision, it takes control away from the user, executes a reflexive response to a previous collision free pose, then returns control to the user.</li>
+<li><b>libVirtualSkin.a</b> - The Virtual Skin static library includes libRobotModel.a and libYarpFilter.a<ul>
+<li><b>libRobotModel.a</b> - a static library for building and moving a kinematic robot model</li>
+<li><b>libYarpFilter.a</b> - a static library containing a port filter for YARP communication channels (contributed by Gregor Kaufmann - also available as part of "idsiaYarpModules")</li>
+</ul>
+</li>
+<li><b>ReflexDemo</b> - an executable that demonstrates use of Virtual Skin. It tracks a YARP robot (currently 'iCub' or 'iCubSim' but you can model any robot quickly and easily in xml) and reports collision events as described above. In case of collision, it takes control away from the user, executes a reflexive response to a previous collision free pose, then returns control to the user.</li>
 <li><b>iCubBabble</b> - a simple control program for the iCub robot (only) that issues random position or velocity commands.</li>
 </ul>
-<p>Throughout this manual, when I refer to 'Virtual Skin', I mean some program that integrates <code>librobotModel.a</code> and <code>libyarpFilter.a</code> to protect a robot from physical collision. Such a 'Virtual Skin' program may also provide response to collision events as in the demo program 'Reflex'.</p>
 <h2><a class="anchor" id="upcoming">
 Coming Soon</a></h2>
 <ul>
@@ -78,9 +83,9 @@ Questions concerning the GIT repository should be directed to - <a href="mailto:
 <li><div class="fragment"><pre class="fragment">mkdir build </pre></div></li>
 <li><div class="fragment"><pre class="fragment">cd build </pre></div></li>
 <li><div class="fragment"><pre class="fragment">cmake .. </pre></div></li>
-<li><div class="fragment"><pre class="fragment">(optional) ccmake .. </pre></div> ...to tweak build options i.e. set build type to DEBUG, or to set paths to dependencies if cmake fails to find them</li>
+<li><div class="fragment"><pre class="fragment">(optional) ccmake .. </pre></div> for tweaking build options i.e. set build type to DEBUG, or to set paths to dependencies if cmake fails to find them</li>
 <li><div class="fragment"><pre class="fragment">make </pre></div></li>
-<li><div class="fragment"><pre class="fragment">(optional) make install </pre></div> ...this will install build products to:<ul>
+<li><div class="fragment"><pre class="fragment">(optional) make install </pre></div> installs build products to:<ul>
 <li>PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/bin</li>
 <li>PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/lib</li>
 <li>PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/include</li>

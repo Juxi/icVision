@@ -49,7 +49,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>VirtualSkin::RobotFilter Class Reference</h1><!-- doxytag: class="VirtualSkin::RobotFilter" -->
+<h1>VirtualSkin::RobotFilter Class Reference<br/>
+<small>
+[<a class="el" href="group___virtual_skin.html">VirtualSkin</a>]</small>
+</h1><!-- doxytag: class="VirtualSkin::RobotFilter" -->
 <p>This class provides a safety mechanism to protect a YARP device from unwanted collisions.  
 <a href="#_details">More...</a></p>
 
@@ -103,11 +106,16 @@ Inheritance diagram for VirtualSkin::RobotFilter:</div>
 &lt; <a class="el" href="classyarp_1_1os_1_1_control_board_filter.html">yarp::os::ControlBoardFilter</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a47c2dd6bbac0a09416a5c04e16530318">cbFilters</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of ControlBoardFilters - one for each of the robot's BodyParts.  <a href="#a47c2dd6bbac0a09416a5c04e16530318"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_state_observer.html">StateObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ae6ee22251bdf7a13f2c779d617eca740">stateObservers</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html">CircularBuffer</a>.  <a href="#ae6ee22251bdf7a13f2c779d617eca740"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html" title="A simple circular buffer of QVectors.">CircularBuffer</a>.  <a href="#ae6ee22251bdf7a13f2c779d617eca740"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_call_observer.html">CallObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#aeccf2ace0ba56a2eeecc47be3fe9549f">callObservers</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers that monitor RPC calls.  <a href="#aeccf2ace0ba56a2eeecc47be3fe9549f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_virtual_skin_1_1_response_observer.html">ResponseObserver</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a2ad49c69af7d91dd3539ce8fdfae9a74">responseObservers</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A QVector of IObservers that monitor RPC responses.  <a href="#a2ad49c69af7d91dd3539ce8fdfae9a74"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#a8c8926cdd5bce1a7a3f0f9b29fa07ad6">start</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Starts collision response.  <a href="#a8c8926cdd5bce1a7a3f0f9b29fa07ad6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_robot_filter.html#ab9eb900478b4c2836666570c79f9d1f2">run</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Collision response is handled in a separate thread so as not to interrupt anything.  <a href="#ab9eb900478b4c2836666570c79f9d1f2"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>This class provides a safety mechanism to protect a YARP device from unwanted collisions. </p>
@@ -281,6 +289,44 @@ template&lt;class aStateObserver , class aCallObserver , class aResponseObserver
 
 </div>
 </div>
+<a class="anchor" id="ab9eb900478b4c2836666570c79f9d1f2"></a><!-- doxytag: member="VirtualSkin::RobotFilter::run" ref="ab9eb900478b4c2836666570c79f9d1f2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RobotFilter::run </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Collision response is handled in a separate thread so as not to interrupt anything. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8c8926cdd5bce1a7a3f0f9b29fa07ad6"></a><!-- doxytag: member="VirtualSkin::RobotFilter::start" ref="a8c8926cdd5bce1a7a3f0f9b29fa07ad6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VirtualSkin::RobotFilter::start </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Starts collision response. </p>
+
+</div>
+</div>
 <a class="anchor" id="a63edcdd59785cfbf70d099ba14766180"></a><!-- doxytag: member="VirtualSkin::RobotFilter::takeControl" ref="a63edcdd59785cfbf70d099ba14766180" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +450,7 @@ template&lt;class aStateObserver , class aCallObserver , class aResponseObserver
 </div>
 <div class="memdoc">
 
-<p>A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html">CircularBuffer</a>. </p>
+<p>A QVector of IObservers. Each is bound to the state port of a BodyPart, and logs its history in a <a class="el" href="class_virtual_skin_1_1_circular_buffer.html" title="A simple circular buffer of QVectors.">CircularBuffer</a>. </p>
 
 </div>
 </div>

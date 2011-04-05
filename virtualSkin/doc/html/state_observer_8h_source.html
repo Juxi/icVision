@@ -59,38 +59,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="circular_buffer_8h.html">circularBuffer.h</a>&quot;</span>
 <a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="robot_8h.html">robot.h</a>&quot;</span>
 <a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="keyword">namespace </span>VirtualSkin {
-<a name="l00021"></a>00021         
-<a name="l00022"></a>00022 <span class="keyword">class </span>RobotFilter;
-<a name="l00023"></a>00023         
-<a name="l00026"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html">00026</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>: <span class="keyword">public</span> QObject, <span class="keyword">public</span> yarp::os::IObserver
-<a name="l00027"></a>00027 {
-<a name="l00028"></a>00028         Q_OBJECT
-<a name="l00029"></a>00029         
-<a name="l00030"></a>00030 <span class="keyword">public</span>:
+<a name="l00020"></a>00020 <span class="keyword">namespace </span>VirtualSkin
+<a name="l00021"></a>00021 {
+<a name="l00022"></a>00022         <span class="keyword">class </span>RobotFilter;
+<a name="l00023"></a>00023         <span class="keyword">class </span>StateObserver;
+<a name="l00024"></a>00024 }
+<a name="l00025"></a>00025 
+<a name="l00028"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html">00028</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">VirtualSkin::StateObserver</a> : <span class="keyword">public</span> QObject, <span class="keyword">public</span> yarp::os::IObserver
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030         Q_OBJECT
 <a name="l00031"></a>00031         
-<a name="l00032"></a>00032         <a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c4bfeb55e24f75987cadadc3f89ecca" title="Nothing special to do here.">StateObserver</a>(<a class="code" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> *f, <span class="keyword">const</span> <span class="keywordtype">int</span> b);             
-<a name="l00033"></a>00033 
-<a name="l00035"></a>00035         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#af4bf0f323eff464401227a01db686edb" title="Nothing special to do here.">~StateObserver</a>();                                               
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#af104fa553abf31754d9acc084e9aa31f" title="The handler function is called whenever state information passes through the filter...">onDataObserved</a>(yarp::os::Bottle &amp;b);       
-<a name="l00038"></a>00038         
-<a name="l00039"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#a7bbf96d3c5b03b62b4d893b19d0863c8">00039</a>         QVector&lt;qreal&gt; <a class="code" href="class_virtual_skin_1_1_state_observer.html#a7bbf96d3c5b03b62b4d893b19d0863c8" title="Returns the oldest pose in the PoseBuffer (which can&amp;#39;t be colliding).">nonCollidingPose</a>() { <span class="keywordflow">return</span> poseBuffer.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#a9f6b11ef3601e32beac4d5525211ce52" title="Returns a reference to the oldest value in the buffer.">getOldest</a>(); }    
-<a name="l00040"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#af5503bae3beef74c0a34821d8c0b0555">00040</a>         QVector&lt;qreal&gt; <a class="code" href="class_virtual_skin_1_1_state_observer.html#af5503bae3beef74c0a34821d8c0b0555" title="Returns the most recent pose written to the PoseBuffer.">currentPose</a>() { <span class="keywordflow">return</span> poseBuffer.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#a7c4096d1efc8e1cdc9f5be5be3c349e1" title="Returns a reference to the current value.">getCurrent</a>(); }                
-<a name="l00041"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c21836febaed2b79c605947036d19d0">00041</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c21836febaed2b79c605947036d19d0" title="Fills every slot in the PoseBuffer with the vector passed in as a parameter.">initPoseBuffer</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; v ) { poseBuffer.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#accc0710337540977a87597e848bf5e26" title="Fill the buffer with the QVector v.">init</a>(v); }  
-<a name="l00042"></a>00042         
-<a name="l00043"></a>00043 signals:
-<a name="l00044"></a>00044         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#a5e911b16df05da5e7580aa0fc0b707ec" title="Set the motor encoder positions for an enitre RobotModel::BodyPart of the RobotModel::Robot...">setPosition</a>( <span class="keywordtype">int</span> i, <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; v);      
-<a name="l00045"></a>00045 
-<a name="l00048"></a>00048 <span class="keyword">private</span>:
-<a name="l00049"></a>00049         
-<a name="l00050"></a>00050         <a class="code" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> *robotFilter;               
-<a name="l00051"></a>00051         <span class="keyword">const</span> <span class="keywordtype">int</span> bodyPart;                             
-<a name="l00052"></a>00052         <a class="code" href="class_virtual_skin_1_1_circular_buffer.html">CircularBuffer</a> poseBuffer;              
-<a name="l00053"></a>00053 };
-<a name="l00054"></a>00054 }
-<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
+<a name="l00032"></a>00032 <span class="keyword">public</span>:
+<a name="l00033"></a>00033         
+<a name="l00034"></a>00034         <a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c4bfeb55e24f75987cadadc3f89ecca" title="Nothing special to do here.">StateObserver</a>(<a class="code" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> *f, <span class="keyword">const</span> <span class="keywordtype">int</span> b);             
+<a name="l00035"></a>00035 
+<a name="l00037"></a>00037         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#af4bf0f323eff464401227a01db686edb" title="Nothing special to do here.">~StateObserver</a>();                                               
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#af104fa553abf31754d9acc084e9aa31f" title="The handler function is called whenever state information passes through the filter...">onDataObserved</a>(yarp::os::Bottle &amp;b);       
+<a name="l00040"></a>00040         
+<a name="l00041"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#a7bbf96d3c5b03b62b4d893b19d0863c8">00041</a>         QVector&lt;qreal&gt; <a class="code" href="class_virtual_skin_1_1_state_observer.html#a7bbf96d3c5b03b62b4d893b19d0863c8" title="Returns the oldest pose in the PoseBuffer (which can&amp;#39;t be colliding).">nonCollidingPose</a>() { <span class="keywordflow">return</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#ad11c746fdab85dd0090d48819f22317d" title="A CircularBuffer full of previous states of the robot.">poseBuffer</a>.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#a9f6b11ef3601e32beac4d5525211ce52" title="Returns a reference to the oldest value in the buffer.">getOldest</a>(); }    
+<a name="l00042"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#af5503bae3beef74c0a34821d8c0b0555">00042</a>         QVector&lt;qreal&gt; <a class="code" href="class_virtual_skin_1_1_state_observer.html#af5503bae3beef74c0a34821d8c0b0555" title="Returns the most recent pose written to the PoseBuffer.">currentPose</a>() { <span class="keywordflow">return</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#ad11c746fdab85dd0090d48819f22317d" title="A CircularBuffer full of previous states of the robot.">poseBuffer</a>.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#a7c4096d1efc8e1cdc9f5be5be3c349e1" title="Returns a reference to the current value.">getCurrent</a>(); }                
+<a name="l00043"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c21836febaed2b79c605947036d19d0">00043</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#a2c21836febaed2b79c605947036d19d0" title="Fills every slot in the PoseBuffer with the vector passed in as a parameter.">initPoseBuffer</a>( <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; v ) { <a class="code" href="class_virtual_skin_1_1_state_observer.html#ad11c746fdab85dd0090d48819f22317d" title="A CircularBuffer full of previous states of the robot.">poseBuffer</a>.<a class="code" href="class_virtual_skin_1_1_circular_buffer.html#accc0710337540977a87597e848bf5e26" title="Fill the buffer with the QVector v.">init</a>(v); }  
+<a name="l00044"></a>00044         
+<a name="l00045"></a>00045 signals:
+<a name="l00046"></a>00046         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#a5e911b16df05da5e7580aa0fc0b707ec" title="Set the motor encoder positions for an enitre RobotModel::BodyPart of the RobotModel::Robot...">setPosition</a>( <span class="keywordtype">int</span> i, <span class="keyword">const</span> QVector&lt;qreal&gt;&amp; v);      
+<a name="l00047"></a>00047 
+<a name="l00050"></a>00050 <span class="keyword">private</span>:
+<a name="l00051"></a>00051         
+<a name="l00052"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#ad8fc5e279e24aeeb50fc247d671d1638">00052</a>         <a class="code" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> *<a class="code" href="class_virtual_skin_1_1_state_observer.html#ad8fc5e279e24aeeb50fc247d671d1638" title="The RobotFilter to which this Observer belongs.">robotFilter</a>;               
+<a name="l00053"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#a8ffa65dfa1ed6941bcb4b9e5cf27bf81">00053</a>         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_virtual_skin_1_1_state_observer.html#a8ffa65dfa1ed6941bcb4b9e5cf27bf81" title="The RobotModel::BodyPart to which this Observer applies.">bodyPart</a>;                             
+<a name="l00054"></a><a class="code" href="class_virtual_skin_1_1_state_observer.html#ad11c746fdab85dd0090d48819f22317d">00054</a>         <a class="code" href="class_virtual_skin_1_1_circular_buffer.html" title="A simple circular buffer of QVectors.">CircularBuffer</a> <a class="code" href="class_virtual_skin_1_1_state_observer.html#ad11c746fdab85dd0090d48819f22317d" title="A CircularBuffer full of previous states of the robot.">poseBuffer</a>;              
+<a name="l00055"></a>00055 };
+<a name="l00056"></a>00056 <span class="preprocessor">#endif</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

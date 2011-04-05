@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>yarp::os::impl::StreamFilterImpl Class Reference<br/>
 <small>
-[<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
+[<a class="el" href="group___yarp_filter.html">YarpFilter</a>]</small>
 </h1><!-- doxytag: class="yarp::os::impl::StreamFilterImpl" -->
 <p><code>#include &lt;<a class="el" href="_stream_filter_impl_8h_source.html">StreamFilterImpl.h</a>&gt;</code></p>
 
@@ -66,6 +66,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a269889b1cdc1992968861e49d7542e5d">setObserver</a> (<a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *o)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a114406a0f5eb4ae4c002a76f998e89b2">injectData</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a9ffe25ea43e69bcc50d3334fea26fff5">onRead</a> (Bottle &amp;b)</td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BufferedPort&lt; Bottle &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a11d246252484d424208007889f50056e">outPort</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#aa0cddefd0890d9fbfa52a13a56bea284">isOpen</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#af6536a3864437495b7be232a0a527913">isCut</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a6c463d1ec2e8f07782c36dbbdbaaad7e">observer</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Implementation details for the <code><a class="el" href="classyarp_1_1os_1_1_stream_filter.html" title="A proxy for a YARP Stream port that can also filter data.">StreamFilter</a></code> class. The provided services implement the inner workings of StreamFilters.</p>
@@ -210,6 +215,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>o</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="af6536a3864437495b7be232a0a527913"></a><!-- doxytag: member="yarp::os::impl::StreamFilterImpl::isCut" ref="af6536a3864437495b7be232a0a527913" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#af6536a3864437495b7be232a0a527913">yarp::os::impl::StreamFilterImpl::isCut</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa0cddefd0890d9fbfa52a13a56bea284"></a><!-- doxytag: member="yarp::os::impl::StreamFilterImpl::isOpen" ref="aa0cddefd0890d9fbfa52a13a56bea284" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#aa0cddefd0890d9fbfa52a13a56bea284">yarp::os::impl::StreamFilterImpl::isOpen</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6c463d1ec2e8f07782c36dbbdbaaad7e"></a><!-- doxytag: member="yarp::os::impl::StreamFilterImpl::observer" ref="a6c463d1ec2e8f07782c36dbbdbaaad7e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyarp_1_1os_1_1_i_observer.html">IObserver</a>* <a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a6c463d1ec2e8f07782c36dbbdbaaad7e">yarp::os::impl::StreamFilterImpl::observer</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a11d246252484d424208007889f50056e"></a><!-- doxytag: member="yarp::os::impl::StreamFilterImpl::outPort" ref="a11d246252484d424208007889f50056e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BufferedPort&lt;Bottle&gt; <a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html#a11d246252484d424208007889f50056e">yarp::os::impl::StreamFilterImpl::outPort</a><code> [private]</code></td>
         </tr>
       </table>
 </div>

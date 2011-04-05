@@ -49,7 +49,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>VirtualSkin::CallObserver Class Reference</h1><!-- doxytag: class="VirtualSkin::CallObserver" --><!-- doxytag: inherits="yarp::os::IObserver" -->
+<h1>VirtualSkin::CallObserver Class Reference<br/>
+<small>
+[<a class="el" href="group___virtual_skin.html">VirtualSkin</a>]</small>
+</h1><!-- doxytag: class="VirtualSkin::CallObserver" --><!-- doxytag: inherits="yarp::os::IObserver" -->
 <p>An IObserver implemented to monitor RPC calls.  
 <a href="#_details">More...</a></p>
 
@@ -76,6 +79,13 @@ Inheritance diagram for VirtualSkin::CallObserver:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The handler function (called whenever an RPC call passes through the filter).  <a href="#abc1974fe2f04101dbbb1ae3ce83e7bfe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_call_observer.html#a7551cd8674e37faa25451d78150f6a7c">setResponseObsever</a> (<a class="el" href="class_virtual_skin_1_1_response_observer.html">ResponseObserver</a> *o)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the Observer for RPC responses.  <a href="#a7551cd8674e37faa25451d78150f6a7c"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_virtual_skin_1_1_robot_filter.html">RobotFilter</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_call_observer.html#aa41e9ee1c3b076c49c8f05381dbfa8df">robotFilter</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> to which this Observer belongs.  <a href="#aa41e9ee1c3b076c49c8f05381dbfa8df"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_call_observer.html#a19754a51c9117a6f928eddf2d86634a0">bodyPart</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> to which this Observer applies.  <a href="#a19754a51c9117a6f928eddf2d86634a0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_virtual_skin_1_1_response_observer.html">ResponseObserver</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_call_observer.html#ac47a2f7d0ba0ce81dc510179eb09cde0">responseObserver</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">An IObserver implemented to monitor RPC responses.  <a href="#ac47a2f7d0ba0ce81dc510179eb09cde0"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>An IObserver implemented to monitor RPC calls. </p>
@@ -175,6 +185,52 @@ Inheritance diagram for VirtualSkin::CallObserver:</div>
 <div class="memdoc">
 
 <p>Sets the Observer for RPC responses. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a19754a51c9117a6f928eddf2d86634a0"></a><!-- doxytag: member="VirtualSkin::CallObserver::bodyPart" ref="a19754a51c9117a6f928eddf2d86634a0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="class_virtual_skin_1_1_call_observer.html#a19754a51c9117a6f928eddf2d86634a0">VirtualSkin::CallObserver::bodyPart</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indicates the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a> to which this Observer applies. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac47a2f7d0ba0ce81dc510179eb09cde0"></a><!-- doxytag: member="VirtualSkin::CallObserver::responseObserver" ref="ac47a2f7d0ba0ce81dc510179eb09cde0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_virtual_skin_1_1_response_observer.html">ResponseObserver</a>* <a class="el" href="class_virtual_skin_1_1_call_observer.html#ac47a2f7d0ba0ce81dc510179eb09cde0">VirtualSkin::CallObserver::responseObserver</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>An IObserver implemented to monitor RPC responses. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa41e9ee1c3b076c49c8f05381dbfa8df"></a><!-- doxytag: member="VirtualSkin::CallObserver::robotFilter" ref="aa41e9ee1c3b076c49c8f05381dbfa8df" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_virtual_skin_1_1_robot_filter.html">RobotFilter</a>* <a class="el" href="class_virtual_skin_1_1_call_observer.html#aa41e9ee1c3b076c49c8f05381dbfa8df">VirtualSkin::CallObserver::robotFilter</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indicates the <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">RobotFilter</a> to which this Observer belongs. </p>
 
 </div>
 </div>

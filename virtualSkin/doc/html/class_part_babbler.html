@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>PartBabbler Class Reference<br/>
 <small>
-[<a class="el" href="group__i_cub_babbler.html">ICubBabbler</a>]</small>
+[<a class="el" href="group__i_cub_babble.html">ICubBabble</a>]</small>
 </h1><!-- doxytag: class="PartBabbler" -->
 <p>Facilitates Motor Babbling.  
 <a href="#_details">More...</a></p>
@@ -65,6 +65,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#a156d8ef91d4f8d4dfe02f9d8982c5d06">crackBaby</a> (qreal velocity, bool hands)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#a16e6e6a7582a5fb5903604691de52070">doTheRobot</a> (qreal velocity, bool hands)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#ac62a972e85492eaaa8cfc7dcd1c9488c">checkMotionDone</a> (bool *flag)</td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_part_controller.html">PartController</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">partController</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#a9407956071234e4e5087807b0da199ae">minPos</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#ae47d7957cb9a199c4621124b6eba0a89">maxPos</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#a38557e94eff29a7c822967fa33f8cea1">freq</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_part_babbler.html#ad7e9940bd19aa963671c02413e69f3d2">t</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Facilitates Motor Babbling. </p>
@@ -196,6 +202,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td></td>
           <td>)</td>
           <td></td><td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a38557e94eff29a7c822967fa33f8cea1"></a><!-- doxytag: member="PartBabbler::freq" ref="a38557e94eff29a7c822967fa33f8cea1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_part_babbler.html#a38557e94eff29a7c822967fa33f8cea1">PartBabbler::freq</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae47d7957cb9a199c4621124b6eba0a89"></a><!-- doxytag: member="PartBabbler::maxPos" ref="ae47d7957cb9a199c4621124b6eba0a89" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;qreal&gt; <a class="el" href="class_part_babbler.html#ae47d7957cb9a199c4621124b6eba0a89">PartBabbler::maxPos</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9407956071234e4e5087807b0da199ae"></a><!-- doxytag: member="PartBabbler::minPos" ref="a9407956071234e4e5087807b0da199ae" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;qreal&gt; <a class="el" href="class_part_babbler.html#a9407956071234e4e5087807b0da199ae">PartBabbler::minPos</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad772389259d527bf69e1fe7c73d48326"></a><!-- doxytag: member="PartBabbler::partController" ref="ad772389259d527bf69e1fe7c73d48326" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_part_controller.html">PartController</a> <a class="el" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">PartBabbler::partController</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad7e9940bd19aa963671c02413e69f3d2"></a><!-- doxytag: member="PartBabbler::t" ref="ad7e9940bd19aa963671c02413e69f3d2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_part_babbler.html#ad7e9940bd19aa963671c02413e69f3d2">PartBabbler::t</a><code> [private]</code></td>
         </tr>
       </table>
 </div>

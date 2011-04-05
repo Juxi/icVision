@@ -15,14 +15,16 @@
 #include <yarp/os/all.h>
 #include <yarp/os/IObserver.h>
 
-namespace VirtualSkin {
-	
-class CallObserver;
-class RobotFilter;
+namespace VirtualSkin
+{	
+	class CallObserver;
+	class RobotFilter;
+	class ResponseObserver;
+}
 
 /** \brief An IObserver implemented to monitor RPC responses
  */
-class ResponseObserver: public QObject, public yarp::os::IObserver
+class VirtualSkin::ResponseObserver: public QObject, public yarp::os::IObserver
 {
 	Q_OBJECT
 	
@@ -48,6 +50,5 @@ private:
 
 	friend class CallObserver;
 };
-}
 #endif /* RESPONSEOBSERVER_H_ */
 /** @} */

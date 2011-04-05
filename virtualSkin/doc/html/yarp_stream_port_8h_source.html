@@ -55,35 +55,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00013"></a>00013 <span class="preprocessor">#include &lt;yarp/os/all.h&gt;</span>
 <a name="l00014"></a>00014 <span class="preprocessor">#include &lt;QThread&gt;</span>
 <a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="keyword">namespace </span>VirtualSkin {
-<a name="l00017"></a>00017 
-<a name="l00020"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html">00020</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html" title="A YARP port that broadcasts a stream.">YarpStreamPort</a>: <span class="keyword">public</span> QThread
-<a name="l00021"></a>00021 {
-<a name="l00022"></a>00022         
-<a name="l00023"></a>00023 <span class="keyword">public</span>:
-<a name="l00024"></a>00024         <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#aa9bc88cfd89f533676960ba59629af84" title="Nothing special to do here.">YarpStreamPort</a>();                               
-<a name="l00025"></a>00025         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#ac0923822f1b4ab48ef2fd7600184be98" title="Nothing special to do here.">~YarpStreamPort</a>();              
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#ab7d9fff0fa4f2022e8d526563e50b22e" title="Opens the port and starts the thread to stream bottles.">open</a>( <span class="keyword">const</span> QString&amp; name );       
-<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a1e5daf8f884511c4894b699c79c2b20a" title="Stops the thread and closes the port.">close</a>();                                           
-<a name="l00029"></a>00029         
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#aa34609bf9d4a6c3e678ce2b78e913d65" title="Sets the value of the bottle that is streamed.">setBottle</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; aBottle );      
-<a name="l00031"></a>00031         
-<a name="l00032"></a>00032 <span class="keyword">private</span>:
-<a name="l00033"></a>00033         yarp::os::Network yarp; 
-<a name="l00034"></a>00034         yarp::os::Port port;    
-<a name="l00035"></a>00035         <span class="keywordtype">bool</span> keepRunning;               
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037         <span class="comment">//QMutex mutex;</span>
-<a name="l00038"></a>00038         yarp::os::Bottle bottle;
-<a name="l00039"></a>00039         
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> run();             
-<a name="l00041"></a>00041         <span class="keywordtype">void</span> stop();    
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 };
-<a name="l00044"></a>00044 }
-<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>
+<a name="l00016"></a>00016 <span class="keyword">namespace </span>VirtualSkin
+<a name="l00017"></a>00017 {
+<a name="l00018"></a>00018         <span class="keyword">class </span>YarpStreamPort;
+<a name="l00019"></a>00019 }
+<a name="l00020"></a>00020 
+<a name="l00023"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html">00023</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html" title="A YARP port that broadcasts a stream.">VirtualSkin::YarpStreamPort</a>: <span class="keyword">public</span> QThread
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025         
+<a name="l00026"></a>00026 <span class="keyword">public</span>:
+<a name="l00027"></a>00027         <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#aa9bc88cfd89f533676960ba59629af84" title="Nothing special to do here.">YarpStreamPort</a>();                               
+<a name="l00028"></a>00028         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#ac0923822f1b4ab48ef2fd7600184be98" title="Nothing special to do here.">~YarpStreamPort</a>();              
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#ab7d9fff0fa4f2022e8d526563e50b22e" title="Opens the port and starts the thread to stream bottles.">open</a>( <span class="keyword">const</span> QString&amp; name );       
+<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a1e5daf8f884511c4894b699c79c2b20a" title="Stops the thread and closes the port.">close</a>();                                           
+<a name="l00032"></a>00032         
+<a name="l00033"></a>00033         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#aa34609bf9d4a6c3e678ce2b78e913d65" title="Sets the value of the bottle that is streamed.">setBottle</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; aBottle );      
+<a name="l00034"></a>00034         
+<a name="l00035"></a>00035 <span class="keyword">private</span>:
+<a name="l00036"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a863246b941f38593ce3f57112761903d">00036</a>         yarp::os::Network <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a863246b941f38593ce3f57112761903d" title="Identifies the yarp network.">yarp</a>; 
+<a name="l00037"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a1ea94ef8e628139162d52b554c478be5">00037</a>         yarp::os::Port <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a1ea94ef8e628139162d52b554c478be5" title="The port we are wrapping.">port</a>;    
+<a name="l00038"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a94a4607ef9a75f495ccf31e86437ad34">00038</a>         <span class="keywordtype">bool</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a94a4607ef9a75f495ccf31e86437ad34" title="Provides a graceful way to control when the run() method returns.">keepRunning</a>;               
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040         <span class="comment">//QMutex mutex;</span>
+<a name="l00041"></a><a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a2b313619b02810a136d4ffc8482fb658">00041</a>         yarp::os::Bottle <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#a2b313619b02810a136d4ffc8482fb658">bottle</a>;
+<a name="l00042"></a>00042         
+<a name="l00043"></a>00043         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#aaeea4c0a2bae6c5a257935227df3cddb" title="Runs the thread.">run</a>();             
+<a name="l00044"></a>00044         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_yarp_stream_port.html#ae1c105a567b759d0f0c0c0068e0279a1" title="Stops the thread.">stop</a>();    
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 };
+<a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

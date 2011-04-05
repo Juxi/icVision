@@ -56,7 +56,7 @@ iCub Simulator</a></h2>
 <p>Home the robot using the robotMotorGui: </p>
 <div class="fragment"><pre class="fragment">cd YOUR_ICUB_REPOSITORY_ROOT_DIR/main/bin </pre></div> <div class="fragment"><pre class="fragment">./robotMotorGui </pre></div><p>In the GUI, do the following:</p>
 <ul>
-<li>Uncheck 'leftleg' and 'rightleg'</li>
+<li>Uncheck 'left_leg' and 'right_leg'</li>
 <li>Enter <code>icubSim</code> in the textbox and click the button</li>
 <li>At the top of the robotMotorGui window, click the tab labeled 'all'</li>
 <li>Click the button 'Home ALL Parts'</li>
@@ -86,14 +86,19 @@ If you were to use '--file ../xml/iCub.xml' you would connect to the real iCub h
 <li>/icubSimF/left_arm/rpc:i</li>
 </ul>
 <p>These are filtered ports (designated by the "F" at the end of the robot name), which forward information to and from their counterparts, the ports with similar names but no "F", which are associated with the hardware or simulator. The robot models provided with this distribution of Virtual Skin (in this case '../xml/iCubSim.xml') include only the iCub's upper body. Therefore, filters are only created for the control boards: <code>torso</code>, <code>head</code>, <code>left_arm</code> and <code>right_arm</code>. For more info on the YarpFilter, check out <a class="el" href="filter.html">YARP Filter Detail</a>.</p>
-<p>Connecting your control program to these filtered ports will prevent the robot from colliding with itself or with objects modeled in the environment. Control commands will only be forwarded when the robot model (librobotModel.a) is in a safe configuration. As soon as the robot model is in a colliding configuration, the filter is cut, meaning filtered ports no longer forward incoming control commands (libyarpFilter.a). Because the bounding volumes of the robot model are somewhat larger than the actual parts they envelop, detected collision events precede actual physical collisions. <a href="">ELABORATE ON NO GUARANTEES</a></p>
+<p>Connecting your control program to these filtered ports will prevent the robot from colliding with itself or with objects modeled in the environment. Control commands will only be forwarded when the robot model (<a class="el" href="namespace_robot_model.html" title="Contains classes relevant to the robot model.">RobotModel</a>) is in a safe configuration. As soon as the robot model collides with something, the filter is cut such that it no longer forwards incomming commands (YarpFilter), the robot is stopped, and a user-defined response to the collision is executed (ReflexDemo).</p>
+<p>As long as the bounding volumes of the robot model are larger than the actual parts they envelop, and the physical robot is calibrated correctly, detected collision events precede actual physical collisions. However this does not guarantee that the robot can be stopped in time to prevent the physical collision entirely. Virtual Skin is not a dynamic simulator and therefore does not model momentum. This design choice is based on the following two facts:</p>
+<ul>
+<li>In order to protect a robot in real-time, speed is critical. The kinematic model inside virtual skin is frugal and therefore fast.</li>
+<li>The dynamics of a relatively light weight, cable driven robot (such as the iCub) can be rather nonlinear. Even if they were modeled, theoretical guarantees are not likely to hold for the real robot.</li>
+</ul>
+<p>That being said, Virtual Skin has been tested on the iCub robot, and it is very effective at preventing physical collisions from happening. The robot model provided is very conservative, and the user will certainly want to reduce the volumes of some of the bounding volumes to allow the robot come closer to things. It is simply recommended to do this in small steps and to start moving the robot slowly, then speed it up as you gain confidence that your new bounding volumes are sufficient for your application.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd><ul>
 <li>The files <code>YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/xml/iCub.xml</code> and <code>YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/xml/iCubSim.xml</code> are exactly the same except for the robot name, and the kinematics and geometry therein reflect the real iCub hardware. The simulator is quite a bit different from the real iCub, so when you run the above demonstration, it will not effectively prevent the simulated iCub from colliding with itself.</li>
 <li>Since the filtered ports provide transparent access to the underlying YARP ControlBoardInterface, control programs in the iCub repository can easily operate through the ControlBoardFilter. For example, try connecting <code>robotMotorGui</code> to the filtered ports by specifying the robot name 'icubSimF'. Remember not to connect to the legs, as there are no filtered ports <code>/icubSimF/left_leg/*</code> and <code>/icubSimF/right_leg/*</code>. One caveat here is that programs in the repository may behave strangely when the filter is cut, as position move and velocity move commands (from YARP's IPositionControl and IVelocityControl interfaces) will return <code>false</code> during that time.</li>
 </ul>
 </dd></dl>
 <p>In addition to cutting off the client's control of the robot, in the Reflex Demo, collision events trigger a reflexive behavior to return the robot to a previous safe configuration. Only when the robot has reached this safe pose do the filtered ports begin to forward the client's control commands again.</p>
-<p>See reflexports for names and descriptions of several additional ports that may prove useful for your control programs.</p>
 <h2><a class="anchor" id="babbler">
 iCubBabbler</a></h2>
 <p>In order to try out the Reflex Demo...</p>
@@ -109,6 +114,9 @@ iCubBabbler</a></h2>
 <li><b>--speed</b> controls the maximum speed of the random motions. The babbler does not check for limits as they are not available through YARP's iVelocityControl interface.</li>
 <li><b>--hands</b> controls whether the thumb and fingers are also moved during babbling.</li>
 </ul>
+<h2><a class="anchor" id="next">
+Next Steps</a></h2>
+<p>Connect to the <a class="el" href="yarp_ports.html">Virtual Skin YARP Ports</a> to get the status of the port filter, get detailed collision information, as well as add and remove geometries from the world model.</p>
 <p>2011-01-01, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a> </p>
 </div>
 <!--- window showing the filter options -->

@@ -69,16 +69,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00030"></a>00030     <a class="code" href="class_i_cub_babbler.html#a1100623ef8b298c436f2c5059541128e" title="Nothing special here.">ICubBabbler</a>();                                                                                              
 <a name="l00031"></a>00031     <a class="code" href="class_i_cub_babbler.html#aa48d49a9706055cd5323937fdb5a0229" title="Nothing special here.">~ICubBabbler</a>();                                                                                             
 <a name="l00032"></a>00032         
-<a name="l00033"></a>00033         <span class="keywordtype">bool</span> <a class="code" href="class_i_cub_babbler.html#affe4b96670efff3357f67aa26def4481" title="Connect to an iCub via a YARP remote device driver.">configure</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* _robotName );                                       
+<a name="l00033"></a>00033         <span class="keywordtype">bool</span> <a class="code" href="class_i_cub_babbler.html#a90c2ae6f6f5a8032cc7a49e1966b2af6">configure</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* _robotName );                                       
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035         <span class="keywordtype">void</span> <a class="code" href="class_i_cub_babbler.html#a5913a116c61504e6705d1c5de27c5324" title="For velocity-control-based babbling.">crackBaby</a>( qreal period, qreal velocity, <span class="keywordtype">bool</span> hands );     
 <a name="l00036"></a>00036         <span class="keywordtype">void</span> <a class="code" href="class_i_cub_babbler.html#a9ab1247bc5dba75476146438fe70d207" title="For position-control-based babbling.">doTheRobot</a>( qreal period, qreal velocity, <span class="keywordtype">bool</span> hands );
 <a name="l00037"></a>00037         
 <a name="l00038"></a>00038 <span class="keyword">private</span>:
-<a name="l00039"></a>00039         QString robotName;
-<a name="l00040"></a>00040         Network yarp;
-<a name="l00041"></a>00041         <a class="code" href="class_part_babbler.html" title="Facilitates Motor Babbling.">PartBabbler</a>     torso, head, leftArm, rightArm;
-<a name="l00042"></a>00042         <span class="keywordtype">bool</span> configure();
+<a name="l00039"></a><a class="code" href="class_i_cub_babbler.html#a3da08ceac2464334d6f022cd1113cd45">00039</a>         QString <a class="code" href="class_i_cub_babbler.html#a3da08ceac2464334d6f022cd1113cd45">robotName</a>;
+<a name="l00040"></a><a class="code" href="class_i_cub_babbler.html#a697dacfdc21bcfa49e45feb73f5db5a2">00040</a>         Network <a class="code" href="class_i_cub_babbler.html#a697dacfdc21bcfa49e45feb73f5db5a2">yarp</a>;
+<a name="l00041"></a><a class="code" href="class_i_cub_babbler.html#ab3ec10c19d3d3cca626bd0c23b2f25cb">00041</a>         <a class="code" href="class_part_babbler.html" title="Facilitates Motor Babbling.">PartBabbler</a>     <a class="code" href="class_i_cub_babbler.html#ab3ec10c19d3d3cca626bd0c23b2f25cb">torso</a>, <a class="code" href="class_i_cub_babbler.html#abb679cc86b4da08a78ea62bf6d80e02c">head</a>, <a class="code" href="class_i_cub_babbler.html#a4aec6572dd4a00949bbfdce188cdd139">leftArm</a>, <a class="code" href="class_i_cub_babbler.html#ae51180e0fba198a6cc2f4996fb03f765">rightArm</a>;
+<a name="l00042"></a>00042         <span class="keywordtype">bool</span> <a class="code" href="class_i_cub_babbler.html#a90c2ae6f6f5a8032cc7a49e1966b2af6">configure</a>();
 <a name="l00043"></a>00043 };
 <a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
 <a name="l00045"></a>00045 <span class="preprocessor"></span>

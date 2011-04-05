@@ -13,11 +13,14 @@
 #include <yarp/os/all.h>
 #include <QThread>
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class YarpRpcPort;
+}
 
 /** \brief A call/response style YARP port
  */
-class YarpRpcPort: public QThread
+class VirtualSkin::YarpRpcPort: public QThread
 {
 
 public:
@@ -41,6 +44,5 @@ private:
 	void showBottle( yarp::os::Bottle& anUnknownBottle, int indentation = 0 );			//!< Print a yarp::os::bottle to the terminal
 
 };
-}
 #endif
 /** @} */

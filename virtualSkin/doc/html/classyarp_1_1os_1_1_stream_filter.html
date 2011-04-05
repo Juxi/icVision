@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>yarp::os::StreamFilter Class Reference<br/>
 <small>
-[<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
+[<a class="el" href="group___yarp_filter.html">YarpFilter</a>]</small>
 </h1><!-- doxytag: class="yarp::os::StreamFilter" -->
 <p>A proxy for a YARP Stream port that can also filter data.  
 <a href="#_details">More...</a></p>
@@ -75,6 +75,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set an Observer to handle data arriving on the 'in' port.  <a href="#a6f911f0b7818d212d58f05fe82c096a1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a0dad0b2389fa998afc9336509569a01f">injectData</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Injects data into the stream.  <a href="#a0dad0b2389fa998afc9336509569a01f"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BufferedPort&lt; Bottle &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#ac59a4a0bc44e192965c8d8553df353b1">inPort</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The 'in' port, where data arrives.  <a href="#ac59a4a0bc44e192965c8d8553df353b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html">yarp::os::impl::StreamFilterImpl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#ae27ddd8bc8b91010c2f373407ec231d2">impl</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Implements the core functionality of the <a class="el" href="classyarp_1_1os_1_1_stream_filter.html" title="A proxy for a YARP Stream port that can also filter data.">StreamFilter</a>.  <a href="#ae27ddd8bc8b91010c2f373407ec231d2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a2b1fd224b222a8b57cb6655c82a07a37">isOpen</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The cut status of the filter.  <a href="#a2b1fd224b222a8b57cb6655c82a07a37"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A proxy for a YARP Stream port that can also filter data. </p>
@@ -82,8 +89,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <ul>
 <li>Incomming data can be monitored by setting an Observer (see StreamFilterImpl).</li>
 <li>The communication between the client and the target port can be cut.</li>
-<li>Data can be injected into the stream </li>
+<li>Data can be injected into the stream</li>
 </ul>
+<div align="center">
+<img src="streamfilter.png" alt="streamfilter.png"/>
+<p><strong>Stream Filter Architecture</strong></p></div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a687a3082652cb3163619fa04bfe9db1f"></a><!-- doxytag: member="yarp::os::StreamFilter::StreamFilter" ref="a687a3082652cb3163619fa04bfe9db1f" args="()" -->
 <div class="memitem">
@@ -242,6 +252,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memdoc">
 
 <p>Set an Observer to handle data arriving on the 'in' port. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="ae27ddd8bc8b91010c2f373407ec231d2"></a><!-- doxytag: member="yarp::os::StreamFilter::impl" ref="ae27ddd8bc8b91010c2f373407ec231d2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyarp_1_1os_1_1impl_1_1_stream_filter_impl.html">yarp::os::impl::StreamFilterImpl</a> <a class="el" href="classyarp_1_1os_1_1_stream_filter.html#ae27ddd8bc8b91010c2f373407ec231d2">yarp::os::StreamFilter::impl</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements the core functionality of the <a class="el" href="classyarp_1_1os_1_1_stream_filter.html" title="A proxy for a YARP Stream port that can also filter data.">StreamFilter</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac59a4a0bc44e192965c8d8553df353b1"></a><!-- doxytag: member="yarp::os::StreamFilter::inPort" ref="ac59a4a0bc44e192965c8d8553df353b1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BufferedPort&lt;Bottle&gt; <a class="el" href="classyarp_1_1os_1_1_stream_filter.html#ac59a4a0bc44e192965c8d8553df353b1">yarp::os::StreamFilter::inPort</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The 'in' port, where data arrives. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2b1fd224b222a8b57cb6655c82a07a37"></a><!-- doxytag: member="yarp::os::StreamFilter::isOpen" ref="a2b1fd224b222a8b57cb6655c82a07a37" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classyarp_1_1os_1_1_stream_filter.html#a2b1fd224b222a8b57cb6655c82a07a37">yarp::os::StreamFilter::isOpen</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The cut status of the filter. </p>
 
 </div>
 </div>

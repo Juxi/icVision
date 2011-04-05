@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::GLWidget Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::GLWidget" -->
 <p>The QWidget responsible for rendering the scene with OpenGL.  
 <a href="#_details">More...</a></p>
@@ -102,6 +102,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#ab144cc8064c1bbf6d0ef0646ca0bd06c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a9043bac13d6f0a5307ea5c7f9b3caa50">mouseMoveEvent</a> (QMouseEvent *event)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a9043bac13d6f0a5307ea5c7f9b3caa50"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a1e1d21d000d24735432063986079ea1f">normalizeAngle</a> (int *angle)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a1e1d21d000d24735432063986079ea1f"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a485171fa0db2fbbef8994e16a58909f5">drawCS</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Draws a right handed coordinate system at the origin of the OpenGL's 3D cartesian space. (mostly for troubleshooting).  <a href="#a485171fa0db2fbbef8994e16a58909f5"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a454ce855fccdd1f7c4e2e2fe197be177">xRot</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a454ce855fccdd1f7c4e2e2fe197be177"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a926f12d44bc0f691d9da725e2639f76d">yRot</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a926f12d44bc0f691d9da725e2639f76d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a12e2b80ad98e5e656e4daba03408af6c">zRot</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a12e2b80ad98e5e656e4daba03408af6c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QPoint&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a2d808a3e4c04f2b197679ec9b4ab3c9c">lastPos</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a2d808a3e4c04f2b197679ec9b4ab3c9c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#a762dda974a1a3a5661d8faa2465fec41">trolltechPurple</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">see HelloGL example  <a href="#a762dda974a1a3a5661d8faa2465fec41"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_g_l_widget.html#adde22a5324713375ede3a38a63e790be">timeSinceLastRender</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>The QWidget responsible for rendering the scene with OpenGL. </p>
@@ -166,6 +184,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memdoc">
 
 <p>Calls <a class="el" href="class_robot_model_1_1_display_list.html#a842de97924298c7363e50aebd69e5a50" title="Implemented by the sub-classes Sphere, Cylinder and Box.">DisplayList.makeDisplayList()</a>;. </p>
+
+</div>
+</div>
+<a class="anchor" id="a485171fa0db2fbbef8994e16a58909f5"></a><!-- doxytag: member="RobotModel::GLWidget::drawCS" ref="a485171fa0db2fbbef8994e16a58909f5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GLWidget::drawCS </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Draws a right handed coordinate system at the origin of the OpenGL's 3D cartesian space. (mostly for troubleshooting). </p>
 
 </div>
 </div>
@@ -238,6 +275,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>event</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<a class="anchor" id="a1e1d21d000d24735432063986079ea1f"></a><!-- doxytag: member="RobotModel::GLWidget::normalizeAngle" ref="a1e1d21d000d24735432063986079ea1f" args="(int *angle)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GLWidget::normalizeAngle </td>
+          <td>(</td>
+          <td class="paramtype">int *&nbsp;</td>
+          <td class="paramname"> <em>angle</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -483,6 +540,95 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramname"> <em>angle</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a2d808a3e4c04f2b197679ec9b4ab3c9c"></a><!-- doxytag: member="RobotModel::GLWidget::lastPos" ref="a2d808a3e4c04f2b197679ec9b4ab3c9c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QPoint <a class="el" href="class_robot_model_1_1_g_l_widget.html#a2d808a3e4c04f2b197679ec9b4ab3c9c">RobotModel::GLWidget::lastPos</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<a class="anchor" id="adde22a5324713375ede3a38a63e790be"></a><!-- doxytag: member="RobotModel::GLWidget::timeSinceLastRender" ref="adde22a5324713375ede3a38a63e790be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QTime <a class="el" href="class_robot_model_1_1_g_l_widget.html#adde22a5324713375ede3a38a63e790be">RobotModel::GLWidget::timeSinceLastRender</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a762dda974a1a3a5661d8faa2465fec41"></a><!-- doxytag: member="RobotModel::GLWidget::trolltechPurple" ref="a762dda974a1a3a5661d8faa2465fec41" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QColor <a class="el" href="class_robot_model_1_1_g_l_widget.html#a762dda974a1a3a5661d8faa2465fec41">RobotModel::GLWidget::trolltechPurple</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<a class="anchor" id="a454ce855fccdd1f7c4e2e2fe197be177"></a><!-- doxytag: member="RobotModel::GLWidget::xRot" ref="a454ce855fccdd1f7c4e2e2fe197be177" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_g_l_widget.html#a454ce855fccdd1f7c4e2e2fe197be177">RobotModel::GLWidget::xRot</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<a class="anchor" id="a926f12d44bc0f691d9da725e2639f76d"></a><!-- doxytag: member="RobotModel::GLWidget::yRot" ref="a926f12d44bc0f691d9da725e2639f76d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_g_l_widget.html#a926f12d44bc0f691d9da725e2639f76d">RobotModel::GLWidget::yRot</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>see HelloGL example </p>
+
+</div>
+</div>
+<a class="anchor" id="a12e2b80ad98e5e656e4daba03408af6c"></a><!-- doxytag: member="RobotModel::GLWidget::zRot" ref="a12e2b80ad98e5e656e4daba03408af6c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_g_l_widget.html#a12e2b80ad98e5e656e4daba03408af6c">RobotModel::GLWidget::zRot</a><code> [private]</code></td>
         </tr>
       </table>
 </div>

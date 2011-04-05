@@ -10,6 +10,7 @@
 #include "worldRpcInterface.h"
 #include "world.h"
 #include "robotmodelexception.h"
+#include "constants.h"
 
 using namespace VirtualSkin;
 

@@ -17,13 +17,15 @@
 #include "circularBuffer.h"
 #include "robot.h"
 
-namespace VirtualSkin {
-	
-class RobotFilter;
-	
+namespace VirtualSkin
+{
+	class RobotFilter;
+	class StateObserver;
+}
+
 /** \brief An IObserver implemented to monitor streaming state information (motor encoder values)
  */
-class StateObserver: public QObject, public yarp::os::IObserver
+class VirtualSkin::StateObserver : public QObject, public yarp::os::IObserver
 {
 	Q_OBJECT
 	
@@ -51,6 +53,5 @@ private:
 	const int bodyPart;				//!< The RobotModel::BodyPart to which this Observer applies
 	CircularBuffer poseBuffer;		//!< A CircularBuffer full of previous states of the robot
 };
-}
 #endif
 /** @} */

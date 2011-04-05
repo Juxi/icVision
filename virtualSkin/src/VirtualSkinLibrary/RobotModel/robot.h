@@ -47,9 +47,10 @@ public:
 	void printLinks();			//!< Prints the kinematic tree depth first
 	void printBodyParts();		//!< Print a list of the Motor objects in each BodyPart
 	
-	void updatePose();		//!< Do forward kinematics, pushing results down the link/joint trees
-	void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
-	void home();			//!< Set the position of the robot to the home position (also calls updatePose())
+	int numBodyParts() const	{ return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
+	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
+	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
+	
 
 public slots:
 	void setEncoderPosition( qreal pos = 0 );							//!< Set the position of every joint on the robot.
@@ -63,9 +64,8 @@ public slots:
 																		 Motors are numbered as they are encountered by the parser (see configure()).
 																		 To see how Motors and BodyParts are numbered, try looking at the output of printJoints() and printBodyParts(). */
 	
-	int numBodyParts() const	{ return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
-	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
-	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
+	void updatePose();		//!< Do forward kinematics, pushing results down the link/joint trees
+	void home();			//!< Set the position of the robot to the home position (also calls updatePose())
 	
 private:
 	QString					robotName;	//!< Human readable identifier for the robot
@@ -80,17 +80,14 @@ private:
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index
 	void filterCollisionPairs();							//!< Turn off collision response (via FreeSOLID) between 'adjacent pairs of objects'. See KinTreeNode.filterCollisionPairs().
 	
-	/** These functions are used by ZPRobotHandler to build up the Robot from an XML description.
-	 * \addtogroup ToBuildTheRobot
-	 *	@{
-	 */
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
 	void appendBodyPart( BodyPart* part )	{ partList.append(part); }		//!< Appends a BodyPart to the list
 	void appendMotor( Motor* motor )		{ motorList.append(motor); }	//!< Appends a Motor to the list
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
 																			/**< In case you want to populate the list in reverse order */
 	void appendNode( KinTreeNode* node )	{ tree.append(node); }			//!< Append a root node of a kinematic tree to the list
-	/** @} */
+	
+	void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
 	
 	/*** FRIENDS  ***/
 	friend class BodyPart;

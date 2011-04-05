@@ -42,6 +42,8 @@ namespace yarp {
  * When the communication is cut:
  *   - calls to the target port can be injected, and
  *   - responses to calling clients can be injected by setting a Replier (see RpcFilterImpl).
+ *
+ *	\image html rpcfilter.png "RPC Filter Architecture"
  */
 class yarp::os::RpcFilter {
 

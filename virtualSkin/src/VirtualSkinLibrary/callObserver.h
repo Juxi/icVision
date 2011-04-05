@@ -26,13 +26,15 @@
  *			-YARP
  *			-ACE
  */
-namespace VirtualSkin {
-	
-class RobotFilter;
+namespace VirtualSkin
+{	
+	class RobotFilter;
+	class CallObserver;
+}
 
 /** \brief An IObserver implemented to monitor RPC calls
  */
-class CallObserver: public yarp::os::IObserver {
+class VirtualSkin::CallObserver : public yarp::os::IObserver {
 
 public:
 	CallObserver(RobotFilter* r, const int b);			//!< Nothing special to do here
@@ -50,6 +52,5 @@ private:
 	ResponseObserver	*responseObserver;	//!< An IObserver implemented to monitor RPC responses
 	
 };
-}
 #endif
 /** @} */

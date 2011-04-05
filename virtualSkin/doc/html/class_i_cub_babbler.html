@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>ICubBabbler Class Reference<br/>
 <small>
-[<a class="el" href="group__i_cub_babbler.html">ICubBabbler</a>]</small>
+[<a class="el" href="group__i_cub_babble.html">ICubBabble</a>]</small>
 </h1><!-- doxytag: class="ICubBabbler" -->
 <p>Facilitates Motor Babbling.  
 <a href="#_details">More...</a></p>
@@ -69,6 +69,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">For velocity-control-based babbling.  <a href="#a5913a116c61504e6705d1c5de27c5324"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#a9ab1247bc5dba75476146438fe70d207">doTheRobot</a> (qreal period, qreal velocity, bool hands)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">For position-control-based babbling.  <a href="#a9ab1247bc5dba75476146438fe70d207"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#a90c2ae6f6f5a8032cc7a49e1966b2af6">configure</a> ()</td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#a3da08ceac2464334d6f022cd1113cd45">robotName</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Network&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#a697dacfdc21bcfa49e45feb73f5db5a2">yarp</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_part_babbler.html">PartBabbler</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#ab3ec10c19d3d3cca626bd0c23b2f25cb">torso</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_part_babbler.html">PartBabbler</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#abb679cc86b4da08a78ea62bf6d80e02c">head</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_part_babbler.html">PartBabbler</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#a4aec6572dd4a00949bbfdce188cdd139">leftArm</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_part_babbler.html">PartBabbler</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_cub_babbler.html#ae51180e0fba198a6cc2f4996fb03f765">rightArm</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Facilitates Motor Babbling. </p>
@@ -112,6 +121,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a90c2ae6f6f5a8032cc7a49e1966b2af6"></a><!-- doxytag: member="ICubBabbler::configure" ref="a90c2ae6f6f5a8032cc7a49e1966b2af6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ICubBabbler::configure </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="affe4b96670efff3357f67aa26def4481"></a><!-- doxytag: member="ICubBabbler::configure" ref="affe4b96670efff3357f67aa26def4481" args="(const char *_robotName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -199,6 +225,85 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memdoc">
 
 <p>For position-control-based babbling. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="abb679cc86b4da08a78ea62bf6d80e02c"></a><!-- doxytag: member="ICubBabbler::head" ref="abb679cc86b4da08a78ea62bf6d80e02c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_part_babbler.html">PartBabbler</a> <a class="el" href="class_i_cub_babbler.html#abb679cc86b4da08a78ea62bf6d80e02c">ICubBabbler::head</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4aec6572dd4a00949bbfdce188cdd139"></a><!-- doxytag: member="ICubBabbler::leftArm" ref="a4aec6572dd4a00949bbfdce188cdd139" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_part_babbler.html">PartBabbler</a> <a class="el" href="class_i_cub_babbler.html#a4aec6572dd4a00949bbfdce188cdd139">ICubBabbler::leftArm</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae51180e0fba198a6cc2f4996fb03f765"></a><!-- doxytag: member="ICubBabbler::rightArm" ref="ae51180e0fba198a6cc2f4996fb03f765" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_part_babbler.html">PartBabbler</a> <a class="el" href="class_i_cub_babbler.html#ae51180e0fba198a6cc2f4996fb03f765">ICubBabbler::rightArm</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3da08ceac2464334d6f022cd1113cd45"></a><!-- doxytag: member="ICubBabbler::robotName" ref="a3da08ceac2464334d6f022cd1113cd45" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString <a class="el" href="class_i_cub_babbler.html#a3da08ceac2464334d6f022cd1113cd45">ICubBabbler::robotName</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab3ec10c19d3d3cca626bd0c23b2f25cb"></a><!-- doxytag: member="ICubBabbler::torso" ref="ab3ec10c19d3d3cca626bd0c23b2f25cb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_part_babbler.html">PartBabbler</a> <a class="el" href="class_i_cub_babbler.html#ab3ec10c19d3d3cca626bd0c23b2f25cb">ICubBabbler::torso</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a697dacfdc21bcfa49e45feb73f5db5a2"></a><!-- doxytag: member="ICubBabbler::yarp" ref="a697dacfdc21bcfa49e45feb73f5db5a2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Network <a class="el" href="class_i_cub_babbler.html#a697dacfdc21bcfa49e45feb73f5db5a2">ICubBabbler::yarp</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>

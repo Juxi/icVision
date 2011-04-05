@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::Motor Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::Motor" -->
 <p>Affords control of one or more joints (see <a class="el" href="class_robot_model_1_1_joint.html" title="Defines a kinematic &#39;joint&#39;.">Joint</a>, <a class="el" href="class_robot_model_1_1_revolute_joint.html" title="Implements Joint::setM() for a revolute (rotational) joint.">RevoluteJoint</a> and <a class="el" href="class_robot_model_1_1_prismatic_joint.html" title="Implements Joint::setM() for a prismatic (telescoping) joint.">PrismaticJoint</a>).  
 <a href="#_details">More...</a></p>
@@ -92,6 +92,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the normalPosition directly.  <a href="#a2c26ea7475deaef6e1546edbadf88729"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#ae8e0845a9284fbf8013137bf6b1f9293">home</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets encoderPosition = homePosition.  <a href="#ae8e0845a9284fbf8013137bf6b1f9293"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#a033f90136c5492e19cb636d7f2004d62">setJointPositions</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Update the positions of the joints belonging to this motor.  <a href="#a033f90136c5492e19cb636d7f2004d62"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_motor.html">Motor</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#ac2edec6b8bd48ba798390b15e1f50594">parentMotor</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Just for the XML parser.  <a href="#ac2edec6b8bd48ba798390b15e1f50594"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#ae35a88df308f1b522a33d810e09932c8">motorName</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A human readable name.  <a href="#ae35a88df308f1b522a33d810e09932c8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_interval.html">Interval</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#a03a9b4b990020fafb4c357d4c7b35c4a">motorLimits</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Encoder position limits.  <a href="#a03a9b4b990020fafb4c357d4c7b35c4a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#a366deb5e47e9a4ef63874916336cb158">encoderPosition</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The position of the motor encoder... is always on the interval 'limits'.  <a href="#a366deb5e47e9a4ef63874916336cb158"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#a4a9f1f652d6ac6fe2675418d16f5e871">homePosition</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The position in which the real robot (hardware) calibrates... always on the interval 'limits'.  <a href="#a4a9f1f652d6ac6fe2675418d16f5e871"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_motor.html#a35a23a894e6e27f4747203a72933373c">normalPosition</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Normalized encoder position... on the interval [0,1].  <a href="#a35a23a894e6e27f4747203a72933373c"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Affords control of one or more joints (see <a class="el" href="class_robot_model_1_1_joint.html" title="Defines a kinematic &#39;joint&#39;.">Joint</a>, <a class="el" href="class_robot_model_1_1_revolute_joint.html" title="Implements Joint::setM() for a revolute (rotational) joint.">RevoluteJoint</a> and <a class="el" href="class_robot_model_1_1_prismatic_joint.html" title="Implements Joint::setM() for a prismatic (telescoping) joint.">PrismaticJoint</a>). </p>
@@ -126,7 +142,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>robot</em>&nbsp;</td><td>The robot to which this <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">BodyPart</a> should be appended </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>motor</em>&nbsp;</td><td>Facilitates robot creation via the Qt XML parser and <a class="el" href="class_robot_model_1_1_z_p_handler.html" title="A custom handler for the Qt XML parser.">ZPHandler</a> Calls Robot.appendMotor( Motor* this ), initializes the Motor.limits to [-1,1], and initializes encoderPosition = 0.0, normalPosition = 0.5, and homePosition = 0.0 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>motor</em>&nbsp;</td><td>Facilitates robot creation via the Qt XML parser and <a class="el" href="class_robot_model_1_1_z_p_handler.html" title="A custom handler for the Qt XML parser.">ZPHandler</a> Calls <a class="el" href="class_robot_model_1_1_robot.html#aa4db18e00b4e4c56a37943a0b45d1c3b" title="Appends a Motor to the list.">Robot.appendMotor( Motor* this )</a>, initializes the Motor.limits to [-1,1], and initializes encoderPosition = 0.0, normalPosition = 0.5, and homePosition = 0.0 </td></tr>
   </table>
   </dd>
 </dl>
@@ -348,6 +364,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 </div>
+<a class="anchor" id="a033f90136c5492e19cb636d7f2004d62"></a><!-- doxytag: member="RobotModel::Motor::setJointPositions" ref="a033f90136c5492e19cb636d7f2004d62" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Motor::setJointPositions </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Update the positions of the joints belonging to this motor. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad52f8d0e1aa0b5f60b388188147a1ded"></a><!-- doxytag: member="RobotModel::Motor::setMax" ref="ad52f8d0e1aa0b5f60b388188147a1ded" args="(qreal)" -->
 <div class="memitem">
 <div class="memproto">
@@ -426,6 +461,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Sets the normalPosition directly. </p>
 <p>Values outside the interval [0,1] will be replaced by either 0 or 1 as is appropriate </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a366deb5e47e9a4ef63874916336cb158"></a><!-- doxytag: member="RobotModel::Motor::encoderPosition" ref="a366deb5e47e9a4ef63874916336cb158" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_robot_model_1_1_motor.html#a366deb5e47e9a4ef63874916336cb158">RobotModel::Motor::encoderPosition</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The position of the motor encoder... is always on the interval 'limits'. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4a9f1f652d6ac6fe2675418d16f5e871"></a><!-- doxytag: member="RobotModel::Motor::homePosition" ref="a4a9f1f652d6ac6fe2675418d16f5e871" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_robot_model_1_1_motor.html#a4a9f1f652d6ac6fe2675418d16f5e871">RobotModel::Motor::homePosition</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The position in which the real robot (hardware) calibrates... always on the interval 'limits'. </p>
+
+</div>
+</div>
+<a class="anchor" id="a03a9b4b990020fafb4c357d4c7b35c4a"></a><!-- doxytag: member="RobotModel::Motor::motorLimits" ref="a03a9b4b990020fafb4c357d4c7b35c4a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_interval.html">Interval</a> <a class="el" href="class_robot_model_1_1_motor.html#a03a9b4b990020fafb4c357d4c7b35c4a">RobotModel::Motor::motorLimits</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Encoder position limits. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae35a88df308f1b522a33d810e09932c8"></a><!-- doxytag: member="RobotModel::Motor::motorName" ref="ae35a88df308f1b522a33d810e09932c8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString <a class="el" href="class_robot_model_1_1_motor.html#ae35a88df308f1b522a33d810e09932c8">RobotModel::Motor::motorName</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A human readable name. </p>
+
+</div>
+</div>
+<a class="anchor" id="a35a23a894e6e27f4747203a72933373c"></a><!-- doxytag: member="RobotModel::Motor::normalPosition" ref="a35a23a894e6e27f4747203a72933373c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_robot_model_1_1_motor.html#a35a23a894e6e27f4747203a72933373c">RobotModel::Motor::normalPosition</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Normalized encoder position... on the interval [0,1]. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac2edec6b8bd48ba798390b15e1f50594"></a><!-- doxytag: member="RobotModel::Motor::parentMotor" ref="ac2edec6b8bd48ba798390b15e1f50594" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot_model_1_1_motor.html">Motor</a>* <a class="el" href="class_robot_model_1_1_motor.html#ac2edec6b8bd48ba798390b15e1f50594">RobotModel::Motor::parentMotor</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Just for the XML parser. </p>
 
 </div>
 </div>

@@ -13,11 +13,14 @@
 #include <yarp/os/all.h>
 #include <QThread>
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class YarpStreamPort;
+}
 
 /** \brief A YARP port that broadcasts a stream
 */
-class YarpStreamPort: public QThread
+class VirtualSkin::YarpStreamPort: public QThread
 {
 	
 public:
@@ -41,6 +44,5 @@ private:
 	void stop();	//!< Stops the thread
 
 };
-}
 #endif
 /** @} */

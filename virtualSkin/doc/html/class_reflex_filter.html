@@ -49,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>ReflexFilter Class Reference<br/>
 <small>
-[<a class="el" href="group___reflex_demo.html">Reflex Demo</a>]</small>
+[<a class="el" href="group___reflex_demo.html">ReflexDemo</a>]</small>
 </h1><!-- doxytag: class="ReflexFilter" --><!-- doxytag: inherits="VirtualSkin::RobotFilter" -->
 <p>A <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">VirtualSkin::RobotFilter</a> with reflexive collision response.  
 <a href="#_details">More...</a></p>
@@ -77,6 +77,11 @@ Inheritance diagram for ReflexFilter:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Resizes the QVectors according to the robot model.  <a href="#af7d17a4e115d9260ff00271fdd7ac6fd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a3a9baca5af392208099867d8d9340fd4">collisionResponse</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provides reflexive response to collision.  <a href="#a3a9baca5af392208099867d8d9340fd4"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; QVector&lt; qreal &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a067e5003eb9fd5acde5885fb560eca54">originalPose</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A colliding configuration.  <a href="#a067e5003eb9fd5acde5885fb560eca54"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; QVector&lt; qreal &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_filter.html#a4e70cea59928701b68bd06bc9aecada1">targetPose</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A safe configuration.  <a href="#a4e70cea59928701b68bd06bc9aecada1"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A <a class="el" href="class_virtual_skin_1_1_robot_filter.html" title="This class provides a safety mechanism to protect a YARP device from unwanted collisions...">VirtualSkin::RobotFilter</a> with reflexive collision response. </p>
@@ -162,6 +167,37 @@ Inheritance diagram for ReflexFilter:</div>
 <p>Resizes the QVectors according to the robot model. </p>
 
 <p>Reimplemented from <a class="el" href="class_virtual_skin_1_1_robot_filter.html#a3ce7a6f5265b93915ef04789f6042d3c">VirtualSkin::RobotFilter</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a067e5003eb9fd5acde5885fb560eca54"></a><!-- doxytag: member="ReflexFilter::originalPose" ref="a067e5003eb9fd5acde5885fb560eca54" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; QVector&lt;qreal&gt; &gt; <a class="el" href="class_reflex_filter.html#a067e5003eb9fd5acde5885fb560eca54">ReflexFilter::originalPose</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A colliding configuration. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4e70cea59928701b68bd06bc9aecada1"></a><!-- doxytag: member="ReflexFilter::targetPose" ref="a4e70cea59928701b68bd06bc9aecada1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; QVector&lt;qreal&gt; &gt; <a class="el" href="class_reflex_filter.html#a4e70cea59928701b68bd06bc9aecada1">ReflexFilter::targetPose</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A safe configuration. </p>
 
 </div>
 </div>

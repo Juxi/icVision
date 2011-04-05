@@ -56,74 +56,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00014"></a>00014 <span class="preprocessor">#include &lt;yarp/os/all.h&gt;</span>
 <a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="yarp_rpc_port_8h.html">yarpRpcPort.h</a>&quot;</span>
 <a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="keyword">namespace </span>RobotModel {
-<a name="l00018"></a>00018         <span class="keyword">class </span>World;
-<a name="l00019"></a>00019         <span class="keyword">class </span>CompositeObject;
-<a name="l00020"></a>00020         <span class="keyword">class </span>PrimitiveObject;
-<a name="l00021"></a>00021 }
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">namespace </span>VirtualSkin {
-<a name="l00024"></a>00024         
-<a name="l00031"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html">00031</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html" title="Provides an RPC interface (via YARP) to RobotModel::World.">WorldRpcInterface</a>: <span class="keyword">public</span> <a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html" title="A call/response style YARP port.">YarpRpcPort</a>
-<a name="l00032"></a>00032 {
-<a name="l00033"></a>00033                 
-<a name="l00034"></a>00034 <span class="keyword">public</span>:
-<a name="l00035"></a>00035 
-<a name="l00040"></a>00040         <span class="comment">// commands for objects</span>
-<a name="l00041"></a><a class="code" href="group___yarp_vocabs.html#ga8b32026b2a68060710aa8460fc8f9002">00041</a> <span class="preprocessor">        #define VOCAB_MK VOCAB2(&#39;m&#39;,&#39;k&#39;)                        </span>
-<a name="l00042"></a><a class="code" href="group___yarp_vocabs.html#gaec5615baa74d09de8e4a836e933623bd">00042</a> <span class="preprocessor">        #define VOCAB_SET VOCAB3(&#39;s&#39;,&#39;e&#39;,&#39;t&#39;)           </span>
-<a name="l00043"></a><a class="code" href="group___yarp_vocabs.html#ga17b3675d8b0698180d78043ded316b04">00043</a> <span class="preprocessor">        #define VOCAB_ROT VOCAB3(&#39;r&#39;,&#39;o&#39;,&#39;t&#39;)           </span>
-<a name="l00044"></a><a class="code" href="group___yarp_vocabs.html#gaaf18e13341cf849b4b211ddf30b8c08a">00044</a> <span class="preprocessor">        #define VOCAB_REM VOCAB2(&#39;r&#39;,&#39;m&#39;)                       </span>
-<a name="l00045"></a>00045 <span class="preprocessor">        </span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>        <span class="comment">// commands for primitives</span>
-<a name="l00047"></a><a class="code" href="group___yarp_vocabs.html#ga2b7fd4c379b8415e799b959dca03a473">00047</a> <span class="preprocessor">        #define VOCAB_APP VOCAB3(&#39;a&#39;,&#39;p&#39;,&#39;p&#39;)           </span>
-<a name="l00048"></a><a class="code" href="group___yarp_vocabs.html#gadab35edb00a4f24c7fa6c2a57db1c8f3">00048</a> <span class="preprocessor">        #define VOCAB_PSET VOCAB4(&#39;s&#39;,&#39;e&#39;,&#39;t&#39;,&#39;p&#39;)      </span>
-<a name="l00049"></a><a class="code" href="group___yarp_vocabs.html#ga76b9df767fe3175d55af7bc428ee9f7a">00049</a> <span class="preprocessor">        #define VOCAB_PROT VOCAB4(&#39;r&#39;,&#39;o&#39;,&#39;t&#39;,&#39;p&#39;)      </span>
-<a name="l00050"></a><a class="code" href="group___yarp_vocabs.html#gad7fc99adf0f99aeb21e0e8c282a952a4">00050</a> <span class="preprocessor">        #define VOCAB_PREM VOCAB3(&#39;r&#39;,&#39;m&#39;,&#39;p&#39;)          </span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>        <span class="comment">// geometries</span>
-<a name="l00053"></a><a class="code" href="group___yarp_vocabs.html#gaa8d1af1249038fc04e0c14f61077a8df">00053</a> <span class="preprocessor">        #define VOCAB_CSG VOCAB3(&#39;c&#39;,&#39;s&#39;,&#39;g&#39;)           </span>
-<a name="l00054"></a><a class="code" href="group___yarp_vocabs.html#gacda28e98905ab22f6952d5d8bd04a201">00054</a> <span class="preprocessor">        #define VOCAB_SPH VOCAB3(&#39;s&#39;,&#39;p&#39;,&#39;h&#39;)           </span>
-<a name="l00055"></a><a class="code" href="group___yarp_vocabs.html#ga9628cdd5ec72bab3a54dcc99520cc591">00055</a> <span class="preprocessor">        #define VOCAB_CYL VOCAB3(&#39;c&#39;,&#39;y&#39;,&#39;l&#39;)           </span>
-<a name="l00056"></a><a class="code" href="group___yarp_vocabs.html#ga32cf2469c339b363727614521f29b357">00056</a> <span class="preprocessor">        #define VOCAB_BOX VOCAB3(&#39;b&#39;,&#39;o&#39;,&#39;x&#39;)           </span>
-<a name="l00057"></a>00057 <span class="preprocessor">        </span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>        <span class="comment">// these are just for compatibility with the iCubSimulator</span>
-<a name="l00059"></a><a class="code" href="group___yarp_vocabs.html#ga51eaf5d8f1c305cb5d72a93058070b86">00059</a> <span class="preprocessor">        #define VOCAB_SSPH VOCAB4(&#39;s&#39;,&#39;s&#39;,&#39;p&#39;,&#39;h&#39;)      </span>
-<a name="l00060"></a><a class="code" href="group___yarp_vocabs.html#ga16bb49beabf29c974b2eb426733f0318">00060</a> <span class="preprocessor">        #define VOCAB_SCYL VOCAB4(&#39;s&#39;,&#39;c&#39;,&#39;y&#39;,&#39;l&#39;)      </span>
-<a name="l00061"></a><a class="code" href="group___yarp_vocabs.html#ga6fa38324752445e8d11da58e0436e3b2">00061</a> <span class="preprocessor">        #define VOCAB_SBOX VOCAB4(&#39;s&#39;,&#39;b&#39;,&#39;o&#39;,&#39;x&#39;)      </span>
-<a name="l00062"></a>00062 <span class="preprocessor">        </span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span>        <span class="comment">// admin</span>
-<a name="l00064"></a><a class="code" href="group___yarp_vocabs.html#ga0d8540a4c9284876f7e1dc1ed8f30de3">00064</a> <span class="preprocessor">        #define VOCAB_CLEAR VOCAB3(&#39;c&#39;,&#39;l&#39;,&#39;r&#39;)         </span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>
-<a name="l00067"></a>00067 <span class="preprocessor">        WorldRpcInterface();                    </span>
-<a name="l00068"></a>00068 <span class="preprocessor">        virtual ~WorldRpcInterface();   </span>
-<a name="l00069"></a>00069 <span class="preprocessor">        </span>
-<a name="l00070"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">00070</a> <span class="preprocessor"></span>        <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab" title="Sets the RobotModel::World on which this interface operates.">setWorld</a>( <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* aWorld ) { world = aWorld; }  
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="keyword">private</span>:
-<a name="l00073"></a>00073         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> handler( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply );   
-<a name="l00074"></a>00074         
-<a name="l00075"></a>00075         <span class="keywordtype">void</span> make( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );             
-<a name="l00076"></a>00076         <span class="keywordtype">void</span> setPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
-<a name="l00077"></a>00077         <span class="keywordtype">void</span> pSetPos( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
-<a name="l00078"></a>00078         <span class="keywordtype">void</span> setRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
-<a name="l00079"></a>00079         <span class="keywordtype">void</span> pSetRot( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
-<a name="l00080"></a>00080         <span class="keywordtype">void</span> append( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
-<a name="l00081"></a>00081         
-<a name="l00082"></a>00082         <span class="keywordtype">void</span> removeObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );             
-<a name="l00083"></a>00083         <span class="keywordtype">void</span> removePrimitive( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
-<a name="l00084"></a>00084         
-<a name="l00085"></a>00085         <span class="keywordtype">void</span> clearWorld();                                                                                                                                              
-<a name="l00086"></a>00086         
-<a name="l00087"></a>00087         <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* getObject( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );                                                                                                
-<a name="l00088"></a>00088         <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">RobotModel::PrimitiveObject</a>* getPrimitive( <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
-<a name="l00089"></a>00089         QString getName( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, <span class="keywordtype">int</span>&amp; n  );                                                                                                                                                                                                
-<a name="l00090"></a>00090         
-<a name="l00091"></a>00091         <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* world;       
-<a name="l00092"></a>00092 };
-<a name="l00093"></a>00093 }
-<a name="l00094"></a>00094 <span class="preprocessor">#endif</span>
-<a name="l00095"></a>00095 <span class="preprocessor"></span>
+<a name="l00017"></a>00017 <span class="keyword">namespace </span>RobotModel
+<a name="l00018"></a>00018 {
+<a name="l00019"></a>00019         <span class="keyword">class </span>World;
+<a name="l00020"></a>00020         <span class="keyword">class </span>CompositeObject;
+<a name="l00021"></a>00021         <span class="keyword">class </span>PrimitiveObject;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="keyword">namespace </span>VirtualSkin
+<a name="l00025"></a>00025 {
+<a name="l00026"></a>00026         <span class="keyword">class </span>WorldRpcInterface;
+<a name="l00027"></a>00027 }
+<a name="l00028"></a>00028         
+<a name="l00034"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html">00034</a> <span class="keyword">class </span><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html" title="Provides an RPC interface (via YARP) to RobotModel::World.">VirtualSkin::WorldRpcInterface</a>: <span class="keyword">public</span> VirtualSkin::<a class="code" href="class_virtual_skin_1_1_yarp_rpc_port.html" title="A call/response style YARP port.">YarpRpcPort</a>
+<a name="l00035"></a>00035 {
+<a name="l00036"></a>00036                 
+<a name="l00037"></a>00037 <span class="keyword">public</span>:
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039         <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a214bbac16ce3a3a94aa1bd600090ae2b" title="Nothing special to do here.">WorldRpcInterface</a>();                    
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a6b990fdbe2cb39fc2d0e2ef9e8139250" title="Nothing special to do here.">~WorldRpcInterface</a>();   
+<a name="l00041"></a>00041         
+<a name="l00042"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab">00042</a>         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#aa67a848343bcde7782009bdf7bba74ab" title="Sets the RobotModel::World on which this interface operates.">setWorld</a>( <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* aWorld ) { <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a1c1fa34b65882981e6f8484b228826dd" title="Pointer to the world model on which this interface operates.">world</a> = aWorld; }  
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="keyword">private</span>:
+<a name="l00045"></a>00045         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a4f58e014d7ee14ad798d6feeb4696cc2" title="Handles incomming RPC commands (expressed as YARP bottles).">handler</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply );   
+<a name="l00046"></a>00046         
+<a name="l00047"></a>00047         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a8f31b9b8ab8f575ff169b72f3fe119eb" title="Creates a new object.">make</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );             
+<a name="l00048"></a>00048         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#ae43228bf6fc411b784db1553117c8e59" title="Sets the position of an object.">setPos</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
+<a name="l00049"></a>00049         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a4ab83f121161f861a3c844c6cf953c85" title="Set the position of a primitive relative to its parent object.">pSetPos</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
+<a name="l00050"></a>00050         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a7317cd6372d6bdcded65c25e9dc6eb50" title="Rotate an object.">setRot</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a5c9d5b161a9578d6129e1f57f00f8533" title="Rotate a primitive relative to its parent object.">pSetRot</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a54beac9a081373f7a3a7a6947282ab97" title="Append a primitive to an object.">append</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );   
+<a name="l00053"></a>00053         
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#ac888e2be48afaa1f990cc5e9ca66ea6a" title="Remove and delete an object.">removeObject</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );             
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a1b81f7cb8b262c424f6c45d75ac0cea3" title="Remove and delete a primitive.">removePrimitive</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
+<a name="l00056"></a>00056         
+<a name="l00057"></a>00057         <span class="keywordtype">void</span> <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a8fe8b5ab88e219facabe698a0b1b844f" title="Remove and delete everything in the world model and reset naming counters.">clearWorld</a>();                                                                                                                                              
+<a name="l00058"></a>00058         
+<a name="l00059"></a>00059         <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a0823a5c5f0ac5d124783e0ea9023283d" title="Return a pointer to an object by looking up its name.">getObject</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );                                                                                                
+<a name="l00060"></a>00060         <a class="code" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">RobotModel::PrimitiveObject</a>* <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#ae355ccdae79b938d612d973ae493ba96" title="Return a pointer to a primitive by looking up its name.">getPrimitive</a>( <span class="keyword">const</span> <a class="code" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">RobotModel::CompositeObject</a>* Object, <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, yarp::os::Bottle&amp; reply, <span class="keywordtype">int</span>&amp; n  );  
+<a name="l00061"></a>00061         QString <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a1c546ec1c621f1bd79fd4ad6b26fbddc" title="Parse the RPC command and get a name string out.">getName</a>( <span class="keyword">const</span> yarp::os::Bottle&amp; cmd, <span class="keywordtype">int</span>&amp; n  );                                                                                                                                                                                                
+<a name="l00062"></a>00062         
+<a name="l00063"></a><a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a1c1fa34b65882981e6f8484b228826dd">00063</a>         <a class="code" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">RobotModel::World</a>* <a class="code" href="class_virtual_skin_1_1_world_rpc_interface.html#a1c1fa34b65882981e6f8484b228826dd" title="Pointer to the world model on which this interface operates.">world</a>;       
+<a name="l00064"></a>00064 };
+<a name="l00065"></a>00065 <span class="preprocessor">#endif</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

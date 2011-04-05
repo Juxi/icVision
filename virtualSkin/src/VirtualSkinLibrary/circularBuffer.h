@@ -12,15 +12,17 @@
 
 #include <QVector>
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class CircularBuffer;
+}
 
-/**
- * A simple circular buffer of QVectors
+/** \brief A simple circular buffer of QVectors
  *
  *	In VirtualSkin, this is used to store the history of poses for a RobotModel::BodyPart. The history is written to the buffer by StateObserver.
  *	The outer QVector contains states of the RobotModel::BodyPart, and the inner QVector (each state) contains a tuple of motor encoder positions. 
  */
-class CircularBuffer
+class VirtualSkin::CircularBuffer
 {
 
 public:
@@ -40,6 +42,5 @@ private:
 	QVector< QVector<qreal> >::iterator i;	//!< Represents the 'current' position in the buffer
 	QVector< QVector<qreal> > buffer;		//!< The buffer itself
 };
-}
 #endif
 /** @} */

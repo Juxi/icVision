@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::World Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::World" --><!-- doxytag: inherits="RobotModel::RenderList" -->
 <p>A list of objects that define the Robots environment.  
 <a href="#_details">More...</a></p>
@@ -103,8 +103,26 @@ Inheritance diagram for RobotModel::World:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_composite_object.html" title="A physical object modeled as the union of n PrimitiveObjects.">CompositeObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a530cb18d1249f7c6e94c4ba6879cf36a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a38aea4885454231131d4ccb7945138dc">filterCollisions</a> (<a class="el" href="class_robot_model_1_1_primitive_object.html">PrimitiveObject</a> *)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Turns off FreeSOLID collision response between the <a class="el" href="class_robot_model_1_1_primitive_object.html" title="A physical object modeled as a geometric primitive.">PrimitiveObject</a> passed as a parameter and all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a38aea4885454231131d4ccb7945138dc"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a150eab10c21532162bb698d72aecec16">render</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls display lists for all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> using glCallLists( int ).  <a href="#a150eab10c21532162bb698d72aecec16"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a2227f73c49724458eb4e5670c4f27c5f">objectList</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The list of objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>.  <a href="#a2227f73c49724458eb4e5670c4f27c5f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a32c905c2f241337547717879b764423a">numSpheres</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for spheres (counting begins with '1').  <a href="#a32c905c2f241337547717879b764423a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a6f1c32bc3520a29cc02af9285833cc64">numCylinders</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for cylinders (counting begins with '1').  <a href="#a6f1c32bc3520a29cc02af9285833cc64"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a93c81d92436cd46162fc3561140677e7">numBoxes</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for boxes (counting begins with '1').  <a href="#a93c81d92436cd46162fc3561140677e7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#af15689211a22b43e5e93556716778001">numSSpheres</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for sspheres (counting begins with '1').  <a href="#af15689211a22b43e5e93556716778001"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#ab2d26ae43d2db3850e4777c6724e05fc">numSCylinders</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for scylinders (counting begins with '1').  <a href="#ab2d26ae43d2db3850e4777c6724e05fc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a9307e4279a8a1fc01e86143e7aaf66a9">numSBoxes</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A counter for sboxes (counting begins with '1').  <a href="#a9307e4279a8a1fc01e86143e7aaf66a9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_world.html#a501a49c01bc2845656abaef48663102f">mutex</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">To prevent reading past the end of objectList.  <a href="#a501a49c01bc2845656abaef48663102f"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A list of objects that define the Robots environment. </p>
@@ -524,7 +542,7 @@ Inheritance diagram for RobotModel::World:</div>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [virtual]</code></td>
+          <td><code> [private, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -533,6 +551,130 @@ Inheritance diagram for RobotModel::World:</div>
 <p>Calls display lists for all objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a> using glCallLists( int ). </p>
 
 <p>Implements <a class="el" href="class_robot_model_1_1_render_list.html#ac8646765beee22bf11582049dc3cf195">RobotModel::RenderList</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a501a49c01bc2845656abaef48663102f"></a><!-- doxytag: member="RobotModel::World::mutex" ref="a501a49c01bc2845656abaef48663102f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMutex <a class="el" href="class_robot_model_1_1_world.html#a501a49c01bc2845656abaef48663102f">RobotModel::World::mutex</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>To prevent reading past the end of objectList. </p>
+
+</div>
+</div>
+<a class="anchor" id="a93c81d92436cd46162fc3561140677e7"></a><!-- doxytag: member="RobotModel::World::numBoxes" ref="a93c81d92436cd46162fc3561140677e7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#a93c81d92436cd46162fc3561140677e7">RobotModel::World::numBoxes</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for boxes (counting begins with '1'). </p>
+
+</div>
+</div>
+<a class="anchor" id="a6f1c32bc3520a29cc02af9285833cc64"></a><!-- doxytag: member="RobotModel::World::numCylinders" ref="a6f1c32bc3520a29cc02af9285833cc64" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#a6f1c32bc3520a29cc02af9285833cc64">RobotModel::World::numCylinders</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for cylinders (counting begins with '1'). </p>
+
+</div>
+</div>
+<a class="anchor" id="a9307e4279a8a1fc01e86143e7aaf66a9"></a><!-- doxytag: member="RobotModel::World::numSBoxes" ref="a9307e4279a8a1fc01e86143e7aaf66a9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#a9307e4279a8a1fc01e86143e7aaf66a9">RobotModel::World::numSBoxes</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for sboxes (counting begins with '1'). </p>
+<p>Sboxes are included for compatibility with the iCub simulator, however they are functionally equivalent to normal boxes as this model does not include dynamics </p>
+
+</div>
+</div>
+<a class="anchor" id="ab2d26ae43d2db3850e4777c6724e05fc"></a><!-- doxytag: member="RobotModel::World::numSCylinders" ref="ab2d26ae43d2db3850e4777c6724e05fc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#ab2d26ae43d2db3850e4777c6724e05fc">RobotModel::World::numSCylinders</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for scylinders (counting begins with '1'). </p>
+<p>Scylinders are included for compatibility with the iCub simulator, however they are functionally equivalent to normal cylinders as this model does not include dynamics </p>
+
+</div>
+</div>
+<a class="anchor" id="a32c905c2f241337547717879b764423a"></a><!-- doxytag: member="RobotModel::World::numSpheres" ref="a32c905c2f241337547717879b764423a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#a32c905c2f241337547717879b764423a">RobotModel::World::numSpheres</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for spheres (counting begins with '1'). </p>
+
+</div>
+</div>
+<a class="anchor" id="af15689211a22b43e5e93556716778001"></a><!-- doxytag: member="RobotModel::World::numSSpheres" ref="af15689211a22b43e5e93556716778001" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_world.html#af15689211a22b43e5e93556716778001">RobotModel::World::numSSpheres</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A counter for sspheres (counting begins with '1'). </p>
+<p>Sspheres are included for compatibility with the iCub simulator, however they are functionally equivalent to normal spheres as this model does not include dynamics </p>
+
+</div>
+</div>
+<a class="anchor" id="a2227f73c49724458eb4e5670c4f27c5f"></a><!-- doxytag: member="RobotModel::World::objectList" ref="a2227f73c49724458eb4e5670c4f27c5f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;<a class="el" href="class_robot_model_1_1_composite_object.html">CompositeObject</a>*&gt; <a class="el" href="class_robot_model_1_1_world.html#a2227f73c49724458eb4e5670c4f27c5f">RobotModel::World::objectList</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The list of objects in the <a class="el" href="class_robot_model_1_1_world.html" title="A list of objects that define the Robots environment.">World</a>. </p>
 
 </div>
 </div>

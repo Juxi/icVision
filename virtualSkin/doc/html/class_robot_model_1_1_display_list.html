@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::DisplayList Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::DisplayList" -->
 <p>A container for an OpenGL display list and its associated 4x4 displacement matrix.  
 <a href="#_details">More...</a></p>
@@ -116,6 +116,16 @@ Inheritance diagram for RobotModel::DisplayList:</div>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot_model_1_1_displ_matrix.html">DisplMatrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_display_list.html#a9058babda6102fe41186f806990aa350">T</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The position/orientation of the display list as a 4x4 rigid-body transformation matrix.  <a href="#a9058babda6102fe41186f806990aa350"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_display_list.html#a3a5ee1789317363b7bd1ca61e9a2077e">index</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The index is passed to glCallLists(int) to render the display list.  <a href="#a3a5ee1789317363b7bd1ca61e9a2077e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_display_list.html#a5943d28a655fe0c1e4f67a04cb30087a">timeSinceLastCollision</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The time stamp of the last collision event.  <a href="#a5943d28a655fe0c1e4f67a04cb30087a"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static GLfloat&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_display_list.html#ae0fca1c8f89b5f1034901040762a8c08">red</a> [4] = { 1.0, 0.0, 0.0, 1.0 }</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A color for rendering.  <a href="#ae0fca1c8f89b5f1034901040762a8c08"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static GLfloat&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_display_list.html#a6fac335968a06622b9604d955d814ea2">gray</a> [4] = { 0.3, 0.3, 0.3, 1.0 }</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Another color for rendering.  <a href="#a6fac335968a06622b9604d955d814ea2"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A container for an OpenGL display list and its associated 4x4 displacement matrix. </p>
@@ -491,6 +501,53 @@ Inheritance diagram for RobotModel::DisplayList:</div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a6fac335968a06622b9604d955d814ea2"></a><!-- doxytag: member="RobotModel::DisplayList::gray" ref="a6fac335968a06622b9604d955d814ea2" args="[4]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLfloat <a class="el" href="class_robot_model_1_1_display_list.html#a6fac335968a06622b9604d955d814ea2">DisplayList::gray</a> = { 0.3, 0.3, 0.3, 1.0 }<code> [static, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Another color for rendering. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3a5ee1789317363b7bd1ca61e9a2077e"></a><!-- doxytag: member="RobotModel::DisplayList::index" ref="a3a5ee1789317363b7bd1ca61e9a2077e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_robot_model_1_1_display_list.html#a3a5ee1789317363b7bd1ca61e9a2077e">RobotModel::DisplayList::index</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The index is passed to glCallLists(int) to render the display list. </p>
+
+<p>Reimplemented in <a class="el" href="class_robot_model_1_1_kin_tree_node.html#ab7be97fae982037992b0971ab25e643a">RobotModel::KinTreeNode</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae0fca1c8f89b5f1034901040762a8c08"></a><!-- doxytag: member="RobotModel::DisplayList::red" ref="ae0fca1c8f89b5f1034901040762a8c08" args="[4]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLfloat <a class="el" href="class_robot_model_1_1_display_list.html#ae0fca1c8f89b5f1034901040762a8c08">DisplayList::red</a> = { 1.0, 0.0, 0.0, 1.0 }<code> [static, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A color for rendering. </p>
+
+</div>
+</div>
 <a class="anchor" id="a9058babda6102fe41186f806990aa350"></a><!-- doxytag: member="RobotModel::DisplayList::T" ref="a9058babda6102fe41186f806990aa350" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -503,6 +560,21 @@ Inheritance diagram for RobotModel::DisplayList:</div>
 <div class="memdoc">
 
 <p>The position/orientation of the display list as a 4x4 rigid-body transformation matrix. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5943d28a655fe0c1e4f67a04cb30087a"></a><!-- doxytag: member="RobotModel::DisplayList::timeSinceLastCollision" ref="a5943d28a655fe0c1e4f67a04cb30087a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QTime <a class="el" href="class_robot_model_1_1_display_list.html#a5943d28a655fe0c1e4f67a04cb30087a">RobotModel::DisplayList::timeSinceLastCollision</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The time stamp of the last collision event. </p>
 
 </div>
 </div>

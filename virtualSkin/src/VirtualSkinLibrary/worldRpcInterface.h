@@ -14,56 +14,28 @@
 #include <yarp/os/all.h>
 #include "yarpRpcPort.h"
 
-namespace RobotModel {
+namespace RobotModel
+{
 	class World;
 	class CompositeObject;
 	class PrimitiveObject;
 }
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class WorldRpcInterface;
+}
 	
 /** \brief Provides an RPC interface (via YARP) to RobotModel::World
  *
  *	This interface is compatible with that of the iCub simulator in terms of the syntax of RPC commands, the kinds of geometries supported and the
  *  way those geometries are named.  However in addition to individual primitives, the World supports CompositeObjects, made up of unions of PrimitiveObjects.
  */
-
-class WorldRpcInterface: public YarpRpcPort
+class VirtualSkin::WorldRpcInterface: public VirtualSkin::YarpRpcPort
 {
 		
 public:
 
-	/** \addtogroup YarpVocabs
-	 *	@{
-	 *  TODO: investigate absolute vs relative positions/orientations as they apply to the iCub simulator
-	 */
-	// commands for objects
-	#define VOCAB_MK VOCAB2('m','k')			//!< Make a new object
-	#define VOCAB_SET VOCAB3('s','e','t')		//!< Set the position of an object
-	#define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
-	#define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
-	
-	// commands for primitives
-	#define VOCAB_APP VOCAB3('a','p','p')		//!< Append a primitive to an object
-	#define VOCAB_PSET VOCAB4('s','e','t','p')	//!< Set the position of a primitive relative to its parent object
-	#define VOCAB_PROT VOCAB4('r','o','t','p')	//!< Rotate a primitive relative to its parent object
-	#define VOCAB_PREM VOCAB3('r','m','p')		//!< Remove a primitive from its parent object
-
-	// geometries
-	#define VOCAB_CSG VOCAB3('c','s','g')		//!< Constructive Solid Geometry object
-	#define VOCAB_SPH VOCAB3('s','p','h')		//!< Sphere
-	#define VOCAB_CYL VOCAB3('c','y','l')		//!< Cylinder
-	#define VOCAB_BOX VOCAB3('b','o','x')		//!< Box
-	
-	// these are just for compatibility with the iCubSimulator
-	#define VOCAB_SSPH VOCAB4('s','s','p','h')	//!< Static Sphere (exactly the same as a sphere but with a different naming scheme)
-	#define VOCAB_SCYL VOCAB4('s','c','y','l')	//!< Static Cylinder (exactly the same as a cylinder but with a different naming scheme)
-	#define VOCAB_SBOX VOCAB4('s','b','o','x')	//!< Static Box (exactly the same as a box but with a different naming scheme)
-	
-	// admin
-	#define VOCAB_CLEAR VOCAB3('c','l','r')		//!< Clears the world model and resets all counters
-	/** @} */
-	
 	WorldRpcInterface();			//!< Nothing special to do here
 	virtual ~WorldRpcInterface();	//!< Nothing special to do here
 	
@@ -90,6 +62,5 @@ private:
 	
 	RobotModel::World* world;	//!< Pointer to the world model on which this interface operates
 };
-}
 #endif
 /** @} */

@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::KinTreeNode Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::KinTreeNode" --><!-- doxytag: inherits="RobotModel::CompositeObject" -->
 <p>The building block of the kinematic tree structure.  
 <a href="#_details">More...</a></p>
@@ -495,7 +495,7 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <p>Recursively decends serial chains eliminating FreeSOLID collision response to collisions between 'adjacent' geometries. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>node</em>&nbsp;</td><td>The <a class="el" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a> with respect to which we are filtering as we decend the serial chain. The function is called on a node (that node's member function is called) with respect to itself (the same node is passed as a parameter) to decend the serial chain associated with that node. Alternatively, it can be called on a node with respect to one of its siblings (pass a pointer to the node to the member function of the sibling) to decend the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a51113339b5ffc471c058218f1294d73a" title="Recursively parses the tree, calling serialFilter( KinTreeNode* ) on each KinTreeNode...">filterCollisionPairs()</a> and Robot.filterCollisionPairs(). </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>node</em>&nbsp;</td><td>The <a class="el" href="class_robot_model_1_1_kin_tree_node.html" title="The building block of the kinematic tree structure.">KinTreeNode</a> with respect to which we are filtering as we decend the serial chain. The function is called on a node (that node's member function is called) with respect to itself (the same node is passed as a parameter) to decend the serial chain associated with that node. Alternatively, it can be called on a node with respect to one of its siblings (pass a pointer to the node to the member function of the sibling) to decend the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by <a class="el" href="class_robot_model_1_1_kin_tree_node.html#a51113339b5ffc471c058218f1294d73a" title="Recursively parses the tree, calling serialFilter( KinTreeNode* ) on each KinTreeNode...">filterCollisionPairs()</a> and <a class="el" href="class_robot_model_1_1_robot.html#ae45a73c616b505c855c1c22e7088ba64" title="Turn off collision response (via FreeSOLID) between &#39;adjacent pairs of objects&#39;...">Robot.filterCollisionPairs()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -520,7 +520,7 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 <p>Sets the local transformation from the next coordinate system to this coordinate system as a function of nodeAxis. </p>
 <p>Implemented by <a class="el" href="class_robot_model_1_1_link.html" title="A translation in the kinematic tree that models the robot.">Link</a>, <a class="el" href="class_robot_model_1_1_revolute_joint.html" title="Implements Joint::setM() for a revolute (rotational) joint.">RevoluteJoint</a> and <a class="el" href="class_robot_model_1_1_prismatic_joint.html" title="Implements Joint::setM() for a prismatic (telescoping) joint.">PrismaticJoint</a> </p>
 
-<p>Implemented in <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>.</p>
+<p>Implemented in <a class="el" href="class_robot_model_1_1_joint.html#a485f5fc46f5156a7383bee7edbfc6643">RobotModel::Joint</a>, <a class="el" href="class_robot_model_1_1_prismatic_joint.html#a0ef9020541f47c0f2310e38646d22ab9">RobotModel::PrismaticJoint</a>, <a class="el" href="class_robot_model_1_1_revolute_joint.html#a81fec39f92be506e182972c7d19a9dda">RobotModel::RevoluteJoint</a>, and <a class="el" href="class_robot_model_1_1_link.html#aeff5481ceb3dcbb9d8129ed69780e537">RobotModel::Link</a>.</p>
 
 </div>
 </div>
@@ -608,7 +608,7 @@ Inheritance diagram for RobotModel::KinTreeNode:</div>
 
 <p>The index is passed to glCallLists(int) to render the display list. </p>
 
-<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html">RobotModel::DisplayList</a>.</p>
+<p>Reimplemented from <a class="el" href="class_robot_model_1_1_display_list.html#a3a5ee1789317363b7bd1ca61e9a2077e">RobotModel::DisplayList</a>.</p>
 
 </div>
 </div>

@@ -40,17 +40,20 @@ namespace yarp {
  *		- /targetName/command:i
  *		- /targetName/rpc:i
  *
- *	This class creates three more ports to mimic the device driver:
+ *	This class creates three more ports to provide a transparent interface to the device driver:
  * \verbatim
- * 		- /filterName/state:o		|		 |		/targetName/state:o
- *		- /filterName/command:i		| FILTER |		/targetName/command:i
- *		- /filterName/rpc:i			|		 |		/targetName/rpc:i
+ * 		- /filterName/state:o
+ *		- /filterName/command:i
+ *		- /filterName/rpc:i
  *
  * \endverbatim
- *	Thus the filter provides a transparent interface to the device driver.
- *	Furthermore, it provides a mechanism to cut the connection (effectively cutting off the user from the YARP device driver)
+ *
+ *	The filter provides a mechanism to cut the connection (effectively cutting off the user from the YARP device driver)
  *	as well as inject data into the exchange between user and device driver.
- * \note When the filter is cut, it still allows the state port to transmit data
+ * \note Gregor's original implementation has been modified such that when the filter is cut,
+ *	it still allows the state port to transmit data
+ *
+ *	\image html controlboardfilter.png "Control Board Filter Architecture"
  */										
 class yarp::os::ControlBoardFilter {
 

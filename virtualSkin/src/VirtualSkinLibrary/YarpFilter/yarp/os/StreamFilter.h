@@ -36,6 +36,8 @@ namespace yarp {
  * - Incomming data can be monitored by setting an Observer (see StreamFilterImpl).
  * - The communication between the client and the target port can be cut.
  * - Data can be injected into the stream
+ *
+ *	\image html streamfilter.png "Stream Filter Architecture"
  */
 class yarp::os::StreamFilter: public TypedReaderCallback<Bottle> {
 

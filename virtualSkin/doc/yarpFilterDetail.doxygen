@@ -16,7 +16,7 @@ The YarpFilter creates a trio of ports named:
 
 ... and connects them to the RemoteControlBoard as shown here:
 
-\image html controlboardfilter.png "Control Board Filter Architecture" </td>
+\image html controlboardfilter.png "Control Board Filter Architecture"
 
 As you can see, the names of the filtered ports reflect the names of the unfiltered iCub motor control ports, however an "F" has been appended to the robot name to signify that the port is filtered. The filtered ports allow transparent access to the underlying RemoteControlBoard, however during the course of execution, the filter can intervene in two ways:
 

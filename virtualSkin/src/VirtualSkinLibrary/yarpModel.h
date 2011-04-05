@@ -14,7 +14,10 @@
 #include "worldRpcInterface.h"
 #include "model.h"
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class YarpModel;
+}
 
 /*! \brief Wraps RobotModel::Model with YARP functionality
  *
@@ -25,8 +28,7 @@ namespace VirtualSkin {
  *   If you want to publish collision information on the network via YARP, call openCollisionPort(QString&).
  *	 To start the RPC interface to the RobotModel::World, call openWorldRpcPort(QString&).
  */
-
-class YarpModel : public RobotModel::Model
+class VirtualSkin::YarpModel : public RobotModel::Model
 {
 
 public:
@@ -53,6 +55,5 @@ private:
 	WorldRpcInterface	worldPort;		//!< The YARP RPC port that provides an interface to the RobotModel::World
 	yarp::os::Bottle	bottle;			//!< The bottle containing the collision information, that is streamed by collisionPort
 };
-}
 #endif
 /** @} */

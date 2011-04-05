@@ -60,7 +60,7 @@ RemoteControlBoard</a></h2>
 <div align="center">
 <img src="controlboardfilter.png" alt="controlboardfilter.png"/>
 <p><strong>Control Board Filter Architecture</strong></p></div>
- <p>As you can see, the names of the filtered ports reflect the names of the unfiltered iCub motor control ports, however an "F" has been appended to the robot name to signify that the port is filtered. The filtered ports allow transparent access to the underlying RemoteControlBoard, however during the course of execution, the filter can intervene in two ways:</p>
+<p> As you can see, the names of the filtered ports reflect the names of the unfiltered iCub motor control ports, however an "F" has been appended to the robot name to signify that the port is filtered. The filtered ports allow transparent access to the underlying RemoteControlBoard, however during the course of execution, the filter can intervene in two ways:</p>
 <ol type="1">
 <li>Cut the connection between the filtered ports and the RemoteControlBoard, such that motor control commands are no longer forwarded</li>
 <li>Inject commands into the RemoteControlBoard whether or not the connection has been cut.</li>

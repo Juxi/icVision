@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>RobotModel::Interval Class Reference<br/>
 <small>
-[<a class="el" href="group___robot_model.html">Robot Model</a>]</small>
+[<a class="el" href="group___robot_model.html">RobotModel</a>]</small>
 </h1><!-- doxytag: class="RobotModel::Interval" -->
 <p>A simple representation of a 1D interval.  
 <a href="#_details">More...</a></p>
@@ -79,6 +79,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns true iff num &lt; min.  <a href="#a15ffb7f16e3bad02073761ecd23d9695"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#ae8da5063cbb210bdc856e30ea2b01f19">isTooBig</a> (const qreal num)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns true iff num &gt; max.  <a href="#ae8da5063cbb210bdc856e30ea2b01f19"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#a7778559fa9de7b4e8518bf3bed29a0a8">min</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The lower limit of the <a class="el" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>.  <a href="#a7778559fa9de7b4e8518bf3bed29a0a8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">qreal&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robot_model_1_1_interval.html#ae362e9da72728f3d247fe3bb6d42c2a1">max</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The upper limit of the <a class="el" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>.  <a href="#ae362e9da72728f3d247fe3bb6d42c2a1"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A simple representation of a 1D interval. </p>
@@ -258,6 +263,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memdoc">
 
 <p>Sets the value of 'min'. If min &gt; max, min is set equal to max and a warning is printed. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="ae362e9da72728f3d247fe3bb6d42c2a1"></a><!-- doxytag: member="RobotModel::Interval::max" ref="ae362e9da72728f3d247fe3bb6d42c2a1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_robot_model_1_1_interval.html#ae362e9da72728f3d247fe3bb6d42c2a1">RobotModel::Interval::max</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The upper limit of the <a class="el" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7778559fa9de7b4e8518bf3bed29a0a8"></a><!-- doxytag: member="RobotModel::Interval::min" ref="a7778559fa9de7b4e8518bf3bed29a0a8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal <a class="el" href="class_robot_model_1_1_interval.html#a7778559fa9de7b4e8518bf3bed29a0a8">RobotModel::Interval::min</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The lower limit of the <a class="el" href="class_robot_model_1_1_interval.html" title="A simple representation of a 1D interval.">Interval</a>. </p>
 
 </div>
 </div>

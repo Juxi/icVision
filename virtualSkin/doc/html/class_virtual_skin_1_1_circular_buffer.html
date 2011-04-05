@@ -49,7 +49,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>VirtualSkin::CircularBuffer Class Reference</h1><!-- doxytag: class="VirtualSkin::CircularBuffer" -->
+<h1>VirtualSkin::CircularBuffer Class Reference<br/>
+<small>
+[<a class="el" href="group___virtual_skin.html">VirtualSkin</a>]</small>
+</h1><!-- doxytag: class="VirtualSkin::CircularBuffer" -->
+<p>A simple circular buffer of QVectors.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="circular_buffer_8h_source.html">circularBuffer.h</a>&gt;</code></p>
 
 <p><a href="class_virtual_skin_1_1_circular_buffer-members.html">List of all members.</a></p>
@@ -71,9 +77,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a reference to the oldest value in the buffer.  <a href="#a9f6b11ef3601e32beac4d5525211ce52"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QVector&lt; qreal &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#a7c4096d1efc8e1cdc9f5be5be3c349e1">getCurrent</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a reference to the current value.  <a href="#a7c4096d1efc8e1cdc9f5be5be3c349e1"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; QVector&lt; qreal &gt;<br class="typebreak"/>
+ &gt;::iterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#ad61091377f394a0aea226c662ea1afee">i</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Represents the 'current' position in the buffer.  <a href="#ad61091377f394a0aea226c662ea1afee"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QVector&lt; QVector&lt; qreal &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_skin_1_1_circular_buffer.html#acb23c3b3cd243154a80968ee7254dada">buffer</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The buffer itself.  <a href="#acb23c3b3cd243154a80968ee7254dada"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>A simple circular buffer of QVectors</p>
+<p>A simple circular buffer of QVectors. </p>
 <p>In <a class="el" href="namespace_virtual_skin.html" title="Contains classes relevant to the virtual skin static library.">VirtualSkin</a>, this is used to store the history of poses for a <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a>. The history is written to the buffer by <a class="el" href="class_virtual_skin_1_1_state_observer.html" title="An IObserver implemented to monitor streaming state information (motor encoder values)...">StateObserver</a>. The outer QVector contains states of the <a class="el" href="class_robot_model_1_1_body_part.html" title="Allows motors to be controlled via groups such as &#39;torso&#39;, &#39;head&#39;...">RobotModel::BodyPart</a>, and the inner QVector (each state) contains a tuple of motor encoder positions. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8c5de0e610bb50bac684f4707e23431c"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::CircularBuffer" ref="a8c5de0e610bb50bac684f4707e23431c" args="()" -->
@@ -229,6 +241,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memdoc">
 
 <p>Clear and then resize the buffer. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="acb23c3b3cd243154a80968ee7254dada"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::buffer" ref="acb23c3b3cd243154a80968ee7254dada" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; QVector&lt;qreal&gt; &gt; <a class="el" href="class_virtual_skin_1_1_circular_buffer.html#acb23c3b3cd243154a80968ee7254dada">VirtualSkin::CircularBuffer::buffer</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The buffer itself. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad61091377f394a0aea226c662ea1afee"></a><!-- doxytag: member="VirtualSkin::CircularBuffer::i" ref="ad61091377f394a0aea226c662ea1afee" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; QVector&lt;qreal&gt; &gt;::iterator <a class="el" href="class_virtual_skin_1_1_circular_buffer.html#ad61091377f394a0aea226c662ea1afee">VirtualSkin::CircularBuffer::i</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Represents the 'current' position in the buffer. </p>
 
 </div>
 </div>

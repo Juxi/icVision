@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>VirtualSkin: Reflex Demo - YARP Ports</title>
+<title>VirtualSkin: Virtual Skin YARP Ports</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -40,13 +40,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<p>In addition to the filtered motor control ports, the reflex demonstration starts the following additional YARP ports. If you are working with the iCub robot, then "NameOfYourRobot" should be replaced by "icub" or "icubSim" depending on whether you have connected the filter to the hardware or the simulator.</p>
+<h2><a class="anchor" id="Prerequisites">
+Prerequisites</a></h2>
+<p>If you haven't done so already, please read . Before you connect to the ports described here, make sure you have <a class="el" href="reflexdemo.html#skin">Reflex Demo</a> running, and if you want to see anything interesting on <a class="el" href="yarp_ports.html#status">Filter Status Port: /NameOfYourRobotF/status</a> or <a class="el" href="yarp_ports.html#collisions">Collision Reporting Port: /NameOfYourRobotF/collisions</a>, make sure that <a class="el" href="reflexdemo.html#babbler">iCubBabbler</a> is also running. The aforementioned tutorials assume you are working with the iCub robot. If that is the case, then throughout this document "NameOfYourRobot" should be replaced by "icub" or "icubSim" depending on whether you have connected the filter to the hardware or the simulator.</p>
 <h2><a class="anchor" id="status">
 Filter Status Port: /NameOfYourRobotF/status</a></h2>
-<p>The filter status port simply streams a boolean value, indicating the status of the filter. A 1 means the filter is connected, and messages are being forwarded, whereas a 0 means that the filter has been cut, and messages are not being forwarded.</p>
+<p>To connect to the port run: </p>
+<div class="fragment"><pre class="fragment">yarp read /status </pre></div><p> Then, in a new terminal: </p>
+<div class="fragment"><pre class="fragment">yarp connect /icubSimF/status /status </pre></div><p>The filter status port simply streams a boolean value, indicating the status of the filter. A 1 means the filter is connected, and messages are being forwarded, whereas a 0 means that the filter has been cut, and messages are not being forwarded.</p>
 <h2><a class="anchor" id="collisions">
 Collision Reporting Port: /NameOfYourRobotF/collisions</a></h2>
-<p>The collisions port streams the state of the geometries in the robot model with regard to whether or not they are colliding. Each collision is considered to involve exactly two geometries and to occur at exactly one point in cartesian space. That point is expressed twice, once in each of the local coordinate systems associated with the two colliding geometries (see "witnessed response" in <a href="http://www.win.tue.nl/~gino/solid/solid2.html#SEC14">FreeSOLID Documentation - Response Handling</a>). Each bottle in the stream represents a state of the entire robot, and collision events are therefore nested therein according to the following structure:</p>
+<p>To connect to the port run: </p>
+<div class="fragment"><pre class="fragment">yarp read /collisions </pre></div><p> Then, in a new terminal: </p>
+<div class="fragment"><pre class="fragment">yarp connect /icubSimF/collisions /collisions </pre></div><p>The collisions port streams the positions of collisions as they occur. Each collision is considered to involve exactly two geometries and to occur at exactly one point in cartesian space. That point is expressed twice, once in each of the local coordinate systems associated with the two colliding geometries (see "witnessed response" in the <a href="http://www.win.tue.nl/~gino/solid/solid2.html#SEC14">FreeSOLID Documentation</a>). Each bottle in the stream represents a state of the entire robot, and collision events are therefore nested therein according to the following structure:</p>
 <p>A point of collision on a geometry is represented in the local coordinate system of that geometry as a collision-point-bottle: </p>
 <div class="fragment"><pre class="fragment">( geom-index x-position y-position z-position ) </pre></div><p>A collision is represented by two such collision-point-bottles nested in a collision-bottle: </p>
 <div class="fragment"><pre class="fragment">(( geom1-index x-position y-position z-position )( geom2-index x-position y-position z-position )) </pre></div><p>The state of the robot may involve many collisions, so all the collision-bottles are nested within a state-bottle. </p>

@@ -51,7 +51,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <h1>yarp::os::RpcFilter Class Reference<br/>
 <small>
-[<a class="el" href="group___yarp_filter.html">YARP Filter</a>]</small>
+[<a class="el" href="group___yarp_filter.html">YarpFilter</a>]</small>
 </h1><!-- doxytag: class="yarp::os::RpcFilter" -->
 <p>A proxy for a YARP RPC port that can also filter data.  
 <a href="#_details">More...</a></p>
@@ -79,6 +79,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sets the replier to send replies to a call from a client.  <a href="#a266cce1c8c9088b26ad7d6c65fc2201f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#a18789775d8040efabf1bc8df5d0f1c86">injectCall</a> (const Bottle &amp;b)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Injects a call to the target port.  <a href="#a18789775d8040efabf1bc8df5d0f1c86"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html">yarp::os::impl::RpcFilterImpl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#a2f606842f90df3e20f46929aaa510d3f">impl</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">implements the core functionality of the filter  <a href="#a2f606842f90df3e20f46929aaa510d3f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Port&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#aa6c71fd742f0f621f51748af79301ff6">clientsidePort</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">the port that builds the interface to the calling clients  <a href="#aa6c71fd742f0f621f51748af79301ff6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#a83b7acb6c85c1e33c23a5ba32cea6ec8">isOpen</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">is the filter open? (that is, is it forwarding messages?)  <a href="#a83b7acb6c85c1e33c23a5ba32cea6ec8"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>A proxy for a YARP RPC port that can also filter data. </p>
@@ -91,8 +98,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>When the communication is cut:</p>
 <ul>
 <li>calls to the target port can be injected, and</li>
-<li>responses to calling clients can be injected by setting a Replier (see RpcFilterImpl). </li>
+<li>responses to calling clients can be injected by setting a Replier (see RpcFilterImpl).</li>
 </ul>
+<div align="center">
+<img src="rpcfilter.png" alt="rpcfilter.png"/>
+<p><strong>RPC Filter Architecture</strong></p></div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6be8523a6258d84266a57734c907b70c"></a><!-- doxytag: member="yarp::os::RpcFilter::RpcFilter" ref="a6be8523a6258d84266a57734c907b70c" args="()" -->
 <div class="memitem">
@@ -333,6 +343,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="aa6c71fd742f0f621f51748af79301ff6"></a><!-- doxytag: member="yarp::os::RpcFilter::clientsidePort" ref="aa6c71fd742f0f621f51748af79301ff6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Port <a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#aa6c71fd742f0f621f51748af79301ff6">yarp::os::RpcFilter::clientsidePort</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>the port that builds the interface to the calling clients </p>
+
+</div>
+</div>
+<a class="anchor" id="a2f606842f90df3e20f46929aaa510d3f"></a><!-- doxytag: member="yarp::os::RpcFilter::impl" ref="a2f606842f90df3e20f46929aaa510d3f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyarp_1_1os_1_1impl_1_1_rpc_filter_impl.html">yarp::os::impl::RpcFilterImpl</a> <a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#a2f606842f90df3e20f46929aaa510d3f">yarp::os::RpcFilter::impl</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>implements the core functionality of the filter </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>Implement and document this function kail says: why? what's it for? </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a83b7acb6c85c1e33c23a5ba32cea6ec8"></a><!-- doxytag: member="yarp::os::RpcFilter::isOpen" ref="a83b7acb6c85c1e33c23a5ba32cea6ec8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classyarp_1_1os_1_1_rpc_filter.html#a83b7acb6c85c1e33c23a5ba32cea6ec8">yarp::os::RpcFilter::isOpen</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>is the filter open? (that is, is it forwarding messages?) </p>
 
 </div>
 </div>

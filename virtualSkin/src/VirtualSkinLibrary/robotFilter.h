@@ -23,7 +23,10 @@
 #include "yarpModel.h"
 #include "yarpStreamPort.h"
 
-namespace VirtualSkin {
+namespace VirtualSkin
+{
+	class RobotFilter;
+}
 
 /** \brief This class provides a safety mechanism to protect a YARP device from unwanted collisions
  *
@@ -38,7 +41,7 @@ namespace VirtualSkin {
  *	 helper-classes of YarpFilter (StateObserver, CallObserver and ResponseObserver) can be extended, and the resulting sub-classes passed to the RobotFilter
  *	 via the templated open<aStateObserver,aCallObserver,aResponseObserver>( const QString& ) function.
  */
-class RobotFilter : public QThread
+class VirtualSkin::RobotFilter : public QThread
 {
 	Q_OBJECT
 
@@ -171,6 +174,5 @@ private:
 	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
 	
 };
-}
 #endif
 /** @} */

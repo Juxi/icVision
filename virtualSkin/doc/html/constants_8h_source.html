@@ -60,6 +60,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00023"></a><a class="code" href="group___virtual_skin.html#ga5b57353029a939762d93e2da7a188cd4">00023</a> <span class="preprocessor">#define NEGLIGIBLE_ANGLE 5                      </span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span>
 <a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00029"></a>00029 <span class="comment">// commands for objects</span>
+<a name="l00030"></a><a class="code" href="group___virtual_skin.html#ga8b32026b2a68060710aa8460fc8f9002">00030</a> <span class="preprocessor">#define VOCAB_MK VOCAB2(&#39;m&#39;,&#39;k&#39;)                        </span>
+<a name="l00031"></a><a class="code" href="group___virtual_skin.html#gaec5615baa74d09de8e4a836e933623bd">00031</a> <span class="preprocessor">#define VOCAB_SET VOCAB3(&#39;s&#39;,&#39;e&#39;,&#39;t&#39;)           </span>
+<a name="l00032"></a><a class="code" href="group___virtual_skin.html#ga17b3675d8b0698180d78043ded316b04">00032</a> <span class="preprocessor">#define VOCAB_ROT VOCAB3(&#39;r&#39;,&#39;o&#39;,&#39;t&#39;)           </span>
+<a name="l00033"></a><a class="code" href="group___virtual_skin.html#gaaf18e13341cf849b4b211ddf30b8c08a">00033</a> <span class="preprocessor">#define VOCAB_REM VOCAB2(&#39;r&#39;,&#39;m&#39;)                       </span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span>
+<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="comment">// commands for primitives</span>
+<a name="l00036"></a><a class="code" href="group___virtual_skin.html#ga2b7fd4c379b8415e799b959dca03a473">00036</a> <span class="preprocessor">#define VOCAB_APP VOCAB3(&#39;a&#39;,&#39;p&#39;,&#39;p&#39;)           </span>
+<a name="l00037"></a><a class="code" href="group___virtual_skin.html#gadab35edb00a4f24c7fa6c2a57db1c8f3">00037</a> <span class="preprocessor">#define VOCAB_PSET VOCAB4(&#39;s&#39;,&#39;e&#39;,&#39;t&#39;,&#39;p&#39;)      </span>
+<a name="l00038"></a><a class="code" href="group___virtual_skin.html#ga76b9df767fe3175d55af7bc428ee9f7a">00038</a> <span class="preprocessor">#define VOCAB_PROT VOCAB4(&#39;r&#39;,&#39;o&#39;,&#39;t&#39;,&#39;p&#39;)      </span>
+<a name="l00039"></a><a class="code" href="group___virtual_skin.html#gad7fc99adf0f99aeb21e0e8c282a952a4">00039</a> <span class="preprocessor">#define VOCAB_PREM VOCAB3(&#39;r&#39;,&#39;m&#39;,&#39;p&#39;)          </span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span><span class="comment">// geometries</span>
+<a name="l00042"></a><a class="code" href="group___virtual_skin.html#gaa8d1af1249038fc04e0c14f61077a8df">00042</a> <span class="preprocessor">#define VOCAB_CSG VOCAB3(&#39;c&#39;,&#39;s&#39;,&#39;g&#39;)           </span>
+<a name="l00043"></a><a class="code" href="group___virtual_skin.html#gacda28e98905ab22f6952d5d8bd04a201">00043</a> <span class="preprocessor">#define VOCAB_SPH VOCAB3(&#39;s&#39;,&#39;p&#39;,&#39;h&#39;)           </span>
+<a name="l00044"></a><a class="code" href="group___virtual_skin.html#ga9628cdd5ec72bab3a54dcc99520cc591">00044</a> <span class="preprocessor">#define VOCAB_CYL VOCAB3(&#39;c&#39;,&#39;y&#39;,&#39;l&#39;)           </span>
+<a name="l00045"></a><a class="code" href="group___virtual_skin.html#ga32cf2469c339b363727614521f29b357">00045</a> <span class="preprocessor">#define VOCAB_BOX VOCAB3(&#39;b&#39;,&#39;o&#39;,&#39;x&#39;)           </span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="comment">// these are just for compatibility with the iCubSimulator</span>
+<a name="l00048"></a><a class="code" href="group___virtual_skin.html#ga51eaf5d8f1c305cb5d72a93058070b86">00048</a> <span class="preprocessor">#define VOCAB_SSPH VOCAB4(&#39;s&#39;,&#39;s&#39;,&#39;p&#39;,&#39;h&#39;)      </span>
+<a name="l00049"></a><a class="code" href="group___virtual_skin.html#ga16bb49beabf29c974b2eb426733f0318">00049</a> <span class="preprocessor">#define VOCAB_SCYL VOCAB4(&#39;s&#39;,&#39;c&#39;,&#39;y&#39;,&#39;l&#39;)      </span>
+<a name="l00050"></a><a class="code" href="group___virtual_skin.html#ga6fa38324752445e8d11da58e0436e3b2">00050</a> <span class="preprocessor">#define VOCAB_SBOX VOCAB4(&#39;s&#39;,&#39;b&#39;,&#39;o&#39;,&#39;x&#39;)      </span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="comment">// admin</span>
+<a name="l00053"></a><a class="code" href="group___virtual_skin.html#ga0d8540a4c9284876f7e1dc1ed8f30de3">00053</a> <span class="preprocessor">#define VOCAB_CLEAR VOCAB3(&#39;c&#39;,&#39;l&#39;,&#39;r&#39;)         </span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

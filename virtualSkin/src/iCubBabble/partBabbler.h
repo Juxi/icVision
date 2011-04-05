@@ -3,7 +3,7 @@
  ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
  ******************************************************************/
 
-/** \addtogroup iCubBabbler
+/** \addtogroup iCubBabble
  *	@{
  */
 

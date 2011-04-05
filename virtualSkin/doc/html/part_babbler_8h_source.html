@@ -66,21 +66,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00027"></a>00027     <a class="code" href="class_part_babbler.html#adfba4a1da8c68ba88d3451b043bb8a05">PartBabbler</a>();
 <a name="l00028"></a>00028     <a class="code" href="class_part_babbler.html#a64204448180c922a7928f9450f2fa38a">~PartBabbler</a>();
 <a name="l00029"></a>00029         
-<a name="l00030"></a><a class="code" href="class_part_babbler.html#a9a1ff8917964eab2e95711dd9e0594e8">00030</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_babbler.html#a9a1ff8917964eab2e95711dd9e0594e8">open</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* robotName, <span class="keyword">const</span> <span class="keywordtype">char</span>* partName ) { <span class="keywordflow">return</span> partController.<a class="code" href="class_part_controller.html#a20331379a94c33ef330792e6b9e8b94f" title="Connects to the remote device.">open</a>(robotName,partName); }
+<a name="l00030"></a><a class="code" href="class_part_babbler.html#a9a1ff8917964eab2e95711dd9e0594e8">00030</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_babbler.html#a9a1ff8917964eab2e95711dd9e0594e8">open</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* robotName, <span class="keyword">const</span> <span class="keywordtype">char</span>* partName ) { <span class="keywordflow">return</span> <a class="code" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">partController</a>.<a class="code" href="class_part_controller.html#a20331379a94c33ef330792e6b9e8b94f" title="Connects to the remote device.">open</a>(robotName,partName); }
 <a name="l00031"></a>00031         
 <a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="class_part_babbler.html#a156d8ef91d4f8d4dfe02f9d8982c5d06">crackBaby</a>( qreal velocity, <span class="keywordtype">bool</span> hands );
 <a name="l00033"></a>00033         <span class="keywordtype">void</span> <a class="code" href="class_part_babbler.html#a16e6e6a7582a5fb5903604691de52070">doTheRobot</a>( qreal velocity, <span class="keywordtype">bool</span> hands );
 <a name="l00034"></a>00034         <span class="comment">//void oscillate();</span>
 <a name="l00035"></a>00035         <span class="comment">//void crackBabySafe( int );</span>
 <a name="l00036"></a>00036         
-<a name="l00037"></a><a class="code" href="class_part_babbler.html#ac62a972e85492eaaa8cfc7dcd1c9488c">00037</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_babbler.html#ac62a972e85492eaaa8cfc7dcd1c9488c">checkMotionDone</a>( <span class="keywordtype">bool</span>* flag ) { <span class="keywordflow">return</span> partController.<a class="code" href="class_part_controller.html#a4052252cc91ea1387d5a33c968e9a84a" title="Checks if a position move has finished.">checkMotionDone</a>(flag); } 
+<a name="l00037"></a><a class="code" href="class_part_babbler.html#ac62a972e85492eaaa8cfc7dcd1c9488c">00037</a>         <span class="keywordtype">bool</span> <a class="code" href="class_part_babbler.html#ac62a972e85492eaaa8cfc7dcd1c9488c">checkMotionDone</a>( <span class="keywordtype">bool</span>* flag ) { <span class="keywordflow">return</span> <a class="code" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">partController</a>.<a class="code" href="class_part_controller.html#a4052252cc91ea1387d5a33c968e9a84a" title="Checks if a position move has finished.">checkMotionDone</a>(flag); } 
 <a name="l00038"></a>00038         
 <a name="l00039"></a>00039 <span class="keyword">private</span>:
-<a name="l00040"></a>00040         <a class="code" href="class_part_controller.html" title="Wraps YARP&amp;#39;s remote device driver interface neatly This could be a motor control...">PartController</a> partController;
+<a name="l00040"></a><a class="code" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">00040</a>         <a class="code" href="class_part_controller.html" title="Wraps YARP&amp;#39;s remote device driver interface neatly This could be a motor control...">PartController</a> <a class="code" href="class_part_babbler.html#ad772389259d527bf69e1fe7c73d48326">partController</a>;
 <a name="l00041"></a>00041         
 <a name="l00042"></a>00042         <span class="comment">// for the oscillator</span>
-<a name="l00043"></a>00043         QVector&lt;qreal&gt; minPos,maxPos;
-<a name="l00044"></a>00044         qreal freq,t;
+<a name="l00043"></a><a class="code" href="class_part_babbler.html#a9407956071234e4e5087807b0da199ae">00043</a>         QVector&lt;qreal&gt; <a class="code" href="class_part_babbler.html#a9407956071234e4e5087807b0da199ae">minPos</a>,<a class="code" href="class_part_babbler.html#ae47d7957cb9a199c4621124b6eba0a89">maxPos</a>;
+<a name="l00044"></a><a class="code" href="class_part_babbler.html#ad7e9940bd19aa963671c02413e69f3d2">00044</a>         qreal <a class="code" href="class_part_babbler.html#a38557e94eff29a7c822967fa33f8cea1">freq</a>,<a class="code" href="class_part_babbler.html#ad7e9940bd19aa963671c02413e69f3d2">t</a>;
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046 };
 <a name="l00047"></a>00047 <span class="preprocessor">#endif </span>

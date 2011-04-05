@@ -61,23 +61,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00023"></a>00023         
 <a name="l00024"></a>00024 <span class="keyword">public</span>:
 <a name="l00025"></a>00025         
-<a name="l00026"></a>00026         <a class="code" href="class_robot_model_1_1_sphere.html#a9944239ac9fc56091f17701f547652da" title="Creates the FreeSOLID object.">Sphere</a>( qreal radius, <span class="keywordtype">int</span> lod = 3 );    
+<a name="l00026"></a>00026         <a class="code" href="class_robot_model_1_1_sphere.html#a9944239ac9fc56091f17701f547652da" title="Creates the FreeSOLID object.">Sphere</a>( qreal <a class="code" href="class_robot_model_1_1_sphere.html#a9cba288f5ef57605d72a39a65984a834" title="Radius of the sphere.">radius</a>, <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_sphere.html#a8be374fc183637ff6f9b070515bd9b9b" title="Level of Detail (number of recursions to compute).">lod</a> = 3 );    
 <a name="l00027"></a>00027         <span class="keyword">virtual</span> <a class="code" href="class_robot_model_1_1_sphere.html#a569c071e50a3e11f678630ee1a17737e" title="Destroys the FreeSOLID object.">~Sphere</a>();                                              
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_sphere.html#a838b5ae4f743aabe24a255dd61d2843c" title="Makes an OpenGL display list by recursive subdivision of an icosahedron.">makeDisplayList</a>();                                 
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031 <span class="keyword">private</span>:
 <a name="l00032"></a>00032         
-<a name="l00033"></a>00033         <span class="keywordtype">int</span> lod;                                                                
-<a name="l00034"></a>00034         qreal radius;                                                   
+<a name="l00033"></a><a class="code" href="class_robot_model_1_1_sphere.html#a8be374fc183637ff6f9b070515bd9b9b">00033</a>         <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_sphere.html#a8be374fc183637ff6f9b070515bd9b9b" title="Level of Detail (number of recursions to compute).">lod</a>;                                                                
+<a name="l00034"></a><a class="code" href="class_robot_model_1_1_sphere.html#a9cba288f5ef57605d72a39a65984a834">00034</a>         qreal radius;                                                   
 <a name="l00035"></a>00035 
-<a name="l00036"></a>00036         <span class="keywordtype">void</span> drawTriangle( <span class="keywordtype">float</span>* v1, <span class="keywordtype">float</span>* v2, <span class="keywordtype">float</span>* v3 );                   
-<a name="l00037"></a>00037         <span class="keywordtype">void</span> subdivide( <span class="keywordtype">float</span>* v1, <span class="keywordtype">float</span>* v2, <span class="keywordtype">float</span>* v3, <span class="keywordtype">int</span> lod );             
-<a name="l00038"></a>00038         <span class="keywordtype">void</span> normalize( <span class="keywordtype">float</span> v[3] );                                                                   
+<a name="l00036"></a>00036         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_sphere.html#ae4a521754c9393701752a99017ccac36" title="Makes an OpenGL triangle with GL_TRIANGLES.">drawTriangle</a>( <span class="keywordtype">float</span>* v1, <span class="keywordtype">float</span>* v2, <span class="keywordtype">float</span>* v3 );                   
+<a name="l00037"></a>00037         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_sphere.html#abea87297c1a8585d27f443154a36c078" title="Subdivides a triangle into 4 smaller ones by bisecting each side.">subdivide</a>( <span class="keywordtype">float</span>* v1, <span class="keywordtype">float</span>* v2, <span class="keywordtype">float</span>* v3, <span class="keywordtype">int</span> <a class="code" href="class_robot_model_1_1_sphere.html#a8be374fc183637ff6f9b070515bd9b9b" title="Level of Detail (number of recursions to compute).">lod</a> );             
+<a name="l00038"></a>00038         <span class="keywordtype">void</span> <a class="code" href="class_robot_model_1_1_sphere.html#a8b5387063d440b1e08d1b2f8ed4358f2" title="Normalizes a 3D vector... for portability QVector3D is not used.">normalize</a>( <span class="keywordtype">float</span> v[3] );                                                                   
 <a name="l00039"></a>00039         
-<a name="l00040"></a>00040         <span class="keyword">static</span> <span class="keywordtype">float</span> X,Z;
-<a name="l00041"></a>00041         <span class="keyword">static</span> GLfloat vdata[12][3];
-<a name="l00042"></a>00042         <span class="keyword">static</span> GLint tindices[20][3];
+<a name="l00040"></a><a class="code" href="class_robot_model_1_1_sphere.html#ae5ef0d188d1fd4d241ee2a1bb009185d">00040</a>         <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code" href="class_robot_model_1_1_sphere.html#af10f4a80ef693495c81f8f9c1791b34b">X</a>,<a class="code" href="class_robot_model_1_1_sphere.html#ae5ef0d188d1fd4d241ee2a1bb009185d">Z</a>;
+<a name="l00041"></a><a class="code" href="class_robot_model_1_1_sphere.html#a69264ff72676a51679fc40fce180c977">00041</a>         <span class="keyword">static</span> GLfloat <a class="code" href="class_robot_model_1_1_sphere.html#a69264ff72676a51679fc40fce180c977">vdata</a>[12][3];
+<a name="l00042"></a><a class="code" href="class_robot_model_1_1_sphere.html#a7d8e373d83c928dc1a8585e0f732f062">00042</a>         <span class="keyword">static</span> GLint <a class="code" href="class_robot_model_1_1_sphere.html#a7d8e373d83c928dc1a8585e0f732f062">tindices</a>[20][3];
 <a name="l00043"></a>00043 };
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
