@@ -71,22 +71,22 @@ void Robot::filterCollisionPairs()
 
 void Robot::home()
 {
-	//mutex.lock();
 	printf("Going to home position.\n");
 	QVector<Motor*>::iterator j;
     for ( j=motorList.begin(); j!=motorList.end(); ++j ) {
         (*j)->home();
     }
-	//mutex.unlock();
 	updatePose();
 }
 
 void Robot::setEncoderPosition( qreal pos )                                        // for every motor on the robot
 {
+	QMutexLocker locker(&mutex);
+	
     QVector<BodyPart*>::iterator i;
     QVector<Motor*>::iterator j;
 
-	printf("Setting all positions to %f", pos);
+	printf("Setting all positions to %f\n", pos);
     for ( i=partList.begin(); i!=partList.end(); ++i ) {
         for ( j = (*i)->begin(); j != (*i)->end(); ++j ) {
             (*j)->setEncPos(pos);
@@ -96,6 +96,8 @@ void Robot::setEncoderPosition( qreal pos )                                     
 
 bool Robot::setEncoderPosition(int partNum, const QVector<qreal>& pos)           // for an entire branch (using encoder positions)
 {
+	QMutexLocker locker(&mutex);
+	
 	//printf("called setEncoderPosition() - size %i \n", pos.size() );
     if ( partIdxInRange(partNum) ) {
         return partList.at(partNum)->setEncPos(pos);
@@ -105,6 +107,8 @@ bool Robot::setEncoderPosition(int partNum, const QVector<qreal>& pos)          
 
 bool Robot::setEncoderPosition( int partNum, int motorNum, qreal pos )           // for only one motor (using encoder position)
 {
+	QMutexLocker locker(&mutex);
+	
     if ( partIdxInRange(partNum) && motorIdxInRange(partNum,motorNum) ) {
         partList.at(partNum)->at(motorNum)->setEncPos(pos);
         return 1;
@@ -114,6 +118,8 @@ bool Robot::setEncoderPosition( int partNum, int motorNum, qreal pos )          
 
 void Robot::updatePose()
 {
+	QMutexLocker locker(&mutex);
+	
     QMatrix4x4 T;
     T.setToIdentity();
     QVector<KinTreeNode*>::iterator i;
@@ -125,19 +131,14 @@ void Robot::updatePose()
 
 void Robot::render()
 {
+	QMutexLocker locker(&mutex);
+	
 	QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i ) {
         (*i)->render();
     }
+	
 }
-
-//void Robot::notColliding()
-//{
-//    QVector<KinTreeNode*>::iterator i;
-//    for ( i=tree.begin(); i!=tree.end(); ++i ) {
-//        (*i)->notColliding();
-//    }
-//}
 
 /**********************
  ***	GET STUFF	***

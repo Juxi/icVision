@@ -1,6 +1,8 @@
 #include "displaylist.h"
 #include "constants.h"
 
+#include <qthread.h>
+
 using namespace RobotModel;
 
 //uint DisplayList::MAX_NUM_DISPLAYLISTS = 1;
@@ -22,6 +24,7 @@ bool DisplayList::isColliding() const
 
 void DisplayList::render()
 {
+	//printf("   render - %p\n",QThread::currentThread());
 	if ( glIsList(index) )
 	{
 		if ( isColliding() )

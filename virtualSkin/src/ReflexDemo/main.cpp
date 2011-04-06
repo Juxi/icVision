@@ -61,10 +61,14 @@ int main(int argc, char *argv[])
 	// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
 	filter.openStatusPort("/" + filter.model.robot.getName() + "F/status");
 	
-	bool result = 0;
+	int result = 0;
+	
+	//printf("MAIN - %p\n",QThread::currentThread());
+	
 	result = app.exec();						// run the Qt application
 
 	printf("SHUTTIN' 'ER DOWN!!!\n");
+	printf("Result = %d\n", result);
 	//worldRPC.stop();
 	filter.close();
 

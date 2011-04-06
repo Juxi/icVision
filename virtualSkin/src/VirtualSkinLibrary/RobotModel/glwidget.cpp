@@ -22,6 +22,14 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
+	//printf("*** INITIALIZE GL ***\n");
+	
+	//QVector<RobotModel::DisplayList*>::iterator i;
+	//for(i=displayListList.begin(); i!=displayListList.end(); ++i)
+	//{
+	//	(*i)->makeDisplayList();
+	//}
+	
     qglClearColor(trolltechPurple.dark());
 
     glEnable(GL_DEPTH_TEST);
@@ -41,6 +49,8 @@ void GLWidget::initializeGL()
 	
 	static GLfloat lightPosition2[4] = { 1, 0, 0, 0 };
     glLightfv(GL_LIGHT2, GL_POSITION, lightPosition2);
+	
+	//printf("*** INITIALIZE GL EXITED ***\n");
 }
 
 void GLWidget::paintGL()
@@ -60,12 +70,14 @@ void GLWidget::paintGL()
 	rot.setCartesianOrientation( QVector3D(-90, 0, 90) );
 	glMultMatrixd( rot.constData() );
 	
-		drawCS();
-		emit renderStuff();
+	drawCS();
+	emit renderStuff();
+	//printf("paintGL exits\n");
 }
 
 void GLWidget::addDisplayList( RobotModel::DisplayList* thisList )
 {
+	//displayListList.append(thisList);
 	thisList->makeDisplayList();
 }
 
@@ -181,7 +193,8 @@ void GLWidget::update()
 { 
 	if ( timeSinceLastRender.elapsed() > 5 )
 	{
-		updateGL();
+		//printf("UPDATE GL - %p\n",QThread::currentThread());
+		QGLWidget::updateGL();
 	}
 	
 	timeSinceLastRender.restart();

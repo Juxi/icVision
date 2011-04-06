@@ -34,7 +34,11 @@ public:
 
 public slots:
 	
-	void callLists() { render(); }	//!< Causes the display lists to be called
+	void callLists() 
+	{ 
+		render(); 
+		//printf("Call lists exits\n");
+	}	//!< Causes the display lists to be called
 	
 signals:
 	

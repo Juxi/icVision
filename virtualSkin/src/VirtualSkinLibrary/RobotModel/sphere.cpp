@@ -5,6 +5,8 @@
 #include "displmatrix.h"
 #include "robotmodelexception.h"
 
+#include <QThread>
+
 using namespace RobotModel;
 
 float Sphere::X = 0.525731112119133606f;
@@ -33,6 +35,8 @@ Sphere::~Sphere()
 }
 void Sphere::makeDisplayList()
 {
+	//printf("     make - %p\n",QThread::currentThread());
+	
     // get a unique display list index and define the list
     setDisplayListIdx(glGenLists(1)); 
 

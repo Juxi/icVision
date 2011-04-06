@@ -43,6 +43,7 @@ bool Model::computePose()
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations
 	
 	robot.updatePose();		// do forward kinematics
+	
 	dtTest();				// do collision detection
 	
 	emit newStateReady();
@@ -59,7 +60,7 @@ bool Model::computePose()
 }
 
 void Model::run()
-{
+{	
 	while ( keepRunning )
 	{
 		computePose();

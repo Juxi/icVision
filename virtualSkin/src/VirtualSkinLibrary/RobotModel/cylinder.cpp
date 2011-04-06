@@ -6,6 +6,8 @@
 #include "displmatrix.h"
 #include "robotmodelexception.h"
 
+#include <QThread>
+
 using namespace RobotModel;
 
 Cylinder::Cylinder( qreal aRadius, qreal aHeight, int lod ) : radius(aRadius), height(aHeight), lod(lod)
@@ -26,6 +28,8 @@ Cylinder::~Cylinder()
 
 void Cylinder::makeDisplayList()
 {
+	//printf("     make - %p\n",QThread::currentThread());
+	
     int    numSegments = 2*(lod+3);
     double dt = 2*M_PI/numSegments;
 

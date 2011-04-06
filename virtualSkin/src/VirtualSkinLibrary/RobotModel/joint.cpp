@@ -18,6 +18,8 @@ Joint::~Joint()
 
 void Joint::setPos()
 {
+	//printf(" jointPos - %p\n",QThread::currentThread());
+	
 	if (motor) { position = limits.getMin() + motor->normPos()*( limits.getMax() - limits.getMin() ); }
 	else if ( limits.isTooSmall(0) ) { position = limits.getMin(); }
 	else if ( limits.isTooBig(0) ) { position = limits.getMax(); }

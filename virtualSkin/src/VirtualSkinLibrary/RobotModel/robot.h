@@ -10,6 +10,7 @@
 #ifndef KINTREE_H
 #define KINTREE_H
 
+#include <QMutex>
 #include "renderList.h"
 #include "bodyPart.h"
 #include "motor.h"
@@ -75,6 +76,8 @@ private:
 	
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!< Indicates whether 
+	
+	QMutex mutex;
 	
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index

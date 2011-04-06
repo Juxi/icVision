@@ -4,6 +4,8 @@
 #include "robot.h"
 #include "robotmodelexception.h"
 
+#include <QThread>
+
 using namespace RobotModel;
 
 KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  parentRobot(robot),
@@ -110,15 +112,17 @@ void KinTreeNode::render()
 
 void KinTreeNode::update( const QMatrix4x4& txfr )
 {
-		// update the physical objects that constitute this link
-		setT( txfr );
+	//printf("Doing Fwd Kin - %p\n",QThread::currentThread());
+	
+	// update the physical objects that constitute this link
+	setT( txfr );
 
-		// update this link's children
-		QMatrix4x4 nextT = txfr * M;
-		QVector<KinTreeNode*>::iterator j;
-		for ( j=children.begin(); j!=children.end(); ++j ) {
-			(*j)->update(nextT);
-		}
+	// update this link's children
+	QMatrix4x4 nextT = txfr * M;
+	QVector<KinTreeNode*>::iterator j;
+	for ( j=children.begin(); j!=children.end(); ++j ) {
+		(*j)->update(nextT);
+	}
 }
 
 void KinTreeNode::print() const

@@ -80,6 +80,8 @@ private:
     QColor trolltechPurple;	//!< see HelloGL example
 	
 	QTime timeSinceLastRender;
+	
+	//QVector<RobotModel::DisplayList*> displayListList;
 };
 
 #endif

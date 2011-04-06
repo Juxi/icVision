@@ -55,6 +55,7 @@ public:
 										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
 	virtual ~Model();				//!< Nothing special to do here
 	
+	SkinWindow	*skinWindow;	//! The visualization
 	Robot	robot;			//!< The Robot whose pose we are updating
 	World	world;			//!< All the other Objects not belonging to the Robot's body.
 
@@ -91,7 +92,7 @@ signals:
 
 protected:
 	
-	RobotModel::SkinWindow	*skinWindow;	//! The visualization
+	
 	
 	bool keepRunning;	//!< Facilitates stopping and restarting the thread
 	int	 col_count;		//!< The number of (pairwise) collisions in the current robot/world configuration

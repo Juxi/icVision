@@ -162,11 +162,11 @@ bool RpcFilterImpl::forwardCall(Bottle call, ConnectionWriter *responseWriter) {
 		}
 	}
 
-	yarp::os::impl::OutputStream& os = m_out_prot->getOutputStream();
-	yarp::os::impl::InputStream& is = m_out_prot->getInputStream();
-	yarp::os::impl::StreamConnectionReader reader;
-	yarp::os::impl::PortCommand pc(0, adminMode ? "a" : "d");
-	yarp::os::impl::BufferedConnectionWriter bw(m_out_prot->isTextMode());
+	yarp::os::impl::OutputStream&				os = m_out_prot->getOutputStream();
+	yarp::os::impl::InputStream&				is = m_out_prot->getInputStream();
+	yarp::os::impl::StreamConnectionReader		reader;
+	yarp::os::impl::PortCommand					pc(0, adminMode ? "a" : "d");
+	yarp::os::impl::BufferedConnectionWriter	bw(m_out_prot->isTextMode());
 
 	bool ok = pc.write(bw);
 	if (!ok) {

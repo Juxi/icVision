@@ -4,6 +4,8 @@
 #include "box.h"
 #include "robotmodelexception.h"
 
+#include <QThread>
+
 using namespace RobotModel;
 
 Box::Box( const QVector3D& size ) : x(size.x()), y(size.y()), z(size.z())
@@ -21,6 +23,8 @@ Box::~Box()
 }
 void Box::makeDisplayList()
 {
+	//printf("     make - %p\n",QThread::currentThread());
+	
     double X=x/2, Y=y/2, Z=z/2;  //, csLen=(x+y+z)/3;
 
     // get a unique display list index and define the list
