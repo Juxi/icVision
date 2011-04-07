@@ -69,43 +69,64 @@ void ReflexFilter::collisionResponse()
 			cbFilters.at(bodyPart)->injectCall(rewind);	// send the position move command
 		}
 	}
-		
-	// wait for the robot to reach the target pose
-	bool poseReached = false;
-	QVector<qreal> dstToTarget;
-	QVector<qreal>::const_iterator original,current,target;
-	//QVector<qreal>& currentPose;
+}
+
+void ReflexFilter::responseComplete()
+{
+	while ( isColliding )
+	{
+		printf("Waiting for safe position...\n");
+		msleep(YARP_PERIOD_ms);
+	}
 	
-	//TODO: Use Qtime to implement a timeout
-	time_t startTime = time(NULL);
-	dstToTarget.resize(model.robot.numBodyParts());
+	printf("Found a safe position");
+			
+	time_t	startTime = time(NULL);
+	while ( time(NULL) - startTime < 1 )
+	{
+		printf(".");
+		msleep(YARP_PERIOD_ms);
+	}
+	printf("\n");
+	
+	// TODO: Use Qtime to implement the timeout?
+	/*time_t							startTime = time(NULL);
+	bool							poseReached = false;
+	QVector<qreal>::const_iterator	original,
+									current,
+									target;
+	qreal							dstToTarget;
 	
 	while ( !poseReached )
 	{
+		
 		if ( !targetPose.isEmpty() && ! originalPose.isEmpty() )
 		{
-			/**/
-			// compute the current distance to target pose (1-norm of the joint space displacement vector)
+			poseReached = true;
+			printf("Distance to Target: ");
+			
+			// compute the current distance to target pose
 			for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
 			{
-				dstToTarget[bodyPart] = 0;
 				const QVector<qreal>& currentPose = stateObservers.at(bodyPart)->currentPose();
+				
 				for ( original  = originalPose.at(bodyPart).begin(), current  = currentPose.begin(), target  = targetPose.at(bodyPart).begin();
 					  original != originalPose.at(bodyPart).end() && current != currentPose.end() && target != targetPose.at(bodyPart).end();
 					  ++original, ++current, ++target )
 				{
-					//perCentToPose += (*target-*original)/qAbs(*target-*original) * (*target-*current);
-					dstToTarget[bodyPart] += qAbs(*target-*current);
+					dstToTarget = qAbs((*target-*current)/(*target-*original));
+					if ( dstToTarget > NEGLIGIBLE_FRACTION && !( *original<*target<*current || *original>*target>*current) )
+					{
+						poseReached = false;
+					}
+					printf("%f ", dstToTarget );
 				}
 			}
-			
-			// determine whether or not the target bose has been "reached"
-			poseReached = true;
-			for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
-			{
-				if ( dstToTarget.at(bodyPart) > NEGLIGIBLE_ANGLE ) { poseReached = false; }
-			}
-			
+			printf("\n");
+		}
+		else
+		{
+			printf("Target pose or original pose unknown... corrupted pose buffer!?!\n");
 		}
 		
 		if ( time(NULL) - startTime >= POSITION_MOVE_TIMEOUT )
@@ -113,5 +134,5 @@ void ReflexFilter::collisionResponse()
 			printf("Position move for collision recovery timed out!\n");
 			break;
 		}
-	}
+	}*/
 }

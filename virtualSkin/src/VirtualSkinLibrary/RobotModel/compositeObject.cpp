@@ -70,12 +70,6 @@ void CompositeObject::setSpecialEulerOrientation( const QVector3D& axis, qreal a
 	update();
 }
 
-//void CompositeObject::specialEulerRotate( const QVector3D& axis, qreal angle )
-//{
-//	T.specialEulerRotate(axis, angle);
-//	update();
-//}
-
 PrimitiveObject* CompositeObject::newSphere( double r, const QVector3D& pos )
 {
 	QString name =  "sph" + QString::number( ++numSpheres );

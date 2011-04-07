@@ -59,7 +59,7 @@ public:
 	Robot	robot;			//!< The Robot whose pose we are updating
 	World	world;			//!< All the other Objects not belonging to the Robot's body.
 
-	bool computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID
+	int computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using FreeSOLID
 							/**< Call this function directly if you want to be in control of which poses are computed when */
 	
 	void start() { QThread::start(); }	//!< Starts a thread to do collision detection periodically
@@ -87,8 +87,8 @@ public:
 	
 signals:
 	
-	void newStateReady();	//! Indicates that a new state has been computed (useful when running collision detection in a separate thread)
-	void collision();		//! Indicates that a collision has occurred (useful when running collision detection in a separate thread)
+	//void newStateReady();	//! Indicates that a new state has been computed (useful when running collision detection in a separate thread)
+	void collisions(int);	//! Indicates that a collision has occurred (useful when running collision detection in a separate thread)
 
 protected:
 	

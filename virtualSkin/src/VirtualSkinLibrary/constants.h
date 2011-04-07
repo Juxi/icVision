@@ -20,7 +20,9 @@
 #define POSE_BUFFER_SIZE 100		//!< Length of the pose history stored by VirtualSkin::StateObserver
 #define REFLEX_SPEED 30				//!< The velovity to use for the reflexive position move command
 #define POSITION_MOVE_TIMEOUT 10	//!< Max time (seconds) to wait for the robot to finish the reflexive position move
-#define NEGLIGIBLE_ANGLE 5			//!< Tolerance around target position (degrees) for reflexive position move command
+#define NEGLIGIBLE_ANGLE .5			//!< (degrees)
+#define NEGLIGIBLE_FRACTION 0.05
+#define NEGLIGIBLE_PERCENT 100*NEGLIGIBLE_FRACTION
 
 
 /**

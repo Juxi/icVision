@@ -47,7 +47,7 @@ public slots:
 	
 	void addDisplayList( RobotModel::DisplayList* displayList );	//!< Calls DisplayList.makeDisplayList();
 	void removeDisplayList( int idx );								//!< Calls glDeleteLists(int,1);
-	void update();													//!< Calls updateGL();
+	void update(int);													//!< Calls updateGL();
 	
     void setXRotation(int angle);	//!< see HelloGL example
     void setYRotation(int angle);	//!< see HelloGL example

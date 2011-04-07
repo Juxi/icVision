@@ -21,9 +21,10 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false)
+RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false), isColliding(false)
 {
-	QObject::connect( &model, SIGNAL(collision()),	this, SLOT(takeControl()) );
+	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(takeControl(int)) );
+	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
@@ -78,37 +79,63 @@ void RobotFilter::close()
 	isOpen = false;
 }
 
-void RobotFilter::takeControl()
+void RobotFilter::takeControl( int collisions )
 {
-	if ( !haveControl )
+	if ( collisions > 0 ) { isColliding = true; }
+	else { isColliding = false; }
+	
+	if ( isColliding && !haveControl )
 	{
 		haveControl = true;
+		
+		// first take control away from the user
+		for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
+		{
+			cbFilters.at(bodyPart)->cutConnection(true);
+		}
+		
+		// inform the user
+		printf("*** COLLISION RECOVERY ***\n");
+		statusPort.setBottle( yarp::os::Bottle("0") );
+		
+		// should be a position move ?!?
+		collisionResponse();
+		
+		// wait for the response (a position move) to finish
 		start();
 	}
 }
 
 void RobotFilter::run()
+{	
+	//wait for the commands issued in collisionResponse() to finish
+	responseComplete();
+	emit responseCompleteReturns();
+}
+
+void RobotFilter::openFilter()
 {
-	// first stop the robot
-	for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++)
-	{
-		cbFilters.at(bodyPart)->cutConnection(true);		// take control away from the user
-	}
-	
-	// inform the user
-	printf("*** COLLISION RECOVERY ***\n");
-	statusPort.setBottle( yarp::os::Bottle("0") );
-	
-	// pure virtual response to collision
-	collisionResponse();
-	
-	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++ ) {
-		cbFilters.at(bodyPart)->cutConnection(false);
-	}
-	
-	//inform the user
-	statusPort.setBottle( yarp::os::Bottle("1") );
-	printf("CONTROL RESTORED\n");
-	haveControl = false;
+	//if ( !isColliding )
+	//{
+		// reinitialize the pose buffer with the current pose
+		for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++ )
+		{
+			stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
+		}
+		
+		// reopen the filter... 
+		for ( int bodyPart = 0; bodyPart < model.robot.numBodyParts(); bodyPart++ )
+		{
+			cbFilters.at(bodyPart)->cutConnection(false);
+		}
+		
+		//inform the user
+		statusPort.setBottle( yarp::os::Bottle("1") );
+		printf("CONTROL RESTORED\n");
+		haveControl = false;
+	//}
+	//else
+	//{
+	//	printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE in VirtualSkinLibrary/constants.h \n");
+	//}
 }

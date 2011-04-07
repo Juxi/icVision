@@ -48,28 +48,31 @@ int main(int argc, char *argv[])
 	
 	// Virtual Skin Command Filter
 	ReflexFilter filter(visualize);
+	//VirtualSkin::RobotFilter filter(visualize);
 	
 	// start the Virtual Skin command filter
-	if ( !filter.open< VirtualSkin::StateObserver, VirtualSkin::CallObserver, VirtualSkin::ResponseObserver >( xmlFile ) ) { return 1; }
+	if	( !filter.open<	VirtualSkin::StateObserver,
+						VirtualSkin::CallObserver,
+						VirtualSkin::ResponseObserver >( xmlFile ) )
+	{ 
+		return 1;
+	}
 	
 	// open a port to report collision events
-	filter.model.openCollisionPort("/" + filter.model.robot.getName() + "F/collisions");
+	//filter.model.openCollisionPort("/" + filter.model.robot.getName() + "F/collisions");
 	
 	// open a port to interact with the world model
-	filter.model.openWorldRpcPort("/" + filter.model.robot.getName() + "F/world");
+	//filter.model.openWorldRpcPort("/" + filter.model.robot.getName() + "F/world");
 	
 	// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
-	filter.openStatusPort("/" + filter.model.robot.getName() + "F/status");
+	//filter.openStatusPort("/" + filter.model.robot.getName() + "F/status");
 	
-	int result = 0;
-	
-	//printf("MAIN - %p\n",QThread::currentThread());
-	
-	result = app.exec();						// run the Qt application
+	// run the Qt application
+	int result = app.exec();
 
-	printf("SHUTTIN' 'ER DOWN!!!\n");
+	printf("SHUTTING DOWN!!!\n");
 	printf("Result = %d\n", result);
-	//worldRPC.stop();
+	
 	filter.close();
 
     return result;

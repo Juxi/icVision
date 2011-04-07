@@ -189,7 +189,7 @@ void GLWidget::drawCS()
     glEnd();
 }
 
-void GLWidget::update()
+void GLWidget::update(int i)
 { 
 	if ( timeSinceLastRender.elapsed() > 5 )
 	{

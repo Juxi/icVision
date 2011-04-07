@@ -17,7 +17,7 @@ Model::Model( bool visualize ) : keepRunning(true), col_count(0)
 		QObject::connect( &world, SIGNAL(appendedObject(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
 		QObject::connect( &world, SIGNAL(outdatedDisplayList(int)),					skinWindow->glWidget, SLOT(removeDisplayList(int)) );
 		
-		QObject::connect( this, SIGNAL(newStateReady()),				skinWindow->glWidget, SLOT(update()) );
+		QObject::connect( this, SIGNAL(collisions(int)),				skinWindow->glWidget, SLOT(update(int)) );
 		QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),	&robot, SLOT(callLists()) );
 		QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),	&world, SLOT(callLists()) );
 		
@@ -28,9 +28,10 @@ Model::Model( bool visualize ) : keepRunning(true), col_count(0)
 
 Model::~Model()
 {
+	if ( skinWindow ) { delete skinWindow; }
 }
 
-bool Model::computePose()
+int Model::computePose()
 {
 	if ( !robot.isOpen() )
 	{
@@ -46,17 +47,14 @@ bool Model::computePose()
 	
 	dtTest();				// do collision detection
 	
-	emit newStateReady();
+	//semit newStateReady();
+	emit collisions(col_count);
 	
-	if ( col_count )
-	{
-		emit collision();
-		printf("%i Collisions!\n", col_count);
-	}
+	//if ( col_count ) { printf("%i Collisions!\n", col_count); }
 	
 	computePoseSuffix();
 
-	return col_count == 0;
+	return col_count;
 }
 
 void Model::run()

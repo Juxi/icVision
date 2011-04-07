@@ -137,9 +137,12 @@ public:
 	virtual void extraOpenStuff() {}		//!< This is called shortly before open<>(const QString&) returns
 											/**< In your sub-classes, replace the empty implementation with any initialization code required.
 												 For an example of this, see ReflexFilter. */ 
-	virtual void collisionResponse() = 0;	//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
-											/**< This is executed once the RobotFilter has detected collisions and cut its connection. Control
-												 is not restored to the user until this function returns. */
+	virtual void collisionResponse() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
+											/**< This is executed once the RobotFilter has detected collisions and cut its connection. */
+	virtual void responseComplete() {}		//!< Should waits for the commands issued in collisionResponse() to finish running
+											/**< This is called right after collisionResponse() and runs in its own thread.
+												 the user is responsible for deciding what it means that control commands are "finished" executing,
+												 which clearly depends on the kinds of commands issued in the first place. */
 	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
 																			/**< A 1 indicates the filter is connected and motor commands are being forwarded, 
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
@@ -151,7 +154,15 @@ public:
 	
 public slots:
 	
-	void takeControl();			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
+	void takeControl(int);			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
+	
+protected slots:
+	
+	void openFilter();
+	
+signals:
+	
+	void responseCompleteReturns();
 
 protected:
 	
@@ -160,7 +171,8 @@ protected:
 	yarp::os::Bottle	stop_command;			//!< Stores an RPC command to stop the iCub robot
 												/**< \note This is iCub specific, and it should be done differently in the future */
 	bool				isOpen,					//!< Indicates whether or not filter is forwarding commands
-						haveControl;			//!< Indicates whether or not the filter currently has control of the robot
+						haveControl,			//!< Indicates whether or not the filter currently has control of the robot
+						isColliding;			//!< Indicates whether or not the robot's current pose is colliding
 
 	QVector<yarp::os::ControlBoardFilter *> cbFilters;	//!< A QVector of ControlBoardFilters - one for each of the robot's BodyParts
 														/**< These filters have a 1-to-1 correspondence to the YARP

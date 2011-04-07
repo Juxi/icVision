@@ -30,6 +30,9 @@ public:
 	virtual void extraOpenStuff();				//!< Resizes the QVectors according to the robot model
 	virtual void collisionResponse();			//!< Provides reflexive response to collision
 												/**< Moves the robot back to a past "safe" state */
+	virtual void responseComplete();			//!< Waits for the commands from collisionResponse() to finish
+												/**< This example is straightforward, as collisionResponse()
+													 issues a position move command */
 
 private:
 	
