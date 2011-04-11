@@ -20,8 +20,18 @@ import cPickle
 
 global robot_name
 robot_name = "/icubSim/"	#for simulator
-#robot_name = "/icub/"		#for the real robot
+#robot_name = "/icubSimF/"	#for simulator with safety filter
 
+#robot_name = "/icub/"		#for the real robot
+#robot_name = "/icubF/"		#for the real robot with safety filter
+
+global robot_name1
+robot_name1 = "/icubSim/"	#for simulator
+#robot_name1 = "/icub/"		#for the real robot with safety filter
+
+
+global jnt_vel
+jnt_vel = 30.0
 
 ####################################################################################1
 class workspace:
@@ -81,15 +91,21 @@ class iCub_Eyes():
       to carry out Image processing/vision tasks.
   '''
   def __init__(self):
+    global robot_name1
+    robotname1 = robot_name1
+
+    global robot_name
+    robotname = robot_name
+
     self.eyes = yarp.Port()
     self.leftEye = yarp.BufferedPortImageRgb()
     self.rightEye = yarp.BufferedPortImageRgb()
     self.leftEye.open('/iCub_Control/leftEye')
     self.rightEye.open('/iCub_Control/rightEye')
     self.eyes.open('/iCub_Control/eyes')
-    yarp.Network.connect('/icubSim/cam/left','/iCub_Control/leftEye')
-    yarp.Network.connect('/icubSim/cam/right','/iCub_Control/rightEye')
-    yarp.Network.connect('/iCub_Control/eyes','/icubSim/head/rpc:i')
+    yarp.Network.connect(str(robotname1) +'cam/left','/iCub_Control/leftEye')
+    yarp.Network.connect(str(robotname1) + 'cam/right','/iCub_Control/rightEye')
+    yarp.Network.connect('/iCub_Control/eyes',str(robotname) + '/head/rpc:i')
     self._init_disp_flag = 0
     self._cnvt2opncvFlag = 0
 
@@ -312,6 +328,7 @@ class iCub_Body():
     self.bodyjnts = list()
     self.bodylimits = list()
     self.bodyWrkSpace = list()
+    global jnt_vel
     for i in range(len(self.body)):
       self.bodypos.append(self.body[i].viewIPositionControl())
       self.bodylim.append(self.body[i].viewIControlLimits())
@@ -320,7 +337,7 @@ class iCub_Body():
       partWrkSpace = list()
       for j in range(self.bodyjnts[i]):
 	partWrkSpace.append(self.iCub_Home[i][j])
-	self.bodypos[i].setRefSpeed(j,40.0)
+	self.bodypos[i].setRefSpeed(j,jnt_vel)
 	mi = yarp.DVector(1)
 	ma = yarp.DVector(1)
 	self.bodylim[i].getLimits(j,mi,ma)

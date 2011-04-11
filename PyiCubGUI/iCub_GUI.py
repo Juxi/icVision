@@ -17,12 +17,12 @@ import cPickle
 from iCub_init import *
 from World_GUI import *
 from Robot_GUI import *
-from Program_GUI import *
+from Program_GUI_exp2 import *
 
 
 #Set the path for the icub parts config file. search for iCub_parts_activation.ini 
 global parts_config_file
-parts_config_file = '../../iCub_parts_activation.ini'
+parts_config_file = '../iCub_parts_activation.ini'
 
 global SimMode
 SimMode = False
