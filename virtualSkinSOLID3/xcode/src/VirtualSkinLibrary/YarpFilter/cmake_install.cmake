@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter
+# Install script for directory: /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,36 +29,36 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Debug/libYarpFilter.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/YarpFilter/Debug/libYarpFilter.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/Release/libYarpFilter.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/YarpFilter/Release/libYarpFilter.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/MinSizeRel/libYarpFilter.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/YarpFilter/MinSizeRel/libYarpFilter.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/RelWithDebInfo/libYarpFilter.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libYarpFilter.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/YarpFilter/RelWithDebInfo/libYarpFilter.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libYarpFilter.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/include" TYPE DIRECTORY FILES "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter/yarp")
+  FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/include" TYPE DIRECTORY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter/yarp")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

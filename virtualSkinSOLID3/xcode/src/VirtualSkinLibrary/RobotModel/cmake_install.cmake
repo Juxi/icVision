@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel
+# Install script for directory: /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,60 +29,60 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Debug/libRobotModel.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/Debug/libRobotModel.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Release/libRobotModel.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/Release/libRobotModel.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel/libRobotModel.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel/libRobotModel.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo/libRobotModel.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libRobotModel.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo/libRobotModel.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libRobotModel.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/include/RobotModel" TYPE FILE FILES
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.h"
-    "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.h"
+  FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/include/RobotModel" TYPE FILE FILES
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.h"
+    "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.h"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

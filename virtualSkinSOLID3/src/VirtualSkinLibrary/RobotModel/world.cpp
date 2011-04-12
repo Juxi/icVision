@@ -3,20 +3,14 @@
 #include "model.h"
 
 using namespace RobotModel;
-//World::World( Model* m ) :	model(NULL),
-//numSpheres(0), numCylinders(0), numBoxes(0),
-//numSSpheres(0),numSCylinders(0),numSBoxes(0)
-//{
-//}
+
 World::World( Model* m ) :	model(m),
 							numSpheres(0), numCylinders(0), numBoxes(0),
 							numSSpheres(0),numSCylinders(0),numSBoxes(0)
 {
-	if ( model )
-	{
-		worldResponseClass = DT_GenResponseClass( model->getResponseTable() );
-		//DT_AddClassResponse( model->getResponseTable(), worldResponseClass, NULL, DT_NO_RESPONSE, NULL );
-	}
+	if ( !m ) { throw RobotModelException("The World constructor requires a pointer to a valid Model."); }
+	worldResponseClass = DT_GenResponseClass( model->getResponseTable() );
+	DT_RemovePairResponse( model->getResponseTable(), worldResponseClass, worldResponseClass, model->collisionHandler );
 }
 World::~World()
 {
@@ -149,7 +143,12 @@ bool World::remove( CompositeObject* obj )
 		}
 		
 		QVector<PrimitiveObject*>::iterator j;
-		for ( j=obj->begin(); j!=obj->end(); ++j ) { emit outdatedDisplayList( (*j)->displayListIdx() ); }
+		for ( j=obj->end(); j!=obj->begin(); )
+		{
+			--j;
+			emit outdatedDisplayList( (*j)->displayListIdx() );
+			obj->remove(*j);
+		}
 		emit outdatedDisplayList( obj->displayListIdx() );
 		
 		delete(obj);

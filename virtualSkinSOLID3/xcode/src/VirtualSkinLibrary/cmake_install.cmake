@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary
+# Install script for directory: /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,39 +29,39 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Debug/libVirtualSkin.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/Debug/libVirtualSkin.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/Release/libVirtualSkin.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/Release/libVirtualSkin.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/MinSizeRel/libVirtualSkin.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/MinSizeRel/libVirtualSkin.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RelWithDebInfo/libVirtualSkin.a")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
-      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/lib/libVirtualSkin.a")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/lib" TYPE STATIC_LIBRARY FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RelWithDebInfo/libVirtualSkin.a")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
+      EXECUTE_PROCESS(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/lib/libVirtualSkin.a")
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/cmake_install.cmake")
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/YarpFilter/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/YarpFilter/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

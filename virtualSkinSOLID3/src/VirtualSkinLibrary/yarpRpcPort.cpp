@@ -38,7 +38,7 @@ bool YarpRpcPort::open( const QString& name )
 
 void YarpRpcPort::run() 
 {
-	printf("Starting RPC server...\n");
+	//printf("Starting RPC server...\n");
 	
 	yarp::os::Bottle* cmd;
     while ( keepListening ) {

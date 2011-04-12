@@ -8,8 +8,8 @@ PrimitiveObject::PrimitiveObject() : parent(0)
 }
 PrimitiveObject::~PrimitiveObject()
 {
-	DT_DeleteShape(shape);
-	DT_DestroyObject(solidObject);
+	if ( solidObject ) { DT_DestroyObject(solidObject); }
+	if ( shape ) { DT_DeleteShape(shape); }
 }
 void PrimitiveObject::setParent( CompositeObject* object )
 {

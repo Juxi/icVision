@@ -61,7 +61,7 @@ int Model::computePose()
 	//semit newStateReady();
 	emit collisions(col_count);
 	
-	if ( col_count ) { printf("%i Collisions!\n", col_count); }
+	//if ( col_count ) { printf("%i Collisions!\n", col_count); }
 	//printf("called compute pose \n");
 	
 	computePoseSuffix();

@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kail/imClever/dev/virtualSkin/src
+# Install script for directory: /Users/kail/imClever/dev/virtualSkinSOLID3/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,10 +29,10 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/cmake_install.cmake")
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/cmake_install.cmake")
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/iCubBabble/cmake_install.cmake")
-  INCLUDE("/Users/kail/imClever/dev/virtualSkin/xcode/src/RobotModelDemo/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/ReflexDemo/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/iCubBabble/cmake_install.cmake")
+  INCLUDE("/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/RobotModelDemo/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

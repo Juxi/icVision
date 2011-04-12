@@ -115,8 +115,8 @@ void RobotFilter::run()
 
 void RobotFilter::openFilter()
 {
-	//if ( !isColliding )
-	//{
+	if ( !isColliding )
+	{
 		// reinitialize the pose buffer with the current pose
 		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 		{
@@ -133,9 +133,9 @@ void RobotFilter::openFilter()
 		statusPort.setBottle( yarp::os::Bottle("1") );
 		printf("CONTROL RESTORED\n");
 		haveControl = false;
-	//}
-	//else
-	//{
-	//	printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE in VirtualSkinLibrary/constants.h \n");
-	//}
+	}
+	else
+	{
+		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h \n");
+	}
 }

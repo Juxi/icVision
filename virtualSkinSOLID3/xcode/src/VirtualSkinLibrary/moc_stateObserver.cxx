@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'stateObserver.h'
 **
-** Created: Mon Apr 11 16:12:30 2011
+** Created: Tue Apr 12 14:53:46 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.1)
 **
 ** WARNING! All changes made in this file will be lost!

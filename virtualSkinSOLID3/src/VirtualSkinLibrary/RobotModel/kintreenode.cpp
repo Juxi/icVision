@@ -23,9 +23,6 @@ KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  pare
 	else { parentNode->children.append(this); }
 	
 	// Set up Solid
-	//scene = parentRobot->model->getScene(); 
-	//responseTable = parentRobot->model->getResponseTable();
-	//responseClass = DT_GenResponseClass( parentRobot->model->getResponseTable() );
 	configureSolid( parentRobot->model );												// add this Composite object to the current (glabal) scene
 	DT_RemovePairResponse( model->getResponseTable(), responseClass, responseClass, model->collisionHandler);
 	

@@ -39,7 +39,6 @@ public:
 	World( Model *m );	//!< Initializes counters for naming purposes
 	~World();	//!< Deletes all objects in the World
 	
-	//void setModel( Model *m ) { model = m; }									//!< Sets the Model to which this World object belongs (for access to solid's 'scene' and 'response table')
 	CompositeObject* newSphere( double r, const QVector3D& pos );				//!< Creates a new sphere and names it by appending the value of numSpheres to the identifier 'sph'
 	CompositeObject* newSSphere( double r, const QVector3D& pos );				//!< Creates a new sphere and names it by appending the value of numSSpheres to the identifier 'ssph'
 	CompositeObject* newCylinder( double r, double h, const QVector3D& pos );	//!< Creates a new cylinder and names it by appending the value of numCylinders to the identifier 'cyl'

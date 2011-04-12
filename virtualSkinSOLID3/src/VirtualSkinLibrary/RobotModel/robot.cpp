@@ -6,6 +6,7 @@ using namespace RobotModel;
 
 Robot::Robot( Model* m ) : model(m), robotName("unNamedRobot"), numLinks(0), isConfigured(false)
 {
+	if ( !m ) { throw RobotModelException("The Robot constructor requires a pointer to a valid Model."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 }
 Robot::~Robot()

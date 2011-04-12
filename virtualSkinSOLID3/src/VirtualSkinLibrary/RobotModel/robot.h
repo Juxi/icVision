@@ -37,8 +37,6 @@ public:
 	Robot( Model* m );		//!< Nothing to do here
 	~Robot();		//!< Nothing to do here
 	
-	//void setModel( Model* m ) { model = m; }		//!< Sets the Model to which this Robot object belongs (for access to solid's 'scene' and 'response table')
-	
 	bool open( const QString& fileName );			//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
 	bool isOpen() const	{ return isConfigured; }	//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();									//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction

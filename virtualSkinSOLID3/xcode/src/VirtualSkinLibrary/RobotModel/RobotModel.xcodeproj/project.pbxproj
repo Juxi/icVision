@@ -7,28 +7,28 @@
        objects = {
 
 /* Begin PBXAggregateTarget section */
-              602F00602F00602F00000000 /* ALL_BUILD */ = {
+              1057ED01057ED01057ED0000 /* ALL_BUILD */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 603E70603E70603E70000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildConfigurationList = 10591A010591A010591A0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
                      buildPhases = (
-                            6030D06030D06030D0000000 /* CMake ReRun */,
-                            6037E06037E06037E0000000 /* CMake Rules */,
+                            10580F010580F010580F0000 /* CMake ReRun */,
+                            105881010588101058810000 /* CMake Rules */,
                      );
                      dependencies = (
-                            65BAC065BAC065BAC0000000 /* PBXTargetDependency */,
+                            10B133010B133010B1330000 /* PBXTargetDependency */,
                      );
                      name = ALL_BUILD;
                      productName = ALL_BUILD;
               };
-              64BC6064BC6064BC60000000 /* install */ = {
+              10A13A010A13A010A13A0000 /* install */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 64CBB064CBB064CBB0000000 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildConfigurationList = 10A247010A247010A2470000 /* Build configuration list for PBXAggregateTarget "install" */;
                      buildPhases = (
-                            64BE0064BE0064BE00000000 /* CMake ReRun */,
-                            64C4E064C4E064C4E0000000 /* CMake PostBuild Rules */,
+                            10A157010A157010A1570000 /* CMake ReRun */,
+                            10A1C9010A1C9010A1C90000 /* CMake PostBuild Rules */,
                      );
                      dependencies = (
-                            65C36065C36065C360000000 /* PBXTargetDependency */,
+                            10B1B7010B1B7010B1B70000 /* PBXTargetDependency */,
                      );
                      name = install;
                      productName = install;
@@ -36,91 +36,91 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-613190613190613190000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.h */ = {isa = PBXBuildFile; fileRef = 612A40612A40612A40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.h */; settings = { COMPILER_FLAGS = ""; }; };
-613C50613C50613C50000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.h */ = {isa = PBXBuildFile; fileRef = 613AE0613AE0613AE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.h */; settings = { COMPILER_FLAGS = ""; }; };
-614720614720614720000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.h */ = {isa = PBXBuildFile; fileRef = 614540614540614540000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.h */; settings = { COMPILER_FLAGS = ""; }; };
-6157C06157C06157C0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */ = {isa = PBXBuildFile; fileRef = 615000615000615000000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */; settings = { COMPILER_FLAGS = ""; }; };
-615CA0615CA0615CA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.h */ = {isa = PBXBuildFile; fileRef = 615B30615B30615B30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.h */; settings = { COMPILER_FLAGS = ""; }; };
-6167B06167B06167B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.h */ = {isa = PBXBuildFile; fileRef = 616610616610616610000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.h */; settings = { COMPILER_FLAGS = ""; }; };
-617250617250617250000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.h */ = {isa = PBXBuildFile; fileRef = 6170E06170E06170E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.h */; settings = { COMPILER_FLAGS = ""; }; };
-617D10617D10617D10000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.h */ = {isa = PBXBuildFile; fileRef = 617BA0617BA0617BA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.h */; settings = { COMPILER_FLAGS = ""; }; };
-6187D06187D06187D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.h */ = {isa = PBXBuildFile; fileRef = 618660618660618660000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.h */; settings = { COMPILER_FLAGS = ""; }; };
-6192D06192D06192D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.h */ = {isa = PBXBuildFile; fileRef = 619130619130619130000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.h */; settings = { COMPILER_FLAGS = ""; }; };
-619D50619D50619D50000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */ = {isa = PBXBuildFile; fileRef = 619C30619C30619C30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */; settings = { COMPILER_FLAGS = ""; }; };
-61A84061A84061A840000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.h */ = {isa = PBXBuildFile; fileRef = 61A6D061A6D061A6D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.h */; settings = { COMPILER_FLAGS = ""; }; };
-61B30061B30061B300000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.h */ = {isa = PBXBuildFile; fileRef = 61B19061B19061B190000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.h */; settings = { COMPILER_FLAGS = ""; }; };
-61BD8061BD8061BD80000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */ = {isa = PBXBuildFile; fileRef = 61BC6061BC6061BC60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */; settings = { COMPILER_FLAGS = ""; }; };
-61C83061C83061C830000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */ = {isa = PBXBuildFile; fileRef = 61C71061C71061C710000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */; settings = { COMPILER_FLAGS = ""; }; };
-61D32061D32061D320000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.h */ = {isa = PBXBuildFile; fileRef = 61D1B061D1B061D1B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.h */; settings = { COMPILER_FLAGS = ""; }; };
-61DDE061DDE061DDE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.h */ = {isa = PBXBuildFile; fileRef = 61DC7061DC7061DC70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.h */; settings = { COMPILER_FLAGS = ""; }; };
-61E91061E91061E910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h */ = {isa = PBXBuildFile; fileRef = 61E7A061E7A061E7A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h */; settings = { COMPILER_FLAGS = ""; }; };
-61F3C061F3C061F3C0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.h */ = {isa = PBXBuildFile; fileRef = 61F2A061F2A061F2A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.h */; settings = { COMPILER_FLAGS = ""; }; };
-61FEB061FEB061FEB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.h */ = {isa = PBXBuildFile; fileRef = 61FD4061FD4061FD40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.h */; settings = { COMPILER_FLAGS = ""; }; };
-620930620930620930000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.h */ = {isa = PBXBuildFile; fileRef = 620810620810620810000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.h */; settings = { COMPILER_FLAGS = ""; }; };
-6213E06213E06213E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.h */ = {isa = PBXBuildFile; fileRef = 6212C06212C06212C0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.h */; settings = { COMPILER_FLAGS = ""; }; };
-621ED0621ED0621ED0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.h */ = {isa = PBXBuildFile; fileRef = 621D60621D60621D60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.h */; settings = { COMPILER_FLAGS = ""; }; };
-622950622950622950000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */ = {isa = PBXBuildFile; fileRef = 622830622830622830000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-623450623450623450000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */ = {isa = PBXBuildFile; fileRef = 623270623270623270000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-623E90623E90623E90000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.cpp */ = {isa = PBXBuildFile; fileRef = 623D30623D30623D30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-624FA0624FA0624FA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */ = {isa = PBXBuildFile; fileRef = 6247E06247E06247E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-625410625410625410000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */ = {isa = PBXBuildFile; fileRef = 6252B06252B06252B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-625F80625F80625F80000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.cpp */ = {isa = PBXBuildFile; fileRef = 625DE0625DE0625DE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-626A30626A30626A30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.cpp */ = {isa = PBXBuildFile; fileRef = 626850626850626850000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-6274F06274F06274F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.cpp */ = {isa = PBXBuildFile; fileRef = 627310627310627310000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-627FB0627FB0627FB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */ = {isa = PBXBuildFile; fileRef = 627DD0627DD0627DD0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-628AA0628AA0628AA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.cpp */ = {isa = PBXBuildFile; fileRef = 628910628910628910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-629B40629B40629B40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */ = {isa = PBXBuildFile; fileRef = 629390629390629390000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62A03062A03062A030000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */ = {isa = PBXBuildFile; fileRef = 629E50629E50629E50000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62AAF062AAF062AAF0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.cpp */ = {isa = PBXBuildFile; fileRef = 62A91062A91062A910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62BB8062BB8062BB80000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */ = {isa = PBXBuildFile; fileRef = 62B3D062B3D062B3D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62C64062C64062C640000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */ = {isa = PBXBuildFile; fileRef = 62BE9062BE9062BE90000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62CB3062CB3062CB30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.cpp */ = {isa = PBXBuildFile; fileRef = 62C95062C95062C950000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62D5F062D5F062D5F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.cpp */ = {isa = PBXBuildFile; fileRef = 62D41062D41062D410000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62E12062E12062E120000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */ = {isa = PBXBuildFile; fileRef = 62DFB062DFB062DFB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62F1F062F1F062F1F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */ = {isa = PBXBuildFile; fileRef = 62EA4062EA4062EA40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-62F6E062F6E062F6E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.cpp */ = {isa = PBXBuildFile; fileRef = 62F50062F50062F500000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-630120630120630120000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */ = {isa = PBXBuildFile; fileRef = 62FFC062FFC062FFC0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-630BD0630BD0630BD0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */ = {isa = PBXBuildFile; fileRef = 630A70630A70630A70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-631700631700631700000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.cpp */ = {isa = PBXBuildFile; fileRef = 631520631520631520000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-6327D06327D06327D0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */ = {isa = PBXBuildFile; fileRef = 631FE0631FE0631FE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-6332B06332B06332B0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */ = {isa = PBXBuildFile; fileRef = 632AE0632AE0632AE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-633D90633D90633D90000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */ = {isa = PBXBuildFile; fileRef = 6335C06335C06335C0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-634850634850634850000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */ = {isa = PBXBuildFile; fileRef = 6340A06340A06340A0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-635350635350635350000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */ = {isa = PBXBuildFile; fileRef = 634B80634B80634B80000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-635610635610635610000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 612940612940612940000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
-636450636450636450000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */ = {isa = PBXBuildFile; fileRef = 635EA0635EA0635EA0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-6371C06371C06371C0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */ = {isa = PBXBuildFile; fileRef = 6369B06369B06369B0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-637AD0637AD0637AD0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */ = {isa = PBXBuildFile; fileRef = 637500637500637500000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-638800638800638800000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */ = {isa = PBXBuildFile; fileRef = 638030638030638030000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-639310639310639310000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */ = {isa = PBXBuildFile; fileRef = 638B30638B30638B30000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+106881010688101068810000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.h */ = {isa = PBXBuildFile; fileRef = 106812010681201068120000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.h */; settings = { COMPILER_FLAGS = ""; }; };
+1068CA01068CA01068CA0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.h */ = {isa = PBXBuildFile; fileRef = 1068B901068B901068B90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.h */; settings = { COMPILER_FLAGS = ""; }; };
+1069DD01069DD01069DD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.h */ = {isa = PBXBuildFile; fileRef = 10695F010695F010695F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.h */; settings = { COMPILER_FLAGS = ""; }; };
+106A890106A890106A890000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */ = {isa = PBXBuildFile; fileRef = 106A0E0106A0E0106A0E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */; settings = { COMPILER_FLAGS = ""; }; };
+106AD40106AD40106AD40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.h */ = {isa = PBXBuildFile; fileRef = 106AC10106AC10106AC10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.h */; settings = { COMPILER_FLAGS = ""; }; };
+106B870106B870106B870000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.h */ = {isa = PBXBuildFile; fileRef = 106B6F0106B6F0106B6F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.h */; settings = { COMPILER_FLAGS = ""; }; };
+106C300106C300106C300000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.h */ = {isa = PBXBuildFile; fileRef = 106C1F0106C1F0106C1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.h */; settings = { COMPILER_FLAGS = ""; }; };
+106CDC0106CDC0106CDC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.h */ = {isa = PBXBuildFile; fileRef = 106CCB0106CCB0106CCB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.h */; settings = { COMPILER_FLAGS = ""; }; };
+106D880106D880106D880000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.h */ = {isa = PBXBuildFile; fileRef = 106D770106D770106D770000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.h */; settings = { COMPILER_FLAGS = ""; }; };
+106E410106E410106E410000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.h */ = {isa = PBXBuildFile; fileRef = 106E240106E240106E240000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.h */; settings = { COMPILER_FLAGS = ""; }; };
+106F490106F490106F490000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */ = {isa = PBXBuildFile; fileRef = 106ED40106ED40106ED40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */; settings = { COMPILER_FLAGS = ""; }; };
+106F920106F920106F920000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.h */ = {isa = PBXBuildFile; fileRef = 106F810106F810106F810000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.h */; settings = { COMPILER_FLAGS = ""; }; };
+10703E010703E010703E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.h */ = {isa = PBXBuildFile; fileRef = 10702D010702D010702D0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.h */; settings = { COMPILER_FLAGS = ""; }; };
+10714E010714E010714E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */ = {isa = PBXBuildFile; fileRef = 1070D901070D901070D90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */; settings = { COMPILER_FLAGS = ""; }; };
+1071FB01071FB01071FB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */ = {isa = PBXBuildFile; fileRef = 107186010718601071860000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */; settings = { COMPILER_FLAGS = ""; }; };
+10724B010724B010724B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.h */ = {isa = PBXBuildFile; fileRef = 107232010723201072320000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.h */; settings = { COMPILER_FLAGS = ""; }; };
+1072F001072F001072F00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.h */ = {isa = PBXBuildFile; fileRef = 1072DF01072DF01072DF0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.h */; settings = { COMPILER_FLAGS = ""; }; };
+107408010740801074080000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.h */ = {isa = PBXBuildFile; fileRef = 107390010739001073900000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.h */; settings = { COMPILER_FLAGS = ""; }; };
+1074B501074B501074B50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.h */ = {isa = PBXBuildFile; fileRef = 107440010744001074400000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.h */; settings = { COMPILER_FLAGS = ""; }; };
+1074FE01074FE01074FE0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.h */ = {isa = PBXBuildFile; fileRef = 1074ED01074ED01074ED0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.h */; settings = { COMPILER_FLAGS = ""; }; };
+10760E010760E010760E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.h */ = {isa = PBXBuildFile; fileRef = 107599010759901075990000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.h */; settings = { COMPILER_FLAGS = ""; }; };
+1076BB01076BB01076BB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.h */ = {isa = PBXBuildFile; fileRef = 107646010764601076460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.h */; settings = { COMPILER_FLAGS = ""; }; };
+107704010770401077040000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.h */ = {isa = PBXBuildFile; fileRef = 1076F301076F301076F30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.h */; settings = { COMPILER_FLAGS = ""; }; };
+107815010781501078150000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */ = {isa = PBXBuildFile; fileRef = 10779F010779F010779F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1078C001078C001078C00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */ = {isa = PBXBuildFile; fileRef = 107846010784601078460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10796F010796F010796F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.cpp */ = {isa = PBXBuildFile; fileRef = 1078F101078F101078F10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107A210107A210107A210000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */ = {isa = PBXBuildFile; fileRef = 1079A001079A001079A00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107AD20107AD20107AD20000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */ = {isa = PBXBuildFile; fileRef = 107A520107A520107A520000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107B1C0107B1C0107B1C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.cpp */ = {isa = PBXBuildFile; fileRef = 107B030107B030107B030000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107C2D0107C2D0107C2D0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.cpp */ = {isa = PBXBuildFile; fileRef = 107BB00107BB00107BB00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107C770107C770107C770000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.cpp */ = {isa = PBXBuildFile; fileRef = 107C5E0107C5E0107C5E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107D8A0107D8A0107D8A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */ = {isa = PBXBuildFile; fileRef = 107D0B0107D0B0107D0B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107DD90107DD90107DD90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.cpp */ = {isa = PBXBuildFile; fileRef = 107DC20107DC20107DC20000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107EE50107EE50107EE50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */ = {isa = PBXBuildFile; fileRef = 107E680107E680107E680000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107F930107F930107F930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */ = {isa = PBXBuildFile; fileRef = 107F160107F160107F160000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107FDD0107FDD0107FDD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.cpp */ = {isa = PBXBuildFile; fileRef = 107FC40107FC40107FC40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1080EE01080EE01080EE0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */ = {isa = PBXBuildFile; fileRef = 108071010807101080710000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10819C010819C010819C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */ = {isa = PBXBuildFile; fileRef = 10811F010811F010811F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1081E601081E601081E60000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.cpp */ = {isa = PBXBuildFile; fileRef = 1081CD01081CD01081CD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108293010829301082930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.cpp */ = {isa = PBXBuildFile; fileRef = 10827A010827A010827A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1083AB01083AB01083AB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */ = {isa = PBXBuildFile; fileRef = 108333010833301083330000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108459010845901084590000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */ = {isa = PBXBuildFile; fileRef = 1083DC01083DC01083DC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1084A301084A301084A30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.cpp */ = {isa = PBXBuildFile; fileRef = 10848A010848A010848A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1085B401085B401085B40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */ = {isa = PBXBuildFile; fileRef = 108537010853701085370000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108662010866201086620000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */ = {isa = PBXBuildFile; fileRef = 1085E501085E501085E50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1086AC01086AC01086AC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.cpp */ = {isa = PBXBuildFile; fileRef = 108693010869301086930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1087A301087A301087A30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */ = {isa = PBXBuildFile; fileRef = 108739010873901087390000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108875010887501088750000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */ = {isa = PBXBuildFile; fileRef = 1087F401087F401087F40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108909010890901089090000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */ = {isa = PBXBuildFile; fileRef = 10889F010889F010889F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+1089D901089D901089D90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */ = {isa = PBXBuildFile; fileRef = 10895A010895A010895A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108A8B0108A8B0108A8B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */ = {isa = PBXBuildFile; fileRef = 108A0C0108A0C0108A0C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108B010108B010108B010000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 10679E010679E010679E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+108BA00108BA00108BA00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108B410108B410108B410000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108C550108C550108C550000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108BF90108BF90108BF90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108D100108D100108D100000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108CA40108CA40108CA40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108DC30108DC30108DC30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108D690108D690108D690000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108E9E0108E9E0108E9E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108E1F0108E1F0108E1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
-              5F63105F63105F6310000000 /*  */ = {
+              104F320104F320104F320000 /*  */ = {
                      isa = PBXBuildStyle;
               };
-              5F7EB05F7EB05F7EB0000000 /* Debug */ = {
+              1047C501047C501047C50000 /* Debug */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Debug;
               };
-              5B78905B78905B7890000000 /* Release */ = {
+              105100010510001051000000 /* Release */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Release;
               };
-              5F6A305F6A305F6A30000000 /* MinSizeRel */ = {
+              104F8E0104F8E0104F8E0000 /* MinSizeRel */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = MinSizeRel;
               };
-              5A91E05A91E05A91E0000000 /* RelWithDebInfo */ = {
+              5DFC505DFC505DFC50000000 /* RelWithDebInfo */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
@@ -130,217 +130,217 @@
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-              65B60065B60065B600000000 /* PBXContainerItemProxy */ = {
+              10B0E1010B0E1010B0E10000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 600BA0600BA0600BA0000000 /* Project object */;
+                     containerPortal = 1055B401055B401055B40000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 639CB0639CB0639CB0000000;
+                     remoteGlobalIDString = 108F390108F390108F390000;
                      remoteInfo = RobotModel;
               };
-              65BDA065BDA065BDA0000000 /* PBXContainerItemProxy */ = {
+              10B15B010B15B010B15B0000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 600BA0600BA0600BA0000000 /* Project object */;
+                     containerPortal = 1055B401055B401055B40000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 602F00602F00602F00000000;
+                     remoteGlobalIDString = 1057ED01057ED01057ED0000;
                      remoteInfo = ALL_BUILD;
               };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-612940612940612940000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-612A40612A40612A40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "skinWindow.h"; path = "skinWindow.h"; sourceTree = SOURCE_ROOT; };
-613AE0613AE0613AE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "glwidget.h"; path = "glwidget.h"; sourceTree = SOURCE_ROOT; };
-614540614540614540000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "renderList.h"; path = "renderList.h"; sourceTree = SOURCE_ROOT; };
-615000615000615000000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robotmodelexception.h"; path = "robotmodelexception.h"; sourceTree = SOURCE_ROOT; };
-615B30615B30615B30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "zphandler.h"; path = "zphandler.h"; sourceTree = SOURCE_ROOT; };
-616610616610616610000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robot.h"; path = "robot.h"; sourceTree = SOURCE_ROOT; };
-6170E06170E06170E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "interval.h"; path = "interval.h"; sourceTree = SOURCE_ROOT; };
-617BA0617BA0617BA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "motor.h"; path = "motor.h"; sourceTree = SOURCE_ROOT; };
-618660618660618660000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "bodyPart.h"; path = "bodyPart.h"; sourceTree = SOURCE_ROOT; };
-619130619130619130000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "link.h"; path = "link.h"; sourceTree = SOURCE_ROOT; };
-619C30619C30619C30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "primitiveobject.h"; path = "primitiveobject.h"; sourceTree = SOURCE_ROOT; };
-61A6D061A6D061A6D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "cylinder.h"; path = "cylinder.h"; sourceTree = SOURCE_ROOT; };
-61B19061B19061B190000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint.h"; path = "joint.h"; sourceTree = SOURCE_ROOT; };
-61BC6061BC6061BC60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_prismatic.h"; path = "joint_prismatic.h"; sourceTree = SOURCE_ROOT; };
-61C71061C71061C710000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_revolute.h"; path = "joint_revolute.h"; sourceTree = SOURCE_ROOT; };
-61D1B061D1B061D1B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "box.h"; path = "box.h"; sourceTree = SOURCE_ROOT; };
-61DC7061DC7061DC70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "world.h"; path = "world.h"; sourceTree = SOURCE_ROOT; };
-61E7A061E7A061E7A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "kintreenode.h"; path = "kintreenode.h"; sourceTree = SOURCE_ROOT; };
-61F2A061F2A061F2A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "compositeObject.h"; path = "compositeObject.h"; sourceTree = SOURCE_ROOT; };
-61FD4061FD4061FD40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "sphere.h"; path = "sphere.h"; sourceTree = SOURCE_ROOT; };
-620810620810620810000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "displmatrix.h"; path = "displmatrix.h"; sourceTree = SOURCE_ROOT; };
-6212C06212C06212C0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "displaylist.h"; path = "displaylist.h"; sourceTree = SOURCE_ROOT; };
-621D60621D60621D60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "model.h"; path = "model.h"; sourceTree = SOURCE_ROOT; };
-622830622830622830000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "skinWindow.cpp"; path = "skinWindow.cpp"; sourceTree = SOURCE_ROOT; };
-623270623270623270000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "glwidget.cpp"; path = "glwidget.cpp"; sourceTree = SOURCE_ROOT; };
-623D30623D30623D30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "renderList.cpp"; path = "renderList.cpp"; sourceTree = SOURCE_ROOT; };
-6247E06247E06247E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robotmodelexception.cpp"; path = "robotmodelexception.cpp"; sourceTree = SOURCE_ROOT; };
-6252B06252B06252B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "zphandler.cpp"; path = "zphandler.cpp"; sourceTree = SOURCE_ROOT; };
-625DE0625DE0625DE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robot.cpp"; path = "robot.cpp"; sourceTree = SOURCE_ROOT; };
-626850626850626850000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "interval.cpp"; path = "interval.cpp"; sourceTree = SOURCE_ROOT; };
-627310627310627310000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "motor.cpp"; path = "motor.cpp"; sourceTree = SOURCE_ROOT; };
-627DD0627DD0627DD0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "bodyPart.cpp"; path = "bodyPart.cpp"; sourceTree = SOURCE_ROOT; };
-628910628910628910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "link.cpp"; path = "link.cpp"; sourceTree = SOURCE_ROOT; };
-629390629390629390000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "primitiveobject.cpp"; path = "primitiveobject.cpp"; sourceTree = SOURCE_ROOT; };
-629E50629E50629E50000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "cylinder.cpp"; path = "cylinder.cpp"; sourceTree = SOURCE_ROOT; };
-62A91062A91062A910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint.cpp"; path = "joint.cpp"; sourceTree = SOURCE_ROOT; };
-62B3D062B3D062B3D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_prismatic.cpp"; path = "joint_prismatic.cpp"; sourceTree = SOURCE_ROOT; };
-62BE9062BE9062BE90000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_revolute.cpp"; path = "joint_revolute.cpp"; sourceTree = SOURCE_ROOT; };
-62C95062C95062C950000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "box.cpp"; path = "box.cpp"; sourceTree = SOURCE_ROOT; };
-62D41062D41062D410000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "world.cpp"; path = "world.cpp"; sourceTree = SOURCE_ROOT; };
-62DFB062DFB062DFB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "kintreenode.cpp"; path = "kintreenode.cpp"; sourceTree = SOURCE_ROOT; };
-62EA4062EA4062EA40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "compositeObject.cpp"; path = "compositeObject.cpp"; sourceTree = SOURCE_ROOT; };
-62F50062F50062F500000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "sphere.cpp"; path = "sphere.cpp"; sourceTree = SOURCE_ROOT; };
-62FFC062FFC062FFC0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "displmatrix.cpp"; path = "displmatrix.cpp"; sourceTree = SOURCE_ROOT; };
-630A70630A70630A70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "displaylist.cpp"; path = "displaylist.cpp"; sourceTree = SOURCE_ROOT; };
-631520631520631520000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "model.cpp"; path = "model.cpp"; sourceTree = SOURCE_ROOT; };
-631FE0631FE0631FE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_skinWindow.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx"; sourceTree = SOURCE_ROOT; };
-632AE0632AE0632AE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_glwidget.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx"; sourceTree = SOURCE_ROOT; };
-6335C06335C06335C0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_renderList.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx"; sourceTree = SOURCE_ROOT; };
-6340A06340A06340A0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_model.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx"; sourceTree = SOURCE_ROOT; };
-634B80634B80634B80000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_robot.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx"; sourceTree = SOURCE_ROOT; };
-635EA0635EA0635EA0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_skinWindow.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule"; sourceTree = SOURCE_ROOT; };
-6369B06369B06369B0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_glwidget.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule"; sourceTree = SOURCE_ROOT; };
-637500637500637500000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_renderList.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule"; sourceTree = SOURCE_ROOT; };
-638030638030638030000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_model.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule"; sourceTree = SOURCE_ROOT; };
-638B30638B30638B30000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_robot.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule"; sourceTree = SOURCE_ROOT; };
-64AEF064AEF064AEF0000000 /* RobotModel */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libRobotModel.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+10679E010679E010679E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+106812010681201068120000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "skinWindow.h"; path = "skinWindow.h"; sourceTree = SOURCE_ROOT; };
+1068B901068B901068B90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "glwidget.h"; path = "glwidget.h"; sourceTree = SOURCE_ROOT; };
+10695F010695F010695F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "renderList.h"; path = "renderList.h"; sourceTree = SOURCE_ROOT; };
+106A0E0106A0E0106A0E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robotmodelexception.h"; path = "robotmodelexception.h"; sourceTree = SOURCE_ROOT; };
+106AC10106AC10106AC10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "zphandler.h"; path = "zphandler.h"; sourceTree = SOURCE_ROOT; };
+106B6F0106B6F0106B6F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robot.h"; path = "robot.h"; sourceTree = SOURCE_ROOT; };
+106C1F0106C1F0106C1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "interval.h"; path = "interval.h"; sourceTree = SOURCE_ROOT; };
+106CCB0106CCB0106CCB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "motor.h"; path = "motor.h"; sourceTree = SOURCE_ROOT; };
+106D770106D770106D770000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "bodyPart.h"; path = "bodyPart.h"; sourceTree = SOURCE_ROOT; };
+106E240106E240106E240000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "link.h"; path = "link.h"; sourceTree = SOURCE_ROOT; };
+106ED40106ED40106ED40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "primitiveobject.h"; path = "primitiveobject.h"; sourceTree = SOURCE_ROOT; };
+106F810106F810106F810000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "cylinder.h"; path = "cylinder.h"; sourceTree = SOURCE_ROOT; };
+10702D010702D010702D0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint.h"; path = "joint.h"; sourceTree = SOURCE_ROOT; };
+1070D901070D901070D90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_prismatic.h"; path = "joint_prismatic.h"; sourceTree = SOURCE_ROOT; };
+107186010718601071860000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_revolute.h"; path = "joint_revolute.h"; sourceTree = SOURCE_ROOT; };
+107232010723201072320000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "box.h"; path = "box.h"; sourceTree = SOURCE_ROOT; };
+1072DF01072DF01072DF0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "world.h"; path = "world.h"; sourceTree = SOURCE_ROOT; };
+107390010739001073900000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "kintreenode.h"; path = "kintreenode.h"; sourceTree = SOURCE_ROOT; };
+107440010744001074400000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "compositeObject.h"; path = "compositeObject.h"; sourceTree = SOURCE_ROOT; };
+1074ED01074ED01074ED0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "sphere.h"; path = "sphere.h"; sourceTree = SOURCE_ROOT; };
+107599010759901075990000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "displmatrix.h"; path = "displmatrix.h"; sourceTree = SOURCE_ROOT; };
+107646010764601076460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "displaylist.h"; path = "displaylist.h"; sourceTree = SOURCE_ROOT; };
+1076F301076F301076F30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "model.h"; path = "model.h"; sourceTree = SOURCE_ROOT; };
+10779F010779F010779F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "skinWindow.cpp"; path = "skinWindow.cpp"; sourceTree = SOURCE_ROOT; };
+107846010784601078460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "glwidget.cpp"; path = "glwidget.cpp"; sourceTree = SOURCE_ROOT; };
+1078F101078F101078F10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "renderList.cpp"; path = "renderList.cpp"; sourceTree = SOURCE_ROOT; };
+1079A001079A001079A00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robotmodelexception.cpp"; path = "robotmodelexception.cpp"; sourceTree = SOURCE_ROOT; };
+107A520107A520107A520000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "zphandler.cpp"; path = "zphandler.cpp"; sourceTree = SOURCE_ROOT; };
+107B030107B030107B030000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robot.cpp"; path = "robot.cpp"; sourceTree = SOURCE_ROOT; };
+107BB00107BB00107BB00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "interval.cpp"; path = "interval.cpp"; sourceTree = SOURCE_ROOT; };
+107C5E0107C5E0107C5E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "motor.cpp"; path = "motor.cpp"; sourceTree = SOURCE_ROOT; };
+107D0B0107D0B0107D0B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "bodyPart.cpp"; path = "bodyPart.cpp"; sourceTree = SOURCE_ROOT; };
+107DC20107DC20107DC20000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "link.cpp"; path = "link.cpp"; sourceTree = SOURCE_ROOT; };
+107E680107E680107E680000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "primitiveobject.cpp"; path = "primitiveobject.cpp"; sourceTree = SOURCE_ROOT; };
+107F160107F160107F160000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "cylinder.cpp"; path = "cylinder.cpp"; sourceTree = SOURCE_ROOT; };
+107FC40107FC40107FC40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint.cpp"; path = "joint.cpp"; sourceTree = SOURCE_ROOT; };
+108071010807101080710000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_prismatic.cpp"; path = "joint_prismatic.cpp"; sourceTree = SOURCE_ROOT; };
+10811F010811F010811F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_revolute.cpp"; path = "joint_revolute.cpp"; sourceTree = SOURCE_ROOT; };
+1081CD01081CD01081CD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "box.cpp"; path = "box.cpp"; sourceTree = SOURCE_ROOT; };
+10827A010827A010827A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "world.cpp"; path = "world.cpp"; sourceTree = SOURCE_ROOT; };
+108333010833301083330000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "kintreenode.cpp"; path = "kintreenode.cpp"; sourceTree = SOURCE_ROOT; };
+1083DC01083DC01083DC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "compositeObject.cpp"; path = "compositeObject.cpp"; sourceTree = SOURCE_ROOT; };
+10848A010848A010848A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "sphere.cpp"; path = "sphere.cpp"; sourceTree = SOURCE_ROOT; };
+108537010853701085370000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "displmatrix.cpp"; path = "displmatrix.cpp"; sourceTree = SOURCE_ROOT; };
+1085E501085E501085E50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "displaylist.cpp"; path = "displaylist.cpp"; sourceTree = SOURCE_ROOT; };
+108693010869301086930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "model.cpp"; path = "model.cpp"; sourceTree = SOURCE_ROOT; };
+108739010873901087390000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_skinWindow.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx"; sourceTree = SOURCE_ROOT; };
+1087F401087F401087F40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_glwidget.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx"; sourceTree = SOURCE_ROOT; };
+10889F010889F010889F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_renderList.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx"; sourceTree = SOURCE_ROOT; };
+10895A010895A010895A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_model.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx"; sourceTree = SOURCE_ROOT; };
+108A0C0108A0C0108A0C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_robot.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx"; sourceTree = SOURCE_ROOT; };
+108B410108B410108B410000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_skinWindow.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108BF90108BF90108BF90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_glwidget.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108CA40108CA40108CA40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_renderList.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108D690108D690108D690000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_model.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108E1F0108E1F0108E1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_robot.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule"; sourceTree = SOURCE_ROOT; };
+10A06A010A06A010A06A0000 /* RobotModel */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libRobotModel.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-              5F80A05F80A05F80A0000000  = {
+              105062010506201050620000  = {
                      isa = PBXGroup;
                      children = (
-                            5F83705F83705F8370000000 /* Sources */,
-                            5F79F05F79F05F79F0000000 /* Resources */,
-                            600810600810600810000000 /* Products */,
+                            10508F010508F010508F0000 /* Sources */,
+                            104F3E0104F3E0104F3E0000 /* Resources */,
+                            105230010523001052300000 /* Products */,
                      );
                      sourceTree = "<group>";
               };
-              5F83705F83705F8370000000 /* Sources */ = {
+              10508F010508F010508F0000 /* Sources */ = {
                      isa = PBXGroup;
                      children = (
-                            5F89A05F89A05F89A0000000 /* ALL_BUILD */,
-                            5F95A05F95A05F95A0000000 /* RobotModel */,
+                            105181010518101051810000 /* ALL_BUILD */,
+                            105243010524301052430000 /* RobotModel */,
                      );
                      name = Sources;
                      sourceTree = "<group>";
               };
-              5F79F05F79F05F79F0000000 /* Resources */ = {
+              104F3E0104F3E0104F3E0000 /* Resources */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = Resources;
                      sourceTree = "<group>";
               };
-              5F89A05F89A05F89A0000000 /* ALL_BUILD */ = {
+              105181010518101051810000 /* ALL_BUILD */ = {
                      isa = PBXGroup;
                      children = (
-                            5F90305F90305F9030000000 /* CMake Rules */,
-                            612940612940612940000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */,
+                            1051EC01051EC01051EC0000 /* CMake Rules */,
+                            10679E010679E010679E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */,
                      );
                      name = ALL_BUILD;
                      sourceTree = "<group>";
               };
-              5F90305F90305F9030000000 /* CMake Rules */ = {
+              1051EC01051EC01051EC0000 /* CMake Rules */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = "CMake Rules";
                      sourceTree = "<group>";
               };
-              5F95A05F95A05F95A0000000 /* RobotModel */ = {
+              105243010524301052430000 /* RobotModel */ = {
                      isa = PBXGroup;
                      children = (
-                            5F9B105F9B105F9B10000000 /* Header Files */,
-                            5FABD05FABD05FABD0000000 /* Source Files */,
-                            600350600350600350000000 /* CMake Rules */,
-                            612940612940612940000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */,
+                            105299010529901052990000 /* Header Files */,
+                            1053BF01053BF01053BF0000 /* Source Files */,
+                            105532010553201055320000 /* CMake Rules */,
+                            10679E010679E010679E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/CMakeLists.txt */,
                      );
                      name = RobotModel;
                      sourceTree = "<group>";
               };
-              5F9B105F9B105F9B10000000 /* Header Files */ = {
+              105299010529901052990000 /* Header Files */ = {
                      isa = PBXGroup;
                      children = (
-                            612A40612A40612A40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.h */,
-                            613AE0613AE0613AE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.h */,
-                            614540614540614540000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.h */,
-                            615000615000615000000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */,
-                            615B30615B30615B30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.h */,
-                            616610616610616610000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.h */,
-                            6170E06170E06170E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.h */,
-                            617BA0617BA0617BA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.h */,
-                            618660618660618660000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.h */,
-                            619130619130619130000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.h */,
-                            619C30619C30619C30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */,
-                            61A6D061A6D061A6D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.h */,
-                            61B19061B19061B190000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.h */,
-                            61BC6061BC6061BC60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */,
-                            61C71061C71061C710000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */,
-                            61D1B061D1B061D1B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.h */,
-                            61DC7061DC7061DC70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.h */,
-                            61E7A061E7A061E7A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.h */,
-                            61F2A061F2A061F2A0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.h */,
-                            61FD4061FD4061FD40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.h */,
-                            620810620810620810000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.h */,
-                            6212C06212C06212C0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.h */,
-                            621D60621D60621D60000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.h */,
+                            106812010681201068120000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.h */,
+                            1068B901068B901068B90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.h */,
+                            10695F010695F010695F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.h */,
+                            106A0E0106A0E0106A0E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.h */,
+                            106AC10106AC10106AC10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.h */,
+                            106B6F0106B6F0106B6F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.h */,
+                            106C1F0106C1F0106C1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.h */,
+                            106CCB0106CCB0106CCB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.h */,
+                            106D770106D770106D770000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.h */,
+                            106E240106E240106E240000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.h */,
+                            106ED40106ED40106ED40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.h */,
+                            106F810106F810106F810000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.h */,
+                            10702D010702D010702D0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.h */,
+                            1070D901070D901070D90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.h */,
+                            107186010718601071860000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.h */,
+                            107232010723201072320000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.h */,
+                            1072DF01072DF01072DF0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.h */,
+                            107390010739001073900000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.h */,
+                            107440010744001074400000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.h */,
+                            1074ED01074ED01074ED0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.h */,
+                            107599010759901075990000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.h */,
+                            107646010764601076460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.h */,
+                            1076F301076F301076F30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.h */,
                      );
                      name = "Header Files";
                      sourceTree = "<group>";
               };
-              5FABD05FABD05FABD0000000 /* Source Files */ = {
+              1053BF01053BF01053BF0000 /* Source Files */ = {
                      isa = PBXGroup;
                      children = (
-                            622830622830622830000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */,
-                            623270623270623270000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */,
-                            623D30623D30623D30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.cpp */,
-                            6247E06247E06247E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */,
-                            6252B06252B06252B0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */,
-                            625DE0625DE0625DE0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.cpp */,
-                            626850626850626850000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.cpp */,
-                            627310627310627310000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.cpp */,
-                            627DD0627DD0627DD0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */,
-                            628910628910628910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.cpp */,
-                            629390629390629390000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */,
-                            629E50629E50629E50000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */,
-                            62A91062A91062A910000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.cpp */,
-                            62B3D062B3D062B3D0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */,
-                            62BE9062BE9062BE90000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */,
-                            62C95062C95062C950000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.cpp */,
-                            62D41062D41062D410000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.cpp */,
-                            62DFB062DFB062DFB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */,
-                            62EA4062EA4062EA40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */,
-                            62F50062F50062F500000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.cpp */,
-                            62FFC062FFC062FFC0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */,
-                            630A70630A70630A70000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */,
-                            631520631520631520000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.cpp */,
-                            631FE0631FE0631FE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */,
-                            632AE0632AE0632AE0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */,
-                            6335C06335C06335C0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */,
-                            6340A06340A06340A0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */,
-                            634B80634B80634B80000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */,
+                            10779F010779F010779F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */,
+                            107846010784601078460000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */,
+                            1078F101078F101078F10000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.cpp */,
+                            1079A001079A001079A00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */,
+                            107A520107A520107A520000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */,
+                            107B030107B030107B030000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.cpp */,
+                            107BB00107BB00107BB00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.cpp */,
+                            107C5E0107C5E0107C5E0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.cpp */,
+                            107D0B0107D0B0107D0B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */,
+                            107DC20107DC20107DC20000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.cpp */,
+                            107E680107E680107E680000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */,
+                            107F160107F160107F160000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */,
+                            107FC40107FC40107FC40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.cpp */,
+                            108071010807101080710000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */,
+                            10811F010811F010811F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */,
+                            1081CD01081CD01081CD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.cpp */,
+                            10827A010827A010827A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.cpp */,
+                            108333010833301083330000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */,
+                            1083DC01083DC01083DC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */,
+                            10848A010848A010848A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.cpp */,
+                            108537010853701085370000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */,
+                            1085E501085E501085E50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */,
+                            108693010869301086930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.cpp */,
+                            108739010873901087390000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */,
+                            1087F401087F401087F40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */,
+                            10889F010889F010889F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */,
+                            10895A010895A010895A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */,
+                            108A0C0108A0C0108A0C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */,
                      );
                      name = "Source Files";
                      sourceTree = "<group>";
               };
-              600350600350600350000000 /* CMake Rules */ = {
+              105532010553201055320000 /* CMake Rules */ = {
                      isa = PBXGroup;
                      children = (
-                            635EA0635EA0635EA0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */,
-                            6369B06369B06369B0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */,
-                            637500637500637500000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */,
-                            638030638030638030000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */,
-                            638B30638B30638B30000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */,
+                            108B410108B410108B410000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx.rule */,
+                            108BF90108BF90108BF90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx.rule */,
+                            108CA40108CA40108CA40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx.rule */,
+                            108D690108D690108D690000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx.rule */,
+                            108E1F0108E1F0108E1F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx.rule */,
                      );
                      name = "CMake Rules";
                      sourceTree = "<group>";
               };
-              600810600810600810000000 /* Products */ = {
+              105230010523001052300000 /* Products */ = {
                      isa = PBXGroup;
                      children = (
-                            64AEF064AEF064AEF0000000 /* RobotModel */,
+                            10A06A010A06A010A06A0000 /* RobotModel */,
                      );
                      name = Products;
                      sourceTree = "<group>";
@@ -348,14 +348,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-              639CB0639CB0639CB0000000 /* RobotModel */ = {
+              108F390108F390108F390000 /* RobotModel */ = {
                      isa = PBXNativeTarget;
-                     buildConfigurationList = 639FB0639FB0639FB0000000 /* Build configuration list for PBXNativeTarget "RobotModel" */;
+                     buildConfigurationList = 108F690108F690108F690000 /* Build configuration list for PBXNativeTarget "RobotModel" */;
                      buildPhases = (
-                            639D50639D50639D50000000 /* CMake ReRun */,
-                            63A4B063A4B063A4B0000000 /* CMake Rules */,
-                            6395D06395D06395D0000000 /* Sources */,
-                            63AC3063AC3063AC30000000 /* CMake PostBuild Rules */,
+                            108F430108F430108F430000 /* CMake ReRun */,
+                            108FBB0108FBB0108FBB0000 /* CMake Rules */,
+                            108ECA0108ECA0108ECA0000 /* Sources */,
+                            10901B010901B010901B0000 /* CMake PostBuild Rules */,
                      );
                      buildRules = (
                      );
@@ -363,41 +363,41 @@
                      );
                      name = RobotModel;
                      productName = RobotModel;
-                     productReference = 64AEF064AEF064AEF0000000 /* RobotModel */;
+                     productReference = 10A06A010A06A010A06A0000 /* RobotModel */;
                      productType = "com.apple.product-type.library.static";
               };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-              600BA0600BA0600BA0000000 /* Project object */ = {
+              1055B401055B401055B40000 /* Project object */ = {
                      isa = PBXProject;
                      attributes = {
                             BuildIndependentTargetsInParallel = YES;
                      };
-                     buildConfigurationList = 6013F06013F06013F0000000 /* Build configuration list for PBXProject  "RobotModel" */;
+                     buildConfigurationList = 105638010563801056380000 /* Build configuration list for PBXProject  "RobotModel" */;
                      buildSettings = {
                      };
                      buildStyles = (
-                            5F7EB05F7EB05F7EB0000000 /* Debug */,
-                            5B78905B78905B7890000000 /* Release */,
-                            5F6A305F6A305F6A30000000 /* MinSizeRel */,
-                            5A91E05A91E05A91E0000000 /* RelWithDebInfo */,
+                            1047C501047C501047C50000 /* Debug */,
+                            105100010510001051000000 /* Release */,
+                            104F8E0104F8E0104F8E0000 /* MinSizeRel */,
+                            5DFC505DFC505DFC50000000 /* RelWithDebInfo */,
                      );
                      compatibilityVersion = "Xcode 3.1";
                      hasScannedForEncodings = 0;
-                     mainGroup = 5F80A05F80A05F80A0000000;
+                     mainGroup = 105062010506201050620000;
                      projectDirPath = "../../../../src/VirtualSkinLibrary/RobotModel";
                      projectRoot = "";
                      targets = (
-                            602F00602F00602F00000000 /* ALL_BUILD */,
-                            639CB0639CB0639CB0000000 /* RobotModel */,
-                            64BC6064BC6064BC60000000 /* install */,
+                            1057ED01057ED01057ED0000 /* ALL_BUILD */,
+                            108F390108F390108F390000 /* RobotModel */,
+                            10A13A010A13A010A13A0000 /* install */,
                      );
               };
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-              602790602790602790000000 /*  */ = {
+              105776010577601057760000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -411,7 +411,7 @@
                      shellScript = "# shell script goes here
 exit 0";
               };
-              6030D06030D06030D0000000 /* CMake ReRun */ = {
+              10580F010580F010580F0000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -419,9 +419,9 @@ exit 0";
                      name = "CMake ReRun";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/CMakeScripts/ReRunCMake.make";
               };
-              6037E06037E06037E0000000 /* CMake Rules */ = {
+              105881010588101058810000 /* CMake Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -429,9 +429,9 @@ exit 0";
                      name = "CMake Rules";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
               };
-              639D50639D50639D50000000 /* CMake ReRun */ = {
+              108F430108F430108F430000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -439,9 +439,9 @@ exit 0";
                      name = "CMake ReRun";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/CMakeScripts/ReRunCMake.make";
               };
-              63A4B063A4B063A4B0000000 /* CMake Rules */ = {
+              108FBB0108FBB0108FBB0000 /* CMake Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -449,9 +449,9 @@ exit 0";
                      name = "CMake Rules";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_cmakeRulesBuildPhase.make$CONFIGURATION all";
               };
-              63AC3063AC3063AC30000000 /* CMake PostBuild Rules */ = {
+              10901B010901B010901B0000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -459,9 +459,9 @@ exit 0";
                      name = "CMake PostBuild Rules";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_postBuildPhase.make$CONFIGURATION all";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/RobotModel_postBuildPhase.make$CONFIGURATION all";
               };
-              61E72061E72061E720000000 /*  */ = {
+              107388010738801073880000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -475,7 +475,7 @@ exit 0";
                      shellScript = "# shell script goes here
 exit 0";
               };
-              64BE0064BE0064BE00000000 /* CMake ReRun */ = {
+              10A157010A157010A1570000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -483,9 +483,9 @@ exit 0";
                      name = "CMake ReRun";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode -f /Users/kail/imClever/dev/virtualSkin/xcode/CMakeScripts/ReRunCMake.make";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/CMakeScripts/ReRunCMake.make";
               };
-              64C4E064C4E064C4E0000000 /* CMake PostBuild Rules */ = {
+              10A1C9010A1C9010A1C90000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -493,103 +493,103 @@ exit 0";
                      name = "CMake PostBuild Rules";
                      runOnlyForDeploymentPostprocessing = 0;
                      shellPath = /bin/sh;
-                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     shellScript = "make -C /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel -f /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
               };
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-              6395D06395D06395D0000000 /* Sources */ = {
+              108ECA0108ECA0108ECA0000 /* Sources */ = {
                      isa = PBXSourcesBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
-                            622950622950622950000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */,
-                            623450623450623450000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */,
-                            623E90623E90623E90000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/renderList.cpp */,
-                            624FA0624FA0624FA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */,
-                            625410625410625410000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */,
-                            625F80625F80625F80000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/robot.cpp */,
-                            626A30626A30626A30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/interval.cpp */,
-                            6274F06274F06274F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/motor.cpp */,
-                            627FB0627FB0627FB0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */,
-                            628AA0628AA0628AA0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/link.cpp */,
-                            629B40629B40629B40000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */,
-                            62A03062A03062A030000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */,
-                            62AAF062AAF062AAF0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint.cpp */,
-                            62BB8062BB8062BB80000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */,
-                            62C64062C64062C640000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */,
-                            62CB3062CB3062CB30000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/box.cpp */,
-                            62D5F062D5F062D5F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/world.cpp */,
-                            62E12062E12062E120000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */,
-                            62F1F062F1F062F1F0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */,
-                            62F6E062F6E062F6E0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/sphere.cpp */,
-                            630120630120630120000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */,
-                            630BD0630BD0630BD0000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */,
-                            631700631700631700000000 /* /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/model.cpp */,
-                            6327D06327D06327D0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */,
-                            6332B06332B06332B0000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */,
-                            633D90633D90633D90000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */,
-                            634850634850634850000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */,
-                            635350635350635350000000 /* /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */,
+                            107815010781501078150000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/skinWindow.cpp */,
+                            1078C001078C001078C00000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/glwidget.cpp */,
+                            10796F010796F010796F0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/renderList.cpp */,
+                            107A210107A210107A210000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robotmodelexception.cpp */,
+                            107AD20107AD20107AD20000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/zphandler.cpp */,
+                            107B1C0107B1C0107B1C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/robot.cpp */,
+                            107C2D0107C2D0107C2D0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/interval.cpp */,
+                            107C770107C770107C770000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/motor.cpp */,
+                            107D8A0107D8A0107D8A0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/bodyPart.cpp */,
+                            107DD90107DD90107DD90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/link.cpp */,
+                            107EE50107EE50107EE50000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/primitiveobject.cpp */,
+                            107F930107F930107F930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/cylinder.cpp */,
+                            107FDD0107FDD0107FDD0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint.cpp */,
+                            1080EE01080EE01080EE0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_prismatic.cpp */,
+                            10819C010819C010819C0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/joint_revolute.cpp */,
+                            1081E601081E601081E60000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/box.cpp */,
+                            108293010829301082930000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/world.cpp */,
+                            1083AB01083AB01083AB0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/kintreenode.cpp */,
+                            108459010845901084590000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/compositeObject.cpp */,
+                            1084A301084A301084A30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/sphere.cpp */,
+                            1085B401085B401085B40000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displmatrix.cpp */,
+                            108662010866201086620000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/displaylist.cpp */,
+                            1086AC01086AC01086AC0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/model.cpp */,
+                            1087A301087A301087A30000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_skinWindow.cxx */,
+                            108875010887501088750000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_glwidget.cxx */,
+                            108909010890901089090000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_renderList.cxx */,
+                            1089D901089D901089D90000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_model.cxx */,
+                            108A8B0108A8B0108A8B0000 /* /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/moc_robot.cxx */,
                      );
                      runOnlyForDeploymentPostprocessing = 0;
               };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-              65BAC065BAC065BAC0000000 /* PBXTargetDependency */ = {
+              10B133010B133010B1330000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 639CB0639CB0639CB0000000 /* RobotModel */;
-                     targetProxy = 65B60065B60065B600000000 /* PBXContainerItemProxy */;
+                     target = 108F390108F390108F390000 /* RobotModel */;
+                     targetProxy = 10B0E1010B0E1010B0E10000 /* PBXContainerItemProxy */;
               };
-              65C36065C36065C360000000 /* PBXTargetDependency */ = {
+              10B1B7010B1B7010B1B70000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 602F00602F00602F00000000 /* ALL_BUILD */;
-                     targetProxy = 65BDA065BDA065BDA0000000 /* PBXContainerItemProxy */;
+                     target = 1057ED01057ED01057ED0000 /* ALL_BUILD */;
+                     targetProxy = 10B15B010B15B010B15B0000 /* PBXContainerItemProxy */;
               };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-              601530601530601530000000 /* Debug */ = {
+              105650010565001056500000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
                             ONLY_ACTIVE_ARCH = YES;
                             SDKROOT = "/Developer/SDKs/MacOSX10.5.sdk";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/build;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/build;
                      };
                      name = Debug;
               };
-              6016E06016E06016E0000000 /* Release */ = {
+              105669010566901056690000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
                             ONLY_ACTIVE_ARCH = YES;
                             SDKROOT = "/Developer/SDKs/MacOSX10.5.sdk";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/build;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/build;
                      };
                      name = Release;
               };
-              601920601920601920000000 /* MinSizeRel */ = {
+              10568E010568E010568E0000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
                             ONLY_ACTIVE_ARCH = YES;
                             SDKROOT = "/Developer/SDKs/MacOSX10.5.sdk";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/build;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/build;
                      };
                      name = MinSizeRel;
               };
-              601AE0601AE0601AE0000000 /* RelWithDebInfo */ = {
+              1056A501056A501056A50000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
                             ONLY_ACTIVE_ARCH = YES;
                             SDKROOT = "/Developer/SDKs/MacOSX10.5.sdk";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/build;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/build;
                      };
                      name = RelWithDebInfo;
               };
-              604420604420604420000000 /* Debug */ = {
+              105940010594001059400000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -598,7 +598,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, QT_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -606,13 +606,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = ALL_BUILD;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Debug;
               };
-              607CB0607CB0607CB0000000 /* Release */ = {
+              105CCE0105CCE0105CCE0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -621,7 +621,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -629,13 +629,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = ALL_BUILD;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Release;
               };
-              60B47060B47060B470000000 /* MinSizeRel */ = {
+              106057010605701060570000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -644,7 +644,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -652,13 +652,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = ALL_BUILD;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = MinSizeRel;
               };
-              60ECA060ECA060ECA0000000 /* RelWithDebInfo */ = {
+              1063DC01063DC01063DC0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -667,7 +667,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -675,16 +675,16 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = ALL_BUILD;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = RelWithDebInfo;
               };
-              63B74063B74063B740000000 /* Debug */ = {
+              1090E501090E501090E50000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
-                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Debug;
+                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/Debug;
                             EXECUTABLE_PREFIX = lib;
                             EXECUTABLE_SUFFIX = ".a";
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -693,7 +693,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, QT_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             LIBRARY_STYLE = STATIC;
                             OTHER_CFLAGS = "    ";
@@ -703,16 +703,16 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = RobotModel;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Debug;
               };
-              63F44063F44063F440000000 /* Release */ = {
+              1094BC01094BC01094BC0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
-                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/Release;
+                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/Release;
                             EXECUTABLE_PREFIX = lib;
                             EXECUTABLE_SUFFIX = ".a";
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -721,7 +721,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 3;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             LIBRARY_STYLE = STATIC;
                             OTHER_CFLAGS = "    -DNDEBUG  ";
@@ -731,16 +731,16 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = RobotModel;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Release;
               };
-              641580641580641580000000 /* MinSizeRel */ = {
+              1094E201094E201094E20000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
-                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel;
+                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/MinSizeRel;
                             EXECUTABLE_PREFIX = lib;
                             EXECUTABLE_SUFFIX = ".a";
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -749,7 +749,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = s;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             LIBRARY_STYLE = STATIC;
                             OTHER_CFLAGS = "    -DNDEBUG  ";
@@ -759,16 +759,16 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = RobotModel;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = MinSizeRel;
               };
-              6452B06452B06452B0000000 /* RelWithDebInfo */ = {
+              109C6A0109C6A0109C6A0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
-                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo;
+                            CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel/RelWithDebInfo;
                             EXECUTABLE_PREFIX = lib;
                             EXECUTABLE_SUFFIX = ".a";
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -777,7 +777,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 2;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             LIBRARY_STYLE = STATIC;
                             OTHER_CFLAGS = "        ";
@@ -787,13 +787,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = RobotModel;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = RelWithDebInfo;
               };
-              64D10064D10064D100000000 /* Debug */ = {
+              10A28C010A28C010A28C0000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -802,7 +802,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, QT_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -810,13 +810,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = install;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Debug;
               };
-              650990650990650990000000 /* Release */ = {
+              10A61F010A61F010A61F0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -825,7 +825,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -833,13 +833,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = install;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = Release;
               };
-              6541C06541C06541C0000000 /* MinSizeRel */ = {
+              10A9A4010A9A4010A9A40000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -848,7 +848,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -856,13 +856,13 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = install;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
                      name = MinSizeRel;
               };
-              6579F06579F06579F0000000 /* RelWithDebInfo */ = {
+              10AD29010AD29010AD290000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -871,7 +871,7 @@ exit 0";
                             GCC_OPTIMIZATION_LEVEL = 0;
                             GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)\"'", YARP_PRESENT, _REENTRANT, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
                             GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkin/src/VirtualSkinLibrary/RobotModel/debug, );
+                            HEADER_SEARCH_PATHS = (/Users/kail/Library/ace/ACE_wrappers, "/Users/kail/Library/yarp-2.2.6/src/libYARP_OS/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_sig/include", "/Users/kail/Library/yarp-2.2.6/src/libYARP_math/include", /opt/local/include, "/Users/kail/Library/yarp-2.2.6/src/libYARP_dev/include", "/Users/kail/Library/yarp-2.2.6/include", "/Users/kail/Library/FreeSOLID-3.5.6/include", "/Library/Frameworks/QtOpenGL.framework/Headers", "/Library/Frameworks/QtGui.framework/Headers", "/Library/Frameworks/QtXml.framework/Headers", "/Library/Frameworks/QtCore.framework/Headers", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/YarpFilter, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/debug, "/Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/..", /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/optimized, /Users/kail/imClever/dev/virtualSkinSOLID3/src/VirtualSkinLibrary/RobotModel/debug, );
                             INSTALL_PATH = "";
                             OTHER_CFLAGS = "  ";
                             OTHER_LDFLAGS = "";
@@ -879,7 +879,7 @@ exit 0";
                             PREBINDING = NO;
                             PRODUCT_NAME = install;
                             SECTORDER_FLAGS = "";
-                            SYMROOT = /Users/kail/imClever/dev/virtualSkin/xcode/src/VirtualSkinLibrary/RobotModel;
+                            SYMROOT = /Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/VirtualSkinLibrary/RobotModel;
                             USE_HEADERMAP = NO;
                             WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
                      };
@@ -888,51 +888,51 @@ exit 0";
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-              6013F06013F06013F0000000 /* Build configuration list for PBXProject  "RobotModel" */ = {
+              105638010563801056380000 /* Build configuration list for PBXProject  "RobotModel" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            601530601530601530000000 /* Debug */,
-                            6016E06016E06016E0000000 /* Release */,
-                            601920601920601920000000 /* MinSizeRel */,
-                            601AE0601AE0601AE0000000 /* RelWithDebInfo */,
+                            105650010565001056500000 /* Debug */,
+                            105669010566901056690000 /* Release */,
+                            10568E010568E010568E0000 /* MinSizeRel */,
+                            1056A501056A501056A50000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              603E70603E70603E70000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+              10591A010591A010591A0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            604420604420604420000000 /* Debug */,
-                            607CB0607CB0607CB0000000 /* Release */,
-                            60B47060B47060B470000000 /* MinSizeRel */,
-                            60ECA060ECA060ECA0000000 /* RelWithDebInfo */,
+                            105940010594001059400000 /* Debug */,
+                            105CCE0105CCE0105CCE0000 /* Release */,
+                            106057010605701060570000 /* MinSizeRel */,
+                            1063DC01063DC01063DC0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              639FB0639FB0639FB0000000 /* Build configuration list for PBXNativeTarget "RobotModel" */ = {
+              108F690108F690108F690000 /* Build configuration list for PBXNativeTarget "RobotModel" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            63B74063B74063B740000000 /* Debug */,
-                            63F44063F44063F440000000 /* Release */,
-                            641580641580641580000000 /* MinSizeRel */,
-                            6452B06452B06452B0000000 /* RelWithDebInfo */,
+                            1090E501090E501090E50000 /* Debug */,
+                            1094BC01094BC01094BC0000 /* Release */,
+                            1094E201094E201094E20000 /* MinSizeRel */,
+                            109C6A0109C6A0109C6A0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              64CBB064CBB064CBB0000000 /* Build configuration list for PBXAggregateTarget "install" */ = {
+              10A247010A247010A2470000 /* Build configuration list for PBXAggregateTarget "install" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            64D10064D10064D100000000 /* Debug */,
-                            650990650990650990000000 /* Release */,
-                            6541C06541C06541C0000000 /* MinSizeRel */,
-                            6579F06579F06579F0000000 /* RelWithDebInfo */,
+                            10A28C010A28C010A28C0000 /* Debug */,
+                            10A61F010A61F010A61F0000 /* Release */,
+                            10A9A4010A9A4010A9A40000 /* MinSizeRel */,
+                            10AD29010AD29010AD290000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
 /* End XCConfigurationList section */
        };
-       rootObject = 600BA0600BA0600BA0000000;
+       rootObject = 1055B401055B401055B40000;
 }

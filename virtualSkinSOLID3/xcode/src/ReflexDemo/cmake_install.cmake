@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kail/imClever/dev/virtualSkin/src/ReflexDemo
+# Install script for directory: /Users/kail/imClever/dev/virtualSkinSOLID3/src/ReflexDemo
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,38 +29,38 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/Debug/ReflexDemo")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/ReflexDemo/Debug/ReflexDemo")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       IF(CMAKE_INSTALL_DO_STRIP)
-        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       ENDIF(CMAKE_INSTALL_DO_STRIP)
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/Release/ReflexDemo")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/ReflexDemo/Release/ReflexDemo")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       IF(CMAKE_INSTALL_DO_STRIP)
-        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       ENDIF(CMAKE_INSTALL_DO_STRIP)
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/MinSizeRel/ReflexDemo")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/ReflexDemo/MinSizeRel/ReflexDemo")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       IF(CMAKE_INSTALL_DO_STRIP)
-        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       ENDIF(CMAKE_INSTALL_DO_STRIP)
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkin/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkin/xcode/src/ReflexDemo/RelWithDebInfo/ReflexDemo")
-    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo" AND
-       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+    FILE(INSTALL DESTINATION "/Users/kail/imClever/dev/virtualSkinSOLID3/bin" TYPE EXECUTABLE FILES "/Users/kail/imClever/dev/virtualSkinSOLID3/xcode/src/ReflexDemo/RelWithDebInfo/ReflexDemo")
+    IF(EXISTS "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo" AND
+       NOT IS_SYMLINK "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       IF(CMAKE_INSTALL_DO_STRIP)
-        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkin/bin/ReflexDemo")
+        EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/Users/kail/imClever/dev/virtualSkinSOLID3/bin/ReflexDemo")
       ENDIF(CMAKE_INSTALL_DO_STRIP)
     ENDIF()
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
