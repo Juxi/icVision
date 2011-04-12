@@ -1,0 +1,22 @@
+/*! \page xmlSpec Virtual Skin XML Specification
+
+\section How To Model a Robot
+
+The XML Specification used to model robots in Virtual Skin is based on the so called "Zero Reference Position" convention, which is much easier than the Denavit-Hartenberg convention.
+
+\verbatim
+Kinematic analysis of manipulators using the zero reference position description                                                               Gupta, K.C. (1986)
+\endverbatim
+
+There are two differences between the convention described in the above paper and the implementation in Virtual Skin.
+	-1. The displacements between joint axes need not be their mutual perpendicular
+	-2. Prismatic joints are not supported
+
+The idea behind the following XML specification, is that the user should describe the robot's skeleton using <joint> and <link> tags (more on those below). All vectors (joint axes and link axes) can be specified using the chosen world coordinate system, as it is aligned with all local coordinate systems. The hierarchy of the XML tags implies the arrangement of the joints and links, whereby the links (the bones of the skeleton) are positioned tip-to-tail with the joints in between them. 
+
+Cylindrical bounding volumes can be appended to links and joints automatically by providing a radius parameter. If the radius is omitted or set to zero, no bounding volume is created. Alternatively, bounding volumes can be created manually, by inserting <sphere>, <cylinder> and <box> tags into the XML hierarchy.
+
+Finally, the XML specification also provides some structure for organizing the joints. The <motor> tag can (and must) be used to 
+
+2011-01-01, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a>
+*/
