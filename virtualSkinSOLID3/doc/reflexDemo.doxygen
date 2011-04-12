@@ -1,0 +1,109 @@
+/*! \page reflexdemo Reflex Demo Tutorial
+
+In this tutorial we will run the Reflex Demonstration in conjunction with the iCub Simulator.
+
+\section yarp YARP
+
+Start your YARP server somewhere on the network (can also be on the local machine where you intend to run Virtual Skin)
+\verbatim yarp server \endverbatim
+
+Make sure each machine you intend to use in your experiment can see it
+\verbatim yarp where \endverbatim
+
+If you do not see the IP address of the machine running your YARP server, try:
+\verbatim yarp detect --write \endverbatim
+For more help on YARP, read the <a href="http://eris.liralab.it/yarpdoc/index.html">YARP documentation</a>.
+
+\section sim iCub Simulator
+
+Start the simulator
+\verbatim cd YOUR_ICUB_REPOSITORY_ROOT_DIR/main/bin \endverbatim
+\verbatim ./iCub_SIM \endverbatim
+For more help, read the <a href="http://eris.liralab.it/wiki/ODE">iCub Simulator Installation guide</a> and <a href="http://eris.liralab.it/wiki/Simulator_README">iCub Simulator README</a>.
+
+Home the robot using the robotMotorGui:
+\verbatim cd YOUR_ICUB_REPOSITORY_ROOT_DIR/main/bin \endverbatim
+\verbatim ./robotMotorGui \endverbatim
+
+In the GUI, do the following:
+- Uncheck 'left_leg' and 'right_leg'
+- Enter \c icubSim in the textbox and click the button
+- At the top of the robotMotorGui window, click the tab labeled 'all'
+- Click the button 'Home ALL Parts'
+.
+The robot should move to the home position.
+
+\note If you forget to do this, there will be collisions when you start the reflex demonstration. This is desirable behavior, as we have provided a very conservative robot model with very large bounding volumes around the iCub's body parts.
+
+\section skin Reflex Demo
+
+The following commands assume that you have compiled the source code in the directory \c YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/build, that you have run \c make then \c make \c install in that directory, and that you have not modified the directory \c YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/xml or its contents.
+
+Start the Reflex demonstration:
+\verbatim cd YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/bin \endverbatim
+\verbatim ./reflex --visualize --file ../xml/iCubSim.xml \endverbatim
+
+\note If the \c reflex command returns 'device not found' errors, check that ports associated with the robot name in your XML file are actually available on the network.
+
+\note If you were to use '--file ../xml/iCub.xml' you would connect to the real iCub hardware. 
+
+Now you should see a window pop up with a model of the iCub upper-body in it. Read the output in the console. You have just created the following YARP ports:
+
+- /icubSimF/torso/command:i
+- /icubSimF/torso/state:i
+- /icubSimF/torso/rpc:i
+- /icubSimF/head/command:i
+- /icubSimF/head/state:i
+- /icubSimF/head/rpc:i
+- /icubSimF/right_arm/command:i
+- /icubSimF/right_arm/state:i
+- /icubSimF/right_arm/rpc:i
+- /icubSimF/left_arm/command:i
+- /icubSimF/left_arm/state:i
+- /icubSimF/left_arm/rpc:i
+
+These are filtered ports (designated by the "F" at the end of the robot name), which forward information to and from their counterparts, the ports with similar names but no "F", which are associated with the hardware or simulator. The robot models provided with this distribution of Virtual Skin (in this case '../xml/iCubSim.xml') include only the iCub's upper body. Therefore, filters are only created for the control boards: \c torso, \c head, \c left_arm and \c right_arm. For more info on the YarpFilter, check out \ref filter.
+
+Connecting your control program to these filtered ports will prevent the robot from colliding with itself or with objects modeled in the environment. Control commands will only be forwarded when the robot model (RobotModel) is in a safe configuration. As soon as the robot model collides with something, the filter is cut such that it no longer forwards incomming commands (YarpFilter), the robot is stopped, and a user-defined response to the collision is executed (ReflexDemo).
+
+As long as the bounding volumes of the robot model are larger than the actual parts they envelop, and the physical robot is calibrated correctly, detected collision events precede actual physical collisions. However this does not guarantee that the robot can be stopped in time to prevent the physical collision entirely. Virtual Skin is not a dynamic simulator and therefore does not model momentum. This design choice is based on the following two facts:
+
+	- In order to protect a robot in real-time, speed is critical. The kinematic model inside virtual skin is frugal and therefore fast.
+	- The dynamics of a relatively light weight, cable driven robot (such as the iCub) can be rather nonlinear. Even if they were modeled, theoretical guarantees are not likely to hold for the real robot.
+
+That being said, Virtual Skin has been tested on the iCub robot, and it is very effective at preventing physical collisions from happening. The robot model provided is very conservative, and the user will certainly want to reduce the volumes of some of the bounding volumes to allow the robot come closer to things. It is simply recommended to do this in small steps and to start moving the robot slowly, then speed it up as you gain confidence that your new bounding volumes are sufficient for your application.
+
+\note
+- The files \c YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/xml/iCub.xml and \c YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/xml/iCubSim.xml are exactly the same except for the robot name, and the kinematics and geometry therein reflect the real iCub hardware. The simulator is quite a bit different from the real iCub, so when you run the above demonstration, it will not effectively prevent the simulated iCub from colliding with itself.
+- Since the filtered ports provide transparent access to the underlying YARP ControlBoardInterface, control programs in the iCub repository can easily operate through the ControlBoardFilter.  For example, try connecting \c robotMotorGui to the filtered ports by specifying the robot name 'icubSimF'. Remember not to connect to the legs, as there are no filtered ports \c /icubSimF/left_leg/* and \c /icubSimF/right_leg/*. One caveat here is that programs in the repository may behave strangely when the filter is cut, as position move and velocity move commands (from YARP's IPositionControl and IVelocityControl interfaces) will return \c false during that time. 
+
+In addition to cutting off the client's control of the robot, in the Reflex Demo, collision events trigger a reflexive behavior to return the robot to a previous safe configuration. Only when the robot has reached this safe pose do the filtered ports begin to forward the client's control commands again.
+
+\section babbler iCubBabbler
+
+In order to try out the Reflex Demo...
+
+Start the iCubBabbler:
+\verbatim cd YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/bin \endverbatim
+\verbatim ./iCubBabble --robot icubSimF [--type position | velocity] [--period (float seconds)] [--speed (float)] [--hands] \endverbatim
+
+\note If you use the babbler with a real robot, make sure that you ALWAYS connect it to ports filtered by Virtual Skin. If you connect the babbler directly to a robot (by specifying "--robot icub") you WILL cause the robot to collide violently with itself or surrounding objects.
+
+Watch the simulated iCub move around randomly and bump into himself. When collision events occur, the involved geometries turn red in the robot model visualization, the filtered ports stop forwarding control commands and the reflex behavior is executed. The iCubBabbler does not know anything about the state of the robot. It simply sees that its control commands fail during certain time intervals.
+
+In velocity babbling mode, successful (forwarded) commands are represented as "." whereas failed (unforwarded or ignored) commands are represented as "x" in the terminal output. Similarly, in position babbling mode a ":-)" following the command indicates success whereas a ":-(" indicates failure.
+
+A few words on the command line options:
+- \b --robot is followed by the name of the robot (ports) you want to connect to. This will be \c icubF, \c icubSimF or \c icubSim. If you connect the babbler to \c icub, you WILL crash the robot.
+- \b --type is followed by \c position or \c velocity, which indicates whether the babbler should send position or velocity control commands. If omitted, velocity commands will be sent by default.
+- \b --period is followed by a floating point number of seconds, the time babbler waits between random commands.
+- \b --speed controls the maximum speed of the random motions. Should be on the interval [0 100]. The babbler does not check this.
+- \b --hands controls whether the thumb and fingers are also moved during babbling.
+
+\section next Next Steps
+
+Connect to the \ref yarpPorts to get the status of the port filter, get detailed collision information, as well as add and remove geometries from the world model. 
+
+2011-01-01, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a>
+
+ */

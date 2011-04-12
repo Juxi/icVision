@@ -1,0 +1,59 @@
+/*! \mainpage Welcome to...
+
+\image html roadmap.png "" 
+
+\section intro Introduction
+
+The idea behind Virtual Skin is that a cartesian space representation of the geometry of a robot's pose, which is light-weight and fast, is a useful thing to have. Such a representation, driven by streams of encoder positions from the real hardware, can be used to protect a robot from damage resulting from collision with itself or with immovable objects in the environment. Moreover, it can be used offline to facilitate motion planning by searching for feasible motions much faster than real-time. Whether run online or offline, Virtual Skin reports collision information in bodypart-centric cartesian coordinates, which provides a pose-invariant representation of the location of collision events on the robot's body.
+
+
+\section contents What's In The Box
+
+- \b libVirtualSkin.a - The Virtual Skin static library includes libRobotModel.a and libYarpFilter.a
+	- \b libRobotModel.a - a static library for building and moving a kinematic robot model
+	- \b libYarpFilter.a - a static library containing a port filter for YARP communication channels (contributed by Gregor Kaufmann - also available as part of "idsiaYarpModules")
+- \b ReflexDemo - an executable that demonstrates use of Virtual Skin. It tracks a YARP robot (currently 'iCub' or 'iCubSim' but you can model any robot quickly and easily in xml) and reports collision events as described above. In case of collision, it takes control away from the user, executes a reflexive response to a previous collision free pose, then returns control to the user.
+- \b iCubBabble - a simple control program for the iCub robot (only) that issues random position or velocity commands.
+
+\section upcoming Coming Soon
+
+- A new YARP RPC interface to move the robot model directly using position and velocity commands (facilitates planner-mode, decoupling the model from an external robot or simulated robot)
+- Collision events reported in a 2D parameterized "Skin Space" that preserves neighborhood information for adjacent body parts
+- Cartesian positions/orientations of arbitrary body parts published on the network via YARP
+
+
+\section install Installation
+
+-# Make sure you have all dependencies installed and working.
+	- CMake >= 2.6 			<a href="http://www.cmake.org/">http://www.cmake.org/</a>
+	- YARP >= 2.6 			<a href="http://eris.liralab.it/yarp/">http://eris.liralab.it/yarp/</a>
+	- Qt >= 4 			<a href="http://qt.nokia.com/products/">http://qt.nokia.com/products/</a>
+	- OpenGL (comes with Qt) 	<a href="http://www.opengl.org/">http://www.opengl.org/</a>
+	- FreeSOLID 			<a href="http://www.win.tue.nl/~gino/solid/">http://www.win.tue.nl/~gino/solid/</a>
+-# Clone the IDSIA IM-CLeVeR GIT repository using the following command:
+	\verbatim git clone http://git.ti-edu.ch/repogit/IM-CLeVeR.git PATH_TO_YOUR_LOCAL_GIT_REPOSITORY \endverbatim
+	\note The directory PATH_TO_YOUR_LOCAL_GIT_REPOSITORY should not exist yet... it will be created.
+	\note Questions concerning the GIT repository should be directed to - <a href="mailto:varun@idsia.ch">varun@idsia.ch</a>
+-# From PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin do the following:
+	- \verbatim mkdir build \endverbatim
+	- \verbatim cd build \endverbatim
+	- \verbatim cmake .. \endverbatim
+	- \verbatim (optional) ccmake .. \endverbatim
+	for tweaking build options i.e. set build type to DEBUG, or to set paths to dependencies if cmake fails to find them
+	- \verbatim make \endverbatim
+	- \verbatim (optional) make install \endverbatim
+	installs build products to:
+		- PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/bin
+		- PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/lib
+		- PATH_TO_YOUR_LOCAL_GIT_REPOSITORY/virtualSkin/include
+		.
+	.
+.
+
+Once you have everything installed, you can try out the \ref reflexdemo
+
+This project was developed during the fist year of my PhD at IDSIA's robotics lab.
+
+2011-01-01, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a>
+
+ */
