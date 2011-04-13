@@ -7,17 +7,19 @@
 #include "box.h"
 #include "displmatrix.h"
 #include "robotmodelexception.h"
+#include "marker.h"
 
 using namespace std;
 using namespace RobotModel;
 
 ZPHandler::ZPHandler(Robot *robot) : robot(robot)
 {
-    bodyPart = 0;
-    motor = 0;
-    node = 0;
-    //object = 0;
-    metKinTreeTag = false;
+	bodyPart = 0;
+	motor = 0;
+	node = 0;
+	//object = 0;
+	metKinTreeTag = false;
+	markerCounter = 1;
 }
 
 bool ZPHandler::startElement( const QString & /* namespaceURI */,
@@ -188,6 +190,30 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 									   attributes.value("pz").toDouble() );
 		primitive->translate(position);
     }
+
+	/*******************************************************************************
+	*** HANDLE MARKERS                                                           ***
+	*******************************************************************************/
+	else if ( QString::compare(qName,"marker",caseSensitivity) == 0)
+	{
+		if (!node)
+		{
+			errorStr = "Encountered <marker/>, outside of <link> and <joint>.";
+			return false;
+		}
+
+		// obtain information
+		QString name = attributes.value("name");
+		if (name == "")
+		{
+			name = "marker" + QString(markerCounter);
+			markerCounter++;
+		}
+
+		// create the marker, attach it to the node, and make it known to the robot
+		Marker* marker = new Marker(node, name);
+		robot->markers.push_back(marker);
+	}
 
     else { printf("WARNING: Encountered unknown tag: %s ...skipping it.\n",qName.toStdString().c_str()); }
 

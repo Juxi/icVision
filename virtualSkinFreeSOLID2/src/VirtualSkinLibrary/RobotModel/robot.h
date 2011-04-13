@@ -15,6 +15,9 @@
 #include "bodyPart.h"
 #include "motor.h"
 #include "link.h"
+#include "marker.h"
+#include "robotobservation.h"
+
 
 namespace RobotModel { class Robot; }
 	
@@ -33,9 +36,9 @@ public:
 	Robot();		//!< Nothing to do here
 	~Robot();		//!< Nothing to do here
 	
-	bool open( const QString& fileName );			//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
-	bool isOpen() const	{ return isConfigured; }	//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
-	void close();									//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
+	bool open(const QString& fileName, bool verbose = true);			//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
+	bool isOpen() const	{ return isConfigured; }						//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
+	void close();														//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	
 	// These are generic 'get' functions that may be useful
 	const QString& getName() const { return robotName; }				//!< Get the name of the Robot
@@ -52,6 +55,8 @@ public:
 	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
 	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
 	
+signals:
+	void observation(RobotObservation obs);								//!< make new marker positions and orientations known
 
 public slots:
 	void setEncoderPosition( qreal pos = 0 );							//!< Set the position of every joint on the robot.
@@ -65,15 +70,16 @@ public slots:
 																		 Motors are numbered as they are encountered by the parser (see configure()).
 																		 To see how Motors and BodyParts are numbered, try looking at the output of printJoints() and printBodyParts(). */
 	
-	void updatePose();		//!< Do forward kinematics, pushing results down the link/joint trees
-	void home();			//!< Set the position of the robot to the home position (also calls updatePose())
+	void updatePose();					//!< Do forward kinematics, pushing results down the link/joint trees
+	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
 	
 private:
 	QString					robotName;	//!< Human readable identifier for the robot
 	QVector<BodyPart*>		partList;	//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
 	QVector<Motor*>			motorList;	//!< "Motors" serve as an interface to set the position of one or more joints
 	QVector<KinTreeNode*>	tree;		//!< root nodes of the link/joint trees
-	
+	QVector<Marker*>		markers;	//!< list of markers
+
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!< Indicates whether 
 	

@@ -8,6 +8,7 @@ Robot::Robot( Model* m ) : model(m), robotName("unNamedRobot"), numLinks(0), isC
 {
 	if ( !m ) { throw RobotModelException("The Robot constructor requires a pointer to a valid Model."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
+	qRegisterMetaType< RobotObservation >("RobotObservation");
 }
 Robot::~Robot()
 {
@@ -38,7 +39,7 @@ void Robot::close()
 	isConfigured = false;
 }
 
-bool Robot::open( const QString& fileName)
+bool Robot::open(const QString& fileName, bool verbose)
 {
     ZPHandler handler(this);
     QXmlSimpleReader reader;
@@ -60,10 +61,10 @@ bool Robot::open( const QString& fileName)
 		return false;
 	}
 	
-	printf("Created Robot: %s\n",getName().toStdString().c_str());
+	if (verbose) printf("Created Robot: %s\n",getName().toStdString().c_str());
 	
 	filterCollisionPairs();
-	home();
+	home(verbose);
 	
 	return isConfigured = true;
 }
@@ -77,12 +78,12 @@ void Robot::filterCollisionPairs()
     }
 }
 
-void Robot::home()
+void Robot::home(bool verbose)
 {
-	printf("Going to home position.\n");
+	if (verbose) printf("Going to home position.\n");
 	QVector<Motor*>::iterator j;
     for ( j=motorList.begin(); j!=motorList.end(); ++j ) {
-        (*j)->home();
+        (*j)->home(verbose);
     }
 	updatePose();
 }
@@ -135,6 +136,21 @@ void Robot::updatePose()
         (*i)->update(T);
     }
 	emit changedState();
+
+	unsigned int m, mc = markers.size();
+	if (mc > 0)
+	{
+		// observe the markers
+		RobotObservation obs;
+		obs.m_markerName.resize(mc);
+		obs.m_markerConfiguration.resize(mc);
+		for (m=0; m<mc; m++)
+		{
+			obs.m_markerName[m] = markers[m]->name();
+			obs.m_markerConfiguration[m] = markers[m]->object()->getT();
+		}
+		emit observation(obs);
+	}
 }
 
 void Robot::render()

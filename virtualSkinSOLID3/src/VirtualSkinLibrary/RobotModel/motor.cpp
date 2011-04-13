@@ -52,10 +52,10 @@ void Motor::setNormPos( qreal pos )
 	normalPosition = pos;
 	setJointPositions();
 }
-void Motor::home()
+void Motor::home(bool verbose)
 {
 	setEncPos(homePosition);
-	printf("Set Motor %s to position %f.\n",name().toStdString().c_str(),encoderPosition);
+	if (verbose) printf("Set Motor %s to position %f.\n",name().toStdString().c_str(),encoderPosition);
 }
 
 void Motor::setJointPositions()

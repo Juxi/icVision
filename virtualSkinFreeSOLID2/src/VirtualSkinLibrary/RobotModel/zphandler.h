@@ -53,7 +53,8 @@ private:
 	QString currentText;
 	QString errorStr;
 	bool	metKinTreeTag;
-	
+
+	unsigned int markerCounter;
 	static const Qt::CaseSensitivity caseSensitivity = Qt::CaseInsensitive;	
 	
 };

@@ -86,6 +86,8 @@ SET ( hdr_files	skinWindow.h
 				displmatrix.h
 				displaylist.h
 				model.h
+				marker.h
+				robotobservation.h
 )
 
 SET ( QT_MOC_FILES 	skinWindow.h

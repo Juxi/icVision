@@ -66,7 +66,7 @@ public:
 																	 either the maximum or minimum value will be used as is appropriate */ 
 	void setNormPos( qreal );									//!< Sets the normalPosition directly
 																/**< Values outside the interval [0,1] will be replaced by either 0 or 1 as is appropriate */
-	void home();												//!< Sets encoderPosition = homePosition
+	void home(bool verbose = true);								//!< Sets encoderPosition = homePosition
 
 private:
 	

@@ -47,7 +47,7 @@ int Model::computePose()
 	
 	dtTest();				// do collision detection
 	
-	//semit newStateReady();
+	// emit newStateReady();
 	emit collisions(col_count);
 	
 	//if ( col_count ) { printf("%i Collisions!\n", col_count); }
