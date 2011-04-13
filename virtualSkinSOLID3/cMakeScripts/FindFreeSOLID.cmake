@@ -40,30 +40,27 @@ IF( FREE_SOLID_DIR )
 						PATHS	${FREE_SOLID_DIR}/include
 						NO_DEFAULT_PATH
 	)
-	FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	FreeSOLID
-							solid
+	FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 	solid
 						PATHS	${FREE_SOLID_DIR}/libsolid/.libs
 							${FREE_SOLID_DIR}/src/.libs
 						NO_DEFAULT_PATH
 	)
 ELSE( FREE_SOLID_DIR )
-	FIND_PATH( FREE_SOLID_INCLUDE_DIR 	NAMES 		/SOLID/solid.h
-								/SOLID/broad.h
-								/SOLID/types.h		
-						PATHS 		/usr/local/include
+	FIND_PATH( FREE_SOLID_INCLUDE_DIR 	NAMES 		/SOLID.h
+								/SOLID_broad.h
+								/SOLID_types.h		
+					PATHS 		/usr/local/include
+								/usr/local/include/SOLID
 								/usr/include
 								/include
 	)
-	FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 		FreeSOLID
-								solid
+	FIND_LIBRARY( FREE_SOLID_LIBRARY 	NAMES 		solid
 						PATHS 		/opt/local/lib
 								/opt/lib
 								/usr/local/lib
 								/usr/lib
 								/lib
 						PATH_SUFFIXES	FreeSOLID-3.5.6
-								FreeSOLID-2.1.1
-								FreeSOLID
 	)
 ENDIF( FREE_SOLID_DIR )
 
