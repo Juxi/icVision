@@ -1,0 +1,56 @@
+/*!
+
+\section intro PlanningDemo
+
+\par
+The PlanningDemo application uses the virtual skin forward
+kinematics model for trajectory planning. It does not involve
+YARP, but instead directly communicates with the RobotModel
+library.
+
+\par
+Starting the program results in a little help text, explaining
+the two modes of operation. The first more, "plan", results in
+a run of the planner. In the example, the planner tries to move
+the hand (which is defined as a marker in the xml file describing
+the iCub robot) to a pre-specified position within an accuracy of
+one millimeter. The trajectory is supposed to be free of
+self-collisions and collisions with the environment. For testing
+purposes, a sphere-shaped obstacle is placed in between the home
+position of the arm and the target position. The best trajectory
+found is stored to disk, into a file called "coeff.bin",
+containing 14 double precision numbers.
+
+\par
+In its second mode, "show", the application reads the previously
+stored file "coeff.bin" and visualizes the trajectory.
+The scene contains the iCub robot, the spherical obstacle, and a
+small sphere indicating the target position. Of course, collisions
+of the hand with the target position are not penalized during the
+search process, since this is only for visualization purposes.
+
+\par
+The demonstration program uses an evolutionary algorithm to
+directly search the space of trajectories. For this purpose, the
+algorithm parameterizes trajectories as differentiable functions
+from the unit interval (time) into joint space (the seven first
+joints of the right arm are used). Each function is a sum of
+Gaussian basis functions, and the evolutionary algorithm searches
+the space of coefficients of these basis functions. In its
+original formulation the planning algorithm is far more involved,
+searching nested spaces of increasing complexity. However, for
+most reaching tasks (including the present simple setup) the
+limited setup with only two basis functions per joint turns out
+to be more than sufficient.
+
+\par
+Notice that the planning is based of kinematics only. Executing
+the trajectory on the real robot or even in the simulator requires
+a (simple) controller to deal with system <it>dynamics</it>. This
+contoller basically needs to perform corrections to keep the robot
+on or close to the parameterized trajectory.
+
+\par
+2011-04-13, Tobias Glasmachers
+
+*/

@@ -1,9 +1,22 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef CONTROLTHREAD_H_
 #define CONTROLTHREAD_H_
 
 #include <QThread>
 #include "fwdkin.h"
+
+
+//!
+//! thread executing the trajectory
+//!
 
 
 class ControlThread : public QThread
@@ -25,3 +38,4 @@ private:
 
 
 #endif
+/** @} */

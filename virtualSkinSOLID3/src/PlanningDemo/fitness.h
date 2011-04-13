@@ -1,6 +1,19 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef FITNESS_H
 #define FITNESS_H
+
+
+//!
+//! fitness computation for evolutionary search
+//!
 
 
 #include "fwdkin.h"
@@ -55,3 +68,4 @@ protected:
 
 
 #endif
+/** @} */

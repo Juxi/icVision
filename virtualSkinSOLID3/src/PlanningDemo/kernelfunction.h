@@ -1,6 +1,19 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef KERNELFUNCTION_H
 #define KERNELFUNCTION_H
+
+
+//! Gaussian kernel functions, functions composed
+//! of these basis functions, and functions with
+//! multiple components
 
 
 ////////////////////////////////////////////////////////////
@@ -72,3 +85,5 @@ double inner_product(unsigned int i, unsigned int j);
 
 
 #endif
+/** @} */
+

@@ -1,6 +1,22 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef ELITISTXNES_H
 #define ELITISTXNES_H
+
+
+//!
+//! (1+1)-xNES algorithm, see
+//! T. Glasmachers, T. Schaul, and J. Schmidhuber<br>
+//! A Natural Evolution Strategy for Multi-Objective Optimization.<br>
+//! Parallel Problem Solving from Nature (PPSN) XI, 2010.<br>
+//!
 
 
 #include "rng.h"
@@ -58,3 +74,5 @@ protected:
 
 
 #endif
+/** @} */
+

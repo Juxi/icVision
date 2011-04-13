@@ -1,3 +1,11 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef MATRIX_H
 #define MATRIX_H
@@ -7,13 +15,13 @@
 #include "vector.h"
 
 ////////////////////////////////////////////////////////////
-// Real matrix, supporting basic linear algebra operations
-// as well as eigen-decomposition, singular value decomposition,
-// and operations building thereon, such as matrix exponential.
-//
-// NOTE: Eigen-decomposinion, matix square root and exponential
-//       assume a SYMMETRIC square matrix. For non-symmetric
-//       matrices the result is undefined!
+//! Real matrix, supporting basic linear algebra operations
+//! as well as eigen-decomposition, singular value decomposition,
+//! and operations building thereon, such as matrix exponential.
+//!
+//! NOTE: Eigen-decomposinion, matix square root and exponential
+//!       assume a SYMMETRIC square matrix. For non-symmetric
+//!       matrices the result is undefined!
 //
 class Matrix
 {
@@ -881,3 +889,5 @@ protected:
 
 
 #endif
+/** @} */
+

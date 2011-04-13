@@ -1,3 +1,11 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef FwdKin_H
 #define FwdKin_H
@@ -8,6 +16,9 @@
 using namespace RobotModel;
 
 
+//!
+//! interface between planning code and robot model
+//!
 class FwdKin : public QObject
 {
 	Q_OBJECT
@@ -33,3 +44,5 @@ protected:
 
 
 #endif
+/** @} */
+

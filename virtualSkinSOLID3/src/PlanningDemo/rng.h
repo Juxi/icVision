@@ -1,3 +1,11 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef _rng_H_
 #define _rng_H_
@@ -15,7 +23,7 @@
 #include "matrix.h"
 
 
-// random number generator
+//! random number generator encapsulation
 class Rng
 {
 public:
@@ -91,3 +99,5 @@ extern Rng rng;
 
 
 #endif
+/** @} */
+

@@ -1,3 +1,11 @@
+/*******************************************************************
+ ***             Copyright (C) 2011 Tobias Glasmachers           ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ******************************************************************/
+
+/** \addtogroup PlanningDemo
+ *	@{
+ */
 
 #ifndef VECTOR_H
 #define VECTOR_H
@@ -10,8 +18,8 @@
 #include <stdio.h>
 
 ////////////////////////////////////////////////////////////
-// Class representing a real vector, or tuple, of doubles,
-// supportling standard linear algebra operations.
+//! Class representing a real vector, or tuple, of doubles,
+//! supportling standard linear algebra operations.
 //
 class Vector
 {
@@ -37,10 +45,6 @@ public:
 	Vector(Vector const& other)
 	: m_data(other.m_data)
 	{ }
-
-// 	Vector(std::vector<double> const& stdvec)
-// 	: m_data(stdvec)
-// 	{ }
 
 	void operator = (Vector const& other)
 	{ m_data = other.m_data; }
@@ -159,3 +163,5 @@ protected:
 
 
 #endif
+/** @} */
+
