@@ -1,0 +1,738 @@
+<html lang="en">
+<head>
+<title>Usage - Untitled</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Untitled">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Installation.html#Installation" title="Installation">
+<link rel="next" href="Projects.html#Projects" title="Projects">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Usage"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Projects.html#Projects">Projects</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Installation.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">4 The SOLID API</h2>
+
+<p>
+The SOLID API is a set of C functions. All API functions, also referred to as
+commands, use arguments that have primitive types, such as, integers, floats,
+and arrays of floats, or handles (type-mangled pointers) to internal objects
+of SOLID. The types <code>DT_Scalar</code>, <code>DT_Vector</code> and <code>DT_Quaternion</code> are simply
+typedefs:
+<pre class="example">     
+     typedef float     DT_Scalar; 
+     typedef DT_Scalar DT_Vector3[3]; 
+     typedef DT_Scalar DT_Quaternion[4]; 
+     
+</pre>
+   <p>The MT C++ classes can be used for representing geometric data such as vectors
+and quaternions as they are implicitly casted to arrays of floats, however the
+use of these classes is not required for calling SOLID functions.
+SOLID API functions can be called using your own or third-party 3D geometry
+objects if you stick with the following rules:
+     <ul>
+
+<li>All used scalar types are of the type <code>float</code>.
+
+<li>Quaternions store their imaginary vector part before the real scalar
+part. Thus, for an array <code>float q[4]</code> that represents a quaternion,
+<code>q[3]</code> must be the scalar part.
+
+<li>Transformations are specified using arrays of 16 floating-point numbers
+representing a 4x4 column-major matrix as used in OpenGL. This matrix representation is
+discussed below.
+
+
+</ul>
+   
+
+<h3 class="section">4.1 Building Shapes</h3>
+
+<p>
+The commands for creating and destroying shapes are 
+<pre class="example">     
+     DT_ShapeHandle DT_NewBox(DT_Scalar x, DT_Scalar y, DT_Scalar z);
+     DT_ShapeHandle DT_NewCone(DT_Scalar radius, DT_Scalar height);
+     DT_ShapeHandle DT_NewCylinder(DT_Scalar radius, DT_Scalar height);
+     DT_ShapeHandle DT_NewSphere(DT_Scalar radius);
+     DT_ShapeHandle DT_NewPoint(const DT_Vector3 point); 
+     DT_ShapeHandle DT_NewLineSegment(const DT_Vector3 source, 
+                                      const DT_Vector3 target);
+     
+     DT_ShapeHandle DT_NewMinkowski(DT_ShapeHandle shape1, 
+                                    DT_ShapeHandle shape2);
+     DT_ShapeHandle DT_NewHull(DT_ShapeHandle shape1, 
+                               DT_ShapeHandle shape2);
+     
+     void           DT_DeleteShape(DT_ShapeHandle shape);
+     
+</pre>
+   <p>Shapes are referred to by values of <code>DT_ShapeHandle</code>. 
+The command <code>DT_NewBox</code> creates a rectangular parallelepiped centered
+at the origin and aligned with the axes of the shape's local coordinate system.
+The parameters specify its extent along the respective coordinate axes.
+The commands <code>DT_NewCone</code> and <code>DT_NewCylinder</code> create respectively a
+cone and a cylinder centered
+at the origin and whose central axis is aligned with the y-axis of the
+local coordinate system.
+The cone's apex is at y = height / 2. 
+The command <code>DT_NewSphere</code> creates a sphere centered at the origin of
+the local coordinate system.
+The command <code>DT_NewPoint</code> creates a single point. 
+The command <code>DT_NewLineSegment</code> creates a single line segment in a
+similar way.
+
+Any pair of convex shapes (including general polytopes) can be combined to
+form compound shapes using the commands <code>DT_NewMinkowski</code> and
+<code>DT_NewHull</code>.
+The command <code>DT_NewMinkowski</code> `adds' the two shapes by sweeping one
+shape along the other. For instance, the Minkowski addition of a sphere and a
+line segment creates a hot dog. 
+The command <code>DT_NewHull</code> creates a shape that represents the exact convex
+hull of the two shapes.
+
+Complex shape types composed of simple polytopes (polytope soups) are
+created using the 
+<code>DT_NewComplexShape</code> command.
+Here, a simple polytope is a d-dimensional polytopes, where
+d is at most 3. 
+A simple d-polytope can be a simplex (point, line segment, triangle,
+tetrahedron), a convex polygon, or a convex polyhedron.
+
+There are no topological constraints on the set of vertices of a polytope.
+In particular, the vertices of a polytope need not be affinely independent,
+and need not be extreme vertices of the convex hull.
+However, convex polytopes with many vertices may deteriorate the performance.
+Such complex polytopes should be created using the <code>DT_NewPolytope</code> command.
+Make sure that in that case, SOLID is built using Qhull.
+
+For constructing complex shapes the following
+commands are used:  
+<pre class="example">     DT_VertexBaseHandle DT_NewVertexBase(const void *pointer, 
+                                          DT_Size stride);
+     void DT_DeleteVertexBase(DT_VertexBaseHandle vertexBase);	
+     void DT_ChangeVertexBase(DT_VertexBaseHandle vertexBase, 
+                              const void *pointer);
+     
+     DT_ShapeHandle DT_NewComplexShape(DT_VertexBaseHandle vertexBase);
+     void           DT_EndComplexShape();
+     
+     DT_ShapeHandle DT_NewPolytope(DT_VertexBaseHandle vertexBase);
+     void           DT_EndPolytope();
+     
+     void DT_Begin();
+     void DT_End();
+     
+     void DT_Vertex(const DT_Vector3 vertex);
+     void DT_VertexIndex(DT_Index index);
+     
+     void DT_VertexIndices(DT_Count count, const DT_Index *indices);
+     void DT_VertexRange(DT_Index first, DT_Count count); 
+     
+</pre>
+   <p>A d-polytope is specified by enumerating its vertices. This can be done
+in two ways. In the first way, the vertices are specified by value,
+using the <code>DT_Vertex</code> command. The following example shows how the
+faces of a pyramid are specified.   
+<pre class="example">     
+     DT_Vector3 float verts[] = { 
+     		   {  1.0f,  0.0f,  1.0f },
+     		   {  1.0f,  0.0f, -1.0f },
+     		   { -1.0f,  0.0f, -1.0f }, 
+     		   { -1.0f,  0.0f,  1.0f },
+     		   {  0.0f, 1.27f,  0.0f }
+     };
+     
+     DT_ShapeHandle pyramid = DT_NewComplexShape(NULL);
+     
+     DT_Begin();
+     DT_Vertex(verts[0]); 
+     DT_Vertex(verts[1]); 
+     DT_Vertex(verts[2]); 
+     DT_Vertex(verts[3]);
+     DT_End();
+     
+     DT_Begin();
+     DT_Vertex(verts[0]); 
+     DT_Vertex(verts[1]); 
+     DT_Vertex(verts[4]); 
+     DT_End();
+     
+     ...
+     
+     DT_EndComplexShape();
+     
+</pre>
+   <p>Here, an argument of <code>NULL</code> in <code>DT_NewComplexShape</code> denotes that the
+complex shape does not use an external vertex array.
+
+In the second method, the vertices are referred to by indices. 
+For each complex shape, we specify a single array of vertices.
+Vertex arrays are maintained by the client application and can be
+accessed directly by SOLID. 
+Vertex arrays are accessed via vertex bases.
+The command <code>DT_NewVertexBase</code> creates a vertex base for 
+the array given by the argument <code>pointer</code>. 
+The client must maintain vertex data in single-precision floating-point
+format.
+The client is free to store vertex data using arbitrary spacing
+in-between the individual array items.   
+The spacing is specified using the <code>DT_Size stride</code> parameter.
+For instance, the client maintains an array of vertices of the type:
+<pre class="example">        
+     struct Vertex {
+         float xyz[3];
+         float uv[2];
+         float normal[3];
+     };
+     
+     struct Vertex verts[NUM_VERTICES];
+     
+</pre>
+   <p>When specifying a complex shape you can use this data as follows
+<pre class="example">     
+     DT_VertexBaseHandle base = DT_NewVertexBase(verts[0].xyz, 
+                                                 sizeof(struct Vertex));
+     
+</pre>
+   <p>A stride of zero denotes that the vertex coordinate data is packed in a
+separate array, thus
+<pre class="example">     
+     DT_Vector3 verts[NUM_VERTICES];
+     
+     DT_VertexBaseHandle base = DT_NewVertexBase(verts[0], 0);
+     
+</pre>
+   <p>Each time the vertices are updated, or a new vertex base is assigned,
+to a complex shape, for instance, when using a deformable triangle mesh,
+the client needs to notify SOLID of a changed vertex array by calling 
+<code>DT_ChangeVertexBase</code>. 
+We discuss the use of this command further on.
+
+The handle to the vertex base is passed as argument to <code>DT_NewComplexShape</code>.
+The command <code>DT_VertexIndex</code> is used for
+specifying vertices. See the following example:
+<pre class="example">     
+     DT_ShapeHandle pyramid = DT_NewComplexShape(base);
+     
+     DT_Begin();
+     DT_VertexIndex(0); 
+     DT_VertexIndex(1); 
+     DT_VertexIndex(2); 
+     DT_VertexIndex(3); 
+     DT_End();
+     
+     DT_Begin();
+     DT_VertexIndex(0); 
+     DT_VertexIndex(1); 
+     DT_VertexIndex(4); 
+     DT_End();
+     
+     ...
+     
+     DT_EndComplexShape();
+     
+</pre>
+   <p>Alternatively, the indices can be placed into an array and specified
+using the command <code>DT_VertexIndices</code>, as in the following example:
+<pre class="example">     
+     DT_Index face0[4] = { 0, 1, 2, 3 };
+     DT_Index face1[3] = { 0, 1, 4 };
+     
+     ...
+     
+     DT_VertexIndices(4, face0);
+     DT_VertexIndices(3, face1);
+     
+</pre>
+   <p>Finally, a polytope can be specified from a range of vertices using the
+command <code>DT_VertexRange</code>.
+The range is specified by the first index and the number of vertices.
+In the following example a pyramid is constructed as a convex polyhedron,
+which is the convex hull of the vertices in the array.
+<pre class="example">     
+     DT_ShapeHandle pyramid = DT_NewComplexShape(base);
+     DT_VertexRange(0, 5);
+     DT_EndComplexShape();
+     
+</pre>
+   <p>The same shape can be built using the <code>DT_NewPolytope</code> command:
+<pre class="example">     
+     DT_ShapeHandle pyramid = DT_NewPolytope(base);
+     DT_VertexRange(0, 5);
+     DT_EndPolytope();
+     
+</pre>
+   <p>Note that within a <code>DT_NewPolytope</code> construction all the vertex array
+commands can be used to specify vertices.
+The commands <code>DT_Begin</code> and <code>DT_End</code> are ignored for polytopes. 
+Convex polytopes constructed using the <code>DT_NewPolytope</code> command
+are preprocessed by SOLID in order to allow for faster testing, and
+should be used when the number of vertices is large.  
+
+
+
+<h3 class="section">4.2 Creating and Moving Objects</h3>
+
+<p>
+An object is an instance of a shape.
+The commands for creating, moving and deleting objects are 
+<pre class="example">     
+     DT_ObjectHandle DT_CreateObject(void *client_object, DT_ShapeHandle shape); 
+     void            DT_DestroyObject(DT_ObjectHandle object);
+     
+     void DT_SetPosition(DT_ObjectHandle object, const DT_Vector3 position);
+     void DT_SetOrientation(DT_ObjectHandle object, 
+                            const DT_Quaternion orientation);
+     void DT_SetScaling(DT_ObjectHandle object, const DT_Vector3 scaling);
+     
+     void DT_SetMatrixf(DT_ObjectHandle object, const float *m); 
+     void DT_SetMatrixd(DT_ObjectHandle object, const double *m); 
+     
+     void DT_SetMargin(DT_ObjectHandle object, DT_Scalar margin);
+     
+</pre>
+   <p>An object is referred to by a <code>DT_ObjectHandle</code>.
+The first parameter <code>void *client_object</code> is a pointer to an
+arbitrary structure in the client application.
+This pointer is passed as parameter to the callback function in case of
+a collision, and can be used for collision handling. 
+In general, a pointer to a structure in the client application
+associated with the collision object should be used.
+
+An object's motion is specified by changing the placement of the local
+coordinate system of the shape.  
+Initially, the local coordinate system of an object
+coincides with the world coordinate system. 
+
+The placement of an object is changed, either by setting the position,
+orientation, and scaling, or by using an OpenGL 4x4
+column-major matrix representing an affine transformation. 
+Placements are specified relative to the world coordinate system.
+Rotations are specified using quaternions. 
+The object's local coordinate system can be scaled non-uniformly by
+specifying a scale factor per coordinate axis.
+Following example shows how a pair
+of objects are given absolute placements.  
+<pre class="example">     
+     DT_ObjectHandle objectHandle = DT_CreateObject(&amp;myObject, shapeHandle);
+     
+     float position = { 0.0f, 1.0f, 1.0f };
+     float orientation = { 0.0f, 0.0f, 0.0f, 0.1f };
+     float scaling = { 1.0f, 2.0f, 1.0f };
+      
+     DT_SetPosition(objectHandle, position);
+     DT_SetOrientation(objectHandle, orientation);
+     DT_SetScaling(objectHandle, scaling);
+     
+</pre>
+   <p>For scalings along axes that are not coordinate axes, such as shears,
+you should construct a 4x4 column-major matrix representation of the
+local coordinate system and use <code>DT_SetMatrix</code> to specify the
+object placement. 
+
+The x-axis of the local coordinate system relative
+to the world coordinate system is the vector (m[0], m[1], m[2]), the
+y-axis is (m[4], m[5], m[6]), the z-axis is (m[8], m[9],
+m[10]), and the local origin is (m[12], m[13], m[14]).
+The elements m[3], m[7], m[11], and m[15] are ignored. 
+These values are assumed to be 0, 0, 0, and 1, respectively.
+Thus, only affine transformations are allowed.  
+
+By setting a positive margin using <code>DT_SetMargin</code> you can
+spherically expand an object. The actual collision object is the set of
+points whose distance to the transformed shape is at most the margin.
+For instance, a hot dog or capsule can be created using
+<pre class="example">     
+     DT_Vector3 source = { 0.0f, 0.0f, 0.0f }
+     DT_Vector3 target = { 0.0f, -1.5f, 0.0f }
+     
+     DT_ShapeHandle line = DT_NewLineSegment(source, target);
+     
+     DT_ObjectHandle object = DT_CreateObject(&amp;myHotDog, line);
+     DT_SetMargin(object, 0.3f);
+     
+</pre>
+   <p>This object is useful for navigating along walls and over terrains
+Positions, orientations, scalings, and margins may all be changed during the
+life time of an object. 
+
+
+
+<h4 class="subsection">4.2.1 Who's Afraid of Quaternions?</h4>
+
+<p>
+A quaternion is a four-dimensional vector. The set of quaternions of
+length one (points on a four-dimensional sphere) map to the set of
+orientations in three-dimensional space. Since in many applications an
+orientation defined by either a rotation axis and angle or by a
+triple of Euler angles is more convenient, the package includes code for
+quaternion operations. The code is found in the mathematics toolkit (MT). 
+
+The quaternion class is located in the file <samp><span class="file">MT_Quaternion.h</span></samp>. The class
+has constructors and methods for setting a quaternion. For example
+<pre class="example">     
+     MT_Quaternion q1(axis, angle);
+     MT_Quaternion q2(yaw, pitch, roll);
+     
+     ...
+     
+     q1.setRotation(axis, angle);
+     q2.setEuler(yaw, pitch, roll);
+     
+     ...
+     
+     DT_SetOrientation(objectHandle, q1);
+     
+</pre>
+   <p>Also included is a static method <code>MT_Quaternion::random()</code>, which
+returns a random orientation.
+
+
+<h4 class="subsection">4.2.2 Proximity Queries</h4>
+
+<p>
+Objects can also be queried directly using the commands
+<pre class="example">     
+     DT_Scalar DT_GetClosestPair(DT_ObjectHandle object1, DT_ObjectHandle object2,
+                                 DT_Vector3 point1, DT_Vector3 point2);  
+     
+     DT_Bool   DT_GetCommonPoint(DT_ObjectHandle object1, DT_ObjectHandle object2,
+                                 DT_Vector3 point);
+     
+     DT_Bool   DT_GetPenDepth(DT_ObjectHandle object1, DT_ObjectHandle object2,
+                              DT_Vector3 point1, DT_Vector3 point2);  
+     
+</pre>
+   <p>The command <code>DT_GetClosestPair</code> returns the distance between
+<code>object1</code> and <code>object2</code>, and a pair of closest points
+<code>point1</code> and <code>point2</code> given in world coordinates
+The command <code>DT_GetCommonPoint</code> returns a boolean that denotes
+whether the objects <code>object1</code> and <code>object2</code> intersect, and, in
+case of an intersection, returns a common point <code>point</code> in world
+coordinates. 
+The command <code>DT_GetPenDepth</code> also returns a boolean that denotes
+whether the objects <code>object1</code> and <code>object2</code> intersect, and, in
+case of an intersection, returns a pair of witness points of the
+penetration depth <code>point1</code> and <code>point2</code> in world coordinates.
+
+The maximum relative error in the closest points and penetration depth
+computation can be set using
+<pre class="example">     
+     void DT_SetAccuracy(DT_Scalar max_error);
+     
+</pre>
+   <p>The default for <code>max_error</code> is 1.0e-3. Larger errors result
+in better performance. Non-positive error tolerances are ignored.
+
+The maximum tolerance on relative errors due to rounding is set using
+<pre class="example">     
+     void DT_SetTolerance(DT_Scalar tol_error);
+     
+</pre>
+   <p>This value is the estimated relative rounding error in complex computations
+and is used for determining whether a floating-point number should be regarded 
+as zero or not. The default value for `tol_error' is the machine epsilon,
+which is <code>FLT_EPSILON</code> when floats are used, and <code>DBL_EPSILON</code> when
+double-precision floating-point numbers are used internally. Very large
+tolerances result in false collisions. Setting tol_error too small  
+results in missed collisions. Non-positive error tolerances are ignored. 
+
+
+Furthermore, objects can be queried to return data maintained internally.
+The world-axes aligned bounding box of an object is returned using
+<pre class="example">     
+     void DT_GetBBox(DT_ObjectHandle object, DT_Vector3 min, DT_Vector3 max);
+     
+</pre>
+   <p>Here, <code>min</code> and <code>max</code> are the vertices of the box with
+respectively the least and greatest world coordinates.
+The local-to-world transformation of an object can be returned using
+<pre class="example">     
+     void DT_GetMatrixf(DT_ObjectHandle object, float *m); 
+     void DT_GetMatrixd(DT_ObjectHandle object, double *m); 
+     
+</pre>
+   <p>The arguments of these commands are again arrays of 16 floating-point numbers 
+that represent a 4x4 column-major matrix as discussed above.
+ 
+  
+
+<h3 class="section">4.3 Scenes</h3>
+
+<p>
+For scenes with many objects the number of pairwise intersection queries can
+become quite large. 
+To overcome this bottleneck, objects are maintained in scenes.
+The commands for construction and destroying scenes are:
+<pre class="example">     
+     DT_SceneHandle DT_CreateScene(); 
+     void           DT_DestroyScene(DT_SceneHandle scene);
+     void           DT_AddObject(DT_SceneHandle scene, 
+                                 DT_ObjectHandle object);
+     void           DT_RemoveObject(DT_SceneHandle scene,
+                                    DT_ObjectHandle object);
+     
+</pre>
+   <p>Objects can be shared by multiple scenes. 
+Each scene tracks the changes of
+placement and deformations of its objects, and updates its cached data
+accordingly. In this way, global collision queries using <code>DT_Test</code> (see
+below) can be processed much faster.  
+
+
+
+
+<h3 class="section">4.4 Response Handling</h3>
+
+<p>
+Collision response in SOLID is handled by means of callback functions.
+The callback functions have the type <code>DT_ResponseCallback</code> defined by
+<pre class="example">     
+     typedef DT_Bool (*DT_ResponseCallback)(void *client_data, 
+                                            void *client_object1, 
+                                            void *client_object2,
+                                            const DT_CollData *coll_data);
+     
+</pre>
+   <p>Here, <code>client_data</code> is a pointer to an arbitrary structure in the
+client application, <code>client_object1</code> and <code>client_object2</code> are
+the pointers to structures in the client application specified in
+<code>DT_CreateObject</code>, and <code>coll_data</code> is the response data computed by
+SOLID. 
+The Boolean value returned by a callback functions indicates whether
+further processing of callbacks is needed.
+If <code>DT_FALSE</code> or <code>DT_CONTINUE</code> is returned, then the remaining
+colliding object pairs are processed.
+If <code>DT_TRUE</code> or <code>DT_DONE</code> is returned, then the call to
+<code>DT_Test</code> is exited without further processing.
+We discuss the <code>DT_Test</code> further on. 
+   
+Currently, there are three types of response: <dfn>simple</dfn>,
+<dfn>depth</dfn> and <dfn>witnessed</dfn> response. For simple response the value
+of <code>coll_data</code> is <code>NULL</code>. 
+For depth and witnessed response <code>coll_data</code> points to the
+following structure 
+<pre class="example">     
+     
+     typedef struct DT_CollData {
+         DT_Vector3 point1;
+         DT_Vector3 point2;
+         DT_Vector3 normal;
+     } DT_CollData;
+     
+</pre>
+   <p>An object of this type represents a pair of points of the respective
+objects. The points  <code>point1</code> and <code>point2</code> are given relative
+to the world coordinate system. The <code>normal</code> field is used for
+depth response only. 
+
+For witnessed response, the points represent a witness of the collision.
+Both points are contained in the intersection of the colliding objects.
+Note that the witness points are not necessarily equal.
+For depth response, the <code>normal</code> represent the penetration depth
+vector. 
+The penetration depth vector is the shortest vector over which one
+object needs to be translated in order to bring the two objects into
+touching contact.
+The <code>point1</code> and <code>point2</code> fields contain the witness points of
+the penetration depth, thus <code>normal = point2 - point1</code>.
+
+Response callbacks are managed in <dfn>response tables</dfn>. 
+Response tables are defined independent of the scenes in which they are used.
+Multiple response tables can be used in one scene, and a response table
+can be shared among scenes.
+Responses are defined on (pairs of) response classes. Each response table 
+maintains its set of response classes.
+A response table is created and destroyed using the commands
+<pre class="example">     
+     DT_RespTableHandle DT_CreateRespTable(); 
+     void               DT_DestroyRespTable(DT_RespTableHandle respTable); 
+     
+</pre>
+   <p>A response class for a response table is generated using
+<pre class="example">     
+     DT_ResponseClass DT_GenResponseClass(DT_RespTableHandle respTable);
+      
+</pre>
+   <p>To each object for which a response is defined in the response table a
+response class needs to be assigned. This is done using
+<pre class="example">     
+     void DT_SetResponseClass(DT_RespTableHandle respTable,
+                              DT_ObjectHandle object,
+                              DT_ResponseClass responseClass);
+     
+     
+</pre>
+   <p>For each pair of objects multiple responses can be defined. A response
+is a callback together with its response type and client data.
+The <code>DT_ResponseType</code> is defined by
+<pre class="example">     
+     typedef enum DT_ResponseType { 
+         DT_NO_RESPONSE,
+         DT_SIMPLE_RESPONSE, 
+         DT_WITNESSED_RESPONSE   
+         DT_DEPTH_RESPONSE,
+     } DT_ResponseType;
+     
+</pre>
+   <p>Responses can be defined for all pairs of response classes...
+<pre class="example">     
+     void DT_AddDefaultResponse(DT_RespTableHandle respTable,
+                                DT_ResponseCallback response,
+                                DT_ResponseType type,
+                                void *client_data);
+     
+     void DT_RemoveDefaultResponse(DT_RespTableHandle respTable,
+                                   DT_ResponseCallback response);
+     
+</pre>
+   <p>...per response class...
+<pre class="example">     
+     void DT_AddClassResponse(DT_RespTableHandle respTable,
+                              DT_ResponseClass responseClass,
+                              DT_ResponseCallback response,
+                              DT_ResponseType type,
+                              void *client_data);
+     
+     void DT_RemoveClassResponse(DT_RespTableHandle respTable,
+                                 DT_ResponseClass responseClass,
+                                 DT_ResponseCallback response);
+     
+</pre>
+   <p>... and per pair of response classes...
+<pre class="example">     
+     void DT_AddPairResponse(DT_RespTableHandle respTable,
+                             DT_ResponseClass responseClass1,
+                             DT_ResponseClass responseClass2, 
+                             DT_ResponseCallback response,
+                             DT_ResponseType type, 
+                             void *client_data);
+     
+     void DT_RemovePairResponse(DT_RespTableHandle respTable,
+                                DT_ResponseClass responseClass1,
+                                DT_ResponseClass responseClass2,
+                                DT_ResponseCallback response);
+     
+</pre>
+   <p>If for an object pair, one of the objects has a class object response defined,
+that needs to be overruled by a pair response, then you should remove
+the callback defined in the class response for the pair and add the pair
+response, thus
+<pre class="example">     
+     DT_AddClassResponse(respTable, class1, classResponse, 
+                         DT_SIMPLE_RESPONSE, client_data);
+     
+     DT_RemovePairResponse(respTable, class1, class2, classResponse);
+     
+     DT_AddPairResponse(respTable, class1, class2, pairResponse, 
+                        DT_DEPTH_RESPONSE, client_data);
+     
+</pre>
+   <p>In the same way, a default response can be overruled by a class or pair
+response. 
+
+The response callback functions are executed by calling
+<pre class="example">     
+     DT_Count DT_Test(DT_SceneHandle scene, DT_RespTableHandle respTable);
+     
+</pre>
+   <p>This command calls for each colliding pair of objects the corresponding
+callback function until all pairs are processed or until a callback function
+returns <code>DT_TRUE</code> or <code>DT_DONE</code>.   
+It returns the number of object pairs for which callback functions have been
+executed.
+
+Note: If the response classes of the objects in a callback differ, then
+<code>client_object1</code> has a `lower' response class than
+<code>client_object2</code>. That is, the response class of <code>client_object1</code> is
+generated before the response class of <code>client_object2</code>. 
+
+
+
+<h3 class="section">4.5 Deformable Models</h3>
+
+<p>
+SOLID handles deformations of complex shapes.  In this context
+deformations are specified by changes of vertex positions. 
+Complex shapes that are defined using a vertex array in the client
+application may be deformed by changing the array elements, or
+specifying a new array. 
+SOLID is notified of a change of vertices by the command 
+<pre class="example">     
+     void DT_ChangeVertexBase(DT_VertexBaseHandle vertexBase, 
+                              const void *pointer);
+     
+</pre>
+   <p>Note that polytopes constructed from a vertex base using <code>DT_NewPolytope</code> are not affected
+by a change of vertices. 
+
+
+<h3 class="section">4.6 Ray Cast</h3>
+
+<p>
+NOTE: This feature is currently implemented for spheres, boxes, triangles, and
+triangle meshes only.
+Also, margins are ignored for ray casts.
+
+The commands for performing ray casts are 
+<pre class="example">     
+     void *DT_RayCast(DT_SceneHandle scene, void *ignore_client,
+                      const DT_Vector3 source, 
+                      const DT_Vector3 target,
+                      DT_Scalar max_param, 
+                      DT_Scalar *param, DT_Vector3 normal);
+     
+     DT_Bool DT_ObjectRayCast(DT_ObjectHandle object,
+                              const DT_Vector3 source, 
+                              const DT_Vector3 target,
+                              DT_Scalar max_param, 
+                              DT_Scalar *param, DT_Vector3 normal); 
+     
+</pre>
+   <p>The ray is given by <code>source</code>, <code>target</code>, and <code>max_param</code>.
+It represents the line segment <code>source</code> + (<code>target</code> - <code>source</code>) * t,
+where t is a member of the interval [0, <code>max_param</code>].
+So, if <code>max_param</code> is 1, then the ray is simply the line segment from
+<code>source</code> to <code>target</code>, whereas if <code>max_param</code> is equal to
+<code>FLT_MAX</code>, then the ray is `infinite'.     
+
+<code>DT_RayCast</code> returns a pointer to the client object of an object in
+<code>scene</code> that is hit first by the ray, or <code>NULL</code> if no object is hit. 
+<code>DT_ObjectRayCast</code> performs a ray cast on a single object and
+returns a Boolean indicating a hit. 
+In case of a hit, <code>param</code> points to the t of the hit spot,
+and <code>normal</code> is a normal to the object's surface in world coordinates.
+The normal always points towards the <code>source</code>.
+An object can be made transparent for the ray cast by specifying the
+object's client object as <code>ignore_client</code>.
+This is useful if you need to ignore hits of the ray with the source
+object of the ray. 
+For instance terrain following can be implemented by casting a ray down
+and setting the moving object at a distance above the spot.
+In this case, you are probably interested in hits with the terrain only,
+and do not need reports of hits with the moving object. 
+
+
+   </body></html>
+

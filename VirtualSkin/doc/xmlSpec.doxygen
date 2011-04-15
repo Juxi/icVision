@@ -1,0 +1,176 @@
+/*! \page xmlSpec Virtual Skin XML Specification
+
+\section zeroposition Zero Reference Position Kinematics
+
+The XML Specification used to model robots in Virtual Skin is based on the so called "Zero Reference Position" convention, which is much easier than the Denavit-Hartenberg convention. A detailed description of the convention is given in the paper cited in the following figure:
+
+\image html zeroposition.png "A simple schematic of the Zero Reference Position approach to kinematics in 2D using revolute joints. In the configuration shown, where all local coordinate systems are parallel, all joints are by definition in position zero." 
+
+There are two differences between the convention described in the above paper and the implementation in Virtual Skin.
+	-# The displacements between joint axes need not be their mutual perpendicular
+	-# Prismatic joints are not supported
+
+\section modeling How To Model a Robot
+
+The idea behind the following XML specification, is that the user should describe the robot's skeleton using <joint> and <link> tags (more on those below). All vectors (joint axes and link axes) can be specified using the chosen world coordinate system, as it is aligned with all local coordinate systems. The hierarchy of the XML tags implies the arrangement of the joints and links, whereby the links (the bones of the skeleton) are positioned tip-to-tail with the joints in between them. 
+
+Cylindrical bounding volumes can be appended to links and joints automatically by providing a radius parameter. If the radius is omitted or set to zero, no bounding volume is created. Alternatively, bounding volumes can be created manually, by inserting <sphere>, <cylinder> and <box> tags into the XML hierarchy.
+
+Finally, the XML specification also provides some structure for organizing the joints. The <motor> tag creates an interface to one or more joints, and the <bodypart> tag is used to define groups of motors, such that their encoder positions may be set all at once according to a list of values.
+
+Following is a more in-depth description of the XML specification:
+
+\section bodypart <bodypart> </bodypart>
+
+Groups all motors in its scope by listing them in a BodyPart object, facilitating the function RobotModel::Robot::setEncoderPosition(int, const QVector<qreal>&)
+
+Parameters:
+	- name - (optional) A human-readable identifier for the BodyPart. Note: This is also used in naming/connecting to YARP ports."
+
+\section motor <motor> </motor>
+
+Groups all joints in its scope by listing them in a Motor object, which introduces the concept of a "motor encoder". This has several benefits: The encoder position is abstracted from the physical joint angle, a single encoder position can specify the positions of several joints at the same time, and the motor control interfaces of most robots can therefore be modeled quickly and easily.
+
+Parameters:
+	- idx - (optional) The position that the motor should occupy in a BodyPart vector. If you specify this for one Motor in a BodyPart, then you should do it for all Motors in that BodyPart
+	- minPos - (optional) The minimum motor encoder position allowed. If omitted the default value (-1) is used.
+	- maxPos - (optional) The maximum motor encoder position allowed. If omitted the default value (1) is used.
+	- home - (optional) The 'home' encoder position. If omitted the default value (0) is used.
+
+\section link <link> </link>
+
+	Represents a body vector in the Zero Reference Position vernacular, or more intuitively, a 'bone' in your robot skeleton.
+
+Parameters:  It is required to set x, y, or z (at least one).
+	- x - The X component of the Link body vector
+	- y - The Y component of the Link body vector
+	- z - The Y component of the Link body vector
+	- radius - (optional) If specified, a cylindrical bounding volume (of specified radius and length of the body vector) is added to the Link.
+	- length - (optional) Scale the body vector to the desired length.
+
+\section joint <joint> </joint>
+
+	Represents a joint in the robot.
+
+Parameters:  It is required to set x, y, or z (at least one).
+	- x - The X component of the Joint axis
+	- y - The Y component of the Joint axis
+	- z - The Y component of the Joint axis
+	- minPos - (optional) The minimum joint position allowed (in degrees away from Zero Position). If omitted the default value (-180) is used.
+	- maxPos - (optional) The maximum joint position allowed (in degrees away from Zero Position). If omitted the default value (180) is used.
+	- type - (optional) Currently only \c revolute is supported
+	- radius - (optional) If specified, a cylindrical bounding volume (of specified radius and length of the joint axis) is added to the Link.
+	- length - (optional) Scale the joint axis to the desired length.
+
+\section sphere <sphere/>
+
+	Appends a sphere to the Joint or Link currently in scope
+
+Parameters: 
+	- radius - (required) must be greater than zero
+	- px - (optional) the position of the sphere in the X direction. The default is zero.
+	- py - (optional) the position of the sphere in the Y direction. The default is zero.
+	- pz - (optional) the position of the sphere in the Z direction. The default is zero.
+
+\section cylinder <cylinder/>
+
+	Appends a cylinder to the Joint or Link currently in scope. The vector [hx hy hz] is the cylinder's orientation direction (the axis of symmetry will be parallel to this vector). It is required to set hx, hy, or hz (at least one).
+
+Parameters: 
+	- radius - (required) must be greater than zero
+	- height - (required) must be greater than zero
+	- px - (optional) the position of the cylinder in the X direction. The default is zero.
+	- py - (optional) the position of the cylinder in the Y direction. The default is zero.
+	- pz - (optional) the position of the cylinder in the Z direction. The default is zero.
+	- hx - the X component of the cylinder's orientation.
+	- hy - the Y component of the cylinder's orientation.
+	- hy - the Z component of the cylinder's orientation.
+
+\section box <box/>
+
+	Appends a cylinder to the Joint or Link currently in scope. The vector [hx hy hz] is the cylinder's orientation direction (the axis of symmetry will be parallel to this vector). It is required to set hx, hy, or hz (at least one).
+
+Parameters: 
+	- radius - (required) must be greater than zero
+	- height - (required) must be greater than zero
+	- px - (optional) the position of the cylinder in the X direction. The default is zero.
+	- py - (optional) the position of the cylinder in the Y direction. The default is zero.
+	- pz - (optional) the position of the cylinder in the Z direction. The default is zero.
+	- hx - the X component of the cylinder's orientation.
+	- hy - the Y component of the cylinder's orientation.
+	- hy - the Z component of the cylinder's orientation.
+
+\section marker <marker/>
+	
+Provides access to a rotation/translation matrix of interest (the one in scope wherever you put this tag in the hierarchy). Currently, matrices from <marker/> tags are aggregated in an RobotModel::RobotObservation object and published via the signal RobotModel::Robot::Observation. This functionality has yet to be wrapped in YARP.
+	Parameters: 
+	- name - (optional) if omitted, markers will be named "marker1", "marker2", ect as they are encountered by the XML parser 
+
+\section example A Brief Example - The iCub Torso
+
+\verbatim
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ZeroPositionKinematicTree>
+<ZeroPositionKinematicTree version="1.0" robotName="icub">
+
+<bodypart name="torso">
+	<!---------------------------------------------------------------------------
+	  NOTE: In this file, we start from the WCS at the hips and move up. However
+	  on the iCub robot torso joints are numbered backwards with respect to the
+	  kinematic chain, therefore "idx" is specified for each
+	  --------------------------------------------------------------------------->
+
+	<!-- The first joint -->
+	<motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
+        <joint y="-.2" minPos="-22" maxPos="70" radius=".04">
+        
+		<!-----------------------------------------------------------------------------
+		  These geometries are attached to the above joint, and do not move according
+		  to the joint position. Only geometries associated with the children (links
+		  or joints) move with the joint position.
+		  ----------------------------------------------------------------------------->
+			
+		<!-- The mounting pole -->
+		<cylinder radius=".04" height="1" pz="-.5" hz="1"/>
+
+		<!-- The iCub's hips -->
+        	<sphere radius=".07" px=".035" py=".06" pz="-.03"/>
+        	<sphere radius=".07" px=".035" py="-.06" pz="-.03"/>
+        	<sphere radius=".1" px=".035" pz="-.06"/>
+        
+    		<!-- An offset with no modeled geometry -->
+    		<link z=".032" radius="0">
+    
+			<!-- The second joint -->
+    			<motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
+        		<joint x=".1" minPos="-30" maxPos="30" radius=".0325">
+    
+				<!-- An offset with no modeled geometry -->
+    				<link x="-.0055" radius="0">
+    
+    					<!-- The third joint -->
+					<motor name="TorsoYaw" minPos="-50" maxPos="50" idx="0">  
+				        <joint z="-.05" minPos="-50" maxPos="50" radius="0">
+        
+						<!-- Another offset -->
+						<link x=".0233647" z=".1433" radius="0">
+
+    							<!-- Here would begin the neck -->
+    
+						</link>
+        				</joint>
+    					</motor>
+    				</link>
+        		</joint>
+    			</motor>
+		</link>
+        </joint>
+	</motor>
+</bodypart>
+
+</ZeroPositionKinematicTree>
+
+\endverbatim
+
+01-05-2011, Kail Frank - <a href="mailto:kail@idsia.ch">kail@idsia.ch</a>
+*/

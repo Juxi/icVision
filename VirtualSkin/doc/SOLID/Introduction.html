@@ -1,0 +1,259 @@
+<html lang="en">
+<head>
+<title>Introduction - Untitled</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Untitled">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="License.html#License" title="License">
+<link rel="next" href="Installation.html#Installation" title="Installation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Introduction"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Installation.html#Installation">Installation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="License.html#License">License</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Introduction</h2>
+
+<p>
+SOLID is a software library containing functions for performing
+intersection tests and proximity queries that are useful in the context
+of collision detection. Collision detection is the process of detecting
+pairs of geometric objects that are intersecting or are within a given
+proximity of each other. In particular, SOLID is useful for detecting
+collisions between objects that are moving relatively of each other over
+time. The motions of objects are controlled by the client application,
+and are not determined or affected by SOLID. 
+
+Furthermore, SOLID provides functionality for determining geometric data
+pertaining to a pair of objects that is used by the client application
+for computing the appropriate response to a collision. This data,
+referred to as response data, is passed to the client application by
+means of a callback mechanism or by direct queries from the client
+application. 
+
+
+<h3 class="section">2.1 Overview</h3>
+
+<p>
+SOLID's functionality is subdivided into the following categories:
+
+     <ol type=1 start=1>
+
+<li>Shape definition
+<li>Object placement and motion 
+<li>Scene management
+<li>Response definition
+<li>Global actions
+<li>Broad phase
+
+        </ol>
+
+
+<h4 class="subsection">2.1.1 Shape Definition</h4>
+
+<p>
+The shape of a geometric object is defined relative to its local
+coordinate system. A shape can be a simple geometric primitive, e.g., a
+sphere or a line segment, or a complex shape composed of multiple
+primitives. Shapes defined in terms of vertex positions, e.g., a
+triangle mesh, may use vertex data that is stored in memory maintained
+by the client application. 
+
+
+<h4 class="subsection">2.1.2 Object Placement and Motion</h4>
+
+<p>
+A geometric object is defined by a shape, an affine transformation, and
+a margin. The shape is placed in the world coordinate system by
+specifying the object's local coordinate system represented by an affine
+transformation. 
+The actual object is the set of points in world coordinates whose distance to
+the shape  is at most the margin. Motion of an object can be defined by 
+changing the placement of the local coordinate system, the margin, or the
+positions of the vertices of the shape.  
+
+
+
+<h4 class="subsection">2.1.3 Scene Management</h4>
+
+<p>
+Collections of objects on which collision detection has to be performed
+are placed in a scene. SOLID is capable of maintaining multiple
+scenes. Objects can be shared by multiple scenes. A scene maintains
+cached data pertaining to the objects in the scene in order to speed-up
+consecutive collision queries that are performed on the scene. 
+
+
+<h4 class="subsection">2.1.4 Response Definition</h4>
+
+<p>
+In SOLID, collision response is handled by callback functions.
+The types of response and the callback functions that needs to be executed
+for each pair of intersecting objects is stored in a response
+table. Currently, there are three types of response: 
+     <ol type=1 start=1>
+ 
+<li>Simple response: no response data is returned.
+<li>Witnessed response: a common point of the intersecting objects is
+returned. 
+<li>Depth response: the penetration depth of the intersecting objects
+is returned. The penetration depth is the shortest vector over which one
+of the objects needs to be translated in order to bring the objects into
+touching contact. 
+  
+        </ol>
+Response tables can be shared by multiple scenes, and per scene multiple
+response tables can be used. To each object that is considered for
+collision detection in a response table, a response class is
+assigned. Responses can be defined per pair of response classes, on all
+pairs containing a specific response class, or as a default for all
+pairs of response classes. 
+On a pair of response classes multiple responses can be defined. 
+During the lifetime of an object, it is possible to
+reassign the response class associated with the object per response
+table. 
+
+  
+
+<h4 class="subsection">2.1.5 Global Actions</h4>
+
+<p>
+The main functionality of SOLID is to perform collision tests. Given a
+scene and a response table, a collision test computes for all pairs of
+colliding objects on which a response is defined the required response data and
+passes these data together with the colliding pair to the callback. The
+response actions are defined by the client 
+application in the callback and fall outside the scope of SOLID. 
+
+The client application may also obtain response data for a given object or
+pair of objects by direct queries. These direct queries are useful for static
+interference checks or for tracking the closest points of a pair of objects.
+
+
+<h4 class="subsection">2.1.6 Broad Phase</h4>
+
+<p>
+The broad phase detects changes in the overlap status of pairs of
+axis-aligned boxes. The overlap status of a pair of boxes changes
+whenever the boxes start or cease to overlap. The boxes are organized in
+scenes similar to the scenes for objects. For each pair of boxes in a
+scene whose overlap status is changed a callback is called. The client
+defines a callback for pairs that start to overlap and one for pairs
+that cease to overlap. The broad phase is actually a sub-layer of the
+SOLID library, however the API can be directly accessed by the client
+application.   
+
+
+
+
+<h3 class="section">2.2 Software Package</h3>
+
+<p>
+Currently, the SOLID package consists of three separate layers: 
+     <ol type=1 start=1>
+
+<li>MT: The Mathematics Toolkit. This is a set of C++ classes containing
+abstract data types for scalars, vectors, points, quaternions, matrices,
+coordinate systems, and bounding boxes. Global names in this layer are
+prefixed with "MT_".  
+
+<li>The broad phase: A set of C++ classes wrapped by a C API. The broad
+phase detects changes in the overlap status of pairs of axis-aligned
+boxes (pairs of boxes that start or cease to overlap). Global names in this
+layer are prefixed with "BP_". 
+
+<li>The narrow phase: A set of C++ classes wrapped by a C API. The narrow
+phase performs exact collision tests for pairs of objects, and computes
+response data for the colliding pairs of objects. Global names in this layer
+are prefixed with "DT_".  
+
+        </ol>
+
+
+<h3 class="section">2.3 New Features of SOLID version 3</h3>
+
+<p>
+Since the previous version 2.0 of SOLID, which was released in June 1998
+under the terms of the GNU Library General Public License by the
+Department of Mathematics &amp; Computing Science of Eindhoven University of
+Technology, SOLID has evolved and matured considerably. New
+features as well as improvements for robustness and performance have
+been added. The most important changes in SOLID 3 are: 
+     <ul>
+
+<li>Use of single-precision floating-point numbers. The use of a
+32-bit floating-point format is a requirement for games and other
+interactive applications that run on current PC graphics hardware and
+consoles.   
+
+<li>Penetration depth computation as a new response type. The
+penetration depth of a pair of intersecting objects is the shortest
+vector over which one of the objects needs to be translated in order to
+bring the objects in touching contact. The penetration depth can be used
+as an approximation of the contact point and contact plane, which are
+necessary for physics-based simulation. The depth response replaces the
+smart response in SOLID 2.0. Smart response uses the configuration of
+the previous time frame for finding the contact points and plane, which
+could give bad results when objects were interpenetrating over a number
+of frames. 
+
+<li>SOLID 3 maintains multiple scenes. This feature is useful when
+collision detection is required for multiple tasks. For instance, it is
+possible to maintain at the same time a sound scene, a scene used for
+visibility culling, and a scene for physics simulations, without the
+objects in different scenes interfering with each other. 
+
+<li>Stridden vertex arrays can be used for defining complex shapes. 
+
+<li>Objects can be expanded spherically, i.e., a margin that defines
+the radius of the sphere that is 'added' can be set for each object. The
+object is the set of points whose distance to the shape is at most the
+margin. Margins are useful for creating objects with rounded edges, or
+'sensitive' areas around an object.        
+
+<li>Functions for direct computation of response data have been added
+to the API. This is useful, since it allows the client to
+check overlap status, distance, etc., without having to perform a global
+collision test. 
+
+<li>A ray cast has been added to SOLID. The ray cast returns the
+object in a scene that the ray hits first. Also, the hit spot and
+surface normal to this object are returned. 
+
+<li>Response callbacks are defined in a response table independent of
+a scene. 
+
+<li>Response callbacks are defined per pair of response classes rather
+than per object pair. With each object for which a response is defined
+in a response table, a response class is associated. The response class
+of an object may change over time. 
+
+<li>It is now possible to define multiple response callbacks per
+object pair.  This is useful for performing several actions for a single
+collision (play sound, apply impulse, update statistics). 
+
+
+</ul>
+   
+
+   </body></html>
+
