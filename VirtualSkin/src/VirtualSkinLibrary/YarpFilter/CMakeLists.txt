@@ -11,20 +11,9 @@ SET ( YarpFilter_VERSION_MINOR 0 )
 
 MESSAGE(STATUS "*** Sub-Project YarpFilter ***")
 
-### Create some options for use with ccmake ###
-#OPTION (LINK_ACE OFF)
-
-### Location of script to find Ace ###
-#SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../cMakeScripts )
-
 ### Find libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
-
-#IF ( LINK_ACE )
-#	FIND_PACKAGE ( ACE REQUIRED )
-#	INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
-#ENDIF ( LINK_ACE )
 
 ADD_SUBDIRECTORY ( LibYarpFilter )
 ADD_SUBDIRECTORY ( Demo )

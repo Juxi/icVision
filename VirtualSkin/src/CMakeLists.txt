@@ -32,6 +32,7 @@ IF ( UNIX )
 ENDIF ( UNIX )
 IF ( WIN32 )
 	SET (Q_WS_WIN TRUE)
+	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
 ENDIF ( WIN32 )
 
 ### Parse the directories where build targets are ###

@@ -40,6 +40,7 @@ public:
 	{
 		m_markerName = rhs.m_markerName;
 		m_markerConfiguration = rhs.m_markerConfiguration;
+		return *this;												//!< windows isn't too smart 
 	}
 
 	inline unsigned int getNumMarkers() const						//!< return the number of part markers

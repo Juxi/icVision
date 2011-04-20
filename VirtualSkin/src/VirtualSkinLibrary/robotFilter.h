@@ -71,7 +71,7 @@ public:
 		}
 		
 		model.robot->open(fileName);
-		model.skinWindow->show();
+		//model.skinWindow->show();
 		model.start();
 		
 		const QString deviceBaseName( model.robot->getName() );
