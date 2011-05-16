@@ -744,7 +744,7 @@ void CVUtils::estimateDisparityImage(Mat& disparityImage){
   R.convertTo(Rtmp, CV_64FC1);
   T.convertTo(Ttmp, CV_64FC1);
 
-  stereoRectify( camleft, distleft, camright, distright, img_size, Rtmp, Ttmp, R1, R2, P1, P2, Q, -1, img_size, &roi1, &roi2 );
+  stereoRectify( camleft, distleft, camright, distright, img_size, Rtmp, Ttmp, R1, R2, P1, P2, Q, -1, -1, img_size, &roi1, &roi2 );
   Mat map11, map12, map21, map22;
   initUndistortRectifyMap(cameraMatrix_left, distCoeffs_left, R1, P1, img_size, CV_16SC2, map11, map12);
   initUndistortRectifyMap(cameraMatrix_right, distCoeffs_right, R2, P2, img_size, CV_16SC2, map21, map22);
