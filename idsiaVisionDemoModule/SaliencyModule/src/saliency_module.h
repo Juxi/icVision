@@ -46,15 +46,18 @@ class SaliencyModule : public yarp::os::Module
 
 		/* thread parameters: they are pointers so that they refer to the original variables */
 		yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelBgr> >  imageInLeft;
-		yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelBgr> >  imageOutLeft;
+		yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelBgr> >  imageOutLeft;		
+		yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelBgr> >  imageInRight;
+		yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelBgr> >  imageOutRight;
+		
    
 
 
 
 		/*Image support*/
-		yarp::sig::ImageOf<yarp::sig::PixelBgr> *iCubLeft;
-		cv::Mat imageLeft; //, imageRight;
-		cv::Mat outputImageLeft; //, outputImageRight;
+		yarp::sig::ImageOf<yarp::sig::PixelBgr> *iCubLeft, *iCubRight;
+		cv::Mat imageLeft, imageRight;
+		cv::Mat outputImages[2];
 		
 		
 		// Saliency interface to the envision lib

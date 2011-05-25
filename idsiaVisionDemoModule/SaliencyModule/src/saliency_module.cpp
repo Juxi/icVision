@@ -31,25 +31,29 @@ bool SaliencyModule::updateModule()
 	//std::cout << "next step... " <<std::endl;
 
 	//Use YARP port to get images
-	if ( imageInLeft.getInputCount() > 0 ){
+	if ( imageInLeft.getInputCount() > 0 &&
+		 imageInRight.getInputCount() > 0	){
 		// std::cout << "There are images available from the left cam... " << std::endl;
-		iCubLeft = imageInLeft.read();  // read an image
-		
+		iCubLeft = imageInLeft.read();  // read an image		
 		imageLeft = cv::Mat((IplImage*)iCubLeft->getIplImage(),false);
+		iCubRight = imageInRight.read();  // read an image		
+		imageRight = cv::Mat((IplImage*)iCubRight->getIplImage(),false);
 
 		// TODO
 		// do something :)
 		//outputImageLeft = imageLeft.clone();
-		outputImageLeft = saliency->getSaliencyMap((IplImage*)iCubLeft->getIplImage());
+		IplImage **h = saliency->getSaliencyMap((IplImage*)iCubLeft->getIplImage(), (IplImage*)iCubRight->getIplImage());
 		
+		outputImages[0] = h[0];
+		outputImages[1] = h[1];
 
-		if(!outputImageLeft.empty()) {
+		if(!outputImages[0].empty()) {
 			//Send output images ... just place to outputImageLeft or outputImageRight what do you want to see
 			yarp::sig::ImageOf<yarp::sig::PixelBgr> &imageLeftTmp = imageOutLeft.prepare();
 			
-			imageLeftTmp.resize(outputImageLeft.cols,outputImageLeft.rows);
+			imageLeftTmp.resize(outputImages[0].cols,outputImages[0].rows);
 
-			IplImage image_iplLeftimage = (IplImage) outputImageLeft;
+			IplImage image_iplLeftimage = (IplImage) outputImages[0];
 
 			cvCopy( &image_iplLeftimage, (IplImage *) imageLeftTmp.getIplImage());
 			
@@ -159,6 +163,18 @@ bool SaliencyModule::configure(yarp::os::Searchable& config)
 	if(! moduleOutput.open( outputPortName.c_str() )){
 		return false;
 	}
+	
+	inputPortNameRight = "/" + moduleName + "/right/image:i";
+	if(! imageInRight.open( inputPortNameRight.c_str() )){
+		return false;
+	}
+
+	outputPortNameRight = "/" + moduleName + "/right/image:o";
+	if(! imageOutRight.open( outputPortNameRight.c_str() )){
+		return false;
+	}
+
+  	
 
 	return true ;      // let the RFModule know everything went well
 }

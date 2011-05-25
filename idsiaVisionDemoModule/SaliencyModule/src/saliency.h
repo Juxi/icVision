@@ -18,10 +18,10 @@ class SaliencyWorker {
 public:
 	SaliencyWorker();
 	~SaliencyWorker();
-	IplImage* getSaliencyMap(const IplImage*);
+	IplImage** getSaliencyMap(const IplImage*, const IplImage*);
 
 private:
-	IplImage* output_image;;
+	IplImage** output_image;
 
 };
 
