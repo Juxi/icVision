@@ -44,7 +44,8 @@ double WorldObject::matchColoredRects(ColoredRect &rect_left, ColoredRect &rect_
   //TODO to change
   if( rect_left.getColor()[0] == color[0] &&
       rect_left.getColor()[1] == color[1] &&
-      rect_left.getColor()[2] == color[2]){
+      rect_left.getColor()[2] == color[2] &&
+      abs(rect_left.getRect().area()-rect_right.getRect().area())<500 ){
 
       double distance = sqrt((position.x-estimatedPose.x)*(position.x-estimatedPose.x) + (position.y-estimatedPose.y)*(position.y-estimatedPose.y) + (position.z-estimatedPose.z)*(position.z-estimatedPose.z));
 

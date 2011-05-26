@@ -27,6 +27,7 @@ class WorldObject
     bool positioned, oriented;
     Shape shapeis;
     bool isVisible;
+    bool sendData2Sim;
 
     //Object information
     double bank, heading, attitude;

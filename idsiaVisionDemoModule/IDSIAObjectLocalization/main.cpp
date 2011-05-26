@@ -28,6 +28,7 @@ void myMessageOutput(QtMsgType type, const char *msg)
 
 int main(int argc, char * argv[]) {
 
+	//Only for QT windows
   qInstallMsgHandler(myMessageOutput);
 
   Network yarp; // set up yarp

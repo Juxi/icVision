@@ -38,6 +38,7 @@ class VisionModule :public Module
 
     /*Simulator selection*/
     bool isICubSim;
+    bool sendData2Sim;
 
     /*port name strings*/
     string inputPortNameLeft;

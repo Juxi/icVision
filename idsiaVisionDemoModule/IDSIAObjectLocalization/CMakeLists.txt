@@ -39,5 +39,5 @@ MESSAGE(STATUS "OPENCV Library: ${OPENCV_LIBS}")
 TARGET_LINK_LIBRARIES(${PROJECTNAME} ${OPENCV_LINKER_LIBS} opencv_core
             opencv_flann opencv_imgproc opencv_highgui opencv_ml opencv_video opencv_objdetect
             opencv_features2d opencv_calib3d opencv_legacy opencv_contrib)
-TARGET_LINK_LIBRARIES(${PROJECTNAME} ${QT_LIBS})
+TARGET_LINK_LIBRARIES(${PROJECTNAME} ${QT_LIBRARIES})
 									 

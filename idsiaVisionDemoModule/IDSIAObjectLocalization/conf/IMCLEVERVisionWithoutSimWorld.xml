@@ -8,7 +8,7 @@
 </dependencies>
 
 <module>
-	<name>./IDSIAObjectLocalization</name>
+	<name>./idsiaTest</name>
 	<parameters></parameters>
 	<node>iCubIDSIA</node>
 	<stdio>IDSIAOutput</stdio>	
