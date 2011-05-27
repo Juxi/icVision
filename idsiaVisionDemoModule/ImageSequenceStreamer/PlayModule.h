@@ -5,8 +5,8 @@
  * CopyPolicy: Released under the terms of the GNU GPL v2.0.*
  ************************************************************/
 
-#ifndef PLAYMODULE_H_
-#define PLAYMODULE_H_
+#ifndef _PLAYMODULE_H_
+#define _PLAYMODULE_H_
 
 //STD include
 #include <string.h>
@@ -26,10 +26,12 @@ using namespace yarp::sig;
 using namespace std;
 using namespace cv;
 
-class PlayModule : public yarp::os::Module
-{
-  private:
+class PlayModule : public yarp::os::Module {
 
+private:
+	bool loop;
+	int startFrame;
+	
     //Module settings
     string moduleName;
     string handlerPortName;
@@ -59,16 +61,19 @@ class PlayModule : public yarp::os::Module
     //Function to save image
     bool readImage(Mat& image2save, string directory, string camera, int framecounter);
 	
-
-  public:
+public:
     PlayModule();
     virtual ~PlayModule();
+	
     double getPeriod();
     bool updateModule();
     bool respond(const Bottle& command, Bottle& reply);
-    bool configure(yarp::os::ResourceFinder &rf);
+
+    bool open(Searchable& config);
+
+    bool configure(Searchable& config);//yarp::os::ResourceFinder &rf);
     bool interruptModule();
-    bool open(Searchable& config); //member to set the object up.
+
     bool close();
 };
 

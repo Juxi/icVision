@@ -36,7 +36,7 @@ bool RecordModule::updateModule(){
 
   if ( getImageLeft + getImageRight < 1){
     Time::delay(0.1);
-    cout<<"not available"<<endl;
+    cout << "not available - " << getImageLeft << "/" << getImageRight << endl;
   }
   else{
 
@@ -58,7 +58,7 @@ bool RecordModule::updateModule(){
     framecounter++;
 
   }
-
+	return true;
 
 }
 
@@ -97,8 +97,10 @@ bool RecordModule::configure(yarp::os::ResourceFinder &rf){
      */
 
     //where to save the images
-    dir4left = "/home/icub/Desktop/SaveFolder/";
-    dir4right = "/home/icub/Desktop/SaveFolder/";
+    dir4left = "/Users/juxi/Desktop/SaveFolder/";
+    dir4right = "/Users/juxi/Desktop/SaveFolder/";
+//    dir4left = "/home/icub/Desktop/SaveFolder/";
+//		dir4right = "/home/icub/Desktop/SaveFolder/";
 
     params.push_back(CV_IMWRITE_PXM_BINARY);
 
@@ -125,8 +127,18 @@ bool RecordModule::configure(yarp::os::ResourceFinder &rf){
       return false;
     }
 
-    Network::connect("/icub/cam/left",inputPortNameLeft.c_str());
-    Network::connect("/icub/cam/right",inputPortNameRight.c_str());
+	if(	Network::connect("/icub/cam/left", inputPortNameLeft.c_str()) &&
+	    Network::connect("/icub/cam/right", inputPortNameRight.c_str())) {
+		cout << "Connected to the iCub Cameras" << endl;
+		return true;
+	}else if( Network::connect("/icubSim/cam/left", inputPortNameLeft.c_str()) &&
+			  Network::connect("/icubSim/cam/right", inputPortNameRight.c_str())) {
+		cout << "Connected to the iCub _!SIMULATOR!_ Cameras" << endl;		
+		return true;
+	} else {
+		cout << getName() << ": Unable to connect ports to either the iCub or the Sim" << endl;
+	}
+	return false;
 
 }
 

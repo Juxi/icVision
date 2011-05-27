@@ -13,7 +13,7 @@ int main(int argc, char * argv[]) {
     PlayModule module;
     
     std::cout << "Launching ImageSequenceStreamer" << std::endl;
-    module.runModule(argc,argv);
+    module.runModule(argc, argv);
     module.close();
     
     return 0;

@@ -19,15 +19,14 @@
 
 //Get opencv libraries
 #include <opencv2/opencv.hpp>
+using namespace cv;
 
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace std;
 using namespace cv;
 
-
 typedef enum {LEFT, RIGHT, BOTH} recordFlag; //What camera do you want acquire?
-
 
 class RecordModule : public yarp::os::Module
 {

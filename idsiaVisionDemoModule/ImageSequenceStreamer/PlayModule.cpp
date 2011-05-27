@@ -7,10 +7,9 @@
 
 #include "PlayModule.h"
 
-PlayModule::PlayModule()
-{
-  // TODO Auto-generated constructor stub
-
+PlayModule::PlayModule() {
+	loop = true;
+	startFrame = 0;
 }
 
 PlayModule::~PlayModule()
@@ -46,9 +45,15 @@ bool PlayModule::updateModule(){
 			cvCopy( &image_iplLeftimage, (IplImage *) imageLeftTmp.getIplImage());
 			
 			imageOutLeft.write();
-			cout<< "left streamed " << endl;
+			cout<< "left streamed ";
 			
-		} else std::cout << "empty image... ?! " << std::endl;
+		} else {
+			std::cout << "empty image... ?! " << std::endl;
+			if(loop) {
+				framecounter = startFrame;
+				return true;
+			}
+		}
 	}
 	
 	if (cam2play == BOTH || cam2play == RIGHT){						
@@ -66,11 +71,18 @@ bool PlayModule::updateModule(){
 			cvCopy( &image_iplRightimage, (IplImage *) imageRightTmp.getIplImage());
 			
 			imageOutRight.write();
-			cout<< "right streamed " << endl;			
+			cout<< "right streamed ";			
 			
-		} else std::cout << "empty image... ?! " << std::endl;
+		} else {
+			std::cout << "empty image... ?! " << std::endl;
+			if(loop) {
+				framecounter = startFrame;
+				return true;
+			}
+		}
 	}
 
+	std::cout << endl;
 	framecounter++;
 	return true;
 }
@@ -93,8 +105,8 @@ bool PlayModule::respond(const Bottle& command, Bottle& reply){
 
 }
 
-bool PlayModule::configure(yarp::os::ResourceFinder &rf){
-    framecounter = 0;
+bool PlayModule::configure(Searchable &config) { //yarp::os::ResourceFinder &rf){
+    framecounter = startFrame;
     cam2play = BOTH;
 
     /* Process all parameters from both command-line and .ini file */
@@ -109,6 +121,25 @@ bool PlayModule::configure(yarp::os::ResourceFinder &rf){
     dir4right = "/Users/juxi/Desktop/SaveFolder/";
 //    dir4left = "/home/icub/Desktop/SaveFolder/";
 //    dir4right = "/home/icub/Desktop/SaveFolder/";
+	
+	std::cout << "Parsing frame start index ('startframe') .. ";
+	int sIndex = config.find("startframe").asInt();	
+	if(sIndex > 0) {
+		startFrame = sIndex;
+	} else {
+		std::cout << "not found! ";
+		startFrame = 0;
+	}
+	framecounter = startFrame;
+	std::cout << "using " << startFrame << std::endl;
+
+	
+	std::cout << "Parsing whether to loop  ('loop') .. ";
+	int cLoop = config.find("loop").asInt();	
+	loop = cLoop;
+	if(!loop) std::cout << "not ";
+	std::cout << "looping!" << std::endl;
+	
 
     params.push_back(CV_IMWRITE_PXM_BINARY);
 
@@ -152,18 +183,9 @@ bool PlayModule::interruptModule(){
 bool PlayModule::open(Searchable& config){ //remember to set the object up.
   //TODO change the config setting for customizable configuration (ref Taio code)
 
-    /* prepare and configure the resource finder */
-     ResourceFinder rf;
-     rf.setVerbose( true );
-     rf.setDefaultConfigFile( "SequenceStreamer.ini" ); //overridden by --from parameter
-     rf.setDefaultContext( "SequenceStreamer/conf" );   //overridden by --context parameter
-     rf.configure( "ICUB_ROOT", 0, NULL );
-     //rf.configure( "../home/migliore/Dropbox/Projects/YarpObjectLocalization/bin/", 0, NULL );
-
      cout << "Start module" << endl;
 
-
-     if( !configure(rf) ){
+     if( !configure(config) ){
        return false;
      }
      return true;
