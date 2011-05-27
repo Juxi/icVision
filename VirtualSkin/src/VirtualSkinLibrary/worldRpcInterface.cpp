@@ -161,7 +161,7 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 			
-			primitive = object->newBox( size, pos );
+			primitive = object->newBox( size, true, pos );
 		}
 		else { reply.addString("Cannot append to object: Unknown Primitive... use 'sph', 'cyl', 'box'"); }
 			

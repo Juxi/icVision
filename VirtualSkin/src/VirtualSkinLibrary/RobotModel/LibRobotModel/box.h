@@ -22,14 +22,16 @@ namespace RobotModel { class Box; }
 class RobotModel::Box : public PrimitiveObject
 {
 public:
-    Box( const QVector3D& size );	//!< Creates the SOLID object
+    Box( const QVector3D& size, bool lines = true );	//!< Creates the SOLID object
 									/**< \param size 3D list of side lengths of the box in x, y and z respectively */
     ~Box();							//!< Destroys the SOLID object
 
-	void makeDisplayList();			//!< Make an OpenGL display list for the box using 6 GL_QUADS
+	void makeDisplayList(  );			//!< Make an OpenGL display list for the box using 6 GL_QUADS
 
 private:
     qreal x, y, z;					//!< Side lengths of the box in the x, y and z directions
+	static GLfloat black[4];
+	bool withLines;
 };
 
 #endif

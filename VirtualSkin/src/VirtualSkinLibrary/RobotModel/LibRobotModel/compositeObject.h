@@ -41,7 +41,7 @@ public:
 	
 	PrimitiveObject* newSphere( double r, const QVector3D& pos = QVector3D(0,0,0) );				//!< Create a new Sphere and append it to the CompositeObject
 	PrimitiveObject* newCylinder( double r, double h, const QVector3D& pos = QVector3D(0,0,0) );	//!< Create a new Cylinder and append it to the CompositeObject
-	PrimitiveObject* newBox( const QVector3D& size, const QVector3D& pos = QVector3D(0,0,0) );		//!< Create a new Box and append it to the CompositeObject
+	PrimitiveObject* newBox( const QVector3D& size, bool lines = true, const QVector3D& pos = QVector3D(0,0,0) );		//!< Create a new Box and append it to the CompositeObject
 	
 	virtual void append( PrimitiveObject* primitiveObject );					//!< Append a PrimitiveObject to the CompositeObject
 	PrimitiveObject* getPrimitiveByName( const QString& objectName ) const;		//!< Get a pointer to a PrimitiveObject by looking up its name

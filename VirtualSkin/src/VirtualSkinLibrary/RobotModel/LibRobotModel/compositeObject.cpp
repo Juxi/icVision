@@ -148,11 +148,11 @@ PrimitiveObject* CompositeObject::newCylinder( double r, double h, const QVector
 	return primitive;
 }
 
-PrimitiveObject* CompositeObject::newBox( const QVector3D& size, const QVector3D& pos )
+PrimitiveObject* CompositeObject::newBox( const QVector3D& size, bool lines, const QVector3D& pos )
 {
 	QString name =  "box" + QString::number( ++numBoxes );
 	
-	PrimitiveObject* primitive = new Box( size );
+	PrimitiveObject* primitive = new Box( size, lines );
 	primitive->setName( name );
 	primitive->setPosition( pos );
 	append( primitive );

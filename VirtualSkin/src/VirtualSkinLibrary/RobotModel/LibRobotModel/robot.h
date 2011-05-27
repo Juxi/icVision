@@ -63,6 +63,10 @@ signals:
 	void observation(RobotObservation obs);								//!< make new marker positions and orientations known
 
 public slots:
+	void setNormalPosition( qreal pos = 0.5 );							//!< Set the position of every joint on the robot.
+																		/**< Position must be on the interval [0,1], if it is out of range, 0 or 1 will be used */
+	bool setNormalPosition( int partNum, int motorNum, qreal pos );		//!< Set the position of a single Motor.
+																		/**< If the value is out of range, the maximum or minimum value will be used accordingly.  */
 	void setEncoderPosition( qreal pos = 0 );							//!< Set the position of every joint on the robot.
 																		/**< If the value is out of range, the maximum or minimum value will be used accordingly. */
 	bool setEncoderPosition( int partNum, int motorNum, qreal pos );	//!< Set the position of a single Motor.
@@ -86,6 +90,7 @@ private:
 	QVector<Marker*>		markers;	//!< list of markers
 
 	int						numLinks;		//!< Number of KinTreeNodes
+	//int						numPrimitives;	//!< Number of geometric primitives
 	bool					isConfigured;	//!< Indicates whether 
 	
 	QMutex mutex;
@@ -100,6 +105,8 @@ private:
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
 																			/**< In case you want to populate the list in reverse order */
 	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list
+	
+	int getNumPrimitives();
 	
 	void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
 	
