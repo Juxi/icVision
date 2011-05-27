@@ -36,6 +36,9 @@ public:
     int displayListIdx() { return index; }	//!< Returns the index of the display list
 											/**< Zero means there is no list yet because makeDisplayList() has not been called */
 	
+	void setSemiTransparent() { semiTransparent = true; }	//!< Render the display list semi-transparent
+	void setOpaque() { semiTransparent = false; }			//!< Render the display list opaque
+	
     void setColliding() { timeSinceLastCollision.restart(); }	//!< Sets the time of last collision to now
 																/**< This is called by Model.collisionHandler( void*, DtObjectRef, DtObjectRef, const DtCollData* ) */ 
     bool isColliding() const;									//!< Determines whether or not the collision timestamp is fresh enough
@@ -61,15 +64,20 @@ protected:
 	void setDisplayListIdx( int idx ) { index = idx; }		//!< Set the display list index
 															/**< The safe thing to do is: setDisplayListIdx( glGenLists(1) )  */
 	DisplMatrix T;											//!< The position/orientation of the display list as a 4x4 rigid-body transformation matrix
-	
+	bool semiTransparent;
+
 private:
 	
     int  index;						//!< The index is passed to glCallLists(int) to render the display list
 	QTime timeSinceLastCollision;	//!< The time stamp of the last collision event
     
+	
     static GLfloat red[4];			//!< A color for rendering
+	static GLfloat transpRed[4];	//!< Another color for rendering
     static GLfloat gray[4];			//!< Another color for rendering
+	static GLfloat transpGray[4];	//!< Another color for rendering
 	static const int collisionTimeout = 400;	//!< Number of milliseconds after collision that objects are still considered "colliding"
+
 };
 
 #endif

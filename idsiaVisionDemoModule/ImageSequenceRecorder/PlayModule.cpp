@@ -1,31 +1,31 @@
 /*
- * RecordModule.cpp
+ * PlayModule.cpp
  *
  *  Created on: May 26, 2011
  *      Author: Davide Migliore
  * 	GPL goes here...
  */
 
-#include "RecordModule.h"
+#include "PlayModule.h"
 
-RecordModule::RecordModule()
+PlayModule::PlayModule()
 {
   // TODO Auto-generated constructor stub
 
 }
 
-RecordModule::~RecordModule()
+PlayModule::~PlayModule()
 {
   // TODO Auto-generated destructor stub
 }
 
-double RecordModule::getPeriod(){
+double PlayModule::getPeriod(){
 
   return 1; //module periodicity (seconds)
 
 }
 
-bool RecordModule::updateModule(){
+bool PlayModule::updateModule(){
 
   //printf("[%d] updateModule\n", count);
   cout<<"["<<framecounter<<" frame]"<< "... ";
@@ -36,7 +36,7 @@ bool RecordModule::updateModule(){
 
   if ( getImageLeft + getImageRight < 1){
     Time::delay(0.1);
-    cout << "not available - " << getImageLeft << "/" << getImageRight << endl;
+    cout<<"not available"<<endl;
   }
   else{
 
@@ -58,11 +58,11 @@ bool RecordModule::updateModule(){
     framecounter++;
 
   }
-	return true;
+
 
 }
 
-bool RecordModule::respond(const Bottle& command, Bottle& reply){
+bool PlayModule::respond(const Bottle& command, Bottle& reply){
 
   cout<<"Got something, echo is on"<<endl;
      if (command.get(0).asString()=="quit" || command.get(0).asString()=="stop"){
@@ -80,7 +80,7 @@ bool RecordModule::respond(const Bottle& command, Bottle& reply){
 
 }
 
-bool RecordModule::configure(yarp::os::ResourceFinder &rf){
+bool PlayModule::configure(yarp::os::ResourceFinder &rf){
 
     framecounter = 0;
   //handlerPort.open("/IMCLEVERVision");
@@ -97,10 +97,8 @@ bool RecordModule::configure(yarp::os::ResourceFinder &rf){
      */
 
     //where to save the images
-    dir4left = "/Users/juxi/Desktop/SaveFolder/";
-    dir4right = "/Users/juxi/Desktop/SaveFolder/";
-//    dir4left = "/home/icub/Desktop/SaveFolder/";
-//		dir4right = "/home/icub/Desktop/SaveFolder/";
+    dir4left = "/home/icub/Desktop/SaveFolder/";
+    dir4right = "/home/icub/Desktop/SaveFolder/";
 
     params.push_back(CV_IMWRITE_PXM_BINARY);
 
@@ -127,22 +125,12 @@ bool RecordModule::configure(yarp::os::ResourceFinder &rf){
       return false;
     }
 
-	if(	Network::connect("/icub/cam/left", inputPortNameLeft.c_str()) &&
-	    Network::connect("/icub/cam/right", inputPortNameRight.c_str())) {
-		cout << "Connected to the iCub Cameras" << endl;
-		return true;
-	}else if( Network::connect("/icubSim/cam/left", inputPortNameLeft.c_str()) &&
-			  Network::connect("/icubSim/cam/right", inputPortNameRight.c_str())) {
-		cout << "Connected to the iCub _!SIMULATOR!_ Cameras" << endl;		
-		return true;
-	} else {
-		cout << getName() << ": Unable to connect ports to either the iCub or the Sim" << endl;
-	}
-	return false;
+    Network::connect("/icub/cam/left",inputPortNameLeft.c_str());
+    Network::connect("/icub/cam/right",inputPortNameRight.c_str());
 
 }
 
-bool RecordModule::interruptModule(){
+bool PlayModule::interruptModule(){
 
   cout<<"Interrupting your module, for port cleanup"<<endl;
   imageInLeft.interrupt();
@@ -152,7 +140,7 @@ bool RecordModule::interruptModule(){
   return true;
 }
 
-bool RecordModule::open(Searchable& config){ //remember to set the object up.
+bool PlayModule::open(Searchable& config){ //remember to set the object up.
   //TODO change the config setting for customizable configuration (ref Taio code)
 
     /* prepare and configure the resource finder */
@@ -172,7 +160,7 @@ bool RecordModule::open(Searchable& config){ //remember to set the object up.
      return true;
 }
 
-bool RecordModule::close(){
+bool PlayModule::close(){
 
   cout<<"Calling close function\n";
   imageInLeft.close();
@@ -182,7 +170,7 @@ bool RecordModule::close(){
   return true;
 }
 
-bool RecordModule::saveImage(Mat& image2save, string directory, string camera, int framecounter, vector<int> & params){
+bool PlayModule::saveImage(Mat& image2save, string directory, string camera, int framecounter, vector<int> & params){
   char numberImage[6];
   stringstream filename;
   sprintf(numberImage, "%.06d", framecounter);

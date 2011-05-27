@@ -130,6 +130,16 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 	}
 }
 
+int KinTreeNode::getNumPrimitives()
+{
+	int result = size();
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=children.begin(); i!=children.end(); ++i ) {
+        result += (*i)->getNumPrimitives();
+    }
+	return result;
+}
+
 void KinTreeNode::print() const
 {
     const qreal* m = M.constData();

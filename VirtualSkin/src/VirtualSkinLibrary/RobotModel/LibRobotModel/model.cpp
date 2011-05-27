@@ -2,7 +2,7 @@
 
 using namespace RobotModel;
 
-Model::Model( bool visualize ) : keepRunning(true), col_count(0)
+Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), keepRunning(true), col_count(0)
 {
 	scene = DT_CreateScene();
 	responseTable =  DT_CreateRespTable();

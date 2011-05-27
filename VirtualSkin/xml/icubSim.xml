@@ -174,7 +174,7 @@
                                 <joint y="-.015" minPos="0" maxPos="90" radius="0.0075">
                                 <link x="-.025" radius=".0075">
                                 
-                                    <sphere radius=".03" px="-.025"/>
+                                    <sphere radius=".012" px="-.025"/>
                                     
                                 </link>
                                 </joint>
@@ -213,8 +213,6 @@
                                 <link z="-.025" radius=".0075">
                             
                                     <sphere radius=".012" pz="-.025"/>
-                                    <sphere radius=".012" py=".02" pz="-.025"/>
-                                    <sphere radius=".012" py="-.02" pz="-.025"/>
                                     
                                 </link>
                                 </joint>
@@ -247,8 +245,6 @@
                                 <link z="-.025" radius=".0075">
                             
                                     <sphere radius=".012" pz="-.025"/>
-                                    <sphere radius=".012" py=".02" pz="-.025"/>
-                                    <sphere radius=".012" py="-.02" pz="-.025"/>
                                     
                                 </link>
                                 </joint>
@@ -279,8 +275,6 @@
                             <link z="-.025" radius=".0075">
                                     
                                     <sphere radius=".011" pz="-.025"/>
-                                    <sphere radius=".011" py=".02" pz="-.025"/>
-                                    <sphere radius=".011" py="-.02" pz="-.025"/>
                                     
                             </link>
                             </joint>
@@ -310,8 +304,6 @@
                             <link z="-.025" radius=".0075">
                                     
                                     <sphere radius=".011" pz="-.025"/>
-                                    <sphere radius=".011" py=".02" pz="-.025"/>
-                                    <sphere radius=".011" py="-.02" pz="-.025"/>
                                     
                             </link>
                             </joint>
@@ -434,7 +426,7 @@
                                 <joint y="-.015" minPos="0" maxPos="90" radius="0.0075">
                                 <link x="-.025" radius=".0075">
                                 
-                                    <sphere radius=".03" px="-.025"/>
+                                    <sphere radius=".012" px="-.025"/>
                                 
                                 </link>
                                 </joint>
@@ -471,8 +463,6 @@
                                 <link z="-.025" radius=".0075">
                             
                                     <sphere radius=".012" pz="-.025"/>
-                                    <sphere radius=".012" py=".02" pz="-.025"/>
-                                    <sphere radius=".012" py="-.02" pz="-.025"/>
                                     
                                 </link>
                                 </joint>
@@ -505,9 +495,7 @@
                                 <link z="-.025" radius=".0075">
                             
                                     <sphere radius=".012" pz="-.025"/>
-                                    <sphere radius=".012" py=".02" pz="-.025"/>
-                                    <sphere radius=".012" py="-.02" pz="-.025"/>
-                                    
+                                                                        
                                 </link>
                                 </joint>
                                 </link>
@@ -537,8 +525,6 @@
                             <link z="-.025" radius=".0075">
                                     
                                     <sphere radius=".011" pz="-.025"/>
-                                    <sphere radius=".011" py=".02" pz="-.025"/>
-                                    <sphere radius=".011" py="-.02" pz="-.025"/>
                                     
                             </link>
                             </joint>
@@ -567,10 +553,7 @@
                             <joint x=".017" minPos="0" maxPos="90" radius="0.0075">
                             <link z="-.025" radius=".0075">
                                     
-                                    <sphere radius=".011" pz="-.025"/>
-                                    <sphere radius=".011" py=".02" pz="-.025"/>
-                                    <sphere radius=".011" py="-.02" pz="-.025"/>
-                                    
+                                    <sphere radius=".011" pz="-.025"/>                                    
                             </link>
                             </joint>
                             </link>

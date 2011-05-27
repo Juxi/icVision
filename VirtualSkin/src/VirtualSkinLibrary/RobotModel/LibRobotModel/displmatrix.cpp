@@ -59,8 +59,12 @@ void DisplMatrix::setCartesianOrientation( const QVector3D& angle )
 				sB = sin( angle.y() ),  cB = cos( angle.y() ),
 				sA = sin( angle.z() ),  cA = cos( angle.z() );
 	
+	//operator()(0,0) = cA*cB;			operator()(0,1) = -sA*cB;				operator()(0,2) =  sB;
+	//operator()(1,0) = sA*cG + cA*sB*sG;	operator()(1,1) =  cA*cG + sA*sB*sG;	operator()(1,2) =  -cB*sG;
+	//operator()(2,0) = sA*sG - cA*sB*cG;	operator()(2,1) =  cA*sG + sA*sB*cG;	operator()(2,2) =   cB*cG;
+	
 	operator()(0,0) = cA*cB;			operator()(0,1) = -sA*cB;				operator()(0,2) =  sB;
-	operator()(1,0) = sA*cG + cA*sB*sG;	operator()(1,1) =  cA*cG + sA*sB*sG;	operator()(1,2) =  -cB*sG;
+	operator()(1,0) = sA*cG + cA*sB*sG;	operator()(1,1) =  cA*cG - sA*sB*sG;	operator()(1,2) =  -cB*sG;
 	operator()(2,0) = sA*sG - cA*sB*cG;	operator()(2,1) =  cA*sG + sA*sB*cG;	operator()(2,2) =   cB*cG;
 }
 void DisplMatrix::cartesianRotate( const QVector3D& angle )
@@ -74,7 +78,7 @@ void DisplMatrix::cartesianRotate( const QVector3D& angle )
 	QMatrix4x4 rot;
 	
 	rot(0,0) = cA*cB;				rot(0,1) = -sA*cB;				rot(0,2) =  sB;
-	rot(1,0) = sA*cG + cA*sB*sG;	rot(1,1) =  cA*cG + sA*sB*sG;	rot(1,2) =  -cB*sG;
+	rot(1,0) = sA*cG + cA*sB*sG;	rot(1,1) =  cA*cG - sA*sB*sG;	rot(1,2) =  -cB*sG;
 	rot(2,0) = sA*sG - cA*sB*cG;	rot(2,1) =  cA*sG + sA*sB*cG;	rot(2,2) =   cB*cG;
 	
 	*this = rot * (*this);

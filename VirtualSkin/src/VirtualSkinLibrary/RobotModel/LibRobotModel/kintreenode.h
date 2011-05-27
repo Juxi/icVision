@@ -57,6 +57,8 @@ public:
 	
 	void render();																	//!< Calls CompositeObject::render() to render the primitives in this KinTreeNode, then calls KintreeNode::render() recursively on children
 	
+	int getNumPrimitives();
+	
 	void print() const;																//!< Prints the member variables to the terminal
 	void printAll();																//!< Recursively calls print() on all nodes
 

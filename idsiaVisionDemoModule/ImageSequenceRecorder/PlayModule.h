@@ -1,13 +1,13 @@
 /*
- * RecordModule.h
+ * PlayModule.h
  *
  *  Created on: May 26, 2011
- *      Author: Davide Migliore
+ *      Author: Juxi Leitner
  * 	GPL goes here...
  */
 
-#ifndef RECORDMODULE_H_
-#define RECORDMODULE_H_
+#ifndef PLAYMODULE_H_
+#define PLAYMODULE_H_
 
 //STD include
 #include <string.h>
@@ -17,18 +17,17 @@
 #include <yarp/sig/all.h>
 #include <yarp/sig/Matrix.h>
 
+#include "RecordModule.h"
+
 //Get opencv libraries
 #include <opencv2/opencv.hpp>
-using namespace cv;
 
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace std;
 using namespace cv;
 
-typedef enum {LEFT, RIGHT, BOTH} recordFlag; //What camera do you want acquire?
-
-class RecordModule : public yarp::os::Module
+class PlayModule : public yarp::os::Module
 {
   private:
 
@@ -61,8 +60,8 @@ class RecordModule : public yarp::os::Module
     bool saveImage(Mat& image2save, string directory, string camera, int framecounter, vector<int> & params);
 
   public:
-    RecordModule();
-    virtual ~RecordModule();
+    PlayModule();
+    virtual ~PlayModule();
     double getPeriod();
     bool updateModule();
     bool respond(const Bottle& command, Bottle& reply);
@@ -72,4 +71,4 @@ class RecordModule : public yarp::os::Module
     bool close();
 };
 
-#endif /* RECORDMODULE_H_ */
+#endif
