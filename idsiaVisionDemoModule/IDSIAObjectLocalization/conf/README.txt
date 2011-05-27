@@ -18,7 +18,7 @@ Once they are running you can launch the software using manager.py and the confi
 Only for Davide
 
 yarpserver &
-yarp conf 195.176.191.68 (90) 10000
+yarp conf 195.176.191.90 10000
 sudo route add -net 10.0.0.0 gw 195.176.191.90 netmask 255.255.0.0
 
 
