@@ -83,7 +83,6 @@ class CVUtils
 
     void estimateDisparityImage(Mat& disparityImage);
     int dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredRect> &right_rectList, vector<WorldObject> &object_list);
-    bool saveImage(Mat& image2save, string directory, int framecounter);
 
     void findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &rect, Mat &outputImage);
 
@@ -93,6 +92,8 @@ class CVUtils
 
   public:
     CVUtils();
+    bool saveImage(Mat& image2save, string directory, int framecounter);
+
     void setUpImageStereoImages(Mat& imageL, Mat& imageR);
     void setUpCamera2World(Mat& left2world, Mat& right2world);
     int detectObjects(vector<WorldObject> &obj_list);

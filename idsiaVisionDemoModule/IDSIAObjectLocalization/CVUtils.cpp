@@ -50,6 +50,7 @@ Mat CVUtils::fundfromcameras(Mat &camera_left, Mat &camera_right, Mat &R, Mat &T
 }
 
 
+
 void CVUtils::fundfromimages(Mat &camera_left, Mat &camera_right){
 
   Size patternsize(8,6); //interior number of corners
@@ -121,9 +122,28 @@ void CVUtils::fundfromimages(Mat &camera_left, Mat &camera_right){
 
     R.convertTo(R, CV_32F);
     T.convertTo(T, CV_32F);
-    F.convertTo(F, CV_32F);
 
-//    Rodrigues(R_vec, R_matrix);
+
+    Mat extRT = Mat::eye(4,4,CV_32F);
+    Mat extRT_R = extRT( Rect(0, 0, 3, 3) );
+    R.copyTo(extRT_R);
+    extRT.at<float>(0,3) = T.at<float>(0,0)/1000;
+    extRT.at<float>(1,3) = T.at<float>(0,1)/1000;
+    extRT.at<float>(2,3) = T.at<float>(0,2)/1000;
+
+    //cout<<extRT<<endl;
+
+
+   // F.convertTo(F, CV_32F);
+
+   // cout<<F<<endl;
+
+    Mat Fext = fundfromcameras(cameraMatrix_left, cameraMatrix_right, R, T);
+    //cout<<Fext<<endl;
+
+    F = Fext;
+
+    //    Rodrigues(R_vec, R_matrix);
 
 //    cout<<R_matrix<<endl;
  //   cout<<T_vec<<endl;
@@ -381,7 +401,7 @@ void CVUtils::colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage)
 
   //cout<<resultingImage<<endl;
   Mat dst;
-  compare(resultingImage, 0.035, binaryImage, CMP_LE);
+  compare(resultingImage, 0.03, binaryImage, CMP_LE);
 
 
   Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3) );
@@ -430,12 +450,12 @@ void CVUtils::detectPossibleColoredObject(Mat &image, Mat& outputMask, vector<Co
           Rect objRect =  boundingRect( Mat(contours_obj[idx]) );
 
           //Draw contours only for debugging
-          //drawContours( outputImage, contours_obj, idx, color, CV_FILLED, 8, hierarchy_obj );
+         // drawContours( outputImage, contours_obj, idx, color, CV_FILLED, 8, hierarchy_obj );
 
           //Increase the BB to capture the background
           objRect = Rect(max(0,objRect.x-5), max(0,objRect.y-5), min(image.cols - objRect.x + 5, objRect.width+10), min(image.rows - objRect.y + 5, objRect.height+10));
 
-          if(objRect.area() > 300){
+          if(objRect.area() > 500){
               Mat roi(outputMask, objRect);
               roi =  Scalar(255);
               listofrect.push_back(ColoredRect(objRect, color, contours_obj[idx]));
@@ -744,7 +764,7 @@ void CVUtils::estimateDisparityImage(Mat& disparityImage){
   R.convertTo(Rtmp, CV_64FC1);
   T.convertTo(Ttmp, CV_64FC1);
 
-  stereoRectify( camleft, distleft, camright, distright, img_size, Rtmp, Ttmp, R1, R2, P1, P2, Q, -1, img_size, &roi1, &roi2 );
+  stereoRectify( camleft, distleft, camright, distright, img_size, Rtmp, Ttmp, R1, R2, P1, P2, Q, -1, -1, img_size, &roi1, &roi2 );
   Mat map11, map12, map21, map22;
   initUndistortRectifyMap(cameraMatrix_left, distCoeffs_left, R1, P1, img_size, CV_16SC2, map11, map12);
   initUndistortRectifyMap(cameraMatrix_right, distCoeffs_right, R2, P2, img_size, CV_16SC2, map21, map22);
@@ -780,10 +800,15 @@ void CVUtils::estimateDisparityImage(Mat& disparityImage){
 
 }
 
+/*
+ * Perform data association beween left and right camera
+ */
 int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredRect> &right_rectList, vector<WorldObject> &object_list){
 
+  //matches between blobs
   vector<DMatch> blobs_matches;
 
+  //Iterate objects in left camera
   for(uint i = 0; i<left_rectList.size(); i++){
 
       ColoredRect currentLeftRect = left_rectList[i];
@@ -791,19 +816,47 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       Scalar colorleft = currentLeftRect.getColor();
       Mat leftobject = Mat(currentLeftRect.getContour());
 
+      //Estimate shape moments
       Moments leftmoments = moments(Mat(currentLeftRect.getContour()));
       Point2f massCenter_left = Point2f(leftmoments.m10/leftmoments.m00, leftmoments.m01/leftmoments.m00);
 
+
+      //Epipolar geometry
       vector<Vec3f> right_epilines;
       vector<Point2f> points_left;
-
-
       undistortPoint(massCenter_left, distCoeffs_left);
       points_left.push_back(massCenter_left);
       computeCorrespondEpilines(Mat(points_left), 1, F, right_epilines);
 
       Vec3f line2test = right_epilines[0];
 
+      /*ONLY FOR DEBUG */
+      for(uint i = 0; i < right_epilines.size(); i++){
+
+           Vec3f line2plot = right_epilines[i];
+
+           float x_borderleft = 0;
+           float y_borderleft = -line2plot[2]/line2plot[1];
+           if(y_borderleft<0){
+               y_borderleft = 0;
+               x_borderleft = -line2plot[2]/line2plot[0];
+           }
+
+           float x_borderright = imageLeft.cols;
+           float y_borderright = (-line2plot[2]-line2plot[0]*x_borderright)/line2plot[1];
+           if(y_borderleft > imageLeft.rows){
+               y_borderleft = imageLeft.rows;
+               x_borderleft = (-line2plot[2]-line2plot[1]*y_borderright)/line2plot[0];
+           }
+
+           Point2f pt1 = Point2f(x_borderleft, y_borderleft);
+           Point2f pt2 = Point2f(x_borderright, y_borderright);
+
+           line(outputImageRight, pt1, pt2, CV_RGB(255,0,0));
+       }
+
+
+      //A possible match is a point (mass center) belonging to the epiline
       double minDistance = DBL_MAX;
       double diffArea = -1;
       int idxright = -1;
@@ -814,28 +867,30 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
 
           Scalar colorright = currentRightRect.getColor();
 
+          //Compare colors
           if(colorleft[0] == colorright[0] && colorleft[1] == colorright[1] && colorleft[2] == colorright[2]){
 
               Moments rightmoments = moments(Mat(currentRightRect.getContour()));
               Point2f massCenter_right = Point2f(rightmoments.m10/rightmoments.m00, rightmoments.m01/rightmoments.m00);
-
               undistortPoint(massCenter_right, distCoeffs_right);
+
+              //Estimate the distance from the epiline
               float dist2line = fabs(line2test[0]*massCenter_right.x + line2test[1]*massCenter_right.y + line2test[2]);
 
-             // cout<<i<<" "<<j<<" "<<dist2line<<endl;
-
+              //if distance is less then a threshold, the dimension are similar and the x and y position are not so far
               if (dist2line < 5 &&
-                  abs(currentLeftRect.getRect().width - currentRightRect.getRect().width)< 5 &&
-                  abs(currentLeftRect.getRect().height - currentRightRect.getRect().height)< 5 &&
+                 // abs(currentLeftRect.getRect().width - currentRightRect.getRect().width)< 20 &&
+                 // abs(currentLeftRect.getRect().height - currentRightRect.getRect().height)< 20 &&
                   abs(massCenter_left.x - massCenter_right.x)< 200 &&
                   abs(massCenter_left.y- massCenter_right.y) < 200){
+
                 Mat rightobject = Mat(currentRightRect.getContour());
                 double distance =  matchShapes(leftobject, rightobject, CV_CONTOURS_MATCH_I3, 0);
 
+                //Match also the shape
                 if(distance < minDistance){
                     minDistance = distance;
                     idxright = j;
-
                 }
               }
 
@@ -843,30 +898,32 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
 
       }
 
+      //If a matching is found
       if(idxright != -1){
-
     //    cout<<i<<" with "<<idxright<<" and distance "<<minDistance<<endl;
         char numberobj[2];
         stringstream left,right;
-        sprintf(numberobj, "%.02d", i);
+        sprintf(numberobj, "%d->%d", i, idxright);
         left<<numberobj;
 
+        //Only for debugging
         putText(outputImageLeft, left.str(), currentLeftRect.getBBTopLeftCorner(), FONT_HERSHEY_DUPLEX , 0.5, CV_RGB(0,0,0));
 
-        sprintf(numberobj, "%.02d", idxright);
+        sprintf(numberobj, "%d->%d", idxright, i);
         right<<numberobj;
-
+        //Only for debugging
         putText(outputImageRight, right.str(), right_rectList[idxright].getBBTopLeftCorner(), FONT_HERSHEY_DUPLEX , 0.5, CV_RGB(0,0,0));
 
-        blobs_matches.push_back(DMatch(idxright, i, minDistance)); //query and after train
+        //Add the blob match in blobs
+        blobs_matches.push_back(DMatch(idxright, i, minDistance)); //query first and after train
       }
 
   }
 
   //Now we have a list of pairs representing the matching
  // object_list.clear(); // TODO remove it!
-
   int newobjs = 0;
+
   //We can start to work on objects
   vector<Point3f> listof3Dpoints;
   for(uint i = 0; i<blobs_matches.size(); i++){
@@ -884,15 +941,14 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
 
  //     double orientation = 180*(0.5*atan(2*leftmoments.mu11/(leftmoments.mu20 - leftmoments.mu02)))/CV_PI;
 
-
       RotatedRect leftRRect = leftbb.getRotatedRect();
       RotatedRect rightRRect = rightbb.getRotatedRect();
 
       Size2f areaDist = leftRRect.size - rightRRect.size;
       double areaL2Dist = abs(areaDist.width*areaDist.width - areaDist.height*areaDist.height);
 
-      //This triangulate points is based on barycenter (TODO improve it)
-    //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
+      //This triangulate points is based on center mass (TODO improve it)
+     //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
 
       Point3f poseWrtLeft;
@@ -900,55 +956,68 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       poseWrtLeft.y = point3dLeft.at<float>(1,0);
       poseWrtLeft.z = point3dLeft.at<float>(2,0);
 
-      cout<<"Camera position "<<blobs_matches[i].trainIdx<<" position "<<poseWrtLeft.x<<" "<<poseWrtLeft.y<<" "<<poseWrtLeft.z<<endl;
-
       Mat rotatedpoint3Dpoint;
+      Point3f poseWrtWorld;
 
-      if( !RT_left.empty() ){
-          Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
-          rotatedpoint3Dpoint = RT_left*hompoint3dLeft;
-         // cout<<rotatedpoint3Dpoint<<endl;
 
-          poseWrtLeft.x = rotatedpoint3Dpoint.at<float>(0,0);
-          poseWrtLeft.y = rotatedpoint3Dpoint.at<float>(1,0);
-          poseWrtLeft.z = rotatedpoint3Dpoint.at<float>(2,0);
-
+      //If we have the rototraslation from Left to World
+      if( RT_left.empty() ){
+    	  cout<<"ERROR"<<endl;
       }
 
+      Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
+      rotatedpoint3Dpoint = RT_left*hompoint3dLeft;
+      // cout<<rotatedpoint3Dpoint<<endl;
+
+      poseWrtWorld.x = rotatedpoint3Dpoint.at<float>(0,0)/rotatedpoint3Dpoint.at<float>(3,0);
+      poseWrtWorld.y = rotatedpoint3Dpoint.at<float>(1,0)/rotatedpoint3Dpoint.at<float>(3,0);
+      poseWrtWorld.z = rotatedpoint3Dpoint.at<float>(2,0)/rotatedpoint3Dpoint.at<float>(3,0);
+
+
+
+      //only for debugging
+      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position "<<poseWrtWorld<<endl;
+
+
+      //Data association between stored object and new objects founded
       bool associated = false;
       double mindistance = DBL_MAX;
-
       int indexoo= -1;
 
       for(uint oo = 0; oo < object_list.size(); oo++){
           //associate old object with new measurements
 
          // cout << object_list[oo].getObjPosition().x << " " << object_list[oo].getObjPosition().y << " " << object_list[oo].getObjPosition().z << endl;
-          double distvalue = object_list[oo].matchColoredRects(leftbb, rightbb, poseWrtLeft);
-
+          //
+          double distvalue = object_list[oo].matchColoredRects(leftbb, rightbb, poseWrtWorld);
           if( distvalue < mindistance){
               mindistance = distvalue;
               indexoo = oo;
           }
-
           //mindistance = min(mindistance, distvalue);
          // cout<<distvalue<<endl; TODO change it with the position prediction
 
       }
 
-      //TODO this data association is one way!
-      if (mindistance < 0.1){
+      //TODO this data association is one way! Is based on a distance between the stored and the current object, cosindering also the colors
+      if (mindistance < 0.1 && 	  poseWrtWorld.x < 0 && poseWrtWorld.x > -1){
           associated = true;
+          //Only for debugging
           cout<<"Associated with "<<object_list[indexoo].getId()<<" with distance "<<mindistance<<endl;
-          object_list[indexoo].changeData(leftbb, rightbb, poseWrtLeft);
+          //Update the pose
+          object_list[indexoo].changeData(leftbb, rightbb, poseWrtWorld);
       }
 
-
-      if( !associated && !RT_left.empty() ){
+      //If there are no associations create a new object
+      if( !associated && !RT_left.empty() && poseWrtWorld.x < 0 && poseWrtWorld.x > -1){
           cout<<"Not associated because distance is "<<mindistance<<" , I am creating the new object "<<objId<<endl;
-          object_list.push_back(WorldObject(leftbb, rightbb, objId, poseWrtLeft));
+          object_list.push_back(WorldObject(leftbb, rightbb, objId, poseWrtWorld));
           objId++;
           newobjs++;
+      }
+
+      if (poseWrtWorld.x > 0 || poseWrtWorld.x < -0.5){
+    	  cout<<"*** Object rejected because its pose is "<<poseWrtWorld<<" id "<<objId<<endl;
       }
 
   }
@@ -1005,6 +1074,9 @@ bool CVUtils::saveImage(Mat& image2save, string directory, int framecounter){
   return imwrite(filename.str(), image2save ,params);
 }
 
+/*
+ * Detect colored objects
+ */
 int CVUtils::detectObjects(vector<WorldObject> &obj_list){
 
   int numberOfNewObject = 0;
@@ -1012,17 +1084,23 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       return 0;
   }
 
+  //Only for debug
   //  object_list.clear();
+
+  //List of possible object represented as a rectangle with color
   vector<ColoredRect> left_rectList, right_rectList;
   Mat maskLeft, maskRight;
 
+  //Detect colore object in left and right camera
   detectPossibleColoredObject(imageLeft, maskLeft, left_rectList, outputImageLeft);
   cout<<"Found "<<left_rectList.size()<<" possible objects in left image"<<endl;
   detectPossibleColoredObject(imageRight, maskRight, right_rectList, outputImageRight);
   cout<<"Found "<<right_rectList.size()<<" possible objects in right image"<<endl;
 
+  //Perform data association between left and right camera
   numberOfNewObject =  dataAssociation(left_rectList, right_rectList, obj_list);
 
+  //For each object estimate position and orientation
   for(uint oo = 0; oo<obj_list.size(); oo++){
       char numberobj[2];
       stringstream left,right;

@@ -15,7 +15,7 @@ void myMessageOutput(QtMsgType type, const char *msg)
         fprintf(stderr, "Debug: %s\n", msg);
         break;
     case QtWarningMsg:
-        //fprintf(stderr, "Warning: %s\n", msg);
+        fprintf(stderr, "Warning: %s\n", msg);
         break;
     case QtCriticalMsg:
         fprintf(stderr, "Critical: %s\n", msg);
@@ -28,6 +28,7 @@ void myMessageOutput(QtMsgType type, const char *msg)
 
 int main(int argc, char * argv[]) {
 
+	//Only for QT windows
   qInstallMsgHandler(myMessageOutput);
 
   Network yarp; // set up yarp

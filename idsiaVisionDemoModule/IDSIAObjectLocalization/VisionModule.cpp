@@ -117,26 +117,27 @@ bool VisionModule::updateModule()
 
       vision->setUpCamera2World(RT_left, RT_right);
 
-      //TODO Test if it is possible estimate the F matrix from encoder readings
-//      Mat RT_w2r = RT_right.inv();
-// //    Mat RT_w2l = RT_left.inv();
-//
-//       Mat RT_l2r = RT_w2r*RT_left;
-//
-//       cout<<RT_l2r<<endl;
-
+/*
+      Mat RT_w2r = RT_right.inv();
+	  Mat RT_w2l = RT_left.inv();
+	  Mat RT_l2r = RT_w2r*RT_left;
+	  Mat RT_tmp = RT_left*RT_w2r;
+	  cout<<RT_l2r<<endl;
+*/
    }
   else{
-      //We have to compute the RT Matrix
+      //We nned to estimate the RT Matrix
   }
 
-  if ( getImageLeft + getImageRight > 1){
+  if ( getImageLeft + getImageRight > 1 && receivedHead && receivedTorso){
 
     iCubleft = imageInLeft.read();  // read an image
     iCubright = imageInRight.read();  // read an image
 
     imageLeft = Mat((IplImage*)iCubleft->getIplImage(),false);
     imageRight = Mat((IplImage*)iCubright->getIplImage(),false);
+
+   // vision->saveImage(imageLeft, "/home/icub/Desktop/test/", count);
 
     vision->setUpImageStereoImages(imageLeft, imageRight);
     cout<<"New objects detected: "<<vision->detectObjects(object_list)<<endl;
@@ -155,6 +156,7 @@ bool VisionModule::updateModule()
       imageLeftTmp.resize(outputImageLeft.cols,outputImageLeft.rows);
       imageRightTmp.resize(outputImageRight.cols,outputImageRight.rows);
 
+
       IplImage image_iplLeftimage = (IplImage) outputImageLeft;
       IplImage image_iplRightimage = (IplImage) outputImageRight;
 
@@ -168,37 +170,38 @@ bool VisionModule::updateModule()
 
 
 
-    for(uint i=0; i<object_list.size(); i++){
+    if(sendData2Sim){
+		for(uint i=0; i<object_list.size(); i++){
 
-        //Send object position on the port
-        Bottle output_message,answer;
-        ostringstream buffer2send;
-//        output_message.clear();
-//        answer.clear();
-//        buffer2send.clear();
-//        flush(buffer2send);
+			//Send object position on the port
+			Bottle output_message,answer;
+			ostringstream buffer2send;
+	//        output_message.clear();
+	//        answer.clear();
+	//        buffer2send.clear();
+	//        flush(buffer2send);
 
-        string command2send = object_list[i].getSimCommand(POSE, isICubSim);
-        cout<<"Command transmitted: "<<endl;
-        cout<<command2send<<endl;
-        buffer2send<<command2send;
-        output_message.fromString(buffer2send.str().c_str());
-        moduleOutput.write(output_message, answer);
-        cout<<"Answer : "<<answer.toString()<<endl;
+			string command2send = object_list[i].getSimCommand(POSE, isICubSim);
+			cout<<"Command transmitted: "<<endl;
+			cout<<command2send<<endl;
+			buffer2send<<command2send;
+			output_message.fromString(buffer2send.str().c_str());
+			moduleOutput.write(output_message, answer);
+			cout<<"Answer : "<<answer.toString()<<endl;
 
-//        output_message.clear();
-//        answer.clear();
-//        flush(buffer2send);
-//
-//        cout<<"Command transmitted: "<<endl;
-//        cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
-//        buffer2send<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
-//        output_message.fromString(buffer2send.str().c_str());
-//        moduleOutput.write(output_message, answer);
-//        cout<<"Answer : "<<answer.toString()<<endl;
+	//        output_message.clear();
+	//        answer.clear();
+	//        flush(buffer2send);
+	//
+	//        cout<<"Command transmitted: "<<endl;
+	//        cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
+	//        buffer2send<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
+	//        output_message.fromString(buffer2send.str().c_str());
+	//        moduleOutput.write(output_message, answer);
+	//        cout<<"Answer : "<<answer.toString()<<endl;
 
+		}
     }
-
 
   }
 
@@ -240,6 +243,8 @@ bool VisionModule::configure(yarp::os::ResourceFinder &rf)
   //attachTerminal();
 
   isICubSim = true;
+
+  sendData2Sim = false;
 
  /* Process all parameters from both command-line and .ini file */
 
@@ -342,6 +347,13 @@ bool VisionModule::configure(yarp::os::ResourceFinder &rf)
 
     /*Vision utils*/
     vision = new CVUtils();
+
+    //Connect ports
+
+    Network::connect("/icub/cam/left","/IMCLEVERVision/left/image:i");
+    Network::connect("/icub/cam/right","/IMCLEVERVision/right/image:i");
+    Network::connect("/icub/head/state:o","/IMCLEVERVision/head:i");
+    Network::connect("/icub/torso/state:o","/IMCLEVERVision/torso:i");
 
    return true ;      // let the RFModule know everything went well
 }
