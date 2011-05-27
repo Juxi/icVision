@@ -4,15 +4,22 @@
 
 using namespace RobotModel;
 
+GLfloat GLWidget::lightPosition[3][4] = {  { 0.0, -1.0, 1.0, 0.0 },
+{ 1.0, 0.0, 1.0, 0.0 },
+{ 0.0, 1.0, 0.0, 0.0 } };
+GLfloat GLWidget::lightColor[3][4] = { { 1.0, 1.0, 1.0, 1.0 },
+{ 0.5, 0.5, 0.5, 1.0 },
+{ 0.1, 0.1, 0.1, 1.0 } };
+
 GLWidget::GLWidget(QWidget *parent)
     : QGLWidget(parent)
 {	
     xRot = 0;
     yRot = 0;
     zRot = 0;
-
-    trolltechPurple = QColor::fromCmykF(0.39, 0.39, 0.0, 0.0);
-	
+	aspect = 16.0/9.0;
+	zoom = 0.4;   // lower numbers are more zoomed in
+    trolltechPurple = QColor::fromRgbF(0.9, 0.9, 0.9, 1.0);
 	timeSinceLastRender.start();
 }
 
@@ -22,33 +29,36 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
-	//printf("*** INITIALIZE GL ***\n");
-	
-	//QVector<RobotModel::DisplayList*>::iterator i;
-	//for(i=displayListList.begin(); i!=displayListList.end(); ++i)
-	//{
-	//	(*i)->makeDisplayList();
-	//}
-	
-    qglClearColor(trolltechPurple.dark());
+    qglClearColor(trolltechPurple);
 
-    glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glClearDepth(1.0);		
+	glDepthFunc(GL_LEQUAL);
+	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	glEnable(GL_BLEND);
+	
+	glAlphaFunc(GL_GREATER,0.1);
+	glEnable(GL_ALPHA_TEST);						
+
+	glFrontFace(GL_CW);
     glShadeModel(GL_SMOOTH);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+	
+	
+	glEnable(GL_LIGHTING);
+	
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition[0]);
+	glLightfv(GL_LIGHT0, GL_AMBIENT_AND_DIFFUSE, lightColor[0]);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor[0]);
+	glEnable(GL_LIGHT0);
+	
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition[1]);
+	glLightfv(GL_LIGHT1, GL_AMBIENT_AND_DIFFUSE, lightColor[1]);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor[1]);
 	glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHT2);
-    //glEnable(GL_MULTISAMPLE);
 	
-    static GLfloat lightPosition0[4] = { -.2, -.5, 1, 0 };
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
-	
-	static GLfloat lightPosition1[4] = { 1, 1, 1, 0 };
-    glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
-	
-	static GLfloat lightPosition2[4] = { 1, 0, 0, 0 };
-    glLightfv(GL_LIGHT2, GL_POSITION, lightPosition2);
+
 	
 	//printf("*** INITIALIZE GL EXITED ***\n");
 }
@@ -58,19 +68,20 @@ void GLWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glTranslated(0.0, 0.10, -10.0);
-    glRotated(xRot / 16.0, 1.0, 0.0, 0.0);
-    glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
-    glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
-
+	
 	QMatrix4x4 flip;
 	flip(1,1) = -1;
 	glMultMatrixd( flip.constData() );
 	
 	RobotModel::DisplMatrix rot;
-	rot.setCartesianOrientation( QVector3D(-90, 0, 90) );
+	rot.setCartesianOrientation( QVector3D(-M_PI/2, 0, M_PI/2) );
 	glMultMatrixd( rot.constData() );
 	
-	drawCS();
+    glRotated(xRot / 16.0, 1.0, 0.0, 0.0);
+    glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
+    glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
+	
+	//drawCS();
 	emit renderStuff();
 	//printf("paintGL exits\n");
 }
@@ -91,12 +102,24 @@ void GLWidget::removeDisplayList( int idx )
 
 void GLWidget::resizeGL(int width, int height)
 {
-    int side = qMin(width, height);
-    glViewport((width - side) / 2, (height - side) / 2, side, side);
+	int x,y;
+	if ( width/height > aspect )
+	{
+		y = height;
+		x = aspect*height;
+	}
+	else
+	{
+		x = width;
+		y = width/aspect;
+	}
+	
+    glViewport((width - x) / 2, (height - y) / 2, x, y);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-0.5, +0.5, +0.5, -0.5, 4.0, 15.0);
+
+    glOrtho(-aspect*zoom, +aspect*zoom, +zoom, -zoom, 1.0, 20.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -111,11 +134,11 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
     int dy = event->y() - lastPos.y();
 
     if (event->buttons() & Qt::LeftButton) {
-        setXRotation(xRot - 8 * dy);
-        setYRotation(yRot + 8 * dx);
+        setYRotation(yRot - 8 * dy);
+        setZRotation(zRot + 8 * dx);
     } else if (event->buttons() & Qt::RightButton) {
         setXRotation(xRot - 8 * dy);
-        setZRotation(zRot - 8 * dx);
+        setZRotation(zRot + 8 * dx);
     }
     lastPos = event->pos();
 }
@@ -130,12 +153,16 @@ void GLWidget::normalizeAngle(int *angle)
 
 QSize GLWidget::minimumSizeHint() const
 {
-    return QSize(50, 50);
+	int y = 50;
+	int x = static_cast<int> (y*aspect);
+    return QSize(x, y);
 }
 
 QSize GLWidget::sizeHint() const
 {
-    return QSize(400, 400);
+	int y = 400;
+	int x = static_cast<int> (y*aspect);
+    return QSize(x, y);
 }
 
 void GLWidget::setXRotation(int angle)
@@ -168,6 +195,18 @@ void GLWidget::setZRotation(int angle)
     }
 }
 
+
+void GLWidget::update(int i)
+{ 
+	if ( timeSinceLastRender.elapsed() > 5 )
+	{
+		//printf("UPDATE GL - %p\n",QThread::currentThread());
+		QGLWidget::updateGL();
+	}
+	
+	timeSinceLastRender.restart();
+}
+
 void GLWidget::drawCS()
 {
     GLfloat red[] = {1,0,0,1};
@@ -187,15 +226,4 @@ void GLWidget::drawCS()
 	glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, blue);
 	glVertex3f(0,0,0); glVertex3f(0,0,1);
     glEnd();
-}
-
-void GLWidget::update(int i)
-{ 
-	if ( timeSinceLastRender.elapsed() > 5 )
-	{
-		//printf("UPDATE GL - %p\n",QThread::currentThread());
-		QGLWidget::updateGL();
-	}
-	
-	timeSinceLastRender.restart();
 }

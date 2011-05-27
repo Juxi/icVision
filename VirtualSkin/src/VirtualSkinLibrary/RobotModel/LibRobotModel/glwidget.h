@@ -78,10 +78,13 @@ private:
     int zRot;				//!< see HelloGL example
     QPoint lastPos;			//!< see HelloGL example
     QColor trolltechPurple;	//!< see HelloGL example
+	qreal aspect, zoom;
 	
 	QTime timeSinceLastRender;
 	
 	//QVector<RobotModel::DisplayList*> displayListList;
+	static GLfloat lightPosition[3][4];
+	static GLfloat lightColor[3][4];
 };
 
 #endif

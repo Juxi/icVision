@@ -132,7 +132,6 @@ bool World::remove( CompositeObject* obj )
 	bool foundObject = false;
 	
 	mutex.lock();
-	
 		QVector<CompositeObject*>::iterator i;
 		for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
 			if ( *i == obj ) {
@@ -141,19 +140,18 @@ bool World::remove( CompositeObject* obj )
 				break;
 			}
 		}
-		
-		QVector<PrimitiveObject*>::iterator j;
-		for ( j=obj->end(); j!=obj->begin(); )
-		{
-			--j;
-			emit outdatedDisplayList( (*j)->displayListIdx() );
-			obj->remove(*j);
-		}
-		emit outdatedDisplayList( obj->displayListIdx() );
-		
-		delete(obj);
-	
 	mutex.unlock();
+	
+	QVector<PrimitiveObject*>::iterator j;
+	for ( j=obj->end(); j!=obj->begin(); )
+	{
+		--j;
+		emit outdatedDisplayList( (*j)->displayListIdx() );
+		obj->remove(*j);
+	}
+	emit outdatedDisplayList( obj->displayListIdx() );
+	
+	delete(obj);
 	
 	return foundObject;
 }
@@ -169,14 +167,14 @@ bool World::removePrimitive( CompositeObject* object, PrimitiveObject* primitive
 
 void World::clear()
 {
-	mutex.lock();
-	
 	QVector<CompositeObject*>::iterator i;
-	for ( i=objectList.begin(); i!=objectList.end(); ++i ) { remove(*i); }
+	for ( i=objectList.end(); i!=objectList.begin(); )
+	{ 
+		--i;
+		remove(*i);
+	}
 	
 	numBoxes = 0;		numSBoxes = 0;
 	numCylinders = 0;	numSCylinders = 0;
 	numSpheres = 0;		numSSpheres = 0;
-	
-	mutex.unlock();
 }

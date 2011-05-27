@@ -61,7 +61,7 @@ bool Robot::open(const QString& fileName, bool verbose)
 		return false;
 	}
 	
-	if (verbose) printf("Created Robot: %s\n",getName().toStdString().c_str());
+	if (verbose) printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
 	
 	filterCollisionPairs();
 	home(verbose);
@@ -88,6 +88,20 @@ void Robot::home(bool verbose)
 	updatePose();
 }
 
+void Robot::setNormalPosition( qreal pos )
+{
+	//QMutexLocker locker(&mutex);
+	
+    QVector<BodyPart*>::iterator i;
+    QVector<Motor*>::iterator j;
+	
+	//printf("Setting all positions to %f\n", pos);
+    for ( i=partList.begin(); i!=partList.end(); ++i ) {
+        for ( j = (*i)->begin(); j != (*i)->end(); ++j ) {
+            (*j)->setNormPos(pos);
+        }
+    }
+}
 void Robot::setEncoderPosition( qreal pos )                                        // for every motor on the robot
 {
 	QMutexLocker locker(&mutex);
@@ -95,7 +109,7 @@ void Robot::setEncoderPosition( qreal pos )                                     
     QVector<BodyPart*>::iterator i;
     QVector<Motor*>::iterator j;
 
-	printf("Setting all positions to %f\n", pos);
+	//printf("Setting all positions to %f\n", pos);
     for ( i=partList.begin(); i!=partList.end(); ++i ) {
         for ( j = (*i)->begin(); j != (*i)->end(); ++j ) {
             (*j)->setEncPos(pos);
@@ -110,6 +124,17 @@ bool Robot::setEncoderPosition(int partNum, const QVector<qreal>& pos)          
 	//printf("called setEncoderPosition() - size %i \n", pos.size() );
     if ( partIdxInRange(partNum) ) {
         return partList.at(partNum)->setEncPos(pos);
+    }
+    else { return 0; }
+}
+
+bool Robot::setNormalPosition( int partNum, int motorNum, qreal pos )           // for only one motor (using normal position)
+{
+	QMutexLocker locker(&mutex);
+	
+    if ( partIdxInRange(partNum) && motorIdxInRange(partNum,motorNum) ) {
+        partList.at(partNum)->at(motorNum)->setNormPos(pos);
+        return 1;
     }
     else { return 0; }
 }
@@ -220,6 +245,15 @@ Motor* Robot::getMotorByName(const QString &motorName)
     return 0;
 }
 
+int Robot::getNumPrimitives()
+{
+	int result = 0;
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=tree.begin(); i!=tree.end(); ++i ) {
+        result += (*i)->getNumPrimitives();
+    }
+	return result;
+}
 void Robot::printLinks()
 {
     QVector<KinTreeNode*>::iterator i;

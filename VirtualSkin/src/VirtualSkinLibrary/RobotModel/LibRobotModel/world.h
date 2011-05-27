@@ -57,6 +57,8 @@ public:
 																						 to inform GLWidget that the PrimitiveObject is gone */	
 	void clear();																	//!< Deletes everything in the World and resets counters
 																					/**< This returns the World to the state it was in just after construction */
+
+	int size() { return objectList.size(); }
 private:
 	
 	void render();		//!< Calls display lists for all objects in the World using glCallLists( int )

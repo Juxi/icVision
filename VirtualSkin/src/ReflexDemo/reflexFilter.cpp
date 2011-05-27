@@ -63,7 +63,7 @@ void ReflexFilter::collisionResponse()
 			printf("%s\n",rewind.toString().c_str());	// print the position move command
 			cbFilters.at(bodyPart)->injectCall(rewind);	// send the position move command
 		}
-	}
+	}/**/
 }
 
 void ReflexFilter::responseComplete()
@@ -83,6 +83,6 @@ void ReflexFilter::responseComplete()
 	{
 		printf(".");
 		msleep(YARP_PERIOD_ms);
-	}
+	}/**/
 	//printf("\n");
 }
