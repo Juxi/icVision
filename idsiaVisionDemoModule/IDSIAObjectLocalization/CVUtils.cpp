@@ -1062,31 +1062,6 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
 
-<<<<<<< HEAD
-//  //Create camera matrix
-//
-//  P_left = Mat::zeros(3,4,CV_64FC1);
-//
-//  Mat iR_left = iRT_left(Rect(0,0,3,3));
-//  Mat iT_left = iRT_left(Rect(0,3,0,3));
-//
-//  Mat P_left_tmpR = P_left(Rect(0,0,3,3));
-//  Mat P_left_tmpT = P_left(Rect(0,3,0,3));
-//
-//  P_left_tmpR = cameraMatrix_left*iR_left;
-//  P_left_tmpT = cameraMatrix_left*iT_left;
-//
-//  P_right = Mat::zeros(3,4,CV_64FC1);
-//
-//  Mat iR_right = iRT_left(Rect(0,0,3,3));
-//  Mat iT_right = iRT_left(Rect(0,3,0,3));
-//
-//  Mat P_right_tmpR = P_left(Rect(0,0,3,3));
-//  Mat P_right_tmpT = P_left(Rect(0,3,0,3));
-//
-//  P_right_tmpR = cameraMatrix_left*iR_right;
-//  P_right_tmpT = cameraMatrix_left*iT_right;
-=======
   //Create camera matrix
 
   P_left = Mat::zeros(3,4, iRT_left.type());
@@ -1109,7 +1084,6 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   Mat tmprT = cameraMatrix_right*iT_right;
   tmprR.copyTo(P_right_tmpR);
   tmprT.copyTo(P_right_tmpT);
->>>>>>> 1be30eb69322a38a202b7c8ec6674b3d81bcc04c
 
 }
 
