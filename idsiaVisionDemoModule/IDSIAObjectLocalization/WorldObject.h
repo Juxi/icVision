@@ -33,6 +33,7 @@ class WorldObject
     double bank, heading, attitude;
     Point3f position;
     double radius;
+    double lenght;
     double boxSize1, boxSize2, boxSize3;
 
     //Maybe not here

@@ -61,7 +61,8 @@ class VisionModule :public Module
     bool receivedTorso;
 
     //output Module
-    Port moduleOutput;
+    //Port moduleOutput;
+    BufferedPort<yarp::os::Bottle> moduleOutput;
 
     /* to estimate obj position in the world*/
     iCub::iKin::iCubEye   *eye_left, *eye_right;

@@ -401,7 +401,7 @@ void CVUtils::colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage)
 
   //cout<<resultingImage<<endl;
   Mat dst;
-  compare(resultingImage, 0.03, binaryImage, CMP_LE);
+  compare(resultingImage, 0.02, binaryImage, CMP_LE); //0.03
 
 
   Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3) );
@@ -455,7 +455,7 @@ void CVUtils::detectPossibleColoredObject(Mat &image, Mat& outputMask, vector<Co
           //Increase the BB to capture the background
           objRect = Rect(max(0,objRect.x-5), max(0,objRect.y-5), min(image.cols - objRect.x + 5, objRect.width+10), min(image.rows - objRect.y + 5, objRect.height+10));
 
-          if(objRect.area() > 500){
+          if(objRect.area() > 650){
               Mat roi(outputMask, objRect);
               roi =  Scalar(255);
               listofrect.push_back(ColoredRect(objRect, color, contours_obj[idx]));
@@ -831,9 +831,9 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       Vec3f line2test = right_epilines[0];
 
       /*ONLY FOR DEBUG */
-      for(uint i = 0; i < right_epilines.size(); i++){
+      for(uint ii = 0; ii < right_epilines.size(); ii++){
 
-           Vec3f line2plot = right_epilines[i];
+           Vec3f line2plot = right_epilines[ii];
 
            float x_borderleft = 0;
            float y_borderleft = -line2plot[2]/line2plot[1];
@@ -1016,7 +1016,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
           newobjs++;
       }
 
-      if (poseWrtWorld.x > 0 || poseWrtWorld.x < -0.5){
+      if (poseWrtWorld.x > 0 || poseWrtWorld.x < -1){
     	  cout<<"*** Object rejected because its pose is "<<poseWrtWorld<<" id "<<objId<<endl;
       }
 
@@ -1062,6 +1062,7 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
 
+<<<<<<< HEAD
 //  //Create camera matrix
 //
 //  P_left = Mat::zeros(3,4,CV_64FC1);
@@ -1085,6 +1086,30 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 //
 //  P_right_tmpR = cameraMatrix_left*iR_right;
 //  P_right_tmpT = cameraMatrix_left*iT_right;
+=======
+  //Create camera matrix
+
+  P_left = Mat::zeros(3,4, iRT_left.type());
+
+  Mat iR_left = iRT_left(Rect(0,0,3,3));
+  Mat iT_left =  iRT_left(Rect(3,0,1,3));
+  Mat P_left_tmpR = P_left(Rect(0,0,3,3));
+  Mat P_left_tmpT = P_left(Rect(3,0,1,3));
+  Mat tmplR = cameraMatrix_left*iR_left;
+  Mat tmplT = cameraMatrix_left*iT_left;
+  tmplR.copyTo(P_left_tmpR);
+  tmplT.copyTo(P_left_tmpT);
+
+  P_right = Mat::zeros(3,4,iRT_right.type());
+  Mat iR_right = iRT_right(Rect(0,0,3,3));
+  Mat iT_right =  iRT_right(Rect(3,0,1,3));
+  Mat P_right_tmpR = P_right(Rect(0,0,3,3));
+  Mat P_right_tmpT = P_right(Rect(3,0,1,3));
+  Mat tmprR = cameraMatrix_right*iR_right;
+  Mat tmprT = cameraMatrix_right*iT_right;
+  tmprR.copyTo(P_right_tmpR);
+  tmprT.copyTo(P_right_tmpT);
+>>>>>>> 1be30eb69322a38a202b7c8ec6674b3d81bcc04c
 
 }
 
