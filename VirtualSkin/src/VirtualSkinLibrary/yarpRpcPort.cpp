@@ -12,8 +12,9 @@
 
 using namespace VirtualSkin;
 
-YarpRpcPort::YarpRpcPort() : keepListening(true), debug(false)
+YarpRpcPort::YarpRpcPort() : keepListening(true), debug(true)
 {
+	port.setStrict();
 }
 YarpRpcPort::~YarpRpcPort()
 {
@@ -41,14 +42,17 @@ void YarpRpcPort::run()
 	//printf("Starting RPC server...\n");
 	
 	yarp::os::Bottle* cmd;
-    while ( keepListening ) {
+	yarp::os::Bottle& reply = port.prepare();
+    while ( keepListening )
+	{
 		cmd = port.read(false);
 		if (cmd!=NULL)
 		{
-			yarp::os::Bottle& reply = port.prepare(); 
+			reply.clear();
 			if (debug) { showBottle(*cmd); }
 			if ( !handler(*cmd,reply) ) { reply.addString("Unknown Command! Type 'help' for a list of valid commands."); }
-			port.write();
+			port.writeStrict();
+			if (debug) { printf("reply: %s\n",reply.toString().c_str()); }
 		}
 		usleep(YARP_PERIOD_us);
     }
@@ -94,7 +98,7 @@ void YarpRpcPort::showBottle( yarp::os::Bottle& anUnknownBottle, int indentation
 void YarpRpcPort::close()
 {
 	keepListening = false;
-	while (isRunning()) {}
+	while (isRunning()) { msleep(1); }
 }
 
 void YarpRpcPort::restart()
