@@ -40,7 +40,9 @@ class CVUtils
     Mat R, T, E;
     Mat F;
 
-    Mat RT_left, RT_right;
+    Mat RT_left, RT_right, iRT_left, iRT_right;
+
+    Mat P_left, P_right;
 
     bool saveImages, useUndistImages, recomputeF;
 
@@ -51,7 +53,9 @@ class CVUtils
          Mat& R, Mat& T, Mat & dist_l, Mat & dist_r,
          Mat& cameraMatrix_l, Mat& cameraMatrix_r,
          Mat& point3DLeft, Mat& point3DRight);
-    void triangulatePoint(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);
+    void triangulatePoint(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);\
+    void triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);
+
 
     void undistortPoint(Mat &point, Mat &dist);
     void undistortPoint(Point2f &point, Mat &dist);

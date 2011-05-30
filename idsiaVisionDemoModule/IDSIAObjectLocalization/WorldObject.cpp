@@ -20,14 +20,23 @@ WorldObject::WorldObject(ColoredRect & rect_left, ColoredRect & rect_right, int 
   position = pos;
 
   //only for demonstration
-  shapeis = SPHERE;
+/*  shapeis = SPHERE;
   radius = 0.01;
   bank = 0;
   heading = 0;
-  attitude = 0;
+  attitude = 0;*/
+   shapeis = CYLINDER;
+   radius = 0.04;
+   lenght = 0.08;
+   bank = CV_PI/2;
+   heading = 0;
+   attitude = 0;
+
+
 
   //Configure W2SimRot T = [ 0 -1 0 0; 0 0 1 0.5484; -1 0 0 -0.04; 0 0 0 1 ]
-  w2SimRot =  (Mat_<float>(4,4) << 0, -1, 0, 0, 0, 0, 1, 0.5484, -1, 0, 0, -0.04, 0, 0, 0, 1 );
+//  w2SimRot =  (Mat_<float>(4,4) << 0, -1, 0, 0, 0, 0, 1, 0.5484, -1, 0, 0, -0.04, 0, 0, 0, 1 );
+  w2SimRot =  (Mat_<float>(4,4) << 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 );
 
 }
 
@@ -44,8 +53,7 @@ double WorldObject::matchColoredRects(ColoredRect &rect_left, ColoredRect &rect_
   //TODO to change
   if( rect_left.getColor()[0] == color[0] &&
       rect_left.getColor()[1] == color[1] &&
-      rect_left.getColor()[2] == color[2] &&
-      abs(rect_left.getRect().area()-rect_right.getRect().area())<500 ){
+      rect_left.getColor()[2] == color[2] ){
 
       double distance = sqrt((position.x-estimatedPose.x)*(position.x-estimatedPose.x) + (position.y-estimatedPose.y)*(position.y-estimatedPose.y) + (position.z-estimatedPose.z)*(position.z-estimatedPose.z));
 
@@ -87,7 +95,10 @@ string WorldObject::getSimCommand(CommandType type, bool isICubSimulator){
           else if(shapeis == CUBE){
               //TODO
           }
-          else if(shapeis == CYLINDER || shapeis == SPHERE){
+          else if(shapeis == CYLINDER){
+              buffer2send << "world mk "<<getShape()<<" "<<radius<<" "<<lenght<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
+          }
+          else if(shapeis == SPHERE){
               buffer2send << "world mk "<<getShape()<<" "<<radius<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
           }
 
@@ -105,7 +116,7 @@ string WorldObject::getSimCommand(CommandType type, bool isICubSimulator){
           oriented = true;
       }
       else
-          buffer2send << " "; //TODO to write
+          buffer2send << "Nocommand"; //TODO to write
       break;
 
     default:
