@@ -1059,6 +1059,32 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   RT_left = left2world;
   RT_right = right2world;
+  iRT_left = left2world.inv();
+  iRT_right = right2world.inv();
+
+//  //Create camera matrix
+//
+//  P_left = Mat::zeros(3,4,CV_64FC1);
+//
+//  Mat iR_left = iRT_left(Rect(0,0,3,3));
+//  Mat iT_left = iRT_left(Rect(0,3,0,3));
+//
+//  Mat P_left_tmpR = P_left(Rect(0,0,3,3));
+//  Mat P_left_tmpT = P_left(Rect(0,3,0,3));
+//
+//  P_left_tmpR = cameraMatrix_left*iR_left;
+//  P_left_tmpT = cameraMatrix_left*iT_left;
+//
+//  P_right = Mat::zeros(3,4,CV_64FC1);
+//
+//  Mat iR_right = iRT_left(Rect(0,0,3,3));
+//  Mat iT_right = iRT_left(Rect(0,3,0,3));
+//
+//  Mat P_right_tmpR = P_left(Rect(0,0,3,3));
+//  Mat P_right_tmpT = P_left(Rect(0,3,0,3));
+//
+//  P_right_tmpR = cameraMatrix_left*iR_right;
+//  P_right_tmpT = cameraMatrix_left*iT_right;
 
 }
 
@@ -1254,5 +1280,9 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
   edges.copyTo(localWhiteMask);
 
   image.copyTo(outputImage, whiteMask);
+
+}
+
+void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
 
 }
