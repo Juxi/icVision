@@ -171,6 +171,7 @@ bool VisionModule::updateModule()
     }
 
 
+    vector<int> obj2delete;
 
 
     if(sendData2Sim){
@@ -202,7 +203,6 @@ bool VisionModule::updateModule()
 			cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
 			moduleOutput.writeStrict();
 
-
                   //        output_message.clear();
                   //        answer.clear();
                   //        flush(buffer2send);
@@ -211,15 +211,17 @@ bool VisionModule::updateModule()
           //			cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
                           //message2send.clear();
 
-
                           ostringstream buffer2send_rot;
                           buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
 
-                          Bottle& message2send_rot = moduleOutput.prepare();
-                          message2send_rot.fromString(buffer2send_rot.str().c_str());
-                          cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
-                          moduleOutput.writeStrict();
 
+                          if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
+
+							  Bottle& message2send_rot = moduleOutput.prepare();
+							  message2send_rot.fromString(buffer2send_rot.str().c_str());
+							  cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
+							  moduleOutput.writeStrict();
+                          }
 
 		    }
 
@@ -230,9 +232,17 @@ bool VisionModule::updateModule()
 		        message2send_rm.fromString(buffer2send_rm.str().c_str());
 		        cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
 		        moduleOutput.writeStrict();
+
+		        obj2delete.push_back(i);
 		    }
 
 		}
+    }
+
+    for(uint i=0; i<obj2delete.size(); i++){
+
+    	object_list.erase( object_list.begin()+obj2delete[i]);
+
     }
 
   }

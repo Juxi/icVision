@@ -21,7 +21,7 @@ yarpserver &
 yarp conf 195.176.191.90 10000
 sudo route add -net 10.0.0.0 gw 195.176.191.90 netmask 255.255.0.0
 
-
+	
 yarp run --server /iCubIDSIA &
 yarp run --server /IDSIAOutput &
 iCub_SIM 
