@@ -19,6 +19,8 @@ WorldObject::WorldObject(ColoredRect & rect_left, ColoredRect & rect_right, int 
   oriented = false;
   position = pos;
 
+  disappearCounter = 0;
+
   //only for demonstration
 /*  shapeis = SPHERE;
   radius = 0.01;
@@ -46,6 +48,7 @@ void WorldObject::changeData(ColoredRect & rect_left, ColoredRect & rect_right, 
    color = bb_left.getColor();
    newobj = false;
    position = pos;
+   disappearCounter = 0;
 }
 
 double WorldObject::matchColoredRects(ColoredRect &rect_left, ColoredRect &rect_right, Point3f &estimatedPose){
@@ -150,6 +153,16 @@ string WorldObject::getShape(){
       return NULL;
       break;
   }
+}
+
+void WorldObject::updateNotchangedCounter(){
+
+  disappearCounter++;
+}
+
+int WorldObject::getNotchangedCounter(){
+
+  return disappearCounter;
 }
 
 WorldObject::~WorldObject()

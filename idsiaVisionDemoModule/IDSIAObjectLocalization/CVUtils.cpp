@@ -985,6 +985,10 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       int indexoo= -1;
 
       for(uint oo = 0; oo < object_list.size(); oo++){
+
+          //update invisibility counter
+          object_list[oo].updateNotchangedCounter();
+
           //associate old object with new measurements
 
          // cout << object_list[oo].getObjPosition().x << " " << object_list[oo].getObjPosition().y << " " << object_list[oo].getObjPosition().z << endl;
