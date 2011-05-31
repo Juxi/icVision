@@ -171,18 +171,21 @@ bool VisionModule::updateModule()
     }
 
 
+    vector<int> obj2delete;
 
 
     if(sendData2Sim){
 		for(uint i=0; i<object_list.size(); i++){
 
+
+		    if(object_list[i].getNotchangedCounter() < 5){
 			//Send object position on the port
 			Bottle output_message,answer;
 			ostringstream buffer2send;
-	//        output_message.clear();
-	//        answer.clear();
-	//        buffer2send.clear();
-	//        flush(buffer2send);
+                        //        output_message.clear();
+                        //        answer.clear();
+                        //        buffer2send.clear();
+                        //        flush(buffer2send);
 
 			string command2send = object_list[i].getSimCommand(POSE, isICubSim);
 			cout<<"Command transmitted: "<<endl;
@@ -198,34 +201,50 @@ bool VisionModule::updateModule()
 			Bottle& message2send = moduleOutput.prepare();
 			message2send.fromString(buffer2send.str().c_str());
 			cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
-			moduleOutput.write();
+			moduleOutput.writeStrict();
 
 
-			cout<<"TEST "<<moduleOutput.isWriting()<<endl;
+                  //        output_message.clear();
+                  //        answer.clear();
+                  //        flush(buffer2send);
+                  //
+          //	        cout<<"Command transmitted: "<<endl;
+          //			cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
+                          //message2send.clear();
 
 
 
-	//        output_message.clear();
-	//        answer.clear();
-	//        flush(buffer2send);
-	//
-//	        cout<<"Command transmitted: "<<endl;
-//			cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
-	        //message2send.clear();
+                          ostringstream buffer2send_rot;
+                          buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
 
+                          if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
 
-		    ostringstream buffer2send_rot;
-			buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
+							  Bottle& message2send_rot = moduleOutput.prepare();
+							  message2send_rot.fromString(buffer2send_rot.str().c_str());
+							  cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
+							  moduleOutput.writeStrict();
+                          }
 
-			Bottle& message2send_rot = moduleOutput.prepare();
-			message2send_rot.fromString(buffer2send_rot.str().c_str());
-	        cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
-	        moduleOutput.writeStrict();
+		    }
 
-			cout<<"TEST "<<moduleOutput.isWriting()<<endl;
-	//        cout<<"Answer : "<<answer.toString()<<endl;
+		    else{
+		        ostringstream buffer2send_rm;
+		        buffer2send_rm<<"world rm "<<object_list[i].getShape()<<" "<<object_list[i].getId()+1;
+		        Bottle& message2send_rm = moduleOutput.prepare();
+		        message2send_rm.fromString(buffer2send_rm.str().c_str());
+		        cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
+		        moduleOutput.writeStrict();
+
+		        obj2delete.push_back(i);
+		    }
 
 		}
+    }
+
+    for(uint i=0; i<obj2delete.size(); i++){
+
+    	object_list.erase( object_list.begin()+obj2delete[i]);
+
     }
 
   }
