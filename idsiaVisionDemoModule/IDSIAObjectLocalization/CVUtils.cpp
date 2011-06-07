@@ -951,6 +951,9 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
      //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
 
+
+
+
       Point3f poseWrtLeft;
       poseWrtLeft.x = point3dLeft.at<float>(0,0);
       poseWrtLeft.y = point3dLeft.at<float>(1,0);
@@ -976,8 +979,13 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
 
 
       //only for debugging
-      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position "<<poseWrtWorld<<endl;
+      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt world"<<poseWrtWorld<<endl;
 
+      /** inizio test **/
+       Mat point3dLeftnew, point3dRightnew;
+       triangulatePointNew(massCenter_left, massCenter_right, point3dLeftnew, point3dRightnew);
+
+       //*** fine tst **/
 
       //Data association between stored object and new objects founded
       bool associated = false;
@@ -1291,6 +1299,47 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 
 void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
 
-  Mat P3_left = P_left.row(3);
+  Mat P3_left = P_left.row(2);
+  Mat P2_left = P_left.row(1);
+  Mat P1_left = P_left.row(0);
+
+  Mat P3_right = P_right.row(2);
+  Mat P2_right = P_right.row(1);
+  Mat P1_right = P_right.row(0);
+
+  Mat A = Mat::zeros(4,4, P_left.type());
+
+  Mat A1 = A.row(0); //A(Rect(0,0,3,1));
+  Mat A2 = A.row(1);
+  Mat A3 = A.row(2);
+  Mat A4 = A.row(3);
+
+  A1 = P3_left*pl.x - P1_left;
+  A2 = P3_left*pl.y - P2_left;
+  A3 = P3_right*pr.x - P1_right;
+  A4 = P3_right*pr.y - P2_right;
+
+  A1 = A1/norm(A1);
+  A2 = A2/norm(A2);
+  A3 = A3/norm(A3);
+  A4 = A4/norm(A4);
+
+  Mat A2solve = A.t()*A;
+
+  Mat eigenvalue, eigenvector;
+  int highindex, lowindex;
+  highindex = 0;
+  lowindex = 0;
+
+  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
+
+  cout<<eigenvalue<<endl;
+  cout<<eigenvector<<endl;
+  cout<<highindex<<" "<<lowindex<<endl;
+//  Mat result = eigenvector.row(highindex - lowindex + 1)
+//  cout<<eigenvector.row(highindex - lowindex + 1)<<endl;
+
+  //TODO test
+
 
 }
