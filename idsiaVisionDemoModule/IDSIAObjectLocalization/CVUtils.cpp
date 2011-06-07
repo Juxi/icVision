@@ -1134,6 +1134,8 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       char numberobj[2];
       stringstream left,right;
       sprintf(numberobj, "%.02d", obj_list[oo].getId());
+
+      //left image
       left<<numberobj;
 
       ColoredRect leftbb = obj_list[oo].getColoredRect('l');
@@ -1163,6 +1165,8 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       ellipse(outputImageLeft, leftRRect, leftbb.getColor());
       rectangle(outputImageLeft, leftbb.getRect(), leftbb.getColor());
       putText(outputImageLeft, left.str(), leftbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, leftbb.getColor());
+
+      //Right Image
       right<<numberobj;
 
       ColoredRect rightbb = obj_list[oo].getColoredRect('r');
@@ -1183,7 +1187,6 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       pt2 = Point2f(width * cosangle +  rightRRect.center.x, width * sinangle +  rightRRect.center.y);
       pt3 = Point2f(height * sinangle +  rightRRect.center.x, -height * cosangle +  rightRRect.center.y);
       pt4 = Point2f(-height * sinangle +  rightRRect.center.x, height * cosangle +  rightRRect.center.y);
-
 
       line(outputImageRight, pt1, pt2, rightbb.getColor());
       line(outputImageRight, pt3, pt4, rightbb.getColor());
@@ -1287,5 +1290,7 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 }
 
 void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
+
+  Mat P3_left = P_left.row(3);
 
 }
