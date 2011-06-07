@@ -1088,6 +1088,7 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   tmplT.copyTo(P_left_tmpT);
 
   P_right = Mat::zeros(3,4,iRT_right.type());
+
   Mat iR_right = iRT_right(Rect(0,0,3,3));
   Mat iT_right =  iRT_right(Rect(3,0,1,3));
   Mat P_right_tmpR = P_right(Rect(0,0,3,3));
@@ -1139,6 +1140,8 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
 
   //For each object estimate position and orientation
   for(uint oo = 0; oo<obj_list.size(); oo++){
+
+      bool isASphere = true;
       char numberobj[2];
       stringstream left,right;
       sprintf(numberobj, "%.02d", obj_list[oo].getId());
@@ -1157,9 +1160,14 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       float cosangle = cos((angle/180)*CV_PI);
       float sinangle = sin((angle/180)*CV_PI);
 
+      if(abs(height - width) > 20)
+        isASphere = false;
+
+
       //Divide the h and w
       height = height/2;
       width = width/2;
+
 
       //define 4 points
       Point2f pt1 = Point2f(-width * cosangle +  leftRRect.center.x, -width * sinangle +  leftRRect.center.y);
@@ -1201,6 +1209,18 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       ellipse(outputImageRight, rightRRect, rightbb.getColor());
       rectangle(outputImageRight, rightbb.getRect(), rightbb.getColor());
       putText(outputImageRight, right.str(), rightbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, rightbb.getColor());
+
+      if(abs(height - width) > 20)
+        isASphere = false;
+
+      if(!isASphere){
+          obj_list[oo].setShape(CYLINDER);
+      }
+      else{
+          obj_list[oo].setShape(SPHERE);
+      }
+
+
   }
 
   return numberOfNewObject;

@@ -217,10 +217,11 @@ bool VisionModule::updateModule()
 
                           if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
 
-							  Bottle& message2send_rot = moduleOutput.prepare();
-							  message2send_rot.fromString(buffer2send_rot.str().c_str());
-							  cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
-							  moduleOutput.writeStrict();
+                                Bottle& message2send_rot = moduleOutput.prepare();
+                                message2send_rot.fromString(buffer2send_rot.str().c_str());
+                                cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
+                                moduleOutput.writeStrict();
+
                           }
 
 		    }

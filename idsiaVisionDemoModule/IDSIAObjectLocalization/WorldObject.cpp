@@ -27,12 +27,12 @@ WorldObject::WorldObject(ColoredRect & rect_left, ColoredRect & rect_right, int 
   bank = 0;
   heading = 0;
   attitude = 0;*/
-   shapeis = CYLINDER;
-   radius = 0.04;
-   lenght = 0.08;
-   bank = CV_PI/2;
-   heading = 0;
-   attitude = 0;
+  shapeis = CYLINDER;
+  radius = 0.04;
+  lenght = 0.08;
+  bank = CV_PI/2;
+  heading = 0;
+  attitude = 0;
 
 
 
