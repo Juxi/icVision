@@ -11,6 +11,7 @@
 #define WORLDRPCINTERFACE_H
 
 #include <QVector3D>
+#include <QMatrix4x4>
 #include <yarp/os/all.h>
 #include "yarpRpcPort.h"
 
@@ -55,6 +56,9 @@ private:
 	void removePrimitive( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Remove and delete a primitive
 	
 	void clearWorld();																		//!< Remove and delete everything in the world model and reset naming counters
+	
+	void getList(yarp::os::Bottle& reply);											//!< Get a list of objects in the world
+	void getState(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n);		//!< Get the 4x4 rototranslation matrix of an object
 	
 	RobotModel::CompositeObject* getObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );												//!< Return a pointer to an object by looking up its name
 	RobotModel::PrimitiveObject* getPrimitive( const RobotModel::CompositeObject* Object, const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Return a pointer to a primitive by looking up its name

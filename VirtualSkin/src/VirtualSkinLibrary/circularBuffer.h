@@ -11,6 +11,7 @@
 #define CIRCULARBUFFER_H
 
 #include <QVector>
+#include <QTime>
 
 namespace VirtualSkin
 {
@@ -33,14 +34,22 @@ public:
 	void init( const QVector<qreal> v);		//!< Fill the buffer with the QVector v
 	void put( const QVector<qreal> v);		//!< Write the QVector v to the buffer and advance the 'current' position
 	void next();							//!< Advances the 'current' position in the buffer
+	void prev();							//!< Moves the 'current' position in the buffer backward
 	
 	QVector<qreal>& getOldest();			//!< Returns a reference to the oldest value in the buffer
 	QVector<qreal>& getCurrent();			//!< Returns a reference to the current value
+	QVector< QVector<qreal> > getHistory();	//!< Return the current contents of the buffer in reverse chronological order
+	qreal getPeriod() { return period; }    //!< Returns the average time between writes to the buffer
+											/**< This is recalculated each time we traverse the circular buffer, so it may be wacky if you use
+												 a very short buffer, and it may take a long time to refresh if you use a really long buffer */
 
 private:
 
 	QVector< QVector<qreal> >::iterator i;	//!< Represents the 'current' position in the buffer
 	QVector< QVector<qreal> > buffer;		//!< The buffer itself
+	QTime time;
+	qreal period;
+	
 };
 #endif
 /** @} */

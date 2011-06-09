@@ -71,8 +71,7 @@ public:
 		}
 		
 		model.robot->open(fileName);
-		//model.skinWindow->show();
-		model.start();
+		//model.start();
 		
 		const QString deviceBaseName( model.robot->getName() );
 		const QString filterBaseName( model.robot->getName() + "F" );
@@ -129,6 +128,8 @@ public:
 
 		isOpen = true;
 		statusPort.setBottle("1");
+		
+		model.start();
 		
 		return true;
 	}

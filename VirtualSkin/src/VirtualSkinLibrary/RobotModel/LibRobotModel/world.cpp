@@ -127,6 +127,18 @@ void World::render()
 	mutex.unlock();
 }
 
+QVector<QString> World::getList()
+{
+	QVector<QString> list;
+	mutex.lock();
+	QVector<CompositeObject*>::iterator i;
+    for ( i=objectList.begin(); i!=objectList.end(); ++i ) {
+        list.append( (*i)->getName() );
+    }
+	mutex.unlock();
+	return list;
+}
+
 bool World::remove( CompositeObject* obj )
 {
 	bool foundObject = false;

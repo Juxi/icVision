@@ -2,7 +2,7 @@
 
 using namespace VirtualSkin;
 
-CircularBuffer::CircularBuffer()
+CircularBuffer::CircularBuffer() : period(0)
 {
 }
 CircularBuffer::~CircularBuffer()
@@ -20,6 +20,10 @@ void CircularBuffer::put( const QVector<qreal> v )
 	{
 		*i = v;
 		next();
+		if ( i == buffer.end()-1 )
+		{ 
+			period = static_cast<qreal>(time.restart()) / static_cast<qreal>(buffer.size());
+		}
 	}
 }
 void CircularBuffer::next()
@@ -52,4 +56,21 @@ QVector<qreal>& CircularBuffer::getCurrent()
 QVector<qreal>& CircularBuffer::getOldest()
 {
 	return *i;
+}
+QVector< QVector<qreal> > CircularBuffer::getHistory()
+{
+	int count = 0;
+	QVector< QVector<qreal> > history;
+	QVector< QVector<qreal> >::iterator j = i-1;
+	while ( count < buffer.size() )
+	{
+		history.append(*j);
+		if ( j == buffer.begin() ) 
+		{
+			j = buffer.end()-1;
+		}
+		else --j;
+		count++;
+	}
+	return history;
 }
