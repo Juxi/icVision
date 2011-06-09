@@ -126,7 +126,7 @@ bool VisionModule::updateModule()
 */
    }
   else{
-      //We nned to estimate the RT Matrix
+      //We need to estimate the RT Matrix
   }
 
   if ( getImageLeft + getImageRight > 1 && receivedHead && receivedTorso){
@@ -140,6 +140,7 @@ bool VisionModule::updateModule()
    // vision->saveImage(imageLeft, "/home/icub/Desktop/test/", count);
 
     vision->setUpImageStereoImages(imageLeft, imageRight);
+
     cout<<"New objects detected: "<<vision->detectObjects(object_list)<<endl;
     cout<<"Current number of objects: "<<object_list.size()<<endl;
 
@@ -147,6 +148,8 @@ bool VisionModule::updateModule()
     outputImageRight = vision->getOutputImage("right");
 
 
+   // outputImageLeft = imageLeft;
+   // outputImageRight = imageRight;
 
     if(!outputImageLeft.empty() && !outputImageRight.empty()){
     //Send output images ... just place to outputImageLeft or outputImageRight what do you want to see
@@ -168,39 +171,79 @@ bool VisionModule::updateModule()
     }
 
 
+    vector<int> obj2delete;
 
 
     if(sendData2Sim){
 		for(uint i=0; i<object_list.size(); i++){
 
+
+		    if(object_list[i].getNotchangedCounter() < 5){
 			//Send object position on the port
 			Bottle output_message,answer;
 			ostringstream buffer2send;
-	//        output_message.clear();
-	//        answer.clear();
-	//        buffer2send.clear();
-	//        flush(buffer2send);
+                        //        output_message.clear();
+                        //        answer.clear();
+                        //        buffer2send.clear();
+                        //        flush(buffer2send);
 
 			string command2send = object_list[i].getSimCommand(POSE, isICubSim);
 			cout<<"Command transmitted: "<<endl;
 			cout<<command2send<<endl;
 			buffer2send<<command2send;
 			output_message.fromString(buffer2send.str().c_str());
-			moduleOutput.write(output_message, answer);
-			cout<<"Answer : "<<answer.toString()<<endl;
+			//moduleOutput.write(output_message, answer);
+			//cout<<"Answer : "<<answer.toString()<<endl;
 
-	//        output_message.clear();
-	//        answer.clear();
-	//        flush(buffer2send);
-	//
-	//        cout<<"Command transmitted: "<<endl;
-	//        cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
-	//        buffer2send<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
-	//        output_message.fromString(buffer2send.str().c_str());
-	//        moduleOutput.write(output_message, answer);
-	//        cout<<"Answer : "<<answer.toString()<<endl;
+
+			 /* TEST WITH BUFFERED PORT */
+
+			Bottle& message2send = moduleOutput.prepare();
+			message2send.fromString(buffer2send.str().c_str());
+			cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
+			moduleOutput.writeStrict();
+
+                  //        output_message.clear();
+                  //        answer.clear();
+                  //        flush(buffer2send);
+                  //
+          //	        cout<<"Command transmitted: "<<endl;
+          //			cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
+                          //message2send.clear();
+
+                          ostringstream buffer2send_rot;
+                          buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
+
+
+                          if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
+
+                                Bottle& message2send_rot = moduleOutput.prepare();
+                                message2send_rot.fromString(buffer2send_rot.str().c_str());
+                                cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
+                                moduleOutput.writeStrict();
+
+                          }
+
+		    }
+
+		    else{
+		        ostringstream buffer2send_rm;
+		        buffer2send_rm<<"world rm "<<object_list[i].getShape()<<" "<<object_list[i].getId()+1;
+		        Bottle& message2send_rm = moduleOutput.prepare();
+		        message2send_rm.fromString(buffer2send_rm.str().c_str());
+		        cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
+		        moduleOutput.writeStrict();
+
+		        obj2delete.push_back(i);
+		    }
 
 		}
+    }
+
+    for(uint i=0; i<obj2delete.size(); i++){
+
+    	object_list.erase( object_list.begin()+obj2delete[i]);
+
     }
 
   }
@@ -244,7 +287,7 @@ bool VisionModule::configure(yarp::os::ResourceFinder &rf)
 
   isICubSim = true;
 
-  sendData2Sim = false;
+  sendData2Sim = true;
 
  /* Process all parameters from both command-line and .ini file */
 
@@ -350,10 +393,10 @@ bool VisionModule::configure(yarp::os::ResourceFinder &rf)
 
     //Connect ports
 
-    Network::connect("/icub/cam/left","/IMCLEVERVision/left/image:i");
-    Network::connect("/icub/cam/right","/IMCLEVERVision/right/image:i");
-    Network::connect("/icub/head/state:o","/IMCLEVERVision/head:i");
-    Network::connect("/icub/torso/state:o","/IMCLEVERVision/torso:i");
+//    Network::connect("/icub/cam/left","/IMCLEVERVision/left/image:i");
+//    Network::connect("/icub/cam/right","/IMCLEVERVision/right/image:i");
+//    Network::connect("/icub/head/state:o","/IMCLEVERVision/head:i");
+//    Network::connect("/icub/torso/state:o","/IMCLEVERVision/torso:i");
 
    return true ;      // let the RFModule know everything went well
 }

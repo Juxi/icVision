@@ -401,7 +401,7 @@ void CVUtils::colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage)
 
   //cout<<resultingImage<<endl;
   Mat dst;
-  compare(resultingImage, 0.03, binaryImage, CMP_LE);
+  compare(resultingImage, 0.02, binaryImage, CMP_LE); //0.03
 
 
   Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3) );
@@ -455,7 +455,7 @@ void CVUtils::detectPossibleColoredObject(Mat &image, Mat& outputMask, vector<Co
           //Increase the BB to capture the background
           objRect = Rect(max(0,objRect.x-5), max(0,objRect.y-5), min(image.cols - objRect.x + 5, objRect.width+10), min(image.rows - objRect.y + 5, objRect.height+10));
 
-          if(objRect.area() > 500){
+          if(objRect.area() > 650){
               Mat roi(outputMask, objRect);
               roi =  Scalar(255);
               listofrect.push_back(ColoredRect(objRect, color, contours_obj[idx]));
@@ -831,9 +831,9 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       Vec3f line2test = right_epilines[0];
 
       /*ONLY FOR DEBUG */
-      for(uint i = 0; i < right_epilines.size(); i++){
+      for(uint ii = 0; ii < right_epilines.size(); ii++){
 
-           Vec3f line2plot = right_epilines[i];
+           Vec3f line2plot = right_epilines[ii];
 
            float x_borderleft = 0;
            float y_borderleft = -line2plot[2]/line2plot[1];
@@ -951,6 +951,9 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
      //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
 
+
+
+
       Point3f poseWrtLeft;
       poseWrtLeft.x = point3dLeft.at<float>(0,0);
       poseWrtLeft.y = point3dLeft.at<float>(1,0);
@@ -976,8 +979,13 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
 
 
       //only for debugging
-      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position "<<poseWrtWorld<<endl;
+      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt world"<<poseWrtWorld<<endl;
 
+      /** inizio test **/
+       Mat point3dLeftnew, point3dRightnew;
+       triangulatePointNew(massCenter_left, massCenter_right, point3dLeftnew, point3dRightnew);
+
+       //*** fine tst **/
 
       //Data association between stored object and new objects founded
       bool associated = false;
@@ -985,6 +993,10 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       int indexoo= -1;
 
       for(uint oo = 0; oo < object_list.size(); oo++){
+
+          //update invisibility counter
+          object_list[oo].updateNotchangedCounter();
+
           //associate old object with new measurements
 
          // cout << object_list[oo].getObjPosition().x << " " << object_list[oo].getObjPosition().y << " " << object_list[oo].getObjPosition().z << endl;
@@ -1016,7 +1028,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
           newobjs++;
       }
 
-      if (poseWrtWorld.x > 0 || poseWrtWorld.x < -0.5){
+      if (poseWrtWorld.x > 0 || poseWrtWorld.x < -1){
     	  cout<<"*** Object rejected because its pose is "<<poseWrtWorld<<" id "<<objId<<endl;
       }
 
@@ -1059,6 +1071,32 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   RT_left = left2world;
   RT_right = right2world;
+  iRT_left = left2world.inv();
+  iRT_right = right2world.inv();
+
+  //Create camera matrix
+
+  P_left = Mat::zeros(3,4, iRT_left.type());
+
+  Mat iR_left = iRT_left(Rect(0,0,3,3));
+  Mat iT_left =  iRT_left(Rect(3,0,1,3));
+  Mat P_left_tmpR = P_left(Rect(0,0,3,3));
+  Mat P_left_tmpT = P_left(Rect(3,0,1,3));
+  Mat tmplR = cameraMatrix_left*iR_left;
+  Mat tmplT = cameraMatrix_left*iT_left;
+  tmplR.copyTo(P_left_tmpR);
+  tmplT.copyTo(P_left_tmpT);
+
+  P_right = Mat::zeros(3,4,iRT_right.type());
+
+  Mat iR_right = iRT_right(Rect(0,0,3,3));
+  Mat iT_right =  iRT_right(Rect(3,0,1,3));
+  Mat P_right_tmpR = P_right(Rect(0,0,3,3));
+  Mat P_right_tmpT = P_right(Rect(3,0,1,3));
+  Mat tmprR = cameraMatrix_right*iR_right;
+  Mat tmprT = cameraMatrix_right*iT_right;
+  tmprR.copyTo(P_right_tmpR);
+  tmprT.copyTo(P_right_tmpT);
 
 }
 
@@ -1102,9 +1140,13 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
 
   //For each object estimate position and orientation
   for(uint oo = 0; oo<obj_list.size(); oo++){
+
+      bool isASphere = true;
       char numberobj[2];
       stringstream left,right;
       sprintf(numberobj, "%.02d", obj_list[oo].getId());
+
+      //left image
       left<<numberobj;
 
       ColoredRect leftbb = obj_list[oo].getColoredRect('l');
@@ -1118,9 +1160,14 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       float cosangle = cos((angle/180)*CV_PI);
       float sinangle = sin((angle/180)*CV_PI);
 
+      if(abs(height - width) > 20)
+        isASphere = false;
+
+
       //Divide the h and w
       height = height/2;
       width = width/2;
+
 
       //define 4 points
       Point2f pt1 = Point2f(-width * cosangle +  leftRRect.center.x, -width * sinangle +  leftRRect.center.y);
@@ -1134,6 +1181,8 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       ellipse(outputImageLeft, leftRRect, leftbb.getColor());
       rectangle(outputImageLeft, leftbb.getRect(), leftbb.getColor());
       putText(outputImageLeft, left.str(), leftbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, leftbb.getColor());
+
+      //Right Image
       right<<numberobj;
 
       ColoredRect rightbb = obj_list[oo].getColoredRect('r');
@@ -1155,12 +1204,23 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       pt3 = Point2f(height * sinangle +  rightRRect.center.x, -height * cosangle +  rightRRect.center.y);
       pt4 = Point2f(-height * sinangle +  rightRRect.center.x, height * cosangle +  rightRRect.center.y);
 
-
       line(outputImageRight, pt1, pt2, rightbb.getColor());
       line(outputImageRight, pt3, pt4, rightbb.getColor());
       ellipse(outputImageRight, rightRRect, rightbb.getColor());
       rectangle(outputImageRight, rightbb.getRect(), rightbb.getColor());
       putText(outputImageRight, right.str(), rightbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, rightbb.getColor());
+
+      if(abs(height - width) > 20)
+        isASphere = false;
+
+      if(!isASphere){
+          obj_list[oo].setShape(CYLINDER);
+      }
+      else{
+          obj_list[oo].setShape(SPHERE);
+      }
+
+
   }
 
   return numberOfNewObject;
@@ -1254,5 +1314,52 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
   edges.copyTo(localWhiteMask);
 
   image.copyTo(outputImage, whiteMask);
+
+}
+
+void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
+
+  Mat P3_left = P_left.row(2);
+  Mat P2_left = P_left.row(1);
+  Mat P1_left = P_left.row(0);
+
+  Mat P3_right = P_right.row(2);
+  Mat P2_right = P_right.row(1);
+  Mat P1_right = P_right.row(0);
+
+  Mat A = Mat::zeros(4,4, P_left.type());
+
+  Mat A1 = A.row(0); //A(Rect(0,0,3,1));
+  Mat A2 = A.row(1);
+  Mat A3 = A.row(2);
+  Mat A4 = A.row(3);
+
+  A1 = P3_left*pl.x - P1_left;
+  A2 = P3_left*pl.y - P2_left;
+  A3 = P3_right*pr.x - P1_right;
+  A4 = P3_right*pr.y - P2_right;
+
+  A1 = A1/norm(A1);
+  A2 = A2/norm(A2);
+  A3 = A3/norm(A3);
+  A4 = A4/norm(A4);
+
+  Mat A2solve = A.t()*A;
+
+  Mat eigenvalue, eigenvector;
+  int highindex, lowindex;
+  highindex = 0;
+  lowindex = 0;
+
+  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
+
+  cout<<eigenvalue<<endl;
+  cout<<eigenvector<<endl;
+  cout<<highindex<<" "<<lowindex<<endl;
+//  Mat result = eigenvector.row(highindex - lowindex + 1)
+//  cout<<eigenvector.row(highindex - lowindex + 1)<<endl;
+
+  //TODO test
+
 
 }

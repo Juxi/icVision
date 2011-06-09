@@ -26,13 +26,14 @@ class WorldObject
     bool newobj;
     bool positioned, oriented;
     Shape shapeis;
-    bool isVisible;
+    int  disappearCounter;
     bool sendData2Sim;
 
     //Object information
     double bank, heading, attitude;
     Point3f position;
     double radius;
+    double lenght;
     double boxSize1, boxSize2, boxSize3;
 
     //Maybe not here
@@ -42,6 +43,7 @@ class WorldObject
   public:
     WorldObject(ColoredRect & rect_left, ColoredRect & rect_right, int idx, Point3f pos);
     void changeData(ColoredRect & rect_left, ColoredRect & rect_right, Point3f pos);
+
     double matchColoredRects(ColoredRect &rect_left, ColoredRect &rect_right, Point3f &estimatedPose);
     ColoredRect getColoredRect(char camera){ if(camera=='l') return bb_left; else return bb_right;}
     void setShape(Shape shape);
@@ -49,8 +51,8 @@ class WorldObject
     int getId(){return id;}
     string getSimCommand(CommandType type, bool isICubSimulator);
     Point3f getObjPosition(){return position;}
-    void setVisibility(bool visibility){isVisible = visibility;}
-    bool getVisibility(){return isVisible;}
+    void updateNotchangedCounter();
+    int getNotchangedCounter();
 
 
     virtual
