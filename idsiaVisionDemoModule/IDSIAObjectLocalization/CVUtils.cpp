@@ -1319,47 +1319,92 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 
 void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
 
-  Mat P3_left = P_left.row(2);
-  Mat P2_left = P_left.row(1);
-  Mat P1_left = P_left.row(0);
-
-  Mat P3_right = P_right.row(2);
-  Mat P2_right = P_right.row(1);
-  Mat P1_right = P_right.row(0);
-
-  Mat A = Mat::zeros(4,4, P_left.type());
-
-  Mat A1 = A.row(0); //A(Rect(0,0,3,1));
-  Mat A2 = A.row(1);
-  Mat A3 = A.row(2);
-  Mat A4 = A.row(3);
-
-  A1 = P3_left*pl.x - P1_left;
-  A2 = P3_left*pl.y - P2_left;
-  A3 = P3_right*pr.x - P1_right;
-  A4 = P3_right*pr.y - P2_right;
-
-  A1 = A1/norm(A1);
-  A2 = A2/norm(A2);
-  A3 = A3/norm(A3);
-  A4 = A4/norm(A4);
-
-  Mat A2solve = A.t()*A;
-
-  Mat eigenvalue, eigenvector;
-  int highindex, lowindex;
-  highindex = 0;
-  lowindex = 0;
-
-  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
-
-  cout<<eigenvalue<<endl;
-  cout<<eigenvector<<endl;
-  cout<<highindex<<" "<<lowindex<<endl;
+//  Mat P3_left = P_left.row(2);
+//  Mat P2_left = P_left.row(1);
+//  Mat P1_left = P_left.row(0);
+//
+//  Mat P3_right = P_right.row(2);
+//  Mat P2_right = P_right.row(1);
+//  Mat P1_right = P_right.row(0);
+//
+//  Mat A = Mat::zeros(4,4, P_left.type());
+//
+//  Mat A1 = A.row(0); //A(Rect(0,0,3,1));
+//  Mat A2 = A.row(1);
+//  Mat A3 = A.row(2);
+//  Mat A4 = A.row(3);
+//
+//  A1 = P3_left*pl.x - P1_left;
+//  A2 = P3_left*pl.y - P2_left;
+//  A3 = P3_right*pr.x - P1_right;
+//  A4 = P3_right*pr.y - P2_right;
+//
+//  A1 = A1/norm(A1);
+//  A2 = A2/norm(A2);
+//  A3 = A3/norm(A3);
+//  A4 = A4/norm(A4);
+//
+//  Mat A2solve = A.t()*A;
+//
+//  Mat eigenvalue, eigenvector;
+//  int highindex, lowindex;
+//  highindex = 0;
+//  lowindex = 0;
+//
+//  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
+//
+//  cout<<eigenvalue<<endl;
+//  cout<<eigenvector<<endl;
+//  cout<<highindex<<" "<<lowindex<<endl;
 //  Mat result = eigenvector.row(highindex - lowindex + 1)
 //  cout<<eigenvector.row(highindex - lowindex + 1)<<endl;
 
   //TODO test
 
+  //Estimate a point
+  Mat matpleft = (Mat_<float>(3,1) << pl.x, pl.y, 1);
+  Mat dirleft = cameraMatrix_left.inv()*matpleft;
+  dirleft = dirleft/norm(dirleft);
+  Mat matpright = (Mat_<float>(3,1) << pr.x, pr.y, 1);
+  Mat dirright = cameraMatrix_right.inv()*matpright;
+  dirright = dirright/norm(dirright);
+
+  Mat center = Mat::zeros(3,1, CV_32FC1);
+
+  //Center of the camera
+  Mat pl_1 = RT_left*center;
+  Mat pl_2 = RT_left*dirleft;
+  Mat pr_1 = RT_right*center;
+  Mat pr_2 = RT_right*dirleft;
+
+  float U = pl_2.at<float>(0,0);
+  float V = pl_2.at<float>(1,0);
+  float W = pl_2.at<float>(2,0);
+  float T = 1;
+
+  //Definition of Pi(X_2) matrix
+  Mat Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
+                                 0,  1,  0, -V,
+                                 0,  0,  1, -W,
+                                 0, -W,  V,  0,
+                                 W,  0, -U,  0,
+                                -V,  U,  0,  0);
+
+  Mat line_left = Pi_X*pl_1;
+
+  U = pr_2.at<float>(0,0);
+  V = pr_2.at<float>(1,0);
+  W = pr_2.at<float>(2,0);
+  T = 1;
+
+  //Definition of Pi(X_2) matrix
+  Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
+                               0,  1,  0, -V,
+                               0,  0,  1, -W,
+                               0, -W,  V,  0,
+                               W,  0, -U,  0,
+                              -V,  U,  0,  0);
+
+  Mat line_right = Pi_X*pr_1;
 
 }
