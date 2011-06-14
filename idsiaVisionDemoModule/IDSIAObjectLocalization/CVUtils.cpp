@@ -948,19 +948,21 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       double areaL2Dist = abs(areaDist.width*areaDist.width - areaDist.height*areaDist.height);
 
       //This triangulate points is based on center mass (TODO improve it)
-     //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
+      cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
 
-
-
-
       Point3f poseWrtLeft;
-      poseWrtLeft.x = point3dLeft.at<float>(0,0);
-      poseWrtLeft.y = point3dLeft.at<float>(1,0);
-      poseWrtLeft.z = point3dLeft.at<float>(2,0);
+      poseWrtLeft.x = point3dLeft.at<float>(0,0)/1000;
+      poseWrtLeft.y = point3dLeft.at<float>(1,0)/1000;
+      poseWrtLeft.z = point3dLeft.at<float>(2,0)/1000;
+
+      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt camera left"<<poseWrtLeft<<endl;
+
 
       Mat rotatedpoint3Dpoint;
       Point3f poseWrtWorld;
+
+      Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
 
 
       //If we have the rototraslation from Left to World
@@ -968,7 +970,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
     	  cout<<"ERROR"<<endl;
       }
 
-      Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
+      //Rotate the point
       rotatedpoint3Dpoint = RT_left*hompoint3dLeft;
       // cout<<rotatedpoint3Dpoint<<endl;
 
@@ -977,15 +979,20 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       poseWrtWorld.z = rotatedpoint3Dpoint.at<float>(2,0)/rotatedpoint3Dpoint.at<float>(3,0);
 
 
-
       //only for debugging
       cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt world"<<poseWrtWorld<<endl;
 
       /** inizio test **/
-       Mat point3dLeftnew, point3dRightnew;
-       triangulatePointNew(massCenter_left, massCenter_right, point3dLeftnew, point3dRightnew);
+      cout<<"********Start test using encoders"<<endl;
+           Point3f point3dNew;
+           cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
 
-       //*** fine tst **/
+           triangulatePointNew(massCenter_left, massCenter_right, point3dNew);
+
+           //TEST
+          // poseWrtWorld = point3dNew;
+           //*** fine tst **/
+      cout<<"********End test using encoders"<<endl;
 
       //Data association between stored object and new objects founded
       bool associated = false;
@@ -1071,15 +1078,20 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   RT_left = left2world;
   RT_right = right2world;
+
+  cout<<RT_left<<endl;
+
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
 
   //Create camera matrix
+  //The first problem to solve is that the encoder reading are in m, instead our calibration in in mm
 
-  P_left = Mat::zeros(3,4, iRT_left.type());
+
+  P_left = Mat::zeros(3,4, cameraMatrix_left.type());
 
   Mat iR_left = iRT_left(Rect(0,0,3,3));
-  Mat iT_left =  iRT_left(Rect(3,0,1,3));
+  Mat iT_left =  iRT_left(Rect(3,0,1,3))*1000; //Convertion from m->mm
   Mat P_left_tmpR = P_left(Rect(0,0,3,3));
   Mat P_left_tmpT = P_left(Rect(3,0,1,3));
   Mat tmplR = cameraMatrix_left*iR_left;
@@ -1087,10 +1099,10 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   tmplR.copyTo(P_left_tmpR);
   tmplT.copyTo(P_left_tmpT);
 
-  P_right = Mat::zeros(3,4,iRT_right.type());
+  P_right = Mat::zeros(3,4,cameraMatrix_right.type());
 
   Mat iR_right = iRT_right(Rect(0,0,3,3));
-  Mat iT_right =  iRT_right(Rect(3,0,1,3));
+  Mat iT_right =  iRT_right(Rect(3,0,1,3))*1000; //Convertion from m->mm
   Mat P_right_tmpR = P_right(Rect(0,0,3,3));
   Mat P_right_tmpT = P_right(Rect(3,0,1,3));
   Mat tmprR = cameraMatrix_right*iR_right;
@@ -1160,9 +1172,6 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       float cosangle = cos((angle/180)*CV_PI);
       float sinangle = sin((angle/180)*CV_PI);
 
-      if(abs(height - width) > 20)
-        isASphere = false;
-
 
       //Divide the h and w
       height = height/2;
@@ -1174,6 +1183,9 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       Point2f pt2 = Point2f(width * cosangle +  leftRRect.center.x, width * sinangle +  leftRRect.center.y);
       Point2f pt3 = Point2f(height * sinangle +  leftRRect.center.x, -height * cosangle +  leftRRect.center.y);
       Point2f pt4 = Point2f(-height * sinangle +  leftRRect.center.x, height * cosangle +  leftRRect.center.y);
+
+      if(abs(norm(pt1-pt2) - norm(pt3-pt4)) > 20)
+            isASphere = false;
 
 
       line(outputImageLeft, pt1, pt2, leftbb.getColor());
@@ -1194,6 +1206,7 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       cosangle = cos((angle/180)*CV_PI);
       sinangle = sin((angle/180)*CV_PI);
 
+
       //Divide the h and w
       height = height/2;
       width = width/2;
@@ -1204,20 +1217,24 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       pt3 = Point2f(height * sinangle +  rightRRect.center.x, -height * cosangle +  rightRRect.center.y);
       pt4 = Point2f(-height * sinangle +  rightRRect.center.x, height * cosangle +  rightRRect.center.y);
 
+      if(abs(norm(pt1-pt2) - norm(pt3-pt4)) > 20)
+            isASphere = false;
+
+
       line(outputImageRight, pt1, pt2, rightbb.getColor());
       line(outputImageRight, pt3, pt4, rightbb.getColor());
       ellipse(outputImageRight, rightRRect, rightbb.getColor());
       rectangle(outputImageRight, rightbb.getRect(), rightbb.getColor());
       putText(outputImageRight, right.str(), rightbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, rightbb.getColor());
 
-      if(abs(height - width) > 20)
-        isASphere = false;
 
       if(!isASphere){
           obj_list[oo].setShape(CYLINDER);
+          cout<<"detected a cylinder"<<endl;
       }
       else{
           obj_list[oo].setShape(SPHERE);
+          cout<<"detected a sphere"<<endl;
       }
 
 
@@ -1317,47 +1334,91 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 
 }
 
-void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
+void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
-  Mat P3_left = P_left.row(2);
-  Mat P2_left = P_left.row(1);
-  Mat P1_left = P_left.row(0);
 
-  Mat P3_right = P_right.row(2);
-  Mat P2_right = P_right.row(1);
-  Mat P1_right = P_right.row(0);
+	Mat points_l = (Mat_<float>(3,1) << pl.x, pl.y, 1);
+	Mat points_r = (Mat_<float>(3,1) << pl.x, pl.y, 1);
 
-  Mat A = Mat::zeros(4,4, P_left.type());
+	Mat P1_left = P_left.row(0);
+	Mat P2_left = P_left.row(1);
+    Mat P3_left = P_left.row(2);
+
+    Mat P1_right = P_right.row(0);
+	Mat P2_right = P_right.row(1);
+	Mat P3_right = P_right.row(2);
+
+
+
+		Mat A = Mat::zeros(4,4, P_left.type());
 
   Mat A1 = A.row(0); //A(Rect(0,0,3,1));
   Mat A2 = A.row(1);
   Mat A3 = A.row(2);
   Mat A4 = A.row(3);
 
-  A1 = P3_left*pl.x - P1_left;
-  A2 = P3_left*pl.y - P2_left;
-  A3 = P3_right*pr.x - P1_right;
-  A4 = P3_right*pr.y - P2_right;
+  A1 = P3_left*points_l.at<float>(0,0) - P1_left;
+  A2 = P3_left*points_l.at<float>(1,0) - P2_left;
+  A3 = P3_right*points_r.at<float>(0,0) - P1_right;
+  A4 = P3_right*points_r.at<float>(1,0) - P2_right;
 
   A1 = A1/norm(A1);
   A2 = A2/norm(A2);
   A3 = A3/norm(A3);
   A4 = A4/norm(A4);
 
-  Mat A2solve = A.t()*A;
 
-  Mat eigenvalue, eigenvector;
-  int highindex, lowindex;
-  highindex = 0;
-  lowindex = 0;
+  SVD svdestimator(A, SVD::FULL_UV);
 
-  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
+  //Mat results = svdestimator.u*svdestimator.w*svdestimator.vt;
 
-  cout<<eigenvalue<<endl;
-  cout<<eigenvector<<endl;
-  cout<<highindex<<" "<<lowindex<<endl;
-//  Mat result = eigenvector.row(highindex - lowindex + 1)
-//  cout<<eigenvector.row(highindex - lowindex + 1)<<endl;
+/*
+  Mat W = Mat::eye(4,4,svdestimator.w.type());
+  W.at<float>(0,0) = svdestimator.w.at<float>(0,0);
+  W.at<float>(1,1) = svdestimator.w.at<float>(0,1);
+  W.at<float>(2,2) = svdestimator.w.at<float>(0,2);
+  W.at<float>(3,3) = svdestimator.w.at<float>(0,3);
+
+
+  //Mat results = svdestimator.u*W*svdestimator.vt;
+  //cout<<results<<endl;
+  //cout<<A<<endl;
+
+  cout<<W<<endl;
+*/
+
+  Mat results = svdestimator.vt.row(3);
+
+//  results = results/1000;
+  results = results/results.at<float>(0,3);
+
+
+  //Point3f point3D;
+
+  point3D.x = results.at<float>(0,0)/1000;
+  point3D.y = results.at<float>(0,1)/1000;
+  point3D.z = results.at<float>(0,2)/1000;
+
+  cout<<point3D<<endl;
+//  Mat A2solve = A.t()*A;
+//
+//  Mat eigenvalue, eigenvector;
+//  int highindex, lowindex;
+//  highindex = 0;
+//  lowindex = 0;
+//
+//  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
+//
+// // cout<<eigenvalue<<endl;
+////  cout<<eigenvector<<endl;
+////  cout<<highindex<<" "<<lowindex<<endl;
+//  Mat results2 = eigenvector.row(highindex - lowindex + 1);
+////  cout<<eigenvalue.row(2)<<endl;
+////  Mat results2 = eigenvector.col(3);
+// // results2 = results2/1000;
+//  results2 = results2/results2.at<float>(0,3);
+//  cout<<results2<<endl;
+
 
   //TODO test
 
