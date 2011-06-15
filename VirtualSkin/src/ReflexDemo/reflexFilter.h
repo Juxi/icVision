@@ -38,6 +38,7 @@ private:
 	
 	QVector< QVector<qreal> >	originalPose,	//!< A colliding configuration
 								targetPose;		//!< A safe configuration
+	QVector< QVector< QVector<qreal> > > history;	//!< The history of the last n poses of the whole robot
 
 };
 #endif

@@ -59,6 +59,8 @@ public:
 																					/**< This returns the World to the state it was in just after construction */
 
 	int size() { return objectList.size(); }
+	
+	QVector<QString> getList();	//!< Get a list of the objects in the world model
 private:
 	
 	void render();		//!< Calls display lists for all objects in the World using glCallLists( int )

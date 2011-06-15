@@ -37,8 +37,10 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 
 	switch (cmd)
 	{
+		case VOCAB_LS:	getList(reply); break;
 		case VOCAB_MK:  make(command,reply,n); break;
 		case VOCAB_SET: setPos(command,reply,n); break;
+		case VOCAB_GET: getState(command,reply,n); break;
 		case VOCAB_ROT: setRot(command,reply,n); break;
 		case VOCAB_REM: removeObject(command,reply,n); break;
 
@@ -53,6 +55,15 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	}
 	//world->emit changedState();
 	return true;
+}
+void WorldRpcInterface::getList(yarp::os::Bottle& reply)
+{
+	QVector<QString>::iterator i;
+	QVector<QString> objectNames = world->getList();
+	for ( i=objectNames.begin(); i!=objectNames.end(); ++i )
+	{
+		reply.addString( (*i).toStdString().c_str() );
+    }
 }
 void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n )
 {
@@ -200,6 +211,20 @@ void WorldRpcInterface::pSetPos( const yarp::os::Bottle& command, yarp::os::Bott
 		double z = command.get(n).asDouble(); n++;  //std::cout << z << std::endl; // z position
 		primitive->setPosition( QVector3D(x,y,z) );
 		reply.addString("Set Cartesian position of primitive relative to object.");
+	}
+}
+void WorldRpcInterface::getState( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
+{
+	RobotModel::CompositeObject* object = getObject( command, reply, n );
+	
+	if ( object )
+	{
+		const qreal* T = object->getT().data();
+		for ( int i = 0; i < 16; i++ )
+		{
+			reply.addDouble( T[i] );
+		}
+		//reply.addString("Set rotation (about x,y,z in degrees) of object.");
 	}
 }
 void WorldRpcInterface::setRot( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )

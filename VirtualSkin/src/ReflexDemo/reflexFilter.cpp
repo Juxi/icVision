@@ -15,6 +15,7 @@
 #include "constants.h"
 #include "reflexFilter.h"
 #include <yarp/dev/all.h>
+#include <QTime>
 
 ReflexFilter::ReflexFilter( bool visualize ) : VirtualSkin::RobotFilter(visualize) 
 {
@@ -28,16 +29,28 @@ void ReflexFilter::extraOpenStuff()
 {
 	originalPose.resize(model.robot->numBodyParts());
 	targetPose.resize(model.robot->numBodyParts());
+	history.resize(model.robot->numBodyParts());
 }
 
 void ReflexFilter::collisionResponse()
 {
-	QVector< QVector<qreal> >	currentPose;
-	yarp::os::Bottle rewind;
-	QVector<qreal>::const_iterator joint;
+	//QVector< QVector<qreal> >	currentPose;
+	yarp::os::Bottle stop;
+	//QVector<qreal>::const_iterator joint;
+	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+	{
+		// stop the body part
+		stop.clear();
+		stop.addVocab(VOCAB_SET);
+		stop.addVocab(VOCAB_STOPS);
+		cbFilters.at(bodyPart)->injectCall(stop);
+		
+		// get the body part's history
+		history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory());
+	}
 	
 	// move the robot back to a safe configuration
-	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+	/*for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
 	{
 		// get the current (colliding) pose from the pose buffer
 		originalPose.replace(bodyPart, stateObservers.at(bodyPart)->currentPose());
@@ -63,12 +76,51 @@ void ReflexFilter::collisionResponse()
 			printf("%s\n",rewind.toString().c_str());	// print the position move command
 			cbFilters.at(bodyPart)->injectCall(rewind);	// send the position move command
 		}
-	}/**/
+	}*/
 }
 
 void ReflexFilter::responseComplete()
 {
-	time_t	startTime = time(NULL);
+	yarp::os::Bottle rewind;
+	QVector<qreal>::const_iterator joint;
+	qreal period;
+	QTime safeTime;
+
+	//for ( int n = 0; n < POSE_BUFFER_SIZE; n++ )
+	//{
+		int n=0;
+		while ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT)
+		{
+			printf("Time: %d\n",n);
+			period = 0;
+			for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
+			{
+				printf("  Body Part - %d:", bodyPart);
+				rewind.clear();
+				rewind.addVocab(VOCAB_SET);
+				rewind.addVocab(VOCAB_POSITION_MOVES);
+				yarp::os::Bottle& bodyPartPose = rewind.addList();
+				for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
+				{
+					bodyPartPose.addDouble(*joint);
+					printf(" %f", *joint);
+				}
+				printf("\n");
+				cbFilters.at(bodyPart)->injectCall(rewind);
+				period += stateObservers.at(bodyPart)->getPeriod();
+			}
+			period /= model.robot->numBodyParts();
+			printf("  waiting %f msec\n", period);
+			
+			n++;
+			msleep(period);
+			if ( n>=POSE_BUFFER_SIZE ) { break; }
+			if ( isColliding ) { safeTime.restart(); }
+		}
+		//break;
+	//}
+	
+	/*time_t	startTime = time(NULL);
 	while ( isColliding )	// wait until the model is no longer colliding with itself
 	{
 		if ( time(NULL) - startTime > POSITION_MOVE_TIMEOUT ) { break; }
@@ -83,6 +135,6 @@ void ReflexFilter::responseComplete()
 	{
 		printf(".");
 		msleep(YARP_PERIOD_ms);
-	}/**/
+	}*/
 	//printf("\n");
 }
