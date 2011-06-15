@@ -1381,58 +1381,76 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
   //TODO test
 
-  //Estimate a point
-  Mat dirleft = (Mat_<float>(4,1) << (pl.x- cameraMatrix_left.at<float>(0,2))/cameraMatrix_left.at<float>(0,0), (pl.y- cameraMatrix_left.at<float>(1,2))/cameraMatrix_left.at<float>(1,1), 1/sqrt(cameraMatrix_left.at<float>(0,0)*cameraMatrix_left.at<float>(0,0)+cameraMatrix_left.at<float>(1,1)+cameraMatrix_left.at<float>(1,1)), 1 );
-  Mat dirright = (Mat_<float>(4,1) << (pr.x- cameraMatrix_right.at<float>(0,2))/cameraMatrix_right.at<float>(0,0), (pr.y- cameraMatrix_right.at<float>(1,2))/cameraMatrix_right.at<float>(1,1), 1/sqrt(cameraMatrix_right.at<float>(0,0)*cameraMatrix_right.at<float>(0,0)+cameraMatrix_right.at<float>(1,1)+cameraMatrix_right.at<float>(1,1)), 1 );
+//  //Estimate a point
+//  Mat dirleft = (Mat_<float>(4,1) << (pl.x- cameraMatrix_left.at<float>(0,2))/cameraMatrix_left.at<float>(0,0), (pl.y- cameraMatrix_left.at<float>(1,2))/cameraMatrix_left.at<float>(1,1), 1/sqrt(cameraMatrix_left.at<float>(0,0)*cameraMatrix_left.at<float>(0,0)+cameraMatrix_left.at<float>(1,1)+cameraMatrix_left.at<float>(1,1)), 1 );
+//  Mat dirright = (Mat_<float>(4,1) << (pr.x- cameraMatrix_right.at<float>(0,2))/cameraMatrix_right.at<float>(0,0), (pr.y- cameraMatrix_right.at<float>(1,2))/cameraMatrix_right.at<float>(1,1), 1/sqrt(cameraMatrix_right.at<float>(0,0)*cameraMatrix_right.at<float>(0,0)+cameraMatrix_right.at<float>(1,1)+cameraMatrix_right.at<float>(1,1)), 1 );
+//
+//  cout<<dirleft<<endl;
+//  cout<<dirright<<endl;
+//
+//  Mat center = Mat::zeros(4,1, CV_32FC1);
+//  center.at<float>(3,0) = 1;
+//
+//   //Center of the camera
+//  Mat pl_1 = RT_left*center;
+//  Mat pl_2 = RT_left*dirleft;
+//  Mat pr_1 = RT_right*center;
+//  Mat pr_2 = RT_right*dirright;
+//
+//  float U = pl_2.at<float>(0,0);
+//  float V = pl_2.at<float>(1,0);
+//  float W = pl_2.at<float>(2,0);
+//  float T = 1;
+//
+//  //Definition of Pi(X_2) matrix
+//  Mat Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
+//                                 0,  1,  0, -V,
+//                                 0,  0,  1, -W,
+//                                 0, -W,  V,  0,
+//                                 W,  0, -U,  0,
+//                                -V,  U,  0,  0);
+//
+//  Mat pl_h = (Mat_<float>(4,1) << pl_1.at<float>(0,0), pl_1.at<float>(1,0), pl_1.at<float>(2,0), 1);
+//  Mat line_left = Pi_X*pl_h;
+//
+//  U = pr_2.at<float>(0,0);
+//  V = pr_2.at<float>(1,0);
+//  W = pr_2.at<float>(2,0);
+//  T = 1;
+//
+//  //Definition of Pi(X_2) matrix
+//  Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
+//                               0,  1,  0, -V,
+//                               0,  0,  1, -W,
+//                               0, -W,  V,  0,
+//                               W,  0, -U,  0,
+//                              -V,  U,  0,  0);
+//
+//  Mat pr_h = (Mat_<float>(4,1) << pr_1.at<float>(0,0), pr_1.at<float>(1,0), pr_1.at<float>(2,0), 1);
+//
+//  Mat line_right = Pi_X*pr_h;
+//
+//  cout<<pl_1<<endl;
+//  cout<<pl_2<<endl;
+//  cout<<pr_1<<endl;
+//  cout<<pr_2<<endl;
 
-  cout<<dirleft<<endl;
-  cout<<dirright<<endl;
+  //Another test in the hat
 
-  Mat center = Mat::zeros(4,1, CV_32FC1);
-  center.at<float>(3,0) = 1;
+  Mat matpleft = (Mat_<float>(2,1) << pl.x, pl.y);
+  Mat matpright = (Mat_<float>(2,1) << pr.x, pr.y);
 
-   //Center of the camera
-  Mat pl_1 = RT_left*center;
-  Mat pl_2 = RT_left*dirleft;
-  Mat pr_1 = RT_right*center;
-  Mat pr_2 = RT_right*dirright;
+  CvMat __points1 = matpleft, __points2 = matpright;
 
-  float U = pl_2.at<float>(0,0);
-  float V = pl_2.at<float>(1,0);
-  float W = pl_2.at<float>(2,0);
-  float T = 1;
+  CvMat* P1 = &(CvMat)P_left;
+  CvMat* P2 = &(CvMat)P_right;
 
-  //Definition of Pi(X_2) matrix
-  Mat Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
-                                 0,  1,  0, -V,
-                                 0,  0,  1, -W,
-                                 0, -W,  V,  0,
-                                 W,  0, -U,  0,
-                                -V,  U,  0,  0);
+  float _d[1000] = {0.0f};
+  Mat outTM(4,1,CV_32FC1,_d);
+  CvMat* out = &(CvMat)outTM;
 
-  Mat pl_h = (Mat_<float>(4,1) << pl_1.at<float>(0,0), pl_1.at<float>(1,0), pl_1.at<float>(2,0), 1);
-  Mat line_left = Pi_X*pl_h;
+  //using cvTriangulate with the created structures
+   cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
-  U = pr_2.at<float>(0,0);
-  V = pr_2.at<float>(1,0);
-  W = pr_2.at<float>(2,0);
-  T = 1;
-
-  //Definition of Pi(X_2) matrix
-  Pi_X = (Mat_<float>(6,4) <<  1,  0,  0, -U,
-                               0,  1,  0, -V,
-                               0,  0,  1, -W,
-                               0, -W,  V,  0,
-                               W,  0, -U,  0,
-                              -V,  U,  0,  0);
-
-  Mat pr_h = (Mat_<float>(4,1) << pr_1.at<float>(0,0), pr_1.at<float>(1,0), pr_1.at<float>(2,0), 1);
-
-  Mat line_right = Pi_X*pr_h;
-
-  cout<<pl_1<<endl;
-  cout<<pl_2<<endl;
-  cout<<pr_1<<endl;
-  cout<<pr_2<<endl;
-
+   cout<<outTM<<endl;
 }
