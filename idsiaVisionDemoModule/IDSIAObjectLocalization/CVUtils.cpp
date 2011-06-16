@@ -124,12 +124,12 @@ void CVUtils::fundfromimages(Mat &camera_left, Mat &camera_right){
     T.convertTo(T, CV_32F);
 
 
-    Mat extRT = Mat::eye(4,4,CV_32F);
-    Mat extRT_R = extRT( Rect(0, 0, 3, 3) );
-    R.copyTo(extRT_R);
-    extRT.at<float>(0,3) = T.at<float>(0,0)/1000;
-    extRT.at<float>(1,3) = T.at<float>(0,1)/1000;
-    extRT.at<float>(2,3) = T.at<float>(0,2)/1000;
+//    Mat extRT = Mat::eye(4,4,CV_32F);
+//    Mat extRT_R = extRT( Rect(0, 0, 3, 3) );
+//    R.copyTo(extRT_R);
+//    extRT.at<float>(0,3) = T.at<float>(0,0)/1000;
+//    extRT.at<float>(1,3) = T.at<float>(0,1)/1000;
+//    extRT.at<float>(2,3) = T.at<float>(0,2)/1000;
 
     //cout<<extRT<<endl;
 
@@ -382,6 +382,7 @@ void CVUtils::undistortPoint(Point2f &point, Mat &dist){
   point = Point2f(x.x, x.y);
 
 }
+
 
 void CVUtils::colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage){
 
@@ -932,10 +933,16 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       ColoredRect rightbb = right_rectList[blobs_matches[i].queryIdx];
 
       Moments leftmoments = moments(Mat(leftbb.getContour()));
-      Point2d massCenter_left = Point2d(leftmoments.m10/leftmoments.m00, leftmoments.m01/leftmoments.m00);
+      Point2f massCenter_left = Point2f(leftmoments.m10/leftmoments.m00, leftmoments.m01/leftmoments.m00);
 
       Moments rightmoments = moments(Mat(rightbb.getContour()));
-      Point2d massCenter_right = Point2d(rightmoments.m10/rightmoments.m00, rightmoments.m01/rightmoments.m00);
+      Point2f massCenter_right = Point2f(rightmoments.m10/rightmoments.m00, rightmoments.m01/rightmoments.m00);
+
+
+
+
+      undistortPoint(massCenter_left, distCoeffs_left);
+      undistortPoint(massCenter_right, distCoeffs_right);
 
       Mat point3dLeft, point3dRight;
 
@@ -950,6 +957,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       //This triangulate points is based on center mass (TODO improve it)
       cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
+     // triangulatePoint(massCenter_right, massCenter_left, point3dRight, point3dLeft);
 
       Point3f poseWrtLeft;
       poseWrtLeft.x = point3dLeft.at<float>(0,0)/1000;
@@ -1079,7 +1087,7 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   RT_left = left2world;
   RT_right = right2world;
 
-  cout<<RT_left<<endl;
+ // cout<<RT_left<<endl;
 
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
@@ -1087,26 +1095,38 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   //Create camera matrix
   //The first problem to solve is that the encoder reading are in m, instead our calibration in in mm
 
+  Mat cameraMatrix_leftm,cameraMatrix_rightm;
+  cameraMatrix_left.copyTo(cameraMatrix_leftm);
+  cameraMatrix_right.copyTo(cameraMatrix_rightm);
+
+
+  cameraMatrix_leftm.at<float>(0,0) /= 1000;
+  cameraMatrix_leftm.at<float>(1,1) /= 1000;
+  cameraMatrix_rightm.at<float>(0,0) /= 1000;
+  cameraMatrix_rightm.at<float>(1,1) /= 1000;
+
+  cout<<cameraMatrix_leftm<<endl;
 
   P_left = Mat::zeros(3,4, cameraMatrix_left.type());
 
+
   Mat iR_left = iRT_left(Rect(0,0,3,3));
-  Mat iT_left =  iRT_left(Rect(3,0,1,3))*1000; //Convertion from m->mm
+  Mat iT_left =  iRT_left(Rect(3,0,1,3)); //Convertion from m->mm ?
   Mat P_left_tmpR = P_left(Rect(0,0,3,3));
   Mat P_left_tmpT = P_left(Rect(3,0,1,3));
-  Mat tmplR = cameraMatrix_left*iR_left;
-  Mat tmplT = cameraMatrix_left*iT_left;
+  Mat tmplR = cameraMatrix_leftm*iR_left;
+  Mat tmplT = cameraMatrix_leftm*iT_left;
   tmplR.copyTo(P_left_tmpR);
   tmplT.copyTo(P_left_tmpT);
 
   P_right = Mat::zeros(3,4,cameraMatrix_right.type());
 
   Mat iR_right = iRT_right(Rect(0,0,3,3));
-  Mat iT_right =  iRT_right(Rect(3,0,1,3))*1000; //Convertion from m->mm
+  Mat iT_right =  iRT_right(Rect(3,0,1,3)); //Convertion from m->mm ?
   Mat P_right_tmpR = P_right(Rect(0,0,3,3));
   Mat P_right_tmpT = P_right(Rect(3,0,1,3));
-  Mat tmprR = cameraMatrix_right*iR_right;
-  Mat tmprT = cameraMatrix_right*iT_right;
+  Mat tmprR = cameraMatrix_rightm*iR_right;
+  Mat tmprT = cameraMatrix_rightm*iT_right;
   tmprR.copyTo(P_right_tmpR);
   tmprT.copyTo(P_right_tmpT);
 
@@ -1440,17 +1460,32 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
   Mat matpleft = (Mat_<float>(2,1) << pl.x, pl.y);
   Mat matpright = (Mat_<float>(2,1) << pr.x, pr.y);
 
-  CvMat __points1 = matpleft, __points2 = matpright;
+  Mat doubleleft, doubleright;
 
-  CvMat* P1 = &(CvMat)P_left;
-  CvMat* P2 = &(CvMat)P_right;
+  matpleft.convertTo(doubleleft, CV_64FC1);
+  matpright.convertTo(doubleright, CV_64FC1);
+
+  CvMat __points1 = doubleleft, __points2 = doubleright;
+  CvMat __newpoints1 = doubleleft, __newpoints2 = doubleright;
+
+  Mat doubleP_left, doubleP_right;
+  P_left.convertTo(doubleP_left, CV_64FC1);
+  P_right.convertTo(doubleP_right, CV_64FC1);
+
+  CvMat* P1 = &(CvMat)doubleP_left;
+  CvMat* P2 = &(CvMat)doubleP_right;
 
   float _d[1000] = {0.0f};
-  Mat outTM(4,1,CV_32FC1,_d);
+  Mat outTM(4,1,CV_64FC1,_d);
   CvMat* out = &(CvMat)outTM;
 
   //using cvTriangulate with the created structures
+  //cvCorrectMatches(&(CvMat)F, &__points1, &__points2, &__newpoints1, &__newpoints2);
+
+
    cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
-   cout<<outTM<<endl;
+   cout<<matpleft<<endl;
+   cout<<matpright<<endl;
+   cout<<outTM/outTM.at<double>(3,0)<<endl;
 }
