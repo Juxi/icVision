@@ -1426,4 +1426,5 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat&
    cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
    cout<<outTM<<endl;
+
 }

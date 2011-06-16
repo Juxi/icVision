@@ -103,6 +103,14 @@ bool VisionModule::updateModule()
       //Matrix transformation;
       transformation_left = chainEye_left.getH(v);
 
+      v[0]=torso2;
+      v[1]=torso1;
+      v[2]=torso0;
+      v[3]=head0;
+      v[4]=head1;
+      v[5]=head2;
+      v[6]=head3;
+
       //it is a RIGHT eye
       v[7]=head4-head5/2;
 
@@ -116,6 +124,9 @@ bool VisionModule::updateModule()
       RT_right.convertTo(RT_right, CV_32FC1);
 
       vision->setUpCamera2World(RT_left, RT_right);
+
+      Matrix T_left = iCub::ctrl::SE3inv(transformation_left);
+      Matrix T_right = iCub::ctrl::SE3inv(transformation_right);
 
 /*
       Mat RT_w2r = RT_right.inv();
