@@ -948,19 +948,21 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       double areaL2Dist = abs(areaDist.width*areaDist.width - areaDist.height*areaDist.height);
 
       //This triangulate points is based on center mass (TODO improve it)
-     //  cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
+      cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
       triangulatePoint(massCenter_left, massCenter_right, point3dLeft, point3dRight);
 
-
-
-
       Point3f poseWrtLeft;
-      poseWrtLeft.x = point3dLeft.at<float>(0,0);
-      poseWrtLeft.y = point3dLeft.at<float>(1,0);
-      poseWrtLeft.z = point3dLeft.at<float>(2,0);
+      poseWrtLeft.x = point3dLeft.at<float>(0,0)/1000;
+      poseWrtLeft.y = point3dLeft.at<float>(1,0)/1000;
+      poseWrtLeft.z = point3dLeft.at<float>(2,0)/1000;
+
+      cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt camera left"<<poseWrtLeft<<endl;
+
 
       Mat rotatedpoint3Dpoint;
       Point3f poseWrtWorld;
+
+      Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
 
 
       //If we have the rototraslation from Left to World
@@ -968,7 +970,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
     	  cout<<"ERROR"<<endl;
       }
 
-      Mat hompoint3dLeft = (Mat_<float>(4,1) << point3dLeft.at<float>(0,0)/1000, point3dLeft.at<float>(1,0)/1000 , point3dLeft.at<float>(2,0)/1000 , 1);
+      //Rotate the point
       rotatedpoint3Dpoint = RT_left*hompoint3dLeft;
       // cout<<rotatedpoint3Dpoint<<endl;
 
@@ -977,15 +979,20 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       poseWrtWorld.z = rotatedpoint3Dpoint.at<float>(2,0)/rotatedpoint3Dpoint.at<float>(3,0);
 
 
-
       //only for debugging
       cout<<"Estimated points left blob "<<blobs_matches[i].trainIdx<<" position wrt world"<<poseWrtWorld<<endl;
 
       /** inizio test **/
-       Mat point3dLeftnew, point3dRightnew;
-       triangulatePointNew(massCenter_left, massCenter_right, point3dLeftnew, point3dRightnew);
+      cout<<"********Start test using encoders"<<endl;
+           Point3f point3dNew;
+           cout<<"Center left "<< massCenter_left.x<<", "<<massCenter_left.y<<" - "<< massCenter_right.x<< ", "<<massCenter_right.y<<endl;
 
-       //*** fine tst **/
+           triangulatePointNew(massCenter_left, massCenter_right, point3dNew);
+
+           //TEST
+          // poseWrtWorld = point3dNew;
+           //*** fine tst **/
+      cout<<"********End test using encoders"<<endl;
 
       //Data association between stored object and new objects founded
       bool associated = false;
@@ -1071,15 +1078,20 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   RT_left = left2world;
   RT_right = right2world;
+
+  cout<<RT_left<<endl;
+
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
 
   //Create camera matrix
+  //The first problem to solve is that the encoder reading are in m, instead our calibration in in mm
 
-  P_left = Mat::zeros(3,4, iRT_left.type());
+
+  P_left = Mat::zeros(3,4, cameraMatrix_left.type());
 
   Mat iR_left = iRT_left(Rect(0,0,3,3));
-  Mat iT_left =  iRT_left(Rect(3,0,1,3));
+  Mat iT_left =  iRT_left(Rect(3,0,1,3))*1000; //Convertion from m->mm
   Mat P_left_tmpR = P_left(Rect(0,0,3,3));
   Mat P_left_tmpT = P_left(Rect(3,0,1,3));
   Mat tmplR = cameraMatrix_left*iR_left;
@@ -1087,10 +1099,10 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   tmplR.copyTo(P_left_tmpR);
   tmplT.copyTo(P_left_tmpT);
 
-  P_right = Mat::zeros(3,4,iRT_right.type());
+  P_right = Mat::zeros(3,4,cameraMatrix_right.type());
 
   Mat iR_right = iRT_right(Rect(0,0,3,3));
-  Mat iT_right =  iRT_right(Rect(3,0,1,3));
+  Mat iT_right =  iRT_right(Rect(3,0,1,3))*1000; //Convertion from m->mm
   Mat P_right_tmpR = P_right(Rect(0,0,3,3));
   Mat P_right_tmpT = P_right(Rect(3,0,1,3));
   Mat tmprR = cameraMatrix_right*iR_right;
@@ -1160,9 +1172,6 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       float cosangle = cos((angle/180)*CV_PI);
       float sinangle = sin((angle/180)*CV_PI);
 
-      if(abs(height - width) > 20)
-        isASphere = false;
-
 
       //Divide the h and w
       height = height/2;
@@ -1174,6 +1183,9 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       Point2f pt2 = Point2f(width * cosangle +  leftRRect.center.x, width * sinangle +  leftRRect.center.y);
       Point2f pt3 = Point2f(height * sinangle +  leftRRect.center.x, -height * cosangle +  leftRRect.center.y);
       Point2f pt4 = Point2f(-height * sinangle +  leftRRect.center.x, height * cosangle +  leftRRect.center.y);
+
+      if(abs(norm(pt1-pt2) - norm(pt3-pt4)) > 20)
+            isASphere = false;
 
 
       line(outputImageLeft, pt1, pt2, leftbb.getColor());
@@ -1194,6 +1206,7 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       cosangle = cos((angle/180)*CV_PI);
       sinangle = sin((angle/180)*CV_PI);
 
+
       //Divide the h and w
       height = height/2;
       width = width/2;
@@ -1204,20 +1217,24 @@ int CVUtils::detectObjects(vector<WorldObject> &obj_list){
       pt3 = Point2f(height * sinangle +  rightRRect.center.x, -height * cosangle +  rightRRect.center.y);
       pt4 = Point2f(-height * sinangle +  rightRRect.center.x, height * cosangle +  rightRRect.center.y);
 
+      if(abs(norm(pt1-pt2) - norm(pt3-pt4)) > 20)
+            isASphere = false;
+
+
       line(outputImageRight, pt1, pt2, rightbb.getColor());
       line(outputImageRight, pt3, pt4, rightbb.getColor());
       ellipse(outputImageRight, rightRRect, rightbb.getColor());
       rectangle(outputImageRight, rightbb.getRect(), rightbb.getColor());
       putText(outputImageRight, right.str(), rightbb.getBBCenter(), FONT_HERSHEY_DUPLEX , 0.5, rightbb.getColor());
 
-      if(abs(height - width) > 20)
-        isASphere = false;
 
       if(!isASphere){
           obj_list[oo].setShape(CYLINDER);
+          cout<<"detected a cylinder"<<endl;
       }
       else{
           obj_list[oo].setShape(SPHERE);
+          cout<<"detected a sphere"<<endl;
       }
 
 
@@ -1317,7 +1334,9 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 
 }
 
-void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight){
+void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
+
+
 
 //  Mat P3_left = P_left.row(2);
 //  Mat P2_left = P_left.row(1);
@@ -1353,6 +1372,7 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat&
 //
 //  eigen(A2solve,eigenvalue,eigenvector, lowindex, highindex);
 //
+
 //  cout<<eigenvalue<<endl;
 //  cout<<eigenvector<<endl;
 //  cout<<highindex<<" "<<lowindex<<endl;
@@ -1362,20 +1382,20 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat&
   //TODO test
 
 //  //Estimate a point
-//  Mat matpleft = (Mat_<float>(3,1) << pl.x, pl.y, 1);
-//  Mat dirleft = cameraMatrix_left.inv()*matpleft;
-//  dirleft = dirleft/norm(dirleft);
-//  Mat matpright = (Mat_<float>(3,1) << pr.x, pr.y, 1);
-//  Mat dirright = cameraMatrix_right.inv()*matpright;
-//  dirright = dirright/norm(dirright);
+//  Mat dirleft = (Mat_<float>(4,1) << (pl.x- cameraMatrix_left.at<float>(0,2))/cameraMatrix_left.at<float>(0,0), (pl.y- cameraMatrix_left.at<float>(1,2))/cameraMatrix_left.at<float>(1,1), 1/sqrt(cameraMatrix_left.at<float>(0,0)*cameraMatrix_left.at<float>(0,0)+cameraMatrix_left.at<float>(1,1)+cameraMatrix_left.at<float>(1,1)), 1 );
+//  Mat dirright = (Mat_<float>(4,1) << (pr.x- cameraMatrix_right.at<float>(0,2))/cameraMatrix_right.at<float>(0,0), (pr.y- cameraMatrix_right.at<float>(1,2))/cameraMatrix_right.at<float>(1,1), 1/sqrt(cameraMatrix_right.at<float>(0,0)*cameraMatrix_right.at<float>(0,0)+cameraMatrix_right.at<float>(1,1)+cameraMatrix_right.at<float>(1,1)), 1 );
 //
-//  Mat center = Mat::zeros(3,1, CV_32FC1);
+//  cout<<dirleft<<endl;
+//  cout<<dirright<<endl;
 //
-//  //Center of the camera
+//  Mat center = Mat::zeros(4,1, CV_32FC1);
+//  center.at<float>(3,0) = 1;
+//
+//   //Center of the camera
 //  Mat pl_1 = RT_left*center;
 //  Mat pl_2 = RT_left*dirleft;
 //  Mat pr_1 = RT_right*center;
-//  Mat pr_2 = RT_right*dirleft;
+//  Mat pr_2 = RT_right*dirright;
 //
 //  float U = pl_2.at<float>(0,0);
 //  float V = pl_2.at<float>(1,0);
@@ -1390,7 +1410,8 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat&
 //                                 W,  0, -U,  0,
 //                                -V,  U,  0,  0);
 //
-//  Mat line_left = Pi_X*pl_1;
+//  Mat pl_h = (Mat_<float>(4,1) << pl_1.at<float>(0,0), pl_1.at<float>(1,0), pl_1.at<float>(2,0), 1);
+//  Mat line_left = Pi_X*pl_h;
 //
 //  U = pr_2.at<float>(0,0);
 //  V = pr_2.at<float>(1,0);
@@ -1405,8 +1426,14 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat&
 //                               W,  0, -U,  0,
 //                              -V,  U,  0,  0);
 //
-//  Mat line_right = Pi_X*pr_1;
-
+//  Mat pr_h = (Mat_<float>(4,1) << pr_1.at<float>(0,0), pr_1.at<float>(1,0), pr_1.at<float>(2,0), 1);
+//
+//  Mat line_right = Pi_X*pr_h;
+//
+//  cout<<pl_1<<endl;
+//  cout<<pl_2<<endl;
+//  cout<<pr_1<<endl;
+//  cout<<pr_2<<endl;
 
   //Another test in the hat
 

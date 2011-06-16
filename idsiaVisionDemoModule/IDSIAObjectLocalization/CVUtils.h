@@ -53,8 +53,8 @@ class CVUtils
          Mat& R, Mat& T, Mat & dist_l, Mat & dist_r,
          Mat& cameraMatrix_l, Mat& cameraMatrix_r,
          Mat& point3DLeft, Mat& point3DRight);
-    void triangulatePoint(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);\
-    void triangulatePointNew(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);
+    void triangulatePoint(Point2f pl, Point2f pr, Mat& point3DLeft, Mat& point3DRight);
+    void triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D);
 
 
     void undistortPoint(Mat &point, Mat &dist);

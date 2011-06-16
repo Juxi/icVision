@@ -117,6 +117,8 @@ bool VisionModule::updateModule()
       //Matrix transformation;
       transformation_right = chainEye_right.getH(v);
 
+      // eye -> robot
+
       RT_left = Mat(4,4, CV_64FC1, transformation_left.data());
       RT_right = Mat(4,4, CV_64FC1, transformation_right.data());
 
