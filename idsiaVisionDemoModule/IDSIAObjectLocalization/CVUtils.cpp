@@ -1364,8 +1364,6 @@ void CVUtils::findObjectContour(Mat &image, Mat &graylevelimage, ColoredRect &re
 
 void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
-
-
 //  Mat P3_left = P_left.row(2);
 //  Mat P2_left = P_left.row(1);
 //  Mat P1_left = P_left.row(0);
@@ -1490,10 +1488,9 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
   //using cvTriangulate with the created structures
   //cvCorrectMatches(&(CvMat)F, &__points1, &__points2, &__newpoints1, &__newpoints2);
 
+  cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
-   cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
-
-   cout<<matpleft<<endl;
-   cout<<matpright<<endl;
-   cout<<outTM/outTM.at<double>(3,0)<<endl;
+  cout<<matpleft<<endl;
+  cout<<matpright<<endl;
+  cout<<outTM/outTM.at<double>(3,0)<<endl;
 }
