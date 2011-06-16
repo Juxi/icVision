@@ -1109,9 +1109,12 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   P_left = Mat::zeros(3,4, cameraMatrix_left.type());
 
+//  Mat iR_left = iRT_left(Rect(0,0,3,3));
+//  Mat iT_left =  iRT_left(Rect(3,0,1,3)); //Convertion from m->mm ?
 
-  Mat iR_left = iRT_left(Rect(0,0,3,3));
-  Mat iT_left =  iRT_left(Rect(3,0,1,3)); //Convertion from m->mm ?
+  Mat iR_left = Mat::eye(3,3, cameraMatrix_left.type());
+  Mat iT_left =  Mat::zeros(3,1, cameraMatrix_left.type()); //Convertion from m->mm ?
+
   Mat P_left_tmpR = P_left(Rect(0,0,3,3));
   Mat P_left_tmpT = P_left(Rect(3,0,1,3));
   Mat tmplR = cameraMatrix_leftm*iR_left;
@@ -1121,8 +1124,11 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   P_right = Mat::zeros(3,4,cameraMatrix_right.type());
 
-  Mat iR_right = iRT_right(Rect(0,0,3,3));
-  Mat iT_right =  iRT_right(Rect(3,0,1,3)); //Convertion from m->mm ?
+//  Mat iR_right = iRT_right(Rect(0,0,3,3));
+//  Mat iT_right =  iRT_right(Rect(3,0,1,3)); //Convertion from m->mm ?
+  Mat iR_right = R.clone();
+  Mat iT_right = T.clone();
+
   Mat P_right_tmpR = P_right(Rect(0,0,3,3));
   Mat P_right_tmpT = P_right(Rect(3,0,1,3));
   Mat tmprR = cameraMatrix_rightm*iR_right;
