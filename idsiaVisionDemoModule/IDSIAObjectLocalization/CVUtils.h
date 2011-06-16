@@ -43,6 +43,8 @@ class CVUtils
     Mat RT_left, RT_right, iRT_left, iRT_right;
 
     Mat P_left, P_right;
+    Mat P_left_tmp, P_right_tmp;
+
 
     bool saveImages, useUndistImages, recomputeF;
 

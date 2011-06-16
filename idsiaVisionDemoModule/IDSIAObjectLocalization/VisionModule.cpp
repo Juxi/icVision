@@ -127,8 +127,8 @@ bool VisionModule::updateModule()
 
       vision->setUpCamera2World(RT_left, RT_right);
 
-      Matrix T_left = iCub::ctrl::SE3inv(transformation_left);
-      Matrix T_right = iCub::ctrl::SE3inv(transformation_right);
+//      Matrix T_left = iCub::ctrl::SE3inv(transformation_left);
+//      Matrix T_right = iCub::ctrl::SE3inv(transformation_right);
 
 /*
       Mat RT_w2r = RT_right.inv();

@@ -1092,6 +1092,11 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
 
   Mat iR_left = iRT_left(Rect(0,0,3,3));
   Mat iT_left =  iRT_left(Rect(3,0,1,3))*1000; //Convertion from m->mm
+
+  Mat iR_left = iRT_left(Rect(0,0,3,3));
+  Mat iT_left =  iRT_left(Rect(3,0,1,3))*1000; //Convertion from m->mm
+
+
   Mat P_left_tmpR = P_left(Rect(0,0,3,3));
   Mat P_left_tmpT = P_left(Rect(3,0,1,3));
   Mat tmplR = cameraMatrix_left*iR_left;
@@ -1109,6 +1114,8 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   Mat tmprT = cameraMatrix_right*iT_right;
   tmprR.copyTo(P_right_tmpR);
   tmprT.copyTo(P_right_tmpT);
+
+
 
 }
 
