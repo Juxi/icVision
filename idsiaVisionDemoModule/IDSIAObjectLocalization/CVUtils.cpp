@@ -113,6 +113,11 @@ void CVUtils::fundfromimages(Mat &camera_left, Mat &camera_right){
 
     //Mat R_matrix, R_vec, T_vec;
     //solvePnP(Mat(objectPoints), Mat(imagePoints_left), cameraMatrix_left, distCoeffs_left, R_vec, T_vec, false);
+    Mat Rlefttmp, Rlefttmp_vec;
+    Mat Tlefttmp;
+
+    //Solve ransac
+    solvePnPRansac(singleObjectPoints, corners_left, cameraMatrix_left, distCoeffs_left, Rlefttmp_vec, Tlefttmp);
 
     //reconvert everything to float
     cameraMatrix_left.convertTo(cameraMatrix_left, CV_32F);
@@ -123,6 +128,28 @@ void CVUtils::fundfromimages(Mat &camera_left, Mat &camera_right){
     R.convertTo(R, CV_32F);
     T.convertTo(T, CV_32F);
 
+
+    Rodrigues(Rlefttmp_vec, Rlefttmp);
+    cout<<Rlefttmp<<endl;
+    cout<<Tlefttmp<<endl;
+    //This transforms a point in checkboard coordination to camera coordinates
+    Mat extRT_left = Mat::eye(4,4,CV_32F);
+
+    for(int i = 0; i<3; i++)
+    	for(int j = 0; j<3; j++)
+    		extRT_left.at<float>(i,j) = (float)Rlefttmp.at<double>(i,j);
+
+    extRT_left.at<float>(0,3) = (float)Tlefttmp.at<double>(0,0);
+    extRT_left.at<float>(1,3) = (float)Tlefttmp.at<double>(1,0);
+    extRT_left.at<float>(2,3) = (float)Tlefttmp.at<double>(2,0);
+
+    //cout<<extRT_left<<endl;
+    //From camera to checkboard
+    RT_left_checkboard = extRT_left.inv();
+    RT_left_checkboard.convertTo(RT_left_checkboard, CV_32F);
+
+
+    cout<<RT_left_checkboard<<endl;
 
 //    Mat extRT = Mat::eye(4,4,CV_32F);
 //    Mat extRT_R = extRT( Rect(0, 0, 3, 3) );
@@ -938,12 +965,6 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
       Moments rightmoments = moments(Mat(rightbb.getContour()));
       Point2f massCenter_right = Point2f(rightmoments.m10/rightmoments.m00, rightmoments.m01/rightmoments.m00);
 
-
-
-
-      undistortPoint(massCenter_left, distCoeffs_left);
-      undistortPoint(massCenter_right, distCoeffs_right);
-
       Mat point3dLeft, point3dRight;
 
  //     double orientation = 180*(0.5*atan(2*leftmoments.mu11/(leftmoments.mu20 - leftmoments.mu02)))/CV_PI;
@@ -998,7 +1019,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
            triangulatePointNew(massCenter_left, massCenter_right, point3dNew);
 
            //TEST
-          // poseWrtWorld = point3dNew;
+           poseWrtWorld = point3dNew;
            //*** fine tst **/
       cout<<"********End test using encoders"<<endl;
 
@@ -1092,6 +1113,32 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   iRT_left = left2world.inv();
   iRT_right = right2world.inv();
 
+
+  /*
+        Mat RT_w2r = RT_right.inv();
+  	  Mat RT_w2l = RT_left.inv();
+  	  Mat RT_l2r = RT_w2r*RT_left;
+  	  Mat RT_tmp = RT_left*RT_w2r;
+  	  cout<<RT_l2r<<endl;
+  */
+
+//  cout<<R<<endl;
+//  cout<<T<<endl;
+//
+//
+//  Mat extRT = iRT_right*RT_left;
+//
+////  cout<<extRT<<endl;
+////  cout<<extRT.at<float>(0,3)*1000<<" "<<extRT.at<float>(1,3)*1000<<" "<<extRT.at<float>(2,3)*1000<<endl;
+//
+//
+//  Mat Rtmp = extRT(Rect(0,0,3,3));
+//  Mat Ttmp = extRT(Rect(3,0,1,3));
+
+//
+//  cout<<Rtmp<<endl;
+//  cout<<Ttmp<<endl;
+
   //Create camera matrix
   //The first problem to solve is that the encoder reading are in m, instead our calibration in in mm
 
@@ -1100,18 +1147,14 @@ void CVUtils::setUpCamera2World(Mat& left2world, Mat& right2world){
   cameraMatrix_right.copyTo(cameraMatrix_rightm);
 
 
-  cameraMatrix_leftm.at<float>(0,0) /= 1000;
-  cameraMatrix_leftm.at<float>(1,1) /= 1000;
-  cameraMatrix_rightm.at<float>(0,0) /= 1000;
-  cameraMatrix_rightm.at<float>(1,1) /= 1000;
-
-  cout<<cameraMatrix_leftm<<endl;
+//  cameraMatrix_leftm.at<float>(0,0) /= 1000;
+//  cameraMatrix_leftm.at<float>(1,1) /= 1000;
+//  cameraMatrix_rightm.at<float>(0,0) /= 1000;
+//  cameraMatrix_rightm.at<float>(1,1) /= 1000;
 
   P_left = Mat::zeros(3,4, cameraMatrix_left.type());
-
 //  Mat iR_left = iRT_left(Rect(0,0,3,3));
 //  Mat iT_left =  iRT_left(Rect(3,0,1,3)); //Convertion from m->mm ?
-
   Mat iR_left = Mat::eye(3,3, cameraMatrix_left.type());
   Mat iT_left =  Mat::zeros(3,1, cameraMatrix_left.type()); //Convertion from m->mm ?
 
@@ -1463,6 +1506,9 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
   //Another test in the hat
 
+  undistortPoint(pl, distCoeffs_left);
+  undistortPoint(pr, distCoeffs_right);
+
   Mat matpleft = (Mat_<float>(2,1) << pl.x, pl.y);
   Mat matpright = (Mat_<float>(2,1) << pr.x, pr.y);
 
@@ -1492,5 +1538,40 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
   cout<<matpleft<<endl;
   cout<<matpright<<endl;
-  cout<<outTM/outTM.at<double>(3,0)<<endl;
+  outTM = outTM/outTM.at<double>(3,0);
+
+  Mat tmpoutTM = outTM.clone();
+
+  outTM.at<double>(0,0)/=1000;
+  outTM.at<double>(1,0)/=1000;
+  outTM.at<double>(2,0)/=1000;
+
+  cout<<outTM<<endl;
+
+  outTM.convertTo(outTM, CV_32FC1);
+  Mat result = RT_left*outTM;
+  cout<<result<<endl;
+
+  //ok... now the position wrt checkboard
+
+  tmpoutTM.convertTo(tmpoutTM, CV_32FC1);
+  cout<<tmpoutTM<<endl;
+  Mat result2 = RT_left_checkboard*tmpoutTM;
+
+  cout<<result2<<endl;
+
+  result2.at<float>(0,0)/=1000;
+  result2.at<float>(1,0)/=1000;
+  result2.at<float>(2,0)/=1000;
+
+  Mat finalresult = result2/result2.at<float>(3,0);
+  cout<<finalresult<<endl;
+
+
+  Mat convertedresults =  (Mat_<float>(3,1) << finalresult.at<float>(2,0)-0.85, finalresult.at<float>(1,0)-0.24, -(finalresult.at<float>(0,0)-0.04));
+  cout<<convertedresults<<endl;
+
+  point3D.x = finalresult.at<float>(2,0)-0.91; //83cm
+  point3D.y = finalresult.at<float>(1,0)-0.24; //24 cm
+  point3D.z = -(finalresult.at<float>(0,0)-0.01); //4cm
 }

@@ -41,6 +41,7 @@ class CVUtils
     Mat F;
 
     Mat RT_left, RT_right, iRT_left, iRT_right;
+    Mat RT_left_checkboard, RT_c2r;
 
     Mat P_left, P_right;
     Mat P_left_tmp, P_right_tmp;
