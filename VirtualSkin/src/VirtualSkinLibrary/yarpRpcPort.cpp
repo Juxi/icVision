@@ -14,7 +14,7 @@ using namespace VirtualSkin;
 
 YarpRpcPort::YarpRpcPort() : keepListening(true), debug(true)
 {
-	port.setStrict();
+	//port.setStrict();
 }
 YarpRpcPort::~YarpRpcPort()
 {
@@ -41,18 +41,17 @@ void YarpRpcPort::run()
 {
 	//printf("Starting RPC server...\n");
 	
-	yarp::os::Bottle* cmd;
-	yarp::os::Bottle& reply = port.prepare();
+	yarp::os::Bottle cmd,response;
     while ( keepListening )
 	{
-		cmd = port.read(false);
+		port.read(cmd,true);
 		if (cmd!=NULL)
 		{
-			reply.clear();
-			if (debug) { showBottle(*cmd); }
-			if ( !handler(*cmd,reply) ) { reply.addString("Unknown Command! Type 'help' for a list of valid commands."); }
-			port.writeStrict();
-			if (debug) { printf("reply: %s\n",reply.toString().c_str()); }
+			response.clear();
+			if (debug) { showBottle(cmd); }
+			if ( !handler(cmd,response) ) { response.addString("Unknown Command! Type 'help' for a list of valid commands."); }
+			port.reply(response);
+			if (debug) { printf("reply: %s\n",response.toString().c_str()); }
 		}
 		usleep(YARP_PERIOD_us);
     }
