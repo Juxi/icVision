@@ -78,10 +78,18 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 			
-			if ( geom == VOCAB_SPH ) { world->newSphere( r, QVector3D(px,py,pz) ); }
-			else if ( geom == VOCAB_SSPH ) { world->newSSphere( r, QVector3D(px,py,pz) ); }
-			
-			reply.addString("Made sphere.");
+			// sanity check for radius
+			if ( r > 0.0 ) {
+				
+				if ( geom == VOCAB_SPH ) { world->newSphere( r, QVector3D(px,py,pz) ); }
+				else if ( geom == VOCAB_SSPH ) { world->newSSphere( r, QVector3D(px,py,pz) ); }
+				
+				reply.addString("Made sphere.");			
+				
+			} else {
+				reply.addString("MK ERROR: Radius for sphere was negative.");
+			}			
+
 			
 		} else if ( geom == VOCAB_CYL || geom == VOCAB_SCYL ) {
 			
@@ -91,10 +99,17 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 			
-			if ( geom == VOCAB_CYL ) { world->newCylinder( r, h, QVector3D(px,py,pz) ); }
-			else if ( geom == VOCAB_SCYL ) { world->newSCylinder( r, h, QVector3D(px,py,pz) ); }
-			
-			reply.addString("Made cylinder.");
+			// sanity check for radius and height
+			if ( r > 0.0 && h > 0.0 ) {
+				
+				if ( geom == VOCAB_CYL ) { world->newCylinder( r, h, QVector3D(px,py,pz) ); }
+				else if ( geom == VOCAB_SCYL ) { world->newSCylinder( r, h, QVector3D(px,py,pz) ); }				
+				
+				reply.addString("Made cylinder.");
+				
+			} else {
+				reply.addString("MK ERROR: Radius or height of cylinder was negative.");
+			}			
 			
 		} else if ( geom == VOCAB_BOX || geom == VOCAB_SBOX ) {
 			
@@ -105,10 +120,17 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 
-			if ( geom == VOCAB_BOX ) { world->newBox( QVector3D(x,y,z), QVector3D(px,py,pz) ); }
-			else if ( geom == VOCAB_SBOX ) { world->newSBox( QVector3D(x,y,z), QVector3D(px,py,pz) ); }
+			// sanity check for the sides
+			if ( x > 0.0 && y > 0.0 && z > 0.0 ) {
+
+				if ( geom == VOCAB_BOX ) { world->newBox( QVector3D(x,y,z), QVector3D(px,py,pz) ); }
+				else if ( geom == VOCAB_SBOX ) { world->newSBox( QVector3D(x,y,z), QVector3D(px,py,pz) ); }
 			
-			reply.addString("Made box.");
+				reply.addString("Made box.");
+				
+			} else {
+				reply.addString("MK ERROR: At least one of the sides of the box was negative.");
+			}
 			
 		}
 		else if ( geom == VOCAB_CSG ) {
