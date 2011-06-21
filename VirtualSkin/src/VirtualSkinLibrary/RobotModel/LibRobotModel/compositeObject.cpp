@@ -6,6 +6,7 @@
 #include "cylinder.h"
 #include "box.h"
 #include "model.h"
+#include <exception>
 
 using namespace std;
 using namespace RobotModel;
@@ -129,8 +130,8 @@ void CompositeObject::setSpecialEulerOrientation( const QVector3D& axis, qreal a
 PrimitiveObject* CompositeObject::newSphere( double r, const QVector3D& pos )
 {
 	QString name =  "sph" + QString::number( ++numSpheres );
-	
-	PrimitiveObject* primitive = new Sphere( r );
+	PrimitiveObject* primitive = NULL;
+	primitive = new Sphere( r );
 	primitive->setName( name );
 	primitive->setPosition( pos );
 	append( primitive );

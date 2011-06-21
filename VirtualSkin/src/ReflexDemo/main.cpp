@@ -51,21 +51,27 @@ int main(int argc, char *argv[])
 	//VirtualSkin::RobotFilter filter(visualize);
 	
 	// start the Virtual Skin command filter
-	if	( !filter.open<	VirtualSkin::StateObserver,
-						VirtualSkin::CallObserver,
-						VirtualSkin::ResponseObserver >( xmlFile ) )
+	try
 	{ 
-		return 1;
+		filter.open< VirtualSkin::StateObserver,
+					 VirtualSkin::CallObserver,
+					 VirtualSkin::ResponseObserver >( xmlFile ); 
+	
+		// open a port to report collision events
+		filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");
+	
+		// open a port to interact with the world model
+		filter.model.openWorldRpcPort("/" + filter.model.robot->getName() + "F/world");
+	
+		// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
+		filter.openStatusPort("/" + filter.model.robot->getName() + "F/status");
 	}
 	
-	// open a port to report collision events
-	filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");
-	
-	// open a port to interact with the world model
-	filter.model.openWorldRpcPort("/" + filter.model.robot->getName() + "F/world");
-	
-	// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
-	filter.openStatusPort("/" + filter.model.robot->getName() + "F/status");
+	catch (std::exception& e)
+	{ 
+		printf("%s\n",e.what());
+		return 1;
+	}
 	
 	// run the Qt application
 	int result = app.exec();

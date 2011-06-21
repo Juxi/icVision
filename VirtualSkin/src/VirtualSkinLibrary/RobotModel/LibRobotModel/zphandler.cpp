@@ -126,7 +126,11 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 				}
 			}
         }
-		catch (RobotModelException e) { errorStr = e.what(); return 0;}
+		catch (std::exception& e)
+		{ 
+			errorStr = e.what();
+			return 0;
+		}
     }
 
 	/*******************************************************************************
@@ -164,7 +168,11 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 				primitive = node->newBox( size, false );
 			}
         }
-		catch (RobotModelException e) { errorStr = e.what(); return 0;}
+		catch (std::exception& e)
+		{ 
+			errorStr = e.what();
+			return 0;
+		}
 		
 		/*
 		 *	SET ITS ROTATION
@@ -255,7 +263,11 @@ BodyPart* ZPHandler::createChildPart()
 		if (!childPart) errorStr = "Failed to allocate bodyPart.";
 		return childPart;
 	}
-	catch (RobotModelException e) { errorStr = e.what(); return 0;}
+	catch (std::exception& e)
+	{ 
+		errorStr = e.what();
+		return 0;
+	}
 }
 
 Motor* ZPHandler::createChildMotor( int motorIdx )
@@ -284,7 +296,11 @@ Motor* ZPHandler::createChildMotor( int motorIdx )
 		} else errorStr = "Failed to allocate motor.";
 		return childMotor;
 	}
-	catch (RobotModelException e) { errorStr = e.what(); return 0;}
+	catch (std::exception& e)
+	{ 
+		errorStr = e.what();
+		return 0;
+	}
 }
 
 KinTreeNode* ZPHandler::createChildLink()
@@ -295,7 +311,11 @@ KinTreeNode* ZPHandler::createChildLink()
 		if (!link) errorStr = "Failed to allocate link.";
 		return link;
 	}
-	catch (RobotModelException e) { errorStr = e.what(); return 0;}
+	catch (std::exception& e)
+	{ 
+		errorStr = e.what();
+		return 0;
+	}
     
 }
 
@@ -303,7 +323,7 @@ KinTreeNode* ZPHandler::createChildJoint( const QString& type )
 {
     if ( !motor )
 	{
-        errorStr = "Ecnountered <joint> outside of <motor>!!";
+        errorStr = "Ecnountered <joint> outside of <motor>!!\n";
         return 0;
     }
 	
@@ -311,13 +331,17 @@ KinTreeNode* ZPHandler::createChildJoint( const QString& type )
 	{
 		KinTreeNode* joint;
 		if ( type == "revolute" || type == "" ) { joint = new RevoluteJoint(robot, node, motor); }		
-		else if ( type == "prismatic" )			{ errorStr = "Prismatic joints are not yet supported"; }
-		else									{ errorStr = "Tried to create <joint> of unknown type!! Known types are 'revolute' and 'prismatic'"; }
+		else if ( type == "prismatic" )			{ errorStr = "Prismatic joints are not yet supported\n"; }
+		else									{ errorStr = "Tried to create <joint> of unknown type!! Known types are 'revolute' and 'prismatic'\n"; }
 		// TODO: add prismatic joints
-		if (!joint) errorStr = "Failed to allocate joint.";
+		if (!joint) errorStr = "Failed to allocate joint.\n";
 		return joint;
 	}
-	catch (RobotModelException e) { errorStr = e.what(); return 0;}
+	catch (std::exception& e)
+	{ 
+		errorStr = e.what();
+		return 0;
+	}
 
 }
 
@@ -329,8 +353,7 @@ bool ZPHandler::characters(const QString &str)
 bool ZPHandler::fatalError(const QXmlParseException &exception)
 {
 	printf("XML PARSE FATAL ERROR: line %d column %d\n", exception.lineNumber(), exception.columnNumber());
-	printf("%s", exception.message().toStdString().c_str());
-	
+	printf("%s\n", exception.message().toStdString().c_str());
     return false;
 }
 

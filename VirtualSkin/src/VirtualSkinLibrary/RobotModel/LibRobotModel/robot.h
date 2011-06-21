@@ -17,6 +17,7 @@
 #include "link.h"
 #include "marker.h"
 #include "robotobservation.h"
+#include "robotmodelexception.h"
 
 
 namespace RobotModel
@@ -40,7 +41,7 @@ public:
 	Robot( Model* m );		//!< Nothing to do here
 	~Robot();		//!< Nothing to do here
 	
-	bool open(const QString& fileName, bool verbose = true);			//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
+	void open(const QString& fileName, bool verbose = true) throw(RobotModelException);			//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
 	bool isOpen() const	{ return isConfigured; }						//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();														//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	

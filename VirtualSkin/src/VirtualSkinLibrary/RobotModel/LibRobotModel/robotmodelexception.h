@@ -11,20 +11,21 @@
 #define ROBOTMODELEXCEPTION_H
 
 #include <QString>
+#include <exception>
 
 namespace RobotModel { class RobotModelException; }
 	
 /*! \brief A simple exception for the RobotModel namespace
  */
-class RobotModel::RobotModelException
+class RobotModel::RobotModelException : public std::exception
 {
 	
 public:
 	
 	RobotModelException( const QString& msg = "" );	//!< Sets the error message
-	~RobotModelException();							//!< Nothing special
-	
-	const char* what();								//!< Returns the error message
+	~RobotModelException () throw ();
+
+	virtual const char* what() const throw();		//!< Returns the error message
 
 private:
 	

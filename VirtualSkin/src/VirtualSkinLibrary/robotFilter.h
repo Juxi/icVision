@@ -11,7 +11,6 @@
 #ifndef ROBOTFILTER_H_
 #define ROBOTFILTER_H_
 
-//#include <QMutex>
 #include <QThread>
 #include <QVector>
 #include <yarp/os/ControlBoardFilter.h>
@@ -22,6 +21,7 @@
 #include "responseObserver.h"
 #include "yarpModel.h"
 #include "yarpStreamPort.h"
+#include "virtualskinexception.h"
 
 namespace VirtualSkin
 {
@@ -60,18 +60,16 @@ public:
 	 * \note aStateObserver,aCallObserver,aResponseObserver MUST be sub-classes of StateObserver,CallObserver,ResponseObserver respectively
 	 */
 	template <class aStateObserver, class aCallObserver, class aResponseObserver>
-	bool open( const QString& fileName )
+	void open( const QString& fileName ) throw(std::exception)
 	{
 		if ( isOpen ) { close(); }
 		
 		if ( !yarp::os::Network::checkNetwork() )
 		{
-			printf("ROBOT FILTER ERROR: yarp network unavailable...\n");
-			return false;
+			throw( VirtualSkinException("yarp network unavailable...") );
 		}
 		
 		model.robot->open(fileName);
-		//model.start();
 		
 		const QString deviceBaseName( model.robot->getName() );
 		const QString filterBaseName( model.robot->getName() + "F" );
@@ -117,21 +115,20 @@ public:
 			}
 			else
 			{
-				printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
+				//printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
+				QString errStr = "failed to find YARP port '";
+				errStr.append(targetName);
+				errStr.append("'");
 				delete p_cbf;
 				close();
-				return false;
+				throw( VirtualSkinException(errStr) );
 			}
 		} 
 		
 		extraOpenStuff();
-
 		isOpen = true;
 		statusPort.setBottle("1");
-		
 		model.start();
-		
-		return true;
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction

@@ -78,8 +78,14 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 			
-			if ( geom == VOCAB_SPH ) { world->newSphere( r, QVector3D(px,py,pz) ); }
-			else if ( geom == VOCAB_SSPH ) { world->newSSphere( r, QVector3D(px,py,pz) ); }
+			if ( geom == VOCAB_SPH )
+			{ 
+				world->newSphere( r, QVector3D(px,py,pz) );
+			}
+			else if ( geom == VOCAB_SSPH )
+			{
+				world->newSSphere( r, QVector3D(px,py,pz) );
+			}
 			
 			reply.addString("Made sphere.");
 			
@@ -128,7 +134,12 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 		}
 		else { reply.addString("MK ERROR: Unknown geometry... use '(s)sph', '(s)cyl', '(s)box' or 'csg'"); }
 	}
-	catch (RobotModel::RobotModelException e) { reply.clear(); reply.addString(e.what()); }
+	catch (std::exception& e)
+	{
+		printf("Caught RobotModelException!!!\n");
+		reply.clear();
+		reply.addString(e.what());
+	}
 }
 void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n )
 {
@@ -184,7 +195,7 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 		reply.addString("to");
 		reply.addString( object->getName().toStdString().c_str() );
 			
-	} catch (RobotModel::RobotModelException e) { reply.addString(e.what()); }
+	} catch (std::exception& e) { reply.addString(e.what()); }
 }
 void WorldRpcInterface::setPos( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {

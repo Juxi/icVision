@@ -4,14 +4,14 @@ using namespace RobotModel;
 
 RobotModelException::RobotModelException( const QString& msg )
 {
-	errStr = "RobotModelException:";
+	errStr = "RobotModelException: ";
 	errStr.append(msg);
 }
-RobotModelException::~RobotModelException()
+RobotModelException::~RobotModelException() throw()
 {
 }
 
-const char* RobotModelException::what()
+const char* RobotModelException::what() const throw()
 {
-    return errStr.toStdString().c_str();
+	return errStr.toStdString().c_str();
 }

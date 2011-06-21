@@ -11,6 +11,7 @@ SET ( src_files	yarpModel.cpp
 		yarpRpcPort.cpp
 		worldRpcInterface.cpp
 		yarpStreamPort.cpp
+		virtualskinexception.cpp
 )
 
 SET ( hdr_files	yarpModel.h
@@ -23,6 +24,7 @@ SET ( hdr_files	yarpModel.h
 		worldRpcInterface.h
 		yarpStreamPort.h
 		constants.h
+		virtualskinexception.h
 )
 
 SET ( QT_MOC_FILES 	robotFilter.h

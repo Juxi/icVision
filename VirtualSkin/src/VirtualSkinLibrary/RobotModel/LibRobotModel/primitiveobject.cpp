@@ -3,7 +3,7 @@
 
 using namespace RobotModel;
 
-PrimitiveObject::PrimitiveObject() : parent(0)
+PrimitiveObject::PrimitiveObject() : parent(0), shape(NULL), solidObject(NULL)
 {
 }
 PrimitiveObject::~PrimitiveObject()
