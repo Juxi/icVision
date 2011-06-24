@@ -91,11 +91,11 @@ void ReflexFilter::responseComplete()
 		int n=0;
 		while ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT)
 		{
-			printf("Time: %d\n",n);
+			//printf("Time: %d\n",n);
 			period = 0;
 			for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 			{
-				printf("  Body Part - %d:", bodyPart);
+				//printf("  Body Part - %d:", bodyPart);
 				rewind.clear();
 				rewind.addVocab(VOCAB_SET);
 				rewind.addVocab(VOCAB_POSITION_MOVES);
@@ -103,14 +103,14 @@ void ReflexFilter::responseComplete()
 				for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
 				{
 					bodyPartPose.addDouble(*joint);
-					printf(" %f", *joint);
+					//printf(" %f", *joint);
 				}
-				printf("\n");
+				//printf("\n");
 				cbFilters.at(bodyPart)->injectCall(rewind);
 				period += stateObservers.at(bodyPart)->getPeriod();
 			}
 			period /= model.robot->numBodyParts();
-			printf("  waiting %f msec\n", period);
+			//printf("  waiting %f msec\n", period);
 			
 			n++;
 			msleep(period);

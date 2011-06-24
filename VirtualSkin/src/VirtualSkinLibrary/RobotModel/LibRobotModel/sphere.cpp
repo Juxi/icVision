@@ -40,7 +40,7 @@ void Sphere::makeDisplayList()
 	//printf("     make - %p\n",QThread::currentThread());
 	
     // get a unique display list index and define the list
-    setDisplayListIdx(glGenLists(1)); 
+    index = glGenLists(1); 
 
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS
 

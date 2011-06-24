@@ -30,13 +30,13 @@ class RobotModel::KinTreeNode : public CompositeObject
 	
 public:
 	
-	enum Type { 
+	enum NodeType { 
 				LINK,	//!< See Link
 				RJOINT,	//!< See RevoluteJoint
 				PJOINT	//!< See PrismaticJoint
 			   };		//!< Indicates the sub-type of this object
 
-	KinTreeNode( Robot* parentRobot, KinTreeNode* parentNode, Type type = LINK );	//!< Initializes member variables and appends the KinTreeNode to the supplied Robot and KinTreeNode
+	KinTreeNode( Robot* parentRobot, KinTreeNode* parentNode, NodeType type = LINK );	//!< Initializes member variables and appends the KinTreeNode to the supplied Robot and KinTreeNode
 																					/**< \param parentRobot The robot to which the KinTreeNode belongs
 																						 \param parentNode The parent of the KinTreeNode in the kinematic tree structure */
 	virtual ~KinTreeNode();															//!< First delete the child KinTreeNodes and PrimitiveObjects associated with this KinTreeNode
@@ -48,7 +48,8 @@ public:
 	Robot* robot() const { return parentRobot; }									//!< Returns the Robot to which this KinTreeNode belongs
 	const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
 	
-	const Type& getNodeType() const { return nodeType; }							//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
+	DT_ResponseClass getSolidType() const { return solidObjectType; }				
+	NodeType getNodeType() const { return nodeType; }								//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
 	const QVector3D& getNodeAxis() const { return nodeAxis; }						//!< Returns nodeAxis
 	const QMatrix4x4& getM() const { return M; }									//!< Returns the transformation matrix between the next coordinate system in the tree and this one
 
@@ -66,7 +67,8 @@ protected:
 	Robot*                parentRobot;
 	KinTreeNode*          parentNode;
 	int                   index;
-	Type                  nodeType;
+	DT_ResponseClass	  solidObjectType;
+	NodeType              nodeType;
 	QVector<KinTreeNode*> children;
 	QVector3D             nodeAxis;     /**< The meaning of nodeAxis depends on the sub-type of the object. If the object is a Link, nodeAxis represents
 											 a body vector, a displacement between two joint axes (like a bone in a skeleton), and both magnitude and direction

@@ -6,18 +6,18 @@
 #include "cylinder.h"
 #include "box.h"
 #include "model.h"
+
 #include <exception>
 
 using namespace std;
 using namespace RobotModel;
 
-CompositeObject::CompositeObject( const QString& aName ) :	model(NULL),
-															responseClass(-1), 
+CompositeObject::CompositeObject( const QString& aName ) :	objType(NO_TYPE),
 															objectName(aName),
 															numSpheres(0),
 															numCylinders(0),
 															numBoxes(0)
-{		
+{
 }
 
 CompositeObject::~CompositeObject()
@@ -29,42 +29,36 @@ CompositeObject::~CompositeObject()
 	resize(0);
 }
 
-void CompositeObject::configureSolid( Model* m, DT_ResponseClass c)
+//void CompositeObject::setModel( Model* m )
+/*void CompositeObject::registerSolidPrimitives( DT_SceneHandle scene, DT_RespTableHandle respTable, DT_ResponseClass respClass )
 {
-	model = m;
-	if ( c != static_cast<DT_ResponseClass>(-1) ) { responseClass = c; }
-	else { responseClass = DT_GenResponseClass( model->getResponseTable() ); }
-	
 	QVector<PrimitiveObject*>::iterator i;
 	for (i=begin(); i!=end(); ++i)
 	{
-		DT_AddObject( model->getScene(), (*i)->getSolidHandle() );
-		DT_SetResponseClass( model->getResponseTable(), (*i)->getSolidHandle(), responseClass );
+		DT_AddObject( scene, (*i)->getSolidHandle() );
+		DT_SetResponseClass( respTable, (*i)->getSolidHandle(), respClass );
 	}
 }
+*/
 
 void CompositeObject::append(PrimitiveObject *primitiveObject)
 {
-	if ( model && responseClass != static_cast<DT_ResponseClass>(-1) )
-	{
-		DT_AddObject( model->getScene(), primitiveObject->getSolidHandle() );
-		DT_SetResponseClass( model->getResponseTable(), primitiveObject->getSolidHandle(), responseClass );
-	}
-	
+	//primitiveObject->
     primitiveObject->setParent( this );
+	primitiveObject->update(getT());
 	QVector<PrimitiveObject*>::append( primitiveObject );
-	update();
 }
 
-void CompositeObject::doNotCheckCollision( DT_ResponseClass responseClass2 ) const
+ /*
+void CompositeObject::doNotCheckCollision( DT_ResponseClass objType2 ) const
 {
 	//printf("Cleared a pair response %i, %i\n", responseClass, obj->getResponseClass() );
-	DT_RemovePairResponse( model->getResponseTable(), responseClass, responseClass2, model->collisionHandler);
-}
+	DT_RemovePairResponse( model->getResponseTable(), objType, objType2, model->reflexTrigger);
+	DT_RemovePairResponse( model->getResponseTable(), objType, objType2, model->collisionHandler);
+}*/
 
 bool CompositeObject::remove( PrimitiveObject* primitive )
 {
-	DT_RemoveObject( model->getScene(), primitive->getSolidHandle() );
 	
 	QVector<PrimitiveObject*>::iterator i;
 	for ( i=begin(); i!=end(); ++i )
@@ -182,11 +176,11 @@ void CompositeObject::makeDisplayList()
 	int error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
-		printf("An OpenGL error has occured: %s\n", gluErrorString(error));
+		printf("An OpenGL error has occured making a displaylist for a CompositeObject: %s\n", gluErrorString(error));
 	}
 	
     // get a unique display list index and define the list
-    setDisplayListIdx(glGenLists(1));
+    index = glGenLists(1);
 
     glNewList( displayListIdx(), GL_COMPILE );
 
@@ -211,10 +205,10 @@ void CompositeObject::makeDisplayList()
     glEndList();
 
     // make display lists for primitives
-    QVector<PrimitiveObject*>::const_iterator i;
-    for ( i=begin(); i!=end(); ++i ) {
-        (*i)->makeDisplayList();
-    }
+    //QVector<PrimitiveObject*>::const_iterator i;
+    //for ( i=begin(); i!=end(); ++i ) {
+    //    (*i)->makeDisplayList();
+    //}
 }
 
 void CompositeObject::render()

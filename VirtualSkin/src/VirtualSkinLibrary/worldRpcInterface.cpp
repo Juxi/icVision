@@ -10,6 +10,8 @@
 #include "worldRpcInterface.h"
 #include "world.h"
 #include "robotmodelexception.h"
+//#include "compositeObject.h"
+#include "model.h"
 #include "constants.h"
 
 using namespace VirtualSkin;
@@ -39,7 +41,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	{
 		case VOCAB_LS:	getList(reply); break;
 		case VOCAB_MK:  make(command,reply,n); break;
-		case VOCAB_SET: setPos(command,reply,n); break;
+		case VOCAB_SET: set(command,reply,n); break;
 		case VOCAB_GET: getState(command,reply,n); break;
 		case VOCAB_ROT: setRot(command,reply,n); break;
 		case VOCAB_REM: removeObject(command,reply,n); break;
@@ -196,6 +198,36 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 		reply.addString( object->getName().toStdString().c_str() );
 			
 	} catch (std::exception& e) { reply.addString(e.what()); }
+}
+void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
+{
+	RobotModel::CompositeObject* object = getObject( command, reply, n );
+	
+	if ( object )
+	{
+		bool didSomething = false;
+		int type = command.get(n).asVocab();
+		switch (type)
+		{
+			case VOCAB_OBSTACLE:
+				object->setObjectType(RobotModel::CompositeObject::OBSTACLE);
+				world->changeResponseClass( object, world->model->obstacleRespClass() );
+				reply.addString("Changed object type to 'obstacle'.");
+				didSomething = true;
+				break;
+			case VOCAB_TARGET:
+				object->setObjectType(RobotModel::CompositeObject::TARGET);
+				world->changeResponseClass( object, world->model->targetRespClass() );
+				reply.addString("Changed object type to 'target'.");
+				didSomething = true;
+				break;
+		}
+		if ( !didSomething )
+		{
+			n--;
+			setPos(command,reply,n);
+		}
+	}
 }
 void WorldRpcInterface::setPos( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {

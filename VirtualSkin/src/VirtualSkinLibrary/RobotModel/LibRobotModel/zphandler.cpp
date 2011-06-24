@@ -117,7 +117,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			{
 				PrimitiveObject* cylinder = node->newCylinder( radius, height );
 				cylinder->setSpecialEulerOrientation(axis);
-				cylinder->setOpaque();
+				//cylinder->setOpaque();
 				
 				if (node->getNodeType() == KinTreeNode::LINK ) { cylinder->translate( axis/2 ); }
 				else if ( node->getNodeType() != KinTreeNode::RJOINT &&  node->getNodeType() != KinTreeNode::PJOINT ) { 
@@ -197,7 +197,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 									   attributes.value("py").toDouble(),
 									   attributes.value("pz").toDouble() );
 		primitive->translate(position);
-		primitive->setOpaque();
+		//primitive->setOpaque();
     }
 
 	/*******************************************************************************

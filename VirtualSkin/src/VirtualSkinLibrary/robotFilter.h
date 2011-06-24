@@ -152,7 +152,8 @@ public:
 	
 public slots:
 	
-	void takeControl(int);			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
+	void collisionStatus(int);
+	void takeControl();			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
 	
 protected slots:
 	

@@ -9,22 +9,20 @@
 
 using namespace RobotModel;
 
-KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  parentRobot(robot),
+KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, NodeType aType ) :  parentRobot(robot),
 																		    parentNode(parent),
 																		    index(robot->numNodes()),
-																		    nodeType(type)
+																		    nodeType(aType)
 {
 	if ( !robot ) { throw RobotModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
 	
     objectName.setNum(index);
     objectName.prepend("BodyPart");
+	setObjectType(CompositeObject::BODY_PART);
+	solidObjectType = DT_GenResponseClass(parentRobot->model->getRobotTable());
     
 	if ( !parentNode ) { parentRobot->appendNode(this); }
 	else { parentNode->children.append(this); }
-	
-	// Set up Solid
-	configureSolid( parentRobot->model );												// add this Composite object to the current (glabal) scene
-	DT_RemovePairResponse( model->getResponseTable(), responseClass, responseClass, model->collisionHandler);
 	
 	parentRobot->emit appendedObject(static_cast<DisplayList*>(this));
 }
@@ -51,6 +49,10 @@ void KinTreeNode::setNodeAxis( const QVector3D& vector )
 
 void KinTreeNode::append( PrimitiveObject* anObject )
 { 
+
+	DT_AddObject( parentRobot->model->getScene(), anObject->getSolidHandle() );
+	DT_SetResponseClass( parentRobot->model->getRobotTable(), anObject->getSolidHandle(), solidObjectType );
+	DT_SetResponseClass( parentRobot->model->getWorldTable(), anObject->getSolidHandle(), parentRobot->model->body_partRespClass() );
 	CompositeObject::append(anObject);
 	parentRobot->emit appendedObject(static_cast<DisplayList*>(anObject));
 }
@@ -98,7 +100,7 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
     }
 
     // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-    doNotCheckCollision( node->getResponseClass() );
+    parentRobot->model->removeSelfCollisionPair( solidObjectType, node->getSolidType() );
 
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {

@@ -23,7 +23,8 @@ using namespace VirtualSkin;
 
 RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false), isColliding(false)
 {
-	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(takeControl(int)) );
+	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
+	QObject::connect( &model, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
 	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
@@ -79,10 +80,14 @@ void RobotFilter::close()
 	isOpen = false;
 }
 
-void RobotFilter::takeControl( int collisions )
+void RobotFilter::collisionStatus( int collisions )
 {
 	if ( collisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
+}
+void RobotFilter::takeControl()
+{
+	isColliding = true;
 	
 	if ( isColliding && !haveControl )
 	{
@@ -98,10 +103,10 @@ void RobotFilter::takeControl( int collisions )
 		printf("*** COLLISION RECOVERY ***\n");
 		statusPort.setBottle( yarp::os::Bottle("0") );
 		
-		// should be a position move ?!?
+		// do some control in response
 		collisionResponse();
 		
-		// wait for the response (a position move) to finish
+		// wait for the response to finish
 		start();
 	}
 }

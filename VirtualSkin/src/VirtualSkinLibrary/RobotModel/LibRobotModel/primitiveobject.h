@@ -14,10 +14,11 @@
 #include <QMatrix4x4>
 #include "SOLID.h"
 #include "displaylist.h"
+#include "compositeObject.h"
 
 namespace RobotModel
 {
-	class CompositeObject;
+	//class CompositeObject;
 	class PrimitiveObject;
 }
 
@@ -59,6 +60,9 @@ public:
 																				/**< See DisplMatrix.setPosition( const QVector3D& ) */ 
 	void translate( const QVector3D& trans );									//!< Translate the CompositeObject form its current position
 																				/**< See DisplMatrix.translate( const QVector3D& ) */ 
+	CompositeObject::ObjType getObjectType();
+	void render();
+	
 protected:
 	
 	QString				name;		//!< A human readable name for the primitive

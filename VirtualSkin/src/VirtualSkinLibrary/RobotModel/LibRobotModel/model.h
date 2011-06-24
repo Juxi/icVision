@@ -21,6 +21,7 @@
 #include "robot.h"
 #include "world.h"
 #include "robotmodelexception.h"
+#include "constants.h"
 
 namespace RobotModel
 {
@@ -60,8 +61,11 @@ public:
 	SkinWindow	*skinWindow;	//! The visualization
 	
 	DT_SceneHandle		getScene() { return scene; }
-	DT_RespTableHandle	getResponseTable() { return responseTable; }
-	DT_ResponseClass	getResponseClass() { return responseClass; }
+	DT_RespTableHandle	getWorldTable() { return worldTable; }
+	DT_RespTableHandle	getRobotTable() { return robotTable; }
+	//DT_ResponseClass	getResponseClass() { return responseClass; }
+	
+	void removeSelfCollisionPair( DT_ResponseClass objType1, DT_ResponseClass objType2 );
 
 	int computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using SOLID
 							/**< Call this function directly if you want to be in control of which poses are computed when */
@@ -86,29 +90,48 @@ public:
 		
 		return DT_CONTINUE;
 	}
+	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
+	{
+		collisionHandler( client_data, obj1, obj2, coll_data );
+		Model* detector = (Model*)client_data;
+		detector->reflexTriggered = true;
+
+		//return DT_DONE;
+		return DT_CONTINUE;
+	}
 	
 	virtual void computePosePrefix() {}																	//!< This is executed by computePose() just before forward kinematics is computed 
 	virtual void computePoseSuffix() {}																	//!< This is executed by computePose() just after collision detection is computed
 	virtual void collisionHandlerAddendum( PrimitiveObject*, PrimitiveObject*, const DT_CollData* ) {}	//!< This is executed by collisionHandler() just before it returns
+
+	DT_ResponseClass obstacleRespClass() { return OBSTACLE; }
+	DT_ResponseClass targetRespClass() { return TARGET; }
+	DT_ResponseClass body_partRespClass() { return BODY_PART; }
 	
 signals:
 	
 	void collisions(int);	//! Indicates that a collision has occurred (useful when running collision detection in a separate thread)
-
+	void reflexResponse();
+	
 protected:
 	
 	bool keepRunning;	//!< Facilitates stopping and restarting the thread
 	int	 col_count;		//!< The number of (pairwise) collisions in the current robot/world configuration
+	bool reflexTriggered;
 	
 private:
 	
-	static const int period = 20;		//!< Number of milliseconds to wait between collision tests (if using the thread)
+	DT_ResponseClass OBSTACLE;		//!< objects in this response class trigger reflexes
+	DT_ResponseClass TARGET;		//!< these don't
+	DT_ResponseClass BODY_PART;		//!< these belong to the robot's body
+	
+	static const int period = YARP_PERIOD_ms;		//!< Number of milliseconds to wait between collision tests (if using the thread)
 	
 	void run();				//!< Allows a thread to call computePose() periodically
 							/**< \note IMPORTANT: Call start() not run() !!! */
 	
-	DT_ResponseClass	responseClass;
-	DT_RespTableHandle	responseTable;
+	DT_RespTableHandle	worldTable;
+	DT_RespTableHandle	robotTable;
 	DT_SceneHandle		scene;
 };
 

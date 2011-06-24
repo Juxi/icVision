@@ -72,11 +72,9 @@ void PrimitiveObject::setSpecialEulerOrientation( const QVector3D& axis, qreal a
 void PrimitiveObject::update( const QMatrix4x4& txfr )
 {
     T = txfr * L;
-    //dtSelectObject( this );
-    //dtLoadIdentity();
-    //dtMultMatrixd( T.constData() );
 	DT_SetMatrixd( solidObject , T.constData() );
 }
+
 /*void PrimitiveObject::doNotCollideWith( CompositeObject* object )
 {
     QVector<PrimitiveObject*>::iterator i;
@@ -84,3 +82,43 @@ void PrimitiveObject::update( const QMatrix4x4& txfr )
                 dtClearPairResponse( *i, this );
         }
 }*/
+
+CompositeObject::ObjType PrimitiveObject::getObjectType()
+{
+	if (parent) { return parent->getObjectType(); }
+	else { return CompositeObject::NO_TYPE; }
+}
+
+void PrimitiveObject::render()
+{
+	if ( glIsList(index) )
+	{
+		GLfloat* color = gray;
+		switch ( getObjectType() ) {
+			case CompositeObject::OBSTACLE: 
+				if ( isColliding() ) { color = blue; }
+				else { color = transpBlue; }
+				break;
+			case CompositeObject::TARGET: 
+				if ( isColliding() ) { color = green; }
+				else { color = transpGreen; }
+				break;
+			case CompositeObject::BODY_PART: 
+				if ( isColliding() ) { color = red; }
+				else { color = gray; }
+				break;
+			default:
+				if ( isColliding() ) { color = transpRed; }
+				else { color = transpGray; }
+				break;
+		}
+		
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color);
+		glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, color);
+		
+		glPushMatrix();
+		glMultMatrixd( T.constData() );
+		glCallList( index );
+		glPopMatrix();
+	}
+}

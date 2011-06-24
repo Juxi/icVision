@@ -40,9 +40,7 @@ void Robot::close()
 }
 
 void Robot::open(const QString& fileName, bool verbose) throw(RobotModelException)
-{
-	QMutexLocker locker(&mutex);
-	
+{	
     ZPHandler handler(this);
     QXmlSimpleReader reader;
     reader.setContentHandler(&handler);
@@ -67,8 +65,6 @@ void Robot::open(const QString& fileName, bool verbose) throw(RobotModelExceptio
 		errStr.append("'");
 		throw RobotModelException(errStr);
     }
-	
-	printf(" glError: %i \n",glGetError());
 	
 	if (verbose) printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
 	

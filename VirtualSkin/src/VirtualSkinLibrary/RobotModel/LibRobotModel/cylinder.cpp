@@ -49,7 +49,7 @@ void Cylinder::makeDisplayList()
     DisplMatrix M,N;
 
     // get a unique display list index and define the list
-    setDisplayListIdx(glGenLists(1));
+    index = glGenLists(1);
 	//printf("created robot-cylinder %d \n", glGenLists(1) );
 	
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS

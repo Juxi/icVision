@@ -49,7 +49,11 @@ public:
 	
 	CompositeObject* append( CompositeObject* obj );			//!< Appends an existing CompositeObject to the World
 																/**< To append a primitive to a composite object, see CompositeObject.append( PrimitiveObject* ) */
+	bool appendToObject( CompositeObject* obj, PrimitiveObject* primitive );
+	
 	CompositeObject* getObjectByName( const QString& name );	//!< Returns a pointer to a CompositeObject in the world by looking up its name
+	
+	bool changeResponseClass( CompositeObject* object, DT_ResponseClass respClass);
 	
 	bool remove( CompositeObject* object );											//!< Removes a CompositeObject from the list and deletes it
 	bool removePrimitive( CompositeObject* object, PrimitiveObject* primitive );	//!< Removes a PrimitiveObject from one of the CompositeObjects
@@ -61,12 +65,12 @@ public:
 	int size() { return objectList.size(); }
 	
 	QVector<QString> getList();	//!< Get a list of the objects in the world model
+	Model				*model;				//!< The Model that is doing collision detection on the World
 private:
 	
 	void render();		//!< Calls display lists for all objects in the World using glCallLists( int )
 
-	Model				*model;				//!< The Model that is doing collision detection on the World
-	DT_ResponseClass	worldResponseClass;	//!< A response class for collision detection where nothing is compared
+	//DT_ResponseClass	worldResponseClass;	//!< A response class for collision detection where nothing is compared
 	
 	QVector<CompositeObject*> objectList;	//!< The list of objects in the World
 	

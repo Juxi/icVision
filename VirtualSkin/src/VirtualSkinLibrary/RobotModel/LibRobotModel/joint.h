@@ -26,7 +26,7 @@ namespace RobotModel
 class RobotModel::Joint : public KinTreeNode
 {
 public:
-    Joint( Robot* robot, KinTreeNode* parent, Motor* motor, Type type );	//!< Simply initializes member variables and calls KinTreeNode constructor
+    Joint( Robot* robot, KinTreeNode* parent, Motor* motor, NodeType type );	//!< Simply initializes member variables and calls KinTreeNode constructor
 																			//!< \param robot The robot to which this joint belongs
 																			//!< \param parent The parent KinTreeNode in the kinematic tree structure
 																			//!< \param motor The motor that controls this joint

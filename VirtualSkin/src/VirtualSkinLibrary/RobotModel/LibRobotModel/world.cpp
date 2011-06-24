@@ -9,8 +9,8 @@ World::World( Model* m ) :	model(m),
 							numSSpheres(0),numSCylinders(0),numSBoxes(0)
 {
 	if ( !m ) { throw RobotModelException("The World constructor requires a pointer to a valid Model."); }
-	worldResponseClass = DT_GenResponseClass( model->getResponseTable() );
-	DT_RemovePairResponse( model->getResponseTable(), worldResponseClass, worldResponseClass, model->collisionHandler );
+	//worldResponseClass = DT_GenResponseClass( model->getResponseTable() );
+	//DT_RemovePairResponse( model->getResponseTable(), worldResponseClass, worldResponseClass, model->collisionHandler );
 }
 World::~World()
 {
@@ -89,12 +89,22 @@ CompositeObject* World::newObject( const QString& name, const QVector3D& pos )
 	object->setPosition(pos);
 	return append( object );	// this copies the object into the list
 }
+
 CompositeObject* World::append( CompositeObject* obj )
 {
-	obj->configureSolid( model, worldResponseClass );
+	// render the object as an 'obstacle'
+	obj->setObjectType(CompositeObject::OBSTACLE);
+	
+	// make the primitives in the objects 'obstacles' in SOLID (see RobotModel::Model::Model())
+	QVector<PrimitiveObject*>::iterator i;
+	for ( i=obj->begin(); i!=obj->end(); ++i )
+	{
+		DT_AddObject( model->getScene(), (*i)->getSolidHandle() );
+		DT_SetResponseClass( model->getWorldTable(), (*i)->getSolidHandle(), model->obstacleRespClass() );
+	}
+	
 	objectList.append( obj );
 	
-	QVector<PrimitiveObject*>::iterator i;
 	for ( i=obj->begin(); i!=obj->end(); ++i ) // these are primitive objects
 	{
 		emit appendedObject( static_cast<DisplayList*>(*i) );
@@ -102,6 +112,54 @@ CompositeObject* World::append( CompositeObject* obj )
 	emit appendedObject( static_cast<DisplayList*>(obj) ); // this is the composite object (which may have the displayList for the local CS
 	
 	return obj;
+}
+
+bool World::appendToObject( CompositeObject* object, PrimitiveObject* primitive )
+{
+	bool foundObject = false;
+	QVector<CompositeObject*>::iterator i;
+    for ( i=objectList.begin(); i!=objectList.end(); ++i )
+	{
+		if ( *i == object )
+		{
+			foundObject = true;
+			break;
+		}
+	}
+	
+	if ( foundObject )
+	{
+		DT_AddObject( model->getScene(), primitive->getSolidHandle() );
+		DT_SetResponseClass( model->getWorldTable(), primitive->getSolidHandle(), model->obstacleRespClass() );
+		object->append( primitive );
+	}
+	
+	return foundObject;
+}
+
+bool World::changeResponseClass( CompositeObject* object, DT_ResponseClass respClass)
+{
+	bool foundObject = false;
+	QVector<CompositeObject*>::iterator i;
+    for ( i=objectList.begin(); i!=objectList.end(); ++i )
+	{
+		if ( *i == object )
+		{
+			foundObject = true;
+			break;
+		}
+	}
+	
+	if ( foundObject )
+	{
+		QVector<PrimitiveObject*>::iterator j;
+		for ( j=object->begin(); j!=object->end(); ++j )
+		{
+			DT_SetResponseClass( model->getWorldTable(), (*j)->getSolidHandle(), respClass );
+		}
+	}
+	
+	return foundObject;
 }
 
 CompositeObject* World::getObjectByName( const QString& name )
@@ -170,11 +228,27 @@ bool World::remove( CompositeObject* obj )
 
 bool World::removePrimitive( CompositeObject* object, PrimitiveObject* primitive )
 {
-	mutex.lock();
-		emit outdatedDisplayList( primitive->displayListIdx() );
-		object->remove( primitive );
-	mutex.unlock();
-	return 0;
+	bool foundObject = false;
+	QVector<CompositeObject*>::iterator i;
+    for ( i=objectList.begin(); i!=objectList.end(); ++i )
+	{
+		if ( *i == object )
+		{
+			foundObject = true;
+			break;
+		}
+	}
+	
+	if ( foundObject )
+	{
+		mutex.lock();
+			emit outdatedDisplayList( primitive->displayListIdx() );
+			DT_RemoveObject( model->getScene(), primitive->getSolidHandle() );
+			object->remove( primitive );
+		mutex.unlock();
+	}
+	
+	return foundObject;
 }
 
 void World::clear()

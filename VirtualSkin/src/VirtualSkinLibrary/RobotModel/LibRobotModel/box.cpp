@@ -28,7 +28,7 @@ void Box::makeDisplayList( )
     double X=x/2, Y=y/2, Z=z/2;  //, csLen=(x+y+z)/3;
 
     // get a unique display list index and define the list
-    setDisplayListIdx( glGenLists(1) );  // (this number determines the max number of physical objects representable in OpenGL)
+    index = glGenLists(1);  // (this number determines the max number of physical objects representable in OpenGL)
 
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS
         glBegin( GL_QUADS );

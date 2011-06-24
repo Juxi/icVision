@@ -18,7 +18,7 @@
  *	For the reflex behavior
  */
 #define POSE_BUFFER_SIZE 100				//!< Length of the pose history stored by VirtualSkin::StateObserver
-#define ALL_CLEAR_WAIT 100					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
+#define ALL_CLEAR_WAIT 1					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
 //#define REFLEX_SPEED 30					//!< The velovity to use for the reflexive position move command
 #define POSITION_MOVE_TIMEOUT 10			//!< Max time (seconds) to wait for the robot to finish the reflexive position move
 //#define NEGLIGIBLE_ANGLE .5				//!< (degrees)
@@ -36,6 +36,12 @@
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
 #define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
+
+// object types
+#define VOCAB_OBSTACLE VOCAB3('o','b','s')	//!< an obstacle that triggers reflexive response 
+#define VOCAB_TARGET VOCAB3('t','g','t')
+//#define VOCAB_BODY_PART VOCAB3('b','d','y')
+//#define VOCAB_NO_TYPE VOCAB2('g','h','o')	//!< gho for ghost
 
 // commands for primitives
 #define VOCAB_APP VOCAB3('a','p','p')		//!< Append a primitive to an object
