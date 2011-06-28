@@ -10,7 +10,7 @@
 #ifndef PHYSOBJECT_H
 #define PHYSOBJECT_H
 
-#include <QMutex>
+//#include <QMutex>
 #include <QMatrix4x4>
 #include "SOLID.h"
 #include "displaylist.h"
@@ -30,6 +30,12 @@ class RobotModel::PrimitiveObject : public DisplayList
 {
 	
 public:
+	
+	enum GeomType {
+		SPHERE,
+		CYLINDER,
+		BOX
+	};
 	
 	PrimitiveObject();				//!< Nothing special to do here
 	virtual ~PrimitiveObject();		//!< Nothing special to do here
@@ -56,23 +62,30 @@ public:
 																				/**< See DisplMatrix.axisAngleRotate( const QVector3D&, qreal ) */ 
 	void setSpecialEulerOrientation( const QVector3D& axis, qreal angle = 0 );	//!< Rotate the CompositeObject from its current orientation using euler angles
 																				/**< See DisplMatrix.setSpecialEulerOrientation( const QVector3D&, qreal ) */ 
-	void setPosition( const QVector3D& trans );									//!< Set the position of the CompositeObject absolutely with respect to the world coordinate system
+	void setPosition( const QVector3D& trans );								
+	//!< Set the position of the CompositeObject absolutely with respect to the world coordinate system
 																				/**< See DisplMatrix.setPosition( const QVector3D& ) */ 
 	void translate( const QVector3D& trans );									//!< Translate the CompositeObject form its current position
 																				/**< See DisplMatrix.translate( const QVector3D& ) */ 
-	CompositeObject::ObjType getObjectType();
 	void render();
+	
+	CompositeObject::ObjType getParentObjectType();		//!< BODY_PART, OBSTACLE, or TARGET
+	GeomType getGeomType() { return geomType; }			//!< SPHERE, CYLINDER, or BOX
+	
+	void setShape( DT_ShapeHandle s ) { shape = s; }
+	DT_ShapeHandle getShape() { return shape; }
+	void setObject( DT_ObjectHandle o ) { solidObject = o; }
+	DT_ObjectHandle getObject() { return solidObject; }
 	
 protected:
 	
 	QString				name;		//!< A human readable name for the primitive
+	GeomType			geomType;
 	CompositeObject*    parent;		//!< The parent of the primitive (for the XML parser)
+	DisplMatrix			L;			//!< Transformation from the PrimitiveObjectCS to the ObjectCS
+	
 	DT_ShapeHandle		shape;		//!< The particular shape of the primitive
 	DT_ObjectHandle		solidObject;	//!< A representation of the object in the Solid library
-	DisplMatrix			L;			//!< Transformation from the PrimitiveObjectCS to the ObjectCS
-	QMutex				mutex;
-
-	//void doNotCollideWith( CompositeObject* object );	//!< Disables collision response between this primitive and the ones in the specified CompositeObject
 };
 
 #endif

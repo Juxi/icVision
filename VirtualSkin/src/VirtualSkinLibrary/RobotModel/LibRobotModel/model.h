@@ -59,13 +59,6 @@ public:
 	Robot		*robot;			//!< The Robot whose pose we are updating
 	World		*world;			//!< All the other Objects not belonging to the Robot's body.
 	SkinWindow	*skinWindow;	//! The visualization
-	
-	DT_SceneHandle		getScene() { return scene; }
-	DT_RespTableHandle	getWorldTable() { return worldTable; }
-	DT_RespTableHandle	getRobotTable() { return robotTable; }
-	//DT_ResponseClass	getResponseClass() { return responseClass; }
-	
-	void removeSelfCollisionPair( DT_ResponseClass objType1, DT_ResponseClass objType2 );
 
 	int computePose();		//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using SOLID
 							/**< Call this function directly if you want to be in control of which poses are computed when */
@@ -90,6 +83,7 @@ public:
 		
 		return DT_CONTINUE;
 	}
+	
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
 		collisionHandler( client_data, obj1, obj2, coll_data );
@@ -104,9 +98,23 @@ public:
 	virtual void computePoseSuffix() {}																	//!< This is executed by computePose() just after collision detection is computed
 	virtual void collisionHandlerAddendum( PrimitiveObject*, PrimitiveObject*, const DT_CollData* ) {}	//!< This is executed by collisionHandler() just before it returns
 
-	DT_ResponseClass obstacleRespClass() { return OBSTACLE; }
-	DT_ResponseClass targetRespClass() { return TARGET; }
-	DT_ResponseClass body_partRespClass() { return BODY_PART; }
+	DT_SceneHandle		getScene() { return scene; }
+	DT_RespTableHandle	getWorldTable() { return worldTable; }
+	DT_RespTableHandle	getRobotTable() { return robotTable; }
+	DT_ResponseClass	obstacleResponseClass() { return OBSTACLE; }
+	DT_ResponseClass	targetResonsepClass() { return TARGET; }
+	DT_ResponseClass	body_partResponseClass() { return BODY_PART; }
+	
+public slots:
+	
+	void newBodyPartResponseClass( KinTreeNode* node );
+	void newBodyPart( PrimitiveObject* );
+	void removeRobotTablePair( DT_ResponseClass, DT_ResponseClass );
+	
+	void newObstacle( PrimitiveObject* );
+	void changeResponseClass( PrimitiveObject*, DT_ResponseClass );
+	
+	void removeObject( PrimitiveObject* );
 	
 signals:
 	
@@ -115,11 +123,13 @@ signals:
 	
 protected:
 	
-	bool keepRunning;	//!< Facilitates stopping and restarting the thread
-	int	 col_count;		//!< The number of (pairwise) collisions in the current robot/world configuration
-	bool reflexTriggered;
+	bool keepRunning;		//!< Facilitates stopping and restarting the thread
+	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
+	bool reflexTriggered;	
 	
 private:
+	
+	DT_ShapeHandle createSolidShape( PrimitiveObject* );
 	
 	DT_ResponseClass OBSTACLE;		//!< objects in this response class trigger reflexes
 	DT_ResponseClass TARGET;		//!< these don't
@@ -133,6 +143,8 @@ private:
 	DT_RespTableHandle	worldTable;
 	DT_RespTableHandle	robotTable;
 	DT_SceneHandle		scene;
+	
+	QMutex mutex;
 };
 
 #endif

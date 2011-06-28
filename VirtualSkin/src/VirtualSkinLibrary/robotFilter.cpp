@@ -85,11 +85,12 @@ void RobotFilter::collisionStatus( int collisions )
 	if ( collisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
 }
+
 void RobotFilter::takeControl()
 {
 	isColliding = true;
 	
-	if ( isColliding && !haveControl )
+	if ( isColliding && !haveControl && false)
 	{
 		haveControl = true;
 		
@@ -115,32 +116,35 @@ void RobotFilter::run()
 {	
 	//wait for the commands issued in collisionResponse() to finish
 	responseComplete();
+	
+	if ( isColliding )
+	{
+		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
+	}
+	while ( isColliding )
+	{
+		msleep(YARP_PERIOD_ms);
+	}
+	
 	emit responseCompleteReturns();
 }
 
 void RobotFilter::openFilter()
-{
-	if ( !isColliding )
+{	
+	// reinitialize the pose buffer with the current pose
+	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 	{
-		// reinitialize the pose buffer with the current pose
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
-		{
-			stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
-		}
-		
-		// reopen the filter... 
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
-		{
-			cbFilters.at(bodyPart)->cutConnection(false);
-		}
-		
-		//inform the user
-		statusPort.setBottle( yarp::os::Bottle("1") );
-		printf("CONTROL RESTORED\n");
-		haveControl = false;
+		stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
 	}
-	else
+	
+	// reopen the filter... 
+	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 	{
-		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h \n");
+		cbFilters.at(bodyPart)->cutConnection(false);
 	}
+	
+	//inform the user
+	statusPort.setBottle( yarp::os::Bottle("1") );
+	printf("CONTROL RESTORED\n");
+	haveControl = false;
 }

@@ -26,6 +26,10 @@ public:
 									/**< \param size 3D list of side lengths of the box in x, y and z respectively */
     ~Box();							//!< Destroys the SOLID object
 
+	qreal getX() { return x; }
+	qreal getY() { return y; }
+	qreal getZ() { return z; }
+	
 	void makeDisplayList(  );			//!< Make an OpenGL display list for the box using 6 GL_QUADS
 
 private:

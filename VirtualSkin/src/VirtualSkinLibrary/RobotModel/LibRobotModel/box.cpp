@@ -14,9 +14,7 @@ Box::Box( const QVector3D& size, bool lines ) : x(size.x()), y(size.y()), z(size
 {
 	// check validity of parameters
 	if ( x <= 0 || y <= 0 || z <= 0 ) { throw RobotModelException("Box must have non-zero dimensions height, width and depth."); }
-
-    shape = DT_NewBox(x,y,z);
-	solidObject = DT_CreateObject( static_cast<PrimitiveObject*>(this), shape);
+	geomType = BOX;
 }
 Box::~Box()
 {

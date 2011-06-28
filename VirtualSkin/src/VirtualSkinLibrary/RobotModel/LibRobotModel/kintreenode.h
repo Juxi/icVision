@@ -48,7 +48,6 @@ public:
 	Robot* robot() const { return parentRobot; }									//!< Returns the Robot to which this KinTreeNode belongs
 	const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
 	
-	DT_ResponseClass getSolidType() const { return solidObjectType; }				
 	NodeType getNodeType() const { return nodeType; }								//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
 	const QVector3D& getNodeAxis() const { return nodeAxis; }						//!< Returns nodeAxis
 	const QMatrix4x4& getM() const { return M; }									//!< Returns the transformation matrix between the next coordinate system in the tree and this one
@@ -67,7 +66,6 @@ protected:
 	Robot*                parentRobot;
 	KinTreeNode*          parentNode;
 	int                   index;
-	DT_ResponseClass	  solidObjectType;
 	NodeType              nodeType;
 	QVector<KinTreeNode*> children;
 	QVector3D             nodeAxis;     /**< The meaning of nodeAxis depends on the sub-type of the object. If the object is a Link, nodeAxis represents

@@ -22,7 +22,7 @@ namespace RobotModel { class GLWidget; }
  * arbitrary OpenGL display lists can be rendered. This is done in conjunction with the class RenderList.
  *
  * The signals and slots between RenderList and this class work as follows:
- *	SIGNAL RenderList::appendedObject( RobotModel::DisplayList* )	--->	SLOT GLWidget::addDisplayList(DisplayList*)
+ *	SIGNAL RenderList::requestDisplayList( RobotModel::DisplayList* )	--->	SLOT GLWidget::addDisplayList(DisplayList*)
  *  SIGNAL RenderList::outdatedDisplayList( int idx )				--->	SLOT GLWidget::removeDisplayList(int)
  *  SIGNAL RenderList::changedState()								--->	SLOT GLWidget::update()
  *  SIGNAL GLWidget::renderStuff()									--->	SLOT RenderList::callLists()

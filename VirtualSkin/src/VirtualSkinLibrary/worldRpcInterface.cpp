@@ -211,13 +211,13 @@ void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& 
 		{
 			case VOCAB_OBSTACLE:
 				object->setObjectType(RobotModel::CompositeObject::OBSTACLE);
-				world->changeResponseClass( object, world->model->obstacleRespClass() );
+				//world->changeResponseClass( object, world->model->obstacleRespClass() );
 				reply.addString("Changed object type to 'obstacle'.");
 				didSomething = true;
 				break;
 			case VOCAB_TARGET:
 				object->setObjectType(RobotModel::CompositeObject::TARGET);
-				world->changeResponseClass( object, world->model->targetRespClass() );
+				//world->changeResponseClass( object, world->model->targetRespClass() );
 				reply.addString("Changed object type to 'target'.");
 				didSomething = true;
 				break;

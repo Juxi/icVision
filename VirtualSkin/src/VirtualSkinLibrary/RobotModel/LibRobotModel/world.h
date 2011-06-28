@@ -33,6 +33,7 @@ namespace RobotModel
  */
 class RobotModel::World : public RenderList
 {
+	Q_OBJECT
 
 public:
 	
@@ -64,14 +65,21 @@ public:
 
 	int size() { return objectList.size(); }
 	
+	void update();
+	
 	QVector<QString> getList();	//!< Get a list of the objects in the world model
 	Model				*model;				//!< The Model that is doing collision detection on the World
+	
+signals:
+	
+	void worldAppendedPrimitive( PrimitiveObject* );
+	void requestNewResponseClass( PrimitiveObject*, DT_ResponseClass );
+	void requestRemoveSolidObject( PrimitiveObject* );
+	
 private:
 	
 	void render();		//!< Calls display lists for all objects in the World using glCallLists( int )
 
-	//DT_ResponseClass	worldResponseClass;	//!< A response class for collision detection where nothing is compared
-	
 	QVector<CompositeObject*> objectList;	//!< The list of objects in the World
 	
 	int numSpheres,		//!< A counter for spheres (counting begins with '1')

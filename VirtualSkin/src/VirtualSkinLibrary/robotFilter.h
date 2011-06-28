@@ -126,9 +126,14 @@ public:
 		} 
 		
 		extraOpenStuff();
+		
+		
 		isOpen = true;
 		statusPort.setBottle("1");
 		model.start();
+		
+		// this is to let all the control board filters and observers come up
+		sleep(1);
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction
@@ -184,6 +189,8 @@ private:
 	
 	void start() { QThread::start(); }	//!< Starts collision response
 	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
+	
+	friend class StateObserver;
 	
 };
 #endif

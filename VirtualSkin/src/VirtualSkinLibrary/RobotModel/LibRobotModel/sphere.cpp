@@ -25,12 +25,7 @@ Sphere::Sphere( qreal r, int detail ) throw(RobotModelException) : lod(detail), 
 	{ 
 		throw RobotModelException("Sphere radius must be greater than 0.");
 	}
-	
-    // make a sphere
-	shape = DT_NewSphere(radius);
-	solidObject = DT_CreateObject( static_cast<PrimitiveObject*>(this), shape);
-	
-    //dtLoadIdentity();
+	geomType = SPHERE;
 }
 Sphere::~Sphere()
 {	

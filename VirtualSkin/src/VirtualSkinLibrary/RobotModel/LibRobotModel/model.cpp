@@ -32,18 +32,25 @@ Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), kee
 
 	// initialize the data-structures that hold the geometries in the model
 	robot = new Robot(this);
+	QObject::connect( robot, SIGNAL(appendedObject(KinTreeNode*)), this, SLOT(newBodyPartResponseClass(KinTreeNode*)) );
+	QObject::connect( robot, SIGNAL(appendedPrimitive(PrimitiveObject*)), this, SLOT(newBodyPart(PrimitiveObject*)) );
+	QObject::connect( robot, SIGNAL(removeSelfCollisionPair(DT_ResponseClass,DT_ResponseClass)), this, SLOT(removeRobotTablePair(DT_ResponseClass,DT_ResponseClass)) );
+	
 	world = new World(this);
+	QObject::connect( world, SIGNAL(worldAppendedPrimitive(PrimitiveObject*)), this, SLOT(newObstacle(PrimitiveObject*)) );
+	QObject::connect( world, SIGNAL(requestNewResponseClass(PrimitiveObject*,DT_ResponseClass)), this, SLOT(changeResponseClass(PrimitiveObject*,DT_ResponseClass)) );
+	QObject::connect( world, SIGNAL(requestRemoveSolidObject(PrimitiveObject*)), this, SLOT(removeObject(PrimitiveObject*)) );
 	
 	// set up the window for OpenGL
 	if ( visualize )
 	{ 
 		skinWindow = new SkinWindow();
 		
-		QObject::connect( robot, SIGNAL(appendedObject(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),					skinWindow->glWidget, SLOT(removeDisplayList(int)) );
+		QObject::connect( robot, SIGNAL(requestDisplayList(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
+		QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),						skinWindow->glWidget, SLOT(removeDisplayList(int)) );
 		
-		QObject::connect( world, SIGNAL(appendedObject(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		QObject::connect( world, SIGNAL(outdatedDisplayList(int)),					skinWindow->glWidget, SLOT(removeDisplayList(int)) );
+		QObject::connect( world, SIGNAL(requestDisplayList(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
+		QObject::connect( world, SIGNAL(outdatedDisplayList(int)),						skinWindow->glWidget, SLOT(removeDisplayList(int)) );
 		
 		QObject::connect( this, SIGNAL(collisions(int)),				skinWindow->glWidget, SLOT(update(int)) );
 		QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),	robot, SLOT(callLists()) );
@@ -61,19 +68,75 @@ Model::~Model()
 	DT_DestroyRespTable(robotTable);
 }
 
-void Model::removeSelfCollisionPair( DT_ResponseClass objType1, DT_ResponseClass objType2 )
+void Model::newBodyPartResponseClass( KinTreeNode* node )
 {
-	//printf("Cleared a pair response %i, %i\n", responseClass, obj->getResponseClass() );
-	//DT_RemovePairResponse( getWorldTable(), objType1, objType2, reflexTrigger);
-	//DT_RemovePairResponse( getWorldTable(), objType1, objType2, collisionHandler);
+	//QMutexLocker locker(&mutex);
+	node->setSolidResponseClass( DT_GenResponseClass(robotTable) );
+}
+
+DT_ShapeHandle Model::createSolidShape( PrimitiveObject* primitive )
+{
+	// create the appropriate shape object for the primitive at hand
+	switch (primitive->getGeomType()) {
+		case PrimitiveObject::SPHERE:
+			Sphere* sphere = static_cast<Sphere*>(primitive);
+			return DT_NewSphere(sphere->r());
+		case PrimitiveObject::CYLINDER:
+			Cylinder* cylinder = static_cast<Cylinder*>(primitive);
+			return DT_NewCylinder(cylinder->r(), cylinder->h());
+		case PrimitiveObject::BOX:
+			Box* box = static_cast<Box*>(primitive);
+			return DT_NewBox(box->getX(), box->getY(), box->getZ());
+		default:
+			return NULL;
+	}
+}
+void Model::newBodyPart( PrimitiveObject* primitive )
+{
+	//QMutexLocker locker(&mutex);
 	
-	DT_RemovePairResponse( getRobotTable(), objType1, objType2, reflexTrigger);
-	//DT_RemovePairResponse( getRobotTable(), objType1, objType2, collisionHandler);
+	primitive->setShape( createSolidShape( primitive ) );
+	primitive->setObject( DT_CreateObject( primitive, primitive->getShape()) );
+	DT_AddObject( scene, primitive->getSolidHandle() );
+	DT_SetResponseClass( robotTable, primitive->getSolidHandle(), primitive->getParent()->getSolidResponseClass() );
+	DT_SetResponseClass( worldTable, primitive->getSolidHandle(), body_partResponseClass() );
+}
+
+void Model::newObstacle( PrimitiveObject* primitive )
+{
+	//QMutexLocker locker(&mutex);
+	
+	primitive->setShape( createSolidShape( primitive ) );
+	primitive->setObject( DT_CreateObject( primitive, primitive->getShape()) );
+	DT_AddObject( scene, primitive->getSolidHandle() );
+	DT_SetResponseClass( worldTable, primitive->getSolidHandle(), obstacleResponseClass() );
+}
+
+void Model::changeResponseClass( PrimitiveObject* primitive, DT_ResponseClass responseClass )
+{
+	//QMutexLocker locker(&mutex);
+	DT_SetResponseClass( worldTable, primitive->getSolidHandle(), responseClass );
+}
+
+void Model::removeRobotTablePair( DT_ResponseClass objType1, DT_ResponseClass objType2 )
+{
+	//QMutexLocker locker(&mutex);
+	DT_RemovePairResponse( robotTable, objType1, objType2, reflexTrigger);
+}
+
+void Model::removeObject( PrimitiveObject* primitive)
+{
+	QMutexLocker locker(&mutex);
+	DT_RemoveObject( scene, primitive->getObject() );
+	DT_DestroyObject( primitive->getObject() );
+	DT_DeleteShape( primitive->getShape() );
 }
 
 int Model::computePose()
 {
-	if ( !robot->isOpen() )
+	QMutexLocker locker(&mutex);
+	
+	/**/if ( !robot->isOpen() )
 	{
 		printf("COLLISION DETECTOR ERROR: the robot has not been configured...  call robot.open(QString) before computePose()...\n *** DO YOU HAVE THE RIGHT ROBOT NAME?!? ***\n");
 		return 0;
@@ -85,19 +148,15 @@ int Model::computePose()
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations
 	
 	robot->updatePose();		// do forward kinematics
-	
-	// do collision detection
-	//if ( !DT_Test(scene,robotTable) )
-	//{
-	//	DT_Test(scene,worldTable);
-	//}
+	world->update();
+
 	DT_Test(scene,robotTable);
 	DT_Test(scene,worldTable);
 	
 	// send the results of DT_TEST as Qt Signals
 	if ( reflexTriggered )
 	{
-		printf("EMITTING REFLEX SIGNAL!!! \n");
+		//printf("EMITTING REFLEX SIGNAL!!! \n");
 		emit reflexResponse();
 	}
 	emit collisions(col_count); // this number may not be correct as we stop DT_TEST early in the case of reflexive response

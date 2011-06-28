@@ -29,40 +29,20 @@ CompositeObject::~CompositeObject()
 	resize(0);
 }
 
-//void CompositeObject::setModel( Model* m )
-/*void CompositeObject::registerSolidPrimitives( DT_SceneHandle scene, DT_RespTableHandle respTable, DT_ResponseClass respClass )
-{
-	QVector<PrimitiveObject*>::iterator i;
-	for (i=begin(); i!=end(); ++i)
-	{
-		DT_AddObject( scene, (*i)->getSolidHandle() );
-		DT_SetResponseClass( respTable, (*i)->getSolidHandle(), respClass );
-	}
-}
-*/
-
 void CompositeObject::append(PrimitiveObject *primitiveObject)
 {
-	//primitiveObject->
     primitiveObject->setParent( this );
 	primitiveObject->update(getT());
 	QVector<PrimitiveObject*>::append( primitiveObject );
 }
 
- /*
-void CompositeObject::doNotCheckCollision( DT_ResponseClass objType2 ) const
-{
-	//printf("Cleared a pair response %i, %i\n", responseClass, obj->getResponseClass() );
-	DT_RemovePairResponse( model->getResponseTable(), objType, objType2, model->reflexTrigger);
-	DT_RemovePairResponse( model->getResponseTable(), objType, objType2, model->collisionHandler);
-}*/
-
 bool CompositeObject::remove( PrimitiveObject* primitive )
 {
 	
 	QVector<PrimitiveObject*>::iterator i;
-	for ( i=begin(); i!=end(); ++i )
+	for ( i=end(); i!=begin(); )
 	{
+		--i;
 		if ( *i == primitive )
 		{
 			erase(i);

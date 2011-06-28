@@ -61,7 +61,11 @@ public:
 	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
 
 signals:
-	void observation(RobotObservation obs);								//!< make new marker positions and orientations known
+	
+	void appendedObject( KinTreeNode* node );
+	void appendedPrimitive ( PrimitiveObject* primitive );
+	void removeSelfCollisionPair( DT_ResponseClass, DT_ResponseClass );
+	void observation( RobotObservation obs );								//!< make new marker positions and orientations known
 
 public slots:
 	void setNormalPosition( qreal pos = 0.5 );							//!< Set the position of every joint on the robot.

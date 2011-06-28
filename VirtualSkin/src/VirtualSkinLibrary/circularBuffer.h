@@ -31,10 +31,12 @@ public:
 	~CircularBuffer();		//!< Nothing special to do here
 
 	void setBufferSize( int bufferLength );	//!< Clear and then resize the buffer
-	void init( const QVector<qreal> v);		//!< Fill the buffer with the QVector v
+	
+	QVector< QVector<qreal> >::iterator next();		//!< Advances the 'current' position in the buffer
+	QVector< QVector<qreal> >::iterator prev();		//!< Moves the 'current' position in the buffer backward
+	void init( const QVector<qreal> v);				//!< Fill the buffer with the QVector v
+	
 	void put( const QVector<qreal> v);		//!< Write the QVector v to the buffer and advance the 'current' position
-	void next();							//!< Advances the 'current' position in the buffer
-	void prev();							//!< Moves the 'current' position in the buffer backward
 	
 	QVector<qreal>& getOldest();			//!< Returns a reference to the oldest value in the buffer
 	QVector<qreal>& getCurrent();			//!< Returns a reference to the current value
@@ -49,6 +51,7 @@ private:
 	QVector< QVector<qreal> > buffer;		//!< The buffer itself
 	QTime time;
 	qreal period;
+	bool empty;
 	
 };
 #endif

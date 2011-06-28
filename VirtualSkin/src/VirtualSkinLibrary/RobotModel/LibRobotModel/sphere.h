@@ -27,6 +27,7 @@ public:
 	Sphere( qreal radius, int lod = 3 ) throw(RobotModelException);	//!< Creates the SOLID object
 	virtual ~Sphere();												//!< Destroys the SOLID object
 
+	qreal r() { return radius; }
 	void makeDisplayList();											//!< Makes an OpenGL display list by recursive subdivision of an icosahedron
 
 private:

@@ -22,6 +22,7 @@ YarpStreamPort::~YarpStreamPort()
 
 void YarpStreamPort::setBottle( const yarp::os::Bottle& aBottle )
 {
+	QMutexLocker locker(&mutex);
 	bottle = aBottle;
 }
 
@@ -42,7 +43,9 @@ void YarpStreamPort::run()
 {
 	while ( keepRunning )
 	{
-		port.write( bottle );
+		mutex.lock();
+			port.write( bottle );
+		mutex.unlock();
 		usleep(YARP_PERIOD_us);
 	}
 }

@@ -8,14 +8,11 @@ PrimitiveObject::PrimitiveObject() : parent(0), shape(NULL), solidObject(NULL)
 }
 PrimitiveObject::~PrimitiveObject()
 {
-	if ( solidObject ) { DT_DestroyObject(solidObject); }
-	if ( shape ) { DT_DeleteShape(shape); }
 }
 void PrimitiveObject::setParent( CompositeObject* object )
 {
 	if (object) {
 		parent = object;
-		//doNotCollideWith(parent);
 	}
 }
 void PrimitiveObject::setL( const QMatrix4x4& txfr )
@@ -72,18 +69,11 @@ void PrimitiveObject::setSpecialEulerOrientation( const QVector3D& axis, qreal a
 void PrimitiveObject::update( const QMatrix4x4& txfr )
 {
     T = txfr * L;
-	DT_SetMatrixd( solidObject , T.constData() );
+	if ( solidObject ) DT_SetMatrixd( solidObject , T.constData() );
+	
 }
 
-/*void PrimitiveObject::doNotCollideWith( CompositeObject* object )
-{
-    QVector<PrimitiveObject*>::iterator i;
-        for ( i=object->begin(); i!=object->end(); ++i ) {
-                dtClearPairResponse( *i, this );
-        }
-}*/
-
-CompositeObject::ObjType PrimitiveObject::getObjectType()
+CompositeObject::ObjType PrimitiveObject::getParentObjectType()
 {
 	if (parent) { return parent->getObjectType(); }
 	else { return CompositeObject::NO_TYPE; }
@@ -94,7 +84,7 @@ void PrimitiveObject::render()
 	if ( glIsList(index) )
 	{
 		GLfloat* color = gray;
-		switch ( getObjectType() ) {
+		switch ( getParentObjectType() ) {
 			case CompositeObject::OBSTACLE: 
 				if ( isColliding() ) { color = blue; }
 				else { color = transpBlue; }

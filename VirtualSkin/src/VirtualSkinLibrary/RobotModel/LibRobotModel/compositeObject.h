@@ -34,15 +34,6 @@ public:
     CompositeObject( const QString& aName = "unnamedObject" );	//!< Simply names the object and initializes indices
     virtual ~CompositeObject();															//!< Deletes the primitives in the QVector first then this object
 	
-	
-	
-	//void setModel( Model* model );
-	void registerSolidPrimitives( DT_SceneHandle scene, DT_RespTableHandle respTable, DT_ResponseClass respClass);
-	//DT_ResponseClass& getResponseClass() { return responseClass; }
-	
-	
-	
-	
 	void setName( const QString& aName ) { objectName = aName; }						//!< Set a human readable identifier for the physical object
 	const QString& getName() { return objectName; }										//!< Return a human readable identifier for the physical object
 	
@@ -77,8 +68,6 @@ public:
 	void makeDisplayList();														//!< Creates an OpenGL display list for the coordinate system associated with the CompositeObject
     virtual void render();														//!< Call the DisplayList of the object and its children
 	
-	//void doNotCheckCollision( DT_ResponseClass ) const;					//!< Set SOLID not to compute collisions between CompositeObjects of the same response class as this one and CompositeObjects of the same class as the one passed in as a parameter
-
 	virtual void update();														//!< Update the positions/orientations of the primitives (PrimitiveObject) within this CompositeObject
 																				/**< This is called whenever the position/orientation of the CompositeObject is changed */
 
@@ -91,9 +80,13 @@ public:
 	ObjType getObjectType() { return objType; }
 	void setObjectType( ObjType t ) { objType = t; }
 	
+	void setSolidResponseClass( DT_ResponseClass c ) { respClass = c; }
+	DT_ResponseClass getSolidResponseClass() const { return respClass; }
+	
 protected:
 	
-	ObjType	objType;
+	ObjType				objType;
+	DT_ResponseClass	respClass;
 
 	QString objectName;				//!< A human readable identifier for the object
 	int numSpheres,					//!< Counts calls to newSphere( double r, const QVector3D& pos ) so that spheres can be named 'sph1', 'sph2', ect.
