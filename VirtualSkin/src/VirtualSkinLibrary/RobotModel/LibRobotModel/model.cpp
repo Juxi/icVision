@@ -78,15 +78,18 @@ DT_ShapeHandle Model::createSolidShape( PrimitiveObject* primitive )
 {
 	// create the appropriate shape object for the primitive at hand
 	switch (primitive->getGeomType()) {
-		case PrimitiveObject::SPHERE:
+		case PrimitiveObject::SPHERE: {
 			Sphere* sphere = static_cast<Sphere*>(primitive);
 			return DT_NewSphere(sphere->r());
-		case PrimitiveObject::CYLINDER:
+		}
+		case PrimitiveObject::CYLINDER: {
 			Cylinder* cylinder = static_cast<Cylinder*>(primitive);
 			return DT_NewCylinder(cylinder->r(), cylinder->h());
-		case PrimitiveObject::BOX:
+		}
+		case PrimitiveObject::BOX: {
 			Box* box = static_cast<Box*>(primitive);
 			return DT_NewBox(box->getX(), box->getY(), box->getZ());
+		}
 		default:
 			return NULL;
 	}
