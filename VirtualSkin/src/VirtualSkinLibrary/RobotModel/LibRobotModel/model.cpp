@@ -4,10 +4,14 @@ using namespace RobotModel;
 
 Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), keepRunning(true), col_count(0), reflexTriggered(false)
 {
+	qRegisterMetaType< DT_ResponseClass >("DT_ResponseClass");
+	
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
 	robotTable =  DT_CreateRespTable();  // setup of this response table is handled by KinTreeNode
 	worldTable =  DT_CreateRespTable();
+	
+	// create SOLID Response classes for the world table
 	OBSTACLE = DT_GenResponseClass(worldTable);
 	TARGET = DT_GenResponseClass(worldTable);
 	BODY_PART = DT_GenResponseClass(worldTable);
@@ -17,18 +21,17 @@ Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), kee
 	
 	// FOR INTERACTION WITH THE ENVIRONMENT
 	// anything that hits an 'OBSTACLE' causes the reflexTrigger signal to be emitted
-	DT_AddClassResponse( worldTable, OBSTACLE, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse( worldTable, BODY_PART, OBSTACLE, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	
 	// anything that hits a 'TARGET' does not (but still computes the witness point)
-	DT_AddClassResponse( worldTable, TARGET, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse( worldTable, BODY_PART, TARGET, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 
 	// collisions between objects in the robot's environment are ignored completely
-	DT_RemovePairResponse( worldTable,	OBSTACLE,	OBSTACLE,	collisionHandler);
-	DT_RemovePairResponse( worldTable,	TARGET,		TARGET,		collisionHandler);
-	DT_RemovePairResponse( worldTable,	TARGET,		OBSTACLE,	collisionHandler);
-	
+	//DT_RemovePairResponse( worldTable,	OBSTACLE,	OBSTACLE,	collisionHandler);
+	//DT_RemovePairResponse( worldTable,	TARGET,		TARGET,		collisionHandler);
+	//DT_RemovePairResponse( worldTable,	TARGET,		OBSTACLE,	collisionHandler);
 	// the robot's self-collisions are also ignored, as they are handled in another response table
-	DT_RemovePairResponse( worldTable,	BODY_PART,	BODY_PART,	collisionHandler);
+	//DT_RemovePairResponse( worldTable,	BODY_PART,	BODY_PART,	collisionHandler);
 
 	// initialize the data-structures that hold the geometries in the model
 	robot = new Robot(this);

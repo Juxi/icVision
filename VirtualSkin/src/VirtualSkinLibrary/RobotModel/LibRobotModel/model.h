@@ -102,7 +102,7 @@ public:
 	DT_RespTableHandle	getWorldTable() { return worldTable; }
 	DT_RespTableHandle	getRobotTable() { return robotTable; }
 	DT_ResponseClass	obstacleResponseClass() { return OBSTACLE; }
-	DT_ResponseClass	targetResonsepClass() { return TARGET; }
+	DT_ResponseClass	targetResponseClass() { return TARGET; }
 	DT_ResponseClass	body_partResponseClass() { return BODY_PART; }
 	
 public slots:

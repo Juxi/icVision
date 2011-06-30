@@ -58,10 +58,10 @@ int main(int argc, char *argv[])
 					 VirtualSkin::ResponseObserver >( xmlFile ); 
 		
 		// open a port to report collision events
-		//filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");
+		filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");
 	
 		// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
-		//filter.openStatusPort("/" + filter.model.robot->getName() + "F/status");
+		filter.openStatusPort("/" + filter.model.robot->getName() + "F/status");
 		
 		// open a port to interact with the world model
 		filter.model.openWorldRpcPort("/" + filter.model.robot->getName() + "F/world");

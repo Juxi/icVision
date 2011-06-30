@@ -90,7 +90,7 @@ void RobotFilter::takeControl()
 {
 	isColliding = true;
 	
-	if ( isColliding && !haveControl && false)
+	if ( isColliding && !haveControl )
 	{
 		haveControl = true;
 		
