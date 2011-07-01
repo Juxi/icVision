@@ -1,0 +1,160 @@
+#include <stdio.h>
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
+using namespace yarp::os;
+using namespace yarp::sig;
+
+// Forward declarations
+string getSimCommand(CommandType type, bool isICubSimulator); 
+
+
+int main() 
+{
+	BufferedPort<yarp::os::Bottle> moduleOutput; // or port????
+	string outputPortName;
+   	outputPortName = "/" + "TestModuleName" + "/output:o";
+   	if(! moduleOutput.open( outputPortName.c_str() )){
+     		return false;
+   	}
+
+#if 0
+        Bottle output_message,answer;
+	ostringstream buffer2send;
+	buffer2send << "world mk ssph 0.1 0.5 1 0 0 1 0";	
+	string command2send = buffer2send.str();
+	cout << "Command to transmit: " << command2send << endl;
+	output_message.fromString(command2send.c_str());
+        moduleOutput.write(output_message, answer);
+        cout << "Answer: " << answer.toString() << endl;
+#else
+	ostringstream buffer2send;
+	buffer2send << "world mk ssph 0.1 0.5 1 0 0 1 0";	
+	string command2send = buffer2send.str();
+	cout << "Command to transmit: " << command2send << endl;
+	Bottle& message2send = moduleOutput.prepare();
+	message2send.fromString(buffer2send.str().c_str());
+	cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
+	moduleOutput.writeStrict();
+#endif	
+
+#if 0
+/*
+	string command2send = object_list[i].getSimCommand(POSE, isICubSim);
+			cout<<"Command transmitted: "<<endl;
+			cout<<command2send<<endl;
+			buffer2send<<command2send;
+			output_message.fromString(buffer2send.str().c_str());
+			//moduleOutput.write(output_message, answer);
+			//cout<<"Answer : "<<answer.toString()<<endl;
+
+
+			//  TEST WITH BUFFERED PORT 
+
+			Bottle& message2send = moduleOutput.prepare();
+			message2send.fromString(buffer2send.str().c_str());
+			cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
+			moduleOutput.writeStrict();
+*/
+    for(uint i=0; i<object_list.size(); i++){
+
+        //Send object position on the port
+        Bottle output_message,answer;
+        ostringstream buffer2send;
+//        output_message.clear();
+//        answer.clear();
+//        buffer2send.clear();
+//        flush(buffer2send);
+
+        string command2send = object_list[i].getSimCommand(POSE, isICubSim);
+        cout<<"Command transmitted: "<<endl;
+        cout<<command2send<<endl;
+        buffer2send<<command2send;
+        output_message.fromString(buffer2send.str().c_str());
+        moduleOutput.write(output_message, answer);
+        cout<<"Answer : "<<answer.toString()<<endl;
+
+//        output_message.clear();
+//        answer.clear();
+//        flush(buffer2send);
+//
+//        cout<<"Command transmitted: "<<endl;
+//        cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
+//        buffer2send<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
+//        output_message.fromString(buffer2send.str().c_str());
+//        moduleOutput.write(output_message, answer);
+//        cout<<"Answer : "<<answer.toString()<<endl;
+
+    }
+
+
+  }
+
+
+
+   return true;
+}
+
+}
+
+string getSimCommand(CommandType type, bool isICubSimulator){
+  ostringstream buffer2send;
+
+  Point3f sendedPosition = position;
+
+  if(isICubSimulator){
+
+      Mat tmpposition = (Mat_<float>(4,1) << position.x, position.y, position.z, 1 );
+      tmpposition = w2SimRot*tmpposition;
+
+     // cout<<tmpposition<<endl;
+      sendedPosition.x = tmpposition.at<float>(0,0);
+      sendedPosition.y = tmpposition.at<float>(1,0);
+      sendedPosition.z = tmpposition.at<float>(2,0);
+
+  }
+
+
+  switch (type) {
+    case POSE:
+      if(!positioned){
+          if(shapeis == BOX){
+              //buffer2send << "world mk "<<getShape()<<" "<<boxSize1<<" "<<boxSize2<<" "<<boxSize3<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" 1 0 0";
+              buffer2send << "world mk "<<getShape()<<" "<<boxSize1<<" "<<boxSize2<<" "<<boxSize3<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
+          }
+          else if(shapeis == CUBE){
+              //TODO
+          }
+          else if(shapeis == CYLINDER){
+              buffer2send << "world mk "<<getShape()<<" "<<radius<<" "<<lenght<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
+          }
+          else if(shapeis == SPHERE){
+              buffer2send << "world mk "<<getShape()<<" "<<radius<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
+          }
+
+          positioned = true;
+      }
+      else
+        buffer2send << "world set "<<getShape()<<" "<<id+1<<" "<<sendedPosition.x<<" "<<sendedPosition.y<<" "<<sendedPosition.z<<" "<<color[2]/255<<" "<<color[1]/255<<" "<<color[0]/255;
+
+      break;
+
+    case ORIENTATION:
+
+      if(!oriented){
+          buffer2send << "world rot "<<getShape()<<" "<<id+1<<" "<<bank<<" "<<heading<<" "<<attitude;
+          oriented = true;
+      }
+      else
+          buffer2send << "Nocommand"; //TODO to write
+      break;
+
+    default:
+      return NULL;
+      break;
+  }
+
+  return buffer2send.str();
+#endif
+}
+
+
