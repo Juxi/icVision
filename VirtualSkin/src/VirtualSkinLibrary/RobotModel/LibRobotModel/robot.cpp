@@ -39,8 +39,8 @@ void Robot::close()
 	isConfigured = false;
 }
 
-bool Robot::open(const QString& fileName, bool verbose)
-{
+void Robot::open(const QString& fileName, bool verbose) throw(RobotModelException)
+{	
     ZPHandler handler(this);
     QXmlSimpleReader reader;
     reader.setContentHandler(&handler);
@@ -49,24 +49,28 @@ bool Robot::open(const QString& fileName, bool verbose)
 	
     if ( !file.open(QFile::ReadOnly | QFile::Text) )
 	{
-        printf("Failed to open file: %s\n",fileName.toStdString().c_str());
-        return false;
+		QString errStr = "failed to open file '";
+		errStr.append(fileName);
+		errStr.append("'");
+		throw RobotModelException(errStr);
     }
 	
     QXmlInputSource xmlInputSource( &file );
-	
     if ( !reader.parse( xmlInputSource ) )
 	{
-		printf("Failed to create Robot: %s", getName().toStdString().c_str());
-		return false;
-	}
+		QString errStr = "failed to create robot '";
+		errStr.append(getName());
+		errStr.append("' from file '");
+		errStr.append(fileName);
+		errStr.append("'");
+		throw RobotModelException(errStr);
+    }
 	
 	if (verbose) printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
 	
 	filterCollisionPairs();
 	home(verbose);
-	
-	return isConfigured = true;
+	isConfigured = true;
 }
 
 void Robot::filterCollisionPairs()

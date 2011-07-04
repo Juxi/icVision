@@ -46,7 +46,8 @@ private:
 	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );	//!< Handles incomming RPC commands (expressed as YARP bottles)
 	
 	void make( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Creates a new object
-	void setPos( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Sets the position of an object
+	void set( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Sets the properties of an object
+	void setPos( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Sets the position of an object (called by set() above)
 	void pSetPos( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Set the position of a primitive relative to its parent object
 	void setRot( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Rotate an object
 	void pSetRot( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Rotate a primitive relative to its parent object

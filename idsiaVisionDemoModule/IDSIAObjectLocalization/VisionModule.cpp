@@ -103,11 +103,14 @@ bool VisionModule::updateModule()
       //Matrix transformation;
       transformation_left = chainEye_left.getH(v);
 
+
       //it is a RIGHT eye
       v[7]=head4-head5/2;
 
       //Matrix transformation;
       transformation_right = chainEye_right.getH(v);
+
+      // eye -> robot
 
       RT_left = Mat(4,4, CV_64FC1, transformation_left.data());
       RT_right = Mat(4,4, CV_64FC1, transformation_right.data());
@@ -233,6 +236,7 @@ bool VisionModule::updateModule()
 		        message2send_rm.fromString(buffer2send_rm.str().c_str());
 		        cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
 		        moduleOutput.writeStrict();
+
 
 		        obj2delete.push_back(i);
 		    }

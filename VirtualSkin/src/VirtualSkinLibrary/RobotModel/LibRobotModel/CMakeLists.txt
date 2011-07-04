@@ -59,6 +59,7 @@ SET ( QT_MOC_FILES 	skinWindow.h
 			renderList.h
 			model.h
 			robot.h
+			world.h
 )	
 
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )

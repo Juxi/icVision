@@ -4,7 +4,7 @@
 
 using namespace RobotModel;
 
-Joint::Joint( Robot* robot, KinTreeNode* parent, Motor* motor, KinTreeNode::Type type ) : KinTreeNode(robot,parent,type), motor(motor), position(0)
+Joint::Joint( Robot* robot, KinTreeNode* parent, Motor* motor, KinTreeNode::NodeType type ) : KinTreeNode(robot,parent,type), motor(motor), position(0)
 {
 	if ( !motor ) { throw RobotModelException("The Joint constructor requires a pointer to a valid motor."); }
 	

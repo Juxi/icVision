@@ -23,7 +23,8 @@ using namespace VirtualSkin;
 
 RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false), isColliding(false)
 {
-	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(takeControl(int)) );
+	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
+	QObject::connect( &model, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
 	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
@@ -79,10 +80,15 @@ void RobotFilter::close()
 	isOpen = false;
 }
 
-void RobotFilter::takeControl( int collisions )
+void RobotFilter::collisionStatus( int collisions )
 {
 	if ( collisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
+}
+
+void RobotFilter::takeControl()
+{
+	isColliding = true;
 	
 	if ( isColliding && !haveControl )
 	{
@@ -98,10 +104,10 @@ void RobotFilter::takeControl( int collisions )
 		printf("*** COLLISION RECOVERY ***\n");
 		statusPort.setBottle( yarp::os::Bottle("0") );
 		
-		// should be a position move ?!?
+		// do some control in response
 		collisionResponse();
 		
-		// wait for the response (a position move) to finish
+		// wait for the response to finish
 		start();
 	}
 }
@@ -110,32 +116,35 @@ void RobotFilter::run()
 {	
 	//wait for the commands issued in collisionResponse() to finish
 	responseComplete();
+	
+	if ( isColliding )
+	{
+		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
+	}
+	while ( isColliding )
+	{
+		msleep(YARP_PERIOD_ms);
+	}
+	
 	emit responseCompleteReturns();
 }
 
 void RobotFilter::openFilter()
-{
-	if ( !isColliding )
+{	
+	// reinitialize the pose buffer with the current pose
+	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 	{
-		// reinitialize the pose buffer with the current pose
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
-		{
-			stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
-		}
-		
-		// reopen the filter... 
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
-		{
-			cbFilters.at(bodyPart)->cutConnection(false);
-		}
-		
-		//inform the user
-		statusPort.setBottle( yarp::os::Bottle("1") );
-		printf("CONTROL RESTORED\n");
-		haveControl = false;
+		stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
 	}
-	else
+	
+	// reopen the filter... 
+	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 	{
-		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h \n");
+		cbFilters.at(bodyPart)->cutConnection(false);
 	}
+	
+	//inform the user
+	statusPort.setBottle( yarp::os::Bottle("1") );
+	printf("CONTROL RESTORED\n");
+	haveControl = false;
 }

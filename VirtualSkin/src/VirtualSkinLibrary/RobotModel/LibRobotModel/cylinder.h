@@ -28,6 +28,8 @@ public:
 																 \param lod Level Of Detail - the number of line segments used to represent each circular edge of the cylinder */
     ~Cylinder();											//!< Destroys the SOLID object
 
+	qreal r() { return radius; }
+	qreal h() { return height; }
     virtual void makeDisplayList();							//!< Make an OpenGL display list for the cylinder using GL_TRIANGLE_FAN and a GL_TRIANGLE_STRIP
 
 private:

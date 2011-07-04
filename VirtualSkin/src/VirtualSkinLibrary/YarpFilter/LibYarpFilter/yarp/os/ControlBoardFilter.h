@@ -78,6 +78,8 @@ public:
 	void injectState(const Bottle &b);			//!< Inject a yarp::os::bottle into the state stream on /filterName/state:o
 	void injectCommand(const Bottle &b);		//!< Inject a yarp::os::bottle into the command stream on /filterName/command:o
 	void injectCall(const Bottle &b);			//!< Inject an RPC call (yarp::os::bottle) on /filterName/rpc:o
+	
+	bool isCut() { return !isOpen; }
 
 private:
 	StreamFilter stateFilter;		//!< A filter for the state port

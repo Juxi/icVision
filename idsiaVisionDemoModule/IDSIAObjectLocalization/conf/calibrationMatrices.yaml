@@ -3,14 +3,14 @@ Intrinsics_left: !!opencv-matrix
    rows: 3
    cols: 3
    dt: f
-   data: [ 4.34744995e+02, 0., 2.79116150e+02, 0., 4.34044525e+02,
-       2.34102798e+02, 0., 0., 1. ]
+   data: [ 819.634, 0., 350.967, 0., 820.241,
+       269.419, 0., 0., 1. ]
 Intrinsics_right: !!opencv-matrix
    rows: 3
    cols: 3
    dt: f
-   data: [ 4.31093628e+02, 0., 3.62635925e+02, 0., 4.30133942e+02,
-       2.72816376e+02, 0., 0., 1. ]
+    data: [ 819.634, 0., 350.967, 0., 820.241,
+       269.419, 0., 0., 1. ]
 Distorsion_left: !!opencv-matrix
    rows: 1
    cols: 5

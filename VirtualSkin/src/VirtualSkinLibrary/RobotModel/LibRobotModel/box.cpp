@@ -14,9 +14,7 @@ Box::Box( const QVector3D& size, bool lines ) : x(size.x()), y(size.y()), z(size
 {
 	// check validity of parameters
 	if ( x <= 0 || y <= 0 || z <= 0 ) { throw RobotModelException("Box must have non-zero dimensions height, width and depth."); }
-
-    shape = DT_NewBox(x,y,z);
-	solidObject = DT_CreateObject( static_cast<PrimitiveObject*>(this), shape);
+	geomType = BOX;
 }
 Box::~Box()
 {
@@ -28,7 +26,7 @@ void Box::makeDisplayList( )
     double X=x/2, Y=y/2, Z=z/2;  //, csLen=(x+y+z)/3;
 
     // get a unique display list index and define the list
-    setDisplayListIdx( glGenLists(1) );  // (this number determines the max number of physical objects representable in OpenGL)
+    index = glGenLists(1);  // (this number determines the max number of physical objects representable in OpenGL)
 
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS
         glBegin( GL_QUADS );

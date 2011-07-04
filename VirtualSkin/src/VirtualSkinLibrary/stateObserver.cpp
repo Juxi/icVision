@@ -38,7 +38,7 @@ void StateObserver::onDataObserved(yarp::os::Bottle &b)
 		poss.append((qreal) (((b.get(i).asDouble()))));
 	}
 	
-	poseBuffer.put(poss);
+	if ( !robotFilter->cbFilters.at(bodyPart)->isCut() ) { poseBuffer.put(poss); }
 	
 	int i = bodyPart;
 	const QVector<qreal>& v = poss;

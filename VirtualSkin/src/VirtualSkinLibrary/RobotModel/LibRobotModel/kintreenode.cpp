@@ -9,24 +9,22 @@
 
 using namespace RobotModel;
 
-KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, Type type ) :  parentRobot(robot),
+KinTreeNode::KinTreeNode( Robot* robot, KinTreeNode* parent, NodeType aType ) :  parentRobot(robot),
 																		    parentNode(parent),
 																		    index(robot->numNodes()),
-																		    nodeType(type)
+																		    nodeType(aType)
 {
 	if ( !robot ) { throw RobotModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
 	
     objectName.setNum(index);
     objectName.prepend("BodyPart");
+	setObjectType(CompositeObject::BODY_PART);
     
 	if ( !parentNode ) { parentRobot->appendNode(this); }
 	else { parentNode->children.append(this); }
 	
-	// Set up Solid
-	configureSolid( parentRobot->model );												// add this Composite object to the current (glabal) scene
-	DT_RemovePairResponse( model->getResponseTable(), responseClass, responseClass, model->collisionHandler);
-	
-	parentRobot->emit appendedObject(static_cast<DisplayList*>(this));
+	parentRobot->emit appendedObject(this);
+	parentRobot->emit requestDisplayList(static_cast<DisplayList*>(this));
 }
 
 KinTreeNode::~KinTreeNode()
@@ -49,16 +47,17 @@ void KinTreeNode::setNodeAxis( const QVector3D& vector )
 	setM();
 }
 
-void KinTreeNode::append( PrimitiveObject* anObject )
+void KinTreeNode::append( PrimitiveObject* primitive )
 { 
-	CompositeObject::append(anObject);
-	parentRobot->emit appendedObject(static_cast<DisplayList*>(anObject));
+	CompositeObject::append(primitive);
+	parentRobot->emit appendedPrimitive(primitive);
+	parentRobot->emit requestDisplayList(static_cast<DisplayList*>(primitive));
 }
 
-bool KinTreeNode::remove( PrimitiveObject* anObject )
+bool KinTreeNode::remove( PrimitiveObject* primitive )
 { 
-	parentRobot->emit outdatedDisplayList( anObject->displayListIdx() );
-	return CompositeObject::remove(anObject);
+	parentRobot->emit outdatedDisplayList( primitive->displayListIdx() );
+	return CompositeObject::remove(primitive);
 }
 
 void KinTreeNode::filterCollisionPairs()
@@ -98,7 +97,7 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
     }
 
     // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-    doNotCheckCollision( node->getResponseClass() );
+    parentRobot->emit removeSelfCollisionPair( respClass, node->getSolidResponseClass() );
 
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {

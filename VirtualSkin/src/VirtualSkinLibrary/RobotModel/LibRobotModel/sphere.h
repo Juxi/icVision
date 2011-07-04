@@ -11,6 +11,7 @@
 #define SPHERE_H
 
 #include "primitiveobject.h"
+#include "robotmodelexception.h"
 
 namespace RobotModel { class Sphere; }
 
@@ -23,15 +24,16 @@ class RobotModel::Sphere : public PrimitiveObject
 	
 public:
 	
-	Sphere( qreal radius, int lod = 3 );	//!< Creates the SOLID object
-	virtual ~Sphere();						//!< Destroys the SOLID object
+	Sphere( qreal radius, int lod = 3 ) throw(RobotModelException);	//!< Creates the SOLID object
+	virtual ~Sphere();												//!< Destroys the SOLID object
 
-	void makeDisplayList();					//!< Makes an OpenGL display list by recursive subdivision of an icosahedron
+	qreal r() { return radius; }
+	void makeDisplayList();											//!< Makes an OpenGL display list by recursive subdivision of an icosahedron
 
 private:
 	
-	int lod;								//!< Level of Detail (number of recursions to compute)
-	qreal radius;							//!< Radius of the sphere
+	int lod;														//!< Level of Detail (number of recursions to compute)
+	qreal radius;													//!< Radius of the sphere
 
 	void drawTriangle( float* v1, float* v2, float* v3 );			//!< Makes an OpenGL triangle with GL_TRIANGLES
 	void subdivide( float* v1, float* v2, float* v3, int lod );		//!< Subdivides a triangle into 4 smaller ones by bisecting each side

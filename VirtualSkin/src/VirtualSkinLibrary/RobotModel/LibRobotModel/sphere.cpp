@@ -3,7 +3,6 @@
 #include <SOLID.h>
 #include "sphere.h"
 #include "displmatrix.h"
-#include "robotmodelexception.h"
 
 #include <QThread>
 
@@ -19,16 +18,14 @@ GLint Sphere::tindices[20][3] = {	{0,4,1},  {0,9,4},  {9,5,4},  {4,5,8},  {4,8,1
 									{7,10,3}, {7,6,10}, {7,11,6}, {11,0,6}, {0,1,6},
 									{6,1,10}, {9,0,11}, {9,11,2}, {9,2,5},  {7,2,11}	};
 
-Sphere::Sphere( qreal r, int detail ) : lod(detail), radius(r)
+Sphere::Sphere( qreal r, int detail ) throw(RobotModelException) : lod(detail), radius(r)
 {
 	// check validity of parameters
-	if ( radius <= 0 ) { throw RobotModelException("Sphere radius must be greater than 0."); }
-	
-    // make a sphere
-	shape = DT_NewSphere(radius);
-	solidObject = DT_CreateObject( static_cast<PrimitiveObject*>(this), shape);
-	
-    //dtLoadIdentity();
+	if ( radius <= 0 )
+	{ 
+		throw RobotModelException("Sphere radius must be greater than 0.");
+	}
+	geomType = SPHERE;
 }
 Sphere::~Sphere()
 {	
@@ -38,7 +35,7 @@ void Sphere::makeDisplayList()
 	//printf("     make - %p\n",QThread::currentThread());
 	
     // get a unique display list index and define the list
-    setDisplayListIdx(glGenLists(1)); 
+    index = glGenLists(1); 
 
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS
 

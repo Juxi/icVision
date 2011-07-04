@@ -15,10 +15,7 @@ Cylinder::Cylinder( qreal aRadius, qreal aHeight, int lod ) : radius(aRadius), h
 	// check validity of parameters
 	if ( radius <= 0 ) { throw RobotModelException("Cylinder radius must be greater than 0."); }
 	if ( height <= 0 ) { throw RobotModelException("Cylinder height must be greater than 0."); }
-	
-    // make a cylinder
-	shape = DT_NewCylinder(radius,height);
-	solidObject = DT_CreateObject( static_cast<PrimitiveObject*>(this), shape);
+	geomType = CYLINDER;
 }
 Cylinder::~Cylinder()
 {
@@ -49,7 +46,7 @@ void Cylinder::makeDisplayList()
     DisplMatrix M,N;
 
     // get a unique display list index and define the list
-    setDisplayListIdx(glGenLists(1));
+    index = glGenLists(1);
 	//printf("created robot-cylinder %d \n", glGenLists(1) );
 	
     glNewList( displayListIdx(), GL_COMPILE );  // a cylinder expressed in a centroidal y-principal CS

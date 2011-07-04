@@ -10,6 +10,8 @@
 #include "worldRpcInterface.h"
 #include "world.h"
 #include "robotmodelexception.h"
+//#include "compositeObject.h"
+#include "model.h"
 #include "constants.h"
 
 using namespace VirtualSkin;
@@ -39,7 +41,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	{
 		case VOCAB_LS:	getList(reply); break;
 		case VOCAB_MK:  make(command,reply,n); break;
-		case VOCAB_SET: setPos(command,reply,n); break;
+		case VOCAB_SET: set(command,reply,n); break;
 		case VOCAB_GET: getState(command,reply,n); break;
 		case VOCAB_ROT: setRot(command,reply,n); break;
 		case VOCAB_REM: removeObject(command,reply,n); break;
@@ -78,8 +80,14 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 			
-			if ( geom == VOCAB_SPH ) { world->newSphere( r, QVector3D(px,py,pz) ); }
-			else if ( geom == VOCAB_SSPH ) { world->newSSphere( r, QVector3D(px,py,pz) ); }
+			if ( geom == VOCAB_SPH )
+			{ 
+				world->newSphere( r, QVector3D(px,py,pz) );
+			}
+			else if ( geom == VOCAB_SSPH )
+			{
+				world->newSSphere( r, QVector3D(px,py,pz) );
+			}
 			
 			reply.addString("Made sphere.");
 			
@@ -128,7 +136,12 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 		}
 		else { reply.addString("MK ERROR: Unknown geometry... use '(s)sph', '(s)cyl', '(s)box' or 'csg'"); }
 	}
-	catch (RobotModel::RobotModelException e) { reply.clear(); reply.addString(e.what()); }
+	catch (std::exception& e)
+	{
+		printf("Caught RobotModelException!!!\n");
+		reply.clear();
+		reply.addString(e.what());
+	}
 }
 void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n )
 {
@@ -184,7 +197,39 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 		reply.addString("to");
 		reply.addString( object->getName().toStdString().c_str() );
 			
-	} catch (RobotModel::RobotModelException e) { reply.addString(e.what()); }
+	} catch (std::exception& e) { reply.addString(e.what()); }
+}
+void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
+{
+	RobotModel::CompositeObject* object = getObject( command, reply, n );
+	
+	if ( object )
+	{
+		bool didSomething = false;
+		int type = command.get(n).asVocab();
+		switch (type)
+		{
+			case VOCAB_OBSTACLE:
+				object->setObjectType(RobotModel::CompositeObject::OBSTACLE);
+				world->changeResponseClass( object, world->model->obstacleResponseClass() );
+				reply.addString("Changed object type to 'obstacle'.");
+				didSomething = true;
+				break;
+			case VOCAB_TARGET:
+				object->setObjectType(RobotModel::CompositeObject::TARGET);
+				world->changeResponseClass( object, world->model->targetResponseClass() );
+				reply.addString("Changed object type to 'target'.");
+				didSomething = true;
+				break;
+			default:
+				reply.addString("Unknown object type, use 'obs' or 'tgt'.");
+		}
+		if ( !didSomething )
+		{
+			n--;
+			setPos(command,reply,n);
+		}
+	}
 }
 void WorldRpcInterface::setPos( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {

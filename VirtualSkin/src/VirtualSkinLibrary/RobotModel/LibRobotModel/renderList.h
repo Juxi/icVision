@@ -42,7 +42,7 @@ public slots:
 	
 signals:
 	
-	void appendedObject( RobotModel::DisplayList* list );	//!< Indicates that a new physical object has been created, and that its corresponding display list should be created as well if necessary
+	void requestDisplayList( RobotModel::DisplayList* list );	//!< Indicates that a new physical object has been created, and that its corresponding display list should be created as well if necessary
 	void outdatedDisplayList( int idx );					//!< Indicates that an object has been deleted and that its corresponding display list should be destroyed if it exists
 	void changedState();									//!< Indicates that one or more objects (from the sub-class) have moved, and that the scene should be re-rendered as soon as is convenient
 

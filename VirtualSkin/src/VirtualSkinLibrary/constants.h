@@ -37,6 +37,12 @@
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
 #define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
 
+// object types
+#define VOCAB_OBSTACLE VOCAB3('o','b','s')	//!< an obstacle that triggers reflexive response 
+#define VOCAB_TARGET VOCAB3('t','g','t')
+//#define VOCAB_BODY_PART VOCAB3('b','d','y')
+//#define VOCAB_NO_TYPE VOCAB2('g','h','o')	//!< gho for ghost
+
 // commands for primitives
 #define VOCAB_APP VOCAB3('a','p','p')		//!< Append a primitive to an object
 #define VOCAB_PSET VOCAB4('s','e','t','p')	//!< Set the position of a primitive relative to its parent object

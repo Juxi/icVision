@@ -12,6 +12,7 @@
 
 #include <yarp/os/all.h>
 #include <QThread>
+#include <QMutex>
 
 namespace VirtualSkin
 {
@@ -42,6 +43,8 @@ private:
 	
 	void run();		//!< Runs the thread
 	void stop();	//!< Stops the thread
+	
+	QMutex mutex;
 
 };
 #endif
