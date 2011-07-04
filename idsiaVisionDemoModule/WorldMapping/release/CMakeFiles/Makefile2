@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping
+CMAKE_SOURCE_DIR = /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release
+CMAKE_BINARY_DIR = /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release
 
 #=============================================================================
 # Target rules for target CMakeFiles/WorldMapping.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/relea
 CMakeFiles/WorldMapping.dir/all:
 	$(MAKE) -f CMakeFiles/WorldMapping.dir/build.make CMakeFiles/WorldMapping.dir/depend
 	$(MAKE) -f CMakeFiles/WorldMapping.dir/build.make CMakeFiles/WorldMapping.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles  1 2 3 4 5 6 7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles  1 2 3 4 5 6 7
 	@echo "Built target WorldMapping"
 .PHONY : CMakeFiles/WorldMapping.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/WorldMapping.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/WorldMapping.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/WorldMapping.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles 0
 .PHONY : CMakeFiles/WorldMapping.dir/rule
 
 # Convenience name for target.

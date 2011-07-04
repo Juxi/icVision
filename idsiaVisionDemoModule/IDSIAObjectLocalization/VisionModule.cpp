@@ -120,16 +120,9 @@ bool VisionModule::updateModule()
 
       vision->setUpCamera2World(RT_left, RT_right);
 
-/*
-      Mat RT_w2r = RT_right.inv();
-	  Mat RT_w2l = RT_left.inv();
-	  Mat RT_l2r = RT_w2r*RT_left;
-	  Mat RT_tmp = RT_left*RT_w2r;
-	  cout<<RT_l2r<<endl;
-*/
    }
   else{
-      //We need to estimate the RT Matrix
+      //We need to estimate the RT Matrix using the images
   }
 
   if ( getImageLeft + getImageRight > 1 && receivedHead && receivedTorso){
@@ -178,70 +171,55 @@ bool VisionModule::updateModule()
 
 
     if(sendData2Sim){
-		for(uint i=0; i<object_list.size(); i++){
+      for(uint i=0; i<object_list.size(); i++){
 
 
-		    if(object_list[i].getNotchangedCounter() < 5){
-			//Send object position on the port
-			Bottle output_message,answer;
-			ostringstream buffer2send;
-                        //        output_message.clear();
-                        //        answer.clear();
-                        //        buffer2send.clear();
-                        //        flush(buffer2send);
+          if(object_list[i].getNotchangedCounter() < timeTh){
+              //Send object position on the port
+              Bottle output_message,answer;
+              ostringstream buffer2send;
 
-			string command2send = object_list[i].getSimCommand(POSE, isICubSim);
-			cout<<"Command transmitted: "<<endl;
-			cout<<command2send<<endl;
-			buffer2send<<command2send;
-			output_message.fromString(buffer2send.str().c_str());
-			//moduleOutput.write(output_message, answer);
-			//cout<<"Answer : "<<answer.toString()<<endl;
+              string command2send = object_list[i].getSimCommand(POSE, isICubSim);
+              cout<<"Command transmitted: "<<endl;
+              cout<<command2send<<endl;
+              buffer2send<<command2send;
+              output_message.fromString(buffer2send.str().c_str());
 
+               /* TEST WITH BUFFERED PORT */
 
-			 /* TEST WITH BUFFERED PORT */
+              Bottle& message2send = moduleOutput.prepare();
+              message2send.fromString(buffer2send.str().c_str());
+              cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
+              moduleOutput.writeStrict();
 
-			Bottle& message2send = moduleOutput.prepare();
-			message2send.fromString(buffer2send.str().c_str());
-			cout<<"Writing position bottle " << message2send.toString().c_str()<<endl;
-			moduleOutput.writeStrict();
-
-                  //        output_message.clear();
-                  //        answer.clear();
-                  //        flush(buffer2send);
-                  //
-          //	        cout<<"Command transmitted: "<<endl;
-          //			cout<<object_list[i].getSimCommand(ORIENTATION, isICubSim)<<endl;
-                          //message2send.clear();
-
-                          ostringstream buffer2send_rot;
-                          buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
+              ostringstream buffer2send_rot;
+              buffer2send_rot<<object_list[i].getSimCommand(ORIENTATION, isICubSim);
 
 
-                          if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
+              if(strcmp("Nocommand", buffer2send_rot.str().c_str())){
 
-                                Bottle& message2send_rot = moduleOutput.prepare();
-                                message2send_rot.fromString(buffer2send_rot.str().c_str());
-                                cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
-                                moduleOutput.writeStrict();
+                  Bottle& message2send_rot = moduleOutput.prepare();
+                  message2send_rot.fromString(buffer2send_rot.str().c_str());
+                  cout<<"Writing rotation bottle " << message2send_rot.toString().c_str()<<endl;
+                  moduleOutput.writeStrict();
 
-                          }
+              }
 
-		    }
+          }
 
-		    else{
-		        ostringstream buffer2send_rm;
-		        buffer2send_rm<<"world rm "<<object_list[i].getShape()<<" "<<object_list[i].getId()+1;
-		        Bottle& message2send_rm = moduleOutput.prepare();
-		        message2send_rm.fromString(buffer2send_rm.str().c_str());
-		        cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
-		        moduleOutput.writeStrict();
+          else{
 
+              ostringstream buffer2send_rm;
+              buffer2send_rm<<"world rm "<<object_list[i].getShape()<<" "<<object_list[i].getId()+1;
+              Bottle& message2send_rm = moduleOutput.prepare();
+              message2send_rm.fromString(buffer2send_rm.str().c_str());
+              cout<<"Writing delete bottle " << message2send_rm.toString().c_str()<<endl;
+              moduleOutput.writeStrict();
 
-		        obj2delete.push_back(i);
-		    }
+              obj2delete.push_back(i);
+          }
 
-		}
+      }
     }
 
     for(uint i=0; i<obj2delete.size(); i++){
@@ -391,6 +369,8 @@ bool VisionModule::configure(yarp::os::ResourceFinder &rf)
 //    root2simtransformation[3][0] = 0; root2simtransformation[3][1] = 0; root2simtransformation[3][2] = 0; root2simtransformation[3][3] = 1;
 
    // RT = [ 0 -1 0 0; 0 0 1 0.5484; -1 0 0 -0.04; 0 0 0 1 ]
+
+    timeTh = 5;
 
     /*Vision utils*/
     vision = new CVUtils();

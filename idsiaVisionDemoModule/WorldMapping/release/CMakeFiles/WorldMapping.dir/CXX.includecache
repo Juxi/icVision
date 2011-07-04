@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/CameraiCub.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/CameraiCub.h
 opencv2/opencv.hpp
 -
 vector
@@ -24,9 +24,9 @@ yarp/sig/all.h
 yarp/dev/all.h
 -
 GaborDescriptor.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborDescriptor.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborDescriptor.h
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/FeatureDetectionThread.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/FeatureDetectionThread.h
 yarp/sig/all.h
 -
 yarp/os/all.h
@@ -34,15 +34,15 @@ yarp/os/all.h
 iostream
 -
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborDescriptor.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborDescriptor.h
 opencv2/opencv.hpp
 -
 GaborFilter.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborFilter.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborFilter.h
 convertflt.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborFilter.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/GaborFilter.h
 opencv2/opencv.hpp
 -
 vector
@@ -54,7 +54,7 @@ stdio.h
 iostream
 -
 convertflt.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
 yarp/os/all.h
 -
 yarp/sig/all.h
@@ -62,11 +62,11 @@ yarp/sig/all.h
 yarp/dev/all.h
 -
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.cpp
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.cpp
 WorldMapping.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.h
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/WorldMapping.h
 yarp/os/all.h
 -
 yarp/sig/all.h
@@ -78,17 +78,17 @@ iCub/iKin/iKinFwd.h
 opencv2/opencv.hpp
 -
 FeatureDetectionThread.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/FeatureDetectionThread.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/FeatureDetectionThread.h
 CameraiCub.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/CameraiCub.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/CameraiCub.h
 
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/convertflt.h
 cv.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/cv.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/cv.h
 highgui.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/highgui.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/highgui.h
 cxcore.h
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/cxcore.h
+/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/cxcore.h
 vector
 -
 string
@@ -691,8 +691,12 @@ yarp/dev/CalibratorInterfaces.h
 /usr/local/include/yarp/dev/ControlBoardInterfacesImpl.h
 yarp/dev/ControlBoardInterfaces.h
 -
+yarp/dev/api.h
+-
 
 /usr/local/include/yarp/dev/ControlBoardPid.h
+yarp/dev/api.h
+-
 
 /usr/local/include/yarp/dev/DataSource.h
 yarp/os/Port.h
@@ -1183,8 +1187,16 @@ yarp/os/Bottle.h
 -
 
 /usr/local/include/yarp/os/RpcClient.h
+yarp/os/Contactable.h
+-
+yarp/os/Port.h
+-
 
 /usr/local/include/yarp/os/RpcServer.h
+yarp/os/Contactable.h
+-
+yarp/os/Port.h
+-
 
 /usr/local/include/yarp/os/Runnable.h
 yarp/os/api.h
@@ -1318,6 +1330,8 @@ yarp/os/NetInt32.h
 
 /usr/local/include/yarp/os/impl/String.h
 yarp/os/api.h
+-
+yarp/conf/system.h
 -
 string
 -

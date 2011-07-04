@@ -1,4 +1,4 @@
-# Install script for directory: /home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping
+# Install script for directory: /home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

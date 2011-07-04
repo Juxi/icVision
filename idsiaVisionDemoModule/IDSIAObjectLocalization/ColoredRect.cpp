@@ -69,3 +69,12 @@ Point2d ColoredRect::getBBTopLeftCorner(){
   return Point2d(rectangle.x, rectangle.y );
 
 }
+
+bool ColoredRect::operator==(ColoredRect &other){
+
+  Scalar othercolor = other.getColor();
+
+  return (color[0] == othercolor[0] &&
+          color[1] == othercolor[1] &&
+          color[2] == othercolor[2]);
+}

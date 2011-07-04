@@ -23,12 +23,11 @@ class ColoredObjectDetector: public ObjectDetector
     bool loadColorStats(string filename);
 
   public:
-    ColoredObjectDetector(string camera);
+    ColoredObjectDetector(string );
     virtual ~ColoredObjectDetector();
-    int objectDetection(Mat &imageLeft, Mat &imageRight, vector<WorldObject> &obj_list, Mat & lc2w, Mat & rc2w);
+    int objectDetection(Mat &image, Mat &outputImage, vector<ColoredRect> &objects);
     void colorObjectDetection(Mat &image, Mat& outputMask, vector<ColoredRect> &listofrect, Mat& outputImage);
     void colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage, float threshold = 0.035);
-    void lrDataAssociation(vector<ColoredRect> &l_listofrect, vector<ColoredRect> &r_listofrect, vector<DMatch> &matching);
 };
 
 #endif /* COLOREDOBJECTDETECTOR_H_ */

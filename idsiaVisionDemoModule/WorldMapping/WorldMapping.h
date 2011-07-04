@@ -199,6 +199,7 @@ public:
 	bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
 	double getPeriod();
 	bool updateModule();
+	bool matchingGabor(Mat &gaborsLeft, Mat &gaborsRight, std::vector<cv::DMatch> &matches );
 
 };
 

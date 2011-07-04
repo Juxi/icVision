@@ -28,8 +28,7 @@ public:
   ColoredRect();
   ColoredRect(Rect &rect, Scalar &col, vector<Point> &cont);
   Rect getRect(){return rectangle; }
-  RotatedRect getRotatedRect(){return minAreaRect(Mat(contour));
-}
+  RotatedRect getRotatedRect(){return minAreaRect(Mat(contour));}
   Scalar getColor(){return color; }
   vector<Point> getContour(){return contour; }
   Point getPointOnContour(int i){if(i<(int)contour.size()) return contour[i]; else return Point(-1,-1);}
@@ -37,6 +36,8 @@ public:
   void estimateMoments(Moments &moms, double h[7] = NULL);
   Point2d getBBCenter();
   Point2d getBBTopLeftCorner();
+
+  bool operator==(ColoredRect &other);
 
   virtual
   ~ColoredRect();

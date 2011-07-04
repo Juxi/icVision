@@ -67,6 +67,10 @@ public:
 	std::vector<cv::KeyPoint>& getKeypoints(){return keypoints;}
 	Mat& getGaborDescriptors(){return gaborDescMatrix;}
 	Mat& getImage(){ imageMat = Mat(iplimagein,false); return imageMat;}
+
+	bool loadCalibration();
+        bool saveCalibration();
+        Mat& undistortImage();
 };
 
 #endif /* CAMERAICUB_H_ */

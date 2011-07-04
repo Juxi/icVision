@@ -1,11 +1,11 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/WorldMapping.dir/CameraiCub.cpp.o"
-  "CMakeFiles/WorldMapping.dir/WorldMapping.cpp.o"
+  "CMakeFiles/WorldMapping.dir/GaborDescriptor.cpp.o"
+  "CMakeFiles/WorldMapping.dir/FeatureDetectionThread.cpp.o"
   "CMakeFiles/WorldMapping.dir/GaborFilter.cpp.o"
   "CMakeFiles/WorldMapping.dir/main.cpp.o"
-  "CMakeFiles/WorldMapping.dir/FeatureDetectionThread.cpp.o"
-  "CMakeFiles/WorldMapping.dir/GaborDescriptor.cpp.o"
+  "CMakeFiles/WorldMapping.dir/CameraiCub.cpp.o"
   "CMakeFiles/WorldMapping.dir/convertflt.cpp.o"
+  "CMakeFiles/WorldMapping.dir/WorldMapping.cpp.o"
   "WorldMapping.pdb"
   "WorldMapping"
 )
