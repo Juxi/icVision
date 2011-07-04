@@ -212,7 +212,7 @@ void HandController::unGrasp( int speed )
 	checkValidity();
 	while ( true )
 	{
-		mean = doVelocityControl( speed );
+		mean = doVelocityControl( speed, false );
 		msleep(20);
 		
 		// move through the vector of control points
@@ -237,7 +237,7 @@ void HandController::unGrasp( int speed )
 	}
 }
 
-qreal HandController::doVelocityControl( int speed )
+qreal HandController::doVelocityControl( int speed, bool stopOnTouch )
 {
 	// get encoder positions and tabulate error
 	max = 0.0;
@@ -251,6 +251,16 @@ qreal HandController::doVelocityControl( int speed )
 		printf( "%f\t", err[i] );
 	}
 	//printf("\n");
+	
+	// stop digits that have touched something
+	if ( stopOnTouch )
+	{
+		if ( thumbTouch || indexTouch || middleTouch || littleTouch ) { ERR[7] = 0; }
+		if ( thumbTouch ) { ERR[8] = 0; ERR[9] = 0; ERR[10] = 0; }
+		if ( indexTouch ) { ERR[11] = 0; ERR[12] = 0; }
+		if ( middleTouch ) { ERR[13] = 0; ERR[14] = 0; }
+		if ( littleTouch ) { ERR[15] = 0; }
+	}
 	
 	// do feedback velocity control
 	// still need to check which fingers should be stopped
@@ -268,6 +278,7 @@ qreal HandController::doVelocityControl( int speed )
 		//printf( "%f\t", cmd );
 	}
 	mean /= 9.0;
+	
 	printf(": att = %f", mean );
 	printf("\n");
 	return mean;

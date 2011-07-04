@@ -1,8 +1,8 @@
 #include "handController.h"
 
-#define VOCAB_PREGRASP VOCAB3('p','r','e')
-#define VOCAB_GRASP VOCAB3('c','l','s')
-#define VOCAB_UNGRASP VOCAB3('o','p','n')
+#define VOCAB_PREGRASP VOCAB3('p','r','e')	// goto pregrasp pose (position control)
+#define VOCAB_GRASP VOCAB3('c','l','s')		// close the hand	(velocity control)
+#define VOCAB_UNGRASP VOCAB3('o','p','n')	// open the hand	(velocity control)
 
 int main(int argc, char *argv[])
 {
