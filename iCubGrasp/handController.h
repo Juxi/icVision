@@ -83,7 +83,7 @@ private:
 	bool littleTouch;
 	
 	void blockingPositionMove( ControlPoint* );
-	qreal doVelocityControl( int speed );
+	qreal doVelocityControl( int speed, bool stopOnTouch = true );
 	
 };
 #endif
