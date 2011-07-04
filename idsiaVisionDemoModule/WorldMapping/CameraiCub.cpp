@@ -160,6 +160,18 @@ bool CameraiCub::getGaborDescriptorOnOutputPort(){
 
 }
 
+bool CameraiCub::loadCalibration(){
+  //TODO
+}
+
+bool CameraiCub::saveCalibration(){
+  //TODO
+}
+
+Mat& CameraiCub::undistortImage(Mat& image2undist){
+  //TODO
+}
+
 
 
 

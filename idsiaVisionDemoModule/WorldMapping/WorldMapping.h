@@ -169,20 +169,20 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <opencv2/opencv.hpp>
 
-#include "FeatureDetectionThread.h"
 #include "CameraiCub.h"
+#include "StereoGeometry.h"
+#include "SaliencyMap.h"
 
 class WorldMapping: public yarp::os::RFModule {
 
-	std::string moduleName;
-	std::string robotName;
+    std::string moduleName;
+    std::string robotName;
     std::string handlerPortName;
 
-	CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
+    CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
+    StereoGeometry *stereoutils;
+    SaliencyMap *saliencyutils;
     yarp::os::Port handlerPort;      //a port to handle messages
-
-    /* pointer to a new thread to be created and started in configure() and stopped in close() */
-    FeatureDetectionThread *fdThread;
 
     bool isImageLeft, isImageRight;
 
@@ -199,7 +199,6 @@ public:
 	bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
 	double getPeriod();
 	bool updateModule();
-	bool matchingGabor(Mat &gaborsLeft, Mat &gaborsRight, std::vector<cv::DMatch> &matches );
 
 };
 

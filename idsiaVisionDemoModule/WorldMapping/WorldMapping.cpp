@@ -76,6 +76,11 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
     cameraLeft = new CameraiCub(moduleName, "left");
     cameraRight = new CameraiCub(moduleName, "right");
 
+    //Set-up stereo geometry function
+    stereoutils = new StereoGeometry();
+
+    //Set-up saliency map
+    saliencyutils = new SaliencyMap();
 
     /* do all initialization here */
     /*
@@ -165,7 +170,7 @@ bool WorldMapping::updateModule() {
 		cameraRight->getGaborDescriptorOnOutputPort();
 
 		vector<KeyPoint> keypointsLeft = cameraLeft->getKeypoints();
-        vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
+                vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
 
 		Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
 		Mat gaborDescrRight = cameraRight->getGaborDescriptors();
@@ -182,7 +187,7 @@ bool WorldMapping::updateModule() {
 
 		vector<DMatch> matches;
 
-		matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
+		stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
 
 		int point_count = matches.size();
 		vector<Point2f> points1(point_count);
@@ -196,14 +201,29 @@ bool WorldMapping::updateModule() {
 
 		 }
 
-		 vector<uchar> outlier_mask;
-		 Mat H =  findHomography(points1, points2, RANSAC, 3, outlier_mask);
+		vector<uchar> outlier_mask;
+		if(point_count>10)
+		  Mat H =  findHomography(points1, points2, RANSAC, 3, outlier_mask);
 
 		Mat resultImage;
 		drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, matches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255), reinterpret_cast<const vector<char>&> (outlier_mask));
 		namedWindow("nomedellafinestra");
 		imshow("nomedellafinestra", resultImage);
-		cvWaitKey();
+
+                cvWaitKey(30);
+
+
+		saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
+
+		namedWindow("Mleft");
+                namedWindow("Mright");
+
+                imshow("Mleft", saliencyutils->getLeftMap());
+                imshow("Mright", saliencyutils->getRightMap());
+
+                cvWaitKey();
+
+
 	}
 
     return true;
@@ -213,44 +233,3 @@ double WorldMapping::getPeriod() {
     /* module periodicity (seconds), called implicitly by myModule */
     return 0.1;
 }
-
-bool WorldMapping::matchingGabor(Mat &gaborsLeft, Mat &gaborsRight, vector<DMatch> &matches ){
-
-
-  Mat multresult;
-  float testvalue;
-  DMatch match;
-  bool found;
-
-  for(int i=0; i<gaborsLeft.rows; i++){
-
-      testvalue = FLT_MIN;
-      found = false;
-
-      for(int j=0; j<gaborsRight.rows; j++){
-
-          Mat leftrow = gaborsLeft.row(i);
-          Mat rightrow = gaborsRight.row(j);
-          multiply(leftrow, rightrow, multresult);
-          Scalar similarity = sum(multresult);
-
-          if(similarity[0]>testvalue){
-              testvalue = similarity[0];
-              match.queryIdx = i;
-              match.trainIdx = j;
-              match.distance = similarity[0];
-              found = true;
-          }
-
-      }
-
-      if(found && testvalue > 0.95){
-          matches.push_back(match);
-      }
-
-
-  }
-
-  return true;
-}
-

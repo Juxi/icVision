@@ -1,1 +1,0 @@
-/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles/WorldMapping.dir

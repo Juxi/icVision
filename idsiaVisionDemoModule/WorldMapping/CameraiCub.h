@@ -70,7 +70,7 @@ public:
 
 	bool loadCalibration();
         bool saveCalibration();
-        Mat& undistortImage();
+        Mat& undistortImage(Mat& image2undist);
 };
 
 #endif /* CAMERAICUB_H_ */
