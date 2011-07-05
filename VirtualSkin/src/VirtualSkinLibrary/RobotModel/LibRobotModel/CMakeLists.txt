@@ -7,6 +7,7 @@ SET ( src_files	skinWindow.cpp
 				renderList.cpp
 				robotmodelexception.cpp
 				zphandler.cpp
+				worldhandler.cpp
 				robot.cpp
 				interval.cpp
 				motor.cpp
@@ -32,6 +33,7 @@ SET ( hdr_files	skinWindow.h
 				renderList.h
 				robotmodelexception.h
 				zphandler.h
+				worldhandler.h
 				robot.h
 				interval.h
 				motor.h

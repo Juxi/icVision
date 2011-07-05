@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	qreal errTolerance = 0.8;	// 0-1, where smaller numbers favor precision
 	if ( config.check("tolerance") )  { errTolerance = config.find("tolerance").asDouble(); }
 	
-	qreal attFactor = 4.0;	// 0-inf larger numbers cause the controller to approach target points more slowly
+	qreal attFactor = 3.0;	// 0-inf larger numbers cause the controller to approach target points more slowly
 	if ( config.check("attenuation") )  { attFactor = config.find("attenuation").asDouble(); }
 	
 	qreal accel = 20.0;	// reference acceleration for the yarp remote control board interface
@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
 		yarp::os::RpcServer port;
 		port.open(name);
 		
+		int speed;
+		
 		while (true) {
 			printf("Waiting for a message...\n");
 			yarp::os::Bottle cmd;
@@ -58,15 +60,19 @@ int main(int argc, char *argv[])
 					response.addString("OK");
 					break;
 				case VOCAB_GRASP:
-					controller.grasp(cmd.get(1).asDouble());
+					speed = cmd.get(1).asInt();
+					if ( speed == 0 ) { speed = 50; }
+					controller.grasp( speed );
 					response.addString("OK");
 					break;
 				case VOCAB_UNGRASP:
-					controller.unGrasp(cmd.get(1).asDouble());
+					speed = cmd.get(1).asInt();
+					if ( speed == 0 ) { speed = 50; }
+					controller.unGrasp( speed );
 					response.addString("OK");
 					break;
 				default:
-					response.addString("Unknown Command.  Use 'pre', 'cls (int)', or 'opn (int)'. The doubles should be a speed 0-100");
+					response.addString("Unknown Command.  Use 'pre', 'cls (int)', or 'opn (int)'. The ints should be a speed 0-100");
 					break;
 			}
 			printf("Got message: %s\n", cmd.toString().c_str());

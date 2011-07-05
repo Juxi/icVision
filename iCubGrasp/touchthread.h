@@ -7,6 +7,7 @@
 #include <float.h>
 #include <string.h>
 #include <string>
+//#include <QString>
 
 using namespace std;
 using namespace yarp::os;
@@ -24,10 +25,12 @@ protected:
 	bool ringTouch;
 	bool littleTouch;
 	bool palmTouch;
+	string remotePort;
 	string portname;
 	
 public:
-    	TouchSenseThread(const string& portname): portname(portname) { }
+    	TouchSenseThread( const string& remotePort, const string& portname ): remotePort(remotePort), 
+																			  portname(portname) { }
 	bool getThumbTouch() const {return thumbTouch;}
 	bool getIndexTouch() const {return indexTouch;}
 	bool getMiddleTouch() const {return middleTouch;}
