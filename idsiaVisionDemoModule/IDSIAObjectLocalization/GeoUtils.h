@@ -48,6 +48,8 @@ class GeoUtils
 
     bool saveCalibrationMatrix();
     bool loadCalibrationMatrix();
+
+    void lrDataAssociation(vector<ColoredRect> &l_listofrect, vector<ColoredRect> &r_listofrect, vector<DMatch> &matching, float epipolarDistance = 5);
 };
 
 #endif /* GEOUTILS_H_ */

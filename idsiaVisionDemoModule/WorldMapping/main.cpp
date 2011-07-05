@@ -26,7 +26,8 @@ int main(int argc, char * argv[]) {
 
 
   cout<<"Launching World Mapping Module"<<endl;
-  putenv("VISION_ROOT=/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/conf");
+  //putenv("VISION_ROOT=/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/conf");
+  putenv("VISION_ROOT=/home/migliore/Dropbox/Projects/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/conf");
 
   ResourceFinder rf;
   rf.setVerbose(true);

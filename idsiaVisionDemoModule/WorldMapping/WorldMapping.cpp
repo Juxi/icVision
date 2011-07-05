@@ -76,6 +76,11 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
     cameraLeft = new CameraiCub(moduleName, "left");
     cameraRight = new CameraiCub(moduleName, "right");
 
+    //Set-up stereo geometry function
+    stereoutils = new StereoGeometry();
+
+    //Set-up saliency map
+    saliencyutils = new SaliencyMap();
 
     /* do all initialization here */
     /*
@@ -165,32 +170,60 @@ bool WorldMapping::updateModule() {
 		cameraRight->getGaborDescriptorOnOutputPort();
 
 		vector<KeyPoint> keypointsLeft = cameraLeft->getKeypoints();
-        vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
+                vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
 
 		Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
 		Mat gaborDescrRight = cameraRight->getGaborDescriptors();
 
-		Mat outImageLeft, outImageRight;
-		namedWindow("Test della minchia left");
-		namedWindow("Test della minchia right");
-		cv::drawKeypoints(cameraLeft->getImage(), keypointsLeft, outImageLeft, CV_RGB(255,0,0));
-		cv::drawKeypoints(cameraRight->getImage(), keypointsRight, outImageRight, CV_RGB(255,0,0));
-		imshow("Test della minchia left", outImageLeft);
-		imshow("Test della minchia right", outImageRight);
-		cvWaitKey();
+		//TODO just for testing
+//		Mat outImageLeft, outImageRight;
+//		namedWindow("Test della minchia left");
+//		namedWindow("Test della minchia right");
+//		cv::drawKeypoints(cameraLeft->getImage(), keypointsLeft, outImageLeft, CV_RGB(255,0,0));
+//		cv::drawKeypoints(cameraRight->getImage(), keypointsRight, outImageRight, CV_RGB(255,0,0));
+//		imshow("Test della minchia left", outImageLeft);
+//		imshow("Test della minchia right", outImageRight);
+//		cvWaitKey(30);
 
-//		DMatch test;
-//		test.queryIdx = indexKeypointleft;
-//		test.trainIdx = indexKeypointright;
-//		test.distance = similarita
-		// matches.push_back(test);
+		vector<DMatch> matches;
 
-		// matches = vector<DMatch>;
-		// Mat image_right;
-		//drawMatches(image_left, keypoints_left, image_right, keypoints_right, matches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
-		//namedWindow("nomedellafinestra");
-		// imshow("nomefinestra", resulImage);
-		// cvWaitKey();
+		stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
+
+		int point_count = matches.size();
+		vector<Point2f> points1(point_count);
+		vector<Point2f> points2(point_count);
+
+		// initialize the points here ... */
+		for( int i = 0; i < point_count; i++ )
+		{
+		    points1[i] = keypointsLeft[matches[i].queryIdx].pt;
+		    points2[i] = keypointsRight[matches[i].trainIdx].pt;
+
+		 }
+
+		vector<uchar> outlier_mask;
+		if(point_count>10)
+		  Mat H =  findHomography(points1, points2, RANSAC, 3, outlier_mask);
+
+		Mat resultImage;
+		drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, matches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255), reinterpret_cast<const vector<char>&> (outlier_mask));
+		namedWindow("nomedellafinestra");
+		imshow("nomedellafinestra", resultImage);
+
+                cvWaitKey(30);
+
+
+		saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
+
+		namedWindow("Mleft");
+                namedWindow("Mright");
+
+                imshow("Mleft", saliencyutils->getLeftMap());
+                imshow("Mright", saliencyutils->getRightMap());
+
+                cvWaitKey();
+
+
 	}
 
     return true;
@@ -200,4 +233,3 @@ double WorldMapping::getPeriod() {
     /* module periodicity (seconds), called implicitly by myModule */
     return 0.1;
 }
-

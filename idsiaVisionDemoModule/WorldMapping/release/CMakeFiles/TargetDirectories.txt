@@ -1,1 +1,0 @@
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles/WorldMapping.dir

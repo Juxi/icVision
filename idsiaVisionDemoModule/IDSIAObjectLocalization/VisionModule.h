@@ -64,7 +64,7 @@ class VisionModule :public Module
     //Port moduleOutput;
     BufferedPort<yarp::os::Bottle> moduleOutput;
 
-    /* to estimate obj position in the world*/
+    /* To estimate obj position in the world*/
     iCub::iKin::iCubEye   *eye_left, *eye_right;
     iCub::iKin::iKinChain  chainEye_left, chainEye_right;
 
@@ -94,6 +94,7 @@ class VisionModule :public Module
     /*Object list*/
     int objId;
     vector<WorldObject> object_list;
+    int timeTh; //Time to wait before delete an object
 
   public:
     VisionModule();
