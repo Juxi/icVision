@@ -5,16 +5,14 @@
 #include "reaching.h"
 
 
-# define FIXED_OFFSET 0.20		// 20cm
-
-
-ReachingWorker::ReachingWorker(std::string robotName) : reachActive(false) {
+ReachingWorker::ReachingWorker(std::string robotName, std::string partName) : reachActive(false) {
 	initialized = false;
 	
 	yarp::os::Property option("(device cartesiancontrollerclient)");
-	std::string remoteLocation = "/" + robotName + "/cartesianController/right_arm";
+	std::string remoteLocation = "/" + robotName + "/cartesianController/" + partName;
+	std::string localLocation  = "/client/" + partName;
 	option.put("remote", remoteLocation.c_str());
-	option.put("local", "/client/right_arm");
+	option.put("local",  localLocation.c_str());
 	
 	if (!client.open(option)) {
 		std::cout << "not initialized!!" << std::endl;
@@ -52,33 +50,35 @@ void ReachingWorker::init() {
 	//limitTorsoPitch();
 	
 	// send the request for dofs reconfiguration
-	arm->setDOF(newDof,curDof);
+	arm->setDOF(newDof, curDof);
 	
 	xd.resize(3);
-	od.resize(4);
-	
 	
 	// set policy TODO
-	policy = ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT;
-	//policy = ReachingWorker::FROM_RIGHT;
+	setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
+	
+	// init hand orientation
+	// from Alex' and cartesian interface tutorial!
+	orientationFromAbove.resize(4);
+	orientationFromAbove[0] =  0.0; 
+	orientationFromAbove[1] =  0.0; 
+	orientationFromAbove[2] =  0.0; 
+	orientationFromAbove[3] = M_PI;
+
+	orientationFromSide.resize(4);
+	orientationFromSide[0] =  0.0; 
+	orientationFromSide[1] = -1.0; 
+	orientationFromSide[2] =  1.0; 
+	orientationFromSide[3] = M_PI;
 	
 	initialized = true;
 
 	std::cout << "ReachingWorker is initialized!!" << std::endl;
-
-	// more stuff todo?
-	/* init hand orientation
-	 yarp::sig::Vector x0, o0;
-	 arm->getPose(x0, o0);
-	 
-	 od[0]=0.0;
-	 od[1]=0.0;
-	 od[2]=0.0;
-	 od[3]=M_PI;
-	 
-	 // go to the target :)
-	 arm->goToPose(x0, od);		
-	 */	
+	
+	// yarp::sig::Vector x0, o0;
+	// arm->getPose(x0, o0);
+	// go to the target :)
+	// arm->goToPose(x0, od);
 }
 
 ReachingWorker::~ReachingWorker() {
@@ -92,6 +92,16 @@ ReachingWorker::~ReachingWorker() {
 	arm->restoreContext(startup_context_id);
 	
 	client.close();	
+}
+
+void ReachingWorker::setPolicy(int p) {
+	policy = p;
+	std::cout << "Reaching policy is now set as: " << policy << std::endl;
+}
+void ReachingWorker::setOffset(double o)
+{
+	defined_offset = o;
+	std::cout << "The offset is now set to: " << defined_offset << std::endl;
 }
 
 void ReachingWorker::setPosition(yarp::sig::Vector p)
@@ -184,24 +194,21 @@ bool ReachingWorker::goToPreReach() {
 	arm->getPose(x0, o0);
 	
 	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
-	
-	// we keep the orientation of the left arm constant:
-	// we want the middle finger to point forward (end-effector x-axis)
-	// with the palm turned down (end-effector y-axis points leftward);
-	// to achieve that it is enough to rotate the root frame of pi around z-axis
-	
-	od[0]=0.0;
-	od[1]=0.0;
-	od[2]=M_PI;
-	od[3]=0.0;
-	
+		
 	yarp::sig::Vector preReachPos = calculatePreReachPosition();
-	yarp::sig::Vector preReachOrient = od;	
+	yarp::sig::Vector preReachOrient;	// keep constant!
+	
+	if( policy & FROM_ABOVE || policy & FROM_BELOW) {
+		preReachOrient = orientationFromAbove;
+	}
+	if( policy & FROM_LEFT || policy & FROM_RIGHT) {
+		preReachOrient = orientationFromSide;
+	}
 	
 	std::cout << "Going to pre reach position:" << preReachPos[0] << ", "<< preReachPos[1] << ", "<< preReachPos[2] <<  std::endl;
 
 	bool done = false;
-	arm->goToPosition(preReachPos);
+	arm->goToPose(preReachPos, preReachOrient);
 	
 	while(! done ) {
 		arm->waitMotionDone(0.1, 1.0);
@@ -221,24 +228,24 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 		
 			preReachPos.push_back(xd[0]);
 			preReachPos.push_back(xd[1]);	
-			preReachPos.push_back(xd[2] + FIXED_OFFSET);
+			preReachPos.push_back(xd[2] + defined_offset);
 		
 	} else if( policy & ReachingWorker::FROM_BELOW ) {
 			
 			preReachPos.push_back(xd[0]);
 			preReachPos.push_back(xd[1]);	
-			preReachPos.push_back(xd[2] - FIXED_OFFSET);
+			preReachPos.push_back(xd[2] - defined_offset);
 			
 	} else if( policy & ReachingWorker::FROM_RIGHT ) {
 			
 			preReachPos.push_back(xd[0]);
-			preReachPos.push_back(xd[1] + FIXED_OFFSET);	
+			preReachPos.push_back(xd[1] + defined_offset);	
 			preReachPos.push_back(xd[2]);
 		
 	} else if( policy & ReachingWorker::FROM_LEFT ) {
 		
 		preReachPos.push_back(xd[0]);
-		preReachPos.push_back(xd[1] - FIXED_OFFSET);	
+		preReachPos.push_back(xd[1] - defined_offset);	
 		preReachPos.push_back(xd[2]);
 		
 	} else
@@ -250,30 +257,87 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 bool ReachingWorker::doReaching() {
 	yarp::sig::Vector x0, o0;
 	arm->getPose(x0, o0);
-	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
+//	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
 
-	yarp::sig::Vector intermediatePos(3);
-	if( policy & ReachingWorker::STRAIGHT ) {
-		for(int i=0;i < 3;i++) intermediatePos[i] = (xd[i] - x0[i]) * 0.5 + x0[i];
+	yarp::sig::Vector orientation;
+	if( policy & FROM_ABOVE || policy & FROM_BELOW) {
+		orientation = orientationFromAbove;
+		std::cout << "from above!!" << std::endl;
+	}
+	if( policy & FROM_LEFT || policy & FROM_RIGHT) {
+		orientation = orientationFromSide;
 	}
 	
+	// setup hand
+	callGraspController("pre");
+
 	bool done = false;
-	std::cout << "Going to intermediate:" << intermediatePos[0] << ", "<< intermediatePos[1] << ", "<< intermediatePos[2] <<  std::endl;	
-	arm->goToPosition(intermediatePos, 1.0);
-	arm->waitMotionDone(0.1, 0.5);
+
 	
+//	const int MAX_STEPS = 1;
+	double fact = 0.5; ///1.0 / MAX_STEPS;
+//	for(int steps = 2; steps < MAX_STEPS; steps++) {
+
+		yarp::sig::Vector intermediatePos(3);
+		if( policy & ReachingWorker::STRAIGHT ) {
+			for(int i=0;i < 3;i++) intermediatePos[i] = (xd[i] - x0[i]) * fact + x0[i];
+		}
+		
+		std::cout << "Going to intermediate:" << intermediatePos[0] << ", "<< intermediatePos[1] << ", "<< intermediatePos[2] <<  std::endl;	
+		
+		// move arm	
+		arm->goToPose(intermediatePos, orientation, fact);
+		arm->waitMotionDone(0.1, fact);
+//	}
+	
+	// setup hand, close now
+	callGraspController("cls");
+		
 	std::cout << "Going to reaching:" << xd[0] << ", "<< xd[1] << ", "<< xd[2] <<  std::endl;	
-	arm->goToPosition(xd);
+
+	// move arm
+	arm->goToPose(xd, orientation, 1.0);
+	arm->waitMotionDone(0.1, fact);
+
 	while(! done ) {
 		arm->waitMotionDone(0.1, 1.0);
 		// check tolerance ?! maybe
-		arm->checkMotionDone(&done);
 		// if( collision ) return false
+		arm->checkMotionDone(&done);		
 	}
 	
 	return true;
 }
 	
+
+void ReachingWorker::callGraspController(const std::string msg) {
+	yarp::os::Network yarp;
+	yarp::os::RpcClient port;
+
+	std::string inputPortName = "graspController";
+	std::string clientPortName = "graspClient";
+	if(! port.open( clientPortName.c_str() )){
+		std::cout << std::endl << "ERROR: Could not open port: " << clientPortName.c_str()  << std::endl << std::endl;
+		return;
+	}
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << std::endl << "ERROR: Could not connect to port: " << clientPortName.c_str() << std::endl << std::endl;		
+		return;
+	}
+	
+	
+	// sending command and receiving response
+	yarp::os::Bottle cmd, response;
+	
+	cmd.addString(msg.c_str());		// start closing of hand... cls, pre is for pregrasping ...
+	port.write(cmd, response);	
+		
+	if( response.toString() == "OK" ) {
+		std::cout << "ERROR: did not receive ok! Rcvd: " << response.toString() << std::endl;
+	}
+	
+}		
 
 
 void ReachingWorker::stopMotion( ) 

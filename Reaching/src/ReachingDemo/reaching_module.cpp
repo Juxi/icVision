@@ -12,6 +12,7 @@ ReachingModule::ReachingModule() : isStarted (false) {
 	//moduleName = "IM-CLeVeR::Vision::Reaching";
 	setName("Reaching");
 	reach = NULL;
+	userSetTargetName = "";
 }
 
 
@@ -32,20 +33,30 @@ bool ReachingModule::updateModule()
 {
 	if ( ! isStarted ) return true;
 	
-	// sending command and receiving response
-	yarp::os::Bottle cmd;
-	cmd.addString("ls");
-	yarp::os::Bottle response;
-	port.write(cmd, response);
+	std::string objName = userSetTargetName;
+	yarp::os::Bottle cmd, response;
 	
-	// does an object exist in the world
-	if( response.size() > 0) {
+	if ( userSetTargetName == "" ) {
+		// sending command and receiving response
+		cmd.addString("ls");
+		port.write(cmd, response);
+	
+		// does an object exist in the world
+		if( response.size() > 0) {
 		
-		cout << "checking for new target objects .. " << response.size() << " object(s) found";
+			cout << "checking for new target objects .. " << response.size() << " object(s) found";
 		
-		// last object (by definition, should be target)
-		// at least for now!!
-		std::string objName = response.get(response.size() - 1).asString().c_str();
+			// last object (by definition, should be target)
+			// at least for now!!
+			objName = response.get(response.size() - 1).asString().c_str();
+		} else {
+			// no object(s) found, stop active reaches ...
+			objName = "";
+		}
+			
+	} 
+	
+	if (objName != "") {
 		
 		// query if object is target !!!
 		// TODO
@@ -58,9 +69,7 @@ bool ReachingModule::updateModule()
 		} else {
 			cout << " new target found " << endl;
 			reach->stopMotion();
-		}
-		lastTgtObjName = objName;
-	
+		}	
 
 		// get information about the new object from rpc
 		cmd.clear();
@@ -69,7 +78,10 @@ bool ReachingModule::updateModule()
 		port.write(cmd, response);
 		
 		cout << objName << ": " << response.toString().c_str() << "" << endl;
-				
+		
+		if( response.toString() == "Object not found." )
+			return true;
+		
 		double x = response.get(13).asDouble();
 		double y = response.get(14).asDouble();	
 		double z = response.get(15).asDouble();
@@ -83,13 +95,14 @@ bool ReachingModule::updateModule()
 		if( isStarted ) reach->reachPosition();
 		
 	} else {
-		// no object(s) found, stop active reaches ...
-		lastTgtObjName = "";
+		// no object given stop active reaches...
 		stop();
-		
 	}
 
-   return true;
+	lastTgtObjName = objName;
+
+
+	return true;
 }
 
 
@@ -103,8 +116,9 @@ bool ReachingModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& 
 		close();
 		return false;
 	}
-	
+
 	reply.clear();
+	reply.addString("The command is not valid! Try: start|stop|set");	
 
 	if( command.get(0).asString() == "stop" || command.get(0).asString() == "wait" ){
 		
@@ -112,22 +126,102 @@ bool ReachingModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& 
 			isStarted = false;
 			lastTgtObjName = "";
 			stop();
+
+			reply.clear();
 			reply.addString("OK");
 		}
-		else
+		else {
+			reply.clear();
 			reply.addString("ReachingWorker not ready yet!");
+		}
 		
-	} else if( command.get(0).asString() == "start" || command.get(0).asString() == "launch" ){
+	}
+	
+	if( command.get(0).asString() == "start" || command.get(0).asString() == "launch" ){
 
 		if(reach) {
 			isStarted = true;
+			reply.clear();
 			reply.addString("OK");
 		}
-		else
+		else {
+			reply.clear();			
 			reply.addString("ReachingWorker not ready yet!");
+		}
 
-	} else
-		reply.addString("The command is not valid");
+	}
+	
+	if( command.get(0).asString() == "set"){
+		
+		if( command.get(1).asString() == "tgt" || command.get(1).asString() == "target" ) {
+			userSetTargetName = command.get(2).asString();
+			reply.clear();	
+			if( userSetTargetName == "" ) {
+				reply.addString("using latest object in the world as target!");
+			} else {
+				reply.addString(userSetTargetName.c_str());					
+				reply.addString(" is now the target!");	
+			}
+
+
+		} else 
+			
+		if( command.get(1).asString() == "offset" ) {
+			if(reach) {
+				if( command.get(2).isDouble() ) {
+					reach->setOffset( command.get(2).asDouble() );
+					reply.clear();
+					reply.addString("OK");			
+				} else {
+					reply.clear();
+					reply.addString("ERROR: Could not parse double! the syntax should be: set offset <double>");	
+				}
+			} else {
+				reply.clear();
+				reply.addString("ReachingWorker not ready yet!");	
+			}
+		} else 
+		
+		if( command.get(1).asString() == "policy" ) {
+			if(reach) {
+				
+				if( command.get(2).asString() == "above" ) {
+					reach->setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
+					reply.clear();
+					reply.addString("OK");
+					
+				} else if( command.get(2).asString() == "below" ) {
+					reach->setPolicy( ReachingWorker::FROM_BELOW | ReachingWorker::STRAIGHT );
+					reply.clear();
+					reply.addString("OK");	
+					
+				} else if( command.get(2).asString() == "left" ) {
+					reach->setPolicy( ReachingWorker::FROM_LEFT  | ReachingWorker::STRAIGHT );
+					reply.clear();
+					reply.addString("OK");	
+					
+				} else if( command.get(2).asString() == "right" ) {
+					reach->setPolicy( ReachingWorker::FROM_RIGHT | ReachingWorker::STRAIGHT );
+					reply.clear();
+					reply.addString("OK");	
+					
+				} else {
+					reply.clear();
+					reply.addString("ERROR: Could not parse policy! the syntax should be: set policy <above|below|left|right>");	
+				}
+			} else {
+				reply.clear();
+				reply.addString("ReachingWorker not ready yet!");	
+			}
+		} else {
+			
+			// not a correct command?!
+			reply.clear();
+			reply.addString("Could not parse command try set [tgt|policy|offset]!");	
+		}
+
+		
+	} 
 
 	return true;
 }
@@ -154,11 +248,17 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 {
 	/* Process all parameters from both command-line and .ini file */
 	robotName = (config.find("robot")).toString();
-	if ( robotName.empty() ) {
+	if( robotName.empty() ) {
 		robotName = "icubSimF";
 		std::cout << "WARNING! No robot name found using " << robotName << std::endl;
 	}
-
+	
+	partName = (config.find("part")).toString();
+	if( partName.empty() ) {
+		partName = "right_arm";
+		std::cout << "WARNING! No part specified, using " << partName << std::endl;
+	}
+	
 	/*
 	 * attach a port of the same name as the module (prefixed with a /) to the module
 	 * so that messages received from the port are redirected to the respond method
@@ -198,7 +298,18 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 	}
 	
 	// instantiate the worker
-	reach = new ReachingWorker(robotName);
+	reach = new ReachingWorker(robotName, partName);
+	
+	// parse more of the command line arguments here:
+	//  offset variable (how far away from the object do we place the hand)
+	double offset = 0.2;	// std value
+	if( config.check("offset") ) {
+		offset = config.find("offset").asDouble();
+	} else {
+		std::cout << "WARNING! No offset specified, using " << offset << std::endl;		
+	}
+	reach->setOffset(offset);
+	
 
 	return true ;      // let the RFModule know everything went well
 }

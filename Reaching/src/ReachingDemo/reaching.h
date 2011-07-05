@@ -19,7 +19,7 @@
 
 class ReachingWorker {
 public:
-	ReachingWorker(std::string robotName);
+	ReachingWorker(std::string robotName, std::string partName);
 	~ReachingWorker();
 	
 	void setPosition(double, double, double);
@@ -27,6 +27,10 @@ public:
 	yarp::sig::Vector getPosition();			// the position set to be reached
 	
 	yarp::sig::Vector getCurrentPosition();		// the position from the ikin
+	
+	
+	void setPolicy(int p);
+	void setOffset(double o);
 
 	void reachPosition();
 	bool waitForMotionDone(double period, double timeout);
@@ -48,6 +52,8 @@ public:
 protected:
 	bool initialized;
 	bool reachActive;
+	
+	double defined_offset;
 
 	int policy;
 	
@@ -55,7 +61,7 @@ protected:
 	yarp::dev::ICartesianControl *arm;
 	
 	yarp::sig::Vector xd;
-	yarp::sig::Vector od;
+	yarp::sig::Vector orientationFromAbove, orientationFromSide; // orientation vectors;
 	
     int startup_context_id;
 	
@@ -67,6 +73,8 @@ protected:
 	yarp::sig::Vector calculatePreReachPosition();		
 	bool goToPreReach();
 	bool doReaching();	
+
+	void callGraspController(const std::string msg);
 	
 };
 
