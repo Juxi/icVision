@@ -20,7 +20,7 @@ CameraiCub::CameraiCub(std::string moduleName, std::string flag) {
 
 		cout<<"Opening ports for camera " << flag << endl;
 
-		// /worldmapping/cam/left/image:i
+		// /WorldMappingModule/cam/left/image:i
 		inputPortName = "/"+moduleName+"/cam/"+flag+"/image:i";
 		outputPortName = "/"+moduleName+"/cam/"+flag+"/image:o";
 		outputHarrisPortName = "/"+moduleName+"/cam/"+flag+"/harris:o";
@@ -45,6 +45,9 @@ CameraiCub::CameraiCub(std::string moduleName, std::string flag) {
 
 		//For feature detector
 		detector = FeatureDetector::create("HARRIS");
+
+		//For feature descriptor
+		descriptor = DescriptorExtractor::create("BRIEF");
 
 		//Set up Gabor Descriptor
 		gaborDescriptor.setParam();
@@ -105,9 +108,11 @@ bool CameraiCub::getImageOnOutputPort(){
 			 cvCvtColor(iplimagein, iplimageinGrayLevel, CV_BGR2GRAY);
 
 			//Broadcast the output image
-			imageout = outputPort.prepare();
 			iplimageout = iplimagein;
+			imageout.wrapIplImage(iplimageout);
+			outputPort.prepare()=imageout;
 			outputPort.write();
+
 
 			return true;
 	     }
@@ -119,6 +124,35 @@ bool CameraiCub::getImageOnOutputPort(){
 }
 
 bool CameraiCub::getFeaturesOnOutputPort(FeatureType type){
+
+	GoodFeaturesToTrackDetector::Params params;
+
+	switch (type) {
+		case HARRIS:
+			params.useHarrisDetector = true;
+			params.maxCorners = 1000;
+			params.qualityLevel = 0.01;
+			params.minDistance = 3;
+			detector = new GoodFeaturesToTrackDetector(params);
+			break;
+		case GFTT:
+			params.useHarrisDetector = false;
+			params.maxCorners = 1000;
+			params.qualityLevel = 0.01;
+			params.minDistance = 3;
+			params.blockSize = 3;
+			detector = new GoodFeaturesToTrackDetector(params);
+			break;
+		case FAST10:
+			detector = new FastFeatureDetector(10);
+			break;
+		case DeSURF:
+			detector = new  SurfFeatureDetector( 1000, 3, 4 );
+			break;
+		default:
+			break;
+	}
+
 
 	Mat outImage = Mat(iplimagein,false);
 	cvtColor(outImage, imageMat, CV_BGR2GRAY);
@@ -149,27 +183,40 @@ bool CameraiCub::getFeaturesOnOutputPort(FeatureType type){
 	return false;
 }
 
-bool CameraiCub::getGaborDescriptorOnOutputPort(){
+bool CameraiCub::getGaborDescriptorsOnOutputPort(){
 
 	if(!keypoints.empty() && iplimageinGrayLevel){
 		gaborDescriptor.detect(keypoints, iplimageinGrayLevel, gaborDescMatrix);
 		return true;
 	}
 
+	//TODO put gabor on ports
 	return false;
 
 }
 
-bool CameraiCub::loadCalibration(){
-  //TODO
-}
+bool CameraiCub::getDescriptorsOnOutputPort(DescriptorType type){
 
-bool CameraiCub::saveCalibration(){
-  //TODO
-}
+	switch (type) {
+		case DSURF:
+			descriptor = DescriptorExtractor::create("SURF");
+			break;
+		case DBRIEF:
+			descriptor = new BriefDescriptorExtractor(64);
+			break;
+			break;
+		case GABOR:
+    		gaborDescriptor.detect(keypoints, iplimageinGrayLevel, gaborDescMatrix);
+			return true;
+			break;
+		default:
+			break;
+	}
 
-Mat& CameraiCub::undistortImage(Mat& image2undist){
-  //TODO
+	descriptor->compute(iplimageinGrayLevel,keypoints, descMatrix);
+
+	return false;
+
 }
 
 

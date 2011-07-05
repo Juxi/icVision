@@ -21,6 +21,7 @@ private:
 	// module parameters
 	string moduleName;
 	string robotName;
+	string partName;	
 	string handlerPortName;
 
 	/*port name strings*/
@@ -36,6 +37,7 @@ private:
 	// 
 	string	lastTgtObjName;
 	bool	isStarted;	
+	string	userSetTargetName;
 	
 	// internal methods
 	void stop();				// stop the reaching worker

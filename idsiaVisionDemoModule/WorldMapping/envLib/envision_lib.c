@@ -190,7 +190,7 @@ void envision_init(int w, int h) //just do both the eyes!
   float val=gaussian_val((float)gauss_filter_radius, GAUSS_LPF_SD, 0, 1); //sd, mean, scale
   while(val >= GAUSS_LPF_CUTOFF)
     {
-      printf("%0.3f ", val);
+     // printf("%0.3f ", val);
       ++gauss_filter_radius;
       val= gaussian_val((float)gauss_filter_radius, GAUSS_LPF_SD, 0, 1); //sd, mean, scale
       
@@ -217,11 +217,11 @@ void envision_init(int w, int h) //just do both the eyes!
 	    gauss_filter[x][z] = 0;
 	  
 	  //gauss_filter[x][z] = sqrt(xdist*xdist + zdist*zdist);
-	  printf("%4.3f ", gauss_filter[x][z]);
+	  //printf("%4.3f ", gauss_filter[x][z]);
 	}
-      printf("\n");
+      //printf("\n");
     }
-  printf("\n");
+//  printf("\n");
   
   printf("FINISHED INITIALIZING GAUSSIAN FILTERS\n");
   
@@ -264,9 +264,9 @@ void envision_init(int w, int h) //just do both the eyes!
 	  float dist = sqrt((((float)x-RF_w_c)*((float)x-RF_w_c))+(((float)y-RF_h_c)*((float)y-RF_h_c)));
 	  float w = -RF_w_baseline + -gaussian_val(dist, RF_gauss_SD, 0.0, RF_amplitude);
 	  RF_SC_inhib[x][y] = w;
-	  printf("%2.2f ", w);
+	  //printf("%2.2f ", w);
 	}
-      printf("\n");
+      //printf("\n");
     }
   printf("FINISHED INITIALIZING RF->SC weights\n\n");
  
@@ -492,15 +492,15 @@ void envision_nextframe(const IplImage* ipl_input,  //ipl image as input
 //=================== SC_FIND_WINNERS_SUBSET ==================//
 int SC_subset_winner(int* l_subset, int l_subset_l, int* r_subset, int r_subset_l) //assume l NUMBER OF POINTS (not size of array)
 {
-    
+
   SC_l_maxval = -1;
   SC_r_maxval = -1;
-  
+
   //naive fashion: just find the max of the subsets given to us.
-  
+
   int lwin=-1;
   int rwin=-1;
-  
+
   //LEFT SIDE
   for(int x=0; x<l_subset_l; x+=2)
     {
@@ -529,7 +529,7 @@ int SC_subset_winner(int* l_subset, int l_subset_l, int* r_subset, int r_subset_
 	  SC_r_maxy = yloc;
 	}
     }
- 
+
   if(SC_l_maxval > SC_r_maxval && SC_l_maxval > -1)
     {
       return lwin;
@@ -633,7 +633,7 @@ int* SC_naive_competition(IplImage* ipl_outputL, IplImage* ipl_outputR)
       printf("\n");
     }
   printf("\n\n");
-    }   
+    }
   //either way, draw the shizzle! //first, just draw the two!
   //just draw at original size! (do L first, then R)
   //problem is that the LIF neurons have no "cap" for their Vm, since they could explode from lots of input

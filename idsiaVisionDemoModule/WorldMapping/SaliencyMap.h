@@ -9,14 +9,25 @@
 #ifndef SALIENCYMAP_H_
 #define SALIENCYMAP_H_
 
+//YARP
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
+#include <yarp/dev/all.h>
+
 #include <opencv2/opencv.hpp>
 #include "envLib/envision_lib.h"
 
 class SaliencyMap
 {
   private:
-    bool move;
+
     cv::Mat outputLeft, outputRight;
+
+    //Send Winner Points
+    std::string namePointLeftOutPort;
+    yarp::os::BufferedPort<yarp::os::Bottle > PointLeftOutPort;
+    std::string namePointRightOutPort;
+    yarp::os::BufferedPort<yarp::os::Bottle > PointRightOutPort;
 
   public:
     SaliencyMap();
@@ -24,9 +35,15 @@ class SaliencyMap
     ~SaliencyMap();
 
   int detectSaliencyPoint(cv::Mat &imLeft, cv::Mat &imRight, std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches);
+	bool interrupt();
+	bool close();
 
   cv::Mat &getLeftMap(){return outputLeft;}
   cv::Mat &getRightMap(){return outputRight;}
+
+  std::string getPortName(int flag){ if(!flag) return namePointLeftOutPort; else return namePointRightOutPort;}
+
+  bool move;
 
 };
 
