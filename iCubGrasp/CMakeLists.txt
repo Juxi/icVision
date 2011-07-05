@@ -16,9 +16,11 @@ INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 
 SET ( src_files	main.cpp
 		handController.cpp
+		touchthread.cpp
 )
 
 SET ( hdr_files	handController.h
+		touchthread.h
 )
 
 SET ( QT_MOC_FILES 	

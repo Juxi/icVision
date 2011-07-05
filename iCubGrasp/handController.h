@@ -15,6 +15,8 @@
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 
+#include "touchthread.h"
+
 class HandController : private QThread
 {
 	
@@ -33,7 +35,7 @@ public:
 	/* need a function to make the trajectory from a config file */
 	
 private:
-	
+	TouchSenseThread* ts;
 	qreal errorTolerance;
 	qreal attenuationFactor;
 
@@ -80,6 +82,7 @@ private:
 	bool thumbTouch;
 	bool indexTouch;
 	bool middleTouch;
+	bool ringTouch;
 	bool littleTouch;
 	
 	void blockingPositionMove( ControlPoint* );

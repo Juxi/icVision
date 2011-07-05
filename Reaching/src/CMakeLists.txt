@@ -13,3 +13,6 @@ INCLUDE_DIRECTORIES (${ICUB_INCLUDE_DIRS})
 ### Parse the directories where build targets are ###
 ADD_SUBDIRECTORY ( ReachingDemo )
 
+ADD_SUBDIRECTORY ( FollowSphere )
+ADD_SUBDIRECTORY ( GetObjects )
+
