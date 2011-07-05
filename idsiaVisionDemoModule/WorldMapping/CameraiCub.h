@@ -22,7 +22,8 @@
 
 #include "GaborDescriptor.h"
 
-typedef enum{HARRIS, GFFT} FeatureType;
+typedef enum{HARRIS, GFTT, FAST10, DeSURF} FeatureType;
+typedef enum{DSURF, DBRIEF, GABOR} DescriptorType;
 
 class CameraiCub {
 private:
@@ -40,15 +41,18 @@ private:
 	yarp::sig::ImageOf<yarp::sig::PixelBgr> imageout;
 	IplImage *iplimagein, *iplimageout;
 	IplImage *iplimageinGrayLevel;
-	Mat imageMat;
+	cv::Mat imageMat;
 
 	//For feature detector
 	cv::Ptr<cv::FeatureDetector> detector;
     std::vector<cv::KeyPoint> keypoints;
 
+    cv::Ptr<cv::DescriptorExtractor> descriptor;
+    cv::Mat descMatrix;
+
     //Gabor Descriptor
     GaborDescriptor gaborDescriptor;
-    Mat gaborDescMatrix;
+    cv::Mat gaborDescMatrix;
 
 
 public:
@@ -62,15 +66,16 @@ public:
 
 	bool getImageOnOutputPort();
 	bool getFeaturesOnOutputPort(FeatureType type = HARRIS);
-	bool getGaborDescriptorOnOutputPort();
+	bool getGaborDescriptorsOnOutputPort();
+	bool getDescriptorsOnOutputPort(DescriptorType type = DBRIEF);
 
 	std::vector<cv::KeyPoint>& getKeypoints(){return keypoints;}
 	Mat& getGaborDescriptors(){return gaborDescMatrix;}
+	Mat& getDescriptors(){return descMatrix;}
+
 	Mat& getImage(){ imageMat = Mat(iplimagein,false); return imageMat;}
 
-	bool loadCalibration();
-        bool saveCalibration();
-        Mat& undistortImage(Mat& image2undist);
+
 };
 
 #endif /* CAMERAICUB_H_ */

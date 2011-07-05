@@ -71,6 +71,7 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
                            Value("icub"),
                            "Robot name (string)").asString();
 
+    cyclecounter = 0;
 
     //Set-up camera ports, input and output
     cameraLeft = new CameraiCub(moduleName, "left");
@@ -81,6 +82,9 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
 
     //Set-up saliency map
     saliencyutils = new SaliencyMap();
+
+    //Set-up moving head
+    movinghead = new MovingHead();
 
     /* do all initialization here */
     /*
@@ -100,6 +104,8 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
     //Connect Port
     cameraLeft->connect("/icub/cam/left");
     cameraRight->connect("/icub/cam/right");
+    movinghead->connect(saliencyutils->getPortName(0),saliencyutils->getPortName(1));
+
 
 //    /* create the thread and pass pointers to the module parameters */
 //    dThread = new demoThread(&thresholdValue);
@@ -121,6 +127,7 @@ bool WorldMapping::close() {
 
     cameraLeft->close();
     cameraRight->close();
+    movinghead->close();
     /* stop the thread */
    // dThread->stop();
 
@@ -157,37 +164,35 @@ bool WorldMapping::respond(const Bottle& command, Bottle& reply) {
 /* Called periodically every getPeriod() seconds */
 bool WorldMapping::updateModule() {
 
+	cyclecounter++;
+
 	isImageLeft = cameraLeft->getImageOnOutputPort();
 	isImageRight = cameraRight->getImageOnOutputPort();
 
 	if(isImageLeft && isImageRight){
 		//do something
-		cameraLeft->getFeaturesOnOutputPort(HARRIS);
-		cameraLeft->getGaborDescriptorOnOutputPort();
+		cameraLeft->getFeaturesOnOutputPort(GFTT);
+		//cameraLeft->getGaborDescriptorsOnOutputPort();
+		cameraLeft->getDescriptorsOnOutputPort(DBRIEF);
 
 		//TODO CHANGE IN CameraiCub.cpp "HARRIS" linea 48
-		cameraRight->getFeaturesOnOutputPort(HARRIS);
-		cameraRight->getGaborDescriptorOnOutputPort();
+		cameraRight->getFeaturesOnOutputPort(GFTT);
+		//cameraRight->getGaborDescriptorsOnOutputPort();
+		cameraRight->getDescriptorsOnOutputPort(DBRIEF);
 
 		vector<KeyPoint> keypointsLeft = cameraLeft->getKeypoints();
-                vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
+        vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
 
-		Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
-		Mat gaborDescrRight = cameraRight->getGaborDescriptors();
-
-		//TODO just for testing
-//		Mat outImageLeft, outImageRight;
-//		namedWindow("Test della minchia left");
-//		namedWindow("Test della minchia right");
-//		cv::drawKeypoints(cameraLeft->getImage(), keypointsLeft, outImageLeft, CV_RGB(255,0,0));
-//		cv::drawKeypoints(cameraRight->getImage(), keypointsRight, outImageRight, CV_RGB(255,0,0));
-//		imshow("Test della minchia left", outImageLeft);
-//		imshow("Test della minchia right", outImageRight);
-//		cvWaitKey(30);
+		//Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
+		//Mat gaborDescrRight = cameraRight->getGaborDescriptors();
+        Mat descrLeft = cameraLeft->getDescriptors();
+        Mat descrRight = cameraRight->getDescriptors();
 
 		vector<DMatch> matches;
 
-		stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
+//		stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
+
+		stereoutils->matching(descrLeft, descrRight, matches, DBRIEF);
 
 		int point_count = matches.size();
 		vector<Point2f> points1(point_count);
@@ -210,19 +215,34 @@ bool WorldMapping::updateModule() {
 		namedWindow("nomedellafinestra");
 		imshow("nomedellafinestra", resultImage);
 
-                cvWaitKey(30);
-
-
 		saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
 
 		namedWindow("Mleft");
-                namedWindow("Mright");
+        imshow("Mleft", saliencyutils->getLeftMap());
 
-                imshow("Mleft", saliencyutils->getLeftMap());
-                imshow("Mright", saliencyutils->getRightMap());
+        namedWindow("Mright");
+        imshow("Mright", saliencyutils->getRightMap());
 
-                cvWaitKey();
+        if(saliencyutils->move == true)
+        	movinghead->get2DPoints();
 
+        Mat outImageLeft;
+        cameraLeft->getImage().copyTo(outImageLeft);
+        Mat outImageRight;
+        cameraRight->getImage().copyTo(outImageRight);
+
+        stereoutils->estimateRTfromImages(cameraLeft->getImage(), cameraRight->getImage(), outImageLeft, outImageRight);
+
+        namedWindow("leftcamera");
+        imshow("leftcamera", outImageLeft);
+
+        namedWindow("rightcamera");
+        imshow("rightcamera", outImageRight);
+
+        saveImage(cameraLeft->getImage(), "/home/icub/Desktop/CameraCalibration640/left/", cyclecounter);
+        saveImage(cameraRight->getImage(), "/home/icub/Desktop/CameraCalibration640/right/", cyclecounter);
+
+        cvWaitKey(33);
 
 	}
 
@@ -232,4 +252,24 @@ bool WorldMapping::updateModule() {
 double WorldMapping::getPeriod() {
     /* module periodicity (seconds), called implicitly by myModule */
     return 0.1;
+}
+
+bool WorldMapping::saveImage(Mat& image2save, string directory, int framecounter){
+	  cout<<"Start saving image "<<endl;
+
+	  stringstream filename;
+	  if(framecounter<10)
+		  filename<<directory<<"im_000"<<framecounter<<".ppm";
+	  else if(framecounter<100)
+		  filename<<directory<<"im_00"<<framecounter<<".ppm";
+	  else if(framecounter<1000)
+		  filename<<directory<<"im_0"<<framecounter<<".ppm";
+	  else
+		  filename<<directory<<"im_"<<framecounter<<".ppm";
+
+	  cout<<"Saving image "<<filename.str()<<endl;
+
+	  vector<int> params;
+	  params.push_back(CV_IMWRITE_PXM_BINARY);
+	  return imwrite(filename.str(), image2save,params);
 }

@@ -172,6 +172,7 @@
 #include "CameraiCub.h"
 #include "StereoGeometry.h"
 #include "SaliencyMap.h"
+#include "MovingHead.h"
 
 class WorldMapping: public yarp::os::RFModule {
 
@@ -179,9 +180,12 @@ class WorldMapping: public yarp::os::RFModule {
     std::string robotName;
     std::string handlerPortName;
 
+    int cyclecounter;
+
     CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
     StereoGeometry *stereoutils;
     SaliencyMap *saliencyutils;
+    MovingHead	*movinghead;
     yarp::os::Port handlerPort;      //a port to handle messages
 
     bool isImageLeft, isImageRight;
@@ -199,6 +203,7 @@ public:
 	bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
 	double getPeriod();
 	bool updateModule();
+	bool saveImage(cv::Mat& image2save, std::string directory, int framecounter);
 
 };
 
