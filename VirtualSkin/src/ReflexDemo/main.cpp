@@ -19,12 +19,15 @@ int main(int argc, char *argv[])
 		config.fromCommand(argc,argv);
 		
 		// path to the XML file that defines the robot model
-		QString xmlFile = "";
-		if ( !config.check("file") ) {
+		QString robotFile = "";
+		if ( !config.check("robot") ) {
 			printf("Please specify a robot model using '--file yourFileName.xml'\n");
 			return 1;
 		}
-		else xmlFile = config.find("file").asString();
+		else robotFile = config.find("robot").asString();
+	
+		// optional... path to the xml file that contains the world
+		QString worldFile = config.find("world").asString().c_str();
 		
 		// whether or not to run the visualization
 		bool visualize = false;
@@ -39,7 +42,7 @@ int main(int argc, char *argv[])
 		else
 		{
 			printf("  ...without visualization\n");
-			printf("  ...using robot model file: %s\n", xmlFile.toStdString().c_str());
+			printf("  ...using robot model file: %s\n", robotFile.toStdString().c_str());
 		}
 	/***********************************************************************/
 	
@@ -55,7 +58,7 @@ int main(int argc, char *argv[])
 	{ 
 		filter.open< VirtualSkin::StateObserver,
 					 VirtualSkin::CallObserver,
-					 VirtualSkin::ResponseObserver >( xmlFile ); 
+					 VirtualSkin::ResponseObserver >( robotFile, worldFile ); 
 		
 		// open a port to report collision events
 		filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");

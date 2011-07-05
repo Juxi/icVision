@@ -1,6 +1,7 @@
 #include "world.h"
 #include <QMatrix4x4>
 #include "model.h"
+#include "worldhandler.h"
 
 using namespace RobotModel;
 
@@ -25,6 +26,35 @@ World::~World()
 		}
 		emit outdatedDisplayList( (*i)->displayListIdx() );
 		delete(*i);
+	}
+}
+
+void World::load( const QString& fileName )
+{
+	if ( fileName != "" )
+	{
+		WorldHandler handler(this);
+		QXmlSimpleReader reader;
+		reader.setContentHandler(&handler);
+		reader.setErrorHandler(&handler);
+		QFile file(fileName);
+		
+		if ( !file.open(QFile::ReadOnly | QFile::Text) )
+		{
+			QString errStr = "failed to open file '";
+			errStr.append(fileName);
+			errStr.append("'");
+			throw RobotModelException(errStr);
+		}
+		
+		QXmlInputSource xmlInputSource( &file );
+		if ( !reader.parse( xmlInputSource ) )
+		{
+			QString errStr = "failed to initialize world from file ";
+			errStr.append(fileName);
+			errStr.append("'");
+			throw RobotModelException(errStr);
+		}
 	}
 }
 CompositeObject* World::newSphere( double r, const QVector3D& pos )
