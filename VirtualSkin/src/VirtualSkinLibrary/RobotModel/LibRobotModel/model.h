@@ -114,7 +114,7 @@ public slots:
 	void newObstacle( PrimitiveObject* );
 	void changeResponseClass( PrimitiveObject*, DT_ResponseClass );
 	
-	void removeObject( PrimitiveObject* );
+	void removeObject( DT_ObjectHandle obj, DT_ShapeHandle shape );
 	
 signals:
 	

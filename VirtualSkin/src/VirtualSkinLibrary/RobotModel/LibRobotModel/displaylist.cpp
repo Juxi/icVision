@@ -7,13 +7,13 @@ using namespace RobotModel;
 //uint DisplayList::MAX_NUM_DISPLAYLISTS = 1;
 
 GLfloat DisplayList::gray[4] = { 0.3, 0.3, 0.3, 1.0 };
-GLfloat DisplayList::transpGray[4] = { 0.9, 0.9, 0.9, 0.7 };
+GLfloat DisplayList::transpGray[4] = { 0.9, 0.9, 0.9, 0.5 };
 GLfloat DisplayList::red[4] =  { 0.3, 0.0, 0.0, 1.0 };
-GLfloat DisplayList::transpRed[4] =  { 0.7, 0.0, 0.0, 0.7 };
+GLfloat DisplayList::transpRed[4] =  { 0.7, 0.0, 0.0, 0.5 };
 GLfloat DisplayList::green[4] =  { 0.0, 0.3, 0.0, 1.0 };
-GLfloat DisplayList::transpGreen[4] =  { 0.0, 0.7, 0.0, 0.7 };
+GLfloat DisplayList::transpGreen[4] =  { 0.0, 0.7, 0.0, 0.5 };
 GLfloat DisplayList::blue[4] =  { 0.0, 0.0, 0.3, 1.0 };
-GLfloat DisplayList::transpBlue[4] =  { 0.0, 0.0, 0.7, 0.7 };
+GLfloat DisplayList::transpBlue[4] =  { 0.0, 0.0, 0.7, 0.5 };
 
 DisplayList::DisplayList() : index(0)
 {

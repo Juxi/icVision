@@ -61,11 +61,11 @@ void ReflexFilter::responseComplete()
 	{
 		if ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT)
 		{
-			printf("Pose: %d\n",n);
+			//printf("Pose: %d\n",n);
 			period = 0.0;
 			for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 			{
-				printf("  Body Part - %d:", bodyPart);
+				//printf("  Body Part - %d:", bodyPart);
 				rewind.clear();
 				rewind.addVocab(VOCAB_SET);
 				rewind.addVocab(VOCAB_POSITION_MOVES);
@@ -73,11 +73,11 @@ void ReflexFilter::responseComplete()
 				for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
 				{
 					bodyPartPose.addDouble(*joint);
-					printf(" %f", *joint);
+					//printf(" %f", *joint);
 				}
 				cbFilters.at(bodyPart)->injectCall(rewind);
 				period += stateObservers.at(bodyPart)->getPeriod();
-				printf("\n");
+				//printf("\n");
 			}
 			//printf("  waiting %f/%d msec\n", period, model.robot->numBodyParts());
 			period /= static_cast<qreal>(model.robot->numBodyParts());

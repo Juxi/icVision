@@ -1,7 +1,7 @@
 #include "worldhandler.h"
 #include "world.h"
 #include "compositeObject.h"
-#include "PrimitiveObject.h"
+#include "primitiveobject.h"
 #include "cylinder.h"
 #include "sphere.h"
 #include "box.h"

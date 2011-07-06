@@ -5,6 +5,8 @@ using namespace RobotModel;
 Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), keepRunning(true), col_count(0), reflexTriggered(false)
 {
 	qRegisterMetaType< DT_ResponseClass >("DT_ResponseClass");
+	qRegisterMetaType< DT_ResponseClass >("DT_ObjectHandle");
+	qRegisterMetaType< DT_ResponseClass >("DT_ShapeHandle");
 	
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
@@ -42,7 +44,7 @@ Model::Model( bool visualize ) : robot(NULL), world(NULL), skinWindow(NULL), kee
 	world = new World(this);
 	QObject::connect( world, SIGNAL(worldAppendedPrimitive(PrimitiveObject*)), this, SLOT(newObstacle(PrimitiveObject*)) );
 	QObject::connect( world, SIGNAL(requestNewResponseClass(PrimitiveObject*,DT_ResponseClass)), this, SLOT(changeResponseClass(PrimitiveObject*,DT_ResponseClass)) );
-	QObject::connect( world, SIGNAL(requestRemoveSolidObject(PrimitiveObject*)), this, SLOT(removeObject(PrimitiveObject*)) );
+	QObject::connect( world, SIGNAL(requestRemoveSolidObject(DT_ObjectHandle,DT_ShapeHandle)), this, SLOT(removeObject(DT_ObjectHandle,DT_ShapeHandle)) );
 	
 	// set up the window for OpenGL
 	if ( visualize )
@@ -130,12 +132,12 @@ void Model::removeRobotTablePair( DT_ResponseClass objType1, DT_ResponseClass ob
 	DT_RemovePairResponse( robotTable, objType1, objType2, reflexTrigger);
 }
 
-void Model::removeObject( PrimitiveObject* primitive)
+void Model::removeObject( DT_ObjectHandle obj, DT_ShapeHandle shape )
 {
 	QMutexLocker locker(&mutex);
-	DT_RemoveObject( scene, primitive->getObject() );
-	DT_DestroyObject( primitive->getObject() );
-	DT_DeleteShape( primitive->getShape() );
+	DT_RemoveObject( scene, obj );
+	DT_DestroyObject( obj );
+	DT_DeleteShape( shape );
 }
 
 int Model::computePose()
