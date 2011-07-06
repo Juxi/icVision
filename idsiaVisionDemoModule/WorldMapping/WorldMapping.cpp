@@ -217,7 +217,7 @@ bool WorldMapping::updateModule() {
       namedWindow("nomedellafinestra");
       imshow("nomedellafinestra", resultImage);
 
-      saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
+      int selectedfeature = saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
 
       namedWindow("Mleft");
       imshow("Mleft", saliencyutils->getLeftMap());
@@ -233,7 +233,7 @@ bool WorldMapping::updateModule() {
       Mat outImageRight;
       cameraRight->getImage().copyTo(outImageRight);
 
-      //stereoutils->estimateRTfromImages(cameraLeft->getImage(), cameraRight->getImage(), outImageLeft, outImageRight);
+      stereoutils->estimateRTfromImages(cameraLeft->getImage(), cameraRight->getImage(), outImageLeft, outImageRight);
 
       namedWindow("leftcamera");
       imshow("leftcamera", outImageLeft);
@@ -241,7 +241,22 @@ bool WorldMapping::updateModule() {
       namedWindow("rightcamera");
       imshow("rightcamera", outImageRight);
 
-      cvWaitKey(33);
+      vector<int> selectedIndexes;
+      vector<Point3f> selectedPoints3d;
+      stereoutils->segmentOnDepth(keypointsLeft, keypointsRight, matches, selectedfeature, selectedIndexes, selectedPoints3d);
+
+      vector<KeyPoint> selectedPoints2d_left, selectedPoints2d_right;
+
+      for(int i=0; i<selectedIndexes.size(); i++){
+          selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
+          selectedPoints2d_right.push_back(keypointsLeft[matches[selectedIndexes[i]].trainIdx]);
+      }
+
+      namedWindow("SelectedObjLeft");
+      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+      imshow("SelectedObjLeft", outImageLeft);
+
+      cvWaitKey(/*33*/);
 
   }
 
