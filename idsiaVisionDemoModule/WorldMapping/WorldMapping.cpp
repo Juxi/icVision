@@ -78,7 +78,7 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
   cameraRight = new CameraiCub(moduleName, "right");
 
   //Set-up stereo geometry function
-  stereoutils = new StereoGeometry(Camera640);
+  stereoutils = new StereoGeometry(Camera320);
 
   //Set-up saliency map
   saliencyutils = new SaliencyMap();
@@ -99,7 +99,7 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
       return false;
   }
 
-  attach(handlerPort);                  // attach to port
+  attach(handlerPort);  // attach to port
 
   //Connect Port
   cameraLeft->connect("/icub/cam/left");
@@ -169,6 +169,10 @@ bool WorldMapping::updateModule() {
   isImageRight = cameraRight->getImageOnOutputPort();
 
   if(isImageLeft && isImageRight){
+
+      //Correct the stereo camera if something is changed
+      stereoutils->changeCalibration(cameraLeft->getImage().cols);
+
       //do something
       cameraLeft->getFeaturesOnOutputPort(GFTT);
       //cameraLeft->getGaborDescriptorsOnOutputPort();
@@ -189,8 +193,7 @@ bool WorldMapping::updateModule() {
 
       vector<DMatch> matches;
 
-      //		stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
-
+      //stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
       stereoutils->matching(descrLeft, descrRight, matches, DBRIEF);
 
       int point_count = matches.size();

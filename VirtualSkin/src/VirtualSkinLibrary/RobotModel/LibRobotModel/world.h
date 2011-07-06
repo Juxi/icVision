@@ -76,7 +76,7 @@ signals:
 	
 	void worldAppendedPrimitive( PrimitiveObject* );
 	void requestNewResponseClass( PrimitiveObject*, DT_ResponseClass );
-	void requestRemoveSolidObject( PrimitiveObject* );
+	void requestRemoveSolidObject( DT_ObjectHandle, DT_ShapeHandle );
 	
 private:
 	

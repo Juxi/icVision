@@ -2,10 +2,19 @@
 <!DOCTYPE WorldList>
 <WorldList version="1.0">
 
-<object name="testObject" px="-.3" hx="-1" hy="-1" hz="-1">
-    <sphere radius=".1" py=".1"/>
-    <cylinder radius=".1" height=".3" hz="1"/>
-    <box depth=".1" width=".1" height=".1" px="-.3" py="-.1" hx="-1" hy="-1" hz="-1"/>
+
+<!--<object name="pelvisGuard" >
+    <box width=".08" depth=".15" height=".2" pz="-.075"/>
+</object>-->
+
+<object name="table" pz="-.15" px="-0.145">
+    <box width="1" depth=".005" height=".71"/>
+</object>
+
+<object name="walls">
+    <box width=".005" depth="1" height=".71" px=".355"/>
+    <box width="1" depth="1" height=".005" px="-.145" py=".355"/>
+    <box width="1" depth="1" height=".005" px="-.145" py="-.355"/>
 </object>
 
 </WorldList>

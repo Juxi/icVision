@@ -247,7 +247,7 @@ bool World::remove( CompositeObject* obj )
 	for ( j=obj->end(); j!=obj->begin(); )
 	{
 		--j;
-		emit requestRemoveSolidObject( *j );
+		emit requestRemoveSolidObject( (*j)->getSolidHandle(), (*j)->getShape() );
 		emit outdatedDisplayList( (*j)->displayListIdx() );
 		//model->destroyObject((*j)->getSolidHandle());
 		obj->remove(*j);
@@ -274,7 +274,7 @@ bool World::removePrimitive( CompositeObject* object, PrimitiveObject* primitive
 	
 	if ( foundObject )
 	{
-		emit requestRemoveSolidObject( primitive );
+		emit requestRemoveSolidObject( primitive->getSolidHandle(), primitive->getShape() );
 		emit outdatedDisplayList( primitive->displayListIdx() );
 		object->remove( primitive );
 	}

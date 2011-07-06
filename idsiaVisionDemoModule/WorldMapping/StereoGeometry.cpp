@@ -13,7 +13,9 @@ using namespace cv;
 
 StereoGeometry::StereoGeometry(Cameratype type)
 {
-  // TODO Auto-generated constructor stub
+
+  cameraType = type;
+
   RTb2cl = Mat::eye(4,4,CV_32FC1);
   RTcl2b = Mat::eye(4,4,CV_32FC1);
   P_left = Mat::zeros(4,3,CV_32FC1);
@@ -30,8 +32,23 @@ StereoGeometry::StereoGeometry(Cameratype type)
 
 StereoGeometry::~StereoGeometry()
 {
-  // TODO Auto-generated destructor stub
-  saveCalibration("../conf/calibrationMatrices.yaml");
+  if(cameraType == Camera640)
+    saveCalibration("../conf/calibrationMatrices640.yaml");
+  else
+    saveCalibration("../conf/calibrationMatrices320.yaml");
+
+}
+
+
+void StereoGeometry::changeCalibration(int w){
+  if( w == 640 && cameraType == Camera320){
+      cameraType = Camera640;
+      loadCalibration("../conf/calibrationMatrices640.yaml");
+  }
+  else if( w == 320 && cameraType == Camera640){
+      cameraType = Camera320;
+      loadCalibration("../conf/calibrationMatrices320.yaml");
+  }
 
 }
 
@@ -341,7 +358,7 @@ void StereoGeometry::triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f 
   if(P_left.empty())
     estimatePmatrix(K_left, RTw2cl, P_left);
   if(P_right.empty())
-     estimatePmatrix(K_right, RTw2cr, P_right);
+    estimatePmatrix(K_right, RTw2cr, P_right);
 
   Mat doubleP_left, doubleP_right;
   P_left.convertTo(doubleP_left, CV_64FC1);
@@ -407,13 +424,6 @@ void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr
   //Normalize the point
   outTM = outTM/outTM.at<double>(3,0);
   Mat tmpoutTM = outTM.clone();
-  //    //Conversion from mm to m?!?
-  //    outTM.at<double>(0,0)/=1000;
-  //    outTM.at<double>(1,0)/=1000;
-  //    outTM.at<double>(2,0)/=1000;
-  //    outTM.convertTo(outTM, CV_32FC1);
-  //    Mat result = RTcl2w*outTM;
-
 
   //from camera to chessboard
   tmpoutTM.convertTo(tmpoutTM, CV_32FC1);
@@ -440,46 +450,75 @@ void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr
 void StereoGeometry::triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d){
   //This function is the same included in the toolbox of Bouguet
 
-   Mat point_l_distort = (Mat_<float>(2,1) << (pl.x - K_left.at<float>(0,2))/K_left.at<float>(0,0),
-                                              (pl.y - K_left.at<float>(1,2))/K_left.at<float>(1,1));
-   Mat point_r_distort = (Mat_<float>(2,1) << (pr.x - K_right.at<float>(0,2))/K_right.at<float>(0,0),
-                                              (pr.y - K_right.at<float>(1,2))/K_right.at<float>(1,1));
+  Mat point_l_distort = (Mat_<float>(2,1) << (pl.x - K_left.at<float>(0,2))/K_left.at<float>(0,0),
+      (pl.y - K_left.at<float>(1,2))/K_left.at<float>(1,1));
+  Mat point_r_distort = (Mat_<float>(2,1) << (pr.x - K_right.at<float>(0,2))/K_right.at<float>(0,0),
+      (pr.y - K_right.at<float>(1,2))/K_right.at<float>(1,1));
 
 
-   Mat point_l_undist, point_r_undist;
+  Mat point_l_undist, point_r_undist;
 
-   //Undistort points
-   undistortPoint(point_l_distort, point_l_undist, "left");
-   undistortPoint(point_r_distort, point_r_undist, "right");
+  //Undistort points
+  undistortPoint(point_l_distort, point_l_undist, "left");
+  undistortPoint(point_r_distort, point_r_undist, "right");
 
 
-   Mat points_l = (Mat_<float>(3,1) << point_l_undist.at<float>(0,0), point_l_undist.at<float>(1,0), 1);
-   Mat points_r = (Mat_<float>(3,1) << point_r_undist.at<float>(0,0), point_r_undist.at<float>(1,0), 1);
+  Mat points_l = (Mat_<float>(3,1) << point_l_undist.at<float>(0,0), point_l_undist.at<float>(1,0), 1);
+  Mat points_r = (Mat_<float>(3,1) << point_r_undist.at<float>(0,0), point_r_undist.at<float>(1,0), 1);
 
-     Mat u = R*points_l;
-     float n_xt2 = points_l.dot(points_l);
-     float n_xtt2 = points_r.dot(points_r);
-     float udot = u.dot(points_r);
-     float DD = n_xt2*n_xtt2 - udot*udot;
-     float dot_uT = u.dot(T);
-     float dot_xttT = points_r.dot(T);
-     float dot_xttu = u.dot(points_r);
-     float NN1 = dot_xttu*dot_xttT - n_xtt2* dot_uT;
-     float NN2 = n_xt2*dot_xttT - dot_uT*dot_xttu;
-     float Zt = NN1/DD;
-     float Ztt = NN2/DD;
+  Mat u = R*points_l;
+  float n_xt2 = points_l.dot(points_l);
+  float n_xtt2 = points_r.dot(points_r);
+  float udot = u.dot(points_r);
+  float DD = n_xt2*n_xtt2 - udot*udot;
+  float dot_uT = u.dot(T);
+  float dot_xttT = points_r.dot(T);
+  float dot_xttu = u.dot(points_r);
+  float NN1 = dot_xttu*dot_xttT - n_xtt2* dot_uT;
+  float NN2 = n_xt2*dot_xttT - dot_uT*dot_xttu;
+  float Zt = NN1/DD;
+  float Ztt = NN2/DD;
 
-     Mat X1 = points_l*Zt;
-     Mat X2 = R.t()* (points_r*Ztt - T);
+  Mat X1 = points_l*Zt;
+  Mat X2 = R.t()* (points_r*Ztt - T);
 
-     Mat point3DLeft = 0.5 * (X1+X2);
+  Mat point3DLeft = 0.5 * (X1+X2);
 
-     point3d.x = point3DLeft.at<float>(0,0);
-     point3d.y = point3DLeft.at<float>(1,0);
-     point3d.z = point3DLeft.at<float>(2,0);
+  point3d.x = point3DLeft.at<float>(0,0);
+  point3d.y = point3DLeft.at<float>(1,0);
+  point3d.z = point3DLeft.at<float>(2,0);
 
-//    %--- Right coordinates:
-//    XR = R*XL + T_vect;
-     //Mat point3DRight = R*point3DLeft+T;
+  //    %--- Right coordinates:
+  //    XR = R*XL + T_vect;
+  //Mat point3DRight = R*point3DLeft+T;
+}
+
+void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPoint> &keysRight, vector<DMatch> &matches, int selectedFeature){
+
+  vector<int> selectedIndexes ;
+  vector<Point3f> selectedPoints3d;
+  Point2f pointLeft, pointRight;
+  Point3f point3d, selectedPoint3d;
+
+  //Estimate depth of the selected point
+  triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+  for(int i = 0; i<matches.size(); i++){
+      pointLeft = keysLeft[matches[i].queryIdx].pt;
+      pointRight = keysRight[matches[i].trainIdx].pt;
+
+      //estimate the point wrt camera left
+      triangulatePointLeftCamera(pointLeft, pointRight, point3d);
+
+      if( abs(point3d.x-selectedPoint3d.x) < 50 &&
+          abs(point3d.z-selectedPoint3d.z) < 50 &&
+          abs(point3d.z-selectedPoint3d.z) < 10){
+
+          selectedIndexes.push_back(i);
+          selectedPoints3d.push_back(point3d);
+      }
+  }
+
+
 }
 
