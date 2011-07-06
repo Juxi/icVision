@@ -38,6 +38,9 @@ public:
 	
 	bool isActive();	
 	bool isMotionDone();	
+	
+	
+	void printStatus();
 
 	
 	// policies (maybe extend later)

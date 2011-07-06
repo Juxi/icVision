@@ -33,7 +33,7 @@ void ReachingWorker::init() {
 	arm->storeContext(&startup_context_id);
 	
 	// set trajectory time
-	arm->setTrajTime(1.0);
+	arm->setTrajTime(3.0);
 	
 	// get the torso dofs
 	yarp::sig::Vector newDof, curDof;
@@ -59,17 +59,17 @@ void ReachingWorker::init() {
 	
 	// init hand orientation
 	// from Alex' and cartesian interface tutorial!
-	orientationFromAbove.resize(4);
-	orientationFromAbove[0] =  0.0; 
-	orientationFromAbove[1] =  0.0; 
-	orientationFromAbove[2] =  0.0; 
-	orientationFromAbove[3] = M_PI;
-
 	orientationFromSide.resize(4);
 	orientationFromSide[0] =  0.0; 
 	orientationFromSide[1] = -1.0; 
 	orientationFromSide[2] =  1.0; 
 	orientationFromSide[3] = M_PI;
+
+	orientationFromAbove.resize(4);
+	orientationFromAbove[0] =  0.0; 
+	orientationFromAbove[1] =  0.0; 
+	orientationFromAbove[2] =  1.0; 
+	orientationFromAbove[3] = M_PI;
 	
 	initialized = true;
 
@@ -135,6 +135,33 @@ yarp::sig::Vector ReachingWorker::getCurrentPosition()
 	return r;	
 }
 
+void ReachingWorker::printStatus()
+{        
+	yarp::sig::Vector x,o,xdhat,odhat,qdhat;
+		
+		// we get the current arm pose in the
+	// operational space
+	arm->getPose(x,o);
+	
+	// we get the final destination of the arm
+	// as found by the solver: it differs a bit
+	// from the desired pose according to the tolerances
+	arm->getDesired(xdhat,odhat,qdhat);
+	
+//	double e_x=yarp::math::norm(xdhat-x);
+//	double e_o=yarp::math::norm(odhat-o);
+	
+	fprintf(stdout,"+++++++++\n");
+	fprintf(stdout,"xd          [m] = %s\n",xd.toString().c_str());
+	fprintf(stdout,"xdhat       [m] = %s\n",xdhat.toString().c_str());
+	fprintf(stdout,"x           [m] = %s\n",x.toString().c_str());
+	fprintf(stdout,"od        [rad] = %s\n",orientationFromAbove.toString().c_str());
+	fprintf(stdout,"odhat     [rad] = %s\n",odhat.toString().c_str());
+	fprintf(stdout,"o         [rad] = %s\n",o.toString().c_str());
+	fprintf(stdout,"---------\n\n");
+	
+}
+
 bool ReachingWorker::isActive( void ) 
 {
 	return reachActive;
@@ -177,6 +204,7 @@ void ReachingWorker::reachPosition( )
 		std::cout << "PreReach completed ... ";	
 		std::cout.flush();
 		
+		yarp::os::Time::delay(0.5);
 		if(doReaching()) {
 			std::cout << "Reaching completed!" << std::endl;			
 		} else {
@@ -274,9 +302,9 @@ bool ReachingWorker::doReaching() {
 	bool done = false;
 
 	
-//	const int MAX_STEPS = 1;
-	double fact = 0.5; ///1.0 / MAX_STEPS;
-//	for(int steps = 2; steps < MAX_STEPS; steps++) {
+	const int MAX_STEPS = 2;
+	double fact = 1.0 / MAX_STEPS;
+//	for(int steps = 1; steps < MAX_STEPS; steps++) {
 
 		yarp::sig::Vector intermediatePos(3);
 		if( policy & ReachingWorker::STRAIGHT ) {
@@ -286,7 +314,8 @@ bool ReachingWorker::doReaching() {
 		std::cout << "Going to intermediate:" << intermediatePos[0] << ", "<< intermediatePos[1] << ", "<< intermediatePos[2] <<  std::endl;	
 		
 		// move arm	
-		arm->goToPose(intermediatePos, orientation, fact);
+//		arm->goToPose(intermediatePos, orientation, fact);
+		arm->goToPose(intermediatePos, orientation);	
 		arm->waitMotionDone(0.1, fact);
 //	}
 	
@@ -296,7 +325,8 @@ bool ReachingWorker::doReaching() {
 	std::cout << "Going to reaching:" << xd[0] << ", "<< xd[1] << ", "<< xd[2] <<  std::endl;	
 
 	// move arm
-	arm->goToPose(xd, orientation, 1.0);
+//	arm->goToPose(xd, orientation, 1.0);
+	arm->goToPose(xd, orientation); // testing in the lab!!, 1.0);
 	arm->waitMotionDone(0.1, fact);
 
 	while(! done ) {

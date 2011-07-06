@@ -36,8 +36,8 @@ int main(int argc, char * argv[]) {
 
   if(!yarp.checkNetwork()){
 
-	  cerr<<"Yarp Network not available"<<endl;
-	  return true;
+      cerr<<"Yarp Network not available"<<endl;
+      return true;
 
   }
 
