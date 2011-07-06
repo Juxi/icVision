@@ -19,24 +19,24 @@
 
 class SaliencyMap
 {
-  private:
+private:
 
-    cv::Mat outputLeft, outputRight;
+  cv::Mat outputLeft, outputRight;
 
-    //Send Winner Points
-    std::string namePointLeftOutPort;
-    yarp::os::BufferedPort<yarp::os::Bottle > PointLeftOutPort;
-    std::string namePointRightOutPort;
-    yarp::os::BufferedPort<yarp::os::Bottle > PointRightOutPort;
+  //Send Winner Points
+  std::string namePointLeftOutPort;
+  yarp::os::BufferedPort<yarp::os::Bottle > PointLeftOutPort;
+  std::string namePointRightOutPort;
+  yarp::os::BufferedPort<yarp::os::Bottle > PointRightOutPort;
 
-  public:
-    SaliencyMap();
-    virtual
-    ~SaliencyMap();
+public:
+  SaliencyMap();
+  virtual
+  ~SaliencyMap();
 
   int detectSaliencyPoint(cv::Mat &imLeft, cv::Mat &imRight, std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches);
-	bool interrupt();
-	bool close();
+  bool interrupt();
+  bool close();
 
   cv::Mat &getLeftMap(){return outputLeft;}
   cv::Mat &getRightMap(){return outputRight;}

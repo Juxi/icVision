@@ -25,19 +25,19 @@ using namespace yarp::sig;
 using namespace yarp::dev;
 
 
-	class ConvertFlt {
-	
-		public:
-			ConvertFlt();
-			~ConvertFlt();
+class ConvertFlt {
 
-			IplImage* convert(IplImage* img);
-			
-		private:
+public:
+  ConvertFlt();
+  ~ConvertFlt();
 
-			IplImage* mp_cvoutputimg;
+  IplImage* convert(IplImage* img);
 
-	};
+private:
+
+  IplImage* mp_cvoutputimg;
+
+};
 
 
 #endif
