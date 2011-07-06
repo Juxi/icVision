@@ -52,7 +52,7 @@ public:
 
   bool loadCalibration(std::string filename = "calibrationMatrices.yaml");
   bool saveCalibration(std::string filename = "calibrationMatrices.yaml");
-  cv::Mat undistortImage(cv::Mat& image2undist, std::string camera);
+  void undistortImage(cv::Mat& image2undist, cv::Mat &undistortedImage, std::string camera);
   cv::Point2f undistortPoint(cv::Point2f &point2undistort, std::string camera);
   void undistortPoint(cv::Mat &point2undistort, cv::Mat &pointundistorted, std::string camera);
 
@@ -60,7 +60,8 @@ public:
   void triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
   void triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
 
-  void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature);
+  void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature,
+                      std::vector<int> &selectedIndexes, std::vector<cv::Point3f> &selectedPoints3d);
 
 };
 
