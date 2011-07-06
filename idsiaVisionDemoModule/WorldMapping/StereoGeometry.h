@@ -18,6 +18,9 @@ typedef enum {Camera640, Camera320} Cameratype;
 class StereoGeometry
 {
 private:
+
+  Cameratype cameraType;
+
   cv::Mat K_left, d_left; //intrinsic parameters camera left
   cv::Mat K_right, d_right; //intrinsic parameters camera right
   cv::Mat R, T; //Rotation and translation matrices between camera left and right
@@ -29,6 +32,8 @@ private:
   cv::Mat RTcl2w, RTw2cl; // RT from camera left to world and vice versa
   cv::Mat RTcr2w, RTw2cr; // RT from camera right to world and vice versa
 
+  cv::Mat RTb2w, RTw2b; //RT from board to world and vice versa
+
   //only for matching
   Ptr<DescriptorMatcher> descriptorMatcher;
 
@@ -36,6 +41,8 @@ public:
   StereoGeometry(Cameratype type);
   virtual
   ~StereoGeometry();
+
+  void changeCalibration(int w);
 
   bool matchingGabor(cv::Mat &gaborsLeft, cv::Mat &gaborsRight, std::vector<cv::DMatch> &matches );
   bool matching(cv::Mat &descLeft, cv::Mat &descRight, std::vector<cv::DMatch> &matches, DescriptorType type);
@@ -52,6 +59,8 @@ public:
   void triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
   void triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
   void triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
+
+  void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature);
 
 };
 
