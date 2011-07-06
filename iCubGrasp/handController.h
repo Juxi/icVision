@@ -36,7 +36,7 @@ public:
 	
 private:
 	TouchSenseThread* ts;
-	qreal errorTolerance;
+	qreal attenuationThreshold;
 	qreal attenuationFactor;
 
 	QString robotName;
@@ -49,10 +49,8 @@ private:
 	qreal ERR[9];	// absolute value of error
 	qreal max;		// maximum error
 	qreal cmd;		// velocity control signal
-	qreal n;		// normalized error
 	qreal t;		// the independant variable of the attenuation function
-	qreal att;		// evaluated attenuator
-	//qreal mean;		// mean attenuation
+	qreal att;		// attenuator value
 	
 	yarp::os::Network network;
 	yarp::dev::PolyDriver *dd;

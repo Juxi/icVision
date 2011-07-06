@@ -6,14 +6,12 @@
 //{
 //	HandController(  );
 //}
-HandController::HandController( qreal _errorTolerance, qreal _attenuationFactor ) : 
+HandController::HandController( qreal _attenuationThreshold, qreal _attenuationFactor ) : 
 																	dd(NULL), pos(NULL), vel(NULL), enc(NULL), pid(NULL), amp(NULL), lim(NULL), tgt(NULL),
 																	palmTouch(false), thumbTouch(false), indexTouch(false), middleTouch(false), ringTouch(false), littleTouch(false)
 {
-	ts = new TouchSenseThread("/touchsensor");
-
-	errorTolerance = _errorTolerance;		// 0-1, where smaller numbers favor precision
-	attenuationFactor = _attenuationFactor;	// 0-inf larger numbers cause the controller to approach target points more slowly
+	attenuationThreshold = _attenuationThreshold;	// 0-1, where smaller numbers favor precision
+	attenuationFactor = _attenuationFactor;			// 0-inf larger numbers cause the controller to approach target points more slowly
 	
 	ControlPoint A,B,C,D,E;
 	
@@ -24,11 +22,11 @@ HandController::HandController( qreal _errorTolerance, qreal _attenuationFactor 
 	E.t = 1;
 	
 	// joint num	7	8	9	10	11	12	13	14	15
-	qreal a[9] = {	0,	0,	90,	0,	0,	10,	10,	10,	10 };
-	qreal b[9] = {	30,	30,	0,	0,	30,	10,	40,	10,	20 };
-	qreal c[9] = {	30,	50,	0,	0,	50,	10,	60,	10,	30 };
-	qreal d[9] = {	30,	70,	0,	0,	70,	10,	80,	10,	50 };
-	qreal e[9] = {	60,	90,	0,	0,	90,	90,	90,	90,	70 };
+	qreal a[9] = {	15,	0,	0,	0,	0,	10,	10,	10,	10 };
+	qreal b[9] = {	15,	30,	0,	0,	30,	10,	40,	10,	20 };
+	qreal c[9] = {	15,	50,	0,	0,	50,	10,	60,	10,	30 };
+	qreal d[9] = {	15,	70,	0,	0,	70,	10,	80,	10,	50 };
+	qreal e[9] = {	15,	90,	0,	0,	90,	90,	90,	90,	70 };
 	
 	for (int i = 0; i < 9; i++)
 	{
@@ -120,6 +118,26 @@ void HandController::start( const char* _robotName, const char* _partName, int r
 		}
 	}
 	
+	// init alex's touch stuff
+	QString remoteTouchPort;
+	QString touchPartName;
+	if ( robotName == "icubSim" )
+	{
+		if ( partName == "left_arm" ) touchPartName = "left_hand";
+		else if ( partName == "right_arm" ) touchPartName = "right_hand";
+		else throw "Not connected to an arm";
+	}
+	else if (robotName == "icub" )
+	{
+		if ( partName == "left_arm" ) touchPartName = "lefthand";
+		else if ( partName == "right_arm" ) touchPartName = "righthand";
+		else throw "Not connected to an arm";
+	}
+	else throw "Not connected to an iCub";
+	
+	remoteTouchPort = "/" + robotName + "/skin/" + touchPartName;
+	ts = new TouchSenseThread( remoteTouchPort.toStdString(), "/touchsensor" );
+	
 	if (!ts->start())
 	{
 		QString err = "Cannot start touch sensor thread";
@@ -186,7 +204,7 @@ void HandController::blockingPositionMove( ControlPoint* target )
 
 void HandController::grasp( int speed )
 {
-	qreal mean;
+	qreal currentAttenuation;
 	checkValidity();
 	while ( true )
 	{
@@ -198,18 +216,18 @@ void HandController::grasp( int speed )
 		ringTouch = ts->getRingTouch();
 		littleTouch = ts->getLittleTouch();
 		
-		mean = doVelocityControl( speed );
+		currentAttenuation = doVelocityControl( speed );
 		msleep(20);
 		
 		// move through the vector of control points
-		if ( mean <= errorTolerance )
+		if ( currentAttenuation <= attenuationThreshold )
 		{
 			if ( tgt != graspTrajectory.end() - 1 ) 
 			{
 				printf("GOTO NEXT TARGET\n");
 				tgt++;
 			}
-			else if ( qFuzzyIsNull(mean) )
+			else if ( currentAttenuation <= attenuationThreshold/10 )
 			{
 				// stop everything
 				printf("STOP\n");
@@ -225,22 +243,22 @@ void HandController::grasp( int speed )
 
 void HandController::unGrasp( int speed )
 {
-	qreal mean;
+	qreal currentAttenuation;
 	checkValidity();
 	while ( true )
 	{
-		mean = doVelocityControl( speed, false );
+		currentAttenuation = doVelocityControl( speed, false );
 		msleep(20);
 		
 		// move through the vector of control points
-		if ( mean <= errorTolerance )
+		if ( currentAttenuation <= attenuationThreshold )
 		{
 			if ( tgt != graspTrajectory.begin() ) 
 			{
 				printf("GOTO NEXT TARGET\n");
 				tgt--;
 			}
-			else if ( qFuzzyIsNull(mean) )
+			else if ( currentAttenuation <= attenuationThreshold/10 )
 			{
 				// stop everything
 				printf("STOP\n");
@@ -258,16 +276,19 @@ qreal HandController::doVelocityControl( int speed, bool stopOnTouch )
 {
 	// get encoder positions and tabulate error
 	max = 0.0;
+	//qreal meanErr = 0.0;
 	enc->getEncoders(q);
 	printf("Position Error:\t");
 	for ( i = 0; i < 9; i++ )
 	{
 		err[i] = tgt->p[i] - q[i+7];
-		ERR[i] = abs(err[i]);
+		ERR[i] = qAbs( err[i] );
+		//meanErr += ERR[i];
 		if ( ERR[i] > max ) { max = ERR[i]; }
 		printf( "%f\t", err[i] );
 	}
-	//printf("\n");
+	if ( qFuzzyIsNull(max) ) { return 0; }
+	//meanErr /= 9.0;
 	
 	// stop digits that have touched something
 	if ( stopOnTouch )
@@ -280,23 +301,20 @@ qreal HandController::doVelocityControl( int speed, bool stopOnTouch )
 	}
 	
 	// do feedback velocity control
-	// still need to check which fingers should be stopped
-	qreal mean = 0.0;
+	qreal meanAtt = 0.0;
 	//printf("Velocity Move:\t");
 	for ( i = 0; i < 9; i++ )
 	{
 		t = ERR[i]/attenuationFactor;
 		att = -exp(-t)*(1+t)+1;
-		mean += att;
-		if ( !qFuzzyIsNull(max) ) n = err[i]/max;
-		else n = 1; 
-		cmd = speed*n*att;
+		cmd = att * speed * err[i]/max;
 		vel->velocityMove(i+7,cmd);
 		//printf( "%f\t", cmd );
+		meanAtt += att;
 	}
-	mean /= 9.0;
+	meanAtt /= 9.0;
 	
-	printf(": att = %f", mean );
+	//printf(" meanCmd = %f", mean );
 	printf("\n");
-	return mean;
+	return meanAtt;
 }

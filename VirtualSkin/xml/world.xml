@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WorldList>
+<WorldList version="1.0">
+
+<object name="testObject" px="-.3" hx="-1" hy="-1" hz="-1">
+    <sphere radius=".1" py=".1"/>
+    <cylinder radius=".1" height=".3" hz="1"/>
+    <box depth=".1" width=".1" height=".1" px="-.3" py="-.1" hx="-1" hy="-1" hz="-1"/>
+</object>
+
+</WorldList>

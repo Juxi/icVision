@@ -1,0 +1,2 @@
+/usr/bin/ar cr libkatana400.a  CMakeFiles/katana400.dir/Katana400.cpp.o
+/usr/bin/ranlib libkatana400.a

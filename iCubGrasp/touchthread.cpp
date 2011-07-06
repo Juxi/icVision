@@ -9,11 +9,9 @@ bool TouchSenseThread::threadInit()
 	{
 		Network yarp;
 		port.open(portname.c_str());
-		cout << "waiting for input, please call something like"<< endl;
-		cout << "   'yarp connect /icubSim/skin/left_hand " << portname << "'" << endl;
-		cout << "or" << endl;
-		cout << "   'yarp connect /icub/skin/lefthand " << portname << "'" << endl;
-		cout << "in another shell." << endl;
+		
+		Network::connect( remotePort.c_str(), portname.c_str() );
+		
 		thumbTouch = false;
 		indexTouch = false;
 		middleTouch = false;
@@ -176,22 +174,22 @@ bool TouchSenseThread::threadInit()
 				cout.precision(0);
 				cout << fixed ;
 				cout << "thumb contacts diff to mean: " << thumb; 
-				if (thumb<-50) cout << " touchée!";
+				if (thumb<-50) cout << " touchÃˆe!";
 				cout << endl;
 				cout << "index contacts diff to mean: " << index;
-				if (index<-50) cout << " touchée!";
+				if (index<-50) cout << " touchÃˆe!";
 				cout << endl;
 				cout << "middle contacts diff to mean: " << middle;
-				if (middle<-50) cout << " touchée!";
+				if (middle<-50) cout << " touchÃˆe!";
 				cout << endl;
 				cout << "ring contacts diff to mean: " << ring;
-				if (ring<-50) cout << " touchée!";
+				if (ring<-50) cout << " touchÃˆe!";
 				cout << endl;
 				cout << "little contacts diff to mean: " << little;
-				if (little<-50) cout << " touchée!";
+				if (little<-50) cout << " touchÃˆe!";
 				cout << endl;
 				cout << "palm contacts diff to mean: " << palm;
-				if (palm<-20) cout << " touchée!";
+				if (palm<-20) cout << " touchÃˆe!";
 				cout << endl;
 #endif
 			}

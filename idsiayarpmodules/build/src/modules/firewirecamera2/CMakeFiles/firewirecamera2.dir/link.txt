@@ -1,0 +1,2 @@
+/usr/bin/ar cr libfirewirecamera2.a  CMakeFiles/firewirecamera2.dir/FirewireCamera2.cpp.o CMakeFiles/firewirecamera2.dir/FirewireCamera2Set.cpp.o
+/usr/bin/ranlib libfirewirecamera2.a

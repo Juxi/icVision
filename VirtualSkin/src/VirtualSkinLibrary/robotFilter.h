@@ -60,7 +60,7 @@ public:
 	 * \note aStateObserver,aCallObserver,aResponseObserver MUST be sub-classes of StateObserver,CallObserver,ResponseObserver respectively
 	 */
 	template <class aStateObserver, class aCallObserver, class aResponseObserver>
-	void open( const QString& fileName ) throw(std::exception)
+	void open( const QString& fileName, const QString& worldFileName ) throw(std::exception)
 	{
 		if ( isOpen ) { close(); }
 		
@@ -70,6 +70,8 @@ public:
 		}
 		
 		model.robot->open(fileName);
+		printf("loading %s\n", worldFileName.toStdString().c_str());
+		model.world->load(worldFileName);
 		
 		const QString deviceBaseName( model.robot->getName() );
 		const QString filterBaseName( model.robot->getName() + "F" );
