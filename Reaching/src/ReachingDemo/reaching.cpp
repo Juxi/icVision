@@ -33,7 +33,7 @@ void ReachingWorker::init() {
 	arm->storeContext(&startup_context_id);
 	
 	// set trajectory time
-	arm->setTrajTime(1.0);
+	arm->setTrajTime(3.0);
 	
 	// get the torso dofs
 	yarp::sig::Vector newDof, curDof;
@@ -274,9 +274,9 @@ bool ReachingWorker::doReaching() {
 	bool done = false;
 
 	
-//	const int MAX_STEPS = 1;
-	double fact = 0.5; ///1.0 / MAX_STEPS;
-//	for(int steps = 2; steps < MAX_STEPS; steps++) {
+	const int MAX_STEPS = 2;
+	double fact = 1.0 / MAX_STEPS;
+//	for(int steps = 1; steps < MAX_STEPS; steps++) {
 
 		yarp::sig::Vector intermediatePos(3);
 		if( policy & ReachingWorker::STRAIGHT ) {
@@ -286,7 +286,8 @@ bool ReachingWorker::doReaching() {
 		std::cout << "Going to intermediate:" << intermediatePos[0] << ", "<< intermediatePos[1] << ", "<< intermediatePos[2] <<  std::endl;	
 		
 		// move arm	
-		arm->goToPose(intermediatePos, orientation, fact);
+//		arm->goToPose(intermediatePos, orientation, fact);
+		arm->goToPose(intermediatePos, orientation);	
 		arm->waitMotionDone(0.1, fact);
 //	}
 	
@@ -296,7 +297,8 @@ bool ReachingWorker::doReaching() {
 	std::cout << "Going to reaching:" << xd[0] << ", "<< xd[1] << ", "<< xd[2] <<  std::endl;	
 
 	// move arm
-	arm->goToPose(xd, orientation, 1.0);
+	arm->goToPose(xd, orientation);
+//	arm->goToPose(xd, orientation, 1.0);
 	arm->waitMotionDone(0.1, fact);
 
 	while(! done ) {
