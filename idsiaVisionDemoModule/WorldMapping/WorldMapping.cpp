@@ -78,7 +78,7 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
   cameraRight = new CameraiCub(moduleName, "right");
 
   //Set-up stereo geometry function
-  stereoutils = new StereoGeometry();
+  stereoutils = new StereoGeometry(Camera640);
 
   //Set-up saliency map
   saliencyutils = new SaliencyMap();
@@ -128,8 +128,7 @@ bool WorldMapping::close() {
   cameraLeft->close();
   cameraRight->close();
   movinghead->close();
-  /* stop the thread */
-  // dThread->stop();
+
 
   return true;
 }
