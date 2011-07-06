@@ -176,34 +176,34 @@
 
 class WorldMapping: public yarp::os::RFModule {
 
-    std::string moduleName;
-    std::string robotName;
-    std::string handlerPortName;
+  std::string moduleName;
+  std::string robotName;
+  std::string handlerPortName;
 
-    int cyclecounter;
+  int cyclecounter;
 
-    CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
-    StereoGeometry *stereoutils;
-    SaliencyMap *saliencyutils;
-    MovingHead	*movinghead;
-    yarp::os::Port handlerPort;      //a port to handle messages
+  CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
+  StereoGeometry *stereoutils;
+  SaliencyMap *saliencyutils;
+  MovingHead	*movinghead;
+  yarp::os::Port handlerPort;      //a port to handle messages
 
-    bool isImageLeft, isImageRight;
+  bool isImageLeft, isImageRight;
 
 public:
-	//WorldMapping();
-	//virtual ~WorldMapping();
+  //WorldMapping();
+  //virtual ~WorldMapping();
 
-   /**
-	 * document your methods too.
-	 */
-	bool configure(yarp::os::ResourceFinder &rf); // configure all the module parameters and return true if successful
-	bool interruptModule();                       // interrupt, e.g., the ports
-	bool close();                                 // close and shut down the module
-	bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
-	double getPeriod();
-	bool updateModule();
-	bool saveImage(cv::Mat& image2save, std::string directory, int framecounter);
+  /**
+   * document your methods too.
+   */
+  bool configure(yarp::os::ResourceFinder &rf); // configure all the module parameters and return true if successful
+  bool interruptModule();                       // interrupt, e.g., the ports
+  bool close();                                 // close and shut down the module
+  bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
+  double getPeriod();
+  bool updateModule();
+  bool saveImage(cv::Mat& image2save, std::string directory, int framecounter);
 
 };
 
