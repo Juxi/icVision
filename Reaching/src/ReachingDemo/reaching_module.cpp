@@ -276,6 +276,7 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 
 	//set-up input/output ports
 	inputPortName = "/" + robotName + "/world";
+// check whether we have F or not!! TODO
     string clientPortName = "/";
 	clientPortName += getName();
 	clientPortName += "/world-client";

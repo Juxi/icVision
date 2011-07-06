@@ -45,18 +45,39 @@ void ReachingWorker::init() {
 	newDof[0]=0;
 	newDof[1]=0;
 	newDof[2]=0;
-	
+
+	newDof[0]=1;
+        newDof[1]=0;
+        newDof[2]=1;
+
+
 	// impose some restriction on the torso pitch
 	//limitTorsoPitch();
+// void limitTorsoPitch()
+  //  {
+        int axis=0; // pitch joint
+        double min, max;
+
+        // sometimes it may be helpful to reduce
+        // the range of variability of the joints;
+        // for example here we don't want the torso
+        // to lean out more than 30 degrees forward
+
+        // we keep the lower limit
+        arm->getLimits(axis,&min,&max);
+        arm->setLimits(axis,min, 30.0);	  // [deg]
+    //}
 	
 	// send the request for dofs reconfiguration
 	arm->setDOF(newDof, curDof);
 	
+	// tolerance?
+	double tol;
+	arm->getInTargetTol(&tol);
+	std::cout << "Tolerance: " << tol << std::endl;
+
 	xd.resize(3);
-	
-	// set policy TODO
-	setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
-	
+		
 	// init hand orientation
 	// from Alex' and cartesian interface tutorial!
 	orientationFromSide.resize(4);
@@ -70,7 +91,16 @@ void ReachingWorker::init() {
 	orientationFromAbove[1] =  0.0; 
 	orientationFromAbove[2] =  1.0; 
 	orientationFromAbove[3] = M_PI;
+
+	// tweaking for left arm demo!!
+//	orientationFromAbove[0] = -0.15;
+//	orientationFromAbove[1] =  0.23; 
+//	orientationFromAbove[2] = -0.96; 
+//	orientationFromAbove[3] =  3.14;
 	
+	// set policy TODO
+	setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
+
 	initialized = true;
 
 	std::cout << "ReachingWorker is initialized!!" << std::endl;
@@ -151,7 +181,7 @@ void ReachingWorker::printStatus()
 //	double e_x=yarp::math::norm(xdhat-x);
 //	double e_o=yarp::math::norm(odhat-o);
 	
-	fprintf(stdout,"+++++++++\n");
+	fprintf(stdout,"\n\n+++++++++\n");
 	fprintf(stdout,"xd          [m] = %s\n",xd.toString().c_str());
 	fprintf(stdout,"xdhat       [m] = %s\n",xdhat.toString().c_str());
 	fprintf(stdout,"x           [m] = %s\n",x.toString().c_str());
@@ -203,12 +233,19 @@ void ReachingWorker::reachPosition( )
 	if( goToPreReach() ) {
 		std::cout << "PreReach completed ... ";	
 		std::cout.flush();
+
+		printStatus();
 		
 		yarp::os::Time::delay(0.5);
+// testing now
 		if(doReaching()) {
+// testing now
 			std::cout << "Reaching completed!" << std::endl;			
+// testing now
 		} else {
+// testing now
 			std::cout << "ERROR: Reach failed" << std::endl;
+// testing now
 		}
 	} else {
 		std::cout << "ERROR: PREReach failed" << std::endl;
@@ -236,14 +273,24 @@ bool ReachingWorker::goToPreReach() {
 	std::cout << "Going to pre reach position:" << preReachPos[0] << ", "<< preReachPos[1] << ", "<< preReachPos[2] <<  std::endl;
 
 	bool done = false;
+
 	arm->goToPose(preReachPos, preReachOrient);
-	
+
 	while(! done ) {
-		arm->waitMotionDone(0.1, 1.0);
+		arm->waitMotionDone(0.1, 0.5);
 		// check tolerance ?! maybe
 		arm->checkMotionDone(&done);
 		// if( collision ) return false
+		std::cout << "waiting ...";
 	}
+	std::cout <<  std::endl;
+//	arm->getPose(x0, o0);	
+//		if(! (o0[0] < -0.1 && o0[0] > -0.15) ) {
+//			printStatus();
+//			done = false;
+//			std::cout << "reissuing command to go to position" << std::endl;
+//		}
+//	}while(!done);
 	
 	return true;
 //	arm->goToPose(preReachPos, preReachOrient);
