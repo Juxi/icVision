@@ -59,17 +59,17 @@ void ReachingWorker::init() {
 	
 	// init hand orientation
 	// from Alex' and cartesian interface tutorial!
-	orientationFromAbove.resize(4);
-	orientationFromAbove[0] =  0.0; 
-	orientationFromAbove[1] =  0.0; 
-	orientationFromAbove[2] =  0.0; 
-	orientationFromAbove[3] = M_PI;
-
 	orientationFromSide.resize(4);
 	orientationFromSide[0] =  0.0; 
 	orientationFromSide[1] = -1.0; 
 	orientationFromSide[2] =  1.0; 
 	orientationFromSide[3] = M_PI;
+
+	orientationFromAbove.resize(4);
+	orientationFromAbove[0] =  0.0; 
+	orientationFromAbove[1] =  0.0; 
+	orientationFromAbove[2] =  1.0; 
+	orientationFromAbove[3] = M_PI;
 	
 	initialized = true;
 
@@ -177,6 +177,7 @@ void ReachingWorker::reachPosition( )
 		std::cout << "PreReach completed ... ";	
 		std::cout.flush();
 		
+		yarp::os::Time::delay(0.5);
 		if(doReaching()) {
 			std::cout << "Reaching completed!" << std::endl;			
 		} else {
@@ -297,8 +298,8 @@ bool ReachingWorker::doReaching() {
 	std::cout << "Going to reaching:" << xd[0] << ", "<< xd[1] << ", "<< xd[2] <<  std::endl;	
 
 	// move arm
-	arm->goToPose(xd, orientation);
 //	arm->goToPose(xd, orientation, 1.0);
+	arm->goToPose(xd, orientation); // testing in the lab!!, 1.0);
 	arm->waitMotionDone(0.1, fact);
 
 	while(! done ) {
