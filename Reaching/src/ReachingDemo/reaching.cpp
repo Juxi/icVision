@@ -135,6 +135,33 @@ yarp::sig::Vector ReachingWorker::getCurrentPosition()
 	return r;	
 }
 
+void ReachingWorker::printStatus()
+{        
+	yarp::sig::Vector x,o,xdhat,odhat,qdhat;
+		
+		// we get the current arm pose in the
+	// operational space
+	arm->getPose(x,o);
+	
+	// we get the final destination of the arm
+	// as found by the solver: it differs a bit
+	// from the desired pose according to the tolerances
+	arm->getDesired(xdhat,odhat,qdhat);
+	
+//	double e_x=yarp::math::norm(xdhat-x);
+//	double e_o=yarp::math::norm(odhat-o);
+	
+	fprintf(stdout,"+++++++++\n");
+	fprintf(stdout,"xd          [m] = %s\n",xd.toString().c_str());
+	fprintf(stdout,"xdhat       [m] = %s\n",xdhat.toString().c_str());
+	fprintf(stdout,"x           [m] = %s\n",x.toString().c_str());
+	fprintf(stdout,"od        [rad] = %s\n",orientationFromAbove.toString().c_str());
+	fprintf(stdout,"odhat     [rad] = %s\n",odhat.toString().c_str());
+	fprintf(stdout,"o         [rad] = %s\n",o.toString().c_str());
+	fprintf(stdout,"---------\n\n");
+	
+}
+
 bool ReachingWorker::isActive( void ) 
 {
 	return reachActive;
