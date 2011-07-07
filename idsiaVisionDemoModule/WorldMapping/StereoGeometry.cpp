@@ -11,7 +11,7 @@
 using namespace std;
 using namespace cv;
 
-StereoGeometry::StereoGeometry(Cameratype type)
+StereoGeometry::StereoGeometry(string moduleName, Cameratype type)
 {
 
   cameraType = type;
@@ -36,8 +36,26 @@ StereoGeometry::StereoGeometry(Cameratype type)
   else
     loadCalibration("../conf/calibrationMatrices320.yaml");
 
-
   // loadCalibration("calibrationMatrices.yaml");
+
+
+  cout<<"Opening ports for reading encoders "<< endl;
+
+  inputHeadPortName = "/"+moduleName+"/stereo/head:i";
+  inputTorsoPortName =  "/"+moduleName+"/stereo/torso:i";
+
+
+   //Input head port
+   if(! inputHeadPort.open( inputHeadPortName.c_str() )){
+       cerr<<"Unable to open port "+inputHeadPortName<<endl;
+   }
+   cout<<"Opened port "+inputHeadPortName<<endl;
+
+   //Input torso port
+   if(! inputTorsoPort.open( inputTorsoPortName.c_str() )){
+       cerr<<"Unable to open port "+inputTorsoPortName<<endl;
+   }
+   cout<<"Opened port "+inputTorsoPortName<<endl;
 }
 
 StereoGeometry::~StereoGeometry()

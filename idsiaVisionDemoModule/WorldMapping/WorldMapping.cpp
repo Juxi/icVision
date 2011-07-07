@@ -35,6 +35,8 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace std;
 using namespace cv;
+using namespace yarp::math;
+using namespace iCub::iKin;
 
 
 /*
@@ -78,7 +80,7 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
   cameraRight = new CameraiCub(moduleName, "right");
 
   //Set-up stereo geometry function
-  stereoutils = new StereoGeometry(Camera320);
+  stereoutils = new StereoGeometry(moduleName, Camera320);
 
   //Set-up saliency map
   saliencyutils = new SaliencyMap();
