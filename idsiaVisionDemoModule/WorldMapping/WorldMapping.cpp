@@ -171,7 +171,7 @@ bool WorldMapping::updateModule() {
   if(isImageLeft && isImageRight){
 
       //Correct the stereo camera if something is changed
-     // stereoutils->changeCalibration(cameraLeft->getImage().cols);
+      stereoutils->changeCalibration(cameraLeft->getImage().cols);
 
       //do something
       cameraLeft->getFeaturesOnOutputPort(FAST10);
@@ -263,7 +263,7 @@ bool WorldMapping::updateModule() {
 
       for(int i=0; i<selectedIndexes.size(); i++){
           selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
-          selectedPoints2d_right.push_back(keypointsLeft[matches[selectedIndexes[i]].trainIdx]);
+          selectedPoints2d_right.push_back(keypointsRight[matches[selectedIndexes[i]].trainIdx]);
 
           testmatches.push_back(matches[selectedIndexes[i]]);
       }
@@ -272,9 +272,13 @@ bool WorldMapping::updateModule() {
       drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
       imshow("Test", resultImage);
 
-      namedWindow("SelectedObjLeft");
-      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
-      imshow("SelectedObjLeft", outImageLeft);
+//      namedWindow("SelectedObjLeft");
+//      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+//      imshow("SelectedObjLeft", outImageLeft);
+//
+//      namedWindow("SelectedObjRight");
+//      drawKeypoints(cameraRight->getImage(), selectedPoints2d_right, outImageRight, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+//      imshow("SelectedObjRight", outImageRight);
 
       cvWaitKey(33);
 
