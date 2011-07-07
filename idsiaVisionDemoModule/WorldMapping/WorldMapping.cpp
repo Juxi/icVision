@@ -47,6 +47,7 @@ using namespace iCub::iKin;
  */
 
 bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
+
   /*
    * PLEASE remove useless comments when writing actual code. If needed then use Doxygen comments and tags.
    */
@@ -120,159 +121,162 @@ bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
 }
 
 bool WorldMapping::interruptModule() {
-  handlerPort.interrupt();
-  return true;
+	handlerPort.interrupt();
+	return true;
 }
 
 bool WorldMapping::close() {
-  handlerPort.close();
+	handlerPort.close();
 
-  cameraLeft->close();
-  cameraRight->close();
-  movinghead->close();
+	cameraLeft->close();
+	cameraRight->close();
+	movinghead->close();
 
 
-  return true;
+	return true;
 }
 
 bool WorldMapping::respond(const Bottle& command, Bottle& reply) {
-  string helpMessage =  string(getName().c_str()) +
-      " commands are: \n" +
-      "help \n" +
-      "quit \n" +
-      "set thr <n> ... set the threshold \n" +
-      "(where <n> is an integer number) \n";
+	string helpMessage =  string(getName().c_str()) +
+			" commands are: \n" +
+			"help \n" +
+			"quit \n" +
+			"set thr <n> ... set the threshold \n" +
+			"(where <n> is an integer number) \n";
 
-  reply.clear();
+	reply.clear();
 
-  if (command.get(0).asString()=="quit") {
-      reply.addString("quitting");
-      return false;
-  }
-  else if (command.get(0).asString()=="help") {
-      cout << helpMessage;
-      reply.addString("ok");
-  }
-  else if (command.get(0).asString()=="set") {
-      if (command.get(1).asString()=="thr") {
-          //        thresholdValue = command.get(2).asInt(); // set parameter value
-          reply.addString("ok");
-      }
-  }
-  return true;
+	if (command.get(0).asString()=="quit") {
+		reply.addString("quitting");
+		return false;
+	}
+	else if (command.get(0).asString()=="help") {
+		cout << helpMessage;
+		reply.addString("ok");
+	}
+	else if (command.get(0).asString()=="set") {
+		if (command.get(1).asString()=="thr") {
+			//        thresholdValue = command.get(2).asInt(); // set parameter value
+			reply.addString("ok");
+		}
+	}
+	return true;
 }
 
 /* Called periodically every getPeriod() seconds */
 bool WorldMapping::updateModule() {
 
-  cyclecounter++;
+	cyclecounter++;
 
-  isImageLeft = cameraLeft->getImageOnOutputPort();
-  isImageRight = cameraRight->getImageOnOutputPort();
+	isImageLeft = cameraLeft->getImageOnOutputPort();
+	isImageRight = cameraRight->getImageOnOutputPort();
 
-  if(isImageLeft && isImageRight){
+	if(isImageLeft && isImageRight){
+
 
       //Correct the stereo camera if something is changed
       stereoutils->changeCalibration(cameraLeft->getImage().cols);
 
-      //do something
-      cameraLeft->getFeaturesOnOutputPort(FAST10);
-     //cameraLeft->getGaborDescriptorsOnOutputPort();
-      cameraLeft->getDescriptorsOnOutputPort(DBRIEF);
+		//do something
+		cameraLeft->getFeaturesOnOutputPort(FAST10);
+		//cameraLeft->getGaborDescriptorsOnOutputPort();
+		cameraLeft->getDescriptorsOnOutputPort(DBRIEF);
 
-      //TODO CHANGE IN CameraiCub.cpp "HARRIS" linea 48
-      cameraRight->getFeaturesOnOutputPort(FAST10);
-      //cameraRight->getGaborDescriptorsOnOutputPort();
-      cameraRight->getDescriptorsOnOutputPort(DBRIEF);
+		//TODO CHANGE IN CameraiCub.cpp "HARRIS" linea 48
+		cameraRight->getFeaturesOnOutputPort(FAST10);
+		//cameraRight->getGaborDescriptorsOnOutputPort();
+		cameraRight->getDescriptorsOnOutputPort(DBRIEF);
 
-      vector<KeyPoint> keypointsLeft = cameraLeft->getKeypoints();
-      vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
+		vector<KeyPoint> keypointsLeft = cameraLeft->getKeypoints();
+		vector<KeyPoint> keypointsRight = cameraRight->getKeypoints();
 
-      //Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
-      //Mat gaborDescrRight = cameraRight->getGaborDescriptors();
-      Mat descrLeft = cameraLeft->getDescriptors();
-      Mat descrRight = cameraRight->getDescriptors();
+		//Mat gaborDescrLeft = cameraLeft->getGaborDescriptors();
+		//Mat gaborDescrRight = cameraRight->getGaborDescriptors();
+		Mat descrLeft = cameraLeft->getDescriptors();
+		Mat descrRight = cameraRight->getDescriptors();
 
-      vector<DMatch> matches;
+		vector<DMatch> matches;
 
-      //stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
-      stereoutils->matching(descrLeft, descrRight, matches, DBRIEF);
+		//stereoutils->matchingGabor(gaborDescrLeft, gaborDescrRight, matches );
+		stereoutils->matching(descrLeft, descrRight, matches, DBRIEF);
 
-      int point_count = matches.size();
-      vector<Point2f> points1(point_count);
-      vector<Point2f> points2(point_count);
+		int point_count = matches.size();
+		vector<Point2f> points1(point_count);
+		vector<Point2f> points2(point_count);
 
-      // initialize the points here ... */
-      for( int i = 0; i < point_count; i++ )
-        {
-          points1[i] = keypointsLeft[matches[i].queryIdx].pt;
-          points2[i] = keypointsRight[matches[i].trainIdx].pt;
+		// initialize the points here ... */
+		for( int i = 0; i < point_count; i++ )
+		{
+			points1[i] = keypointsLeft[matches[i].queryIdx].pt;
+			points2[i] = keypointsRight[matches[i].trainIdx].pt;
 
-        }
+		}
 
-      vector<uchar> outlier_mask;
-      if(point_count>10)
-        Mat H =  findHomography(points1, points2, RANSAC, 3, outlier_mask);
+		vector<uchar> outlier_mask;
+		if(point_count>10)
+			Mat H =  findHomography(points1, points2, RANSAC, 3, outlier_mask);
 
-      Mat resultImage;
-      drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, matches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255), reinterpret_cast<const vector<char>&> (outlier_mask));
-      namedWindow("nomedellafinestra");
-      imshow("nomedellafinestra", resultImage);
+		Mat resultImage;
+		drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, matches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255), reinterpret_cast<const vector<char>&> (outlier_mask));
+		namedWindow("nomedellafinestra");
+		imshow("nomedellafinestra", resultImage);
 
-      vector<DMatch> matches_tmp;
-      //Filter out matches
-      for( int i = 0; i < matches.size(); i++ )
-          {
-			  if(outlier_mask[i]){
-				  matches_tmp.push_back(matches[i]);
-			  }
-          }
+		vector<DMatch> matches_tmp;
+		//Filter out matches
+		for( int i = 0; i < matches.size(); i++ )
+		{
+			if(outlier_mask[i]){
+				matches_tmp.push_back(matches[i]);
+			}
+		}
 
-      matches.clear();
-      matches = matches_tmp;
+		matches.clear();
+		matches = matches_tmp;
 
-      int selectedfeature = saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
+		int selectedfeature = saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
 
-      namedWindow("Mleft");
-      imshow("Mleft", saliencyutils->getLeftMap());
+		namedWindow("Mleft");
+		imshow("Mleft", saliencyutils->getLeftMap());
 
-      namedWindow("Mright");
-      imshow("Mright", saliencyutils->getRightMap());
+		namedWindow("Mright");
+		imshow("Mright", saliencyutils->getRightMap());
 
-      if(saliencyutils->move == true)
-        movinghead->get2DPoints();
+		if(saliencyutils->move == true)
+			movinghead->get2DPoints();
 
-      Mat outImageLeft;
-      cameraLeft->getImage().copyTo(outImageLeft);
-      Mat outImageRight;
-      cameraRight->getImage().copyTo(outImageRight);
+		Mat outImageLeft;
+		cameraLeft->getImage().copyTo(outImageLeft);
+		Mat outImageRight;
+		cameraRight->getImage().copyTo(outImageRight);
 
-      stereoutils->estimateRTfromImages(cameraLeft->getImage(), cameraRight->getImage(), outImageLeft, outImageRight);
+		stereoutils->estimateRTfromImages(cameraLeft->getImage(), cameraRight->getImage(), outImageLeft, outImageRight);
 
-      namedWindow("leftcamera");
-      imshow("leftcamera", outImageLeft);
+		namedWindow("leftcamera");
+		imshow("leftcamera", outImageLeft);
 
-      namedWindow("rightcamera");
-      imshow("rightcamera", outImageRight);
+		namedWindow("rightcamera");
+		imshow("rightcamera", outImageRight);
 
-      vector<int> selectedIndexes;
-      vector<Point3f> selectedPoints3d;
+		vector<int> selectedIndexes;
+		vector<Point3f> selectedPoints3d;
 
-      stereoutils->segmentOnDepth(keypointsLeft, keypointsRight, matches, selectedfeature, selectedIndexes, selectedPoints3d);
+		stereoutils->segmentOnDepth(keypointsLeft, keypointsRight, matches, selectedfeature, selectedIndexes, selectedPoints3d);
 
-      vector<KeyPoint> selectedPoints2d_left, selectedPoints2d_right;
-      vector<DMatch> testmatches;
+		vector<KeyPoint> selectedPoints2d_left, selectedPoints2d_right;
+		vector<DMatch> testmatches;
+
 
       for(int i=0; i<selectedIndexes.size(); i++){
           selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
           selectedPoints2d_right.push_back(keypointsRight[matches[selectedIndexes[i]].trainIdx]);
 
-          testmatches.push_back(matches[selectedIndexes[i]]);
-      }
+			testmatches.push_back(matches[selectedIndexes[i]]);
+		}
 
-      namedWindow("Test");
-      drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
-      imshow("Test", resultImage);
+		namedWindow("Test");
+		drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
+		imshow("Test", resultImage);
+
 
 //      namedWindow("SelectedObjLeft");
 //      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
@@ -282,34 +286,34 @@ bool WorldMapping::updateModule() {
 //      drawKeypoints(cameraRight->getImage(), selectedPoints2d_right, outImageRight, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
 //      imshow("SelectedObjRight", outImageRight);
 
-      cvWaitKey(33);
+		cvWaitKey(33);
 
-  }
+	}
 
-  return true;
+	return true;
 }
 
 double WorldMapping::getPeriod() {
-  /* module periodicity (seconds), called implicitly by myModule */
-  return 0.1;
+	/* module periodicity (seconds), called implicitly by myModule */
+	return 0.1;
 }
 
 bool WorldMapping::saveImage(Mat& image2save, string directory, int framecounter){
-  cout<<"Start saving image "<<endl;
+	cout<<"Start saving image "<<endl;
 
-  stringstream filename;
-  if(framecounter<10)
-    filename<<directory<<"im_000"<<framecounter<<".ppm";
-  else if(framecounter<100)
-    filename<<directory<<"im_00"<<framecounter<<".ppm";
-  else if(framecounter<1000)
-    filename<<directory<<"im_0"<<framecounter<<".ppm";
-  else
-    filename<<directory<<"im_"<<framecounter<<".ppm";
+	stringstream filename;
+	if(framecounter<10)
+		filename<<directory<<"im_000"<<framecounter<<".ppm";
+	else if(framecounter<100)
+		filename<<directory<<"im_00"<<framecounter<<".ppm";
+	else if(framecounter<1000)
+		filename<<directory<<"im_0"<<framecounter<<".ppm";
+	else
+		filename<<directory<<"im_"<<framecounter<<".ppm";
 
-  cout<<"Saving image "<<filename.str()<<endl;
+	cout<<"Saving image "<<filename.str()<<endl;
 
-  vector<int> params;
-  params.push_back(CV_IMWRITE_PXM_BINARY);
-  return imwrite(filename.str(), image2save,params);
+	vector<int> params;
+	params.push_back(CV_IMWRITE_PXM_BINARY);
+	return imwrite(filename.str(), image2save,params);
 }
