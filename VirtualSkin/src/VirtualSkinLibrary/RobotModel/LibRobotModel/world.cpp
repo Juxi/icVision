@@ -152,6 +152,7 @@ bool World::appendToObject( CompositeObject* object, PrimitiveObject* primitive 
 	{
 		object->append( primitive );
 		emit worldAppendedPrimitive( primitive );
+		emit requestDisplayList( static_cast<DisplayList*>( primitive ) );
 	}
 	
 	return foundObject;
