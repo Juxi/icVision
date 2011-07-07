@@ -340,6 +340,7 @@ bool ReachingWorker::doReaching() {
 		std::cout << "from above!!" << std::endl;
 		if( policy & FROM_ABOVE) x[2] += reaching_offset;
 		else x[2] -= reaching_offset;
+		x[1] -= 0.02;
 	}
 	if( policy & FROM_LEFT || policy & FROM_RIGHT) {
 		orientation = orientationFromSide;
@@ -348,7 +349,7 @@ bool ReachingWorker::doReaching() {
 	}
 
 	// offset needed?!!?!
-	x[2] += 0.05;
+//	x[2] += 0.05;
 
 
 	
