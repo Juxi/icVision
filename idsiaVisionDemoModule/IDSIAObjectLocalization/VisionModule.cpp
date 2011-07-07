@@ -38,7 +38,7 @@ VisionModule::~VisionModule()
 
 double VisionModule::getPeriod()
 {
-   return 1; //module periodicity (seconds)
+   return 0.1; //module periodicity (seconds)
 }
 
 /*

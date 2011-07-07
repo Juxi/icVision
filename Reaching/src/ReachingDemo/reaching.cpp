@@ -235,17 +235,12 @@ void ReachingWorker::reachPosition( )
 		std::cout.flush();
 
 		printStatus();
-		
-		yarp::os::Time::delay(0.5);
-// testing now
+		yarp::os::Time::delay(0.2);
+
 		if(doReaching()) {
-// testing now
 			std::cout << "Reaching completed!" << std::endl;			
-// testing now
 		} else {
-// testing now
 			std::cout << "ERROR: Reach failed" << std::endl;
-// testing now
 		}
 	} else {
 		std::cout << "ERROR: PREReach failed" << std::endl;
@@ -302,7 +297,7 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 	if( policy & ReachingWorker::FROM_ABOVE ) {
 		
 			preReachPos.push_back(xd[0]);
-			preReachPos.push_back(xd[1]);	
+			preReachPos.push_back(xd[1] - 0.05);	
 			preReachPos.push_back(xd[2] + defined_offset);
 		
 	} else if( policy & ReachingWorker::FROM_BELOW ) {
@@ -321,7 +316,7 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 		
 		preReachPos.push_back(xd[0]);
 		preReachPos.push_back(xd[1] - defined_offset);	
-		preReachPos.push_back(xd[2]);
+		preReachPos.push_back(xd[2] + 0.1); //0.1needed but why?);
 		
 	} else
 		std::cout << "NOT YET IMPlEMENTED" << std::endl; 
@@ -330,32 +325,46 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 }
 
 bool ReachingWorker::doReaching() {
-	yarp::sig::Vector x0, o0;
+	if( ! reachActive ) return false;
+
+	yarp::sig::Vector x, x0, o0;
 	arm->getPose(x0, o0);
 //	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
+
+	double reaching_offset = 0.1;	// sphere RADIUS + eps?
+	x = xd;
 
 	yarp::sig::Vector orientation;
 	if( policy & FROM_ABOVE || policy & FROM_BELOW) {
 		orientation = orientationFromAbove;
 		std::cout << "from above!!" << std::endl;
+		if( policy & FROM_ABOVE) x[2] += reaching_offset;
+		else x[2] -= reaching_offset;
 	}
 	if( policy & FROM_LEFT || policy & FROM_RIGHT) {
 		orientation = orientationFromSide;
+		if( policy & FROM_RIGHT) x[1] += reaching_offset;
+		else x[1] -= reaching_offset;
 	}
+
+	// offset needed?!!?!
+	x[2] += 0.05;
+
+
 	
 	// setup hand
 	callGraspController("pre");
 
 	bool done = false;
-
 	
+/* no intermediate for now
 	const int MAX_STEPS = 2;
 	double fact = 1.0 / MAX_STEPS;
 //	for(int steps = 1; steps < MAX_STEPS; steps++) {
 
 		yarp::sig::Vector intermediatePos(3);
 		if( policy & ReachingWorker::STRAIGHT ) {
-			for(int i=0;i < 3;i++) intermediatePos[i] = (xd[i] - x0[i]) * fact + x0[i];
+			for(int i=0;i < 3;i++) intermediatePos[i] = (x[i] - x0[i]) * fact + x0[i];
 		}
 		
 		std::cout << "Going to intermediate:" << intermediatePos[0] << ", "<< intermediatePos[1] << ", "<< intermediatePos[2] <<  std::endl;	
@@ -365,16 +374,17 @@ bool ReachingWorker::doReaching() {
 		arm->goToPose(intermediatePos, orientation);	
 		arm->waitMotionDone(0.1, fact);
 //	}
+*/
 	
 	// setup hand, close now
 	callGraspController("cls");
 		
-	std::cout << "Going to reaching:" << xd[0] << ", "<< xd[1] << ", "<< xd[2] <<  std::endl;	
+	std::cout << "Going to reaching:" << x[0] << ", "<< x[1] << ", "<< x[2] <<  std::endl;	
 
 	// move arm
 //	arm->goToPose(xd, orientation, 1.0);
-	arm->goToPose(xd, orientation); // testing in the lab!!, 1.0);
-	arm->waitMotionDone(0.1, fact);
+	arm->goToPose(x, orientation); // testing in the lab!!, 1.0);
+	arm->waitMotionDone(0.1, 0.5/*fact*/);
 
 	while(! done ) {
 		arm->waitMotionDone(0.1, 1.0);
