@@ -62,16 +62,14 @@ bool ReachingModule::updateModule()
 		// TODO
 
 		//	do it only once changes
-		if( objName == lastTgtObjName ) {
-			cout << ": last is the same" << endl;
-			// todo check position
-			return true;
-		} else {
+		if( ! (objName == lastTgtObjName)  ) {
 			cout << " new target found " << endl;
 			reach->stopMotion();
+		} else {
+			cout << " target is still the same" << endl;
 		}	
 
-		// get information about the new object from rpc
+		// get information about the object from rpc
 		cmd.clear();
 		cmd.addString("get");
 		cmd.addString(objName.c_str());
@@ -79,6 +77,7 @@ bool ReachingModule::updateModule()
 		
 		cout << objName << ": " << response.toString().c_str() << "" << endl;
 		
+		// TODO debug & test  this!!
 		if( response.toString() == "Object not found." )
 			return true;
 		
@@ -86,8 +85,17 @@ bool ReachingModule::updateModule()
 		double y = response.get(14).asDouble();	
 		double z = response.get(15).asDouble();
 		
+		// check if the position is a new one!
+		bool posIsSame = true;
+
+		yarp::sig::Vector oldpos = reach->getPosition();
+		if( oldpos[0] == x && oldpos[1] == x && oldpos[2] == z ) {
+			cout << " position is still the same" << endl;
+			return true;
+		}
+				
 		// set the reach target!
-		reach->setPosition(x, y, z);
+		if( ! posIsSame )reach->setPosition(x, y, z);
 		
 		// reach->setPolicy ()... something like from top from left, which hand orientation?
 		
