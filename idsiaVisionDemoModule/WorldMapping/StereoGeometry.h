@@ -10,6 +10,11 @@
 #define STEREOGEOMETRY_H_
 
 #include <opencv2/opencv.hpp>
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
+#include <yarp/sig/Matrix.h>
+#include <iCub/iKin/iKinFwd.h>
+
 #include "CameraiCub.h"
 
 typedef enum {Camera640, Camera320} Cameratype;
@@ -31,14 +36,19 @@ private:
   cv::Mat P_left, P_right; //Left and Right camera matrices
   cv::Mat RTcl2w, RTw2cl; // RT from camera left to world and vice versa
   cv::Mat RTcr2w, RTw2cr; // RT from camera right to world and vice versa
-
   cv::Mat RTb2w, RTw2b; //RT from board to world and vice versa
+
+  //Port to read encoders
+  std::string inputHeadPortName;
+  std::string inputTorsoPortName;
+  BufferedPort<yarp::os::Bottle> inputHeadPort;
+  BufferedPort<yarp::os::Bottle> inputTorsoPort;
 
   //only for matching
   Ptr<DescriptorMatcher> descriptorMatcher;
 
 public:
-  StereoGeometry(Cameratype type);
+  StereoGeometry(std::string moduleName, Cameratype type);
   virtual
   ~StereoGeometry();
 
