@@ -154,13 +154,15 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 	{
 		if ( geom == VOCAB_SPH || geom == VOCAB_SSPH )
 		{
-			double r = command.get(n).asDouble(); n++;  // radius 
+			qreal r = command.get(n).asDouble(); n++;  // radius 
 			double px = command.get(n).asDouble(); n++; // x position
 			double py = command.get(n).asDouble(); n++; // y position  
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 
-			primitive = object->newSphere(r, pos);
+			primitive = new RobotModel::Sphere(r);
+			primitive->setPosition(pos);
+			world->appendToObject( object, primitive );
 		}
 		else if ( geom == VOCAB_CYL || geom == VOCAB_SCYL )
 		{
@@ -171,7 +173,9 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 			
-			primitive = object->newCylinder( r, h, pos );
+			primitive = new RobotModel::Cylinder(r,h);
+			primitive->setPosition(pos);
+			world->appendToObject( object, primitive );
 		}
 		else if ( geom == VOCAB_BOX || geom == VOCAB_SBOX )
 		{
@@ -185,12 +189,14 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 			
-			primitive = object->newBox( size, true, pos );
+			primitive = new RobotModel::Box(size,true);
+			primitive->setPosition(pos);
+			world->appendToObject( object, primitive );
 		}
 		else { reply.addString("Cannot append to object: Unknown Primitive... use 'sph', 'cyl', 'box'"); }
 			
 		//world->filterCollisions( primitive );
-		object->append(primitive);
+		//object->append(primitive);
 		
 		reply.addString("Appended ");
 		reply.addString( primitive->getName().toStdString().c_str() );

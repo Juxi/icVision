@@ -70,7 +70,6 @@ public:
 		}
 		
 		model.robot->open(fileName);
-		printf("loading %s\n", worldFileName.toStdString().c_str());
 		model.world->load(worldFileName);
 		
 		const QString deviceBaseName( model.robot->getName() );
