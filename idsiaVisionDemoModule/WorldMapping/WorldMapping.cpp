@@ -35,6 +35,8 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace std;
 using namespace cv;
+using namespace yarp::math;
+using namespace iCub::iKin;
 
 
 /*
@@ -45,76 +47,77 @@ using namespace cv;
  */
 
 bool WorldMapping::configure(yarp::os::ResourceFinder &rf) {
-	/*
-	 * PLEASE remove useless comments when writing actual code. If needed then use Doxygen comments and tags.
-	 */
+
+  /*
+   * PLEASE remove useless comments when writing actual code. If needed then use Doxygen comments and tags.
+   */
 
 
-	/* Process all parameters from both command-line and .ini file */
-	/* get the module name which will form the stem of all module port names */
-	moduleName            = rf.check("name",
-			Value("WorldMappingModule"),
-			"module name (string)").asString();
+  /* Process all parameters from both command-line and .ini file */
+  /* get the module name which will form the stem of all module port names */
+  moduleName            = rf.check("name",
+      Value("WorldMappingModule"),
+      "module name (string)").asString();
 
-	/*
-	 * before continuing, set the module name before getting any other parameters,
-	 * specifically the port names which are dependent on the module name
-	 */
-	setName(moduleName.c_str());
+  /*
+   * before continuing, set the module name before getting any other parameters,
+   * specifically the port names which are dependent on the module name
+   */
+  setName(moduleName.c_str());
 
-	/* now, get the rest of the parameters */
-	/*
-	 * get the robot name which will form the stem of the robot ports names
-	 * and append the specific part and device required
-	 */
-	robotName             = rf.check("robot",
-			Value("icub"),
-			"Robot name (string)").asString();
+  /* now, get the rest of the parameters */
+  /*
+   * get the robot name which will form the stem of the robot ports names
+   * and append the specific part and device required
+   */
+  robotName             = rf.check("robot",
+      Value("icub"),
+      "Robot name (string)").asString();
 
-	cyclecounter = 0;
+  cyclecounter = 0;
 
-	//Set-up camera ports, input and output
-	cameraLeft = new CameraiCub(moduleName, "left");
-	cameraRight = new CameraiCub(moduleName, "right");
+  //Set-up camera ports, input and output
+  cameraLeft = new CameraiCub(moduleName, "left");
+  cameraRight = new CameraiCub(moduleName, "right");
 
-	//Set-up stereo geometry function
-	stereoutils = new StereoGeometry(Camera320);
+  //Set-up stereo geometry function
+  stereoutils = new StereoGeometry(moduleName, Camera320);
 
-	//Set-up saliency map
-	saliencyutils = new SaliencyMap();
+  //Set-up saliency map
+  saliencyutils = new SaliencyMap();
 
-	//Set-up moving head
-	movinghead = new MovingHead();
+  //Set-up moving head
+  movinghead = new MovingHead();
 
-	/* do all initialization here */
-	/*
-	 * attach a port of the same name as the module (prefixed with a /) to the module
-	 * so that messages received from the port are redirected to the respond method
-	 */
-	handlerPortName =  "/";
-	handlerPortName += getName();         // use getName() rather than a literal
+  /* do all initialization here */
+  /*
+   * attach a port of the same name as the module (prefixed with a /) to the module
+   * so that messages received from the port are redirected to the respond method
+   */
+  handlerPortName =  "/";
+  handlerPortName += getName();         // use getName() rather than a literal
 
-	if (!handlerPort.open(handlerPortName.c_str())) {
-		cout << getName() << ": Unable to open port " << handlerPortName << endl;
-		return false;
-	}
+  if (!handlerPort.open(handlerPortName.c_str())) {
+      cout << getName() << ": Unable to open port " << handlerPortName << endl;
+      return false;
+  }
 
-	attach(handlerPort);  // attach to port
+  attach(handlerPort);  // attach to port
 
-	//Connect Port
-	cameraLeft->connect("/icub/cam/left");
-	cameraRight->connect("/icub/cam/right");
-	movinghead->connect(saliencyutils->getPortName(0),saliencyutils->getPortName(1));
+  //Connect Port
+  cameraLeft->connect("/icub/cam/left");
+  cameraRight->connect("/icub/cam/right");
+  movinghead->connect(saliencyutils->getPortName(0),saliencyutils->getPortName(1));
 
 
-	//    /* create the thread and pass pointers to the module parameters */
-	//    dThread = new demoThread(&thresholdValue);
-	//
-	//    /* now start the thread to do the work */
-	//    dThread->start(); // this calls threadInit() and it if returns true, it then calls run()
+  //    /* create the thread and pass pointers to the module parameters */
+  //    dThread = new demoThread(&thresholdValue);
+  //
+  //    /* now start the thread to do the work */
+  //    dThread->start(); // this calls threadInit() and it if returns true, it then calls run()
 
-	return true ;     // let the RFModule know everything went well
-	// so that it will then run the module
+  return true ;     // let the RFModule know everything went well
+  // so that it will then run the module
 }
 
 bool WorldMapping::interruptModule() {
@@ -170,8 +173,9 @@ bool WorldMapping::updateModule() {
 
 	if(isImageLeft && isImageRight){
 
-		//Correct the stereo camera if something is changed
-		stereoutils->changeCalibration(cameraLeft->getImage().cols);
+
+      //Correct the stereo camera if something is changed
+      stereoutils->changeCalibration(cameraLeft->getImage().cols);
 
 		//do something
 		cameraLeft->getFeaturesOnOutputPort(FAST10);
@@ -261,9 +265,10 @@ bool WorldMapping::updateModule() {
 		vector<KeyPoint> selectedPoints2d_left, selectedPoints2d_right;
 		vector<DMatch> testmatches;
 
-		for(int i=0; i<selectedIndexes.size(); i++){
-			selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
-			selectedPoints2d_right.push_back(keypointsLeft[matches[selectedIndexes[i]].trainIdx]);
+
+      for(int i=0; i<selectedIndexes.size(); i++){
+          selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
+          selectedPoints2d_right.push_back(keypointsRight[matches[selectedIndexes[i]].trainIdx]);
 
 			testmatches.push_back(matches[selectedIndexes[i]]);
 		}
@@ -272,9 +277,14 @@ bool WorldMapping::updateModule() {
 		drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
 		imshow("Test", resultImage);
 
-		namedWindow("SelectedObjLeft");
-		drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
-		imshow("SelectedObjLeft", outImageLeft);
+
+//      namedWindow("SelectedObjLeft");
+//      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+//      imshow("SelectedObjLeft", outImageLeft);
+//
+//      namedWindow("SelectedObjRight");
+//      drawKeypoints(cameraRight->getImage(), selectedPoints2d_right, outImageRight, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+//      imshow("SelectedObjRight", outImageRight);
 
 		cvWaitKey(33);
 
