@@ -165,7 +165,6 @@
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 #include <yarp/sig/Matrix.h>
-
 #include <iCub/iKin/iKinFwd.h>
 #include <opencv2/opencv.hpp>
 
@@ -174,11 +173,14 @@
 #include "SaliencyMap.h"
 #include "MovingHead.h"
 
+
 class WorldMapping: public yarp::os::RFModule {
 
   std::string moduleName;
   std::string robotName;
   std::string handlerPortName;
+
+
 
   int cyclecounter;
 
