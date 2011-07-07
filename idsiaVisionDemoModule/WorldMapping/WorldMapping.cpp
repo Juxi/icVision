@@ -171,15 +171,15 @@ bool WorldMapping::updateModule() {
   if(isImageLeft && isImageRight){
 
       //Correct the stereo camera if something is changed
-      stereoutils->changeCalibration(cameraLeft->getImage().cols);
+     // stereoutils->changeCalibration(cameraLeft->getImage().cols);
 
       //do something
-      cameraLeft->getFeaturesOnOutputPort(GFTT);
-      //cameraLeft->getGaborDescriptorsOnOutputPort();
+      cameraLeft->getFeaturesOnOutputPort(FAST10);
+     //cameraLeft->getGaborDescriptorsOnOutputPort();
       cameraLeft->getDescriptorsOnOutputPort(DBRIEF);
 
       //TODO CHANGE IN CameraiCub.cpp "HARRIS" linea 48
-      cameraRight->getFeaturesOnOutputPort(GFTT);
+      cameraRight->getFeaturesOnOutputPort(FAST10);
       //cameraRight->getGaborDescriptorsOnOutputPort();
       cameraRight->getDescriptorsOnOutputPort(DBRIEF);
 
@@ -217,6 +217,18 @@ bool WorldMapping::updateModule() {
       namedWindow("nomedellafinestra");
       imshow("nomedellafinestra", resultImage);
 
+      vector<DMatch> matches_tmp;
+      //Filter out matches
+      for( int i = 0; i < matches.size(); i++ )
+          {
+			  if(outlier_mask[i]){
+				  matches_tmp.push_back(matches[i]);
+			  }
+          }
+
+      matches.clear();
+      matches = matches_tmp;
+
       int selectedfeature = saliencyutils->detectSaliencyPoint(cameraLeft->getImage(), cameraRight->getImage(), keypointsLeft, keypointsRight, matches);
 
       namedWindow("Mleft");
@@ -243,20 +255,28 @@ bool WorldMapping::updateModule() {
 
       vector<int> selectedIndexes;
       vector<Point3f> selectedPoints3d;
+
       stereoutils->segmentOnDepth(keypointsLeft, keypointsRight, matches, selectedfeature, selectedIndexes, selectedPoints3d);
 
       vector<KeyPoint> selectedPoints2d_left, selectedPoints2d_right;
+      vector<DMatch> testmatches;
 
       for(int i=0; i<selectedIndexes.size(); i++){
           selectedPoints2d_left.push_back(keypointsLeft[matches[selectedIndexes[i]].queryIdx]);
           selectedPoints2d_right.push_back(keypointsLeft[matches[selectedIndexes[i]].trainIdx]);
+
+          testmatches.push_back(matches[selectedIndexes[i]]);
       }
+
+      namedWindow("Test");
+      drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
+      imshow("Test", resultImage);
 
       namedWindow("SelectedObjLeft");
       drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
       imshow("SelectedObjLeft", outImageLeft);
 
-      cvWaitKey(/*33*/);
+      cvWaitKey(33);
 
   }
 

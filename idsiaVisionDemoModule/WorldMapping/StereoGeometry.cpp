@@ -23,20 +23,22 @@ StereoGeometry::StereoGeometry(Cameratype type)
   RTcl2w = Mat::eye(4,4,CV_32FC1);
   RTw2cl = Mat::eye(4,4,CV_32FC1);
 
-  if(type == Camera640)
+  /*if(type == Camera640)
     loadCalibration("../conf/calibrationMatrices640.yaml");
   else
     loadCalibration("../conf/calibrationMatrices320.yaml");
+*/
 
+  loadCalibration("calibrationMatrices.yaml");
 }
 
 StereoGeometry::~StereoGeometry()
 {
-  if(cameraType == Camera640)
+ /* if(cameraType == Camera640)
     saveCalibration("../conf/calibrationMatrices640.yaml");
   else
     saveCalibration("../conf/calibrationMatrices320.yaml");
-
+*/
 }
 
 
@@ -196,9 +198,6 @@ void StereoGeometry::estimateRTfromImages(Mat &imageLeft, Mat &imageRight, Mat &
       R.convertTo(R, CV_32F);
       T.convertTo(T, CV_32F);
 
-      cout<<R<<endl;
-      cout<<T<<endl;
-
       Rlefttmp.convertTo(Rlefttmp, CV_32F);
       Tlefttmp.convertTo(Tlefttmp, CV_32F);
 
@@ -282,7 +281,7 @@ void StereoGeometry::undistortImage(Mat& image2undist, Mat& undistortedImage, st
 }
 
 
-void StereoGeometry::estimatePmatrix(Mat &K, Mat &RTworld2camera, cv::Mat &P){
+void StereoGeometry::estimatePmatrix(Mat &K, Mat &RTworld2camera, Mat &P){
 
   P = Mat::zeros(3,4, K.type());
   // Mat iR_left = Mat::eye(3,3, RTcamera2world.type());
@@ -297,6 +296,23 @@ void StereoGeometry::estimatePmatrix(Mat &K, Mat &RTworld2camera, cv::Mat &P){
   tmplR.copyTo(P_tmpR);
   tmplT.copyTo(P_tmpT);
 }
+
+void StereoGeometry::estimatePmatrix(Mat &K, Mat &Rworld2camera, Mat &Tworld2camera, Mat &P){
+
+	  P = Mat::zeros(3,4, K.type());
+	  // Mat iR_left = Mat::eye(3,3, RTcamera2world.type());
+	  // Mat iT_left =  Mat::zeros(3,1, RTcamera2world.type());
+	  Mat iR_left = Rworld2camera;
+	  Mat iT_left =  Tworld2camera; //Convertion from m->mm ?
+
+	  Mat P_tmpR = P(Rect(0,0,3,3));
+	  Mat P_tmpT = P(Rect(3,0,1,3));
+	  Mat tmplR = K*iR_left;
+	  Mat tmplT = K*iT_left;
+	  tmplR.copyTo(P_tmpR);
+	  tmplT.copyTo(P_tmpT);
+	}
+
 
 Point2f StereoGeometry::undistortPoint(Point2f &point2undistort, string camera){
   Mat dist;
@@ -367,10 +383,12 @@ void StereoGeometry::triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f 
   CvMat __points1 = doubleleft, __points2 = doubleright;
   CvMat __newpoints1 = doubleleft, __newpoints2 = doubleright;
 
+/*
   if(P_left.empty())
     estimatePmatrix(K_left, RTw2cl, P_left);
   if(P_right.empty())
     estimatePmatrix(K_right, RTw2cr, P_right);
+*/
 
   Mat doubleP_left, doubleP_right;
   P_left.convertTo(doubleP_left, CV_64FC1);
@@ -401,6 +419,8 @@ void StereoGeometry::triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f 
   point3d.y = result.at<float>(1,0)/result.at<float>(3,0);
   point3d.z = result.at<float>(2,0)/result.at<float>(3,0);
 
+  //cout<<point3d<<endl;
+
 }
 
 void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d){
@@ -418,10 +438,12 @@ void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr
   CvMat __points1 = doubleleft, __points2 = doubleright;
   CvMat __newpoints1 = doubleleft, __newpoints2 = doubleright;
 
+/*
   if(P_left.empty())
       estimatePmatrix(K_left, RTw2cl, P_left);
     if(P_right.empty())
       estimatePmatrix(K_right, RTw2cr, P_right);
+*/
 
   Mat doubleP_left, doubleP_right;
   P_left.convertTo(doubleP_left, CV_64FC1);
@@ -508,6 +530,8 @@ void StereoGeometry::triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr
 
 
   //TODO for testing
+
+/*
   Mat point2dtest = K_left*point3DLeft;
   point2dtest.at<float>(0,0)/=point2dtest.at<float>(2,0);
   point2dtest.at<float>(1,0)/=point2dtest.at<float>(2,0);
@@ -515,10 +539,11 @@ void StereoGeometry::triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr
 
   point2dtest.at<float>(0,0)-= point_l_distort.at<float>(0,0);
   point2dtest.at<float>(1,0)-= point_l_distort.at<float>(1,0);
+*/
 
-   cout<<point2dtest<<endl;
+  //cout<<point2dtest<<endl;
 
-  // cout<<point3DLeft<<endl;
+//   cout<<point3D<<endl;
   //    %--- Right coordinates:
   //    XR = R*XL + T_vect;
   //Mat point3DRight = R*point3DLeft+T;
@@ -531,28 +556,38 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
   Point3f point3d, selectedPoint3d;
 
   //Estimate depth of the selected point
-  cout<<"Estimate new object"<<endl;
-  triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+  //cout<<"Estimate new object"<<endl;
 
-  cout<<"***********************"<<endl;
+//  triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+  Mat fakeR = Mat::eye(3,3,R.type());
+  Mat fakeT = Mat::zeros(3,1,T.type());
+
+  estimatePmatrix(K_left, fakeR, fakeT, P_left);
+  estimatePmatrix(K_right, R, T, P_right);
+
+  triangulatePoint(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+  //cout<<"***********************"<<endl;
   for(int i = 0; i<matches.size(); i++){
       pointLeft = keysLeft[matches[i].queryIdx].pt;
       pointRight = keysRight[matches[i].trainIdx].pt;
 
       //estimate the point wrt camera left
-      triangulatePointLeftCamera(pointLeft, pointRight, point3d);
+      //triangulatePointLeftCamera(pointLeft, pointRight, point3d);
+      triangulatePoint(pointLeft, pointRight, point3d);
 
-     // if(point3d.z > 0){
+      if(point3d.z > 0){
 
-        if( abs(point3d.x-selectedPoint3d.x) < 0.05 &&
-            abs(point3d.y-selectedPoint3d.y) < 0.05 &&
-            abs(point3d.z-selectedPoint3d.z) < 0.01){
+        if( abs(point3d.x-selectedPoint3d.x) < 0.1 &&
+            abs(point3d.y-selectedPoint3d.y) < 0.1 &&
+            abs(point3d.z-selectedPoint3d.z) < 0.005){
 
             selectedIndexes.push_back(i);
             selectedPoints3d.push_back(point3d);
         }
 
-     // }
+      }
   }
 
   //Only for debug
@@ -566,4 +601,5 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 
 
 }
+
 

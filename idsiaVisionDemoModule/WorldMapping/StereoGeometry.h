@@ -49,6 +49,7 @@ public:
   bool detectChessBoard(cv::Size patternsize, float squaresize,  cv::Mat &image, cv::Mat &outImage, std::vector<cv::Point2f> &corners);
   void estimateRTfromImages(cv::Mat &imageLeft, cv::Mat &imageRight, cv::Mat &outImageLeft, cv::Mat &outImageRight);
   void estimatePmatrix(cv::Mat &K, cv::Mat &RTworld2camera, cv::Mat &P);
+  void estimatePmatrix(cv::Mat &K, cv::Mat &Rworld2camera, cv::Mat &Tworld2camera, cv::Mat &P);
 
   bool loadCalibration(std::string filename = "calibrationMatrices.yaml");
   bool saveCalibration(std::string filename = "calibrationMatrices.yaml");
