@@ -1,1 +1,0 @@
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/IDSIAObjectLocalization/release/CMakeFiles/IDSIAObjectLocalization.dir
