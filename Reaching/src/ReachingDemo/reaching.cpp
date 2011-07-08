@@ -99,7 +99,7 @@ void ReachingWorker::init() {
 //	orientationFromAbove[3] =  3.14;
 	
 	// set policy TODO
-	setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
+	setPolicy( ReachingWorker::FROM_LEFT | ReachingWorker::STRAIGHT );
 
 	initialized = true;
 
@@ -239,6 +239,7 @@ void ReachingWorker::reachPosition( )
 
 		if(doReaching()) {
 			std::cout << "Reaching completed!" << std::endl;			
+			printStatus();
 		} else {
 			std::cout << "ERROR: Reach failed" << std::endl;
 		}
@@ -314,9 +315,9 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 		
 	} else if( policy & ReachingWorker::FROM_LEFT ) {
 		
-		preReachPos.push_back(xd[0]);
+		preReachPos.push_back(xd[0] + 0.05);
 		preReachPos.push_back(xd[1] - defined_offset);	
-		preReachPos.push_back(xd[2] + 0.1); //0.1needed but why?);
+		preReachPos.push_back(xd[2] + 0.05); //0.1needed but why?);
 		
 	} else
 		std::cout << "NOT YET IMPlEMENTED" << std::endl; 
@@ -331,7 +332,7 @@ bool ReachingWorker::doReaching() {
 	arm->getPose(x0, o0);
 //	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
 
-	double reaching_offset = 0.1;	// sphere RADIUS + eps?
+	double reaching_offset = 0.05;	// sphere RADIUS + eps?
 	x = xd;
 
 	yarp::sig::Vector orientation;
@@ -346,6 +347,9 @@ bool ReachingWorker::doReaching() {
 		orientation = orientationFromSide;
 		if( policy & FROM_RIGHT) x[1] += reaching_offset;
 		else x[1] -= reaching_offset;
+
+	// real robot testing
+		//x[0] += 0.02;
 	}
 
 	// offset needed?!!?!

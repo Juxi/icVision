@@ -31,7 +31,7 @@ start order:
  (maybe without world?!if you get: "Problems with obtaining the number of controlled axes")
 
  on the pc 104: 
-  simCartesianControl --context simCartesianControl/vSkinConfRealRobot --robot icubSim
+  simCartesianControl --context simCartesianControl/vSkinConfRealRobot --robot icubF
 
  back on the server:
   iKinCartesianSolver --part left_arm --context simCartesianControl/vSkinConfRealRobot
