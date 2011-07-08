@@ -10,7 +10,6 @@
 #include "worldRpcInterface.h"
 #include "world.h"
 #include "robotmodelexception.h"
-//#include "compositeObject.h"
 #include "model.h"
 #include "constants.h"
 
@@ -345,25 +344,31 @@ RobotModel::CompositeObject* WorldRpcInterface::getObject( const yarp::os::Bottl
 RobotModel::PrimitiveObject* WorldRpcInterface::getPrimitive( const RobotModel::CompositeObject* object, const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {
 	QString primName = getName( command, n );
-	RobotModel::PrimitiveObject* primitive = object->getPrimitiveByName( primName );
-	if ( !primitive ) {
-		reply.addString("Primitive not found.");
-		return 0;
-	} else {
-		reply.addString("Primitive found.");
-		return primitive;
+	if ( object )
+	{
+		RobotModel::PrimitiveObject* primitive = object->getPrimitiveByName( primName );
+		if ( !primitive ) {
+			reply.addString("Primitive not found.");
+			return 0;
+		} else {
+			reply.addString("Primitive found.");
+			return primitive;
+		}
 	}
+	return NULL;
 }
 
 QString WorldRpcInterface::getName( const yarp::os::Bottle& command, int& n  )
 {
 	QString name;
 	int unknownData = command.get(n).asVocab();
+	int len = command.get(n).asString().length();
 	 
 	// for primitive shapes build the name from the vocab and the following number
-	if ( unknownData == VOCAB_SPH || unknownData == VOCAB_SSPH ||
-		 unknownData == VOCAB_CYL || unknownData == VOCAB_SCYL ||
-		 unknownData == VOCAB_BOX || unknownData == VOCAB_SBOX )
+	if ( len < 5 &&
+		 (unknownData == VOCAB_SPH || unknownData == VOCAB_SSPH ||
+		  unknownData == VOCAB_CYL || unknownData == VOCAB_SCYL ||
+		  unknownData == VOCAB_BOX || unknownData == VOCAB_SBOX ) )
 	{
 		name = command.get(n).asString(); n++;
 		name += QString::number( command.get(n).asInt() ); n++;
@@ -371,6 +376,7 @@ QString WorldRpcInterface::getName( const yarp::os::Bottle& command, int& n  )
 	else // otherwise treat the vocab as a name directly
 	{
 		name = command.get(n).asString(); n++;
+		printf("GET NAME: %s\n", name.toStdString().c_str());
 	}
 	return name;
 }
