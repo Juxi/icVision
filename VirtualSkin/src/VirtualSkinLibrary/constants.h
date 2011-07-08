@@ -32,6 +32,7 @@
 // commands for objects
 #define VOCAB_MK VOCAB2('m','k')			//!< Make a new object
 #define VOCAB_SET VOCAB3('s','e','t')		//!< Set the position of an object
+#define VOCAB_DEF VOCAB3('d','e','f')
 #define VOCAB_GET VOCAB3('g','e','t')		//!< Returns the 4x4 rototranslation matrix for an object
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object

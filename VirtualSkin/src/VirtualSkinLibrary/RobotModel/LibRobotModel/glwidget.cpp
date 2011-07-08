@@ -89,7 +89,7 @@ void GLWidget::paintGL()
 void GLWidget::addDisplayList( RobotModel::DisplayList* thisList )
 {
 	//displayListList.append(thisList);
-	thisList->makeDisplayList();
+	if( thisList ) { thisList->makeDisplayList(); }
 }
 
 void GLWidget::removeDisplayList( int idx )

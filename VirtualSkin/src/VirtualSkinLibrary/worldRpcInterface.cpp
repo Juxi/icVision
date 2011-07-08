@@ -41,11 +41,11 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	{
 		case VOCAB_LS:	getList(reply); break;
 		case VOCAB_MK:  make(command,reply,n); break;
-		case VOCAB_SET: set(command,reply,n); break;
+		case VOCAB_SET: setPos(command,reply,n); break;
+		case VOCAB_DEF: def(command,reply,n); break;
 		case VOCAB_GET: getState(command,reply,n); break;
 		case VOCAB_ROT: setRot(command,reply,n); break;
 		case VOCAB_REM: removeObject(command,reply,n); break;
-
 		case VOCAB_APP:  append(command,reply,n); break;
 		case VOCAB_PSET: pSetPos(command,reply,n); break;
 		case VOCAB_PROT: pSetRot(command,reply,n); break;
@@ -205,13 +205,12 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			
 	} catch (std::exception& e) { reply.addString(e.what()); }
 }
-void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
+void WorldRpcInterface::def( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {
 	RobotModel::CompositeObject* object = getObject( command, reply, n );
 	
 	if ( object )
 	{
-		bool didSomething = false;
 		int type = command.get(n).asVocab();
 		switch (type)
 		{
@@ -219,21 +218,15 @@ void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& 
 				object->setObjectType(RobotModel::CompositeObject::OBSTACLE);
 				world->changeResponseClass( object, world->model->obstacleResponseClass() );
 				reply.addString("Changed object type to 'obstacle'.");
-				didSomething = true;
 				break;
 			case VOCAB_TARGET:
 				object->setObjectType(RobotModel::CompositeObject::TARGET);
 				world->changeResponseClass( object, world->model->targetResponseClass() );
 				reply.addString("Changed object type to 'target'.");
-				didSomething = true;
 				break;
 			default:
-				reply.addString("Unknown object type, use 'obs' or 'tgt'.");
-		}
-		if ( !didSomething )
-		{
-			n--;
-			setPos(command,reply,n);
+				reply.addString("Unknown object type, use 'tgt' or 'obs'.");
+				break;
 		}
 	}
 }

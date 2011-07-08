@@ -53,6 +53,8 @@ private:
 	void pSetRot( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Rotate a primitive relative to its parent object
 	void append( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Append a primitive to an object
 	
+	void def( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< define objects to be TARGET or OBSTACLE
+	
 	void removeObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Remove and delete an object
 	void removePrimitive( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Remove and delete a primitive
 	
