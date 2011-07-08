@@ -26,8 +26,11 @@ for the robot:
 start order:
  yarp server (should be running)
  iCubInterface 
+	1) ssh pc104 
+	2) iCubInterface
+
  VirtualSkin/ReflexDemo:
-  ./ReflexDemo --visualize --robot ../../../xml/icub.xml --world ../../../xml/world.xml
+  IM-CleVER/VirtualSkin/build/src/ReflexDemo/ReflexDemo --visualize --robot ../../../xml/icub.xml --world ../../../xml/world.xml
  (maybe without world?!if you get: "Problems with obtaining the number of controlled axes")
 
  on the pc 104: 
@@ -36,4 +39,4 @@ start order:
  back on the server:
   iKinCartesianSolver --part left_arm --context simCartesianControl/vSkinConfRealRobot
 
- ./ReachingDemo --robot icubF --part left_arm
+ IM-CleVER/Reaching/build/src/ReachingDemo/ReachingDemo --robot icubF --part left_arm
