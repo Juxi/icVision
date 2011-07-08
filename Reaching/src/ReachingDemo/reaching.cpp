@@ -406,7 +406,7 @@ void ReachingWorker::callGraspController(const std::string msg) {
 	yarp::os::Network yarp;
 	yarp::os::RpcClient port;
 
-	std::string inputPortName = "graspController";
+	std::string inputPortName = "/graspController";
 	std::string clientPortName = "graspClient";
 	if(! port.open( clientPortName.c_str() )){
 		std::cout << std::endl << "ERROR: Could not open port: " << clientPortName.c_str()  << std::endl << std::endl;

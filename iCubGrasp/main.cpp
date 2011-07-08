@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	 *** Get arguments off the command line ***
 	 ******************************************/
 	yarp::os::Property config;
-	config.fromCommand(argc,argv);
+	config.fromCommand(argc, argv);
 	
 	if ( !config.check("robot") )	// the name of the robot to connect to
 	{
@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	char* part = "right_arm";	// whether or not to use the left hand (default is right)
-	if ( config.check("left") )	{ part = "left_arm"; }
+	std::string part = "right_arm";	// whether or not to use the left hand (default is right)
+	if ( config.check("part") )  { part = config.find("part").asString().c_str(); }
 	
-	const char* name = "graspController";	// the name of the RPC server
+	std::string name = "/graspController";	// the name of the RPC server
 	if ( config.check("name") )  { name = config.find("name").asString().c_str(); } 
 	
 	qreal errTolerance = 0.8;	// 0-1, where smaller numbers favor precision
@@ -39,11 +39,13 @@ int main(int argc, char *argv[])
 	try
 	{
 		HandController controller( errTolerance, attFactor );
-		controller.start( config.find("robot").asString(), part, accel, vel);
+		controller.start( config.find("robot").asString().c_str(), part.c_str(), accel, vel);
 		
 		yarp::os::Network yarp;
 		yarp::os::RpcServer port;
-		port.open(name);
+		printf("Opening port...");
+		port.open(name.c_str());
+		printf(" . DONE!");
 		
 		int speed;
 		
@@ -85,6 +87,8 @@ int main(int argc, char *argv[])
 	{
 		printf("%s", e.toStdString().c_str());
 	}
-	
+	catch (...) {
+		printf("All shits fucked up, mate!");
+	}
 	return 0;
 }
