@@ -1,2 +1,0 @@
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/CMakeFiles/WorldMapping.dir
-/home/icub/IM-CLeVeR/idsiaVisionDemoModule/WorldMapping/release/envLib/CMakeFiles/libEnv.dir
