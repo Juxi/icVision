@@ -134,15 +134,21 @@ void Model::removeRobotTablePair( DT_ResponseClass objType1, DT_ResponseClass ob
 
 void Model::removeObject( DT_ObjectHandle obj, DT_ShapeHandle shape )
 {
-	QMutexLocker locker(&mutex);
-	DT_RemoveObject( scene, obj );
-	DT_DestroyObject( obj );
-	DT_DeleteShape( shape );
+	//QMutexLocker locker(&mutex);
+	//if (obj)
+	//{
+		DT_RemoveObject( scene, obj );
+		DT_DestroyObject( obj );
+	//}
+	//if ( shape )
+	//{
+		DT_DeleteShape( shape );
+	//}
 }
 
 int Model::computePose()
 {
-	QMutexLocker locker(&mutex);
+	//QMutexLocker locker(&mutex);
 	
 	/**/if ( !robot->isOpen() )
 	{

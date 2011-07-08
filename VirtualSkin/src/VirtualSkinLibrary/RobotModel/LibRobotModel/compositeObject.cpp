@@ -46,7 +46,8 @@ bool CompositeObject::remove( PrimitiveObject* primitive )
 		if ( *i == primitive )
 		{
 			erase(i);
-			delete(primitive);
+			//! now we are leaking memory !!! TODO
+			//delete(primitive);
 			return 1;
 		}
 	}

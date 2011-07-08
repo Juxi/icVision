@@ -30,22 +30,23 @@
 #include <yarp/sig/all.h>
 #include <yarp/dev/all.h>
 #include <yarp/math/Math.h>
+#include <string>
+#include <iostream>
 
 YARP_DECLARE_DEVICES(icubmod)
 
-using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
 using namespace yarp::sig;
 
-class LookAtLocation : public yarp::os::Thread
+class LookAtLocation : public yarp::os::Thread //RateThread
 {
 
-private:
   PolyDriver *clientGaze;
-
   PolyDriver *head;
+
   IGazeControl *igaze;
+
   IPositionControl *ipos;
   IVelocityControl *ivel;
   IEncoders        *iencs;
@@ -53,15 +54,13 @@ private:
   int state;
   int startup_context_id;
 
-
-  Vector setpoints;
-  Vector tmp;
-  Vector encoders;
-  Vector commands_position;
-  Vector commands_velocity;
-  Vector checkpos;
-
-  Vector fp;
+  yarp::sig::Vector setpoints;
+  yarp::sig::Vector tmp;
+  yarp::sig::Vector encoders;
+  yarp::sig::Vector commands_position;
+  yarp::sig::Vector commands_velocity;
+  yarp::sig::Vector checkpos;
+  yarp::sig::Vector fp;
 
   int joints;
   double velocityFactor;
@@ -69,8 +68,8 @@ private:
   BufferedPort<Bottle> MotionPort;
   Bottle *target;
 
- // std::string check;
-
+  std::string inputLookAt3DPortName;
+  std::string check;
 
   double x, y, z;
 
@@ -94,6 +93,8 @@ public:
   void onStop();
   //void printStatus();
   void storeInterestingPoint();
+  bool connect(std::string port2connect);
+
 
 };
 

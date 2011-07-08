@@ -35,6 +35,7 @@ public:
   ~SaliencyMap();
 
   int detectSaliencyPoint(cv::Mat &imLeft, cv::Mat &imRight, std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches);
+  void inhibitSaliencyMap(cv::Point2f &pointleft, cv::Point2f &pointright, int numberOfFeatureLeft, int numberOfFeatureRight);
   bool interrupt();
   bool close();
 

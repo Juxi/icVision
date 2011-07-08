@@ -130,7 +130,8 @@ CompositeObject* World::append( CompositeObject* obj )
 		emit worldAppendedPrimitive( *i );
 		emit requestDisplayList( static_cast<DisplayList*>(*i) );
 	}
-	emit requestDisplayList( static_cast<DisplayList*>(obj) ); // this is the composite object (which may have the displayList for the local CS
+	// this may introduce memory problems
+	//emit requestDisplayList( static_cast<DisplayList*>(obj) ); // this is the composite object (which may have the displayList for the local CS
 	
 	return obj;
 }

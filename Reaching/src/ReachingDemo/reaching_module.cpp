@@ -74,13 +74,33 @@ bool ReachingModule::updateModule()
 		// get information about the new object from rpc
 		cmd.clear();
 		cmd.addString("get");
-		cmd.addString(objName.c_str());
+
+		std::string scyl = "scyl";
+//		if( objName.startsWith("scyl") )
+		if( objName.compare(0, scyl.length(), scyl) == 0 ) {
+			string::iterator it = objName.begin();
+//			objName.replace(it, it + 4, "scyl ", 5);
+//			objName.replace("scyl", 
+			std::string a = objName.substr(4);
+			std::string name = objName.substr(0, 4);
+//			std::cout << "New objname: " << name << "." << a << std::endl;
+			cmd.addString(name.c_str());
+			cmd.addInt(atoi(a.c_str()));
+
+		} else {
+			cmd.addString(objName.c_str());
+		}
 		port.write(cmd, response);
 		
-		cout << objName << ": " << response.toString().c_str() << "" << endl;
+		cout << cmd.toString() << ": " << response.toString().c_str() << "" << endl;
 		
-		if( response.toString() == "Object not found." )
+		std::string h = "\"Object not found.\"";
+//		if( ((std::string) response.toString().c_str()).compare(0, h.size(), h) == 0 ) {
+		if( response.toString().c_str() == h ) {
+			std::cout << "ERROR: Object not found  " << std::endl;
 			return true;
+		}
+
 		
 		double x = response.get(13).asDouble();
 		double y = response.get(14).asDouble();	

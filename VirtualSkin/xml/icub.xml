@@ -4,7 +4,7 @@
 
 <!-- TORSO -->
 <bodypart name="torso">
-    <link z="-.05" radius="0">
+    <!--<link z="-.05" radius="0">-->
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
@@ -619,7 +619,7 @@
     </link>
         </joint>
     </motor>
-    </link>
+    <!--</link>-->
 </bodypart>
 <!-- /TORSO -->
 

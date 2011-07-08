@@ -8,6 +8,7 @@ PrimitiveObject::PrimitiveObject() : parent(0), shape(NULL), solidObject(NULL)
 }
 PrimitiveObject::~PrimitiveObject()
 {
+	printf("primitive destructor called!!!\n");
 }
 void PrimitiveObject::setParent( CompositeObject* object )
 {
