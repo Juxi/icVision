@@ -605,7 +605,7 @@ void StereoGeometry::triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr
 
 
 void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPoint> &keysRight, vector<DMatch> &matches, int selectedFeature,
-		vector<int> &selectedIndexes, vector<Point3f> &selectedPoints3d, Point3f &lookAtPoint3d){
+		vector<int> &selectedIndexes, vector<Point3f> &selectedPoints3d, Point3f &lookAtPoint3d, Rect &objRect_left, Rect &objRect_right){
 
 	Point2f pointLeft, pointRight;
 	Point3f point3d, selectedPoint3d;
@@ -670,8 +670,8 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 		selectedPoints2d_right.push_back(keysRight[matches[i].trainIdx].pt);
 	}
 
-	Rect objRect_left = Rect(0,0,0,0);
-	Rect objRect_right = Rect(0,0,0,0);
+	objRect_left = Rect(0,0,0,0);
+	objRect_right = Rect(0,0,0,0);
 
 	if(selectedIndexes.size() > 0){
 		objRect_left =  boundingRect( Mat(selectedPoints2d_left) );
@@ -701,4 +701,7 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 
 }
 
+void StereoGeometry::pointFromCamera2World(cv::Point2f &pointCamera, cv::Point2f &pointWorld, std::string camera){
+
+}
 

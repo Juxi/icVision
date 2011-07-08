@@ -79,8 +79,10 @@ public:
   void triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
   void triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
 
+  void pointFromCamera2World(cv::Point2f &pointCamera, cv::Point2f &pointWorld, std::string camera);
+
   void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature,
-                      std::vector<int> &selectedIndexes, std::vector<cv::Point3f> &selectedPoints3d, cv::Point3f &lookAtPoint3d);
+                      std::vector<int> &selectedIndexes, std::vector<cv::Point3f> &selectedPoints3d, cv::Point3f &lookAtPoint3d, cv::Rect &objRect_left, cv::Rect &objRect_right);
 
 };
 
