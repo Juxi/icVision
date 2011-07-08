@@ -58,6 +58,7 @@ bool VisionModule::updateModule()
   if ( getImageLeft + getImageRight < 1){
     Time::delay(0.1);
     cout<<"There are no images"<<endl;
+    object_list.clear();
   }
   else{
     cout<<"There are images"<<endl;
