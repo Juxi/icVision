@@ -177,7 +177,7 @@ bool WorldMapping::updateModule() {
 
       //do something
       cameraLeft->getFeaturesOnOutputPort(FAST10);
-     //cameraLeft->getGaborDescriptorsOnOutputPort();
+      //cameraLeft->getGaborDescriptorsOnOutputPort();
       cameraLeft->getDescriptorsOnOutputPort(DBRIEF);
 
       //TODO CHANGE IN CameraiCub.cpp "HARRIS" linea 48
@@ -222,11 +222,11 @@ bool WorldMapping::updateModule() {
       vector<DMatch> matches_tmp;
       //Filter out matches
       for( int i = 0; i < matches.size(); i++ )
-          {
-			  if(outlier_mask[i]){
-				  matches_tmp.push_back(matches[i]);
-			  }
+        {
+          if(outlier_mask[i]){
+              matches_tmp.push_back(matches[i]);
           }
+        }
 
       matches.clear();
       matches = matches_tmp;
@@ -274,13 +274,13 @@ bool WorldMapping::updateModule() {
       drawMatches(cameraLeft->getImage(), keypointsLeft, cameraRight->getImage(), keypointsRight, testmatches, resultImage,CV_RGB(255,0,0), CV_RGB(0,0,255));
       imshow("Test", resultImage);
 
-//      namedWindow("SelectedObjLeft");
-//      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
-//      imshow("SelectedObjLeft", outImageLeft);
-//
-//      namedWindow("SelectedObjRight");
-//      drawKeypoints(cameraRight->getImage(), selectedPoints2d_right, outImageRight, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
-//      imshow("SelectedObjRight", outImageRight);
+      //      namedWindow("SelectedObjLeft");
+      //      drawKeypoints(cameraLeft->getImage(), selectedPoints2d_left, outImageLeft, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+      //      imshow("SelectedObjLeft", outImageLeft);
+      //
+      //      namedWindow("SelectedObjRight");
+      //      drawKeypoints(cameraRight->getImage(), selectedPoints2d_right, outImageRight, CV_RGB(255,0,0),DrawMatchesFlags::DEFAULT);
+      //      imshow("SelectedObjRight", outImageRight);
 
       cvWaitKey(33);
 

@@ -44,18 +44,17 @@ StereoGeometry::StereoGeometry(string moduleName, Cameratype type)
   inputHeadPortName = "/"+moduleName+"/stereo/head:i";
   inputTorsoPortName =  "/"+moduleName+"/stereo/torso:i";
 
+  //Input head port
+  if(! inputHeadPort.open( inputHeadPortName.c_str() )){
+      cerr<<"Unable to open port "+inputHeadPortName<<endl;
+  }
+  cout<<"Opened port "+inputHeadPortName<<endl;
 
-   //Input head port
-   if(! inputHeadPort.open( inputHeadPortName.c_str() )){
-       cerr<<"Unable to open port "+inputHeadPortName<<endl;
-   }
-   cout<<"Opened port "+inputHeadPortName<<endl;
-
-   //Input torso port
-   if(! inputTorsoPort.open( inputTorsoPortName.c_str() )){
-       cerr<<"Unable to open port "+inputTorsoPortName<<endl;
-   }
-   cout<<"Opened port "+inputTorsoPortName<<endl;
+  //Input torso port
+  if(! inputTorsoPort.open( inputTorsoPortName.c_str() )){
+      cerr<<"Unable to open port "+inputTorsoPortName<<endl;
+  }
+  cout<<"Opened port "+inputTorsoPortName<<endl;
 }
 
 StereoGeometry::~StereoGeometry()
