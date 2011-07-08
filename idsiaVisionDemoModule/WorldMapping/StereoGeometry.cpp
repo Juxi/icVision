@@ -44,9 +44,9 @@ StereoGeometry::StereoGeometry(string moduleName, Cameratype type)
 
 	inputHeadPortName = "/"+moduleName+"/stereo/head:i";
 	inputTorsoPortName =  "/"+moduleName+"/stereo/torso:i";
-	outputBBLeftPortName =  "/"+moduleName+"/stereo/bb_left:o";
-	outputBBRightPortName =  "/"+moduleName+"/stereo/bb_right:o";
-	outputCheckPortName =  "/"+moduleName+"/stereo/check:o";
+	outputBBLeftPortName =  "/"+moduleName+"/stereo/bb_left_out";
+	outputBBRightPortName =  "/"+moduleName+"/stereo/bb_right_out";
+	outputCheckPortName =  "/"+moduleName+"/stereo/check_out";
 
 	//Input head port
 	if(! inputHeadPort.open( inputHeadPortName.c_str() )){
