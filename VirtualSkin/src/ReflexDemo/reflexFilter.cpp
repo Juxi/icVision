@@ -34,9 +34,12 @@ void ReflexFilter::extraOpenStuff()
 
 void ReflexFilter::collisionResponse()
 {
-	//QVector< QVector<qreal> >	currentPose;
+	
 	yarp::os::Bottle stop;
-	//QVector<qreal>::const_iterator joint;
+	QVector< QVector<qreal> >::iterator	pose;
+	QVector<qreal>::iterator joint;
+	QVector< QVector<qreal> > bpHistory;
+	
 	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
 	{
 		// stop the body part
@@ -46,7 +49,18 @@ void ReflexFilter::collisionResponse()
 		cbFilters.at(bodyPart)->injectCall(stop);
 		
 		// get the body part's history
-		history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory());
+		bpHistory = stateObservers.at(bodyPart)->getHistory();
+		printf("Body Part: %d\n", bodyPart);
+		for ( pose = bpHistory.begin(); pose != bpHistory.end(); ++pose )
+		{
+			for ( joint = pose->begin(); joint != pose->end(); ++joint )
+			{
+					printf("%f ",*joint);
+			}
+			printf("\n");
+		}
+		
+		history.replace(bodyPart, bpHistory );
 	}
 }
 
@@ -61,11 +75,11 @@ void ReflexFilter::responseComplete()
 	{
 		if ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT)
 		{
-			//printf("Pose: %d\n",n);
+			printf("Pose: %d\n",n);
 			period = 0.0;
 			for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
 			{
-				//printf("  Body Part - %d:", bodyPart);
+				printf("  Body Part - %d:", bodyPart);
 				rewind.clear();
 				rewind.addVocab(VOCAB_SET);
 				rewind.addVocab(VOCAB_POSITION_MOVES);
@@ -73,11 +87,11 @@ void ReflexFilter::responseComplete()
 				for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
 				{
 					bodyPartPose.addDouble(*joint);
-					//printf(" %f", *joint);
+					printf(" %f", *joint);
 				}
 				cbFilters.at(bodyPart)->injectCall(rewind);
 				period += stateObservers.at(bodyPart)->getPeriod();
-				//printf("\n");
+				printf("\n");
 			}
 			//printf("  waiting %f/%d msec\n", period, model.robot->numBodyParts());
 			period /= static_cast<qreal>(model.robot->numBodyParts());

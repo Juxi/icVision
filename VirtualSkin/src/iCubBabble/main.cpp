@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 	}
-	else { type = 0; }
+	else { type = 1; }
 	
 	qreal period;	// the time between commands that will be sent
 	if ( config.check("period") ) { period = config.find("period").asDouble(); }
-	else { period = 1.0; }
+	else { period = 0.5; }
 	period *= 1000000;
 	
 	qreal speed;	// the speed to use for both position and velocity commands
