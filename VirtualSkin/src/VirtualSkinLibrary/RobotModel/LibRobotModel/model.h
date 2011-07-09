@@ -72,7 +72,7 @@ public:
 	 */
 	static DT_Bool collisionHandler( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-		/*if ( obj1 && obj2 )
+		if ( obj1 && obj2 )
 		{
 			PrimitiveObject* object1 = (PrimitiveObject*)obj1;
 			PrimitiveObject* object2 = (PrimitiveObject*)obj2;
@@ -82,7 +82,7 @@ public:
 			Model* detector = (Model*)client_data;
 			detector->col_count++;
 			detector->collisionHandlerAddendum( object1, object2, coll_data );
-		}*/
+		}
 		
 		return DT_CONTINUE;
 	}

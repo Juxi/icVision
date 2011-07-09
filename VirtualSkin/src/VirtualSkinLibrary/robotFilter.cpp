@@ -92,6 +92,7 @@ void RobotFilter::takeControl()
 	
 	if ( isColliding && !haveControl )
 	{
+		printf("taking control\n");
 		haveControl = true;
 		
 		// first take control away from the user
@@ -101,7 +102,7 @@ void RobotFilter::takeControl()
 		}
 		
 		// inform the user
-		//printf("*** COLLISION RECOVERY ***\n");
+		printf("*** COLLISION RECOVERY ***\n");
 		statusPort.setBottle( yarp::os::Bottle("0") );
 		
 		// do some control in response
@@ -145,6 +146,6 @@ void RobotFilter::openFilter()
 	
 	//inform the user
 	statusPort.setBottle( yarp::os::Bottle("1") );
-	//printf("CONTROL RESTORED\n");
+	printf("CONTROL RESTORED\n");
 	haveControl = false;
 }
