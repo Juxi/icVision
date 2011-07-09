@@ -28,12 +28,13 @@ HandController::HandController( qreal _attenuationThreshold, qreal _attenuationF
 //	qreal d[9] = {	15,	70,	0,	0,	70,	10,	80,	10,	50 };
 //	qreal e[9] = {	15,	90,	0,	0,	90,	90,	90,	90,	70 };
 
-
-	qreal a[9] = {	50,	5,	5,	5,	5,	10,	10,	10,	10 };
-	qreal b[9] = {	50,	60,	30,	30,	30,	10,	40,	10,	20 };
-	qreal c[9] = {	50,	60,	30,	30,	30,	50,	40,	50,	20 };
-	qreal d[9] = {	15,	70,	5,	5,	70,	10,	80,	10,	50 };
-	qreal e[9] = {	15,	90,	5,	5,	90,	90,	90,	90,	70 };
+	// First position (used for pre and final for open)
+	qreal a[9] = {	0,	60,	0,	0,	10,	10,	10,	10,	15 };
+	qreal b[9] = {	0,	60,	30,	0,	25,	10,	20,	10,	15 };
+	qreal c[9] = {	0,	60,	30,	0,	25,	10,	20,	10,	15 };
+	qreal d[9] = {	0,	60,	30,	30,	25,	55,	20,	100,	130 };
+	// Final position (used as last position for close)
+	qreal e[9] = {	0,	60,	30,	30,	25,	55,	20,	100,	130 };
 
 
 	
@@ -49,10 +50,10 @@ HandController::HandController( qreal _attenuationThreshold, qreal _attenuationF
 	}
 	
 	graspTrajectory.append(A);
-	graspTrajectory.append(B);
-	graspTrajectory.append(C);
+//	graspTrajectory.append(B);
+//	graspTrajectory.append(C);
 //	graspTrajectory.append(D);
-//	graspTrajectory.append(E);
+	graspTrajectory.append(E);
 	tgt = graspTrajectory.begin();
 }
 HandController::~HandController()
@@ -126,29 +127,28 @@ void HandController::start( const char* _robotName, const char* _partName, int r
 		for ( int j = 0; j < 9; j++ )
 		{
 			printf("Fluuuuf j:%d \tp: %f\t", j, i->p[j]);
-			printf(
-			if ( i->p[j] < limits[j].min))
+
+			if ( i->p[j] < limits[j].min )
 			{
 				printf("WARNING: position not within limits, min:%f\tmax:%f\n", limits[j].min, limits[j].max );
 				//QString err = "Joint "; err.append(j); err.append(" goes out of range.");
 				//throw err;
 				i->p[j] = limits[j].min + 0.1;
-				printf("resetting position to %d\n", i->p[j] );
+				printf("resetting position to %f\n", i->p[j] );
 
 			}
 			if ( i->p[j] > limits[j].max ) {
 				printf("WARNING: position not within limits, min:%f\tmax:%f\n", limits[j].min, limits[j].max );
 				i->p[j] = limits[j].max - 0.1;
-				printf("resetting position to %d\n", i->p[j] );
+				printf("resetting position to %f\n", i->p[j] );
 			}
 		}
 	}
 */
-	
 	printf("Fluuuuf C\n");
 
 
-/*
+#ifdef USE_TOUCH
 	// init alex's touch stuff
 	QString remoteTouchPort;
 	QString touchPartName;
@@ -183,7 +183,7 @@ void HandController::start( const char* _robotName, const char* _partName, int r
 		throw err;
 	};
 
-*/
+#endif
 
 	printf("HandController started successfully.\n");
 }
@@ -202,8 +202,9 @@ void HandController::checkValidity()
 
 void HandController::stop()
 {
+#ifdef USE_TOUCH
 	ts->stop();
-
+#endif
 	checkValidity();
 	
 	/* warning: this for() loop kills the motors: */
@@ -249,6 +250,7 @@ void HandController::grasp( int speed )
 	checkValidity();
 	while ( true )
 	{
+#ifdef USE_TOUCH	
 		// update booleans for touch sensors
 		palmTouch = ts->getPalmTouch();
 		thumbTouch = ts->getThumbTouch(); 
@@ -256,7 +258,7 @@ void HandController::grasp( int speed )
 		middleTouch = ts->getMiddleTouch();
 		ringTouch = ts->getRingTouch();
 		littleTouch = ts->getLittleTouch();
-		
+#endif		
 		currentAttenuation = doVelocityControl( speed );
 		msleep(20);
 		

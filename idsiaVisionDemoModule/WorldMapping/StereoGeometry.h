@@ -24,65 +24,82 @@ class StereoGeometry
 {
 private:
 
-  Cameratype cameraType;
+	Cameratype cameraType;
 
-  cv::Mat K_left, d_left; //intrinsic parameters camera left
-  cv::Mat K_right, d_right; //intrinsic parameters camera right
-  cv::Mat R, T; //Rotation and translation matrices between camera left and right
-  cv::Mat F; //Fundamental matrix
-  cv::Mat E; //Essential matrix
-  cv::Mat RTb2cl, RTcl2b; //RT from chessboard to camera left and vice versa
-  cv::Mat RTb2cr, RTcr2b; //RT from chessboard to camera right and vice versa
-  cv::Mat P_left, P_right; //Left and Right camera matrices
-  cv::Mat RTcl2w, RTw2cl; // RT from camera left to world and vice versa
-  cv::Mat RTcr2w, RTw2cr; // RT from camera right to world and vice versa
-  cv::Mat RTb2w, RTw2b; //RT from board to world and vice versa
-  cv::Mat RTwr2cr, RTcr2wr; //RT from wrong camera position to correct camera position and vice versa
+	cv::Mat K_left, d_left; //intrinsic parameters camera left
+	cv::Mat K_right, d_right; //intrinsic parameters camera right
+	cv::Mat R, T; //Rotation and translation matrices between camera left and right
+	cv::Mat F; //Fundamental matrix
+	cv::Mat E; //Essential matrix
+	cv::Mat RTb2cl, RTcl2b; //RT from chessboard to camera left and vice versa
+	cv::Mat RTb2cr, RTcr2b; //RT from chessboard to camera right and vice versa
+	cv::Mat P_left, P_right; //Left and Right camera matrices
+	cv::Mat RTcl2w, RTw2cl; // RT from camera left to world and vice versa
+	cv::Mat RTcr2w, RTw2cr; // RT from camera right to world and vice versa
+	cv::Mat RTb2w, RTw2b; //RT from board to world and vice versa
+	cv::Mat RTwr2cr, RTcr2wr; //RT from wrong camera position to correct camera position and vice versa
 
 
-  //Port to read encoders
-  std::string inputHeadPortName;
-  std::string inputTorsoPortName;
-  std::string outputBBLeftPortName;
-  std::string outputBBRightPortName;
-  std::string outputCheckPortName;
-  BufferedPort<yarp::os::Bottle> inputHeadPort;
-  BufferedPort<yarp::os::Bottle> inputTorsoPort;
-  BufferedPort<yarp::os::Bottle> outputBBLeftPort;
-  BufferedPort<yarp::os::Bottle> outputBBRightPort;
-  BufferedPort<yarp::os::Bottle> outputCheckPort;
+	//Port to read encoders
+	std::string inputHeadPortName;
+	std::string inputTorsoPortName;
+	std::string outputBBLeftPortName;
+	std::string outputBBRightPortName;
+	std::string outputCheckPortName;
+	BufferedPort<yarp::os::Bottle> inputHeadPort;
+	BufferedPort<yarp::os::Bottle> inputTorsoPort;
+	BufferedPort<yarp::os::Bottle> outputBBLeftPort;
+	BufferedPort<yarp::os::Bottle> outputBBRightPort;
+	BufferedPort<yarp::os::Bottle> outputCheckPort;
 
-  //only for matching
-  Ptr<DescriptorMatcher> descriptorMatcher;
+	//only for matching
+	Ptr<DescriptorMatcher> descriptorMatcher;
+
+	/* To estimate obj position in the world using encoders*/
+	iCub::iKin::iCubEye   *eye_left, *eye_right;
+	iCub::iKin::iKinChain  chainEye_left, chainEye_right;
+
+	yarp::sig::Vector v;
+	yarp::sig::Matrix transformation_left, transformation_right;
+	yarp::sig::Matrix rotation4obj;
+	yarp::sig::Vector eyeTargetPos;
+
+	double head0,head1,head2,head3,head4,head5;
+	double torso0,torso1,torso2;
+	double targetPosInX,targetPosInY,targetPosInZ,targetPosInGood;
 
 public:
-  StereoGeometry(std::string moduleName, Cameratype type);
-  virtual
-  ~StereoGeometry();
+	StereoGeometry(std::string moduleName, Cameratype type);
+	virtual
+	~StereoGeometry();
 
-  void changeCalibration(int w);
+	void changeCalibration(int w);
+	bool connect(std::string portTorso2connect, std::string portHead2connect);
 
-  bool matchingGabor(cv::Mat &gaborsLeft, cv::Mat &gaborsRight, std::vector<cv::DMatch> &matches );
-  bool matching(cv::Mat &descLeft, cv::Mat &descRight, std::vector<cv::DMatch> &matches, DescriptorType type);
-  bool detectChessBoard(cv::Size patternsize, float squaresize,  cv::Mat &image, cv::Mat &outImage, std::vector<cv::Point2f> &corners);
-  void estimateRTfromImages(cv::Mat &imageLeft, cv::Mat &imageRight, cv::Mat &outImageLeft, cv::Mat &outImageRight);
-  void estimatePmatrix(cv::Mat &K, cv::Mat &RTworld2camera, cv::Mat &P);
-  void estimatePmatrix(cv::Mat &K, cv::Mat &Rworld2camera, cv::Mat &Tworld2camera, cv::Mat &P);
+	bool matchingGabor(cv::Mat &gaborsLeft, cv::Mat &gaborsRight, std::vector<cv::DMatch> &matches );
+	bool matching(cv::Mat &descLeft, cv::Mat &descRight, std::vector<cv::DMatch> &matches, DescriptorType type);
+	bool detectChessBoard(cv::Size patternsize, float squaresize,  cv::Mat &image, cv::Mat &outImage, std::vector<cv::Point2f> &corners);
+	void estimateRTfromImages(cv::Mat &imageLeft, cv::Mat &imageRight, cv::Mat &outImageLeft, cv::Mat &outImageRight);
+	void estimatePmatrix(cv::Mat &K, cv::Mat &RTworld2camera, cv::Mat &P);
+	void estimatePmatrix(cv::Mat &K, cv::Mat &Rworld2camera, cv::Mat &Tworld2camera, cv::Mat &P);
 
-  bool loadCalibration(std::string filename = "calibrationMatrices.yaml");
-  bool saveCalibration(std::string filename = "calibrationMatrices.yaml");
-  void undistortImage(cv::Mat& image2undist, cv::Mat &undistortedImage, std::string camera);
-  cv::Point2f undistortPoint(cv::Point2f &point2undistort, std::string camera);
-  void undistortPoint(cv::Mat &point2undistort, cv::Mat &pointundistorted, std::string camera);
+	bool loadCalibration(std::string filename = "calibrationMatrices.yaml");
+	bool saveCalibration(std::string filename = "calibrationMatrices.yaml");
+	void undistortImage(cv::Mat& image2undist, cv::Mat &undistortedImage, std::string camera);
+	cv::Point2f undistortPoint(cv::Point2f &point2undistort, std::string camera);
+	void undistortPoint(cv::Mat &point2undistort, cv::Mat &pointundistorted, std::string camera);
 
-  void triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
-  void triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
-  void triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
+	void triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
+	void triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
+	void triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d);
 
-  void pointFromCamera2World(cv::Point2f &pointCamera, cv::Point2f &pointWorld, std::string camera);
+	void setUpCamera2WorldEncoder();
 
-  void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature,
-                      std::vector<int> &selectedIndexes, std::vector<cv::Point3f> &selectedPoints3d, cv::Point3f &lookAtPoint3d, cv::Rect &objRect_left, cv::Rect &objRect_right);
+	void segmentOnDepth(std::vector<cv::KeyPoint> &keysLeft, std::vector<cv::KeyPoint> &keysRight, std::vector<cv::DMatch> &matches, int selectedFeature,
+			std::vector<int> &selectedIndexes, std::vector<cv::Point3f> &selectedPoints3d, cv::Point3f &lookAtPoint3d, cv::Rect &objRect_left, cv::Rect &objRect_right, int &isValid);
+
+	void sendZeroBBOnPort();
+	void sendfakeBBOnPort();
 
 };
 

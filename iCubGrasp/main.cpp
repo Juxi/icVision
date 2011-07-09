@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	std::string part = "right_arm";	// whether or not to use the left hand (default is right)
+	std::string part = "left_arm";	// whether or not to use the left hand (default is right)
 	if ( config.check("part") )  { part = config.find("part").asString().c_str(); }
 	
 	std::string name = "/graspController";	// the name of the RPC server
@@ -27,10 +27,10 @@ int main(int argc, char *argv[])
 	qreal errTolerance = 0.8;	// 0-1, where smaller numbers favor precision
 	if ( config.check("tolerance") )  { errTolerance = config.find("tolerance").asDouble(); }
 	
-	qreal attFactor = 3.0;	// 0-inf larger numbers cause the controller to approach target points more slowly
+	qreal attFactor = 4.0;	// 0-inf larger numbers cause the controller to approach target points more slowly
 	if ( config.check("attenuation") )  { attFactor = config.find("attenuation").asDouble(); }
 	
-	qreal accel = 20.0;	// reference acceleration for the yarp remote control board interface
+	qreal accel = 10.0;	// reference acceleration for the yarp remote control board interface
 	if ( config.check("acceleration") )  { accel = config.find("acceleration").asDouble(); }
 	
 	qreal vel = 20.0;	// reference velocity for the yarp remote control board interface
@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
 			port.read(cmd,true);
 			
 			int command  = cmd.get(0).asVocab();
+			printf("gOT MESSAGE...%s\n", cmd.toString().c_str());
+
 			switch ( command ) {
 				case VOCAB_PREGRASP:
 					controller.preGrasp();

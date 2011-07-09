@@ -6,9 +6,10 @@
     <box width="1" depth=".001" height=".71"/>
 </object>
 
-<object name="cup1" px="-.3" pz="-.1">
+<object name="cup1" px="-.3" pz="0">
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>
+
 <!--<object name="cup2" px="-.3" py="-.2" pz="-.1">   
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>

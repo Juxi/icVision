@@ -332,7 +332,7 @@ bool ReachingWorker::doReaching() {
 	arm->getPose(x0, o0);
 //	std::cout << "Arm Previous Pose:" << x0[0] << ", "<< x0[1] << ", "<< x0[2] <<  std::endl;
 
-	double reaching_offset = 0.05;	// sphere RADIUS + eps?
+	double reaching_offset = 0.1;	// sphere RADIUS + eps?
 	x = xd;
 
 	yarp::sig::Vector orientation;
@@ -358,7 +358,8 @@ bool ReachingWorker::doReaching() {
 
 	
 	// setup hand
-	callGraspController("pre");
+//	callGraspController("pre");
+	callGraspController("opn");
 
 	bool done = false;
 	
@@ -382,7 +383,8 @@ bool ReachingWorker::doReaching() {
 */
 	
 	// setup hand, close now
-	callGraspController("cls");
+//	callGraspController("cls");
+	callGraspController("opn");
 		
 	std::cout << "Going to reaching:" << x[0] << ", "<< x[1] << ", "<< x[2] <<  std::endl;	
 

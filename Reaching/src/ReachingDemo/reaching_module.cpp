@@ -295,9 +295,14 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 	attach(handlerPort);
 
 	//set-up input/output ports
-	inputPortName = "/" + robotName + "/world";
-// check whether we have F or not!! TODO
-    string clientPortName = "/";
+	if( robotName.compare( robotName.length() - 1, 1, "F") == 0 )
+		inputPortName = "/" + robotName + "/world";
+	else
+		inputPortName = "/" + robotName + "F/world";
+
+
+	// check whether we have F or not!! TODO
+    	string clientPortName = "/";
 	clientPortName += getName();
 	clientPortName += "/world-client";
 	if(! port.open( clientPortName.c_str() )){
