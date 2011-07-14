@@ -100,7 +100,6 @@ bool MovingHead::get2DPoints(){
   Pnt2DRightIn = Point2DRightInPort.read(&receive2DPntRight);
 
 
-
   posxLe = Pnt2DLeftIn->get(0).asInt();
   posyLe = Pnt2DLeftIn->get(1).asInt();
   posxRi = Pnt2DRightIn->get(0).asInt();
@@ -123,8 +122,6 @@ bool MovingHead::get2DPoints(){
 
 	Pnt3DLeftIn = Point3DLeftInPort.read(&receive3DPntLeft);
 	Pnt3DRightIn = Point3DRightInPort.read(&receive3DPntRight);
-
-
 
 	posxLe = Pnt3DLeftIn->get(0).asInt();
 	posyLe = Pnt3DLeftIn->get(1).asInt();

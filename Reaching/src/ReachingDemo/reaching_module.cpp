@@ -72,14 +72,31 @@ bool ReachingModule::updateModule()
 		// get information about the object from rpc
 		cmd.clear();
 		cmd.addString("get");
-		cmd.addString(objName.c_str());
+
+		std::string scyl = "scyl";
+//		if( objName.startsWith("scyl") )
+		if( objName.compare(0, scyl.length(), scyl) == 0 ) {
+			string::iterator it = objName.begin();
+//			objName.replace(it, it + 4, "scyl ", 5);
+//			objName.replace("scyl", 
+			std::string a = objName.substr(4);
+			std::string name = objName.substr(0, 4);
+//			std::cout << "New objname: " << name << "." << a << std::endl;
+			cmd.addString(name.c_str());
+			cmd.addInt(atoi(a.c_str()));
+
+		} else {
+			cmd.addString(objName.c_str());
+		}
 		port.write(cmd, response);
 		
-		cout << objName << ": " << response.toString().c_str() << "" << endl;
+		cout << cmd.toString() << ": " << response.toString().c_str() << "" << endl;
 		
 		// TODO debug & test  this!!
-		if( response.toString() == "Object not found." )
+		if( response.toString() == "\"Object not found.\"" )
+			std::cout << "ERROR: Object not found  " << std::endl;
 			return true;
+		}
 		
 		double x = response.get(13).asDouble();
 		double y = response.get(14).asDouble();	
@@ -283,9 +300,14 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 	attach(handlerPort);
 
 	//set-up input/output ports
-	inputPortName = "/" + robotName + "/world";
-// check whether we have F or not!! TODO
-    string clientPortName = "/";
+	if( robotName.compare( robotName.length() - 1, 1, "F") == 0 )
+		inputPortName = "/" + robotName + "/world";
+	else
+		inputPortName = "/" + robotName + "F/world";
+
+
+	// check whether we have F or not!! TODO
+    	string clientPortName = "/";
 	clientPortName += getName();
 	clientPortName += "/world-client";
 	if(! port.open( clientPortName.c_str() )){

@@ -17,10 +17,10 @@
 /**
  *	For the reflex behavior
  */
-#define POSE_BUFFER_SIZE 100				//!< Length of the pose history stored by VirtualSkin::StateObserver
-#define ALL_CLEAR_WAIT 500					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
+#define POSE_BUFFER_SIZE 1000				//!< Length of the pose history stored by VirtualSkin::StateObserver
+#define ALL_CLEAR_WAIT 1000					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
 //#define REFLEX_SPEED 30					//!< The velovity to use for the reflexive position move command
-#define POSITION_MOVE_TIMEOUT 10			//!< Max time (seconds) to wait for the robot to finish the reflexive position move
+//#define POSITION_MOVE_TIMEOUT 10			//!< Max time (seconds) to wait for the robot to finish the reflexive position move
 //#define NEGLIGIBLE_ANGLE .5				//!< (degrees)
 //#define NEGLIGIBLE_FRACTION 0.05
 //#define NEGLIGIBLE_PERCENT 100*NEGLIGIBLE_FRACTION
@@ -32,6 +32,7 @@
 // commands for objects
 #define VOCAB_MK VOCAB2('m','k')			//!< Make a new object
 #define VOCAB_SET VOCAB3('s','e','t')		//!< Set the position of an object
+#define VOCAB_DEF VOCAB3('d','e','f')
 #define VOCAB_GET VOCAB3('g','e','t')		//!< Returns the 4x4 rototranslation matrix for an object
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object

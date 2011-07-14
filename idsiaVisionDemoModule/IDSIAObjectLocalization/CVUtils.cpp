@@ -429,7 +429,7 @@ void CVUtils::colorSegmentation(Mat &image, Mat &m, Mat &icov, Mat &binaryImage)
 
   //cout<<resultingImage<<endl;
   Mat dst;
-  compare(resultingImage, 0.02, binaryImage, CMP_LE); //0.03
+  compare(resultingImage, 0.027, binaryImage, CMP_LE); //0.03
 
 
   Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3) );
@@ -478,7 +478,7 @@ void CVUtils::detectPossibleColoredObject(Mat &image, Mat& outputMask, vector<Co
           Rect objRect =  boundingRect( Mat(contours_obj[idx]) );
 
           //Draw contours only for debugging
-         // drawContours( outputImage, contours_obj, idx, color, CV_FILLED, 8, hierarchy_obj );
+          drawContours( outputImage, contours_obj, idx, color, CV_FILLED, 8, hierarchy_obj );
 
           //Increase the BB to capture the background
           objRect = Rect(max(0,objRect.x-5), max(0,objRect.y-5), min(image.cols - objRect.x + 5, objRect.width+10), min(image.rows - objRect.y + 5, objRect.height+10));
@@ -906,7 +906,7 @@ int CVUtils::dataAssociation(vector<ColoredRect> &left_rectList, vector<ColoredR
               float dist2line = fabs(line2test[0]*massCenter_right.x + line2test[1]*massCenter_right.y + line2test[2]);
 
               //if distance is less then a threshold, the dimension are similar and the x and y position are not so far
-              if (dist2line < 5 &&
+              if (dist2line < 10 &&
                  // abs(currentLeftRect.getRect().width - currentRightRect.getRect().width)< 20 &&
                  // abs(currentLeftRect.getRect().height - currentRightRect.getRect().height)< 20 &&
                   abs(massCenter_left.x - massCenter_right.x)< 200 &&
@@ -1536,8 +1536,8 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
 
   cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
-  cout<<matpleft<<endl;
-  cout<<matpright<<endl;
+ // cout<<matpleft<<endl;
+ // cout<<matpright<<endl;
   outTM = outTM/outTM.at<double>(3,0);
 
   Mat tmpoutTM = outTM.clone();
@@ -1546,32 +1546,38 @@ void CVUtils::triangulatePointNew(Point2f pl, Point2f pr, Point3f& point3D){
   outTM.at<double>(1,0)/=1000;
   outTM.at<double>(2,0)/=1000;
 
-  cout<<outTM<<endl;
+  cout<<"Result of triangulation "<<outTM<<endl;
 
-  outTM.convertTo(outTM, CV_32FC1);
+/*  outTM.convertTo(outTM, CV_32FC1);
   Mat result = RT_left*outTM;
-  cout<<result<<endl;
+  cout<<result<<endl;*/
 
   //ok... now the position wrt checkboard
 
   tmpoutTM.convertTo(tmpoutTM, CV_32FC1);
-  cout<<tmpoutTM<<endl;
+  //cout<<tmpoutTM<<endl;
   Mat result2 = RT_left_checkboard*tmpoutTM;
 
-  cout<<result2<<endl;
+  cout<<"Result "<<result2<<endl;
 
   result2.at<float>(0,0)/=1000;
   result2.at<float>(1,0)/=1000;
   result2.at<float>(2,0)/=1000;
 
   Mat finalresult = result2/result2.at<float>(3,0);
-  cout<<finalresult<<endl;
+  cout<<"Result before conversion "<<finalresult<<endl;
 
 
   Mat convertedresults =  (Mat_<float>(3,1) << finalresult.at<float>(2,0)-0.85, finalresult.at<float>(1,0)-0.24, -(finalresult.at<float>(0,0)-0.04));
-  cout<<convertedresults<<endl;
+  cout<<"Result after conversion "<<convertedresults<<endl;
 
+/*
   point3D.x = finalresult.at<float>(2,0)-0.91; //83cm
   point3D.y = finalresult.at<float>(1,0)-0.24; //24 cm
   point3D.z = -(finalresult.at<float>(0,0)-0.01); //4cm
+*/
+
+  point3D.x = finalresult.at<float>(2,0)-0.85; //~84cm
+  point3D.y = finalresult.at<float>(1,0)-0.18; //~18 cm
+  point3D.z = -(finalresult.at<float>(0,0)-0.03); //~3cm
 }

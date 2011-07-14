@@ -92,6 +92,7 @@ void RobotFilter::takeControl()
 	
 	if ( isColliding && !haveControl )
 	{
+		printf("taking control\n");
 		haveControl = true;
 		
 		// first take control away from the user

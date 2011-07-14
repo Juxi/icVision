@@ -58,6 +58,7 @@ bool VisionModule::updateModule()
   if ( getImageLeft + getImageRight < 1){
     Time::delay(0.1);
     cout<<"There are no images"<<endl;
+    object_list.clear();
   }
   else{
     cout<<"There are images"<<endl;
@@ -133,7 +134,8 @@ bool VisionModule::updateModule()
     imageLeft = Mat((IplImage*)iCubleft->getIplImage(),false);
     imageRight = Mat((IplImage*)iCubright->getIplImage(),false);
 
-   // vision->saveImage(imageLeft, "/home/icub/Desktop/test/", count);
+   // vision->saveImage(imageLeft, "/home/icub/Desktop/DavideVideo/imagesinput1/left/", count);
+   // vision->saveImage(imageRight, "/home/icub/Desktop/DavideVideo/imagesinput1/right/", count);
 
     vision->setUpImageStereoImages(imageLeft, imageRight);
 
@@ -142,6 +144,9 @@ bool VisionModule::updateModule()
 
     outputImageLeft = vision->getOutputImage("left");
     outputImageRight = vision->getOutputImage("right");
+
+   // vision->saveImage(outputImageLeft, "/home/icub/Desktop/DavideVideo/imagesoutput1/left/", count);
+   //vision->saveImage(outputImageRight, "/home/icub/Desktop/DavideVideo/imagesoutput1/right/", count);
 
 
    // outputImageLeft = imageLeft;

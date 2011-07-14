@@ -168,10 +168,15 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <opencv2/opencv.hpp>
 
+#include <iostream>
+#include <stdio.h>
+
 #include "CameraiCub.h"
 #include "StereoGeometry.h"
 #include "SaliencyMap.h"
-#include "MovingHead.h"
+//#include "MovingHead.h"
+#include "LookAtLocation.h"
+
 
 
 class WorldMapping: public yarp::os::RFModule {
@@ -180,17 +185,33 @@ class WorldMapping: public yarp::os::RFModule {
   std::string robotName;
   std::string handlerPortName;
 
-
-
   int cyclecounter;
+  int counter;
+
+  bool detectNewSaliencyPoint;
 
   CameraiCub *cameraLeft, *cameraRight;   //Camera class declarations
   StereoGeometry *stereoutils;
   SaliencyMap *saliencyutils;
-  MovingHead	*movinghead;
+ // MovingHead	*movinghead;
+  LookAtLocation *lookAtLocation;
   yarp::os::Port handlerPort;      //a port to handle messages
 
+  std::string lookAt3DPortName;
+  yarp::os::BufferedPort<yarp::os::Bottle > lookAt3DPort;
+
+  std::string motionPortName;
+  yarp::os::BufferedPort<yarp::os::Bottle > motionPort;
+
+  std::string trainingPortName;
+  yarp::os::BufferedPort<yarp::os::Bottle > trainingPort;
+
+
   bool isImageLeft, isImageRight;
+  bool waitAnswer;
+  bool isSavingImage;
+  int isValid;
+  std::string go;
 
 public:
   //WorldMapping();

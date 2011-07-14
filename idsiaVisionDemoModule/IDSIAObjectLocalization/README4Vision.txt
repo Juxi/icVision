@@ -2,13 +2,19 @@ How to use the software
 
 Launch the two nodes
 	
-	yarp run --server /iCubIDSIA
-
-and
-
 	yarp run --server /IDSIAOutput
 	
 when the software will run on the server or on the laptop the iCubIDSIA and use directly the icubsrv
+
+launch VirtualSkin
+
+cd ~/IM-CLeVeR/idsiaVisionDemoModule/IDSIAObjectLocalization/conf
+manager.py IMCLEVERWithKailSimWorld.xml
+cd ~/IM-CLeVeR/idsiaVisionDemoModule/IDSIAObjectLocalization/release
+././IDSIAObjectLocalization
+
+Push Connect button
+ 
 
 Once they are running you can launch the software using manager.py and the configuration file that you want to use
 

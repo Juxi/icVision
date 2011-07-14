@@ -99,7 +99,7 @@ void ReachingWorker::init() {
 //	orientationFromAbove[3] =  3.14;
 	
 	// set policy TODO
-	setPolicy( ReachingWorker::FROM_ABOVE | ReachingWorker::STRAIGHT );
+	setPolicy( ReachingWorker::FROM_LEFT | ReachingWorker::STRAIGHT );
 
 	initialized = true;
 
@@ -239,6 +239,7 @@ void ReachingWorker::reachPosition( )
 
 		if(doReaching()) {
 			std::cout << "Reaching completed!" << std::endl;			
+			printStatus();
 		} else {
 			std::cout << "ERROR: Reach failed" << std::endl;
 		}
@@ -314,9 +315,9 @@ yarp::sig::Vector ReachingWorker::calculatePreReachPosition() {
 		
 	} else if( policy & ReachingWorker::FROM_LEFT ) {
 		
-		preReachPos.push_back(xd[0]);
+		preReachPos.push_back(xd[0] + 0.05);
 		preReachPos.push_back(xd[1] - defined_offset);	
-		preReachPos.push_back(xd[2] + 0.1); //0.1needed but why?);
+		preReachPos.push_back(xd[2] + 0.05); //0.1needed but why?);
 		
 	} else
 		std::cout << "NOT YET IMPlEMENTED" << std::endl; 
@@ -346,6 +347,9 @@ bool ReachingWorker::doReaching() {
 		orientation = orientationFromSide;
 		if( policy & FROM_RIGHT) x[1] += reaching_offset;
 		else x[1] -= reaching_offset;
+
+	// real robot testing
+		//x[0] += 0.02;
 	}
 
 	// offset needed?!!?!
@@ -354,7 +358,8 @@ bool ReachingWorker::doReaching() {
 
 	
 	// setup hand
-	callGraspController("pre");
+//	callGraspController("pre");
+	callGraspController("opn");
 
 	bool done = false;
 	
@@ -378,7 +383,8 @@ bool ReachingWorker::doReaching() {
 */
 	
 	// setup hand, close now
-	callGraspController("cls");
+//	callGraspController("cls");
+	callGraspController("opn");
 		
 	std::cout << "Going to reaching:" << x[0] << ", "<< x[1] << ", "<< x[2] <<  std::endl;	
 
@@ -402,7 +408,7 @@ void ReachingWorker::callGraspController(const std::string msg) {
 	yarp::os::Network yarp;
 	yarp::os::RpcClient port;
 
-	std::string inputPortName = "graspController";
+	std::string inputPortName = "/graspController";
 	std::string clientPortName = "graspClient";
 	if(! port.open( clientPortName.c_str() )){
 		std::cout << std::endl << "ERROR: Could not open port: " << clientPortName.c_str()  << std::endl << std::endl;
