@@ -29,12 +29,12 @@ int main(int argc, char *argv[])
 	
 	qreal period;	// the time between commands that will be sent
 	if ( config.check("period") ) { period = config.find("period").asDouble(); }
-	else { period = 0.5; }
+	else { period = 1; }
 	period *= 1000000;
 	
 	qreal speed;	// the speed to use for both position and velocity commands
 	if ( config.check("speed") ) { speed = config.find("speed").asDouble(); }
-	else { speed = 20.0; }
+	else { speed = 10.0; }
 	
 	bool hands;		// whether or not to include the hands in babbling
 	if ( config.check("hands") ) { hands = true; }

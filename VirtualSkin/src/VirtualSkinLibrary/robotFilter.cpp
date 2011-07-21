@@ -92,7 +92,6 @@ void RobotFilter::takeControl()
 	
 	if ( isColliding && !haveControl )
 	{
-		printf("taking control\n");
 		haveControl = true;
 		
 		// first take control away from the user
@@ -122,6 +121,7 @@ void RobotFilter::run()
 	{
 		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
 	}
+	
 	while ( isColliding )
 	{
 		msleep(YARP_PERIOD_ms);

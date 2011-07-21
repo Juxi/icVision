@@ -17,8 +17,8 @@
 /**
  *	For the reflex behavior
  */
-#define POSE_BUFFER_SIZE 1000				//!< Length of the pose history stored by VirtualSkin::StateObserver
-#define ALL_CLEAR_WAIT 1000					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
+#define POSE_BUFFER_SIZE 100				//!< Length of the pose history stored by VirtualSkin::StateObserver
+#define ALL_CLEAR_WAIT 500					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
 //#define REFLEX_SPEED 30					//!< The velovity to use for the reflexive position move command
 //#define POSITION_MOVE_TIMEOUT 10			//!< Max time (seconds) to wait for the robot to finish the reflexive position move
 //#define NEGLIGIBLE_ANGLE .5				//!< (degrees)

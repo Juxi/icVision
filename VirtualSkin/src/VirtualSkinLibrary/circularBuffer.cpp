@@ -30,7 +30,7 @@ void CircularBuffer::setBufferSize( int len )
 void CircularBuffer::put( const QVector<qreal> v )
 {
 	if (empty) { init(v); }
-	else if ( time.elapsed() > 10 ) {
+	else /*if ( time.elapsed() > 10 )*/ {
 		*i = v;
 		//QVector<qreal>::iterator j;
 		//for ( j=(*i).begin(); j!=(*i).end(); ++j ) {
@@ -63,12 +63,13 @@ QVector< QVector<qreal> > CircularBuffer::getHistory()
 {
 	int count = 0;
 	QVector< QVector<qreal> > history;
-	//QVector< QVector<qreal> >::iterator j = i;
+	QVector< QVector<qreal> >::iterator j = i;
 	
 	while ( count < buffer.size() )
 	{
-		i = prev();
-		history.append(*i);
+		if ( j == buffer.begin() ) { j = buffer.end() - 1; }
+		else { --j; }
+		history.append(*j);
 		count++;
 	}
 	

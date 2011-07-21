@@ -3,8 +3,8 @@
 <WorldList version="1.0">
 
 <object name="table" pz="-.13">
-    <box width="2" depth=".001" height="2"/>
-    <box width=".005" depth="2" height="2" px=".3" pz="0.5"/>
+    <box width="2" depth=".001" height="2" px="-.7"/>
+    <box width=".005" depth="2" height="2" px=".3" pz="1"/>
 </object>
 
 <!--<object name="cup1" px="-.3" pz="-.1">

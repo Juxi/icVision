@@ -50,19 +50,6 @@ void ICubBabbler::doTheRobot( qreal period, qreal velocity, bool hands )
 		rightArm.doTheRobot( velocity, hands);
 		printf("\n");
 		
-		//headDone = false,
-		//torsoDone = false,
-		//lArmDone = false,
-		//rArmDone = false;
-		
-		//while ( !headDone || !torsoDone || !lArmDone || !rArmDone )
-		//{
-		//	head.checkMotionDone(&headDone);
-		//	torso.checkMotionDone(&torsoDone);
-		//	leftArm.checkMotionDone(&lArmDone);
-		//	rightArm.checkMotionDone(&rArmDone);
-		//}
-		
 		usleep(period);
 	}
 }

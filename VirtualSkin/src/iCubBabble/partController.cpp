@@ -64,7 +64,7 @@ bool PartController::open()
 	int i;
 	for (i = 0; i < numJoints; i++)
 	{
-		pos->setRefAcceleration(i, 50);
+		pos->setRefAcceleration(i, 20);
 		amp->enableAmp(i);
 		pid->enablePid(i);
 	}
