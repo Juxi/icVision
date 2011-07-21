@@ -168,6 +168,9 @@
 #include <iCub/iKin/iKinFwd.h>
 #include <opencv2/opencv.hpp>
 
+#include <iostream>
+#include <stdio.h>
+
 #include "CameraiCub.h"
 #include "StereoGeometry.h"
 #include "SaliencyMap.h"
@@ -200,7 +203,15 @@ class WorldMapping: public yarp::os::RFModule {
   std::string motionPortName;
   yarp::os::BufferedPort<yarp::os::Bottle > motionPort;
 
+  std::string trainingPortName;
+  yarp::os::BufferedPort<yarp::os::Bottle > trainingPort;
+
+
   bool isImageLeft, isImageRight;
+  bool waitAnswer;
+  bool isSavingImage;
+  int isValid;
+  std::string go;
 
 public:
   //WorldMapping();

@@ -147,7 +147,7 @@ bool SaliencyMap::close(){
 	PointRightOutPort.close();
 }
 
-void SaliencyMap::inhibitSaliencyMap(cv::Point2f &pointleft, cv::Point2f &pointright, int numberOfFeatureLeft, int numberOfFeatureRight){
+void SaliencyMap::inhibitSaliencyMap(int numberOfFeatureLeft, int numberOfFeatureRight){
 
 	float complexity= (float)(numberOfFeatureLeft+numberOfFeatureRight)/2;
 

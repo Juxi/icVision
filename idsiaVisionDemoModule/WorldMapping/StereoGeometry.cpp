@@ -44,9 +44,9 @@ StereoGeometry::StereoGeometry(string moduleName, Cameratype type)
 
 	inputHeadPortName = "/"+moduleName+"/stereo/head:i";
 	inputTorsoPortName =  "/"+moduleName+"/stereo/torso:i";
-	outputBBLeftPortName =  "/"+moduleName+"/stereo/bb_left:o";
-	outputBBRightPortName =  "/"+moduleName+"/stereo/bb_right:o";
-	outputCheckPortName =  "/"+moduleName+"/stereo/check:o";
+	outputBBLeftPortName =  "/"+moduleName+"/stereo/bb_left_out";
+	outputBBRightPortName =  "/"+moduleName+"/stereo/bb_right_out";
+	outputCheckPortName =  "/"+moduleName+"/stereo/check_out";
 
 	//Input head port
 	if(! inputHeadPort.open( inputHeadPortName.c_str() )){
@@ -77,6 +77,8 @@ StereoGeometry::StereoGeometry(string moduleName, Cameratype type)
 		cerr<<"Unable to open port "+outputCheckPortName<<endl;
 	}
 	cout<<"Opened port "+outputCheckPortName<<endl;
+
+
 }
 
 StereoGeometry::~StereoGeometry()
@@ -88,6 +90,11 @@ StereoGeometry::~StereoGeometry()
     saveCalibration("../conf/calibrationMatrices320.yaml");
 	 */
 
+}
+
+bool StereoGeometry::connect(string portTorso2connect, string portHead2connect){
+	Network::connect(portTorso2connect.c_str(),inputTorsoPortName.c_str());
+	Network::connect(portHead2connect.c_str(),inputHeadPortName.c_str());
 }
 
 
@@ -473,6 +480,8 @@ void StereoGeometry::triangulatePoint(cv::Point2f &pl, cv::Point2f &pr, Point3f 
 
 }
 
+
+
 void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr, Point3f &point3d){
 
 	Point2f pl_und =  undistortPoint(pl, "left");
@@ -488,16 +497,6 @@ void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr
 	CvMat __points1 = doubleleft, __points2 = doubleright;
 	CvMat __newpoints1 = doubleleft, __newpoints2 = doubleright;
 
-	/*
-=======
-  /*
->>>>>>> 1d81e393cb89b09196236014e5f9e720e7300be4
-  if(P_left.empty())
-      estimatePmatrix(K_left, RTw2cl, P_left);
-    if(P_right.empty())
-      estimatePmatrix(K_right, RTw2cr, P_right);
-<<<<<<< HEAD
-	 */
 
 	Mat doubleP_left, doubleP_right;
 	P_left.convertTo(doubleP_left, CV_64FC1);
@@ -506,21 +505,26 @@ void StereoGeometry::triangulatePointChessboard(cv::Point2f &pl, cv::Point2f &pr
 	CvMat* P1 = &(CvMat)doubleP_left;
 	CvMat* P2 = &(CvMat)doubleP_right;
 
+
 	float _d[1000] = {0.0f};
 	Mat outTM(4,1,CV_64FC1,_d);
 	CvMat* out = &(CvMat)outTM;
+
 
 	//using cvTriangulate with the created structures
 	//cvCorrectMatches(&(CvMat)F, &__points1, &__points2, &__newpoints1, &__newpoints2);
 	cvTriangulatePoints(P1,P2,&__points1,&__points2,out);
 
+
 	//Normalize the point
 	outTM = outTM/outTM.at<double>(3,0);
 	Mat tmpoutTM = outTM.clone();
 
+
 	//from camera to chessboard
 	tmpoutTM.convertTo(tmpoutTM, CV_32FC1);
 	Mat result2 = RTcl2b*tmpoutTM;
+
 
 	//Conversion from mm to m?!?
 	result2.at<float>(0,0)/=1000;
@@ -605,14 +609,21 @@ void StereoGeometry::triangulatePointLeftCamera(cv::Point2f &pl, cv::Point2f &pr
 
 
 void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPoint> &keysRight, vector<DMatch> &matches, int selectedFeature,
-		vector<int> &selectedIndexes, vector<Point3f> &selectedPoints3d, Point3f &lookAtPoint3d, Rect &objRect_left, Rect &objRect_right){
+		vector<int> &selectedIndexes, vector<Point3f> &selectedPoints3d, Point3f &lookAtPoint3d, Rect &objRect_left, Rect &objRect_right, int &isValid){
 
 	Point2f pointLeft, pointRight;
 	Point3f point3d, selectedPoint3d;
-
+	bool useCamera = true;
 	//Estimate depth of the selected point
-	//cout<<"Estimate new object"<<endl;
+	cout<<"Estimate new object"<<endl;
 
+	if(RTcl2b.empty()){
+		cout<<"I am using encoders"<<endl;
+		useCamera = false;
+		setUpCamera2WorldEncoder();
+	}
+	else
+		cout<<"I am using camera"<<endl;
 	//  triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
 
 	Mat fakeR = Mat::eye(3,3,R.type());
@@ -620,16 +631,24 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 	estimatePmatrix(K_left, fakeR, fakeT, P_left);
 	estimatePmatrix(K_right, R, T, P_right);
 
-	cout<<"Triangulating point "<<keysLeft[matches[selectedFeature].queryIdx].pt<<" "<<keysRight[matches[selectedFeature].trainIdx].pt<<endl;
+	cout<<"Triangulating point "<<keysLeft[matches[selectedFeature].queryIdx].pt<<" "<<keysRight[matches[selectedFeature].trainIdx].pt<<" ";
 	//triangulatePoint(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
-	triangulatePointChessboard(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+	if(useCamera)
+		triangulatePointChessboard(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+	else
+		triangulatePoint(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+		//triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+
+	cout<<"and results is "<<selectedPoint3d<<endl;
 
 	lookAtPoint3d = selectedPoint3d;
-	int isValid = 0;
+	/*int*/ isValid = 0;
 
 	if(lookAtPoint3d.x < 0 &&
 			lookAtPoint3d.y < 1.5 && lookAtPoint3d.x > -1.5 &&
-			lookAtPoint3d.z < 1 && lookAtPoint3d.z > 0.5){
+			lookAtPoint3d.z < 1 && lookAtPoint3d.z > -1){
 
 		isValid = 1;
 
@@ -643,13 +662,19 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 		//estimate the point wrt camera left
 		//triangulatePointLeftCamera(pointLeft, pointRight, point3d);
 		//triangulatePoint(pointLeft, pointRight, point3d);
-		triangulatePointChessboard(pointLeft, pointRight, point3d);
+		if(useCamera)
+			triangulatePointChessboard(pointLeft, pointRight, point3d);
+		else
+			triangulatePoint(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+
+			//triangulatePointLeftCamera(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
+			//triangulatePoint(keysLeft[matches[selectedFeature].queryIdx].pt, keysRight[matches[selectedFeature].trainIdx].pt, selectedPoint3d);
 
 		if(point3d.x < 0){
 
 			if( abs(point3d.x-selectedPoint3d.x) < 0.05 &&
-					abs(point3d.y-selectedPoint3d.y) < 0.25 &&
-					abs(point3d.z-selectedPoint3d.z) < 0.25){
+					abs(point3d.y-selectedPoint3d.y) < 0.15 &&
+					abs(point3d.z-selectedPoint3d.z) < 0.15){
 
 				//cout<<point3d<<endl;
 
@@ -663,22 +688,130 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 	//Only for debug
 	//Select the point
 	vector<Point> selectedPoints2d_left, selectedPoints2d_right;
+	Point2f tmp_left, tmp_right;
+
 
 	cout<<"Size of points "<<selectedIndexes.size()<<endl;
 	for(int i = 0; i<selectedIndexes.size(); i++){
-		selectedPoints2d_left.push_back(keysLeft[matches[i].queryIdx].pt);
-		selectedPoints2d_right.push_back(keysRight[matches[i].trainIdx].pt);
+
+		selectedPoints2d_left.push_back(keysLeft[matches[selectedIndexes[i]].queryIdx].pt);
+		selectedPoints2d_right.push_back(keysRight[matches[selectedIndexes[i]].trainIdx].pt);
+
 	}
 
 	objRect_left = Rect(0,0,0,0);
 	objRect_right = Rect(0,0,0,0);
 
-	if(selectedIndexes.size() > 0){
+	if(selectedIndexes.size() > 4){
 		objRect_left =  boundingRect( Mat(selectedPoints2d_left) );
 		objRect_right =  boundingRect( Mat(selectedPoints2d_right) );
 	}
+	else
+		isValid = 0;
 
-    //SENDING POINTS COORDINATES
+
+	cout<<"I am sending BB_left "<< objRect_left.x<< " " << objRect_left.y << " " << objRect_left.width << " " << objRect_left.height<<endl;
+	cout<<"I am sending BB_right "<< objRect_right.x<< " " << objRect_right.y << " " << objRect_right.width << " " << objRect_right.height<<endl;
+	cout<<"I am sending is valid "<< isValid<<endl;
+	/*	if(objRect_left.width > 400 || objRect_right.width > 400 || objRect_left.height > 400 || objRect_right.height > 200 )
+		isValid = 0*/;
+
+		//SENDING POINTS COORDINATES
+		Bottle& bblOut = outputBBLeftPort.prepare();
+		Bottle& bbrOut = outputBBRightPort.prepare();
+		Bottle& checkOut = outputCheckPort.prepare();
+		bblOut.clear();
+		bbrOut.clear();
+		checkOut.clear();
+		bblOut.addInt(objRect_left.x);
+		bblOut.addInt(objRect_left.y);
+		bblOut.addInt(objRect_left.width);
+		bblOut.addInt(objRect_left.height);
+		bblOut.addInt(isValid);
+		bbrOut.addInt(objRect_right.x);
+		bbrOut.addInt(objRect_right.y);
+		bbrOut.addInt(objRect_right.width);
+		bbrOut.addInt(objRect_right.height);
+		bbrOut.addInt(isValid);
+		checkOut.addInt(isValid);
+		outputCheckPort.write();
+		outputBBLeftPort.write();
+		outputBBRightPort.write();
+
+
+}
+
+void StereoGeometry::setUpCamera2WorldEncoder(){
+
+	bool receivedHead = false;
+	bool receivedTorso = false;
+
+	while(receivedHead && receivedTorso){
+
+		cout<<"Reading encoders"<<endl;
+		if (Bottle *head=inputHeadPort.read(false))
+		{
+			//get data and convert from degrees to radians
+			head0=head->get(0).asDouble()*M_PI/180;
+			head1=head->get(1).asDouble()*M_PI/180;
+			head2=head->get(2).asDouble()*M_PI/180;
+			head3=head->get(3).asDouble()*M_PI/180;
+			head4=head->get(4).asDouble()*M_PI/180;
+			head5=head->get(5).asDouble()*M_PI/180;
+			receivedHead = true;
+		}
+
+		if (Bottle *torso=inputTorsoPort.read(false))
+		{
+			//get data and convert from degrees to radians
+			torso0=torso->get(0).asDouble()*M_PI/180;
+			torso1=torso->get(1).asDouble()*M_PI/180;
+			torso2=torso->get(2).asDouble()*M_PI/180;
+			receivedTorso = true;
+		}
+
+		//Estimate rototranslation camera->world model
+		if (receivedHead && receivedTorso)
+		{
+
+			v[0]=torso2;
+			v[1]=torso1;
+			v[2]=torso0;
+			v[3]=head0;
+			v[4]=head1;
+			v[5]=head2;
+			v[6]=head3;
+
+			//it is a LEFT eye
+			v[7]=head4+head5/2;
+
+			//Matrix transformation;
+			transformation_left = chainEye_left.getH(v);
+
+
+			//it is a RIGHT eye
+			v[7]=head4-head5/2;
+
+			//Matrix transformation;
+			transformation_right = chainEye_right.getH(v);
+
+			// eye -> robot
+
+			RTcl2w = Mat(4,4, CV_64FC1, transformation_left.data());
+			RTcr2w = Mat(4,4, CV_64FC1, transformation_right.data());
+
+			RTcl2w.convertTo(RTcl2w, CV_32FC1);
+			RTcr2w.convertTo(RTcr2w, CV_32FC1);
+
+		}
+	}
+}
+
+void StereoGeometry::sendZeroBBOnPort(){
+	//SENDING POINTS COORDINATES
+	int isValid = 2;
+	Rect objRect_left = Rect(320-20,240-20,40,40);
+	Rect objRect_right = Rect(320-20,240-20,40,40);
 	Bottle& bblOut = outputBBLeftPort.prepare();
 	Bottle& bbrOut = outputBBRightPort.prepare();
 	Bottle& checkOut = outputCheckPort.prepare();
@@ -689,19 +822,41 @@ void StereoGeometry::segmentOnDepth(vector<cv::KeyPoint> &keysLeft, vector<KeyPo
 	bblOut.addInt(objRect_left.y);
 	bblOut.addInt(objRect_left.width);
 	bblOut.addInt(objRect_left.height);
+	bblOut.addInt(isValid);
 	bbrOut.addInt(objRect_right.x);
 	bbrOut.addInt(objRect_right.y);
 	bbrOut.addInt(objRect_right.width);
 	bbrOut.addInt(objRect_right.height);
+	bbrOut.addInt(isValid);
 	checkOut.addInt(isValid);
 	outputCheckPort.write();
 	outputBBLeftPort.write();
 	outputBBRightPort.write();
-
-
 }
 
-void StereoGeometry::pointFromCamera2World(cv::Point2f &pointCamera, cv::Point2f &pointWorld, std::string camera){
-
+void StereoGeometry::sendfakeBBOnPort(){
+	//SENDING POINTS COORDINATES
+	int isValid = 1;
+	Rect objRect_left = Rect(320-20,240-20,40,40);
+	Rect objRect_right = Rect(320-20,240-20,40,40);
+	Bottle& bblOut = outputBBLeftPort.prepare();
+	Bottle& bbrOut = outputBBRightPort.prepare();
+	Bottle& checkOut = outputCheckPort.prepare();
+	bblOut.clear();
+	bbrOut.clear();
+	checkOut.clear();
+	bblOut.addInt(objRect_left.x);
+	bblOut.addInt(objRect_left.y);
+	bblOut.addInt(objRect_left.width);
+	bblOut.addInt(objRect_left.height);
+	bblOut.addInt(isValid);
+	bbrOut.addInt(objRect_right.x);
+	bbrOut.addInt(objRect_right.y);
+	bbrOut.addInt(objRect_right.width);
+	bbrOut.addInt(objRect_right.height);
+	bbrOut.addInt(isValid);
+	checkOut.addInt(isValid);
+	outputCheckPort.write();
+	outputBBLeftPort.write();
+	outputBBRightPort.write();
 }
-

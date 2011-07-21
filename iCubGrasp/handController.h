@@ -10,12 +10,16 @@
 #ifndef HANDCONTROLLER_H
 #define HANDCONTROLLER_H
 
+
 #include <QtCore>
 #include <QThread>
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
+//#define USE_TOUCH
 
+#ifdef USE_TOUCH
 #include "touchthread.h"
+#endif
 
 class HandController : private QThread
 {
@@ -35,7 +39,9 @@ public:
 	/* need a function to make the trajectory from a config file */
 	
 private:
+#ifdef USE_TOUCH
 	TouchSenseThread* ts;
+#endif
 	qreal attenuationThreshold;
 	qreal attenuationFactor;
 

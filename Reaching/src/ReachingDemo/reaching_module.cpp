@@ -62,16 +62,14 @@ bool ReachingModule::updateModule()
 		// TODO
 
 		//	do it only once changes
-		if( objName == lastTgtObjName ) {
-			cout << ": last is the same" << endl;
-			// todo check position
-			return true;
-		} else {
+		if( ! (objName == lastTgtObjName)  ) {
 			cout << " new target found " << endl;
 			reach->stopMotion();
+		} else {
+			cout << " target is still the same" << endl;
 		}	
 
-		// get information about the new object from rpc
+		// get information about the object from rpc
 		cmd.clear();
 		cmd.addString("get");
 
@@ -94,20 +92,27 @@ bool ReachingModule::updateModule()
 		
 		cout << cmd.toString() << ": " << response.toString().c_str() << "" << endl;
 		
-		std::string h = "\"Object not found.\"";
-//		if( ((std::string) response.toString().c_str()).compare(0, h.size(), h) == 0 ) {
-		if( response.toString().c_str() == h ) {
+		// TODO debug & test  this!!
+		if( response.toString() == "\"Object not found.\"" )
 			std::cout << "ERROR: Object not found  " << std::endl;
 			return true;
 		}
-
 		
 		double x = response.get(13).asDouble();
 		double y = response.get(14).asDouble();	
 		double z = response.get(15).asDouble();
 		
+		// check if the position is a new one!
+		bool posIsSame = true;
+
+		yarp::sig::Vector oldpos = reach->getPosition();
+		if( oldpos[0] == x && oldpos[1] == x && oldpos[2] == z ) {
+			cout << " position is still the same" << endl;
+			return true;
+		}
+				
 		// set the reach target!
-		reach->setPosition(x, y, z);
+		if( ! posIsSame )reach->setPosition(x, y, z);
 		
 		// reach->setPolicy ()... something like from top from left, which hand orientation?
 		
@@ -295,9 +300,14 @@ bool ReachingModule::configure(yarp::os::Searchable& config)
 	attach(handlerPort);
 
 	//set-up input/output ports
-	inputPortName = "/" + robotName + "/world";
-// check whether we have F or not!! TODO
-    string clientPortName = "/";
+	if( robotName.compare( robotName.length() - 1, 1, "F") == 0 )
+		inputPortName = "/" + robotName + "/world";
+	else
+		inputPortName = "/" + robotName + "F/world";
+
+
+	// check whether we have F or not!! TODO
+    	string clientPortName = "/";
 	clientPortName += getName();
 	clientPortName += "/world-client";
 	if(! port.open( clientPortName.c_str() )){
