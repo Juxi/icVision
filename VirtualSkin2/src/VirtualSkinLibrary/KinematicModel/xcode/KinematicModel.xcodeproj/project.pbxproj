@@ -1,0 +1,1388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		5D39C05D39C05D39C0000000 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5E08905E08905E0890000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				5D3B905D3B905D3B90000000 /* CMake ReRun */,
+				5E9F505E9F505E9F50000000 /* CMake Rules */,
+			);
+			dependencies = (
+				103C600103C600103C600000 /* PBXTargetDependency */,
+				103CD70103CD70103CD70000 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		5F1EA05F1EA05F1EA0000000 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5F2F105F2F105F2F10000000 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				5F20405F20405F2040000000 /* CMake ReRun */,
+				5F26305F26305F2630000000 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				103D5B0103D5B0103D5B0000 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		100E4E0100E4E0100E4E0000 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100DD50100DD50100DD50000 /* model.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100F0A0100F0A0100F0A0000 /* modelexception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100E870100E870100E870000 /* modelexception.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100FB70100FB70100FB70000 /* modelwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100F3B0100F3B0100F3B0000 /* modelwindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101069010106901010690000 /* glwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100FE10100FE10100FE10000 /* glwidget.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101122010112201011220000 /* transformable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1010A201010A201010A20000 /* transformable.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1011D701011D701011D70000 /* compositeobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101153010115301011530000 /* compositeobject.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10128D010128D010128D0000 /* primitiveobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10120B010120B010120B0000 /* primitiveobject.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10133A010133A010133A0000 /* sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1012BE01012BE01012BE0000 /* sphere.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1013EC01013EC01013EC0000 /* cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101373010137301013730000 /* cylinder.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1014A201014A201014A20000 /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101425010142501014250000 /* box.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101555010155501015550000 /* robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1014DB01014DB01014DB0000 /* robot.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101607010160701016070000 /* bodyPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10157F010157F010157F0000 /* bodyPart.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1016BA01016BA01016BA0000 /* kintreenode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101640010164001016400000 /* kintreenode.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10176C010176C010176C0000 /* motor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1016E401016E401016E40000 /* motor.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10181F010181F010181F0000 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1017A501017A501017A50000 /* interval.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1018D101018D101018D10000 /* link.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101849010184901018490000 /* link.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10198A010198A010198A0000 /* joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10190A010190A010190A0000 /* joint.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101A460101A460101A460000 /* joint_revolute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1019CB01019CB01019CB0000 /* joint_revolute.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101AF40101AF40101AF40000 /* zpHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101A7A0101A7A0101A7A0000 /* zpHandler.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101B870101B870101B870000 /* moc_model.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 101B1E0101B1E0101B1E0000 /* moc_model.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		101C3D0101C3D0101C3D0000 /* moc_modelwindow.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 101BE10101BE10101BE10000 /* moc_modelwindow.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		101D140101D140101D140000 /* moc_glwidget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 101C980101C980101C980000 /* moc_glwidget.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		101DCA0101DCA0101DCA0000 /* moc_robot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 101D4F0101D4F0101D4F0000 /* moc_robot.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		102EE50102EE50102EE50000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 102E6F0102E6F0102E6F0000 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		102F950102F950102F950000 /* objectSoup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 102F1E0102F1E0102F1E0000 /* objectSoup.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		103C100103C100103C100000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E88805E88805E8880000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10319A010319A010319A0000;
+			remoteInfo = WorldModelDemo;
+		};
+		103C880103C880103C880000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E88805E88805E8880000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1021D401021D401021D40000;
+			remoteInfo = KinematicModel;
+		};
+		103CFF0103CFF0103CFF0000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E88805E88805E8880000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D39C05D39C05D39C0000000;
+			remoteInfo = ALL_BUILD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		100096010009601000960000 /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = LibKinematicModel/model.h; sourceTree = SOURCE_ROOT; };
+		100139010013901001390000 /* modelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modelexception.h; path = LibKinematicModel/modelexception.h; sourceTree = SOURCE_ROOT; };
+		1001FC01001FC01001FC0000 /* modelwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modelwindow.h; path = LibKinematicModel/modelwindow.h; sourceTree = SOURCE_ROOT; };
+		1002AF01002AF01002AF0000 /* glwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glwidget.h; path = LibKinematicModel/glwidget.h; sourceTree = SOURCE_ROOT; };
+		100363010036301003630000 /* transformable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transformable.h; path = LibKinematicModel/transformable.h; sourceTree = SOURCE_ROOT; };
+		100416010041601004160000 /* compositeobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compositeobject.h; path = LibKinematicModel/compositeobject.h; sourceTree = SOURCE_ROOT; };
+		1004C601004C601004C60000 /* primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = primitiveobject.h; path = LibKinematicModel/primitiveobject.h; sourceTree = SOURCE_ROOT; };
+		10057B010057B010057B0000 /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sphere.h; path = LibKinematicModel/sphere.h; sourceTree = SOURCE_ROOT; };
+		10062E010062E010062E0000 /* cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cylinder.h; path = LibKinematicModel/cylinder.h; sourceTree = SOURCE_ROOT; };
+		1006E101006E101006E10000 /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box.h; path = LibKinematicModel/box.h; sourceTree = SOURCE_ROOT; };
+		10078E010078E010078E0000 /* robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = robot.h; path = LibKinematicModel/robot.h; sourceTree = SOURCE_ROOT; };
+		100840010084001008400000 /* bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bodyPart.h; path = LibKinematicModel/bodyPart.h; sourceTree = SOURCE_ROOT; };
+		1008F201008F201008F20000 /* kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kintreenode.h; path = LibKinematicModel/kintreenode.h; sourceTree = SOURCE_ROOT; };
+		1009A401009A401009A40000 /* motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = motor.h; path = LibKinematicModel/motor.h; sourceTree = SOURCE_ROOT; };
+		100A560100A560100A560000 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = LibKinematicModel/interval.h; sourceTree = SOURCE_ROOT; };
+		100B080100B080100B080000 /* link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = link.h; path = LibKinematicModel/link.h; sourceTree = SOURCE_ROOT; };
+		100BC30100BC30100BC30000 /* joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joint.h; path = LibKinematicModel/joint.h; sourceTree = SOURCE_ROOT; };
+		100C730100C730100C730000 /* joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = joint_revolute.h; path = LibKinematicModel/joint_revolute.h; sourceTree = SOURCE_ROOT; };
+		100D230100D230100D230000 /* zpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zpHandler.h; path = LibKinematicModel/zpHandler.h; sourceTree = SOURCE_ROOT; };
+		100DD50100DD50100DD50000 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = model.cpp; path = LibKinematicModel/model.cpp; sourceTree = SOURCE_ROOT; };
+		100E870100E870100E870000 /* modelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = modelexception.cpp; path = LibKinematicModel/modelexception.cpp; sourceTree = SOURCE_ROOT; };
+		100F3B0100F3B0100F3B0000 /* modelwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = modelwindow.cpp; path = LibKinematicModel/modelwindow.cpp; sourceTree = SOURCE_ROOT; };
+		100FE10100FE10100FE10000 /* glwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glwidget.cpp; path = LibKinematicModel/glwidget.cpp; sourceTree = SOURCE_ROOT; };
+		1010A201010A201010A20000 /* transformable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transformable.cpp; path = LibKinematicModel/transformable.cpp; sourceTree = SOURCE_ROOT; };
+		101153010115301011530000 /* compositeobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compositeobject.cpp; path = LibKinematicModel/compositeobject.cpp; sourceTree = SOURCE_ROOT; };
+		10120B010120B010120B0000 /* primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = primitiveobject.cpp; path = LibKinematicModel/primitiveobject.cpp; sourceTree = SOURCE_ROOT; };
+		1012BE01012BE01012BE0000 /* sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sphere.cpp; path = LibKinematicModel/sphere.cpp; sourceTree = SOURCE_ROOT; };
+		101373010137301013730000 /* cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cylinder.cpp; path = LibKinematicModel/cylinder.cpp; sourceTree = SOURCE_ROOT; };
+		101425010142501014250000 /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box.cpp; path = LibKinematicModel/box.cpp; sourceTree = SOURCE_ROOT; };
+		1014DB01014DB01014DB0000 /* robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = robot.cpp; path = LibKinematicModel/robot.cpp; sourceTree = SOURCE_ROOT; };
+		10157F010157F010157F0000 /* bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bodyPart.cpp; path = LibKinematicModel/bodyPart.cpp; sourceTree = SOURCE_ROOT; };
+		101640010164001016400000 /* kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kintreenode.cpp; path = LibKinematicModel/kintreenode.cpp; sourceTree = SOURCE_ROOT; };
+		1016E401016E401016E40000 /* motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = motor.cpp; path = LibKinematicModel/motor.cpp; sourceTree = SOURCE_ROOT; };
+		1017A501017A501017A50000 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = LibKinematicModel/interval.cpp; sourceTree = SOURCE_ROOT; };
+		101849010184901018490000 /* link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = link.cpp; path = LibKinematicModel/link.cpp; sourceTree = SOURCE_ROOT; };
+		10190A010190A010190A0000 /* joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = joint.cpp; path = LibKinematicModel/joint.cpp; sourceTree = SOURCE_ROOT; };
+		1019BA01019BA01019BA0000 /* objectSoup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objectSoup.h; path = WorldModelDemo/objectSoup.h; sourceTree = SOURCE_ROOT; };
+		1019CB01019CB01019CB0000 /* joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = joint_revolute.cpp; path = LibKinematicModel/joint_revolute.cpp; sourceTree = SOURCE_ROOT; };
+		101A7A0101A7A0101A7A0000 /* zpHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zpHandler.cpp; path = LibKinematicModel/zpHandler.cpp; sourceTree = SOURCE_ROOT; };
+		101B1E0101B1E0101B1E0000 /* moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_model.cxx; path = xcode/LibKinematicModel/moc_model.cxx; sourceTree = SOURCE_ROOT; };
+		101BE10101BE10101BE10000 /* moc_modelwindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_modelwindow.cxx; path = xcode/LibKinematicModel/moc_modelwindow.cxx; sourceTree = SOURCE_ROOT; };
+		101C980101C980101C980000 /* moc_glwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_glwidget.cxx; path = xcode/LibKinematicModel/moc_glwidget.cxx; sourceTree = SOURCE_ROOT; };
+		101D4F0101D4F0101D4F0000 /* moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_robot.cxx; path = xcode/LibKinematicModel/moc_robot.cxx; sourceTree = SOURCE_ROOT; };
+		101DFE0101DFE0101DFE0000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = LibKinematicModel/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		101EB40101EB40101EB40000 /* moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_model.cxx.rule; path = xcode/LibKinematicModel/moc_model.cxx.rule; sourceTree = SOURCE_ROOT; };
+		101F680101F680101F680000 /* moc_modelwindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_modelwindow.cxx.rule; path = xcode/LibKinematicModel/moc_modelwindow.cxx.rule; sourceTree = SOURCE_ROOT; };
+		102011010201101020110000 /* moc_glwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_glwidget.cxx.rule; path = xcode/LibKinematicModel/moc_glwidget.cxx.rule; sourceTree = SOURCE_ROOT; };
+		1020D901020D901020D90000 /* moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_robot.cxx.rule; path = xcode/LibKinematicModel/moc_robot.cxx.rule; sourceTree = SOURCE_ROOT; };
+		102D5A0102D5A0102D5A0000 /* libKinematicModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libKinematicModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		102E6F0102E6F0102E6F0000 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = WorldModelDemo/main.cpp; sourceTree = SOURCE_ROOT; };
+		102F1E0102F1E0102F1E0000 /* objectSoup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objectSoup.cpp; path = WorldModelDemo/objectSoup.cpp; sourceTree = SOURCE_ROOT; };
+		102FC90102FC90102FC90000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = WorldModelDemo/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		103BA70103BA70103BA70000 /* WorldModelDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = WorldModelDemo; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F10B05F10B05F10B0000000 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		5FBE105FBE105FBE10000000 /* modelconstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modelconstants.h; path = LibKinematicModel/modelconstants.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		57D63057D63057D630000000 = {
+			isa = PBXGroup;
+			children = (
+				582270582270582270000000 /* Sources */,
+				582640582640582640000000 /* Resources */,
+				5E39D05E39D05E39D0000000 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		582270582270582270000000 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5E3B905E3B905E3B90000000 /* ALL_BUILD */,
+				5E47505E47505E4750000000 /* KinematicModel */,
+				5E46B05E46B05E46B0000000 /* WorldModelDemo */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		582640582640582640000000 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5E39D05E39D05E39D0000000 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				102D5A0102D5A0102D5A0000 /* libKinematicModel.a */,
+				103BA70103BA70103BA70000 /* WorldModelDemo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E3B905E3B905E3B90000000 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				5E42405E42405E4240000000 /* CMake Rules */,
+				5F10B05F10B05F10B0000000 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		5E42405E42405E4240000000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		5E46B05E46B05E46B0000000 /* WorldModelDemo */ = {
+			isa = PBXGroup;
+			children = (
+				5E7C805E7C805E7C80000000 /* Header Files */,
+				5E81005E81005E8100000000 /* Source Files */,
+				102FC90102FC90102FC90000 /* CMakeLists.txt */,
+			);
+			name = WorldModelDemo;
+			sourceTree = "<group>";
+		};
+		5E47505E47505E4750000000 /* KinematicModel */ = {
+			isa = PBXGroup;
+			children = (
+				5E4B505E4B505E4B50000000 /* Header Files */,
+				5E5CC05E5CC05E5CC0000000 /* Source Files */,
+				5E72305E72305E7230000000 /* CMake Rules */,
+				101DFE0101DFE0101DFE0000 /* CMakeLists.txt */,
+			);
+			name = KinematicModel;
+			sourceTree = "<group>";
+		};
+		5E4B505E4B505E4B50000000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				5FBE105FBE105FBE10000000 /* modelconstants.h */,
+				100096010009601000960000 /* model.h */,
+				100139010013901001390000 /* modelexception.h */,
+				1001FC01001FC01001FC0000 /* modelwindow.h */,
+				1002AF01002AF01002AF0000 /* glwidget.h */,
+				100363010036301003630000 /* transformable.h */,
+				100416010041601004160000 /* compositeobject.h */,
+				1004C601004C601004C60000 /* primitiveobject.h */,
+				10057B010057B010057B0000 /* sphere.h */,
+				10062E010062E010062E0000 /* cylinder.h */,
+				1006E101006E101006E10000 /* box.h */,
+				10078E010078E010078E0000 /* robot.h */,
+				100840010084001008400000 /* bodyPart.h */,
+				1008F201008F201008F20000 /* kintreenode.h */,
+				1009A401009A401009A40000 /* motor.h */,
+				100A560100A560100A560000 /* interval.h */,
+				100B080100B080100B080000 /* link.h */,
+				100BC30100BC30100BC30000 /* joint.h */,
+				100C730100C730100C730000 /* joint_revolute.h */,
+				100D230100D230100D230000 /* zpHandler.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		5E5CC05E5CC05E5CC0000000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				100DD50100DD50100DD50000 /* model.cpp */,
+				100E870100E870100E870000 /* modelexception.cpp */,
+				100F3B0100F3B0100F3B0000 /* modelwindow.cpp */,
+				100FE10100FE10100FE10000 /* glwidget.cpp */,
+				1010A201010A201010A20000 /* transformable.cpp */,
+				101153010115301011530000 /* compositeobject.cpp */,
+				10120B010120B010120B0000 /* primitiveobject.cpp */,
+				1012BE01012BE01012BE0000 /* sphere.cpp */,
+				101373010137301013730000 /* cylinder.cpp */,
+				101425010142501014250000 /* box.cpp */,
+				1014DB01014DB01014DB0000 /* robot.cpp */,
+				10157F010157F010157F0000 /* bodyPart.cpp */,
+				101640010164001016400000 /* kintreenode.cpp */,
+				1016E401016E401016E40000 /* motor.cpp */,
+				1017A501017A501017A50000 /* interval.cpp */,
+				101849010184901018490000 /* link.cpp */,
+				10190A010190A010190A0000 /* joint.cpp */,
+				1019CB01019CB01019CB0000 /* joint_revolute.cpp */,
+				101A7A0101A7A0101A7A0000 /* zpHandler.cpp */,
+				101B1E0101B1E0101B1E0000 /* moc_model.cxx */,
+				101BE10101BE10101BE10000 /* moc_modelwindow.cxx */,
+				101C980101C980101C980000 /* moc_glwidget.cxx */,
+				101D4F0101D4F0101D4F0000 /* moc_robot.cxx */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		5E72305E72305E7230000000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				101EB40101EB40101EB40000 /* moc_model.cxx.rule */,
+				101F680101F680101F680000 /* moc_modelwindow.cxx.rule */,
+				102011010201101020110000 /* moc_glwidget.cxx.rule */,
+				1020D901020D901020D90000 /* moc_robot.cxx.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		5E7C805E7C805E7C80000000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				1019BA01019BA01019BA0000 /* objectSoup.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		5E81005E81005E8100000000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				102E6F0102E6F0102E6F0000 /* main.cpp */,
+				102F1E0102F1E0102F1E0000 /* objectSoup.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1021D401021D401021D40000 /* KinematicModel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 102351010235101023510000 /* Build configuration list for PBXNativeTarget "KinematicModel" */;
+			buildPhases = (
+				102200010220001022000000 /* CMake ReRun */,
+				102274010227401022740000 /* CMake Rules */,
+				102188010218801021880000 /* Sources */,
+				1022C801022C801022C80000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinematicModel;
+			productName = KinematicModel;
+			productReference = 102D5A0102D5A0102D5A0000 /* libKinematicModel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		10319A010319A010319A0000 /* WorldModelDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1031E001031E001031E00000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */;
+			buildPhases = (
+				1030BE01030BE01030BE0000 /* CMake ReRun */,
+				10307B010307B010307B0000 /* Sources */,
+				10311B010311B010311B0000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				103CD70103CD70103CD70000 /* PBXTargetDependency */,
+			);
+			name = WorldModelDemo;
+			productName = WorldModelDemo;
+			productReference = 103BA70103BA70103BA70000 /* WorldModelDemo */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E88805E88805E8880000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 5E91205E91205E9120000000 /* Build configuration list for PBXProject "KinematicModel" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 0;
+			mainGroup = 57D63057D63057D630000000;
+			projectDirPath = ..;
+			projectRoot = "";
+			targets = (
+				5D39C05D39C05D39C0000000 /* ALL_BUILD */,
+				5F1EA05F1EA05F1EA0000000 /* install */,
+				1021D401021D401021D40000 /* KinematicModel */,
+				10319A010319A010319A0000 /* WorldModelDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		102200010220001022000000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		102274010227401022740000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/CMakeScripts/KinematicModel_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		1022C801022C801022C80000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/CMakeScripts/KinematicModel_postBuildPhase.make$CONFIGURATION all";
+		};
+		1030BE01030BE01030BE0000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		10311B010311B010311B0000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/CMakeScripts/WorldModelDemo_postBuildPhase.make$CONFIGURATION all";
+		};
+		5D3B905D3B905D3B90000000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		5E9F505E9F505E9F50000000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		5F20405F20405F2040000000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make";
+		};
+		5F26305F26305F2630000000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode -f /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		102188010218801021880000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100E4E0100E4E0100E4E0000 /* model.cpp in Sources */,
+				100F0A0100F0A0100F0A0000 /* modelexception.cpp in Sources */,
+				100FB70100FB70100FB70000 /* modelwindow.cpp in Sources */,
+				101069010106901010690000 /* glwidget.cpp in Sources */,
+				101122010112201011220000 /* transformable.cpp in Sources */,
+				1011D701011D701011D70000 /* compositeobject.cpp in Sources */,
+				10128D010128D010128D0000 /* primitiveobject.cpp in Sources */,
+				10133A010133A010133A0000 /* sphere.cpp in Sources */,
+				1013EC01013EC01013EC0000 /* cylinder.cpp in Sources */,
+				1014A201014A201014A20000 /* box.cpp in Sources */,
+				101555010155501015550000 /* robot.cpp in Sources */,
+				101607010160701016070000 /* bodyPart.cpp in Sources */,
+				1016BA01016BA01016BA0000 /* kintreenode.cpp in Sources */,
+				10176C010176C010176C0000 /* motor.cpp in Sources */,
+				10181F010181F010181F0000 /* interval.cpp in Sources */,
+				1018D101018D101018D10000 /* link.cpp in Sources */,
+				10198A010198A010198A0000 /* joint.cpp in Sources */,
+				101A460101A460101A460000 /* joint_revolute.cpp in Sources */,
+				101AF40101AF40101AF40000 /* zpHandler.cpp in Sources */,
+				101B870101B870101B870000 /* moc_model.cxx in Sources */,
+				101C3D0101C3D0101C3D0000 /* moc_modelwindow.cxx in Sources */,
+				101D140101D140101D140000 /* moc_glwidget.cxx in Sources */,
+				101DCA0101DCA0101DCA0000 /* moc_robot.cxx in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10307B010307B010307B0000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				102EE50102EE50102EE50000 /* main.cpp in Sources */,
+				102F950102F950102F950000 /* objectSoup.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		103C600103C600103C600000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10319A010319A010319A0000 /* WorldModelDemo */;
+			targetProxy = 103C100103C100103C100000 /* PBXContainerItemProxy */;
+		};
+		103CD70103CD70103CD70000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1021D401021D401021D40000 /* KinematicModel */;
+			targetProxy = 103C880103C880103C880000 /* PBXContainerItemProxy */;
+		};
+		103D5B0103D5B0103D5B0000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D39C05D39C05D39C0000000 /* ALL_BUILD */;
+			targetProxy = 103CFF0103CFF0103CFF0000 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1023A601023A601023A60000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = KinematicModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		102434010243401024340000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = KinematicModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		102867010286701028670000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = KinematicModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		102AC30102AC30102AC30000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = KinematicModel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		10321A010321A010321A0000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/libKinematicModel.a,
+					"/Users/kail/Library/FreeSOLID-3.5.6/src/.libs/libsolid.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = WorldModelDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		103481010348101034810000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Release/libKinematicModel.a,
+					"/Users/kail/Library/FreeSOLID-3.5.6/src/.libs/libsolid.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = WorldModelDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		1034F901034F901034F90000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = "-DNDEBUG";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/MinSizeRel/libKinematicModel.a,
+					"/Users/kail/Library/FreeSOLID-3.5.6/src/.libs/libsolid.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = WorldModelDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		10391B010391B010391B0000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/RelWithDebInfo/libKinematicModel.a,
+					"/Users/kail/Library/FreeSOLID-3.5.6/src/.libs/libsolid.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"-framework",
+					AGL,
+					"-framework",
+					OpenGL,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = WorldModelDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		5E0AE05E0AE05E0AE0000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		5E2C005E2C005E2C00000000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		5E92905E92905E9290000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/build;
+			};
+			name = Debug;
+		};
+		5E94705E94705E9470000000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/build;
+			};
+			name = Release;
+		};
+		5E96B05E96B05E96B0000000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/build;
+			};
+			name = MinSizeRel;
+		};
+		5E98305E98305E9830000000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode/build;
+			};
+			name = RelWithDebInfo;
+		};
+		5ECA305ECA305ECA30000000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		5EEAF05EEAF05EEAF0000000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		5F33205F33205F3320000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		5F56305F56305F5630000000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		5F77005F77005F7700000000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		5F99305F99305F9930000000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel,
+					"/Users/kail/Library/FreeSOLID-3.5.6/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		102351010235101023510000 /* Build configuration list for PBXNativeTarget "KinematicModel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1023A601023A601023A60000 /* Debug */,
+				102434010243401024340000 /* Release */,
+				102867010286701028670000 /* MinSizeRel */,
+				102AC30102AC30102AC30000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1031E001031E001031E00000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10321A010321A010321A0000 /* Debug */,
+				103481010348101034810000 /* Release */,
+				1034F901034F901034F90000 /* MinSizeRel */,
+				10391B010391B010391B0000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5E08905E08905E0890000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E0AE05E0AE05E0AE0000000 /* Debug */,
+				5E2C005E2C005E2C00000000 /* Release */,
+				5ECA305ECA305ECA30000000 /* MinSizeRel */,
+				5EEAF05EEAF05EEAF0000000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5E91205E91205E9120000000 /* Build configuration list for PBXProject "KinematicModel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E92905E92905E9290000000 /* Debug */,
+				5E94705E94705E9470000000 /* Release */,
+				5E96B05E96B05E96B0000000 /* MinSizeRel */,
+				5E98305E98305E9830000000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5F2F105F2F105F2F10000000 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F33205F33205F3320000000 /* Debug */,
+				5F56305F56305F5630000000 /* Release */,
+				5F77005F77005F7700000000 /* MinSizeRel */,
+				5F99305F99305F9930000000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E88805E88805E8880000000 /* Project object */;
+}
