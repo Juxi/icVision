@@ -80,6 +80,7 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h"
     "/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h"
     "/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h"
+    "/Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

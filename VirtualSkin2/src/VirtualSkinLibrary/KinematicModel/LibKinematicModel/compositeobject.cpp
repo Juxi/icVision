@@ -7,11 +7,11 @@ using namespace std;
 using namespace KinematicModel;
 
 CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : responseClass(c),
-																					 inModel(false), 
-																					 deathWish(false),
-																					 numSpheres(0),
-																					 numCylinders(0),
-																					 numBoxes(0)
+																			   inModel(false), 
+																			   deathWish(false),
+																			   numSpheres(0),
+																			   numCylinders(0),
+																			   numBoxes(0)
 {
 }
 

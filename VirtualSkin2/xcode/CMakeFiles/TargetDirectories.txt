@@ -1,0 +1,6 @@
+/Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeFiles/ALL_BUILD.dir
+/Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeFiles/KinematicModel.dir
+/Users/kail/imClever/dev/VirtualSkin2/xcode/src/ReflexDemo/CMakeFiles/ReflexDemo.dir
+/Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/CMakeFiles/VirtualSkin.dir
+/Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeFiles/WorldModelDemo.dir
+/Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeFiles/YarpFilter.dir

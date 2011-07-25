@@ -11,7 +11,7 @@
 #define KINTREE_H
 
 #include <QMutex>
-#include "renderList.h"
+//#include "renderList.h"
 #include "bodyPart.h"
 #include "motor.h"
 #include "link.h"

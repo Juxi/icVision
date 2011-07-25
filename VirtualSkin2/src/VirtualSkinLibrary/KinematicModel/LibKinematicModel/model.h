@@ -65,7 +65,9 @@ public:
 	//void appendRobotObject( CompositeObject* );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	// to remove objects use CompositeObject.kill()
-	void loadRobot( const QString& fileName, bool verbose = true );
+	
+	Robot* loadRobot( const QString& fileName, bool verbose = true );
+	void loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }
 	DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }

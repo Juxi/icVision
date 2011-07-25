@@ -17,7 +17,7 @@ SET ( src_files		model.cpp			# the center of it all
 			
 			#displaylist.cpp
 				
-			#worldhandler.cpp
+			
 				
 			robot.cpp
 			bodyPart.cpp
@@ -31,6 +31,7 @@ SET ( src_files		model.cpp			# the center of it all
 				#joint_prismatic.cpp 
 				
 			zpHandler.cpp
+			worldhandler.cpp
 				
 )
 
@@ -43,9 +44,9 @@ SET ( QT_MOC_FILES 	model.h
 SET ( hdr_files		modelconstants.h
 
 			model.h			# the center of it all
-			modelexception.h		# when things go wrong
-			modelwindow.h			# the window
-			glwidget.h			# the OpenGL frustum
+			modelexception.h	# when things go wrong
+			modelwindow.h		# the window
+			glwidget.h		# the OpenGL frustum
 
 			transformable.h
 			compositeobject.h
@@ -66,8 +67,7 @@ SET ( hdr_files		modelconstants.h
 				#joint_prismatic.h 
 				
 			zpHandler.h
-
-				#worldhandler.h
+			worldhandler.h
 
 				
 )

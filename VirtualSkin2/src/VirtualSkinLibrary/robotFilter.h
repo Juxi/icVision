@@ -46,8 +46,8 @@ class VirtualSkin::RobotFilter : public QThread
 	Q_OBJECT
 
 public:
-	RobotFilter( bool visualize = false );	//!< Connects the RobotModel::Model to the RobotFilter, and initializes some members
-	virtual ~RobotFilter();					//!< Calls close()
+	RobotFilter( KinematicModel::Robot* r,/* KinematicModel::Model* m,*/ bool visualize = false );	//!< Connects the RobotModel::Model to the RobotFilter, and initializes some members
+	virtual ~RobotFilter();																		//!< Calls close()
 
 	/** \brief Builds a RobotFilter for the RobotModel::Model described in the requested config file
 	 *
@@ -59,8 +59,13 @@ public:
 	 *
 	 * \note aStateObserver,aCallObserver,aResponseObserver MUST be sub-classes of StateObserver,CallObserver,ResponseObserver respectively
 	 */
-	template <class aStateObserver, class aCallObserver, class aResponseObserver>
-	void open( const QString& fileName, const QString& worldFileName ) throw(std::exception)
+	template <
+				class aStateObserver,
+				class aCallObserver,
+				class aResponseObserver
+			 >
+	
+	void open( /*const QString& fileName, const QString& worldFileName*/ ) throw(std::exception)
 	{
 		if ( isOpen ) { close(); }
 		
@@ -68,12 +73,14 @@ public:
 		{
 			throw( VirtualSkinException("yarp network unavailable...") );
 		}
+		yarp::os::Network yarp;
 		
-		model.robot->open(fileName);
-		model.world->load(worldFileName);
+		//robot = model.loadRobot(fileName);
+		//model.robot->open(fileName);
+		//model.world->load(worldFileName);
 		
-		const QString deviceBaseName( model.robot->getName() );
-		const QString filterBaseName( model.robot->getName() + "F" );
+		const QString deviceBaseName( robot->getName() );
+		const QString filterBaseName( robot->getName() + "F" );
 		
 		yarp::os::ControlBoardFilter *p_cbf;	// create the port filter
 		aStateObserver *p_so;					// create an observer for the encoder readings
@@ -84,15 +91,15 @@ public:
 		QString targetName;
 		QString filterName;
 		
-		for (int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+		for (int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
 			p_cbf = new yarp::os::ControlBoardFilter();
 			
-			filterName = "/" + model.robot->getName() + "F/" + *(model.robot->getPartName(bodyPart));
-			targetName = "/" + model.robot->getName() + "/" + *(model.robot->getPartName(bodyPart));
+			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
+			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
 			
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", model.robot->getName().toStdString().c_str(), model.robot->getPartName(bodyPart)->toStdString().c_str() );
+			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -111,8 +118,8 @@ public:
 				p_cbf->setResponseObserver(p_ro);
 				responseObservers.append(p_ro);
 				
-				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	model.robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				model.robot, SLOT(setEncoderPosition(int,int,qreal)) );
+				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
+				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
@@ -130,8 +137,8 @@ public:
 		
 		
 		isOpen = true;
-		statusPort.setBottle("1");
-		model.start();
+		//statusPort.setBottle("1");
+		//model.start();
 		
 		// this is to let all the control board filters and observers come up
 		sleep(1);
@@ -147,15 +154,11 @@ public:
 											/**< This is called right after collisionResponse() and runs in its own thread.
 												 the user is responsible for deciding what it means that control commands are "finished" executing,
 												 which clearly depends on the kinds of commands issued in the first place. */
-	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
+	//void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
 																			/**< A 1 indicates the filter is connected and motor commands are being forwarded, 
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
-	void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
-	
-	YarpModel			model;	//!< The model that controls the opening and closing of the filter
-								/**< It is public so that the user has access to the information that was read out of the robot configuration file, 
-									 such as the name of the robot and the number of controllable axes for example */
-	
+	//void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
+
 public slots:
 	
 	void collisionStatus(int);
@@ -171,7 +174,12 @@ signals:
 
 protected:
 	
-	YarpStreamPort		statusPort;				//!< Published the (open/closed) status of the filter
+	KinematicModel::Robot*	robot;
+	YarpModel*				model;	//!< The model that controls the opening and closing of the filter
+									/**< It is public so that the user has access to the information that was read out of the robot configuration file, 
+										 such as the name of the robot and the number of controllable axes for example */
+	
+	//YarpStreamPort		statusPort;			//!< Published the (open/closed) status of the filter
 												//! TODO: Make this not iCub specific	
 	yarp::os::Bottle	stop_command;			//!< Stores an RPC command to stop the iCub robot
 												/**< \note This is iCub specific, and it should be done differently in the future */

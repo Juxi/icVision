@@ -3,7 +3,7 @@
  ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
  ******************************************************************/
 
-/** \addtogroup RobotModel
+/** \addtogroup KinematicModel
  *	@{
  */
 
@@ -12,9 +12,9 @@
 
 #include <QXmlDefaultHandler>
 
-namespace RobotModel
+namespace KinematicModel
 {
-	class World;
+	class Model;
 	class WorldHandler;
 	class CompositeObject;
 	class PrimitiveObject;
@@ -27,10 +27,10 @@ namespace RobotModel
  * has become createChildBodyPart(), createChildMotor(), and createChildJoint().
  */
 //!TODO: Document XML Spec
-class RobotModel::WorldHandler : public QXmlDefaultHandler
+class KinematicModel::WorldHandler : public QXmlDefaultHandler
 {
 public:
-	WorldHandler(World *world);
+	WorldHandler( Model* m );
 	bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &attributes);
 	bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
 	bool characters(const QString &str);
@@ -39,7 +39,7 @@ public:
 
 private:
 	
-	World		*world;
+	Model			*model;
 	CompositeObject *obj;
 	PrimitiveObject *prim;
 

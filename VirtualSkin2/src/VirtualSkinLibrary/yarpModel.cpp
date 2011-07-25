@@ -2,24 +2,24 @@
 
 using namespace VirtualSkin;
 
-YarpModel::YarpModel( bool visualize ) : RobotModel::Model(visualize)
+YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)
 {
-	worldPort.setWorld( world );
+	//worldPort.setWorld( world );
 }
 YarpModel::~YarpModel()
 {
 	//TODO: implement if (isOpen) kinda thing here
-	collisionPort.close();
-	worldPort.close();
+	//collisionPort.close();
+	//worldPort.close();
 }
-void YarpModel::collisionHandlerAddendum( RobotModel::PrimitiveObject *object1, RobotModel::PrimitiveObject *object2, const DT_CollData *coll_data )
+void YarpModel::collisionHandlerAddendum( KinematicModel::PrimitiveObject *object1, KinematicModel::PrimitiveObject *object2, const DT_CollData *coll_data )
 {	
 	QString nameA = object1->getName(); 
 	nameA.prepend("-");
-	nameA.prepend(object1->getParent()->getName());
+	//nameA.prepend(object1->getParent()->getName());
 	QString nameB = object2->getName();
 	nameB.prepend("-");
-	nameB.prepend(object2->getParent()->getName());
+	//nameB.prepend(object2->getParent()->getName());
 	
 	yarp::os::Bottle& collision = bottle.addList();
 	
@@ -38,14 +38,14 @@ void YarpModel::collisionHandlerAddendum( RobotModel::PrimitiveObject *object1, 
 
 void YarpModel::computePosePrefix()
 {
-	bottle.clear();
+	//bottle.clear();
 }
 
 void YarpModel::computePoseSuffix()
 {
 	//if ( collisionPort.isOpen() )
 	//{
-		if ( !col_count ) { bottle.addInt(0); }
-		collisionPort.setBottle(bottle);
+		//if ( !col_count ) { bottle.addInt(0); }
+		//collisionPort.setBottle(bottle);
 	//}
 }

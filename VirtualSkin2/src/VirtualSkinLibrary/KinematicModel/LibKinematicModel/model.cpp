@@ -1,5 +1,6 @@
 #include "model.h"
 #include "robot.h"
+#include "worldhandler.h"
 #include "modelwindow.h"
 
 using namespace KinematicModel;
@@ -101,10 +102,8 @@ DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 	return respClass;
 }
 
-void Model::loadRobot( const QString& fileName, bool verbose )
+Robot* Model::loadRobot( const QString& fileName, bool verbose )
 {
-	//QMutexLocker locker(&mutex);
-	
 	DT_RespTableHandle newTable = newRobotTable();
 	Robot* robot = new Robot( this, newTable );
 	robot->open( fileName, verbose );
@@ -112,36 +111,36 @@ void Model::loadRobot( const QString& fileName, bool verbose )
 	
 	responseTables.append( newTable );
 	robots.append( robot );
+	return robot;
 }
-//DT_ResponseClass getNewRobotResponseClass()
-//{
-//	QMutexLocker locker(&mutex);
-//	return DT_GenResponseClass(robotTable);
-//}
 
-/*void Model::appendRobotObject( CompositeObject* object )
+void Model::loadWorld( const QString& fileName, bool verbose )
 {
-	printf("  appending world object.\n");
-	QMutexLocker locker(&mutex);
-	if ( !object->getResponseClass() )
-	{
-		throw KinematicModelException("CompositeObject must have a DT_ResponseClass to be appended to the world.  Use setResponseClass( DT_ResponseClass )");
-	}
+	printf("Loading world file...\n");
+    WorldHandler handler( this );
+    QXmlSimpleReader reader;
+    reader.setContentHandler(&handler);
+    reader.setErrorHandler(&handler);
+    QFile file(fileName);
 	
-	const QVector<PrimitiveObject*>& primitives = object->data();
-	QVector<PrimitiveObject*>::const_iterator i;
-	for ( i=primitives.begin(); i!=primitives.end(); ++i )
+    if ( !file.open(QFile::ReadOnly | QFile::Text) )
 	{
-		if (verbose) printf("appending primitive to world\n");
-		//DT_SetResponseClass( robotTable, (*i)->getSolidObjectHandle(), object->getResponseClass() );
-		DT_SetResponseClass( robotTable, (*i)->getSolidObjectHandle(), object->getResponseClass() );
-		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
-		if ( modelWindow ) { (*i)->setListPending(true); }
-		emit addedPrimitive(*i);
-	}
-	object->setInModel(true);
-	world.append(object);
-}*/
+		QString errStr = "failed to open file '";
+		errStr.append(fileName);
+		errStr.append("'");
+		throw KinematicModelException(errStr);
+    }
+	
+    QXmlInputSource xmlInputSource( &file );
+    if ( !reader.parse( xmlInputSource ) )
+	{
+		QString errStr = "failed to create world from file '";
+		errStr.append(fileName);
+		errStr.append("'");
+		throw KinematicModelException(errStr);
+    }
+}
+
 void Model::appendObject( KinTreeNode* node )
 {
 	if ( verbose ) printf("  appending robot object.\n");
@@ -270,22 +269,6 @@ void Model::cleanTheWorld()
 		
 	}
 }
-
-/*void Model::newBodyPart( PrimitiveObject* primitive )
-{
-	//QMutexLocker locker(&mutex);
-	
-	primitive->setShape( createSolidShape( primitive ) );
-	primitive->setObject( DT_CreateObject( primitive, primitive->getShape()) );
-	DT_AddObject( scene, primitive->getSolidHandle() );
-	DT_SetResponseClass( robotTable, primitive->getSolidHandle(), primitive->getParent()->getSolidResponseClass() );
-	DT_SetResponseClass( worldTable, primitive->getSolidHandle(), body_partResponseClass() );
-}*/
-/*void Model::removeRobotTablePair( DT_ResponseClass objType1, DT_ResponseClass objType2 )
-{
-	//QMutexLocker locker(&mutex);
-	DT_RemovePairResponse( robotTable, objType1, objType2, reflexTrigger);
-}*/
 
 /***********************
 *** TO RUN THE MODEL ***

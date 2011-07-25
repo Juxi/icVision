@@ -8,14 +8,15 @@
  */
 
 #include "worldRpcInterface.h"
-#include "world.h"
-#include "robotmodelexception.h"
+//#include "world.h"
+#include "modelexception.h"
 //#include "compositeObject.h"
 #include "model.h"
 #include "constants.h"
 
 using namespace VirtualSkin;
 
+/*
 WorldRpcInterface::WorldRpcInterface()
 {
 }
@@ -145,9 +146,9 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 }
 void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n )
 {
-	RobotModel::CompositeObject* object = getObject( command, reply, n );
+	KinematicModel::CompositeObject* object = getObject( command, reply, n );
 
-	RobotModel::PrimitiveObject* primitive;
+	KinematicModel::PrimitiveObject* primitive;
 	int geom = command.get(n).asVocab(); n++;
 	
 	try
@@ -160,7 +161,7 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 
-			primitive = new RobotModel::Sphere(r);
+			primitive = new KinematicModel::Sphere(r);
 			primitive->setPosition(pos);
 			world->appendToObject( object, primitive );
 		}
@@ -173,7 +174,7 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 			
-			primitive = new RobotModel::Cylinder(r,h);
+			primitive = new KinematicModel::Cylinder(r,h);
 			primitive->setPosition(pos);
 			world->appendToObject( object, primitive );
 		}
@@ -189,7 +190,7 @@ void WorldRpcInterface::append( const yarp::os::Bottle& command, yarp::os::Bottl
 			double pz = command.get(n).asDouble(); n++; // z position
 			QVector3D pos = QVector3D(px,py,pz);
 			
-			primitive = new RobotModel::Box(size,true);
+			primitive = new KinematicModel::Box(size,true);
 			primitive->setPosition(pos);
 			world->appendToObject( object, primitive );
 		}
@@ -216,13 +217,13 @@ void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& 
 		switch (type)
 		{
 			case VOCAB_OBSTACLE:
-				object->setObjectType(RobotModel::CompositeObject::OBSTACLE);
+				object->setObjectType(KinematicModel::CompositeObject::OBSTACLE);
 				world->changeResponseClass( object, world->model->obstacleResponseClass() );
 				reply.addString("Changed object type to 'obstacle'.");
 				didSomething = true;
 				break;
 			case VOCAB_TARGET:
-				object->setObjectType(RobotModel::CompositeObject::TARGET);
+				object->setObjectType(KinematicModel::CompositeObject::TARGET);
 				world->changeResponseClass( object, world->model->targetResponseClass() );
 				reply.addString("Changed object type to 'target'.");
 				didSomething = true;
@@ -352,7 +353,7 @@ RobotModel::CompositeObject* WorldRpcInterface::getObject( const yarp::os::Bottl
 RobotModel::PrimitiveObject* WorldRpcInterface::getPrimitive( const RobotModel::CompositeObject* object, const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {
 	QString primName = getName( command, n );
-	RobotModel::PrimitiveObject* primitive = object->getPrimitiveByName( primName );
+	KinematicModel::PrimitiveObject* primitive = object->getPrimitiveByName( primName );
 	if ( !primitive ) {
 		reply.addString("Primitive not found.");
 		return 0;
@@ -380,4 +381,4 @@ QString WorldRpcInterface::getName( const yarp::os::Bottle& command, int& n  )
 		name = command.get(n).asString(); n++;
 	}
 	return name;
-}
+}*/

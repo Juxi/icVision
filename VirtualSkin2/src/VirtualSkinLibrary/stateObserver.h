@@ -38,7 +38,7 @@ public:
 
 	virtual void onDataObserved(yarp::os::Bottle &b);	//!< The handler function is called whenever state information passes through the filter
 	
-	//QVector<qreal> earliestPose() { return poseBuffer.getOldest(); }	//!< Returns the oldest pose in the PoseBuffer (which can't be colliding)
+	QVector<qreal> earliestPose() { return poseBuffer.getOldest(); }	//!< Returns the oldest pose in the PoseBuffer (which can't be colliding)
 	QVector<qreal> currentPose() { return poseBuffer.getCurrent(); }		//!< Returns the most recent pose written to the PoseBuffer
 	QVector< QVector<qreal> > getHistory() { return poseBuffer.getHistory(); }		//!< Returns the most recent pose written to the PoseBuffer
 	qreal getPeriod() { return poseBuffer.getPeriod(); }			//!< Returns the average period between arriving state bottles

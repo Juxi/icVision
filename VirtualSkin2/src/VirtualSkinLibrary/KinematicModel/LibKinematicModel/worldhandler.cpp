@@ -1,17 +1,16 @@
 #include "worldhandler.h"
-#include "world.h"
+#include "model.h"
 #include "compositeObject.h"
 #include "primitiveobject.h"
 #include "cylinder.h"
 #include "sphere.h"
 #include "box.h"
-#include "displmatrix.h"
-#include "robotmodelexception.h"
+#include "modelexception.h"
 
 using namespace std;
-using namespace RobotModel;
+using namespace KinematicModel;
 
-WorldHandler::WorldHandler(World *world) : world(world)
+WorldHandler::WorldHandler( Model* m ) : model(m)
 {
 	obj = 0;
 	prim = 0;
@@ -61,7 +60,19 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 		}
 		else
 		{
-			obj = new CompositeObject(attributes.value("name"));
+			if ( attributes.value("type").isEmpty() || attributes.value("type").toStdString() == "obstacle" )
+			{
+				obj = new CompositeObject( model->OBSTACLE() );
+			}
+			else if ( attributes.value("type").toStdString() == "target" )
+			{
+				obj = new CompositeObject( model->TARGET() ) ;
+			}
+			else
+			{
+				errorStr = "the 'type' attribute of an <object> tag must be 'obstacle' or 'target'.";
+				return 0;
+			}
 			
 			QVector3D heightAxis = QVector3D( attributes.value("hx").toDouble(), attributes.value("hy").toDouble(), attributes.value("hz").toDouble() );
 			QVector3D position = QVector3D( attributes.value("px").toDouble(),  attributes.value("py").toDouble(), attributes.value("pz").toDouble() );
@@ -95,19 +106,21 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 		{
 			if ( QString::compare(qName,"sphere",caseSensitivity) == 0 ) {
 				qreal radius = attributes.value("radius").toDouble();
-				prim = obj->newSphere(radius);
+				prim = new Sphere(radius);
+				//
 			}
 			else if ( QString::compare(qName,"cylinder",caseSensitivity) == 0 ) {
 				qreal radius = attributes.value("radius").toDouble();
 				qreal height = attributes.value("height").toDouble();
-				prim = obj->newCylinder( radius, height );
+				prim = new Cylinder(radius,height);
 			}
 			else if ( QString::compare(qName,"box",caseSensitivity) == 0 ) {
 				QVector3D size = QVector3D(attributes.value("width").toDouble(),
 										   attributes.value("height").toDouble(),
 										   attributes.value("depth").toDouble());
-				prim = obj->newBox( size, false );
+				prim = new Box(size,true);
 			}
+			obj->append(prim);
         }
 		catch (std::exception& e)
 		{ 
@@ -136,8 +149,8 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 bool WorldHandler::endElement(const QString & /* namespaceURI */, const QString & /* localName */, const QString &qName)
 {
     if ( qName == "object") {
-		world->append(obj);
-		obj = 0;
+		model->appendObject(obj);
+		obj = NULL;
     }
     else if ( qName == "sphere" || qName == "cylinder" || qName == "box" ) {
         prim = 0;

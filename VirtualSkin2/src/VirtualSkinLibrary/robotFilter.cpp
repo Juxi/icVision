@@ -21,16 +21,21 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false), isColliding(false)
+RobotFilter::RobotFilter(	KinematicModel::Robot* r,
+							//KinematicModel::Model* m,
+							bool visualize				) : robot(r),
+															isOpen(false),
+															haveControl(false),
+															isColliding(false)
 {
-	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
-	QObject::connect( &model, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
+	//QObject::connect( m, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
+	//QObject::connect( m, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
 	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
-	statusPort.setBottle("0");
+	//statusPort.setBottle("0");
 }
 
 RobotFilter::~RobotFilter()
@@ -40,10 +45,10 @@ RobotFilter::~RobotFilter()
 
 void RobotFilter::close()
 {
-	model.stop();
-	model.robot->close();
-	model.world->clear();
-	statusPort.close();
+	//model.stop();
+	//robot->close();
+	//model.world->clear();
+	//statusPort.close();
 	
 	// remove all observers from the ControlBoardFilters, close the filters and delete them
 	QVector<yarp::os::ControlBoardFilter*>::const_iterator cbfIter;
@@ -95,14 +100,14 @@ void RobotFilter::takeControl()
 		haveControl = true;
 		
 		// first take control away from the user
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+		for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
 			cbFilters.at(bodyPart)->cutConnection(true);
 		}
 		
 		// inform the user
 		printf("*** COLLISION RECOVERY ***\n");
-		statusPort.setBottle( yarp::os::Bottle("0") );
+		//statusPort.setBottle( yarp::os::Bottle("0") );
 		
 		// do some control in response
 		collisionResponse();
@@ -132,19 +137,19 @@ void RobotFilter::run()
 void RobotFilter::openFilter()
 {	
 	// reinitialize the pose buffer with the current pose
-	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
+	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 	{
 		stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
 	}
 	
 	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
+	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 	{
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	
 	//inform the user
-	statusPort.setBottle( yarp::os::Bottle("1") );
+	//statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("CONTROL RESTORED\n");
 	haveControl = false;
 }

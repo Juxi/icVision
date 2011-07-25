@@ -13,11 +13,11 @@
 #include <QVector3D>
 #include <QMatrix4x4>
 #include <yarp/os/all.h>
-#include "yarpRpcPort.h"
+//#include "yarpRpcPort.h"
 
-namespace RobotModel
+namespace KinematicModel
 {
-	class World;
+	//class World;
 	class CompositeObject;
 	class PrimitiveObject;
 }
@@ -32,7 +32,7 @@ namespace VirtualSkin
  *	This interface is compatible with that of the iCub simulator in terms of the syntax of RPC commands, the kinds of geometries supported and the
  *  way those geometries are named.  However in addition to individual primitives, the World supports CompositeObjects, made up of unions of PrimitiveObjects.
  */
-class VirtualSkin::WorldRpcInterface: public VirtualSkin::YarpRpcPort
+class VirtualSkin::WorldRpcInterface //: public VirtualSkin::YarpRpcPort
 {
 		
 public:
@@ -40,7 +40,7 @@ public:
 	WorldRpcInterface();			//!< Nothing special to do here
 	virtual ~WorldRpcInterface();	//!< Nothing special to do here
 	
-	void setWorld( RobotModel::World* aWorld ) { world = aWorld; }	//!< Sets the RobotModel::World on which this interface operates
+	//void setWorld( KinematicModel::World* aWorld ) { world = aWorld; }	//!< Sets the RobotModel::World on which this interface operates
 
 private:
 	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );	//!< Handles incomming RPC commands (expressed as YARP bottles)
@@ -61,11 +61,11 @@ private:
 	void getList(yarp::os::Bottle& reply);											//!< Get a list of objects in the world
 	void getState(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n);		//!< Get the 4x4 rototranslation matrix of an object
 	
-	RobotModel::CompositeObject* getObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );												//!< Return a pointer to an object by looking up its name
-	RobotModel::PrimitiveObject* getPrimitive( const RobotModel::CompositeObject* Object, const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Return a pointer to a primitive by looking up its name
+	KinematicModel::CompositeObject* getObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );												//!< Return a pointer to an object by looking up its name
+	KinematicModel::PrimitiveObject* getPrimitive( const KinematicModel::CompositeObject* Object, const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Return a pointer to a primitive by looking up its name
 	QString getName( const yarp::os::Bottle& cmd, int& n  );																								//!< Parse the RPC command and get a name string out
 	
-	RobotModel::World* world;	//!< Pointer to the world model on which this interface operates
+	//KinematicModel::World* world;	//!< Pointer to the world model on which this interface operates
 };
 #endif
 /** @} */

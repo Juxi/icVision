@@ -19,7 +19,7 @@ INCLUDE ( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/RobotModel/LibRobotModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/KinematicModel/LibKinematicModel" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/YarpFilter/LibYarpFilter" )
 
 ### Set some platform-specific variables ###
@@ -41,5 +41,5 @@ ENDIF ( WIN32 )
 
 ### Parse the directories where build targets are ###
 ADD_SUBDIRECTORY ( VirtualSkinLibrary )
-#ADD_SUBDIRECTORY ( ReflexDemo )
+ADD_SUBDIRECTORY ( ReflexDemo )
 #ADD_SUBDIRECTORY ( iCubBabble )
