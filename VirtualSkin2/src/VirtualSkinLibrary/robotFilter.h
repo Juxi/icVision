@@ -154,15 +154,15 @@ public:
 											/**< This is called right after collisionResponse() and runs in its own thread.
 												 the user is responsible for deciding what it means that control commands are "finished" executing,
 												 which clearly depends on the kinds of commands issued in the first place. */
-	//void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
+	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
 																			/**< A 1 indicates the filter is connected and motor commands are being forwarded, 
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
-	//void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
+	void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
 
 public slots:
 	
-	void collisionStatus(int);
-	void takeControl();			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
+	//void collisionStatus(int);
+	void takeControl(int);			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
 	
 protected slots:
 	
@@ -170,7 +170,7 @@ protected slots:
 	
 signals:
 	
-	void responseCompleteReturns();
+	void reflexDone();
 
 protected:
 	
@@ -179,7 +179,7 @@ protected:
 									/**< It is public so that the user has access to the information that was read out of the robot configuration file, 
 										 such as the name of the robot and the number of controllable axes for example */
 	
-	//YarpStreamPort		statusPort;			//!< Published the (open/closed) status of the filter
+	YarpStreamPort		statusPort;			//!< Published the (open/closed) status of the filter
 												//! TODO: Make this not iCub specific	
 	yarp::os::Bottle	stop_command;			//!< Stores an RPC command to stop the iCub robot
 												/**< \note This is iCub specific, and it should be done differently in the future */

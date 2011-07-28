@@ -41,9 +41,16 @@ public:
 	Robot( Model* m, DT_RespTableHandle t );	//!< 
 	~Robot();									//!< Nothing to do here
 	
+	//bool Robot::isColliding() const;
+	
 	void open(const QString& fileName, bool verbose = true) throw(KinematicModelException);	//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
 	bool isOpen() const	{ return isConfigured; }											//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();																			//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
+	
+	void addCollision() { numCollisions++; }
+	void addReflexCollision() { numReflexCollisions++; }
+	RobotObservation observe();
+	void emitState();										// emit signals for observations and reflexes
 	
 	// generic 'get' functions that may be useful
 	const Model* getModel() const { return model; }
@@ -70,7 +77,10 @@ signals:
 	//void appendedObject( KinTreeNode* node );
 	//void appendedPrimitive ( PrimitiveObject* primitive );
 	//void removeSelfCollisionPair( DT_ResponseClass, DT_ResponseClass );
-	void observation( RobotObservation obs );								//!< make new marker positions and orientations known
+	
+	void collisions(int);
+	void reflexCollisions(int);
+	void observation( RobotObservation obs );							//!< make new marker positions and orientations known
 
 public slots:
 	
@@ -106,6 +116,9 @@ private:
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
 	
+	int						numCollisions;
+	int						numReflexCollisions;
+	
 	QMutex mutex;
 	
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
@@ -113,11 +126,10 @@ private:
 	void filterCollisionPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.filterCollisionPairs().
 	
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
-	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list
 	void appendBodyPart( BodyPart* part )	{ partList.append(part); }		//!< Appends a BodyPart to the list
 	void appendMotor( Motor* motor )		{ motorList.append(motor); }	//!< Appends a Motor to the list
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
-																			/**< In case you want to populate the list in reverse order */
+	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list																		/**< In case you want to populate the list in reverse order */
 	
 	int getNumPrimitives();
 	

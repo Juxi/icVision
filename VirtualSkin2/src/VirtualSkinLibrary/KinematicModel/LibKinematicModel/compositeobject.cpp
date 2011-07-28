@@ -52,6 +52,7 @@ void CompositeObject::append( PrimitiveObject* primitive )
 		}
 		primitive->setName(name);
 	}
+	primitive->setCompositeObject(this);
 	primitives.append(primitive);
 }
 
@@ -115,6 +116,19 @@ void CompositeObject::render()
 		}
 	glPopMatrix();
 }
+
+/*bool CompositeObject::isColliding()
+{
+	QVector<PrimitiveObject*>::const_iterator i;
+	for ( i=primitives.begin(); i!=primitives.end(); ++i )
+	{
+		if ( (*i)->isColliding() )
+		{
+			return true;
+		}
+	}
+	return false;
+}*/
 
 void CompositeObject::kill()
 {

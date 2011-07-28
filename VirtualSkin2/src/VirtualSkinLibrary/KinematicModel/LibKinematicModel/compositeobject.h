@@ -44,6 +44,10 @@ public:
     CompositeObject( DT_ResponseClass c, DT_RespTableHandle t = NULL );	//!< Simply initializes indices
     virtual ~CompositeObject();					//!< Deletes the primitives in the QVector first then this object
 	
+	//virtual Robot* robot() const { return NULL; }
+	
+	//virtual bool	isColliding();
+	
 	void			setName( const QString& aName ) { objectName = aName; }	//!< Set a human readable identifier for the physical object
 	const QString&	getName() const { return objectName; }						//!< Return a human readable identifier for the physical object
 	
@@ -54,12 +58,14 @@ public:
 	bool remove( PrimitiveObject* primitive );	//!< Remove a PrimitiveObject from the CompositeObject and delete that primitive
 
 	//int getNumPrimitives() { return primitives.size() }
+	
 	const QVector<PrimitiveObject*>& data() { return primitives; }
 	PrimitiveObject* get( const QString& primitiveName ) const;		//!< Get a pointer to a PrimitiveObject by looking up its name
 																	/**< If there is more than one primitive with the same name, the first one in the vector is returned **/
 	
 	//void setListPending();
-
+	
+	
 	void updateSolid();
 	void render();
 	

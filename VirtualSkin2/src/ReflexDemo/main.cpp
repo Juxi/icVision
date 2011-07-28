@@ -38,17 +38,17 @@ int main(int argc, char *argv[])
 	// Create the QApplication
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
-	KinematicModel::Model* model = NULL;
+	VirtualSkin::YarpModel* model = NULL;
 	KinematicModel::Robot* robot = NULL;
 	ReflexFilter* filter = NULL;
 	
 	try
 	{
 		model = new VirtualSkin::YarpModel( visualize );
+		model->openCollisionPort("/collisions");
 		model->start();						/*	if we want display lists to be created automatically,
 												the model must be started prior to appending objects by
 												calling loadWorld(), loadRobot(), or appendObject()		*/
-	
 		if ( worldFile != "" )
 		{
 			printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
@@ -59,6 +59,8 @@ int main(int argc, char *argv[])
 		{
 			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
 			robot = model->loadRobot( robotFile, false );
+			
+			sleep(1);
 			
 			printf( "  ...opening robot filter for '%s'\n", robot->getName().toStdString().c_str() );
 			filter = new ReflexFilter( robot, visualize );

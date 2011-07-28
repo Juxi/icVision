@@ -28,14 +28,14 @@ RobotFilter::RobotFilter(	KinematicModel::Robot* r,
 															haveControl(false),
 															isColliding(false)
 {
-	//QObject::connect( m, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
-	//QObject::connect( m, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
-	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
+	//QObject::connect( m, SIGNAL(computedState(int)),	this, SLOT(collisionStatus(int)) );
+	QObject::connect( robot, SIGNAL(reflexCollisions(int)),	this, SLOT(takeControl(int)) );
+	QObject::connect( this, SIGNAL(reflexDone()),			this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
-	//statusPort.setBottle("0");
+	statusPort.setBottle("1");
 }
 
 RobotFilter::~RobotFilter()
@@ -85,15 +85,16 @@ void RobotFilter::close()
 	isOpen = false;
 }
 
-void RobotFilter::collisionStatus( int collisions )
+/*void RobotFilter::collisionStatus( int collisions )
 {
 	if ( collisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
-}
+}*/
 
-void RobotFilter::takeControl()
+void RobotFilter::takeControl( int numReflexCollisions )
 {
-	isColliding = true;
+	if ( numReflexCollisions > 0 ) { isColliding = true; }
+	else { isColliding = false; }
 	
 	if ( isColliding && !haveControl )
 	{
@@ -107,7 +108,7 @@ void RobotFilter::takeControl()
 		
 		// inform the user
 		printf("*** COLLISION RECOVERY ***\n");
-		//statusPort.setBottle( yarp::os::Bottle("0") );
+		statusPort.setBottle( yarp::os::Bottle("0") );
 		
 		// do some control in response
 		collisionResponse();
@@ -131,7 +132,7 @@ void RobotFilter::run()
 		msleep(YARP_PERIOD_ms);
 	}
 	
-	emit responseCompleteReturns();
+	emit reflexDone();
 }
 
 void RobotFilter::openFilter()
@@ -149,7 +150,7 @@ void RobotFilter::openFilter()
 	}
 	
 	//inform the user
-	//statusPort.setBottle( yarp::os::Bottle("1") );
+	statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("CONTROL RESTORED\n");
 	haveControl = false;
 }

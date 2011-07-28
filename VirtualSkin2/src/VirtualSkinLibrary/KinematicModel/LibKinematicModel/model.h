@@ -14,16 +14,13 @@
 #include <QMutex>
 #include <SOLID.h>
 
-#include "compositeobject.h"
+#include "robot.h"
 #include "primitiveobject.h"
 #include "modelexception.h"
 #include "modelconstants.h"
 
 namespace KinematicModel
 {
-	class Robot;
-	class KinTreeNode;
-	//class World;
 	class Model;
 	class ModelWindow;
 }
@@ -86,16 +83,13 @@ public:
 	
 public slots:
 	
-	//void displayListArrived( PrimitiveObject* );
 	void renderWorld();
 	
 signals:
 	
 	void addedPrimitive( PrimitiveObject* );		// when this is emitted, we need to call primitive.setListPending(true)
 	void removedPrimitive( GL_DisplayList );
-	
 	void computedState( int collisions );	//! Indicates that a state has been computed and reports the number of collisions
-	void encounteredObstacle();
 	
 protected:
 	
@@ -110,6 +104,7 @@ protected:
 	void cleanTheWorld();
 	void updateWorldState();
 	void fwdKin();
+	void emitRobotStates();
 	
 	//Robot*				removeRobot( Robot* );
 	CompositeObject*	removeWorldObject( CompositeObject* );
@@ -117,6 +112,7 @@ protected:
 							/**< \note IMPORTANT: Call start() not run() !!! */
 	
 	
+	//virtual void onStartUp() {}
 	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
 	virtual void computePoseSuffix() {}								//!< This is executed by computePose() just after collision detection is computed
 	virtual void collisionHandlerAddendum( PrimitiveObject*,		//!< This is executed by collisionHandler() just before it returns
@@ -144,14 +140,21 @@ private:
 	 *************************/
 	static DT_Bool collisionHandler( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-		PrimitiveObject* object1 = (PrimitiveObject*)obj1;
-		PrimitiveObject* object2 = (PrimitiveObject*)obj2;
-		object1->setColliding();
-		object2->setColliding();
+		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
+		prim1->setColliding();
+		CompositeObject* comp1 = prim1->getCompositeObject();
+		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
+		if ( node1 ) { node1->robot()->addCollision(); }
 		
+		PrimitiveObject* prim2 = (PrimitiveObject*)obj2;
+		prim2->setColliding();
+		CompositeObject* comp2 = prim2->getCompositeObject();
+		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
+		if ( node2 ) { node2->robot()->addCollision(); }
+
 		Model* detector = (Model*)client_data;
 		detector->col_count++;
-		detector->collisionHandlerAddendum( object1, object2, coll_data );
+		detector->collisionHandlerAddendum( prim1, prim2, coll_data );
 		
 		return DT_CONTINUE;
 	}
@@ -160,8 +163,16 @@ private:
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
 		collisionHandler( client_data, obj1, obj2, coll_data );
-		Model* detector = (Model*)client_data;
-		detector->encObstacle = true;
+		
+		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
+		CompositeObject* comp1 = prim1->getCompositeObject();
+		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
+		if ( node1 ) { node1->robot()->addReflexCollision(); }
+		
+		PrimitiveObject* prim2 = (PrimitiveObject*)obj2;
+		CompositeObject* comp2 = prim2->getCompositeObject();
+		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
+		if ( node2 ) { node2->robot()->addReflexCollision(); }
 		
 		//return DT_DONE;
 		return DT_CONTINUE;

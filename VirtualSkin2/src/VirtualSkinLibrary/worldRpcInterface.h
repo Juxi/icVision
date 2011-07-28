@@ -13,11 +13,12 @@
 #include <QVector3D>
 #include <QMatrix4x4>
 #include <yarp/os/all.h>
-//#include "yarpRpcPort.h"
+
+//#include "model.h"
 
 namespace KinematicModel
 {
-	//class World;
+	class Model;
 	class CompositeObject;
 	class PrimitiveObject;
 }
@@ -40,10 +41,10 @@ public:
 	WorldRpcInterface();			//!< Nothing special to do here
 	virtual ~WorldRpcInterface();	//!< Nothing special to do here
 	
-	//void setWorld( KinematicModel::World* aWorld ) { world = aWorld; }	//!< Sets the RobotModel::World on which this interface operates
-
+	void setModel( KinematicModel::Model* m ) { model = m; }	//!< Sets the RobotModel::World on which this interface operates
+	bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );	//!< Handles incomming RPC commands (expressed as YARP bottles)
+	
 private:
-	virtual bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );	//!< Handles incomming RPC commands (expressed as YARP bottles)
 	
 	void make( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Creates a new object
 	void set( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Sets the properties of an object
@@ -66,6 +67,7 @@ private:
 	QString getName( const yarp::os::Bottle& cmd, int& n  );																								//!< Parse the RPC command and get a name string out
 	
 	//KinematicModel::World* world;	//!< Pointer to the world model on which this interface operates
+	KinematicModel::Model* model;
 };
 #endif
 /** @} */

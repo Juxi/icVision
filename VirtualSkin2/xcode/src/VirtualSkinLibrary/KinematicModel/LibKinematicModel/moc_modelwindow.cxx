@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'modelwindow.h'
 **
-** Created: Fri Jul 22 12:57:36 2011
+** Created: Thu Jul 28 13:26:46 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.1)
 **
 ** WARNING! All changes made in this file will be lost!

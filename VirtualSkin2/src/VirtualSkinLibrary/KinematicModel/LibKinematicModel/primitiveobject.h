@@ -64,18 +64,21 @@ public:
 	void setCollidingColor( GLfloat color[4] );
 	void setFreeColor( GLfloat color[4] );
 	
+	void setCompositeObject( CompositeObject* o ) { parentObject = o; }
+	CompositeObject* getCompositeObject() { return parentObject; }
+	
 	void display();  //!< Only call this from the openGL thread or pay the price !!!
 	virtual GL_DisplayList makeDisplayList() = 0;
 	
 protected:
 	
-	QString				name;		//!< A human readable name for the primitive
-	GeomType			geomType;	//!< Sphere, cylinder, or box
+	QString				name;			//!< A human readable name for the primitive
+	CompositeObject*	parentObject;
+	GeomType			geomType;		//!< Sphere, cylinder, or box
 	
 	DT_ShapeHandle		solidShape;		//!< The particular shape of the primitive
 	DT_ObjectHandle		solidObject;	//!< A representation of the object in the Solid library
 	QTime				collisionTimer;	//!< The time stamp of the last collision event
-	
 	
 	GL_DisplayList		displayList;
 	bool				listPending;

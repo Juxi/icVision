@@ -175,3 +175,20 @@ void KinTreeNode::printAll()
         (*i)->printAll();
     }
 }*/
+
+/*bool KinTreeNode::isColliding()
+{
+	if ( CompositeObject::isColliding() )
+	{ 
+		return true;
+	}
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=children.begin(); i!=children.end(); ++i )
+	{
+        if ( (*i)->isColliding() )
+		{
+			return true;
+		}
+    }
+	return false;
+}*/

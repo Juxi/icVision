@@ -52,12 +52,12 @@ Model::~Model()
 {
 	if ( isRunning() ) { stop(); }
 	
-	QVector<Robot*>::iterator k;
+	/*QVector<Robot*>::iterator k;
 	for ( k=robots.end(); k!=robots.begin(); )
 	{
 		--k;
 		delete(*k);
-	}
+	}*/
 	
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.begin(); i!=world.end(); ++i )
@@ -155,13 +155,9 @@ void Model::appendObject( KinTreeNode* node )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		if (verbose) printf("appending robot primitive to world\n");
-		
 		DT_SetResponseClass(	node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
 		DT_RemovePairResponse(	node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
-		
 		DT_SetResponseClass(	responseTables.at(0), (*i)->getSolidObjectHandle(), robotClass );
-		//DT_RemovePairResponse(	responseTables.at(0), robotClass, robotClass, reflexTrigger );
-		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		emit addedPrimitive(*i);
@@ -184,15 +180,7 @@ void Model::appendObject( CompositeObject* object )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		if (verbose) printf("appending primitive to world\n");
-		
-		//if (object->g
-		//DT_SetResponseClass( robotTable, (*i)->getSolidObjectHandle(), object->getResponseClass() );
 		DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
-		//if ( object->getRobotResponseClass() )
-		//{
-		//	DT_SetResponseClass( robotTable, (*i)->getSolidObjectHandle(), object->getRobotResponseClass() );
-		//}
-		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		emit addedPrimitive(*i);
@@ -277,32 +265,34 @@ int Model::computePose()
 {
 	QMutexLocker locker(&mutex);
 	
-	cleanTheWorld();		// remove stuff that has been flagged for deletion
-	updateWorldState();		// update positions of things in the world
-
 	// Prepare to do collision detection
 	col_count = 0;			// reset collision counter
 	encObstacle = false;	// this is used to trigger a collision response controller
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
+
+	cleanTheWorld();		// remove stuff that has been flagged for deletion
+	updateWorldState();		// update positions of things in the world
 
 	QVector<DT_RespTableHandle>::iterator i;
 	for (i=responseTables.begin();i!=responseTables.end();++i)
 	{
 		DT_Test(scene,*i);
 	}
-	//DT_Test(scene,worldTable);
 	
-	computePoseSuffix();
-	
-	// send the results of DT_TEST as Qt Signals
-	if ( encObstacle )
-	{
-		//printf("EMITTING REFLEX SIGNAL!!! \n");
-		emit encounteredObstacle();
-	}
-	emit computedState(col_count); // this number may not be correct as we stop DT_TEST early in the case of reflexive response
+	computePoseSuffix();			
+	emitRobotStates();				// causes each robot to emit their observation/reflex signals where appropriate
+	emit computedState(col_count);	// this number may not be correct as we stop DT_TEST early in the case of reflexive response
 	
 	return col_count;
+}
+
+void Model::emitRobotStates()
+{
+	QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		(*i)->emitState();
+	}
 }
 
 void Model::fwdKin()
@@ -326,7 +316,7 @@ void Model::updateWorldState()
 }
 
 void Model::run()
-{	
+{
 	while ( keepRunning )
 	{
 		computePose();
@@ -361,9 +351,3 @@ void Model::renderWorld()
 		(*i)->render();
 	}
 }
-
-//void Model::displayListArrived( PrimitiveObject* primitive )
-//{
-//	printf("displayListArrived()\n");
-//	primitive->setListPending(false);
-//}

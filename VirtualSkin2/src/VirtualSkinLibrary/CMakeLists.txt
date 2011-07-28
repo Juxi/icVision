@@ -10,7 +10,7 @@ SET ( src_files	yarpModel.cpp
 		circularBuffer.cpp
 		#yarpRpcPort.cpp
 		worldRpcInterface.cpp
-		#yarpStreamPort.cpp
+		yarpStreamPort.cpp
 		virtualskinexception.cpp
 )
 
@@ -24,7 +24,7 @@ SET ( hdr_files	constants.h
 		circularBuffer.h
 		#yarpRpcPort.h
 		worldRpcInterface.h
-		#yarpStreamPort.h
+		yarpStreamPort.h
 		
 )
 

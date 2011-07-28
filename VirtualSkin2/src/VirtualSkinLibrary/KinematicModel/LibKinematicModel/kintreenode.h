@@ -62,6 +62,7 @@ public:
 	
 	//void render();																	//!< Calls CompositeObject::render() to render the primitives in this KinTreeNode, then calls KintreeNode::render() recursively on children
 	
+	//bool isColliding();
 	int getNumPrimitives();
 	
 	//void print() const;																//!< Prints the member variables to the terminal

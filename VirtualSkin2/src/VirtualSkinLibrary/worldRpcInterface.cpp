@@ -16,7 +16,7 @@
 
 using namespace VirtualSkin;
 
-/*
+
 WorldRpcInterface::WorldRpcInterface()
 {
 }
@@ -30,35 +30,37 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	int cmd;	// the command (see command vocabs in header)
 	
 	yarp::os::ConstString prefix = command.get(n).asString();
-	if (prefix=="help") {
+	if ( prefix=="help" )
+	{
 		reply.addString("No help for YOU!!!");
 		return true;
 	}
-	else if (prefix == "world") { n++; }
+	else if ( prefix == "world" ) { n++; }
 	
 	cmd  = command.get(n).asVocab(); n++;
 
 	switch (cmd)
 	{
-		case VOCAB_LS:	getList(reply); break;
-		case VOCAB_MK:  make(command,reply,n); break;
-		case VOCAB_SET: set(command,reply,n); break;
-		case VOCAB_GET: getState(command,reply,n); break;
-		case VOCAB_ROT: setRot(command,reply,n); break;
-		case VOCAB_REM: removeObject(command,reply,n); break;
+		//case VOCAB_LS:	getList(reply); break;
+		//case VOCAB_MK:	make(command,reply,n); break;
+		//case VOCAB_SET:	set(command,reply,n); break;
+		//case VOCAB_GET:	getState(command,reply,n); break;
+		//case VOCAB_ROT:	setRot(command,reply,n); break;
+		//case VOCAB_REM:	removeObject(command,reply,n); break;
 
-		case VOCAB_APP:  append(command,reply,n); break;
-		case VOCAB_PSET: pSetPos(command,reply,n); break;
-		case VOCAB_PROT: pSetRot(command,reply,n); break;
-		case VOCAB_PREM: removePrimitive(command,reply,n); break;
+		//case VOCAB_APP:	append(command,reply,n); break;
+		//case VOCAB_PSET:	pSetPos(command,reply,n); break;
+		//case VOCAB_PROT:	pSetRot(command,reply,n); break;
+		//case VOCAB_PREM:	removePrimitive(command,reply,n); break;
 			
-		case VOCAB_CLEAR: clearWorld(); break;
+		//case VOCAB_CLEAR: clearWorld(); break;
 			
-		default: reply.addString("Unknown RPC command"); break;
+		default: reply.addString("Unknown RPC command"); return false;
 	}
-	//world->emit changedState();
 	return true;
 }
+
+/*
 void WorldRpcInterface::getList(yarp::os::Bottle& reply)
 {
 	QVector<QString>::iterator i;

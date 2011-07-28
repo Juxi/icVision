@@ -7,28 +7,28 @@
        objects = {
 
 /* Begin PBXAggregateTarget section */
-              104AAC0104AAC0104AAC0000 /* ALL_BUILD */ = {
+              104AD30104AD30104AD30000 /* ALL_BUILD */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 104BAD0104BAD0104BAD0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildConfigurationList = 104BD40104BD40104BD40000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
                      buildPhases = (
-                            104ACE0104ACE0104ACE0000 /* CMake ReRun */,
-                            104B3B0104B3B0104B3B0000 /* CMake Rules */,
+                            104AF50104AF50104AF50000 /* CMake ReRun */,
+                            104B620104B620104B620000 /* CMake Rules */,
                      );
                      dependencies = (
-                            10971C010971C010971C0000 /* PBXTargetDependency */,
+                            109741010974101097410000 /* PBXTargetDependency */,
                      );
                      name = ALL_BUILD;
                      productName = ALL_BUILD;
               };
-              10741E010741E010741E0000 /* install */ = {
+              107443010744301074430000 /* install */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 107513010751301075130000 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildConfigurationList = 107538010753801075380000 /* Build configuration list for PBXAggregateTarget "install" */;
                      buildPhases = (
-                            10743C010743C010743C0000 /* CMake ReRun */,
-                            1074A901074A901074A90000 /* CMake PostBuild Rules */,
+                            107461010746101074610000 /* CMake ReRun */,
+                            1074CE01074CE01074CE0000 /* CMake PostBuild Rules */,
                      );
                      dependencies = (
-                            1097A501097A501097A50000 /* PBXTargetDependency */,
+                            1097CA01097CA01097CA0000 /* PBXTargetDependency */,
                      );
                      name = install;
                      productName = install;
@@ -36,47 +36,47 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-108081010808101080810000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = 107FFC0107FFC0107FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108132010813201081320000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */ = {isa = PBXBuildFile; fileRef = 1080AF01080AF01080AF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-1081E801081E801081E80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = 108161010816101081610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10829A010829A010829A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */ = {isa = PBXBuildFile; fileRef = 108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10834D010834D010834D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */ = {isa = PBXBuildFile; fileRef = 1082C901082C901082C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108404010840401084040000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXBuildFile; fileRef = 108383010838301083830000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
-1084BE01084BE01084BE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */ = {isa = PBXBuildFile; fileRef = 10843B010843B010843B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
-108570010857001085700000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXBuildFile; fileRef = 1084EE01084EE01084EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
-108626010862601086260000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */ = {isa = PBXBuildFile; fileRef = 1085A601085A601085A60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
-1086BB01086BB01086BB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXBuildFile; fileRef = 10865D010865D010865D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
-10879A010879A010879A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */ = {isa = PBXBuildFile; fileRef = 108715010871501087150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
-10884B010884B010884B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */ = {isa = PBXBuildFile; fileRef = 1087CB01087CB01087CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */; settings = { COMPILER_FLAGS = ""; }; };
-1088FE01088FE01088FE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 10887C010887C010887C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+1080A601080A601080A60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = 108021010802101080210000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108157010815701081570000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */ = {isa = PBXBuildFile; fileRef = 1080D401080D401080D40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10820D010820D010820D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = 108186010818601081860000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1082BF01082BF01082BF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */ = {isa = PBXBuildFile; fileRef = 10823C010823C010823C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108372010837201083720000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */ = {isa = PBXBuildFile; fileRef = 1082EE01082EE01082EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108429010842901084290000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXBuildFile; fileRef = 1083A801083A801083A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
+1084E301084E301084E30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */ = {isa = PBXBuildFile; fileRef = 108460010846001084600000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+108595010859501085950000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXBuildFile; fileRef = 108513010851301085130000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
+10864B010864B010864B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */ = {isa = PBXBuildFile; fileRef = 1085CB01085CB01085CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+1086E001086E001086E00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXBuildFile; fileRef = 108682010868201086820000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+1087BF01087BF01087BF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */ = {isa = PBXBuildFile; fileRef = 10873A010873A010873A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
+108870010887001088700000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */ = {isa = PBXBuildFile; fileRef = 1087F001087F001087F00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */; settings = { COMPILER_FLAGS = ""; }; };
+108923010892301089230000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 1088A101088A101088A10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
-              104409010440901044090000 /*  */ = {
+              104430010443001044300000 /*  */ = {
                      isa = PBXBuildStyle;
               };
-              104485010448501044850000 /* Debug */ = {
+              1044AC01044AC01044AC0000 /* Debug */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Debug;
               };
-              105FBD0105FBD0105FBD0000 /* Release */ = {
+              105FE40105FE40105FE40000 /* Release */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Release;
               };
-              105195010519501051950000 /* MinSizeRel */ = {
+              1051BC01051BC01051BC0000 /* MinSizeRel */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = MinSizeRel;
               };
-              1043B501043B501043B50000 /* RelWithDebInfo */ = {
+              1043DC01043DC01043DC0000 /* RelWithDebInfo */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
@@ -86,122 +86,122 @@
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-              1096D501096D501096D50000 /* PBXContainerItemProxy */ = {
+              1096FA01096FA01096FA0000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 104C620104C620104C620000 /* Project object */;
+                     containerPortal = 104C890104C890104C890000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 108A460108A460108A460000;
+                     remoteGlobalIDString = 108A6B0108A6B0108A6B0000;
                      remoteInfo = YarpFilter;
               };
-              109765010976501097650000 /* PBXContainerItemProxy */ = {
+              10978A010978A010978A0000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 104C620104C620104C620000 /* Project object */;
+                     containerPortal = 104C890104C890104C890000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 104AAC0104AAC0104AAC0000;
+                     remoteGlobalIDString = 104AD30104AD30104AD30000;
                      remoteInfo = ALL_BUILD;
               };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-10733B010733B010733B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-107FFC0107FFC0107FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilterImpl.cpp"; path = "LibYarpFilter/RpcFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
-1080AF01080AF01080AF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilter.cpp"; path = "LibYarpFilter/RpcFilter.cpp"; sourceTree = SOURCE_ROOT; };
-108161010816101081610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilterImpl.cpp"; path = "LibYarpFilter/StreamFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
-108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilter.cpp"; path = "LibYarpFilter/StreamFilter.cpp"; sourceTree = SOURCE_ROOT; };
-1082C901082C901082C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "ControlBoardFilter.cpp"; path = "LibYarpFilter/ControlBoardFilter.cpp"; sourceTree = SOURCE_ROOT; };
-108383010838301083830000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilterImpl.h"; path = "LibYarpFilter/yarp/os/impl/RpcFilterImpl.h"; sourceTree = SOURCE_ROOT; };
-10843B010843B010843B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilter.h"; path = "LibYarpFilter/yarp/os/RpcFilter.h"; sourceTree = SOURCE_ROOT; };
-1084EE01084EE01084EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilterImpl.h"; path = "LibYarpFilter/yarp/os/impl/StreamFilterImpl.h"; sourceTree = SOURCE_ROOT; };
-1085A601085A601085A60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilter.h"; path = "LibYarpFilter/yarp/os/StreamFilter.h"; sourceTree = SOURCE_ROOT; };
-10865D010865D010865D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "ControlBoardFilter.h"; path = "LibYarpFilter/yarp/os/ControlBoardFilter.h"; sourceTree = SOURCE_ROOT; };
-108715010871501087150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IObserver.h"; path = "LibYarpFilter/yarp/os/IObserver.h"; sourceTree = SOURCE_ROOT; };
-1087CB01087CB01087CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IReplier.h"; path = "LibYarpFilter/yarp/os/IReplier.h"; sourceTree = SOURCE_ROOT; };
-10887C010887C010887C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "LibYarpFilter/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-109662010966201096620000 /* YarpFilter */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libYarpFilter.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+107360010736001073600000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+108021010802101080210000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilterImpl.cpp"; path = "LibYarpFilter/RpcFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
+1080D401080D401080D40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilter.cpp"; path = "LibYarpFilter/RpcFilter.cpp"; sourceTree = SOURCE_ROOT; };
+108186010818601081860000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilterImpl.cpp"; path = "LibYarpFilter/StreamFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
+10823C010823C010823C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilter.cpp"; path = "LibYarpFilter/StreamFilter.cpp"; sourceTree = SOURCE_ROOT; };
+1082EE01082EE01082EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "ControlBoardFilter.cpp"; path = "LibYarpFilter/ControlBoardFilter.cpp"; sourceTree = SOURCE_ROOT; };
+1083A801083A801083A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilterImpl.h"; path = "LibYarpFilter/yarp/os/impl/RpcFilterImpl.h"; sourceTree = SOURCE_ROOT; };
+108460010846001084600000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilter.h"; path = "LibYarpFilter/yarp/os/RpcFilter.h"; sourceTree = SOURCE_ROOT; };
+108513010851301085130000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilterImpl.h"; path = "LibYarpFilter/yarp/os/impl/StreamFilterImpl.h"; sourceTree = SOURCE_ROOT; };
+1085CB01085CB01085CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilter.h"; path = "LibYarpFilter/yarp/os/StreamFilter.h"; sourceTree = SOURCE_ROOT; };
+108682010868201086820000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "ControlBoardFilter.h"; path = "LibYarpFilter/yarp/os/ControlBoardFilter.h"; sourceTree = SOURCE_ROOT; };
+10873A010873A010873A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IObserver.h"; path = "LibYarpFilter/yarp/os/IObserver.h"; sourceTree = SOURCE_ROOT; };
+1087F001087F001087F00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IReplier.h"; path = "LibYarpFilter/yarp/os/IReplier.h"; sourceTree = SOURCE_ROOT; };
+1088A101088A101088A10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "LibYarpFilter/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+109687010968701096870000 /* YarpFilter */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libYarpFilter.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-              104C170104C170104C170000  = {
+              104C3E0104C3E0104C3E0000  = {
                      isa = PBXGroup;
                      children = (
-                            10689F010689F010689F0000 /* Sources */,
-                            105A600105A600105A600000 /* Resources */,
-                            104551010455101045510000 /* Products */,
+                            1068C601068C601068C60000 /* Sources */,
+                            105A870105A870105A870000 /* Resources */,
+                            104578010457801045780000 /* Products */,
                      );
                      sourceTree = "<group>";
               };
-              10689F010689F010689F0000 /* Sources */ = {
+              1068C601068C601068C60000 /* Sources */ = {
                      isa = PBXGroup;
                      children = (
-                            105765010576501057650000 /* ALL_BUILD */,
-                            10B269010B269010B2690000 /* YarpFilter */,
+                            10578C010578C010578C0000 /* ALL_BUILD */,
+                            10B290010B290010B2900000 /* YarpFilter */,
                      );
                      name = Sources;
                      sourceTree = "<group>";
               };
-              105A600105A600105A600000 /* Resources */ = {
+              105A870105A870105A870000 /* Resources */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = Resources;
                      sourceTree = "<group>";
               };
-              105765010576501057650000 /* ALL_BUILD */ = {
+              10578C010578C010578C0000 /* ALL_BUILD */ = {
                      isa = PBXGroup;
                      children = (
-                            10B219010B219010B2190000 /* CMake Rules */,
-                            10733B010733B010733B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/CMakeLists.txt */,
+                            10B240010B240010B2400000 /* CMake Rules */,
+                            107360010736001073600000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/CMakeLists.txt */,
                      );
                      name = ALL_BUILD;
                      sourceTree = "<group>";
               };
-              10B219010B219010B2190000 /* CMake Rules */ = {
+              10B240010B240010B2400000 /* CMake Rules */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = "CMake Rules";
                      sourceTree = "<group>";
               };
-              10B269010B269010B2690000 /* YarpFilter */ = {
+              10B290010B290010B2900000 /* YarpFilter */ = {
                      isa = PBXGroup;
                      children = (
-                            10B2A8010B2A8010B2A80000 /* Source Files */,
-                            1044F001044F001044F00000 /* Header Files */,
-                            10887C010887C010887C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */,
+                            10B2CF010B2CF010B2CF0000 /* Source Files */,
+                            104517010451701045170000 /* Header Files */,
+                            1088A101088A101088A10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/CMakeLists.txt */,
                      );
                      name = YarpFilter;
                      sourceTree = "<group>";
               };
-              10B2A8010B2A8010B2A80000 /* Source Files */ = {
+              10B2CF010B2CF010B2CF0000 /* Source Files */ = {
                      isa = PBXGroup;
                      children = (
-                            107FFC0107FFC0107FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */,
-                            1080AF01080AF01080AF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */,
-                            108161010816101081610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */,
-                            108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */,
-                            1082C901082C901082C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */,
+                            108021010802101080210000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */,
+                            1080D401080D401080D40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */,
+                            108186010818601081860000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */,
+                            10823C010823C010823C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */,
+                            1082EE01082EE01082EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */,
                      );
                      name = "Source Files";
                      sourceTree = "<group>";
               };
-              1044F001044F001044F00000 /* Header Files */ = {
+              104517010451701045170000 /* Header Files */ = {
                      isa = PBXGroup;
                      children = (
-                            108383010838301083830000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */,
-                            10843B010843B010843B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */,
-                            1084EE01084EE01084EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */,
-                            1085A601085A601085A60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */,
-                            10865D010865D010865D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */,
-                            108715010871501087150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */,
-                            1087CB01087CB01087CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */,
+                            1083A801083A801083A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/RpcFilterImpl.h */,
+                            108460010846001084600000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/RpcFilter.h */,
+                            108513010851301085130000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/impl/StreamFilterImpl.h */,
+                            1085CB01085CB01085CB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/StreamFilter.h */,
+                            108682010868201086820000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/ControlBoardFilter.h */,
+                            10873A010873A010873A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IObserver.h */,
+                            1087F001087F001087F00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/yarp/os/IReplier.h */,
                      );
                      name = "Header Files";
                      sourceTree = "<group>";
               };
-              104551010455101045510000 /* Products */ = {
+              104578010457801045780000 /* Products */ = {
                      isa = PBXGroup;
                      children = (
-                            109662010966201096620000 /* YarpFilter */,
+                            109687010968701096870000 /* YarpFilter */,
                      );
                      name = Products;
                      sourceTree = "<group>";
@@ -209,13 +209,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-              108A460108A460108A460000 /* YarpFilter */ = {
+              108A6B0108A6B0108A6B0000 /* YarpFilter */ = {
                      isa = PBXNativeTarget;
-                     buildConfigurationList = 108A8A0108A8A0108A8A0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */;
+                     buildConfigurationList = 108AAF0108AAF0108AAF0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */;
                      buildPhases = (
-                            108970010897001089700000 /* CMake ReRun */,
-                            108927010892701089270000 /* Sources */,
-                            1089DD01089DD01089DD0000 /* CMake PostBuild Rules */,
+                            108995010899501089950000 /* CMake ReRun */,
+                            10894C010894C010894C0000 /* Sources */,
+                            108A020108A020108A020000 /* CMake PostBuild Rules */,
                      );
                      buildRules = (
                      );
@@ -223,41 +223,41 @@
                      );
                      name = YarpFilter;
                      productName = YarpFilter;
-                     productReference = 109662010966201096620000 /* YarpFilter */;
+                     productReference = 109687010968701096870000 /* YarpFilter */;
                      productType = "com.apple.product-type.library.static";
               };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-              104C620104C620104C620000 /* Project object */ = {
+              104C890104C890104C890000 /* Project object */ = {
                      isa = PBXProject;
                      attributes = {
                             BuildIndependentTargetsInParallel = YES;
                      };
-                     buildConfigurationList = 10498A010498A010498A0000 /* Build configuration list for PBXProject  "YarpFilter" */;
+                     buildConfigurationList = 1049B101049B101049B10000 /* Build configuration list for PBXProject  "YarpFilter" */;
                      buildSettings = {
                      };
                      buildStyles = (
-                            104485010448501044850000 /* Debug */,
-                            105FBD0105FBD0105FBD0000 /* Release */,
-                            105195010519501051950000 /* MinSizeRel */,
-                            1043B501043B501043B50000 /* RelWithDebInfo */,
+                            1044AC01044AC01044AC0000 /* Debug */,
+                            105FE40105FE40105FE40000 /* Release */,
+                            1051BC01051BC01051BC0000 /* MinSizeRel */,
+                            1043DC01043DC01043DC0000 /* RelWithDebInfo */,
                      );
                      compatibilityVersion = "Xcode 3.1";
                      hasScannedForEncodings = 0;
-                     mainGroup = 104C170104C170104C170000;
+                     mainGroup = 104C3E0104C3E0104C3E0000;
                      projectDirPath = "../../../../src/VirtualSkinLibrary/YarpFilter";
                      projectRoot = "";
                      targets = (
-                            104AAC0104AAC0104AAC0000 /* ALL_BUILD */,
-                            10741E010741E010741E0000 /* install */,
-                            108A460108A460108A460000 /* YarpFilter */,
+                            104AD30104AD30104AD30000 /* ALL_BUILD */,
+                            107443010744301074430000 /* install */,
+                            108A6B0108A6B0108A6B0000 /* YarpFilter */,
                      );
               };
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-              10B183010B183010B1830000 /*  */ = {
+              10B1AA010B1AA010B1AA0000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -271,7 +271,7 @@
                      shellScript = "# shell script goes here
 exit 0";
               };
-              104ACE0104ACE0104ACE0000 /* CMake ReRun */ = {
+              104AF50104AF50104AF50000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -281,7 +281,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              104B3B0104B3B0104B3B0000 /* CMake Rules */ = {
+              104B620104B620104B620000 /* CMake Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -291,7 +291,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
               };
-              107354010735401073540000 /*  */ = {
+              107379010737901073790000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -305,7 +305,7 @@ exit 0";
                      shellScript = "# shell script goes here
 exit 0";
               };
-              10743C010743C010743C0000 /* CMake ReRun */ = {
+              107461010746101074610000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -315,7 +315,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              1074A901074A901074A90000 /* CMake PostBuild Rules */ = {
+              1074CE01074CE01074CE0000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -325,7 +325,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
               };
-              108970010897001089700000 /* CMake ReRun */ = {
+              108995010899501089950000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -335,7 +335,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              1089DD01089DD01089DD0000 /* CMake PostBuild Rules */ = {
+              108A020108A020108A020000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -348,35 +348,35 @@ exit 0";
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-              108927010892701089270000 /* Sources */ = {
+              10894C010894C010894C0000 /* Sources */ = {
                      isa = PBXSourcesBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
-                            108081010808101080810000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */,
-                            108132010813201081320000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */,
-                            1081E801081E801081E80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */,
-                            10829A010829A010829A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */,
-                            10834D010834D010834D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */,
+                            1080A601080A601080A60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilterImpl.cpp */,
+                            108157010815701081570000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RpcFilter.cpp */,
+                            10820D010820D010820D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilterImpl.cpp */,
+                            1082BF01082BF01082BF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/StreamFilter.cpp */,
+                            108372010837201083720000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/ControlBoardFilter.cpp */,
                      );
                      runOnlyForDeploymentPostprocessing = 0;
               };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-              10971C010971C010971C0000 /* PBXTargetDependency */ = {
+              109741010974101097410000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 108A460108A460108A460000 /* YarpFilter */;
-                     targetProxy = 1096D501096D501096D50000 /* PBXContainerItemProxy */;
+                     target = 108A6B0108A6B0108A6B0000 /* YarpFilter */;
+                     targetProxy = 1096FA01096FA01096FA0000 /* PBXContainerItemProxy */;
               };
-              1097A501097A501097A50000 /* PBXTargetDependency */ = {
+              1097CA01097CA01097CA0000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 104AAC0104AAC0104AAC0000 /* ALL_BUILD */;
-                     targetProxy = 109765010976501097650000 /* PBXContainerItemProxy */;
+                     target = 104AD30104AD30104AD30000 /* ALL_BUILD */;
+                     targetProxy = 10978A010978A010978A0000 /* PBXContainerItemProxy */;
               };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-              10499F010499F010499F0000 /* Debug */ = {
+              1049C601049C601049C60000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -386,7 +386,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              1049BE01049BE01049BE0000 /* Release */ = {
+              1049E501049E501049E50000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -396,7 +396,7 @@ exit 0";
                      };
                      name = Release;
               };
-              1049DD01049DD01049DD0000 /* MinSizeRel */ = {
+              104A040104A040104A040000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -406,7 +406,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              1049FC01049FC01049FC0000 /* RelWithDebInfo */ = {
+              104A230104A230104A230000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -416,7 +416,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              1068C201068C201068C20000 /* Debug */ = {
+              1068E901068E901068E90000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -439,7 +439,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              106B550106B550106B550000 /* Release */ = {
+              106B7C0106B7C0106B7C0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -462,7 +462,7 @@ exit 0";
                      };
                      name = Release;
               };
-              106DE10106DE10106DE10000 /* MinSizeRel */ = {
+              106E080106E080106E080000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -485,7 +485,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              10706D010706D010706D0000 /* RelWithDebInfo */ = {
+              107094010709401070940000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -508,7 +508,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              10756E010756E010756E0000 /* Debug */ = {
+              107593010759301075930000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -531,7 +531,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              107801010780101078010000 /* Release */ = {
+              107826010782601078260000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -554,7 +554,7 @@ exit 0";
                      };
                      name = Release;
               };
-              107A930107A930107A930000 /* MinSizeRel */ = {
+              107AB80107AB80107AB80000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -577,7 +577,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              107D250107D250107D250000 /* RelWithDebInfo */ = {
+              107D4A0107D4A0107D4A0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -600,7 +600,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              108AC00108AC00108AC00000 /* Debug */ = {
+              108AE50108AE50108AE50000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/Debug;
@@ -628,7 +628,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              108DA40108DA40108DA40000 /* Release */ = {
+              108DC90108DC90108DC90000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/Release;
@@ -656,7 +656,7 @@ exit 0";
                      };
                      name = Release;
               };
-              109075010907501090750000 /* MinSizeRel */ = {
+              10909A010909A010909A0000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/MinSizeRel;
@@ -684,7 +684,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              1090F801090F801090F80000 /* RelWithDebInfo */ = {
+              10911D010911D010911D0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/YarpFilter/LibYarpFilter/RelWithDebInfo;
@@ -715,51 +715,51 @@ exit 0";
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-              10498A010498A010498A0000 /* Build configuration list for PBXProject  "YarpFilter" */ = {
+              1049B101049B101049B10000 /* Build configuration list for PBXProject  "YarpFilter" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            10499F010499F010499F0000 /* Debug */,
-                            1049BE01049BE01049BE0000 /* Release */,
-                            1049DD01049DD01049DD0000 /* MinSizeRel */,
-                            1049FC01049FC01049FC0000 /* RelWithDebInfo */,
+                            1049C601049C601049C60000 /* Debug */,
+                            1049E501049E501049E50000 /* Release */,
+                            104A040104A040104A040000 /* MinSizeRel */,
+                            104A230104A230104A230000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              104BAD0104BAD0104BAD0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+              104BD40104BD40104BD40000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            1068C201068C201068C20000 /* Debug */,
-                            106B550106B550106B550000 /* Release */,
-                            106DE10106DE10106DE10000 /* MinSizeRel */,
-                            10706D010706D010706D0000 /* RelWithDebInfo */,
+                            1068E901068E901068E90000 /* Debug */,
+                            106B7C0106B7C0106B7C0000 /* Release */,
+                            106E080106E080106E080000 /* MinSizeRel */,
+                            107094010709401070940000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              107513010751301075130000 /* Build configuration list for PBXAggregateTarget "install" */ = {
+              107538010753801075380000 /* Build configuration list for PBXAggregateTarget "install" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            10756E010756E010756E0000 /* Debug */,
-                            107801010780101078010000 /* Release */,
-                            107A930107A930107A930000 /* MinSizeRel */,
-                            107D250107D250107D250000 /* RelWithDebInfo */,
+                            107593010759301075930000 /* Debug */,
+                            107826010782601078260000 /* Release */,
+                            107AB80107AB80107AB80000 /* MinSizeRel */,
+                            107D4A0107D4A0107D4A0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              108A8A0108A8A0108A8A0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */ = {
+              108AAF0108AAF0108AAF0000 /* Build configuration list for PBXNativeTarget "YarpFilter" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            108AC00108AC00108AC00000 /* Debug */,
-                            108DA40108DA40108DA40000 /* Release */,
-                            109075010907501090750000 /* MinSizeRel */,
-                            1090F801090F801090F80000 /* RelWithDebInfo */,
+                            108AE50108AE50108AE50000 /* Debug */,
+                            108DC90108DC90108DC90000 /* Release */,
+                            10909A010909A010909A0000 /* MinSizeRel */,
+                            10911D010911D010911D0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
 /* End XCConfigurationList section */
        };
-       rootObject = 104C620104C620104C620000;
+       rootObject = 104C890104C890104C890000;
 }

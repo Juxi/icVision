@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'robot.h'
 **
-** Created: Mon Jul 25 15:11:01 2011
+** Created: Thu Jul 28 15:35:46 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,33 +23,36 @@ static const uint qt_meta_data_KinematicModel__Robot[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       3,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      27,   23,   22,   22, 0x05,
+      23,   22,   22,   22, 0x05,
+      39,   22,   22,   22, 0x05,
+      65,   61,   22,   22, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      61,   57,   22,   22, 0x0a,
-      86,   22,   22,   22, 0x2a,
-     132,  111,  106,   22, 0x0a,
-     165,   57,   22,   22, 0x0a,
-     191,   22,   22,   22, 0x2a,
-     212,  111,  106,   22, 0x0a,
-     258,  246,  106,   22, 0x0a,
-     297,   22,   22,   22, 0x0a,
-     318,  310,   22,   22, 0x0a,
-     329,   22,   22,   22, 0x2a,
+      99,   95,   22,   22, 0x0a,
+     124,   22,   22,   22, 0x2a,
+     170,  149,  144,   22, 0x0a,
+     203,   95,   22,   22, 0x0a,
+     229,   22,   22,   22, 0x2a,
+     250,  149,  144,   22, 0x0a,
+     296,  284,  144,   22, 0x0a,
+     335,   22,   22,   22, 0x0a,
+     356,  348,   22,   22, 0x0a,
+     367,   22,   22,   22, 0x2a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_KinematicModel__Robot[] = {
-    "KinematicModel::Robot\0\0obs\0"
+    "KinematicModel::Robot\0\0collisions(int)\0"
+    "reflexCollisions(int)\0obs\0"
     "observation(RobotObservation)\0pos\0"
     "setNormalPosition(qreal)\0setNormalPosition()\0"
     "bool\0partNum,motorNum,pos\0"
@@ -90,31 +93,47 @@ int KinematicModel::Robot::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: observation((*reinterpret_cast< RobotObservation(*)>(_a[1]))); break;
-        case 1: setNormalPosition((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 2: setNormalPosition(); break;
-        case 3: { bool _r = setNormalPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])));
+        case 0: collisions((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: reflexCollisions((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: observation((*reinterpret_cast< RobotObservation(*)>(_a[1]))); break;
+        case 3: setNormalPosition((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 4: setNormalPosition(); break;
+        case 5: { bool _r = setNormalPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 4: setEncoderPosition((*reinterpret_cast< qreal(*)>(_a[1]))); break;
-        case 5: setEncoderPosition(); break;
-        case 6: { bool _r = setEncoderPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])));
+        case 6: setEncoderPosition((*reinterpret_cast< qreal(*)>(_a[1]))); break;
+        case 7: setEncoderPosition(); break;
+        case 8: { bool _r = setEncoderPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< qreal(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 7: { bool _r = setEncoderPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QVector<qreal>(*)>(_a[2])));
+        case 9: { bool _r = setEncoderPosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QVector<qreal>(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 8: updatePose(); break;
-        case 9: home((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 10: home(); break;
+        case 10: updatePose(); break;
+        case 11: home((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 12: home(); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }
 
 // SIGNAL 0
-void KinematicModel::Robot::observation(RobotObservation _t1)
+void KinematicModel::Robot::collisions(int _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void KinematicModel::Robot::reflexCollisions(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void KinematicModel::Robot::observation(RobotObservation _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_END_MOC_NAMESPACE

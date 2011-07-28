@@ -13,12 +13,7 @@ SET ( src_files		model.cpp			# the center of it all
 			sphere.cpp
 			cylinder.cpp 
 			box.cpp  
-			
-			
-			#displaylist.cpp
-				
-			
-				
+	
 			robot.cpp
 			bodyPart.cpp
 			kintreenode.cpp 

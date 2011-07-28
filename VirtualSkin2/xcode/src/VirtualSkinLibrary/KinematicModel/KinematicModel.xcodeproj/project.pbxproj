@@ -7,29 +7,29 @@
        objects = {
 
 /* Begin PBXAggregateTarget section */
-              105033010503301050330000 /* ALL_BUILD */ = {
+              10505A010505A010505A0000 /* ALL_BUILD */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 10515D010515D010515D0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildConfigurationList = 105184010518401051840000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
                      buildPhases = (
-                            105055010505501050550000 /* CMake ReRun */,
-                            1050C201050C201050C20000 /* CMake Rules */,
+                            10507C010507C010507C0000 /* CMake ReRun */,
+                            1050E901050E901050E90000 /* CMake Rules */,
                      );
                      dependencies = (
-                            10B0AE010B0AE010B0AE0000 /* PBXTargetDependency */,
-                            10B125010B125010B1250000 /* PBXTargetDependency */,
+                            10B0D5010B0D5010B0D50000 /* PBXTargetDependency */,
+                            10B14C010B14C010B14C0000 /* PBXTargetDependency */,
                      );
                      name = ALL_BUILD;
                      productName = ALL_BUILD;
               };
-              105E640105E640105E640000 /* install */ = {
+              105E8B0105E8B0105E8B0000 /* install */ = {
                      isa = PBXAggregateTarget;
-                     buildConfigurationList = 105F670105F670105F670000 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildConfigurationList = 105F8E0105F8E0105F8E0000 /* Build configuration list for PBXAggregateTarget "install" */;
                      buildPhases = (
-                            105E810105E810105E810000 /* CMake ReRun */,
-                            105EED0105EED0105EED0000 /* CMake PostBuild Rules */,
+                            105EA80105EA80105EA80000 /* CMake ReRun */,
+                            105F140105F140105F140000 /* CMake PostBuild Rules */,
                      );
                      dependencies = (
-                            10B1A9010B1A9010B1A90000 /* PBXTargetDependency */,
+                            10B1D0010B1D0010B1D00000 /* PBXTargetDependency */,
                      );
                      name = install;
                      productName = install;
@@ -37,88 +37,88 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-106C430106C430106C430000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */ = {isa = PBXBuildFile; fileRef = 106BC20106BC20106BC20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */; settings = { COMPILER_FLAGS = ""; }; };
-106CF50106CF50106CF50000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */ = {isa = PBXBuildFile; fileRef = 106C7C0106C7C0106C7C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */; settings = { COMPILER_FLAGS = ""; }; };
-106DA90106DA90106DA90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */ = {isa = PBXBuildFile; fileRef = 106D1F0106D1F0106D1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */; settings = { COMPILER_FLAGS = ""; }; };
-106E5C0106E5C0106E5C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */ = {isa = PBXBuildFile; fileRef = 106DE20106DE20106DE20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */; settings = { COMPILER_FLAGS = ""; }; };
-106F100106F100106F100000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */ = {isa = PBXBuildFile; fileRef = 106E950106E950106E950000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */; settings = { COMPILER_FLAGS = ""; }; };
-106FC30106FC30106FC30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */ = {isa = PBXBuildFile; fileRef = 106F490106F490106F490000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */; settings = { COMPILER_FLAGS = ""; }; };
-107078010707801070780000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */ = {isa = PBXBuildFile; fileRef = 106FFC0106FFC0106FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */; settings = { COMPILER_FLAGS = ""; }; };
-107128010712801071280000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */ = {isa = PBXBuildFile; fileRef = 1070AC01070AC01070AC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */; settings = { COMPILER_FLAGS = ""; }; };
-1071DB01071DB01071DB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */ = {isa = PBXBuildFile; fileRef = 107161010716101071610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */; settings = { COMPILER_FLAGS = ""; }; };
-10728F010728F010728F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */ = {isa = PBXBuildFile; fileRef = 107214010721401072140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */; settings = { COMPILER_FLAGS = ""; }; };
-10733B010733B010733B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */ = {isa = PBXBuildFile; fileRef = 1072C701072C701072C70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */; settings = { COMPILER_FLAGS = ""; }; };
-1073ED01073ED01073ED0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */ = {isa = PBXBuildFile; fileRef = 107374010737401073740000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */; settings = { COMPILER_FLAGS = ""; }; };
-10749F010749F010749F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */ = {isa = PBXBuildFile; fileRef = 107426010742601074260000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */; settings = { COMPILER_FLAGS = ""; }; };
-107551010755101075510000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */ = {isa = PBXBuildFile; fileRef = 1074D801074D801074D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */; settings = { COMPILER_FLAGS = ""; }; };
-107603010760301076030000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */ = {isa = PBXBuildFile; fileRef = 10758A010758A010758A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */; settings = { COMPILER_FLAGS = ""; }; };
-1076B501076B501076B50000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */ = {isa = PBXBuildFile; fileRef = 10763C010763C010763C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */; settings = { COMPILER_FLAGS = ""; }; };
-107768010776801077680000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */ = {isa = PBXBuildFile; fileRef = 1076EE01076EE01076EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */; settings = { COMPILER_FLAGS = ""; }; };
-107820010782001078200000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */ = {isa = PBXBuildFile; fileRef = 1077A901077A901077A90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */; settings = { COMPILER_FLAGS = ""; }; };
-1078D001078D001078D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */ = {isa = PBXBuildFile; fileRef = 107859010785901078590000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */; settings = { COMPILER_FLAGS = ""; }; };
-107982010798201079820000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */ = {isa = PBXBuildFile; fileRef = 107909010790901079090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */; settings = { COMPILER_FLAGS = ""; }; };
-107A340107A340107A340000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */ = {isa = PBXBuildFile; fileRef = 1079BB01079BB01079BB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */; settings = { COMPILER_FLAGS = ""; }; };
-107AE60107AE60107AE60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */ = {isa = PBXBuildFile; fileRef = 107A6D0107A6D0107A6D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107BA20107BA20107BA20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */ = {isa = PBXBuildFile; fileRef = 107B1F0107B1F0107B1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107C4F0107C4F0107C4F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */ = {isa = PBXBuildFile; fileRef = 107BD30107BD30107BD30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107D010107D010107D010000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */ = {isa = PBXBuildFile; fileRef = 107C790107C790107C790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107DBA0107DBA0107DBA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */ = {isa = PBXBuildFile; fileRef = 107D3A0107D3A0107D3A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107E6F0107E6F0107E6F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */ = {isa = PBXBuildFile; fileRef = 107DEB0107DEB0107DEB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107F250107F250107F250000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */ = {isa = PBXBuildFile; fileRef = 107EA30107EA30107EA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-107FD20107FD20107FD20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */ = {isa = PBXBuildFile; fileRef = 107F560107F560107F560000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108084010808401080840000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */ = {isa = PBXBuildFile; fileRef = 10800B010800B010800B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10813A010813A010813A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */ = {isa = PBXBuildFile; fileRef = 1080BD01080BD01080BD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-1081ED01081ED01081ED0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */ = {isa = PBXBuildFile; fileRef = 108173010817301081730000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10829F010829F010829F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */ = {isa = PBXBuildFile; fileRef = 108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108352010835201083520000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */ = {isa = PBXBuildFile; fileRef = 1082D801082D801082D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108404010840401084040000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */ = {isa = PBXBuildFile; fileRef = 10837C010837C010837C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-1084B701084B701084B70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */ = {isa = PBXBuildFile; fileRef = 10843D010843D010843D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108569010856901085690000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */ = {isa = PBXBuildFile; fileRef = 1084E101084E101084E10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-108622010862201086220000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */ = {isa = PBXBuildFile; fileRef = 1085A201085A201085A20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-1086DE01086DE01086DE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */ = {isa = PBXBuildFile; fileRef = 108663010866301086630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10878C010878C010878C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */ = {isa = PBXBuildFile; fileRef = 108712010871201087120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10883E010883E010883E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */ = {isa = PBXBuildFile; fileRef = 1087B601087B601087B60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-1088D601088D601088D60000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */ = {isa = PBXBuildFile; fileRef = 108877010887701088770000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-10898E010898E010898E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */ = {isa = PBXBuildFile; fileRef = 10892E010892E010892E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-108A480108A480108A480000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */ = {isa = PBXBuildFile; fileRef = 1089DB01089DB01089DB0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-108B020108B020108B020000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */ = {isa = PBXBuildFile; fileRef = 108A950108A950108A950000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */; settings = { COMPILER_FLAGS = ""; }; };
-108BD70108BD70108BD70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 108B4F0108B4F0108B4F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
-108C730108C730108C730000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108C110108C110108C110000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-108D260108D260108D260000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108CCA0108CCA0108CCA0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-108DE70108DE70108DE70000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108D760108D760108D760000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-108EA00108EA00108EA00000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108E310108E310108E310000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
-109F160109F160109F160000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */ = {isa = PBXBuildFile; fileRef = 108652010865201086520000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */; settings = { COMPILER_FLAGS = ""; }; };
-109FC40109FC40109FC40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */ = {isa = PBXBuildFile; fileRef = 109F4E0109F4E0109F4E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10A074010A074010A0740000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */ = {isa = PBXBuildFile; fileRef = 109FFD0109FFD0109FFD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */; settings = { COMPILER_FLAGS = ""; }; };
-10A126010A126010A1260000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 10A0A8010A0A8010A0A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+106C6A0106C6A0106C6A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */ = {isa = PBXBuildFile; fileRef = 106BE90106BE90106BE90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */; settings = { COMPILER_FLAGS = ""; }; };
+106D1C0106D1C0106D1C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */ = {isa = PBXBuildFile; fileRef = 106CA30106CA30106CA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */; settings = { COMPILER_FLAGS = ""; }; };
+106DD00106DD00106DD00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */ = {isa = PBXBuildFile; fileRef = 106D460106D460106D460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */; settings = { COMPILER_FLAGS = ""; }; };
+106E830106E830106E830000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */ = {isa = PBXBuildFile; fileRef = 106E090106E090106E090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */; settings = { COMPILER_FLAGS = ""; }; };
+106F370106F370106F370000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */ = {isa = PBXBuildFile; fileRef = 106EBC0106EBC0106EBC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */; settings = { COMPILER_FLAGS = ""; }; };
+106FEA0106FEA0106FEA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */ = {isa = PBXBuildFile; fileRef = 106F700106F700106F700000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */; settings = { COMPILER_FLAGS = ""; }; };
+10709F010709F010709F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */ = {isa = PBXBuildFile; fileRef = 107023010702301070230000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */; settings = { COMPILER_FLAGS = ""; }; };
+10714F010714F010714F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */ = {isa = PBXBuildFile; fileRef = 1070D301070D301070D30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */; settings = { COMPILER_FLAGS = ""; }; };
+107202010720201072020000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */ = {isa = PBXBuildFile; fileRef = 107188010718801071880000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */; settings = { COMPILER_FLAGS = ""; }; };
+1072B601072B601072B60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */ = {isa = PBXBuildFile; fileRef = 10723B010723B010723B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */; settings = { COMPILER_FLAGS = ""; }; };
+107362010736201073620000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */ = {isa = PBXBuildFile; fileRef = 1072EE01072EE01072EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */; settings = { COMPILER_FLAGS = ""; }; };
+107414010741401074140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */ = {isa = PBXBuildFile; fileRef = 10739B010739B010739B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */; settings = { COMPILER_FLAGS = ""; }; };
+1074C601074C601074C60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */ = {isa = PBXBuildFile; fileRef = 10744D010744D010744D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */; settings = { COMPILER_FLAGS = ""; }; };
+107578010757801075780000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */ = {isa = PBXBuildFile; fileRef = 1074FF01074FF01074FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */; settings = { COMPILER_FLAGS = ""; }; };
+10762A010762A010762A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */ = {isa = PBXBuildFile; fileRef = 1075B101075B101075B10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */; settings = { COMPILER_FLAGS = ""; }; };
+1076DC01076DC01076DC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */ = {isa = PBXBuildFile; fileRef = 107663010766301076630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */; settings = { COMPILER_FLAGS = ""; }; };
+10778F010778F010778F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */ = {isa = PBXBuildFile; fileRef = 107715010771501077150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */; settings = { COMPILER_FLAGS = ""; }; };
+107847010784701078470000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */ = {isa = PBXBuildFile; fileRef = 1077D001077D001077D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */; settings = { COMPILER_FLAGS = ""; }; };
+1078F701078F701078F70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */ = {isa = PBXBuildFile; fileRef = 107880010788001078800000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */; settings = { COMPILER_FLAGS = ""; }; };
+1079A901079A901079A90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */ = {isa = PBXBuildFile; fileRef = 107930010793001079300000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */; settings = { COMPILER_FLAGS = ""; }; };
+107A5B0107A5B0107A5B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */ = {isa = PBXBuildFile; fileRef = 1079E201079E201079E20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */; settings = { COMPILER_FLAGS = ""; }; };
+107B0D0107B0D0107B0D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */ = {isa = PBXBuildFile; fileRef = 107A940107A940107A940000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107BC90107BC90107BC90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */ = {isa = PBXBuildFile; fileRef = 107B460107B460107B460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107C760107C760107C760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */ = {isa = PBXBuildFile; fileRef = 107BFA0107BFA0107BFA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107D280107D280107D280000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */ = {isa = PBXBuildFile; fileRef = 107CA00107CA00107CA00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107DE10107DE10107DE10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */ = {isa = PBXBuildFile; fileRef = 107D610107D610107D610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107E960107E960107E960000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */ = {isa = PBXBuildFile; fileRef = 107E120107E120107E120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107F4C0107F4C0107F4C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */ = {isa = PBXBuildFile; fileRef = 107ECA0107ECA0107ECA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+107FF90107FF90107FF90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */ = {isa = PBXBuildFile; fileRef = 107F7D0107F7D0107F7D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1080AB01080AB01080AB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */ = {isa = PBXBuildFile; fileRef = 108032010803201080320000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108161010816101081610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */ = {isa = PBXBuildFile; fileRef = 1080E401080E401080E40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108214010821401082140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */ = {isa = PBXBuildFile; fileRef = 10819A010819A010819A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1082C601082C601082C60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */ = {isa = PBXBuildFile; fileRef = 10823E010823E010823E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108379010837901083790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */ = {isa = PBXBuildFile; fileRef = 1082FF01082FF01082FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10842B010842B010842B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */ = {isa = PBXBuildFile; fileRef = 1083A301083A301083A30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1084DE01084DE01084DE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */ = {isa = PBXBuildFile; fileRef = 108464010846401084640000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108590010859001085900000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */ = {isa = PBXBuildFile; fileRef = 108508010850801085080000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108649010864901086490000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */ = {isa = PBXBuildFile; fileRef = 1085C901085C901085C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108705010870501087050000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */ = {isa = PBXBuildFile; fileRef = 10868A010868A010868A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1087B301087B301087B30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */ = {isa = PBXBuildFile; fileRef = 108739010873901087390000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108865010886501088650000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */ = {isa = PBXBuildFile; fileRef = 1087DD01087DD01087DD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+1088FD01088FD01088FD0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */ = {isa = PBXBuildFile; fileRef = 10889E010889E010889E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+1089B501089B501089B50000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */ = {isa = PBXBuildFile; fileRef = 108955010895501089550000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108A6F0108A6F0108A6F0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */ = {isa = PBXBuildFile; fileRef = 108A020108A020108A020000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108B290108B290108B290000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */ = {isa = PBXBuildFile; fileRef = 108ABC0108ABC0108ABC0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+108BFE0108BFE0108BFE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 108B760108B760108B760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+108C9A0108C9A0108C9A0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108C380108C380108C380000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108D4D0108D4D0108D4D0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108CF10108CF10108CF10000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108E0E0108E0E0108E0E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108D9D0108D9D0108D9D0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+108EC70108EC70108EC70000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */ = {isa = PBXBuildFile; fileRef = 108E580108E580108E580000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+109F3E0109F3E0109F3E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */ = {isa = PBXBuildFile; fileRef = 108679010867901086790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */; settings = { COMPILER_FLAGS = ""; }; };
+109FEC0109FEC0109FEC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */ = {isa = PBXBuildFile; fileRef = 109F760109F760109F760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10A09C010A09C010A09C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */ = {isa = PBXBuildFile; fileRef = 10A025010A025010A0250000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+10A14E010A14E010A14E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 10A0D0010A0D0010A0D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
-              104409010440901044090000 /*  */ = {
+              104430010443001044300000 /*  */ = {
                      isa = PBXBuildStyle;
               };
-              104485010448501044850000 /* Debug */ = {
+              1044AC01044AC01044AC0000 /* Debug */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Debug;
               };
-              10193D010193D010193D0000 /* Release */ = {
+              101964010196401019640000 /* Release */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = Release;
               };
-              104903010490301049030000 /* MinSizeRel */ = {
+              10492A010492A010492A0000 /* MinSizeRel */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
                      };
                      name = MinSizeRel;
               };
-              10474E010474E010474E0000 /* RelWithDebInfo */ = {
+              104775010477501047750000 /* RelWithDebInfo */ = {
                      isa = PBXBuildStyle;
                      buildSettings = {
                             COPY_PHASE_STRIP = NO;
@@ -128,245 +128,245 @@
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-              10B05F010B05F010B05F0000 /* PBXContainerItemProxy */ = {
+              10B086010B086010B0860000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 104DE60104DE60104DE60000 /* Project object */;
+                     containerPortal = 104E0D0104E0D0104E0D0000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 108F410108F410108F410000;
-                     remoteInfo = KinematicModel;
-              };
-              10B0D6010B0D6010B0D60000 /* PBXContainerItemProxy */ = {
-                     isa = PBXContainerItemProxy;
-                     containerPortal = 104DE60104DE60104DE60000 /* Project object */;
-                     proxyType = 1;
-                     remoteGlobalIDString = 10A26E010A26E010A26E0000;
+                     remoteGlobalIDString = 10A29F010A29F010A29F0000;
                      remoteInfo = WorldModelDemo;
               };
-              10B14D010B14D010B14D0000 /* PBXContainerItemProxy */ = {
+              10B0FD010B0FD010B0FD0000 /* PBXContainerItemProxy */ = {
                      isa = PBXContainerItemProxy;
-                     containerPortal = 104DE60104DE60104DE60000 /* Project object */;
+                     containerPortal = 104E0D0104E0D0104E0D0000 /* Project object */;
                      proxyType = 1;
-                     remoteGlobalIDString = 105033010503301050330000;
+                     remoteGlobalIDString = 108F680108F680108F680000;
+                     remoteInfo = KinematicModel;
+              };
+              10B174010B174010B1740000 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 104E0D0104E0D0104E0D0000 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 10505A010505A010505A0000;
                      remoteInfo = ALL_BUILD;
               };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-105D8A0105D8A0105D8A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-106BC20106BC20106BC20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelconstants.h"; path = "LibKinematicModel/modelconstants.h"; sourceTree = SOURCE_ROOT; };
-106C7C0106C7C0106C7C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "model.h"; path = "LibKinematicModel/model.h"; sourceTree = SOURCE_ROOT; };
-106D1F0106D1F0106D1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelexception.h"; path = "LibKinematicModel/modelexception.h"; sourceTree = SOURCE_ROOT; };
-106DE20106DE20106DE20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelwindow.h"; path = "LibKinematicModel/modelwindow.h"; sourceTree = SOURCE_ROOT; };
-106E950106E950106E950000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "glwidget.h"; path = "LibKinematicModel/glwidget.h"; sourceTree = SOURCE_ROOT; };
-106F490106F490106F490000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "transformable.h"; path = "LibKinematicModel/transformable.h"; sourceTree = SOURCE_ROOT; };
-106FFC0106FFC0106FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "compositeobject.h"; path = "LibKinematicModel/compositeobject.h"; sourceTree = SOURCE_ROOT; };
-1070AC01070AC01070AC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "primitiveobject.h"; path = "LibKinematicModel/primitiveobject.h"; sourceTree = SOURCE_ROOT; };
-107161010716101071610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "sphere.h"; path = "LibKinematicModel/sphere.h"; sourceTree = SOURCE_ROOT; };
-107214010721401072140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "cylinder.h"; path = "LibKinematicModel/cylinder.h"; sourceTree = SOURCE_ROOT; };
-1072C701072C701072C70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "box.h"; path = "LibKinematicModel/box.h"; sourceTree = SOURCE_ROOT; };
-107374010737401073740000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robot.h"; path = "LibKinematicModel/robot.h"; sourceTree = SOURCE_ROOT; };
-107426010742601074260000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "bodyPart.h"; path = "LibKinematicModel/bodyPart.h"; sourceTree = SOURCE_ROOT; };
-1074D801074D801074D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "kintreenode.h"; path = "LibKinematicModel/kintreenode.h"; sourceTree = SOURCE_ROOT; };
-10758A010758A010758A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "motor.h"; path = "LibKinematicModel/motor.h"; sourceTree = SOURCE_ROOT; };
-10763C010763C010763C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "interval.h"; path = "LibKinematicModel/interval.h"; sourceTree = SOURCE_ROOT; };
-1076EE01076EE01076EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "link.h"; path = "LibKinematicModel/link.h"; sourceTree = SOURCE_ROOT; };
-1077A901077A901077A90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint.h"; path = "LibKinematicModel/joint.h"; sourceTree = SOURCE_ROOT; };
-107859010785901078590000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_revolute.h"; path = "LibKinematicModel/joint_revolute.h"; sourceTree = SOURCE_ROOT; };
-107909010790901079090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "zpHandler.h"; path = "LibKinematicModel/zpHandler.h"; sourceTree = SOURCE_ROOT; };
-1079BB01079BB01079BB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "worldhandler.h"; path = "LibKinematicModel/worldhandler.h"; sourceTree = SOURCE_ROOT; };
-107A6D0107A6D0107A6D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "model.cpp"; path = "LibKinematicModel/model.cpp"; sourceTree = SOURCE_ROOT; };
-107B1F0107B1F0107B1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "modelexception.cpp"; path = "LibKinematicModel/modelexception.cpp"; sourceTree = SOURCE_ROOT; };
-107BD30107BD30107BD30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "modelwindow.cpp"; path = "LibKinematicModel/modelwindow.cpp"; sourceTree = SOURCE_ROOT; };
-107C790107C790107C790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "glwidget.cpp"; path = "LibKinematicModel/glwidget.cpp"; sourceTree = SOURCE_ROOT; };
-107D3A0107D3A0107D3A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "transformable.cpp"; path = "LibKinematicModel/transformable.cpp"; sourceTree = SOURCE_ROOT; };
-107DEB0107DEB0107DEB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "compositeobject.cpp"; path = "LibKinematicModel/compositeobject.cpp"; sourceTree = SOURCE_ROOT; };
-107EA30107EA30107EA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "primitiveobject.cpp"; path = "LibKinematicModel/primitiveobject.cpp"; sourceTree = SOURCE_ROOT; };
-107F560107F560107F560000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "sphere.cpp"; path = "LibKinematicModel/sphere.cpp"; sourceTree = SOURCE_ROOT; };
-10800B010800B010800B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "cylinder.cpp"; path = "LibKinematicModel/cylinder.cpp"; sourceTree = SOURCE_ROOT; };
-1080BD01080BD01080BD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "box.cpp"; path = "LibKinematicModel/box.cpp"; sourceTree = SOURCE_ROOT; };
-108173010817301081730000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robot.cpp"; path = "LibKinematicModel/robot.cpp"; sourceTree = SOURCE_ROOT; };
-108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "bodyPart.cpp"; path = "LibKinematicModel/bodyPart.cpp"; sourceTree = SOURCE_ROOT; };
-1082D801082D801082D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "kintreenode.cpp"; path = "LibKinematicModel/kintreenode.cpp"; sourceTree = SOURCE_ROOT; };
-10837C010837C010837C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "motor.cpp"; path = "LibKinematicModel/motor.cpp"; sourceTree = SOURCE_ROOT; };
-10843D010843D010843D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "interval.cpp"; path = "LibKinematicModel/interval.cpp"; sourceTree = SOURCE_ROOT; };
-1084E101084E101084E10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "link.cpp"; path = "LibKinematicModel/link.cpp"; sourceTree = SOURCE_ROOT; };
-1085A201085A201085A20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint.cpp"; path = "LibKinematicModel/joint.cpp"; sourceTree = SOURCE_ROOT; };
-108663010866301086630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_revolute.cpp"; path = "LibKinematicModel/joint_revolute.cpp"; sourceTree = SOURCE_ROOT; };
-108712010871201087120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "zpHandler.cpp"; path = "LibKinematicModel/zpHandler.cpp"; sourceTree = SOURCE_ROOT; };
-1087B601087B601087B60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "worldhandler.cpp"; path = "LibKinematicModel/worldhandler.cpp"; sourceTree = SOURCE_ROOT; };
-108877010887701088770000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_model.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx"; sourceTree = SOURCE_ROOT; };
-10892E010892E010892E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_modelwindow.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx"; sourceTree = SOURCE_ROOT; };
-1089DB01089DB01089DB0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_glwidget.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx"; sourceTree = SOURCE_ROOT; };
-108A950108A950108A950000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_robot.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx"; sourceTree = SOURCE_ROOT; };
-108B4F0108B4F0108B4F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "LibKinematicModel/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-108C110108C110108C110000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_model.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule"; sourceTree = SOURCE_ROOT; };
-108CCA0108CCA0108CCA0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_modelwindow.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule"; sourceTree = SOURCE_ROOT; };
-108D760108D760108D760000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_glwidget.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule"; sourceTree = SOURCE_ROOT; };
-108E310108E310108E310000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_robot.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule"; sourceTree = SOURCE_ROOT; };
-109E360109E360109E360000 /* KinematicModel */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libKinematicModel.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
-108652010865201086520000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "objectSoup.h"; path = "WorldModelDemo/objectSoup.h"; sourceTree = SOURCE_ROOT; };
-109F4E0109F4E0109F4E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "main.cpp"; path = "WorldModelDemo/main.cpp"; sourceTree = SOURCE_ROOT; };
-109FFD0109FFD0109FFD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "objectSoup.cpp"; path = "WorldModelDemo/objectSoup.cpp"; sourceTree = SOURCE_ROOT; };
-10A0A8010A0A8010A0A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "WorldModelDemo/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
-10AFF6010AFF6010AFF60000 /* WorldModelDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = WorldModelDemo; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+105DB10105DB10105DB10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+106BE90106BE90106BE90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelconstants.h"; path = "LibKinematicModel/modelconstants.h"; sourceTree = SOURCE_ROOT; };
+106CA30106CA30106CA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "model.h"; path = "LibKinematicModel/model.h"; sourceTree = SOURCE_ROOT; };
+106D460106D460106D460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelexception.h"; path = "LibKinematicModel/modelexception.h"; sourceTree = SOURCE_ROOT; };
+106E090106E090106E090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "modelwindow.h"; path = "LibKinematicModel/modelwindow.h"; sourceTree = SOURCE_ROOT; };
+106EBC0106EBC0106EBC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "glwidget.h"; path = "LibKinematicModel/glwidget.h"; sourceTree = SOURCE_ROOT; };
+106F700106F700106F700000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "transformable.h"; path = "LibKinematicModel/transformable.h"; sourceTree = SOURCE_ROOT; };
+107023010702301070230000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "compositeobject.h"; path = "LibKinematicModel/compositeobject.h"; sourceTree = SOURCE_ROOT; };
+1070D301070D301070D30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "primitiveobject.h"; path = "LibKinematicModel/primitiveobject.h"; sourceTree = SOURCE_ROOT; };
+107188010718801071880000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "sphere.h"; path = "LibKinematicModel/sphere.h"; sourceTree = SOURCE_ROOT; };
+10723B010723B010723B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "cylinder.h"; path = "LibKinematicModel/cylinder.h"; sourceTree = SOURCE_ROOT; };
+1072EE01072EE01072EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "box.h"; path = "LibKinematicModel/box.h"; sourceTree = SOURCE_ROOT; };
+10739B010739B010739B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robot.h"; path = "LibKinematicModel/robot.h"; sourceTree = SOURCE_ROOT; };
+10744D010744D010744D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "bodyPart.h"; path = "LibKinematicModel/bodyPart.h"; sourceTree = SOURCE_ROOT; };
+1074FF01074FF01074FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "kintreenode.h"; path = "LibKinematicModel/kintreenode.h"; sourceTree = SOURCE_ROOT; };
+1075B101075B101075B10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "motor.h"; path = "LibKinematicModel/motor.h"; sourceTree = SOURCE_ROOT; };
+107663010766301076630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "interval.h"; path = "LibKinematicModel/interval.h"; sourceTree = SOURCE_ROOT; };
+107715010771501077150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "link.h"; path = "LibKinematicModel/link.h"; sourceTree = SOURCE_ROOT; };
+1077D001077D001077D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint.h"; path = "LibKinematicModel/joint.h"; sourceTree = SOURCE_ROOT; };
+107880010788001078800000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "joint_revolute.h"; path = "LibKinematicModel/joint_revolute.h"; sourceTree = SOURCE_ROOT; };
+107930010793001079300000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "zpHandler.h"; path = "LibKinematicModel/zpHandler.h"; sourceTree = SOURCE_ROOT; };
+1079E201079E201079E20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "worldhandler.h"; path = "LibKinematicModel/worldhandler.h"; sourceTree = SOURCE_ROOT; };
+107A940107A940107A940000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "model.cpp"; path = "LibKinematicModel/model.cpp"; sourceTree = SOURCE_ROOT; };
+107B460107B460107B460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "modelexception.cpp"; path = "LibKinematicModel/modelexception.cpp"; sourceTree = SOURCE_ROOT; };
+107BFA0107BFA0107BFA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "modelwindow.cpp"; path = "LibKinematicModel/modelwindow.cpp"; sourceTree = SOURCE_ROOT; };
+107CA00107CA00107CA00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "glwidget.cpp"; path = "LibKinematicModel/glwidget.cpp"; sourceTree = SOURCE_ROOT; };
+107D610107D610107D610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "transformable.cpp"; path = "LibKinematicModel/transformable.cpp"; sourceTree = SOURCE_ROOT; };
+107E120107E120107E120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "compositeobject.cpp"; path = "LibKinematicModel/compositeobject.cpp"; sourceTree = SOURCE_ROOT; };
+107ECA0107ECA0107ECA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "primitiveobject.cpp"; path = "LibKinematicModel/primitiveobject.cpp"; sourceTree = SOURCE_ROOT; };
+107F7D0107F7D0107F7D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "sphere.cpp"; path = "LibKinematicModel/sphere.cpp"; sourceTree = SOURCE_ROOT; };
+108032010803201080320000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "cylinder.cpp"; path = "LibKinematicModel/cylinder.cpp"; sourceTree = SOURCE_ROOT; };
+1080E401080E401080E40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "box.cpp"; path = "LibKinematicModel/box.cpp"; sourceTree = SOURCE_ROOT; };
+10819A010819A010819A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robot.cpp"; path = "LibKinematicModel/robot.cpp"; sourceTree = SOURCE_ROOT; };
+10823E010823E010823E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "bodyPart.cpp"; path = "LibKinematicModel/bodyPart.cpp"; sourceTree = SOURCE_ROOT; };
+1082FF01082FF01082FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "kintreenode.cpp"; path = "LibKinematicModel/kintreenode.cpp"; sourceTree = SOURCE_ROOT; };
+1083A301083A301083A30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "motor.cpp"; path = "LibKinematicModel/motor.cpp"; sourceTree = SOURCE_ROOT; };
+108464010846401084640000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "interval.cpp"; path = "LibKinematicModel/interval.cpp"; sourceTree = SOURCE_ROOT; };
+108508010850801085080000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "link.cpp"; path = "LibKinematicModel/link.cpp"; sourceTree = SOURCE_ROOT; };
+1085C901085C901085C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint.cpp"; path = "LibKinematicModel/joint.cpp"; sourceTree = SOURCE_ROOT; };
+10868A010868A010868A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "joint_revolute.cpp"; path = "LibKinematicModel/joint_revolute.cpp"; sourceTree = SOURCE_ROOT; };
+108739010873901087390000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "zpHandler.cpp"; path = "LibKinematicModel/zpHandler.cpp"; sourceTree = SOURCE_ROOT; };
+1087DD01087DD01087DD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "worldhandler.cpp"; path = "LibKinematicModel/worldhandler.cpp"; sourceTree = SOURCE_ROOT; };
+10889E010889E010889E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_model.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx"; sourceTree = SOURCE_ROOT; };
+108955010895501089550000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_modelwindow.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx"; sourceTree = SOURCE_ROOT; };
+108A020108A020108A020000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_glwidget.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx"; sourceTree = SOURCE_ROOT; };
+108ABC0108ABC0108ABC0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_robot.cxx"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx"; sourceTree = SOURCE_ROOT; };
+108B760108B760108B760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "LibKinematicModel/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+108C380108C380108C380000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_model.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108CF10108CF10108CF10000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_modelwindow.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108D9D0108D9D0108D9D0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_glwidget.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule"; sourceTree = SOURCE_ROOT; };
+108E580108E580108E580000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_robot.cxx.rule"; path = "../../../xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule"; sourceTree = SOURCE_ROOT; };
+109E5E0109E5E0109E5E0000 /* KinematicModel */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libKinematicModel.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+108679010867901086790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "objectSoup.h"; path = "WorldModelDemo/objectSoup.h"; sourceTree = SOURCE_ROOT; };
+109F760109F760109F760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "main.cpp"; path = "WorldModelDemo/main.cpp"; sourceTree = SOURCE_ROOT; };
+10A025010A025010A0250000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "objectSoup.cpp"; path = "WorldModelDemo/objectSoup.cpp"; sourceTree = SOURCE_ROOT; };
+10A0D0010A0D0010A0D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "WorldModelDemo/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+10B01D010B01D010B01D0000 /* WorldModelDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = WorldModelDemo; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-              1043A601043A601043A60000  = {
+              1043CD01043CD01043CD0000  = {
                      isa = PBXGroup;
                      children = (
-                            104679010467901046790000 /* Sources */,
-                            1044B401044B401044B40000 /* Resources */,
-                            1044F201044F201044F20000 /* Products */,
+                            1046A001046A001046A00000 /* Sources */,
+                            1044DB01044DB01044DB0000 /* Resources */,
+                            104519010451901045190000 /* Products */,
                      );
                      sourceTree = "<group>";
               };
-              104679010467901046790000 /* Sources */ = {
+              1046A001046A001046A00000 /* Sources */ = {
                      isa = PBXGroup;
                      children = (
-                            10450E010450E010450E0000 /* ALL_BUILD */,
-                            1049A401049A401049A40000 /* KinematicModel */,
-                            104997010499701049970000 /* WorldModelDemo */,
+                            104535010453501045350000 /* ALL_BUILD */,
+                            1049CB01049CB01049CB0000 /* KinematicModel */,
+                            1049BE01049BE01049BE0000 /* WorldModelDemo */,
                      );
                      name = Sources;
                      sourceTree = "<group>";
               };
-              1044B401044B401044B40000 /* Resources */ = {
+              1044DB01044DB01044DB0000 /* Resources */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = Resources;
                      sourceTree = "<group>";
               };
-              10450E010450E010450E0000 /* ALL_BUILD */ = {
+              104535010453501045350000 /* ALL_BUILD */ = {
                      isa = PBXGroup;
                      children = (
-                            1048B601048B601048B60000 /* CMake Rules */,
-                            105D8A0105D8A0105D8A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/CMakeLists.txt */,
+                            1048DD01048DD01048DD0000 /* CMake Rules */,
+                            105DB10105DB10105DB10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/CMakeLists.txt */,
                      );
                      name = ALL_BUILD;
                      sourceTree = "<group>";
               };
-              1048B601048B601048B60000 /* CMake Rules */ = {
+              1048DD01048DD01048DD0000 /* CMake Rules */ = {
                      isa = PBXGroup;
                      children = (
                      );
                      name = "CMake Rules";
                      sourceTree = "<group>";
               };
-              1049A401049A401049A40000 /* KinematicModel */ = {
+              1049CB01049CB01049CB0000 /* KinematicModel */ = {
                      isa = PBXGroup;
                      children = (
-                            1049E201049E201049E20000 /* Header Files */,
-                            104B0D0104B0D0104B0D0000 /* Source Files */,
-                            104C800104C800104C800000 /* CMake Rules */,
-                            108B4F0108B4F0108B4F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */,
+                            104A090104A090104A090000 /* Header Files */,
+                            104B340104B340104B340000 /* Source Files */,
+                            104CA70104CA70104CA70000 /* CMake Rules */,
+                            108B760108B760108B760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeLists.txt */,
                      );
                      name = KinematicModel;
                      sourceTree = "<group>";
               };
-              1049E201049E201049E20000 /* Header Files */ = {
+              104A090104A090104A090000 /* Header Files */ = {
                      isa = PBXGroup;
                      children = (
-                            106BC20106BC20106BC20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */,
-                            106C7C0106C7C0106C7C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */,
-                            106D1F0106D1F0106D1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */,
-                            106DE20106DE20106DE20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */,
-                            106E950106E950106E950000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */,
-                            106F490106F490106F490000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */,
-                            106FFC0106FFC0106FFC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */,
-                            1070AC01070AC01070AC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */,
-                            107161010716101071610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */,
-                            107214010721401072140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */,
-                            1072C701072C701072C70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */,
-                            107374010737401073740000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */,
-                            107426010742601074260000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */,
-                            1074D801074D801074D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */,
-                            10758A010758A010758A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */,
-                            10763C010763C010763C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */,
-                            1076EE01076EE01076EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */,
-                            1077A901077A901077A90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */,
-                            107859010785901078590000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */,
-                            107909010790901079090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */,
-                            1079BB01079BB01079BB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */,
+                            106BE90106BE90106BE90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelconstants.h */,
+                            106CA30106CA30106CA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h */,
+                            106D460106D460106D460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.h */,
+                            106E090106E090106E090000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h */,
+                            106EBC0106EBC0106EBC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h */,
+                            106F700106F700106F700000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.h */,
+                            107023010702301070230000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h */,
+                            1070D301070D301070D30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.h */,
+                            107188010718801071880000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h */,
+                            10723B010723B010723B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h */,
+                            1072EE01072EE01072EE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h */,
+                            10739B010739B010739B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h */,
+                            10744D010744D010744D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.h */,
+                            1074FF01074FF01074FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.h */,
+                            1075B101075B101075B10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.h */,
+                            107663010766301076630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.h */,
+                            107715010771501077150000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.h */,
+                            1077D001077D001077D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.h */,
+                            107880010788001078800000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.h */,
+                            107930010793001079300000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.h */,
+                            1079E201079E201079E20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h */,
                      );
                      name = "Header Files";
                      sourceTree = "<group>";
               };
-              104B0D0104B0D0104B0D0000 /* Source Files */ = {
+              104B340104B340104B340000 /* Source Files */ = {
                      isa = PBXGroup;
                      children = (
-                            107A6D0107A6D0107A6D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */,
-                            107B1F0107B1F0107B1F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */,
-                            107BD30107BD30107BD30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */,
-                            107C790107C790107C790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */,
-                            107D3A0107D3A0107D3A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */,
-                            107DEB0107DEB0107DEB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */,
-                            107EA30107EA30107EA30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */,
-                            107F560107F560107F560000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */,
-                            10800B010800B010800B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */,
-                            1080BD01080BD01080BD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */,
-                            108173010817301081730000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */,
-                            108217010821701082170000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */,
-                            1082D801082D801082D80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */,
-                            10837C010837C010837C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */,
-                            10843D010843D010843D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */,
-                            1084E101084E101084E10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */,
-                            1085A201085A201085A20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */,
-                            108663010866301086630000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */,
-                            108712010871201087120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */,
-                            1087B601087B601087B60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */,
-                            108877010887701088770000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */,
-                            10892E010892E010892E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */,
-                            1089DB01089DB01089DB0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */,
-                            108A950108A950108A950000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */,
+                            107A940107A940107A940000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */,
+                            107B460107B460107B460000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */,
+                            107BFA0107BFA0107BFA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */,
+                            107CA00107CA00107CA00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */,
+                            107D610107D610107D610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */,
+                            107E120107E120107E120000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */,
+                            107ECA0107ECA0107ECA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */,
+                            107F7D0107F7D0107F7D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */,
+                            108032010803201080320000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */,
+                            1080E401080E401080E40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */,
+                            10819A010819A010819A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */,
+                            10823E010823E010823E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */,
+                            1082FF01082FF01082FF0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */,
+                            1083A301083A301083A30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */,
+                            108464010846401084640000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */,
+                            108508010850801085080000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */,
+                            1085C901085C901085C90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */,
+                            10868A010868A010868A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */,
+                            108739010873901087390000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */,
+                            1087DD01087DD01087DD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */,
+                            10889E010889E010889E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */,
+                            108955010895501089550000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */,
+                            108A020108A020108A020000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */,
+                            108ABC0108ABC0108ABC0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */,
                      );
                      name = "Source Files";
                      sourceTree = "<group>";
               };
-              104C800104C800104C800000 /* CMake Rules */ = {
+              104CA70104CA70104CA70000 /* CMake Rules */ = {
                      isa = PBXGroup;
                      children = (
-                            108C110108C110108C110000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */,
-                            108CCA0108CCA0108CCA0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */,
-                            108D760108D760108D760000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */,
-                            108E310108E310108E310000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */,
+                            108C380108C380108C380000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx.rule */,
+                            108CF10108CF10108CF10000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx.rule */,
+                            108D9D0108D9D0108D9D0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx.rule */,
+                            108E580108E580108E580000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx.rule */,
                      );
                      name = "CMake Rules";
                      sourceTree = "<group>";
               };
-              104997010499701049970000 /* WorldModelDemo */ = {
+              1049BE01049BE01049BE0000 /* WorldModelDemo */ = {
                      isa = PBXGroup;
                      children = (
-                            104D2B0104D2B0104D2B0000 /* Header Files */,
-                            104D710104D710104D710000 /* Source Files */,
-                            10A0A8010A0A8010A0A80000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */,
+                            104D520104D520104D520000 /* Header Files */,
+                            104D980104D980104D980000 /* Source Files */,
+                            10A0D0010A0D0010A0D00000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/CMakeLists.txt */,
                      );
                      name = WorldModelDemo;
                      sourceTree = "<group>";
               };
-              104D2B0104D2B0104D2B0000 /* Header Files */ = {
+              104D520104D520104D520000 /* Header Files */ = {
                      isa = PBXGroup;
                      children = (
-                            108652010865201086520000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */,
+                            108679010867901086790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.h */,
                      );
                      name = "Header Files";
                      sourceTree = "<group>";
               };
-              104D710104D710104D710000 /* Source Files */ = {
+              104D980104D980104D980000 /* Source Files */ = {
                      isa = PBXGroup;
                      children = (
-                            109F4E0109F4E0109F4E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */,
-                            109FFD0109FFD0109FFD0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */,
+                            109F760109F760109F760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */,
+                            10A025010A025010A0250000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */,
                      );
                      name = "Source Files";
                      sourceTree = "<group>";
               };
-              1044F201044F201044F20000 /* Products */ = {
+              104519010451901045190000 /* Products */ = {
                      isa = PBXGroup;
                      children = (
-                            109E360109E360109E360000 /* KinematicModel */,
-                            10AFF6010AFF6010AFF60000 /* WorldModelDemo */,
+                            109E5E0109E5E0109E5E0000 /* KinematicModel */,
+                            10B01D010B01D010B01D0000 /* WorldModelDemo */,
                      );
                      name = Products;
                      sourceTree = "<group>";
@@ -374,14 +374,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-              108F410108F410108F410000 /* KinematicModel */ = {
+              108F680108F680108F680000 /* KinematicModel */ = {
                      isa = PBXNativeTarget;
-                     buildConfigurationList = 1090C101090C101090C10000 /* Build configuration list for PBXNativeTarget "KinematicModel" */;
+                     buildConfigurationList = 1090F601090F601090F60000 /* Build configuration list for PBXNativeTarget "KinematicModel" */;
                      buildPhases = (
-                            108F510108F510108F510000 /* CMake ReRun */,
-                            108FD70108FD70108FD70000 /* CMake Rules */,
-                            108EEE0108EEE0108EEE0000 /* Sources */,
-                            10903C010903C010903C0000 /* CMake PostBuild Rules */,
+                            108F780108F780108F780000 /* CMake ReRun */,
+                            108FFE0108FFE0108FFE0000 /* CMake Rules */,
+                            108F150108F150108F150000 /* Sources */,
+                            109086010908601090860000 /* CMake PostBuild Rules */,
                      );
                      buildRules = (
                      );
@@ -389,60 +389,60 @@
                      );
                      name = KinematicModel;
                      productName = KinematicModel;
-                     productReference = 109E360109E360109E360000 /* KinematicModel */;
+                     productReference = 109E5E0109E5E0109E5E0000 /* KinematicModel */;
                      productType = "com.apple.product-type.library.static";
               };
-              10A26E010A26E010A26E0000 /* WorldModelDemo */ = {
+              10A29F010A29F010A29F0000 /* WorldModelDemo */ = {
                      isa = PBXNativeTarget;
-                     buildConfigurationList = 10A2B9010A2B9010A2B90000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */;
+                     buildConfigurationList = 10A2D0010A2D0010A2D00000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */;
                      buildPhases = (
-                            10A19D010A19D010A19D0000 /* CMake ReRun */,
-                            10A15A010A15A010A15A0000 /* Sources */,
-                            10A209010A209010A2090000 /* CMake PostBuild Rules */,
+                            10A1C5010A1C5010A1C50000 /* CMake ReRun */,
+                            10A182010A182010A1820000 /* Sources */,
+                            10A231010A231010A2310000 /* CMake PostBuild Rules */,
                      );
                      buildRules = (
                      );
                      dependencies = (
-                            10B0AE010B0AE010B0AE0000 /* PBXTargetDependency */,
+                            10B14C010B14C010B14C0000 /* PBXTargetDependency */,
                      );
                      name = WorldModelDemo;
                      productName = WorldModelDemo;
-                     productReference = 10AFF6010AFF6010AFF60000 /* WorldModelDemo */;
+                     productReference = 10B01D010B01D010B01D0000 /* WorldModelDemo */;
                      productType = "com.apple.product-type.tool";
               };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-              104DE60104DE60104DE60000 /* Project object */ = {
+              104E0D0104E0D0104E0D0000 /* Project object */ = {
                      isa = PBXProject;
                      attributes = {
                             BuildIndependentTargetsInParallel = YES;
                      };
-                     buildConfigurationList = 104E820104E820104E820000 /* Build configuration list for PBXProject  "KinematicModel" */;
+                     buildConfigurationList = 104EA90104EA90104EA90000 /* Build configuration list for PBXProject  "KinematicModel" */;
                      buildSettings = {
                      };
                      buildStyles = (
-                            104485010448501044850000 /* Debug */,
-                            10193D010193D010193D0000 /* Release */,
-                            104903010490301049030000 /* MinSizeRel */,
-                            10474E010474E010474E0000 /* RelWithDebInfo */,
+                            1044AC01044AC01044AC0000 /* Debug */,
+                            101964010196401019640000 /* Release */,
+                            10492A010492A010492A0000 /* MinSizeRel */,
+                            104775010477501047750000 /* RelWithDebInfo */,
                      );
                      compatibilityVersion = "Xcode 3.1";
                      hasScannedForEncodings = 0;
-                     mainGroup = 1043A601043A601043A60000;
+                     mainGroup = 1043CD01043CD01043CD0000;
                      projectDirPath = "../../../../src/VirtualSkinLibrary/KinematicModel";
                      projectRoot = "";
                      targets = (
-                            105033010503301050330000 /* ALL_BUILD */,
-                            105E640105E640105E640000 /* install */,
-                            108F410108F410108F410000 /* KinematicModel */,
-                            10A26E010A26E010A26E0000 /* WorldModelDemo */,
+                            10505A010505A010505A0000 /* ALL_BUILD */,
+                            105E8B0105E8B0105E8B0000 /* install */,
+                            108F680108F680108F680000 /* KinematicModel */,
+                            10A29F010A29F010A29F0000 /* WorldModelDemo */,
                      );
               };
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-              104FBC0104FBC0104FBC0000 /*  */ = {
+              104FE30104FE30104FE30000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -456,7 +456,7 @@
                      shellScript = "# shell script goes here
 exit 0";
               };
-              105055010505501050550000 /* CMake ReRun */ = {
+              10507C010507C010507C0000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -466,7 +466,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              1050C201050C201050C20000 /* CMake Rules */ = {
+              1050E901050E901050E90000 /* CMake Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -476,7 +476,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
               };
-              105DA60105DA60105DA60000 /*  */ = {
+              105DCD0105DCD0105DCD0000 /*  */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -490,7 +490,7 @@ exit 0";
                      shellScript = "# shell script goes here
 exit 0";
               };
-              105E810105E810105E810000 /* CMake ReRun */ = {
+              105EA80105EA80105EA80000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -500,7 +500,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              105EED0105EED0105EED0000 /* CMake PostBuild Rules */ = {
+              105F140105F140105F140000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -510,7 +510,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
               };
-              108F510108F510108F510000 /* CMake ReRun */ = {
+              108F780108F780108F780000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -520,7 +520,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              108FD70108FD70108FD70000 /* CMake Rules */ = {
+              108FFE0108FFE0108FFE0000 /* CMake Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -530,7 +530,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeScripts/KinematicModel_cmakeRulesBuildPhase.make$CONFIGURATION all";
               };
-              10903C010903C010903C0000 /* CMake PostBuild Rules */ = {
+              109086010908601090860000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -540,7 +540,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -f /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/CMakeScripts/KinematicModel_postBuildPhase.make$CONFIGURATION all";
               };
-              10A19D010A19D010A19D0000 /* CMake ReRun */ = {
+              10A1C5010A1C5010A1C50000 /* CMake ReRun */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -550,7 +550,7 @@ exit 0";
                      shellPath = /bin/sh;
                      shellScript = "make -C /Users/kail/imClever/dev/VirtualSkin2/xcode -f /Users/kail/imClever/dev/VirtualSkin2/xcode/CMakeScripts/ReRunCMake.make";
               };
-              10A209010A209010A2090000 /* CMake PostBuild Rules */ = {
+              10A231010A231010A2310000 /* CMake PostBuild Rules */ = {
                      isa = PBXShellScriptBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
@@ -563,68 +563,68 @@ exit 0";
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-              108EEE0108EEE0108EEE0000 /* Sources */ = {
+              108F150108F150108F150000 /* Sources */ = {
                      isa = PBXSourcesBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
-                            107AE60107AE60107AE60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */,
-                            107BA20107BA20107BA20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */,
-                            107C4F0107C4F0107C4F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */,
-                            107D010107D010107D010000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */,
-                            107DBA0107DBA0107DBA0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */,
-                            107E6F0107E6F0107E6F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */,
-                            107F250107F250107F250000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */,
-                            107FD20107FD20107FD20000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */,
-                            108084010808401080840000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */,
-                            10813A010813A010813A0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */,
-                            1081ED01081ED01081ED0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */,
-                            10829F010829F010829F0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */,
-                            108352010835201083520000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */,
-                            108404010840401084040000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */,
-                            1084B701084B701084B70000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */,
-                            108569010856901085690000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */,
-                            108622010862201086220000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */,
-                            1086DE01086DE01086DE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */,
-                            10878C010878C010878C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */,
-                            10883E010883E010883E0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */,
-                            1088D601088D601088D60000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */,
-                            10898E010898E010898E0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */,
-                            108A480108A480108A480000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */,
-                            108B020108B020108B020000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */,
+                            107B0D0107B0D0107B0D0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp */,
+                            107BC90107BC90107BC90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp */,
+                            107C760107C760107C760000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp */,
+                            107D280107D280107D280000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp */,
+                            107DE10107DE10107DE10000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp */,
+                            107E960107E960107E960000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp */,
+                            107F4C0107F4C0107F4C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp */,
+                            107FF90107FF90107FF90000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp */,
+                            1080AB01080AB01080AB0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp */,
+                            108161010816101081610000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp */,
+                            108214010821401082140000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp */,
+                            1082C601082C601082C60000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodyPart.cpp */,
+                            108379010837901083790000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp */,
+                            10842B010842B010842B0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp */,
+                            1084DE01084DE01084DE0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp */,
+                            108590010859001085900000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp */,
+                            108649010864901086490000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp */,
+                            108705010870501087050000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp */,
+                            1087B301087B301087B30000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zpHandler.cpp */,
+                            108865010886501088650000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp */,
+                            1088FD01088FD01088FD0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_model.cxx */,
+                            1089B501089B501089B50000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_modelwindow.cxx */,
+                            108A6F0108A6F0108A6F0000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_glwidget.cxx */,
+                            108B290108B290108B290000 /* /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/moc_robot.cxx */,
                      );
                      runOnlyForDeploymentPostprocessing = 0;
               };
-              10A15A010A15A010A15A0000 /* Sources */ = {
+              10A182010A182010A1820000 /* Sources */ = {
                      isa = PBXSourcesBuildPhase;
                      buildActionMask = 2147483647;
                      files = (
-                            109FC40109FC40109FC40000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */,
-                            10A074010A074010A0740000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */,
+                            109FEC0109FEC0109FEC0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp */,
+                            10A09C010A09C010A09C0000 /* /Users/kail/imClever/dev/VirtualSkin2/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectSoup.cpp */,
                      );
                      runOnlyForDeploymentPostprocessing = 0;
               };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-              10B0AE010B0AE010B0AE0000 /* PBXTargetDependency */ = {
+              10B0D5010B0D5010B0D50000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 108F410108F410108F410000 /* KinematicModel */;
-                     targetProxy = 10B05F010B05F010B05F0000 /* PBXContainerItemProxy */;
+                     target = 10A29F010A29F010A29F0000 /* WorldModelDemo */;
+                     targetProxy = 10B086010B086010B0860000 /* PBXContainerItemProxy */;
               };
-              10B125010B125010B1250000 /* PBXTargetDependency */ = {
+              10B14C010B14C010B14C0000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 10A26E010A26E010A26E0000 /* WorldModelDemo */;
-                     targetProxy = 10B0D6010B0D6010B0D60000 /* PBXContainerItemProxy */;
+                     target = 108F680108F680108F680000 /* KinematicModel */;
+                     targetProxy = 10B0FD010B0FD010B0FD0000 /* PBXContainerItemProxy */;
               };
-              10B1A9010B1A9010B1A90000 /* PBXTargetDependency */ = {
+              10B1D0010B1D0010B1D00000 /* PBXTargetDependency */ = {
                      isa = PBXTargetDependency;
-                     target = 105033010503301050330000 /* ALL_BUILD */;
-                     targetProxy = 10B14D010B14D010B14D0000 /* PBXContainerItemProxy */;
+                     target = 10505A010505A010505A0000 /* ALL_BUILD */;
+                     targetProxy = 10B174010B174010B1740000 /* PBXContainerItemProxy */;
               };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-              104E990104E990104E990000 /* Debug */ = {
+              104EC00104EC00104EC00000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -634,7 +634,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              104EB30104EB30104EB30000 /* Release */ = {
+              104EDA0104EDA0104EDA0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -644,7 +644,7 @@ exit 0";
                      };
                      name = Release;
               };
-              104ED00104ED00104ED00000 /* MinSizeRel */ = {
+              104EF70104EF70104EF70000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -654,7 +654,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              104EF50104EF50104EF50000 /* RelWithDebInfo */ = {
+              104F1C0104F1C0104F1C0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             ARCHS = "$(ARCHS_STANDARD_32_BIT) ";
@@ -664,7 +664,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              105184010518401051840000 /* Debug */ = {
+              1051AB01051AB01051AB0000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -687,7 +687,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              10547C010547C010547C0000 /* Release */ = {
+              1054A301054A301054A30000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -710,7 +710,7 @@ exit 0";
                      };
                      name = Release;
               };
-              10576B010576B010576B0000 /* MinSizeRel */ = {
+              105792010579201057920000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -733,7 +733,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              105A5C0105A5C0105A5C0000 /* RelWithDebInfo */ = {
+              105A830105A830105A830000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -756,7 +756,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              105FA80105FA80105FA80000 /* Debug */ = {
+              105FCF0105FCF0105FCF0000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -779,7 +779,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              1062B201062B201062B20000 /* Release */ = {
+              1062D901062D901062D90000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -802,7 +802,7 @@ exit 0";
                      };
                      name = Release;
               };
-              1065A301065A301065A30000 /* MinSizeRel */ = {
+              1065CA01065CA01065CA0000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -825,7 +825,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              106894010689401068940000 /* RelWithDebInfo */ = {
+              1068BB01068BB01068BB0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             FRAMEWORK_SEARCH_PATHS = (/Library/Frameworks, );
@@ -848,7 +848,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              109111010911101091110000 /* Debug */ = {
+              109139010913901091390000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/Debug;
@@ -876,7 +876,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              109454010945401094540000 /* Release */ = {
+              10947C010947C010947C0000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/Release;
@@ -904,7 +904,7 @@ exit 0";
                      };
                      name = Release;
               };
-              109513010951301095130000 /* MinSizeRel */ = {
+              10953B010953B010953B0000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/MinSizeRel;
@@ -932,7 +932,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              109951010995101099510000 /* RelWithDebInfo */ = {
+              109979010997901099790000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/RelWithDebInfo;
@@ -960,7 +960,7 @@ exit 0";
                      };
                      name = RelWithDebInfo;
               };
-              10A2F3010A2F3010A2F30000 /* Debug */ = {
+              10A31D010A31D010A31D0000 /* Debug */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/Debug;
@@ -988,7 +988,7 @@ exit 0";
                      };
                      name = Debug;
               };
-              10A3B7010A3B7010A3B70000 /* Release */ = {
+              10A3E1010A3E1010A3E10000 /* Release */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/Release;
@@ -1016,7 +1016,7 @@ exit 0";
                      };
                      name = Release;
               };
-              10A963010A963010A9630000 /* MinSizeRel */ = {
+              10A98C010A98C010A98C0000 /* MinSizeRel */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/MinSizeRel;
@@ -1044,7 +1044,7 @@ exit 0";
                      };
                      name = MinSizeRel;
               };
-              10AC91010AC91010AC910000 /* RelWithDebInfo */ = {
+              10ACBA010ACBA010ACBA0000 /* RelWithDebInfo */ = {
                      isa = XCBuildConfiguration;
                      buildSettings = {
                             CONFIGURATION_BUILD_DIR = /Users/kail/imClever/dev/VirtualSkin2/xcode/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/RelWithDebInfo;
@@ -1075,62 +1075,62 @@ exit 0";
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-              104E820104E820104E820000 /* Build configuration list for PBXProject  "KinematicModel" */ = {
+              104EA90104EA90104EA90000 /* Build configuration list for PBXProject  "KinematicModel" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            104E990104E990104E990000 /* Debug */,
-                            104EB30104EB30104EB30000 /* Release */,
-                            104ED00104ED00104ED00000 /* MinSizeRel */,
-                            104EF50104EF50104EF50000 /* RelWithDebInfo */,
+                            104EC00104EC00104EC00000 /* Debug */,
+                            104EDA0104EDA0104EDA0000 /* Release */,
+                            104EF70104EF70104EF70000 /* MinSizeRel */,
+                            104F1C0104F1C0104F1C0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              10515D010515D010515D0000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+              105184010518401051840000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            105184010518401051840000 /* Debug */,
-                            10547C010547C010547C0000 /* Release */,
-                            10576B010576B010576B0000 /* MinSizeRel */,
-                            105A5C0105A5C0105A5C0000 /* RelWithDebInfo */,
+                            1051AB01051AB01051AB0000 /* Debug */,
+                            1054A301054A301054A30000 /* Release */,
+                            105792010579201057920000 /* MinSizeRel */,
+                            105A830105A830105A830000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              105F670105F670105F670000 /* Build configuration list for PBXAggregateTarget "install" */ = {
+              105F8E0105F8E0105F8E0000 /* Build configuration list for PBXAggregateTarget "install" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            105FA80105FA80105FA80000 /* Debug */,
-                            1062B201062B201062B20000 /* Release */,
-                            1065A301065A301065A30000 /* MinSizeRel */,
-                            106894010689401068940000 /* RelWithDebInfo */,
+                            105FCF0105FCF0105FCF0000 /* Debug */,
+                            1062D901062D901062D90000 /* Release */,
+                            1065CA01065CA01065CA0000 /* MinSizeRel */,
+                            1068BB01068BB01068BB0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              1090C101090C101090C10000 /* Build configuration list for PBXNativeTarget "KinematicModel" */ = {
+              1090F601090F601090F60000 /* Build configuration list for PBXNativeTarget "KinematicModel" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            109111010911101091110000 /* Debug */,
-                            109454010945401094540000 /* Release */,
-                            109513010951301095130000 /* MinSizeRel */,
-                            109951010995101099510000 /* RelWithDebInfo */,
+                            109139010913901091390000 /* Debug */,
+                            10947C010947C010947C0000 /* Release */,
+                            10953B010953B010953B0000 /* MinSizeRel */,
+                            109979010997901099790000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
-              10A2B9010A2B9010A2B90000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */ = {
+              10A2D0010A2D0010A2D00000 /* Build configuration list for PBXNativeTarget "WorldModelDemo" */ = {
                      isa = XCConfigurationList;
                      buildConfigurations = (
-                            10A2F3010A2F3010A2F30000 /* Debug */,
-                            10A3B7010A3B7010A3B70000 /* Release */,
-                            10A963010A963010A9630000 /* MinSizeRel */,
-                            10AC91010AC91010AC910000 /* RelWithDebInfo */,
+                            10A31D010A31D010A31D0000 /* Debug */,
+                            10A3E1010A3E1010A3E10000 /* Release */,
+                            10A98C010A98C010A98C0000 /* MinSizeRel */,
+                            10ACBA010ACBA010ACBA0000 /* RelWithDebInfo */,
                      );
                      defaultConfigurationIsVisible = 0;
                      defaultConfigurationName = Debug;
               };
 /* End XCConfigurationList section */
        };
-       rootObject = 104DE60104DE60104DE60000;
+       rootObject = 104E0D0104E0D0104E0D0000;
 }

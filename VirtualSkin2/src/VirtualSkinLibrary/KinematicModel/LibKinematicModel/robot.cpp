@@ -8,7 +8,9 @@ Robot::Robot( Model* m, DT_RespTableHandle t ) : model(m),
 												responseTable(t),
 												robotName("unNamedRobot"),
 												numLinks(0),
-												isConfigured(false)
+												isConfigured(false),
+												numCollisions(0),
+												numReflexCollisions(0)
 {
 	if ( !t ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
@@ -185,12 +187,27 @@ void Robot::updatePose()
         (*i)->update(T);
     }
 	//emit changedState();
+}
 
+void Robot::emitState()
+{
+	emit collisions(numCollisions);
+	numCollisions = 0;
+	
+	
+	emit reflexCollisions( numReflexCollisions );
+	numReflexCollisions = 0;
+	
+	RobotObservation obs = observe();
+	emit observation(obs);
+}
+
+RobotObservation Robot::observe()
+{
+	RobotObservation obs;
 	unsigned int m, mc = markers.size();
 	if (mc > 0)
 	{
-		// observe the markers
-		RobotObservation obs;
 		obs.m_markerName.resize(mc);
 		obs.m_markerConfiguration.resize(mc);
 		for (m=0; m<mc; m++)
@@ -198,10 +215,9 @@ void Robot::updatePose()
 			obs.m_markerName[m] = markers[m]->name();
 			obs.m_markerConfiguration[m] = markers[m]->object()->getT();
 		}
-		emit observation(obs);
 	}
+	return obs;
 }
-
 /*void Robot::render()
 {
 	QMutexLocker locker(&mutex);
@@ -280,6 +296,20 @@ int Robot::getNumPrimitives()
 	printf(" num primitives: %d\n", result );
 	return result;
 }
+
+/*bool Robot::isColliding() const
+{
+	QVector<KinTreeNode*>::const_iterator i;
+    for ( i=tree.begin(); i!=tree.end(); ++i )
+	{
+        if ( (*i)->isColliding() )
+		{
+			return true;
+		}
+    }
+	return false;
+}*/
+
 /*
 void Robot::printLinks()
 {

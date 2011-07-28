@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'model.h'
 **
-** Created: Fri Jul 22 13:16:25 2011
+** Created: Thu Jul 28 13:26:46 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,21 +23,20 @@ static const uint qt_meta_data_KinematicModel__Model[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       3,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       23,   22,   22,   22, 0x05,
       56,   22,   22,   22, 0x05,
      100,   89,   22,   22, 0x05,
-     119,   22,   22,   22, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     141,   22,   22,   22, 0x0a,
+     119,   22,   22,   22, 0x0a,
 
        0        // eod
 };
@@ -47,7 +46,7 @@ static const char qt_meta_stringdata_KinematicModel__Model[] = {
     "addedPrimitive(PrimitiveObject*)\0"
     "removedPrimitive(GL_DisplayList)\0"
     "collisions\0computedState(int)\0"
-    "encounteredObstacle()\0renderWorld()\0"
+    "renderWorld()\0"
 };
 
 const QMetaObject KinematicModel::Model::staticMetaObject = {
@@ -82,11 +81,10 @@ int KinematicModel::Model::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: addedPrimitive((*reinterpret_cast< PrimitiveObject*(*)>(_a[1]))); break;
         case 1: removedPrimitive((*reinterpret_cast< GL_DisplayList(*)>(_a[1]))); break;
         case 2: computedState((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: encounteredObstacle(); break;
-        case 4: renderWorld(); break;
+        case 3: renderWorld(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }
@@ -110,11 +108,5 @@ void KinematicModel::Model::computedState(int _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
-}
-
-// SIGNAL 3
-void KinematicModel::Model::encounteredObstacle()
-{
-    QMetaObject::activate(this, &staticMetaObject, 3, 0);
 }
 QT_END_MOC_NAMESPACE

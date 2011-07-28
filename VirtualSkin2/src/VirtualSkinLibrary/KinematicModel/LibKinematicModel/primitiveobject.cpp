@@ -2,7 +2,7 @@
 
 using namespace KinematicModel;
 
-PrimitiveObject::PrimitiveObject() : /*deathWish(false),*/ solidShape(NULL), solidObject(NULL), displayList(0), listPending(false)
+PrimitiveObject::PrimitiveObject() : /*deathWish(false),*/ parentObject(NULL), solidShape(NULL), solidObject(NULL), displayList(0), listPending(false)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
 		 freeColor[0] = 0.9;	  freeColor[1] = 0.9;	   freeColor[2] = 0.9;	    freeColor[3] = 0.5; 
