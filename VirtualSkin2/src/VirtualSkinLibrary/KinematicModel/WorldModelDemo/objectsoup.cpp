@@ -50,12 +50,9 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 	KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
 	
 	// choose a random color for the object
-	GLfloat collidingColor[4] = { (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, 0.5 };
-	GLfloat freeColor[4];
-	freeColor[0] = collidingColor[0];
-	freeColor[1] = collidingColor[1];
-	freeColor[2] = collidingColor[2];
-	freeColor[3] = 1.0;
+	QColor collidingColor = QColor( (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, 0.5 );
+	QColor freeColor = collidingColor;
+	freeColor.setAlphaF( 1.0 );
 	
 	// choose a random number of primitives to append to the object 1 to 5 inclusive
 	int numPrimitives =  (qrand() % 6 + 1);
@@ -80,7 +77,7 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 			default:
 				break;
 		}
-		primitive->setCollidingColor(collidingColor);
+		primitive->setCollidingColor( collidingColor );
 		primitive->setFreeColor(freeColor);
 		primitive->translate(randomTranslation(0.1));
 		primitive->cartesianRotate(randomRotation());

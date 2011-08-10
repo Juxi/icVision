@@ -13,6 +13,8 @@
 #include <QMutex>
 #include <QTime>
 #include <qgl.h>
+#include <QColor>
+
 #include <SOLID.h>
 #include "modelconstants.h"
 #include "transformable.h"
@@ -42,7 +44,11 @@ public:
 	PrimitiveObject();				//!< Nothing special to do here
 	virtual ~PrimitiveObject();		//!< Nothing special to do here
 	
+	void setIdx( uint i ) { index = i; }
+	uint idx() { return index; }
+	
 	void setName( const QString& aName ) { name = aName; }		//!< Sets a human readable name for the primitive
+	QString getName() const;
 	
 	void setListPending( bool b );
 	bool listIsPending() const  { return listPending; }
@@ -61,8 +67,8 @@ public:
 	DT_ObjectHandle getSolidObjectHandle() { return solidObject; }
 	GL_DisplayList	getDisplayList() { return displayList; }
 	
-	void setCollidingColor( GLfloat color[4] );
-	void setFreeColor( GLfloat color[4] );
+	void setCollidingColor( QColor color );
+	void setFreeColor( QColor color );
 	
 	void setCompositeObject( CompositeObject* o ) { parentObject = o; }
 	CompositeObject* getCompositeObject() { return parentObject; }
@@ -72,6 +78,7 @@ public:
 	
 protected:
 	
+	uint				index;
 	QString				name;			//!< A human readable name for the primitive
 	CompositeObject*	parentObject;
 	GeomType			geomType;		//!< Sphere, cylinder, or box

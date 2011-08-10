@@ -189,17 +189,18 @@ void Robot::updatePose()
 	//emit changedState();
 }
 
-void Robot::emitState()
+void Robot::publishState()
 {
 	emit collisions(numCollisions);
 	numCollisions = 0;
-	
 	
 	emit reflexCollisions( numReflexCollisions );
 	numReflexCollisions = 0;
 	
 	RobotObservation obs = observe();
 	emit observation(obs);
+	
+	//processState();
 }
 
 RobotObservation Robot::observe()

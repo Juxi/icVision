@@ -50,9 +50,9 @@ void ReflexFilter::collisionResponse()
 		cbFilters.at(bodyPart)->injectCall(stop);
 		
 		// display histories
-		//if ( bodyPart == 0 )
-		//{
-			/*printf("  Body Part - %d:", bodyPart);
+		/*if ( bodyPart == 0 )
+		{
+			printf("  Body Part - %d:", bodyPart);
 			bpHistory = stateObservers.at(bodyPart)->getHistory();
 			printf("Body Part: %d\n", bodyPart);
 			for ( pose = bpHistory.begin(); pose != bpHistory.end(); ++pose )
@@ -63,15 +63,15 @@ void ReflexFilter::collisionResponse()
 				}
 				printf("\n");
 			}
-			printf("\n");*/
-		//}
+			printf("\n");
+		}*/
 		
 		// this is part of the smart response below that doesn't work on the hardware :-(
-		//history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory() );
+		history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory() );
 	}
 	
 	// stupid response
-	yarp::os::Bottle rewind;
+	/*yarp::os::Bottle rewind;
 	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 	{
 		rewind.clear();
@@ -83,29 +83,30 @@ void ReflexFilter::collisionResponse()
 		{
 			bodyPartPose.addDouble(*joint);
 		}
+		// INJECT COMMAND!
 		cbFilters.at(bodyPart)->injectCall(rewind);
 		printf("%s\n", rewind.toString().c_str());
 	}
-	printf("\n");
+	printf("\n");*/
 }
 
 void ReflexFilter::responseComplete()
 {
-	//yarp::os::Bottle rewind;
-	//QVector<qreal>::const_iterator joint;
+	yarp::os::Bottle rewind;
+	QVector<qreal>::const_iterator joint;
 	QTime safeTime;
-	//qreal period;
+	qreal period;
 
 	// this works great on the simulator, but not on the robot !?!
-	/*for ( int n = 0; n < POSE_BUFFER_SIZE; n++ )
+	for ( int n = 0; n < POSE_BUFFER_SIZE; n++ )
 	{
 		if ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT)
 		{
-			printf("Pose: %d\n",n);
+			//printf("Pose: %d\n",n);
 			period = 0.0;
-			for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
+			for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 			{
-				if ( bodyPart == 0) printf("  Body Part - %d:", bodyPart);
+				//if ( bodyPart == 0) printf("  Body Part - %d:", bodyPart);
 				rewind.clear();
 				rewind.addVocab(VOCAB_SET);
 				rewind.addVocab(VOCAB_POSITION_MOVES);
@@ -113,27 +114,27 @@ void ReflexFilter::responseComplete()
 				for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
 				{
 					bodyPartPose.addDouble(*joint);
-					if ( bodyPart == 0) printf(" %f", *joint);
+					//if ( bodyPart == 0) printf(" %f", *joint);
 				}
 				cbFilters.at(bodyPart)->injectCall(rewind);
 				period += stateObservers.at(bodyPart)->getPeriod();
-				if ( bodyPart == 0) printf("\n");
+				//if ( bodyPart == 0) printf("\n");
 			}
 			//printf("  waiting %f/%d msec\n", period, model.robot->numBodyParts());
-			period /= static_cast<qreal>(model.robot->numBodyParts());
+			period /= static_cast<qreal>(robot->numBodyParts());
 			msleep(period);
 			if ( isColliding ) { safeTime.restart(); }
 		}
 		else { break; }
-	}*/
-	
+	}
+	/*
 	// wait for stupid response to complete or for 10 seconds, whichever comes first
 	QTime timeout;
 	timeout.start();
 	while ( isColliding || safeTime.elapsed() < ALL_CLEAR_WAIT )
 	{
 		if ( isColliding ) { safeTime.restart(); }
-		if ( timeout.elapsed() > 10000 /* 10 sec */ ) { break; }
+		if ( timeout.elapsed() > 10000 ) { break; }  // 10 seconds
 		msleep(20);
-	}
+	}*/
 }

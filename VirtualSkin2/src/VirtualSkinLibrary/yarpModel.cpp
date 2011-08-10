@@ -1,15 +1,15 @@
 #include "yarpModel.h"
-//#include "kintreenode.h"
+#include "yarprobot.h"
 
 using namespace VirtualSkin;
 
-YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)
+YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)//, rpcIsOpen(false)
 {
 	worldRpcInterface.setModel(this);
+	//worldPort.setReader(rpcReader);
 }
 YarpModel::~YarpModel()
 {
-	collisionPort.close();
 	//worldPort.close();
 }
 
@@ -17,70 +17,99 @@ YarpModel::~YarpModel()
 //{
 //}
 
+YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
+{
+	printf("creating robot response table\n");
+	DT_RespTableHandle newTable = newRobotTable();
+	
+	printf("creating robot object\n");
+	YarpRobot* robot = new YarpRobot( this, newTable );
+	
+	printf("calling open robot\n");
+	robot->open( fileName, verbose );
+	robot->home( verbose );
+	
+	//responseTables.append( newTable );
+	robots.append( robot );
+	return robot;
+}
+
 void YarpModel::collisionHandlerAddendum( KinematicModel::PrimitiveObject* prim1, KinematicModel::PrimitiveObject* prim2, const DT_CollData *coll_data )
 {	
-	QString nameA = prim1->getName();		nameA.prepend("-");		nameA.prepend(prim1->getCompositeObject()->getName());
-	QString nameB = prim2->getName();		nameB.prepend("-");		nameB.prepend(prim2->getCompositeObject()->getName());
+	//QString nameA = prim1->getName();		nameA.prepend("-");		nameA.prepend(prim1->getCompositeObject()->getName());
+	//QString nameB = prim2->getName();		nameB.prepend("-");		nameB.prepend(prim2->getCompositeObject()->getName());
 	
-	yarp::os::Bottle& collision = collisionBottle.addList();
-	yarp::os::Bottle& part1 = collision.addList();
-	yarp::os::Bottle& part2 = collision.addList();
+	//printf("called collision handler addendum\n");
 	
 	KinematicModel::CompositeObject* comp1 = prim1->getCompositeObject();
-	KinematicModel::KinTreeNode* node1 = dynamic_cast<KinematicModel::KinTreeNode*>(comp1);
-	if ( node1 )
-	{
-		//part1.addString(nameA.toStdString().c_str());
-		part1.addDouble(coll_data->point1[0]);
-		part1.addDouble(coll_data->point1[1]);
-		part1.addDouble(coll_data->point1[2]);
-	}
-	else
-	{
-		if ( comp1->getResponseClass() == OBSTACLE() ) { part1.addString("OBSTACLE"); }
-		else if ( comp1->getResponseClass() == TARGET() ) { part1.addString("TARGET"); }
-	}
-	
 	KinematicModel::CompositeObject* comp2 = prim2->getCompositeObject();
+	KinematicModel::KinTreeNode* node1 = dynamic_cast<KinematicModel::KinTreeNode*>(comp1);
 	KinematicModel::KinTreeNode* node2 = dynamic_cast<KinematicModel::KinTreeNode*>(comp2);
-	if ( node2 )
-	{
-		//part2.addString(nameB.toStdString().c_str());
-		part2.addDouble(coll_data->point2[0]);
-		part2.addDouble(coll_data->point2[1]);
-		part2.addDouble(coll_data->point2[2]);
-	}
-	else
-	{
-		if ( comp2->getResponseClass() == OBSTACLE() ) { part2.addString("OBSTACLE"); }
-		else if ( comp2->getResponseClass() == TARGET() ) { part2.addString("TARGET"); }
-	}
 	
+	if ( node1 && node2 )
+	{
+		if ( node1->robot() == node2->robot() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx() , coll_data->point1[0], coll_data->point1[1], coll_data->point1[2],
+										prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]  );
+		}
+		else
+		{
+			YarpRobot* r1 = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r1) r1->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "ROBOT" );
+			
+			YarpRobot* r2 = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r2) r2->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "ROBOT" );
+		}
+	}
+	else if ( node1 )
+	{
+		if ( comp2->getResponseClass() == OBSTACLE() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "OBSTACLE" );
+		}
+		else if ( comp2->getResponseClass() == TARGET() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "TARGET" );
+		}
+	}
+	else if ( node2 )
+	{
+		if ( comp1->getResponseClass() == OBSTACLE() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r) r->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "OBSTACLE" );
+		}
+		else if ( comp1->getResponseClass() == TARGET() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r) r->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "TARGET" );
+		}
+	}
 }
 
 void YarpModel::computePosePrefix()
 {
-	
-	yarp::os::Bottle cmd,response;
-	worldPort.read(cmd,true);
-	if ( cmd.size() > 0 )
+	// clear the yarp::bottles of residual observations and collisions
+	QVector<KinematicModel::Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
 	{
-		//if (debug) { showBottle(cmd); }
-		worldRpcInterface.handler(cmd,response);
-		worldPort.reply(response);
-		//if (debug) { printf("reply: %s\n",response.toString().c_str()); }
+		YarpRobot* r = dynamic_cast<YarpRobot*>(*i);
+		if (r) { r->clearStateBottles(); }
 	}
-	
-	collisionBottle.clear();
 }
 
 void YarpModel::computePoseSuffix()
 {
-	//if ( collisionPort.isOpen() )
-	//{
-		if ( collisionBottle.size() == 0 ) { collisionBottle.addInt(0); }
-		collisionPort.write(collisionBottle);
-	//}
+	//KinematicModel::computePoseSuffix();
+	QVector<KinematicModel::Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		(*i)->publishState();
+	}
 }
 
 void YarpModel::showBottle( yarp::os::Bottle& anUnknownBottle, int indentation)

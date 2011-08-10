@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'model.h'
 **
-** Created: Thu Jul 28 13:26:46 2011
+** Created: Mon Aug 8 15:47:47 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -46,7 +46,7 @@ static const char qt_meta_stringdata_KinematicModel__Model[] = {
     "addedPrimitive(PrimitiveObject*)\0"
     "removedPrimitive(GL_DisplayList)\0"
     "collisions\0computedState(int)\0"
-    "renderWorld()\0"
+    "renderModel()\0"
 };
 
 const QMetaObject KinematicModel::Model::staticMetaObject = {
@@ -81,7 +81,7 @@ int KinematicModel::Model::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: addedPrimitive((*reinterpret_cast< PrimitiveObject*(*)>(_a[1]))); break;
         case 1: removedPrimitive((*reinterpret_cast< GL_DisplayList(*)>(_a[1]))); break;
         case 2: computedState((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: renderWorld(); break;
+        case 3: renderModel(); break;
         default: ;
         }
         _id -= 4;

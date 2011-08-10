@@ -3,6 +3,7 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 SET ( src_files	yarpModel.cpp
+		yarprobot.cpp
 		robotFilter.cpp
 			stateObserver.cpp
 			responseObserver.cpp
@@ -17,6 +18,7 @@ SET ( src_files	yarpModel.cpp
 SET ( hdr_files	constants.h
 		virtualskinexception.h
 		yarpModel.h
+		yarprobot.h
 		robotFilter.h
 			stateObserver.h
 			responseObserver.h	

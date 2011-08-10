@@ -2,7 +2,7 @@
 
 using namespace KinematicModel;
 
-PrimitiveObject::PrimitiveObject() : /*deathWish(false),*/ parentObject(NULL), solidShape(NULL), solidObject(NULL), displayList(0), listPending(false)
+PrimitiveObject::PrimitiveObject() : /*deathWish(false),*/index(0), parentObject(NULL), solidShape(NULL), solidObject(NULL), displayList(0), listPending(false)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
 		 freeColor[0] = 0.9;	  freeColor[1] = 0.9;	   freeColor[2] = 0.9;	    freeColor[3] = 0.5; 
@@ -16,6 +16,12 @@ PrimitiveObject::~PrimitiveObject()
 	if ( solidObject ) { DT_DestroyObject( solidObject ); }
 	if ( solidShape ) { DT_DeleteShape( solidShape ); }
 	//printf("deleted PrimtiveObject\n");
+}
+
+QString PrimitiveObject::getName() const
+{ 
+	if ( name != "" ) { return name; }
+	else { return QString("primitive") + QString::number(index); }
 }
 
 void PrimitiveObject::setListPending( bool b )
@@ -41,20 +47,20 @@ void PrimitiveObject::updateSolid( const QMatrix4x4& M )
 	}
 }
 
-void PrimitiveObject::setCollidingColor( GLfloat color[4] )
+void PrimitiveObject::setCollidingColor( QColor color )
 {
-	collidingColor[0] = color[0];
-	collidingColor[1] = color[1];
-	collidingColor[2] = color[2];
-	collidingColor[3] = color[3];
+	collidingColor[0] = color.redF();
+	collidingColor[1] = color.greenF();
+	collidingColor[2] = color.blueF();
+	collidingColor[3] = color.alphaF();
 }
 
-void PrimitiveObject::setFreeColor( GLfloat color[4] )
+void PrimitiveObject::setFreeColor( QColor color )
 {
-	freeColor[0] = color[0];
-	freeColor[1] = color[1];
-	freeColor[2] = color[2];
-	freeColor[3] = color[3];
+	freeColor[0] = color.redF();
+	freeColor[1] = color.greenF();
+	freeColor[2] = color.blueF();
+	freeColor[3] = color.alphaF();
 }
 
 void PrimitiveObject::render()

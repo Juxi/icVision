@@ -6,13 +6,17 @@
 using namespace std;
 using namespace KinematicModel;
 
-CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : responseClass(c),
+CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : index(0),
+																			   responseClass(c),
 																			   inModel(false), 
 																			   deathWish(false),
 																			   numSpheres(0),
 																			   numCylinders(0),
 																			   numBoxes(0)
 {
+	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
+	freeColor[0] = 0.9;		 freeColor[1] = 0.9;	  freeColor[2] = 0.9;	   freeColor[3] = 0.5; 
+	//black[0] = 0.0;		  black[0] = 0.0;		   black[0] = 0.0;			black[0] = 1.0;
 }
 
 CompositeObject::~CompositeObject()
@@ -28,6 +32,13 @@ CompositeObject::~CompositeObject()
 	}
 	//printf("deleted CompositeObject\n");
 }
+
+QString	CompositeObject::getName() const
+{
+	//printf( "index: %s", QString(index).toStdString().c_str() );
+	if ( objectName != "" ) { return objectName; }
+	else { return QString("object") + QString::number(index); }
+}				
 
 void CompositeObject::append( PrimitiveObject* primitive )
 {
@@ -53,6 +64,7 @@ void CompositeObject::append( PrimitiveObject* primitive )
 		primitive->setName(name);
 	}
 	primitive->setCompositeObject(this);
+	
 	primitives.append(primitive);
 }
 
@@ -101,6 +113,24 @@ void CompositeObject::updateSolid()
 	{
         (*i)->updateSolid(T);
     }
+}
+
+void CompositeObject::setCollidingColor( QColor c )
+{ 
+	QVector<PrimitiveObject*>::const_iterator i;
+	for ( i=primitives.begin(); i!=primitives.end(); ++i )
+	{
+		(*i)->setCollidingColor(c);
+	}
+}
+
+void CompositeObject::setFreeColor( QColor c )
+{ 
+	QVector<PrimitiveObject*>::const_iterator i;
+	for ( i=primitives.begin(); i!=primitives.end(); ++i )
+	{
+		(*i)->setFreeColor(c);
+	}
 }
 
 void CompositeObject::render()

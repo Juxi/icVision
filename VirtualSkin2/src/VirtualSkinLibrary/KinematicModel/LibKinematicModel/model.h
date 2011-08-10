@@ -46,7 +46,7 @@ class KinematicModel::Model : public QThread
 	Q_OBJECT
 
 public:
-	Model( bool visualize = 0, bool v = true );	//!< Sets the default collision response for SOLID to DT_WITNESSED_RESPONSE
+	Model( bool visualize = 0, bool verbse = true );	//!< Sets the default collision response for SOLID to DT_WITNESSED_RESPONSE
 									/**< \param visualize If true, a SkinWindow (with its associated GLWidget) is constructed and its signals and slots are
 										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
 	virtual ~Model();				//!< Nothing special to do here
@@ -61,10 +61,15 @@ public:
 	
 	//void appendRobotObject( CompositeObject* );
 	void appendObject( KinTreeNode* );
-	void appendObject( CompositeObject* );	// to remove objects use CompositeObject.kill()
+	void appendObject( CompositeObject* );	
+	CompositeObject*	removeWorldObject( CompositeObject* );
+	void clearTheWorld();
 	
-	Robot* loadRobot( const QString& fileName, bool verbose = true );
-	void loadWorld( const QString& fileName, bool verbose = true );
+	QVector< QString > listWorldObjects();
+	CompositeObject* getObject( const QString& name );
+	
+	Robot*	loadRobot( const QString& fileName, bool verbose = true );
+	void	loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }
 	DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }
@@ -83,7 +88,7 @@ public:
 	
 public slots:
 	
-	void renderWorld();
+	void renderModel();
 	
 signals:
 	
@@ -98,23 +103,25 @@ protected:
 	bool encObstacle;
 	bool verbose;
 	
+	QVector<DT_RespTableHandle> responseTables;
+	
 	QVector<Robot*> robots;
 	QVector<CompositeObject*> world;
 	
 	void cleanTheWorld();
 	void updateWorldState();
 	void fwdKin();
-	void emitRobotStates();
+	//void emitRobotStates();
 	
 	//Robot*				removeRobot( Robot* );
-	CompositeObject*	removeWorldObject( CompositeObject* );
+	
 	void run();				//!< Allows a thread to call computePose() periodically
 							/**< \note IMPORTANT: Call start() not run() !!! */
 	
 	
 	//virtual void onStartUp() {}
 	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
-	virtual void computePoseSuffix() {}								//!< This is executed by computePose() just after collision detection is computed
+	virtual void computePoseSuffix();								//!< This is executed by computePose() just after collision detection is computed
 	virtual void collisionHandlerAddendum( PrimitiveObject*,		//!< This is executed by collisionHandler() just before it returns
 										   PrimitiveObject*,
 										   const DT_CollData* ) {}	
@@ -124,13 +131,14 @@ private:
 	ModelWindow	*modelWindow;	//! The visualization
 	
 	DT_SceneHandle				scene;
-	QVector<DT_RespTableHandle> responseTables;
 	
 	//DT_ResponseClass worldCriticalClass;		//!< triggers reflex response against all other objects
 	DT_ResponseClass obstacleClass;		//!< objects in this response class trigger reflexes
 	DT_ResponseClass targetClass;		//!< these don't
 	//DT_ResponseClass robotCriticalClass;		//!< triggers reflex response against all other objects
 	DT_ResponseClass robotClass;		//!< these belong to the robot's body
+	
+	uint numObjects, numPrimitives;
 	
 	QMutex mutex;
 
@@ -154,6 +162,7 @@ private:
 
 		Model* detector = (Model*)client_data;
 		detector->col_count++;
+		
 		detector->collisionHandlerAddendum( prim1, prim2, coll_data );
 		
 		return DT_CONTINUE;

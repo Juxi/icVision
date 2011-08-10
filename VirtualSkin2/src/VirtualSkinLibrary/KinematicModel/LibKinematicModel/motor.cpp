@@ -50,6 +50,7 @@ void Motor::setNormPos( qreal pos )
 	else if ( pos > 1 ) { pos = 1; }
 		
 	normalPosition = pos;
+	encoderPosition = minPos() + normalPosition * (maxPos() - minPos()); /***********/
 	setJointPositions();
 }
 void Motor::home(bool verbose)
@@ -75,7 +76,7 @@ void Motor::print()
          QVector<Joint*>::iterator i;
          for ( i=begin(); i!=end(); ++i )
 		 {
-			 printf("%i ", (*i)->idx());
+			 //printf("%i ", (*i)->idx());
          }
 	printf("\n");
     printf("    ======================================\n");

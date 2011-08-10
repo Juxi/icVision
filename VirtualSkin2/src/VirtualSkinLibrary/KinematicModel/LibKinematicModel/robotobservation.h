@@ -45,8 +45,10 @@ public:
 
 	inline unsigned int getNumMarkers() const						//!< return the number of part markers
 	{ return m_markerConfiguration.size(); }
+	
 	inline QMatrix4x4 const& markerConfiguration(unsigned int index) const	//!< return the marker configuration given an index
 	{ return m_markerConfiguration[index]; }
+	
 	inline QString markerName(unsigned int index) const				//!< return the part marker name given an index
 	{ return m_markerName[index]; }
 

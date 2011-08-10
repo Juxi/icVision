@@ -7,8 +7,8 @@
  *	@{
  */
 
-#ifndef KINTREE_H
-#define KINTREE_H
+#ifndef ROBOT_H
+#define ROBOT_H
 
 #include <QMutex>
 //#include "renderList.h"
@@ -49,8 +49,10 @@ public:
 	
 	void addCollision() { numCollisions++; }
 	void addReflexCollision() { numReflexCollisions++; }
+	
 	RobotObservation observe();
-	void emitState();										// emit signals for observations and reflexes
+	
+	virtual void publishState();										// emit signals for observations and reflexes
 	
 	// generic 'get' functions that may be useful
 	const Model* getModel() const { return model; }
@@ -134,6 +136,8 @@ private:
 	int getNumPrimitives();
 	
 	//void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
+	
+	//virtual void processState() {}
 	
 	/*** FRIENDS  ***/
 	friend class BodyPart;

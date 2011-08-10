@@ -17,6 +17,7 @@
 namespace VirtualSkin
 {
 	class YarpModel;
+	class YarpRobot;
 	class WorldRpcInterface;
 }
 
@@ -37,14 +38,11 @@ public:
 	YarpModel( bool visualize = false );	//!< Connects the WorldRpcInterface to the RobotModel::World and calls the super-class constructor	
 	~YarpModel();							//!< Just stops the YARP port if its running
 
-	void openCollisionPort( const QString& name ) { collisionPort.open(name.toStdString().c_str()); }	//!< Starts a YARP Port that streams the results of collision detection (see \ref yarpPorts)
-	void closeCollisionPort() { collisionPort.close(); }												//!< Close the port that streams collision information
+	YarpRobot* loadYarpRobot( const QString& fileName, bool verbose );
 	
-	void openWorldRpcPort( const QString& name ) { worldPort.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
-	void closeWorldRpcPort() { worldPort.close(); }														//!< Closes the RPC interface to the RobotModel::Model
-	
-	// open marker port
-	// close marker port
+	void openWorldRpcPort( const QString& name ) { worldRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	void closeWorldRpcPort() { worldRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	//bool WorldRpcPortIsOpen() { return rpcIsOpen; }
 	
 	void showBottle( yarp::os::Bottle& anUnknownBottle, int indentation = 0 );			//!< Print a yarp::os::bottle to the terminal
 	
@@ -56,10 +54,13 @@ private:
 								   KinematicModel::PrimitiveObject*,
 								   const DT_CollData* );				//!< This puts the results of collision detection into the yarp::os::bottle bottle
 
-	yarp::os::Network	yarp;				//!< Identifies the yarp network
-	yarp::os::RpcServer	worldPort;
-	yarp::os::Port		collisionPort;		//!< 
-	yarp::os::Bottle	collisionBottle;	//!< The bottle containing the collision information, that is streamed by collisionPort
+	//yarp::os::Network	yarp;				//!< Identifies the yarp network
+	//yarp::os::RpcServer	worldPort;
+	//WorldRpcReader		rpcReader;
+	//bool				rpcIsOpen;
+	
+	//yarp::os::Bottle	response;
+	
 	
 	WorldRpcInterface	worldRpcInterface;		//!< The YARP RPC port that provides an interface to the RobotModel::World
 	

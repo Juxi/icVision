@@ -2,7 +2,7 @@
 #include <yarp/os/Property.h>
 
 //#include "model.h"
-#include "robot.h"
+#include "yarprobot.h"
 #include "yarpModel.h"
 #include "reflexFilter.h"
 #include "worldRpcInterface.h"
@@ -31,42 +31,53 @@ int main(int argc, char *argv[])
 		
 		// print the configuration to the console
 		printf("Launching Virtual Skin... \n");
-		if ( visualize ) { printf("  ...with visualization\n"); }
-		else { printf("  ...without visualization\n"); }
+		if ( visualize ) {	printf("  ...with visualization\n");		}
+		else {				printf("  ...without visualization\n");		}
 	/***********************************************************************/
 	
 	// Create the QApplication
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
-	VirtualSkin::YarpModel* model = NULL;
-	KinematicModel::Robot* robot = NULL;
-	ReflexFilter* filter = NULL;
+	VirtualSkin::YarpModel* yarpModel = NULL;
+	VirtualSkin::YarpRobot* yarpRobot = NULL;
+	ReflexFilter*			filter	  = NULL;
 	
 	try
 	{
-		model = new VirtualSkin::YarpModel( visualize );
-		model->openCollisionPort("/collisions");
-		model->start();						/*	if we want display lists to be created automatically,
-												the model must be started prior to appending objects by
-												calling loadWorld(), loadRobot(), or appendObject()		*/
+		yarpModel = new VirtualSkin::YarpModel( visualize );
+		yarpModel->start();	/*	if we want display lists to be created automatically,
+								the model must be started prior to appending objects by
+								calling loadWorld(), loadRobot(), or appendObject()		*/
+		
+		// Load a world model from file
 		if ( worldFile != "" )
 		{
 			printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
-			model->loadWorld( worldFile, false );
+			yarpModel->loadWorld( worldFile, false );
 		}
+		
+		// Open the RPC interface to the world model
+		printf("opening world RPC port\n");
+		yarpModel->openWorldRpcPort("/world");
+		
+		
+		// Load a robot model from file
 		
 		if ( robotFile != "" )
 		{
 			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
-			robot = model->loadRobot( robotFile, false );
+			yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
+			yarpRobot->openCollisionPort("/collisions");
+			yarpRobot->openObservationPort("/observations");
 			
 			sleep(1);
 			
-			printf( "  ...opening robot filter for '%s'\n", robot->getName().toStdString().c_str() );
-			filter = new ReflexFilter( robot, visualize );
-			filter->open< VirtualSkin::StateObserver,
-						  VirtualSkin::CallObserver,
-						  VirtualSkin::ResponseObserver >(); 
+			// Enable Virtual Skin for the robot model
+			/**/
+			 printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
+			filter = new ReflexFilter( yarpRobot, visualize );
+			filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
+			 
 		}
 	}
 	
@@ -83,11 +94,12 @@ int main(int argc, char *argv[])
 	printf("Result = %d\n", result);
 
 	if ( filter ) { filter->close(); }
-	if ( model ) { model->stop(); }
-	
 	delete filter;
-	delete robot;
-	delete model;
+	
+	if ( yarpModel ) { yarpModel->stop(); }
+	delete yarpModel;
+	
+	//delete yarpRobot;
 
     return result;
 }

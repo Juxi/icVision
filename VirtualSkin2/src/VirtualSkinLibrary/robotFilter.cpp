@@ -126,6 +126,53 @@ void RobotFilter::run()
 	if ( isColliding )
 	{
 		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
+
+		/* */
+		yarp::os::Bottle torso,head,arm;
+		torso.addVocab(VOCAB_SET);
+		torso.addVocab(VOCAB_POSITION_MOVES);
+		yarp::os::Bottle& pTorso = torso.addList();
+		pTorso.addDouble(0.0);
+		pTorso.addDouble(0.0);
+		pTorso.addDouble(0.0);
+		
+		head.addVocab(VOCAB_SET);
+		head.addVocab(VOCAB_POSITION_MOVES);
+		yarp::os::Bottle& pHead = head.addList();
+		pHead.addDouble(0.0);
+		pHead.addDouble(0.0);
+		pHead.addDouble(0.0);
+		pHead.addDouble(0.0);
+		pHead.addDouble(0.0);
+		pHead.addDouble(0.0);
+		
+		arm.addVocab(VOCAB_SET);
+		arm.addVocab(VOCAB_POSITION_MOVES);
+		yarp::os::Bottle& pArm = arm.addList();
+		pArm.addDouble(-26.0);
+		pArm.addDouble(20.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(50.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+		pArm.addDouble(0.0);
+
+		cbFilters.at(0)->injectCall(torso);
+		cbFilters.at(1)->injectCall(head);
+		cbFilters.at(2)->injectCall(arm);
+		cbFilters.at(3)->injectCall(arm);
+		
+		printf("sent 'home' command\n");
+		
 	}
 	while ( isColliding )
 	{

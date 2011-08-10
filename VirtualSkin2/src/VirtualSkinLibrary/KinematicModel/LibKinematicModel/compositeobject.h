@@ -48,11 +48,17 @@ public:
 	
 	//virtual bool	isColliding();
 	
-	void			setName( const QString& aName ) { objectName = aName; }	//!< Set a human readable identifier for the physical object
-	const QString&	getName() const { return objectName; }						//!< Return a human readable identifier for the physical object
+	void setIdx( uint i ) { index = i; }
+	uint idx() { return index; }
+	
+	void	setName( const QString& aName ) { objectName = aName; }	//!< Set a human readable identifier for the physical object
+	QString	getName() const;										//!< Return a human readable identifier for the physical object
 	
 	void				setResponseClass( DT_ResponseClass c ) { responseClass = c; }
 	DT_ResponseClass	getResponseClass() const { return responseClass; }
+	
+	void setCollidingColor( QColor color );
+	void setFreeColor( QColor color );
 	
 	void append( PrimitiveObject* primitive );	//!< Append a PrimitiveObject to the CompositeObject
 	bool remove( PrimitiveObject* primitive );	//!< Remove a PrimitiveObject from the CompositeObject and delete that primitive
@@ -77,10 +83,14 @@ public:
 	
 protected:
 	
+	uint				index;
 	QString				objectName;				//!< A human readable identifier for the object
 	DT_ResponseClass	responseClass;
 	bool				inModel;
 	bool				deathWish;
+	
+	GLfloat collidingColor[4];
+	GLfloat freeColor[4];
 	
 	QVector<PrimitiveObject*> primitives;
 

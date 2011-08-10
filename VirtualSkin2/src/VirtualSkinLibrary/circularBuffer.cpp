@@ -63,8 +63,10 @@ QVector< QVector<qreal> > CircularBuffer::getHistory()
 	
 	while ( count < buffer.size() )
 	{
-		--j;
-		history.append(*i);
+		if ( j == buffer.begin() ) { j = buffer.end() - 1; }
+		else { --j; }
+		
+		history.append(*j);
 		count++;
 	}
 	

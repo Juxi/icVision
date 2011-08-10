@@ -53,11 +53,11 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
             errorStr = "Encountered nested <object> tags.";
             return 0;
         }
-		else if ( attributes.value("name").isEmpty() )
+		/*else if ( attributes.value("name").isEmpty() )
 		{ 
 			errorStr = "<object> tag must have a 'name' property. Uniqueness is not checked.";
 			return 0;
-		}
+		}*/
 		else
 		{
 			if ( attributes.value("type").isEmpty() || attributes.value("type").toStdString() == "obstacle" )
@@ -80,6 +80,8 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 			qreal rotAngle = attributes.value("angle").toDouble()*M_PI/180;
 			if ( qFuzzyIsNull( heightAxis.length() ) ) { heightAxis.setY(1); }
 			
+			
+			obj->setName( attributes.value("name") );
 			obj->setSpecialEulerOrientation( heightAxis, rotAngle );
 			obj->translate(position);
 		}

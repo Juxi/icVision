@@ -16,7 +16,7 @@
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>
 
-<object name="walls">
+<object name="">
     <box width=".005" depth="1" height=".71" px=".355"/>
     <box width="1" depth="1" height=".005" px="-.145" py=".355"/>
     <box width="1" depth="1" height=".005" px="-.145" py="-.355"/>

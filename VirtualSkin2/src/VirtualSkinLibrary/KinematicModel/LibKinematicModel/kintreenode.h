@@ -51,7 +51,7 @@ public:
 
 	KinTreeNode* parent() const { return parentNode; }								//!< Returns the parent KinTreeNode of this object in the kinematic tree structure
 	Robot* robot() const { return parentRobot; }									//!< Returns the Robot to which this KinTreeNode belongs
-	const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
+	//const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
 	
 	NodeType getNodeType() const { return nodeType; }								//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
 	const QVector3D& getNodeAxis() const { return nodeAxis; }						//!< Returns nodeAxis
@@ -77,7 +77,7 @@ protected:
 											 are significant. Otherwise if the object is a PrismaticJoint or a RevoluteJoint, nodeAxis represents the joint axis,
 											 and only direction is significant. */
 	
-	int                   index;
+	//int                   index;
 	//CompositeObject*	  obj;
 	Transformable		  M;
 	QVector<KinTreeNode*> children;
