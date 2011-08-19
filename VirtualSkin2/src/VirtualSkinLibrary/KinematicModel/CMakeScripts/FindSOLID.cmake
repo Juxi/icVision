@@ -7,9 +7,9 @@
 SET( SOLID_DIR $ENV{SOLID_DIR} )
 
 IF( SOLID_DIR )
-	FIND_PATH( SOLID_INCLUDE_DIR	NAMES 	/solid.h
-						/broad.h
-						/types.h
+	FIND_PATH( SOLID_INCLUDE_DIR	NAMES 	/SOLID.h
+						/SOLID_broad.h
+						/SOLID_types.h	
 					PATHS	${SOLID_DIR}/include
 					NO_DEFAULT_PATH
 	)
@@ -27,7 +27,8 @@ ELSE( SOLID_DIR )
 							/usr/local/include
 							/usr/include
 							/include
-					PATH_SUFFIXES	SOLID
+							~
+					PATH_SUFFIXES	solid-3.5.6/include
 	)
 	FIND_LIBRARY( SOLID_LIBRARY 	NAMES 		solid
 					PATHS 		/opt/local/lib
@@ -35,6 +36,8 @@ ELSE( SOLID_DIR )
 							/usr/local/lib
 							/usr/lib
 							/lib
+							~
+					PATH_SUFFIXES	solid-3.5.6/src/.libs
 	)
 ENDIF( SOLID_DIR )
 
