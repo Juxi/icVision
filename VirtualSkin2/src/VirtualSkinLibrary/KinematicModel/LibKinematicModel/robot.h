@@ -134,6 +134,7 @@ private:
 	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list																		/**< In case you want to populate the list in reverse order */
 	
 	int getNumPrimitives();
+	void kill();
 	
 	//void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
 	

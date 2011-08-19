@@ -46,7 +46,7 @@ class KinematicModel::Model : public QThread
 	Q_OBJECT
 
 public:
-	Model( bool visualize = 0, bool verbse = true );	//!< Sets the default collision response for SOLID to DT_WITNESSED_RESPONSE
+	Model( bool visualize = 0, bool verbse = false );	//!< Sets the default collision response for SOLID to DT_WITNESSED_RESPONSE
 									/**< \param visualize If true, a SkinWindow (with its associated GLWidget) is constructed and its signals and slots are
 										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
 	virtual ~Model();				//!< Nothing special to do here

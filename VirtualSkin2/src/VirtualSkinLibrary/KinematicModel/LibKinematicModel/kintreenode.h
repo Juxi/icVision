@@ -65,6 +65,7 @@ public:
 	//bool isColliding();
 	int getNumPrimitives();
 	
+	void kill();
 	//void print() const;																//!< Prints the member variables to the terminal
 	//void printAll();																//!< Recursively calls print() on all nodes
 

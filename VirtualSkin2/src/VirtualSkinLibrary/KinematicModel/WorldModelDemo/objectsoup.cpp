@@ -5,14 +5,14 @@
 
 void ObjectSoup::stop()
 {
-	printf("\n*** ObjectSoup thread is shutting down ***\n\n");
+	printf("ObjectSoup thread is shutting down ");
 	keepRunning = false;
 	while ( isRunning() )
 	{
 		printf(".");
 		msleep(1);
 	}
-	printf("\n\n");
+	printf("\n");
 }
 
 void ObjectSoup::run()
@@ -35,14 +35,14 @@ void ObjectSoup::run()
 	time.start();
 	while ( keepRunning )
 	{
-		j = qrand() % (num+1);
+		j = qrand() % (num);
 		if (verbose) printf( "replacing object: %d\n", j );
 		obj[j]->kill();
 		obj[j] = makeARandomObjectLikeAMothaFucka();
 		msleep(20);
 	}
 	
-	printf("ObjectSoup::run() returned\n");
+	//printf("ObjectSoup::run() returned\n");
 }
 
 KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
@@ -50,7 +50,7 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 	KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
 	
 	// choose a random color for the object
-	QColor collidingColor = QColor( (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX, 0.5 );
+	QColor collidingColor = QColor( qrand()%255, qrand()%255, qrand()%255, 0.5 );
 	QColor freeColor = collidingColor;
 	freeColor.setAlphaF( 1.0 );
 	

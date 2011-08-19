@@ -59,12 +59,12 @@ Model::~Model()
 {
 	if ( isRunning() ) { stop(); }
 	
-	/*QVector<Robot*>::iterator k;
+	QVector<Robot*>::iterator k;
 	for ( k=robots.end(); k!=robots.begin(); )
 	{
 		--k;
 		delete(*k);
-	}*/
+	}
 	
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.begin(); i!=world.end(); ++i )
@@ -87,9 +87,9 @@ Model::~Model()
 ****************/
 DT_RespTableHandle Model::newRobotTable()
 {
-	printf("locking mutex\n");
+	//printf("locking mutex\n");
 	QMutexLocker locker(&mutex);
-	printf("Creating Robot Table\n");
+	//printf("Creating Robot Table\n");
 	DT_RespTableHandle table = DT_CreateRespTable();
 	DT_AddDefaultResponse( table, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	responseTables.append( table );
@@ -149,6 +149,7 @@ void Model::loadWorld( const QString& fileName, bool verbose )
 		errStr.append("'");
 		throw KinematicModelException(errStr);
     }
+	//printf("success!\n");
 }
 
 void Model::appendObject( KinTreeNode* node )
@@ -285,6 +286,8 @@ void Model::cleanTheWorld()
 		if ( (*i)->isDead() )
 		{
 			if (verbose) printf("found dead object: %s\n", (*i)->getName().toStdString().c_str());
+			
+			// check whether OpenGL is about to access this CompositeObject
 			bool displayListPending = false;
 			const QVector<PrimitiveObject*>& primitives = (*i)->data();
 			QVector<PrimitiveObject*>::const_iterator j;
@@ -300,15 +303,15 @@ void Model::cleanTheWorld()
 			
 			if ( !displayListPending )
 			{
-				if (verbose) printf(" no pending display lists\n");
+				//if (verbose) printf(" no pending display lists\n");
 				CompositeObject* dyingObject = *i;	// get a non-iterator ref to the object in question
 				removeWorldObject( dyingObject );	// this would f*** up the iterator passed to it because we call QVector::erase( <T> ) inside here
 				delete( dyingObject );				// and delete the object from memory
 			}
-			else
-			{
-				if (verbose) printf(" waiting to delete object\n");
-			}
+			//else
+			//{
+			//	if (verbose) printf(" waiting to delete object\n");
+			//}
 		}
 	}
 }
@@ -385,7 +388,7 @@ void Model::updateWorldState()
 
 void Model::run()
 {
-	printf("starting the model's collision detection thread\n");
+	printf("Starting collision detection thread\n");
 	while ( keepRunning )
 	{
 		computePose();
@@ -398,13 +401,13 @@ void Model::stop()
 	QMutexLocker locker(&mutex);
 	
 	keepRunning = false;
-	printf("\n*** KinematicModel main thread is shutting down ***\n");
+	printf("KinematicModel main thread is shutting down ");
 	while ( isRunning() )
 	{
 		printf(".");
 		msleep(1);
 	}
-	printf("\n\n");
+	printf("\n");
 }
 
 /************

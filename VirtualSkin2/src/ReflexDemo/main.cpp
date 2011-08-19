@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 	VirtualSkin::YarpModel* yarpModel = NULL;
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
 	ReflexFilter*			filter	  = NULL;
+	int result = 0;
 	
 	try
 	{
@@ -56,13 +57,7 @@ int main(int argc, char *argv[])
 			yarpModel->loadWorld( worldFile, false );
 		}
 		
-		// Open the RPC interface to the world model
-		printf("opening world RPC port\n");
-		yarpModel->openWorldRpcPort("/world");
-		
-		
 		// Load a robot model from file
-		
 		if ( robotFile != "" )
 		{
 			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
@@ -73,33 +68,34 @@ int main(int argc, char *argv[])
 			sleep(1);
 			
 			// Enable Virtual Skin for the robot model
-			/**/
-			 printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
-			filter = new ReflexFilter( yarpRobot, visualize );
-			filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
+			//printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
+			//filter = new ReflexFilter( yarpRobot, visualize );
+			//filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 			 
 		}
-	}
+		
+		// Open the RPC interface to the model
+		printf("opening world RPC port\n");
+		yarpModel->openWorldRpcPort("/world");
 	
+		// run the Qt application
+		result = app.exec();
+		
+		//if ( filter ) { filter->close(); }
+		//delete filter;
+		
+		if ( yarpModel )
+		{
+			//yarpModel->closeWorldRpcPort();
+			yarpModel->stop(); 
+			delete yarpModel;
+		}
+	}
 	catch ( std::exception& e )
 	{ 
 		printf("%s\n",e.what());
 		return 1;
 	}
-	
-	// run the Qt application
-	int result = app.exec();
-
-	printf("SHUTTING DOWN!!!\n");
-	printf("Result = %d\n", result);
-
-	if ( filter ) { filter->close(); }
-	delete filter;
-	
-	if ( yarpModel ) { yarpModel->stop(); }
-	delete yarpModel;
-	
-	//delete yarpRobot;
 
     return result;
 }

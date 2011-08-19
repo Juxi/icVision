@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
 	printf( "loading world file: %s\n", argv[1] );
 	model.loadWorld( QString(argv[2]), false );
 	
-	ObjectSoup soup( model, 5 );
+	ObjectSoup soup( model, 5, false );
 	soup.start();
 
-	return app.exec();						// run the Qt application
+	int result = app.exec();						// run the Qt application
 	
-	printf("\n\n\n\n HIT THE BUTTON \n\n\n\n");
 	soup.stop();
-	
 	model.stop();
+	
+	return result;
 }

@@ -10,7 +10,7 @@ YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)//, rpc
 }
 YarpModel::~YarpModel()
 {
-	//worldPort.close();
+	worldRpcInterface.close();
 }
 
 //void YarpModel::onStartUp()

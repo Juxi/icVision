@@ -41,8 +41,15 @@ void WorldRpcInterface::open( const QString& portName )
 
 void WorldRpcInterface::close()
 {
+	printf("Closing WorldRpcInterface ");
 	keepRunning = false;
-	while ( isRunning() ) { msleep(1); }
+	port.interrupt();
+	while ( isRunning() )
+	{ 
+		printf("."); 
+		msleep(1); 
+	}
+	printf("\n");
 	port.close();
 }
 

@@ -45,6 +45,15 @@ KinTreeNode::~KinTreeNode()
 	parentRobot->emit outdatedDisplayList( displayListIdx() );*/
 }
 
+void KinTreeNode::kill()
+{
+    QVector<KinTreeNode*>::iterator i;
+    for ( i=children.begin(); i!=children.end(); ++i ) {
+        (*i)->kill();
+    }
+	CompositeObject::kill();
+}
+
 void KinTreeNode::setNodeAxis( const QVector3D& vector )
 {
     if ( vector.length() <= 0 ) { throw KinematicModelException("Axis must have non zero magnitude (set x,y or z > 0)"); }

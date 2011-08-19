@@ -21,17 +21,7 @@ Robot::Robot( Model* m, DT_RespTableHandle t ) : model(m),
 }
 Robot::~Robot()
 {
-	//if ( isOpen() ) { close(); }
-	QVector<Motor*>::iterator j;
-    for ( j=motorList.end(); j!=motorList.begin(); ) {
-		--j;
-        delete (*j);
-    }
-    QVector<BodyPart*>::iterator i;
-    for ( i=partList.end(); i!=partList.begin(); ) {
-		--i;
-        delete (*i);
-    }
+	if ( isOpen() ) { close(); }
 }
 
 void Robot::appendNode( KinTreeNode* node )
@@ -42,27 +32,35 @@ void Robot::appendNode( KinTreeNode* node )
 
 void Robot::close()
 {	
-	/*QVector<KinTreeNode*>::iterator k;
-    //for ( k=tree.begin(); k!=tree.end(); ++k ) {
-    //    delete *k;
-    //}
-    QVector<Motor*>::iterator j;
+	isConfigured = false;
+	
+	QVector<Motor*>::iterator j;
     for ( j=motorList.end(); j!=motorList.begin(); ) {
 		--j;
         delete (*j);
     }
     QVector<BodyPart*>::iterator i;
-    for ( i=partList.end(); i!=partList.begin(); ) {
+    for ( i=partList.end(); i!=partList.begin(); )
+	{
 		--i;
         delete (*i);
-    }*/
+    }
 	
-	isConfigured = false;
+	kill();
+}
+
+void Robot::kill()
+{
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=tree.begin(); i!=tree.end(); ++i )
+	{
+        (*i)->kill();
+    }
 }
 
 void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelException)
 {	
-	printf("Robot.Open()\n");
+	//printf("Robot.Open()\n");
     ZPHandler handler( model, this );
     QXmlSimpleReader reader;
     reader.setContentHandler(&handler);

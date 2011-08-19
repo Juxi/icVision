@@ -78,7 +78,7 @@ public:
 	void setInModel( bool b ) { inModel = b; }
 	bool isInModel() { return inModel; }
 	
-	void kill();									//!< Sets a flag that the Composite object should be deleted ASAP (in a thread safe way by Model)
+	virtual void kill();									//!< Sets a flag that the Composite object should be deleted ASAP (in a thread safe way by Model)
 	bool isDead() const { return deathWish; }
 	
 protected:
