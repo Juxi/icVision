@@ -192,11 +192,11 @@ void Window::writeCSV() {
 	std::cout << "Write CSV () " << std::endl;
 	
 	
-	stringstream ss1;
+	std::stringstream ss1;
 	ss1 << "left_"<< imageIndex;
 	ss1 << ".ppm";
 	imgNameLeft = ss1.str();
-	stringstream ss2;
+	std::stringstream ss2;
 	ss2 << "right_"<< imageIndex;
 	ss2 << ".ppm";
 	imgNameRight = ss2.str();
@@ -237,7 +237,7 @@ void Window::showEncoderPositions() {
 	yarp_port->read(input);
 	
 	if (input != NULL) {
-		cout << "got " << input.toString().c_str() << endl;
+		std::cout << "got " << input.toString().c_str() << endl;
 		s = input.toString();
 	} else {
 		s = "NULL";
@@ -251,7 +251,7 @@ void Window::showEncoderPositions() {
     Bottle input2;
 	yarp_port->read(input2);
 	if (input2 != NULL) {
-		cout << "got " << input2.toString().c_str() << endl;
+		std::cout << "got " << input2.toString().c_str() << endl;
 		s = input2.toString();
 	} else {
 		s = "NULL";
