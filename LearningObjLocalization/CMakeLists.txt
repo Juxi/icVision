@@ -7,4 +7,8 @@ CMAKE_MINIMUM_REQUIRED ( VERSION 2.8 )
 SET ( PROJECTNAME LearningObjLocalization )
 PROJECT ( ${PROJECTNAME} )
 
-ADD_SUBDIRECTORY ( src )
+ADD_SUBDIRECTORY ( GetImagesAndEncoderPos )
+
+# optional builds
+# ADD_SUBDIRECTORY ( ppmpngConverter )
+# ADD_SUBDIRECTORY ( GetImagePosOfRedBall )
