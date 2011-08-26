@@ -3,7 +3,7 @@
 #include "sphere.h"
 #include "cylinder.h"
 #include "box.h"
-#include "objectSoup.h"
+#include "objectsoup.h"
 
 using namespace KinematicModel;
 

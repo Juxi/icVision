@@ -11,7 +11,7 @@
 #define KINTREENODE_H
 
 #include <QtGui>
-#include "compositeObject.h"
+#include "compositeobject.h"
 
 namespace KinematicModel
 {

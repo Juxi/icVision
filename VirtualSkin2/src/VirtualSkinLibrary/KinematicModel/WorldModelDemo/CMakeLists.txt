@@ -3,9 +3,9 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 	
 SET ( src_files	main.cpp
-		objectSoup.cpp )
+		objectsoup.cpp )
 
-SET ( hdr_files	objectSoup.h )
+SET ( hdr_files	objectsoup.h )
 
 #SET ( QT_MOC_FILES objectSoup.h )	
 #QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
