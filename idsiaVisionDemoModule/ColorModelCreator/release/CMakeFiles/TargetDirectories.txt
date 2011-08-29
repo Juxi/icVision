@@ -1,0 +1,1 @@
+/home/migliore/Dropbox/Projects/ColorModelCreator/release/CMakeFiles/test.dir
