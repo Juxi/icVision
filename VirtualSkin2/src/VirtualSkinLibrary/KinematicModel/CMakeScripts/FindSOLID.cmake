@@ -29,6 +29,8 @@ ELSE( SOLID_DIR )
 							/include
 							~
 					PATH_SUFFIXES	solid-3.5.6/include
+							solid-3.5.6
+							SOLID
 	)
 	FIND_LIBRARY( SOLID_LIBRARY 	NAMES 		solid
 					PATHS 		/opt/local/lib
@@ -38,6 +40,8 @@ ELSE( SOLID_DIR )
 							/lib
 							~
 					PATH_SUFFIXES	solid-3.5.6/src/.libs
+							solid-3.5.6
+							SOLID
 	)
 ENDIF( SOLID_DIR )
 
