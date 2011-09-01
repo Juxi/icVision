@@ -12,7 +12,7 @@
 
 #include <QMutex>
 //#include "renderList.h"
-#include "bodyPart.h"
+#include "bodypart.h"
 #include "motor.h"
 #include "link.h"
 #include "marker.h"

@@ -15,7 +15,7 @@ SET ( src_files		model.cpp			# the center of it all
 			box.cpp  
 	
 			robot.cpp
-			bodyPart.cpp
+			bodypart.cpp
 			kintreenode.cpp 
 			motor.cpp
 			interval.cpp
@@ -25,7 +25,7 @@ SET ( src_files		model.cpp			# the center of it all
 			joint_revolute.cpp
 				#joint_prismatic.cpp 
 				
-			zpHandler.cpp
+			zphandler.cpp
 			worldhandler.cpp
 				
 )
@@ -51,7 +51,7 @@ SET ( hdr_files		modelconstants.h
 			box.h  
 
 			robot.h
-			bodyPart.h
+			bodypart.h
 			kintreenode.h 
 			motor.h
 			interval.h
@@ -61,7 +61,7 @@ SET ( hdr_files		modelconstants.h
 			joint_revolute.h
 				#joint_prismatic.h 
 				
-			zpHandler.h
+			zphandler.h
 			worldhandler.h
 
 				

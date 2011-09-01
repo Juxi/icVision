@@ -1,6 +1,6 @@
 #include "worldhandler.h"
 #include "model.h"
-#include "compositeObject.h"
+#include "compositeobject.h"
 #include "primitiveobject.h"
 #include "cylinder.h"
 #include "sphere.h"
