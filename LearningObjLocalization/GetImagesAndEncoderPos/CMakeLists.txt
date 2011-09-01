@@ -53,6 +53,7 @@ SET ( src_files main.cpp
                 iCub_controller.cpp
 		window.cpp
 		ColoredRect.cpp
+		partController.cpp
 )
 
 SET ( hdr_files cv_widget.h
@@ -60,6 +61,7 @@ SET ( hdr_files cv_widget.h
 		iCub_controller.h
 		window.h
 		ColoredRect.h
+		partController.h
 )
 
 SET ( QT_MOC_FILES      dashboard.h

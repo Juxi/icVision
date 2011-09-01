@@ -34,7 +34,9 @@ public:
 	void setupSignalsAndSlots();
 	
 public slots:
-	void getYarpStatus();	
+	void getYarpStatus();
+	void toggleTimer();	
+	void timerTimeout();
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -44,8 +46,14 @@ private:
 	void initWindow();
 	void showYarpImages();
 	void showEncoderPositions();
+	void showRedBall3DPosition();
+
+	void doTheBabbling();
+	
 //	void doSomethingWithImages()
 	void writeCSV();
+	
+	void changeBallPos();
 		
 	// GUI 
 	QString title;
@@ -56,10 +64,11 @@ private:
 	QHBoxLayout *central_layout;
 	QVBoxLayout *second_layout;
 	QGridLayout *vision_layout;	
-	QPushButton *btn_quit, *btn_get;
+	QPushButton *btn_quit, *btn_get, *btn_timer;
 	QLabel *lbl_CV_left, *lbl_CV_right;
-	QLabel *lbl_State_Head, *lbl_State_Torso;
+	QLabel *lbl_State_Head, *lbl_State_Torso, *lbl_BallPosition;
 	QLineEdit *txt_State_Head, *txt_State_Torso;
+	QLineEdit *txt_BallPosition;
 	
 //	QFile *csvfile;
 	std::ofstream csvfile;

@@ -130,20 +130,28 @@ void iCubController::initHead() {
     if(!head->initialized) {	
 		std::cout<<endl<<"initialising head..."<<std::endl;
 		
+		// needs cleanup , TODO
         head->port = new Port;
         head->port->open("/juxi/head");
-		
-//		yarp_network->connect("/icubSim/head/status:o", "/juxi/head");	
 		Network::connect("/icubSim/head/state:o", "/juxi/head"); 
 
-        head->initialized = true;
+		// needs cleanup , TODO, might not need both!
+		head->ctrl = new PartController();
+		head->ctrl->open("icubSim", "head");
+		if( head->ctrl->isValid() ) head->initialized = true;
     }
 }
 
 void iCubController::closeHead() {
     if(head->initialized) {	
 		std::cout<<endl<<"closing head ..."<<std::endl;
-		
+
+		if( head->ctrl ) {
+			head->ctrl->stop();
+			head->ctrl->close();
+			head->ctrl = NULL;
+		}
+
 		Network::disconnect("/icubSim/head/state:o", "/juxi/head");
         head->port->close();
         delete head->port;
@@ -156,18 +164,28 @@ void iCubController::initTorso() {
     if(!torso->initialized) {	
 		std::cout<<endl<<"initialising torso..."<<std::endl;
 		
-		// state port
+		// state port, TODO needs cleanup ?
         torso->port = new Port;
         torso->port->open("/juxi/torso");
 		Network::connect("/icubSim/torso/state:o", "/juxi/torso"); 
 		
-        torso->initialized = true;
-    }
+		// needs cleanup , TODO, might not need both!
+		torso->ctrl = new PartController();
+		torso->ctrl->open("icubSim", "torso");
+		if( torso->ctrl->isValid() ) torso->initialized = true;
+	}
 }
 
 void iCubController::closeTorso() {
     if(torso->initialized) {	
 		std::cout<<endl<<"closing torso ..."<<std::endl;
+		
+		if( torso->ctrl ) {
+			torso->ctrl->stop();
+			torso->ctrl->close();
+			torso->ctrl = NULL;
+		}
+		
 		// state port
 		Network::disconnect("/icubSim/torso/state:o", "/juxi/torso");
         torso->port->close();
@@ -175,4 +193,85 @@ void iCubController::closeTorso() {
 		torso->port = NULL;
 		torso->initialized = false;		
     }
+}
+
+void iCubController::getWorldObjectPosition(const char *name, double &x, double &y, double &z) {
+	std::cout<<"read world rpc ..."<<std::endl;
+
+	RpcClient port;
+	port.open("/juxi/world-client");
+	if(! Network::connect("/juxi/world-client", "/icubSim/world") ) {
+		std::cout << std::endl << "ERROR: Could not connect to port: " << "/icubSim/world" << std::endl << std::endl;		
+		return;
+	}
+
+	Bottle cmd, response;
+	
+	// remove the blue (default) ball
+	cmd.addString("world"); cmd.addString("set");	
+	cmd.addString("ball");	cmd.addInt(1);
+	cmd.addDouble( 0.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
+	port.write(cmd, response);		
+	if( response.size() > 0) {
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+	}
+	
+	cmd.clear(); response.clear();
+	
+	// get red ball info
+	cmd.addString("world"); cmd.addString("get");	
+	cmd.addString("ssph");	cmd.addInt(1);
+	port.write(cmd, response);
+	
+	if( response.size() < 3) { 
+		// no ball there yet? add one
+		cmd.clear(); response.clear();
+		
+		// get red ball info
+		cmd.addString("world"); cmd.addString("mk");	
+		cmd.addString("ssph");	cmd.addDouble(0.01); // radius
+		x = 0.0; y = 0.53; z = 0.5;
+		cmd.addDouble( x ); cmd.addDouble( y ); cmd.addDouble( z );// pos
+		cmd.addInt(1); cmd.addInt(0); cmd.addInt(0); //red
+		port.write(cmd, response);
+		
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;				
+		
+	} else {
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+		
+		x = response.get(0).asDouble();
+		y = response.get(1).asDouble();		
+		z = response.get(2).asDouble();
+	}
+		
+	
+	Network::disconnect("/icubSim/world", "/juxi/world-client");
+	port.close();	
+}
+
+void iCubController::setWorldObjectPosition(const char *name, double x, double y, double z) {
+	std::cout<<"set world position of " << name << " ..."<<std::endl;
+	
+	RpcClient port;
+	port.open("/juxi/world-client");
+	if(! Network::connect("/juxi/world-client", "/icubSim/world") ) {
+		std::cout << std::endl << "ERROR: Could not connect to port: " << "/icubSim/world" << std::endl << std::endl;		
+		return;
+	}
+	
+	Bottle cmd, response;
+	
+	// remove the blue (default) ball
+	cmd.addString("world"); cmd.addString("set");	
+	cmd.addString("ssph");	cmd.addInt(1);
+	cmd.addDouble( x ); cmd.addDouble( y ); cmd.addDouble( z );	
+	port.write(cmd, response);		
+	if( response.size() > 0) {
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+	}
+		
+	Network::disconnect("/icubSim/world", "/juxi/world-client");
+	port.close();	
+
 }

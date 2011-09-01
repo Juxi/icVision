@@ -12,11 +12,12 @@
 #ifndef ICUB_CONTROLLER_H
 #define ICUB_CONTROLLER_H
 
-#include <yarp/os/Network.h>
+#include <yarp/os/all.h>
 #include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/PolyDriver.h>
 #include <yarp/sig/all.h>
 #include "window.h"
+#include "partController.h"
 
 using namespace yarp::dev;
 using namespace yarp::sig;
@@ -31,7 +32,14 @@ class iCubController : public QObject {
 public:
 	iCubController(); //Window *ptr_mw
 	~iCubController();
+
+signals:
+	void connectionStatus(bool);
 	
+public slots:
+	void toggleConnection();
+	
+private:	//vars
     //structures
     struct Camera {
         QString                             port_name;
@@ -39,8 +47,7 @@ public:
         bool                                initialized;
         ImageOf<PixelRgb>                   *last_image;
     };
-		
-    Camera *left_camera, *right_camera;
+	
 	QString left_camera_port_name;
 	QString right_camera_port_name;
 
@@ -48,22 +55,25 @@ public:
         QString                 port_name;
         Port					*port;			// Streaming Port
         bool                    initialized;
+		PartController			*ctrl;
     };
+
+	struct WorldObject {
+        QString                 name;
+		double x, y, z;	// last_position;
+    };
+	
+public: // vars
+    Camera *left_camera, *right_camera;
 	Part *head, *torso;	
-		
+	
 
-signals:
-	void connectionStatus(bool);
-
-public slots:
-	void toggleConnection();
-
-private:
+private: // methods		
 	//pointers to objects
 	//    Window *main_window;
 	Network *yarp_network;
 	bool simulation;
-		
+
 	void initCameras();
     void closeCameras();	
 	
@@ -78,6 +88,9 @@ private:
 	void initTorso();
 	void closeTorso();
 
+public:
+	void getWorldObjectPosition(const char *name, double &x, double &y, double &z);
+	void setWorldObjectPosition(const char *name, double x, double y, double z);
 };
 
 #endif 
