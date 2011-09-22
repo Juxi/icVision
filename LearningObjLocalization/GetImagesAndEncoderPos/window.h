@@ -35,6 +35,7 @@ public:
 	
 public slots:
 	void getYarpStatus();
+	void updateTimer();
 	void toggleTimer();	
 	void timerTimeout();
 
@@ -69,6 +70,7 @@ private:
 	QLabel *lbl_State_Head, *lbl_State_Torso, *lbl_BallPosition;
 	QLineEdit *txt_State_Head, *txt_State_Torso;
 	QLineEdit *txt_BallPosition;
+	QSlider *sld_UpdateInterval;
 	
 //	QFile *csvfile;
 	std::ofstream csvfile;

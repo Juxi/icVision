@@ -75,9 +75,15 @@ void Window::initWindow() {
 	lbl_BallPosition = new QLabel("Red Ball in World (3d)");
 	txt_BallPosition = new QLineEdit();
 	
-	btn_get		= new QPushButton("Get Images");
+	btn_get		= new QPushButton("Get Test Images");
 	btn_quit	= new QPushButton("Quit");
 	btn_timer	= new QPushButton("Start Gathering Data");
+
+	sld_UpdateInterval = new QSlider(Qt::Horizontal);
+	sld_UpdateInterval->setToolTip("Timing Interval");
+	sld_UpdateInterval->setRange(100, 2000);
+	sld_UpdateInterval->setTickInterval(50);
+	sld_UpdateInterval->setValue(500);
 	
 	lbl_CV_left->setMinimumHeight(20);
 	lbl_CV_left->setMaximumHeight(60);
@@ -105,8 +111,11 @@ void Window::initWindow() {
 //	vision_layout->addWidget(CV_right_dev, 2, 1);
 	
 	// VP - Get Button	
-	vision_layout->addWidget(btn_get, 5, 0);
-	vision_layout->addWidget(btn_timer, 5, 1);
+	vision_layout->addWidget(btn_get, 5, 1);
+
+	// VP - Start Gathering Data
+	vision_layout->addWidget(sld_UpdateInterval, 6, 0);
+	vision_layout->addWidget(btn_timer, 6, 1);
 	
 	vision_widget->setLayout(vision_layout);
  	
@@ -140,6 +149,9 @@ void Window::initWindow() {
 	move(100,0);
 	resize(740, 600);	// width, height
 	show();
+
+	
+	updateTimer();
 }
 
 // Destructor
@@ -147,6 +159,8 @@ Window::~Window() {
 	
 	csvfile.close();
 //	delete csvfile;
+	
+	delete sld_UpdateInterval;
 	
 	delete btn_timer;
 	delete btn_get;
@@ -183,6 +197,10 @@ void Window::setupSignalsAndSlots() {
 	QObject::connect(btn_get,  SIGNAL(clicked()), 
 					 this,	   SLOT(getYarpStatus()));
 
+	QObject::connect(sld_UpdateInterval, SIGNAL(valueChanged(int)), //SIGNAL(sliderMoved(int)), 
+					 this,	   SLOT(updateTimer()));
+
+	
 	QObject::connect(btn_timer,SIGNAL(clicked()), 
 					 this,	   SLOT(toggleTimer()));
 
@@ -203,6 +221,20 @@ void Window::setupSignalsAndSlots() {
 }
 
 
+void Window::updateTimer() {
+	if (sld_UpdateInterval ) {
+		int val = sld_UpdateInterval->value();
+		QString s = "Timing Interval";
+		s.append(QString(" = %1 ms").arg(val));
+		sld_UpdateInterval->setToolTip(s);
+		
+		if (!timer->isActive()) {
+			timer->setInterval(val);
+		}
+	}
+	
+}
+
 void Window::toggleTimer() {
     if (!timer->isActive()) {		
 		getYarpStatus();
@@ -216,41 +248,48 @@ void Window::toggleTimer() {
 
 void Window::timerTimeout() {
     if (timer->isActive()) {
-		timer->stop();
-		changeBallPos();
-		getYarpStatus();
 		
-		// move to new position?
-		doTheBabbling();
+		// stop it
+		iCubCtrl->head->ctrl->stop();
+		iCubCtrl->torso->ctrl->stop();
+
+//		bool ready = false, b1, b2;
+//		iCubCtrl->head->ctrl->checkMotionDone(&b1);
+		
+		timer->stop();
+		
+		getYarpStatus();
 		
 		// write log file
 		writeCSV();	
 		
-		timer->start();
+		changeBallPos();		
 		
-		bool ready = false, b1, b2;
-		iCubCtrl->head->ctrl->checkMotionDone(&b1);
-		iCubCtrl->torso->ctrl->checkMotionDone(&b2);		
-		if ( b1 && b2 ) {
-			// something is still moving
-			printf("something is still moving...");
-			iCubCtrl->head->ctrl->stop();
-			printf(".");
-			iCubCtrl->torso->ctrl->stop();
-			printf(".");		
-			printf(" should not anymore");
-			
-		}
+		timer->start();
+		// move to new position?
+		doTheBabbling();
+		
+		// stop
+//		iCubCtrl->head->ctrl->stop();
+//		iCubCtrl->torso->ctrl->stop();
 		
 	}
 }
 
 void Window::getYarpStatus() {
-		
-	// read
-	showEncoderPositions();
-	showYarpImages();
-	showRedBall3DPosition();
+	if ( ! dash->btn_connect->isEnabled() ) {	// then we are connected
+		// read
+		showEncoderPositions();
+		showRedBall3DPosition();
+		showYarpImages();
+	} else {
+		// error not connected
+		QMessageBox::warning( this, title,
+							 "It seems the yarp network is not yet connected"
+							 "to the iCub (Simulator)!\n"
+							 "Click on the connect button first!",
+							 "OK");
+	}
 }
 
 void Window::writeCSV() {
@@ -290,13 +329,19 @@ void Window::writeCSV() {
 }
 
 void Window::changeBallPos() {
+	// old rng (quantized)
 	int rnr1 = rand() % 11 - 5;
-	int rnr2 = rand() % 45 + 25;	
+	int rnr2 = (rand() % 45 + 25)/100.0;	
 	double rnr = rnr1/22.0;	
-	double x = 0.0 + rnr;
+	double x = rnr;
 	double y = 0.53;	// on the table
-	rnr = rnr2/100.0;		
-	double z = rnr;
+	double z = rnr2;
+
+	// new rng
+	x = -0.22 + (0.44) * (qreal)rand()/RAND_MAX;;
+	z = 0.25 + (0.41) * (qreal)rand()/RAND_MAX;;
+	///////
+	
 	iCubCtrl->setWorldObjectPosition("ssph1", x, y, z);	
 }
 
@@ -413,6 +458,7 @@ void Window::doTheBabbling() {
 	QVector<qreal> pose;
 	
 	
+	// HEAD
 	if( iCubCtrl->head->initialized ) {
 		ctrl = iCubCtrl->head->ctrl;
 //	if ( iCubCtrl->head->ctrl->randomPosMove( 0.5, false ) ) { printf("H"); }
@@ -428,20 +474,21 @@ void Window::doTheBabbling() {
 				
 		}
 		
+		iCubCtrl->head->ctrl->setRefSpeeds( 2.5 );
+			
 		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
 		else { printf("-\n"); }
 		
 //		iCubCtrl->head->ctrl->positionMove();
 	}
-	
-	
+
 	// now the torso
 	
 	if( iCubCtrl->torso->initialized ) {
-		if ( iCubCtrl->torso->ctrl->randomPosMove( 0.5, false ) ) { printf("T"); }
+		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
 		else { printf("*\n"); }
 	}
-		
+	
 	//so have a wait or something?
 	{ printf("\n"); }
 	
