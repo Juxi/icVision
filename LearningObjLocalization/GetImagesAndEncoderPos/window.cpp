@@ -84,6 +84,7 @@ void Window::initWindow() {
 	sld_UpdateInterval->setRange(100, 2000);
 	sld_UpdateInterval->setTickInterval(50);
 	sld_UpdateInterval->setValue(500);
+	lbl_ImageCounter = new QLabel("No points gathered yet!");
 	
 	lbl_CV_left->setMinimumHeight(20);
 	lbl_CV_left->setMaximumHeight(60);
@@ -111,10 +112,11 @@ void Window::initWindow() {
 //	vision_layout->addWidget(CV_right_dev, 2, 1);
 	
 	// VP - Get Button	
+	vision_layout->addWidget(sld_UpdateInterval, 5, 0);
 	vision_layout->addWidget(btn_get, 5, 1);
 
 	// VP - Start Gathering Data
-	vision_layout->addWidget(sld_UpdateInterval, 6, 0);
+	vision_layout->addWidget(lbl_ImageCounter, 6, 0);
 	vision_layout->addWidget(btn_timer, 6, 1);
 	
 	vision_widget->setLayout(vision_layout);
@@ -170,6 +172,7 @@ Window::~Window() {
 //	delete CV_left_dev;
 //	delete CV_right_dev;
 	
+	delete lbl_ImageCounter;
 	delete lbl_State_Head;
 	delete lbl_State_Torso;
 	delete lbl_BallPosition;
@@ -210,6 +213,9 @@ void Window::setupSignalsAndSlots() {
 						 dash,	   SLOT(updateConnectionStatus(bool)));
 		QObject::connect(dash->btn_connect, SIGNAL(clicked()),
 						 iCubCtrl,			SLOT(toggleConnection()));		
+		QObject::connect(dash->btn_initialize, SIGNAL(clicked()),
+						 iCubCtrl,			SLOT(initializeRobot()));		
+
 		
 		timer->setInterval(500);
 		connect(timer, SIGNAL(timeout()), this, SLOT(timerTimeout()));		
@@ -232,7 +238,7 @@ void Window::updateTimer() {
 			timer->setInterval(val);
 		}
 	}
-	
+		
 }
 
 void Window::toggleTimer() {
@@ -253,9 +259,6 @@ void Window::timerTimeout() {
 		iCubCtrl->head->ctrl->stop();
 		iCubCtrl->torso->ctrl->stop();
 
-//		bool ready = false, b1, b2;
-//		iCubCtrl->head->ctrl->checkMotionDone(&b1);
-		
 		timer->stop();
 		
 		getYarpStatus();
@@ -266,8 +269,10 @@ void Window::timerTimeout() {
 		changeBallPos();		
 		
 		timer->start();
+		
 		// move to new position?
-		doTheBabbling();
+		// stop the babbling for now
+		// doTheBabbling();
 		
 		// stop
 //		iCubCtrl->head->ctrl->stop();
@@ -289,6 +294,7 @@ void Window::getYarpStatus() {
 							 "to the iCub (Simulator)!\n"
 							 "Click on the connect button first!",
 							 "OK");
+		
 	}
 }
 
@@ -320,6 +326,10 @@ void Window::writeCSV() {
 	
 	++imageIndex;
 	
+	QString s = QString("Currently at point %1").arg(imageIndex);
+	
+	lbl_ImageCounter->setText(s);
+	
 	//	ImageOf<PixelRgb> *yarp_image;
 	//	IplImage *img;
 	//	yarp_image = iCubCtrl->left_camera->last_image;
@@ -338,10 +348,13 @@ void Window::changeBallPos() {
 	double z = rnr2;
 
 	// new rng
-	x = -0.22 + (0.44) * (qreal)rand()/RAND_MAX;;
-	z = 0.25 + (0.41) * (qreal)rand()/RAND_MAX;;
-	///////
+	x = -0.22 + (0.44) * (qreal)rand()/RAND_MAX;
+	// fix one dimension, 	x = 0.0;
+	z = 0.25 + (0.41) * (qreal)rand()/RAND_MAX;
 	
+	printf("z=%f\n", z);
+	///////
+		
 	iCubCtrl->setWorldObjectPosition("ssph1", x, y, z);	
 }
 
@@ -460,16 +473,22 @@ void Window::doTheBabbling() {
 	
 	// HEAD
 	if( iCubCtrl->head->initialized ) {
-		ctrl = iCubCtrl->head->ctrl;
-//	if ( iCubCtrl->head->ctrl->randomPosMove( 0.5, false ) ) { printf("H"); }
 		
-
+		ctrl = iCubCtrl->head->ctrl;
 		for (int i = 0; i < ctrl->getNumJoints(); i++) {
-			if ( i < 4 ) {
+
+			// limit the head movement to not include eyes
+			//if ( i < 4 ) {
+//				ctrl->lim->getLimits(i, &min, &max);
+//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+//			} else { aPos = 0; }
+
+			// limit the head movement to one joint!
+			if ( i == 0 ) {
 				ctrl->lim->getLimits(i, &min, &max);
 				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
 			} else { aPos = 0; }
-				
+			
 			pose.append( aPos );
 				
 		}
@@ -484,10 +503,10 @@ void Window::doTheBabbling() {
 
 	// now the torso
 	
-	if( iCubCtrl->torso->initialized ) {
-		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
-		else { printf("*\n"); }
-	}
+//	if( iCubCtrl->torso->initialized ) {
+//		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
+//		else { printf("*\n"); }
+//	}
 	
 	//so have a wait or something?
 	{ printf("\n"); }

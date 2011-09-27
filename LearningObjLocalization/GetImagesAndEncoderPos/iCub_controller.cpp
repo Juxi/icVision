@@ -48,6 +48,24 @@ void iCubController::toggleConnection() {
 	initTorso();
 }
 
+void iCubController::initializeRobot() {
+	if( head->initialized ) {
+		QVector<qreal> pose;
+		pose.append(-10.0);		pose.append(0.0);
+		pose.append(0.0); 		pose.append(0.0);
+		pose.append(0.0); 		pose.append(0.0);
+		if ( head->ctrl->positionMove( pose ) ) { printf("Head initialized!"); }		
+	}
+	if( torso->initialized ) {
+		QVector<qreal> pose;
+		pose.append(0.0); 		pose.append(0.0);
+		pose.append(35.0);
+		if ( torso->ctrl->positionMove( pose ) ) { printf("Torso initialized!"); }		
+	}
+}
+	
+	
+
 /**
  *@brief     initialises camera
  */
@@ -210,7 +228,7 @@ void iCubController::getWorldObjectPosition(const char *name, double &x, double 
 	// remove the blue (default) ball
 	cmd.addString("world"); cmd.addString("set");	
 	cmd.addString("ball");	cmd.addInt(1);
-	cmd.addDouble( 0.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
+	cmd.addDouble( -10.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
 	port.write(cmd, response);		
 	if( response.size() > 0) {
 		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
@@ -219,7 +237,7 @@ void iCubController::getWorldObjectPosition(const char *name, double &x, double 
 	cmd.clear(); response.clear();
 	
 	// get red ball info
-	cmd.addString("world"); cmd.addString("get");	
+	cmd.addString("world"); cmd.addString("get");
 	cmd.addString("ssph");	cmd.addInt(1);
 	port.write(cmd, response);
 	
@@ -227,9 +245,9 @@ void iCubController::getWorldObjectPosition(const char *name, double &x, double 
 		// no ball there yet? add one
 		cmd.clear(); response.clear();
 		
-		// get red ball info
+		// create/make red ball
 		cmd.addString("world"); cmd.addString("mk");	
-		cmd.addString("ssph");	cmd.addDouble(0.01); // radius
+		cmd.addString("ssph");	cmd.addDouble(0.005); // radius
 		x = 0.0; y = 0.53; z = 0.5;
 		cmd.addDouble( x ); cmd.addDouble( y ); cmd.addDouble( z );// pos
 		cmd.addInt(1); cmd.addInt(0); cmd.addInt(0); //red
@@ -262,7 +280,6 @@ void iCubController::setWorldObjectPosition(const char *name, double x, double y
 	
 	Bottle cmd, response;
 	
-	// remove the blue (default) ball
 	cmd.addString("world"); cmd.addString("set");	
 	cmd.addString("ssph");	cmd.addInt(1);
 	cmd.addDouble( x ); cmd.addDouble( y ); cmd.addDouble( z );	

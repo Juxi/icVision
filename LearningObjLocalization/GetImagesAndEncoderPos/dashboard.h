@@ -27,6 +27,7 @@ public:
 	// Methods
 	void update();
 	QPushButton *btn_connect;	
+	QPushButton *btn_initialize;
 	
 public slots:
 	void updateConnectionStatus(bool);
@@ -36,13 +37,16 @@ private:
 	bool iCubSimulator_accessible;
 
 	// GUI
+	QWidget *vwidget;
 	QHBoxLayout *layout;
+	QVBoxLayout *vlayout;
 	QLabel *lbl_iCubSim_Status, *lbl_Connection_Status;
 
 	
 protected:
 	// Methods
 	void checkiCubSimulator();
+
 	
 };
 

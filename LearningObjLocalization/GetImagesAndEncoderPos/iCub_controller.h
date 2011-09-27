@@ -38,6 +38,7 @@ signals:
 	
 public slots:
 	void toggleConnection();
+	void initializeRobot();
 	
 private:	//vars
     //structures

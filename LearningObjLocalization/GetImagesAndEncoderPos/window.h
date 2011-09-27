@@ -68,6 +68,7 @@ private:
 	QPushButton *btn_quit, *btn_get, *btn_timer;
 	QLabel *lbl_CV_left, *lbl_CV_right;
 	QLabel *lbl_State_Head, *lbl_State_Torso, *lbl_BallPosition;
+	QLabel *lbl_ImageCounter;
 	QLineEdit *txt_State_Head, *txt_State_Torso;
 	QLineEdit *txt_BallPosition;
 	QSlider *sld_UpdateInterval;
