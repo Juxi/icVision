@@ -13,7 +13,7 @@
 // TODO:
 
 int main(int argc, char *argv[]) {
-	QString version = "0.06";
+	QString version = "v0.08";
 	QString title = "LearningObjLocalization";
 
 	QApplication app(argc, argv);

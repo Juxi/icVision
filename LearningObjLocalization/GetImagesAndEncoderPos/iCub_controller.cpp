@@ -54,14 +54,49 @@ void iCubController::initializeRobot() {
 		pose.append(-10.0);		pose.append(0.0);
 		pose.append(0.0); 		pose.append(0.0);
 		pose.append(0.0); 		pose.append(0.0);
-		if ( head->ctrl->positionMove( pose ) ) { printf("Head initialized!"); }		
+		if ( head->ctrl->positionMove( pose ) ) { printf("Head initialized!\n"); }		
 	}
 	if( torso->initialized ) {
 		QVector<qreal> pose;
 		pose.append(0.0); 		pose.append(0.0);
 		pose.append(35.0);
-		if ( torso->ctrl->positionMove( pose ) ) { printf("Torso initialized!"); }		
+		if ( torso->ctrl->positionMove( pose ) ) { printf("Torso initialized!\n"); }		
 	}
+	
+	// clean up the world!
+	
+	RpcClient port;
+	port.open("/juxi/world-client");
+	if(! Network::connect("/juxi/world-client", "/icubSim/world") ) {
+		std::cout << std::endl << "ERROR: Could not connect to port: " << "/icubSim/world" << std::endl << std::endl;		
+		return;
+	}
+	
+	Bottle cmd, response;
+	
+	
+	// remove the blue (default) ball
+	cmd.addString("world"); cmd.addString("set");	
+	cmd.addString("ball");	cmd.addInt(1);
+	cmd.addDouble( -10.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
+	port.write(cmd, response);		
+	if( response.size() > 0) {
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+	}
+	
+	cmd.clear(); response.clear();
+	// also red cube
+	cmd.addString("world"); cmd.addString("set");	
+	cmd.addString("cube");
+	cmd.addDouble( 0.0); cmd.addDouble(-1.5);
+	port.write(cmd, response);		
+	if( response.size() > 0) {
+		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+	}
+	
+	Network::disconnect("/icubSim/world", "/juxi/world-client");
+	port.close();	
+	
 }
 	
 	
@@ -224,17 +259,6 @@ void iCubController::getWorldObjectPosition(const char *name, double &x, double 
 	}
 
 	Bottle cmd, response;
-	
-	// remove the blue (default) ball
-	cmd.addString("world"); cmd.addString("set");	
-	cmd.addString("ball");	cmd.addInt(1);
-	cmd.addDouble( -10.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
-	port.write(cmd, response);		
-	if( response.size() > 0) {
-		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
-	}
-	
-	cmd.clear(); response.clear();
 	
 	// get red ball info
 	cmd.addString("world"); cmd.addString("get");

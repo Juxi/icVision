@@ -19,6 +19,7 @@
 #include <opencv/cv.h>
 
 #include <iostream>	//for cout
+#include <iomanip>	// for setw
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,6 +85,21 @@ void Window::initWindow() {
 	sld_UpdateInterval->setRange(100, 2000);
 	sld_UpdateInterval->setTickInterval(50);
 	sld_UpdateInterval->setValue(500);
+	
+	//chk_head = new QCheckBox[5]();
+	for(int i = 0; i < HEAD_JOINTS; i++) {
+		chk_head[i] = new QCheckBox();
+		chk_head[i]->setText(QString("Head %1").arg(i));
+		if(i < 3) {
+			chk_head[i]->setChecked(true);
+			
+			chk_torso[i] = new QCheckBox(QString("Torso %1").arg(i));
+			chk_torso[i]->setChecked(true);			
+		}else
+			chk_head[i]->setChecked(false);
+	}
+//	chk_head[0]->setStatusTip("Activate babbling for the head joints");
+//	chk_head->setStatusTip("Activate babbling for the torso joints");	
 	lbl_ImageCounter = new QLabel("No points gathered yet!");
 	
 	lbl_CV_left->setMinimumHeight(20);
@@ -91,33 +107,59 @@ void Window::initWindow() {
 	lbl_CV_right->setMinimumHeight(20);
 	lbl_CV_right->setMaximumHeight(60);
 
+	int row = 0;
 	// Vision Pane (VP)
 	// VP - Labels
-	vision_layout->addWidget(lbl_CV_left, 0, 0);
-	vision_layout->addWidget(lbl_CV_right, 0, 1);
+	vision_layout->addWidget(lbl_CV_left,  row, 0);
+	vision_layout->addWidget(lbl_CV_right, row, 1);
 	// VP - Images (from iCub)
-	vision_layout->addWidget(CV_left, 1, 0);
-	vision_layout->addWidget(CV_right, 1, 1);
+	row++;
+	vision_layout->addWidget(CV_left,  row, 0);
+	vision_layout->addWidget(CV_right, row++, 1);
 
 	// VisionPane - info about robot status
-	vision_layout->addWidget(lbl_State_Head, 2, 0);
-	vision_layout->addWidget(txt_State_Head, 2, 1);
-	vision_layout->addWidget(lbl_State_Torso, 3, 0);
-	vision_layout->addWidget(txt_State_Torso, 3, 1);
-	vision_layout->addWidget(lbl_BallPosition, 4, 0);
-	vision_layout->addWidget(txt_BallPosition, 4, 1);
+	vision_layout->addWidget(lbl_State_Head, row, 0);
+	vision_layout->addWidget(txt_State_Head, row++, 1);
+	vision_layout->addWidget(lbl_State_Torso, row, 0);
+	vision_layout->addWidget(txt_State_Torso, row++, 1);
+	vision_layout->addWidget(lbl_BallPosition, row, 0);
+	vision_layout->addWidget(txt_BallPosition, row++, 1);
 	
 	// VP - Images (postprocessed)	
 //	vision_layout->addWidget(CV_left_dev, 2, 0);
 //	vision_layout->addWidget(CV_right_dev, 2, 1);
 	
 	// VP - Get Button	
-	vision_layout->addWidget(sld_UpdateInterval, 5, 0);
-	vision_layout->addWidget(btn_get, 5, 1);
+	vision_layout->addWidget(lbl_ImageCounter, row, 0);
+	vision_layout->addWidget(btn_get, row++, 1);
+	
+	
+	// Checkboxes for head and torso
+	chkH_widget = new QWidget();
+	chkT_widget = new QWidget();
+	chkH_layout = new QHBoxLayout();
+	chkT_layout = new QHBoxLayout();
+	
+	for(int i = 0;i < HEAD_JOINTS; i++) {
+		chk_head[i]->setText(QString("Head %1").arg(i));
+		if( i < 5 ) chkH_layout->addWidget(chk_head[i]);
+		else		chkT_layout->addWidget(chk_head[i]);
+		
+	}
+	chkH_widget->setLayout(chkH_layout);
+
+	// torso checkers
+	for(int i = 0;i < 3; i++)
+		chkT_layout->addWidget(chk_torso[i]);
+	chkT_widget->setLayout(chkT_layout);
+
+	vision_layout->addWidget(chkH_widget, row, 0);
+	vision_layout->addWidget(chkT_widget, row++, 1);
+	
 
 	// VP - Start Gathering Data
-	vision_layout->addWidget(lbl_ImageCounter, 6, 0);
-	vision_layout->addWidget(btn_timer, 6, 1);
+	vision_layout->addWidget(sld_UpdateInterval, row, 0);
+	vision_layout->addWidget(btn_timer, row++, 1);
 	
 	vision_widget->setLayout(vision_layout);
  	
@@ -125,6 +167,7 @@ void Window::initWindow() {
 
 	second_widget = new QWidget;	
 	second_layout  = new QVBoxLayout;
+	second_layout->setMargin(0);
 	second_layout->addWidget(dash);
 	second_layout->addWidget(vision_widget);
 	second_layout->addWidget(btn_quit);
@@ -149,7 +192,7 @@ void Window::initWindow() {
 	
 	setLayout(central_layout);
 	move(100,0);
-	resize(740, 600);	// width, height
+	resize(740, 680);	// width, height
 	show();
 
 	
@@ -171,6 +214,16 @@ Window::~Window() {
 	
 //	delete CV_left_dev;
 //	delete CV_right_dev;
+	
+	for(int i=0; i < 5;i++)
+		delete chk_head[i];
+	for(int i=0; i < 3;i++)
+		delete chk_torso[i];
+	
+	delete chkH_layout;
+	delete chkH_widget;	
+	delete chkT_layout;	
+	delete chkT_widget;
 	
 	delete lbl_ImageCounter;
 	delete lbl_State_Head;
@@ -270,9 +323,8 @@ void Window::timerTimeout() {
 		
 		timer->start();
 		
-		// move to new position?
-		// stop the babbling for now
-		// doTheBabbling();
+		// move to new position (babbling!)
+		doTheBabbling();
 		
 		// stop
 //		iCubCtrl->head->ctrl->stop();
@@ -303,11 +355,15 @@ void Window::writeCSV() {
 	
 	
 	std::stringstream ss1;
-	ss1 << "left_"<< imageIndex;
+	ss1 << "left_";
+	ss1 << std::setfill('0') << std::setw(8);
+	ss1 << imageIndex;
 	ss1 << ".ppm";
 	imgNameLeft = ss1.str();
 	std::stringstream ss2;
-	ss2 << "right_"<< imageIndex;
+	ss2 << "right_";
+	ss2 << std::setfill('0') << std::setw(8);
+	ss2 << imageIndex;
 	ss2 << ".ppm";
 	imgNameRight = ss2.str();
 
@@ -393,8 +449,15 @@ void Window::showEncoderPositions() {
 	yarp_port->read(input);
 	
 	if (input != NULL) {
-		std::cout << "got " << input.toString().c_str() << endl;
+		//std::cout << "got " << input.toString().c_str() << endl;
 		s = input.toString();
+		
+		for(int i = 0; i < input.size(); i++) {
+			if(input.get(i).isDouble() && i < HEAD_JOINTS) {
+				headjnt_pos[i] = input.get(i).asDouble();
+// DEBUG				std::cout << "#########Head joint " << i << ": " << headjnt_pos[i] << endl;
+			}
+		}
 	} else {
 		s = "NULL";
 	}
@@ -407,8 +470,15 @@ void Window::showEncoderPositions() {
     Bottle input2;
 	yarp_port->read(input2);
 	if (input2 != NULL) {
-		std::cout << "got " << input2.toString().c_str() << endl;
 		s = input2.toString();
+
+		for(int i = 0; i < input2.size(); i++) {
+			if(input2.get(i).isDouble() && i < 3) {
+				torsojnt_pos[i] = input2.get(i).asDouble();
+// DEBUG				std::cout << "#########Torso joint " << i << ": " << torsojnt_pos[i] << endl;
+			}
+		}
+		
 	} else {
 		s = "NULL";
 	}
@@ -483,11 +553,23 @@ void Window::doTheBabbling() {
 //				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
 //			} else { aPos = 0; }
 
-			// limit the head movement to one joint!
-			if ( i == 0 ) {
+//			// limit the head movement to one joint!
+//			if ( i == 0 ) {
+//				ctrl->lim->getLimits(i, &min, &max);
+//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+//			} else { aPos = 0; }
+			
+			// limit the head movement to only selected ones ...
+
+			if ( chk_head[i] && chk_head[i]->isChecked() ) {
 				ctrl->lim->getLimits(i, &min, &max);
 				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
-			} else { aPos = 0; }
+			} else { 
+//				if( i < 4) 
+					aPos = headjnt_pos[i];
+//				else aPos = 0;
+			}
+			
 			
 			pose.append( aPos );
 				
@@ -500,13 +582,31 @@ void Window::doTheBabbling() {
 		
 //		iCubCtrl->head->ctrl->positionMove();
 	}
+	
+	pose.clear();
 
 	// now the torso
 	
-//	if( iCubCtrl->torso->initialized ) {
+	if( iCubCtrl->torso->initialized ) {
+		ctrl = iCubCtrl->torso->ctrl;
+		for (int i = 0; i < ctrl->getNumJoints(); i++) {
+			if ( chk_torso[i] && chk_torso[i]->isChecked() ) {
+				ctrl->lim->getLimits(i, &min, &max);
+				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+			} else { 
+				aPos = torsojnt_pos[i];
+			}
+			pose.append(aPos);
+		}
+
+		iCubCtrl->torso->ctrl->setRefSpeeds( 2.5 );
+		
+		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("T"); }		
+		else { printf("*\n"); }
+		
 //		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
 //		else { printf("*\n"); }
-//	}
+	}
 	
 	//so have a wait or something?
 	{ printf("\n"); }

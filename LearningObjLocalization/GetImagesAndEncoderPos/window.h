@@ -20,6 +20,8 @@
 #include <iostream>
 #include <fstream>
 
+#define HEAD_JOINTS 6
+
 class iCubController;
 
 class Window : public QWidget {
@@ -72,6 +74,12 @@ private:
 	QLineEdit *txt_State_Head, *txt_State_Torso;
 	QLineEdit *txt_BallPosition;
 	QSlider *sld_UpdateInterval;
+	
+	QWidget *chkH_widget, *chkT_widget;
+	QHBoxLayout *chkH_layout, *chkT_layout;	
+	QCheckBox *chk_head[HEAD_JOINTS], *chk_torso[3];
+	
+	double headjnt_pos[HEAD_JOINTS], torsojnt_pos[3];
 	
 //	QFile *csvfile;
 	std::ofstream csvfile;

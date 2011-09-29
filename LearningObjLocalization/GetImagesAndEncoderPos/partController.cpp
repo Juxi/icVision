@@ -67,6 +67,7 @@ bool PartController::open()
 		pos->setRefAcceleration(i, 20);
 		amp->enableAmp(i);
 		pid->enablePid(i);
+		
 	}
 	
 	/* initialize random seed: */
@@ -134,6 +135,21 @@ bool PartController::velocityMove( int i, qreal v )
 	if ( i<numJoints ) { return vel->velocityMove(i,v); }
 	else { return 0; }
 }
+
+
+//void PartController::getPositions( QVector<qreal>&pos ) {
+////	QVector<qreal> pos;
+//	pos.resize(numJoints);
+//	
+//	double val;
+//	for (int i = 0; i < numJoints; i++)
+//	{
+//		enc->getEncoder(i, &val);
+//		pos.append( val );
+//	}	
+//
+//	//	return pos;
+//}
 
 void PartController::close()
 {

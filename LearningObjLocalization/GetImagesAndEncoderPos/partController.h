@@ -38,6 +38,10 @@ public:
 	bool positionMove( const QVector<qreal>& );					//!< Moves the device to a specified position
 	bool velocityMove( int i, qreal v);							//!< Move the robot (indefinitely) with a specified velocity (you should stop it eventually)
 	bool randomPosMove( qreal maxSpeed, bool hands );			//!< do a random position move with all controllable axes
+	
+//added by Juxi
+	//void getPositions( QVector<qreal>& );						//!< Returns the values from the encoder readouts of the device
+	
 
 private:
 	
