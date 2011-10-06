@@ -8,6 +8,11 @@
 
 #include "GpImage.h"
 
+// TODO:
+//		- check for memory leak
+//			o probably something with the input files?!
+//			o or also the CvCreate stuff...
+
 using namespace yarp::os;
 using namespace yarp::sig;
 
