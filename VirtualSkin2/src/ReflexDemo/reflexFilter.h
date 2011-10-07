@@ -28,10 +28,10 @@ public:
 	virtual ~ReflexFilter();					//!< Nothing special to do here
 
 	virtual void extraOpenStuff();				//!< Resizes the QVectors according to the robot model
-	virtual void collisionResponse();			//!< Provides reflexive response to collision
+	//virtual void stopRobot();			//!< Provides reflexive response to collision
 												/**< Moves the robot back to a past "safe" state */
-	virtual void responseComplete();			//!< Waits for the commands from collisionResponse() to finish
-												/**< This example is straightforward, as collisionResponse()
+	virtual void collisionResponse();			//!< Waits for the commands from stopRobot() to finish
+												/**< This example is straightforward, as stopRobot()
 													 issues a position move command */
 
 private:

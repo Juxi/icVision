@@ -34,9 +34,9 @@ namespace VirtualSkin
  *	 control ports for your robot, and forwards commands from the duplicates to the real ones as long as the filter is connected. The filter is controlled
  *	 by a kinematic model of the robot (see YarpModel and RobotModel::Model) that reads the streams of encoder positions from the real robot, computes the
  *	 forward kinematics and does collision detection. If unwanted collisions are found, the filter cuts its connection between the duplicate ports and the real
- *	 ones, thereby effectively ignoring the user until a pure virutal handler function (collisionResponse()) returns.
+ *	 ones, thereby effectively ignoring the user until a pure virutal handler function (stopRobot()) returns.
  *
- *	 The user is free to implement collisionResponse() in any way they like. An example of a simple reflexive response to collision is implemented in ReflexFilter.
+ *	 The user is free to implement stopRobot() in any way they like. An example of a simple reflexive response to collision is implemented in ReflexFilter.
  *	 The implementation of RobotFilter is built on YarpFilter. In order to empower the user to gather the data needed to handle collisions in arbitrary ways, the RobotFilter supports the extension
  *	 helper-classes of YarpFilter (StateObserver, CallObserver and ResponseObserver) can be extended, and the resulting sub-classes passed to the RobotFilter
  *	 via the templated open<aStateObserver,aCallObserver,aResponseObserver>( const QString& ) function.
@@ -148,10 +148,10 @@ public:
 	virtual void extraOpenStuff() {}		//!< This is called shortly before open<>(const QString&) returns
 											/**< In your sub-classes, replace the empty implementation with any initialization code required.
 												 For an example of this, see ReflexFilter. */ 
-	virtual void collisionResponse() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
+	//virtual void stopRobot() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
 											/**< This is executed once the RobotFilter has detected collisions and cut its connection. */
-	virtual void responseComplete() {}		//!< Should waits for the commands issued in collisionResponse() to finish running
-											/**< This is called right after collisionResponse() and runs in its own thread.
+	virtual void collisionResponse() {}		//!< Should waits for the commands issued in stopRobot() to finish running
+											/**< This is called right after stopRobot() and runs in its own thread.
 												 the user is responsible for deciding what it means that control commands are "finished" executing,
 												 which clearly depends on the kinds of commands issued in the first place. */
 	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter

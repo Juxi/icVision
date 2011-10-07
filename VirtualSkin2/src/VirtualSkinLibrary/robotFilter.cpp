@@ -100,84 +100,37 @@ void RobotFilter::takeControl( int numReflexCollisions )
 	{
 		haveControl = true;
 		
-		// first take control away from the user
 		for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
-			cbFilters.at(bodyPart)->cutConnection(true);
+			cbFilters.at(bodyPart)->cutConnection(true);	// take control away from the user
+			cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
 		}
 		
-		// inform the user
-		printf("*** COLLISION RECOVERY ***\n");
 		statusPort.setBottle( yarp::os::Bottle("0") );
+
+		printf("*** ALL STOPPED ***\n");
 		
 		// do some control in response
-		collisionResponse();
-		
-		// wait for the response to finish
 		start();
 	}
 }
 
 void RobotFilter::run()
 {	
-	//wait for the commands issued in collisionResponse() to finish
-	responseComplete();
+	collisionResponse();
 	
 	if ( isColliding )
 	{
-		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
-
-		/* */
-		yarp::os::Bottle torso,head,arm;
-		torso.addVocab(VOCAB_SET);
-		torso.addVocab(VOCAB_POSITION_MOVES);
-		yarp::os::Bottle& pTorso = torso.addList();
-		pTorso.addDouble(0.0);
-		pTorso.addDouble(0.0);
-		pTorso.addDouble(0.0);
-		
-		head.addVocab(VOCAB_SET);
-		head.addVocab(VOCAB_POSITION_MOVES);
-		yarp::os::Bottle& pHead = head.addList();
-		pHead.addDouble(0.0);
-		pHead.addDouble(0.0);
-		pHead.addDouble(0.0);
-		pHead.addDouble(0.0);
-		pHead.addDouble(0.0);
-		pHead.addDouble(0.0);
-		
-		arm.addVocab(VOCAB_SET);
-		arm.addVocab(VOCAB_POSITION_MOVES);
-		yarp::os::Bottle& pArm = arm.addList();
-		pArm.addDouble(-26.0);
-		pArm.addDouble(20.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(50.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-		pArm.addDouble(0.0);
-
-		cbFilters.at(0)->injectCall(torso);
-		cbFilters.at(1)->injectCall(head);
-		cbFilters.at(2)->injectCall(arm);
-		cbFilters.at(3)->injectCall(arm);
-		
-		printf("sent 'home' command\n");
-		
+		printf("No safe pose in the buffer. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
 	}
+	
 	while ( isColliding )
 	{
+		printf(".");
 		msleep(YARP_PERIOD_ms);
 	}
+	
+	printf("\n");
 	
 	emit reflexDone();
 }
@@ -198,6 +151,6 @@ void RobotFilter::openFilter()
 	
 	//inform the user
 	statusPort.setBottle( yarp::os::Bottle("1") );
-	printf("CONTROL RESTORED\n");
+	printf("*** CONTROL RESTORED ***\n");
 	haveControl = false;
 }

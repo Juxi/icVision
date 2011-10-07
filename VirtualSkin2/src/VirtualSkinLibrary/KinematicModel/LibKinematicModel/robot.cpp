@@ -143,9 +143,10 @@ void Robot::setEncoderPosition( qreal pos )                                     
 
 bool Robot::setEncoderPosition(int partNum, const QVector<qreal>& pos)           // for an entire branch (using encoder positions)
 {
+	//printf("called setEncoderPosition() - size %i \n", pos.size() );
+
 	QMutexLocker locker(&mutex);
 	
-	//printf("called setEncoderPosition() - size %i \n", pos.size() );
     if ( partIdxInRange(partNum) ) {
         return partList.at(partNum)->setEncPos(pos);
     }

@@ -62,6 +62,7 @@ public:
 	const QString*	getPartName( int partNum ) const;					//!< Get the name of a BodyPart, given its index (usually for printing messages) 
 	const QString*	getMotorName( int partNum, int motorNum ) const;		//!< Get the name of a Motor, given its index and the index of its body part
 	
+	BodyPart*		getPart( int partNum ) const { return partList.at(partNum); }
 	BodyPart*		getPartByName( const QString& partName );					//!< Get the BodyPart itself, given its name
 	Motor*			getMotorByName( const QString& motorName );					//!< Get the moter itself, given its name
 	
