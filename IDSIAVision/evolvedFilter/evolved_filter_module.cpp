@@ -127,15 +127,15 @@ bool EvolvedFilterModule::updateModule()
 	ImageHeight = left_image->height();	
 	IplImage* in = (IplImage*) left_image->getIplImage();
 	
-//	// DEBUG
+	// DEBUG
 //	std::cout << "DEBUG: Got input image!" << std::endl;	
-//	GpImage* inputImg = new GpImage(in);
-//	inputImg->Save("input.png");
+	GpImage* inputImg = new GpImage(in);
+	inputImg->Save("input.png");
 	
 	// create input images to the filter
 	createInputImages(in);
 
-//	// DEBUG test output of the creating
+	// DEBUG test output of the creating
 //	std::cout << "DEBUG: Created the GP input images!" << std::endl;		
 //	int i = 0;
 //	for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
@@ -218,7 +218,7 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 
 
 GpImage* EvolvedFilterModule::runFilter() {	
-	// filter blue cup on icub
+	// filter blue things on icub
 //		GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
 	GpImage* node0 = new GpImage(-8.22974890470505, ImageWidth, ImageHeight);
 	GpImage* node1 = InputImages[4];
