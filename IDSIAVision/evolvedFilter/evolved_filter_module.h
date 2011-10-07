@@ -39,9 +39,23 @@ private:
 	BufferedPort< ImageOf<PixelBgr> > outputPort_Image;
 	
 	bool	isStarted;	
+	bool	inDebugMode;
+	double  scalingFactor;
 	
 	int ImageWidth;
 	int ImageHeight;
+	
+	IplImage* gray;
+	IplImage* red ;
+	IplImage* green;
+	IplImage* blue;
+	IplImage* h   ;
+	IplImage* s   ;
+	IplImage* v   ;
+	
+	
+	
+	
 	
 	std::vector<GpImage*> InputImages;
 	void createInputImages(IplImage *in);

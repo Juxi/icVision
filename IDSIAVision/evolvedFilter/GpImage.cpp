@@ -142,16 +142,26 @@ GpImage* GpImage::unsharpen(int Aperture) const {
 //		Img unsharpenmask = this.Image.Sub(blurred);
 //		Img hicontrast = unsharpenmask.Mul(1.5);/
 //		Value = this.Image.Add(hicontrast);
-	GpImage* blurred = gauss(Aperture);
-	GpImage* unsharpenmask = sub(blurred);
-	GpImage* hicontrast = unsharpenmask->mulc(1.5);
-	GpImage* retImg = add(hicontrast);
+	Img retImg = (IplImage*) cvClone(Image);
 
-	delete blurred;
-	delete unsharpenmask;
-	delete hicontrast;
+	Img blurred = (IplImage*) cvClone(Image);
+	Img unsharpenmask = (IplImage*) cvClone(Image);
+	Img hicontrast = (IplImage*) cvClone(Image);
+	Img cv1 = (IplImage*) cvClone(Image);	
+	
+	cvSmooth(Image, blurred, CV_GAUSSIAN, Aperture, Aperture);
+	cvSub(Image, blurred, unsharpenmask);
+	cvSet(cv1, cvRealScalar(1.0));
+	cvMul(unsharpenmask, cv1, hicontrast, 1.5);
+	
+	cvAdd(Image, hicontrast, retImg);
 
-	return retImg;	
+	cvReleaseImage(&blurred);
+	cvReleaseImage(&unsharpenmask);
+	cvReleaseImage(&hicontrast);
+	cvReleaseImage(&cv1);
+	
+	return new GpImage(retImg);	
 }
 GpImage* GpImage::threshold(double v) const {
 //		Value = this.Image.ThresholdBinary(new Gray(v), new Gray(255));
@@ -178,40 +188,48 @@ GpImage* GpImage::ShiftDown() const {
 //		Value = this.Image.Convolution(ShiftDownKernel);
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	int down[] = { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };	
-	CvMat ShiftDownKernel;
-	cvSetData(&ShiftDownKernel, down, 1);
-	cvFilter2D(Image, retImg, &ShiftDownKernel);
+	float down[] = { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };	
+	CvMat* ShiftDownKernel = cvCreateMat(3, 3, CV_32F);;
+	cvSetData(ShiftDownKernel, down, 3*sizeof(float));
+	cvFilter2D(Image, retImg, ShiftDownKernel);
+	
+	cvReleaseMat(&ShiftDownKernel);	
 
 	return new GpImage(retImg);
 }
 GpImage* GpImage::ShiftUp() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 
-	int up[]   = { 0, 0, 0 , 0, 0, 0 , 0, 1, 0 };
-	CvMat ShiftUpKernel;
-	cvSetData(&ShiftUpKernel,    up, 1);		
-	cvFilter2D(Image, retImg, &ShiftUpKernel);
+	float up[] = { 0, 0, 0 , 0, 0, 0 , 0, 1, 0 };
+	CvMat* ShiftUpKernel = cvCreateMat(3, 3, CV_32F);
+	cvSetData(ShiftUpKernel, up, 3*sizeof(float));		
+	cvFilter2D(Image, retImg, ShiftUpKernel);
+	
+	cvReleaseMat(&ShiftUpKernel);
 
 	return new GpImage(retImg);
 }
 GpImage* GpImage::ShiftRight() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	int left[] = { 0, 0, 0 , 1, 0, 0 , 0, 0, 0 };
-	CvMat ShiftLeftKernel;
-	cvSetData(&ShiftLeftKernel,  left, 1);	
-	cvFilter2D(Image, retImg, &ShiftLeftKernel);
+	float left[] = { 0, 0, 0 , 1, 0, 0 , 0, 0, 0 };
+	CvMat* ShiftLeftKernel = cvCreateMat(3, 3, CV_32F);;
+	cvSetData(ShiftLeftKernel,  left, 3*sizeof(float));
+	cvFilter2D(Image, retImg, ShiftLeftKernel);
+	
+	cvReleaseMat(&ShiftLeftKernel);
 	
 	return new GpImage(retImg);
 }
 GpImage* GpImage::ShiftLeft() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	int right[]= { 0, 0, 0 , 0, 0, 1 , 0, 0, 0 };
-	CvMat ShiftRightKernel;	
-	cvSetData(&ShiftRightKernel, right, 1);
-	cvFilter2D(Image, retImg, &ShiftRightKernel);
+	float right[]= { 0, 0, 0 , 0, 0, 1 , 0, 0, 0 };
+	CvMat* ShiftRightKernel = cvCreateMat(3, 3, CV_32F);;	
+	cvSetData(ShiftRightKernel, right, 3*sizeof(float));
+	cvFilter2D(Image, retImg, ShiftRightKernel);
+	
+	cvReleaseMat(&ShiftRightKernel);
 	
 	return new GpImage(retImg);
 }
