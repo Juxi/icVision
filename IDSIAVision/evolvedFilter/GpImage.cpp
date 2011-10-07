@@ -27,10 +27,19 @@ GpImage* GpImage::mul (GpImage* a) const {
 }
 GpImage* GpImage::avg (GpImage* a) const { 
 //GpImage* GpImage::avg (GpImage a) { Img Temp = this.Image + a.Image; Temp._Mul(0.5); return new GpImage(Temp); }
-	GpImage* temp = this->add(a);
-	GpImage* retImg = temp->mulc(0.5);
-	delete temp;
-	return retImg;
+	Img retImg = (IplImage*) cvClone(Image);
+	Img unity  = (IplImage*) cvClone(Image);
+
+	// adding two pictures together
+	cvAdd(Image, a->Image, retImg);
+	
+	// multiply with 0.5
+	cvSet(unity, cvRealScalar(1.0));
+	cvMul(retImg, unity, retImg, 0.5);
+
+	cvReleaseImage(&unity);
+	
+	return new GpImage(retImg);
 }
 
 GpImage* GpImage::mulc(double v) const { 

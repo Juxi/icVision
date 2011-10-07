@@ -25,6 +25,8 @@ public:
 	}
 	
 	GpImage(Img img_in) {
+		m_width = img_in->width;
+		m_height = img_in->height;		
 		Image = img_in;
 	}
 
@@ -97,6 +99,9 @@ public:
 	GpImage* ShiftRight() const;	
 		
 	void Save(string FileName) const;
+	
+private:
+	int m_width, m_height;
 	
 };
 

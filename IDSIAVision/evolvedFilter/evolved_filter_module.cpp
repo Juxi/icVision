@@ -104,7 +104,7 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 
 double EvolvedFilterModule::getPeriod()
 {
-   return 0.1;	// we need something higher than 0.0 else it is too fast?!
+   return 0.05;	// we need something higher than 0.0 else it is too fast?!
    //module periodicity (seconds)
 }
 
@@ -113,12 +113,18 @@ double EvolvedFilterModule::getPeriod()
 */
 bool EvolvedFilterModule::updateModule()
 {
+	// DEBUG
+	putchar('.');
+//	std::cout << "DEBUG: Run filter!" << std::endl;	
+
 	// read image from the port
-	ImageOf<PixelRgb> *left_image = leftInPort.read();  // read an image
+	ImageOf<PixelBgr> *left_image = leftInPort.read();  // read an image
 	if (left_image == NULL) { 
 		std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
 		return false;
 	}
+	ImageWidth  = left_image->width();
+	ImageHeight = left_image->height();	
 	IplImage* in = (IplImage*) left_image->getIplImage();
 	
 //	// DEBUG
@@ -129,7 +135,7 @@ bool EvolvedFilterModule::updateModule()
 	// create input images to the filter
 	createInputImages(in);
 
-	// DEBUG test output of the creating
+//	// DEBUG test output of the creating
 //	std::cout << "DEBUG: Created the GP input images!" << std::endl;		
 //	int i = 0;
 //	for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
@@ -142,8 +148,8 @@ bool EvolvedFilterModule::updateModule()
 	// run filter
 	GpImage* filteredImg = runFilter();
 		
-//	//DEBUG
-//	filteredImg->Save("output.png");
+	//DEBUG
+	filteredImg->Save("output.png");
 	
 //	// DEBUG
 //	std::cout << "DEBUG: Yarping..." << std::endl;		
@@ -172,6 +178,7 @@ bool EvolvedFilterModule::updateModule()
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();
 	
+//	std::cout << "DEBUG: A..." << in->width <<"," << in->height << std::endl;			
 	IplImage* gray  = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 1);
 	IplImage* red   = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 1);
 	IplImage* green = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 1);
@@ -180,23 +187,25 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 	IplImage* s     = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 1);
 	IplImage* v     = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 1);	
 
+//	std::cout << "DEBUG: B..." << std::endl;			
 	// to float
 	IplImage* in32  = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 3);	
 	cvConvertScale(in, in32, 1.0, 0.0);
 	
+//	std::cout << "DEBUG: C..." << std::endl;				
 	// to gray
 	cvCvtColor(in32, gray, CV_BGR2GRAY);
 	InputImages.push_back(new GpImage(gray));
 	
-	// from RGB
-	cvSplit(in32, red, green, blue, NULL);
+	// from BGR to RGB
+	cvSplit(in32, blue, green, red, NULL);
 	InputImages.push_back(new GpImage(red));
 	InputImages.push_back(new GpImage(green));
 	InputImages.push_back(new GpImage(blue));	
 
 	// to HSV
 	IplImage* hsvIn = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 3);
-	cvCvtColor(in32, hsvIn, CV_RGB2HSV);
+	cvCvtColor(in32, hsvIn, CV_BGR2HSV);
 	cvSplit(hsvIn, h, s, v, NULL);
 
 	cvReleaseImage(&hsvIn);
@@ -208,25 +217,51 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 }
 
 
-GpImage* EvolvedFilterModule::runFilter() {
-	GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
-	GpImage* node23 = InputImages[5];
-	GpImage* node26 = InputImages[2];
-
-	GpImage* node32 = node26; //NOP
-	GpImage* node44 = node32; //NOP
-	GpImage* node49 = node23->mul(node44);
-	GpImage* node57 = node49; //NOP
-	GpImage* node99 = node57->threshold(64);
-
-	delete(node987654321);
-	delete(node23);
-	delete(node26); //	delete(node32);
-					//	delete(node44);
-	delete(node49);	// 	delete(node57);
-	
+GpImage* EvolvedFilterModule::runFilter() {	
+	// filter blue cup on icub
+//		GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
+	GpImage* node0 = new GpImage(-8.22974890470505, ImageWidth, ImageHeight);
+	GpImage* node1 = InputImages[4];
+	GpImage* node2 = node0->avg(node1);
+	GpImage* node4 = node2->threshold(64);
+	GpImage* node6 = node4->erode(5);
+	GpImage* node42 = node6->SmoothMedian(5);
+	GpImage* node79 = node42->gauss(9);
+	GpImage* node99 = node79->dilate(5);
+//		delete(node987654321);
+	delete(node0);
+	delete(node1);
+	delete(node2);
+	delete(node4);
+	delete(node6);
+	delete(node42);
+	delete(node79);
 	return node99;
 }
+
+
+// filter table in sim
+//GpImage* EvolvedFilterModule::runFilter() {	
+////	std::cout << "DEBUG: Created the GP input images!" << std::endl;		
+//	
+//	GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
+//	GpImage* node23 = InputImages[5];
+//	GpImage* node26 = InputImages[2];
+//
+//	GpImage* node32 = node26; //NOP
+//	GpImage* node44 = node32; //NOP
+//	GpImage* node49 = node23->mul(node44);
+//	GpImage* node57 = node49; //NOP
+//	GpImage* node99 = node57->threshold(64);
+//
+//	delete(node987654321);
+//	delete(node23);
+//	delete(node26); //	delete(node32);
+//					//	delete(node44);
+//	delete(node49);	// 	delete(node57);
+//	
+//	return node99;
+//}
 //	GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
 //	GpImage* node0 = node987654321->ShiftDown();
 //	GpImage* node1 = node0->sobelx(11);
