@@ -43,6 +43,7 @@ SET ( hdr_files		modelconstants.h
 			modelwindow.h		# the window
 			glwidget.h		# the OpenGL frustum
 
+			marker.h
 			transformable.h
 			compositeobject.h
 			primitiveobject.h

@@ -10,6 +10,6 @@ ModelWindow::ModelWindow()
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addWidget(glWidget);
     setLayout(mainLayout);
-    setWindowTitle(tr("Kineamtic Robot Model"));
+    setWindowTitle(tr("Kinematic Robot Model"));
 }
 

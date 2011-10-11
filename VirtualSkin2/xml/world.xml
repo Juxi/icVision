@@ -2,11 +2,11 @@
 <!DOCTYPE WorldList>
 <WorldList version="1.0">
 
-<object name="table" pz="-.175" px="-0.145">
+<object name="table" pz="-.1" px="-0.145">
     <box width="1" depth=".001" height=".71"/>
 </object>
 
-<object name="cup1" px="-.3" pz="-.1">
+<!--<object name="cup1" px="-.3" pz="-.1">
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>
 <object name="cup2" px="-.3" py="-.2" pz="-.1">   
@@ -16,10 +16,10 @@
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>
 
-<object name="">
+<object name="" pz="">
     <box width=".005" depth="1" height=".71" px=".355"/>
     <box width="1" depth="1" height=".005" px="-.145" py=".355"/>
     <box width="1" depth="1" height=".005" px="-.145" py="-.355"/>
-</object>
+</object>-->
 
 </WorldList>

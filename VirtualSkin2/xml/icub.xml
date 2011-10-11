@@ -9,7 +9,7 @@
     
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".0325">
-            <box width=".15" depth=".14" height=".25" pz="-.075"/>
+            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>-->
             
         <link z=".032" radius="0">
     

@@ -68,9 +68,9 @@ int main(int argc, char *argv[])
 			sleep(1);
 			
 			// Enable Virtual Skin for the robot model
-			//printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
-			//filter = new ReflexFilter( yarpRobot, visualize );
-			//filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
+			printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
+			filter = new ReflexFilter( yarpRobot, visualize );
+			filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 			 
 		}
 		
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
 		// run the Qt application
 		result = app.exec();
 		
-		//if ( filter ) { filter->close(); }
-		//delete filter;
+		if ( filter ) { filter->close(); }
+		delete filter;
 		
 		if ( yarpModel )
 		{
