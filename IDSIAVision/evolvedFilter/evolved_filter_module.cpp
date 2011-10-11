@@ -22,9 +22,23 @@ EvolvedFilterModule::EvolvedFilterModule() :
 	//moduleName = "IM-CLeVeR::Vision::Reaching";
 	setName("EvolvedFilter");
 	gray = red = green = blue =	h =	s = v = NULL;	
+	UsedInputs.Add(4);
 }
 
 EvolvedFilterModule::~EvolvedFilterModule() { 
+	
+	// cleanup input files
+	if( gray != NULL) {
+		cvReleaseImage(&gray );		
+		cvReleaseImage(&red  );		
+		cvReleaseImage(&green);				
+		cvReleaseImage(&blue );			
+		cvReleaseImage(&h    );				
+		cvReleaseImage(&s    );		
+		cvReleaseImage(&v    );
+		
+		gray = red = green = blue =	h =	s = v = NULL;	
+	}		
 }
 
 
@@ -57,6 +71,17 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 	}
 	std::cout << "Scaling input images with factor: " << scalingFactor << std::endl;		
 
+	
+	isReadingFileFromHDD = false;
+	fileName = (config.find("readFile")).toString();
+	if(! fileName.empty() ) {
+		// read file
+		isReadingFileFromHDD = true;
+		
+		std::cout << "FileName specified: " << fileName << std::endl;
+		std::cout << "WARNING! Running only once on this image!" << std::endl;
+	}
+	
 	
 	/*
 	 * attach a port of the same name as the module (prefixed with a /) to the module
@@ -137,22 +162,30 @@ bool EvolvedFilterModule::updateModule()
 		std::cout << "DEBUG: Run filter!" << std::endl;			
 	}
 	
-	// read image from the port
-	ImageOf<PixelBgr> *left_image = leftInPort.read();  // read an image
-	if (left_image == NULL) { 
-		std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
-		return false;
-	}
-	ImageWidth  = left_image->width() * scalingFactor;
-	ImageHeight = left_image->height() * scalingFactor;	
+	IplImage* in;
 	
-	IplImage* in = (IplImage*) left_image->getIplImage();
+	if( isReadingFileFromHDD ) {
+		in = cvLoadImage(fileName.c_str());
+	} else {	
+		// read image from the port
+		ImageOf<PixelBgr> *left_image = leftInPort.read();  // read an image
+		if (left_image == NULL) { 
+			std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
+			return false;
+		}
+		in = (IplImage*) left_image->getIplImage();
+	}
+	ImageWidth  = in->width * scalingFactor;
+	ImageHeight = in->height * scalingFactor;	
 	
 	if( inDebugMode ) {
 		std::cout << "DEBUG: Got input image!" << std::endl;	
 		GpImage* inputImg = new GpImage(in);
 		inputImg->Save("input.png");
 	}
+	
+	// set which images from the input we need for the filter
+	this->setUsedInputs();
 	
 	// create input images to the filter
 	createInputImages(in);
@@ -170,7 +203,7 @@ bool EvolvedFilterModule::updateModule()
 	}
 	
 	// run filter
-	GpImage* filteredImg = runFilter();
+	GpImage* filteredImg = this->runFilter();
 		
 	if( inDebugMode ) {
 		//DEBUG
@@ -195,15 +228,15 @@ bool EvolvedFilterModule::updateModule()
 	
 	InputImages.clear();
 	
-	// return
-	return true;
+	// return	(when we read from HDD we only run once!)
+	return !isReadingFileFromHDD;
 }
 
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();
 	
-//	std::cout << "DEBUG: A..." << in->width <<"," << in->height << std::endl;			
-	if( gray == NULL) {
+	// only initalize the memory for the images once!
+	if( gray == NULL ) {
 		gray  = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 		red   = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 		green = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
@@ -217,6 +250,7 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 	IplImage* in32  = cvCreateImage(cvSize(in->width, in->height), IPL_DEPTH_32F, 3);	
 	cvConvertScale(in, in32, 1.0, 0.0);
 	
+	// scale if wanted
 	IplImage* in32_scaled;
 	if( scalingFactor != 1.0) {
 		in32_scaled = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 3);	
@@ -225,30 +259,48 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 		in32_scaled = in32;
 	}
 
-	// to gray
-	cvCvtColor(in32_scaled, gray, CV_BGR2GRAY);
-	InputImages.push_back(new GpImage(gray));
+	if( UsedInputs.uses(0) ) {
+		// to gray
+		cvCvtColor(in32_scaled, gray, CV_BGR2GRAY);
+		InputImages.push_back(new GpImage(gray));
+	} else {
+		InputImages.push_back(NULL); // gray
+	}
 	
-	// from BGR to RGB
-	cvSplit(in32_scaled, blue, green, red, NULL);
-	InputImages.push_back(new GpImage(red));
-	InputImages.push_back(new GpImage(green));
-	InputImages.push_back(new GpImage(blue));	
 
-	// to HSV
-	IplImage* hsvIn = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 3);
-	cvCvtColor(in32_scaled, hsvIn, CV_BGR2HSV);
-	cvSplit(hsvIn, h, s, v, NULL);
-
-	cvReleaseImage(&hsvIn);
+	if( UsedInputs.uses(1) || UsedInputs.uses(2) || UsedInputs.uses(3) ) {	
+		// from BGR to RGB
+		cvSplit(in32_scaled, blue, green, red, NULL);
+		InputImages.push_back(new GpImage(red));
+		InputImages.push_back(new GpImage(green));
+		InputImages.push_back(new GpImage(blue));		
+	} else {
+		InputImages.push_back(NULL); // red
+		InputImages.push_back(NULL); // green
+		InputImages.push_back(NULL); // blue
+	}	
+	
+	if( UsedInputs.uses(4) || UsedInputs.uses(5) || UsedInputs.uses(6) ) {	
+		// to HSV 
+		IplImage* hsvIn = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 3);
+		cvCvtColor(in32_scaled, hsvIn, CV_BGR2HSV);
+		cvSplit(hsvIn, h, s, v, NULL);
+		cvReleaseImage(&hsvIn);
+		InputImages.push_back(new GpImage(h));
+		InputImages.push_back(new GpImage(s));
+		InputImages.push_back(new GpImage(v));			
+	} else {
+		InputImages.push_back(NULL); // h
+		InputImages.push_back(NULL); // s
+		InputImages.push_back(NULL); // v
+	}		
+	
+	// in32_scaled and in32 are the same if scale is 1.0
 	cvReleaseImage(&in32_scaled);
 	if( scalingFactor != 1.0) {
 		cvReleaseImage(&in32);
 	}
 	
-	InputImages.push_back(new GpImage(h));
-	InputImages.push_back(new GpImage(s));
-	InputImages.push_back(new GpImage(v));	
 }
 
 
@@ -355,51 +407,36 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 //}
 //
 
+// filter table in sim
 GpImage* EvolvedFilterModule::runFilter() {	
-	// filter blue things on icub
-	GpImage* node0 = new GpImage(-8.22974890470505, ImageWidth, ImageHeight);
-	GpImage* node1 = InputImages[4];
-	GpImage* node2 = node0->avg(node1);
-	GpImage* node4 = node2->threshold(64);
-	GpImage* node6 = node4->erode(5);
-	GpImage* node42 = node6->SmoothMedian(5);
-	GpImage* node79 = node42->gauss(9);
-	GpImage* node99 = node79->dilate(5);
+//	std::cout << "DEBUG: Created the GP input images!" << std::endl;		
+	
+	//GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
+	GpImage* node23 = InputImages[5];
+	GpImage* node26 = InputImages[2];
 
-	delete(node0);
-//	delete(node1);
-	delete(node2);
-	delete(node4);
-	delete(node6);
-	delete(node42);
-	delete(node79);
+	GpImage* node32 = node26; //NOP
+	GpImage* node44 = node32; //NOP
+	GpImage* node49 = node23->mul(node44);
+	GpImage* node57 = node49; //NOP
+	GpImage* node99 = node57->threshold(64);
 
+	//delete(node987654321);
+	//delete(node23);
+	//delete(node26); //	delete(node32);
+					//	delete(node44);
+	delete(node49);	// 	delete(node57);
+	
 	return node99;
 }
 
+	   
+void EvolvedFilterModule::setUsedInputs() {
+	UsedInputs.Add(2);
+	UsedInputs.Add(5);	
+}
 
-// filter table in sim
-//GpImage* EvolvedFilterModule::runFilter() {	
-////	std::cout << "DEBUG: Created the GP input images!" << std::endl;		
-//	
-//	GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
-//	GpImage* node23 = InputImages[5];
-//	GpImage* node26 = InputImages[2];
-//
-//	GpImage* node32 = node26; //NOP
-//	GpImage* node44 = node32; //NOP
-//	GpImage* node49 = node23->mul(node44);
-//	GpImage* node57 = node49; //NOP
-//	GpImage* node99 = node57->threshold(64);
-//
-//	delete(node987654321);
-//	delete(node23);
-//	delete(node26); //	delete(node32);
-//					//	delete(node44);
-//	delete(node49);	// 	delete(node57);
-//	
-//	return node99;
-//}
+
 //	GpImage* node987654321 = new GpImage(0, ImageWidth, ImageHeight);
 //	GpImage* node0 = node987654321->ShiftDown();
 //	GpImage* node1 = node0->sobelx(11);

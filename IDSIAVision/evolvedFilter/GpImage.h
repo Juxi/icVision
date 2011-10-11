@@ -90,9 +90,11 @@ public:
 	GpImage* unsharpen(int) const;
 	GpImage* threshold (double) const;
 	GpImage* SmoothMedian (int) const;
+	GpImage* Normalize(void) const;
 	
 	GpImage* gabor(int) const;
-
+	GpImage* ResizeThenGabor(int Orientation, double Scale) const;
+	
 	GpImage* ShiftDown() const;
 	GpImage* ShiftUp() const;
 	GpImage* ShiftLeft() const;

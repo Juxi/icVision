@@ -7,6 +7,8 @@
 #include <yarp/sig/all.h>
 
 #include "evolved_filter_module.h"
+#include "evolved_filters/blue_detector.h"
+#include "evolved_filters/teabox.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
@@ -14,15 +16,18 @@ using namespace yarp::sig;
 int main(int argc, char * argv[]) {
 	Network yarp;
 
-	EvolvedFilterModule module;
-	
 	std::string version = "v0.02";
-
 	printf("Launching IM-CLeVeR Evolved Filter (%s) Module [vision]...\n", version.c_str());
-
+	
+//	EvolvedFilterModule* module = new BlueCupDetector();
+//	EvolvedFilterModule* module = new EvolvedFilterModule();	
+	EvolvedFilterModule* module = new TeaBoxDetector();	
+	
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
-	module.runModule(argc, argv);
-	module.close();
+	module->runModule(argc, argv);
+	module->close();
+	
+	delete module;
 	
 	return 0;
 }

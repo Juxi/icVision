@@ -29,11 +29,17 @@ INCLUDE_DIRECTORIES (${OpenCV_INCLUDE_DIRS})
 ### Add sources
 SET ( src_files main.cpp
 		GpImage.cpp
+		GaborImage.cpp
 		evolved_filter_module.cpp
+		evolved_filters/blue_detector.cpp
+		evolved_filters/teabox.cpp		
 )
 
 
-SET ( hdr_files evolved_filter_module.h GpImage.h )
+SET ( hdr_files evolved_filter_module.h boolList.h GpImage.h GaborImage.h
+		evolved_filters/blue_detector.h
+		evolved_filters/teabox.h
+)
 
 ADD_EXECUTABLE ( ${PROJECTNAME} ${hdr_files} ${src_files} )
 

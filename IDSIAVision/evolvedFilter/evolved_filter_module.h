@@ -2,8 +2,8 @@
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-#ifndef _REDLOCATOR_MODULE_H_
-#define _REDLOCATOR_MODULE_H_
+#ifndef _EVOLVEDFILTERMODULE_MODULE_H_
+#define _EVOLVEDFILTERMODULE_MODULE_H_
 
 #include <string>
 using namespace std;
@@ -13,18 +13,23 @@ using namespace std;
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 #include "GpImage.h"
+#include "boolList.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
 
 class EvolvedFilterModule : public yarp::os::Module
 {
-private:
+protected:
 	// module parameters
 	string moduleName;
 	string robotName;
 	string partName;	
 	string handlerPortName;
+	
+	// read one file from hdd
+	string fileName;	
+	bool isReadingFileFromHDD;
 
 	/*port name strings*/
 	string outputPortName;
@@ -54,8 +59,8 @@ private:
 	IplImage* v   ;
 	
 	
-	
-	
+	boolList UsedInputs;
+	virtual void setUsedInputs();	
 	
 	std::vector<GpImage*> InputImages;
 	void createInputImages(IplImage *in);
@@ -67,7 +72,7 @@ public:
 	double getPeriod();
 	bool updateModule();
 	
-	GpImage* runFilter();
+	virtual GpImage* runFilter();
 	
 	bool open			(yarp::os::Searchable& config);
 	bool respond		(const yarp::os::Bottle& command, yarp::os::Bottle& reply);

@@ -8,6 +8,7 @@
  */
 
 #include "GpImage.h"
+#include "GaborImage.h"
 
 
 GpImage* GpImage::add (GpImage* a) const {
@@ -44,10 +45,10 @@ GpImage* GpImage::avg (GpImage* a) const {
 
 GpImage* GpImage::mulc(double v) const { 
 	Img retImg = (IplImage*) cvClone(Image);
-	GpImage* cv1 = new GpImage((IplImage*) cvClone(Image));	
-	cvSet(cv1, cvRealScalar(1.0));
-	cvMul(Image, cv1, retImg, v);
-	delete cv1;
+	Img unity  = (IplImage*) cvClone(Image);
+	cvSet(unity, cvRealScalar(1.0));
+	cvMul(Image, unity, retImg, v);
+	cvReleaseImage(&unity);
 	return new GpImage(retImg);
 }
 
@@ -180,8 +181,13 @@ GpImage* GpImage::SmoothMedian(int Aperture) const {
 GpImage* GpImage::gabor(int p) const {
 	//GaborEmguImg gab = new GaborEmguImg();
 //		Value = gab.GaborTransform(this.Image, p);
-	std::cout << "TODO!:" << "IMplement GABOR" << std::endl;
-	exit(1);	
+	//	std::cout << "TODO!:" << "IMplement GABOR" << std::endl;
+	//	exit(1);	
+	
+	GaborImage *gab = new GaborImage();
+	Img retImg = gab->GaborTransform(Image, p);
+	delete gab;
+	return new GpImage(retImg);
 }
 
 GpImage* GpImage::ShiftDown() const {
@@ -235,117 +241,67 @@ GpImage* GpImage::ShiftLeft() const {
 }
 
 
+GpImage* GpImage::Normalize() const {
+	Img retImg = (IplImage*) cvClone(Image);	
+	
+	double min, max;
+	CvPoint min_loc, max_loc;
+	Img temp  = (IplImage*) cvClone(Image);		
+	Img unity = (IplImage*) cvClone(Image);
+
+	//	this.Image.MinMax(out MinValues, out MaxValues, out MinPoints, out MaxPoints);
+	cvMinMaxLoc(Image, &min, &max, &min_loc, &max_loc);
+
+	//	Value = this.Image - MinValues[0];
+	cvSubS(Image, cvRealScalar(min), temp);
+
+	//		Value._Mul(255d / (MaxValues[0] - MinValues[0]));
+	cvSet(unity, cvRealScalar(1.0));
+	cvMul(temp, unity, retImg, 255 / (max - min));
+	
+	cvReleaseImage(&unity);
+	cvReleaseImage(&temp);
+	return new GpImage(retImg);
+}
+
+GpImage* GpImage::ResizeThenGabor(int Orientation, double Scale) const {
+	GaborImage *gab = new GaborImage();
+	
+	Img retImg = (IplImage*) cvClone(Image);
+	Img temp   = cvCreateImage(cvSize(Image->width*Scale, Image->height*Scale), IPL_DEPTH_32F, 1);
+	cvResize(Image, temp, CV_INTER_CUBIC);
+
+	Img temp2 = gab->GaborTransform(temp, Orientation);
+	
+	cvResize(temp2, retImg, CV_INTER_CUBIC);
+	
+	delete gab;
+	cvReleaseImage(&temp);
+	cvReleaseImage(&temp2);	
+	
+	return new GpImage(retImg);
+
+}
+	
+	//		GaborEmguImg gab = new GaborEmguImg();
+	
+//			
+//			int H = (int)(this.Height * Scale);
+//			int W = (int)(this.Width * Scale);
+//			
+//			Img t = this.Image.Resize(W, H, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+
+	//			t = t.Resize(this.Width, this.Height, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+//			
+//			Value = gab.GaborTransform(this.Image, Orientation);
+//			this.Cache.Add(Key, Value);
+//			           }
+//	           return new GpImage(Value);
+//	       }
 
 
-//public Gray cannyThreshold = new Gray(180);
-//public Gray cannyThresholdLinking = new Gray(120);
-//public Gray circleAccumulatorThreshold = new Gray(120);
-//public Gray WhiteColour = new Gray(255);
-
-//public GpImage SIFTa()
-//{
-////		Value = new Img(this.Image.Size);
-////		SIFTDetector Sift = new SIFTDetector();
-////		MKeyPoint[] KPs = Sift.DetectKeyPoints(this.Image.Convert<Gray, byte>(), null);
-////		
-////		foreach (MKeyPoint KP in KPs)
-////		Value.Draw(new CircleF(KP.Point, 2), new Gray(255), 0);
-////	return new GpImage(Value);
-//}
-
-//public GpImage Normalize()
-//{
-//	string Key = "normalize";
-//	Img Value = this.CheckCache(Key);
-//	if (Value == null)
-//	{
-//		if (this.MinValues == null)
-//			this.Image.MinMax(out MinValues, out MaxValues, out MinPoints, out MaxPoints);
-//		Value = this.Image - MinValues[0];
-//		Value._Mul(255d / (MaxValues[0] - MinValues[0]));
-//		this.Cache.Add(Key, Value);
-//	}
-//	
-//	
-//	return new GpImage(Value);
-//}
-
-//double[] MinValues = null;
-//double[] MaxValues = null;
-//Point[] MinPoints = null;
-//Point[] MaxPoints = null;
-//
-//public GpImage Min()
-//{
-//	string Key = "min";
-//	Img Value = this.CheckCache(Key);
-//	if (Value == null)
-//	{
-//		if (this.MinValues == null)
-//			this.Image.MinMax(out MinValues, out MaxValues, out MinPoints, out MaxPoints);
-//		Value = new Img(this.Image.Width, this.Image.Height, new Gray(MinValues[0]));
-//		this.Cache.Add(Key, Value);
-//	}
-//	return new GpImage(Value);
-//}
-//public GpImage Max()
-//{
-//	string Key = "max";
-//	Img Value = this.CheckCache(Key);
-//	if (Value == null)
-//	{
-//		if (this.MinValues == null)
-//			this.Image.MinMax(out MinValues, out MaxValues, out MinPoints, out MaxPoints);
-//		Value = new Img(this.Image.Width, this.Image.Height, new Gray(MaxValues[0]));
-//		this.Cache.Add(Key, Value);
-//	}
-//	return new GpImage(Value);
-//}
-//
-//public void MinMax(out double[] MinValues, out double[] MaxValues, out Point[] MinPoints, out Point[] MaxPoints)
-//{
-//	if (this.MinValues == null)
-//		this.Image.MinMax(out this.MinValues, out this.MaxValues, out this.MinPoints, out this.MaxPoints);
-//	
-//	MinValues = this.MinValues;
-//	MaxValues = this.MaxValues;
-//	MinPoints = this.MinPoints;
-//	MaxPoints = this.MaxPoints;
-//}
-//
-//public GpImage Avg()
-//{
-//	string Key = "avg";
-//	Img Value = this.CheckCache(Key);
-//	if (Value == null)
-//	{
-//		Value = new Img(this.Image.Width, this.Image.Height, new Gray(this.GetSum() / (this.Image.Width * this.Image.Height)));
-//		this.Cache.Add(Key, Value);
-//	}
-//	return new GpImage(Value);
-//}
-
-//public GpImage NormalizeImage(double MinValue, double MaxValue)
-//{
-//	Img Temp = this.Image.Sub(new Gray(MinValue));
-//	Temp._Mul(255d / (MaxValue - MinValue));
-//	return new GpImage(Temp);
-//}
-//
-//public GpImage Resize(double Scale, Emgu.CV.CvEnum.INTER InterType)
-//{
-//	return new GpImage(this.Image.Resize(Scale, InterType));
-//}
-
-//public double GetSum()
-//{
-//	this.Sum = this.Image.GetSum().Intensity;
-//	return (double)this.Sum;
-//}
-//
 
 void GpImage::Save(string FileName) const {
 	cvSaveImage(FileName.c_str(), Image);
-//
 //	Image->Save(FileName);
 }
