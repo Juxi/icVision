@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define BALL_MOVES 2
+
 using namespace yarp::sig;
 using namespace yarp::os;
 
@@ -301,6 +303,8 @@ void Window::toggleTimer() {
 		btn_timer->setText("Stop Gathering Data");
 	} else {
 		timer->stop();
+		iCubCtrl->head->ctrl->stop();
+		iCubCtrl->torso->ctrl->stop();
 		btn_timer->setText("Start Gathering Data");		
 	}
 }
@@ -312,19 +316,21 @@ void Window::timerTimeout() {
 		iCubCtrl->head->ctrl->stop();
 		iCubCtrl->torso->ctrl->stop();
 
+		// again?
+		iCubCtrl->head->ctrl->stop();
+		iCubCtrl->torso->ctrl->stop();
+
 		timer->stop();
 		
-		getYarpStatus();
-		
+		getYarpStatus();			
 		// write log file
 		writeCSV();	
-		
-		changeBallPos();		
-		
-		timer->start();
+		changeBallPos();	
 		
 		// move to new position (babbling!)
 		doTheBabbling();
+
+		timer->start();
 		
 		// stop
 //		iCubCtrl->head->ctrl->stop();

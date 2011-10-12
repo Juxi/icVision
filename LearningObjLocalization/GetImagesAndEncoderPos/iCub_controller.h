@@ -65,8 +65,10 @@ private:	//vars
     };
 	
 public: // vars
-    Camera *left_camera, *right_camera;
-	Part *head, *torso;	
+    Camera *left_camera;
+	Camera *right_camera;
+	Part *head;
+	Part *torso;	
 	
 
 private: // methods		

@@ -54,31 +54,31 @@ GpImage* TeaBoxDetector::runFilter() {
 	GpImage *node99 = node88->ShiftDown();
 	
 	
-	node0->Save("traceNode0000.png"); 
-	node1->Save("traceNode0001.png"); 
-	node2->Save("traceNode0002.png"); 
-	node3->Save("traceNode0003.png"); 
-	node4->Save("traceNode0004.png"); 
-	node5->Save("traceNode0005.png"); 
-	node6->Save("traceNode0006.png"); 
-	node9->Save("traceNode0009.png"); 
-	node10->Save("traceNode0010.png");
-	node11->Save("traceNode0011.png");
-	node12->Save("traceNode0012.png");
-	node14->Save("traceNode0014.png");
-	node16->Save("traceNode0016.png");
-	node17->Save("traceNode0017.png");
-	node18->Save("traceNode0018.png");
-	node19->Save("traceNode0019.png");
-	node21->Save("traceNode0021.png");
-	node25->Save("traceNode0025.png");
-	node32->Save("traceNode0032.png");
-	node35->Save("traceNode0035.png");
-	node41->Save("traceNode0041.png");
-	node45->Save("traceNode0045.png");
-	node66->Save("traceNode0066.png");
-	node88->Save("traceNode0088.png");
-	node99->Save("traceNode0099.png");
+//	node0->Save("traceNode0000.png"); 
+//	node1->Save("traceNode0001.png"); 
+//	node2->Save("traceNode0002.png"); 
+//	node3->Save("traceNode0003.png"); 
+//	node4->Save("traceNode0004.png"); 
+//	node5->Save("traceNode0005.png"); 
+//	node6->Save("traceNode0006.png"); 
+//	node9->Save("traceNode0009.png"); 
+//	node10->Save("traceNode0010.png");
+//	node11->Save("traceNode0011.png");
+//	node12->Save("traceNode0012.png");
+//	node14->Save("traceNode0014.png");
+//	node16->Save("traceNode0016.png");
+//	node17->Save("traceNode0017.png");
+//	node18->Save("traceNode0018.png");
+//	node19->Save("traceNode0019.png");
+//	node21->Save("traceNode0021.png");
+//	node25->Save("traceNode0025.png");
+//	node32->Save("traceNode0032.png");
+//	node35->Save("traceNode0035.png");
+//	node41->Save("traceNode0041.png");
+//	node45->Save("traceNode0045.png");
+//	node66->Save("traceNode0066.png");
+//	node88->Save("traceNode0088.png");
+//	node99->Save("traceNode0099.png");
 
 	
 //	delete(node987node0);
@@ -106,8 +106,13 @@ GpImage* TeaBoxDetector::runFilter() {
 	delete(node45);
 	delete(node66);
 	delete(node88);
+	
+	GpImage* bla = node99->add(InputImages[0]);
 
-	return node99;
+	delete(node99);
+
+	return bla;
+//	return node99;
 }
 	   
 void TeaBoxDetector::setUsedInputs() {

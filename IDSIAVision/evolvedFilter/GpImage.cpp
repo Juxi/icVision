@@ -191,10 +191,9 @@ GpImage* GpImage::gabor(int p) const {
 }
 
 GpImage* GpImage::ShiftDown() const {
-//		Value = this.Image.Convolution(ShiftDownKernel);
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	float down[] = { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };	
+	float down[] = { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };
 	CvMat* ShiftDownKernel = cvCreateMat(3, 3, CV_32F);;
 	cvSetData(ShiftDownKernel, down, 3*sizeof(float));
 	cvFilter2D(Image, retImg, ShiftDownKernel);
@@ -218,24 +217,25 @@ GpImage* GpImage::ShiftUp() const {
 GpImage* GpImage::ShiftRight() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	float left[] = { 0, 0, 0 , 1, 0, 0 , 0, 0, 0 };
-	CvMat* ShiftLeftKernel = cvCreateMat(3, 3, CV_32F);;
-	cvSetData(ShiftLeftKernel,  left, 3*sizeof(float));
-	cvFilter2D(Image, retImg, ShiftLeftKernel);
+	//	float right[]= { 0, 0, 0 , 0, 0, 1 , 0, 0, 0 };
+		float right[]= { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };		// actually down(simon!?)
+	CvMat* ShiftRightKernel = cvCreateMat(3, 3, CV_32F);;	
+	cvSetData(ShiftRightKernel, right, 3 * sizeof(float));
+	cvFilter2D(Image, retImg, ShiftRightKernel);
 	
-	cvReleaseMat(&ShiftLeftKernel);
+	cvReleaseMat(&ShiftRightKernel);
 	
 	return new GpImage(retImg);
 }
 GpImage* GpImage::ShiftLeft() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 	
-	float right[]= { 0, 0, 0 , 0, 0, 1 , 0, 0, 0 };
-	CvMat* ShiftRightKernel = cvCreateMat(3, 3, CV_32F);;	
-	cvSetData(ShiftRightKernel, right, 3*sizeof(float));
-	cvFilter2D(Image, retImg, ShiftRightKernel);
+	float left[] = { 0, 0, 0 , 1, 0, 0 , 0, 0, 0 };
+	CvMat* ShiftLeftKernel = cvCreateMat(3, 3, CV_32F);;
+	cvSetData(ShiftLeftKernel,  left, 3*sizeof(float));
+	cvFilter2D(Image, retImg, ShiftLeftKernel);
 	
-	cvReleaseMat(&ShiftRightKernel);
+	cvReleaseMat(&ShiftLeftKernel);
 	
 	return new GpImage(retImg);
 }

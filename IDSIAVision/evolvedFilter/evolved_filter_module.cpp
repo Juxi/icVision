@@ -4,9 +4,11 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <time.h>	
 #include "evolved_filter_module.h"
 
 #include "GpImage.h"
+
 
 // TODO:
 //		- check for memory leak
@@ -103,6 +105,7 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 	inputPortName = "/";		serverPortName = "/";
 	inputPortName += getName(); serverPortName += robotName;
 	inputPortName += "/left";	serverPortName += "/cam/left";
+//	inputPortName += "/right";	serverPortName += "/cam/right";	
 
 	// trying to connect to the left camera
 	if(! leftInPort.open( inputPortName.c_str() )){
@@ -161,7 +164,9 @@ bool EvolvedFilterModule::updateModule()
 	} else {
 		std::cout << "DEBUG: Run filter!" << std::endl;			
 	}
-	
+
+	clock_t start = clock();
+
 	IplImage* in;
 	
 	if( isReadingFileFromHDD ) {
@@ -178,10 +183,13 @@ bool EvolvedFilterModule::updateModule()
 	ImageWidth  = in->width * scalingFactor;
 	ImageHeight = in->height * scalingFactor;	
 	
-	if( inDebugMode ) {
+	static int index = 0;
+	if( inDebugMode) {
 		std::cout << "DEBUG: Got input image!" << std::endl;	
 		GpImage* inputImg = new GpImage(in);
-		inputImg->Save("input.png");
+		char fileIn[80];
+		sprintf(fileIn, "input-frame-%05d.png", index);
+		inputImg->Save(fileIn);
 	}
 	
 	// set which images from the input we need for the filter
@@ -197,7 +205,7 @@ bool EvolvedFilterModule::updateModule()
 		for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
 			std::string fileName = "input-";
 			fileName += '0' + i++;
-			fileName += ".jpg";
+			fileName += ".png";
 			(*it)->Save(fileName);
 		}
 	}
@@ -226,10 +234,16 @@ bool EvolvedFilterModule::updateModule()
 	cvReleaseImage(&gray);	
 	delete filteredImg;
 	
+	
 	InputImages.clear();
+	
+	clock_t end = clock();	
+	double diffms = (end-start)*1000/CLOCKS_PER_SEC;///CLOCKS_PER_SEC;	
+	std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
 	
 	// return	(when we read from HDD we only run once!)
 	return !isReadingFileFromHDD;
+//	return true;
 }
 
 void EvolvedFilterModule::createInputImages(IplImage* in) {
