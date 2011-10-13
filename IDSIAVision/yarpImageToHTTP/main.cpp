@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
 	printf("Launching iCub YARP Image HTTP Server \n");
 
 
-	string inputPortName, serverPortName;
+	std::string inputPortName, serverPortName;
 	
 	/********************************************
 	 ** Init YARP
@@ -57,7 +57,7 @@ int main(int argc, char * argv[]) {
 	config.configure("MYYARP2HTTP", argc, argv, true);
 
 	/* Process all parameters from both command-line and .ini file */
-	string robotName = (config.find("robot")).toString().c_str();
+	std::string robotName = (config.find("robot")).toString().c_str();
 	if( robotName.empty() ) {
 		robotName = "icubSim";
 		std::cout << "WARNING! No robot name found using " << robotName << std::endl;
@@ -73,13 +73,13 @@ int main(int argc, char * argv[]) {
 	inputPortName += "HTTPSERVER";serverPortName += robotName;
 	inputPortName += "/left";	  serverPortName += "/cam/left";
 	if(! leftInPort.open( inputPortName.c_str() )){
-		cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << endl;
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
 		return false;
 	}
 
 	printf("Trying to connect to %s\n", inputPortName.c_str());
 	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
 		return false;
 	}
 	
@@ -88,13 +88,13 @@ int main(int argc, char * argv[]) {
 	inputPortName += "HTTPSERVER";serverPortName += robotName;
 	inputPortName += "/right";	  serverPortName += "/cam/right";
 	if(! rightInPort.open( inputPortName.c_str() )){
-		cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << endl;		
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;		
 		return false;
 	}
 		
 	printf("Trying to connect to %s\n", inputPortName.c_str());
 	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
 		return false;
 	}
 	
@@ -179,7 +179,7 @@ int startup(u_short *port)
 	memset(&name, 0, sizeof(name));
 	name.sin_family = AF_INET;
 	name.sin_port = htons(*port);
-	name.sin_addr.s_addr = htonl(INADDR_ANY);
+	name.sin_addr.s_addr = INADDR_ANY; //htonl(INADDR_ANY);
 	if (bind(httpd, (struct sockaddr *)&name, sizeof(name)) < 0) {
 		perror("bind");
 		exit(1);

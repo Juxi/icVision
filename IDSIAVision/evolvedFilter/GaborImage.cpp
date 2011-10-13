@@ -102,10 +102,17 @@ Img GaborImage::GaborTransform(Img Image, int Orientation) {
 	
 	// Img gabor = (gabor_real + gabor_img).Pow(0.5);
 	cvAdd(gabor_real, gabor_img, retImg);
-	cvPow(retImg, retImg, 0.5);
+	
+	cv::Mat in = retImg;
+	cv::Mat out;
+	cv::sqrt(in, out); 
+	
+	IplImage dst_img = out;	
 	
 	cvReleaseImage(&gabor_real);
 	cvReleaseImage(&gabor_img);
+	
+	retImg = (IplImage*) cvClone(&dst_img);
 	
 	return retImg;
 }

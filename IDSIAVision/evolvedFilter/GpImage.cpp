@@ -301,7 +301,7 @@ GpImage* GpImage::ResizeThenGabor(int Orientation, double Scale) const {
 
 
 
-void GpImage::Save(string FileName) const {
+void GpImage::Save(std::string FileName) const {
 	cvSaveImage(FileName.c_str(), Image);
 //	Image->Save(FileName);
 }

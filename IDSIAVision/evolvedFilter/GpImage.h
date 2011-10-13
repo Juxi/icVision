@@ -100,7 +100,7 @@ public:
 	GpImage* ShiftLeft() const;
 	GpImage* ShiftRight() const;	
 		
-	void Save(string FileName) const;
+	void Save(std::string FileName) const;
 	
 private:
 	int m_width, m_height;
