@@ -220,12 +220,28 @@ bool EvolvedFilterModule::updateModule()
 	}
 
 	// output filtered image
-	ImageOf<PixelBgr>& output = outputPort_Image.prepare();
+	IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
+	IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);	
+	
+	// overlay original	
+	//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
+	IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 
-	IplImage* gray = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
-	IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);			
-	cvCvtColor(filteredImg->Image, gray, CV_GRAY2RGB);
-	cvConvertScale(gray, out8, 1.0, 0.0);
+	cvCvtColor(InputImages[0]->Image, rgb, CV_GRAY2RGB);
+
+	cvSplit(rgb, b, g, r, NULL);
+	cvAdd(r, filteredImg->Image, r);
+	cvMerge(b, g, r, NULL, rgb);	
+	
+	cvReleaseImage(&r);
+	cvReleaseImage(&g);	
+	cvReleaseImage(&b);	
+	
+	cvConvertScale(rgb, out8, 1.0, 0.0);
+
+	ImageOf<PixelBgr>& output = outputPort_Image.prepare();
 	output.wrapIplImage(out8); //output.copy ( *left_image );
     outputPort_Image.write();	
 		
