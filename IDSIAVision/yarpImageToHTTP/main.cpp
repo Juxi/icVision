@@ -4,6 +4,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <algorithm>
 #include <iostream>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
@@ -29,10 +30,16 @@ void* accept_request(void *cl);
 int get_line(int sock, char *buf, int size);
 void not_found(int client);
 void serve_image(int client, const char *filename);
+void serve_txt(int client, const char *filename);
 
 // global vars (argh)
 BufferedPort<ImageOf<PixelBgr> > leftInPort;	//!< The port to handle incoming left eye images
 BufferedPort<ImageOf<PixelBgr> > rightInPort; 	//!< The port to handle incoming right eye images
+Port iCubHeadPort;
+Port iCubTorsoPort;
+Port iCubLeftArmPort;
+Port iCubRightArmPort;
+
 int server_sock = -1;
 #define SERVER_STRING "Server: yarp2http/0.0.1\r\n"
 
@@ -97,6 +104,69 @@ int main(int argc, char * argv[]) {
 		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
 		return false;
 	}
+	
+	// trying to connect to Head
+	inputPortName = "/";		  serverPortName = "/";
+	inputPortName += "HTTPSERVER";serverPortName += robotName;
+	inputPortName += "/head";	  serverPortName += "/head/state:o";
+	if(! iCubHeadPort.open( inputPortName.c_str() )){
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+		return false;
+	}
+
+	// trying to connect to torso
+	inputPortName = "/";		  serverPortName = "/";
+	inputPortName += "HTTPSERVER";serverPortName += robotName;
+	inputPortName += "/torso";	  serverPortName += "/torso/state:o";
+	if(! iCubTorsoPort.open( inputPortName.c_str() )){
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+		return false;
+	}
+
+	
+	
+	// trying to connect to left arm
+	inputPortName = "/";		  serverPortName = "/";
+	inputPortName += "HTTPSERVER";serverPortName += robotName;
+	inputPortName += "/left_arm"; serverPortName += "/left_arm/state:o";
+	if(! iCubLeftArmPort.open( inputPortName.c_str() )){
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+		return false;
+	}
+	// trying to connect to right arm
+	inputPortName = "/";		  serverPortName = "/";
+	inputPortName += "HTTPSERVER";serverPortName += robotName;
+	inputPortName += "/right_arm"; serverPortName += "/right_arm/state:o";
+	if(! iCubRightArmPort.open( inputPortName.c_str() )){
+		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+		return false;
+	}
+	
+	
 	
 	/********************************************
 	 ** Init HTTP Server Sockets
@@ -244,9 +314,20 @@ void* accept_request(void* cl)
 	sprintf(path, ".%s", url);
 //	printf("Request received for: %s (%s)\n", url, path);
 	
+	buf[0] = 'A'; buf[1] = '\0';
+	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
+		numchars = get_line(client, buf, sizeof(buf));
+	
+	
 	if(strlen(url) <= 1) not_found(client);
-	else
-		serve_image(client, path);
+	else {
+		if(strcmp(url + (strlen(url) - 4), ".csv") == 0)
+			serve_txt(client, path);
+		else if( strcmp(url + (strlen(url) - 4), ".png") == 0 || 
+		 		 strcmp(url + (strlen(url) - 4), ".jpg") == 0 ||
+				 strcmp(url + (strlen(url) - 5), ".jpeg") == 0 )
+			serve_image(client, path);
+	}
 	
 	close(client);
 	return NULL;
@@ -344,30 +425,49 @@ void not_found(int client)
 void serve_image(int client, const char *filename)
 {
 	FILE *resource = NULL;
-	int numchars = 1;
 	char buf[1024];
+	bool error = false;
 	
-	buf[0] = 'A'; buf[1] = '\0';
-	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
-		numchars = get_line(client, buf, sizeof(buf));
-	
+	int stackOfFrames = 2;
+		
 	IplImage *in = NULL;
+	IplImage *out = NULL;
+	IplImage *help = NULL;
 	
 	if( strncmp(filename + 2, "left.", 5) == 0 ) 
 	{	
 		remove(filename);
 //		printf("reading from yarp file: %s\n", filename);
-		
-		// read image from the port
-		ImageOf<PixelBgr> *image = leftInPort.read();  // read an image
-		if (image == NULL) { 
-			std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
-		}else {
-			in = (IplImage*) image->getIplImage();
-			// write to disk
-			cvSaveImage(filename, in);			
-			
+		for(int i = 0; i < stackOfFrames; i++) {
+			// read image from the port
+			ImageOf<PixelBgr> *image = leftInPort.read();  // read an image
+			if (image == NULL) { 
+				std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
+				error = true;
+			}else {
+				help = (IplImage*) image->getIplImage();
+				if(out == NULL)
+					out = help;
+//				else
+//					cvAdd(out, help, out);
+				
+//				std::cout << "INFO: Stack #" << i << " !" << std::endl;
+			}
 		}
+		// write to disk
+	   if(! error) {
+//		   IplImage* unity  = (IplImage*) cvClone(out);
+		   
+		   // multiply with 1/frames
+//		   cvSet(unity, cvRealScalar(1.0));
+//		   cvMul(out, unity, out, 1.0/stackOfFrames);
+		   
+//		   cvReleaseImage(&unity);
+		   
+		   cvSaveImage(filename, out);
+		   //cvReleaseImage(&out);
+		   out = NULL;
+	   }
 	}else if( strncmp(filename + 2, "right.", 6) == 0 ) {
 		remove(filename);
 //		printf("reading from yarp file: %s\n", filename);
@@ -417,3 +517,105 @@ void serve_image(int client, const char *filename)
 	}
 	fclose(resource);
 }
+
+
+/**********************************************************************/
+/* Send a regular txt content to the client.  Use headers, and report
+ * errors to client if they occur.
+ * Parameters: a pointer to a file structure produced from the socket
+ *              file descriptor
+ *             the name of the file to serve */
+/**********************************************************************/
+void serve_txt(int client, const char *filename)
+{
+	char buf[1024];
+	
+	if( strcmp(filename + 2, "joints.csv") != 0 &&
+	    strcmp(filename + 2, "alljoints.csv") != 0 ) {
+		not_found(client);
+	}else {  
+
+		remove(filename);
+		printf("reading from yarp file: %s\n", filename);
+		
+		// YARP READING
+
+		Bottle input;
+		iCubHeadPort.read(input);
+		
+		char sHead[512] = "n/a,n/a,n/a,n/a,n/a,n/a";
+		if (input != NULL) {
+			strcpy(sHead, input.toString());
+			for(uint i = 0; i < strlen(sHead); i++)
+				if(sHead[i] == ' ') sHead[i] = ',';
+		}
+		
+		input.clear();
+		iCubTorsoPort.read(input);
+		
+		char sTorso[512] = "n/a,n/a,n/a";
+		if (input != NULL) {
+			strcpy(sTorso, input.toString());
+			for(uint i = 0; i < strlen(sTorso); i++)
+				if(sTorso[i] == ' ') sTorso[i] = ',';
+		}
+		
+		
+		char sLeftArm[1024];
+		char sRightArm[1024];
+		
+		if(strcmp(filename + 2, "alljoints.csv") == 0 ) {
+			// add also left arm and right arm
+			
+			input.clear();
+			iCubLeftArmPort.read(input);
+			
+			if (input != NULL) {
+				strcpy(sLeftArm, input.toString());
+				for(uint i = 0; i < strlen(sLeftArm); i++)
+					if(sLeftArm[i] == ' ') sLeftArm[i] = ',';
+			}
+
+			input.clear();
+			iCubRightArmPort.read(input);
+			
+			if (input != NULL) {
+				strcpy(sRightArm, input.toString());
+				for(uint i = 0; i < strlen(sRightArm); i++)
+					if(sRightArm[i] == ' ') sRightArm[i] = ',';
+			}
+			
+		}
+		
+		
+		// output HTTP
+		strcpy(buf, "HTTP/1.0 200 OK\r\n");
+		send(client, buf, strlen(buf), 0);
+		
+		strcpy(buf, SERVER_STRING);
+		send(client, buf, strlen(buf), 0);
+		
+		sprintf(buf, "Content-Type: text/plain\r\n");
+		send(client, buf, strlen(buf), 0);
+		
+		strcpy(buf, "\r\n");
+		send(client, buf, strlen(buf), 0);
+	
+		sprintf(buf, "%s,%s\r\n", sHead, sTorso);
+		send(client, buf, strlen(buf), 0);
+		
+		if(strcmp(filename + 2, "alljoints.csv") == 0 ) {		
+			sprintf(buf, "%s\r\n", sLeftArm);
+			send(client, buf, strlen(buf), 0);
+			sprintf(buf, "%s\r\n", sRightArm);
+			send(client, buf, strlen(buf), 0);
+		}
+			
+			
+		strcpy(buf, "\r\n");
+		send(client, buf, strlen(buf), 0);
+			
+		
+	}
+}
+
