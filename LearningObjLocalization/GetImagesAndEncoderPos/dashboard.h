@@ -34,17 +34,19 @@ public slots:
 		
 private:
 	// Variables
+	bool iCub_accessible;
 	bool iCubSimulator_accessible;
+	
 
 	// GUI
 	QWidget *vwidget;
 	QHBoxLayout *layout;
 	QVBoxLayout *vlayout;
 	QLabel *lbl_iCubSim_Status, *lbl_Connection_Status;
-
 	
 protected:
 	// Methods
+	void checkiCub();
 	void checkiCubSimulator();
 
 	

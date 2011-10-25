@@ -13,7 +13,8 @@
 // TODO:
 
 int main(int argc, char *argv[]) {
-	QString version = "v0.08";
+	QString version = "v0.1";
+	// first version on the real robot
 	QString title = "LearningObjLocalization";
 
 	QApplication app(argc, argv);
@@ -21,7 +22,10 @@ int main(int argc, char *argv[]) {
 	QThread ctrl_t;
 
 	// Objects
-	iCubController ctrl;
+	bool isSimulation = true;
+	// TODO if --robot icub then no simulation
+	isSimulation = false;
+	iCubController ctrl(isSimulation);
 	ctrl.moveToThread(&ctrl_t);
 	ctrl_t.start();
 	

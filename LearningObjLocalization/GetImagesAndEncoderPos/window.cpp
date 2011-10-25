@@ -20,6 +20,7 @@
 
 #include <iostream>	//for cout
 #include <iomanip>	// for setw
+#include <fstream>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,7 +79,7 @@ void Window::initWindow() {
 	lbl_BallPosition = new QLabel("Red Ball in World (3d)");
 	txt_BallPosition = new QLineEdit();
 	
-	btn_get		= new QPushButton("Get Test Images");
+	btn_get		= new QPushButton("Get Test Readout");
 	btn_quit	= new QPushButton("Quit");
 	btn_timer	= new QPushButton("Start Gathering Data");
 
@@ -188,9 +189,16 @@ void Window::initWindow() {
 	
 	
 	imageIndex = 0;
+	
+	std::string s = "data";
+	std::string ext = ".csv";
+	std::string filename  = s + ext;
+	
+//TODO
+	std::cout << "Check if file exists?!" << endl;
 
-	csvfile.open ("example.txt");
-	csvfile << "imgname,imgname,head-jnt0,head-jnt1...,torso-jnt0,torso-jnt1,torso-jnt2,ballx,bally,ballz" << "\n";	
+	csvfile.open (filename.c_str());
+	csvfile << "imgname,imgname,head-jnt0,head-jnt1,head-jnt2,head-jnt3,head-jnt4,head-jnt5,torso-jnt0,torso-jnt1,torso-jnt2,ballx,bally,ballz" << "\n";	
 	
 	setLayout(central_layout);
 	move(100,0);
@@ -260,7 +268,7 @@ void Window::setupSignalsAndSlots() {
 
 	
 	QObject::connect(btn_timer,SIGNAL(clicked()), 
-					 this,	   SLOT(toggleTimer()));
+					 this,	   SLOT(collectData()));
 
 	
 	if(dash && iCubCtrl) {
@@ -272,7 +280,7 @@ void Window::setupSignalsAndSlots() {
 						 iCubCtrl,			SLOT(initializeRobot()));		
 
 		
-		timer->setInterval(500);
+		timer->setInterval(1500);
 		connect(timer, SIGNAL(timeout()), this, SLOT(timerTimeout()));		
 //		connect(timer, SIGNAL(timeout()), this, SLOT(updateDash()));
 		
@@ -309,6 +317,56 @@ void Window::toggleTimer() {
 	}
 }
 
+
+void Window::collectData() {
+	if(iCubCtrl) {
+		
+		btn_timer->setEnabled(false);
+		
+		std::cout << "Collecting Data! "<< std::endl;
+	//	float nextpose[iCubCtrl->head->ctrl->getNumJoints()];
+		float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
+		
+		// stop it
+		iCubCtrl->head->ctrl->stop();
+		iCubCtrl->torso->ctrl->stop();
+		
+		// move to new position
+		// right now only joint 2 of head
+//		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
+		
+		// joints for the torso
+		for(float j0 = -15; j0 <= 15; j0+= 5) {		
+			nextposetorso[0] = j0;			
+			for(float v = 15; v <= 40; v+= 5) {
+				nextposetorso[2] = v;
+				moveTheRobot(nextposetorso);
+				printf("B.");
+				// wait longer for the resetting
+				if(15 == v) sleep(5);	
+				sleep(6);
+				getYarpStatus();			
+				writeCSV();	
+				
+				printf("A\n");			
+			}
+		}
+		
+		// move back to original pose
+		nextposetorso[0] = 0;
+		nextposetorso[1] = 0;
+		nextposetorso[2] = 15;		
+		moveTheRobot(nextposetorso);
+		
+		btn_timer->setEnabled(true);
+		
+		// stop
+		// iCubCtrl->head->ctrl->stop();
+		// iCubCtrl->torso->ctrl->stop();
+		
+	}
+}
+
 void Window::timerTimeout() {
     if (timer->isActive()) {
 		
@@ -321,20 +379,13 @@ void Window::timerTimeout() {
 		iCubCtrl->torso->ctrl->stop();
 
 		timer->stop();
-		
-		getYarpStatus();			
-		// write log file
-		writeCSV();	
-		changeBallPos();	
-		
-		// move to new position (babbling!)
-		doTheBabbling();
 
-		timer->start();
+		// do the babbling
+		//dothe
 		
 		// stop
-//		iCubCtrl->head->ctrl->stop();
-//		iCubCtrl->torso->ctrl->stop();
+		// iCubCtrl->head->ctrl->stop();
+		// iCubCtrl->torso->ctrl->stop();
 		
 	}
 }
@@ -343,8 +394,9 @@ void Window::getYarpStatus() {
 	if ( ! dash->btn_connect->isEnabled() ) {	// then we are connected
 		// read
 		showEncoderPositions();
-		showRedBall3DPosition();
+		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
+				
 	} else {
 		// error not connected
 		QMessageBox::warning( this, title,
@@ -377,8 +429,16 @@ void Window::writeCSV() {
 	csvfile << ",";	
 	csvfile << imgNameRight; //.toStdString();
 	csvfile << ",";	
-	csvfile << txt_State_Head->text().toStdString() << ",";
-	csvfile << txt_State_Torso->text().toStdString()  << ",";
+	for(int i = 0; i < 6; i++) {
+		csvfile << headjnt_pos[i];
+		csvfile << ",";		
+	}
+//	csvfile << txt_State_Head->text().toStdString() << ",";
+	for(int i = 0; i < 3; i++) {
+		csvfile << torsojnt_pos[i];
+		csvfile << ",";		
+	}
+	//	csvfile << txt_State_Torso->text().toStdString()  << ",";
 	csvfile << txt_BallPosition->text().toStdString();
 	csvfile << "\n";		
 
@@ -422,9 +482,12 @@ void Window::changeBallPos() {
 
 
 void Window::showRedBall3DPosition() {
+	if(! iCubCtrl->simulation) return;
+	
+	// get position from the simulator
 	std::cout << "Show red ball position() " << std::endl;	
 
-	// data
+	// not yet initialized
 	if(! iCubCtrl) return;
 	
 	QString s = "";
@@ -443,7 +506,7 @@ void Window::showRedBall3DPosition() {
 
 // read encoder positions
 void Window::showEncoderPositions() {
-	std::cout << "Show encoder positions() " << std::endl;	
+//	std::cout << "Show encoder positions() " << std::endl;	
 	
 	QString s = "";
     Port *yarp_port;
@@ -461,7 +524,8 @@ void Window::showEncoderPositions() {
 		for(int i = 0; i < input.size(); i++) {
 			if(input.get(i).isDouble() && i < HEAD_JOINTS) {
 				headjnt_pos[i] = input.get(i).asDouble();
-// DEBUG				std::cout << "#########Head joint " << i << ": " << headjnt_pos[i] << endl;
+// DEBUG
+				std::cout << "#########Head joints " << i << ": " << headjnt_pos[i] << endl;
 			}
 		}
 	} else {
@@ -481,7 +545,8 @@ void Window::showEncoderPositions() {
 		for(int i = 0; i < input2.size(); i++) {
 			if(input2.get(i).isDouble() && i < 3) {
 				torsojnt_pos[i] = input2.get(i).asDouble();
-// DEBUG				std::cout << "#########Torso joint " << i << ": " << torsojnt_pos[i] << endl;
+// DEBUG
+				std::cout << "#########Torso joints " << i << ": " << torsojnt_pos[i] << endl;
 			}
 		}
 		
@@ -490,7 +555,6 @@ void Window::showEncoderPositions() {
 	}
 	s.replace(" ", ",");	
 	txt_State_Torso->setText(s);
-
 }
 
 // show images
@@ -538,84 +602,148 @@ void Window::showYarpImages() {
 	
 }
 
-void Window::doTheBabbling() {
+void Window::moveTheRobot(float value[]) {	
 	// call the part babbler (kail's code) and change it to be stopped after ...
 	
+	// for the head
 	PartController *ctrl = NULL;
 	
 	qreal min, max, aPos;
 	QVector<qreal> pose;
 	
-	
 	// HEAD
-	if( iCubCtrl->head->initialized ) {
+//	if( iCubCtrl->head->initialized ) {
+//		
+//		ctrl = iCubCtrl->head->ctrl;
+//		for (int i = 0; i < ctrl->getNumJoints(); i++) {
+//			// limit the head movement to one joint
+//			if ( i == 2 ) {
+//				ctrl->lim->getLimits(i, &min, &max);
+//				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
+//				if( value[i] < max && value[i] > min ) { aPos = value[i]; }
+//				else { aPos = headjnt_pos[i]; }				
+//			} else { 
+//				aPos = headjnt_pos[i];
+//			}				
+//			pose.append( aPos );
+//			
+//		}
+//		
+//		iCubCtrl->head->ctrl->setRefSpeeds( 10.0 );
+//		
+//		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
+//		else { printf("-\n"); }
+//		
+//		//		iCubCtrl->head->ctrl->positionMove();
+//	}
+//	
+//	pose.clear();
+	
+	if( iCubCtrl->torso->initialized ) {
 		
-		ctrl = iCubCtrl->head->ctrl;
+		ctrl = iCubCtrl->torso->ctrl;
 		for (int i = 0; i < ctrl->getNumJoints(); i++) {
-
-			// limit the head movement to not include eyes
-			//if ( i < 4 ) {
-//				ctrl->lim->getLimits(i, &min, &max);
-//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
-//			} else { aPos = 0; }
-
-//			// limit the head movement to one joint!
-//			if ( i == 0 ) {
-//				ctrl->lim->getLimits(i, &min, &max);
-//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
-//			} else { aPos = 0; }
-			
-			// limit the head movement to only selected ones ...
-
-			if ( chk_head[i] && chk_head[i]->isChecked() ) {
+			if ( i == 2 || i == 0 ) {
 				ctrl->lim->getLimits(i, &min, &max);
-				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+//				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
+				if( value[i] < max && value[i] > min ) { aPos = value[i]; }
+				else { aPos = headjnt_pos[i]; }				
 			} else { 
-//				if( i < 4) 
-					aPos = headjnt_pos[i];
-//				else aPos = 0;
-			}
-			
-			
+				aPos = headjnt_pos[i];
+			}				
 			pose.append( aPos );
-				
+			
 		}
 		
-		iCubCtrl->head->ctrl->setRefSpeeds( 2.5 );
-			
-		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
+		ctrl->setRefSpeeds( 3.0 );
+		
+		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("H"); }		
 		else { printf("-\n"); }
 		
-//		iCubCtrl->head->ctrl->positionMove();
+		//		iCubCtrl->head->ctrl->positionMove();
 	}
 	
 	pose.clear();
+}
 
-	// now the torso
+void Window::doTheBabbling() {			
 	
-	if( iCubCtrl->torso->initialized ) {
-		ctrl = iCubCtrl->torso->ctrl;
-		for (int i = 0; i < ctrl->getNumJoints(); i++) {
-			if ( chk_torso[i] && chk_torso[i]->isChecked() ) {
-				ctrl->lim->getLimits(i, &min, &max);
-				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
-			} else { 
-				aPos = torsojnt_pos[i];
-			}
-			pose.append(aPos);
-		}
-
-		iCubCtrl->torso->ctrl->setRefSpeeds( 2.5 );
-		
-		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("T"); }		
-		else { printf("*\n"); }
-		
-//		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
+	
+//	PartController *ctrl = NULL;
+//	
+//	qreal min, max, aPos;
+//	QVector<qreal> pose;
+//	
+//	
+//	// HEAD
+//	if( iCubCtrl->head->initialized ) {
+//		
+//		ctrl = iCubCtrl->head->ctrl;
+//		for (int i = 0; i < ctrl->getNumJoints(); i++) {
+//
+//			// limit the head movement to not include eyes
+//			//if ( i < 4 ) {
+////				ctrl->lim->getLimits(i, &min, &max);
+////				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+////			} else { aPos = 0; }
+//
+////			// limit the head movement to one joint!
+////			if ( i == 0 ) {
+////				ctrl->lim->getLimits(i, &min, &max);
+////				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+////			} else { aPos = 0; }
+//			
+//			// limit the head movement to only selected ones ...
+//
+//			if ( chk_head[i] && chk_head[i]->isChecked() ) {
+//				ctrl->lim->getLimits(i, &min, &max);
+//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+//			} else { 
+////				if( i < 4) 
+//					aPos = headjnt_pos[i];
+////				else aPos = 0;
+//			}
+//			
+//			
+//			pose.append( aPos );
+//				
+//		}
+//		
+//		iCubCtrl->head->ctrl->setRefSpeeds( 2.0 );
+//			
+//		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
+//		else { printf("-\n"); }
+//		
+////		iCubCtrl->head->ctrl->positionMove();
+//	}
+//	
+//	pose.clear();
+//
+//	// now the torso
+//	
+//	if( iCubCtrl->torso->initialized ) {
+//		ctrl = iCubCtrl->torso->ctrl;
+//		for (int i = 0; i < ctrl->getNumJoints(); i++) {
+//			if ( chk_torso[i] && chk_torso[i]->isChecked() ) {
+//				ctrl->lim->getLimits(i, &min, &max);
+//				aPos = min + (max-min) * (qreal)rand()/RAND_MAX;
+//			} else { 
+//				aPos = torsojnt_pos[i];
+//			}
+//			pose.append(aPos);
+//		}
+//
+//		iCubCtrl->torso->ctrl->setRefSpeeds( 2.5 );
+//		
+//		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("T"); }		
 //		else { printf("*\n"); }
-	}
-	
-	//so have a wait or something?
-	{ printf("\n"); }
+//		
+////		if ( iCubCtrl->torso->ctrl->randomPosMove( 2.0, false ) ) { printf("T"); }
+////		else { printf("*\n"); }
+//	}
+//	
+//	//so have a wait or something?
+//	{ printf("\n"); }
 	
 }
 

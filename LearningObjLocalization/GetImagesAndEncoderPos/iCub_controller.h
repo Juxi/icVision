@@ -31,6 +31,7 @@ class iCubController : public QObject {
 	
 public:
 	iCubController(); //Window *ptr_mw
+	iCubController(bool isSim);
 	~iCubController();
 
 signals:
@@ -69,13 +70,13 @@ public: // vars
 	Camera *right_camera;
 	Part *head;
 	Part *torso;	
+	bool simulation;	
 	
 
 private: // methods		
 	//pointers to objects
 	//    Window *main_window;
 	Network *yarp_network;
-	bool simulation;
 
 	void initCameras();
     void closeCameras();	

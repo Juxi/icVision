@@ -16,6 +16,7 @@
 CVWidget::CVWidget() : QGLWidget(QGLFormat(QGL::SampleBuffers))
 {
     setMinimumSize(320,240);
+	setMaximumSize(320,240);
 }
 
 /**
@@ -85,8 +86,10 @@ void CVWidget::sendImage(cv::Mat* img, bool rgbSwapped) {
     QImage tmp = qframe;
     qframe = QGLWidget::convertToGLFormat(tmp);
 
-	this->setFixedHeight(img->rows);
-	this->setFixedWidth (img->cols);
+	this->setFixedHeight(240);
+	this->setFixedWidth(320);
+//	this->setFixedHeight(img->rows);
+//	this->setFixedWidth (img->cols);
 
     this->update();
 }

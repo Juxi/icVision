@@ -153,11 +153,11 @@ bool PartController::velocityMove( int i, qreal v )
 
 void PartController::close()
 {
-	/* warning: this for() loop kills the motors: */
-	for (int i = 0; i < numJoints; i++) {
-	    if (amp) { amp->disableAmp(i); }
-	    if (pid) { pid->disablePid(i); }
-	}
+//	/* warning: this for() loop kills the motors: */
+//	for (int i = 0; i < numJoints; i++) {
+//	    if (amp) { amp->disableAmp(i); }
+//	    if (pid) { pid->disablePid(i); }
+//	}
 	/* this just closes the driver: OK */
 	if (dd)
 	{ 

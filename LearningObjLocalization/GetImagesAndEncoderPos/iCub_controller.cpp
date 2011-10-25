@@ -12,6 +12,27 @@ iCubController::iCubController() {
 	
 	left_camera = new Camera;	
 	right_camera = new Camera;
+	
+	left_camera->initialized = false;
+	right_camera->initialized = false;
+	
+	left_camera_port_name  = "/juxi/cam/left";
+	right_camera_port_name = "/juxi/cam/right";
+	
+	head = new Part;
+	head->initialized = false;
+	
+	torso = new Part;
+	torso->initialized = false;
+	
+	yarp_network->init();
+}
+
+iCubController::iCubController(bool isSim) {
+	simulation = isSim;
+	
+	left_camera = new Camera;	
+	right_camera = new Camera;
 
 	left_camera->initialized = false;
 	right_camera->initialized = false;
@@ -49,54 +70,57 @@ void iCubController::toggleConnection() {
 }
 
 void iCubController::initializeRobot() {
-	if( head->initialized ) {
+	if( head->initialized && simulation) {
 		QVector<qreal> pose;
 		pose.append(-10.0);		pose.append(0.0);
 		pose.append(0.0); 		pose.append(0.0);
 		pose.append(0.0); 		pose.append(0.0);
 		if ( head->ctrl->positionMove( pose ) ) { printf("Head initialized!\n"); }		
 	}
-	if( torso->initialized ) {
+	if( torso->initialized && simulation ) {
 		QVector<qreal> pose;
 		pose.append(0.0); 		pose.append(0.0);
 		pose.append(35.0);
 		if ( torso->ctrl->positionMove( pose ) ) { printf("Torso initialized!\n"); }		
 	}
 	
-	// clean up the world!
 	
-	RpcClient port;
-	port.open("/juxi/world-client");
-	if(! Network::connect("/juxi/world-client", "/icubSim/world") ) {
-		std::cout << std::endl << "ERROR: Could not connect to port: " << "/icubSim/world" << std::endl << std::endl;		
-		return;
+	if(simulation) {
+		// clean up the world!
+	
+		RpcClient port;
+		port.open("/juxi/world-client");
+		if(! Network::connect("/juxi/world-client", "/icubSim/world") ) {
+			std::cout << std::endl << "ERROR: Could not connect to port: " << "/icubSim/world" << std::endl << std::endl;		
+			return;
+		}
+		
+		Bottle cmd, response;
+		
+		
+		// remove the blue (default) ball
+		cmd.addString("world"); cmd.addString("set");	
+		cmd.addString("ball");	cmd.addInt(1);
+		cmd.addDouble( -10.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
+		port.write(cmd, response);		
+		if( response.size() > 0) {
+			std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+		}
+		
+		cmd.clear(); response.clear();
+		// also red cube
+		cmd.addString("world"); cmd.addString("set");	
+		cmd.addString("cube");
+		cmd.addDouble( 0.0); cmd.addDouble(-1.5);
+		port.write(cmd, response);		
+		if( response.size() > 0) {
+			std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
+		}
+		
+		Network::disconnect("/icubSim/world", "/juxi/world-client");
+		port.close();	
 	}
-	
-	Bottle cmd, response;
-	
-	
-	// remove the blue (default) ball
-	cmd.addString("world"); cmd.addString("set");	
-	cmd.addString("ball");	cmd.addInt(1);
-	cmd.addDouble( -10.0); cmd.addDouble(-0.5); cmd.addDouble(-0.5);	
-	port.write(cmd, response);		
-	if( response.size() > 0) {
-		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
-	}
-	
-	cmd.clear(); response.clear();
-	// also red cube
-	cmd.addString("world"); cmd.addString("set");	
-	cmd.addString("cube");
-	cmd.addDouble( 0.0); cmd.addDouble(-1.5);
-	port.write(cmd, response);		
-	if( response.size() > 0) {
-		std::cout << "RPC Reply size (" << response.size() << "): " << response.toString() << std::endl;		
-	}
-	
-	Network::disconnect("/icubSim/world", "/juxi/world-client");
-	port.close();	
-	
+		
 }
 	
 	
@@ -114,14 +138,17 @@ void iCubController::initCameras() {
 
 void iCubController::initLeftCamera() {
     if(!left_camera->initialized) {	
-		std::cout<<endl<<"initialising left camera ..."<<std::endl;
+		std::cout << std::endl << "initialising left camera ..." << simulation;
 		
         left_camera->port = new BufferedPort<ImageOf<PixelRgb> >;
         left_camera->port->open("/juxi/cam/left");
 		
-		yarp_network->connect("/icubSim/cam/left", "/juxi/cam/left");	
+		if(simulation)	yarp_network->connect("/icubSim/cam/left", "/juxi/cam/left");	
+		else			yarp_network->connect("/icub/cam/left", "/juxi/cam/left");	
         left_camera->last_image = left_camera->port->read();
         left_camera->initialized = true;
+		
+		std::cout << "done!" << std::endl;
     }
 }
 
@@ -130,14 +157,17 @@ void iCubController::initLeftCamera() {
  */
 void iCubController::initRightCamera() {
     if(!right_camera->initialized) {	
-		std::cout<<endl<<"initialising right camera ..."<<std::endl;
+		std::cout<<endl<<"initialising right camera ..." << simulation;
 		
         right_camera->port = new BufferedPort<ImageOf<PixelRgb> >;
         right_camera->port->open("/juxi/cam/right");
 		
-		yarp_network->connect("/icubSim/cam/right", "/juxi/cam/right");	
+		if(simulation)	yarp_network->connect("/icubSim/cam/right", "/juxi/cam/right");	
+		else			yarp_network->connect("/icub/cam/right", "/juxi/cam/right");	
         right_camera->last_image = right_camera->port->read();
         right_camera->initialized = true;
+		
+		std::cout << "done!" << std::endl;
     }
 }
 
@@ -154,9 +184,10 @@ void iCubController::closeCameras() {
 
 void iCubController::closeLeftCamera() {
     if(left_camera->initialized) {	
-		std::cout<<endl<<"closing left camera ..."<<std::endl;
-		
-		yarp_network->disconnect("/icubSim/cam/left", "/juxi/cam/left");	
+		std::cout<<endl<<"closing left camera ..." << std::endl;
+
+		if(simulation)  yarp_network->disconnect("/icubSim/cam/left", "/juxi/cam/left");	
+		else			yarp_network->disconnect("/icub/cam/left", "/juxi/cam/left");	
         left_camera->port->close();
         delete left_camera->port;
 		left_camera->port = NULL;		
@@ -171,7 +202,9 @@ void iCubController::closeRightCamera() {
     if(right_camera->initialized) {	
 		std::cout<<endl<<"closing right camera ..."<<std::endl;
 		
-		yarp_network->disconnect("/icubSim/cam/right", "/juxi/cam/right");
+		if(simulation)  yarp_network->disconnect("/icubSim/cam/right", "/juxi/cam/right");
+		else			yarp_network->disconnect("/icub/cam/right", "/juxi/cam/right");
+
         right_camera->port->close();
         delete right_camera->port;
 		right_camera->port = NULL;
@@ -179,6 +212,12 @@ void iCubController::closeRightCamera() {
     }
 }
 
+
+
+
+/**
+ *@brief     initialises camera
+ */
 void iCubController::initHead() {
     if(!head->initialized) {	
 		std::cout<<endl<<"initialising head..."<<std::endl;
@@ -186,11 +225,13 @@ void iCubController::initHead() {
 		// needs cleanup , TODO
         head->port = new Port;
         head->port->open("/juxi/head");
-		Network::connect("/icubSim/head/state:o", "/juxi/head"); 
+		if(simulation) Network::connect("/icubSim/head/state:o", "/juxi/head"); 
+		else		   Network::connect("/icub/head/state:o", "/juxi/head"); 
 
 		// needs cleanup , TODO, might not need both!
 		head->ctrl = new PartController();
-		head->ctrl->open("icubSim", "head");
+		if(simulation) head->ctrl->open("icubSim", "head");
+		else head->ctrl->open("icub", "head");
 		if( head->ctrl->isValid() ) head->initialized = true;
     }
 }
@@ -205,13 +246,16 @@ void iCubController::closeHead() {
 			head->ctrl = NULL;
 		}
 
-		Network::disconnect("/icubSim/head/state:o", "/juxi/head");
+		if(simulation)  Network::disconnect("/icubSim/head/state:o", "/juxi/head");
+		else			Network::disconnect("/icub/head/state:o", "/juxi/head");
+
         head->port->close();
         delete head->port;
 		head->port = NULL;
 		head->initialized = false;		
     }
 }
+
 
 void iCubController::initTorso() {
     if(!torso->initialized) {	
@@ -220,11 +264,13 @@ void iCubController::initTorso() {
 		// state port, TODO needs cleanup ?
         torso->port = new Port;
         torso->port->open("/juxi/torso");
-		Network::connect("/icubSim/torso/state:o", "/juxi/torso"); 
+		if(simulation)  Network::connect("/icubSim/torso/state:o", "/juxi/torso"); 
+		else			Network::connect("/icub/torso/state:o", "/juxi/torso"); 
 		
 		// needs cleanup , TODO, might not need both!
 		torso->ctrl = new PartController();
-		torso->ctrl->open("icubSim", "torso");
+		if(simulation) torso->ctrl->open("icubSim", "torso");
+		else torso->ctrl->open("icub", "torso");
 		if( torso->ctrl->isValid() ) torso->initialized = true;
 	}
 }
@@ -240,7 +286,9 @@ void iCubController::closeTorso() {
 		}
 		
 		// state port
-		Network::disconnect("/icubSim/torso/state:o", "/juxi/torso");
+		if(simulation)  Network::disconnect("/icubSim/torso/state:o", "/juxi/torso");
+		else			Network::disconnect("/icubSim/torso/state:o", "/juxi/torso");
+
         torso->port->close();
         delete torso->port;
 		torso->port = NULL;
@@ -249,6 +297,9 @@ void iCubController::closeTorso() {
 }
 
 void iCubController::getWorldObjectPosition(const char *name, double &x, double &y, double &z) {
+	if(! simulation) return;
+
+	// read from simulation world interface
 	std::cout<<"read world rpc ..."<<std::endl;
 
 	RpcClient port;
@@ -293,6 +344,9 @@ void iCubController::getWorldObjectPosition(const char *name, double &x, double 
 }
 
 void iCubController::setWorldObjectPosition(const char *name, double x, double y, double z) {
+	if(!simulation) return;
+
+	// set position of the object in the world
 	std::cout<<"set world position of " << name << " ..."<<std::endl;
 	
 	RpcClient port;

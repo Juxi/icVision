@@ -40,6 +40,7 @@ public slots:
 	void updateTimer();
 	void toggleTimer();	
 	void timerTimeout();
+	void collectData();	
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -52,6 +53,7 @@ private:
 	void showRedBall3DPosition();
 
 	void doTheBabbling();
+	void moveTheRobot(float values[]);
 	
 //	void doSomethingWithImages()
 	void writeCSV();
