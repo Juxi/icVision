@@ -54,6 +54,9 @@ private:
 
 	void doTheBabbling();
 	void moveTheRobot(float values[]);
+	void moveTheRobotHead(float values[]);
+	
+	void waitForMotionDone();
 	
 //	void doSomethingWithImages()
 	void writeCSV();

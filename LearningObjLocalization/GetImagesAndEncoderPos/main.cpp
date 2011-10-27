@@ -19,6 +19,8 @@ int main(int argc, char *argv[]) {
 
 	QApplication app(argc, argv);
 
+	srand ( time(NULL) );
+	
 	QThread ctrl_t;
 
 	// Objects

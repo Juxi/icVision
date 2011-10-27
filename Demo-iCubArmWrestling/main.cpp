@@ -4,6 +4,7 @@
 #include "torsoController.h"
 
 #define VOCAB_QUIT VOCAB4('q','u','i','t')		// stop controller
+#define VOCAB_HOME VOCAB4('h','o','m','e')		// goto home pose
 #define VOCAB_INIT VOCAB4('i','n','i','t')		// goto initial pose
 #define VOCAB_GO   VOCAB2('g','o')				// go
 #define VOCAB_BACK VOCAB2('b','k')				// go back ...
@@ -14,6 +15,9 @@
 
 void initialTrajectories(HeadController *ctrl_head, TorsoController *ctrl_torso, ArmController *left, ArmController *right);
 void initializeWrestlingTrajectories(HeadController *ctrl_head, TorsoController *ctrl_torso, ArmController *left, ArmController *right);
+void homeTrajectories(HeadController *ctrl_head, TorsoController *ctrl_torso, ArmController *left, ArmController *right);
+
+
 
 int main(int argc, char *argv[])
 {
@@ -98,8 +102,8 @@ int main(int argc, char *argv[])
 					
 					// maybe replace by start?!, probably should .. hmm... or at least do one by one ...
 					ctrl_rightArm.initialPose();
-					ctrl_leftArm.initialPose();
 					ctrl_torso.initialPose();					
+					ctrl_leftArm.initialPose();
 					ctrl_head.initialPose();
 
 					system("echo \"set all ang\" | yarp rpc /icub/face/emotions/in");	
@@ -143,6 +147,19 @@ int main(int argc, char *argv[])
 					response.addString("OK");
 					
 					break;
+					
+				/////////////////
+				case VOCAB_HOME:
+					homeTrajectories(&ctrl_head, &ctrl_torso, &ctrl_leftArm, &ctrl_rightArm);					
+
+					ctrl_head.initialPose();
+					ctrl_torso.initialPose();					
+					ctrl_rightArm.initialPose();
+					ctrl_leftArm.initialPose();
+					response.addString("OK");
+					
+					break;
+					
 					
 					
 				/////////////////			
@@ -191,7 +208,7 @@ void initialTrajectories(HeadController *ctrl_head, TorsoController *ctrl_torso,
 	float t[NUMBEROFTORSOJOINTS] = {-37, 0.0, 10};
 	ctrl_torso->addControlPoint(t);
 	
-	//-1.010989,63.005495,16.914835,25.010989,-0.000425,0.000204,-0.000082,14.857157,29.992439,0.0,-0.155642,6.570995,5.670498,7.044929,2.605364,8.758943
+	
 	float l[NUMBEROFARMJOINTS] = { -1.0, 63, 17, 25, 0.0, 0.0, 0.0, 15, 30, 0, 0, 6.5, 5.6, 7, 2.6, 9.0 };
 	left->addControlPoint(l);
 	
@@ -248,34 +265,26 @@ void initializeWrestlingTrajectories(HeadController *ctrl_head, TorsoController 
 	right->addControlPoint(r2);
 }
 
-
-void initializeTrajectories(std::string csvfile, HeadController *ctrl_head, TorsoController *ctrl_torso, ArmController *left, ArmController *right) {
+void homeTrajectories(HeadController *ctrl_head, TorsoController *ctrl_torso, ArmController *left, ArmController *right) {
+	
+	ctrl_torso->clearTrajectory();
+	ctrl_head->clearTrajectory();
+	left->clearTrajectory();
+	right->clearTrajectory();
+	
+	
 	// from -7.000077,1.999959,-47.0001, 1.000166,-0.000106,-0.004308,
-	float h[NUMBEROFHEADJOINTS] = { -7.0, 2.0, -47, 1, 0.0, 0.0 };
+	float h[NUMBEROFHEADJOINTS] = { 0.0, 0.0, 0, 0, 0.0, 0.0 };
 	ctrl_head->addControlPoint(h);
 	
 	//-36.967033,0.043956,9.978022
-	float t[NUMBEROFTORSOJOINTS] = {-37, 0.0, 10};
+	float t[NUMBEROFTORSOJOINTS] = {0, 0.0, 0};
 	ctrl_torso->addControlPoint(t);
 	
 	//-1.010989,63.005495,16.914835,25.010989,-0.000425,0.000204,-0.000082,14.857157,29.992439,0.0,-0.155642,6.570995,5.670498,7.044929,2.605364,8.758943
-	float l[NUMBEROFARMJOINTS] = { -1.0, 63, 17, 25, 0.0, 0.0, 0.0, 15, 30, 0, 0, 6.5, 5.6, 7, 2.6, 9.0 };
-	left->addControlPoint(l);
-	
-	// 	-52.967033,53.010989,-21.036703,91.032967,-0.000425,0.000204,-0.000082,14.99995,30.004151,4.34551,4.902724,3.563704,-0.152672,5.564202,7.027027,5.3
-	float r [NUMBEROFARMJOINTS] = {-52.0, 53, -21, 91, 0, 0, 0, 15, 30, 4.3, 4.9, 3.5, -0.2, 5.5, 7, 5.3};
-	right->addControlPoint(r);
-	
-	// end position...
-	
-	// -7.000077,1.999959,-21.000071,-7.999861,0.001599,-0.000899,
-	float h2[NUMBEROFHEADJOINTS] = { -7.0, 2.0, -21, -8, 0.0, 0.0 };
-	ctrl_head->addControlPoint(h2);
-	
-	//  -52.967033,53.098901,35.93033,89.978022,-3.00041,0.000204,-0.000082,14.99995,30.004151,3.325102,4.902724,3.975226,-0.152672,7.120623,7.027027,5.792624
-	float r2[NUMBEROFARMJOINTS] = {-52.0, 53,  38, 91, 0, 0, 0, 15, 30, 4.3, 4.9, 3.5, -0.2, 5.5, 7, 5.3};
-	right->addControlPoint(r2);
-	
-	
+	float home[NUMBEROFARMJOINTS] = { -60.0, 100, 0, 45, 0, 0, 0, 15, 30, 4, 5, 4, 0, 9, 7, 0 };
+	left->addControlPoint(home);
+	right->addControlPoint(home);
 }
+
 

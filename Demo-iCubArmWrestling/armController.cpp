@@ -122,10 +122,7 @@ void ArmController::initialPose()
 //	printf("[HEAD] Reached initial pose...\n");
 	
 	// changed that 
-	while ( tgt != trajectory.end() - 1 ) {
-		
-		// test this!! 
-		
+	while ( tgt != trajectory.end() ) {		
 		blockingPositionMove(tgt++);
 		usleep(20000);
 	}	

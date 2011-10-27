@@ -324,7 +324,7 @@ void Window::collectData() {
 		btn_timer->setEnabled(false);
 		
 		std::cout << "Collecting Data! "<< std::endl;
-	//	float nextpose[iCubCtrl->head->ctrl->getNumJoints()];
+		float nextposehead[iCubCtrl->head->ctrl->getNumJoints()];
 		float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
 		
 		// stop it
@@ -336,19 +336,52 @@ void Window::collectData() {
 //		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
 		
 		// joints for the torso
-		for(float j0 = -15; j0 <= 15; j0+= 5) {		
+		for(float j0 = -15; j0 <= 15; j0+= 15) {
 			nextposetorso[0] = j0;			
-			for(float v = 15; v <= 40; v+= 5) {
-				nextposetorso[2] = v;
-				moveTheRobot(nextposetorso);
-				printf("B.");
-				// wait longer for the resetting
-				if(15 == v) sleep(5);	
-				sleep(6);
-				getYarpStatus();			
-				writeCSV();	
+			
+			// bending sideways
+			for(float j1 = -10; j1 <= 10; j1+= 10) {		
+				nextposetorso[1] = j1;			
 				
-				printf("A\n");			
+				// tilt forward/backward
+				for(float v = 10; v <= 40; v+= 10) {
+					nextposetorso[2] = v;
+
+					moveTheRobot(nextposetorso);
+					// wait longer for the resetting
+					if(15 == v) sleep(5);	
+										
+					// HEAD up down
+					for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
+						nextposehead[0] = hj0;
+
+						// HEAD left right
+						for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
+							nextposehead[2] = hj2;
+							
+							// HEAD eyes up down
+							for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
+								nextposehead[3] = hj3;						
+							
+								// HEAD eyes left right
+								for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
+									nextposehead[4] = hj4;
+									
+									if(rand() % 50 != 0) continue;
+									printf("B.");
+									moveTheRobotHead(nextposehead);	
+									waitForMotionDone();
+
+									getYarpStatus();			
+									writeCSV();	
+									
+									printf("A\n");	
+									
+								}
+							}
+						}	
+					}
+				}
 			}
 		}
 		
@@ -408,9 +441,40 @@ void Window::getYarpStatus() {
 	}
 }
 
+void Window::waitForMotionDone() {
+	float old_headjnt_pos[HEAD_JOINTS];
+	float old_torsojnt_pos[3];
+	float tolerance = 0.1;
+	showEncoderPositions();
+	printf("in waiting .");
+	
+	usleep(500000);
+	do {
+		for(int i = 0; i < HEAD_JOINTS; i++)
+			old_headjnt_pos[i] = headjnt_pos[i];
+		for(int i = 0; i < 3; i++)
+			old_torsojnt_pos[i] = torsojnt_pos[i];
+		
+		showEncoderPositions();
+		
+		int MoveCount = 0;
+		for(int i = 0; i < HEAD_JOINTS; i++)
+			MoveCount += fabs(old_headjnt_pos[i] - headjnt_pos[i])>=tolerance ? 1 : 0;
+		for(int i = 0; i < 3; i++)
+			MoveCount += fabs(old_torsojnt_pos[i] - torsojnt_pos[i])>=tolerance ? 1 : 0;
+		
+		if (MoveCount==0)
+			return;
+
+		printf(".");		
+		usleep(200000);
+	}while(true);
+	
+	
+}
+
 void Window::writeCSV() {
 	std::cout << "Write CSV () " << std::endl;
-	
 	
 	std::stringstream ss1;
 	ss1 << "left_";
@@ -643,26 +707,63 @@ void Window::moveTheRobot(float value[]) {
 		
 		ctrl = iCubCtrl->torso->ctrl;
 		for (int i = 0; i < ctrl->getNumJoints(); i++) {
-			if ( i == 2 || i == 0 ) {
+//			if ( i == 2 || i == 0 ) {
 				ctrl->lim->getLimits(i, &min, &max);
 //				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
 				if( value[i] < max && value[i] > min ) { aPos = value[i]; }
 				else { aPos = headjnt_pos[i]; }				
-			} else { 
-				aPos = headjnt_pos[i];
-			}				
+//			} else { 
+//				aPos = headjnt_pos[i];
+//			}				
 			pose.append( aPos );
 			
 		}
 		
-		ctrl->setRefSpeeds( 3.0 );
+		ctrl->setRefSpeeds( 7.0 );
 		
 		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("H"); }		
+		else { printf("-\n"); }
+		
+	}
+	
+	pose.clear();
+}
+
+void Window::moveTheRobotHead(float value[]) {	
+	// call the part babbler (kail's code) and change it to be stopped after ...
+	
+	// for the head
+	PartController *ctrl = NULL;
+	
+	qreal min, max, aPos;
+	QVector<qreal> pose;
+	
+	if( iCubCtrl->head->initialized ) {
+		
+		ctrl = iCubCtrl->head->ctrl;
+		for (int i = 0; i < ctrl->getNumJoints(); i++) {
+//			// limit the head movement to one joint
+//			if ( i == 2 ) {
+				ctrl->lim->getLimits(i, &min, &max);
+				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
+				if( value[i] < max && value[i] > min ) { aPos = value[i]; }
+				else { aPos = headjnt_pos[i]; }				
+//			} else { 
+//				aPos = headjnt_pos[i];
+//			}				
+			pose.append( aPos );
+			
+		}
+		
+		iCubCtrl->head->ctrl->setRefSpeeds( 10.0 );
+		
+		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
 		else { printf("-\n"); }
 		
 		//		iCubCtrl->head->ctrl->positionMove();
 	}
 	
+
 	pose.clear();
 }
 
