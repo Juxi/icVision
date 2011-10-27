@@ -28,6 +28,8 @@ public:
 	void checkValidity();																			//!< Checks if the remote device is ready and the interface is working
 	void stop();																					//!< Closes the connection to the remote device
 	
+	void clearTrajectory() { trajectory.clear(); }
+	void reverseTrajectory() { std::reverse(trajectory.begin(), trajectory.end()); }		
 	void addControlPoint(float a[NUMBEROFARMJOINTS]);		
 	void initialPose();
 	/* need a function to make the trajectory from a config file */

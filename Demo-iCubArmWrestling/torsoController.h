@@ -28,6 +28,7 @@ public:
 	void checkValidity();																			//!< Checks if the remote device is ready and the interface is working
 	void stop();																					//!< Closes the connection to the remote device
 	
+	void clearTrajectory() { trajectory.clear(); }	
 	void addControlPoint(float a[NUMBEROFTORSOJOINTS]);		
 	void initialPose();
 

@@ -117,8 +117,18 @@ void ArmController::initialPose()
 	printf("[HEAD] Initializing pose...\n");
 	checkValidity();
 	tgt = trajectory.begin(); 
-	blockingPositionMove(tgt++);
-	printf("[HEAD] Reached initial pose...\n");
+
+//	blockingPositionMove(tgt++);
+//	printf("[HEAD] Reached initial pose...\n");
+	
+	// changed that 
+	while ( tgt != trajectory.end() - 1 ) {
+		
+		// test this!! 
+		
+		blockingPositionMove(tgt++);
+		usleep(20000);
+	}	
 }
 
 void ArmController::blockingPositionMove( ControlPoint* target )
