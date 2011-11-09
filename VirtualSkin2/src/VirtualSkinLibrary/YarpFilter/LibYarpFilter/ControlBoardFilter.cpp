@@ -97,3 +97,8 @@ void ControlBoardFilter::injectCommand(const Bottle &b) {
 void ControlBoardFilter::injectCall(const Bottle &b) {
 	callFilter.injectCall(b);
 }
+
+//void ControlBoardFilter::setWaypoint()
+//{
+	
+//}

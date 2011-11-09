@@ -87,7 +87,7 @@ void ReflexFilter::collisionResponse()
 					{
 						bodyPartPose.addDouble( 100*(*jointB-*jointA)/period );
 					}*/
-					for ( joint = history.at(bodyPart).at(n).begin(); joint != history.at(bodyPart).at(n).end(); ++joint )
+					for ( joint = history.at(bodyPart).at(n).value.begin(); joint != history.at(bodyPart).at(n).value.end(); ++joint )
 					{
 						bodyPartPose.addDouble( *joint );
 					}
@@ -129,3 +129,12 @@ void ReflexFilter::collisionResponse()
 		msleep(20);
 	}*/
 }
+
+/*void ReflexFilter::setWaypoint()
+{
+	printf("setting a waypoint in the pose buffer\n");
+	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
+	{
+		cbFilters.at(bodyPart)->setWaypoint();
+	}
+}*/

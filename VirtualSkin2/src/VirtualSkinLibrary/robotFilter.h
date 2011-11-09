@@ -22,6 +22,7 @@
 #include "yarpModel.h"
 #include "yarpStreamPort.h"
 #include "virtualskinexception.h"
+#include "filterRpcInterface.h"
 
 namespace VirtualSkin
 {
@@ -159,6 +160,11 @@ public:
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
 	void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
 
+	
+	void openFilterRpcPort( const QString& name ) { filterRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	void closeFilterRpcPort() { filterRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	void setWaypoint();
+	
 public slots:
 	
 	//void collisionStatus(int);
@@ -180,7 +186,8 @@ protected:
 										 such as the name of the robot and the number of controllable axes for example */
 	
 	YarpStreamPort		statusPort;			//!< Published the (open/closed) status of the filter
-												//! TODO: Make this not iCub specific	
+	FilterRpcInterface	filterRpcInterface;
+	
 	yarp::os::Bottle	stop_command;			//!< Stores an RPC command to stop the iCub robot
 												/**< \note This is iCub specific, and it should be done differently in the future */
 	bool				isOpen,					//!< Indicates whether or not filter is forwarding commands

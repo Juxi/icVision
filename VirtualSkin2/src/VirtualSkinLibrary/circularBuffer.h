@@ -32,23 +32,31 @@ public:
 
 	void setBufferSize( int bufferLength );	//!< Clear and then resize the buffer
 	
-	QVector< QVector<qreal> >::iterator next();		//!< Advances the 'current' position in the buffer
-	QVector< QVector<qreal> >::iterator prev();		//!< Moves the 'current' position in the buffer backward
-	void init( const QVector<qreal> v);				//!< Fill the buffer with the QVector v
+	struct Item
+	{
+		int label;	//! 0-colliding, 1-safe, 2-waypoint
+		QVector<qreal> value;
+	};
 	
-	void put( const QVector<qreal> v);		//!< Write the QVector v to the buffer and advance the 'current' position
+	QVector< Item >::iterator next();		//!< Advances the 'current' position in the buffer
+	QVector< Item >::iterator prev();		//!< Moves the 'current' position in the buffer backward
 	
-	QVector<qreal>& getOldest();			//!< Returns a reference to the oldest value in the buffer
-	QVector<qreal>& getCurrent();			//!< Returns a reference to the current value
-	QVector< QVector<qreal> > getHistory();	//!< Return the current contents of the buffer in reverse chronological order
+	void init( Item );				//!< Fill the buffer with the QVector v
+	void put( Item );		//!< Write the QVector v to the buffer and advance the 'current' position
+	
+	void labelLastEntry( int anInt ) { (*prev()).label = anInt; }
+	
+	Item& getOldest();			//!< Returns a reference to the oldest value in the buffer
+	Item& getCurrent();			//!< Returns a reference to the current value
+	QVector< Item > getHistory();	//!< Return the current contents of the buffer in reverse chronological order
 	qreal getPeriod() { return period; }    //!< Returns the average time between writes to the buffer
 											/**< This is recalculated each time we traverse the circular buffer, so it may be wacky if you use
 												 a very short buffer, and it may take a long time to refresh if you use a really long buffer */
 
 private:
-
-	QVector< QVector<qreal> >::iterator i;	//!< Represents the 'current' position in the buffer
-	QVector< QVector<qreal> > buffer;		//!< The buffer itself
+	
+	QVector< Item >::iterator i;	//!< Represents the 'current' position in the buffer
+	QVector< Item > buffer;		//!< The buffer itself
 	QTime time;
 	qreal period;
 	bool empty;

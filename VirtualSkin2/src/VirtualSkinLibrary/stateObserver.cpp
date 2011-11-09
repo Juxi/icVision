@@ -33,12 +33,18 @@ StateObserver::~StateObserver()
 
 void StateObserver::onDataObserved(yarp::os::Bottle &b)
 {
+	CircularBuffer::Item item;
 	QVector<qreal> poss;
-	for (int i = 0; i < b.size(); i++) {
+	for (int i = 0; i < b.size(); i++)
+	{
 		poss.append((qreal) (((b.get(i).asDouble()))));
 	}
+	item.value = poss;
 	
-	if ( !robotFilter->cbFilters.at(bodyPart)->isCut() ) { poseBuffer.put(poss); }
+	if ( !robotFilter->cbFilters.at(bodyPart)->isCut() ) { item.label = SAFE; }
+	else { item.label = COLLIDING; }
+	
+	poseBuffer.put(item);
 	
 	int i = bodyPart;
 	const QVector<qreal>& v = poss;

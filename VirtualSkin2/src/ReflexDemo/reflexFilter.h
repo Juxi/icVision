@@ -13,6 +13,8 @@
 #include <time.h>
 
 #include "robotFilter.h"
+#include "circularBuffer.h"
+#include "filterRpcInterface.h"
 
 /** \brief A VirtualSkin::RobotFilter with reflexive collision response
  *
@@ -34,12 +36,15 @@ public:
 												/**< This example is straightforward, as stopRobot()
 													 issues a position move command */
 
+	//void openFilterRpcPort( const QString& name ) { filterRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	//void closeFilterRpcPort() { filterRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	
+	//void setWaypoint();
 private:
 	
 	QVector< QVector<qreal> >	originalPose,	//!< A colliding configuration
 								targetPose;		//!< A safe configuration
-	QVector< QVector< QVector<qreal> > > history;	//!< The history of the last n poses of the whole robot
-
+	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;	//!< The history of the last n poses of the whole robot
 };
 #endif
 /** @} */

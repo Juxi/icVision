@@ -5,7 +5,8 @@
 #include "yarprobot.h"
 #include "yarpModel.h"
 #include "reflexFilter.h"
-#include "worldRpcInterface.h"
+//#include "worldRpcInterface.h"
+//#include "filterRpcInterface.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
 		printf("Launching Virtual Skin... \n");
 		if ( visualize ) {	printf("  ...with visualization\n");		}
 		else {				printf("  ...without visualization\n");		}
+	
 	/***********************************************************************/
 	
 	// Create the QApplication
@@ -72,16 +74,23 @@ int main(int argc, char *argv[])
 			filter = new ReflexFilter( yarpRobot, visualize );
 			filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 			 
+			// Open the RPC interface to the filter
+			printf("opening filter RPC port\n");
+			filter->openFilterRpcPort("/filter");
 		}
 		
-		// Open the RPC interface to the model
+		// Open the RPC interface to the world model
 		printf("opening world RPC port\n");
 		yarpModel->openWorldRpcPort("/world");
 	
 		// run the Qt application
 		result = app.exec();
 		
-		if ( filter ) { filter->close(); }
+		if ( filter )
+		{ 
+			filter->closeFilterRpcPort();
+			filter->close();
+		}
 		delete filter;
 		
 		if ( yarpModel )

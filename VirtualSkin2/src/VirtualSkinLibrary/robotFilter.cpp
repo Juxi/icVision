@@ -13,6 +13,7 @@
  */
 
 #include "robotFilter.h"
+#include "filterRpcInterface.h"
 #include "constants.h"
 
 #include <yarp/os/all.h>
@@ -153,4 +154,12 @@ void RobotFilter::openFilter()
 	statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("*** CONTROL RESTORED ***\n");
 	haveControl = false;
+}
+
+void RobotFilter::setWaypoint()
+{
+	for (int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
+	{
+		stateObservers.at(bodyPart)->setWaypoint();
+	}
 }
