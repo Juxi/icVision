@@ -133,7 +133,6 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 //		return false;
 //	}
 	
-	
 	outputPortName = "/";
 	outputPortName += getName();
 	outputPortName += "/output:o";
@@ -142,8 +141,26 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 	}
 	
 	
-	// instantiate the worker
-		//reach = new ReachingWorker(robotName, partName);
+	// TEMP Solution TODO change
+	// connect to rpc
+	
+	// check whether we have F or not!! TODO
+	string clientPortName = "/evolvedfilter";
+	clientPortName += "/world-client";
+	if(! port.open( clientPortName.c_str() )){
+		return false;
+	}
+		
+	inputPortName = "/world";	
+//	inputPortName += robotName; 
+//	inputPortName += "F/world";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+		cout << getName() << ": Unable to connect to port " /*<< clientPortName.c_str() << " to "*/ << inputPortName.c_str() << endl;
+		return false;
+	}	
 	
 	return true ;      // let the RFModule know everything went well
 }
@@ -285,7 +302,13 @@ bool EvolvedFilterModule::updateModule()
 			CvPoint p1, p2;
 			p1.x = r.x; p1.y = r.y;
 			p2.x = r.x + r.width; p2.y = r.y + r.height;
-			cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 3, 8, 0 );
+			cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+			
+			double x = -0.5;
+			double y = -1.0 * (p1.x - (in->width*scalingFactor * 0.5))/360.0;
+			double z = 0.0;
+			
+			setObjectWorldPosition(x, y, z);
 		}
 		
 	}
@@ -311,6 +334,28 @@ bool EvolvedFilterModule::updateModule()
 	return !isReadingFileFromHDD;
 //	return true;
 }
+
+
+
+void EvolvedFilterModule::setObjectWorldPosition(double x, double y, double z) {
+	std::string objName = "cup1";
+	yarp::os::Bottle cmd, response;
+		
+	// get information about the object from rpc
+	cmd.clear();
+	cmd.addString("set");
+	cmd.addString(objName.c_str());
+	
+	
+	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	
+	cmd.addDouble(x);
+	cmd.addDouble(y);
+	cmd.addDouble(z);
+
+	port.write(cmd, response);
+}	
+
 
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();

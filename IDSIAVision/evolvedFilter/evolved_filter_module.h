@@ -35,6 +35,9 @@ protected:
 	string outputPortName;
 	
 	// YARP interfaces
+	
+	yarp::os::RpcClient port;
+
 	yarp::os::Network yarp;			//!< Identifies the yarp network
 	yarp::os::Port handlerPort; 	//!< The port to handle messages (e.g. quit)
 	
@@ -64,6 +67,8 @@ protected:
 	
 	std::vector<GpImage*> InputImages;
 	void createInputImages(IplImage *in);
+	
+	void setObjectWorldPosition(double x, double y, double z);
 	
 public:
 	EvolvedFilterModule();
