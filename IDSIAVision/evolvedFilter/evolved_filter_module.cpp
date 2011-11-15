@@ -203,10 +203,12 @@ bool EvolvedFilterModule::updateModule()
 		std::cout << "DEBUG: Created the GP input images!" << std::endl;		
 		int i = 0;
 		for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
-			std::string fileName = "input-";
-			fileName += '0' + i++;
-			fileName += ".png";
-			(*it)->Save(fileName);
+			if((*it)) {
+				std::string fileName = "input-";
+				fileName += '0' + i++;
+				fileName += ".png";
+				(*it)->Save(fileName);
+			}
 		}
 	}
 	
@@ -222,32 +224,80 @@ bool EvolvedFilterModule::updateModule()
 	// output filtered image
 	IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
 	IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);	
+	IplImage* out_single = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 1);	
 	
-	// overlay original	
-	//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
-	IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	bool wewantoverlay = false;
+	bool wewanttothreshold = true;	
+	if(wewantoverlay) {
+		// overlay original	
+		//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
+		IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+		IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+		IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 
-	cvCvtColor(InputImages[0]->Image, rgb, CV_GRAY2RGB);
+		cvCvtColor(InputImages[0]->Image, rgb, CV_GRAY2RGB);
 
-	cvSplit(rgb, b, g, r, NULL);
-	cvAdd(r, filteredImg->Image, r);
-	cvMerge(b, g, r, NULL, rgb);	
-	
-	cvReleaseImage(&r);
-	cvReleaseImage(&g);	
-	cvReleaseImage(&b);	
+		cvSplit(rgb, b, g, r, NULL);
+		cvAdd(r, filteredImg->Image, r);
+		cvMerge(b, g, r, NULL, rgb);	
+		
+		cvReleaseImage(&r);
+		cvReleaseImage(&g);	
+		cvReleaseImage(&b);	
+	}else{
+		cvCvtColor(filteredImg->Image, rgb, CV_GRAY2RGB);
+	}
 	
 	cvConvertScale(rgb, out8, 1.0, 0.0);
+
+	// if we want to threshold the output! there we go	
+	if(wewanttothreshold) {
+		cvThreshold(out8, out8, 250.0, 255.0, CV_THRESH_BINARY);
+		
+		
+		// Blob detection
+		cvCvtColor(out8, out_single, CV_RGB2GRAY);
+		//Linked list of connected pixel sequences in a binary image
+		CvSeq* seq;
+		
+		//Array of bounding boxes
+		vector<CvRect> boxes;
+		
+		//Memory allocated for OpenCV function operations
+		CvMemStorage* storage = cvCreateMemStorage(0);
+		cvClearMemStorage(storage);
+		
+		//Find connected pixel sequences within a binary OpenGL image (diff), starting at the top-left corner (0,0)
+		cvFindContours(out_single, storage, &seq, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, cvPoint(0,0));
+		
+		//Iterate through segments
+		for(; seq; seq = seq->h_next) {
+			//Find minimal bounding box for each sequence
+			CvRect boundbox = cvBoundingRect(seq);
+			boxes.push_back(boundbox);
+		}
+		
+		cvReleaseMemStorage(&storage);
+
+		if(boxes.size() > 0) {
+			CvRect r = boxes[0];
+			std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
+			CvPoint p1, p2;
+			p1.x = r.x; p1.y = r.y;
+			p2.x = r.x + r.width; p2.y = r.y + r.height;
+			cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 3, 8, 0 );
+		}
+		
+	}
 
 	ImageOf<PixelBgr>& output = outputPort_Image.prepare();
 	output.wrapIplImage(out8); //output.copy ( *left_image );
     outputPort_Image.write();	
 		
 	// cleanup 
+	cvReleaseImage(&out_single);	
 	cvReleaseImage(&out8);
-	cvReleaseImage(&gray);	
+	cvReleaseImage(&rgb);	
 	delete filteredImg;
 	
 	
