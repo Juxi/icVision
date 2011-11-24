@@ -30,6 +30,7 @@ INCLUDE_DIRECTORIES (${OpenCV_INCLUDE_DIRS})
 SET ( src_files main.cpp
 		GpImage.cpp
 		GaborImage.cpp
+		
 		evolved_filter_module.cpp
 		evolved_filters/blue_detector.cpp
 		evolved_filters/teabox.cpp		
