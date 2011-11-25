@@ -23,7 +23,8 @@ EvolvedFilterModule::EvolvedFilterModule() :
 {
 	//moduleName = "IM-CLeVeR::Vision::Reaching";
 	setName("EvolvedFilter");
-	gray = red = green = blue =	h =	s = v = NULL;	
+	gray = red = green = blue =	h =	s = v = NULL;
+		
 	UsedInputs.Add(4);
 }
 
@@ -122,17 +123,16 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 	inputPortName = "/";		serverPortName = "/";
 	inputPortName += getName(); serverPortName += robotName;
 	inputPortName += "/right";	serverPortName += "/cam/right";
-//	if(! rightInPort.open( inputPortName.c_str() )){
-//		cout << getName() << ": Unable to open port " << inputPortName << endl;		
-//		return false;
-//	}
-//	
-//	printf("Trying to connect to %s\n", inputPortName.c_str());
-//	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-//		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
-//		return false;
-//	}
+	if(! rightInPort.open( inputPortName.c_str() )){
+		cout << getName() << ": Unable to open port " << inputPortName << endl;		
+		return false;
+	}
 	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
+		return false;
+	}
 	
 	outputPortName = "/";
 	outputPortName += getName();
@@ -142,8 +142,56 @@ bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
 	}
 	
 	
-	// instantiate the worker
-		//reach = new ReachingWorker(robotName, partName);
+	// TEMP Solution TODO change
+	
+	// connect to straems
+	
+	std::string portName = "/juxi/head/state:o";
+	inputPortName = "/icub/head/state:o";	
+	if(! head_port.open( portName.c_str() )){
+		cout << getName() << ": Unable to open port " << portName << endl;		
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", portName.c_str());
+	if(! yarp.connect(inputPortName.c_str(), portName.c_str()) ) {
+		cout << getName() << ": Unable to connect to port " << inputPortName.c_str() << " with " << portName.c_str() << endl;
+		return false;
+	}
+
+	
+	portName = "/juxi/torso/state:o";
+	inputPortName = "/icub/torso/state:o";	
+	if(! torso_port.open( portName.c_str() )){
+		cout << getName() << ": Unable to open port " << portName << endl;		
+		return false;
+	}
+	
+	printf("Trying to connect to %s\n", portName.c_str());
+	if(! yarp.connect(inputPortName.c_str(), portName.c_str()) ) {
+		cout << getName() << ": Unable to connect to port " << inputPortName.c_str() << " with " << portName.c_str() << endl;
+		return false;
+	}
+	
+	// connect to rpc
+	
+	// check whether we have F or not!! TODO
+	string clientPortName = "/evolvedfilter";
+	clientPortName += "/world-client";
+	if(! port.open( clientPortName.c_str() )){
+		return false;
+	}
+		
+	inputPortName = "/world";	
+//	inputPortName += robotName; 
+//	inputPortName += "F/world";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+		cout << getName() << ": Unable to connect to port " /*<< clientPortName.c_str() << " to "*/ << inputPortName.c_str() << endl;
+		return false;
+	}	
 	
 	return true ;      // let the RFModule know everything went well
 }
@@ -167,100 +215,301 @@ bool EvolvedFilterModule::updateModule()
 
 	clock_t start = clock();
 
-	IplImage* in;
+	IplImage* in = NULL;
+	
+	ImageOf<PixelBgr> *left_image = NULL;
+	ImageOf<PixelBgr> *right_image = NULL;	
 	
 	if( isReadingFileFromHDD ) {
 		in = cvLoadImage(fileName.c_str());
 	} else {	
 		// read image from the port
-		ImageOf<PixelBgr> *left_image = leftInPort.read();  // read an image
+		left_image = leftInPort.read();  // read an image
 		if (left_image == NULL) { 
 			std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
 			return false;
 		}
-		in = (IplImage*) left_image->getIplImage();
-	}
-	ImageWidth  = in->width * scalingFactor;
-	ImageHeight = in->height * scalingFactor;	
-	
-	static int index = 0;
-	if( inDebugMode) {
-		std::cout << "DEBUG: Got input image!" << std::endl;	
-		GpImage* inputImg = new GpImage(in);
-		char fileIn[80];
-		sprintf(fileIn, "input-frame-%05d.png", index);
-		inputImg->Save(fileIn);
-	}
-	
-	// set which images from the input we need for the filter
-	this->setUsedInputs();
-	
-	// create input images to the filter
-	createInputImages(in);
-
-	if( inDebugMode ) {
-		// DEBUG test output of the creating
-		std::cout << "DEBUG: Created the GP input images!" << std::endl;		
-		int i = 0;
-		for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
-			std::string fileName = "input-";
-			fileName += '0' + i++;
-			fileName += ".png";
-			(*it)->Save(fileName);
+		// read image from the right port
+		right_image = rightInPort.read();  // read an image
+		if (right_image == NULL) { 
+			std::cout << "ERROR: Could not read from port '" << rightInPort.getName() << "'!" << std::endl;
+			return false;
 		}
+
 	}
 	
-	// run filter
-	GpImage* filteredImg = this->runFilter();
+	
+	bool allFramesDone = false;
+	
+	CvPoint frame1, frame2;
+	
+	frame1.x = frame2.x = 0.0;
+	frame1.y = frame2.y = 0.0;	
+	
+	do {
+		if(in == NULL) {
+			// first run 
+			in = (IplImage*) right_image->getIplImage();
+		}else{
+			allFramesDone = true;
+			in = (IplImage*) left_image->getIplImage();
+		}
+		ImageWidth  = in->width * scalingFactor;
+		ImageHeight = in->height * scalingFactor;	
 		
-	if( inDebugMode ) {
-		//DEBUG
-		filteredImg->Save("output.png");
-		std::cout << "DEBUG: Now yarping..." << std::endl;		
-	}
-
-	// output filtered image
-	IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
-	IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);	
-	
-	// overlay original	
-	//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
-	IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-
-	cvCvtColor(InputImages[0]->Image, rgb, CV_GRAY2RGB);
-
-	cvSplit(rgb, b, g, r, NULL);
-	cvAdd(r, filteredImg->Image, r);
-	cvMerge(b, g, r, NULL, rgb);	
-	
-	cvReleaseImage(&r);
-	cvReleaseImage(&g);	
-	cvReleaseImage(&b);	
-	
-	cvConvertScale(rgb, out8, 1.0, 0.0);
-
-	ImageOf<PixelBgr>& output = outputPort_Image.prepare();
-	output.wrapIplImage(out8); //output.copy ( *left_image );
-    outputPort_Image.write();	
+		static int index = 0;
+		if( inDebugMode) {
+			std::cout << "DEBUG: Got input image!" << std::endl;	
+			GpImage* inputImg = new GpImage(in);
+			char fileIn[80];
+			sprintf(fileIn, "input-frame-%05d.png", index++
+					);
+			inputImg->Save(fileIn);
+		}
 		
-	// cleanup 
-	cvReleaseImage(&out8);
-	cvReleaseImage(&gray);	
-	delete filteredImg;
+		// set which images from the input we need for the filter
+		this->setUsedInputs();
+		
+		// create input images to the filter
+		createInputImages(in);
+
+		if( inDebugMode ) {
+			// DEBUG test output of the creating
+			std::cout << "DEBUG: Created the GP input images!" << std::endl;		
+			int i = 0;
+			for(std::vector<GpImage*>::iterator it = InputImages.begin(); it != InputImages.end(); it++ ) {
+				if((*it)) {
+					std::string fileName = "input-";
+					fileName += '0' + i++;
+					fileName += ".png";
+					(*it)->Save(fileName);
+				}
+			}
+		}
+		
+		// run filter
+		GpImage* filteredImg = this->runFilter();
+			
+		if( inDebugMode ) {
+			//DEBUG
+			filteredImg->Save("output.png");
+			std::cout << "DEBUG: Now yarping..." << std::endl;		
+		}
+
+		// output filtered image
+		IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
+		IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);	
+		IplImage* out_single = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 1);	
+		
+		bool wewantoverlay = true;
+		bool wewanttothreshold = true;	
+
+	//	if(wewantoverlay) {
+	//		// overlay original	
+	//		//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
+	//		IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	//		IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	//		IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+	//
+	//		cvCvtColor(gray, rgb, CV_GRAY2RGB);
+	//
+	//		cvSplit(rgb, b, g, r, NULL);
+	//		cvAdd(r, filteredImg->Image, r);
+	//		cvMerge(b, g, r, NULL, rgb);	
+	//		
+	//		cvReleaseImage(&r);
+	//		cvReleaseImage(&g);	
+	//		cvReleaseImage(&b);	
+	//	}else{
+			cvCvtColor(filteredImg->Image, rgb, CV_GRAY2RGB);
+	//	}
+		
+		
+		cvConvertScale(rgb, out8, 1.0, 0.0);
+
+		if(wewantoverlay)
+			cvCvtColor(gray, rgb, CV_GRAY2RGB);
+
+		// if we want to threshold the output! there we go	
+		if(wewanttothreshold) {
+			cvThreshold(out8, out8, 250.0, 255.0, CV_THRESH_BINARY);
+			
+			
+			// Blob detection
+			cvCvtColor(out8, out_single, CV_RGB2GRAY);
+			//Linked list of connected pixel sequences in a binary image
+			CvSeq* seq;
+			
+			//Array of bounding boxes
+			vector<CvRect> boxes;
+			
+			//Memory allocated for OpenCV function operations
+			CvMemStorage* storage = cvCreateMemStorage(0);
+			cvClearMemStorage(storage);
+			
+			//Find connected pixel sequences within a binary OpenGL image (diff), starting at the top-left corner (0,0)
+			cvFindContours(out_single, storage, &seq, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, cvPoint(0,0));
+			
+			//Iterate through segments
+			for(; seq; seq = seq->h_next) {
+				//Find minimal bounding box for each sequence
+				CvRect boundbox = cvBoundingRect(seq);
+				boxes.push_back(boundbox);
+			}
+			
+			cvReleaseMemStorage(&storage);
+
+			if(boxes.size() > 0) {
+				CvRect r = boxes[0];
+//				std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
+				CvPoint p1, p2;
+				p1.x = r.x; p1.y = r.y;
+				p2.x = r.x + r.width; p2.y = r.y + r.height;
+				
+				int x = r.x + r.width/2;
+				int y = r.y + r.height;
+
+				if(wewantoverlay) {
+					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+					CvPoint ph; ph.x = x; ph.y = y;
+					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
+
+				} else {
+					cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+				}
+				
+				
+				if(allFramesDone) {
+					frame1.x = x;
+					frame1.y = y;
+				}else{
+					frame2.x = x;
+					frame2.y = y;
+				}
+			}
+			
+		}
+		
+		if(wewantoverlay) {
+			cvConvertScale(rgb, out8, 1.0, 0.0);
+		}
+
+		if(allFramesDone) {
+			ImageOf<PixelBgr>& output = outputPort_Image.prepare();
+			output.wrapIplImage(out8); //output.copy ( *left_image );
+			outputPort_Image.write();	
+		}
+			
+		// cleanup 
+		cvReleaseImage(&out_single);	
+		cvReleaseImage(&out8);
+		cvReleaseImage(&rgb);	
+		delete filteredImg;
+		
+		InputImages.clear();
+		
+	}while(!allFramesDone);
+
+	// first try...
+	//			double x = -0.5;
+	//			double y = -1.0 * (frame1.x - (in->width*scalingFactor * 0.5))/360.0;
+	//			double z = 0.0;
 	
+
+	// HACKING !! todo rewrite, ...
+	// assumes we got both points!
+	// calculate world
 	
-	InputImages.clear();
+	readEncoderPositions();
+		
+	std::cout <<  frame1.x << ", "<< frame1.y << ", "<< frame2.x<< ", "<< frame2.y << std::endl;
+	double x[13] = { frame1.x, frame1.y, frame2.x, frame2.y, headjnt_pos[0], headjnt_pos[1],headjnt_pos[2],headjnt_pos[3], headjnt_pos[4], headjnt_pos[5], torsojnt_pos[0], torsojnt_pos[1], torsojnt_pos[2] };
+	
+	double PredictedZ = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
+	double PredictedX = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0])	;
+	
+	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
+	double PredictedY = 0;
+	
+	std::cout <<  "Predition: "<< round(PredictedZ)<< ", "<< (char)(round(PredictedX)+'A') << std::endl;
+	
+	double CellSize = 6;
+	
+	PredictedX *= CellSize;
+	PredictedY *= CellSize;
+	PredictedZ *= CellSize;
+
+	double xOffset = CellSize * 6;
+	double zOffset = CellSize * 2.85;
+	
+	PredictedX-=xOffset;
+	PredictedZ+=zOffset;
+
+	setObjectWorldPosition(-PredictedZ/100.0, PredictedX/100.0, 0.0);
+			
 	
 	clock_t end = clock();	
 	double diffms = (end-start)*1000/CLOCKS_PER_SEC;///CLOCKS_PER_SEC;	
-	std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
+// Debug	std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
 	
 	// return	(when we read from HDD we only run once!)
 	return !isReadingFileFromHDD;
 //	return true;
 }
+
+
+void EvolvedFilterModule::readEncoderPositions() {
+	//	std::cout << "Show encoder positions() " << std::endl;	
+	
+    Port *yarp_port;
+	
+	// Head data
+	yarp_port = &head_port;			
+    Bottle input;
+	yarp_port->read(input);
+	
+	if (input != NULL) {
+		for(int i = 0; i < input.size(); i++) {
+			if(input.get(i).isDouble() && i < HEAD_JOINTS) {
+				headjnt_pos[i] = input.get(i).asDouble();
+			}
+		}
+	}
+	
+	// Torso data
+	yarp_port = &torso_port;			
+    Bottle input2;
+	yarp_port->read(input2);
+	if (input2 != NULL) {
+		for(int i = 0; i < input2.size(); i++) {
+			if(input2.get(i).isDouble() && i < 3) {
+				torsojnt_pos[i] = input2.get(i).asDouble();
+			}
+		}
+	}
+}
+
+
+
+void EvolvedFilterModule::setObjectWorldPosition(double x, double y, double z) {
+	std::string objName = "cup1";
+	yarp::os::Bottle cmd, response;
+		
+	// get information about the object from rpc
+	cmd.clear();
+	cmd.addString("set");
+	cmd.addString(objName.c_str());
+	
+//	
+//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	
+	cmd.addDouble(x);
+	cmd.addDouble(y);
+	cmd.addDouble(z);
+
+	port.write(cmd, response);
+}	
+
 
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();
@@ -289,9 +538,9 @@ void EvolvedFilterModule::createInputImages(IplImage* in) {
 		in32_scaled = in32;
 	}
 
+	// to gray
+	cvCvtColor(in32_scaled, gray, CV_BGR2GRAY);
 	if( UsedInputs.uses(0) ) {
-		// to gray
-		cvCvtColor(in32_scaled, gray, CV_BGR2GRAY);
 		InputImages.push_back(new GpImage(gray));
 	} else {
 		InputImages.push_back(NULL); // gray

@@ -15,11 +15,13 @@ using namespace std;
 #include "GpImage.h"
 #include "boolList.h"
 
+#define HEAD_JOINTS 6
+
+
 using namespace yarp::os;
 using namespace yarp::sig;
 
-class EvolvedFilterModule : public yarp::os::Module
-{
+class EvolvedFilterModule : public yarp::os::Module {
 protected:
 	// module parameters
 	string moduleName;
@@ -35,11 +37,14 @@ protected:
 	string outputPortName;
 	
 	// YARP interfaces
+	
+	yarp::os::RpcClient port;
+
 	yarp::os::Network yarp;			//!< Identifies the yarp network
 	yarp::os::Port handlerPort; 	//!< The port to handle messages (e.g. quit)
 	
 	BufferedPort< ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
-//	BufferedPort< ImageOf<PixelBgr> > rightInPort; 	//!< The port to handle incoming right eye images
+	BufferedPort< ImageOf<PixelBgr> > rightInPort; 	//!< The port to handle incoming right eye images
 	
 	BufferedPort< ImageOf<PixelBgr> > outputPort_Image;
 	
@@ -64,6 +69,17 @@ protected:
 	
 	std::vector<GpImage*> InputImages;
 	void createInputImages(IplImage *in);
+	
+	void setObjectWorldPosition(double x, double y, double z);
+	void readEncoderPositions();	
+	
+	
+	// HACK
+	yarp::os::Port head_port;
+	yarp::os::Port torso_port;	
+	
+	double headjnt_pos[HEAD_JOINTS], torsojnt_pos[3];
+	
 	
 public:
 	EvolvedFilterModule();

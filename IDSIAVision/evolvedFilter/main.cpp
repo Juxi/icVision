@@ -19,9 +19,9 @@ int main(int argc, char * argv[]) {
 	std::string version = "v0.02";
 	printf("Launching IM-CLeVeR Evolved Filter (%s) Module [vision]...\n", version.c_str());
 	
-//	EvolvedFilterModule* module = new BlueCupDetector();
+	EvolvedFilterModule* module = new BlueCupDetector();
 //	EvolvedFilterModule* module = new EvolvedFilterModule();	
-	EvolvedFilterModule* module = new TeaBoxDetector();	
+//	EvolvedFilterModule* module = new TeaBoxDetector();	
 	
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
 	module->runModule(argc, argv);

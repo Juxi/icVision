@@ -16,7 +16,7 @@ ENDIF ( LINK_ACE )
 
 ### Add sources
 ADD_SUBDIRECTORY (core)
-ADD_SUBDIRECTORY (coreGUI)
+## ADD_SUBDIRECTORY (coreGUI)
 
 ADD_SUBDIRECTORY (evolvedFilter)
 
