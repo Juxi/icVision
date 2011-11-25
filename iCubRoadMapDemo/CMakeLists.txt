@@ -34,11 +34,13 @@ endif()
 
 SET ( src_files	main.cpp
 		partController.cpp
+		iCubController.cpp
 		roadmap.cpp
 )
 
 SET ( hdr_files	roadmap.h
 		partController.h
+		iCubController.h
 )
 
 ADD_EXECUTABLE ( RoadmapDemo ${hdr_files} ${src_files} )

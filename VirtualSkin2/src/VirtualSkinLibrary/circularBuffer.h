@@ -44,7 +44,17 @@ public:
 	void init( Item );				//!< Fill the buffer with the QVector v
 	void put( Item );		//!< Write the QVector v to the buffer and advance the 'current' position
 	
-	void labelLastEntry( int anInt ) { (*prev()).label = anInt; }
+	/*void labelLastEntry( int anInt )
+	{
+		prev()->label = anInt;
+		printf("labeled last entry: %d\n",  prev()->label );
+	}*/
+	void init( int anInt )
+	{
+		Item item = *prev();
+		item.label = anInt;
+		init(item);
+	}
 	
 	Item& getOldest();			//!< Returns a reference to the oldest value in the buffer
 	Item& getCurrent();			//!< Returns a reference to the current value

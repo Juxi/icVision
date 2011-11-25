@@ -3,7 +3,7 @@
  ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
  ******************************************************************/
 
-/** \addtogroup iCubBabble
+/** \addtogroup iCubRoadMap
  *	@{
  */
 
@@ -35,15 +35,20 @@ public:
 	bool checkMotionDone( bool* );								//!< Checks if a position move has finished
 	
 	bool stop();												//!< Stops all joints immediately
-	bool positionMove( double* poss, double* vels = NULL );		//!< Moves the device to a specified position
-	bool setJointMask( int jointNum, bool val );
-	bool getRandomPose( double* poss );
+	
+	bool positionMove( const std::vector<double>& poss );
+	//bool positionMove( const std::vector<double>& poss, const std::vector<double>& vels );		//!< Moves the device to a specified position
+
+	bool setJointMask( const std::vector<bool>& vals );
 	std::vector<double> getRandomPose();
+	std::vector<double> getCurrentPose();
+	
 	
 private:
 
 	int numJoints;
-	bool* jointMask;
+	std::vector<double> min,max;
+	//std::vector<bool> jointMask;
 	
 	yarp::os::Network network;
 	yarp::dev::PolyDriver *dd;

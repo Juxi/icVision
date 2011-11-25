@@ -71,7 +71,7 @@ public:
 	//void printLinks();			//!< Prints the kinematic tree depth first
 	//void printBodyParts();		//!< Print a list of the Motor objects in each BodyPart
 	
-	int numBodyParts() const	{ return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
+	int numBodyParts() const { return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
 	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
 	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
 

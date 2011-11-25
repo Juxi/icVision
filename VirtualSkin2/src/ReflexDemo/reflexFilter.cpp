@@ -46,74 +46,60 @@ void ReflexFilter::extraOpenStuff()
 
 void ReflexFilter::collisionResponse()
 {
-	yarp::os::Bottle rewind;
-	//QVector<qreal>::const_iterator jointA,jointB;
-	//int jointNum;
-	QVector<qreal>::const_iterator joint;
-	QTime safeTime;
-	qreal period;
-	
-	// this works great on the simulator, but not on the robot !?!
-	/**/
-	
-	// get the pose history
+	int n = 10;			// we will use every nth pose in the buffer
+
+	// get the pose history and the average period between arriving state bottles
+	qreal period = 0;
 	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 	{
 		history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory() );
+		period += stateObservers.at(bodyPart)->getPeriod();
 	}
+	period /= robot->numBodyParts();
 	
+	// prepare a bottle for the position move commands
+	yarp::os::Bottle rewind;
 	yarp::os::Bottle& prefix = rewind.addList();
-	//prefix.addVocab(VOCAB_VELOCITY_MOVES);
-	prefix.addVocab(VOCAB_POSITION_MOVES);
 	yarp::os::Bottle& bodyPartPose = rewind.addList();
+	prefix.addVocab(VOCAB_POSITION_MOVES);
 	
-	for ( int n = 0; n < POSE_BUFFER_SIZE ; n++ )
+	bool wpReached = false;
+	QVector<double>::const_iterator joint;
+	for ( int i = 0; i < POSE_BUFFER_SIZE ; i++ )
 	{
-		if ( isColliding || safeTime.elapsed() < 500 )
-		{
-			// we want to control at 10 Hz, but the hardware streams poses at 100Hz
-			// the simulator does it at 50Hz, so reflexes will be rather fast
-			if ( n % 10 == 0 )
+		if ( wpReached ) { break; }
+		else {
+			
+			//printf("i = %d\n",i);
+			if ( i % n == 0 )	// use every nth pose in the buffer
 			{
-				printf("------------------------------------------ %d\n",n%10);
+				//printf("------------------------------------------\n");
 				for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 				{
+					printf("Pose: %d, Part: %d, Label: %d\n", i, bodyPart, history.at(bodyPart).at(i).label );
+					
+					// send the next position move bottle
 					bodyPartPose.clear();
-					period = stateObservers.at(bodyPart)->getPeriod();
-					printf("Body Part - %d, %f period: ", bodyPart, period );
-					/*for ( jointA  = history.at(bodyPart).at(n).begin(), jointB  = history.at(bodyPart).at(n+1).begin();
-						  jointA != history.at(bodyPart).at(n).end() && jointB != history.at(bodyPart).at(n+1).end() ;
-						 ++jointA, ++jointB )
-					{
-						bodyPartPose.addDouble( 100*(*jointB-*jointA)/period );
-					}*/
-					for ( joint = history.at(bodyPart).at(n).value.begin(); joint != history.at(bodyPart).at(n).value.end(); ++joint )
+					for ( joint = history.at(bodyPart).at(i).value.begin(); joint != history.at(bodyPart).at(i).value.end(); ++joint )
 					{
 						bodyPartPose.addDouble( *joint );
 					}
-					
-					printf("%s\n", rewind.toString().c_str());
 					cbFilters.at(bodyPart)->injectCommand(rewind);
+					//if ( bodyPart ==2 ) { printf("%s\n", rewind.toString().c_str()); }
+					
+					if ( /*!isColliding &&*/ history.at(bodyPart).at(i).label == VirtualSkin::StateObserver::WAYPOINT )
+					{ 
+						wpReached = true;
+						printf("WAYPOINT REACHED!!!\n\n");
+						//setWaypoint();
+					}
+					else { wpReached = false; }
 				}
-				
-				//printf("  waiting %f/%d msec\n", period, model.robot->numBodyParts());
-				//period /= static_cast<qreal>(robot->numBodyParts());
-			
-				//printf("sleeping for: %f\n", 20);
-				
-				msleep( 100 );
-				if ( isColliding )
-				{
-					safeTime.restart();
-					printf("colliding\n");
-				}
-				else
-				{
-					printf("not colliding - %d\n", safeTime.elapsed());
-				}
+	
+				//printf("sleeping %f msec\n\n", n*period );
+				msleep( n*period );
 			}
 		}
-		else { break; }
 	}
 	
 	//stopRobot();

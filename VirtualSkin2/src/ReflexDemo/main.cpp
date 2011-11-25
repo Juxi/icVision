@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
 		{
 			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
 			yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
-			yarpRobot->openCollisionPort("/collisions");
-			yarpRobot->openObservationPort("/observations");
+			//yarpRobot->openCollisionPort("/collisions");
+			//yarpRobot->openObservationPort("/observations");
 			
 			sleep(1);
 			
@@ -76,19 +76,23 @@ int main(int argc, char *argv[])
 			 
 			// Open the RPC interface to the filter
 			printf("opening filter RPC port\n");
-			filter->openFilterRpcPort("/filter");
+			filter->openFilterRpcPort("/filterRpc");
+			
+			// Open the filter status port
+			printf("opening filter status port\n");
+			filter->openStatusPort("/filterStatus");
 		}
 		
 		// Open the RPC interface to the world model
-		printf("opening world RPC port\n");
-		yarpModel->openWorldRpcPort("/world");
+		//printf("opening world RPC port\n");
+		//yarpModel->openWorldRpcPort("/world");
 	
 		// run the Qt application
 		result = app.exec();
 		
 		if ( filter )
 		{ 
-			filter->closeFilterRpcPort();
+			//filter->closeFilterRpcPort();
 			filter->close();
 		}
 		delete filter;

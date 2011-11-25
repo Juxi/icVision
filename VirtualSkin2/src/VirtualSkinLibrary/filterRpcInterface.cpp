@@ -56,28 +56,31 @@ void FilterRpcInterface::run()
 		port.read(cmd,true);
 		response.clear();
 		if ( cmd.size() > 0 )
-		 {
-		 //if (debug) { showBottle(cmd); }
-		 handler(cmd,response);
-		 port.reply(response);
-		 //if (debug) { printf("reply: %s\n",response.toString().c_str()); }
-		 }
+		{
+			//if (debug) { showBottle(cmd); }
+			handler(cmd,response);
+			port.reply(response);
+			//if (debug) { printf("reply: %s\n",response.toString().c_str()); }
+		}
 		msleep(YARP_PERIOD);
 	}
 }
 
 bool FilterRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bottle& reply ) 
 {
+	printf("FilterRpcInterface Handler Called!\n");
+	
 	int n = 0;	// identifier of the current bottle element
 	int cmd;	// the command (see command vocabs in header)
 	
 	yarp::os::ConstString prefix = command.get(n).asString();
+	
 	if ( prefix=="help" )
 	{
 		reply.addString("No help for YOU!!!");
 		return true;
 	}
-	if ( prefix=="set" )
+	if ( prefix=="setWP" )
 	{
 		filter->setWaypoint();
 		reply.addString("set a waypoint!");

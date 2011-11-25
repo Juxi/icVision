@@ -48,7 +48,11 @@ public:
 	
 	enum PoseStatus { COLLIDING, SAFE, WAYPOINT };
 	
-	void setWaypoint() { poseBuffer.labelLastEntry(WAYPOINT); }
+	void setWaypoint()
+	{
+		printf("Set Waypoint!!!\n");
+		poseBuffer.init(WAYPOINT);
+	}
 	
 signals:
 	void setPosition( int i, const QVector<qreal>& v);	//!< Set the motor encoder positions for an enitre RobotModel::BodyPart of the RobotModel::Robot
