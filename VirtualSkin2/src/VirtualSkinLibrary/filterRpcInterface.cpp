@@ -9,7 +9,7 @@
 
 #include "filterRpcInterface.h"
 #include "robotFilter.h"
-#include "VirtualSkinException.h"
+#include "virtualskinexception.h"
 #include "constants.h"
 
 using namespace VirtualSkin;
