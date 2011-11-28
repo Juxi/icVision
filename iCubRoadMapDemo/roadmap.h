@@ -51,7 +51,6 @@ private:
 									Edge											>	Map;
 	
 	/* THEN A 'VISITOR' TO STOP DIJKSTRA'S WHEN THE TARGET VERTEX IS FOUND */
-	
 	template <class Vertex_Type, class Tag>
 	struct target_visitor : public boost::default_dijkstra_visitor
 	{
@@ -78,7 +77,6 @@ private:
 	}
 	
 	/* NEAREST NEIGHBOR SEARCH WITH CGAL */
-	
 	typedef CGAL::Cartesian_d<double> K;
 	class Pose : public K::Point_d {
 		public:
