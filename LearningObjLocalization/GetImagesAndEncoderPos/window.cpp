@@ -16,6 +16,8 @@
 #include <yarp/os/Network.h>
 #include <yarp/os/BufferedPort.h>
 
+#include <QtNetwork/QTcpSocket>
+
 #include <opencv/cv.h>
 
 #include <iostream>	//for cout
@@ -319,7 +321,7 @@ void Window::toggleTimer() {
 
 
 void Window::collectData() {
-	if(iCubCtrl) {
+	if(false /*iCubCtrl*/) {
 		
 		btn_timer->setEnabled(false);
 		
@@ -334,6 +336,8 @@ void Window::collectData() {
 		// move to new position
 		// right now only joint 2 of head
 //		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
+		int posCnt = 0;
+		int numPoses = 3 * 3 * 4 * 4 * 4 * 5;
 		
 		// joints for the torso
 		for(float j0 = -15; j0 <= 15; j0+= 15) {
@@ -356,15 +360,18 @@ void Window::collectData() {
 						nextposehead[0] = hj0;
 
 						// HEAD left right
-						for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
-							nextposehead[2] = hj2;
-							
+						//for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
+//							nextposehead[2] = hj2;
+							nextposehead[2] = 0;							
+						
 							// HEAD eyes up down
 							for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
 								nextposehead[3] = hj3;						
 							
 								// HEAD eyes left right
 								for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
+									posCnt++;
+									
 									nextposehead[4] = hj4;
 									
 									if(rand() % 50 != 0) continue;
@@ -375,11 +382,11 @@ void Window::collectData() {
 									getYarpStatus();			
 									writeCSV();	
 									
-									printf("A\n");	
+									printf("A   %d of %d = %3.2g percent\n", posCnt, numPoses, posCnt*1.0/(1.0*numPoses)*100.0);	
 									
 								}
 							}
-						}	
+						//}	
 					}
 				}
 			}
@@ -397,6 +404,12 @@ void Window::collectData() {
 		// iCubCtrl->head->ctrl->stop();
 		// iCubCtrl->torso->ctrl->stop();
 		
+	}else{
+		// just record position and images and write to csv
+		
+		
+		getYarpStatus();			
+		writeCSV();	
 	}
 }
 
@@ -413,9 +426,6 @@ void Window::timerTimeout() {
 
 		timer->stop();
 
-		// do the babbling
-		//dothe
-		
 		// stop
 		// iCubCtrl->head->ctrl->stop();
 		// iCubCtrl->torso->ctrl->stop();
@@ -429,6 +439,30 @@ void Window::getYarpStatus() {
 		showEncoderPositions();
 		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
+		
+		QTcpSocket* socket = new QTcpSocket();
+		socket->connectToHost("195.176.191.29", 5677);
+		
+		if( ! (socket->waitForConnected(20000)) )
+		{
+			printf("Unable to connect To Imap Server!\n");
+		}
+		else {
+			printf("Connection to simon(katana) \n");
+			char buf[1] = { 'N' };
+			socket->write(buf, 1);
+			socket->flush();
+			
+			socket->waitForReadyRead(-1);
+			if(1 == socket->getChar(buf)) 
+				txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
+			else {
+				txt_BallPosition->setText( "Nothing_read!" );
+			}
+			
+			socket->disconnect();
+		}
+		
 				
 	} else {
 		// error not connected
@@ -507,8 +541,10 @@ void Window::writeCSV() {
 	csvfile << "\n";		
 
 	
-	yarp::sig::file::write(*iCubCtrl->left_camera->last_image,  imgNameLeft.c_str());
-	yarp::sig::file::write(*iCubCtrl->right_camera->last_image, imgNameRight.c_str());
+	if(iCubCtrl->left_camera->initialized)
+		yarp::sig::file::write(*iCubCtrl->left_camera->last_image,  imgNameLeft.c_str());
+	if(iCubCtrl->right_camera->initialized)
+		yarp::sig::file::write(*iCubCtrl->right_camera->last_image, imgNameRight.c_str());
 	
 	++imageIndex;
 	
@@ -589,7 +625,7 @@ void Window::showEncoderPositions() {
 			if(input.get(i).isDouble() && i < HEAD_JOINTS) {
 				headjnt_pos[i] = input.get(i).asDouble();
 // DEBUG
-				std::cout << "#########Head joints " << i << ": " << headjnt_pos[i] << endl;
+//				std::cout << "#########Head joints " << i << ": " << headjnt_pos[i] << endl;
 			}
 		}
 	} else {
@@ -610,7 +646,7 @@ void Window::showEncoderPositions() {
 			if(input2.get(i).isDouble() && i < 3) {
 				torsojnt_pos[i] = input2.get(i).asDouble();
 // DEBUG
-				std::cout << "#########Torso joints " << i << ": " << torsojnt_pos[i] << endl;
+//				std::cout << "#########Torso joints " << i << ": " << torsojnt_pos[i] << endl;
 			}
 		}
 		
@@ -745,7 +781,7 @@ void Window::moveTheRobotHead(float value[]) {
 //			// limit the head movement to one joint
 //			if ( i == 2 ) {
 				ctrl->lim->getLimits(i, &min, &max);
-				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
+//				std::cout << "min: " << min << " max: " << max << " v: "<< value[i] << std::endl;
 				if( value[i] < max && value[i] > min ) { aPos = value[i]; }
 				else { aPos = headjnt_pos[i]; }				
 //			} else { 

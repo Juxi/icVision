@@ -13,7 +13,7 @@
 // TODO:
 
 int main(int argc, char *argv[]) {
-	QString version = "v0.1";
+	QString version = "v0.2";
 	// first version on the real robot
 	QString title = "LearningObjLocalization";
 
