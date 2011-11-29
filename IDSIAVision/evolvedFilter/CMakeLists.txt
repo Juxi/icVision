@@ -33,12 +33,14 @@ SET ( src_files main.cpp
 		
 		evolved_filter_module.cpp
 		evolved_filters/blue_detector.cpp
+		evolved_filters/redbox_detector.cpp
 		evolved_filters/teabox.cpp		
 )
 
 
 SET ( hdr_files evolved_filter_module.h boolList.h GpImage.h GaborImage.h
 		evolved_filters/blue_detector.h
+		evolved_filters/redbox_detector.h
 		evolved_filters/teabox.h
 )
 

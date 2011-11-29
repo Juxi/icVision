@@ -8,6 +8,7 @@
 
 #include "evolved_filter_module.h"
 #include "evolved_filters/blue_detector.h"
+#include "evolved_filters/redbox_detector.h"
 #include "evolved_filters/teabox.h"
 
 using namespace yarp::os;
@@ -19,7 +20,8 @@ int main(int argc, char * argv[]) {
 	std::string version = "v0.02";
 	printf("Launching IM-CLeVeR Evolved Filter (%s) Module [vision]...\n", version.c_str());
 	
-	EvolvedFilterModule* module = new BlueCupDetector();
+	EvolvedFilterModule* module = new RedBoxDetector();
+//	EvolvedFilterModule* module = new BlueCupDetector();	
 //	EvolvedFilterModule* module = new EvolvedFilterModule();	
 //	EvolvedFilterModule* module = new TeaBoxDetector();	
 	

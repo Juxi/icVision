@@ -241,10 +241,12 @@ bool EvolvedFilterModule::updateModule()
 	
 	bool allFramesDone = false;
 	
-	CvPoint frame1, frame2;
+	CvPoint frame1_1, frame1_2, frame2_1, frame2_2;
 	
-	frame1.x = frame2.x = 0.0;
-	frame1.y = frame2.y = 0.0;	
+	frame1_1.x = frame2_1.x = 0.0;
+	frame1_1.y = frame2_1.y = 0.0;	
+	frame1_2.x = frame2_2.x = 0.0;
+	frame1_2.y = frame2_2.y = 0.0;	
 	
 	do {
 		if(in == NULL) {
@@ -380,11 +382,11 @@ bool EvolvedFilterModule::updateModule()
 				
 				
 				if(allFramesDone) {
-					frame1.x = x;
-					frame1.y = y;
+					frame1_1 = p1;
+					frame1_2 = p2;
 				}else{
-					frame2.x = x;
-					frame2.y = y;
+					frame2_1 = p1;
+					frame2_2 = p2;
 				}
 			}
 			
@@ -422,11 +424,18 @@ bool EvolvedFilterModule::updateModule()
 	
 	readEncoderPositions();
 		
-	std::cout <<  frame1.x << ", "<< frame1.y << ", "<< frame2.x<< ", "<< frame2.y << std::endl;
-	double x[13] = { frame1.x, frame1.y, frame2.x, frame2.y, headjnt_pos[0], headjnt_pos[1],headjnt_pos[2],headjnt_pos[3], headjnt_pos[4], headjnt_pos[5], torsojnt_pos[0], torsojnt_pos[1], torsojnt_pos[2] };
+//	std::cout <<  frame1.x << ", "<< frame1.y << ", "<< frame2.x<< ", "<< frame2.y << std::endl;
+	double x[21] = { (frame1_1.x + frame1_2.x) / 2.0, (frame1_1.y + frame1_2.y) / 2.0,
+					 (frame2_1.x + frame2_2.x) / 2.0, (frame2_1.y + frame2_2.y) / 2.0, 
+					frame1_1.x, frame1_1.y, frame1_2.x, frame1_2.y,
+					frame2_1.x, frame2_1.y, frame2_2.x, frame2_2.y,
+		headjnt_pos[0], headjnt_pos[1],headjnt_pos[2], headjnt_pos[3], headjnt_pos[4], headjnt_pos[5],
+		torsojnt_pos[0], torsojnt_pos[1], torsojnt_pos[2] };
 	
-	double PredictedZ = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
-	double PredictedX = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0])	;
+//	double PredictedZ = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
+//	double PredictedX = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0])	;
+	double PredictedX = 6.65392e-5*x[8]*x[8] + 0.053116996*x[6] - 6.6527806e-5*x[6]*x[6] - 0.031458694*x[8] - 0.35683247;
+	double PredictedZ = 16.404181 + 0.040965516*x[5] + 0.00014704028*x[7]*x[7] - 0.00012028684*x[5]*x[5] - 0.09530589*x[7];
 	
 	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
 	double PredictedY = 0;
