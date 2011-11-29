@@ -407,9 +407,11 @@ void Window::collectData() {
 	}else{
 		// just record position and images and write to csv
 		
-		
-		getYarpStatus();			
-		writeCSV();	
+		// HACK CHANGE for 100 times
+		for(int i = 0; i < 100; i++) {
+			getYarpStatus();			
+			writeCSV();	
+		}
 	}
 }
 
