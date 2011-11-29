@@ -1,7 +1,7 @@
 #include "partController.h"
 #include <time.h>
 
-PartController::PartController() : numJoints(0), jointMask(NULL), dd(NULL)
+PartController::PartController() : numJoints(0), /*jointMask(NULL),*/ dd(NULL)
 {
 }
 
@@ -50,14 +50,18 @@ bool PartController::open( const char* robotName, const char* partName )
 	dd->view(lim);	if (lim==0) { printf("IControlLimits Error!"); return 0; }
 	
 	pos->getAxes(&numJoints);
-	jointMask = new bool[numJoints];
 	
+	double _min,_max;
 	for ( int i = 0; i < numJoints; i++ )
 	{
 		pos->setRefAcceleration(i, 20);
 		amp->enableAmp(i);
 		pid->enablePid(i);
-		jointMask[i] = true;
+		lim->getLimits( i, &_min, &_max );
+		
+		//jointMask.push_back(true);
+		min.push_back(_min);
+		max.push_back(_max);
 	}
 	
 	/* initialize random seed: */
@@ -84,12 +88,7 @@ void PartController::close()
 	}
 	
 	numJoints = 0;
-	if ( jointMask )
-	{
-		delete[] jointMask;
-		jointMask = NULL;
-	}
-	
+	//jointMask.clear();	
 }
 
 bool PartController::stop()
@@ -98,20 +97,38 @@ bool PartController::stop()
 	return vel->stop();
 }
 
-bool PartController::positionMove( double* q, double* v )
+bool PartController::positionMove( const std::vector<double>& poss )
+{
+	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
+	
+	double p[numJoints];
+	for ( int i=0; i<numJoints; i++ )
+	{
+		p[i] = poss.at(i);
+	}
+	return pos->positionMove( p );
+}
+								  
+/*bool PartController::positionMove( const std::vector<double>& poss, const std::vector<double>& vels )
 { 
-	if ( !pos ) { return 0; }
-	if ( v )
+	if ( !vels.empty() && vels.size() != (unsigned int)numJoints ) { return 0; }
+	
+	if ( !vels.empty() )
 	{ 
+		double v[numJoints];
+		for ( int i=0; i<numJoints; i++ )
+		{
+			v[i] = vels.at(i);
+		}
 		if ( !pos->setRefSpeeds( v ) ) { return 0; }
 	}
-	return pos->positionMove( q );
-}
+	return positionMove(poss);
+}*/
 
-bool PartController::setJointMask( int jointNum, bool val )
+bool PartController::setJointMask( const std::vector<bool>& vals )
 {
-	if ( !jointMask || jointNum >= numJoints ) { return 0; }
-	jointMask[jointNum] = val;
+	if ( vals.size() != (unsigned int)numJoints ) { return 0; }
+	//jointMask = vals;
 	return 1;
 }
 
@@ -121,43 +138,32 @@ bool PartController::checkMotionDone( bool* flag )
 	return pos->checkMotionDone( flag );
 }
 
-bool PartController::getRandomPose( double* q )
-{
-	if ( !enc ) { return 0; }
-	
-	double min, max;
-	
-	enc->getEncoders( q );
-	
-	for ( int i = 0; i < numJoints; i++ )
-	{
-		if ( jointMask[i] )
-		{
-			lim->getLimits( i, &min, &max );
-			q[i] = min + (max-min) * (double)rand()/RAND_MAX;
-		}
-	}
-	
-	return 1;
-}
-
 std::vector<double> PartController::getRandomPose()
 {
-	double min, max, val;
+	std::vector<double> q;
+	for ( int i = 0; i < numJoints; i++ )
+	{
+		if ( i <= 6 )
+		{
+			q.push_back( min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX );
+		}
+		else { q.push_back(0); }
+	}
+	return q;
+}
+
+std::vector<double> PartController::getCurrentPose()
+{
+	double val;
 	std::vector<double> q;
 	if ( enc )
 	{
 		for ( int i = 0; i < numJoints; i++ )
 		{
 			enc->getEncoder( i, &val );
-			q.push_back( val );
-			if ( jointMask[i] )
-			{
-				q.pop_back();
-				lim->getLimits( i, &min, &max );
-				q.push_back( min + (max-min) * (double)rand()/RAND_MAX );
-			}
+			q.push_back(val);
 		}
 	}
+	
 	return q;
 }

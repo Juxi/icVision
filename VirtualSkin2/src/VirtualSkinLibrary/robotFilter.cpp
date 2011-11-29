@@ -36,11 +36,14 @@ RobotFilter::RobotFilter(	KinematicModel::Robot* r,
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
+	filterRpcInterface.setFilter(this);
+	
 	statusPort.setBottle("1");
 }
 
 RobotFilter::~RobotFilter()
 {
+	filterRpcInterface.close();
 	if ( isOpen ) { close(); }
 }
 
@@ -139,10 +142,11 @@ void RobotFilter::run()
 void RobotFilter::openFilter()
 {	
 	// reinitialize the pose buffer with the current pose
-	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
-	{
-		stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
-	}
+	setWaypoint();
+	//for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+	//{
+	//	stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
+	//}
 	
 	// reopen the filter... 
 	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
@@ -158,8 +162,11 @@ void RobotFilter::openFilter()
 
 void RobotFilter::setWaypoint()
 {
+	//printf("entering for loop! %d body parts\n",robot->numBodyParts());
+	
 	for (int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 	{
+		//printf("RobotFilter setWayPoint(%d) called\n",bodyPart);
 		stateObservers.at(bodyPart)->setWaypoint();
 	}
 }

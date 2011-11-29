@@ -120,7 +120,7 @@ public:
 				responseObservers.append(p_ro);
 				
 				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
+				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
