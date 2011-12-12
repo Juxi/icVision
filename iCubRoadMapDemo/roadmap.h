@@ -25,28 +25,40 @@
 
 #include "iCubController.h"
 
-/** \brief foo
- */
-class Roadmap
+#include <QThread>
+#include <QtGui/QGraphicsView>
+
+//class Node;
+class QtGraphNode;
+class QtGraphEdge;
+
+class Roadmap : public QObject
 {
-
+	Q_OBJECT
+	
 private:
-
+	
+	typedef CGAL::Cartesian_d<double> K;
+	
 	/* FIRST, THE BOOST GRAPH */
+	class Pose;
 	struct Vertex { 
+		int	idx;
+		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
-		double proj[2];						// for visualization
 		std::vector<double> q;				// robot configuration
-		Vertex():type("") { proj[0]=0; proj[1]=0; }
+		
+		Vertex() : qtGraphNode(NULL), type("") {}
 	};
 	
 	struct Edge {
+		QtGraphEdge* qtGraphEdge;
 		double length;
 		double successRate;
-		Edge():length(1.0),successRate(1.0){}
+		Edge() :length(1.0),successRate(1.0){}
 	};
 	
-	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::undirectedS, 
+	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::directedS, 
 									Vertex,
 									Edge											>	Map;
 	
@@ -77,13 +89,13 @@ private:
 	}
 	
 	/* NEAREST NEIGHBOR SEARCH WITH CGAL */
-	typedef CGAL::Cartesian_d<double> K;
+	
 	class Pose : public K::Point_d {
 		public:
 			Pose (	int d, 
-					std::vector<double>::iterator first,
-					std::vector<double>::iterator last,
-					Map::vertex_descriptor _boostGraphVertex			) :  K::Point_d(d,first,last), vertex(_boostGraphVertex) {}
+						std::vector<double>::iterator first,
+						std::vector<double>::iterator last,
+						Map::vertex_descriptor _boostGraphVertex ) :  K::Point_d(d,first,last), vertex(_boostGraphVertex) {}
 			Map::vertex_descriptor vertex;
 	};
 	
@@ -104,44 +116,75 @@ private:
 	
 	/*****************************/
 	
-	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
-	//bool nearestVertex( std::vector<double>&, std::vector<double>, char* type="" );
+	//std::vector<double> randomSample();
 	
-	void graphConnect( Pose, unsigned int n = 3 );
 	
-	std::vector<double> toStdVector( Pose ); 
+	unsigned int			dim;
+	Map						map;
+	Tree					tree;
+	Map::vertex_descriptor	currentVertex;
 	
-	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
-	
-	Map				map;
-	Tree			tree;
-	
-	Map::vertex_descriptor currentVertex;
-	unsigned int dim;
+protected:
+	void run();
 	
 public:
 	
-	iCubController	iCub;
-	
+	typedef K::Point_d CGAL_Point;
 	typedef Map::vertex_descriptor vertex_t;
 	typedef Map::vertex_iterator vertex_i;
 	typedef Map::edge_descriptor edge_t;
+	typedef Map::edge_iterator edge_i;
 	
-	Roadmap( char* iCubName );
+	Roadmap();
 	~Roadmap();
 	
+	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }
+	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
+	
+	std::vector<double> randomMove();
+	
+	
+	int dimensionality() { return dim; }
+	
+	void setDimensionality( int );
+	void setCurrentVertex( vertex_t );
+	
+	vertex_t insert( std::vector<double> _q, unsigned int n = 0 );
+	void graphConnect( Pose, unsigned int n = 3 );
+	
 	void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
-	void insert( std::vector<double> _q, unsigned int n );
 	
-	bool gotoNearest();
-	bool isOnMap();
-	bool motionCompleted();	// wait until the motion is done or we are cut off from the robot
+	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
+	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
-	bool randomMove();
+	void removeEdge( edge_t );
+	void removeAllEdges();
+	
+	//bool startController();
+	//bool gotoNearest();
+	//bool isOnMap();
+	//bool motionCompleted();	// wait until the motion is done or we are cut off from the robot
+	//bool randomMove();
+	
+	//std::list< double[3] > 
+	void project2D( std::vector<double> d = std::vector<double>() );
+	
+	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
+	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
 	
 	//bool insert( std::vector< std::vector<double> > );
 	
+signals:
 	
+	void appendedNode( vertex_t );
+	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
+	void update2DPosition( QtGraphNode* n, double x, double y );
+	void removeQtGraphEdge( QtGraphEdge* );
+	
+public slots:
+	
+	void setQtGraphNode( vertex_t, QtGraphNode* );
+	void setQtGraphEdge( edge_t, QtGraphEdge* );
 	
 };
 #endif

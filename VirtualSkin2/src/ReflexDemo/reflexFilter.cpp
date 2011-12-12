@@ -27,8 +27,8 @@ ReflexFilter::~ReflexFilter()
 
 void ReflexFilter::extraOpenStuff()
 {
-	originalPose.resize(robot->numBodyParts());
-	targetPose.resize(robot->numBodyParts());
+	//originalPose.resize(robot->numBodyParts());
+	//targetPose.resize(robot->numBodyParts());
 	history.resize(robot->numBodyParts());
 }
 

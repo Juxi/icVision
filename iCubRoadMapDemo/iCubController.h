@@ -11,14 +11,17 @@
 #define ICUBCONTROLLER_H
 
 #include "partController.h"
+#include <QObject>
 
 
 /*! \brief Wraps YARP's remote device driver interface neatly
  *  This could be a motor control interface for one part of the iCub for example. see: http://eris.liralab.it/wiki/Motor_control
  */
 
-class iCubController
+class iCubController: public QObject
 {
+	Q_OBJECT
+	
 public:
     iCubController();	//!< Nothing special
     ~iCubController();	//!< Nothing special
@@ -35,8 +38,13 @@ public:
 	
 	bool positionMove( std::vector<double> );		//!< Moves the device to a specified position
 	bool setJointMask( std::vector<bool> );
+	
+public slots:
 	std::vector<double> getRandomPose();
 	std::vector<double> getCurrentPose();
+	
+signals:
+	void newSample( std::vector<double> );
 	
 private:
 
