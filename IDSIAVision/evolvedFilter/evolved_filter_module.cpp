@@ -18,17 +18,21 @@
 using namespace yarp::os;
 using namespace yarp::sig;
 
-EvolvedFilterModule::EvolvedFilterModule() :
-	inDebugMode(false)
+EvolvedFilterModule::EvolvedFilterModule()
 {
 	//moduleName = "IM-CLeVeR::Vision::Reaching";
 	setName("EvolvedFilter");
 	gray = red = green = blue =	h =	s = v = NULL;
-		
-	UsedInputs.Add(4);
+	
+	inDebugMode = false;
 }
 
 EvolvedFilterModule::~EvolvedFilterModule() { 
+	
+	if( rawImageToWrite != NULL )
+		cvReleaseImage(&rawImageToWrite);
+	if( outputImageToWrite != NULL )
+		cvReleaseImage(&outputImageToWrite);
 	
 	// cleanup input files
 	if( gray != NULL) {
@@ -44,164 +48,6 @@ EvolvedFilterModule::~EvolvedFilterModule() {
 	}		
 }
 
-
-/*
- * Configure function. Receive a previously initialized
- * resource finder object. Use it to configure your module.
- * Open port and attach it to message handler.
- */
-//bool EvolvedFilterModule::configure(yarp::os::ResourceFinder &rf)
-bool EvolvedFilterModule::configure(yarp::os::Searchable& config)
-{
-	/* Process all parameters from both command-line and .ini file */
-	robotName = (config.find("robot")).toString();
-	if( robotName.empty() ) {
-		robotName = "icubSim";
-		std::cout << "WARNING! No robot name found using " << robotName << std::endl;
-	}
-	
-	if ( config.check("debug") ) {
-		inDebugMode = true;
-		std::cout << "DEBUG: Debug mode enabled!" << std::endl;
-	} else {
-		std::cout << "DEBUG: Debug mode disabled!" << std::endl;		
-	}
-
-	if ( config.check("scale") ) {
-		scalingFactor = (config.find("scale")).asDouble();
-	} else {
-		scalingFactor = 1.0;
-	}
-	std::cout << "Scaling input images with factor: " << scalingFactor << std::endl;		
-
-	
-	isReadingFileFromHDD = false;
-	fileName = (config.find("readFile")).toString();
-	if(! fileName.empty() ) {
-		// read file
-		isReadingFileFromHDD = true;
-		
-		std::cout << "FileName specified: " << fileName << std::endl;
-		std::cout << "WARNING! Running only once on this image!" << std::endl;
-	}
-	
-	
-	/*
-	 * attach a port of the same name as the module (prefixed with a /) to the module
-	 * so that messages received from the port are redirected to the respond method
-	 */
-	
-	handlerPortName =  "/";
-	handlerPortName += getName();         // use getName() rather than a literal
-	
-	if (! handlerPort.open(handlerPortName.c_str())) {
-		cout << getName() << ": Unable to open port " << handlerPortName << endl;
-		return false;
-	}
-	
-	attach(handlerPort); 
-	
-	string inputPortName, serverPortName;
-			
-	inputPortName = "/";		serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/left";	serverPortName += "/cam/left";
-//	inputPortName += "/right";	serverPortName += "/cam/right";	
-
-	// trying to connect to the left camera
-	if(! leftInPort.open( inputPortName.c_str() )){
-		cout << getName() << ": Unable to open port " << inputPortName << endl;
-		return false;
-	}
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
-		return false;
-	}
-
-	// trying to connect to the right camera
-	inputPortName = "/";		serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/right";	serverPortName += "/cam/right";
-	if(! rightInPort.open( inputPortName.c_str() )){
-		cout << getName() << ": Unable to open port " << inputPortName << endl;		
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
-		return false;
-	}
-	
-	outputPortName = "/";
-	outputPortName += getName();
-	outputPortName += "/output:o";
-	if(! outputPort_Image.open( outputPortName.c_str() )){
-		return false;
-	}
-	
-	
-	// TEMP Solution TODO change
-	
-	// connect to straems
-	
-	std::string portName = "/juxi/head/state:o";
-	inputPortName = "/icub/head/state:o";	
-	if(! head_port.open( portName.c_str() )){
-		cout << getName() << ": Unable to open port " << portName << endl;		
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", portName.c_str());
-	if(! yarp.connect(inputPortName.c_str(), portName.c_str()) ) {
-		cout << getName() << ": Unable to connect to port " << inputPortName.c_str() << " with " << portName.c_str() << endl;
-		return false;
-	}
-
-	
-	portName = "/juxi/torso/state:o";
-	inputPortName = "/icub/torso/state:o";	
-	if(! torso_port.open( portName.c_str() )){
-		cout << getName() << ": Unable to open port " << portName << endl;		
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", portName.c_str());
-	if(! yarp.connect(inputPortName.c_str(), portName.c_str()) ) {
-		cout << getName() << ": Unable to connect to port " << inputPortName.c_str() << " with " << portName.c_str() << endl;
-		return false;
-	}
-	
-	// connect to rpc
-	
-	// check whether we have F or not!! TODO
-	string clientPortName = "/evolvedfilter";
-	clientPortName += "/world-client";
-	if(! port.open( clientPortName.c_str() )){
-		return false;
-	}
-		
-	inputPortName = "/world";	
-//	inputPortName += robotName; 
-//	inputPortName += "F/world";
-	
-	// trying to connect to the rpc server (world interface)
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-		cout << getName() << ": Unable to connect to port " /*<< clientPortName.c_str() << " to "*/ << inputPortName.c_str() << endl;
-		return false;
-	}	
-	
-	return true ;      // let the RFModule know everything went well
-}
-
-double EvolvedFilterModule::getPeriod()
-{
-   return 0.05;	// we need something higher than 0.0 else it is too fast?!
-   //module periodicity (seconds)
-}
-
 /*
 * This is our main function. Will be called periodically every getPeriod() seconds.
 */
@@ -210,10 +56,9 @@ bool EvolvedFilterModule::updateModule()
 	if( ! inDebugMode) {
 		putchar('.'); std::cout.flush();
 	} else {
-		std::cout << "DEBUG: Run filter!" << std::endl;			
+		std::cout << "DEBUG: Run filter!" << std::endl;	
+		start = clock();
 	}
-
-	clock_t start = clock();
 
 	IplImage* in = NULL;
 	
@@ -238,22 +83,27 @@ bool EvolvedFilterModule::updateModule()
 
 	}
 	
-	
 	bool allFramesDone = false;
+	if( runOnLeft == runOnRight == true ) {
+		allFramesDone = true;
+	}
 	
-	CvPoint frame1, frame2;
+	CvPoint frame1_1, frame1_2, frame2_1, frame2_2;
 	
-	frame1.x = frame2.x = 0.0;
-	frame1.y = frame2.y = 0.0;	
+	frame1_1.x = frame2_1.x = 0.0;
+	frame1_1.y = frame2_1.y = 0.0;
+	frame1_2.x = frame2_2.x = 0.0;
+	frame1_2.y = frame2_2.y = 0.0;
 	
 	do {
 		if(in == NULL) {
 			// first run 
-			in = (IplImage*) right_image->getIplImage();
+			in = (IplImage*) left_image->getIplImage();
 		}else{
 			allFramesDone = true;
-			in = (IplImage*) left_image->getIplImage();
+			in = (IplImage*) right_image->getIplImage();
 		}
+
 		ImageWidth  = in->width * scalingFactor;
 		ImageHeight = in->height * scalingFactor;	
 		
@@ -296,40 +146,45 @@ bool EvolvedFilterModule::updateModule()
 			std::cout << "DEBUG: Now yarping..." << std::endl;		
 		}
 
-		// output filtered image
-		IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
-		IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);	
-		IplImage* out_single = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 1);	
 		
 		bool wewantoverlay = true;
 		bool wewanttothreshold = true;	
-
-	//	if(wewantoverlay) {
-	//		// overlay original	
-	//		//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
-	//		IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	//		IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	//		IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
-	//
-	//		cvCvtColor(gray, rgb, CV_GRAY2RGB);
-	//
-	//		cvSplit(rgb, b, g, r, NULL);
-	//		cvAdd(r, filteredImg->Image, r);
-	//		cvMerge(b, g, r, NULL, rgb);	
-	//		
-	//		cvReleaseImage(&r);
-	//		cvReleaseImage(&g);	
-	//		cvReleaseImage(&b);	
-	//	}else{
-			cvCvtColor(filteredImg->Image, rgb, CV_GRAY2RGB);
-	//	}
 		
+		IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
+		IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
+		IplImage* out_single = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 1);			
 		
+		// convert the of filtered image to be outputted
+		cvCvtColor(filteredImg->Image, rgb, CV_GRAY2RGB);
 		cvConvertScale(rgb, out8, 1.0, 0.0);
 
-		if(wewantoverlay)
+		if(allFramesDone && streamRawFilterOutput) {
+			// check if we have allocated the to be written image already
+			if(rawImageToWrite == NULL)
+				rawImageToWrite = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
+			cvCopy(out8, rawImageToWrite);
+			ImageOf<PixelBgr>& rawOutput = rawOutputPort.prepare();
+			rawOutput.wrapIplImage(rawImageToWrite); //output.copy ( *left_image );
+			rawOutputPort.writeStrict();
+		}		
+		
+		if(wewantoverlay) {
+			// overlay original	
+			//cvAdd(InputImages[0]->Image, filteredImg->Image, InputImages[0]->Image);
+			IplImage* r = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+			IplImage* g = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+			IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
+			
 			cvCvtColor(gray, rgb, CV_GRAY2RGB);
-
+			cvSplit(rgb, b, g, r, NULL);
+			cvAdd(r, filteredImg->Image, r);
+			cvMerge(b, g, r, NULL, rgb);	
+			
+			cvReleaseImage(&r);
+			cvReleaseImage(&g);	
+			cvReleaseImage(&b);	
+		}
+		
 		// if we want to threshold the output! there we go	
 		if(wewanttothreshold) {
 			cvThreshold(out8, out8, 250.0, 255.0, CV_THRESH_BINARY);
@@ -359,8 +214,8 @@ bool EvolvedFilterModule::updateModule()
 			
 			cvReleaseMemStorage(&storage);
 
-			if(boxes.size() > 0) {
-				CvRect r = boxes[0];
+			for(unsigned int boxNr = 0; boxNr < boxes.size(); boxNr++) {
+				CvRect r = boxes[boxNr];
 //				std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
 				CvPoint p1, p2;
 				p1.x = r.x; p1.y = r.y;
@@ -380,11 +235,11 @@ bool EvolvedFilterModule::updateModule()
 				
 				
 				if(allFramesDone) {
-					frame1.x = x;
-					frame1.y = y;
+					frame1_1 = p1;
+					frame1_2 = p2;
 				}else{
-					frame2.x = x;
-					frame2.y = y;
+					frame2_1 = p1;
+					frame2_2 = p2;
 				}
 			}
 			
@@ -393,40 +248,66 @@ bool EvolvedFilterModule::updateModule()
 		if(wewantoverlay) {
 			cvConvertScale(rgb, out8, 1.0, 0.0);
 		}
-
-		if(allFramesDone) {
+		
+		if(allFramesDone && streamProcessedFilterOutput) {
+			// check if we have allocated the to be written image already
+			if(outputImageToWrite == NULL)
+				outputImageToWrite = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
+			
+			cvCopy(out8, outputImageToWrite);			
 			ImageOf<PixelBgr>& output = outputPort_Image.prepare();
-			output.wrapIplImage(out8); //output.copy ( *left_image );
+			output.wrapIplImage(outputImageToWrite); 
 			outputPort_Image.write();	
 		}
 			
 		// cleanup 
 		cvReleaseImage(&out_single);	
 		cvReleaseImage(&out8);
-		cvReleaseImage(&rgb);	
+		cvReleaseImage(&rgb);
 		delete filteredImg;
 		
 		InputImages.clear();
 		
 	}while(!allFramesDone);
 
+	// only if we do it on both images
+	if( runOnLeft == runOnRight == true )	
+		calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
+
+	if( inDebugMode ) {
+		end = clock();	
+		double diffms = (end-start)*1000.0/CLOCKS_PER_SEC;
+		// Debug
+		std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
+	}
+		
+	// return	(when we read from HDD we only run once!)
+	return !isReadingFileFromHDD;
+}
+
+void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, CvPoint frame1_2, CvPoint frame2_1, CvPoint frame2_2) {
+	// HACKING !! todo rewrite, ...
+	// assumes we got both points!
+	// calculate world
 	// first try...
 	//			double x = -0.5;
 	//			double y = -1.0 * (frame1.x - (in->width*scalingFactor * 0.5))/360.0;
 	//			double z = 0.0;
 	
-
-	// HACKING !! todo rewrite, ...
-	// assumes we got both points!
-	// calculate world
-	
 	readEncoderPositions();
-		
-	std::cout <<  frame1.x << ", "<< frame1.y << ", "<< frame2.x<< ", "<< frame2.y << std::endl;
-	double x[13] = { frame1.x, frame1.y, frame2.x, frame2.y, headjnt_pos[0], headjnt_pos[1],headjnt_pos[2],headjnt_pos[3], headjnt_pos[4], headjnt_pos[5], torsojnt_pos[0], torsojnt_pos[1], torsojnt_pos[2] };
 	
-	double PredictedZ = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
-	double PredictedX = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0])	;
+	//	std::cout <<  frame1.x << ", "<< frame1.y << ", "<< frame2.x<< ", "<< frame2.y << std::endl;
+	double x[21] = { (frame1_1.x + frame1_2.x) / 2.0, (frame1_1.y + frame1_2.y) / 2.0,
+		(frame2_1.x + frame2_2.x) / 2.0, (frame2_1.y + frame2_2.y) / 2.0, 
+		frame1_1.x, frame1_1.y, frame1_2.x, frame1_2.y,
+		frame2_1.x, frame2_1.y, frame2_2.x, frame2_2.y,
+		headjnt_pos[0], headjnt_pos[1],headjnt_pos[2], headjnt_pos[3], headjnt_pos[4], headjnt_pos[5],
+		torsojnt_pos[0], torsojnt_pos[1], torsojnt_pos[2] };
+	
+	//	double PredictedZ = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
+	//	double PredictedX = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0])	;
+	double PredictedX = 6.65392e-5*x[8]*x[8] + 0.053116996*x[6] - 6.6527806e-5*x[6]*x[6] - 0.031458694*x[8] - 0.35683247;
+	double PredictedZ = 16.404181 + 0.040965516*x[5] + 0.00014704028*x[7]*x[7] - 0.00012028684*x[5]*x[5] - 0.09530589*x[7];
 	
 	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
 	double PredictedY = 0;
@@ -438,25 +319,15 @@ bool EvolvedFilterModule::updateModule()
 	PredictedX *= CellSize;
 	PredictedY *= CellSize;
 	PredictedZ *= CellSize;
-
+	
 	double xOffset = CellSize * 6;
 	double zOffset = CellSize * 2.85;
 	
 	PredictedX-=xOffset;
 	PredictedZ+=zOffset;
-
-	setObjectWorldPosition(-PredictedZ/100.0, PredictedX/100.0, 0.0);
-			
 	
-	clock_t end = clock();	
-	double diffms = (end-start)*1000/CLOCKS_PER_SEC;///CLOCKS_PER_SEC;	
-// Debug	std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
-	
-	// return	(when we read from HDD we only run once!)
-	return !isReadingFileFromHDD;
-//	return true;
+	setWorldPositionOfObject(-PredictedZ/100.0, PredictedX/100.0, 0.0, "cup1");
 }
-
 
 void EvolvedFilterModule::readEncoderPositions() {
 	//	std::cout << "Show encoder positions() " << std::endl;	
@@ -488,27 +359,6 @@ void EvolvedFilterModule::readEncoderPositions() {
 		}
 	}
 }
-
-
-
-void EvolvedFilterModule::setObjectWorldPosition(double x, double y, double z) {
-	std::string objName = "cup1";
-	yarp::os::Bottle cmd, response;
-		
-	// get information about the object from rpc
-	cmd.clear();
-	cmd.addString("set");
-	cmd.addString(objName.c_str());
-	
-//	
-//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
-	
-	cmd.addDouble(x);
-	cmd.addDouble(y);
-	cmd.addDouble(z);
-
-	port.write(cmd, response);
-}	
 
 
 void EvolvedFilterModule::createInputImages(IplImage* in) {
@@ -777,15 +627,6 @@ bool EvolvedFilterModule::interruptModule()
 }
 
 
-
-bool EvolvedFilterModule::open(yarp::os::Searchable& config)
-{
-	if( ! configure(config) ) return false;
-
-	std::cout << "Starting the IM-CLeVeR Evolved Filter Vision module" << std::endl;
-
-	return true;
-}
 
 /*
 * Close function, to perform cleanup.

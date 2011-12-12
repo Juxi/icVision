@@ -30,15 +30,20 @@ INCLUDE_DIRECTORIES (${OpenCV_INCLUDE_DIRS})
 SET ( src_files main.cpp
 		GpImage.cpp
 		GaborImage.cpp
+		icFilterModule.cpp
 		
 		evolved_filter_module.cpp
 		evolved_filters/blue_detector.cpp
+		evolved_filters/glass_detector.cpp
+		evolved_filters/redbox_detector.cpp
 		evolved_filters/teabox.cpp		
 )
 
 
-SET ( hdr_files evolved_filter_module.h boolList.h GpImage.h GaborImage.h
+SET ( hdr_files evolved_filter_module.h boolList.h GpImage.h GaborImage.h icFilterModule.h
 		evolved_filters/blue_detector.h
+		evolved_filters/glass_detector.h
+		evolved_filters/redbox_detector.h
 		evolved_filters/teabox.h
 )
 
