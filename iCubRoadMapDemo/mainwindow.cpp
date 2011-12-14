@@ -68,8 +68,24 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,double,double)),	&graphWidget, SLOT(setPosition(QtGraphNode*,double,double)));
 	connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
 
+	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
 }
 //! [2]
+
+MainWindow::~MainWindow()
+{
+	if ( ctrlThread.isRunning() )
+		ctrlThread.stop();
+}
+
+void MainWindow::connectMap()
+{
+	bool ok;
+	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+								 tr("Number of Neighbors:"), 3, 1, 100, 1, &ok);
+	if (ok)
+		roadmap.graphConnect(i);
+}
 
 void MainWindow::connectToRobot()
 {
@@ -159,6 +175,9 @@ void MainWindow::saveMap()
 
 void MainWindow::loadMap()
 {
+	if ( !iCub.isValid() )
+		return;
+	
 	QString fileName = QFileDialog::getOpenFileName(this,
 													tr("Open Address Book"), "",
 													tr("All Files (*)"));
@@ -257,6 +276,12 @@ void MainWindow::createActions()
     saveMapAction->setStatusTip(tr("Save the current map to file"));
     connect(saveMapAction, SIGNAL(triggered()), this, SLOT(saveMap()));
 	
+	connectMapAction = new QAction(tr("&Connect Map"), this);
+	//connectMapAction->setShortcuts(QKeySequence::Save);
+    connectMapAction->setStatusTip(tr("Connect Nodes"));
+    connect(connectMapAction, SIGNAL(triggered()), this, SLOT(connectMap()));
+	
+	
 	connectToRobotAction = new QAction(tr("&Connect To Robot"), this);
 	//connectToRobotAction->setShortcuts(Qt::ALT, Qt::Key_R);
 	connectToRobotAction->setStatusTip(tr("Connect to an iCub Robot"));
@@ -285,6 +310,7 @@ void MainWindow::createMenus()
 	fileMenu->addAction(newMapAction);
 	fileMenu->addAction(loadMapAction);
 	fileMenu->addAction(saveMapAction);
+	fileMenu->addAction(connectMapAction);
 	
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);

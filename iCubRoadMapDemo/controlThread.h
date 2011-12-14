@@ -28,11 +28,19 @@ public:
 	bool isOnMap();
 	bool motionCompleted();	// wait until the motion is done or we are cut off from the robot
 	bool randomMove();
+	
+	void start();
+	//void restart();
+	void stop();
 
 protected:
 	
+	yarp::os::Network yarp;
+	yarp::os::Port vSkinStatus;
+	
 	iCubController* robot;
 	Roadmap* map;
+	bool keepRunning;
 	
 	void run();
 

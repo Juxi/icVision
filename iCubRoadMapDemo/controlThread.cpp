@@ -1,11 +1,59 @@
 #include "controlThread.h"
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), map(_map)
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), map(_map), keepRunning(true)
 {
 }
 
 ControlThread::~ControlThread()
 {
+}
+
+void ControlThread::start()
+{
+	vSkinStatus.open("/statusOut");
+	if ( !yarp.connect("/filterStatus","/statusOut") )
+	{ 
+		printf("failed to connect to robot filter status port\n");
+		return;
+	}
+	
+	if ( !gotoNearest() )
+	{ 
+		printf("Failed to move iCub onto the roadmap\n");
+		return;
+	}
+		
+	QThread::start();
+}
+
+void ControlThread::run()
+{
+	yarp::os::Bottle b;
+	while ( keepRunning )
+	{
+		vSkinStatus.read(b);
+		printf("Filter status: %s\n",b.toString().c_str());
+		if (  b.get(0).asInt() == 1 )
+		{
+			//if ( !isOnMap() ) 
+			//{
+			//	if ( !gotoNearest() )  { printf("Failed to move iCub onto the roadmap\n"); } 
+			//}
+			if ( randomMove() ) std::cout << "OK" << std::endl;			
+			else std::cout << "OH NO!!!" << std::endl;
+			
+			// MODIFY GRAPH EDGES HERE
+			
+		}
+		else { printf("waiting for filter to open\n"); }
+		usleep(100000);
+	}
+}
+
+void ControlThread::stop()
+{
+	keepRunning = false;
+	while ( isRunning() ) { msleep(20); }
 }
 
 bool ControlThread::gotoNearest()
@@ -16,12 +64,13 @@ bool ControlThread::gotoNearest()
 	
 	if ( !robot->positionMove( map->getStdPose(v) ) ) { return 0; }
 	
-	//return isOnMap();
-	return 1;
+	return isOnMap();
 }
 
 bool ControlThread::isOnMap()
 {
+	printf("called isOnMap()\n");
+	
 	if ( !motionCompleted() ) { return 0; }
 	
 	std::vector<double> p = robot->getCurrentPose();
@@ -41,6 +90,8 @@ bool ControlThread::isOnMap()
 
 bool ControlThread::motionCompleted()
 {
+	printf("called motionCompleted()\n");
+	
 	bool flag = false;
 	do { 
 		if ( !robot->checkMotionDone(&flag) ) { break; }
@@ -70,48 +121,11 @@ bool ControlThread::randomMove()
 	if ( !robot->positionMove( p ) )
 	{ 
 		//widget.removeEdge( map[ moves.at(idx) ].qtGraphEdge );
-		printf("failed\n"); return 0;
+		printf("failed\n"); 
+		return 0;
 	}
 	else { printf("succeded"); }
 	
 
 	return isOnMap();
-}
-
-void ControlThread::run()
-{
-	yarp::os::Network yarp;
-	yarp::os::Port vSkinStatus;
-	vSkinStatus.open("/statusOut");
-	if ( !yarp.connect("/filterStatus","/statusOut") )
-	{ 
-		printf("failed to connect to robot filter status port\n");
-	}
-	if ( !gotoNearest() )
-	{ 
-		printf("Failed to move iCub onto the roadmap\n");
-	} else {
-		std::cout << "iCub is on the roadmap" << std::endl;
-		
-		yarp::os::Bottle b;
-		while (true)
-		{
-			vSkinStatus.read(b);
-			printf("Filter status: %s\n",b.toString().c_str());
-			if (  b.get(0).asInt() == 1 )
-			{
-				if ( !isOnMap() ) 
-				{
-					if ( !gotoNearest() )  { printf("Failed to move iCub onto the roadmap\n"); } 
-				}
-				if ( randomMove() ) std::cout << "OK" << std::endl;			
-				else std::cout << "OH NO!!!" << std::endl;
-				
-				// MODIFY GRAPH EDGES HERE
-			
-			}
-			else { printf("waiting for filter to open\n"); }
-			usleep(100000);
-		}
-	}
 }

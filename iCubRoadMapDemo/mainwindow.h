@@ -63,6 +63,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+	~MainWindow();
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
@@ -73,6 +74,7 @@ private slots:
 	void newMap();
 	void loadMap();
 	void saveMap();
+	void connectMap();
 	
 	void connectToRobot();
 	void explore();
@@ -91,6 +93,7 @@ private:
 	QAction *newMapAction;
 	QAction *loadMapAction;
 	QAction *saveMapAction;
+	QAction *connectMapAction;
 	
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;

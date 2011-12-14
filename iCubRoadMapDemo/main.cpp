@@ -17,13 +17,6 @@ int main(int argc, char *argv[])
 	MainWindow window;
     window.show();
 	
-	//Roadmap roadmap(4);
-	//roadmap.openRobot("icubSimF");
-	//roadmap.buildRandomMap( 10,		// number of vertices
-	//						5 );	// number of neighbors per node
-	//roadmap.project2D();	
-	//roadmap.startController();
-	
 	return app.exec();
 	
 }

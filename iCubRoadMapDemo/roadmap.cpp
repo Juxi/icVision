@@ -3,7 +3,7 @@
 #include "widgetEdge.h"
 #include "widgetNode.h"
 
-Roadmap::Roadmap() : dim(0)
+Roadmap::Roadmap() : dim(0), currentVertex(NULL)
 {
 	srand ( time(NULL) );
 }
@@ -11,7 +11,6 @@ Roadmap::Roadmap() : dim(0)
 Roadmap::~Roadmap()
 {
 }
-
 
 void Roadmap::setDimensionality( int d )
 {
@@ -25,10 +24,27 @@ void Roadmap::setDimensionality( int d )
 
 void Roadmap::setCurrentVertex( vertex_t v )
 {
-	//TODO: should really check if the vertex exists, but how?
-	currentVertex = v;
+	if ( v != currentVertex )
+	{
+		printf("called roadmap.setCurrentVertex()\n");
+		//std::cout << "v: " << v << std::endl; 
+		
+		if ( currentVertex && map[currentVertex].qtGraphNode )
+		{
+			printf("emitting change current vertex color signal (yellow)\n");
+			emit newNodeColor( map[currentVertex].qtGraphNode, Qt::yellow, Qt::darkYellow );
+		}
+		
+		if ( v && map[v].qtGraphNode )
+		{
+			printf("emitting change next vertex color signal (red)\n");
+			emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
+		}
+		
+		//TODO: should really check if the vertex exists, but how?
+		currentVertex = v;
+	}
 }
-
 
 std::vector<double> Roadmap::randomMove()
 {
@@ -49,59 +65,6 @@ std::vector<double> Roadmap::randomMove()
 	
 	return map[target(moves.at(idx),map)].q ;
 }
-
-/*bool Roadmap::openRobot( const char* iCubName )
-{
-	if ( iCub.open(iCubName) )
-	{
-		dim = (unsigned int)iCub.getNumJoints();
-		return true;
-	}
-	return false;
-}
-
-void Roadmap::closeRobot()
-{
-	if ( iCub.isValid() )
-	{
-		dim = 0;
-		iCub.close();
-	}
-}
-
-std::vector<double> Roadmap::randomSample()
-{
-	std::vector<double> q;
-	if ( iCub.isValid() )
-	{
-		q = iCub.getRandomPose();
-		emit newSample(q);
-	}
-	return q;
-	std::vector<double> q;
-	q.clear();
-	for ( unsigned int j=0; j<dim; j++ )
-	{
-		q.push_back( (double)rand()/(double)RAND_MAX );
-	}
-	return q;
-}
-
-std::vector<double> Roadmap::currentPose()
-{
-	std::vector<double> q;
-	if ( iCub.isValid() )
-	{
-		q = iCub.getCurrentPose();
-		emit newSample(q);
-	}
-	return q;
-}*/
-
-//void Roadmap::computeSample()
-//{
-//	emit newSample(randomSample());
-//}
 
 void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
 {
@@ -206,7 +169,6 @@ void Roadmap::removeAllEdges()
 	}
 }
 
-
 void Roadmap::setQtGraphNode( vertex_t v, QtGraphNode* n )
 {
 	map[v].qtGraphNode = n;
@@ -237,49 +199,14 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 	}
 }
 
-/*bool Roadmap::gotoNearest()
+void Roadmap::graphConnect( unsigned int n )
 {
-	printf("Trying a move to the nearest roadmap vertex\n");
-	//iCub.setWaypoint();
-	
-	std::vector<double> p = iCub.getCurrentPose();
-	vertex_t v = nearestVertex( p );
-	
-	if ( !iCub.positionMove( map[v].q ) ) { return 0; }
-	
-	return isOnMap();
-}
-
-bool Roadmap::motionCompleted()
-{
-	bool flag = false;
-	do { 
-		if ( !iCub.checkMotionDone(&flag) ) { break; }
-		usleep(200000);
-	}
-	while ( !flag );
-	
-	return flag;
-}
-
-bool Roadmap::isOnMap()
-{
-	if ( !motionCompleted() ) { return 0; }
-	
-	std::vector<double> p = iCub.getCurrentPose();
-	vertex_t v = nearestVertex( p );
-	Pose b( map[v].q.size(), map[v].q.begin(), map[v].q.end(), NULL );
-	Pose a(  p.size(), p.begin(), p.end(), NULL );
-	
-	if ( (b-a).squared_length() < 5.0 )
+	std::pair<vertex_i, vertex_i> vp;
+	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
-		currentVertex = v;
-		return iCub.setWaypoint();
-		//return 1;
+		graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n );
 	}
-	
-	return 0;
-}*/
+}
 
 Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 {
@@ -291,61 +218,6 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 	map[search.begin()->first.vertex].type = type;
 	return search.begin()->first.vertex;
 }
-
-
-/*bool Roadmap::randomMove()
-{	
-	printf("Trying a random position move on the roadmap\n");
-	
-	//if ( !isOnMap() ) { return 0; }
-	
-	std::vector<edge_t> moves;
-	Map::out_edge_iterator e, e_end;
-	
-	int count = 0;
-	for (tie(e, e_end) = out_edges( currentVertex, map ); e != e_end; ++e)
-	{
-		moves.push_back( *e );
-		count++;
-	}
-	
-	//std::cout << "count: " << count << std::endl;
-	//std::cout << "size: " << moves.size() << std::endl;
-	int idx = rand() % moves.size();
-	//std::cout << "choose edge IDX: " << idx << std::endl;
-	
-	std::vector<double> pose = map[target(moves.at(idx),map)].q ; //map[ moves.at(idx) ].q;
-	
-	printf("Position move:\n");
-	for ( std::vector<double>::iterator i = pose.begin(); i != pose.end(); ++i )
-	{
-		printf("%f\n", *i);
-	}
-	
-	//bool result = iCub.positionMove( map[ moves.at(idx) ].q );
-	
-	if ( !iCub.positionMove( pose ) )
-	{ 
-		//widget.removeEdge( map[ moves.at(idx) ].qtGraphEdge );
-		printf("failed\n"); return 0;
-	}
-	else { printf("succeded"); }
-	
-
-	return isOnMap();
-}
-
-std::vector<double> Roadmap::toStdVector( Pose p )
-{
-	std::vector<double> q;
-	for ( Pose::Cartesian_const_iterator j = p.cartesian_begin(); j != p.cartesian_end(); ++j )
-	{ 
-		q.push_back(*j);
-	}
-	return q;
-}*/
-
-
 
 std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 {
@@ -371,7 +243,6 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	
 	return path;
 }
-
 
 void Roadmap::project2D( std::vector<double> direction )
 {
@@ -501,52 +372,3 @@ void Roadmap::project2D( std::vector<double> direction )
 		emit update2DPosition(map[*(vp.first)].qtGraphNode, iVal, jVal);
 	}
 }
-
-/*
-bool Roadmap::startController()
-{
-	if ( hasRobot() )
-	{
-		start();
-		return true;
-	}
-	return false;
-}
-
-void Roadmap::run()
-{
-	yarp::os::Network yarp;
-	yarp::os::Port vSkinStatus;
-	vSkinStatus.open("/statusOut");
-	if ( !yarp.connect("/filterStatus","/statusOut") )
-	{ 
-		printf("failed to connect to robot filter status port\n");
-	}
-	if ( !gotoNearest() )
-	{ 
-		printf("Failed to move iCub onto the roadmap\n");
-	} else {
-		std::cout << "iCub is on the roadmap" << std::endl;
-		
-		yarp::os::Bottle b;
-		while (true)
-		{
-			vSkinStatus.read(b);
-			printf("Filter status: %s\n",b.toString().c_str());
-			if (  b.get(0).asInt() == 1 )
-			{
-				if ( !isOnMap() ) 
-				{
-					if ( !gotoNearest() )  { printf("Failed to move iCub onto the roadmap\n"); } 
-				}
-				if ( randomMove() ) std::cout << "OK" << std::endl;			
-				else std::cout << "OH NO!!!" << std::endl;
-				
-				// MODIFY GRAPH EDGES HERE
-			
-			}
-			else { printf("waiting for filter to open\n"); }
-			usleep(100000);
-		}
-	}
-}*/

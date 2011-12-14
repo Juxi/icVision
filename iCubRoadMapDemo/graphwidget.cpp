@@ -79,17 +79,6 @@ void GraphWidget::setPosition( QtGraphNode* a, double x, double y )
 	}
 }
 
-/*void GraphWidget::createMenu()
-{
-    menuBar = new QMenuBar;
-	
-    fileMenu = new QMenu(tr("&File"), this);
-    exitAction = fileMenu->addAction(tr("E&xit"));
-    menuBar->addMenu(fileMenu);
-	
-   // connect(exitAction, SIGNAL(triggered()), this, SLOT(accept()));
-}*/
-
 void GraphWidget::addNode( Roadmap::vertex_t n )
 {
 	QtGraphNode* thisNode = new QtGraphNode(this);
@@ -111,6 +100,13 @@ void GraphWidget::removeEdge( QtGraphEdge* edge )
 {
 	scene()->removeItem(edge);
 	//delete edge;
+}
+
+
+void GraphWidget::setNodeColor( QtGraphNode* thisNode, QColor a, QColor b )
+{
+	printf("called graphWidget.setNodeColor()\n");
+	thisNode->setColor(a, b);
 }
 
 void GraphWidget::itemMoved()

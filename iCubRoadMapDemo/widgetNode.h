@@ -74,6 +74,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	void setPos( qreal x, qreal y);
+	void setColor( QColor c1, QColor c2 );
 	
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -85,6 +86,8 @@ private:
     QList<QtGraphEdge *> edgeList;
     QPointF newPos,targetPos;
     GraphWidget *graph;
+	QColor primaryColor, secondaryColor;
+	bool colorChanged;
 };
 
 #endif

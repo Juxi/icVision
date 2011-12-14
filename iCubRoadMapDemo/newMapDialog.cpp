@@ -81,7 +81,7 @@ void NewMapDialog::accept()
 {
 	QString fileName = QFileDialog::getSaveFileName(this,
 													tr("Save Roadmap Vertices"), "",
-													tr("Address Book (*.txt);;All Files (*)"));
+													tr("All Files (*)"));
 	if (fileName.isEmpty())
 		return;
 	else {

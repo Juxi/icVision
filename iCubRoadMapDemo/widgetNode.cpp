@@ -49,7 +49,7 @@
 #include "graphwidget.h"
 
 QtGraphNode::QtGraphNode(GraphWidget *graphWidget)
-    : graph(graphWidget)
+    : graph(graphWidget), primaryColor(Qt::yellow), secondaryColor(Qt::darkYellow), colorChanged(false)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
@@ -74,6 +74,16 @@ void QtGraphNode::setPos( qreal x, qreal y)
 	QPointF p( sceneRect.left() + x*(sceneRect.right()-sceneRect.left()),
 			   sceneRect.bottom() + y*(sceneRect.top()-sceneRect.bottom()));
 	QGraphicsItem::setPos(p);
+}
+
+void QtGraphNode::setColor( QColor c1, QColor c2 )
+{ 
+	primaryColor = c1; 
+	secondaryColor = c2; 
+	colorChanged = true;
+	printf("***SET NODE COLOR***\n");
+	
+	update();
 }
 
 void QtGraphNode::calculateForces()
@@ -145,6 +155,14 @@ void QtGraphNode::calculateForces()
 
 bool QtGraphNode::advance()
 {
+	/*printf("computing qtGraphNode.advance()\n");
+	if ( colorChanged )
+	{
+		printf("COLOR CHANGED!!!!\n");
+		colorChanged = false;
+		return true;
+	}*/
+	
     if (newPos == pos())
         return false;
 
@@ -176,11 +194,11 @@ void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     if (option->state & QStyle::State_Sunken) {
         gradient.setCenter(3, 3);
         gradient.setFocalPoint(3, 3);
-        gradient.setColorAt(1, QColor(Qt::yellow).light(120));
-        gradient.setColorAt(0, QColor(Qt::darkYellow).light(120));
+        gradient.setColorAt(1, primaryColor.light(120));
+        gradient.setColorAt(0, secondaryColor.light(120));
     } else {
-        gradient.setColorAt(0, Qt::yellow);
-        gradient.setColorAt(1, Qt::darkYellow);
+        gradient.setColorAt(0, primaryColor);
+        gradient.setColorAt(1, secondaryColor);
     }
     painter->setBrush(gradient);
     painter->setPen(QPen(Qt::black, 0));

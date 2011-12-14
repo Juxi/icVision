@@ -133,7 +133,7 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
     painter->drawLine(line);
 
     // Draw the arrows
-    double angle = ::acos(line.dx() / line.length());
+    /*double angle = ::acos(line.dx() / line.length());
     if (line.dy() >= 0)
         angle = TwoPi - angle;
 
@@ -148,5 +148,5 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 
     painter->setBrush(Qt::black);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
-    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);        
+    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);   */     
 }

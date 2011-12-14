@@ -44,7 +44,7 @@ private:
 	
 	//QVector< QVector<qreal> >	originalPose,	//!< A colliding configuration
 	//							targetPose;		//!< A safe configuration
-	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;	//!< The history of the last n poses of the whole robot
+	//QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;	//!< The history of the last n poses of the whole robot
 };
 #endif
 /** @} */

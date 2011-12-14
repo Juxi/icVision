@@ -151,6 +151,7 @@ public:
 	
 	vertex_t insert( std::vector<double> _q, unsigned int n = 0 );
 	void graphConnect( Pose, unsigned int n = 3 );
+	void graphConnect( unsigned int n = 3 );
 	
 	void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
@@ -180,6 +181,7 @@ signals:
 	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
 	void update2DPosition( QtGraphNode* n, double x, double y );
 	void removeQtGraphEdge( QtGraphEdge* );
+	void newNodeColor( QtGraphNode*, QColor, QColor );
 	
 public slots:
 	

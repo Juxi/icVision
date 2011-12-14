@@ -14,6 +14,8 @@
 #include <QThread>
 #include <QVector>
 #include <yarp/os/ControlBoardFilter.h>
+#include <yarp/dev/ControlBoardInterfaces.h>
+
 
 #include "robot.h"
 #include "callObserver.h"
@@ -98,6 +100,42 @@ public:
 			
 			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
 			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
+			
+			
+			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
+			yarp::os::RpcClient port;
+			port.open("clientPort");
+	
+			printf("Trying to connect to %s\n", (targetName + "/rpc:i").toStdString().c_str());
+			yarp.connect( "clientPort", (targetName + "/rpc:i").toStdString().c_str() );
+			
+			for ( int i=0; i<robot->getPart(bodyPart)->size(); i++ )
+			{
+				yarp::os::Bottle cmd;
+				cmd.addVocab(VOCAB_GET);
+				cmd.addVocab(VOCAB_LIMITS);
+				cmd.addInt(i);
+				printf("Sending message... %s\n", cmd.toString().c_str());
+				
+				yarp::os::Bottle response;
+				port.write(cmd,response);
+				printf("Got response: %s\n", response.toString().c_str());
+				
+				double min = response.get(2).asDouble();
+				double max = response.get(3).asDouble();
+				printf("setting motor limits: %f, %f\n", min, max);
+				
+				robot->getPart(bodyPart)->at(i)->setMin(min);
+				robot->getPart(bodyPart)->at(i)->setMax(max);
+				
+				if ( robot->getPart(bodyPart)->at(i)->size() == 1 )
+				{
+					printf("setting joint limits: %f, %f\n", min, max);
+					robot->getPart(bodyPart)->at(i)->at(0)->setMin(min*M_PI/180);
+					robot->getPart(bodyPart)->at(i)->at(0)->setMax(max*M_PI/180);
+				} else { printf("skipping this joint\n"); }
+			}
+			/************************/
 			
 			printf("----------------------------------------------------------------\n");
 			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
