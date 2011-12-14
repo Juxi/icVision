@@ -27,9 +27,9 @@ ReflexFilter::~ReflexFilter()
 
 void ReflexFilter::extraOpenStuff()
 {
-	originalPose.resize(robot->numBodyParts());
-	targetPose.resize(robot->numBodyParts());
-	history.resize(robot->numBodyParts());
+	//originalPose.resize(robot->numBodyParts());
+	//targetPose.resize(robot->numBodyParts());
+	//history.resize(robot->numBodyParts());
 }
 
 /*void ReflexFilter::stopRobot()
@@ -49,10 +49,11 @@ void ReflexFilter::collisionResponse()
 	int n = 10;			// we will use every nth pose in the buffer
 
 	// get the pose history and the average period between arriving state bottles
+	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;
 	qreal period = 0;
 	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 	{
-		history.replace(bodyPart, stateObservers.at(bodyPart)->getHistory() );
+		history.push_back( stateObservers.at(bodyPart)->getHistory() );
 		period += stateObservers.at(bodyPart)->getPeriod();
 	}
 	period /= robot->numBodyParts();

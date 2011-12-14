@@ -134,6 +134,12 @@ void iCubController::initCameras() {
 		initRightCamera();
 	}
 	emit connectionStatus(left_camera->initialized && right_camera->initialized);		
+
+	// single eye only
+//	if(! (left_camera->initialized)) {		
+//		initLeftCamera();
+//	}
+//	emit connectionStatus(left_camera->initialized);		
 }
 
 void iCubController::initLeftCamera() {

@@ -108,7 +108,6 @@ GpImage* GpImage::Pow(double P) const {
 	return new GpImage(retImg);	
 }
 
-
 GpImage* GpImage::max(GpImage* a) const { 
 	Img retImg = (IplImage*) cvClone(Image);
 	cvMax(Image, a->Image, retImg);

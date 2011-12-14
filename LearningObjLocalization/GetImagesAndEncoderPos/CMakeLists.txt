@@ -75,6 +75,7 @@ TARGET_LINK_LIBRARIES ( ${PROJECTNAME} ${OpenCV_LIBS}
 				 iKin
 				#### iCub
 				 ${QT_LIBRARIES}
-                                 ${OPENGL_LIBRARIES}
+				 ${QT_QTNETWORK_LIBRARY}				 
+                 ${OPENGL_LIBRARIES}
 				 ${YARP_LIBRARIES}
 )

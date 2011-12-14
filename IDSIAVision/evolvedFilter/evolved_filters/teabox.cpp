@@ -2,8 +2,6 @@
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-#include <cstdlib>
-#include <iostream>
 #include "teabox.h"
 //#include "../evolved_filter_module.h"
 //#include "GpImage.h"

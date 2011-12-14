@@ -124,6 +124,8 @@ std::vector<double> iCubController::getRandomPose()
 	}
 	
 	if ( q.size() != (unsigned int)numJoints ) { q.clear(); }
+	
+	emit newSample(q);
 	return q;
 }
 
@@ -147,5 +149,8 @@ std::vector<double> iCubController::getCurrentPose()
 	//std::cout << q.size() << ", " << qLeft.size() << ", " << qRight.size() << std:: endl;
 	
 	if ( q.size() != (unsigned int)getNumJoints() ) { q.clear(); }
+	
+	
+	emit newSample(q);
 	return q;
 }
