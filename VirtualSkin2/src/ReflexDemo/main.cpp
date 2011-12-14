@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
 		{
 			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
 			yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
-			//yarpRobot->openCollisionPort("/collisions");
-			//yarpRobot->openObservationPort("/observations");
+			yarpRobot->openCollisionPort("/collisions");
+			yarpRobot->openObservationPort("/observations");
 			
 			sleep(1);
 			
