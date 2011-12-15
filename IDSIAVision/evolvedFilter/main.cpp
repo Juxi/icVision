@@ -34,7 +34,7 @@ int main(int argc, char * argv[]) {
 	
 	module->runOnBothImages();
 	
-	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
+//	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
 	module->runModule(argc, argv);
 	module->close();

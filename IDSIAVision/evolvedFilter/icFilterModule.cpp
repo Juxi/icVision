@@ -238,5 +238,7 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	cmd.addDouble(y);
 	cmd.addDouble(z);
 	
-	return port.write(cmd, response);
+	bool r = port.write(cmd, response);
+//	std::cout << "response: " << response.toString() << std::endl;	
+	return r;
 }	
