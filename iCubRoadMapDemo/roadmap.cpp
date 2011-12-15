@@ -3,7 +3,7 @@
 #include "widgetEdge.h"
 #include "widgetNode.h"
 
-Roadmap::Roadmap() : dim(0), currentVertex(NULL)
+Roadmap::Roadmap() : dim(0), currentVertex(-1)
 {
 	srand ( time(NULL) );
 }
@@ -24,24 +24,15 @@ void Roadmap::setDimensionality( int d )
 
 void Roadmap::setCurrentVertex( vertex_t v )
 {
+	printf("called roadmap.setCurrentVertex()\n");
 	if ( v != currentVertex )
 	{
-		printf("called roadmap.setCurrentVertex()\n");
-		//std::cout << "v: " << v << std::endl; 
-		
-		if ( currentVertex && map[currentVertex].qtGraphNode )
-		{
-			printf("emitting change current vertex color signal (yellow)\n");
+		printf("set the current vertex\n");
+		if ( currentVertex >= 0 )
 			emit newNodeColor( map[currentVertex].qtGraphNode, Qt::yellow, Qt::darkYellow );
-		}
-		
-		if ( v && map[v].qtGraphNode )
-		{
-			printf("emitting change next vertex color signal (red)\n");
+		if ( v >= 0 )
 			emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
-		}
 		
-		//TODO: should really check if the vertex exists, but how?
 		currentVertex = v;
 	}
 }

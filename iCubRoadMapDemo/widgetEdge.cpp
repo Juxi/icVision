@@ -50,7 +50,7 @@ static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
 
 QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode)
-    : arrowSize(10)
+: color(Qt::black) // arrowSize(10)
 {
     setAcceptedMouseButtons(0);
     source = sourceNode;
@@ -98,8 +98,8 @@ void QtGraphEdge::adjust()
 
     if (length > qreal(20.)) {
         QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
-        sourcePoint = line.p1() + edgeOffset;
-        destPoint = line.p2() - edgeOffset;
+        sourcePoint = line.p1(); // + edgeOffset;
+        destPoint = line.p2(); // - edgeOffset;
     } else {
         sourcePoint = destPoint = line.p1();
     }
@@ -111,7 +111,7 @@ QRectF QtGraphEdge::boundingRect() const
         return QRectF();
 
     qreal penWidth = 1;
-    qreal extra = (penWidth + arrowSize) / 2.0;
+    qreal extra = (penWidth /*+ arrowSize*/) / 2.0;
 
     return QRectF(sourcePoint, QSizeF(destPoint.x() - sourcePoint.x(),
                                       destPoint.y() - sourcePoint.y()))

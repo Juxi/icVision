@@ -44,6 +44,7 @@
 
 #include <QGraphicsItem>
 #include <QList>
+#include <QMutex>
 
 class QtGraphEdge;
 class GraphWidget;
@@ -87,7 +88,8 @@ private:
     QPointF newPos,targetPos;
     GraphWidget *graph;
 	QColor primaryColor, secondaryColor;
-	bool colorChanged;
+	//bool colorChanged;
+	QMutex mutex;
 };
 
 #endif

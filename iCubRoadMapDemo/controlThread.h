@@ -26,8 +26,8 @@ public:
 	
 	bool gotoNearest();
 	bool isOnMap();
-	bool motionCompleted();	// wait until the motion is done or we are cut off from the robot
 	bool randomMove();
+	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
 	
 	void start();
 	//void restart();

@@ -49,7 +49,7 @@
 #include "graphwidget.h"
 
 QtGraphNode::QtGraphNode(GraphWidget *graphWidget)
-    : graph(graphWidget), primaryColor(Qt::yellow), secondaryColor(Qt::darkYellow), colorChanged(false)
+    : graph(graphWidget), primaryColor(Qt::yellow), secondaryColor(Qt::darkYellow)//, colorChanged(false)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
@@ -78,12 +78,14 @@ void QtGraphNode::setPos( qreal x, qreal y)
 
 void QtGraphNode::setColor( QColor c1, QColor c2 )
 { 
+	mutex.lock();
 	primaryColor = c1; 
 	secondaryColor = c2; 
-	colorChanged = true;
+	//colorChanged = true;
 	printf("***SET NODE COLOR***\n");
 	
 	update();
+	mutex.unlock();
 }
 
 void QtGraphNode::calculateForces()
@@ -186,9 +188,14 @@ QPainterPath QtGraphNode::shape() const
 
 void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
 {
-    painter->setPen(Qt::NoPen);
-    painter->setBrush(Qt::darkGray);
-    painter->drawEllipse(-7, -7, 20, 20);
+	int size = 10;
+	
+	mutex.lock();
+	
+	// drop shadow
+    //painter->setPen(Qt::NoPen);
+    //painter->setBrush(Qt::darkGray);
+    //painter->drawEllipse(0, 0, size, size);
 
     QRadialGradient gradient(-3, -3, 10);
     if (option->state & QStyle::State_Sunken) {
@@ -200,9 +207,11 @@ void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         gradient.setColorAt(0, primaryColor);
         gradient.setColorAt(1, secondaryColor);
     }
+	
     painter->setBrush(gradient);
     painter->setPen(QPen(Qt::black, 0));
-    painter->drawEllipse(-10, -10, 20, 20);
+    painter->drawEllipse(-5, -5, size, size);
+	mutex.unlock();
 }
 
 QVariant QtGraphNode::itemChange(GraphicsItemChange change, const QVariant &value)
