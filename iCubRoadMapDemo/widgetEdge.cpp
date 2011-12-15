@@ -86,6 +86,14 @@ void QtGraphEdge::setDestNode(QtGraphNode *node)
     adjust();
 }
 
+void QtGraphEdge::setColor( QColor c )
+{
+	mutex.lock();
+	color = c;
+	update();
+	mutex.unlock();
+}
+
 void QtGraphEdge::adjust()
 {
     if (!source || !dest)
@@ -98,8 +106,8 @@ void QtGraphEdge::adjust()
 
     if (length > qreal(20.)) {
         QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
-        sourcePoint = line.p1(); // + edgeOffset;
-        destPoint = line.p2(); // - edgeOffset;
+        sourcePoint = line.p1() + edgeOffset;
+        destPoint = line.p2() - edgeOffset;
     } else {
         sourcePoint = destPoint = line.p1();
     }
@@ -124,12 +132,14 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
     if (!source || !dest)
         return;
 
+	mutex.lock();
+	
     QLineF line(sourcePoint, destPoint);
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
     // Draw the line itself
-    painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(QPen(color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
     // Draw the arrows
@@ -148,5 +158,6 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 
     painter->setBrush(Qt::black);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
-    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);   */     
+    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);   */  
+	mutex.unlock();
 }

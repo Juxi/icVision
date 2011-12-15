@@ -69,6 +69,7 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
 
 	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
+	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
 }
 //! [2]
 
@@ -99,8 +100,9 @@ void MainWindow::connectToRobot()
 		if ( iCub.open(robotName.toStdString().c_str()) )
 		{
 			roadmap.setDimensionality( iCub.getNumJoints() );
-			printf("Opened iCub Robot!!!\n");
+			printf("Opened iCub Robot with %d joints!!!\n", iCub.getNumJoints());
 		}
+		else { printf("failed to open iCub\n"); }
 	}
 }
 
@@ -176,7 +178,10 @@ void MainWindow::saveMap()
 void MainWindow::loadMap()
 {
 	if ( !iCub.isValid() )
+	{
+		printf("Cannot load map file because iCub is not valid!!!\n");
 		return;
+	}
 	
 	QString fileName = QFileDialog::getOpenFileName(this,
 													tr("Open Address Book"), "",

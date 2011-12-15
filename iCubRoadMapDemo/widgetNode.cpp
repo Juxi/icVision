@@ -210,7 +210,8 @@ void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	
     painter->setBrush(gradient);
     painter->setPen(QPen(Qt::black, 0));
-    painter->drawEllipse(-5, -5, size, size);
+    painter->drawEllipse(-size/2, -size/2, size, size);
+	
 	mutex.unlock();
 }
 

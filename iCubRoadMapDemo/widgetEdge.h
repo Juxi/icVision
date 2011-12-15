@@ -43,6 +43,7 @@
 #define EDGE_H
 
 #include <QGraphicsItem>
+#include <QMutex>
 
 class QtGraphNode;
 
@@ -57,6 +58,8 @@ public:
 
     QtGraphNode *destNode() const;
     void setDestNode(QtGraphNode *node);
+	
+	void setColor( QColor c );
 
     void adjust();
 
@@ -75,6 +78,7 @@ private:
     //qreal arrowSize;
 	
 	QColor color;
+	QMutex mutex;
 };
 
 #endif
