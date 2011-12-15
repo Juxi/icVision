@@ -104,10 +104,10 @@ public:
 			
 			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
 			yarp::os::RpcClient port;
-			port.open("clientPort");
+			port.open("/clientPort");
 	
 			printf("Trying to connect to %s\n", (targetName + "/rpc:i").toStdString().c_str());
-			yarp.connect( "clientPort", (targetName + "/rpc:i").toStdString().c_str() );
+			yarp.connect( "/clientPort", (targetName + "/rpc:i").toStdString().c_str() );
 			
 			for ( int i=0; i<robot->getPart(bodyPart)->size(); i++ )
 			{
@@ -135,6 +135,7 @@ public:
 					robot->getPart(bodyPart)->at(i)->at(0)->setMax(max*M_PI/180);
 				} else { printf("skipping this joint\n"); }
 			}
+			port.close();
 			/************************/
 			
 			printf("----------------------------------------------------------------\n");
