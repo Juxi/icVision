@@ -71,7 +71,11 @@ bool ControlThread::isOnMap()
 {
 	printf("called isOnMap()\n");
 	
-	if ( !motionCompleted() ) { return 0; }
+	if ( !waitForMotion() )
+	{ 
+		printf("we were cut off from the robot\n");
+		return 0;
+	}
 	
 	std::vector<double> p = robot->getCurrentPose();
 	Roadmap::vertex_t v = map->nearestVertex(p);
@@ -79,27 +83,31 @@ bool ControlThread::isOnMap()
 	Roadmap::CGAL_Point a(  p.size(), p.begin(), p.end() );
 	Roadmap::CGAL_Point b = map->getCgalPose( v );
 	
+	std::cout << "a: " << a << std::endl;
+	std::cout << "b: " << b << std::endl;
+	
 	if ( (b-a).squared_length() < 5.0 )
 	{
 		map->setCurrentVertex(v);
+		printf("ON THE MAP!\n");
 		return robot->setWaypoint();
 	}
+	
+	printf("NOT ON MAP!!\n");
 	
 	return 0;
 }
 
-bool ControlThread::motionCompleted()
+bool ControlThread::waitForMotion()
 {
-	printf("called motionCompleted()\n");
+	printf("called waitForMotion()\n");
 	
 	bool flag = false;
-	do { 
-		if ( !robot->checkMotionDone(&flag) ) { break; }
+	while ( !flag ) { 
+		if ( !robot->checkMotionDone(&flag) ) { return false; }
 		msleep(20);
 	}
-	while ( !flag );
-	
-	return flag;
+	return true;
 }
 
 
