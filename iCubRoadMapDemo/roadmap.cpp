@@ -19,7 +19,9 @@ void Roadmap::setDimensionality( int d )
 	if ( vp.first == vp.second )
 	{
 		dim = d;
+		return;
 	}
+	printf("the map is not empty!!!\n");
 }
 
 void Roadmap::setCurrentVertex( vertex_t v )
@@ -65,7 +67,7 @@ void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbor
 	}
 }
 
-Roadmap::vertex_t Roadmap::insert( std::vector<double> _q, unsigned int n )
+Roadmap::vertex_t Roadmap::insert( std::vector<double> _q /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { throw("wrong size state vector"); }
@@ -82,7 +84,7 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _q, unsigned int n )
 	tree.insert( p );
 	
 	// connect it to its n nearest neighbors
-	graphConnect( p, n );
+	//graphConnect( p, n );
 	
 	//printf("inserted");
 	return vertex;
@@ -101,10 +103,9 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 	{
 		vertex = insert(*v);
 		vertices.push_back( vertex );
-		//emit appendedNode( vertex );
 	}
 	
-	sleep(1);
+	/*sleep(1);
 	std::vector< std::pair<int,int> >::iterator e;
 	std::pair<edge_t, bool> edge;
 	for ( e=graphEdges.begin(); e!=graphEdges.end(); ++e )
@@ -120,9 +121,10 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 							   map[vertices.at(e->second)].qtGraphNode );
 	
 		}
-	}
+	}*/
 	
 }
+
 void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges )
 {
 	int count = 0;
@@ -238,10 +240,18 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 void Roadmap::project2D( std::vector<double> direction )
 {
 	if ( direction.size() == 0 ) {
+		printf("choosing random direction\n");
 		for ( unsigned int i = 0; i < dim; i++ ) {
 			direction.push_back( (double)rand()/(double)RAND_MAX );
 		}
 	}
+	
+	std::vector<double>::iterator fuck;
+	for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
+	{
+		printf("%f ",*fuck);
+	}
+	printf("\n");
 	
 	if ( direction.size() != dim ) { throw("wrong size direction vector"); }
 	

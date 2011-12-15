@@ -84,7 +84,9 @@ public slots:
 	void setPosition( QtGraphNode* a, double x, double y );
 	
 	void removeEdge( QtGraphEdge* );
+	
 	void setNodeColor( QtGraphNode*, QColor, QColor );
+	void setEdgeColor( QtGraphEdge*, QColor );
 
 private:
     int timerId;

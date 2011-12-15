@@ -102,12 +102,18 @@ void GraphWidget::removeEdge( QtGraphEdge* edge )
 	//delete edge;
 }
 
-
 void GraphWidget::setNodeColor( QtGraphNode* thisNode, QColor a, QColor b )
 {
 	printf("called graphWidget.setNodeColor()\n");
 	if ( thisNode )
 		thisNode->setColor(a, b);
+}
+
+void GraphWidget::setEdgeColor( QtGraphEdge* thisEdge, QColor c )
+{
+	printf("called graphWidget.setNodeColor()\n");
+	if ( thisEdge )
+		thisEdge->setColor(c);
 }
 
 void GraphWidget::itemMoved()

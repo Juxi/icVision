@@ -15,6 +15,7 @@ bool iCubController::open( const char* robotName )
 {
 	if ( !torso.open( robotName, "torso" ) || !right_arm.open( robotName, "right_arm" ) || !left_arm.open( robotName, "left_arm" ) )
 	{
+		printf("failed to open one or more body parts\n");
 		return 0;
 	}
 	numJoints = torso.getNumJoints() + right_arm.getNumJoints() + left_arm.getNumJoints();
@@ -22,6 +23,7 @@ bool iCubController::open( const char* robotName )
 	filterRpc.open("/filterCommand");
 	if ( !yarp.connect("/filterCommand","/filterRpc") )
 	{ 
+		printf("failed to connect to /filterRpc\n");
 		return 0;
 	}
 	
