@@ -85,6 +85,21 @@ void GraphWidget::addEdge( Roadmap::edge_t n, QtGraphNode* a, QtGraphNode* b )
 	//printf("added edge to graph\n");
 }
 
+void GraphWidget::setNodePosition( QtGraphNode* node, QPointF p )
+{
+	if ( node ) node->setNormPos(p);
+}
+
+void GraphWidget::setNodeColor( QtGraphNode* node, QColor a, QColor b )
+{
+	if ( node ) node->setColor(a,b);
+}
+
+void GraphWidget::setEdgeColor( QtGraphEdge* edge, QColor c )
+{
+	if ( edge ) edge->setColor(c);
+}
+
 /*void GraphWidget::update()
 {
     foreach (QGraphicsItem *item, scene()->items())

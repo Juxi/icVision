@@ -181,10 +181,10 @@ signals:
 	
 	void appendedNode( vertex_t );
 	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
-	//void update2DPosition( QtGraphNode* n, qreal x, qreal y );
+	void update2DPosition( QtGraphNode*, QPointF );
+	void newNodeColor( QtGraphNode*, QColor, QColor );
+	void newEdgeColor( QtGraphEdge*, QColor );
 	//void removeQtGraphEdge( QtGraphEdge* );
-	//void newNodeColor( QtGraphNode*, QColor, QColor );
-	//void newEdgeColor( QtGraphEdge*, QColor );
 	
 public slots:
 	

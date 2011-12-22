@@ -67,11 +67,11 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( &graphWidget, SIGNAL(newQtGraphNode(vertex_t,QtGraphNode*)),		&roadmap, SLOT(setQtGraphNode( vertex_t, QtGraphNode* )));
 	connect( &graphWidget, SIGNAL(newQtGraphEdge(edge_t,QtGraphEdge*)),			&roadmap, SLOT(setQtGraphEdge( edge_t, QtGraphEdge* )));
 	
-	//connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,qreal,qreal)),		&graphWidget, SLOT(setNodePosition(QtGraphNode*,qreal,qreal)));
+	connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,QPointF)),			&graphWidget, SLOT(setNodePosition(QtGraphNode*,QPointF)));
 	//connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
 
-	//connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
-	//connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
+	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
 	
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);

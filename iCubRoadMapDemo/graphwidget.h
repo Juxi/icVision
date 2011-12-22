@@ -70,10 +70,9 @@ public slots:
 	void addEdge( edge_t, QtGraphNode* a, QtGraphNode* b );
 	void resize( QResizeEvent* event );
 	
-	//void setNodePosition( QtGraphNode* a, qreal x, qreal y );
-	// from controlThread
-	//void setNodeColor( QtGraphNode*, QColor, QColor );
-	//void setEdgeColor( QtGraphEdge*, QColor );
+	void setNodePosition( QtGraphNode*, QPointF );
+	void setNodeColor( QtGraphNode*, QColor, QColor );
+	void setEdgeColor( QtGraphEdge*, QColor );
 	//void removeEdge( QtGraphEdge* );
 
 signals:

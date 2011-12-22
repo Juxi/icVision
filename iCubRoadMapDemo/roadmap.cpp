@@ -26,27 +26,25 @@ void Roadmap::setDimensionality( int d )
 
 void Roadmap::setCurrentVertex( vertex_t v )
 {
-	//if ( v )
-	//{
-		//printf("emit color signal for v\n");
-		//emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
 	if ( map[v].qtGraphNode )
-		map[v].qtGraphNode->setColor( Qt::yellow, Qt::darkYellow );
+		emit newNodeColor( map[v].qtGraphNode, Qt::yellow, Qt::darkYellow );
+		//map[v].qtGraphNode->setColor( Qt::yellow, Qt::darkYellow );
 	
-		if ( v != currentVertex )
-		{
-			if ( map[currentVertex].qtGraphNode )
-				map[currentVertex].qtGraphNode->setColor( Qt::lightGray, Qt::gray );
-		}
-	//}
+	if ( v != currentVertex )
+	{
+		if ( map[currentVertex].qtGraphNode )
+			emit newNodeColor( map[currentVertex].qtGraphNode, Qt::lightGray, Qt::gray );
+			//map[currentVertex].qtGraphNode->setColor( Qt::lightGray, Qt::gray );
+	}
+
 	currentVertex = v;
 }
 
 void Roadmap::setEdgeColor( edge_t e, QColor color )
 {
-	//emit newEdgeColor( map[e].qtGraphEdge, color );
 	if ( map[e].qtGraphEdge )
-		map[e].qtGraphEdge->setColor( color );
+		emit newEdgeColor( map[e].qtGraphEdge, color );
+		//map[e].qtGraphEdge->setColor( color );
 }
 
 std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
@@ -399,7 +397,8 @@ void Roadmap::project2D( std::vector<double> direction )
 		//printf("node addy: %p\n", map[*(vp.first)].qtGraphNode);
 		
 		if ( map[*(vp.first)].qtGraphNode )
-			map[*(vp.first)].qtGraphNode->setNormPos( QPointF(iVal,jVal) );
+			emit update2DPosition(map[*(vp.first)].qtGraphNode, QPointF(iVal,jVal));
+			//map[*(vp.first)].qtGraphNode->setNormPos( QPointF(iVal,jVal) );
 			
 	}
 	
