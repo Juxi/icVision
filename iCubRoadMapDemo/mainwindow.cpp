@@ -47,8 +47,8 @@
 //! [0]
 MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 {
-    setCentralWidget(&graphWidget);
-
+	setCentralWidget(&graphWidget);
+	
     createActions();
     createMenus();
 
@@ -57,7 +57,9 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 
     setWindowTitle(tr("Menus"));
     setMinimumSize(160, 160);
-    resize(480, 320);
+	
+	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
+	resize(480, 320);
 	
 	connect( &roadmap, SIGNAL(appendedNode(vertex_t)),							&graphWidget, SLOT(addNode(vertex_t)));
 	connect( &roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	&graphWidget, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
@@ -65,11 +67,15 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( &graphWidget, SIGNAL(newQtGraphNode(vertex_t,QtGraphNode*)),		&roadmap, SLOT(setQtGraphNode( vertex_t, QtGraphNode* )));
 	connect( &graphWidget, SIGNAL(newQtGraphEdge(edge_t,QtGraphEdge*)),			&roadmap, SLOT(setQtGraphEdge( edge_t, QtGraphEdge* )));
 	
-	connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,double,double)),	&graphWidget, SLOT(setPosition(QtGraphNode*,double,double)));
-	connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
+	//connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,qreal,qreal)),		&graphWidget, SLOT(setNodePosition(QtGraphNode*,qreal,qreal)));
+	//connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
 
-	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
-	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	//connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
+	//connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	
+	//QVBoxLayout *mainLayout = new QVBoxLayout;
+	//mainLayout->addWidget(&graphWidget);
+	//setLayout(mainLayout);
 }
 //! [2]
 
@@ -79,11 +85,16 @@ MainWindow::~MainWindow()
 		ctrlThread.stop();
 }
 
+void MainWindow::resizeEvent( QResizeEvent* event )
+{
+	emit resizedMainWindow(event);
+}
+
 void MainWindow::connectMap()
 {
 	bool ok;
 	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
-								 tr("Number of Neighbors:"), 3, 1, 100, 1, &ok);
+								tr("Number of Neighbors:"), 3, 1, 100, 1, &ok);
 	if (ok)
 		roadmap.graphConnect(i);
 }

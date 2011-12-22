@@ -72,6 +72,9 @@ bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }
 	
+	if ( poss.size() != getNumJoints() )
+		return 0;
+	
 	std::vector<double> torsoCmd, leftCmd, rightCmd;
 	if ( !chop( poss, torsoCmd, leftCmd, rightCmd ) ) { printf("chop failed\n"); return 0; }
 	if ( !torso.positionMove(torsoCmd) ) { printf("torso move failed\n"); return 0; }
@@ -103,7 +106,11 @@ bool iCubController::checkMotionDone( bool* flag )
 	r2 = left_arm.checkMotionDone( &f2 );
 	r3 = right_arm.checkMotionDone( &f3 );
 	
-	if ( !r1 || !r2 || !r3 ) { return 0; }
+	if ( !r1 || !r2 || !r3 )
+	{ 
+		printf("checkMotionDone() failed. was the connection interrupted?\n");
+		return 0;
+	}
 	if ( f1 && f2 && f3 ) { *flag = 1; }
 	
 	return 1;

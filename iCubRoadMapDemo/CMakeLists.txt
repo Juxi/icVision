@@ -85,9 +85,13 @@ SET ( QT_MOC_FILES 	iCubController.h
 			controlThread.h
 )
 
-QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
+SET ( QT_RESOURCES	resources.qrc
+)
 
-ADD_EXECUTABLE ( RoadmapDemo ${hdr_files} ${src_files} )
+QT4_ADD_RESOURCES( qrc_files ${QT_RESOURCES})
+QT4_WRAP_CPP( moc_files ${QT_MOC_FILES} )
+
+ADD_EXECUTABLE ( RoadmapDemo ${hdr_files} ${src_files} ${moc_files} ${qrc_files} )
 
 
 TARGET_LINK_LIBRARIES ( RoadmapDemo ${CGAL_LIBRARIES}

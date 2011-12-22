@@ -59,26 +59,34 @@ public:
     QtGraphNode *destNode() const;
     void setDestNode(QtGraphNode *node);
 	
+	void adjust();
+	//void update() { mutex.lock(); color = newColor; mutex.unlock(); }
+	
+	// these are thread safe
 	void setColor( QColor c );
-
-    void adjust();
-
-    enum { Type = UserType + 2 };
-    int type() const { return Type; }
+	//void flagRemoval() { deleteMe = true; }
+	//bool removeMe() { return deleteMe; }
+	//bool reRenderMe() { return changed; }
     
 protected:
+	
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     
 private:
+	
     QtGraphNode *source, *dest;
 
     QPointF sourcePoint;
     QPointF destPoint;
-    //qreal arrowSize;
 	
 	QColor color;
-	QMutex mutex;
+	
+	//bool changed;
+	
+	//QMutex mutex;
+	
+	//bool deleteMe;
 };
 
 #endif

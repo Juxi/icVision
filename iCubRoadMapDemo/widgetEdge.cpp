@@ -49,8 +49,10 @@
 static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
 
-QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode)
-: color(Qt::black) // arrowSize(10)
+QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	color(Qt::black)
+																			//newColor(Qt::black)
+																			//deleteMe(false),
+																			//changed(false)
 {
     setAcceptedMouseButtons(0);
     source = sourceNode;
@@ -88,10 +90,10 @@ void QtGraphEdge::setDestNode(QtGraphNode *node)
 
 void QtGraphEdge::setColor( QColor c )
 {
-	mutex.lock();
-	color = c;
-	update();
-	mutex.unlock();
+	//mutex.lock();
+		color = c;
+		update();
+	//mutex.unlock();
 }
 
 void QtGraphEdge::adjust()
@@ -100,6 +102,9 @@ void QtGraphEdge::adjust()
         return;
 
     QLineF line(mapFromItem(source, 0, 0), mapFromItem(dest, 0, 0));
+	//printf("adjusting edge...  p1(%f,%f) p2(%f,%f)\n", line.p1().x(), line.p1().y(), line.p2().x(), line.p2().y());
+	
+	
     qreal length = line.length();
 
     prepareGeometryChange();
@@ -111,6 +116,9 @@ void QtGraphEdge::adjust()
     } else {
         sourcePoint = destPoint = line.p1();
     }
+	
+	
+	//changed = true;
 }
 
 QRectF QtGraphEdge::boundingRect() const
@@ -132,32 +140,53 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
     if (!source || !dest)
         return;
 
-	mutex.lock();
+	//mutex.lock();
 	
-    QLineF line(sourcePoint, destPoint);
-    if (qFuzzyCompare(line.length(), qreal(0.)))
-        return;
-
-    // Draw the line itself
-    painter->setPen(QPen(color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter->drawLine(line);
-
-    // Draw the arrows
-    /*double angle = ::acos(line.dx() / line.length());
-    if (line.dy() >= 0)
-        angle = TwoPi - angle;
-
-    QPointF sourceArrowP1 = sourcePoint + QPointF(sin(angle + Pi / 3) * arrowSize,
-                                                  cos(angle + Pi / 3) * arrowSize);
-    QPointF sourceArrowP2 = sourcePoint + QPointF(sin(angle + Pi - Pi / 3) * arrowSize,
-                                                  cos(angle + Pi - Pi / 3) * arrowSize);   
-    QPointF destArrowP1 = destPoint + QPointF(sin(angle - Pi / 3) * arrowSize,
-                                              cos(angle - Pi / 3) * arrowSize);
-    QPointF destArrowP2 = destPoint + QPointF(sin(angle - Pi + Pi / 3) * arrowSize,
-                                              cos(angle - Pi + Pi / 3) * arrowSize);
-
-    painter->setBrush(Qt::black);
-    painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
-    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);   */  
-	mutex.unlock();
+		QLineF line(sourcePoint, destPoint);
+	
+		QLineF offset = line.normalVector();
+		offset.setLength(1);
+	
+		QPointF a(sourcePoint.x()-offset.dx(),sourcePoint.y()-offset.dy());
+		QPointF b(destPoint.x()-offset.dx(),destPoint.y()-offset.dy());
+	
+		QLineF offLine(a,b);
+		
+	
+	painter->setPen(QPen(color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+	painter->drawLine(offLine);
+	
+		//double angle = ::acos(line.dx() / line.length());
+		//if (line.dy() >= 0)
+		//	angle = TwoPi - angle;
+	
+	
+	
+		//QRectF rectangle(sourcePoint,QSizeF(line.length(),5));
+		//int startAngle,spanAngle;
+		//if		( sourcePoint.x() <  destPoint.x() && sourcePoint.y() <  destPoint.y() ) rectangle = QRectF(sourcePoint,destPoint);
+		//else if ( sourcePoint.x() >= destPoint.x() && sourcePoint.y() >= destPoint.y() )	rectangle = QRectF(destPoint,sourcePoint);
+		//else if ( sourcePoint.x() <  destPoint.x() && sourcePoint.y() >= destPoint.y() )	rectangle = QRectF(QPointF(sourcePoint.x(),destPoint.y()),
+		//																									   QPointF(sourcePoint.y(),destPoint.x()));
+		//else if ( sourcePoint.x() >= destPoint.x() && sourcePoint.y() <  destPoint.y() )	rectangle = QRectF(QPointF(sourcePoint.y(),destPoint.x()),
+		//																									   QPointF(sourcePoint.x(),destPoint.y()));
+		//else { return; }
+	
+		//int startAngle = 0 * 16;
+	//	int spanAngle = 180 * 16;
+		
+	//QPainterPath myPath;
+	//myPath.moveTo(center);
+	//myPath.arcTo(rectangle, startAngle, spanAngle);
+	//painter->drawPath(myPath);	
+		//QPainter painter(this);
+		//painter->drawArc(rectangle, startAngle, spanAngle);
+		//setRotation(angle);
+	
+		// Draw the line itself
+		
+	
+	//mutex.unlock();
+	
+	//changed = false;
 }

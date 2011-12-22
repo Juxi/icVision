@@ -26,7 +26,7 @@ public:
 	
 	bool gotoNearest();
 	bool isOnMap();
-	bool randomMove();
+	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
 	
 	void start();

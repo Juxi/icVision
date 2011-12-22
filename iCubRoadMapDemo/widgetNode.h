@@ -57,25 +57,21 @@ class QtGraphNode : public QGraphicsItem
 public:
     QtGraphNode(GraphWidget *graphWidget);
 
+	void setIdx( int i ) { idx=i; }
+	int getIdx() { return idx; }
+	
     void addEdge(QtGraphEdge *edge);
     QList<QtGraphEdge *> edges() const;
-
-    enum { Type = UserType + 1 };
-    int type() const { return Type; }
-
-	void setTargetPos( double x, double y ) { 
-		printf("node->set target position()\n");
-		targetPos = QPointF(x,y);
-	}
-    void calculateForces();
-    bool advance();
 
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
-	void setPos( qreal x, qreal y);
+	void updatePosition();
+	
+	// these need to be thread safe
+	void setNormPos(const QPointF);
 	void setColor( QColor c1, QColor c2 );
+	//bool reRenderMe() { return changed; }
 	
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -84,12 +80,20 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 	
 private:
+	int idx;
+	GraphWidget *graph;
     QList<QtGraphEdge *> edgeList;
-    QPointF newPos,targetPos;
-    GraphWidget *graph;
-	QColor primaryColor, secondaryColor;
-	//bool colorChanged;
-	QMutex mutex;
+	
+	//qreal x,y;
+	QPointF normPos;
+	QColor	primaryColor,
+			secondaryColor;
+	//		newPrimaryColor,
+	//		newSecondaryColor;
+	
+	//bool changed;
+	
+	//QMutex mutex;
 };
 
 #endif

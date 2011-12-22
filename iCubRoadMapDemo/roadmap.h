@@ -55,7 +55,7 @@ private:
 		QtGraphEdge* qtGraphEdge;
 		double length;
 		double successRate;
-		Edge() :length(1.0),successRate(1.0){}
+		Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0){}
 	};
 	
 	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::directedS, 
@@ -123,6 +123,7 @@ private:
 	Map						map;
 	Tree					tree;
 	Map::vertex_descriptor	currentVertex;
+	Map::edge_descriptor	currentEdge;
 	
 protected:
 	void run();
@@ -141,19 +142,20 @@ public:
 	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
 	
-	std::vector<double> randomMove();
+	std::pair< edge_t, std::vector<double> > randomMove();
 	
 	
 	int dimensionality() { return dim; }
 	
 	void setDimensionality( int );
 	void setCurrentVertex( vertex_t );
+	void setEdgeColor( edge_t, QColor );
 	
 	vertex_t insert( std::vector<double> _q /*, unsigned int n = 0*/ );
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
-	void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
+	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
@@ -179,16 +181,17 @@ signals:
 	
 	void appendedNode( vertex_t );
 	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
-	void update2DPosition( QtGraphNode* n, double x, double y );
-	void removeQtGraphEdge( QtGraphEdge* );
-	void newNodeColor( QtGraphNode*, QColor, QColor );
-	void newEdgeColor( QtGraphEdge*, QColor );
+	//void update2DPosition( QtGraphNode* n, qreal x, qreal y );
+	//void removeQtGraphEdge( QtGraphEdge* );
+	//void newNodeColor( QtGraphNode*, QColor, QColor );
+	//void newEdgeColor( QtGraphEdge*, QColor );
 	
 public slots:
 	
 	void setQtGraphNode( vertex_t, QtGraphNode* );
 	void setQtGraphEdge( edge_t, QtGraphEdge* );
 	
+	friend class ControlThread;
 };
 #endif
 /** @} */
