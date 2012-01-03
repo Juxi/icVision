@@ -40,7 +40,7 @@ ENDIF ( WIN32 )
 # 
 # FIND AND CONFIGURE CGAL
 #
-SET ( CGAL_DIR "/opt/local/lib" )
+#SET ( CGAL_DIR "/opt/local/lib" )
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 if ( COMMAND cmake_policy )
   cmake_policy( SET CMP0003 NEW )  

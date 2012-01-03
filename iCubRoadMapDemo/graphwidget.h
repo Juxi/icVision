@@ -47,7 +47,7 @@
 #include <QMenuBar>
 #include <QTimer>
 
-#include "roadmap.h";
+#include "roadmap.h"
 
 class QtGraphNode;
 class QtGraphEdge;
@@ -85,8 +85,8 @@ protected:
     void drawBackground(QPainter *painter, const QRectF &rect);	
     //void keyPressEvent(QKeyEvent *event);
     //void wheelEvent(QWheelEvent *event);
-	void GraphWidget::mousePressEvent(QGraphicsSceneMouseEvent *event) { timer.stop(); }
-	void GraphWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) { timer.start(); }
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) { timer.stop(); }
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) { timer.start(); }
 	
 	QTimer timer;
 	

@@ -48,7 +48,7 @@ private:
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
 		
-		Vertex() : qtGraphNode(NULL), type("") {}
+		Vertex() : qtGraphNode(NULL), type(NULL) {}
 	};
 	
 	struct Edge {
@@ -95,7 +95,7 @@ private:
 			Pose (	int d, 
 						std::vector<double>::iterator first,
 						std::vector<double>::iterator last,
-						Map::vertex_descriptor _boostGraphVertex ) :  K::Point_d(d,first,last), vertex(_boostGraphVertex) {}
+						Map::vertex_descriptor _boostGraphVertex = 0 ) :  K::Point_d(d,first,last), vertex(_boostGraphVertex) {}
 			Map::vertex_descriptor vertex;
 	};
 	

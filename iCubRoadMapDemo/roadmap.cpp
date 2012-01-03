@@ -228,7 +228,7 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 	
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
 	
-	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end(), NULL ) , 1);	
+	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , 1);	
 	map[search.begin()->first.vertex].type = type;
 	return search.begin()->first.vertex;
 }
