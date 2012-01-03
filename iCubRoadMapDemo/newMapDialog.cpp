@@ -61,7 +61,7 @@ NewMapDialog::NewMapDialog()
 
     setLayout(mainLayout);
 
-    setWindowTitle(tr("Basic Layouts"));
+    setWindowTitle(tr("Create Roadmap"));
 }
 //! [5]
 

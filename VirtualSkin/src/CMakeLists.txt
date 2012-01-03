@@ -2,11 +2,12 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/RobotModel/CMakeScripts )
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/KinematicModel/CMakeScripts )
 
 ### Find Libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
-	SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH};${YARP_MODULE_PATH})
+	SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${YARP_MODULE_PATH})
+	#MESSAGE(${CMAKE_MODULE_PATH})
 FIND_PACKAGE ( ACE REQUIRED )
 FIND_PACKAGE ( SOLID REQUIRED )
 FIND_PACKAGE ( OpenGL )
@@ -14,15 +15,12 @@ FIND_PACKAGE ( Qt4 REQUIRED )
 	SET ( QT_USE_QTOPENGL TRUE )
 	SET ( QT_USE_QTXML TRUE )
 
-MESSAGE(STATUS "Yarp module path: ${YARP_MODULE_PATH}")
-MESSAGE(STATUS "CMake module path: ${CMAKE_MODULE_PATH}")
-
 ### Include Paths ###
 INCLUDE ( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/RobotModel/LibRobotModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/KinematicModel/LibKinematicModel" )
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/YarpFilter/LibYarpFilter" )
 
 ### Set some platform-specific variables ###
@@ -45,4 +43,5 @@ ENDIF ( WIN32 )
 ### Parse the directories where build targets are ###
 ADD_SUBDIRECTORY ( VirtualSkinLibrary )
 ADD_SUBDIRECTORY ( ReflexDemo )
-ADD_SUBDIRECTORY ( iCubBabble )
+#ADD_SUBDIRECTORY ( RoadmapDemo )
+#ADD_SUBDIRECTORY ( iCubBabble )

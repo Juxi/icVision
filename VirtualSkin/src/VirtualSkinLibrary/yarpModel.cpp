@@ -1,51 +1,148 @@
 #include "yarpModel.h"
+#include "yarprobot.h"
 
 using namespace VirtualSkin;
 
-YarpModel::YarpModel( bool visualize ) : RobotModel::Model(visualize)
+YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)//, rpcIsOpen(false)
 {
-	worldPort.setWorld( world );
+	worldRpcInterface.setModel(this);
+	//worldPort.setReader(rpcReader);
 }
 YarpModel::~YarpModel()
 {
-	//TODO: implement if (isOpen) kinda thing here
-	collisionPort.close();
-	worldPort.close();
+	worldRpcInterface.close();
 }
-void YarpModel::collisionHandlerAddendum( RobotModel::PrimitiveObject *object1, RobotModel::PrimitiveObject *object2, const DT_CollData *coll_data )
+
+//void YarpModel::onStartUp()
+//{
+//}
+
+YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
+{
+	printf("creating robot response table\n");
+	DT_RespTableHandle newTable = newRobotTable();
+	
+	printf("creating robot object\n");
+	YarpRobot* robot = new YarpRobot( this, newTable );
+	
+	printf("calling open robot\n");
+	robot->open( fileName, verbose );
+	robot->home( verbose );
+	
+	//responseTables.append( newTable );
+	robots.append( robot );
+	return robot;
+}
+
+void YarpModel::collisionHandlerAddendum( KinematicModel::PrimitiveObject* prim1, KinematicModel::PrimitiveObject* prim2, const DT_CollData *coll_data )
 {	
-	QString nameA = object1->getName(); 
-	nameA.prepend("-");
-	nameA.prepend(object1->getParent()->getName());
-	QString nameB = object2->getName();
-	nameB.prepend("-");
-	nameB.prepend(object2->getParent()->getName());
+	//QString nameA = prim1->getName();		nameA.prepend("-");		nameA.prepend(prim1->getCompositeObject()->getName());
+	//QString nameB = prim2->getName();		nameB.prepend("-");		nameB.prepend(prim2->getCompositeObject()->getName());
 	
-	yarp::os::Bottle& collision = bottle.addList();
+	//printf("called collision handler addendum\n");
 	
-	yarp::os::Bottle& part1 = collision.addList();
-	part1.addString(nameA.toStdString().c_str());
-	part1.addDouble(coll_data->point1[0]);
-	part1.addDouble(coll_data->point1[1]);
-	part1.addDouble(coll_data->point1[2]);
+	KinematicModel::CompositeObject* comp1 = prim1->getCompositeObject();
+	KinematicModel::CompositeObject* comp2 = prim2->getCompositeObject();
+	KinematicModel::KinTreeNode* node1 = dynamic_cast<KinematicModel::KinTreeNode*>(comp1);
+	KinematicModel::KinTreeNode* node2 = dynamic_cast<KinematicModel::KinTreeNode*>(comp2);
 	
-	yarp::os::Bottle& part2 = collision.addList();
-	part2.addString(nameB.toStdString().c_str());
-	part2.addDouble(coll_data->point2[0]);
-	part2.addDouble(coll_data->point2[1]);
-	part2.addDouble(coll_data->point2[2]);
+	if ( node1 && node2 )
+	{
+		if ( node1->robot() == node2->robot() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx() , coll_data->point1[0], coll_data->point1[1], coll_data->point1[2],
+										prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]  );
+		}
+		else
+		{
+			YarpRobot* r1 = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r1) r1->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "ROBOT" );
+			
+			YarpRobot* r2 = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r2) r2->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "ROBOT" );
+		}
+	}
+	else if ( node1 )
+	{
+		if ( comp2->getResponseClass() == OBSTACLE() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "OBSTACLE" );
+		}
+		else if ( comp2->getResponseClass() == TARGET() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node1->robot());
+			if (r) r->addCollisionData( prim1->idx(), coll_data->point1[0], coll_data->point1[1], coll_data->point1[2], "TARGET" );
+		}
+	}
+	else if ( node2 )
+	{
+		if ( comp1->getResponseClass() == OBSTACLE() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r) r->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "OBSTACLE" );
+		}
+		else if ( comp1->getResponseClass() == TARGET() )
+		{
+			YarpRobot* r = dynamic_cast<YarpRobot*> (node2->robot());
+			if (r) r->addCollisionData( prim2->idx(), coll_data->point2[0], coll_data->point2[1], coll_data->point2[2], "TARGET" );
+		}
+	}
 }
 
 void YarpModel::computePosePrefix()
 {
-	bottle.clear();
+	// clear the yarp::bottles of residual observations and collisions
+	QVector<KinematicModel::Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		YarpRobot* r = dynamic_cast<YarpRobot*>(*i);
+		if (r) { r->clearStateBottles(); }
+	}
 }
 
 void YarpModel::computePoseSuffix()
 {
-	//if ( collisionPort.isOpen() )
-	//{
-		if ( !col_count ) { bottle.addInt(0); }
-		collisionPort.setBottle(bottle);
-	//}
+	//KinematicModel::computePoseSuffix();
+	QVector<KinematicModel::Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		(*i)->publishState();
+	}
+}
+
+void YarpModel::showBottle( yarp::os::Bottle& anUnknownBottle, int indentation)
+{
+    for (int i=0; i<anUnknownBottle.size(); i++) {
+        for (int j=0; j<indentation; j++) { printf(" "); }
+        printf("[%d]: ", i);
+        yarp::os::Value& element = anUnknownBottle.get(i);
+        switch (element.getCode()) {
+			case BOTTLE_TAG_INT:
+				printf("int %d\n", element.asInt());
+				break;
+			case BOTTLE_TAG_DOUBLE:
+				printf("float %g\n", element.asDouble());
+				break;
+			case BOTTLE_TAG_STRING:
+				printf("string \"%s\"\n", element.asString().c_str());
+				break;
+			case BOTTLE_TAG_BLOB:
+				printf("binary blob of length %d\n", element.asBlobLength());
+				break;
+			case BOTTLE_TAG_VOCAB:
+				printf("vocab [%s]\n", yarp::os::Vocab::decode(element.asVocab()).c_str());
+				break;
+			default:
+				if (element.isList()) {
+					yarp::os::Bottle *lst = element.asList();
+					printf("list of %d elements\n", lst->size());
+					showBottle(*lst,indentation+2);
+				} else {
+					printf("unrecognized type\n");
+				}
+				break;
+        }
+    }
 }

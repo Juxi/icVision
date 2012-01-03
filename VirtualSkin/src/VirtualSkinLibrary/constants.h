@@ -17,8 +17,8 @@
 /**
  *	For the reflex behavior
  */
-#define POSE_BUFFER_SIZE 100				//!< Length of the pose history stored by VirtualSkin::StateObserver
-#define ALL_CLEAR_WAIT 500					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
+#define POSE_BUFFER_SIZE 1000				//!< Length of the pose history stored by VirtualSkin::StateObserver
+//#define ALL_CLEAR_WAIT 500					//!< Time to wait (milliseconds) for control to be restored after the robot reaches a safe configuration (this creates some buffer zone)
 //#define REFLEX_SPEED 30					//!< The velovity to use for the reflexive position move command
 //#define POSITION_MOVE_TIMEOUT 10			//!< Max time (seconds) to wait for the robot to finish the reflexive position move
 //#define NEGLIGIBLE_ANGLE .5				//!< (degrees)
@@ -32,8 +32,8 @@
 // commands for objects
 #define VOCAB_MK VOCAB2('m','k')			//!< Make a new object
 #define VOCAB_SET VOCAB3('s','e','t')		//!< Set the position of an object
-#define VOCAB_DEF VOCAB3('d','e','f')
 #define VOCAB_GET VOCAB3('g','e','t')		//!< Returns the 4x4 rototranslation matrix for an object
+#define VOCAB_DEF VOCAB3('d','e','f')		//!< Define an object target or obstacle
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
 #define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
@@ -45,13 +45,13 @@
 //#define VOCAB_NO_TYPE VOCAB2('g','h','o')	//!< gho for ghost
 
 // commands for primitives
-#define VOCAB_APP VOCAB3('a','p','p')		//!< Append a primitive to an object
-#define VOCAB_PSET VOCAB4('s','e','t','p')	//!< Set the position of a primitive relative to its parent object
-#define VOCAB_PROT VOCAB4('r','o','t','p')	//!< Rotate a primitive relative to its parent object
-#define VOCAB_PREM VOCAB3('r','m','p')		//!< Remove a primitive from its parent object
+//#define VOCAB_APP VOCAB3('a','p','p')		//!< Append a primitive to an object
+//#define VOCAB_PSET VOCAB4('s','e','t','p')	//!< Set the position of a primitive relative to its parent object
+//#define VOCAB_PROT VOCAB4('r','o','t','p')	//!< Rotate a primitive relative to its parent object
+//#define VOCAB_PREM VOCAB3('r','m','p')		//!< Remove a primitive from its parent object
 
 // geometries
-#define VOCAB_CSG VOCAB3('c','s','g')		//!< Constructive Solid Geometry object
+//#define VOCAB_CSG VOCAB3('c','s','g')		//!< Constructive Solid Geometry object
 #define VOCAB_SPH VOCAB3('s','p','h')		//!< Sphere
 #define VOCAB_CYL VOCAB3('c','y','l')		//!< Cylinder
 #define VOCAB_BOX VOCAB3('b','o','x')		//!< Box
@@ -63,5 +63,7 @@
 
 // admin
 #define VOCAB_CLEAR VOCAB3('c','l','r')		//!< Clears the world model and resets all counters
+
+#define VOCAB_WAYPOINT VOCAB4('s','e','t','P') //!< Set a waypoint in the pose buffers
 
 /** @} */

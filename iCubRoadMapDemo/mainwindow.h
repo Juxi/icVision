@@ -67,7 +67,11 @@ public:
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
+	void resizeEvent( QResizeEvent* event );
 //! [0]
+	
+signals:
+	void resizedMainWindow( QResizeEvent* event );
 
 //! [1]
 private slots:

@@ -45,6 +45,7 @@
 #include <QtGui/QGraphicsView>
 #include <boost/graph/adjacency_list.hpp>
 #include <QMenuBar>
+#include <QTimer>
 
 #include "roadmap.h";
 
@@ -60,39 +61,53 @@ class GraphWidget : public QGraphicsView
 	typedef Roadmap::edge_t edge_t;
 
 public:
+	
     GraphWidget();
 
-    void itemMoved();
+public slots:
+	
+	void addNode( vertex_t );
+	void addEdge( edge_t, QtGraphNode* a, QtGraphNode* b );
+	void resize( QResizeEvent* event );
+	
+	void setNodePosition( QtGraphNode*, QPointF );
+	void setNodeColor( QtGraphNode*, QColor, QColor );
+	void setEdgeColor( QtGraphEdge*, QColor );
+	//void removeEdge( QtGraphEdge* );
 
 signals:
+	
 	void newQtGraphNode(vertex_t,QtGraphNode*);
 	void newQtGraphEdge(edge_t,QtGraphEdge*);
 	
 protected:
-    void keyPressEvent(QKeyEvent *event);
-    void timerEvent(QTimerEvent *event);
-    void wheelEvent(QWheelEvent *event);
-    void drawBackground(QPainter *painter, const QRectF &rect);
 
-    void scaleView(qreal scaleFactor);
+    void drawBackground(QPainter *painter, const QRectF &rect);	
+    //void keyPressEvent(QKeyEvent *event);
+    //void wheelEvent(QWheelEvent *event);
+	void GraphWidget::mousePressEvent(QGraphicsSceneMouseEvent *event) { timer.stop(); }
+	void GraphWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) { timer.start(); }
 	
-public slots:
-	//void addNode( int boostNode );
-	void addNode( vertex_t );
-	void addEdge( edge_t, QtGraphNode* a, QtGraphNode* b );
-	//void addEdge( int boostEdge, int a, int b );
-	void setPosition( QtGraphNode* a, double x, double y );
+	QTimer timer;
 	
-	void removeEdge( QtGraphEdge* );
+private slots:
 	
-	void setNodeColor( QtGraphNode*, QColor, QColor );
-	void setEdgeColor( QtGraphEdge*, QColor );
-
+	//void update();
+	
 private:
-    int timerId;
+
+	// this is because the cast in the elastic nodes example fails...
+	QList<QtGraphNode *> nodes;
+	QList<QtGraphEdge *> edges;
 	
-    //QMenu *fileMenu;
-    //QAction *exitAction;
+	/***   WHEN I DO IT LIKE THIS, MY EDGES ALSO CAST TO NODES! ( probably its the ENUM type thingy i removed from edge and node )
+	 QList<Node *> nodes;
+	 foreach (QGraphicsItem *item, scene()->items()) {
+	 if (Node *node = qgraphicsitem_cast<Node *>(item))
+	 nodes << node;
+	 }
+		*/
+
 };
 
 #endif

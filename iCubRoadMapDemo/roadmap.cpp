@@ -3,7 +3,7 @@
 #include "widgetEdge.h"
 #include "widgetNode.h"
 
-Roadmap::Roadmap() : dim(0), currentVertex(-1)
+Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
 	srand ( time(NULL) );
 }
@@ -26,46 +26,61 @@ void Roadmap::setDimensionality( int d )
 
 void Roadmap::setCurrentVertex( vertex_t v )
 {
-	printf("called roadmap.setCurrentVertex()\n");
+	if ( map[v].qtGraphNode )
+		emit newNodeColor( map[v].qtGraphNode, Qt::yellow, Qt::darkYellow );
+		//map[v].qtGraphNode->setColor( Qt::yellow, Qt::darkYellow );
+	
 	if ( v != currentVertex )
 	{
-		printf("set the current vertex\n");
-		if ( currentVertex >= 0 )
-			emit newNodeColor( map[currentVertex].qtGraphNode, Qt::yellow, Qt::darkYellow );
-		if ( v >= 0 )
-			emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
-		
-		currentVertex = v;
+		if ( map[currentVertex].qtGraphNode )
+			emit newNodeColor( map[currentVertex].qtGraphNode, Qt::lightGray, Qt::gray );
+			//map[currentVertex].qtGraphNode->setColor( Qt::lightGray, Qt::gray );
 	}
+
+	currentVertex = v;
 }
 
-std::vector<double> Roadmap::randomMove()
+void Roadmap::setEdgeColor( edge_t e, QColor color )
 {
-	std::vector<edge_t> moves;
-	Map::out_edge_iterator e, e_end;
-	
-	int count = 0;
-	for (tie(e, e_end) = out_edges( currentVertex, map ); e != e_end; ++e)
-	{
-		moves.push_back( *e );
-		count++;
-	}
-	int idx = rand() % moves.size();
-	
-	//std::cout << "count: " << count << std::endl;
-	//std::cout << "size: " << moves.size() << std::endl;
-	//std::cout << "chose edge IDX: " << idx << std::endl;
-	
-	return map[target(moves.at(idx),map)].q ;
+	if ( map[e].qtGraphEdge )
+		emit newEdgeColor( map[e].qtGraphEdge, color );
+		//map[e].qtGraphEdge->setColor( color );
 }
 
-void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
+std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
+{
+	std::pair< edge_t, std::vector<double> > result;
+	if ( num_vertices( map ) > 0 )
+	{
+		std::vector<edge_t> moves;
+		Map::out_edge_iterator e, e_end;
+		
+		vertex_t v = currentVertex;
+		
+		//int count = 0;
+		for (tie(e, e_end) = out_edges( v, map ); e != e_end; ++e)
+		{
+			moves.push_back( *e );
+			//count++;
+		}
+		
+		if ( moves.size() > 0 )
+		{
+			int idx = rand() % moves.size();
+			result.first = moves.at(idx);
+			result.second = map[target(moves.at(idx),map)].q;
+		}
+	}
+	return result;
+}
+
+/*void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
 {
 	for ( unsigned int j=0; j<numVertices; j++ )
 	{
 		//insert( randomSample(), numNeighbors );
 	}
-}
+}*/
 
 Roadmap::vertex_t Roadmap::insert( std::vector<double> _q /*, unsigned int n*/ )
 {
@@ -75,7 +90,6 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _q /*, unsigned int n*/ )
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
-	//map[vertex].qtGraphNode = widget.addNode();
 	
 	emit appendedNode( vertex );
 	
@@ -105,23 +119,25 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 		vertices.push_back( vertex );
 	}
 	
-	/*sleep(1);
+	sleep(1);
+	
 	std::vector< std::pair<int,int> >::iterator e;
 	std::pair<edge_t, bool> edge;
 	for ( e=graphEdges.begin(); e!=graphEdges.end(); ++e )
 	{
 		edge = boost::add_edge( vertices.at(e->first), vertices.at(e->second), map );
+		//std::cout << edge.first << std::endl;
 		if ( !edge.second )
 			printf("boost::add_edge() failed.\n");
 		else
 		{
-			printf("appended edge to boost graph\n");
+			//printf("appended edge to boost graph\n");
 			emit appendedEdge( edge.first, 
 							   map[vertices.at(e->first)].qtGraphNode ,
 							   map[vertices.at(e->second)].qtGraphNode );
 	
 		}
-	}*/
+	}
 	
 }
 
@@ -149,9 +165,13 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 
 void Roadmap::removeEdge( Roadmap::edge_t edge )
 {
-	emit removeQtGraphEdge(map[edge].qtGraphEdge);
+	//if ( map[edge].qtGraphEdge )
+		//map[edge].qtGraphEdge->flagRemoval();
+	
+	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
 	remove_edge( edge, map );
 }
+
 void Roadmap::removeAllEdges()
 {
 	edge_i ei, ei_end, next;
@@ -164,6 +184,7 @@ void Roadmap::removeAllEdges()
 
 void Roadmap::setQtGraphNode( vertex_t v, QtGraphNode* n )
 {
+	//printf("new node addy: %p\n", n);
 	map[v].qtGraphNode = n;
 }
 
@@ -182,7 +203,7 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
 			//widget.addEdge (map[p.vertex].qtGraphNode , map[it->first.vertex].qtGraphNode );
 			
-			emit appendedEdge( edge.first, map[p.vertex].qtGraphNode , map[it->first.vertex].qtGraphNode );
+			//emit appendedEdge( edge.first, map[p.vertex].qtGraphNode , map[it->first.vertex].qtGraphNode );
 			
 			map[edge.first].length = it->second;
 			//put(edge_weight, map,edge.first , map[edge.first].length);
@@ -240,18 +261,18 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 void Roadmap::project2D( std::vector<double> direction )
 {
 	if ( direction.size() == 0 ) {
-		printf("choosing random direction\n");
+		//printf("choosing random direction\n");
 		for ( unsigned int i = 0; i < dim; i++ ) {
 			direction.push_back( (double)rand()/(double)RAND_MAX );
 		}
 	}
 	
-	std::vector<double>::iterator fuck;
+	/*std::vector<double>::iterator fuck;
 	for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
 	{
 		printf("%f ",*fuck);
 	}
-	printf("\n");
+	printf("\n");*/
 	
 	if ( direction.size() != dim ) { throw("wrong size direction vector"); }
 	
@@ -261,14 +282,14 @@ void Roadmap::project2D( std::vector<double> direction )
 	
 	k = K::Vector_d( direction.size(), direction.begin(), direction.end() );	// the view direction
 	
-	std::cout << std::endl << "VIEW DIRECTION..." << std::endl;
-	std::cout << "k: " << k << std::endl;
-	std::cout << "length: " << sqrt(k.squared_length()) << std::endl;
+	//std::cout << std::endl << "VIEW DIRECTION..." << std::endl;
+	//std::cout << "k: " << k << std::endl;
+	//std::cout << "length: " << sqrt(k.squared_length()) << std::endl;
 	
 	k /= sqrt(k.squared_length());
 	
-	std::cout << "normalized k: " << k << std::endl;
-	std::cout << "length: " << sqrt(k.squared_length()) <<  std::endl << std::endl;
+	//std::cout << "normalized k: " << k << std::endl;
+	//std::cout << "length: " << sqrt(k.squared_length()) <<  std::endl << std::endl;
 
 	//std::list< std::pair< K::Vector_d, double > > pointSet;
 	//std::list< std::pair< K::Vector_d, double > >::iterator point_i;
@@ -284,67 +305,62 @@ void Roadmap::project2D( std::vector<double> direction )
 							map[*(vp.first)].q.begin(),
 							map[*(vp.first)].q.end() );
 		
-		std::cout << "r: " << r << std::endl;
+		//std::cout << "r: " << r << std::endl;
 		
 		if ( iFound && jFound ) { 
 			break; 
 		}
 		else if ( iFound && !jFound ) {
-			std::cout << std::endl << "COMPUTE j..." << std::endl;
-			std::cout << "k: " << k << std::endl;
-			std::cout << "i: " << i << std::endl;
+			//std::cout << std::endl << "COMPUTE j..." << std::endl;
+			//std::cout << "k: " << k << std::endl;
+			//std::cout << "i: " << i << std::endl;
 			
-			std::cout << std::endl << "PROJECT ONTO HYPERPLANE DEFINED BY k..." << std::endl;
+			//std::cout << std::endl << "PROJECT ONTO HYPERPLANE DEFINED BY k..." << std::endl;
 			c = k*r;
-			std::cout << "c = k*r: " << c << std::endl;
+			//std::cout << "c = k*r: " << c << std::endl;
 			if ( c != sqrt(r.squared_length()) ) { 
-				std::cout << "kComponent = c*k: " << c*k << std::endl;
+				//std::cout << "kComponent = c*k: " << c*k << std::endl;
 				r = r-c*k;												// project r onto the hyperplane perpendicular to k
 				//j /= sqrt(i.squared_length());
-				std::cout << "r = r-c*k: " << r << std::endl;
+				//std::cout << "r = r-c*k: " << r << std::endl;
 				
 				c = i*r;
-				std::cout << " c = i*r: " << c << std::endl;
+				//std::cout << " c = i*r: " << c << std::endl;
 				if ( c != sqrt(r.squared_length()) ) {
-					std::cout << "iComponent = c*i: " << c*i << std::endl;
+					//std::cout << "iComponent = c*i: " << c*i << std::endl;
 					j = r-c*i;
-					std::cout << "j = r-c*i: " << j << std::endl;
+					//std::cout << "j = r-c*i: " << j << std::endl;
 					j /= sqrt(j.squared_length());
-					std::cout << "normalized j: " << j << std::endl;
+					//std::cout << "normalized j: " << j << std::endl;
 					
 					jFound = true;
-					std::cout << "j: " << j << std::endl;
-					std::cout << "length: " << sqrt(i.squared_length()) << std::endl << std::endl;
+					//std::cout << "j: " << j << std::endl;
+					//std::cout << "length: " << sqrt(i.squared_length()) << std::endl << std::endl;
 				}
 			}
 		}
 		else if ( !iFound ) {
 			c = k*r;
-			std::cout << std::endl << "COMPUTE i..." << std::endl << "k*r: " << c << std::endl;
+			//std::cout << std::endl << "COMPUTE i..." << std::endl << "k*r: " << c << std::endl;
 			if ( c*c != r.squared_length() ) { 
-				std::cout << "c*k: " << c*k << std::endl;
-				std::cout << "r-c*k: " << r-c*k << std::endl;
+				//std::cout << "c*k: " << c*k << std::endl;
+				//std::cout << "r-c*k: " << r-c*k << std::endl;
 				i = r-c*k;											// i is the projection of r onto the hyperplane perpendicular to k
 				i /= sqrt(i.squared_length());
 				iFound = true;
-				std::cout << "i: " << i << std::endl;
-				std::cout << "length: " << sqrt(i.squared_length()) << std::endl << std::endl;
+				//std::cout << "i: " << i << std::endl;
+				//std::cout << "length: " << sqrt(i.squared_length()) << std::endl << std::endl;
 			}
 		}
 	}
 	
-	std::cout << "i dot j:" << i*j << std::endl;
-	std::cout << "i dot k:" << i*k << std::endl;
-	std::cout << "j dot k:" << j*k << std::endl;
-	
-	double	iMin = 0,
-			iMax = 0,
-			jMin = 0,
-			jMax = 0,
-			iVal = 0,
-			jVal = 0;
+	//std::cout << "i dot j:" << i*j << std::endl;
+	//std::cout << "i dot k:" << i*k << std::endl;
+	//std::cout << "j dot k:" << j*k << std::endl;
 			
 	// find extreme points for scaling
+	double	iMin,iMax,jMin,jMax,iVal,jVal;
+	bool initialized = false;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
 		r = K::Vector_d( map[*(vp.first)].q.size(), 
@@ -352,6 +368,13 @@ void Roadmap::project2D( std::vector<double> direction )
 						 map[*(vp.first)].q.end() );
 		iVal = r*i;
 		jVal = r*j;
+		
+		if (!initialized)
+		{
+			iMin = iVal; iMax = iVal;
+			jMin = jVal; jMax = jVal;
+			initialized = true;
+		}
 		
 		if ( iVal > iMax ) iMax = iVal;
 		else if ( iVal < iMin ) iMin = iVal;
@@ -369,7 +392,15 @@ void Roadmap::project2D( std::vector<double> direction )
 		iVal = (r*i-iMin)/(iMax-iMin);
 		jVal = (r*j-jMin)/(jMax-jMin);
 	
-		//map[*(vp.first)].qtGraphNode->setPos( iVal, jVal );
-		emit update2DPosition(map[*(vp.first)].qtGraphNode, iVal, jVal);
+		//map[*(vp.first)].qtGraphNode->setNormPos( iVal, jVal );
+		//emit update2DPosition(map[*(vp.first)].qtGraphNode, iVal, jVal);
+		//printf("node addy: %p\n", map[*(vp.first)].qtGraphNode);
+		
+		if ( map[*(vp.first)].qtGraphNode )
+			emit update2DPosition(map[*(vp.first)].qtGraphNode, QPointF(iVal,jVal));
+			//map[*(vp.first)].qtGraphNode->setNormPos( QPointF(iVal,jVal) );
+			
 	}
+	
+	
 }

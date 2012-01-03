@@ -48,9 +48,15 @@
 #include "widgetNode.h"
 #include "graphwidget.h"
 
-QtGraphNode::QtGraphNode(GraphWidget *graphWidget)
-    : graph(graphWidget), primaryColor(Qt::yellow), secondaryColor(Qt::darkYellow)//, colorChanged(false)
+QtGraphNode::QtGraphNode(GraphWidget *graphWidget) :	graph(graphWidget),
+														//x(0), y(0),
+														primaryColor(Qt::lightGray),
+														secondaryColor(Qt::gray)
+														//newPrimaryColor(Qt::yellow),
+														//newSecondaryColor(Qt::darkYellow),
+														//changed(false)
 {
+	normPos = QPointF(0,0);
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
     setCacheMode(DeviceCoordinateCache);
@@ -68,108 +74,45 @@ QList<QtGraphEdge *> QtGraphNode::edges() const
     return edgeList;
 }
 
-void QtGraphNode::setPos( qreal x, qreal y)
+void QtGraphNode::setNormPos( const QPointF q )
+{
+	//mutex.lock();
+		if ( q.x() < 0.0 || q.x() > 1.0 || q.y() < 0.0 || q.y() > 1.0 )
+		{
+			printf("invalid call to QtGraphNode::setNormPos()...  values must be [0...1]\n");
+			return;
+		}
+		
+		normPos = q;
+		updatePosition();
+	//mutex.unlock();
+}
+
+void QtGraphNode::updatePosition()
 {
 	QRectF sceneRect = scene()->sceneRect();
-	QPointF p( sceneRect.left() + x*(sceneRect.right()-sceneRect.left()),
-			   sceneRect.bottom() + y*(sceneRect.top()-sceneRect.bottom()));
+	QPointF p( sceneRect.left() + normPos.x()*(sceneRect.width()),
+			  sceneRect.top() + normPos.y()*(sceneRect.height()));
+	if ( p.x() - sceneRect.left() < boundingRect().width()/2 )
+		p.setX( sceneRect.left() + boundingRect().width()/2 );
+	else if ( sceneRect.right() - p.x() < boundingRect().width()/2 )
+		p.setX( sceneRect.right() - boundingRect().width()/2 );
+	if ( p.y() - sceneRect.top() < boundingRect().height()/2 ) 
+		p.setY( sceneRect.top() + boundingRect().height()/2 );
+	else if ( sceneRect.bottom() - p.y() < boundingRect().height()/2 )
+		p.setY( sceneRect.bottom() - boundingRect().height()/2 );
+	
 	QGraphicsItem::setPos(p);
 }
 
 void QtGraphNode::setColor( QColor c1, QColor c2 )
 { 
-	mutex.lock();
-	primaryColor = c1; 
-	secondaryColor = c2; 
-	//colorChanged = true;
-	printf("***SET NODE COLOR***\n");
-	
-	update();
-	mutex.unlock();
-}
-
-void QtGraphNode::calculateForces()
-{
-	//printf("CALLED CALCULATE_FORCES()\n");
-	//printf("             pos: %f, %f\n", pos().x(), pos().y() );
-	//printf("      target pos: %f, %f\n", targetPos.x(), targetPos.y());
-	
-    if (!scene() || scene()->mouseGrabberItem() == this) {
-        newPos = pos();
-        return;
-    }
-
-	//QGraphicsItem::setPos(targetPos);
-	
-	//printf("  new target pos: %f, %f\n\n", targetPos.x(), targetPos.y());
-	
-	qreal xvel = 0;
-    qreal yvel = 0;
-	
-	QLineF line(targetPos, pos());
-	//qreal dx = line.dx();
-	//qreal dy = line.dy();
-	//printf("target vector: %f, %f\n", dx, dy);
-	
-	//double l = 2.0 * (dx * dx + dy * dy);
-	//if (l > 0) {
-	//	xvel += (dx * 150.0) / l;
-	//	yvel += (dy * 150.0) / l;
-	//}
-	/*xvel = dx*dx;
-	yvel = dy*dy;
-	printf("velocity command: %f, %f\n", xvel, yvel);
-
-    // Sum up all forces pushing this item away
-    
-    foreach (QGraphicsItem *item, scene()->items()) {
-        QtGraphNode *node = qgraphicsitem_cast<QtGraphNode *>(item);
-        if (!node)
-            continue;
-
-            }
-
-    // Now subtract all forces pulling items together
-    double weight = (edgeList.size() + 1) * 10;
-    foreach (QtGraphEdge *edge, edgeList) {
-        QPointF pos;
-        if (edge->sourceNode() == this)
-            pos = mapFromItem(edge->destNode(), 0, 0);
-        else
-            pos = mapFromItem(edge->sourceNode(), 0, 0);
-        xvel += pos.x() / weight;
-        yvel += pos.y() / weight;
-    } 
-	
-    
-   //if (qAbs(xvel) < 0.1 && qAbs(yvel) < 0.1)
-   //     xvel = yvel = 0;
-*/
-    QRectF sceneRect = scene()->sceneRect();
-    newPos = pos() + QPointF(xvel, yvel);
-	 
-	//printf("newPos: %f, %f\n", newPos.x(), newPos.y() );
-	
-    newPos.setX(qMin(qMax(newPos.x(), sceneRect.left() + 10), sceneRect.right() - 10));
-    newPos.setY(qMin(qMax(newPos.y(), sceneRect.top() + 10), sceneRect.bottom() - 10));
-	
-}
-
-bool QtGraphNode::advance()
-{
-	/*printf("computing qtGraphNode.advance()\n");
-	if ( colorChanged )
-	{
-		printf("COLOR CHANGED!!!!\n");
-		colorChanged = false;
-		return true;
-	}*/
-	
-    if (newPos == pos())
-        return false;
-
-	QGraphicsItem::setPos(newPos);
-    return true;
+	//printf("changing vertex color\n");
+	//mutex.lock();
+		primaryColor = c1; 
+		secondaryColor = c2;
+		update();
+	//mutex.unlock();
 }
 
 QRectF QtGraphNode::boundingRect() const
@@ -190,7 +133,7 @@ void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
 	int size = 10;
 	
-	mutex.lock();
+	//mutex.lock();
 	
 	// drop shadow
     //painter->setPen(Qt::NoPen);
@@ -212,16 +155,16 @@ void QtGraphNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setPen(QPen(Qt::black, 0));
     painter->drawEllipse(-size/2, -size/2, size, size);
 	
-	mutex.unlock();
+	//mutex.unlock();
 }
 
 QVariant QtGraphNode::itemChange(GraphicsItemChange change, const QVariant &value)
 {
+	//printf("called itemChange()\n");
     switch (change) {
     case ItemPositionHasChanged:
         foreach (QtGraphEdge *edge, edgeList)
             edge->adjust();
-        graph->itemMoved();
         break;
     default:
         break;
@@ -232,12 +175,24 @@ QVariant QtGraphNode::itemChange(GraphicsItemChange change, const QVariant &valu
 
 void QtGraphNode::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    update();
+	updatePosition();
     QGraphicsItem::mousePressEvent(event);
 }
 
 void QtGraphNode::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    update();
+	QRectF sceneRect = scene()->sceneRect();
+	QPointF p = event->scenePos();
+	
+	// handle the item being dropped outside the window
+	if ( p.x() > sceneRect.right() ) p.setX( sceneRect.right() );
+	else if ( p.x() < sceneRect.left() ) p.setX( sceneRect.left() );
+	if ( p.y() < sceneRect.top() ) p.setY( sceneRect.top() );
+	else if ( p.y() > sceneRect.bottom() ) p.setY( sceneRect.bottom() );
+	p.setX( (p.x()-sceneRect.left())/sceneRect.width() );
+	p.setY( (p.y()-sceneRect.top())/sceneRect.height() );
+	
+	setNormPos(p);
+    //updatePosition();
     QGraphicsItem::mouseReleaseEvent(event);
 }
