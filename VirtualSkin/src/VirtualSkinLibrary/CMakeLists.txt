@@ -3,28 +3,33 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 SET ( src_files	yarpModel.cpp
-		stateObserver.cpp
-		responseObserver.cpp
+		yarprobot.cpp
 		robotFilter.cpp
-		callObserver.cpp
+			stateObserver.cpp
+			responseObserver.cpp
+			callObserver.cpp
 		circularBuffer.cpp
-		yarpRpcPort.cpp
+		#yarpRpcPort.cpp
 		worldRpcInterface.cpp
+		filterRpcInterface.cpp
 		yarpStreamPort.cpp
 		virtualskinexception.cpp
 )
 
-SET ( hdr_files	yarpModel.h
-		stateObserver.h
-		responseObserver.h
-		robotFilter.h
-		callObserver.h
-		circularBuffer.h
-		yarpRpcPort.h
-		worldRpcInterface.h
-		yarpStreamPort.h
-		constants.h
+SET ( hdr_files	constants.h
 		virtualskinexception.h
+		yarpModel.h
+		yarprobot.h
+		robotFilter.h
+			stateObserver.h
+			responseObserver.h	
+			callObserver.h
+		circularBuffer.h
+		#yarpRpcPort.h
+		worldRpcInterface.h
+		filterRpcInterface.h
+		yarpStreamPort.h
+		
 )
 
 SET ( QT_MOC_FILES 	robotFilter.h
@@ -36,9 +41,9 @@ QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_LIBRARY ( VirtualSkin STATIC ${hdr_files} ${src_files} )
 
-ADD_DEPENDENCIES( VirtualSkin RobotModel YarpFilter )
+ADD_DEPENDENCIES( VirtualSkin KinematicModel YarpFilter )
 
-TARGET_LINK_LIBRARIES ( VirtualSkin 	RobotModel
+TARGET_LINK_LIBRARIES ( VirtualSkin 	KinematicModel
 					YarpFilter
 					${FREE_SOLID_LIBRARY}
 					${QT_LIBRARIES}
@@ -48,6 +53,6 @@ TARGET_LINK_LIBRARIES ( VirtualSkin 	RobotModel
 
 INSTALL ( TARGETS VirtualSkin DESTINATION ${CMAKE_SOURCE_DIR}/lib )
 
-ADD_SUBDIRECTORY ( RobotModel )
+ADD_SUBDIRECTORY ( KinematicModel )
 ADD_SUBDIRECTORY ( YarpFilter )
 

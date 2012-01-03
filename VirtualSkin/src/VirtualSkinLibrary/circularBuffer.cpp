@@ -9,13 +9,13 @@ CircularBuffer::~CircularBuffer()
 {
 }
 
-QVector< QVector<qreal> >::iterator CircularBuffer::next()
+QVector< CircularBuffer::Item >::iterator CircularBuffer::next()
 {
 	if ( i + 1 == buffer.end() ) { return buffer.begin(); }
 	else { return i + 1; }
 }
 
-QVector< QVector<qreal> >::iterator CircularBuffer::prev()
+QVector< CircularBuffer::Item >::iterator CircularBuffer::prev()
 {
 	if ( i == buffer.begin() ) { return buffer.end() - 1; }
 	else { return i - 1; }
@@ -27,21 +27,18 @@ void CircularBuffer::setBufferSize( int len )
 	buffer.resize(len);
 	i=buffer.begin();
 }
-void CircularBuffer::put( const QVector<qreal> v )
+void CircularBuffer::put( Item v )
 {
-	if (empty) { init(v); }
-	else /*if ( time.elapsed() > 10 )*/ {
+	if (empty) { init( v ); }
+	else
+	{
 		*i = v;
-		//QVector<qreal>::iterator j;
-		//for ( j=(*i).begin(); j!=(*i).end(); ++j ) {
-		//	printf("%f ",*j);
-		//} printf("\n");
 		i = next();
 		period = (period + static_cast<qreal>(time.restart()))/2;
 	}
 }
 
-void CircularBuffer::init( const QVector<qreal> v )
+void CircularBuffer::init( Item v )
 {
 	for ( i=buffer.begin(); i!=buffer.end(); ++i ) { *i = v; }
 	i=buffer.begin();
@@ -49,26 +46,27 @@ void CircularBuffer::init( const QVector<qreal> v )
 	empty = false;
 }
 
-QVector<qreal>& CircularBuffer::getCurrent()
+CircularBuffer::Item& CircularBuffer::getCurrent()
 {
 	return *prev();
 }
 
-QVector<qreal>& CircularBuffer::getOldest()
+CircularBuffer::Item& CircularBuffer::getOldest()
 {
 	return *i;
 }
 
-QVector< QVector<qreal> > CircularBuffer::getHistory()
+QVector< CircularBuffer::Item > CircularBuffer::getHistory()
 {
 	int count = 0;
-	QVector< QVector<qreal> > history;
-	QVector< QVector<qreal> >::iterator j = i;
+	QVector< Item > history;
+	QVector< Item >::iterator j = i;
 	
 	while ( count < buffer.size() )
 	{
 		if ( j == buffer.begin() ) { j = buffer.end() - 1; }
 		else { --j; }
+		
 		history.append(*j);
 		count++;
 	}

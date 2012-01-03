@@ -13,6 +13,8 @@
 #include <time.h>
 
 #include "robotFilter.h"
+#include "circularBuffer.h"
+#include "filterRpcInterface.h"
 
 /** \brief A VirtualSkin::RobotFilter with reflexive collision response
  *
@@ -24,22 +26,25 @@ class ReflexFilter : public VirtualSkin::RobotFilter
 
 public:
 	
-	ReflexFilter( bool visualize = true );		//!< Nothing special to do here
+	ReflexFilter( KinematicModel::Robot* r, bool visualize = true );		//!< Nothing special to do here
 	virtual ~ReflexFilter();					//!< Nothing special to do here
 
 	virtual void extraOpenStuff();				//!< Resizes the QVectors according to the robot model
-	virtual void collisionResponse();			//!< Provides reflexive response to collision
+	//virtual void stopRobot();			//!< Provides reflexive response to collision
 												/**< Moves the robot back to a past "safe" state */
-	virtual void responseComplete();			//!< Waits for the commands from collisionResponse() to finish
-												/**< This example is straightforward, as collisionResponse()
+	virtual void collisionResponse();			//!< Waits for the commands from stopRobot() to finish
+												/**< This example is straightforward, as stopRobot()
 													 issues a position move command */
 
+	//void openFilterRpcPort( const QString& name ) { filterRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	//void closeFilterRpcPort() { filterRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	
+	//void setWaypoint();
 private:
 	
-	QVector< QVector<qreal> >	originalPose,	//!< A colliding configuration
-								targetPose;		//!< A safe configuration
-	QVector< QVector< QVector<qreal> > > history;	//!< The history of the last n poses of the whole robot
-
+	//QVector< QVector<qreal> >	originalPose,	//!< A colliding configuration
+	//							targetPose;		//!< A safe configuration
+	//QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;	//!< The history of the last n poses of the whole robot
 };
 #endif
 /** @} */

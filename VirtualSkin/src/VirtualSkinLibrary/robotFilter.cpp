@@ -13,6 +13,7 @@
  */
 
 #include "robotFilter.h"
+#include "filterRpcInterface.h"
 #include "constants.h"
 
 #include <yarp/os/all.h>
@@ -21,29 +22,37 @@
 
 using namespace VirtualSkin;
 
-RobotFilter::RobotFilter( bool visualize ) : model(visualize), isOpen(false), haveControl(false), isColliding(false)
+RobotFilter::RobotFilter(	KinematicModel::Robot* r,
+							//KinematicModel::Model* m,
+							bool visualize				) : robot(r),
+															isOpen(false),
+															haveControl(false),
+															isColliding(false)
 {
-	QObject::connect( &model, SIGNAL(collisions(int)),	this, SLOT(collisionStatus(int)) );
-	QObject::connect( &model, SIGNAL(reflexResponse()),	this, SLOT(takeControl()) );
-	QObject::connect( this, SIGNAL(responseCompleteReturns()),	this, SLOT(openFilter()) );
+	//QObject::connect( m, SIGNAL(computedState(int)),	this, SLOT(collisionStatus(int)) );
+	QObject::connect( robot, SIGNAL(reflexCollisions(int)),	this, SLOT(takeControl(int)) );
+	QObject::connect( this, SIGNAL(reflexDone()),			this, SLOT(openFilter()) );
 	
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
-	statusPort.setBottle("0");
+	filterRpcInterface.setFilter(this);
+	
+	statusPort.setBottle("1");
 }
 
 RobotFilter::~RobotFilter()
 {
+	filterRpcInterface.close();
 	if ( isOpen ) { close(); }
 }
 
 void RobotFilter::close()
 {
-	model.stop();
-	model.robot->close();
-	model.world->clear();
-	statusPort.close();
+	//model.stop();
+	//robot->close();
+	//model.world->clear();
+	//statusPort.close();
 	
 	// remove all observers from the ControlBoardFilters, close the filters and delete them
 	QVector<yarp::os::ControlBoardFilter*>::const_iterator cbfIter;
@@ -80,72 +89,84 @@ void RobotFilter::close()
 	isOpen = false;
 }
 
-void RobotFilter::collisionStatus( int collisions )
+/*void RobotFilter::collisionStatus( int collisions )
 {
 	if ( collisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
-}
+}*/
 
-void RobotFilter::takeControl()
+void RobotFilter::takeControl( int numReflexCollisions )
 {
-	isColliding = true;
+	if ( numReflexCollisions > 0 ) { isColliding = true; }
+	else { isColliding = false; }
 	
 	if ( isColliding && !haveControl )
 	{
 		haveControl = true;
 		
-		// first take control away from the user
-		for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+		for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
-			cbFilters.at(bodyPart)->cutConnection(true);
+			cbFilters.at(bodyPart)->cutConnection(true);	// take control away from the user
+			cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
 		}
 		
-		// inform the user
-		printf("*** COLLISION RECOVERY ***\n");
 		statusPort.setBottle( yarp::os::Bottle("0") );
+
+		printf("*** ALL STOPPED ***\n");
 		
 		// do some control in response
-		collisionResponse();
-		
-		// wait for the response to finish
 		start();
 	}
 }
 
 void RobotFilter::run()
 {	
-	//wait for the commands issued in collisionResponse() to finish
-	responseComplete();
+	collisionResponse();
 	
 	if ( isColliding )
 	{
-		printf("No safe pose in the buffer. Consider increasing POSE_BUFFER_SIZE and/or ALL_CLEAR_WAIT in VirtualSkinLibrary/constants.h. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
+		printf("No safe pose in the buffer. Please resolve the situation manually, and the RobotFilter will re-open auto-magically! \n");
 	}
 	
 	while ( isColliding )
 	{
+		printf(".");
 		msleep(YARP_PERIOD_ms);
 	}
 	
-	emit responseCompleteReturns();
+	printf("\n");
+	
+	emit reflexDone();
 }
 
 void RobotFilter::openFilter()
 {	
 	// reinitialize the pose buffer with the current pose
-	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
-	{
-		stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
-	}
+	setWaypoint();
+	//for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+	//{
+	//	stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
+	//}
 	
 	// reopen the filter... 
-	for ( int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++ )
+	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 	{
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	
 	//inform the user
 	statusPort.setBottle( yarp::os::Bottle("1") );
-	printf("CONTROL RESTORED\n");
+	printf("*** CONTROL RESTORED ***\n");
 	haveControl = false;
+}
+
+void RobotFilter::setWaypoint()
+{
+	//printf("entering for loop! %d body parts\n",robot->numBodyParts());
+	
+	for (int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
+	{
+		//printf("RobotFilter setWayPoint(%d) called\n",bodyPart);
+		stateObservers.at(bodyPart)->setWaypoint();
+	}
 }

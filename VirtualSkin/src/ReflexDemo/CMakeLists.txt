@@ -11,10 +11,10 @@ SET ( hdr_files	reflexFilter.h
 
 ADD_EXECUTABLE ( ReflexDemo ${hdr_files} ${src_files} )
 
-ADD_DEPENDENCIES( ReflexDemo VirtualSkin )
+ADD_DEPENDENCIES( ReflexDemo KinematicModel )
 
 TARGET_LINK_LIBRARIES ( ReflexDemo 	VirtualSkin
-					RobotModel
+					KinematicModel
 					YarpFilter
 					
 					${SOLID_LIBRARY}

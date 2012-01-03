@@ -80,6 +80,8 @@ public:
 	void injectCall(const Bottle &b);			//!< Inject an RPC call (yarp::os::bottle) on /filterName/rpc:o
 	
 	bool isCut() { return !isOpen; }
+	
+	//void setWaypoint();
 
 private:
 	StreamFilter stateFilter;		//!< A filter for the state port

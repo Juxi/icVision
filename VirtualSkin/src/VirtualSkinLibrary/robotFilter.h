@@ -14,6 +14,8 @@
 #include <QThread>
 #include <QVector>
 #include <yarp/os/ControlBoardFilter.h>
+#include <yarp/dev/ControlBoardInterfaces.h>
+
 
 #include "robot.h"
 #include "callObserver.h"
@@ -22,6 +24,7 @@
 #include "yarpModel.h"
 #include "yarpStreamPort.h"
 #include "virtualskinexception.h"
+#include "filterRpcInterface.h"
 
 namespace VirtualSkin
 {
@@ -34,9 +37,9 @@ namespace VirtualSkin
  *	 control ports for your robot, and forwards commands from the duplicates to the real ones as long as the filter is connected. The filter is controlled
  *	 by a kinematic model of the robot (see YarpModel and RobotModel::Model) that reads the streams of encoder positions from the real robot, computes the
  *	 forward kinematics and does collision detection. If unwanted collisions are found, the filter cuts its connection between the duplicate ports and the real
- *	 ones, thereby effectively ignoring the user until a pure virutal handler function (collisionResponse()) returns.
+ *	 ones, thereby effectively ignoring the user until a pure virutal handler function (stopRobot()) returns.
  *
- *	 The user is free to implement collisionResponse() in any way they like. An example of a simple reflexive response to collision is implemented in ReflexFilter.
+ *	 The user is free to implement stopRobot() in any way they like. An example of a simple reflexive response to collision is implemented in ReflexFilter.
  *	 The implementation of RobotFilter is built on YarpFilter. In order to empower the user to gather the data needed to handle collisions in arbitrary ways, the RobotFilter supports the extension
  *	 helper-classes of YarpFilter (StateObserver, CallObserver and ResponseObserver) can be extended, and the resulting sub-classes passed to the RobotFilter
  *	 via the templated open<aStateObserver,aCallObserver,aResponseObserver>( const QString& ) function.
@@ -46,8 +49,8 @@ class VirtualSkin::RobotFilter : public QThread
 	Q_OBJECT
 
 public:
-	RobotFilter( bool visualize = false );	//!< Connects the RobotModel::Model to the RobotFilter, and initializes some members
-	virtual ~RobotFilter();					//!< Calls close()
+	RobotFilter( KinematicModel::Robot* r,/* KinematicModel::Model* m,*/ bool visualize = false );	//!< Connects the RobotModel::Model to the RobotFilter, and initializes some members
+	virtual ~RobotFilter();																		//!< Calls close()
 
 	/** \brief Builds a RobotFilter for the RobotModel::Model described in the requested config file
 	 *
@@ -59,8 +62,13 @@ public:
 	 *
 	 * \note aStateObserver,aCallObserver,aResponseObserver MUST be sub-classes of StateObserver,CallObserver,ResponseObserver respectively
 	 */
-	template <class aStateObserver, class aCallObserver, class aResponseObserver>
-	void open( const QString& fileName, const QString& worldFileName ) throw(std::exception)
+	template <
+				class aStateObserver,
+				class aCallObserver,
+				class aResponseObserver
+			 >
+	
+	void open( /*const QString& fileName, const QString& worldFileName*/ ) throw(std::exception)
 	{
 		if ( isOpen ) { close(); }
 		
@@ -68,12 +76,14 @@ public:
 		{
 			throw( VirtualSkinException("yarp network unavailable...") );
 		}
+		yarp::os::Network yarp;
 		
-		model.robot->open(fileName);
-		model.world->load(worldFileName);
+		//robot = model.loadRobot(fileName);
+		//model.robot->open(fileName);
+		//model.world->load(worldFileName);
 		
-		const QString deviceBaseName( model.robot->getName() );
-		const QString filterBaseName( model.robot->getName() + "F" );
+		const QString deviceBaseName( robot->getName() );
+		const QString filterBaseName( robot->getName() + "F" );
 		
 		yarp::os::ControlBoardFilter *p_cbf;	// create the port filter
 		aStateObserver *p_so;					// create an observer for the encoder readings
@@ -84,15 +94,52 @@ public:
 		QString targetName;
 		QString filterName;
 		
-		for (int bodyPart = 0; bodyPart < model.robot->numBodyParts(); bodyPart++)
+		for (int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
 			p_cbf = new yarp::os::ControlBoardFilter();
 			
-			filterName = "/" + model.robot->getName() + "F/" + *(model.robot->getPartName(bodyPart));
-			targetName = "/" + model.robot->getName() + "/" + *(model.robot->getPartName(bodyPart));
+			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
+			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
+			
+			
+			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
+			yarp::os::RpcClient port;
+			port.open("/clientPort");
+	
+			printf("Trying to connect to %s\n", (targetName + "/rpc:i").toStdString().c_str());
+			yarp.connect( "/clientPort", (targetName + "/rpc:i").toStdString().c_str() );
+			
+			for ( int i=0; i<robot->getPart(bodyPart)->size(); i++ )
+			{
+				yarp::os::Bottle cmd;
+				cmd.addVocab(VOCAB_GET);
+				cmd.addVocab(VOCAB_LIMITS);
+				cmd.addInt(i);
+				printf("Sending message... %s\n", cmd.toString().c_str());
+				
+				yarp::os::Bottle response;
+				port.write(cmd,response);
+				printf("Got response: %s\n", response.toString().c_str());
+				
+				double min = response.get(2).asDouble();
+				double max = response.get(3).asDouble();
+				printf("setting motor limits: %f, %f\n", min, max);
+				
+				robot->getPart(bodyPart)->at(i)->setMin(min);
+				robot->getPart(bodyPart)->at(i)->setMax(max);
+				
+				if ( robot->getPart(bodyPart)->at(i)->size() == 1 )
+				{
+					printf("setting joint limits: %f, %f\n", min, max);
+					robot->getPart(bodyPart)->at(i)->at(0)->setMin(min*M_PI/180);
+					robot->getPart(bodyPart)->at(i)->at(0)->setMax(max*M_PI/180);
+				} else { printf("skipping this joint\n"); }
+			}
+			port.close();
+			/************************/
 			
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", model.robot->getName().toStdString().c_str(), model.robot->getPartName(bodyPart)->toStdString().c_str() );
+			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -111,8 +158,8 @@ public:
 				p_cbf->setResponseObserver(p_ro);
 				responseObservers.append(p_ro);
 				
-				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	model.robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				model.robot, SLOT(setEncoderPosition(int,int,qreal)) );
+				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
+				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
@@ -130,8 +177,8 @@ public:
 		
 		
 		isOpen = true;
-		statusPort.setBottle("1");
-		model.start();
+		//statusPort.setBottle("1");
+		//model.start();
 		
 		// this is to let all the control board filters and observers come up
 		sleep(1);
@@ -141,25 +188,26 @@ public:
 	virtual void extraOpenStuff() {}		//!< This is called shortly before open<>(const QString&) returns
 											/**< In your sub-classes, replace the empty implementation with any initialization code required.
 												 For an example of this, see ReflexFilter. */ 
-	virtual void collisionResponse() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
+	//virtual void stopRobot() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
 											/**< This is executed once the RobotFilter has detected collisions and cut its connection. */
-	virtual void responseComplete() {}		//!< Should waits for the commands issued in collisionResponse() to finish running
-											/**< This is called right after collisionResponse() and runs in its own thread.
+	virtual void collisionResponse() {}		//!< Should waits for the commands issued in stopRobot() to finish running
+											/**< This is called right after stopRobot() and runs in its own thread.
 												 the user is responsible for deciding what it means that control commands are "finished" executing,
 												 which clearly depends on the kinds of commands issued in the first place. */
 	void openStatusPort( const QString& name ) { statusPort.open(name); }	//!< Open a YARP port that streams a boolean indicating the status of the RobotFilter
 																			/**< A 1 indicates the filter is connected and motor commands are being forwarded, 
 																				 whereas a 0 indicates that the filter has been cut and motor commands are being ignored. */
 	void closeStatusPort()		{ statusPort.close(); }						//!< Closes the Yarp stream port indicating whether or not the filter is connected
+
 	
-	YarpModel			model;	//!< The model that controls the opening and closing of the filter
-								/**< It is public so that the user has access to the information that was read out of the robot configuration file, 
-									 such as the name of the robot and the number of controllable axes for example */
+	void openFilterRpcPort( const QString& name ) { filterRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	void closeFilterRpcPort() { filterRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	void setWaypoint();
 	
 public slots:
 	
-	void collisionStatus(int);
-	void takeControl();			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
+	//void collisionStatus(int);
+	void takeControl(int);			//!< Provides a thread-safe mechanism to cut the filter connection and begin collision recovery
 	
 protected slots:
 	
@@ -167,12 +215,18 @@ protected slots:
 	
 signals:
 	
-	void responseCompleteReturns();
+	void reflexDone();
 
 protected:
 	
-	YarpStreamPort		statusPort;				//!< Published the (open/closed) status of the filter
-												//! TODO: Make this not iCub specific	
+	KinematicModel::Robot*	robot;
+	YarpModel*				model;	//!< The model that controls the opening and closing of the filter
+									/**< It is public so that the user has access to the information that was read out of the robot configuration file, 
+										 such as the name of the robot and the number of controllable axes for example */
+	
+	YarpStreamPort		statusPort;			//!< Published the (open/closed) status of the filter
+	FilterRpcInterface	filterRpcInterface;
+	
 	yarp::os::Bottle	stop_command;			//!< Stores an RPC command to stop the iCub robot
 												/**< \note This is iCub specific, and it should be done differently in the future */
 	bool				isOpen,					//!< Indicates whether or not filter is forwarding commands

@@ -153,6 +153,7 @@
             <link z="-.0625" y="-.016" radius="0">
             
                 <!-- HAND -->
+                <marker name="right_hand"/>
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
@@ -407,6 +408,7 @@
             <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
+                <marker name="left_hand"/>
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>

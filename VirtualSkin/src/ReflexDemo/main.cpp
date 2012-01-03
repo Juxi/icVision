@@ -1,10 +1,12 @@
 #include <QApplication>
 #include <yarp/os/Property.h>
 
-#include "robot.h"
+//#include "model.h"
+#include "yarprobot.h"
 #include "yarpModel.h"
 #include "reflexFilter.h"
-#include "worldRpcInterface.h"
+//#include "worldRpcInterface.h"
+//#include "filterRpcInterface.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,12 +21,7 @@ int main(int argc, char *argv[])
 		config.fromCommand(argc,argv);
 		
 		// path to the XML file that defines the robot model
-		QString robotFile = "";
-		if ( !config.check("robot") ) {
-			printf("Please specify a robot model using '--file yourFileName.xml'\n");
-			return 1;
-		}
-		else robotFile = config.find("robot").asString();
+		QString robotFile = config.find("robot").asString().c_str();
 	
 		// optional... path to the xml file that contains the world
 		QString worldFile = config.find("world").asString().c_str();
@@ -34,58 +31,84 @@ int main(int argc, char *argv[])
 		if ( config.check("visualize") ) visualize = true;
 		
 		// print the configuration to the console
-		printf("Launching... \n");
-		if ( visualize ) 
-		{
-			printf("  ...with visualization\n");
-		}
-		else
-		{
-			printf("  ...without visualization\n");
-			printf("  ...using robot model file: %s\n", robotFile.toStdString().c_str());
-		}
+		printf("Launching Virtual Skin... \n");
+		if ( visualize ) {	printf("  ...with visualization\n");		}
+		else {				printf("  ...without visualization\n");		}
+	
 	/***********************************************************************/
 	
 	// Create the QApplication
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
-	// Virtual Skin Command Filter
-	ReflexFilter filter(visualize);
-	//VirtualSkin::RobotFilter filter(visualize);
+	VirtualSkin::YarpModel* yarpModel = NULL;
+	VirtualSkin::YarpRobot* yarpRobot = NULL;
+	ReflexFilter*			filter	  = NULL;
+	int result = 0;
 	
-	// start the Virtual Skin command filter
 	try
-	{ 
-		filter.open< VirtualSkin::StateObserver,
-					 VirtualSkin::CallObserver,
-					 VirtualSkin::ResponseObserver >( robotFile, worldFile ); 
+	{
+		yarpModel = new VirtualSkin::YarpModel( visualize );
+		yarpModel->start();	/*	if we want display lists to be created automatically,
+								the model must be started prior to appending objects by
+								calling loadWorld(), loadRobot(), or appendObject()		*/
 		
-		// open a port to report collision events
-		filter.model.openCollisionPort("/" + filter.model.robot->getName() + "F/collisions");
+		// Load a world model from file
+		if ( worldFile != "" )
+		{
+			printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
+			yarpModel->loadWorld( worldFile, false );
+		}
+		
+		// Load a robot model from file
+		if ( robotFile != "" )
+		{
+			printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
+			yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
+			yarpRobot->openCollisionPort("/collisions");
+			yarpRobot->openObservationPort("/observations");
+			
+			sleep(1);
+			
+			// Enable Virtual Skin for the robot model
+			printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
+			filter = new ReflexFilter( yarpRobot, visualize );
+			filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
+			 
+			// Open the RPC interface to the filter
+			printf("opening filter RPC port\n");
+			filter->openFilterRpcPort("/filterRpc");
+			
+			// Open the filter status port
+			printf("opening filter status port\n");
+			filter->openStatusPort("/filterStatus");
+		}
+		
+		// Open the RPC interface to the world model
+		//printf("opening world RPC port\n");
+		//yarpModel->openWorldRpcPort("/world");
 	
-		// Filter Status Port (streams 1 or 0 indicating filter is open or closed respectively)
-		filter.openStatusPort("/" + filter.model.robot->getName() + "F/status");
+		// run the Qt application
+		result = app.exec();
 		
-		// open a port to interact with the world model
-		filter.model.openWorldRpcPort("/" + filter.model.robot->getName() + "F/world");
+		if ( filter )
+		{ 
+			//filter->closeFilterRpcPort();
+			filter->close();
+		}
+		delete filter;
+		
+		if ( yarpModel )
+		{
+			//yarpModel->closeWorldRpcPort();
+			yarpModel->stop(); 
+			delete yarpModel;
+		}
 	}
-	
-	catch (std::exception& e)
+	catch ( std::exception& e )
 	{ 
 		printf("%s\n",e.what());
 		return 1;
 	}
-	
-	// run the Qt application
-	int result = app.exec();
-
-	printf("SHUTTING DOWN!!!\n");
-	printf("Result = %d\n", result);
-	
-	filter.closeStatusPort();
-	filter.model.closeWorldRpcPort();
-	filter.model.closeCollisionPort();
-	filter.close();
 
     return result;
 }
