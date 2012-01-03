@@ -68,7 +68,7 @@ void FilterRpcInterface::run()
 
 bool FilterRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bottle& reply ) 
 {
-	printf("FilterRpcInterface Handler Called!\n");
+	//printf("FilterRpcInterface Handler Called!\n");
 	
 	int n = 0;	// identifier of the current bottle element
 	int cmd;	// the command (see command vocabs in header)

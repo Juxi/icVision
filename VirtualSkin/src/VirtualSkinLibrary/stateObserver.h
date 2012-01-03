@@ -50,7 +50,7 @@ public:
 	
 	void setWaypoint()
 	{
-		printf("Set Waypoint!!!\n");
+		//printf("Set Waypoint!!!\n");
 		poseBuffer.init(WAYPOINT);
 	}
 	

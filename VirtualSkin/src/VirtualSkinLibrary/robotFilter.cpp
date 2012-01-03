@@ -112,7 +112,7 @@ void RobotFilter::takeControl( int numReflexCollisions )
 		
 		statusPort.setBottle( yarp::os::Bottle("0") );
 
-		printf("*** ALL STOPPED ***\n");
+		printf("*** ALL STOPPED - INITIATING COLLISION RESPONSE ***\n");
 		
 		// do some control in response
 		start();
