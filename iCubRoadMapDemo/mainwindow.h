@@ -43,7 +43,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "graphWidget.h"
+#include "graphwidget.h"
 #include "roadmap.h"
 #include "newMapDialog.h"
 #include "iCubController.h"
