@@ -20,34 +20,38 @@ void CircularBuffer::setBufferSize( int len )
 
 void CircularBuffer::put( Item v )
 {
+	if (empty)
+	{ 
+		init( v ); 
+		return;
+	}
+
 	mutex.lock();
-		if (empty) { init( v ); }
-		else
-		{
-			*i = v;
-			i = next();
-			period = (period + static_cast<qreal>(time.restart()))/2;
-		}
+		*i = v;
+		i = next();
+		period = (period + static_cast<qreal>(time.restart()))/2;
 	mutex.unlock();
 }
 
 void CircularBuffer::init( Item v )
 {
+	//printf("called circular buffer init\n");
 	mutex.lock();
 		for ( i=buffer.begin(); i!=buffer.end(); ++i ) { *i = v; }
 		i=buffer.begin();
 		period = static_cast<qreal>(YARP_PERIOD_ms);
 		empty = false;
 	mutex.unlock();
+	//printf("done init-ing\n");
 }
 
 QVector< CircularBuffer::Item > CircularBuffer::getHistory()
 {
+	int count = 0;
+	QVector< Item > history;
+	
 	mutex.lock();
-		int count = 0;
-		QVector< Item > history;
 		QVector< Item >::iterator j = i;
-		
 		while ( count < buffer.size() )
 		{
 			if ( j == buffer.begin() ) { j = buffer.end() - 1; }
