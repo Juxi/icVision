@@ -10,6 +10,7 @@
 #ifndef CIRCULARBUFFER_H
 #define CIRCULARBUFFER_H
 
+#include <QMutex>
 #include <QVector>
 #include <QTime>
 
@@ -65,6 +66,7 @@ public:
 
 private:
 	
+	QMutex mutex;
 	QVector< Item >::iterator i;	//!< Represents the 'current' position in the buffer
 	QVector< Item > buffer;		//!< The buffer itself
 	QTime time;
