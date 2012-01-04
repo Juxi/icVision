@@ -11,7 +11,7 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::setBufferSize( int len )
 {
-	printf("called set buffer size\n");
+	//printf("called set buffer size\n");
 	mutex.lock();
 		//printf("clear\n");
 		buffer.clear();
