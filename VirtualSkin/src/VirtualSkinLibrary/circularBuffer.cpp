@@ -11,15 +11,20 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::setBufferSize( int len )
 {
+	printf("called set buffer size\n");
 	mutex.lock();
+		//printf("clear\n");
 		buffer.clear();
+		//printf("resize\n");
 		buffer.resize(len);
+		//printf("set i\n");
 		i=buffer.begin();
-	mutex.lock();
+	mutex.unlock();
 }
 
 void CircularBuffer::put( Item v )
 {
+	//printf("called put\n");
 	if (empty)
 	{ 
 		init( v ); 
