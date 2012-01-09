@@ -360,6 +360,7 @@ void MainWindow::createMenus()
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
 	controllerMenu->addAction(disconnectFromRobotAction);
+	controllerMenu->addAction(setRefVelAction);
 	controllerMenu->addAction(exploreAction);
 	controllerMenu->addAction(stopControllerAction);
 	
