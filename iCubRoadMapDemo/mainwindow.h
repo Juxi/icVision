@@ -83,6 +83,7 @@ private slots:
 	
 	void connectToRobot();
 	void disconnectFromRobot();
+	void setRefVel();
 	void explore();
 	void stopController();
 
@@ -105,6 +106,7 @@ private:
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
 	QAction *disconnectFromRobotAction; ////
+	QAction *setRefVelAction;
 	QAction *exploreAction;
 	QAction *stopControllerAction;		////
 

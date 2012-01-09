@@ -108,6 +108,18 @@ void MainWindow::connectToRobot()
 	}
 }
 
+void MainWindow::setRefVel()
+{
+	bool ok;
+	int vel = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+						 tr("Percentage:"), 5, 1, 20, 1, &ok);
+	
+	if (ok)
+	{
+		iCub.setRefVels(vel);
+	}
+}
+
 void MainWindow::disconnectFromRobot()
 {
 	iCub.close();
@@ -299,15 +311,20 @@ void MainWindow::createActions()
 	disconnectFromRobotAction->setStatusTip(tr("Disconnect from the iCub"));
 	connect(disconnectFromRobotAction, SIGNAL(triggered()), this, SLOT(disconnectFromRobot()));
 	
-	stopControllerAction = new QAction(tr("&Stop Controller"), this);
-	stopControllerAction->setShortcut( QKeySequence(tr("Ctrl+X")) );
-	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
-	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
+	setRefVelAction = new QAction(tr("&Set Ref Velocity"), this);
+	setRefVelAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
+	setRefVelAction->setStatusTip(tr("Set the reference velocity on all joints"));
+	connect(setRefVelAction, SIGNAL(triggered()), this, SLOT(setRefVel()));
 	
 	exploreAction = new QAction(tr("&Explore"), this);
 	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
 	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
 	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
+	
+	stopControllerAction = new QAction(tr("&Stop Controller"), this);
+	stopControllerAction->setShortcut( QKeySequence(tr("Ctrl+X")) );
+	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
+	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
 	
 	// MAP MENU
 	newMapAction = new QAction(tr("&New Map"), this);

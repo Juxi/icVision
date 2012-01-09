@@ -67,7 +67,7 @@ bool ControlThread::waitForMotion()
 
 bool ControlThread::isOnMap()
 {
-	//printf("called isOnMap()\n");
+	printf("------------------------------------------------------------------------\n");
 	
 	std::vector<double> p = robot->getCurrentPose();
 	Roadmap::vertex_t	v = map->nearestVertex(p);
@@ -84,13 +84,13 @@ bool ControlThread::isOnMap()
 		  ++i, ++j
 		 )
 	{
-		printf("abs(%f - %f) = %f",*i,*j,qAbs(*i-*j));
+		printf("abs(%f - %f) = %f ",*i,*j,qAbs(*i-*j));
 		if ( qAbs(*i-*j) > 5.0 )
 			return 0;
 	}
 	
 	map->setCurrentVertex( v );
-	printf("robot is on the map\n");
+	printf(" robot is on the map\n");
 	return robot->setWaypoint();
 }
 

@@ -125,6 +125,19 @@ bool PartController::positionMove( const std::vector<double>& poss )
 	return positionMove(poss);
 }*/
 
+
+bool PartController::setRefVels( int v )
+{
+	if (!pos) return 0;
+	double vels[getNumJoints()];
+	for (int i = 0; i < getNumJoints(); i++)
+	{
+		vels[i] = (double)v;
+	}
+	return pos->setRefSpeeds( vels );
+}
+
+
 bool PartController::setJointMask( const std::vector<bool>& vals )
 {
 	if ( vals.size() != (unsigned int)numJoints ) { return 0; }
