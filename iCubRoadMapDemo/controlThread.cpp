@@ -84,7 +84,8 @@ bool ControlThread::isOnMap()
 		  ++i, ++j
 		 )
 	{
-		if ( qAbs(*i-*j) > 1 )
+		printf("abs(%f - %f) = %f",*i,*j,qAbs(*i-*j));
+		if ( qAbs(*i-*j) > 5.0 )
 			return 0;
 	}
 	
