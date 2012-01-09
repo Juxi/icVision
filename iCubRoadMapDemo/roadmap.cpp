@@ -223,6 +223,9 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
 			map[edge.first].length = it->second;
 			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
+			emit appendedEdge( edge.first, 
+							  map[p.vertex].qtGraphNode ,
+							  map[it->first.vertex].qtGraphNode );
 		}
 	}
 }
