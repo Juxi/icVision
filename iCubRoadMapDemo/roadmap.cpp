@@ -82,16 +82,18 @@ std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
 	}
 }*/
 
-Roadmap::vertex_t Roadmap::insert( std::vector<double> _q /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
-	if ( _q.size() != dim ) { throw("wrong size state vector"); }
+	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
 	
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
+	//map[vertex].x = _x;
+	//map[vertex].y = _y;
 	
-	emit appendedNode( vertex );
+	emit appendedNode( vertex, _x, _y );
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -100,7 +102,7 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _q /*, unsigned int n*/ )
 	// connect it to its n nearest neighbors
 	//graphConnect( p, n );
 	
-	//printf("inserted");
+	printf("inserted");
 	return vertex;
 }
 
@@ -115,7 +117,17 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 	
 	for ( v=graphNodes.begin(); v!=graphNodes.end(); ++v )
 	{
-		vertex = insert(*v);
+		std::cout << "inserting: " << *(v->begin()) << " " << *(v->begin()+1) << " - ";
+		
+		std::vector<double> q( v->begin()+2, v->end() );
+		for ( std::vector<double>::iterator j = q.begin(); j !=q.end(); ++j )
+			std::cout << *j << " ";
+		std::cout << std::endl;
+		
+		vertex = insert( *(v->begin()),
+						 *(v->begin()+1),
+						 q
+						);
 		vertices.push_back( vertex );
 	}
 	
@@ -135,10 +147,9 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 			emit appendedEdge( edge.first, 
 							   map[vertices.at(e->first)].qtGraphNode ,
 							   map[vertices.at(e->second)].qtGraphNode );
-	
 		}
 	}
-	
+	printf("loaded file: %d nodes, %d edges\n",graphNodes.size(),graphEdges.size());
 }
 
 void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges )
@@ -149,7 +160,16 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
 		map[*(vp.first)].idx = count;
-		graphNodes->push_back( map[*(vp.first)].q );
+		std::vector<qreal> thisLine;
+		if ( map[*(vp.first)].qtGraphNode ) {
+			thisLine.push_back( map[*(vp.first)].qtGraphNode->getNormX() );
+			thisLine.push_back( map[*(vp.first)].qtGraphNode->getNormY() );
+		} else {
+			thisLine.push_back( 0.0 );
+			thisLine.push_back( 0.0 );
+		}
+		thisLine.insert(thisLine.end(), map[*(vp.first)].q.begin(), map[*(vp.first)].q.end());
+		graphNodes->push_back( thisLine );
 		count ++;
 	}
 	
@@ -201,14 +221,8 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 		if ( it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
 		{
 			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-			//widget.addEdge (map[p.vertex].qtGraphNode , map[it->first.vertex].qtGraphNode );
-			
-			//emit appendedEdge( edge.first, map[p.vertex].qtGraphNode , map[it->first.vertex].qtGraphNode );
-			
 			map[edge.first].length = it->second;
-			//put(edge_weight, map,edge.first , map[edge.first].length);
-			std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
-			
+			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
 		}
 	}
 }

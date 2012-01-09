@@ -61,7 +61,7 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
 	
-	connect( &roadmap, SIGNAL(appendedNode(vertex_t)),							&graphWidget, SLOT(addNode(vertex_t)));
+	connect( &roadmap, SIGNAL(appendedNode(vertex_t, qreal, qreal)),			&graphWidget, SLOT(addNode(vertex_t, qreal, qreal)));
 	connect( &roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	&graphWidget, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
 	
 	connect( &graphWidget, SIGNAL(newQtGraphNode(vertex_t,QtGraphNode*)),		&roadmap, SLOT(setQtGraphNode( vertex_t, QtGraphNode* )));
@@ -90,15 +90,6 @@ void MainWindow::resizeEvent( QResizeEvent* event )
 	emit resizedMainWindow(event);
 }
 
-void MainWindow::connectMap()
-{
-	bool ok;
-	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
-								tr("Number of Neighbors:"), 3, 1, 100, 1, &ok);
-	if (ok)
-		roadmap.graphConnect(i);
-}
-
 void MainWindow::connectToRobot()
 {
 	bool ok;
@@ -117,9 +108,19 @@ void MainWindow::connectToRobot()
 	}
 }
 
+void MainWindow::disconnectFromRobot()
+{
+	iCub.close();
+}
+
 void MainWindow::explore()
 {
-	ctrlThread.start();
+	ctrlThread.restart();
+}
+
+void MainWindow::stopController()
+{
+	ctrlThread.stop();
 }
 
 //! [3]
@@ -230,7 +231,7 @@ void MainWindow::loadMap()
 				p.clear();
 				
 				// put the line into a std::vector and don't worry about number of entries
-				for ( int i=0; i < roadmap.dimensionality(); i++)
+				for ( int i=0; i < roadmap.dimensionality()+2; i++)
 				{
 					if ( !lineStream.atEnd() ) {
 						lineStream >> n;
@@ -239,7 +240,7 @@ void MainWindow::loadMap()
 						p.push_back(0.0);
 					}
 				}
-				if ( p.size() != roadmap.dimensionality() )
+				if ( p.size() != roadmap.dimensionality()+2 )
 				{
 					printf("file parse error. wrong size point.");
 					return;
@@ -266,17 +267,49 @@ void MainWindow::loadMap()
 		printf("loaded file: %d nodes, %d edges\n",graphNodes.size(),graphEdges.size());
 		roadmap.load( graphNodes, graphEdges );
 		
-		sleep(2);
-		
-		roadmap.project2D();
-		
 		file.close();
 	}
+}
+
+void MainWindow::connectMap()
+{
+	bool ok;
+	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+								 tr("Number of Neighbors:"), 3, 1, 100, 1, &ok);
+	if (ok)
+		roadmap.graphConnect(i);
+}
+
+void MainWindow::projectMap()
+{
+	roadmap.project2D();
 }
 
 //! [4]
 void MainWindow::createActions()
 {
+	// CONTROLLER MENU
+	connectToRobotAction = new QAction(tr("&Connect To Robot"), this);
+	connectToRobotAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	connectToRobotAction->setStatusTip(tr("Connect to an iCub Robot"));
+	connect(connectToRobotAction, SIGNAL(triggered()), this, SLOT(connectToRobot()));
+	
+	disconnectFromRobotAction = new QAction(tr("&Disconnect From Robot"), this);
+	disconnectFromRobotAction->setShortcut( QKeySequence(tr("Ctrl+D")) );
+	disconnectFromRobotAction->setStatusTip(tr("Disconnect from the iCub"));
+	connect(disconnectFromRobotAction, SIGNAL(triggered()), this, SLOT(disconnectFromRobot()));
+	
+	stopControllerAction = new QAction(tr("&Stop Controller"), this);
+	stopControllerAction->setShortcut( QKeySequence(tr("Ctrl+X")) );
+	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
+	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
+	
+	exploreAction = new QAction(tr("&Explore"), this);
+	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
+	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
+	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
+	
+	// MAP MENU
 	newMapAction = new QAction(tr("&New Map"), this);
 	newMapAction->setShortcuts(QKeySequence::New);
     newMapAction->setStatusTip(tr("Create a new Roadmap"));
@@ -293,44 +326,31 @@ void MainWindow::createActions()
     connect(saveMapAction, SIGNAL(triggered()), this, SLOT(saveMap()));
 	
 	connectMapAction = new QAction(tr("&Connect Map"), this);
-	//connectMapAction->setShortcuts(QKeySequence::Save);
-    connectMapAction->setStatusTip(tr("Connect Nodes"));
+	connectMapAction->setShortcut( QKeySequence(tr("Ctrl+C")) );
+    connectMapAction->setStatusTip(tr("Connect Nodes to their N nearest neighbors"));
     connect(connectMapAction, SIGNAL(triggered()), this, SLOT(connectMap()));
 	
-	
-	connectToRobotAction = new QAction(tr("&Connect To Robot"), this);
-	//connectToRobotAction->setShortcuts(Qt::ALT, Qt::Key_R);
-	connectToRobotAction->setStatusTip(tr("Connect to an iCub Robot"));
-	connect(connectToRobotAction, SIGNAL(triggered()), this, SLOT(connectToRobot()));
-	
-	
-	exploreAction = new QAction(tr("&Explore"), this);
-	//exploreAction->setShortcuts(Qt::ALT, Qt::Key_R);
-	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
-	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
-	
-	/*disconnectFromRobotAction = new QAction(tr("&Disconnect From Robot"), this);
-	//disconnectFromRobotAction->setShortcuts(Qt::ALT, Qt::Key_D);
-	disconnectFromRobotAction->setStatusTip(tr("Connect to an iCub Robot"));
-	connect(disconnectFromRobotAction, SIGNAL(triggered()), this, SLOT(disconnectFromRobot()));
-	*/
-
+	projectMapAction = new QAction(tr("&Project Map"), this);
+	projectMapAction->setShortcut( QKeySequence(tr("Ctrl+P")) );
+    projectMapAction->setStatusTip(tr("Make a new 2D map projection"));
+    connect(projectMapAction, SIGNAL(triggered()), this, SLOT(projectMap()));
 }
 //! [7]
 
 //! [8]
 void MainWindow::createMenus()
 {
-//! [9] //! [10]
-    fileMenu = menuBar()->addMenu(tr("&File"));
-	fileMenu->addAction(newMapAction);
-	fileMenu->addAction(loadMapAction);
-	fileMenu->addAction(saveMapAction);
-	fileMenu->addAction(connectMapAction);
-	
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
+	controllerMenu->addAction(disconnectFromRobotAction);
 	controllerMenu->addAction(exploreAction);
+	controllerMenu->addAction(stopControllerAction);
 	
+    mapMenu = menuBar()->addMenu(tr("&Map"));
+	mapMenu->addAction(newMapAction);
+	mapMenu->addAction(loadMapAction);
+	mapMenu->addAction(saveMapAction);
+	mapMenu->addAction(connectMapAction);
+	mapMenu->addAction(projectMapAction);
 }
 //! [12]

@@ -68,6 +68,9 @@ NewMapDialog::NewMapDialog()
 void NewMapDialog::insertSample( std::vector<double> p )
 {
 	QString thisline;
+	thisline.append( QString("%1 ").arg( (double)rand()/(double)RAND_MAX ) );
+	thisline.append( QString("%1 ").arg( (double)rand()/(double)RAND_MAX ) );
+	
 	std::vector<double>::iterator i;
 	for ( i = p.begin(); i!=p.end(); ++i )
 	{
@@ -129,9 +132,9 @@ void NewMapDialog::createMenu()
 {
     menuBar = new QMenuBar;
 
-    fileMenu = new QMenu(tr("&File"), this);
-    exitAction = fileMenu->addAction(tr("E&xit"));
-    menuBar->addMenu(fileMenu);
+    mapMenu = new QMenu(tr("&File"), this);
+    exitAction = mapMenu->addAction(tr("E&xit"));
+    menuBar->addMenu(mapMenu);
 
     connect(exitAction, SIGNAL(triggered()), this, SLOT(accept()));
 }

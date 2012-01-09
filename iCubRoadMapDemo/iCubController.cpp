@@ -41,6 +41,7 @@ bool iCubController::isValid()
 
 void iCubController::close()
 {
+	filterRpc.close();
 	torso.close();
 	left_arm.close();
 	right_arm.close();

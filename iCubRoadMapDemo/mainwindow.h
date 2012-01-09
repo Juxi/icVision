@@ -79,10 +79,12 @@ private slots:
 	void loadMap();
 	void saveMap();
 	void connectMap();
+	void projectMap();
 	
 	void connectToRobot();
+	void disconnectFromRobot();
 	void explore();
-	//void disconnectFromRobot();
+	void stopController();
 
 //! [1]
 
@@ -93,16 +95,18 @@ private:
 //! [2]
 
 //! [3]
-    QMenu *fileMenu;
+    QMenu *mapMenu;
 	QAction *newMapAction;
 	QAction *loadMapAction;
 	QAction *saveMapAction;
 	QAction *connectMapAction;
+	QAction *projectMapAction;			////
 	
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
+	QAction *disconnectFromRobotAction; ////
 	QAction *exploreAction;
-	QAction *disconnectFromRobotAction;
+	QAction *stopControllerAction;		////
 
 	iCubController	iCub;
 	Roadmap			roadmap;

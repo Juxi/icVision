@@ -29,8 +29,8 @@ public:
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
 	
-	void start();
-	//void restart();
+	//void start();
+	void restart();
 	void stop();
 
 protected:
@@ -40,7 +40,7 @@ protected:
 	
 	iCubController* robot;
 	Roadmap* map;
-	bool keepRunning;
+	volatile bool keepRunning;
 	
 	void run();
 

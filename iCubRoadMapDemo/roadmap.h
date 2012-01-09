@@ -47,8 +47,9 @@ private:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
+		qreal x,y;
 		
-		Vertex() : qtGraphNode(NULL), type(NULL) {}
+		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
 	};
 	
 	struct Edge {
@@ -151,7 +152,7 @@ public:
 	void setCurrentVertex( vertex_t );
 	void setEdgeColor( edge_t, QColor );
 	
-	vertex_t insert( std::vector<double> _q /*, unsigned int n = 0*/ );
+	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
@@ -179,7 +180,7 @@ public:
 	
 signals:
 	
-	void appendedNode( vertex_t );
+	void appendedNode( vertex_t, qreal, qreal );
 	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
 	void update2DPosition( QtGraphNode*, QPointF );
 	void newNodeColor( QtGraphNode*, QColor, QColor );

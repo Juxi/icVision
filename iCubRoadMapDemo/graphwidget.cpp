@@ -67,11 +67,12 @@ GraphWidget::GraphWidget()
 	timer.start(100);
 }
 
-void GraphWidget::addNode( Roadmap::vertex_t n )
+void GraphWidget::addNode( Roadmap::vertex_t n, qreal _x, qreal _y )
 {
 	QtGraphNode* node = new QtGraphNode(this);
 	nodes << node;
 	scene()->addItem(node);
+	node->setNormPos(QPointF(_x,_y));
 	emit newQtGraphNode(n,node);
 	//printf("added node to graph\n");
 }

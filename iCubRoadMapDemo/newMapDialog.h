@@ -86,7 +86,7 @@ private:
 	QGroupBox *verticalGroupBox;
 	QGroupBox *horizontalGroupBox;
 
-    QMenu *fileMenu;
+    QMenu *mapMenu;
     QAction *exitAction;
 };
 //! [0]

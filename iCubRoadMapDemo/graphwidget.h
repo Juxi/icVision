@@ -66,7 +66,7 @@ public:
 
 public slots:
 	
-	void addNode( vertex_t );
+	void addNode( vertex_t, qreal, qreal );
 	void addEdge( edge_t, QtGraphNode* a, QtGraphNode* b );
 	void resize( QResizeEvent* event );
 	

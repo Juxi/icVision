@@ -70,6 +70,9 @@ public:
 	
 	// these need to be thread safe
 	void setNormPos(const QPointF);
+	qreal getNormX() { return normPos.x(); }
+	qreal getNormY() { return normPos.y(); }
+	
 	void setColor( QColor c1, QColor c2 );
 	//bool reRenderMe() { return changed; }
 	

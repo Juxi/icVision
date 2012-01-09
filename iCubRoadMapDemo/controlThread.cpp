@@ -1,14 +1,6 @@
 #include "controlThread.h"
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), map(_map), keepRunning(true)
-{
-}
-
-ControlThread::~ControlThread()
-{
-}
-
-void ControlThread::start()
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), map(_map), keepRunning(false)
 {
 	vSkinStatus.open("/statusOut");
 	if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -16,13 +8,22 @@ void ControlThread::start()
 		printf("failed to connect to robot filter status port\n");
 		return;
 	}
+}
+
+ControlThread::~ControlThread()
+{
+	vSkinStatus.close();
+		int one = 1;
+}
+
+void ControlThread::restart()
+{
+	if (isRunning())
+		stop();
 	
-	if ( !gotoNearest() )
-	{ 
-		printf("Failed to move iCub onto the roadmap\n");
-		return;
-	}
+	printf("starting iCub Roadmap Controller\n");
 		
+	keepRunning = true;
 	QThread::start();
 }
 
@@ -42,7 +43,6 @@ bool ControlThread::gotoNearest()
 		return false;
 	}
 	
-	printf("iCub is on the roadmap\n");
 	return true;
 }
 
@@ -53,6 +53,11 @@ bool ControlThread::waitForMotion()
 	while ( !flag ) { 
 		if ( !robot->checkMotionDone(&flag) )
 			return false;
+		if ( !keepRunning )
+		{
+			printf("broke waitForMotion()\n");
+			return false;
+		}
 		printf(".");
 		msleep(20);
 	}
@@ -75,6 +80,7 @@ bool ControlThread::isOnMap()
 	if ( (b-a).squared_length() < 5.0 )
 	{
 		map->setCurrentVertex( v );
+		printf("robot is on the map\n");
 		return robot->setWaypoint();
 	}
 	return 0;
@@ -82,7 +88,15 @@ bool ControlThread::isOnMap()
 
 void ControlThread::run()
 {
+	//yarp::os::Port vSkinStatus;
 	yarp::os::Bottle b;
+	
+	printf("Moving iCub to the nearest state on the map\n");
+	if ( !gotoNearest() )
+	{ 
+		return;
+	}
+	
 	while ( keepRunning )
 	{
 		// try to control the robot only when the Virtual Skin Proxy is open
@@ -109,6 +123,7 @@ void ControlThread::run()
 				// if we got a valid action, try it out
 				if ( thisMove.second.size() > 0 )
 				{
+					printf("*** TAKING A RANDOM ACTION ***\n");
 					map->setEdgeColor( thisMove.first, Qt::yellow );	// mark the currently selected action on the
 					robot->positionMove( thisMove.second );		// move the robot
 					
@@ -126,15 +141,28 @@ void ControlThread::run()
 				}
 			}
 		}
-		//else { printf("."); }
+		//printf("@");
 		msleep(100);
 	}
+	//vSkinStatus.interrupt();
+	
+	//yarp.disconnect("/filterStatus","/statusOut",false);
+	printf("*** RUN METHOD RETURNED ***\n");
 }
 
 void ControlThread::stop()
 {
+	//robot->stop();
 	keepRunning = false;
-	while ( isRunning() ) { msleep(20); }
+	printf("shutting down control thread\n");
+	wait();
+	/*while ( isRunning() )
+	{ 
+		printf("*");
+		msleep(100);
+	}*/
+	printf("\n");
+	printf("stopped the controller\n");
 }
 
 /*Roadmap::edge_t ControlThread::randomMove()
