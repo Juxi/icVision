@@ -71,19 +71,26 @@ bool ControlThread::isOnMap()
 	
 	std::vector<double> p = robot->getCurrentPose();
 	Roadmap::vertex_t	v = map->nearestVertex(p);
-	Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
-	Roadmap::CGAL_Point b = map->getCgalPose( v );
+	//Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
+	Roadmap::CGAL_Point q = map->getCgalPose( v );
 	
 	//std::cout << "a: " << a << std::endl;
 	//std::cout << "b: " << b << std::endl;
 	
-	if ( (b-a).squared_length() < 5.0 )
+	std::vector<double>::iterator i;
+	Roadmap::CGAL_Point::Cartesian_const_iterator j;
+	for ( i = p.begin(), j = q.cartesian_begin();
+		  i != p.end() && j != q.cartesian_end();
+		  ++i, ++j
+		 )
 	{
-		map->setCurrentVertex( v );
-		printf("robot is on the map\n");
-		return robot->setWaypoint();
+		if ( qAbs(*i-*j) > 1 )
+			return 0;
 	}
-	return 0;
+	
+	map->setCurrentVertex( v );
+	printf("robot is on the map\n");
+	return robot->setWaypoint();
 }
 
 void ControlThread::run()
