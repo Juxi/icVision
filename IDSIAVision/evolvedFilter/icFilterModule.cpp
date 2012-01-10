@@ -181,26 +181,39 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
-	// connect to rpc
+//	// connect to rpc	
+//	// check whether we have F or not!! TODO
+//	std::string clientPortName = "/evolvedfilter";
+//	clientPortName += "/world-client";
+//	if(! port.open( clientPortName.c_str() )){
+//		return false;
+//	}
+//	
+//	inputPortName = "/world";	
+//	//	inputPortName += robotName; 
+//	//	inputPortName += "F/world";
+//	
+//	// trying to connect to the rpc server (world interface)
+//	printf("Trying to connect to %s\n", inputPortName.c_str());
+//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+//		std::cout << getName() << ": Unable to connect to port "; 
+//		std::cout << inputPortName.c_str() << std::endl;
+//		return false;
+//	}	
 	
-	// check whether we have F or not!! TODO
-	std::string clientPortName = "/evolvedfilter";
-	clientPortName += "/world-client";
-	if(! port.open( clientPortName.c_str() )){
-		return false;
-	}
+	portIKinIn = new BufferedPort<Vector>;
+	portIKinIn->open("/cubeDetector/iKinIn");
+	Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
+	portIKinIn->setStrict(true);
 	
-	inputPortName = "/world";	
-	//	inputPortName += robotName; 
-	//	inputPortName += "F/world";
+	portIKinOut = new BufferedPort<Bottle>;
+	portIKinOut->open("/cubeDetector/iKinOut");
+	Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
+	portIKinOut->setStrict(true);
 	
-	// trying to connect to the rpc server (world interface)
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port "; 
-		std::cout << inputPortName.c_str() << std::endl;
-		return false;
-	}	
+	
+	
+	
 	
 	return true ;      // let the RFModule know everything went well
 }
