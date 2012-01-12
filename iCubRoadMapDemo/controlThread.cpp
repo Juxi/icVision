@@ -83,13 +83,18 @@ bool ControlThread::isOnMap()
 	//std::cout << "a: " << a << std::endl;
 	//std::cout << "b: " << b << std::endl;
 	
-	if ( (b-a).squared_length() < 5.0 )
+	Roadmap::CGAL_Point::Cartesian_const_iterator i,j;
+	for ( i=a.cartesian_begin(), j=b.cartesian_begin();
+		  i!=a.cartesian_end() && j!=b.cartesian_end();
+		  ++i, ++j )
 	{
-		printf("robot is on the roadmap\n");
-		roadmap->setCurrentVertex( v );
-		return robot->setWaypoint();
+		if ( *i-*j > 5 )
+			return false;
 	}
-	return 0;
+	
+	printf("robot is on the roadmap\n");
+	roadmap->setCurrentVertex( v );
+	return robot->setWaypoint();
 }
 
 void ControlThread::run()
@@ -176,13 +181,13 @@ void ControlThread::multipleEdgeMove()
 			Roadmap::out_edge_i e, e_end;
 			tie(e, e_end) = out_edges( i->second, roadmap->map );
 			
-			if ( e == e_end || !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
-				motionInterrupted = true;
-			}
-			else {
+			//if ( /*e == e_end || */
+			//	 !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
+			//	 motionInterrupted = true;
+			//} else {
 				robot->positionMove(roadmap->map[i->second].q);
 				motionInterrupted = !waitForMotion();
-			}
+			//}
 
 			if ( !motionInterrupted ) {
 				std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
