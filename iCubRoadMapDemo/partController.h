@@ -36,7 +36,7 @@ public:
 	
 	bool stop();												//!< Stops all joints immediately
 	
-	bool setRefVels( int );
+	bool isWithinLimits( const std::vector<double>& poss );
 	bool positionMove( const std::vector<double>& poss );
 	//bool positionMove( const std::vector<double>& poss, const std::vector<double>& vels );		//!< Moves the device to a specified position
 

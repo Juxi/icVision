@@ -69,16 +69,6 @@ int	iCubController::getNumJoints()
 	return torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints();
 }
 
-
-bool iCubController::setRefVels( int v )
-{
-	bool ok = true;
-	if (!torso.setRefVels(v)) ok = false;
-	if (!left_arm.setRefVels(v)) ok = false;
-	if (!right_arm.setRefVels(v)) ok = false;
-	return ok;
-}
-
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }
@@ -149,7 +139,7 @@ std::vector<double> iCubController::getRandomPose()
 	return q;
 }
 
-
+//TODO This should pass by reference and return a bool
 std::vector<double> iCubController::getCurrentPose()
 {
 	std::vector<double> q = torso.getCurrentPose(),

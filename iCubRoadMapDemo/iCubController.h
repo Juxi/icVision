@@ -36,7 +36,6 @@ public:
 	
 	bool stop();							//!< Stops all joints immediately
 	
-	bool setRefVels( int );
 	bool positionMove( std::vector<double> );		//!< Moves the device to a specified position
 	bool setJointMask( std::vector<bool> );
 	

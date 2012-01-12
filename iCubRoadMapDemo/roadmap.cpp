@@ -74,6 +74,25 @@ std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
 	return result;
 }
 
+std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
+{
+	std::list< std::pair< edge_t, vertex_t > > result;
+	if ( num_vertices( map ) > 0 )
+	{
+		vertex_t rand_vertex = (vertex_t)(rand() % (int)num_vertices(map));
+		std::list<Map::vertex_descriptor> vertex_list = shortestPath( currentVertex, rand_vertex );
+		for ( std::list<Map::vertex_descriptor>::iterator i = vertex_list.begin(); i != vertex_list.end(); )
+		{
+			vertex_t a = *i;
+			vertex_t b = *(++i);
+			std::pair<edge_t,bool> ab = edge(a,b,map);
+			if (ab.second)
+				result.push_back( std::pair< edge_t, vertex_t >( ab.first, b ) );
+		}
+	}
+	return result;
+}
+
 /*void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
 {
 	for ( unsigned int j=0; j<numVertices; j++ )
@@ -266,11 +285,24 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	
 	std::list<vertex_t> path;
 	path.push_front(to);
-
+	
 	while ( path.front() != from )
 	{
+		if ( parents[path.front()] == path.front() )
+		{
+			printf("target pose unreachable. no path through the graph\n");
+			break;
+		}
 		path.push_front(parents[path.front()]);
 	}
+	
+	printf("path: ");
+	for (std::list<vertex_t>::iterator i = path.begin(); i != path.end(); ++i )
+	{
+		printf("%d ",*i);
+	}
+	printf("\n");
+	
 	
 	return path;
 }

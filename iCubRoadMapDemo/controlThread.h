@@ -39,11 +39,12 @@ protected:
 	yarp::os::Port vSkinStatus;
 	
 	iCubController* robot;
-	Roadmap* map;
+	Roadmap* roadmap;
 	volatile bool keepRunning;
 	
 	void run();
-
+	void singleEdgeMove();
+	void multipleEdgeMove();
 };
 #endif
 /** @} */

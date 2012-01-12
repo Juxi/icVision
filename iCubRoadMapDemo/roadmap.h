@@ -144,6 +144,7 @@ public:
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
 	
 	std::pair< edge_t, std::vector<double> > randomMove();
+	std::list< std::pair< edge_t, vertex_t > > randomMoves();
 	
 	
 	int dimensionality() { return dim; }
