@@ -69,6 +69,22 @@ int	iCubController::getNumJoints()
 	return torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints();
 }
 
+bool iCubController::isWithinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> torsoPoss, leftPoss, rightPoss;
+	if ( !chop( poss, torsoPoss, leftPoss, rightPoss ) ) {
+		printf("chop failed\n");
+		return false;
+	}
+	
+	if ( !torso.isWithinLimits(torsoPoss) ||
+		!left_arm.isWithinLimits(leftPoss) ||
+		!right_arm.isWithinLimits(rightPoss) )
+		return false;
+	
+	return true;
+}
+
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }

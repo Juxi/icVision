@@ -115,8 +115,15 @@ void ControlThread::run()
 			}
 			else
 			{
-				//singleEdgeMove();
-				multipleEdgeMove();
+				Roadmap::out_edge_i e, e_end;
+				tie(e, e_end) = out_edges( roadmap->currentVertex, roadmap->map );
+				if ( e == e_end ) {
+					printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+					keepRunning = false;
+				} else {
+					//singleEdgeMove();
+					multipleEdgeMove();
+				}
 			}
 		}
 		msleep(100);
@@ -166,10 +173,17 @@ void ControlThread::multipleEdgeMove()
 	{
 		if ( !motionInterrupted )
 		{
-			robot->positionMove(roadmap->map[i->second].q);
-			motionInterrupted = !waitForMotion();
-			//!move(i->second);
+			Roadmap::out_edge_i e, e_end;
+			tie(e, e_end) = out_edges( i->second, roadmap->map );
 			
+			if ( e == e_end || !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
+				motionInterrupted = true;
+			}
+			else {
+				robot->positionMove(roadmap->map[i->second].q);
+				motionInterrupted = !waitForMotion();
+			}
+
 			if ( !motionInterrupted ) {
 				std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
 				roadmap->setEdgeColor( i->first, Qt::green ); 

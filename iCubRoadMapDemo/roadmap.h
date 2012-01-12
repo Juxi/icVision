@@ -136,6 +136,7 @@ public:
 	typedef Map::vertex_iterator vertex_i;
 	typedef Map::edge_descriptor edge_t;
 	typedef Map::edge_iterator edge_i;
+	typedef Map::out_edge_iterator out_edge_i;
 	
 	Roadmap();
 	~Roadmap();
