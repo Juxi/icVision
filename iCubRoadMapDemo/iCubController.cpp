@@ -85,6 +85,13 @@ bool iCubController::isWithinLimits( const std::vector<double>& poss )
 	return true;
 }
 
+void iCubController::setVelocity( int v )
+{
+	torso.setVelocity(v);
+	left_arm.setVelocity(v);
+	right_arm.setVelocity(v);
+}
+
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }

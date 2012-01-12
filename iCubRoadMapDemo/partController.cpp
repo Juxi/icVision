@@ -109,6 +109,17 @@ bool PartController::isWithinLimits( const std::vector<double>& poss )
 	return true;
 }
 
+void PartController::setVelocity( int v )
+{
+	double vels[numJoints];
+	for ( int i = 0; i < numJoints; i++ )
+	{
+		vels[i] = (double)v;
+	}
+	if( pos->setRefSpeeds(vels) )
+		printf("Set velocity succeeded\n");
+}
+
 bool PartController::positionMove( const std::vector<double>& poss )
 {
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
