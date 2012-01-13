@@ -181,25 +181,25 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
-//	// connect to rpc	
-//	// check whether we have F or not!! TODO
-//	std::string clientPortName = "/evolvedfilter";
-//	clientPortName += "/world-client";
-//	if(! port.open( clientPortName.c_str() )){
-//		return false;
-//	}
-//	
-//	inputPortName = "/world";	
-//	//	inputPortName += robotName; 
-//	//	inputPortName += "F/world";
-//	
-//	// trying to connect to the rpc server (world interface)
-//	printf("Trying to connect to %s\n", inputPortName.c_str());
-//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-//		std::cout << getName() << ": Unable to connect to port "; 
-//		std::cout << inputPortName.c_str() << std::endl;
-//		return false;
-//	}	
+	// connect to rpc	
+	// check whether we have F or not!! TODO
+	std::string clientPortName = "/evolvedfilter";
+	clientPortName += "/world-client";
+	if(! port.open( clientPortName.c_str() )){
+		return false;
+	}
+	
+	inputPortName = "/world";	
+	//	inputPortName += robotName; 
+	//	inputPortName += "F/world";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << getName() << ": Unable to connect to port "; 
+		std::cout << inputPortName.c_str() << std::endl;
+		return false;
+	}	
 	
 	portIKinIn = new BufferedPort<Vector>;
 	portIKinIn->open("/cubeDetector/iKinIn");
@@ -245,7 +245,7 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	cmd.addString("set");
 	cmd.addString(objName);
 	
-	//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
 	
 	cmd.addDouble(x);
 	cmd.addDouble(y);

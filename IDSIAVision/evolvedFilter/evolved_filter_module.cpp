@@ -365,17 +365,39 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	double estimatedX = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
 	double estimatedY = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0]);
 	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
-	double estimatedZ = 0;
+	double estimatedZ = -.075;	//15cm is the table right roughtly
 	
 	
 	
-	// tuesday jan 10
-	
-//	estimatedY = (0.13074341*x[10] + 0.017721422*x[2] + 0.13263743*x[8])*tanh(0.13074341*x[10] + 0.017721422*x[2] + 0.13263743*x[8]);
-//	estimatedX = 9.5463333 + 0.060173385*x[7] + 0.066696353*x[4] - 0.050383791*x[12] - 0.0086153438*x[1];
-	
-//	printf("%f %f\t", x[0],x[1]);
+//	///////
+//	// wed jan 11
+//	// misc1
+//	estimatedY = 2.4449713 + 0.45422038*pow(0.014661767*x[0] + 0.11048388*x[10] + 0.10637926*x[8], 1.4340008);
+//	estimatedX = 16.690353 + 0.12812519*x[7] + 0.14214782*x[4] - 0.11215064*x[12] - 0.017972222*x[1];
+//		
+//	// misc2
+//	estimatedX = 16.083103 + 0.12178416*x[7] + 0.13797964*x[4] - 0.10328569*x[12] - 0.017162004*x[1];
+//	estimatedY = 1.3739585 + 0.01655753*x[0] + 0.11799882*x[10] + 0.12334365*x[8] - 0.11540742*x[8]*pow(0.87538558, 0.25877491*x[0]);
+//	
+//	// misc3
+//	estimatedX = 16.776382 + 0.13043526*x[7] + 0.14312536*x[4] - 0.10902537*x[12] - 0.018313933*x[1];
+//	estimatedY = 1.9018469 + 0.014656176*x[0] + 0.12437823*x[10] + 0.11133261*x[8] + (0.11133261*x[8] + 0.057853397*x[0] - 15.825777)/x[12];3	
+//	//	printf("%f %f\t", x[0],x[1]);
 //	printf("%f %f\n ", x[2],x[3]);	
+	
+	///////
+	// thu jan 12
+	// includes last two days
+	estimatedX = 16.776382 + 0.13043526*x[7] + 0.14312536*x[4] - 0.10902537*x[12] - 0.018313933*x[1];
+	estimatedY = 1.9018469 + 0.014656176*x[0] + 0.12437823*x[10] + 0.11133261*x[8] + (0.11133261*x[8] + 0.057853397*x[0] - 15.825777)/x[12];	
+
+	
+	estimatedX = 17.453409 + 0.13380532*x[7] + 0.14905137*x[4] - 0.11798947*x[12] - 0.018469423*x[1];
+	estimatedY = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/pow(x[12], 0.18780835) + log(x[12]) - 2.1461744;
+	
+	
+	
+	
 	
 	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
@@ -383,7 +405,7 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	
 	estimatedY *= CellSize;
 	estimatedX *= CellSize;
-	estimatedZ *= CellSize;
+	//estimatedZ *= CellSize;
 	
 	double leftOffset = CellSize * 6 + 2.5;
 	double forwardOffset = 17.5;
@@ -395,7 +417,10 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	std::cout <<  "Predition x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
 	
 	// todo 
-	//setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+	// hacking from thurs 12 jan
+	estimatedX += 8.5;
+	estimatedY -= 6.5;
+	setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
 }
 
 void EvolvedFilterModule::readEncoderPositions() {
