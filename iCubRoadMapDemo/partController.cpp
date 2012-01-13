@@ -99,12 +99,21 @@ bool PartController::stop()
 
 bool PartController::isWithinLimits( const std::vector<double>& poss )
 {
-	if ( poss.size() != (unsigned int)numJoints ) { return 0; }
+	if ( poss.size() != (unsigned int)numJoints )
+	{ 
+		printf("PartController::isWithinLimits() received wrong sized position vector.");
+		return false;
+	}
 	
-	for ( int i = 0; i < numJoints; i++ )
-	{
-		if ( poss.at(i) < min.at(i) || poss.at(i) > max.at(i) )
+	for ( int i = 0; i < numJoints; i++ ) {
+		if ( poss.at(i) < min.at(i) || poss.at(i) > max.at(i) ) {
+			printf("body part vector out of range: ");
+			for ( int j = 0; j < numJoints; j++ ) {
+				printf("*j");
+			}
+			printf("\n");
 			return false;
+		}
 	}
 	return true;
 }

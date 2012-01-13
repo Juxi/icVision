@@ -1,4 +1,5 @@
 #include "controlThread.h"
+#include <QTime>
 
 ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), keepRunning(false)
 {
@@ -38,7 +39,7 @@ bool ControlThread::gotoNearest()
 		return 0;
 	
 	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
-	msleep(200);
+	msleep(500);
 	
 	if ( !waitForMotion() )
 		return 0;
@@ -55,17 +56,20 @@ bool ControlThread::gotoNearest()
 bool ControlThread::waitForMotion()
 {
 	printf("waiting for motion to finish\n");
+	QTime timer;
+	timer.start();
+	
 	bool flag = false;
 	while ( !flag ) { 
-		if ( !robot->checkMotionDone(&flag) )
+		if ( !robot->checkMotionDone(&flag) ||!keepRunning )
 			return false;
-		if ( !keepRunning )
+		else if ( timer.elapsed() > 10000)
 		{
-			printf("broke waitForMotion()\n");
+			printf("waitForMotion() timed out\n");
 			return false;
 		}
 		printf(".");
-		msleep(20);
+		msleep(100);
 	}
 	printf("\n");
 	return true;
@@ -75,26 +79,50 @@ bool ControlThread::isOnMap()
 {
 	//printf("called isOnMap()\n");
 	
-	std::vector<double> p = robot->getCurrentPose();
-	Roadmap::vertex_t	v = roadmap->nearestVertex(p);
-	Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
-	Roadmap::CGAL_Point b = roadmap->getCgalPose( v );
+	std::vector<double> a = robot->getCurrentPose();
+	Roadmap::vertex_t	v = roadmap->nearestVertex(a);
+	std::vector<double> b = roadmap->map[v].q;
 	
-	//std::cout << "a: " << a << std::endl;
-	//std::cout << "b: " << b << std::endl;
+	double err = maxDiff(a,b);
 	
-	Roadmap::CGAL_Point::Cartesian_const_iterator i,j;
-	for ( i=a.cartesian_begin(), j=b.cartesian_begin();
-		  i!=a.cartesian_end() && j!=b.cartesian_end();
-		  ++i, ++j )
+	if ( err > 5.0 )
 	{
-		if ( *i-*j > 5 )
-			return false;
+		printf("robot is not on the roadmap. maxErr: %f\n", err);
+		return false;
 	}
 	
-	printf("robot is on the roadmap\n");
+	//Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
+	//Roadmap::CGAL_Point b = roadmap->getCgalPose( v );
+
+	//Roadmap::CGAL_Point::Cartesian_const_iterator i,j;
+	//for ( i=a.cartesian_begin(), j=b.cartesian_begin();
+	//	  i!=a.cartesian_end() && j!=b.cartesian_end();
+	//	  ++i, ++j )
+	//{
+	//	if ( *i-*j > 5 )
+	//		return false;
+	//}
+	
+	printf("robot is on the roadmap. maxErr: %f\n", err);
 	roadmap->setCurrentVertex( v );
-	return robot->setWaypoint();
+	if ( !robot->setWaypoint() )
+		printf("failed to set waypoint in the VSkin history\n");
+	
+	return true;
+}
+
+double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
+{
+	double result = 0;
+	std::vector<double>::iterator i,j;
+	for ( i=a.begin(), j=b.begin();
+		  i!=a.end() && j!=b.end();
+		  ++i, ++j )
+	{
+		if ( *i-*j > result )
+			result = *i-*j;
+	}
+	return result;
 }
 
 void ControlThread::run()

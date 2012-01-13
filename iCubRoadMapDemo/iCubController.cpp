@@ -78,9 +78,11 @@ bool iCubController::isWithinLimits( const std::vector<double>& poss )
 	}
 	
 	if ( !torso.isWithinLimits(torsoPoss) ||
-		!left_arm.isWithinLimits(leftPoss) ||
-		!right_arm.isWithinLimits(rightPoss) )
+		 !left_arm.isWithinLimits(leftPoss) ||
+		 !right_arm.isWithinLimits(rightPoss) )
+	{
 		return false;
+	}
 	
 	return true;
 }
