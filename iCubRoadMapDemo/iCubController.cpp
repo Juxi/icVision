@@ -69,6 +69,40 @@ int	iCubController::getNumJoints()
 	return torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints();
 }
 
+std::vector<double>  iCubController::withinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> torsoPoss, leftPoss, rightPoss, result;
+	if ( !chop( poss, torsoPoss, leftPoss, rightPoss ) ) {
+		printf("chop failed\n");
+		return result;
+	}
+	
+	result = torso.withinLimits(torsoPoss);
+	leftPoss = left_arm.withinLimits(leftPoss);
+	rightPoss = right_arm.withinLimits(rightPoss);
+	
+	std::vector<double>::iterator i;
+	for ( i = leftPoss.begin(); i != leftPoss.end(); ++i )
+	{
+		result.push_back(*i);
+	}
+	for ( i = rightPoss.begin(); i != rightPoss.end(); ++i )
+	{
+		result.push_back(*i);
+	}
+	
+	if ( result.size() != (unsigned int)numJoints ) { result.clear(); }
+	
+	return result;
+}
+
+void iCubController::setVelocity( int v )
+{
+	torso.setVelocity(v);
+	left_arm.setVelocity(v);
+	right_arm.setVelocity(v);
+}
+
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }
@@ -139,7 +173,7 @@ std::vector<double> iCubController::getRandomPose()
 	return q;
 }
 
-
+//TODO This should pass by reference and return a bool
 std::vector<double> iCubController::getCurrentPose()
 {
 	std::vector<double> q = torso.getCurrentPose(),

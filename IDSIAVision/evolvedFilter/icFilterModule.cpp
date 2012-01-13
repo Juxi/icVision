@@ -181,8 +181,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
-	// connect to rpc
-	
+	// connect to rpc	
 	// check whether we have F or not!! TODO
 	std::string clientPortName = "/evolvedfilter";
 	clientPortName += "/world-client";
@@ -201,6 +200,20 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		std::cout << inputPortName.c_str() << std::endl;
 		return false;
 	}	
+	
+	portIKinIn = new BufferedPort<Vector>;
+	portIKinIn->open("/cubeDetector/iKinIn");
+	Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
+	portIKinIn->setStrict(true);
+	
+	portIKinOut = new BufferedPort<Bottle>;
+	portIKinOut->open("/cubeDetector/iKinOut");
+	Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
+	portIKinOut->setStrict(true);
+	
+	
+	
+	
 	
 	return true ;      // let the RFModule know everything went well
 }
@@ -232,7 +245,7 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	cmd.addString("set");
 	cmd.addString(objName);
 	
-	//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
 	
 	cmd.addDouble(x);
 	cmd.addDouble(y);

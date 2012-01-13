@@ -47,6 +47,14 @@ protected:
 	yarp::os::Network yarp;			//!< Identifies the yarp network
 	yarp::os::Port handlerPort; 	//!< The port to handle messages (e.g. quit)
 	
+	
+	
+	BufferedPort<Vector> *portIKinIn;
+	BufferedPort<Bottle> *portIKinOut;
+
+	
+	
+	
 	BufferedPort< ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
 	BufferedPort< ImageOf<PixelBgr> > rightInPort; 	//!< The port to handle incoming right eye images
 

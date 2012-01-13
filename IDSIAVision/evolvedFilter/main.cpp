@@ -26,9 +26,9 @@ int main(int argc, char * argv[]) {
 	std::string version = "v0.04";
 	printf("Launching IM-CLeVeR Evolved Filter (%s) Module [vision]...\n", version.c_str());
 	
-	EvolvedFilterModule* module = new RedBoxDetector();
+//	EvolvedFilterModule* module = new RedBoxDetector();
 //	EvolvedFilterModule* module = new GlassDetector();		
-//	EvolvedFilterModule* module = new BlueCupDetector();	
+	EvolvedFilterModule* module = new BlueCupDetector();	
 //	EvolvedFilterModule* module = new EvolvedFilterModule();	
 //	EvolvedFilterModule* module = new TeaBoxDetector();	
 	

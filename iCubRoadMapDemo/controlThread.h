@@ -25,9 +25,10 @@ public:
 	~ControlThread();
 	
 	bool gotoNearest();
-	bool isOnMap();
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
+	bool isOnMap();
+	double maxDiff(std::vector<double>,std::vector<double>);
 	
 	//void start();
 	void restart();
@@ -39,11 +40,12 @@ protected:
 	yarp::os::Port vSkinStatus;
 	
 	iCubController* robot;
-	Roadmap* map;
+	Roadmap* roadmap;
 	volatile bool keepRunning;
 	
 	void run();
-
+	void singleEdgeMove();
+	void multipleEdgeMove();
 };
 #endif
 /** @} */

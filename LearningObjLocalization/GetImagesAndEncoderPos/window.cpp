@@ -321,83 +321,130 @@ void Window::toggleTimer() {
 
 
 void Window::collectData() {
-	if(false /*iCubCtrl*/) {
+	bool usingKatana = false;
+	
+	int pointsPerRun = 1; //20;	// for katana learning
+	
+	if( usingKatana ) pointsPerRun = 20;
+	
+	// todo change
+	if(iCubCtrl) {
 		
-		btn_timer->setEnabled(false);
+		for(int collectedPoints = 0; collectedPoints < pointsPerRun; collectedPoints++) {
 		
-		std::cout << "Collecting Data! "<< std::endl;
-		float nextposehead[iCubCtrl->head->ctrl->getNumJoints()];
-		float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
-		
-		// stop it
-		iCubCtrl->head->ctrl->stop();
-		iCubCtrl->torso->ctrl->stop();
-		
-		// move to new position
-		// right now only joint 2 of head
-//		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
-		int posCnt = 0;
-		int numPoses = 3 * 3 * 4 * 4 * 4 * 5;
-		
-		// joints for the torso
-		for(float j0 = -15; j0 <= 15; j0+= 15) {
-			nextposetorso[0] = j0;			
 			
-			// bending sideways
-			for(float j1 = -10; j1 <= 10; j1+= 10) {		
-				nextposetorso[1] = j1;			
+			if( usingKatana ) {
+				/// talk to the katana
+				QTcpSocket* socket = new QTcpSocket();
+				socket->connectToHost("195.176.191.21", 5677);
 				
-				// tilt forward/backward
-				for(float v = 10; v <= 40; v+= 10) {
-					nextposetorso[2] = v;
-
-					moveTheRobot(nextposetorso);
-					// wait longer for the resetting
-					if(15 == v) sleep(5);	
-										
-					// HEAD up down
-					for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
-						nextposehead[0] = hj0;
-
-						// HEAD left right
-						//for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
-//							nextposehead[2] = hj2;
-							nextposehead[2] = 0;							
+				if( ! (socket->waitForConnected(20000)) )
+				{
+					printf("Unable to connect To Katana Server!\n");
+					return;				
+				}
+				else {
+					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
+					char buf[1] = { 'N' };
+					socket->write(buf, 1);
+					socket->flush();
+					
+					if(socket->waitForReadyRead(10000) == false) {
+						//timedout here;
+						std::cout << "socket timed out!! breaking! " <<std::endl;
+						return;
 						
-							// HEAD eyes up down
-							for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
-								nextposehead[3] = hj3;						
-							
-								// HEAD eyes left right
-								for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
-									posCnt++;
-									
-									nextposehead[4] = hj4;
-									
-									if(rand() % 50 != 0) continue;
-									printf("B.");
-									moveTheRobotHead(nextposehead);	
-									waitForMotionDone();
+					}
+					if(1 == socket->getChar(buf)) { 
+						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
+						printf(".. received %d", (int) *buf);
+					} else {
+						txt_BallPosition->setText( "Nothing_read!" );
+					}
+					
+					socket->disconnect();
+				}
+			}
+			
+			btn_timer->setEnabled(false);
+			
+			std::cout << "Collecting Data! (" << collectedPoints << ")" << std::endl;
+			float nextposehead[iCubCtrl->head->ctrl->getNumJoints()];
+			float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
+			
+			// stop it
+			iCubCtrl->head->ctrl->stop();
+			iCubCtrl->torso->ctrl->stop();
+			
+			// move to new position
+			// right now only joint 2 of head
+	//		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
+			int posCnt = 0;
+			int numPoses = 3 * 3 * 4 * 4 * 4 * 5;
+			
+			// joints for the torso
+			for(float j0 = -15; j0 <= 15; j0+= 15) {
+				nextposetorso[0] = j0;			
+				
+				// bending sideways
+				for(float j1 = -10; j1 <= 10; j1+= 10) {		
+					nextposetorso[1] = j1;			
+					
+					// tilt forward/backward
+					for(float v = 10; v <= 40; v+= 10) {
+						nextposetorso[2] = v;
 
-									getYarpStatus();			
-									writeCSV();	
+						moveTheRobot(nextposetorso);
+						// wait longer for the resetting
+						if(15 == v) sleep(5);	
+											
+						// HEAD up down
+						for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
+							nextposehead[0] = hj0;
+
+							// HEAD left right
+							//for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
+	//							nextposehead[2] = hj2;
+								nextposehead[2] = 0;							
+							
+								// HEAD eyes up down
+								for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
+									nextposehead[3] = hj3;						
+								
+									// HEAD eyes left right
+									for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
+										posCnt++;
+										
+										nextposehead[4] = hj4;
+										
+										if(rand() % 100 != 0) continue;
 									
-									printf("A   %d of %d = %3.2g percent\n", posCnt, numPoses, posCnt*1.0/(1.0*numPoses)*100.0);	
-									
+										moveTheRobotHead(nextposehead);	
+										waitForMotionDone();
+
+										getYarpStatus();			
+										writeCSV();	
+										
+										printf("%c   %d of %d = %3.2g percent\n", 'A' + collectedPoints, posCnt, numPoses, posCnt*1.0/(1.0*numPoses)*100.0);	
+										
+									}
 								}
-							}
-						//}	
+							//}	
+						}
 					}
 				}
 			}
+			
+			// move back to original pose
+			nextposetorso[0] = 0;
+			nextposetorso[1] = 0;
+			nextposetorso[2] = 15;		
+			moveTheRobot(nextposetorso);
+			waitForMotionDone();
+		
+		//ending for
 		}
-		
-		// move back to original pose
-		nextposetorso[0] = 0;
-		nextposetorso[1] = 0;
-		nextposetorso[2] = 15;		
-		moveTheRobot(nextposetorso);
-		
+				
 		btn_timer->setEnabled(true);
 		
 		// stop
@@ -407,8 +454,41 @@ void Window::collectData() {
 	}else{
 		// just record position and images and write to csv
 		
-		// HACK CHANGE for 100 times
-		for(int i = 0; i < 100; i++) {
+		// todo look at this!?!
+		for(int collectedPoints = 0; collectedPoints < 120; collectedPoints++) {
+			if( usingKatana ) {
+				/// talk to the katana
+				QTcpSocket* socket = new QTcpSocket();
+				socket->connectToHost("195.176.191.8", 5677);
+				
+				if( ! (socket->waitForConnected(20000)) )
+				{
+					printf("Unable to connect To Katana Server!\n");
+					return;				
+				}
+				else {
+					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
+					char buf[1] = { 'N' };
+					socket->write(buf, 1);
+					socket->flush();
+					
+					if(socket->waitForReadyRead(10000) == false) {
+						//timedout here;
+						std::cout << "socket timed out!! breaking! " <<std::endl;
+						return;
+						
+					}
+					if(1 == socket->getChar(buf)) { 
+						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
+						printf(".. received %d", (int) *buf);
+					} else {
+						txt_BallPosition->setText( "Nothing_read!" );
+					}
+					
+					socket->disconnect();
+				}
+			}
+			
 			getYarpStatus();			
 			writeCSV();	
 		}
@@ -442,29 +522,7 @@ void Window::getYarpStatus() {
 		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
 		
-		QTcpSocket* socket = new QTcpSocket();
-		socket->connectToHost("195.176.191.29", 5677);
-		
-		if( ! (socket->waitForConnected(20000)) )
-		{
-			printf("Unable to connect To Imap Server!\n");
-		}
-		else {
-			printf("Connection to simon(katana) \n");
-			char buf[1] = { 'N' };
-			socket->write(buf, 1);
-			socket->flush();
-			
-			socket->waitForReadyRead(-1);
-			if(1 == socket->getChar(buf)) 
-				txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
-			else {
-				txt_BallPosition->setText( "Nothing_read!" );
-			}
-			
-			socket->disconnect();
-		}
-		
+		//writeCSV();
 				
 	} else {
 		// error not connected

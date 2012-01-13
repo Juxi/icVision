@@ -51,6 +51,7 @@ bool PartController::open( const char* robotName, const char* partName )
 	
 	pos->getAxes(&numJoints);
 	
+	printf("\n");
 	double _min,_max;
 	for ( int i = 0; i < numJoints; i++ )
 	{
@@ -62,6 +63,8 @@ bool PartController::open( const char* robotName, const char* partName )
 		//jointMask.push_back(true);
 		min.push_back(_min);
 		max.push_back(_max);
+
+		printf("joint %d: min = %f max = %f\n",i,_min,_max);
 	}
 	
 	/* initialize random seed: */
@@ -97,15 +100,59 @@ bool PartController::stop()
 	return vel->stop();
 }
 
+std::vector<double> PartController::withinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> p;
+	if ( poss.size() != (unsigned int)numJoints )
+	{ 
+		printf("PartController::isWithinLimits() received wrong sized position vector.");
+		return p;
+	}
+	
+	double offset;
+	for ( int i = 0; i < numJoints; i++ ) {
+		offset = (max.at(i) - min.at(i))/20.0;
+		if ( poss.at(i) < min.at(i) + offset )
+			p.push_back( min.at(i) + offset );
+		else if ( poss.at(i) > max.at(i) - offset )
+			p.push_back( max.at(i) - offset );
+		else
+			p.push_back(poss.at(i));
+	}
+	return p;
+}
+
+void PartController::setVelocity( int v )
+{
+	double vels[numJoints];
+	for ( int i = 0; i < numJoints; i++ )
+	{
+		vels[i] = (double)v;
+	}
+	if( pos->setRefSpeeds(vels) )
+		printf("Set velocity succeeded\n");
+}
+
 bool PartController::positionMove( const std::vector<double>& poss )
 {
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
+	//if ( isWithinLimits(poss) || !pos ) { return 0; }
 	
 	double p[numJoints];
 	for ( int i=0; i<numJoints; i++ )
 	{
 		p[i] = poss.at(i);
 	}
+
+	/*double offset;
+	for ( int j = 0; j < numJoints; j++ ) {
+		offset = (max.at(j) - min.at(j))/20.0;
+		if ( p[j] < min.at(j) + offset )
+			p[j] = min.at(j) + offset;
+		else if ( p[j] > max.at(j) - offset )
+			p[j] = p[j] > max.at(j) - offset;
+	}*/
+
 	return pos->positionMove( p );
 }
 								  

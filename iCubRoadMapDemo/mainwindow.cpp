@@ -217,7 +217,8 @@ void MainWindow::loadMap()
 
 		/*** HANDLE VERTICES ***/
 		double n;				// dimension of p
-		std::vector<double> p;	// an n dimensional point
+		std::vector<double> p,
+							q;	// an n dimensional point
 		
 		//int count = 0;
 		while ( !in.atEnd() )
@@ -229,9 +230,10 @@ void MainWindow::loadMap()
 			{
 				QTextStream lineStream(&line);
 				p.clear();
+				q.clear();
 				
-				// put the line into a std::vector and don't worry about number of entries
-				for ( int i=0; i < roadmap.dimensionality()+2; i++)
+				// read the 2D position of the vertex for the graph visualization
+				/*for ( int j=0; j < 2; j++ )
 				{
 					if ( !lineStream.atEnd() ) {
 						lineStream >> n;
@@ -239,12 +241,44 @@ void MainWindow::loadMap()
 					} else {
 						p.push_back(0.0);
 					}
-				}
-				if ( p.size() != roadmap.dimensionality()+2 )
+				}*/
+
+				// read the DD point and don't worry about number of entries
+				for ( int i=0; i < roadmap.dimensionality()+2; i++)
 				{
-					printf("file parse error. wrong size point.");
-					return;
+					if ( !lineStream.atEnd() ) {
+						lineStream >> n;
+						if ( i < 2 )
+							p.push_back(n);
+						else 
+							q.push_back(n);
+					} else {
+						if ( i < 2 )
+							p.push_back(0.0);
+						else 
+							q.push_back(0.0);
+					}
 				}
+				printf("pSize = %d\n",p.size());
+				printf("qSize = %d\n",q.size());
+
+				//respect the robot's joint constraints
+				std::vector<double>::iterator k;
+				printf("qBefore: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+					q = iCub.withinLimits(q);
+				printf("qAfter: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+				// put q into p
+				for ( k = q.begin(); k!=q.end(); ++k )
+					p.push_back(*k);
+		
+				printf("totalSize = %d\n",p.size());
 				graphNodes.push_back(p);
 				//printf("lineCount: %d\n", count );
 				//count ++;
@@ -280,6 +314,15 @@ void MainWindow::connectMap()
 		roadmap.graphConnect(i);
 }
 
+void MainWindow::setVelocity()
+{
+	bool ok;
+	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+									   tr("Velocity:"), 2, 1, 100, 1, &ok);
+	if (ok)
+		iCub.setVelocity(i);
+}
+
 void MainWindow::projectMap()
 {
 	roadmap.project2D();
@@ -308,6 +351,11 @@ void MainWindow::createActions()
 	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
 	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
 	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
+	
+	setVelocityAction = new QAction(tr("&Set Velocity"), this);
+	setVelocityAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
+	setVelocityAction->setStatusTip(tr("Set the robot velocity for position moves"));
+	connect(setVelocityAction, SIGNAL(triggered()), this, SLOT(setVelocity()));
 	
 	// MAP MENU
 	newMapAction = new QAction(tr("&New Map"), this);
@@ -345,6 +393,7 @@ void MainWindow::createMenus()
 	controllerMenu->addAction(disconnectFromRobotAction);
 	controllerMenu->addAction(exploreAction);
 	controllerMenu->addAction(stopControllerAction);
+	controllerMenu->addAction(setVelocityAction);
 	
     mapMenu = menuBar()->addMenu(tr("&Map"));
 	mapMenu->addAction(newMapAction);

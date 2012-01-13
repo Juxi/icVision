@@ -1,6 +1,7 @@
 #include "controlThread.h"
+#include <QTime>
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), map(_map), keepRunning(false)
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), keepRunning(false)
 {
 	vSkinStatus.open("/statusOut");
 	if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -29,10 +30,16 @@ void ControlThread::restart()
 
 bool ControlThread::gotoNearest()
 {
-	Roadmap::vertex_t v = map->nearestVertex( robot->getCurrentPose() );
+	std::vector<double> p = robot->getCurrentPose();
+	if ( p.size() == 0 ) return false;
 	
-	if ( !robot->positionMove(map->getStdPose(v)) )
+	Roadmap::vertex_t v = roadmap->nearestVertex(p);
+	
+	if ( !robot->positionMove(roadmap->getStdPose(v)) )
 		return 0;
+	
+	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
+	msleep(500);
 	
 	if ( !waitForMotion() )
 		return 0;
@@ -49,17 +56,20 @@ bool ControlThread::gotoNearest()
 bool ControlThread::waitForMotion()
 {
 	printf("waiting for motion to finish\n");
+	QTime timer;
+	timer.start();
+	
 	bool flag = false;
 	while ( !flag ) { 
-		if ( !robot->checkMotionDone(&flag) )
+		if ( !robot->checkMotionDone(&flag) || !keepRunning )
 			return false;
-		if ( !keepRunning )
-		{
-			printf("broke waitForMotion()\n");
-			return false;
-		}
+		//else if ( timer.elapsed() > 10000)
+		//{
+		//	printf("waitForMotion() timed out\n");
+		//	return false;
+		//}
 		printf(".");
-		msleep(20);
+		msleep(100);
 	}
 	printf("\n");
 	return true;
@@ -69,21 +79,65 @@ bool ControlThread::isOnMap()
 {
 	//printf("called isOnMap()\n");
 	
-	std::vector<double> p = robot->getCurrentPose();
-	Roadmap::vertex_t	v = map->nearestVertex(p);
-	Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
-	Roadmap::CGAL_Point b = map->getCgalPose( v );
+	std::vector<double> a = robot->getCurrentPose();
+	Roadmap::vertex_t	v = roadmap->nearestVertex(a);
+	std::vector<double> b = roadmap->map[v].q;
 	
-	//std::cout << "a: " << a << std::endl;
-	//std::cout << "b: " << b << std::endl;
+				std::vector<double>::iterator k;
+				printf("current: ");
+				for ( k = a.begin(); k!=a.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+				printf("nearest: ");
+				for ( k = b.begin(); k!=b.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+	double err = maxDiff(a,b);
 	
-	if ( (b-a).squared_length() < 5.0 )
+	if ( err > 5.0 )
 	{
-		map->setCurrentVertex( v );
-		printf("robot is on the map\n");
-		return robot->setWaypoint();
+		printf("robot is not on the roadmap. maxErr: %f\n", err);
+		return false;
 	}
-	return 0;
+	
+	//Roadmap::CGAL_Point a( p.size(), p.begin(), p.end() );
+	//Roadmap::CGAL_Point b = roadmap->getCgalPose( v );
+
+	//Roadmap::CGAL_Point::Cartesian_const_iterator i,j;
+	//for ( i=a.cartesian_begin(), j=b.cartesian_begin();
+	//	  i!=a.cartesian_end() && j!=b.cartesian_end();
+	//	  ++i, ++j )
+	//{
+	//	if ( *i-*j > 5 )
+	//		return false;
+	//}
+	
+	printf("robot is on the roadmap. maxErr: %f\n", err);
+	roadmap->setCurrentVertex( v );
+	if ( !robot->setWaypoint() )
+		printf("failed to set waypoint in the VSkin history\n");
+	
+	return true;
+}
+
+double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
+{
+	double result = 0;
+	std::vector<double>::iterator i,j;
+	int count = 0;
+	for ( i=a.begin(), j=b.begin();
+		  i!=a.end() && j!=b.end();
+		  ++i, ++j )
+	{
+		if ( count < 10 || (count > 18 && count < 26) ) {
+			if ( *i-*j > result )
+				result = *i-*j;
+		}
+	count++;
+	}
+	return result;
 }
 
 void ControlThread::run()
@@ -91,7 +145,7 @@ void ControlThread::run()
 	//yarp::os::Port vSkinStatus;
 	yarp::os::Bottle b;
 	
-	printf("Moving iCub to the nearest state on the map\n");
+	printf("Moving iCub to the nearest state on the roadmap\n");
 	if ( !gotoNearest() )
 	{ 
 		return;
@@ -99,55 +153,102 @@ void ControlThread::run()
 	
 	while ( keepRunning )
 	{
-		// try to control the robot only when the Virtual Skin Proxy is open
 		vSkinStatus.read(b);
-		if (  b.get(0).asInt() != 1 )
-		{
+		if (  b.get(0).asInt() != 1 ) {	// try to control the robot only when the Virtual Skin Proxy is open
 			printf("Reflex behavior is active. Waiting for control of the robot.\n");
 		}
-		else
-		{
-			//printf("\n");
-			
-			// if the filter is open, the robot should be on the roadmap
-			if ( !isOnMap() )
-			{
+		else {
+			if ( !isOnMap() ) { // if the filter is open, the robot should be on its way back onto the roadmap
 				printf("The iCub is not on the roadmap. Waiting for reflex move to finish.\n");
-				//break;
 			}
 			else
 			{
-				// select a random action given our current location in the map
-				std::pair< Roadmap::edge_t, std::vector<double> > thisMove = map->randomMove();
-				
-				// if we got a valid action, try it out
-				if ( thisMove.second.size() > 0 )
-				{
-					printf("*** TAKING A RANDOM ACTION ***\n");
-					map->setEdgeColor( thisMove.first, Qt::yellow );	// mark the currently selected action on the
-					robot->positionMove( thisMove.second );		// move the robot
-					
-					if ( waitForMotion() ) 
-					{
-						std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
-						map->setEdgeColor( thisMove.first, Qt::black ); 
-					}
-					else 
-					{
-						std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
-						map->setEdgeColor( thisMove.first, Qt::red ); 
-						map->removeEdge( thisMove.first );
-					}
+				Roadmap::out_edge_i e, e_end;
+				tie(e, e_end) = out_edges( roadmap->currentVertex, roadmap->map );
+				if ( e == e_end ) {
+					printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+					keepRunning = false;
+				} else {
+					//singleEdgeMove();
+					multipleEdgeMove();
 				}
 			}
 		}
-		//printf("@");
 		msleep(100);
 	}
-	//vSkinStatus.interrupt();
 	
+	//vSkinStatus.interrupt();
 	//yarp.disconnect("/filterStatus","/statusOut",false);
 	printf("*** RUN METHOD RETURNED ***\n");
+}
+
+void ControlThread::singleEdgeMove()
+{
+	// select a random action given our current location in the map
+	std::pair< Roadmap::edge_t, std::vector<double> > thisMove = roadmap->randomMove();
+	
+	// if we got a valid action, try it out
+	if ( thisMove.second.size() > 0 )
+	{
+		printf("*** TAKING A RANDOM ACTION ***\n");
+		roadmap->setEdgeColor( thisMove.first, Qt::yellow );	// mark the currently selected action on the
+		robot->positionMove( thisMove.second );					// move the robot
+		
+		if ( waitForMotion() ) 
+		{
+			std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
+			roadmap->setEdgeColor( thisMove.first, Qt::green ); 
+		}
+		else 
+		{
+			std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
+			roadmap->setEdgeColor( thisMove.first, Qt::red ); 
+			roadmap->removeEdge( thisMove.first );
+		}
+	}
+}
+
+void ControlThread::multipleEdgeMove()
+{
+	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
+	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path = roadmap->randomMoves();
+	
+	for ( i = path.begin(); i != path.end(); ++i )
+		roadmap->setEdgeColor( i->first, Qt::yellow );
+	
+	bool motionInterrupted = false;
+	for ( i = path.begin(); i != path.end(); ++i )
+	{
+		if ( !motionInterrupted )
+		{
+			Roadmap::out_edge_i e, e_end;
+			tie(e, e_end) = out_edges( i->second, roadmap->map );
+			
+			//if ( /*e == e_end || */
+			//	 !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
+			//	 motionInterrupted = true;
+			//} else {
+				//if ( robot->isWithinLimits( roadmap->map[i->second].q ) )
+				//{
+					robot->positionMove(roadmap->map[i->second].q);
+					motionInterrupted = !waitForMotion();
+				//} else  { motionInterrupted = true; }
+			//}
+
+			if ( !motionInterrupted ) {
+				std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
+				roadmap->setEdgeColor( i->first, Qt::green ); 
+				roadmap->setCurrentVertex( i->second );
+				robot->setWaypoint();
+			} else {
+				std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
+				roadmap->setEdgeColor( i->first, Qt::red );
+				roadmap->removeEdge( i->first );
+			}
+		} else {
+			roadmap->setEdgeColor( i->first, Qt::black );
+		}
+	}	
 }
 
 void ControlThread::stop()

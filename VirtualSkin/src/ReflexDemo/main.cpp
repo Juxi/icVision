@@ -84,8 +84,8 @@ int main(int argc, char *argv[])
 		}
 		
 		// Open the RPC interface to the world model
-		//printf("opening world RPC port\n");
-		//yarpModel->openWorldRpcPort("/world");
+		printf("opening world RPC port\n");
+		yarpModel->openWorldRpcPort("/world");
 	
 		// run the Qt application
 		result = app.exec();

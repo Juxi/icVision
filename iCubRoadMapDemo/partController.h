@@ -36,12 +36,15 @@ public:
 	
 	bool stop();												//!< Stops all joints immediately
 	
+	std::vector<double>  withinLimits( const std::vector<double>& poss );
 	bool positionMove( const std::vector<double>& poss );
 	//bool positionMove( const std::vector<double>& poss, const std::vector<double>& vels );		//!< Moves the device to a specified position
 
 	bool setJointMask( const std::vector<bool>& vals );
 	std::vector<double> getRandomPose();
 	std::vector<double> getCurrentPose();
+	
+	void setVelocity( int );
 	
 	
 private:

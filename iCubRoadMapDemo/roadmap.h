@@ -136,6 +136,7 @@ public:
 	typedef Map::vertex_iterator vertex_i;
 	typedef Map::edge_descriptor edge_t;
 	typedef Map::edge_iterator edge_i;
+	typedef Map::out_edge_iterator out_edge_i;
 	
 	Roadmap();
 	~Roadmap();
@@ -144,6 +145,7 @@ public:
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
 	
 	std::pair< edge_t, std::vector<double> > randomMove();
+	std::list< std::pair< edge_t, vertex_t > > randomMoves();
 	
 	
 	int dimensionality() { return dim; }
