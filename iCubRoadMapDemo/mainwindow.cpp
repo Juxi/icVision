@@ -217,7 +217,8 @@ void MainWindow::loadMap()
 
 		/*** HANDLE VERTICES ***/
 		double n;				// dimension of p
-		std::vector<double> p;	// an n dimensional point
+		std::vector<double> p,
+							q;	// an n dimensional point
 		
 		//int count = 0;
 		while ( !in.atEnd() )
@@ -229,9 +230,10 @@ void MainWindow::loadMap()
 			{
 				QTextStream lineStream(&line);
 				p.clear();
+				q.clear();
 				
-				// put the line into a std::vector and don't worry about number of entries
-				for ( int i=0; i < roadmap.dimensionality()+2; i++)
+				// read the 2D position of the vertex for the graph visualization
+				/*for ( int j=0; j < 2; j++ )
 				{
 					if ( !lineStream.atEnd() ) {
 						lineStream >> n;
@@ -239,12 +241,44 @@ void MainWindow::loadMap()
 					} else {
 						p.push_back(0.0);
 					}
-				}
-				if ( p.size() != roadmap.dimensionality()+2 )
+				}*/
+
+				// read the DD point and don't worry about number of entries
+				for ( int i=0; i < roadmap.dimensionality()+2; i++)
 				{
-					printf("file parse error. wrong size point.");
-					return;
+					if ( !lineStream.atEnd() ) {
+						lineStream >> n;
+						if ( i < 2 )
+							p.push_back(n);
+						else 
+							q.push_back(n);
+					} else {
+						if ( i < 2 )
+							p.push_back(0.0);
+						else 
+							q.push_back(0.0);
+					}
 				}
+				printf("pSize = %d\n",p.size());
+				printf("qSize = %d\n",q.size());
+
+				//respect the robot's joint constraints
+				std::vector<double>::iterator k;
+				printf("qBefore: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+					q = iCub.withinLimits(q);
+				printf("qAfter: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+				// put q into p
+				for ( k = q.begin(); k!=q.end(); ++k )
+					p.push_back(*k);
+		
+				printf("totalSize = %d\n",p.size());
 				graphNodes.push_back(p);
 				//printf("lineCount: %d\n", count );
 				//count ++;

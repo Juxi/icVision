@@ -61,13 +61,13 @@ bool ControlThread::waitForMotion()
 	
 	bool flag = false;
 	while ( !flag ) { 
-		if ( !robot->checkMotionDone(&flag) ||!keepRunning )
+		if ( !robot->checkMotionDone(&flag) || !keepRunning )
 			return false;
-		else if ( timer.elapsed() > 10000)
-		{
-			printf("waitForMotion() timed out\n");
-			return false;
-		}
+		//else if ( timer.elapsed() > 10000)
+		//{
+		//	printf("waitForMotion() timed out\n");
+		//	return false;
+		//}
 		printf(".");
 		msleep(100);
 	}
@@ -83,6 +83,17 @@ bool ControlThread::isOnMap()
 	Roadmap::vertex_t	v = roadmap->nearestVertex(a);
 	std::vector<double> b = roadmap->map[v].q;
 	
+				std::vector<double>::iterator k;
+				printf("current: ");
+				for ( k = a.begin(); k!=a.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+				printf("nearest: ");
+				for ( k = b.begin(); k!=b.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
 	double err = maxDiff(a,b);
 	
 	if ( err > 5.0 )
@@ -115,12 +126,16 @@ double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
 {
 	double result = 0;
 	std::vector<double>::iterator i,j;
+	int count = 0;
 	for ( i=a.begin(), j=b.begin();
 		  i!=a.end() && j!=b.end();
 		  ++i, ++j )
 	{
-		if ( *i-*j > result )
-			result = *i-*j;
+		if ( count < 10 || (count > 18 && count < 26) ) {
+			if ( *i-*j > result )
+				result = *i-*j;
+		}
+	count++;
 	}
 	return result;
 }
@@ -213,8 +228,11 @@ void ControlThread::multipleEdgeMove()
 			//	 !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
 			//	 motionInterrupted = true;
 			//} else {
-				robot->positionMove(roadmap->map[i->second].q);
-				motionInterrupted = !waitForMotion();
+				//if ( robot->isWithinLimits( roadmap->map[i->second].q ) )
+				//{
+					robot->positionMove(roadmap->map[i->second].q);
+					motionInterrupted = !waitForMotion();
+				//} else  { motionInterrupted = true; }
 			//}
 
 			if ( !motionInterrupted ) {
