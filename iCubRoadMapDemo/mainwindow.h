@@ -85,6 +85,7 @@ private slots:
 	void disconnectFromRobot();
 	void explore();
 	void stopController();
+	void setVelocity();
 
 //! [1]
 
@@ -100,13 +101,14 @@ private:
 	QAction *loadMapAction;
 	QAction *saveMapAction;
 	QAction *connectMapAction;
-	QAction *projectMapAction;			////
+	QAction *projectMapAction;
 	
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
-	QAction *disconnectFromRobotAction; ////
+	QAction *disconnectFromRobotAction;
 	QAction *exploreAction;
-	QAction *stopControllerAction;		////
+	QAction *stopControllerAction;
+	QAction *setVelocityAction;
 
 	iCubController	iCub;
 	Roadmap			roadmap;

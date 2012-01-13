@@ -280,6 +280,15 @@ void MainWindow::connectMap()
 		roadmap.graphConnect(i);
 }
 
+void MainWindow::setVelocity()
+{
+	bool ok;
+	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+									   tr("Velocity:"), 2, 1, 100, 1, &ok);
+	if (ok)
+		iCub.setVelocity(i);
+}
+
 void MainWindow::projectMap()
 {
 	roadmap.project2D();
@@ -308,6 +317,11 @@ void MainWindow::createActions()
 	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
 	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
 	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
+	
+	setVelocityAction = new QAction(tr("&Set Velocity"), this);
+	setVelocityAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
+	setVelocityAction->setStatusTip(tr("Set the robot velocity for position moves"));
+	connect(setVelocityAction, SIGNAL(triggered()), this, SLOT(setVelocity()));
 	
 	// MAP MENU
 	newMapAction = new QAction(tr("&New Map"), this);
@@ -345,6 +359,7 @@ void MainWindow::createMenus()
 	controllerMenu->addAction(disconnectFromRobotAction);
 	controllerMenu->addAction(exploreAction);
 	controllerMenu->addAction(stopControllerAction);
+	controllerMenu->addAction(setVelocityAction);
 	
     mapMenu = menuBar()->addMenu(tr("&Map"));
 	mapMenu->addAction(newMapAction);

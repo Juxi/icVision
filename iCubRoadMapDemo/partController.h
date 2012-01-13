@@ -44,6 +44,8 @@ public:
 	std::vector<double> getRandomPose();
 	std::vector<double> getCurrentPose();
 	
+	void setVelocity( int );
+	
 	
 private:
 
