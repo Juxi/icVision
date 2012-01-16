@@ -286,6 +286,7 @@ bool EvolvedFilterModule::updateModule()
 		std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
 		std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
 		
+		
 		calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
 
 		
@@ -293,14 +294,17 @@ bool EvolvedFilterModule::updateModule()
 		// workaround!!
 		
 		Vector X = Vector();
-		X.push_back(ph1.x/2);
-		X.push_back(ph1.y/2);
-		X.push_back(ph2.x/2);
-		X.push_back(ph2.y/2);
+		X.push_back(ph1.x);
+		X.push_back(ph1.y);
+		X.push_back(ph2.x);
+		X.push_back(ph2.y);
 		
-//		Vector &Xsend=portIKinIn->prepare(); // get pointer
-//		Xsend = X; // set to port
-//		
+		
+		Vector &Xsend = posOutputPort.prepare(); // get pointer
+		Xsend = X;			// set to port
+		
+		posOutputPort.write();
+
 //		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
 //		
 ////		std::cout << "trying to connect to the ikinport " << std::endl;		

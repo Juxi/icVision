@@ -148,6 +148,14 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
+	outputPortName  = portPrefix;
+	outputPortName += getName();
+	outputPortName += "/position:o";
+	if(! posOutputPort.open( outputPortName.c_str() )){
+		return false;
+	}
+	
+	
 	// TEMP Solution TODO change
 	
 	// connect to straems

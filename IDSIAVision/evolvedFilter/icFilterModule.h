@@ -52,7 +52,7 @@ protected:
 //	BufferedPort<Vector> *portIKinIn;
 //	BufferedPort<Bottle> *portIKinOut;
 
-	
+	BufferedPort<Vector>			  posOutputPort;	
 	
 	
 	BufferedPort< ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
