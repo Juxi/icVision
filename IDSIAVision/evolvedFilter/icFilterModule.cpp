@@ -181,36 +181,52 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
-	// connect to rpc	
-	// check whether we have F or not!! TODO
-	std::string clientPortName = "/evolvedfilter";
-	clientPortName += "/world-client";
-	if(! port.open( clientPortName.c_str() )){
-		return false;
+	
+	
+	if(addToWorldModel) {
+	
+		// connect to rpc	
+		// check whether we have F or not!! TODO
+		std::string clientPortName = "/evolvedfilter";
+		clientPortName += "/world-client";
+		if(! port.open( clientPortName.c_str() )){
+			return false;
+		}
+	//	
+		inputPortName = "/world";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+
+	//	inputPortName = "/stereoDisparity/rpc";	
+	//	//	inputPortName += robotName; 
+	//	//	inputPortName += "F/world";
+	//	
+	//	// trying to connect to the rpc server (world interface)
+	//	printf("Trying to connect to %s\n", inputPortName.c_str());
+	//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+	//		std::cout << getName() << ": Unable to connect to port "; 
+	//		std::cout << inputPortName.c_str() << std::endl;
+	//		return false;
+	//	}	
+		
+//		portIKinIn = new BufferedPort<Vector>;
+//		portIKinIn->open("/cubeDetector/iKinIn");
+//		Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
+//		portIKinIn->setStrict(true);
+//		
+//		portIKinOut = new BufferedPort<Bottle>;
+//		portIKinOut->open("/cubeDetector/iKinOut");
+//		Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
+//		portIKinOut->setStrict(true);
 	}
-	
-	inputPortName = "/world";	
-	//	inputPortName += robotName; 
-	//	inputPortName += "F/world";
-	
-	// trying to connect to the rpc server (world interface)
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port "; 
-		std::cout << inputPortName.c_str() << std::endl;
-		return false;
-	}	
-	
-	portIKinIn = new BufferedPort<Vector>;
-	portIKinIn->open("/cubeDetector/iKinIn");
-	Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
-	portIKinIn->setStrict(true);
-	
-	portIKinOut = new BufferedPort<Bottle>;
-	portIKinOut->open("/cubeDetector/iKinOut");
-	Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
-	portIKinOut->setStrict(true);
-	
 	
 	
 	
@@ -238,6 +254,7 @@ void icFilterModule::runOnBothImages() {
 // TODO create world interface
 // to kail's world model
 bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
+	if(! addToWorldModel) return false;
 	yarp::os::Bottle cmd, response;
 	
 	// get information about the object from rpc
@@ -253,5 +270,23 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	
 	bool r = port.write(cmd, response);
 //	std::cout << "response: " << response.toString() << std::endl;	
+	return r;
+}	
+
+bool icFilterModule::sendPixelPosOfObject(double x1, double y1, double x2, double y2) {
+	yarp::os::Bottle cmd, response;
+	
+	// get information about the object from rpc
+	cmd.clear();
+//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	// check which image first
+	
+	cmd.addDouble(x2);
+	cmd.addDouble(y2);
+	cmd.addDouble(x1);
+	cmd.addDouble(y1);
+	
+	bool r = port.write(cmd, response);
+	std::cout << "response from 3dstereo crap-a-thingie: " << response.toString() << std::endl;	
 	return r;
 }	
