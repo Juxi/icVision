@@ -69,22 +69,31 @@ int	iCubController::getNumJoints()
 	return torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints();
 }
 
-bool iCubController::isWithinLimits( const std::vector<double>& poss )
+std::vector<double>  iCubController::withinLimits( const std::vector<double>& poss )
 {
-	std::vector<double> torsoPoss, leftPoss, rightPoss;
+	std::vector<double> torsoPoss, leftPoss, rightPoss, result;
 	if ( !chop( poss, torsoPoss, leftPoss, rightPoss ) ) {
 		printf("chop failed\n");
-		return false;
+		return result;
 	}
 	
-	if ( !torso.isWithinLimits(torsoPoss) ||
-		 !left_arm.isWithinLimits(leftPoss) ||
-		 !right_arm.isWithinLimits(rightPoss) )
+	result = torso.withinLimits(torsoPoss);
+	leftPoss = left_arm.withinLimits(leftPoss);
+	rightPoss = right_arm.withinLimits(rightPoss);
+	
+	std::vector<double>::iterator i;
+	for ( i = leftPoss.begin(); i != leftPoss.end(); ++i )
 	{
-		return false;
+		result.push_back(*i);
+	}
+	for ( i = rightPoss.begin(); i != rightPoss.end(); ++i )
+	{
+		result.push_back(*i);
 	}
 	
-	return true;
+	if ( result.size() != (unsigned int)numJoints ) { result.clear(); }
+	
+	return result;
 }
 
 void iCubController::setVelocity( int v )
