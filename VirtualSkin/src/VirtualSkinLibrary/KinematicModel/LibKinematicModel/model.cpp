@@ -25,6 +25,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
 	robotClass = DT_GenResponseClass(responseTables.at(0));
+	ghostClass = DT_GenResponseClass(responseTables.at(0));
 	//worldCriticalClass = DT_GenResponseClass(responseTables.at(0));
 	//robotCriticalClass = DT_GenResponseClass(responseTables.at(0));
 

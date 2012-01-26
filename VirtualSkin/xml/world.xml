@@ -2,8 +2,12 @@
 <!DOCTYPE WorldList>
 <WorldList version="1.0">
 
-<object name="table" pz="-.1" px="-0.145">
+<!--<object name="table" pz="-.1" px="-0.145">
     <box width="1" depth=".001" height=".71"/>
+</object>-->
+
+<object name="ball" px="-0.25" py="-.1" pz=".1" type="target">
+    <sphere radius=".05"/>
 </object>
 
 <!--<object name="cup1" px="-.3" pz="-.1">
