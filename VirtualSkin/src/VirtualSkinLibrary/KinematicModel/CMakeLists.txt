@@ -42,3 +42,4 @@ ENDIF ( WIN32 )
 
 ADD_SUBDIRECTORY ( LibKinematicModel )
 ADD_SUBDIRECTORY ( WorldModelDemo )
+ADD_SUBDIRECTORY ( GraspFind )
