@@ -5,7 +5,7 @@
 
 #include <QString>
 #include <QMatrix4x4>
-
+#include <cassert>
 
 namespace KinematicModel {
 
@@ -67,6 +67,23 @@ public:
 		position[1] = configuration.data()[13];
 		position[2] = configuration.data()[14];
 		return position;
+	}
+
+	double orientationMeasure(QString name, std::vector<double> &goal_orientation) {
+		assert(goal_orientation.size() == 9);
+		QMatrix4x4 const &observation(markerConfiguration(name));
+
+		double measure(0.0), norm1(0.0), norm2(0.0);
+		int orientation_index(0);
+		for (size_t i(0); i < goal_orientation.size(); ++i, ++orientation_index) {
+			if (orientation_index % 4 == 3) ++orientation_index;
+			double val1(observation.data()[orientation_index]);
+			double val2(goal_orientation[i]);
+			measure += val1 * val2;
+			norm1 += val1 * val1;
+			norm2 += val2 * val2;
+		}
+		return measure / sqrt(norm1) / sqrt(norm2);
 	}
 
 	friend class Robot;

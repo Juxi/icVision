@@ -53,6 +53,7 @@ public:
 	qreal homePos() const { return homePosition; }			//!< Returns the current homePosition
 	qreal normHomePos() const { return (homePosition - minPos()) / (maxPos() - minPos()); }			//!< Returns the current homePosition
 
+
 	void print();											//!< Prints the Motor's member variables to the terminal
 
 	void setName( const QString& name ) { motorName = name; }

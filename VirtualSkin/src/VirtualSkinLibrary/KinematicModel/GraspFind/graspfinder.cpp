@@ -42,6 +42,18 @@ void GraspFinder::run()
 	//printf("ObjectSoup::run() returned\n");
 }
 
+//def get_hand_orientation_measure(self):
+//    goal_orientation = np.array([0., 0., -1., 0., 0.])
+//    orientation = self.get_hand_orientation()
+//    return np.dot(goal_orientation, orientation) / norm(goal_orientation) / norm(orientation)
+//
+//def get_hand_orientation(self):
+//	observations = self.get_observations()
+//
+//	if not observations:
+//		return None
+//	return np.array(observations['right_hand'][0:3] + [observations['right_hand'][6]] + [observations['right_hand'][10]])
+
 void GraspFinder::do_test() {
 
 	class Pose : public Function
@@ -81,9 +93,13 @@ void GraspFinder::do_test() {
 			std::vector<double> position = observation.markerPosition(QString(marker_name.c_str()));
 			double position_distance = Pose::pos_error(position);
 
-			std::cout <<  "pos: " << home_penalty << " " << position_distance << endl;
+			std::vector<double> goal_orientation(9);
+			goal_orientation[2] = 1;
+			double orientation_goodness = observation.orientationMeasure(QString(marker_name.c_str()), goal_orientation);
 
-			return home_penalty + position_distance;
+			std::cout <<  "pos: " << home_penalty << " " << position_distance << " " << orientation_goodness << " |" << endl;
+
+			return home_penalty + position_distance + orientation_goodness;
 		}
 	};
 
