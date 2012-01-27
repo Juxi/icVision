@@ -57,8 +57,8 @@ void GraspFinder::do_test() {
 		double pos_error(std::vector<double> &values) const {
 			std::vector<double> goal_pos(3);
 			goal_pos[0] = -0.327605;
-			goal_pos[1] = 0.034241;
-			goal_pos[2] = 0.0390077;
+			goal_pos[1] = 0.234241;
+			goal_pos[2] = 0.0390077 + .3;
 
 			double distance(0.0);
 			for (size_t i(0); i < 3; ++i)
