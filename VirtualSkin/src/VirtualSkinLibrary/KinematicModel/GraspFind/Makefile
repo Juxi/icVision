@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src
+CMAKE_SOURCE_DIR = /home/stollenga/workspace/IM-CLeVeR/VirtualSkin
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src
+CMAKE_BINARY_DIR = /home/stollenga/workspace/IM-CLeVeR/VirtualSkin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(CMAKE_COMMAND) -E cmake_progress_start /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src/CMakeFiles /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/progress.marks
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f CMakeFiles/Makefile2 VirtualSkinLibrary/KinematicModel/GraspFind/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src/CMakeFiles 0
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(CMAKE_COMMAND) -E cmake_progress_start /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/CMakeFiles /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/progress.marks
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f CMakeFiles/Makefile2 src/VirtualSkinLibrary/KinematicModel/GraspFind/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f CMakeFiles/Makefile2 VirtualSkinLibrary/KinematicModel/GraspFind/clean
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f CMakeFiles/Makefile2 src/VirtualSkinLibrary/KinematicModel/GraspFind/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,31 +126,31 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f CMakeFiles/Makefile2 VirtualSkinLibrary/KinematicModel/GraspFind/preinstall
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f CMakeFiles/Makefile2 src/VirtualSkinLibrary/KinematicModel/GraspFind/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f CMakeFiles/Makefile2 VirtualSkinLibrary/KinematicModel/GraspFind/preinstall
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f CMakeFiles/Makefile2 src/VirtualSkinLibrary/KinematicModel/GraspFind/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f CMakeFiles/Makefile2 VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
-.PHONY : VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
+src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule:
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f CMakeFiles/Makefile2 src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
+.PHONY : src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
 
 # Convenience name for target.
-GraspFind: VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
+GraspFind: src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/rule
 .PHONY : GraspFind
 
 # fast build rule for target.
 GraspFind/fast:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build
 .PHONY : GraspFind/fast
 
 graspfinder.o: graspfinder.cpp.o
@@ -158,7 +158,7 @@ graspfinder.o: graspfinder.cpp.o
 
 # target to build an object file
 graspfinder.cpp.o:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.o
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.o
 .PHONY : graspfinder.cpp.o
 
 graspfinder.i: graspfinder.cpp.i
@@ -166,7 +166,7 @@ graspfinder.i: graspfinder.cpp.i
 
 # target to preprocess a source file
 graspfinder.cpp.i:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.i
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.i
 .PHONY : graspfinder.cpp.i
 
 graspfinder.s: graspfinder.cpp.s
@@ -174,7 +174,7 @@ graspfinder.s: graspfinder.cpp.s
 
 # target to generate assembly for a file
 graspfinder.cpp.s:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.s
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/graspfinder.cpp.s
 .PHONY : graspfinder.cpp.s
 
 main.o: main.cpp.o
@@ -182,7 +182,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.o
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -190,7 +190,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.i
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -198,8 +198,32 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(MAKE) -f VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.s
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+xnes.o: xnes.cpp.o
+.PHONY : xnes.o
+
+# target to build an object file
+xnes.cpp.o:
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/xnes.cpp.o
+.PHONY : xnes.cpp.o
+
+xnes.i: xnes.cpp.i
+.PHONY : xnes.i
+
+# target to preprocess a source file
+xnes.cpp.i:
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/xnes.cpp.i
+.PHONY : xnes.cpp.i
+
+xnes.s: xnes.cpp.s
+.PHONY : xnes.s
+
+# target to generate assembly for a file
+xnes.cpp.s:
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(MAKE) -f src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/build.make src/VirtualSkinLibrary/KinematicModel/GraspFind/CMakeFiles/GraspFind.dir/xnes.cpp.s
+.PHONY : xnes.cpp.s
 
 # Help Target
 help:
@@ -220,6 +244,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... xnes.o"
+	@echo "... xnes.i"
+	@echo "... xnes.s"
 .PHONY : help
 
 
@@ -231,6 +258,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin/src && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/stollenga/workspace/IM-CLeVeR/VirtualSkin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

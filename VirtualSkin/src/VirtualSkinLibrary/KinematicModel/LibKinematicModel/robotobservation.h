@@ -52,6 +52,23 @@ public:
 	inline QString markerName(unsigned int index) const				//!< return the part marker name given an index
 	{ return m_markerName[index]; }
 
+	inline QMatrix4x4 const &markerConfiguration(QString &name) {
+		for (size_t i(0); i < m_markerName.size(); ++i) {
+			if (m_markerName[i] == name)
+				return m_markerConfiguration[i];
+		}
+		throw KinematicModelException("marker name not found");
+	}
+
+	inline std::vector<double> markerPosition(QString name) {
+		QMatrix4x4 configuration(markerConfiguration(name));
+		std::vector<double> position(3);
+		position[0] = configuration.data()[12];
+		position[1] = configuration.data()[13];
+		position[2] = configuration.data()[14];
+		return position;
+	}
+
 	friend class Robot;
 
 protected:

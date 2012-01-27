@@ -3,9 +3,10 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 	
 SET ( src_files	main.cpp
-		graspfinder.cpp )
+		graspfinder.cpp 
+		xnes.cpp )
 
-SET ( hdr_files	graspfinder.h )
+SET ( hdr_files	graspfinder.h xnes.h)
 
 #SET ( QT_MOC_FILES graspfinder.h )	
 #QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
