@@ -69,7 +69,7 @@ public:
 		return position;
 	}
 
-	double orientationMeasure(QString name, std::vector<double> &goal_orientation) {
+	double orientationMeasure(QString name, std::vector<double> &goal_orientation, std::vector<double> &mask_orientation) {
 		assert(goal_orientation.size() == 9);
 		QMatrix4x4 const &observation(markerConfiguration(name));
 
@@ -79,9 +79,9 @@ public:
 			if (orientation_index % 4 == 3) ++orientation_index;
 			double val1(observation.data()[orientation_index]);
 			double val2(goal_orientation[i]);
-			measure += val1 * val2;
-			norm1 += val1 * val1;
-			norm2 += val2 * val2;
+			measure += val1 * val2 * mask_orientation[i];
+			norm1 += val1 * val1 * mask_orientation[i];
+			norm2 += val2 * val2 * mask_orientation[i];
 		}
 		return measure / sqrt(norm1) / sqrt(norm2);
 	}

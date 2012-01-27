@@ -66,21 +66,67 @@ void GraspFinder::do_test() {
 		{
 		}
 
-		double pos_error(std::vector<double> &values) const {
-			std::vector<double> goal_pos(3);
-			goal_pos[0] = -0.327605;
-			goal_pos[1] = 0.234241;
-			goal_pos[2] = 0.0390077 + .3;
-
+		double pos_error(std::vector<double> &values, std::vector<double> goal_pos) const {
 			double distance(0.0);
 			for (size_t i(0); i < 3; ++i)
 				distance += pow(values[i] - goal_pos[i], 2.0);
-			return sqrt(distance) / 3.;
+			return sqrt(distance);
+		}
+
+		double rand_val() const {
+			return (((double)(qrand() % 10000000)) / 10000000.);
+		}
+
+		double right_hand_measure() const {
+			std::string marker_name("right_hand");
+
+			KinematicModel::RobotObservation observation = d_grasp_finder->theRobot.observe();
+
+			std::vector<double> goal_pos(3);
+			goal_pos[0] = -0.227605;// + rand_val() * .03;
+			goal_pos[1] = 0.234241;// + rand_val() * .03;
+			goal_pos[2] = 0.0390077 + .0;
+			std::vector<double> position = observation.markerPosition(QString(marker_name.c_str()));
+			double position_distance = Pose::pos_error(position, goal_pos);
+
+			std::vector<double> goal_orientation(9);
+			std::vector<double> mask_orientation(9);
+			goal_orientation[5] = -1;
+			mask_orientation[3] = 1;
+			mask_orientation[4] = 1;
+			mask_orientation[5] = 1;
+			double orientation_goodness = observation.orientationMeasure(QString(marker_name.c_str()), goal_orientation, mask_orientation);
+
+			return position_distance + orientation_goodness;
+		}
+
+		double left_hand_measure() const {
+			std::string marker_name("left_hand");
+
+			KinematicModel::RobotObservation observation = d_grasp_finder->theRobot.observe();
+
+			//std::cout << "val: " << rand_val() << std::endl;
+			std::vector<double> goal_pos(3);
+			goal_pos[0] = -0.227605;//; + rand_val() * .03;
+			goal_pos[1] = -0.234241;//;+ rand_val() * .03;
+			goal_pos[2] = 0.0390077 + .0;
+			std::vector<double> position = observation.markerPosition(QString(marker_name.c_str()));
+			double position_distance = Pose::pos_error(position, goal_pos);
+			std::cout << "left position error: " << position_distance << std::endl;
+
+			std::vector<double> goal_orientation(9);
+			std::vector<double> mask_orientation(9);
+			goal_orientation[5] = 1;
+			mask_orientation[3] = 1;
+			mask_orientation[4] = 1;
+			mask_orientation[5] = 1;
+			double orientation_goodness = observation.orientationMeasure(QString(marker_name.c_str()), goal_orientation, mask_orientation);
+
+			return position_distance + orientation_goodness;
 		}
 
 		double eval(const Matrix& point) const
 		{
-			std::string marker_name("right_hand");
 
 			std::vector<double> values(point.get_data());
 			d_grasp_finder->set_motors(values);
@@ -88,18 +134,11 @@ void GraspFinder::do_test() {
 			double collision_value = .1 * pow(3. -(double)collision_value, 2.0);
 
 			double home_penalty = d_grasp_finder->distance_to_home(values);
+			double right_hand_val = right_hand_measure();
+			double left_hand_val = left_hand_measure();
+			//std::cout <<  "pos: " << home_penalty << " " << left_hand_val << " " << right_hand_val << " |" << endl;
 
-			KinematicModel::RobotObservation observation = d_grasp_finder->theRobot.observe();
-			std::vector<double> position = observation.markerPosition(QString(marker_name.c_str()));
-			double position_distance = Pose::pos_error(position);
-
-			std::vector<double> goal_orientation(9);
-			goal_orientation[2] = 1;
-			double orientation_goodness = observation.orientationMeasure(QString(marker_name.c_str()), goal_orientation);
-
-			std::cout <<  "pos: " << home_penalty << " " << position_distance << " " << orientation_goodness << " |" << endl;
-
-			return home_penalty + position_distance + orientation_goodness;
+			return 1. * home_penalty + right_hand_val + left_hand_val;
 		}
 	};
 
@@ -140,15 +179,16 @@ void GraspFinder::do_test() {
 			do
 			{
 				nes.iterate();
-				printf("fitness: %g\n", nes.bestFitness());
+				//printf("fitness: %g\n", nes.bestFitness());
 				std::vector<double> best_point(nes.bestPoint().get_data());
-				for (size_t i(0); i < best_point.size(); ++i)
-					std::cout << best_point[i] << " ";
-				std::cout << std::endl;
+				//for (size_t i(0); i < best_point.size(); ++i)
+				//	std::cout << best_point[i] << " ";
+				//std::cout << std::endl;
+				
 			}
 			while (nes.evaluations() < maxevals);
 			mean -= log10(nes.bestFitness());
-			printf("   trial: %d/%d     fitness: %g\n", m+1, trials, nes.bestFitness());
+			//printf("   trial: %d/%d     fitness: %g\n", m+1, trials, nes.bestFitness());
 		}
 		mean /= (double)trials;
 		printf("xNES mean success (-log10(fitness): %g\n", mean);
