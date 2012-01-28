@@ -120,7 +120,8 @@ void GraspFinder::do_test() {
 			mask_orientation[4] = 1;
 			mask_orientation[5] = 1;
 			double orientation_goodness = observation.orientationMeasure(QString(marker_name.c_str()), goal_orientation, mask_orientation);
-
+			if (position_distance < 1.0e-4)
+			  std::cout << position_distance << " " << orientation_goodness << std::endl;
 			return position_distance + orientation_goodness;
 		}
 
@@ -155,7 +156,6 @@ void GraspFinder::do_test() {
 		bool useBaseline = false;
 
 		unsigned int m;
-		double mean = 0.0;
 		for (m=0; m<trials; m++)
 		{
 			rngSeed(123 * m + 45);
@@ -173,7 +173,7 @@ void GraspFinder::do_test() {
 			sigma *= .01;
 
 			//sigma(0) = 1e3;
-			int population = 200;//leave 0 to use default
+			int population = 50;//leave 0 to use default
 
 			NES nes(f, useImportanceMixing, useBaseline);
 			nes.init(pt, sigma, population);
@@ -185,14 +185,10 @@ void GraspFinder::do_test() {
 				//for (size_t i(0); i < best_point.size(); ++i)
 				//	std::cout << best_point[i] << " ";
 				//std::cout << std::endl;
-				
 			}
 			while (nes.evaluations() < maxevals);
-			mean -= log10(nes.bestFitness());
 			//printf("   trial: %d/%d     fitness: %g\n", m+1, trials, nes.bestFitness());
 		}
-		mean /= (double)trials;
-		printf("xNES mean success (-log10(fitness): %g\n", mean);
 	}
 	catch (const char* exception)
 	{
