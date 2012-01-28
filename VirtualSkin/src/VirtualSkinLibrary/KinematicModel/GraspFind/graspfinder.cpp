@@ -112,7 +112,6 @@ void GraspFinder::do_test() {
 			goal_pos[2] = 0.0390077 + .0;
 			std::vector<double> position = observation.markerPosition(QString(marker_name.c_str()));
 			double position_distance = Pose::pos_error(position, goal_pos);
-			std::cout << "left position error: " << position_distance << std::endl;
 
 			std::vector<double> goal_orientation(9);
 			std::vector<double> mask_orientation(9);
@@ -167,19 +166,21 @@ void GraspFinder::do_test() {
 			Matrix add = Matrix::ones(dim);
 			add *= .0;
 			pt += add;
+			for (size_t i(0); i < d_home_pos.size(); ++i)
+			  pt[i] = d_home_pos[i];
 
 			Matrix sigma = Matrix::ones(dim);
-			sigma *= .4;
+			sigma *= .01;
 
 			//sigma(0) = 1e3;
-			int population = 0;//leave 0 to use default
+			int population = 200;//leave 0 to use default
 
 			NES nes(f, useImportanceMixing, useBaseline);
 			nes.init(pt, sigma, population);
 			do
 			{
 				nes.iterate();
-				//printf("fitness: %g\n", nes.bestFitness());
+				printf("fitness: %g\n", nes.bestFitness());
 				std::vector<double> best_point(nes.bestPoint().get_data());
 				//for (size_t i(0); i < best_point.size(); ++i)
 				//	std::cout << best_point[i] << " ";
