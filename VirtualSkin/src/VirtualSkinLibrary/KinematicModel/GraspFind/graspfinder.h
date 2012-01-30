@@ -15,6 +15,7 @@
 #include "assert.h"
 #include <cmath>
 #include <iostream>
+#include "sphere.h"
 
 //class KinematicModel::Model;
 #include "xnes.h"
@@ -64,10 +65,24 @@ public:
 
 	void do_test();
 
+	void add_ball(float x, float y, float z) const {
+		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( theModel.TARGET() );
+		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .01 );
+		  QColor color( 0, 0, 255, 255 );
+		  QVector3D pos(x, y, z);
+		  sphere->translate(pos);
+		  sphere->setFreeColor(color);
+		  sphere->setCollidingColor(color);
+		  composite->append(sphere);
+		  theModel.appendObject(composite);
+	}
+
 public:
 	KinematicModel::Model& theModel;	// the world model	
 	KinematicModel::Robot& theRobot;
 	std::vector<double> d_home_pos;
+	std::vector<std::vector<double> > d_points;
+	std::vector<std::vector<double> > d_configuration_points;
 
 	int d_total_motors;
 	bool verbose;

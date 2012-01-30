@@ -25,7 +25,7 @@
 #include <cstring> // <-------------- ***** This is the library missing! *****
 #include <vector>
 #include <algorithm>
-
+#include <iostream>
 //using namespace std;
 
 #ifdef DEBUG
@@ -332,10 +332,14 @@ public:
 		bestPt.resize(dim);
 		bestFit = 1e300;
 		evals = 0;
+
+
 	}
 
 	void iterate()
 	{
+		//std::cout << A(0) << " " << A(1) <<  " " << A(2) << std::endl;
+
 		unsigned int i;
 		unsigned int dim = center.rows();
 		Matrix I = Matrix::eye(dim);
