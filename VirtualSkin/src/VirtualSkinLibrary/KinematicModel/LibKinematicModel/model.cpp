@@ -353,7 +353,7 @@ int Model::computePose()
 	
 	computePoseSuffix();			
 	
-	emit computedState(col_count);	// this number may not be correct as we stop DT_TEST early in the case of reflexive response
+	emit computedState(col_count);	
 	
 	return col_count;
 }

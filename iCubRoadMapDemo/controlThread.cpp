@@ -3,18 +3,18 @@
 
 ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), keepRunning(false)
 {
-	vSkinStatus.open("/statusOut");
-	if ( !yarp.connect("/filterStatus","/statusOut") )
-	{ 
-		printf("failed to connect to robot filter status port\n");
-		return;
-	}
+	//vSkinStatus.open("/statusOut");
+	//if ( !yarp.connect("/filterStatus","/statusOut") )
+	//{ 
+	//	printf("failed to connect to robot filter status port\n");
+	//	return;
+	//}
 }
 
 ControlThread::~ControlThread()
 {
-	vSkinStatus.close();
-		int one = 1;
+	//vSkinStatus.close();
+	//	int one = 1;
 }
 
 void ControlThread::restart()
@@ -39,7 +39,7 @@ bool ControlThread::gotoNearest()
 		return 0;
 	
 	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
-	msleep(500);
+	//msleep(500);
 	
 	if ( !waitForMotion() )
 		return 0;
@@ -61,6 +61,8 @@ bool ControlThread::waitForMotion()
 	
 	bool flag = false;
 	while ( !flag ) { 
+		printf(".");
+		msleep(500);
 		if ( !robot->checkMotionDone(&flag) || !keepRunning )
 			return false;
 		//else if ( timer.elapsed() > 10000)
@@ -68,8 +70,6 @@ bool ControlThread::waitForMotion()
 		//	printf("waitForMotion() timed out\n");
 		//	return false;
 		//}
-		printf(".");
-		msleep(100);
 	}
 	printf("\n");
 	return true;
@@ -143,7 +143,7 @@ double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
 void ControlThread::run()
 {
 	//yarp::os::Port vSkinStatus;
-	yarp::os::Bottle b;
+	//yarp::os::Bottle b;
 	
 	printf("Moving iCub to the nearest state on the roadmap\n");
 	if ( !gotoNearest() )
@@ -153,29 +153,16 @@ void ControlThread::run()
 	
 	while ( keepRunning )
 	{
-		vSkinStatus.read(b);
-		if (  b.get(0).asInt() != 1 ) {	// try to control the robot only when the Virtual Skin Proxy is open
-			printf("Reflex behavior is active. Waiting for control of the robot.\n");
-		}
-		else {
-			if ( !isOnMap() ) { // if the filter is open, the robot should be on its way back onto the roadmap
-				printf("The iCub is not on the roadmap. Waiting for reflex move to finish.\n");
-			}
-			else
-			{
-				Roadmap::out_edge_i e, e_end;
-				tie(e, e_end) = out_edges( roadmap->currentVertex, roadmap->map );
-				if ( e == e_end ) {
-					printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
-					keepRunning = false;
-				} else {
-					//singleEdgeMove();
-					multipleEdgeMove();
-				}
-			}
-		}
+		if ( !isOnMap() )	gotoNearest();
+		else				multipleEdgeMove();
 		msleep(100);
 	}
+	
+	//Roadmap::out_edge_i e, e_end;
+	//tie(e, e_end) = out_edges( roadmap->currentVertex, roadmap->map );
+	//if ( e == e_end ) {
+	//printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+	//keepRunning = false;
 	
 	//vSkinStatus.interrupt();
 	//yarp.disconnect("/filterStatus","/statusOut",false);
