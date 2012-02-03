@@ -12,12 +12,13 @@
             <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>-->
             
             <!-- THESE GEOMS MODEL THE HIPS AND THE STAND
-                 THEY COLLIDE WITH THE TABLE IN world.xml 
-            <sphere radius=".1" px=".035" py=".06" pz="-.03"/>
-            <sphere radius=".1" px=".035" py="-.06" pz="-.03"/>
+                 THEY COLLIDE WITH THE TABLE IN world.xml -->
+                 
+            <sphere radius=".09" px=".03" py=".06" pz="-.05"/>
+            <sphere radius=".09" px=".03" py="-.06" pz="-.05"/>
             <sphere radius=".1" px=".035" pz="-.06"/>
 			<sphere radius=".1" px="0.0" pz="-.06" pz="-.03"/>
-            <cylinder radius=".04" height="1" pz="-.5" hz="1"/>-->
+            <cylinder radius=".04" height="1" pz="-.5" hz="1"/>
             
         <link z=".032" radius="0">
     

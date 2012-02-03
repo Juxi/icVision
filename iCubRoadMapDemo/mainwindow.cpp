@@ -320,7 +320,7 @@ void MainWindow::setVelocity()
 	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
 									   tr("Velocity:"), 2, 1, 100, 1, &ok);
 	if (ok)
-		iCub.setVelocity(i);
+		ctrlThread.setVelocity(i);
 }
 
 void MainWindow::projectMap()

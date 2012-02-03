@@ -47,6 +47,7 @@ void ReflexFilter::extraOpenStuff()
 void ReflexFilter::collisionResponse()
 {
 	int n = 20;			// we will use every nth pose in the buffer
+						// n = 20 -->  5Hz
 
 	// get the pose history and the average period between arriving state bottles
 	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;

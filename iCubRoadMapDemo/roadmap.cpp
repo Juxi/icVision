@@ -27,7 +27,7 @@ void Roadmap::setDimensionality( int d )
 void Roadmap::setCurrentVertex( vertex_t v )
 {
 	if ( map[v].qtGraphNode )
-		emit newNodeColor( map[v].qtGraphNode, Qt::yellow, Qt::darkYellow );
+		emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
 		//map[v].qtGraphNode->setColor( Qt::yellow, Qt::darkYellow );
 	
 	if ( v != currentVertex )
@@ -210,7 +210,7 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
 	
 	
-	//remove_edge( edge, map );
+	remove_edge( edge, map );
 }
 
 void Roadmap::removeAllEdges()
