@@ -117,6 +117,43 @@ private:
 	friend class ControlThread;
 	ControlThread	ctrlThread;
 	
+	typedef std::vector< std::vector<float> > poses_vector_t;
+	typedef std::map< std::string, poses_vector_t > poses_map_t;
+	
+	poses_map_t read_poses(std::string filename) {
+		std::ifstream in_file(filename.c_str());
+		
+		poses_map_t the_map;
+		poses_vector_t the_poses;
+		
+		std::string current_name;
+		while (true) {
+			std::string line;
+			getline(in_file, line);
+			if (!in_file)
+				break;
+			
+			if (std::isalpha(line[0])) {
+				if (current_name.size())
+					the_map[current_name] = the_poses;
+				std::remove(line.begin(), line.end(), ' ');
+				current_name = line;
+			} else {
+				std::istringstream line_reader(line);
+				std::vector<float> pose;
+				while (true) {
+					float number;
+					line_reader >> number;
+					if (!line_reader)
+						break;
+					pose.push_back(number);
+				}
+				the_poses.push_back(pose);
+			}
+		}
+		the_map[current_name] = the_poses;
+		return the_map;
+	}
 };
 //! [3]
 

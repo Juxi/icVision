@@ -43,13 +43,16 @@ private:
 	/* FIRST, THE BOOST GRAPH */
 	class Pose;
 	struct Vertex { 
-		int	idx;
+		//int	idx;
 		QtGraphNode* qtGraphNode;
-		char* type;							//just for debugging
-		std::vector<double> q;				// robot configuration
-		qreal x,y;
+		//char* type;							//just for debugging
 		
-		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
+		qreal x,y;
+		std::vector<double> q;				// robot configuration
+		//std::map< std::string, std::vector< std::vector<double> > markers;
+		
+		
+		Vertex() : qtGraphNode(NULL), x(0), y(0) {}
 	};
 	
 	struct Edge {
