@@ -185,6 +185,15 @@ void Robot::updatePose()
     for ( i=tree.begin(); i!=tree.end(); ++i ) {
         (*i)->update(T);
     }
+	
+	unsigned int m, mc = markers.size();
+	if (mc > 0)
+	{
+		for (m=0; m<mc; m++)
+		{
+			markers[m]->updateTracer();
+		}
+	}
 	//emit changedState();
 }
 

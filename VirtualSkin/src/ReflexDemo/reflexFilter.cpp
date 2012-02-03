@@ -46,7 +46,7 @@ void ReflexFilter::extraOpenStuff()
 
 void ReflexFilter::collisionResponse()
 {
-	int n = 10;			// we will use every nth pose in the buffer
+	int n = 20;			// we will use every nth pose in the buffer
 
 	// get the pose history and the average period between arriving state bottles
 	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;
@@ -74,7 +74,7 @@ void ReflexFilter::collisionResponse()
 			//printf("i = %d\n",i);
 			if ( i % n == 0 )	// use every nth pose in the buffer
 			{
-				//printf("------------------------------------------\n");
+				printf("------------------------------------------\n");
 				for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 				{
 					printf("Pose: %d, Part: %d, Label: %d\n", i, bodyPart, history.at(bodyPart).at(i).label );
@@ -97,7 +97,7 @@ void ReflexFilter::collisionResponse()
 					else { wpReached = false; }
 				}
 	
-				//printf("sleeping %f msec\n\n", n*period );
+				printf("sleeping %f msec\n\n", n*period );
 				msleep( n*period );
 			}
 		}

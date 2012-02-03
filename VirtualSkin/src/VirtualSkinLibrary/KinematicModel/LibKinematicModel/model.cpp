@@ -25,6 +25,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
 	robotClass = DT_GenResponseClass(responseTables.at(0));
+	ghostClass = DT_GenResponseClass(responseTables.at(0));
 	//worldCriticalClass = DT_GenResponseClass(responseTables.at(0));
 	//robotCriticalClass = DT_GenResponseClass(responseTables.at(0));
 
@@ -352,7 +353,7 @@ int Model::computePose()
 	
 	computePoseSuffix();			
 	
-	emit computedState(col_count);	// this number may not be correct as we stop DT_TEST early in the case of reflexive response
+	emit computedState(col_count);	
 	
 	return col_count;
 }

@@ -49,10 +49,10 @@ protected:
 	
 	
 	
-	BufferedPort<Vector> *portIKinIn;
-	BufferedPort<Bottle> *portIKinOut;
+//	BufferedPort<Vector> *portIKinIn;
+//	BufferedPort<Bottle> *portIKinOut;
 
-	
+	BufferedPort<Vector>			  posOutputPort;	
 	
 	
 	BufferedPort< ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
@@ -62,6 +62,7 @@ protected:
 	BufferedPort< ImageOf<PixelBgr> > outputPort_Image;
 	
 	bool	isStarted;
+	bool	addToWorldModel;
 	bool	inDebugMode;
 	bool	streamRawFilterOutput;
 	bool	streamProcessedFilterOutput;	
@@ -97,8 +98,14 @@ public:
 	static const int RIGHT_IMAGE = 0;
 	void runOnOneImage(int leftOrRight);
 	void runOnBothImages();	
+	
+	
+	void putInVirtualSkin(bool b) {
+		addToWorldModel = b;
+	}
 
 	bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
+	bool sendPixelPosOfObject(double x1, double y1, double x2, double y2);
 };
 
 #endif

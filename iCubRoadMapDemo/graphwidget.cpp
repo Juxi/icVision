@@ -132,7 +132,7 @@ void GraphWidget::drawBackground(QPainter *painter, const QRectF &rect)
 {
     Q_UNUSED(rect);
 
-	QPixmap bg = QPixmap(":/images/brain.jpg");
+	/*QPixmap bg = QPixmap(":/images/brain.jpg");
 	qreal bgRatio = (qreal)bg.width()/(qreal)bg.height();
 	qreal pRatio = (qreal)parentWidget()->width()/(qreal)parentWidget()->height();
 	
@@ -141,7 +141,7 @@ void GraphWidget::drawBackground(QPainter *painter, const QRectF &rect)
 	else
 		bg = bg.scaledToWidth(parentWidget()->width());
 
-	painter->drawPixmap( -bg.width()/2, -bg.height()/2, bg );
+	painter->drawPixmap( -bg.width()/2, -bg.height()/2, bg );*/
 }
 
 /*void GraphWidget::scaleView(qreal scaleFactor)

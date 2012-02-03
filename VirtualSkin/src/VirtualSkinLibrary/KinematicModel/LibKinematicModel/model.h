@@ -80,6 +80,7 @@ public:
 	DT_ResponseClass	OBSTACLE() const { return obstacleClass; }
 	DT_ResponseClass	TARGET() const { return targetClass; }
 	DT_ResponseClass	ROBOT() const { return robotClass; }
+	DT_ResponseClass	GHOST() const { return ghostClass; }
 	//DT_ResponseClass	ROBOT_CRITICAL() const { return robotCriticalClass; }
 	
 	
@@ -132,10 +133,9 @@ private:
 	
 	DT_SceneHandle				scene;
 	
-	//DT_ResponseClass worldCriticalClass;		//!< triggers reflex response against all other objects
 	DT_ResponseClass obstacleClass;		//!< objects in this response class trigger reflexes
 	DT_ResponseClass targetClass;		//!< these don't
-	//DT_ResponseClass robotCriticalClass;		//!< triggers reflex response against all other objects
+	DT_ResponseClass ghostClass;		//!< these are left out of collision detection computations
 	DT_ResponseClass robotClass;		//!< these belong to the robot's body
 	
 	uint numObjects, numPrimitives;

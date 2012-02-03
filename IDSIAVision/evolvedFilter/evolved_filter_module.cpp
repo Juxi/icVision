@@ -281,8 +281,12 @@ bool EvolvedFilterModule::updateModule()
 
 	// only if we do it on both images
 	if( runOnLeft == runOnRight == true )	{
-		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
-		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+//		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
+//		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+		std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
+		std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
+		
+		
 		calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
 
 		
@@ -290,27 +294,30 @@ bool EvolvedFilterModule::updateModule()
 		// workaround!!
 		
 		Vector X = Vector();
-		X.push_back(ph1.x/2);
-		X.push_back(ph1.y/2);
-		X.push_back(ph2.x/2);
-		X.push_back(ph2.y/2);
+		X.push_back(ph1.x);
+		X.push_back(ph1.y);
+		X.push_back(ph2.x);
+		X.push_back(ph2.y);
 		
-		Vector &Xsend=portIKinIn->prepare(); // get pointer
-		Xsend = X; // set to port
 		
-		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
+		Vector &Xsend = posOutputPort.prepare(); // get pointer
+		Xsend = X;			// set to port
 		
-//		std::cout << "trying to connect to the ikinport " << std::endl;		
-		if (portIKinOut->getInputCount() > 0) {
-			portIKinIn->writeStrict();
-			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
-//			if (ret->size() >= 3) {
-//				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
-//			}
-			std::cout << "Bottle: " << ret->toString() << std::endl;
-		}
-//		std::cout << "ending ikinport " << std::endl;				
-		
+		posOutputPort.write();
+
+//		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
+//		
+////		std::cout << "trying to connect to the ikinport " << std::endl;		
+//		if (portIKinOut->getInputCount() > 0) {
+//			portIKinIn->writeStrict();
+//			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
+////			if (ret->size() >= 3) {
+////				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
+////			}
+//			std::cout << "Bottle: " << ret->toString() << std::endl;
+//		}
+////		std::cout << "ending ikinport " << std::endl;				
+//		
 				
 	}
 
@@ -399,7 +406,7 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	
 	
 	
-	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
+//	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
 	double CellSize = 6;
 	
@@ -414,13 +421,14 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	estimatedX += forwardOffset;
 	
 	
-	std::cout <<  "Predition x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
+//	std::cout <<  "Predition x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
 	
 	// todo 
 	// hacking from thurs 12 jan
-	estimatedX += 8.5;
-	estimatedY -= 6.5;
+//	estimatedX += 8.5;
+//	estimatedY -= 6.5;
 	setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+//	sendPixelPosOfObject(x[0], x[1], x[2], x[3]);
 }
 
 void EvolvedFilterModule::readEncoderPositions() {

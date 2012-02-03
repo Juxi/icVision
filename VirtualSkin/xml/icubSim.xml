@@ -153,19 +153,21 @@
             <link z="-.0625" y="-.016" radius="0">
             
                 <!-- HAND -->
-                <marker name="right_hand"/>
+                <link x="-.020" y="-.03" radius="0">
+                    <link y="1" radius="0">
+                        <marker name="right_hand"/>
+                    </link>
+                </link>
+                
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
                 <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
                 
-                <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
+                
             
                     <!-- THUMB -->
                     <link x="-.015" y=".004" z=".0275" radius="0">
-                    <!--<box width=".015" height=".0399" depth=".015" hx="-.015" hy="-.012" hz="-0.035" px="-.0075" py="-.006" pz="-0.035"/>-->
-                    
-                    
                         <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30">
                         <joint z=".017" minPos="20" maxPos="90" radius=".0075">
                         <link y="-.00375" radius=".0">
@@ -201,6 +203,8 @@
                     </link>
                     <!-- / THUMB -->
 
+
+                <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
                     <!-- INDEX FINGER -->
                     <link x="-.029" y=".008" z="-.0055" radius="0">
                         <joint y="-.017" minPos="-10" maxPos="0" radius="0">
@@ -408,7 +412,12 @@
             <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
-                <marker name="left_hand"/>
+                <link x="-.020" y=".03" radius="0">
+                    <link y="1" radius="0">
+                        <marker name="left_hand"/>
+                    </link>
+                </link>
+                
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>
