@@ -36,9 +36,8 @@ public:
 private:
 	yarp::os::Network yarp;	//!< Identifies the yarp network
 	yarp::os::Port port;	//!< The port we are wrapping
-	bool keepRunning;		//!< Provides a graceful way to control when the run() method returns
+	volatile bool keepRunning;		//!< Provides a graceful way to control when the run() method returns
 
-	//QMutex mutex;
 	yarp::os::Bottle bottle;
 	
 	void run();		//!< Runs the thread

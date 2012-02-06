@@ -99,7 +99,8 @@ void RobotFilter::takeControl( int numReflexCollisions )
 {
 	if ( numReflexCollisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
-	
+	if ( isColliding && !haveControl )
+		
 	if ( isColliding && !haveControl )
 	{
 		haveControl = true;
@@ -107,7 +108,7 @@ void RobotFilter::takeControl( int numReflexCollisions )
 		for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
 		{
 			cbFilters.at(bodyPart)->cutConnection(true);	// take control away from the user
-			cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
+			//cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
 		}
 		
 		statusPort.setBottle( yarp::os::Bottle("0") );

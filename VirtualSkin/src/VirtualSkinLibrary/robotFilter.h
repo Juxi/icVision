@@ -115,11 +115,11 @@ public:
 				cmd.addVocab(VOCAB_GET);
 				cmd.addVocab(VOCAB_LIMITS);
 				cmd.addInt(i);
-				printf("Sending message... %s\n", cmd.toString().c_str());
+				//printf("Sending message... %s\n", cmd.toString().c_str());
 				
 				yarp::os::Bottle response;
 				port.write(cmd,response);
-				printf("Got response: %s\n", response.toString().c_str());
+				//printf("Got response: %s\n", response.toString().c_str());
 				
 				double min = response.get(2).asDouble();
 				double max = response.get(3).asDouble();

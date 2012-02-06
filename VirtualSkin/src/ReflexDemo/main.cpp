@@ -79,8 +79,8 @@ int main(int argc, char *argv[])
 			filter->openFilterRpcPort("/filterRpc");
 			
 			// Open the filter status port
-			printf("opening filter status port\n");
-			filter->openStatusPort("/filterStatus");
+			//printf("opening filter status port\n");
+			//filter->openStatusPort("/filterStatus");
 		}
 		
 		// Open the RPC interface to the world model
