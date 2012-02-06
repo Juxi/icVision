@@ -30,7 +30,7 @@ public:
 	GaborImage();
 	~GaborImage();
 
-	Img GaborTransform(Img Image, int Orientation);
+	Img GaborTransform(Img Image, int Frequency, int Orientation);
 	ConvolutionKernelF KernelRealData;
 	ConvolutionKernelF KernelImgData;
 };

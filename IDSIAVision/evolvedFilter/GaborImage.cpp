@@ -86,9 +86,9 @@ float GaborImage::KernelImgPart(int x, int y, int Orientation, int Frequency)
 	return (float)(tmp1 * tmp2 * Kv * Kv / Sigma);
 }
 
-Img GaborImage::GaborTransform(Img Image, int Orientation) {
+Img GaborImage::GaborTransform(Img Image, int Frequency, int Orientation) {
 	orientation = Orientation;
-	CalculateKernel(8, Orientation);
+	CalculateKernel(Orientation, Frequency);
 
 	Img retImg  = (IplImage*) cvClone(Image);
 	

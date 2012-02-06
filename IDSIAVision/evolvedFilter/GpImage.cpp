@@ -96,13 +96,23 @@ GpImage* GpImage::laplace(int Aperture) const {
 	return new GpImage(retImg);	
 }
 
+GpImage* GpImage::exp() const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvExp(Image, retImg);
+	return new GpImage(retImg);	
+}
+
+GpImage* GpImage::sqrt() const {
+	return pow(0.5);
+}
+
 GpImage* GpImage::log() const {
 	Img retImg = (IplImage*) cvClone(Image);
 	cvLog(Image, retImg);
 	return new GpImage(retImg);	
 }
 
-GpImage* GpImage::Pow(double P) const {
+GpImage* GpImage::pow(double P) const {
 	Img retImg = (IplImage*) cvClone(Image);
 	cvPow(Image, retImg, P);
 	return new GpImage(retImg);	
@@ -117,6 +127,40 @@ GpImage* GpImage::min(GpImage* a) const {
 	Img retImg = (IplImage*) cvClone(Image);
 	cvMin(Image, a->Image, retImg);
 	return new GpImage(retImg);	
+}
+
+
+GpImage* GpImage::min() const {
+	double MinValue, MaxValue;
+	cvMinMaxLoc(Image, &MinValue, &MaxValue, NULL, NULL);
+	
+	Img retImg = (IplImage*) cvClone(Image);
+	cvZero(retImg);
+	cvAddS(retImg, cvRealScalar(MinValue), retImg);
+	return new GpImage(retImg);
+}
+
+GpImage* GpImage::max() const {
+	double MinValue, MaxValue;
+	cvMinMaxLoc(Image, &MinValue, &MaxValue, NULL, NULL);
+
+	Img retImg = (IplImage*) cvClone(Image);
+	cvZero(retImg);
+	cvAddS(retImg, cvRealScalar(MaxValue), retImg);
+	return new GpImage(retImg);
+}
+
+double GpImage::getSum() const {
+	return cvSum(Image).val[0];
+}
+
+
+GpImage* GpImage::avg() const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvZero(retImg);
+	double v = getSum() / (Image->width * Image->height);
+	cvAddS(retImg, cvRealScalar(v), retImg);
+	return new GpImage(retImg);
 }
 	
 GpImage* GpImage::gauss(int Aperture) const {
@@ -170,6 +214,14 @@ GpImage* GpImage::threshold(double v) const {
 	return new GpImage(retImg);		
 }
 
+GpImage* GpImage::thresholdInv(double v) const {
+	//		Value = this.Image.ThresholdBinary(new Gray(v), new Gray(255));
+	Img retImg = (IplImage*) cvClone(Image);
+	cvThreshold(Image, retImg, v, 255.0, CV_THRESH_BINARY_INV);
+	return new GpImage(retImg);		
+}
+
+
 GpImage* GpImage::SmoothMedian(int Aperture) const { 
 //		Value = this.Image.SmoothMedian(Apertrue);
 	Img retImg = (IplImage*) cvClone(Image);
@@ -177,14 +229,28 @@ GpImage* GpImage::SmoothMedian(int Aperture) const {
 	return new GpImage(retImg);			
 }
 
-GpImage* GpImage::gabor(int p) const {
+GpImage* GpImage::SmoothBilateral(int Aperture) const { 
+	//		Value = this.Image.SmoothMedian(Apertrue);
+	Img retImg = (IplImage*) cvClone(Image);
+	cvSmooth(Image, retImg, CV_BILATERAL, Aperture, 10, 10);
+	return new GpImage(retImg);			
+}
+
+GpImage* GpImage::SmoothBlur(int Aperture) const { 
+	//		Value = this.Image.SmoothMedian(Apertrue);
+	Img retImg = (IplImage*) cvClone(Image);
+	cvSmooth(Image, retImg, CV_BLUR, Aperture, Aperture);
+	return new GpImage(retImg);			
+}
+
+GpImage* GpImage::gabor(int frequ, int orientation) const {
 	//GaborEmguImg gab = new GaborEmguImg();
 //		Value = gab.GaborTransform(this.Image, p);
 	//	std::cout << "TODO!:" << "IMplement GABOR" << std::endl;
 	//	exit(1);	
 	
 	GaborImage *gab = new GaborImage();
-	Img retImg = gab->GaborTransform(Image, p);
+	Img retImg = gab->GaborTransform(Image, frequ, orientation);
 	delete gab;
 	return new GpImage(retImg);
 }
@@ -239,7 +305,6 @@ GpImage* GpImage::ShiftLeft() const {
 	return new GpImage(retImg);
 }
 
-
 GpImage* GpImage::Normalize() const {
 	Img retImg = (IplImage*) cvClone(Image);	
 	
@@ -263,14 +328,14 @@ GpImage* GpImage::Normalize() const {
 	return new GpImage(retImg);
 }
 
-GpImage* GpImage::ResizeThenGabor(int Orientation, double Scale) const {
+GpImage* GpImage::ResizeThenGabor(int Frequency, int Orientation, double Scale) const {
 	GaborImage *gab = new GaborImage();
 	
 	Img retImg = (IplImage*) cvClone(Image);
 	Img temp   = cvCreateImage(cvSize(Image->width*Scale, Image->height*Scale), IPL_DEPTH_32F, 1);
 	cvResize(Image, temp, CV_INTER_CUBIC);
 
-	Img temp2 = gab->GaborTransform(temp, Orientation);
+	Img temp2 = gab->GaborTransform(temp, Frequency, Orientation);
 	
 	cvResize(temp2, retImg, CV_INTER_CUBIC);
 	
@@ -281,7 +346,105 @@ GpImage* GpImage::ResizeThenGabor(int Orientation, double Scale) const {
 	return new GpImage(retImg);
 
 }
+
+
+GpImage* GpImage::ReScale(double S) const {
+//	if (S >= 1) {
+//		return new GpImage(this.Image.Clone());
+//	}
 	
+	Img retImg = (IplImage*) cvClone(Image);	
+
+	int height = (int)(Image->height * S);
+	int width = (int)(Image->width * S);
+	if (height < Image->height / 4) height = Image->height / 4;
+	if (width  < Image->width / 4)  width  = Image->width / 4;
+	if (height > Image->height * 2) height = Image->height;
+	if (width  > Image->width * 2)  width  = Image->width;
+
+	Img temp   = cvCreateImage(cvSize(width, height), IPL_DEPTH_32F, 1);
+	cvResize(Image, temp, CV_INTER_CUBIC);
+	cvResize(temp, retImg, CV_INTER_CUBIC);
+	
+	cvReleaseImage(&temp);
+
+	return new GpImage(retImg);
+}
+
+
+GpImage* GpImage::LocalMax(int Aperture) const {
+	int width = Image->width;
+	int height = Image->height;
+
+	Img retImg = (IplImage*) cvClone(Image);	
+
+	for (int x = Aperture; x < width - Aperture; x++) {
+		for (int y = Aperture; y < height - Aperture; y++) {
+			float Acc = FLT_MIN;
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++) {
+//					uchar* temp_ptr = &((uchar*)(img->imageData + img->widthStep*pt.y))[pt.x*3];
+					Acc = std::max(Acc, CV_IMAGE_ELEM(Image, float, y+j, x+i));
+//					Acc = std::max(Acc, *((float*)(Image->imageData + Image->widthStep*(y + j))[x + i]));
+				}
+					
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++)
+//					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
+					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;			
+//					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
+		}
+	}
+	return new GpImage(retImg);
+}
+
+GpImage* GpImage::LocalAvg(int Aperture) const {
+	int width = Image->width;
+	int height = Image->height;
+	
+	Img retImg = (IplImage*) cvClone(Image);	
+	
+	for (int x = Aperture; x < width - Aperture; x++) {
+		for (int y = Aperture; y < height - Aperture; y++) {
+			float Acc = 0;
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++) 
+					Acc += CV_IMAGE_ELEM(Image, float, y+j, x+i);
+			
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++)
+					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc / (((Aperture * 2) + 1) * ((Aperture * 2) + 1));			
+		}
+	}
+	return new GpImage(retImg);
+}
+
+GpImage* GpImage::LocalMin(int Aperture) const {
+	int width = Image->width;
+	int height = Image->height;
+	
+	Img retImg = (IplImage*) cvClone(Image);	
+	
+	for (int x = Aperture; x < width - Aperture; x++) {
+		for (int y = Aperture; y < height - Aperture; y++) {
+			float Acc = FLT_MAX;
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++) {
+					//					uchar* temp_ptr = &((uchar*)(img->imageData + img->widthStep*pt.y))[pt.x*3];
+					Acc = std::min(Acc, CV_IMAGE_ELEM(Image, float, y+j, x+i));
+					//					Acc = std::max(Acc, *((float*)(Image->imageData + Image->widthStep*(y + j))[x + i]));
+				}
+			
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++)
+					//					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
+					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;			
+			//					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
+		}
+	}
+	return new GpImage(retImg);
+}
+
 	//		GaborEmguImg gab = new GaborEmguImg();
 	
 //			

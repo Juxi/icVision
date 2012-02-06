@@ -90,12 +90,12 @@ bool EvolvedFilterModule::updateModule()
 	
 	CvPoint frame1_1, frame1_2, frame2_1, frame2_2;
 	
-	frame1_1.x = frame2_1.x = 0.0;
-	frame1_1.y = frame2_1.y = 0.0;
-	frame1_2.x = frame2_2.x = 0.0;
-	frame1_2.y = frame2_2.y = 0.0;
+	frame1_1.x = frame2_1.x = -1.0;
+	frame1_1.y = frame2_1.y = -1.0;
+	frame1_2.x = frame2_2.x = -1.0;
+	frame1_2.y = frame2_2.y = -1.0;
 	
-	CvPoint ph, ph1, ph2;
+	CvPoint ph, ph1 = {-1,-1}, ph2 = {-1,-1};
 	
 	do {
 		readEncoderPositions();
@@ -183,7 +183,7 @@ bool EvolvedFilterModule::updateModule()
 			cvSplit(rgb, b, g, r, NULL);
 			cvAdd(r, filteredImg->Image, r);
 			cvMerge(b, g, r, NULL, rgb);	
-			
+						
 			cvReleaseImage(&r);
 			cvReleaseImage(&g);	
 			cvReleaseImage(&b);	
@@ -213,13 +213,23 @@ bool EvolvedFilterModule::updateModule()
 			for(; seq; seq = seq->h_next) {
 				//Find minimal bounding box for each sequence
 				CvRect boundbox = cvBoundingRect(seq);
+				if( boundbox.width * boundbox.height < 35) continue;				
 				boxes.push_back(boundbox);
 			}
 			
 			cvReleaseMemStorage(&storage);
+			
+			CvFont font;
+			double hScale=1.0;
+			double vScale=1.0;
+			int    lineWidth=1;
+			cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, hScale,vScale,0,lineWidth);
 
 			for(unsigned int boxNr = 0; boxNr < boxes.size(); boxNr++) {
 				CvRect r = boxes[boxNr];
+				
+				if( r.width * r.height < 35) continue;
+				
 				//std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
 				CvPoint p1, p2;
 				p1.x = r.x; p1.y = r.y;
@@ -228,19 +238,34 @@ bool EvolvedFilterModule::updateModule()
 				int x = r.x + r.width/2;
 				int y = r.y + r.height;
 
-				if(wewantoverlay) {
-					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
-					ph.x = x; ph.y = y;
-					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
-					
-					if(allFramesDone) ph1 = ph;
-					else ph2 = ph;			
+				if(boxNr == 0) {
+					if(allFramesDone) { 
+						ph1.x = x;
+						ph1.y = y;
+					}else{
+						ph2.x = x;
+						ph2.y = y;
+					}
+				}
 
+				
+				if(wewantoverlay) {
+					// bounding box
+					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+					//text
+					char s[100];
+					sprintf(s, "%s:[%d]", getName().c_str(), boxNr);
+					ph = p1; ph.x -= 10; ph.y -= 10; 
+					cvPutText (rgb, s, ph, &font, cvScalar(255,255,0));
+					
+					ph.x = x; ph.y = y;
+					// mid dot
+					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
 				} else {
 					cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
 				}
 				
-				
+				// TODO correspondance problem? more than one thing in the frame>?!
 				if(allFramesDone) {
 					frame1_1 = p1;
 					frame1_2 = p2;
@@ -249,7 +274,7 @@ bool EvolvedFilterModule::updateModule()
 					frame2_2 = p2;
 				}
 				// only do for one block // HACK // TODO
-				break;
+				// break;
 			}
 			
 		}
@@ -267,6 +292,10 @@ bool EvolvedFilterModule::updateModule()
 			ImageOf<PixelBgr>& output = outputPort_Image.prepare();
 			output.wrapIplImage(outputImageToWrite); 
 			outputPort_Image.write();	
+			
+			if(isReadingFileFromHDD)
+				cvSaveImage("output.png", outputImageToWrite);
+			
 		}
 			
 		// cleanup 
@@ -283,6 +312,7 @@ bool EvolvedFilterModule::updateModule()
 	if( runOnLeft == runOnRight == true )	{
 //		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
 //		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+		printEncoderPositions();
 		std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
 		std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
 		
@@ -300,9 +330,7 @@ bool EvolvedFilterModule::updateModule()
 		X.push_back(ph2.y);
 		
 		
-		Vector &Xsend = posOutputPort.prepare(); // get pointer
-		Xsend = X;			// set to port
-		
+		posOutputPort.prepare() = X;
 		posOutputPort.write();
 
 //		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
@@ -404,8 +432,6 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	
 	
 	
-	
-	
 //	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
 	double CellSize = 6;
@@ -460,6 +486,19 @@ void EvolvedFilterModule::readEncoderPositions() {
 			}
 		}
 	}
+}
+
+void EvolvedFilterModule::printEncoderPositions() {
+	std::cout << "Encoders: (Head, Torso)" << std::endl;	
+	
+	for(int i = 0; i < HEAD_JOINTS; i++) {
+		std::cout << headjnt_pos[i] << ",";
+	}
+
+	for(int i = 0; i < 3; i++) {
+		std::cout << torsojnt_pos[i] << ",";
+	}
+	std::cout << std::endl;
 }
 
 
