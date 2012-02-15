@@ -30,7 +30,7 @@ GpImage* RedBoxDetector::runFilter() {
 	GpImage* node6 = node5->gauss(3);
 	GpImage* node7 = InputImages[1];
 	GpImage* node11 = node7->threshold(64);
-	GpImage* node13 = node11->Pow(0.5);
+	GpImage* node13 = node11->pow(0.5);
 	GpImage*  node15 = node6->absdiff(node13);
 	GpImage* node19 = node7;
 	GpImage* node34 = node15->Normalize();

@@ -5,7 +5,7 @@
 
 #include <QString>
 #include <QMatrix4x4>
-
+#include <cassert>
 
 namespace KinematicModel {
 
@@ -51,6 +51,40 @@ public:
 	
 	inline QString markerName(unsigned int index) const				//!< return the part marker name given an index
 	{ return m_markerName[index]; }
+
+	inline QMatrix4x4 const &markerConfiguration(QString &name) {
+		for (size_t i(0); i < m_markerName.size(); ++i) {
+			if (m_markerName[i] == name)
+				return m_markerConfiguration[i];
+		}
+		throw KinematicModelException("marker name not found");
+	}
+
+	inline std::vector<double> markerPosition(QString name) {
+		QMatrix4x4 configuration(markerConfiguration(name));
+		std::vector<double> position(3);
+		position[0] = configuration.data()[12];
+		position[1] = configuration.data()[13];
+		position[2] = configuration.data()[14];
+		return position;
+	}
+
+	double orientationMeasure(QString name, std::vector<double> &goal_orientation, std::vector<double> &mask_orientation) {
+		assert(goal_orientation.size() == 9);
+		QMatrix4x4 const &observation(markerConfiguration(name));
+
+		double measure(0.0), norm1(0.0), norm2(0.0);
+		int orientation_index(0);
+		for (size_t i(0); i < goal_orientation.size(); ++i, ++orientation_index) {
+			if (orientation_index % 4 == 3) ++orientation_index;
+			double val1(observation.data()[orientation_index]);
+			double val2(goal_orientation[i]);
+			measure += val1 * val2 * mask_orientation[i];
+			norm1 += val1 * val1 * mask_orientation[i];
+			norm2 += val2 * val2 * mask_orientation[i];
+		}
+		return (measure / sqrt(norm1) / sqrt(norm2) + 1.0) / 2.0;
+	}
 
 	friend class Robot;
 

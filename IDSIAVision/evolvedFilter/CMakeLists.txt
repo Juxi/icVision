@@ -35,6 +35,8 @@ SET ( src_files main.cpp
 		evolved_filter_module.cpp
 		evolved_filters/blue_detector.cpp
 		evolved_filters/glass_detector.cpp
+	evolved_filters/hand_detector.cpp	
+		evolved_filters/icub_finger.cpp	
 		evolved_filters/redbox_detector.cpp
 		evolved_filters/teabox.cpp		
 )
@@ -43,6 +45,8 @@ SET ( src_files main.cpp
 SET ( hdr_files evolved_filter_module.h boolList.h GpImage.h GaborImage.h icFilterModule.h
 		evolved_filters/blue_detector.h
 		evolved_filters/glass_detector.h
+evolved_filters/hand_detector.h
+		evolved_filters/icub_finger.h
 		evolved_filters/redbox_detector.h
 		evolved_filters/teabox.h
 )
