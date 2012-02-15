@@ -69,15 +69,16 @@ bool ControlThread::waitForMotion()
 	
 	bool flag = false;
 	while ( !flag ) { 
-		printf(".");
+		//printf(".");
 		msleep(500);
 		if ( !robot->checkMotionDone(&flag) || !keepRunning )
 			return false;
-		else if ( timer.elapsed() > 10000)
+		else if ( timer.elapsed() > 30000)
 		{
 			printf("waitForMotion() timed out\n");
 			return false;
 		}
+		else { printf("%.2fs  ",(double)timer.elapsed()/1000.0); }
 	}
 	printf("\n");
 	return true;
@@ -92,15 +93,15 @@ bool ControlThread::isOnMap()
 	std::vector<double> b = roadmap->map[v].q;
 	
 				std::vector<double>::iterator k;
-				printf("current: ");
-				for ( k = a.begin(); k!=a.end(); ++k )
-					printf("%f ",*k);
-				printf("\n");
+				//printf("current: ");
+				//for ( k = a.begin(); k!=a.end(); ++k )
+				//	printf("%f ",*k);
+				//printf("\n");
 
-				printf("nearest: ");
-				for ( k = b.begin(); k!=b.end(); ++k )
-					printf("%f ",*k);
-				printf("\n");
+				//printf("nearest: ");
+				//for ( k = b.begin(); k!=b.end(); ++k )
+				//	printf("%f ",*k);
+				//printf("\n");
 
 	double err = maxDiff(a,b);
 	
@@ -247,7 +248,7 @@ void ControlThread::multipleEdgeMove()
 				roadmap->removeEdge( i->first );
 			}
 		} else {
-			roadmap->setEdgeColor( i->first, Qt::black );
+			roadmap->setEdgeColor( i->first, Qt::darkGray );
 		}
 	}	
 }
