@@ -202,12 +202,20 @@ void MainWindow::loadMap()
 		return;
 	else {
 		
-		std::map< std::string,  std::vector< std::vector<float> > >roadMapData = read_poses( fileName );
-		//roadMapData.
-				/*** HANDLE VERTICES ***/
+		QFile file(fileName);
+		std::vector< std::vector<double> > graphNodes;
+		std::vector< std::pair<int,int> > graphEdges;
 		
+		if (!file.open(QIODevice::ReadOnly)) {
+			QMessageBox::information(this, tr("Unable to open file"),
+									 file.errorString());
+			return;
+		}
 		
-		
+		QTextStream in(&file);
+		QString line;
+
+		/*** HANDLE VERTICES ***/
 		double n;				// dimension of p
 		std::vector<double> p,
 							q;	// an n dimensional point
@@ -255,17 +263,16 @@ void MainWindow::loadMap()
 				printf("qSize = %d\n",q.size());
 
 				//respect the robot's joint constraints
-				//std::vector<double>::iterator k;
-				//printf("qBefore: ");
-				//for ( k = q.begin(); k!=q.end(); ++k )
-				//		printf("%f ",*k);
-				//printf("\n");
-				
+				std::vector<double>::iterator k;
+				printf("qBefore: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
 					q = iCub.withinLimits(q);
-				//printf("qAfter: ");
-				//for ( k = q.begin(); k!=q.end(); ++k )
-				//	printf("%f ",*k);
-				//printf("\n");
+				printf("qAfter: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
 
 				// put q into p
 				for ( k = q.begin(); k!=q.end(); ++k )
