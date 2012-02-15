@@ -32,6 +32,7 @@ protected:
 	
 	void calculateAndSetObjectWorldPosition(CvPoint, CvPoint, CvPoint, CvPoint);
 	void readEncoderPositions();
+	void printEncoderPositions();	
 	
 	// image memory containers for the buffered port 
 	IplImage *rawImageToWrite, *outputImageToWrite;	

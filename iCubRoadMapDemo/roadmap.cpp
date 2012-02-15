@@ -208,7 +208,9 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 		//map[edge].qtGraphEdge->flagRemoval();
 	
 	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
-	remove_edge( edge, map );
+	
+	
+	//remove_edge( edge, map );
 }
 
 void Roadmap::removeAllEdges()

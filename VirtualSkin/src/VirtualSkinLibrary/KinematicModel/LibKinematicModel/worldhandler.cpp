@@ -66,7 +66,7 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 			}
 			else if ( attributes.value("type").toStdString() == "target" )
 			{
-				obj = new CompositeObject( model->TARGET() ) ;
+				obj = new CompositeObject( model->TARGET() );
 			}
 			else
 			{
@@ -150,7 +150,18 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 
 bool WorldHandler::endElement(const QString & /* namespaceURI */, const QString & /* localName */, const QString &qName)
 {
-    if ( qName == "object") {
+    if ( qName == "object")
+	{
+		QColor freeColor,collidingColor;
+		
+		if ( obj->getResponseClass() == model->OBSTACLE() ) freeColor = Qt::blue;
+		else if ( obj->getResponseClass() == model->TARGET() ) freeColor = Qt::green;
+		
+		collidingColor = freeColor;
+		collidingColor.setAlphaF(0.5);
+		obj->setFreeColor( freeColor );
+		obj->setCollidingColor( collidingColor );
+		
 		model->appendObject(obj);
 		obj = NULL;
     }
