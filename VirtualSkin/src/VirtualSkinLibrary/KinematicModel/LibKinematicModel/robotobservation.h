@@ -83,7 +83,7 @@ public:
 			norm1 += val1 * val1 * mask_orientation[i];
 			norm2 += val2 * val2 * mask_orientation[i];
 		}
-		return measure / sqrt(norm1) / sqrt(norm2);
+		return (measure / sqrt(norm1) / sqrt(norm2) + 1.0) / 2.0;
 	}
 
 	friend class Robot;

@@ -182,7 +182,8 @@
                                 <link x="-.022" radius=".0075">
                                 <joint y="-.015" minPos="0" maxPos="90" radius="0.0075">
                                 <link x="-.025" radius=".0075">
-                                
+                                    <marker name="right_thumb" />
+                              
                                     <sphere radius=".008" px="-.025"/>
                                     
                                 </link>
@@ -222,7 +223,7 @@
                                 <link z="-.022" radius=".0075">
                                 <joint x="-.017" minPos="0" maxPos="90" radius="0.0075">
                                 <link z="-.025" radius=".0075">
-                            
+                                    <marker name="right_index" />
                                     <sphere radius=".008" pz="-.025"/>
                                     
                                 </link>

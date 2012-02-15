@@ -29,17 +29,18 @@ public:
 		int n_parts = theRobot.numBodyParts();
 		std::vector<double> home_pos;
 		for (size_t i(0); i < n_parts; ++i) {
+			std::cout << theRobot.getPart(i)->name().toStdString() << " " << theRobot.getNumMotors(i) << std::endl;
 			int n_motors = theRobot.getNumMotors(i);
 			total_motors += n_motors;
 			for (size_t m(0); m < n_motors; ++m) {
 				home_pos.push_back(theRobot.getPart(i)->at(m)->normHomePos());
-				std::cout << theRobot.getPart(i)->at(m)->normHomePos() << " ";
 			}
 		}
 		d_total_motors = total_motors;
 		d_home_pos = home_pos;
-
+		d_last_position = d_home_pos;
 	}
+
 	~GraspFinder() {}
 	
 	void stop();
@@ -66,9 +67,21 @@ public:
 	void do_test();
 
 	void add_ball(float x, float y, float z) const {
+		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
+		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .02 );
+		  QColor color( 0, 0, 255, 255 );
+		  QVector3D pos(x, y, z);
+		  sphere->translate(pos);
+		  sphere->setFreeColor(color);
+		  sphere->setCollidingColor(color);
+		  composite->append(sphere);
+		  theModel.appendObject(composite);
+	}
+
+	void add_point(float x, float y, float z) const {
 		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( theModel.TARGET() );
 		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .01 );
-		  QColor color( 0, 0, 255, 255 );
+		  QColor color( 0, 0, 0, 255 );
 		  QVector3D pos(x, y, z);
 		  sphere->translate(pos);
 		  sphere->setFreeColor(color);
@@ -80,7 +93,7 @@ public:
 public:
 	KinematicModel::Model& theModel;	// the world model	
 	KinematicModel::Robot& theRobot;
-	std::vector<double> d_home_pos;
+	std::vector<double> d_home_pos, d_last_position;
 	std::vector<std::vector<double> > d_points;
 	std::vector<std::vector<double> > d_configuration_points;
 
