@@ -26,6 +26,8 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <ctime>
+
 //using namespace std;
 
 #ifdef DEBUG
@@ -240,6 +242,7 @@ public:
 	NES(const Function& f, bool importanceMixing = true, bool baseline = false)
 	: m_fitness(f)
 	{
+		rngSeed(time(0));
 		m_importanceMixing = importanceMixing;
 		m_baseline = baseline;
 

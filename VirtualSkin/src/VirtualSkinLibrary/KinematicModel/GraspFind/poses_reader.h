@@ -14,6 +14,17 @@
 typedef std::vector<std::vector<float> > poses_vector_t;
 typedef std::map<std::string, poses_vector_t> poses_map_t;
 
+void write_poses(poses_vector_t &vectors, std::string filename) {
+	std::ofstream out_file(filename.c_str());
+	out_file << "CFGSPACE" << endl;
+	for (size_t i(0); i < vectors.size(); ++i) {
+		std::vector<float> &vec(vectors[i]);
+		for (size_t n(0); n < vec.size(); ++n)
+			out_file << vec[n] << " ";
+		out_file << endl;
+	}
+}
+
 poses_map_t read_poses(std::string filename) {
 	std::ifstream in_file(filename.c_str());
 

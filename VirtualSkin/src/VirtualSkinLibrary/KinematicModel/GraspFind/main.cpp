@@ -3,7 +3,9 @@
 #include "sphere.h"
 #include "cylinder.h"
 #include "box.h"
-#include "graspfinder.h"
+
+#include "graspthread.h"
+
 #include "poses_reader.h"
 #include <iostream>
 #include <vector>
@@ -29,17 +31,17 @@ int main(int argc, char *argv[])
 	printf( "loading world file: %s\n", argv[1] );
 	model.loadWorld( QString(argv[2]), false );
 	
-	GraspFinder grasp_finder( model, the_robot, false );
-	for (float z(-.2); z < .2; z += .03)
-		grasp_finder.add_ball(-.2, .15, z);
-	for (float z(-.2); z < .2; z += .03)
-			grasp_finder.add_ball(-.2, .3, z);
+	GraspThread grasp_thread( model, the_robot );
+//	for (float z(-.2); z < .2; z += .03)
+//		grasp_finder.add_ball(-.2, .15, z);
+//	for (float z(-.2); z < .2; z += .03)
+//			grasp_finder.add_ball(-.2, .3, z);
 
-	grasp_finder.start();
+	grasp_thread.start();
 
 	int result = app.exec();						// run the Qt application
 	
-	grasp_finder.stop();
+	grasp_thread.stop();
 	model.stop();
 	
 	return result;
