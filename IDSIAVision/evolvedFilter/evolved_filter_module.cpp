@@ -53,9 +53,8 @@ EvolvedFilterModule::~EvolvedFilterModule() {
 */
 bool EvolvedFilterModule::updateModule()
 {
-	if( ! inDebugMode) {
-		putchar('.'); std::cout.flush();
-	} else {
+//	putchar('.'); std::cout.flush();
+	if( inDebugMode) {
 		std::cout << "DEBUG: Run filter!" << std::endl;	
 		start = clock();
 	}
@@ -100,12 +99,14 @@ bool EvolvedFilterModule::updateModule()
 	do {
 		readEncoderPositions();
 		
-		if(in == NULL) {
-			// first run 
-			in = (IplImage*) left_image->getIplImage();
-		}else{
-			allFramesDone = true;
-			in = (IplImage*) right_image->getIplImage();
+		if(! isReadingFileFromHDD) {
+			if(in == NULL) {
+				// first run 
+				in = (IplImage*) left_image->getIplImage();
+			}else{
+				allFramesDone = true;
+				in = (IplImage*) right_image->getIplImage();
+			}
 		}
 
 		ImageWidth  = in->width * scalingFactor;
@@ -220,8 +221,8 @@ bool EvolvedFilterModule::updateModule()
 			cvReleaseMemStorage(&storage);
 			
 			CvFont font;
-			double hScale=1.0;
-			double vScale=1.0;
+			double hScale=1.0*0.5;
+			double vScale=1.0*0.5;
 			int    lineWidth=1;
 			cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, hScale,vScale,0,lineWidth);
 
@@ -312,9 +313,11 @@ bool EvolvedFilterModule::updateModule()
 	if( runOnLeft == runOnRight == true )	{
 //		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
 //		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
-		printEncoderPositions();
-		std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
-		std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
+		if(inDebugMode) {
+			printEncoderPositions();
+			std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
+			std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
+		}
 		
 		
 		calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);

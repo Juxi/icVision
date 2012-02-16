@@ -30,16 +30,17 @@ int main(int argc, char * argv[]) {
 	
 //	EvolvedFilterModule* module = new RedBoxDetector();
 //	EvolvedFilterModule* module = new GlassDetector();		
-//	EvolvedFilterModule* module = new BlueCupDetector();	
+	EvolvedFilterModule* module = new BlueCupDetector();	
 //	EvolvedFilterModule* module = new EvolvedFilterModule();
 //	EvolvedFilterModule* module = new TeaBoxDetector();	
 //	EvolvedFilterModule* module = new HandDetector();	
-	EvolvedFilterModule* module = new iCubFingerFilter();	
-	
-	module->runOnBothImages();
-	module->putInVirtualSkin(false);
-	
+//	EvolvedFilterModule* module = new iCubFingerFilter();	
+
+	// for reading from file
 //	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
+	module->runOnBothImages();
+	module->putInVirtualSkin(true);
+	
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
 	module->runModule(argc, argv);
 	module->close();
