@@ -1,12 +1,3 @@
-/*******************************************************************
- ***               Copyright (C) 2011 Mikhail Frank              ***
- ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
- ******************************************************************/
-
-/** \addtogroup WorldModelDemo
- *	@{
- */
-
 #ifndef GRASPFINDER_H_
 #define GRASPFINDER_H_
 
