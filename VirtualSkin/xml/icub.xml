@@ -13,6 +13,7 @@
             
             <!-- THESE GEOMS MODEL THE HIPS AND THE STAND
                  THEY COLLIDE WITH THE TABLE IN world.xml -->
+
             <sphere radius=".08" px="0" py=".06" pz="-.05"/>
             <sphere radius=".08" px="0" py="-.06" pz="-.05"/>
             <sphere radius=".1" px=".035" pz="-.06"/>
@@ -157,6 +158,12 @@
             <link z="-.0625" y="-.016" radius="0">
             
                 <!-- HAND -->
+                <link x="-.020" y="-.03" radius="0">
+                    <link y="1" radius="0">
+                        <marker name="right_hand"/>
+                    </link>
+                </link>
+                
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
@@ -411,6 +418,12 @@
             <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
+                <link x="-.020" y=".03" radius="0">
+                    <link y="1" radius="0">
+                        <marker name="left_hand"/>
+                    </link>
+                </link>
+                
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>

@@ -137,6 +137,7 @@ private:
 	DT_ResponseClass targetClass;		//!< these don't
 	DT_ResponseClass ghostClass;		//!< these are left out of collision detection computations
 	DT_ResponseClass robotClass;		//!< these belong to the robot's body
+	//DT_ResponseClass robotBaseClass;
 	
 	uint numObjects, numPrimitives;
 	

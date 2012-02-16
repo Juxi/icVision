@@ -28,8 +28,11 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	ghostClass = DT_GenResponseClass(responseTables.at(0));
 	//worldCriticalClass = DT_GenResponseClass(responseTables.at(0));
 	//robotCriticalClass = DT_GenResponseClass(responseTables.at(0));
+	//robotBaseClass = DT_GenResponseClass(responseTables.at(0));
+	
 
 	// define some collision responses for the world table
+	//DT_AddPairResponse(	responseTables.at(0), robotClass, robotBaseClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), robotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), robotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	
@@ -170,7 +173,11 @@ void Model::appendObject( KinTreeNode* node )
 		//if (verbose) printf("appending robot primitive to world\n");
 		DT_SetResponseClass(	node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
 		DT_RemovePairResponse(	node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
-		DT_SetResponseClass(	responseTables.at(0), (*i)->getSolidObjectHandle(), robotClass );
+		
+		// if no parents
+		if ( !node->isNearRoot() )
+			DT_SetResponseClass(	responseTables.at(0), (*i)->getSolidObjectHandle(), robotClass );
+		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		(*i)->setIdx( ++numPrimitives );

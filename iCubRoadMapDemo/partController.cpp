@@ -129,8 +129,9 @@ void PartController::setVelocity( int v )
 	{
 		vels[i] = (double)v;
 	}
-	if( pos->setRefSpeeds(vels) )
-		printf("Set velocity succeeded\n");
+	bool ok = pos->setRefSpeeds(vels);
+	//if( ok )
+	//	 printf("Set velocity succeeded\n");
 }
 
 bool PartController::positionMove( const std::vector<double>& poss )

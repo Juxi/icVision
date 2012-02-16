@@ -91,6 +91,35 @@ void KinTreeNode::filterCollisionPairs()
     }
 }
 
+bool KinTreeNode::isNearRoot( KinTreeNode* node, bool foundLink, bool foundJoint )
+{
+	if ( !node ) node = this;
+	
+	// to control recursion up serial chains
+	if ( !parent() ) 
+	{
+		printf("isNearRoot returns TRUE\n");
+		return true;
+	}
+
+        if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
+		{
+			printf("isNearRoot returns FALSE\n");
+			return false;
+		}
+        if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !data().isEmpty() )
+		{
+            foundLink = true;
+        }
+        else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !data().isEmpty() )
+		{
+            foundJoint = true;
+        }
+
+	
+    return parent()->isNearRoot(node,foundLink,foundJoint);
+}
+
 void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoint )
 {
     // to control recursion down serial chains

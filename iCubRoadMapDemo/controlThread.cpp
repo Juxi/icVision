@@ -1,7 +1,7 @@
 #include "controlThread.h"
 #include <QTime>
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), keepRunning(false)
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), keepRunning(false)
 {
 	//vSkinStatus.open("/statusOut");
 	//if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -28,6 +28,13 @@ void ControlThread::restart()
 	QThread::start();
 }
 
+void ControlThread::setVelocity( int i )
+{ 
+	if ( i < 0 ) i = 0;
+	else if ( i > 100 ) i = 100;
+	velocity = (double)i;
+}
+
 bool ControlThread::gotoNearest()
 {
 	std::vector<double> p = robot->getCurrentPose();
@@ -35,6 +42,7 @@ bool ControlThread::gotoNearest()
 	
 	Roadmap::vertex_t v = roadmap->nearestVertex(p);
 	
+	robot->setVelocity( velocity );
 	if ( !robot->positionMove(roadmap->getStdPose(v)) )
 		return 0;
 	
@@ -61,15 +69,16 @@ bool ControlThread::waitForMotion()
 	
 	bool flag = false;
 	while ( !flag ) { 
-		printf(".");
+		//printf(".");
 		msleep(500);
 		if ( !robot->checkMotionDone(&flag) || !keepRunning )
 			return false;
-		//else if ( timer.elapsed() > 10000)
-		//{
-		//	printf("waitForMotion() timed out\n");
-		//	return false;
-		//}
+		else if ( timer.elapsed() > 30000)
+		{
+			printf("waitForMotion() timed out\n");
+			return false;
+		}
+		else { printf("%.2fs  ",(double)timer.elapsed()/1000.0); }
 	}
 	printf("\n");
 	return true;
@@ -84,15 +93,15 @@ bool ControlThread::isOnMap()
 	std::vector<double> b = roadmap->map[v].q;
 	
 				std::vector<double>::iterator k;
-				printf("current: ");
-				for ( k = a.begin(); k!=a.end(); ++k )
-					printf("%f ",*k);
-				printf("\n");
+				//printf("current: ");
+				//for ( k = a.begin(); k!=a.end(); ++k )
+				//	printf("%f ",*k);
+				//printf("\n");
 
-				printf("nearest: ");
-				for ( k = b.begin(); k!=b.end(); ++k )
-					printf("%f ",*k);
-				printf("\n");
+				//printf("nearest: ");
+				//for ( k = b.begin(); k!=b.end(); ++k )
+				//	printf("%f ",*k);
+				//printf("\n");
 
 	double err = maxDiff(a,b);
 	
@@ -151,10 +160,18 @@ void ControlThread::run()
 		return;
 	}
 	
+	//std::vector<double> a = roadmap->map[0].q;
+	//Roadmap::vertex_t b = roadmap->map[1];
+	
 	while ( keepRunning )
 	{
-		if ( !isOnMap() )	gotoNearest();
-		else				multipleEdgeMove();
+		if ( !isOnMap() )	
+			gotoNearest();
+		else if ( roadmap->currentVertex == 0 )	
+			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+		else
+			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
+		
 		msleep(100);
 	}
 	
@@ -178,30 +195,33 @@ void ControlThread::singleEdgeMove()
 	if ( thisMove.second.size() > 0 )
 	{
 		printf("*** TAKING A RANDOM ACTION ***\n");
-		roadmap->setEdgeColor( thisMove.first, Qt::yellow );	// mark the currently selected action on the
+		roadmap->setEdgeColor( thisMove.first, Qt::red );	// mark the currently selected action on the
+		
+		
+		robot->setVelocity( velocity );
 		robot->positionMove( thisMove.second );					// move the robot
 		
 		if ( waitForMotion() ) 
 		{
 			std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
-			roadmap->setEdgeColor( thisMove.first, Qt::green ); 
+			roadmap->setEdgeColor( thisMove.first, Qt::black ); 
 		}
 		else 
 		{
+			QColor color = Qt::lightGray;
 			std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
-			roadmap->setEdgeColor( thisMove.first, Qt::red ); 
+			roadmap->setEdgeColor( thisMove.first, color.lighter() ); 
 			roadmap->removeEdge( thisMove.first );
 		}
 	}
 }
 
-void ControlThread::multipleEdgeMove()
+void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
 {
 	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
-	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path = roadmap->randomMoves();
 	
 	for ( i = path.begin(); i != path.end(); ++i )
-		roadmap->setEdgeColor( i->first, Qt::yellow );
+		roadmap->setEdgeColor( i->first, Qt::red );
 	
 	bool motionInterrupted = false;
 	for ( i = path.begin(); i != path.end(); ++i )
@@ -210,30 +230,24 @@ void ControlThread::multipleEdgeMove()
 		{
 			Roadmap::out_edge_i e, e_end;
 			tie(e, e_end) = out_edges( i->second, roadmap->map );
-			
-			//if ( /*e == e_end || */
-			//	 !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
-			//	 motionInterrupted = true;
-			//} else {
-				//if ( robot->isWithinLimits( roadmap->map[i->second].q ) )
-				//{
-					robot->positionMove(roadmap->map[i->second].q);
-					motionInterrupted = !waitForMotion();
-				//} else  { motionInterrupted = true; }
-			//}
+
+			robot->setVelocity( velocity );
+			robot->positionMove(roadmap->map[i->second].q);
+			motionInterrupted = !waitForMotion();
 
 			if ( !motionInterrupted ) {
 				std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
-				roadmap->setEdgeColor( i->first, Qt::green ); 
+				roadmap->setEdgeColor( i->first, Qt::black ); 
 				roadmap->setCurrentVertex( i->second );
 				robot->setWaypoint();
 			} else {
+				QColor color = Qt::lightGray;
 				std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
-				roadmap->setEdgeColor( i->first, Qt::red );
+				roadmap->setEdgeColor( i->first, color.lighter() );
 				roadmap->removeEdge( i->first );
 			}
 		} else {
-			roadmap->setEdgeColor( i->first, Qt::black );
+			roadmap->setEdgeColor( i->first, Qt::darkGray );
 		}
 	}	
 }

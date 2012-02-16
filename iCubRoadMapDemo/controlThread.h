@@ -24,6 +24,8 @@ public:
 	ControlThread( iCubController* _robot, Roadmap* _map );
 	~ControlThread();
 	
+	void setVelocity( int i );
+	
 	bool gotoNearest();
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
@@ -37,15 +39,17 @@ public:
 protected:
 	
 	yarp::os::Network yarp;
-	yarp::os::Port vSkinStatus;
+	//yarp::os::Port vSkinStatus;
 	
 	iCubController* robot;
 	Roadmap* roadmap;
+	double	velocity;
+	
 	volatile bool keepRunning;
 	
 	void run();
 	void singleEdgeMove();
-	void multipleEdgeMove();
+	void multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
 };
 #endif
 /** @} */

@@ -98,40 +98,42 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	
 	attach(handlerPort); 
 	
-
-	// open the input ports from the cameras
 	std::string inputPortName, serverPortName;
-	
-	inputPortName = portPrefix;	serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/left";	serverPortName += "/cam/left";
-	
-	// trying to connect to the left camera
-	if(! leftInPort.open( inputPortName.c_str() )){
-		std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;
-		return false;
-	}
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
-		std::cout << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
-	
-	inputPortName = portPrefix;	serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/right";	serverPortName += "/cam/right";
-	// trying to connect to the right camera
-	if(! rightInPort.open( inputPortName.c_str() )){
-		std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;		
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
-		std::cout << " with " << inputPortName.c_str() << std::endl;
-		return false;
+
+	if(! isReadingFileFromHDD) {
+		// open the input ports from the cameras
+		
+		inputPortName = portPrefix;	serverPortName = "/";
+		inputPortName += getName(); serverPortName += robotName;
+		inputPortName += "/left";	serverPortName += "/cam/left";
+		
+		// trying to connect to the left camera
+		if(! leftInPort.open( inputPortName.c_str() )){
+			std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
+			std::cout << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
+		
+		inputPortName = portPrefix;	serverPortName = "/";
+		inputPortName += getName(); serverPortName += robotName;
+		inputPortName += "/right";	serverPortName += "/cam/right";
+		// trying to connect to the right camera
+		if(! rightInPort.open( inputPortName.c_str() )){
+			std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;		
+			return false;
+		}
+		
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
+			std::cout << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
 	}
 	
 	outputPortName  = portPrefix;
@@ -263,6 +265,11 @@ void icFilterModule::runOnBothImages() {
 // to kail's world model
 bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
 	if(! addToWorldModel) return false;
+	if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+		std::cout << "NOT setting cup1 ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+		return false;
+	}
+	
 	yarp::os::Bottle cmd, response;
 	
 	// get information about the object from rpc
@@ -270,7 +277,8 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	cmd.addString("set");
 	cmd.addString(objName);
 	
-	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	if(inDebugMode)
+		std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
 	
 	cmd.addDouble(x);
 	cmd.addDouble(y);

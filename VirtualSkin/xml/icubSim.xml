@@ -10,11 +10,11 @@
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".0325">
             <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>
-            <box width="0.07" depth="0.18" height="0.18" pz="-0.09"/>
+            <box width="0.07" depth="0.18" height="0.18" pz="-0.09"/>-->
             <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
             <sphere radius=".07" px=".035" py=".05" pz="-.03"/>
             <sphere radius=".07" px=".035" py="-.05" pz="-.03"/>
-            <sphere radius=".09" px=".035" pz="-.09"/>-->
+            <sphere radius=".09" px=".035" pz="-.09"/>
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">

@@ -27,7 +27,7 @@ void Roadmap::setDimensionality( int d )
 void Roadmap::setCurrentVertex( vertex_t v )
 {
 	if ( map[v].qtGraphNode )
-		emit newNodeColor( map[v].qtGraphNode, Qt::yellow, Qt::darkYellow );
+		emit newNodeColor( map[v].qtGraphNode, Qt::red, Qt::darkRed );
 		//map[v].qtGraphNode->setColor( Qt::yellow, Qt::darkYellow );
 	
 	if ( v != currentVertex )
@@ -74,13 +74,13 @@ std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
 	return result;
 }
 
-std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
+
+std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::aToB( Roadmap::vertex_t from, Roadmap::vertex_t to )
 {
 	std::list< std::pair< edge_t, vertex_t > > result;
 	if ( num_vertices( map ) > 0 )
 	{
-		vertex_t rand_vertex = (vertex_t)(rand() % (int)num_vertices(map));
-		std::list<Map::vertex_descriptor> vertex_list = shortestPath( currentVertex, rand_vertex );
+		std::list<Map::vertex_descriptor> vertex_list = shortestPath( from, to );
 		for ( std::list<Map::vertex_descriptor>::iterator i = vertex_list.begin(); i != vertex_list.end(); )
 		{
 			vertex_t a = *i;
@@ -89,6 +89,17 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 			if (ab.second)
 				result.push_back( std::pair< edge_t, vertex_t >( ab.first, b ) );
 		}
+	}
+	return result;
+}
+
+std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
+{
+	std::list< std::pair< edge_t, vertex_t > > result;
+	if ( num_vertices( map ) > 0 )
+	{
+		vertex_t rand_vertex = (vertex_t)(rand() % (int)num_vertices(map));
+		result = aToB(currentVertex, rand_vertex);
 	}
 	return result;
 }
@@ -210,7 +221,7 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
 	
 	
-	//remove_edge( edge, map );
+	remove_edge( edge, map );
 }
 
 void Roadmap::removeAllEdges()
