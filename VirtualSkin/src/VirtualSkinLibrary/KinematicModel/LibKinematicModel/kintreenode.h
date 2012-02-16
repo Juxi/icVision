@@ -53,6 +53,7 @@ public:
 	Robot* robot() const { return parentRobot; }									//!< Returns the Robot to which this KinTreeNode belongs
 	//const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
 	
+	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );
 	NodeType getNodeType() const { return nodeType; }								//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
 	const QVector3D& getNodeAxis() const { return nodeAxis; }						//!< Returns nodeAxis
 	//const QMatrix4x4& getM() const { return M; }									//!< Returns the transformation matrix between the next coordinate system in the tree and this one
@@ -64,6 +65,7 @@ public:
 	
 	//bool isColliding();
 	int getNumPrimitives();
+	
 	
 	void kill();
 	//void print() const;																//!< Prints the member variables to the terminal
@@ -93,6 +95,7 @@ protected:
 																						 node with respect to one of its siblings (pass a pointer to the node to the member function of the sibling) to decend 
 																						 the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by filterCollisionPairs()
 																						 and Robot.filterCollisionPairs(). */
+	
 	void update( const QMatrix4x4& txfr );											//!< Propogates forward kinematics calculations down the tree
 																					/**< Called by Robot.updatePose() */
 

@@ -146,6 +146,7 @@ public:
 	
 	std::pair< edge_t, std::vector<double> > randomMove();
 	std::list< std::pair< edge_t, vertex_t > > randomMoves();
+	std::list< std::pair< edge_t, vertex_t > > aToB( vertex_t, vertex_t );
 	
 	
 	int dimensionality() { return dim; }

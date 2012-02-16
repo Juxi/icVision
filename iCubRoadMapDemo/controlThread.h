@@ -49,7 +49,7 @@ protected:
 	
 	void run();
 	void singleEdgeMove();
-	void multipleEdgeMove();
+	void multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
 };
 #endif
 /** @} */

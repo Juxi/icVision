@@ -160,10 +160,18 @@ void ControlThread::run()
 		return;
 	}
 	
+	//std::vector<double> a = roadmap->map[0].q;
+	//Roadmap::vertex_t b = roadmap->map[1];
+	
 	while ( keepRunning )
 	{
-		if ( !isOnMap() )	gotoNearest();
-		else				multipleEdgeMove();
+		if ( !isOnMap() )	
+			gotoNearest();
+		else if ( roadmap->currentVertex == 0 )	
+			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+		else
+			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
+		
 		msleep(100);
 	}
 	
@@ -208,10 +216,9 @@ void ControlThread::singleEdgeMove()
 	}
 }
 
-void ControlThread::multipleEdgeMove()
+void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
 {
 	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
-	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path = roadmap->randomMoves();
 	
 	for ( i = path.begin(); i != path.end(); ++i )
 		roadmap->setEdgeColor( i->first, Qt::red );
@@ -223,18 +230,10 @@ void ControlThread::multipleEdgeMove()
 		{
 			Roadmap::out_edge_i e, e_end;
 			tie(e, e_end) = out_edges( i->second, roadmap->map );
-			
-			//if ( /*e == e_end || */
-			//	 !robot->isWithinLimits( roadmap->map[i->second].q ) ) {
-			//	 motionInterrupted = true;
-			//} else {
-				//if ( robot->isWithinLimits( roadmap->map[i->second].q ) )
-				//{
+
 			robot->setVelocity( velocity );
 			robot->positionMove(roadmap->map[i->second].q);
 			motionInterrupted = !waitForMotion();
-				//} else  { motionInterrupted = true; }
-			//}
 
 			if ( !motionInterrupted ) {
 				std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
