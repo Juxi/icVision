@@ -82,6 +82,24 @@ public:
 	}
 };
 
+class PlaneConstraint : public Constraint {
+	std::string d_marker_name;
+	size_t d_axis;
+	double d_value;
+
+public:
+	PlaneConstraint(std::string marker_name, size_t axis, double value) :
+		d_marker_name(marker_name),
+		d_axis(axis),
+		d_value(value)
+	{}
+
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
+		std::vector<double> position = observation.markerPosition(QString(d_marker_name.c_str()));
+		return fabs(position[d_axis] - d_value);
+	}
+};
+
 class OrientationConstraint : public Constraint {
 	std::string d_marker_name;
 	std::vector<double> d_goal_orientation;
@@ -175,13 +193,17 @@ public:
 };
 
 class MapBuildConstraint : public Constraint {
+	std::string d_marker;
 	std::vector<std::vector<double> > d_points;
 	size_t d_nNN;
+	double d_alpha;
 
 public:
-	MapBuildConstraint(size_t nNN) : d_nNN(nNN){
-
-	}
+	MapBuildConstraint(std::string marker, size_t nNN, double alpha) :
+		d_marker(marker),
+		d_nNN(nNN),
+		d_alpha(alpha)
+	{}
 
 	std::vector<std::vector<double> > &points() {
 		return d_points;
@@ -205,6 +227,13 @@ public:
 
 		return measure + exp(-total_dist);
 	}
+
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
+		std::vector<double> position = observation.markerPosition(QString(d_marker.c_str()));
+
+		return close_measure(position, d_alpha);
+	}
+
 };
 
 

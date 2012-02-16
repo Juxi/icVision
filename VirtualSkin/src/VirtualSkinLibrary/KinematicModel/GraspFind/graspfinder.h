@@ -43,8 +43,6 @@ public:
 public:
 	Simulator d_simulator;
 
-	std::vector<std::vector<double> > d_points;
-	std::vector<std::vector<double> > d_configuration_points;
 	std::vector<double> d_best_point;
 
 	PoseFitnessFunction d_pose_fitness_function;
