@@ -34,7 +34,7 @@ public:
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 	//	while (true) {
-			d_grasp_finder.find_pose();
+		d_grasp_finder.find_pose();
 	//	}
 	}
 

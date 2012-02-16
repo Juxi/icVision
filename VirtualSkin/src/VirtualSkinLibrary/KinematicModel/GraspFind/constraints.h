@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <QString>
+#include <algorithm>
+#include <numeric>
 
 class Constraint {
 
@@ -11,7 +13,7 @@ public:
 	Constraint()
 	 {}
 
-	virtual double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) = 0;
+	virtual double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) = 0;
 
 	static double pos_error(std::vector<double> const &values, std::vector<double> const &goal_pos) {
 		double distance(0.0);
@@ -51,7 +53,7 @@ class HomePoseConstraint : public Constraint {
 public:
 	HomePoseConstraint(std::vector<double> home_pose) : d_home_pose(home_pose){}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		return Constraint::pos_error(d_home_pose, motor_values) / d_home_pose.size();
 	}
 
@@ -61,7 +63,7 @@ class CollisionConstraint : public Constraint {
 public:
 	CollisionConstraint(){}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		return collisions;
 	}
 };
@@ -74,7 +76,7 @@ public:
 	PositionConstraint(std::string marker_name, std::vector<double> goal_position) : d_marker_name(marker_name), d_goal_position(goal_position) {
 	}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		std::vector<double> position = observation.markerPosition(QString(d_marker_name.c_str()));
 		return Constraint::pos_error(position, d_goal_position);
 	}
@@ -91,7 +93,7 @@ public:
 		fill(d_mask_orientation.begin() + axis * 3, d_mask_orientation.begin() + axis * 3 + 3, 1.0);
 	}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		return observation.orientationMeasure(QString(d_marker_name.c_str()), d_goal_orientation, d_mask_orientation);
 	}
 };
@@ -112,7 +114,7 @@ public:
 
 	}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		std::vector<double> goal_orientation(9);
 		std::vector<double> mask_orientation(9);
 
@@ -138,7 +140,7 @@ public:
 	d_goal_position(goal_position)
 	{}
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		std::vector<double> position_marker1 = observation.markerPosition(QString(d_marker1.c_str()));
 		std::vector<double> position_marker2 = observation.markerPosition(QString(d_marker2.c_str()));
 
@@ -164,22 +166,27 @@ public:
 	{}
 
 
-	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions, GraspFinder &grasp_finder) {
-		return d_point_constraint1.evaluate(motor_values, observation, collisions, grasp_finder) +
-			d_point_constraint2.evaluate(motor_values, observation, collisions, grasp_finder) +
-			d_opposite_constraint.evaluate(motor_values, observation, collisions, grasp_finder);
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
+		return d_point_constraint1.evaluate(motor_values, observation, collisions) +
+			d_point_constraint2.evaluate(motor_values, observation, collisions) +
+			d_opposite_constraint.evaluate(motor_values, observation, collisions);
 	}
 
 };
 
 class MapBuildConstraint : public Constraint {
-	size_t d_nNN;
 	std::vector<std::vector<double> > d_points;
+	size_t d_nNN;
 
 public:
-	MapBuildConstraint(size_t nNN) : d_nNN(nNN) {
+	MapBuildConstraint(size_t nNN) : d_nNN(nNN){
 
 	}
+
+	std::vector<std::vector<double> > &points() {
+		return d_points;
+	}
+
 
 	double close_measure(std::vector<double> &values, double alpha) const {
 		std::vector<double> distances;
@@ -190,7 +197,7 @@ public:
 		sort(distances.begin(), distances.end());
 		int n_distances = distances.size() >= d_nNN ? d_nNN : distances.size();
 
-		double total_dist = accumulate(distances.begin(), distances.end(), 0.0);
+		double total_dist = std::accumulate(distances.begin(), distances.end(), 0.0);
 		double measure(0.0);
 		for (size_t i(0); i < n_distances; ++i)  {
 			measure += fabs(distances[i] - alpha);// * (distances[i] - alpha); //or use abs?

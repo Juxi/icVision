@@ -31,7 +31,12 @@ int main(int argc, char *argv[])
 	printf( "loading world file: %s\n", argv[1] );
 	model.loadWorld( QString(argv[2]), false );
 	
+	cout << "Creating grasp thread" << endl;
+
 	GraspThread grasp_thread( model, the_robot );
+
+	cout << "After creating grasp thread" << endl;
+
 //	for (float z(-.2); z < .2; z += .03)
 //		grasp_finder.add_ball(-.2, .15, z);
 //	for (float z(-.2); z < .2; z += .03)
