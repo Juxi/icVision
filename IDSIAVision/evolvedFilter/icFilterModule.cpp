@@ -21,7 +21,7 @@ icFilterModule::icFilterModule() {
 
 double icFilterModule::getPeriod()
 {
-	return 0.02;	// we need something higher than 0.0 else it is too fast?!
+	return 1;//0.02;	// we need something higher than 0.0 else it is too fast?!
 	// todo check this!!
 	//module periodicity (seconds)
 }
@@ -239,6 +239,52 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	}
 	
 	
+	if(sendToGazeCtrl) {
+		
+		// connect to rpc	
+		// check whether we have F or not!! TODO
+		std::string clientPortName = "/evolvedfilter";
+		clientPortName += "/gaze-client";
+		if(! gazeportRPC.open( clientPortName.c_str() )){
+			return false;
+		}
+		//	
+		inputPortName = "/iKinGazeCtrl/head/rpc";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+		
+		
+		
+		// check whether we have F or not!! TODO
+		clientPortName = "/evolvedfilter";
+		clientPortName += "/gaze-client-3D";
+		if(! gazeportPos.open( clientPortName.c_str() )){
+			return false;
+		}
+		//	
+		inputPortName = "/iKinGazeCtrl/head/xd:i";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+
+	}
+		
+	
 	
 	
 	return true ;      // let the RFModule know everything went well
@@ -287,6 +333,43 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	bool r = port.write(cmd, response);
 //	std::cout << "response: " << response.toString() << std::endl;	
 	return r;
+}	
+
+bool icFilterModule::send3DPositionToGazeCtrl(double x, double y, double z) {
+	yarp::os::Bottle cmd, response;
+	
+	if(! sendToGazeCtrl) return false;
+	if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+		std::cout << "NOT setting gaze ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+		
+		cmd.clear();
+		cmd.addString("set");
+		cmd.addString("track");		
+		cmd.addInt(0);
+		return false;
+	}
+	
+	// get information about the object from rpc
+	cmd.clear();
+	cmd.addString("set");
+	cmd.addString("track");
+	cmd.addInt(1);	
+	bool r = gazeportRPC.write(cmd, response);
+	if(inDebugMode) {
+		std::cout << "gaze response: " << response.toString() << std::endl;	
+		std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	}
+
+	cmd.clear();
+	cmd.addDouble(x);
+	cmd.addDouble(y);
+	cmd.addDouble(z);
+	
+	bool b = gazeportPos.write(cmd);
+	if(inDebugMode)
+		std::cout << "gazePos response: " << response.toString() << std::endl;	
+	
+	return b && r;
 }	
 
 bool icFilterModule::sendPixelPosOfObject(double x1, double y1, double x2, double y2) {

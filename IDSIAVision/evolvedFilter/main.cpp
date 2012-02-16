@@ -40,6 +40,7 @@ int main(int argc, char * argv[]) {
 //	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
 	module->runOnBothImages();
 	module->putInVirtualSkin(true);
+	module->notifyGazeCtrl(false);	
 	
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
 	module->runModule(argc, argv);

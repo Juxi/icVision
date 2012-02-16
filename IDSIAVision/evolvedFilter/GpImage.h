@@ -88,7 +88,9 @@ public:
 	GpImage* min () const;
 	
 	GpImage* max (GpImage* a) const;
+	GpImage* max (float v) const;
 	GpImage* min (GpImage* a) const;
+	GpImage* min (float v) const;
 	GpImage* gauss (int) const;
 	
 	GpImage* sobelx (int) const;
@@ -104,6 +106,7 @@ public:
 	GpImage* gabor(int, int) const;
 	GpImage* ResizeThenGabor(int Frequency, int Orientation, double Scale) const;
 	
+	GpImage* Shift(int, int) const;
 	GpImage* ShiftDown() const;
 	GpImage* ShiftUp() const;
 	GpImage* ShiftLeft() const;
