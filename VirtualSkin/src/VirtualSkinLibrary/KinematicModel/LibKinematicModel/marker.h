@@ -35,12 +35,13 @@ public:
 	{
 		d = 2*r;
 		tracerObject = new CompositeObject(c);
+		tracerObject->setFreeColor(qc);
+		
 		int i;
 		for (i=0; i<num; i++)
 		{
 			if ( i > 0 ) qc.setAlphaF( 1 - (double)i/(double)num);
 			PrimitiveObject* p = new Sphere(r);
-			p->setFreeColor(qc);
 			//tracer.push_back(p);
 			tracerObject->append(p);
 		}

@@ -52,9 +52,9 @@
    
         <link z=".0825" radius="0">
         
-        <sphere pz=".07" radius=".11"/><!---->
-        <!--<sphere px=".015" pz=".07" radius=".1"/>
-        <sphere px="-.015" pz=".07" radius=".9"/>-->
+        <sphere pz=".08" radius=".1"/><!---->
+        <sphere px=".015" pz=".08" radius=".1"/>
+        <sphere px="-.015" pz=".08" radius=".1"/>
         
                 <!-- LEFT EYE -->
                 <link x="-.054" y="-.034" radius="0">

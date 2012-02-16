@@ -15,7 +15,7 @@ CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : i
 																			   numBoxes(0)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
-	freeColor[0] = 0.9;		 freeColor[1] = 0.9;	  freeColor[2] = 0.9;	   freeColor[3] = 0.5; 
+	freeColor[0] = 0.3;	  freeColor[1] = 0.3;	   freeColor[2] = 0.3;	    freeColor[3] = 1.0; 
 	//black[0] = 0.0;		  black[0] = 0.0;		   black[0] = 0.0;			black[0] = 1.0;
 }
 
@@ -63,7 +63,13 @@ void CompositeObject::append( PrimitiveObject* primitive )
 		}
 		primitive->setName(name);
 	}
+	QColor fc,cc;
+	fc.setRedF(freeColor[0]); fc.setGreenF(freeColor[1]); fc.setBlueF(freeColor[2]); fc.setAlphaF(freeColor[3]);
+	cc.setRedF(collidingColor[0]); cc.setGreenF(collidingColor[1]); cc.setBlueF(collidingColor[2]);	cc.setAlphaF(collidingColor[3]);
+	
 	primitive->setCompositeObject(this);
+	primitive->setFreeColor(fc);
+	primitive->setCollidingColor(cc);
 	
 	primitives.append(primitive);
 }
@@ -117,6 +123,11 @@ void CompositeObject::updateSolid()
 
 void CompositeObject::setCollidingColor( QColor c )
 { 
+	collidingColor[0] = c.redF();
+	collidingColor[1] = c.greenF();
+	collidingColor[2] = c.blueF();
+	collidingColor[3] = c.alphaF();
+	
 	QVector<PrimitiveObject*>::const_iterator i;
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
@@ -126,6 +137,12 @@ void CompositeObject::setCollidingColor( QColor c )
 
 void CompositeObject::setFreeColor( QColor c )
 { 
+	//printf("CALLED SET OBJECT>SETFREECOLOR()\n");
+	freeColor[0] = c.redF();
+	freeColor[1] = c.greenF();
+	freeColor[2] = c.blueF();
+	freeColor[3] = c.alphaF();
+	
 	QVector<PrimitiveObject*>::const_iterator i;
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{

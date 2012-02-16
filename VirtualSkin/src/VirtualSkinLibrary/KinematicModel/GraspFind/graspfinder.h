@@ -1,30 +1,22 @@
-/*******************************************************************
- ***               Copyright (C) 2011 Mikhail Frank              ***
- ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
- ******************************************************************/
-
-/** \addtogroup WorldModelDemo
- *	@{
- */
-
 #ifndef GRASPFINDER_H_
 #define GRASPFINDER_H_
 
-#include <QThread>
-#include "model.h"
-#include "assert.h"
 #include <cmath>
 #include <iostream>
+#include <QVector>
+#include <cassert>
+
+#include "model.h"
 #include "sphere.h"
 
 //class KinematicModel::Model;
 #include "xnes.h"
 
-class GraspFinder : public QThread
+class GraspFinder
 {
 	
 public:
-	GraspFinder( KinematicModel::Model& m,  KinematicModel::Robot& robot, bool v = false ) : theModel(m), theRobot(robot), d_total_motors(0), verbose(v), keepRunning(true) {
+	GraspFinder( KinematicModel::Model& m,  KinematicModel::Robot& robot) : theModel(m), theRobot(robot), d_total_motors(0){
 		int total_motors(0);
 		int n_parts = theRobot.numBodyParts();
 		std::vector<double> home_pos;
@@ -43,7 +35,6 @@ public:
 
 	~GraspFinder() {}
 	
-	void stop();
 	
 	void set_motors(std::vector<double> &motor_values) {
 		assert(motor_values.size() == d_total_motors);
@@ -56,15 +47,7 @@ public:
 		}
 	}
 
-	double distance_to_home(std::vector<double> &motor_values) {
-		double dist = 0.0;
-		for (size_t i(0); i < motor_values.size(); ++i)
-			dist += pow(d_home_pos[i] - motor_values[i], 2.0);
-		dist = sqrt(dist) / motor_values.size();
-		return dist;
-	}
-
-	void do_test();
+	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double std = .4, int population_size = 150);
 
 	void add_ball(float x, float y, float z) const {
 		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
@@ -90,18 +73,18 @@ public:
 		  theModel.appendObject(composite);
 	}
 
+	std::vector<double> get_best_point();
+
 public:
 	KinematicModel::Model& theModel;	// the world model	
 	KinematicModel::Robot& theRobot;
 	std::vector<double> d_home_pos, d_last_position;
 	std::vector<std::vector<double> > d_points;
 	std::vector<std::vector<double> > d_configuration_points;
+	std::vector<double> d_best_point;
 
 	int d_total_motors;
-	bool verbose;
-	bool keepRunning;
 	
-	void run();
 };
 
 #endif
