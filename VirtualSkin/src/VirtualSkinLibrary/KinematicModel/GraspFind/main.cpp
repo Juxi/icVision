@@ -54,6 +54,19 @@ int map_build_test(Model &model, Robot &robot, QApplication &app) {
 	return result;
 }
 
+int path_test(Model &model, Robot &robot, QApplication &app) {
+	PathThread path_thread(model, robot);
+
+	path_thread.start();
+
+	int result = app.exec();						// run the Qt application
+
+	path_thread.stop();
+	model.stop();
+
+	return result;
+}
+
 int main(int argc, char *argv[])
 {
 	assert(argc == 4);
@@ -84,5 +97,9 @@ int main(int argc, char *argv[])
 
 	if (string(argv[3]) == "map") {
 		return map_build_test(model, robot, app);
+	}
+
+	if (string(argv[3]) == "path") {
+		path_test(model, robot, app);
 	}
 }

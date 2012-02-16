@@ -15,7 +15,6 @@
 
 class GraspFinder
 {
-	
 public:
 	GraspFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot) :
 		d_simulator(model, robot),
@@ -29,10 +28,18 @@ public:
 	void add_constraint(Constraint *constraint, double weight = 1.0){
 		d_pose_fitness_function.add_constraint(constraint, weight);
 	}
-//
-//	void clear() {
-//		d_pose_fitness_function = PoseFitnessFunction(d_simulator);
-//	}
+
+	void set_filter(EvaluationFilter *filter) {
+		d_pose_fitness_function.set_filter(filter);
+	}
+
+	EvaluationFilter &get_filter() {
+		return d_pose_fitness_function.get_filter();
+	}
+
+	void clear() {
+		d_pose_fitness_function.clear_constraints();
+	}
 
 	std::vector<double> get_best_point();
 
