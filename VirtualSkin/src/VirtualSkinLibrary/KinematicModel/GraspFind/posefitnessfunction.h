@@ -19,19 +19,6 @@ public:
 
 	PoseFitnessFunction(Simulator &simulator) : d_simulator(simulator)
 	{
-		add_constraint(new HomePoseConstraint(d_simulator.d_home_pos), 10.);
-
-		add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
-
-		add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
-
-//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		d_simulator.add_point(-0.237605, 0.234241,  0.1390077);
-
-		add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		add_constraint(new CollisionConstraint());
 	}
 
 	void add_constraint(Constraint *constraint, double weight = 1.0) {

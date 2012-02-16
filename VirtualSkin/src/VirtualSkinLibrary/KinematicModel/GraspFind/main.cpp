@@ -4,7 +4,7 @@
 #include "cylinder.h"
 #include "box.h"
 
-#include "graspthread.h"
+#include "demothreads.h"
 
 #include "poses_reader.h"
 #include <iostream>

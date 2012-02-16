@@ -26,9 +26,19 @@ public:
 
 	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double std = .4, int population_size = 150);
 
-	void add_constraint(){}
+	void add_constraint(Constraint *constraint, double weight = 1.0){
+		d_pose_fitness_function.add_constraint(constraint, weight);
+	}
+//
+//	void clear() {
+//		d_pose_fitness_function = PoseFitnessFunction(d_simulator);
+//	}
 
 	std::vector<double> get_best_point();
+
+	Simulator &simulator() {
+		return d_simulator;
+	}
 
 public:
 	Simulator d_simulator;
