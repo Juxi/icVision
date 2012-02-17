@@ -15,6 +15,19 @@
 using namespace KinematicModel;
 using namespace std;
 
+int grasp_pose_fast_test(Model &model, Robot &robot, QApplication &app) {
+	GraspThread grasp_thread(model, robot, true, true);
+
+	grasp_thread.start();
+
+	int result = app.exec();						// run the Qt application
+
+	grasp_thread.stop();
+	model.stop();
+
+	return result;
+}
+
 int grasp_pose_test(Model &model, Robot &robot, QApplication &app) {
 	GraspThread grasp_thread(model, robot, false);
 
@@ -93,6 +106,10 @@ int main(int argc, char *argv[])
 
 	if (string(argv[3]) == "grasp2") {
 		return grasp_pose_test2(model, robot, app);
+	}
+
+	if (string(argv[3]) == "grasp2_fast") {
+		return grasp_pose_fast_test(model, robot, app);
 	}
 
 	if (string(argv[3]) == "map") {

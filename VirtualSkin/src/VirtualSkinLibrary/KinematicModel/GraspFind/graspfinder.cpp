@@ -36,9 +36,12 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 		NES nes(d_pose_fitness_function, useImportanceMixing, useBaseline);
 		nes.init(get_start_pos(dim), sigma, population);
 
+		size_t n_evaluations(0);
 		do
 		{
 			nes.iterate();
+			n_evaluations += population_size;
+			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
 		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals);
 

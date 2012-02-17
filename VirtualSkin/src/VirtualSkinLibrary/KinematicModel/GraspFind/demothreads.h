@@ -8,12 +8,12 @@
 class GraspThread : public QThread {
 	bool keepRunning;
 	bool verbose;
-
+	bool d_fast;
 	GraspFinder d_grasp_finder;
 
 public:
-	GraspThread(KinematicModel::Model& model,  KinematicModel::Robot& robot, bool with_things)
-	: verbose(false), keepRunning(true), d_grasp_finder(model, robot)
+	GraspThread(KinematicModel::Model& model,  KinematicModel::Robot& robot, bool with_things, bool fast = false)
+	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_fast(fast)
 	{
 		if (with_things) {
 			for (float z(-.2); z < .2; z += .03)
@@ -53,7 +53,10 @@ public:
 	{
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
-		d_grasp_finder.find_pose(100000, 0., .4, 150);
+		if (d_fast)
+			d_grasp_finder.find_pose(100000, 0., .04, 50);
+		else
+			d_grasp_finder.find_pose(100000, 0., .4, 150);
 	}
 };
 
@@ -72,7 +75,7 @@ public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string marker, size_t nn, double alpha)
 	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_marker(marker)
 	{
-		d_map_build_constraint = new MapBuildConstraint("right_hand", 3, .05);
+		d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .05);
 		d_points = &(d_map_build_constraint->points());
 
 		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
@@ -83,11 +86,14 @@ public:
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .1));
+		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .05), 10.);
 
 		d_grasp_finder.add_constraint(new CollisionConstraint());
 
 		d_grasp_finder.add_constraint(d_map_build_constraint);
+
+		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., 0., -1.)));
+
 
 	}
 
@@ -119,7 +125,7 @@ public:
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 		while (true) {
-			d_grasp_finder.find_pose(10000, 0., .04, 50);
+			d_grasp_finder.find_pose(20000, 0., .10, 50);
 			add_best_pose();
 		}
 	}

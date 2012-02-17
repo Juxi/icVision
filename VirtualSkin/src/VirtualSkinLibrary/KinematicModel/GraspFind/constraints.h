@@ -209,7 +209,6 @@ public:
 		return d_points;
 	}
 
-
 	double close_measure(std::vector<double> &values, double alpha) const {
 		std::vector<double> distances;
 		for (size_t i(0); i < d_points.size(); ++i) {
@@ -225,7 +224,7 @@ public:
 			measure += fabs(distances[i] - alpha);// * (distances[i] - alpha); //or use abs?
 		}
 
-		return measure + exp(-total_dist);
+		return measure;// + exp(-total_dist);
 	}
 
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
