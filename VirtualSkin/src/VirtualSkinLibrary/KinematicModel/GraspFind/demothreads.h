@@ -4,6 +4,7 @@
 #include <QThread>
 
 #include "graspfinder.h"
+#include "path_extractor.h"
 
 class GraspThread : public QThread {
 	bool keepRunning;
@@ -98,7 +99,7 @@ public:
 	}
 
 	void add_best_pose() {
-		std::vector<double> best_point = d_grasp_finder.get_best_point();
+		std::vector<double> best_point = d_grasp_finder.best_point();
 		KinematicModel::RobotObservation observation = d_grasp_finder.simulator().robot().observe();
 		std::vector<double> position = observation.markerPosition(QString(d_marker.c_str()));
 
@@ -141,6 +142,15 @@ public:
 		d_configurations.push_back(values);
 		d_fitnesses.push_back(fitness);
 	}
+
+	std::vector<std::vector<double> > &configurations() {
+		return d_configurations;
+	}
+
+	std::vector<double> &fitnesses() {
+		return d_fitnesses;
+	}
+
 };
 class PathThread : public QThread {
 	bool keepRunning;
@@ -194,6 +204,8 @@ public:
 
 		StoreFilter &store_filter = reinterpret_cast<StoreFilter&>(d_grasp_finder.get_filter());
 		std::cout << "n_points: " << store_filter.d_configurations.size() << std::endl;
+
+		extract_path(store_filter.configurations(), store_filter.fitnesses(), d_grasp_finder.simulator().home_pos(), d_grasp_finder.best_point());
 	}
 
 };

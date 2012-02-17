@@ -72,6 +72,10 @@ public:
 		return d_robot;
 	}
 
+	std::vector<double> home_pos() {
+		return d_home_pos;
+	}
+
 	int total_motors() {
 		return d_total_motors;
 	}

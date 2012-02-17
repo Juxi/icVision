@@ -41,7 +41,7 @@ public:
 		d_pose_fitness_function.clear_constraints();
 	}
 
-	std::vector<double> get_best_point();
+	std::vector<double> best_point();
 
 	Simulator &simulator() {
 		return d_simulator;

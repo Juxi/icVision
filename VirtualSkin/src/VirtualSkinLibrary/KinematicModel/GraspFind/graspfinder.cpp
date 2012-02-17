@@ -11,7 +11,7 @@
 
 using namespace std;
 
-vector<double> GraspFinder::get_best_point() {
+vector<double> GraspFinder::best_point() {
 	return d_best_point;
 }
 
