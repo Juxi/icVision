@@ -264,6 +264,8 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 			case VOCAB_OBSTACLE:
 				
 				freeColor = Qt::blue;
+				freeColor = freeColor.lighter();
+				freeColor.setBlue(130);
 				collidingColor = freeColor;
 				collidingColor.setAlphaF(0.5);
 				
@@ -278,6 +280,7 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 			case VOCAB_TARGET:
 				
 				freeColor = Qt::green;
+				freeColor = freeColor.lighter();
 				collidingColor = freeColor;
 				
 				freeColor.setAlphaF(0.5);

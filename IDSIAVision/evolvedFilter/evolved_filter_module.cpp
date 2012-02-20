@@ -456,7 +456,21 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	// hacking from thurs 12 jan
 //	estimatedX += 8.5;
 //	estimatedY -= 6.5;
+	
+	if(frame1_1.x == -1 || frame2_1.x == -1 || 
+	   frame1_2.x == -1 || frame2_2.x == -1) {
+		estimatedZ = -2;
+		setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+		return;
+		// don't set the Gaze if we don't see stuff!
+		// keep tracking old stuff
+		
+	}
+
 	setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+	send3DPositionToGazeCtrl(-estimatedX/100.0, estimatedY/100.0, estimatedZ);
+	
+	// todo create output!
 //	sendPixelPosOfObject(x[0], x[1], x[2], x[3]);
 }
 
