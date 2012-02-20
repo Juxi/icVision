@@ -82,8 +82,10 @@ int path_test(Model &model, Robot &robot, QApplication &app) {
 
 int main(int argc, char *argv[])
 {
-	assert(argc == 4);
-
+	if (argc != 4) {
+		cout << "not enough arguments" << endl;
+		return 1;
+	}
 	bool visualize = true;
 	
 	//vector<vector<float> > some_poses = read_poses("poses.save")["CFGSPACE"];

@@ -152,6 +152,7 @@ public:
 	}
 
 };
+
 class PathThread : public QThread {
 	bool keepRunning;
 	bool verbose;
@@ -168,7 +169,13 @@ public:
 	: verbose(false), keepRunning(true),
 	  d_grasp_finder(model, robot)
 	{
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
+		if (true) {
+			for (float z(-.2); z < .2; z += .03)
+				d_grasp_finder.simulator().add_ball(-.2, .25, z);
+//			for (float z(-.2); z < .2; z += .03)
+//				d_grasp_finder.simulator().add_ball(-.2, .3, z);
+		}
+		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 10.);
 
 		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
 
@@ -176,10 +183,24 @@ public:
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+		d_grasp_finder.simulator().add_point(-0.237605, 0.234241,  0.1390077);
+
+		d_grasp_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
 		d_grasp_finder.add_constraint(new CollisionConstraint());
-
+//
+//		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
+//
+//		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
+//
+//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
+//
+//	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
+//
+//		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+//
+//		d_grasp_finder.add_constraint(new CollisionConstraint());
+//
 		d_grasp_finder.set_filter(new StoreFilter());
 	}
 
@@ -200,12 +221,28 @@ public:
 	{
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
-		d_grasp_finder.find_pose(10000, 0., .04, 50);
+		d_grasp_finder.find_pose(30000, 0., .1, 350);
+//		d_grasp_finder.find_pose(10000, 0., .04, 50);
 
 		StoreFilter &store_filter = reinterpret_cast<StoreFilter&>(d_grasp_finder.get_filter());
 		std::cout << "n_points: " << store_filter.d_configurations.size() << std::endl;
 
-		extract_path(store_filter.configurations(), store_filter.fitnesses(), d_grasp_finder.simulator().home_pos(), d_grasp_finder.best_point());
+		std::vector<std::vector<double> > path;
+		try {
+			path = extract_path(store_filter.configurations(), store_filter.fitnesses(), d_grasp_finder.simulator().home_pos(), d_grasp_finder.best_point());
+		}
+		catch (char const *message) {
+			std::cout << message << std::endl;
+		}
+
+		while (true) {
+			for (size_t i(0); i < path.size(); ++i) {
+				std::cout << "step " << i << "/" << path.size() << std::endl;
+				d_grasp_finder.simulator().set_motors(path[i]);
+				d_grasp_finder.simulator().computePose();
+				msleep(300);
+			}
+		}
 	}
 
 };

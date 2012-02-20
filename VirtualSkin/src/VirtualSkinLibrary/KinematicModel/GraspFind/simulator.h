@@ -53,6 +53,10 @@ public:
 		  d_model.appendObject(composite);
 	}
 
+	int computePose() {
+		return d_model.computePose();
+	}
+
 	void set_motors(std::vector<double> &motor_values) {
 		assert(motor_values.size() == d_total_motors);
 		size_t i(0);

@@ -59,7 +59,7 @@ public:
 	{
 		std::vector<double> motor_values(point.get_data());
 		d_simulator.set_motors(motor_values);
-		double n_collisions = d_simulator.model().computePose();
+		double n_collisions = d_simulator.computePose();
 
 		double fitness(0.0);
 		for (size_t i(0); i < d_constraints.size(); ++i)
