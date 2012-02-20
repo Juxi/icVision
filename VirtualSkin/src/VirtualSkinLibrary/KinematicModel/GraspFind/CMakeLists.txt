@@ -4,9 +4,10 @@
 	
 SET ( src_files	main.cpp
 		graspfinder.cpp 
-		xnes.cpp )
+		xnes.cpp 
+		roadmap.cpp )
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h graspthread.h posefitnessfunction.h)
+SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h )
 
 #SET ( QT_MOC_FILES graspfinder.h )	
 #QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )

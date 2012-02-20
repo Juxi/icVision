@@ -44,6 +44,9 @@ protected:
 	
 	yarp::os::RpcClient port;
 	
+	yarp::os::RpcClient gazeportRPC;	
+	yarp::os::Port gazeportPos;
+	
 	yarp::os::Network yarp;			//!< Identifies the yarp network
 	yarp::os::Port handlerPort; 	//!< The port to handle messages (e.g. quit)
 	
@@ -63,6 +66,7 @@ protected:
 	
 	bool	isStarted;
 	bool	addToWorldModel;
+	bool	sendToGazeCtrl;
 	bool	inDebugMode;
 	bool	streamRawFilterOutput;
 	bool	streamProcessedFilterOutput;	
@@ -103,9 +107,14 @@ public:
 	void putInVirtualSkin(bool b) {
 		addToWorldModel = b;
 	}
+	
+	void notifyGazeCtrl(bool b) {
+		sendToGazeCtrl = b;
+	}
 
 	bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
 	bool sendPixelPosOfObject(double x1, double y1, double x2, double y2);
+	bool send3DPositionToGazeCtrl(double x, double y, double z);
 };
 
 #endif

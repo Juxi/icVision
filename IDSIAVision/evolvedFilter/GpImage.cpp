@@ -140,6 +140,12 @@ GpImage* GpImage::min() const {
 	return new GpImage(retImg);
 }
 
+GpImage* GpImage::min (float v) const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvMinS(Image, v, retImg);
+	return new GpImage(retImg);	
+}
+
 GpImage* GpImage::max() const {
 	double MinValue, MaxValue;
 	cvMinMaxLoc(Image, &MinValue, &MaxValue, NULL, NULL);
@@ -149,6 +155,13 @@ GpImage* GpImage::max() const {
 	cvAddS(retImg, cvRealScalar(MaxValue), retImg);
 	return new GpImage(retImg);
 }
+
+GpImage* GpImage::max (float v) const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvMaxS(Image, v, retImg);
+	return new GpImage(retImg);	
+}
+
 
 double GpImage::getSum() const {
 	return cvSum(Image).val[0];
@@ -254,6 +267,25 @@ GpImage* GpImage::gabor(int frequ, int orientation) const {
 	delete gab;
 	return new GpImage(retImg);
 }
+
+
+GpImage* GpImage::Shift(int XShift, int YShift) const {
+	int width = Image->width;
+	int height = Image->height;
+	
+	Img retImg = (IplImage*) cvClone(Image);	
+	
+	for (int x = 0; x < width ; x++) {
+		for (int y = 0; y < height; y++) {
+			int x2 = abs(x + XShift) % width;
+			int y2 = abs(y + YShift) % height;
+//			Value.Data[y, x, 0] = this.Image.Data[y2, x2, 0];
+			CV_IMAGE_ELEM(retImg, float, y, x) = CV_IMAGE_ELEM(Image, float, y2, x2);
+		}
+	}
+	return new GpImage(retImg);
+}
+
 
 GpImage* GpImage::ShiftDown() const {
 	Img retImg = (IplImage*) cvClone(Image);	
@@ -391,7 +423,7 @@ GpImage* GpImage::LocalMax(int Aperture) const {
 			for (int i = -Aperture; i <= Aperture; i++)
 				for (int j = -Aperture; j <= Aperture; j++)
 //					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
-					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;			
+					CV_IMAGE_ELEM(retImg, float, y+j, x+i) = Acc;			
 //					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
 		}
 	}
@@ -413,7 +445,7 @@ GpImage* GpImage::LocalAvg(int Aperture) const {
 			
 			for (int i = -Aperture; i <= Aperture; i++)
 				for (int j = -Aperture; j <= Aperture; j++)
-					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc / (((Aperture * 2) + 1) * ((Aperture * 2) + 1));			
+					CV_IMAGE_ELEM(retImg, float, y+j, x+i) = Acc / (((Aperture * 2) + 1) * ((Aperture * 2) + 1));			
 		}
 	}
 	return new GpImage(retImg);
@@ -438,7 +470,7 @@ GpImage* GpImage::LocalMin(int Aperture) const {
 			for (int i = -Aperture; i <= Aperture; i++)
 				for (int j = -Aperture; j <= Aperture; j++)
 					//					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
-					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;			
+					CV_IMAGE_ELEM(retImg, float, y+j, x+i) = Acc;			
 			//					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
 		}
 	}
