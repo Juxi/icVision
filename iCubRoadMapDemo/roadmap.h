@@ -164,6 +164,8 @@ public:
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
+	void readMapPoses(std::string filename);
+
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	

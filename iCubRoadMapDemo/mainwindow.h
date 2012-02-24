@@ -80,6 +80,7 @@ private slots:
 	void saveMap();
 	void connectMap();
 	void projectMap();
+	void importNesMap();
 	
 	void connectToRobot();
 	void disconnectFromRobot();
@@ -102,6 +103,7 @@ private:
 	QAction *saveMapAction;
 	QAction *connectMapAction;
 	QAction *projectMapAction;
+	QAction *importNesMapAction;
 	
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
