@@ -2,6 +2,7 @@
 //#include "graphwidget.h"
 #include "widgetEdge.h"
 #include "widgetNode.h"
+#include "poses_reader.h"
 
 Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
@@ -211,6 +212,14 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 		thisEdge.second = map[target(*(ep.first), map)].idx;
 		graphEdges->push_back( thisEdge );
 	}
+}
+
+void Roadmap::readMapPoses(std::string filename) {
+	poses_map_t poses_map = read_poses(filename);
+	poses_vector_t poses(poses_map["CFGSPACE"]);
+	poses_vector_t work_space(poses_map["WORKSPACE"]);
+	for (size_t i(0); i < poses.size(); ++i)
+		insert(work_space[i][0], work_space[i][1], poses[i]);
 }
 
 void Roadmap::removeEdge( Roadmap::edge_t edge )

@@ -75,6 +75,7 @@ SET ( hdr_files	roadmap.h
 		newMapDialog.h
 		mainwindow.h
 		controlThread.h
+		poses_reader.h
 )
 
 SET ( QT_MOC_FILES 	iCubController.h

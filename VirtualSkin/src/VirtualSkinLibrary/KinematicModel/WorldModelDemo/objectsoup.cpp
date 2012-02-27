@@ -53,6 +53,8 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 	QColor collidingColor = QColor( qrand()%255, qrand()%255, qrand()%255, 0.5 );
 	QColor freeColor = collidingColor;
 	freeColor.setAlphaF( 1.0 );
+	obj->setCollidingColor(collidingColor);
+	obj->setFreeColor(freeColor);
 	
 	// choose a random number of primitives to append to the object 1 to 5 inclusive
 	int numPrimitives =  (qrand() % 6 + 1);
@@ -77,8 +79,8 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 			default:
 				break;
 		}
-		primitive->setCollidingColor( collidingColor );
-		primitive->setFreeColor(freeColor);
+		//primitive->setCollidingColor( collidingColor );
+		//primitive->setFreeColor(freeColor);
 		primitive->translate(randomTranslation(0.1));
 		primitive->cartesianRotate(randomRotation());
 		obj->append(primitive);

@@ -23,20 +23,18 @@
 #include <cmath>
 #include <vector>
 
-#include "iCubController.h"
+//#include "iCubController.h"
 
 #include <QThread>
-#include <QtGui/QGraphicsView>
+//#include <QtGui/QGraphicsView>
 
 //class Node;
 class QtGraphNode;
 class QtGraphEdge;
 
-class Roadmap : public QObject
+class Roadmap
 {
-	Q_OBJECT
-	
-private:
+public:
 	
 	typedef CGAL::Cartesian_d<double> K;
 	
@@ -103,7 +101,7 @@ private:
 	class Custom_search_traits {		
 		public:
 			typedef K::Cartesian_const_iterator_d Cartesian_const_iterator_d;
-            typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
+			typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
 			typedef K::Construct_iso_box_d Construct_iso_box_d;
 			typedef K::Construct_min_vertex_d Construct_min_vertex_d;
 			typedef K::Construct_max_vertex_d Construct_max_vertex_d;
@@ -153,7 +151,7 @@ public:
 	
 	void setDimensionality( int );
 	void setCurrentVertex( vertex_t );
-	void setEdgeColor( edge_t, QColor );
+//	void setEdgeColor( edge_t, QColor );
 	
 	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
 	void graphConnect( Pose, unsigned int n = 3 );
@@ -164,8 +162,6 @@ public:
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
-	void readMapPoses(std::string filename);
-
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	
@@ -180,24 +176,28 @@ public:
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
 	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
-	
+	std::vector<std::vector<double> > shortestPath( std::vector<double> from, std::vector<double> to );
+
+	size_t size() {
+		return num_vertices(map);
+	}
 	//bool insert( std::vector< std::vector<double> > );
+//
+//signals:
+//
+//	void appendedNode( vertex_t, qreal, qreal );
+//	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
+//	void update2DPosition( QtGraphNode*, QPointF );
+//	void newNodeColor( QtGraphNode*, QColor, QColor );
+//	void newEdgeColor( QtGraphEdge*, QColor );
+//	//void removeQtGraphEdge( QtGraphEdge* );
+//
+//public slots:
+//
+//	void setQtGraphNode( vertex_t, QtGraphNode* );
+//	void setQtGraphEdge( edge_t, QtGraphEdge* );
 	
-signals:
-	
-	void appendedNode( vertex_t, qreal, qreal );
-	void appendedEdge( edge_t, QtGraphNode*, QtGraphNode* );
-	void update2DPosition( QtGraphNode*, QPointF );
-	void newNodeColor( QtGraphNode*, QColor, QColor );
-	void newEdgeColor( QtGraphEdge*, QColor );
-	//void removeQtGraphEdge( QtGraphEdge* );
-	
-public slots:
-	
-	void setQtGraphNode( vertex_t, QtGraphNode* );
-	void setQtGraphEdge( edge_t, QtGraphEdge* );
-	
-	friend class ControlThread;
+//	friend class ControlThread;
 };
 #endif
 /** @} */

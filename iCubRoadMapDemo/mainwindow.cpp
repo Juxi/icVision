@@ -48,8 +48,8 @@
 MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 {
 	setCentralWidget(&graphWidget);
-	
     createActions();
+
     createMenus();
 
     QString message = tr("A context menu is available by right-clicking");
@@ -57,7 +57,7 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 
     setWindowTitle(tr("Menus"));
     setMinimumSize(160, 160);
-	
+
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
 	
@@ -314,6 +314,27 @@ void MainWindow::connectMap()
 		roadmap.graphConnect(i);
 }
 
+void MainWindow::importNesMap()
+{
+	if ( !iCub.isValid() )
+	{
+		printf("Cannot load map file because iCub is not valid!!!\n");
+		return;
+	}
+
+
+	QString fileName = QFileDialog::getOpenFileName(this,
+													tr("Open Address Book"), "",
+													tr("All Files (*)"));
+	printf("Reading poses...");
+	roadmap.readMapPoses(fileName.toStdString());\
+	printf("Done");
+//
+//	QMessageBox::information(this, tr("Unable to open file"),
+//							 file.errorString());
+}
+
+
 void MainWindow::setVelocity()
 {
 	bool ok;
@@ -378,6 +399,11 @@ void MainWindow::createActions()
     connectMapAction->setStatusTip(tr("Connect Nodes to their N nearest neighbors"));
     connect(connectMapAction, SIGNAL(triggered()), this, SLOT(connectMap()));
 	
+	importNesMapAction = new QAction(tr("&Import NES Map"), this);
+	importNesMapAction->setShortcuts(QKeySequence::Open);
+	importNesMapAction->setStatusTip(tr("Import a NES map from file"));
+    connect(importNesMapAction, SIGNAL(triggered()), this, SLOT(importNesMap()));
+
 	projectMapAction = new QAction(tr("&Project Map"), this);
 	projectMapAction->setShortcut( QKeySequence(tr("Ctrl+P")) );
     projectMapAction->setStatusTip(tr("Make a new 2D map projection"));
@@ -401,5 +427,6 @@ void MainWindow::createMenus()
 	mapMenu->addAction(saveMapAction);
 	mapMenu->addAction(connectMapAction);
 	mapMenu->addAction(projectMapAction);
+	mapMenu->addAction(importNesMapAction);
 }
 //! [12]

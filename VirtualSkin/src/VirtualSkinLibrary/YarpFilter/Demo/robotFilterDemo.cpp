@@ -7,6 +7,8 @@ using namespace yarp::os;
 
 int main(int argc, char **argv) {
 	cout << "enter main" << endl;
+	
+	Network yarp;
 
 	// create the RobotFilter
 	RobotInterface ri;
