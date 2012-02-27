@@ -15,7 +15,9 @@ CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : i
 																			   numBoxes(0)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
-	freeColor[0] = 0.3;	  freeColor[1] = 0.3;	   freeColor[2] = 0.3;	    freeColor[3] = 1.0; 
+    //collidingColor[0] = 0.3; collidingColor[1] = 0.3; collidingColor[2] = 0.3; collidingColor[3] = 0.2;
+	
+    freeColor[0] = 0.3;	  freeColor[1] = 0.3;	   freeColor[2] = 0.3;	    freeColor[3] = 1.0; 
 	//black[0] = 0.0;		  black[0] = 0.0;		   black[0] = 0.0;			black[0] = 1.0;
 }
 

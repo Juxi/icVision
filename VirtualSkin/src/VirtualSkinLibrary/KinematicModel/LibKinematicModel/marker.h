@@ -65,7 +65,7 @@ public:
 		
 		double dx = sqrt( a*a + b*b + c*c );
 		
-		if ( dx > 2*d )
+		if ( dx > d )
 		{
 			QVector<PrimitiveObject*>::iterator i;
 			

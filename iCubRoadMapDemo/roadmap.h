@@ -103,7 +103,7 @@ private:
 	class Custom_search_traits {		
 		public:
 			typedef K::Cartesian_const_iterator_d Cartesian_const_iterator_d;
-			typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
+            typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
 			typedef K::Construct_iso_box_d Construct_iso_box_d;
 			typedef K::Construct_min_vertex_d Construct_min_vertex_d;
 			typedef K::Construct_max_vertex_d Construct_max_vertex_d;

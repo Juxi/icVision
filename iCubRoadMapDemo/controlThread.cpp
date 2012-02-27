@@ -159,14 +159,14 @@ void ControlThread::run()
 	{ 
 		return;
 	}
-	
-	//std::vector<double> a = roadmap->map[0].q;
-	//Roadmap::vertex_t b = roadmap->map[1];
-	
+
 	while ( keepRunning )
 	{
 		if ( !isOnMap() )	
 			gotoNearest();
+        //else
+        //    multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+        
 		else if ( roadmap->currentVertex == 0 )	
 			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
 		else
