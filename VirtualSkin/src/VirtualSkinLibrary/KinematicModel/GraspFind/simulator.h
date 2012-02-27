@@ -68,6 +68,18 @@ public:
 		}
 	}
 
+	std::vector<double> normal_to_real_motors(std::vector<double> normal_values) {
+		std::vector<double> real_values(normal_values.size());
+		size_t i(0);
+		int n_parts = d_robot.numBodyParts();
+		for (size_t p(0); p < n_parts; ++p) {
+			int n_motors = d_robot.getNumMotors(p);
+			for (size_t m(0); m < n_motors; ++m, ++i)
+				real_values[i] = d_robot.NormalToEncoderPosition(p, m, normal_values[i]);
+		}
+		return real_values;
+	}
+
 	KinematicModel::Model &model() {
 		return d_model;
 	}

@@ -1,4 +1,5 @@
 #include "roadmap.h"
+#include "poses_reader.h"
 //#include "graphwidget.h"
 //#include "widgetEdge.h"
 //#include "widgetNode.h"
@@ -112,7 +113,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 	}
 }*/
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -120,6 +121,8 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
+	map[vertex].fitness = fitness;
+	map[vertex].collisions = collisions;
 	//map[vertex].x = _x;
 	//map[vertex].y = _y;
 	
@@ -213,6 +216,15 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 //	}
 }
 
+void Roadmap::readMapPoses(std::string filename) {
+	poses_map_t poses_map = read_poses(filename);
+	poses_vector_t poses(poses_map["CFGSPACE"]);
+	poses_vector_t work_space(poses_map["WORKSPACE"]);
+	for (size_t i(0); i < poses.size(); ++i) {
+		insert(work_space[i][0], work_space[i][1], poses[i]);
+	}
+}
+
 void Roadmap::removeEdge( Roadmap::edge_t edge )
 {
 	//if ( map[edge].qtGraphEdge )
@@ -239,11 +251,13 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 	K_neighbor_search search(tree, p , n+1);
 	for(K_neighbor_search::iterator it = search.begin(); it != search.end(); ++it)
 	{
-		if ( it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
+		size_t counter(0);
+		if ( ((sqrt(it->second) < .4)) && it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
 		{
 			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-			map[edge.first].length = it->second;
-//			std::cout << it->second << std::endl;
+			map[edge.first].length = sqrt(it->second);
+			++counter;
+//			std::cout << sqrt(it->second) << std::endl;
 			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
 //			emit appendedEdge( edge.first,
 //							  map[p.vertex].qtGraphNode ,
@@ -278,17 +292,26 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	std::vector<vertex_t> parents(num_vertices(map));
 	std::vector<double> distances(num_vertices(map));
 
-//    boost::vector_property_map<double, Map> some_map;
-//    std::pair<edge_i, edge_i> edge_begin_end(edges(map));
-//    edge_i edge_it(edge_begin_end.first);
-//    for (; edge_it != edge_begin_end.second; ++edge_it) {
-//    	some_map[*edge_it] = 0.0;
-//    }
 
+	 std::pair<edge_i, edge_i> map_edges(edges(map));
+	 edge_i edge_it(map_edges.first);
+	 std::cout << "adding lengths2" << std::endl;
+	 for (; edge_it != map_edges.second; ++edge_it) {
+		 double value = (map[source(*edge_it, map)].fitness + map[target(*edge_it, map)].fitness);
+		 int collisions1 = map[source(*edge_it, map)].collisions;
+		 int collisions2 = map[target(*edge_it, map)].collisions;
+		 double length = get(&Edge::length, map, *edge_it);
+
+		 length = length * length;
+
+//		  std::cout << value << " " << collisions << std::endl;
+		 put(&Edge::length2, map, *edge_it, length + 1000. * (collisions1 + collisions2));
+	 }
+	 std::cout << "done" << std::endl;
 
 	try {
 		dijkstra_shortest_paths(	map, from, 
-									weight_map( get(&Edge::length, map) )
+									weight_map( get(&Edge::length2, map) )
 									.predecessor_map( make_iterator_property_map(parents.begin(),get(boost::vertex_index, map)) )
 									.distance_map( make_iterator_property_map(distances.begin(),get(boost::vertex_index, map)) )
 									.visitor( target_visit(to,boost::on_examine_vertex()) )
