@@ -6,7 +6,7 @@
     <box width="1" depth=".001" height=".71"/>
 </object>-->
 
-<object name="ball" px="-0.3" py="-.1" pz=".05" type="target" r="200" g="200" b="200">
+<object name="ball" px="-0.3" py="-.1" pz=".05" type="target" r="0" g="100" b="0">
     <sphere radius=".05"/>
 </object>
 

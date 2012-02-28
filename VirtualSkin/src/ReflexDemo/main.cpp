@@ -52,13 +52,6 @@ int main(int argc, char *argv[])
 								the model must be started prior to appending objects by
 								calling loadWorld(), loadRobot(), or appendObject()		*/
 		
-		// Load a world model from file
-		if ( worldFile != "" )
-		{
-			printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
-			yarpModel->loadWorld( worldFile, false );
-		}
-		
 		// Load a robot model from file
 		if ( robotFile != "" )
 		{
@@ -78,9 +71,17 @@ int main(int argc, char *argv[])
 			printf("opening filter RPC port\n");
 			filter->openFilterRpcPort("/filterRpc");
 			
+            // THIS CAUSES DEADLOCK PROBLEMS
 			// Open the filter status port
 			//printf("opening filter status port\n");
 			//filter->openStatusPort("/filterStatus");
+		}
+        
+        // Load a world model from file
+		if ( worldFile != "" )
+		{
+			printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
+			yarpModel->loadWorld( worldFile, false );
 		}
 		
 		// Open the RPC interface to the world model

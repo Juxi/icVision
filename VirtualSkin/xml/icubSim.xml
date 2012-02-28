@@ -416,13 +416,13 @@
                     <link y="1" radius="0">
                         <marker name="left_hand"/>
                     </link>
-                </link> -->
+                </link>  -->
                
                 <link x="-.020" radius="0">
                     <link y="1" radius="0">
                         <marker name="left_hand"/>
                     </link>
-                </link> 
+                </link>
                 
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>

@@ -78,10 +78,6 @@ public:
 		}
 		yarp::os::Network yarp;
 		
-		//robot = model.loadRobot(fileName);
-		//model.robot->open(fileName);
-		//model.world->load(worldFileName);
-		
 		const QString deviceBaseName( robot->getName() );
 		const QString filterBaseName( robot->getName() + "F" );
 		
@@ -123,21 +119,21 @@ public:
 				
 				double min = response.get(2).asDouble();
 				double max = response.get(3).asDouble();
-				printf("setting motor limits: %f, %f\n", min, max);
+				//printf("setting motor limits: %f, %f\n", min, max);
 				
 				robot->getPart(bodyPart)->at(i)->setMin(min);
 				robot->getPart(bodyPart)->at(i)->setMax(max);
 				
 				if ( robot->getPart(bodyPart)->at(i)->size() == 1 )
 				{
-					printf("setting joint limits: %f, %f\n", min, max);
+					//printf("setting joint limits: %f, %f\n", min, max);
 					robot->getPart(bodyPart)->at(i)->at(0)->setMin(min*M_PI/180);
 					robot->getPart(bodyPart)->at(i)->at(0)->setMax(max*M_PI/180);
-				} else { printf("skipping this joint\n"); }
+				} //else { printf("skipping this joint\n"); }
 			}
 			port.close();
-			/************************/
-			
+            
+			/*** CREATE CONTROL BOARD FILTERS ***/
 			printf("----------------------------------------------------------------\n");
 			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			
@@ -159,7 +155,7 @@ public:
 				responseObservers.append(p_ro);
 				
 				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
+				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),			robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
@@ -174,21 +170,17 @@ public:
 		} 
 		
 		extraOpenStuff();
-		
-		
-		isOpen = true;
-		//statusPort.setBottle("1");
-		//model.start();
-		
+
 		// this is to let all the control board filters and observers come up
 		sleep(1);
+        isOpen = true;
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction
 	virtual void extraOpenStuff() {}		//!< This is called shortly before open<>(const QString&) returns
 											/**< In your sub-classes, replace the empty implementation with any initialization code required.
 												 For an example of this, see ReflexFilter. */ 
-	//virtual void stopRobot() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
+	//virtual void stopRobot() {}           //!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
 											/**< This is executed once the RobotFilter has detected collisions and cut its connection. */
 	virtual void collisionResponse() {}		//!< Should waits for the commands issued in stopRobot() to finish running
 											/**< This is called right after stopRobot() and runs in its own thread.
