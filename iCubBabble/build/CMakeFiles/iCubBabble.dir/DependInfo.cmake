@@ -4,11 +4,11 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/kail/imClever/iCubBabble/iCubBabbler.cpp" "/home/kail/imClever/iCubBabble/build/CMakeFiles/iCubBabble.dir/iCubBabbler.cpp.o"
-  "/home/kail/imClever/iCubBabble/main.cpp" "/home/kail/imClever/iCubBabble/build/CMakeFiles/iCubBabble.dir/main.cpp.o"
-  "/home/kail/imClever/iCubBabble/build/moc_iCubBabbler.cxx" "/home/kail/imClever/iCubBabble/build/CMakeFiles/iCubBabble.dir/moc_iCubBabbler.cxx.o"
-  "/home/kail/imClever/iCubBabble/partBabbler.cpp" "/home/kail/imClever/iCubBabble/build/CMakeFiles/iCubBabble.dir/partBabbler.cpp.o"
-  "/home/kail/imClever/iCubBabble/partController.cpp" "/home/kail/imClever/iCubBabble/build/CMakeFiles/iCubBabble.dir/partController.cpp.o"
+  "/Users/kail/imClever/dev/iCubBabble/iCubBabbler.cpp" "/Users/kail/imClever/dev/iCubBabble/build/CMakeFiles/iCubBabble.dir/iCubBabbler.cpp.o"
+  "/Users/kail/imClever/dev/iCubBabble/main.cpp" "/Users/kail/imClever/dev/iCubBabble/build/CMakeFiles/iCubBabble.dir/main.cpp.o"
+  "/Users/kail/imClever/dev/iCubBabble/build/moc_iCubBabbler.cxx" "/Users/kail/imClever/dev/iCubBabble/build/CMakeFiles/iCubBabble.dir/moc_iCubBabbler.cxx.o"
+  "/Users/kail/imClever/dev/iCubBabble/partBabbler.cpp" "/Users/kail/imClever/dev/iCubBabble/build/CMakeFiles/iCubBabble.dir/partBabbler.cpp.o"
+  "/Users/kail/imClever/dev/iCubBabble/partController.cpp" "/Users/kail/imClever/dev/iCubBabble/build/CMakeFiles/iCubBabble.dir/partController.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -98,13 +98,13 @@ bool KinTreeNode::isNearRoot( KinTreeNode* node, bool foundLink, bool foundJoint
 	// to control recursion up serial chains
 	if ( !parent() ) 
 	{
-		printf("isNearRoot returns TRUE\n");
+		//printf("isNearRoot returns TRUE\n");
 		return true;
 	}
 
         if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
 		{
-			printf("isNearRoot returns FALSE\n");
+			//printf("isNearRoot returns FALSE\n");
 			return false;
 		}
         if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !data().isEmpty() )
