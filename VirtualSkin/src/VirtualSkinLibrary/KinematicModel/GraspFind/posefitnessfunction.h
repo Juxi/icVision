@@ -9,12 +9,12 @@
 
 class EvaluationFilter {
 public:
-	virtual void operator()(std::vector<double> &values, double fitness) = 0;
+	virtual void operator()(std::vector<double> &values, double fitness, int n_collisions, KinematicModel::RobotObservation &observation) = 0;
 };
 
 class DummyFilter : public EvaluationFilter {
 public:
-	void operator()(std::vector<double> &values, double fitness){};
+	void operator()(std::vector<double> &values, double fitness, int n_collisions, KinematicModel::RobotObservation &observation){};
 };
 
 class PoseFitnessFunction : public Function
@@ -62,10 +62,11 @@ public:
 		double n_collisions = d_simulator.computePose();
 
 		double fitness(0.0);
+		KinematicModel::RobotObservation observation(d_simulator.robot().observe());
 		for (size_t i(0); i < d_constraints.size(); ++i)
-			fitness += d_weights[i] * d_constraints[i]->evaluate(motor_values, d_simulator.robot().observe(), n_collisions);
+			fitness += d_weights[i] * d_constraints[i]->evaluate(motor_values, observation, n_collisions);
 
-		(*d_filter)(motor_values, fitness);
+		(*d_filter)(motor_values, fitness, n_collisions, observation);
 		return fitness;
 	}
 

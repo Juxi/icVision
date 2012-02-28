@@ -46,13 +46,15 @@ public:
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
 		qreal x,y;
+		double fitness;
+		int collisions;
 		
 		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
 	};
 	
 	struct Edge {
 		QtGraphEdge* qtGraphEdge;
-		double length;
+		double length, length2;
 		double successRate;
 		Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0){}
 	};
@@ -153,7 +155,7 @@ public:
 	void setCurrentVertex( vertex_t );
 //	void setEdgeColor( edge_t, QColor );
 	
-	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
+	vertex_t insert( qreal x, qreal y, std::vector<double> _q, double fitness = 0.0, int collisions = 0/*, unsigned int n = 0*/ );
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
@@ -161,7 +163,8 @@ public:
 	
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
-	
+	void readMapPoses(std::string filename);
+
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	
@@ -173,6 +176,7 @@ public:
 	
 	//std::list< double[3] > 
 	void project2D( std::vector<double> d = std::vector<double>() );
+
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
 	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );

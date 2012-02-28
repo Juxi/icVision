@@ -175,6 +175,22 @@ bool Robot::setEncoderPosition( int partNum, int motorNum, qreal pos )          
     else { return 0; }
 }
 
+qreal Robot::EncoderToNormalPosition( int partNum, int motorNum, qreal pos ) {
+    if ( partIdxInRange(partNum) && motorIdxInRange(partNum,motorNum) ) {
+		return partList.at(partNum)->at(motorNum)->encToNorm(pos);
+    }
+    else
+    	return 0.0;
+}
+
+qreal Robot::NormalToEncoderPosition( int partNum, int motorNum, qreal pos ) {
+	if ( partIdxInRange(partNum) && motorIdxInRange(partNum,motorNum) ) {
+		return partList.at(partNum)->at(motorNum)->normToEnc(pos);
+	}
+	else
+		return 0.0;
+}
+
 void Robot::updatePose()
 {
 	//QMutexLocker locker(&mutex);
@@ -305,6 +321,7 @@ int Robot::getNumPrimitives()
 	printf(" num primitives: %d\n", result );
 	return result;
 }
+
 
 /*bool Robot::isColliding() const
 {

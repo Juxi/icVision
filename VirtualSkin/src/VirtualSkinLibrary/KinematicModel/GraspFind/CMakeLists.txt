@@ -19,7 +19,9 @@ ADD_DEPENDENCIES( GraspFind WorldModel )
 TARGET_LINK_LIBRARIES ( GraspFind 	KinematicModel
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
-					${OPENGL_LIBRARIES}			
+					${OPENGL_LIBRARIES}
+					gmp
+					CGAL
 )
 
 INSTALL ( TARGETS GraspFind DESTINATION ${CMAKE_SOURCE_DIR}/bin )

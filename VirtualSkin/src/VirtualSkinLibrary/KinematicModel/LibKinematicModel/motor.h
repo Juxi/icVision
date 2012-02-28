@@ -73,6 +73,10 @@ public:
 																/**< Values outside the interval [0,1] will be replaced by either 0 or 1 as is appropriate */
 	void home(bool verbose = true);								//!< Sets encoderPosition = homePosition
 
+
+	qreal normToEnc( qreal );										//!< Converts normalized encoder to real encoder value
+	qreal encToNorm( qreal );										//!< Converts real encoder to normalized encoder value
+
 private:
 	
 	Motor*		parentMotor;		//!< Just for the XML parser

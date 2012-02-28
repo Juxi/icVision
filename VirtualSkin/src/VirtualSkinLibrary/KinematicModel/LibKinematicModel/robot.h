@@ -102,6 +102,11 @@ public slots:
 																		 Motors are numbered as they are encountered by the parser (see configure()).
 																		 To see how Motors and BodyParts are numbered, try looking at the output of printJoints() and printBodyParts(). */
 	
+	qreal EncoderToNormalPosition( int partNum, int motorNum, qreal pos );	//!< Convert between normal [0-1] to real encoder positions for motors
+	qreal NormalToEncoderPosition( int partNum, int motorNum, qreal pos );
+
+
+
 	void updatePose();					//!< Do forward kinematics, pushing results down the link/joint trees
 	
 	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
