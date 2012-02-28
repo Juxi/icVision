@@ -159,7 +159,7 @@ public:
 			}
 			else
 			{
-				//printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
+				printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
 				QString errStr = "failed to find YARP port '";
 				errStr.append(targetName);
 				errStr.append("'");
@@ -174,6 +174,13 @@ public:
 		// this is to let all the control board filters and observers come up
 		sleep(1);
         isOpen = true;
+        
+        // not sure why i had to add this
+        // open the filters
+        for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+        {
+            cbFilters.at(bodyPart)->cutConnection(false);
+        }
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction

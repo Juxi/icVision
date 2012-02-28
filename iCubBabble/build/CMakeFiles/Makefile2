@@ -16,7 +16,7 @@ preinstall:
 #=============================================================================
 # Special targets provided by cmake.
 
-# Disable implicit rules so canoncical targets will work.
+# Disable implicit rules so canonical targets will work.
 .SUFFIXES:
 
 # Remove some rules from gmake that .SUFFIXES does not remove.
@@ -38,19 +38,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/2.8.7/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/2.8.7/bin/cmake -E remove -f
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+CMAKE_EDIT_COMMAND = /usr/local/Cellar/cmake/2.8.7/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kail/imClever/iCubBabble
+CMAKE_SOURCE_DIR = /Users/frank/imClever/iCubBabble
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kail/imClever/iCubBabble/build
+CMAKE_BINARY_DIR = /Users/frank/imClever/iCubBabble/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/iCubBabble.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/kail/imClever/iCubBabble/build
 CMakeFiles/iCubBabble.dir/all:
 	$(MAKE) -f CMakeFiles/iCubBabble.dir/build.make CMakeFiles/iCubBabble.dir/depend
 	$(MAKE) -f CMakeFiles/iCubBabble.dir/build.make CMakeFiles/iCubBabble.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kail/imClever/iCubBabble/build/CMakeFiles  1 2 3 4 5 6
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/frank/imClever/iCubBabble/build/CMakeFiles  1 2 3 4 5 6
 	@echo "Built target iCubBabble"
 .PHONY : CMakeFiles/iCubBabble.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/iCubBabble.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/iCubBabble.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kail/imClever/iCubBabble/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/frank/imClever/iCubBabble/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/iCubBabble.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kail/imClever/iCubBabble/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/frank/imClever/iCubBabble/build/CMakeFiles 0
 .PHONY : CMakeFiles/iCubBabble.dir/rule
 
 # Convenience name for target.
