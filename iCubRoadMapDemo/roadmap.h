@@ -47,6 +47,7 @@ private:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
+		std::vector<double> w;				// robot configuration
 		qreal x,y;
 		
 		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
@@ -156,6 +157,8 @@ public:
 	void setEdgeColor( edge_t, QColor );
 	
 	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
+	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ );
+
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
@@ -181,8 +184,12 @@ public:
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
 	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
 	
+private:
+	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
+	Roadmap::vertex_t nearestWorkspaceVertex( std::vector<double> _w );
+
 	//bool insert( std::vector< std::vector<double> > );
-	
+public:
 signals:
 	
 	void appendedNode( vertex_t, qreal, qreal );

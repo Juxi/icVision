@@ -3,6 +3,7 @@
 #include "widgetEdge.h"
 #include "widgetNode.h"
 #include "poses_reader.h"
+#include <cmath>
 
 Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
@@ -137,6 +138,31 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	return vertex;
 }
 
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ )
+{
+	//printf("called insert\n");
+	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
+
+	// put the configuration in the boost graph
+	vertex_t vertex = boost::add_vertex( map );
+	map[vertex].q = _q;
+	map[vertex].w = _w;
+	//map[vertex].x = _x;
+	//map[vertex].y = _y;
+
+	emit appendedNode( vertex, _x, _y );
+
+	// put it in the CGAL tree
+	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
+	tree.insert( p );
+
+	// connect it to its n nearest neighbors
+	//graphConnect( p, n );
+
+	printf("inserted");
+	return vertex;
+}
+
 void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges )
 {
 	//TODO Clean out the boost graph first
@@ -219,7 +245,7 @@ void Roadmap::readMapPoses(std::string filename) {
 	poses_vector_t poses(poses_map["CFGSPACE"]);
 	poses_vector_t work_space(poses_map["WORKSPACE"]);
 	for (size_t i(0); i < poses.size(); ++i)
-		insert(work_space[i][0], work_space[i][1], poses[i]);
+		insert(work_space[i][0], work_space[i][1], poses[i], work_space[i]);
 }
 
 void Roadmap::removeEdge( Roadmap::edge_t edge )
@@ -262,7 +288,7 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 		if ( it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
 		{
 			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-			map[edge.first].length = it->second;
+			map[edge.first].length = sqrt(it->second);
 			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
 			emit appendedEdge( edge.first, 
 							  map[p.vertex].qtGraphNode ,
@@ -290,6 +316,40 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 	map[search.begin()->first.vertex].type = type;
 	return search.begin()->first.vertex;
 }
+
+double Roadmap::calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2) {
+	assert(v1.size() == v2.size());
+	double distance(0.0);
+	for (size_t i(0); i < v1.size(); ++i)
+		distance += pow(v1[i] - v2[i], 2.0);
+	return sqrt(distance);
+}
+
+Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _w )
+{
+//	if ( _q.size() != dim ) { throw("wrong size state vector"); }
+
+	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
+
+//	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , 1);
+//	map[search.begin()->first.vertex].type = type;
+//	return search.begin()->first.vertex;
+
+	double min_dist(9999999999999.);
+
+	std::pair<vertex_i, vertex_i> vp = vertices(map);
+	vertex_i best_vertex(vp.first);
+	for (; vp.first != vp.second; ++(vp.first)) {
+		double distance = calculate_distance(map[*(vp.first)].w, _w);
+		if (min_dist > distance) {
+			min_dist = distance;
+			best_vertex = vp.first;
+		}
+	}
+
+	return *best_vertex;
+}
+
 
 std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 {
