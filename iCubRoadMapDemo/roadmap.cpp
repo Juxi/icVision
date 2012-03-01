@@ -4,6 +4,10 @@
 #include "widgetNode.h"
 #include "poses_reader.h"
 #include <cmath>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
 
 Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
@@ -145,6 +149,9 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  
 
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
+	for (size_t i(0); i < _q.size(); ++i)
+		cout << _q[i] << " ";
+	cout << endl;
 	map[vertex].q = _q;
 	map[vertex].w = _w;
 	//map[vertex].x = _x;
@@ -241,11 +248,23 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 }
 
 void Roadmap::readMapPoses(std::string filename) {
+	cout << "loading poses" << endl;
 	poses_map_t poses_map = read_poses(filename);
-	poses_vector_t poses(poses_map["CFGSPACE"]);
+	poses_vector_t poses_torso(poses_map["CFGSPACE_TORSO"]);
+	poses_vector_t poses_left(poses_map["CFGSPACE_LEFT_ARM"]);
+	poses_vector_t poses_right(poses_map["CFGSPACE_RIGHT_ARM"]);
+
 	poses_vector_t work_space(poses_map["WORKSPACE"]);
-	for (size_t i(0); i < poses.size(); ++i)
-		insert(work_space[i][0], work_space[i][1], poses[i], work_space[i]);
+	for (size_t i(0); i < poses_torso.size(); ++i) {
+		cout << i << endl;
+		vector<double> combined_pose;
+		copy(poses_torso[i].begin(), poses_torso[i].end(), back_inserter(combined_pose));
+		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
+		copy(poses_right[i].begin(), poses_right[i].end(), back_inserter(combined_pose));
+
+		insert(work_space[i][0], work_space[i][1], combined_pose, work_space[i]);
+	}
+	cout << "DONE loading poses" << endl;
 }
 
 void Roadmap::removeEdge( Roadmap::edge_t edge )
