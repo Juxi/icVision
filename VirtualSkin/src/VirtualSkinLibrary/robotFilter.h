@@ -98,6 +98,10 @@ public:
 			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
 			
 			
+			
+			printf("Getting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
+			printf("----------------------------------------------------------------\n");
+			
 			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
 			yarp::os::RpcClient port;
 			port.open("/clientPort");
@@ -134,8 +138,9 @@ public:
 			port.close();
             
 			/*** CREATE CONTROL BOARD FILTERS ***/
+			printf( "\nConnecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
+			
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -167,6 +172,7 @@ public:
 				close();
 				throw( VirtualSkinException(errStr) );
 			}
+			printf("\n");
 		} 
 		
 		extraOpenStuff();
