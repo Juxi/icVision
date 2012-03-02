@@ -306,12 +306,16 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 	{
 		if ( it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
 		{
-			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-			map[edge.first].length = sqrt(it->second);
+			std::pair<edge_t, bool> edge0 = boost::add_edge( p.vertex, it->first.vertex, map );
+			std::pair<edge_t, bool> edge1 = boost::add_edge( it->first.vertex, p.vertex, map );
+			map[edge0.first].length = sqrt(it->second);
 			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
-			emit appendedEdge( edge.first, 
+			emit appendedEdge( edge0.first, 
 							  map[p.vertex].qtGraphNode ,
 							  map[it->first.vertex].qtGraphNode );
+			emit appendedEdge( edge1.first, 
+							   map[it->first.vertex].qtGraphNode,
+							   map[p.vertex].qtGraphNode);
 		}
 	}
 }

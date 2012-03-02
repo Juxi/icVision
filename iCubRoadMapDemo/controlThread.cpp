@@ -9,6 +9,9 @@ ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_r
 	//	printf("failed to connect to robot filter status port\n");
 	//	return;
 	//}
+	printf("opening world port");
+	worldPort.open("/worldClient");
+	printf("done");
 }
 
 ControlThread::~ControlThread()
@@ -47,7 +50,7 @@ bool ControlThread::gotoNearest()
 		return 0;
 	
 	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
-	//msleep(500);
+	msleep(500);
 	
 	if ( !waitForMotion() )
 		return 0;
@@ -154,25 +157,70 @@ void ControlThread::run()
 	//yarp::os::Port vSkinStatus;
 	//yarp::os::Bottle b;
 	
-	printf("Moving iCub to the nearest state on the roadmap\n");
-	if ( !gotoNearest() )
-	{ 
-		return;
-	}
+	//printf("Moving iCub to the nearest state on the roadmap\n");
+	//if ( !gotoNearest() )
+	//{ 
+	//	return;
+	//}
 
 	while ( keepRunning )
 	{
-		if ( !isOnMap() )	
-			gotoNearest();
-        //else
-        //    multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
-        
-		else if ( roadmap->currentVertex == 0 )	
-			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
-		else
-			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 		
-		msleep(100);
+		if (worldPort.getOutputCount()==0)
+		{
+			printf("Trying to connect to %s\n", "/world");
+			yarp.connect("/worldClient","/world");
+		} else
+		{
+			// get the position of cup1
+			yarp::os::Bottle cmd;
+			cmd.addString("get");
+			cmd.addString("cup1");
+			
+			//printf("Sending message... %s\n", cmd.toString().c_str());
+			yarp::os::Bottle response;
+			worldPort.write(cmd,response);
+			//printf("Got response: %s\n", response.toString().c_str());
+			//printf("size: %d",response.size());
+			
+			if ( response.size() == 17 )
+			{
+				std::vector<double> objectPosition;
+				objectPosition.push_back(response.get(13).asDouble());
+				objectPosition.push_back(response.get(14).asDouble());
+				objectPosition.push_back(response.get(15).asDouble());
+				
+				printf("Object Location: ");
+				for (int i=0; i<3; i++)
+				{
+					printf("%f ", objectPosition[i] );
+				}
+				printf("\n");
+				
+				// find the node in the map that brings a hand closest to cup1
+				Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
+				
+				if ( !isOnMap() )	
+				{
+					gotoNearest();
+				}
+				else
+				{
+					multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+				}
+			}
+			
+		}
+		yarp::os::Time::delay(1);
+
+        // Move to a random other vertex in the map
+        // multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+        
+		// Move between vertices 0 and 1
+		//else if ( roadmap->currentVertex == 0 )	
+		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+		//else
+		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 	}
 	
 	//Roadmap::out_edge_i e, e_end;

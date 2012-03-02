@@ -47,7 +47,7 @@ private:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
-		std::vector<double> w;				// robot configuration
+		std::vector<double> w;				// workspace 
 		qreal x,y;
 		
 		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
