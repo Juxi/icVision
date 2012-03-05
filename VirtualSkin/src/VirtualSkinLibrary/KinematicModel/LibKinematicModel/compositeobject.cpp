@@ -6,7 +6,7 @@
 using namespace std;
 using namespace KinematicModel;
 
-CompositeObject::CompositeObject( DT_ResponseClass c, DT_RespTableHandle t ) : index(0),
+CompositeObject::CompositeObject( DT_ResponseClass c /*, DT_RespTableHandle t*/ ) : index(0),
 																			   responseClass(c),
 																			   inModel(false), 
 																			   deathWish(false),

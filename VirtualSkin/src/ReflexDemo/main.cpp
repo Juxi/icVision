@@ -77,19 +77,6 @@ int main(int argc, char *argv[])
 			//printf("opening filter status port\n");
 			//filter->openStatusPort("/filterStatus");
 		}
-		
-		//load another robot
-		VirtualSkin::YarpRobot* yarpRobot2 = NULL;
-		ReflexFilter*			filter2	  = NULL;
-		yarpRobot2 = yarpModel->loadYarpRobot( "../../../../xml/icubSimOffset.xml", false );
-		yarpRobot2->openCollisionPort("/collisions2");
-		yarpRobot2->openObservationPort("/observations2");
-		sleep(1);
-		printf( "  ...opening robot filter for '%s'\n", yarpRobot2->getName().toStdString().c_str() );
-		filter2 = new ReflexFilter( yarpRobot, false );
-		filter2->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
-		printf("opening filter RPC port\n");
-		filter2->openFilterRpcPort("/filterRpc2");
         
         // Load a world model from file
 		if ( worldFile != "" )

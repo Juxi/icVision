@@ -12,7 +12,7 @@ using namespace KinematicModel;
 KinTreeNode::KinTreeNode( //DT_RespTableHandle robotTable,	//DT_ResponseClass nodeResponseClass,
 						  Robot* robot, 
 						  KinTreeNode* parent,
-						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()), robot->getResponseTable() ),
+						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()) /*, robot->getResponseTable()*/ ),
 												parentRobot(robot),
 												parentNode(parent),
 												//index(robot->numNodes()),

@@ -41,7 +41,7 @@ class KinematicModel::CompositeObject : public Transformable
 	
 public:
 	
-    CompositeObject( DT_ResponseClass c, DT_RespTableHandle t = NULL );	//!< Simply initializes indices
+    CompositeObject( DT_ResponseClass c /*, DT_RespTableHandle t = NULL*/ );	//!< Simply initializes indices
     virtual ~CompositeObject();					//!< Deletes the primitives in the QVector first then this object
 	
 	//virtual Robot* robot() const { return NULL; }
