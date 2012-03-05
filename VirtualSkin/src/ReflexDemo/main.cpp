@@ -77,6 +77,9 @@ int main(int argc, char *argv[])
 			//printf("opening filter status port\n");
 			//filter->openStatusPort("/filterStatus");
 		}
+		
+		// add a second non-yarp robot to test collision detection
+		yarpModel->loadRobot( "../../../../xml/icubSimOffset.xml", false );
         
         // Load a world model from file
 		if ( worldFile != "" )

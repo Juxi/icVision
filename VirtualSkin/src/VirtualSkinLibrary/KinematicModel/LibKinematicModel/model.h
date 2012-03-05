@@ -59,7 +59,6 @@ public:
 											/**< Call this function directly if you want to be in control of which poses are computed when */
 	void stop();
 	
-	//void appendRobotObject( CompositeObject* );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
 	CompositeObject*	removeWorldObject( CompositeObject* );
@@ -73,19 +72,11 @@ public:
 	
 	DT_SceneHandle		getScene() const { return scene; }
 	DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }
-	//DT_RespTableHandle	getRobotTable() const { return robotTable; }
 	
 	// collision response classes for the world table
-	//DT_ResponseClass	WORLD_CRITICAL() const { return worldCriticalClass; }
 	DT_ResponseClass	OBSTACLE() const { return obstacleClass; }
 	DT_ResponseClass	TARGET() const { return targetClass; }
-	DT_ResponseClass	ROBOT() const { return robotClass; }
 	DT_ResponseClass	GHOST() const { return ghostClass; }
-	//DT_ResponseClass	ROBOT_CRITICAL() const { return robotCriticalClass; }
-	
-	
-	//DT_RespTableHandle	getRobotTable() { return robotTable; }
-	//DT_ResponseClass	body_partResponseClass() { return BODY_PART; }
 	
 public slots:
 	
@@ -104,7 +95,8 @@ protected:
 	bool encObstacle;
 	bool verbose;
 	
-	QVector<DT_RespTableHandle> responseTables;
+	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
+	QVector<DT_ResponseClass> robotResponseClasses;
 	
 	QVector<Robot*> robots;
 	QVector<CompositeObject*> world;
@@ -119,7 +111,6 @@ protected:
 	void run();				//!< Allows a thread to call computePose() periodically
 							/**< \note IMPORTANT: Call start() not run() !!! */
 	
-	
 	//virtual void onStartUp() {}
 	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
 	virtual void computePoseSuffix();								//!< This is executed by computePose() just after collision detection is computed
@@ -127,17 +118,13 @@ protected:
 										   PrimitiveObject*,
 										   const DT_CollData* ) {}	
 	
-private:
-	
 	ModelWindow	*modelWindow;	//! The visualization
 	
-	DT_SceneHandle				scene;
-	
-	DT_ResponseClass obstacleClass;		//!< objects in this response class trigger reflexes
-	DT_ResponseClass targetClass;		//!< these don't
-	DT_ResponseClass ghostClass;		//!< these are left out of collision detection computations
-	DT_ResponseClass robotClass;		//!< these belong to the robot's body
-	//DT_ResponseClass robotBaseClass;
+	DT_SceneHandle		scene;
+	DT_ResponseClass	robotBaseClass;	//!< parts of robots that can't move w.r.t the world. These trigger reflexes but are not checked against the world
+	DT_ResponseClass	obstacleClass;	//!< objects in this response class trigger reflexes
+	DT_ResponseClass	targetClass;	//!< these don't
+	DT_ResponseClass	ghostClass;		//!< these are left out of collision detection computations
 	
 	uint numObjects, numPrimitives;
 	

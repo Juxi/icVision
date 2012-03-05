@@ -37,39 +37,25 @@ public:
 				PJOINT	//!< See PrismaticJoint
 			   };		//!< Indicates the sub-type of this object
 
-	KinTreeNode(// DT_RespTableHandle robotTable, //DT_ResponseClass nodeResponseClass,
-				//Model* model,
-				Robot* parentRobot,
-				KinTreeNode* parentNode,
-				NodeType type = LINK );	//!< Initializes member variables and appends the KinTreeNode to the supplied Robot and KinTreeNode
-																					/**< \param parentRobot The robot to which the KinTreeNode belongs
-																						 \param parentNode The parent of the KinTreeNode in the kinematic tree structure */
-	virtual ~KinTreeNode();															//!< First delete the child KinTreeNodes and PrimitiveObjects associated with this KinTreeNode
-																					/**< Also emit a signal to the graphics thread that it should delete all relevant display lists */
+	KinTreeNode( Robot* parentRobot,
+				 KinTreeNode* parentNode,
+				 NodeType type = LINK );	//!< Initializes member variables and appends the KinTreeNode to the supplied Robot and KinTreeNode
+											/**< \param parentRobot The robot to which the KinTreeNode belongs
+												 \param parentNode The parent of the KinTreeNode in the kinematic tree structure */
+	virtual ~KinTreeNode();					//!< First delete the child KinTreeNodes and PrimitiveObjects associated with this KinTreeNode
+											/**< Also emit a signal to the graphics thread that it should delete all relevant display lists */
 
-	void setNodeAxis( const QVector3D& vector );									//!< Sets the value of a vector that represents either a body vector (like a bone in a skeleton) or a joint axis. See nodeAxis.
+	void setNodeAxis( const QVector3D& vector );		//!< Sets the value of a vector that represents either a body vector (like a bone in a skeleton) or a joint axis. See nodeAxis.
 
-	KinTreeNode* parent() const { return parentNode; }								//!< Returns the parent KinTreeNode of this object in the kinematic tree structure
-	Robot* robot() const { return parentRobot; }									//!< Returns the Robot to which this KinTreeNode belongs
-	//const int idx() const { return index; }											//!< Returns the index of this KinTreeNode object. The index is unique among KinTreeNodes belonging to the same Robot
-	
-	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );
-	NodeType getNodeType() const { return nodeType; }								//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
-	const QVector3D& getNodeAxis() const { return nodeAxis; }						//!< Returns nodeAxis
-	//const QMatrix4x4& getM() const { return M; }									//!< Returns the transformation matrix between the next coordinate system in the tree and this one
+	KinTreeNode* parent() const { return parentNode; }	//!< Returns the parent KinTreeNode of this object in the kinematic tree structure
+	Robot* robot() const { return parentRobot; }		//!< Returns the Robot to which this KinTreeNode belongs
 
-	//void append( PrimitiveObject* primitive );										//!< Appends a PrimitiveObject to the KinTreeNode, which is also a CompositeObject
-	//bool remove( PrimitiveObject* primitive );										//!< Removes a PrimitiveObject from the KinTreeNode, which is also a CompositeObject
-	
-	//void render();																	//!< Calls CompositeObject::render() to render the primitives in this KinTreeNode, then calls KintreeNode::render() recursively on children
-	
-	//bool isColliding();
+	NodeType getNodeType() const { return nodeType; }			//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
+	const QVector3D& getNodeAxis() const { return nodeAxis; }	//!< Returns nodeAxis
 	int getNumPrimitives();
-	
+	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );	//!< Returns whether or not this CompositeObject is free to move w.r.t the world
 	
 	void kill();
-	//void print() const;																//!< Prints the member variables to the terminal
-	//void printAll();																//!< Recursively calls print() on all nodes
 
 protected:
 	Robot*                parentRobot;
@@ -95,7 +81,7 @@ protected:
 																						 node with respect to one of its siblings (pass a pointer to the node to the member function of the sibling) to decend 
 																						 the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by filterCollisionPairs()
 																						 and Robot.filterCollisionPairs(). */
-	
+	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t );			//!< Turn off collision response to class c in table t
 	void update( const QMatrix4x4& txfr );											//!< Propogates forward kinematics calculations down the tree
 																					/**< Called by Robot.updatePose() */
 

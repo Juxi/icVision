@@ -4,20 +4,18 @@
 
 using namespace KinematicModel;
 
-Robot::Robot( Model* m, DT_RespTableHandle t ) : model(m),
-												responseTable(t),
-												robotName("unNamedRobot"),
-												numLinks(0),
-												isConfigured(false),
-												numCollisions(0),
-												numReflexCollisions(0)
+Robot::Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass c ) :	model(m),
+																		responseTable(t),
+																		worldResponseClass(c),
+																		robotName("unNamedRobot"),
+																		numLinks(0),
+																		isConfigured(false),
+																		numCollisions(0),
+																		numReflexCollisions(0)
 {
 	if ( !t ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 	qRegisterMetaType< RobotObservation >("RobotObservation");
-	
-	//responseClass = model->newRobotClass(responseTable);
-	//responseTable = model->newRobotTable();
 }
 Robot::~Robot()
 {
@@ -92,6 +90,15 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 	home(verbose);
 	isConfigured = true;
 }
+
+/*void Robot::removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t );
+{
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=tree.begin(); i!=tree.end(); ++i )
+	{
+        (*i)->removeCollisionResponse( c, t );
+    }
+}*/
 
 void Robot::filterCollisionPairs()
 {

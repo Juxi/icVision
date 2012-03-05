@@ -14,27 +14,18 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											numPrimitives(0)
 {
 	qRegisterMetaType< DT_ResponseClass >("GL_DisplayList");
-	//qRegisterMetaType< DT_ResponseClass >("DT_ObjectHandle");
-	//qRegisterMetaType< DT_ResponseClass >("DT_ShapeHandle");
 	
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
 	responseTables.append(DT_CreateRespTable());
 	
 	// create SOLID Response classes for the world table
+	robotBaseClass = DT_GenResponseClass(responseTables.at(0));
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
-	robotClass = DT_GenResponseClass(responseTables.at(0));
-	ghostClass = DT_GenResponseClass(responseTables.at(0));
-	//worldCriticalClass = DT_GenResponseClass(responseTables.at(0));
-	//robotCriticalClass = DT_GenResponseClass(responseTables.at(0));
-	//robotBaseClass = DT_GenResponseClass(responseTables.at(0));
-	
+	ghostClass = DT_GenResponseClass(responseTables.at(0));	
 
 	// define some collision responses for the world table
-	//DT_AddPairResponse(	responseTables.at(0), robotClass, robotBaseClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), robotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), robotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	
 	// set up the window for OpenGL
 	if ( visualize )
@@ -48,10 +39,6 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		QObject::connect( this, SIGNAL(computedState(int)),					modelWindow->glWidget, SLOT(update(int)) );
 		QObject::connect( modelWindow->glWidget, SIGNAL(renderStuff()),		this, SLOT(renderModel()), Qt::DirectConnection );
 
-		//QObject::connect( robot, SIGNAL(requestDisplayList(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		//QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),						skinWindow->glWidget, SLOT(removeDisplayList(int)) );
-		//QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),	this, SLOT(renderRobot()) );
-		
 		printf("showing model window\n");
 		modelWindow->show();
 		 
@@ -116,14 +103,24 @@ DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 
 Robot* Model::loadRobot( const QString& fileName, bool verbose )
 {
-	DT_RespTableHandle newTable = newRobotTable();
+	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
+	DT_ResponseClass newClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+	
+	DT_AddPairResponse(	responseTables.at(0), newClass, robotBaseClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	
+	QVector<DT_ResponseClass>::iterator i;
+	for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
+		DT_AddPairResponse(	responseTables.at(0), newClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	
+	robotResponseClasses.append( newClass );
 	
 	printf("Loading non-yarp robot.\n");
-	Robot* robot = new Robot( this, newTable );
+	Robot* robot = new Robot( this, newTable, newClass );
 	robot->open( fileName, verbose );
 	robot->home( verbose );
 	
-	//responseTables.append( newTable );
 	robots.append( robot );
 	return robot;
 }
@@ -160,7 +157,7 @@ void Model::appendObject( KinTreeNode* node )
 {
 	//if ( verbose ) printf("  appending robot object.\n");
 	QMutexLocker locker(&mutex);
-	if ( !node->getResponseClass() || !node->robot()->getResponseTable() )
+	if ( !node->getResponseClass() || !node->robot()->getResponseTable() || !node->robot()->getWorldResponseClass() )
 	{
 		throw KinematicModelException("CompositeObject must have a DT_RespTableHandle and a DT_ResponseClass to be appended to the world.");
 	}
@@ -171,12 +168,13 @@ void Model::appendObject( KinTreeNode* node )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending robot primitive to world\n");
-		DT_SetResponseClass(	node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
-		DT_RemovePairResponse(	node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
+		DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
+		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
 		
-		// if no parents
-		if ( !node->isNearRoot() )
-			DT_SetResponseClass(	responseTables.at(0), (*i)->getSolidObjectHandle(), robotClass );
+		if ( node->isNearRoot() )
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), robotBaseClass );
+		else
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldResponseClass() );
 		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }

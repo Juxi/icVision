@@ -19,17 +19,26 @@ YarpModel::~YarpModel()
 
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 {
-	printf("creating robot response table\n");
-	DT_RespTableHandle newTable = newRobotTable();
+	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
+	DT_ResponseClass newClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+	
+	DT_AddPairResponse(	responseTables.at(0), newClass, robotBaseClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	
+	QVector<DT_ResponseClass>::iterator i;
+	for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
+		DT_AddPairResponse(	responseTables.at(0), newClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	
+	robotResponseClasses.append( newClass );
 	
 	printf("creating robot object\n");
-	YarpRobot* robot = new YarpRobot( this, newTable );
+	YarpRobot* robot = new YarpRobot( this, newTable, newClass );
 	
 	printf("calling open robot\n");
 	robot->open( fileName, verbose );
 	robot->home( verbose );
 	
-	//responseTables.append( newTable );
 	robots.append( robot );
 	return robot;
 }

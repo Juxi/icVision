@@ -38,8 +38,8 @@ class KinematicModel::Robot : public QObject
 
 public:
 	
-	Robot( Model* m, DT_RespTableHandle t );	//!< 
-	~Robot();									//!< Nothing to do here
+	Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass c );	
+	~Robot();														
 	
 	//bool Robot::isColliding() const;
 	
@@ -56,7 +56,9 @@ public:
 	
 	// generic 'get' functions that may be useful
 	const Model* getModel() const { return model; }
-	DT_RespTableHandle getResponseTable() {return responseTable; }
+	DT_RespTableHandle getResponseTable() { return responseTable; }
+	DT_ResponseClass getWorldResponseClass() { return worldResponseClass; }
+	//void doNotRespondTo( DT_ResponseClass c );
 	
 	const QString&	getName() const { return robotName; }				//!< Get the name of the Robot
 	const QString*	getPartName( int partNum ) const;					//!< Get the name of a BodyPart, given its index (usually for printing messages) 
@@ -112,15 +114,15 @@ public slots:
 	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
 	
 private:
-	Model*					model;		//!< The Model that is doing collision detection on this Robot
-	DT_RespTableHandle		responseTable;
-	//DT_ResponseClass		responseClass;
+	Model*					model;				//!< The Model that is doing collision detection on this Robot
+	DT_RespTableHandle		responseTable;		//!< For managing self-collisions
+	DT_ResponseClass		worldResponseClass;	//!< For managing the robot w.r.t the world and other robots
 	
-	QString					robotName;	//!< Human readable identifier for the robot
-	QVector<BodyPart*>		partList;	//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
-	QVector<Motor*>			motorList;	//!< "Motors" serve as an interface to set the position of one or more joints
-	QVector<KinTreeNode*>	tree;		//!< root nodes of the link/joint trees
-	QVector<Marker*>		markers;	//!< list of markers
+	QString					robotName;		//!< Human readable identifier for the robot
+	QVector<BodyPart*>		partList;		//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
+	QVector<Motor*>			motorList;		//!< "Motors" serve as an interface to set the position of one or more joints
+	QVector<KinTreeNode*>	tree;			//!< root nodes of the link/joint trees
+	QVector<Marker*>		markers;		//!< list of markers
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
 	
@@ -132,6 +134,7 @@ private:
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index
 	void filterCollisionPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.filterCollisionPairs().
+	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t ); //!< Turn off collision response to class c in table t (for the whole robot)
 	
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
 	void appendBodyPart( BodyPart* part )	{ partList.append(part); }		//!< Appends a BodyPart to the list
