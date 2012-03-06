@@ -91,6 +91,8 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 	
 	filterCollisionPairs();
 	home(verbose);
+	appendTreeToModel();
+	
 	isConfigured = true;
 }
 
@@ -318,6 +320,29 @@ Motor* Robot::getMotorByName(const QString &motorName)
 		}
     }
     return 0;
+}
+
+
+void Robot::appendTreeToModel( KinTreeNode* node )
+{
+	QVector<KinTreeNode*>::iterator i;
+	if ( node == NULL ) {
+		for ( i=tree.begin(); i!=tree.end(); ++i )
+			appendTreeToModel(*i);
+	} else {
+		for ( i=node->children.begin(); i!=node->children.end(); ++i ) {
+			appendTreeToModel(*i);
+		}
+		model->appendObject(node);
+	}
+}
+
+void Robot::appendMarkersToModel()
+{
+	QVector<Marker*>::iterator i;
+	for ( i=markers.begin(); i!=markers.end(); ++i ) {
+			model->appendObject( (*i)->getTracerObject() );
+	}
 }
 
 int Robot::getNumPrimitives()

@@ -44,6 +44,7 @@ public:
 	//bool Robot::isColliding() const;
 	
 	void open(const QString& fileName, bool verbose = true) throw(KinematicModelException);	//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
+	void appendMarkersToModel();
 	bool isOpen() const	{ return isConfigured; }											//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();																			//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	
@@ -55,13 +56,11 @@ public:
 	virtual void publishState();										// emit signals for observations and reflexes
 	
 	// generic 'get' functions that may be useful
-	const Model* getModel() const { return model; }
-	DT_RespTableHandle getResponseTable() { return responseTable; }
-	DT_ResponseClass getWorldRobotClass() { return worldRobotClass; }
-	DT_ResponseClass getWorldBaseClass() { return worldBaseClass; }
-	
-	//void doNotRespondTo( DT_ResponseClass c );
-	
+	const Model*		getModel() const { return model; }
+	DT_RespTableHandle	getResponseTable() { return responseTable; }
+	DT_ResponseClass	getWorldRobotClass() { return worldRobotClass; }
+	DT_ResponseClass	getWorldBaseClass() { return worldBaseClass; }
+
 	const QString&	getName() const { return robotName; }				//!< Get the name of the Robot
 	const QString*	getPartName( int partNum ) const;					//!< Get the name of a BodyPart, given its index (usually for printing messages) 
 	const QString*	getMotorName( int partNum, int motorNum ) const;		//!< Get the name of a Motor, given its index and the index of its body part
@@ -71,20 +70,13 @@ public:
 	Motor*			getMotorByName( const QString& motorName );					//!< Get the moter itself, given its name
 	
 	int				getNumMotors( int partNum ) const;								//!< Get the number of motors in a BodyPart, given its index
-	
-	//void printLinks();			//!< Prints the kinematic tree depth first
-	//void printBodyParts();		//!< Print a list of the Motor objects in each BodyPart
-	
-	int numBodyParts() const { return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
-	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
-	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
+
+	int	numBodyParts() const { return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
+	int numMotors() const { return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
+	int numNodes() { return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
 
 signals:
-	
-	//void appendedObject( KinTreeNode* node );
-	//void appendedPrimitive ( PrimitiveObject* primitive );
-	//void removeSelfCollisionPair( DT_ResponseClass, DT_ResponseClass );
-	
+
 	void collisions(int);
 	void reflexCollisions(int);
 	void observation( RobotObservation obs );							//!< make new marker positions and orientations known
@@ -145,6 +137,7 @@ private:
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
 	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list																		/**< In case you want to populate the list in reverse order */
 	
+	void appendTreeToModel( KinTreeNode* node = NULL );
 	int getNumPrimitives();
 	void kill();
 	
