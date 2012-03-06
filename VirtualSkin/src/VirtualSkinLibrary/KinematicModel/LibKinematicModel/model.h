@@ -50,16 +50,11 @@ public:
 									/**< \param visualize If true, a SkinWindow (with its associated GLWidget) is constructed and its signals and slots are
 										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
 	virtual ~Model();				//!< Nothing special to do here
-
-	DT_RespTableHandle newRobotTable();
-	DT_ResponseClass newResponseClass( DT_RespTableHandle );
-	void removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	
 	int computePose();						//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using SOLID
 											/**< Call this function directly if you want to be in control of which poses are computed when */
 	void stop();
 	
-	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
 	CompositeObject*	removeWorldObject( CompositeObject* );
 	void clearTheWorld();
@@ -89,6 +84,25 @@ signals:
 	void computedState( int collisions );	//! Indicates that a state has been computed and reports the number of collisions
 	
 protected:
+
+	DT_RespTableHandle newRobotTable();
+	DT_ResponseClass newResponseClass( DT_RespTableHandle );
+	void removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	
+	void appendObject( KinTreeNode* );
+	void cleanTheWorld();
+	void updateWorldState();
+	void fwdKin();
+
+	void run();				//!< Allows a thread to call computePose() periodically
+							/**< \note IMPORTANT: Call start() not run() !!! */
+	
+	//virtual void onStartUp() {}
+	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
+	virtual void computePoseSuffix();								//!< This is executed by computePose() just after collision detection is computed
+	virtual void collisionHandlerAddendum( PrimitiveObject*,		//!< This is executed by collisionHandler() just before it returns
+										   PrimitiveObject*,
+										   const DT_CollData* ) {}	
 	
 	bool keepRunning;		//!< Facilitates stopping and restarting the thread
 	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
@@ -102,23 +116,6 @@ protected:
 	QVector<Robot*> robots;
 	QVector<CompositeObject*> world;
 	
-	void cleanTheWorld();
-	void updateWorldState();
-	void fwdKin();
-	//void emitRobotStates();
-	
-	//Robot*				removeRobot( Robot* );
-	
-	void run();				//!< Allows a thread to call computePose() periodically
-							/**< \note IMPORTANT: Call start() not run() !!! */
-	
-	//virtual void onStartUp() {}
-	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
-	virtual void computePoseSuffix();								//!< This is executed by computePose() just after collision detection is computed
-	virtual void collisionHandlerAddendum( PrimitiveObject*,		//!< This is executed by collisionHandler() just before it returns
-										   PrimitiveObject*,
-										   const DT_CollData* ) {}	
-	
 	ModelWindow	*modelWindow;	//! The visualization
 	
 	DT_SceneHandle		scene;
@@ -129,6 +126,9 @@ protected:
 	uint numObjects, numPrimitives;
 	
 	QMutex mutex;
+	
+	friend class Robot;
+	friend class KinTreeNode;
 
 	
 	/*************************

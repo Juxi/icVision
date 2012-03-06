@@ -18,7 +18,9 @@ YarpModel::~YarpModel()
 //}
 
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
-{
+{	
+	mutex.lock();
+	
 	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
 	DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
 	DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
@@ -36,14 +38,16 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	robotResponseClasses.append( newRobotClass );
 	robotBaseClasses.append( newBaseClass );
 	
-	printf("creating robot object\n");
+	printf("Loading yarp robot.\n");
 	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
-	
-	printf("calling open robot\n");
 	robot->open( fileName, verbose );
-	robot->home( verbose );
 	
 	robots.append( robot );
+	
+	mutex.unlock();
+	
+	robot->appendMarkersToModel();
+	
 	return robot;
 }
 
