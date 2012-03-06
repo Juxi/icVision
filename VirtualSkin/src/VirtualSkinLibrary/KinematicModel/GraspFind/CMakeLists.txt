@@ -5,12 +5,17 @@
 SET ( src_files	main.cpp
 		graspfinder.cpp 
 		xnes.cpp 
-		roadmap.cpp )
+		roadmap.cpp 
+		sliderwindow.cpp
+)
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h )
+SET ( QT_MOC_FILES 	sliderwindow.h
+)
 
-#SET ( QT_MOC_FILES graspfinder.h )	
-#QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
+SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h )
+
+SET ( QT_MOC_FILES sliderwindow.h )	
+QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_EXECUTABLE ( GraspFind ${hdr_files} ${src_files} )
 

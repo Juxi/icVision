@@ -68,6 +68,21 @@ public:
 		}
 	}
 
+	std::map<std::string, std::vector<double> > to_motor_named_map(std::vector<double> &vec) {
+		std::map<std::string, std::vector<double> > motor_map;
+
+		int n_parts = d_robot.numBodyParts();
+		std::vector<double>::iterator it(vec.begin());
+
+		for (size_t p(0); p < n_parts; ++p) {
+			int n_motors = d_robot.getNumMotors(p);
+			motor_map[d_robot.getPart(p)->name().toStdString()] = std::vector<double>(it, it + n_motors);
+			it += n_motors;
+		}
+
+		return motor_map;
+	}
+
 	std::vector<double> normal_to_real_motors(std::vector<double> normal_values) {
 		std::vector<double> real_values(normal_values.size());
 		size_t i(0);
@@ -78,6 +93,18 @@ public:
 				real_values[i] = d_robot.NormalToEncoderPosition(p, m, normal_values[i]);
 		}
 		return real_values;
+	}
+
+	std::vector<double> real_to_normal_motors(std::vector<double> real_values) {
+		std::vector<double> normal_values(real_values.size());
+		size_t i(0);
+		int n_parts = d_robot.numBodyParts();
+		for (size_t p(0); p < n_parts; ++p) {
+			int n_motors = d_robot.getNumMotors(p);
+			for (size_t m(0); m < n_motors; ++m, ++i)
+				normal_values[i] = d_robot.EncoderToNormalPosition(p, m, real_values[i]);
+		}
+		return normal_values;
 	}
 
 	KinematicModel::Model &model() {
@@ -94,6 +121,15 @@ public:
 
 	int total_motors() {
 		return d_total_motors;
+	}
+
+	int total_parts() {
+		return d_robot.numBodyParts();
+	}
+
+
+	std::string part_name(size_t i) {
+		return d_robot.getPart(i)->name().toStdString();
 	}
 };
 

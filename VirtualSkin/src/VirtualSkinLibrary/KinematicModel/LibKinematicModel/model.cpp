@@ -202,8 +202,10 @@ void Model::appendObject( CompositeObject* object )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending primitive to world\n");
-		DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
-		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+		if (object->getResponseClass() != TARGET()) {
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
+			DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+		}
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		(*i)->setIdx( ++numPrimitives );
 		emit addedPrimitive(*i);

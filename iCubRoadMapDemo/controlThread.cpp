@@ -1,7 +1,10 @@
 #include "controlThread.h"
 #include <QTime>
+#include <iostream>
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), keepRunning(false)
+using namespace std;
+
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), goal_vertex(0), keepRunning(false)
 {
 	//vSkinStatus.open("/statusOut");
 	//if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -58,6 +61,27 @@ bool ControlThread::gotoNearest()
 		return false;
 	}
 	
+	return true;
+}
+
+bool ControlThread::goTo(Roadmap::vertex_t v)
+{
+	robot->setVelocity( velocity );
+	if ( !robot->positionMove(roadmap->getStdPose(v)) )
+		return 0;
+
+	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
+	//msleep(500);
+
+	if ( !waitForMotion() )
+		return 0;
+
+	if ( !isOnMap() )
+	{
+		printf("Failed to move iCub onto the roadmap\n");
+		return false;
+	}
+
 	return true;
 }
 
@@ -155,22 +179,29 @@ void ControlThread::run()
 	//yarp::os::Bottle b;
 	
 	printf("Moving iCub to the nearest state on the roadmap\n");
-	if ( !gotoNearest() )
-	{ 
-		return;
-	}
+//	if ( !gotoNearest() )
+//	{
+//		return;
+//	}
 
 	while ( keepRunning )
 	{
+		cout << "lalalaa" << endl;
 		if ( !isOnMap() )	
 			gotoNearest();
+		else
+			goTo(goal_vertex);
+		cout << "lalalaa" << endl;
         //else
         //    multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
-        
-		else if ( roadmap->currentVertex == 0 )	
-			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
-		else
-			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
+
+//		multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, goal_vertex ) );
+
+
+//		else if ( roadmap->currentVertex == 0 )
+//			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+//		else
+//			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 		
 		msleep(100);
 	}

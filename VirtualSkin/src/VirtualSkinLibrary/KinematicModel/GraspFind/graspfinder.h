@@ -23,7 +23,7 @@ public:
 
 	~GraspFinder() {}
 
-	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double std = .4, int population_size = 150);
+	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
 
 	void add_constraint(Constraint *constraint, double weight = 1.0){
 		d_pose_fitness_function.add_constraint(constraint, weight);

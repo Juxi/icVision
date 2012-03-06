@@ -40,9 +40,12 @@
 ****************************************************************************/
 
 #include <QtGui>
+#include <vector>
 
 #include "mainwindow.h"
 #include "newMapDialog.h"
+
+using namespace std;
 
 //! [0]
 MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
@@ -121,6 +124,20 @@ void MainWindow::explore()
 void MainWindow::stopController()
 {
 	ctrlThread.stop();
+}
+
+
+void MainWindow::test_shit()
+{
+	vector<double> pos(3);
+
+	pos[0] = -0.223289;
+	pos[1] = -0.18154;
+	pos[2] = .0;
+
+	Roadmap::vertex_t goal = roadmap.nearestWorkspaceVertex(pos);
+	ctrlThread.goal_vertex = goal;
+
 }
 
 //! [3]
@@ -327,7 +344,7 @@ void MainWindow::importNesMap()
 													tr("Open Address Book"), "",
 													tr("All Files (*)"));
 	printf("Reading poses...");
-	roadmap.readMapPoses(fileName.toStdString());\
+	roadmap.readMapPoses(fileName.toStdString());
 	printf("Done");
 //
 //	QMessageBox::information(this, tr("Unable to open file"),
@@ -400,9 +417,14 @@ void MainWindow::createActions()
     connect(connectMapAction, SIGNAL(triggered()), this, SLOT(connectMap()));
 	
 	importNesMapAction = new QAction(tr("&Import NES Map"), this);
-	importNesMapAction->setShortcuts(QKeySequence::Open);
+	importNesMapAction->setShortcut(QKeySequence(tr("Ctrl+I")));
 	importNesMapAction->setStatusTip(tr("Import a NES map from file"));
     connect(importNesMapAction, SIGNAL(triggered()), this, SLOT(importNesMap()));
+
+	testShitAction = new QAction(tr("&Test Shit"), this);
+	testShitAction->setShortcut(QKeySequence(tr("Ctrl+T")));
+	testShitAction->setStatusTip(tr("Test Shit"));
+    connect(testShitAction, SIGNAL(triggered()), this, SLOT(test_shit()));
 
 	projectMapAction = new QAction(tr("&Project Map"), this);
 	projectMapAction->setShortcut( QKeySequence(tr("Ctrl+P")) );
@@ -428,5 +450,6 @@ void MainWindow::createMenus()
 	mapMenu->addAction(connectMapAction);
 	mapMenu->addAction(projectMapAction);
 	mapMenu->addAction(importNesMapAction);
+	mapMenu->addAction(testShitAction);
 }
 //! [12]

@@ -34,7 +34,7 @@ inline poses_map_t read_poses(std::string filename) {
 	std::ifstream in_file(filename.c_str());
 
 	if (!in_file) {
-		std::err << "No File Found: " << filename << std::endl;
+		std::cerr << "No File Found: " << filename << std::endl;
 		return poses_map_t();
 	}
 
@@ -53,6 +53,7 @@ inline poses_map_t read_poses(std::string filename) {
 				the_map[current_name] = the_poses;
 			std::remove(line.begin(), line.end(), ' ');
 			current_name = line;
+			the_poses.clear();
 		} else {
 			std::istringstream line_reader(line);
 			std::vector<double> pose;

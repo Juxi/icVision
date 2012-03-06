@@ -80,6 +80,19 @@ int path_test(Model &model, Robot &robot, QApplication &app) {
 	return result;
 }
 
+int online_test(Model &model, Robot &robot, QApplication &app) {
+	OnlineThread online_thread(model, robot);
+
+	online_thread.start();
+
+	int result = app.exec();						// run the Qt application
+
+	online_thread.stop();
+	model.stop();
+
+	return result;
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc != 4) {
@@ -119,6 +132,10 @@ int main(int argc, char *argv[])
 	}
 
 	if (string(argv[3]) == "path") {
-		path_test(model, robot, app);
+		return path_test(model, robot, app);
+	}
+
+	if (string(argv[3]) == "online") {
+		return online_test(model, robot, app);
 	}
 }

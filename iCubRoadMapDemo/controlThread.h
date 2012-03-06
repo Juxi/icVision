@@ -27,6 +27,9 @@ public:
 	void setVelocity( int i );
 	
 	bool gotoNearest();
+	bool goTo(Roadmap::vertex_t v);
+
+
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
 	bool isOnMap();
@@ -44,7 +47,10 @@ protected:
 	iCubController* robot;
 	Roadmap* roadmap;
 	double	velocity;
+public:
+	Roadmap::vertex_t goal_vertex;
 	
+protected:
 	volatile bool keepRunning;
 	
 	void run();

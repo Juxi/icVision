@@ -22,7 +22,7 @@ Matrix GraspFinder::get_start_pos(int dim) {
 	return pt;
 }
 
-void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, double std, int population_size) {
+void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
 	try
 	{
 		int dim = d_simulator.total_motors();
@@ -43,7 +43,7 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 			n_evaluations += population_size;
 			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
-		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals);
+		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals && nes.variance() > variance_threshold);
 
 		d_best_point = (nes.bestPoint().get_data());
 	}
