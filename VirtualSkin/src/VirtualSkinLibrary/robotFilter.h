@@ -121,6 +121,12 @@ public:
 				port.write(cmd,response);
 				//printf("Got response: %s\n", response.toString().c_str());
 				
+				if(response.size() != 3) {	// we did not get the limits
+					printf("No correct joint limit response at joint #%d! got: %s\n", i, response.toString().c_str());	
+					printf("Warning! Using the XML provided values!\n", i, response.toString().c_str());	
+					continue;
+				}
+				
 				double min = response.get(2).asDouble();
 				double max = response.get(3).asDouble();
 				//printf("setting motor limits: %f, %f\n", min, max);
