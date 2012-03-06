@@ -60,15 +60,16 @@ void KinTreeNode::setNodeAxis( const QVector3D& vector )
 
 void KinTreeNode::filterCollisionPairs()
 {
+    QVector<KinTreeNode*>::iterator i;
+	
     // do not do collision detection between this link and its siblings (or itself)
-	QVector<KinTreeNode*>::iterator i;
     if ( !parentNode )
 	{
         for ( i=parentRobot->tree.begin(); i!=parentRobot->tree.end(); ++i ) serialFilter( *i );
     } else {
         for ( i=parentNode->children.begin(); i!=parentNode->children.end(); ++i ) serialFilter( *i );
     }
-
+	
     for ( i=children.begin(); i!=children.end(); ++i ) {
         (*i)->filterCollisionPairs();
     }
@@ -81,23 +82,25 @@ bool KinTreeNode::isNearRoot( KinTreeNode* node, bool foundLink, bool foundJoint
 	// to control recursion up serial chains
 	if ( !parent() ) 
 	{
-		//printf("isNearRoot returns TRUE\n");
+		printf("isNearRoot returns TRUE\n");
 		return true;
 	}
-
+	
 	if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
 	{
-		//printf("isNearRoot returns FALSE\n");
+		printf("isNearRoot returns FALSE\n");
 		return false;
 	}
-	if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !data().isEmpty() )
+	
+	if ( getNodeType() == LINK && parent()->getNodeType() != LINK /*&& !data().isEmpty()*/ )
 	{
 		foundLink = true;
 	}
-	else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !data().isEmpty() )
+	else if ( getNodeType() != LINK && parent()->getNodeType() == LINK /*&& !data().isEmpty()*/ )
 	{
 		foundJoint = true;
 	}
+	
 	
     return parent()->isNearRoot(node,foundLink,foundJoint);
 }
@@ -120,7 +123,7 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
             foundJoint = true;
         }
     }
-
+	
     // do not check collision between objects of the same class as this one and objects of the same class as 'node'
 	parentRobot->model->removePairResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
 	
