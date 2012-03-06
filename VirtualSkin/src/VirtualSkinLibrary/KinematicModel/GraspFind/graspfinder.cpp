@@ -26,30 +26,35 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 	try
 	{
 		int dim = d_simulator.total_motors();
-		bool useImportanceMixing = false;
-		bool useBaseline = false;
+
 
 		Matrix sigma = Matrix::ones(dim);
 		sigma *= std;
 		int population = population_size;//leave 0 to use default
 
-		NES nes(d_pose_fitness_function, useImportanceMixing, useBaseline);
-		nes.init(get_start_pos(dim), sigma, population);
+		d_nes.init(get_start_pos(dim), sigma, population);
 
 		size_t n_evaluations(0);
 		do
 		{
-			nes.iterate();
+			d_nes.iterate();
 			n_evaluations += population_size;
-			std::cout << "n_evaluations: " << n_evaluations << std::endl;
+//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
-		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals && nes.variance() > variance_threshold);
+		while (d_nes.bestFitness() > fitness_threshold && d_nes.evaluations() < maxevals && d_nes.variance() > variance_threshold);
 
-		d_best_point = (nes.bestPoint().get_data());
+		d_best_point = (d_nes.bestPoint().get_data());
 	}
 	catch (const char* exception)
 	{
 		printf("\n\nEXCEPTION: %s\n\n", exception);
 	}
+}
+
+void GraspFinder::set_variance(double std) {
+	Matrix sigma = Matrix::ones(d_nes.dim());
+	sigma *= std;
+
+	d_nes.set_variance(sigma);
 }
 

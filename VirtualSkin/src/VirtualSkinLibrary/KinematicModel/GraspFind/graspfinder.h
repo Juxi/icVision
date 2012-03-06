@@ -18,8 +18,10 @@ class GraspFinder
 public:
 	GraspFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot) :
 		d_simulator(model, robot),
-		d_pose_fitness_function(d_simulator)
-	{}
+		d_pose_fitness_function(d_simulator),
+		d_nes(d_pose_fitness_function, false, false)
+	{
+	}
 
 	~GraspFinder() {}
 
@@ -47,12 +49,16 @@ public:
 		return d_simulator;
 	}
 
+	void set_variance(double std);
+
 public:
 	Simulator d_simulator;
 
 	std::vector<double> d_best_point;
 
 	PoseFitnessFunction d_pose_fitness_function;
+
+	NES d_nes;
 
 private:
 	Matrix get_start_pos(int dim);

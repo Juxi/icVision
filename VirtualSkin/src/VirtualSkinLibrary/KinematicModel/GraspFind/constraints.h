@@ -69,6 +69,7 @@ public:
 };
 
 class PositionConstraint : public Constraint {
+public:
 	std::string d_marker_name;
 	std::vector<double> d_goal_position;
 
@@ -101,14 +102,20 @@ public:
 };
 
 class OrientationConstraint : public Constraint {
+public:
 	std::string d_marker_name;
 	std::vector<double> d_goal_orientation;
 	std::vector<double> d_mask_orientation;
+	int d_axis;
 public:
-	OrientationConstraint(std::string marker_name, size_t axis, std::vector<double> goal_orientation): d_marker_name(marker_name), d_goal_orientation(9), d_mask_orientation(9) {
-		assert(goal_orientation.size() == 3 && axis < 3);
-		copy(goal_orientation.begin(), goal_orientation.end(), d_goal_orientation.begin() + axis * 3);
-		fill(d_mask_orientation.begin() + axis * 3, d_mask_orientation.begin() + axis * 3 + 3, 1.0);
+	OrientationConstraint(std::string marker_name, size_t axis, std::vector<double> goal_orientation): d_marker_name(marker_name), d_goal_orientation(9), d_mask_orientation(9), d_axis(axis) {
+		assert(goal_orientation.size() == 3 && d_axis < 3);
+		copy(goal_orientation.begin(), goal_orientation.end(), d_goal_orientation.begin() + d_axis * 3);
+		fill(d_mask_orientation.begin() + axis * 3, d_mask_orientation.begin() + d_axis * 3 + 3, 1.0);
+	}
+
+	double &element(int index) {
+		return d_goal_orientation[d_axis * 3 + index];
 	}
 
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {

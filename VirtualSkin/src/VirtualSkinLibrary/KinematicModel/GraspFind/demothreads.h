@@ -229,21 +229,27 @@ public:
 };
 
 class OnlineThread : public QThread {
+	Q_OBJECT
+
 	bool keepRunning;
 	bool verbose;
 
 	GraspFinder d_grasp_finder;
 	SliderWindow slider_window;
 
+	double d_test;
 public:
 	OnlineThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 	: verbose(false), keepRunning(true), d_grasp_finder(model, robot)
 	{
+		PositionConstraint *position_constraint = new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900));
+
 		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
 
-		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+		d_grasp_finder.add_constraint(position_constraint);
 
-		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
+		OrientationConstraint *orientation_constraint = new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.));
+		d_grasp_finder.add_constraint(orientation_constraint);
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
@@ -254,6 +260,17 @@ public:
 		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
 
 		slider_window.show();
+
+		slider_window.add_slider("lala", &(position_constraint->d_goal_position[0]), -.3, .3);
+		slider_window.add_slider("lala", &(position_constraint->d_goal_position[1]), -.3, .3);
+		slider_window.add_slider("lala", &(position_constraint->d_goal_position[2]), -.3, .3);
+
+		slider_window.add_slider("lala", &(orientation_constraint->element(0)), -1, 1);
+		slider_window.add_slider("lala", &(orientation_constraint->element(1)), -1, 1);
+		slider_window.add_slider("lala", &(orientation_constraint->element(2)), -1, 1);
+
+
+		connect(&slider_window, SIGNAL(something_changed()), this, SLOT(reset_variance()));
 	}
 
 
@@ -274,16 +291,24 @@ public:
 
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
-		bool changed(false);
 
 		while (true) {
-			if (changed)
-				d_grasp_finder.find_pose(2000000, 0., 1.0e-6, .10, 200);
+			if (slider_window.changed()) {
+				d_grasp_finder.find_pose(2000000, 0., 1.0e-6, .10, 50);
+				slider_window.changed(false);
+				std::cout << "Found pose" << std::endl;
+			}
 			else
-				usleep(10000);
+				sleep(1);
 		}
 	}
 
+
+public slots:
+	void reset_variance() {
+		std::cout << "RESETTING VARIANCE" << std::endl;
+		d_grasp_finder.set_variance(.04);
+	}
 };
 
 class StoreFilter : public EvaluationFilter{
@@ -292,6 +317,7 @@ public:
 	std::vector<double> d_fitnesses;
 	std::vector<int> d_collisions;
 	std::ofstream d_outfile;
+
 	StoreFilter(std::string outfile) : d_outfile(outfile.c_str()) {
 
 	}

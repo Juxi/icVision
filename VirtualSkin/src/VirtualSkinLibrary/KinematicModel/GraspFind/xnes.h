@@ -238,9 +238,10 @@ inline Matrix rngGauss(unsigned int dim)
 
 class NES
 {
+	size_t d_dim;
 public:
 	NES(const Function& f, bool importanceMixing = true, bool baseline = false)
-	: m_fitness(f)
+	: d_dim(0), m_fitness(f)
 	{
 		rngSeed(time(0));
 		m_importanceMixing = importanceMixing;
@@ -264,6 +265,7 @@ public:
 	void init(const Matrix& point, const Matrix& stepsize, unsigned int _lambda = 0, double _lrSigma = 0.0, double _lrCovar = 0.0)
 	{
 		unsigned int i, dim = point.rows();
+		d_dim = dim;
 		ASSERT(point.cols() == 1 && stepsize.rows() == dim && stepsize.cols() == 1);
 
 		// batch size
@@ -351,7 +353,7 @@ public:
 		unsigned int dim = center.rows();
 		Matrix I = Matrix::eye(dim);
 		double denom = pow(2.0 * M_PI, 0.5 * dim) * A.det();
-		std::cout << A.twonorm() << " " <<  variance() << " " << L.twonorm() << std::endl;
+//		std::cout << A.twonorm() << " " <<  variance() << " " << L.twonorm() << std::endl;
 
 		unsigned int newSamples = 0;
 
@@ -451,6 +453,17 @@ public:
 		A.eig(U, D);
 		return (D.max() / D.min());
 	}
+
+	void set_variance(Matrix variance) {
+		for (size_t  i=0; i < d_dim; i++)
+		{
+			A(i, i) = variance(i);
+			C(i, i) = variance(i) * variance(i);
+			L(i, i) = 2.0 * log(variance(i));
+		}
+	}
+
+	size_t dim() {return d_dim;}
 
 protected:
 	class NesIndividual

@@ -7,14 +7,12 @@ SET ( src_files	main.cpp
 		xnes.cpp 
 		roadmap.cpp 
 		sliderwindow.cpp
+		valueslider.cpp
 )
 
-SET ( QT_MOC_FILES 	sliderwindow.h
-)
+SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h)
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h )
-
-SET ( QT_MOC_FILES sliderwindow.h )	
+SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h )	
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_EXECUTABLE ( GraspFind ${hdr_files} ${src_files} )
