@@ -3,8 +3,7 @@
 <ZeroPositionKinematicTree version="1.0" robotName="katana400">
 
 <bodypart name="arm">
-    <link z="-.2" radius="0">
-    
+    <link z="-.2">
     <motor minPos="6.65" maxPos="352.64" home="6.65">
     <joint minPos="6.65" maxPos="352.64" z="-1" radius="0">
         <link z="1" radius="0.04" length="0.19"><!--LINK0-->
@@ -57,7 +56,7 @@
         </link>
     </joint>
     </motor>
-    </link>
+ </link>
 </bodypart>
 
 </ZeroPositionKinematicTree>

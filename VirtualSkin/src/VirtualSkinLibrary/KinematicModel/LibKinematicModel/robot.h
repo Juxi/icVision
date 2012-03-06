@@ -38,7 +38,7 @@ class KinematicModel::Robot : public QObject
 
 public:
 	
-	Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass c );	
+	Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass robotClass, DT_ResponseClass baseClass );	
 	~Robot();														
 	
 	//bool Robot::isColliding() const;
@@ -57,7 +57,9 @@ public:
 	// generic 'get' functions that may be useful
 	const Model* getModel() const { return model; }
 	DT_RespTableHandle getResponseTable() { return responseTable; }
-	DT_ResponseClass getWorldResponseClass() { return worldResponseClass; }
+	DT_ResponseClass getWorldRobotClass() { return worldRobotClass; }
+	DT_ResponseClass getWorldBaseClass() { return worldBaseClass; }
+	
 	//void doNotRespondTo( DT_ResponseClass c );
 	
 	const QString&	getName() const { return robotName; }				//!< Get the name of the Robot
@@ -116,7 +118,8 @@ public slots:
 private:
 	Model*					model;				//!< The Model that is doing collision detection on this Robot
 	DT_RespTableHandle		responseTable;		//!< For managing self-collisions
-	DT_ResponseClass		worldResponseClass;	//!< For managing the robot w.r.t the world and other robots
+	DT_ResponseClass		worldRobotClass;	//!< For checking the robot w.r.t the world and other robots
+	DT_ResponseClass		worldBaseClass;		//!< So as not to check the robot's base against the world (so a stand can intersect the table for example)
 	
 	QString					robotName;		//!< Human readable identifier for the robot
 	QVector<BodyPart*>		partList;		//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'

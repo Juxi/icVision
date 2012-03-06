@@ -20,20 +20,24 @@ YarpModel::~YarpModel()
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 {
 	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
-	DT_ResponseClass newClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+	DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+	DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
 	
-	DT_AddPairResponse(	responseTables.at(0), newClass, robotBaseClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), newClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), newClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	
 	QVector<DT_ResponseClass>::iterator i;
 	for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
-		DT_AddPairResponse(	responseTables.at(0), newClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	{
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newBaseClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	}
 	
-	robotResponseClasses.append( newClass );
+	robotResponseClasses.append( newRobotClass );
+	robotBaseClasses.append( newBaseClass );
 	
 	printf("creating robot object\n");
-	YarpRobot* robot = new YarpRobot( this, newTable, newClass );
+	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
 	
 	printf("calling open robot\n");
 	robot->open( fileName, verbose );

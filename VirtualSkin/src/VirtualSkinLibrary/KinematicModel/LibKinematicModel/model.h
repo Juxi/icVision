@@ -97,6 +97,7 @@ protected:
 	
 	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
 	QVector<DT_ResponseClass> robotResponseClasses;
+	QVector<DT_ResponseClass> robotBaseClasses;
 	
 	QVector<Robot*> robots;
 	QVector<CompositeObject*> world;
@@ -121,7 +122,6 @@ protected:
 	ModelWindow	*modelWindow;	//! The visualization
 	
 	DT_SceneHandle		scene;
-	DT_ResponseClass	robotBaseClass;	//!< parts of robots that can't move w.r.t the world. These trigger reflexes but are not checked against the world
 	DT_ResponseClass	obstacleClass;	//!< objects in this response class trigger reflexes
 	DT_ResponseClass	targetClass;	//!< these don't
 	DT_ResponseClass	ghostClass;		//!< these are left out of collision detection computations

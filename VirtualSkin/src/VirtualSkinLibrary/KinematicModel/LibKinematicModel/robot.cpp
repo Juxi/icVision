@@ -4,14 +4,17 @@
 
 using namespace KinematicModel;
 
-Robot::Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass c ) :	model(m),
-																		responseTable(t),
-																		worldResponseClass(c),
-																		robotName("unNamedRobot"),
-																		numLinks(0),
-																		isConfigured(false),
-																		numCollisions(0),
-																		numReflexCollisions(0)
+Robot::Robot( Model* m, DT_RespTableHandle t,
+						DT_ResponseClass robotClass, 
+						DT_ResponseClass baseClass ) :	model(m),
+														responseTable(t),
+														worldRobotClass(robotClass),
+														worldBaseClass(baseClass),
+														robotName("unNamedRobot"),
+														numLinks(0),
+														isConfigured(false),
+														numCollisions(0),
+														numReflexCollisions(0)
 {
 	if ( !t ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
