@@ -85,10 +85,10 @@ public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string marker, size_t nn, double alpha)
 	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_marker(marker)
 	{
-		d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .025);
+		d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .04);
 		d_points = &(d_map_build_constraint->points());
 
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
+		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .1);
 
 		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
 
@@ -96,13 +96,14 @@ public:
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 10.);
+		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
 
-		d_grasp_finder.add_constraint(new CollisionConstraint());
+		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
 
 		d_grasp_finder.add_constraint(d_map_build_constraint);
 
 		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
+
 	}
 
 	void add_best_pose() {
@@ -157,6 +158,7 @@ public:
 			std::cout << d_configuration_points[0][i] << " ";
 		std::cout << std::endl;
 		d_configuration_points = convert_to_normal(d_configuration_points);
+
 		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
 			std::cout << d_configuration_points[0][i] << " ";
 		for (size_t i(0); i < d_points->size(); ++i)
@@ -177,7 +179,6 @@ public:
 	std::vector<std::vector<double> > convert_to_normal(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i) {
-
 			out.push_back(d_grasp_finder.simulator().real_to_normal_motors(in[i]));
 		}
 		return out;
@@ -195,32 +196,63 @@ public:
 		printf("\n");
 	}
 
+	void filter_collisions(Simulator &simulator) {
+		std::vector<std::vector<double> > filtered_configurations;
+		std::vector<std::vector<double> > filtered_points;
+
+		for (size_t i(0); i < d_configuration_points.size(); ++i) {
+			std::vector<double> pose = d_configuration_points[i];//d_grasp_finder.simulator().home_pos();
+			simulator.set_motors(pose);
+			double n_collisions = simulator.computePose();
+			if (n_collisions) {
+				std::cout << "FILTARR" << std::endl;
+				continue;
+			}
+			filtered_configurations.push_back(pose);
+			filtered_points.push_back((*d_points)[i]);
+		}
+
+		d_configuration_points = filtered_configurations;
+		*d_points = filtered_points;
+	}
+
 	void run()
 	{
-		std::cout << "test3" << std::endl;
-		if (exists("table_map_better.save"))
-			load_points("table_map_better.save");
-
-		std::cout << "test4" << std::endl;
+		if (exists("table_map.save")) {
+			std::cout << "loading Map" << std::endl;
+			load_points("table_map.save");
+		}
 //		store_points("table_map.save");
 
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 
-		bool test(false);
+		bool test(true);
+		bool filter(true);
 
+		if (filter) {
+			filter_collisions(d_grasp_finder.simulator());
+			store_points("table_map.save");
+		}
+
+		size_t n(0);
 		if (test)
 			while (true) {
-				size_t n(rand() % d_configuration_points.size());
+//				size_t n(qrand() % d_configuration_points.size());
 
-				d_grasp_finder.simulator().set_motors(d_configuration_points[n]);
+				std::vector<double> random_pose = d_configuration_points[n];//d_grasp_finder.simulator().home_pos();
+				for (size_t i(0); i < random_pose.size(); ++i)
+					std::cout << random_pose[i] << " ";
+				std::cout << std::endl;
+				d_grasp_finder.simulator().set_motors(random_pose);
 				double n_collisions = d_grasp_finder.simulator().computePose();
 				std::cout << n_collisions << std::endl;
-				sleep(1);
+				usleep(500000);
+				n = (n + 1) % d_configuration_points.size();
 			}
 		else
 			while (true) {
-				d_grasp_finder.find_pose(2000000, 0., 1.0e-6, .10, 200);
+				d_grasp_finder.find_pose(2000000, 0., 1.0e-6, .20, 200);
 				add_best_pose();
 				store_points("table_map.save");
 			}
@@ -261,13 +293,13 @@ public:
 
 		slider_window.show();
 
-		slider_window.add_slider("lala", &(position_constraint->d_goal_position[0]), -.3, .3);
-		slider_window.add_slider("lala", &(position_constraint->d_goal_position[1]), -.3, .3);
-		slider_window.add_slider("lala", &(position_constraint->d_goal_position[2]), -.3, .3);
+		slider_window.add_slider("Front", &(position_constraint->d_goal_position[0]), -.3, .3);
+		slider_window.add_slider("Right", &(position_constraint->d_goal_position[1]), -.3, .3);
+		slider_window.add_slider("Up", &(position_constraint->d_goal_position[2]), -.3, .3);
 
-		slider_window.add_slider("lala", &(orientation_constraint->element(0)), -1, 1);
-		slider_window.add_slider("lala", &(orientation_constraint->element(1)), -1, 1);
-		slider_window.add_slider("lala", &(orientation_constraint->element(2)), -1, 1);
+		slider_window.add_slider("Pointing Front", &(orientation_constraint->element(0)), -1, 1);
+		slider_window.add_slider("Pointing Right", &(orientation_constraint->element(1)), -1, 1);
+		slider_window.add_slider("Pointing Up", &(orientation_constraint->element(2)), -1, 1);
 
 
 		connect(&slider_window, SIGNAL(something_changed()), this, SLOT(reset_variance()));

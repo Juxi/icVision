@@ -2,6 +2,7 @@
 #define __SLIDER2_WINDOW__
 
 #include <QSlider>
+#include <QLabel>
 #include <QThread>
 #include <QGridLayout>
 

@@ -8,6 +8,7 @@
 
 #include "constraints.h"
 #include "posefitnessfunction.h"
+#include "isnan.h"
 
 using namespace std;
 
@@ -37,7 +38,12 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 		size_t n_evaluations(0);
 		do
 		{
-			d_nes.iterate();
+			try {
+				d_nes.iterate();
+			} catch (NanException &e) {
+				std::cout << "breaking isnan" << std::endl;
+				break;
+			}
 			n_evaluations += population_size;
 //			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}

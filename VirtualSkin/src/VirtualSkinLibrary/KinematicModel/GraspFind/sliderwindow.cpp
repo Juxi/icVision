@@ -28,13 +28,11 @@ void SliderWindow::create_controls() {
 
 void SliderWindow::add_slider(string name, double *value, double min_value, double max_value) {
 	ValueSlider *slider_ptr = new ValueSlider(name, value, min_value, max_value, this);
-	cout << "after creatorr" << endl;
+
 	d_sliders.push_back(slider_ptr);
-	cout << "after creatorr" << endl;
-	cout << slider_ptr->get_slider() << endl;
-	cout << controlsLayout << endl;
-	controlsLayout->addWidget(slider_ptr->get_slider());
-	cout << "after creatorr" << endl;
+
+	controlsLayout->addWidget(new QLabel(tr(name.c_str())), d_sliders.size(), 0);
+	controlsLayout->addWidget(slider_ptr->get_slider(), d_sliders.size(), 1);
 
 	connect(slider_ptr, SIGNAL(something_changed()), this, SLOT(set_changed()));
 }

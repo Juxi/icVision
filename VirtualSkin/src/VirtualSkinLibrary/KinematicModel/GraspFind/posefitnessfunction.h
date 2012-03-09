@@ -6,6 +6,7 @@
 #include "simulator.h"
 #include "xnes.h"
 #include "constraints.h"
+#include "isnan.h"
 
 class EvaluationFilter {
 public:
@@ -58,6 +59,9 @@ public:
 	double eval(const Matrix& point) const
 	{
 		std::vector<double> motor_values(point.get_data());
+		if (isnan(motor_values[0])) {
+			throw NanException();
+		}
 		d_simulator.set_motors(motor_values);
 		double n_collisions = d_simulator.computePose();
 

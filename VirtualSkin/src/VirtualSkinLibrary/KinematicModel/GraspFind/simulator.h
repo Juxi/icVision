@@ -43,8 +43,8 @@ public:
 
 	void add_point(float x, float y, float z) const {
 		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( d_model.TARGET() );
-		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .01 );
-		  QColor color( 0, 0, 0, 255 );
+		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .004 );
+		  QColor color( 0, 0, 255, 255 );
 		  QVector3D pos(x, y, z);
 		  sphere->translate(pos);
 		  sphere->setFreeColor(color);

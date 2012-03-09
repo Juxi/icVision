@@ -4,7 +4,7 @@
 using namespace std;
 
 ValueSlider::ValueSlider(std::string name, double *value, double min_value, double max_value, QWidget *parent) :
-	d_slider( new QSlider(Qt::Vertical, parent)),
+	d_slider( new QSlider(Qt::Horizontal, parent)),
 	d_value(value),
 	d_min_value(min_value),
 	d_max_value(max_value) {
