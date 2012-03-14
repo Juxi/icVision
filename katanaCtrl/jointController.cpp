@@ -320,6 +320,7 @@ void JointController::loadPositions( const char* fileName ) {
 		{88, 161.442969, 65.380812, 156.724596, 177.490625, 180.765625, 8.70625},
 		{89, 149.869531, 65.380812, 156.724596, 177.35, 180.765625, 8.70625}
 	};
+	
 		
 	
 	for(int i = 0; i < 80; i++) {
@@ -329,7 +330,7 @@ void JointController::loadPositions( const char* fileName ) {
 		tgt->pos[2] = array[i][3];
 		tgt->pos[3] = array[i][4];
 		tgt->pos[4] = array[i][5];
-		tgt->pos[5] = array[i][6];
+		tgt->pos[5] = -120; //array[i][6];
 	
 		storedTargets.push_back(tgt);
 	}
