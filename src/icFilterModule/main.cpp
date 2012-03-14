@@ -33,11 +33,17 @@ int main(int argc, char * argv[]) {
 	//TestModule *module = new TestModule();
 	
 	// TODO remove that, this is just testing
-	RedBlockDetector *module = new RedBlockDetector();
-	//BlueCupDetector *module = new BlueCupDetector();
+	//RedBlockDetector *module = new RedBlockDetector();
+	BlueCupDetector *module = new BlueCupDetector();
 	
 //	RedFilterModule* module = new RedFilterModule();		
-//	module->runOnBothImages();
+
+	
+	module->runOnBothImages();
+
+	// TODO create possibility
+	// module->localiseInThreeD(true);
+	// module->useThisForGazeCtrl(true);
 	
 //	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
