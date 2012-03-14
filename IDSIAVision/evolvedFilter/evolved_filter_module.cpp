@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -117,8 +117,7 @@ bool EvolvedFilterModule::updateModule()
 			std::cout << "DEBUG: Got input image!" << std::endl;	
 			GpImage* inputImg = new GpImage(in);
 			char fileIn[80];
-			sprintf(fileIn, "input-frame-%05d.png", index++
-					);
+			sprintf(fileIn, "input-frame-%05d.png", index++	);
 			inputImg->Save(fileIn);
 		}
 		
@@ -403,7 +402,7 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	double estimatedX = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
 	double estimatedY = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0]);
 	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
-	double estimatedZ = -.075;	//15cm is the table right roughtly
+	double estimatedZ = -.15;	//15cm is the table right roughtly
 	
 	
 	

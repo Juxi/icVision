@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -115,6 +115,10 @@ public:
 	bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
 	bool sendPixelPosOfObject(double x1, double y1, double x2, double y2);
 	bool send3DPositionToGazeCtrl(double x, double y, double z);
+	
+	static double movingAverageX(double);
+	static double movingAverageY(double);	
+	static double movingAverageZ(double);		
 };
 
 #endif

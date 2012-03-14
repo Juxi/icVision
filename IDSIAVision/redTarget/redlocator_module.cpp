@@ -97,7 +97,7 @@ bool RedLocatorModule::configure(yarp::os::Searchable& config)
 
 double RedLocatorModule::getPeriod()
 {
-   return 0.0;
+   return 0.1;
    //module periodicity (seconds)
 }
 
