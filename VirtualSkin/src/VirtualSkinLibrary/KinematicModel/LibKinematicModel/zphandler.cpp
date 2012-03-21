@@ -133,6 +133,9 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			errorStr = e.what();
 			return 0;
 		}
+		
+		if ( attributes.value("noSelfCollision") == "true" )
+			node->setReflexSubtree(false);
     }
 
 	/*******************************************************************************
@@ -250,8 +253,8 @@ bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /
         motor = motor->parent();
     }
     else if ( qName == "link" || qName == "joint" ) {
-		//if( robot->verbose ) printf("appendingRobotObject\n");
-		//model->appendObject(node);
+		if ( !node->reflexSubtree() )
+			node->ignoreBranch();
 		node = node->parent();
     }
     //else if ( qName == "object" ) {

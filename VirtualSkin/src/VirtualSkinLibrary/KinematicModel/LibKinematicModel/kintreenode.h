@@ -56,7 +56,11 @@ public:
 	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );	//!< Returns whether or not this CompositeObject is free to move w.r.t the world
 	
 	void kill();
-
+	
+	bool reflexSubtree() { return strf; }
+	void setReflexSubtree( bool b ) { strf = b; }
+	void ignoreBranch( KinTreeNode* node = NULL );
+	
 protected:
 	Robot*                parentRobot;
 	KinTreeNode*          parentNode;
@@ -70,6 +74,7 @@ protected:
 	//CompositeObject*	  obj;
 	Transformable		  M;
 	QVector<KinTreeNode*> children;
+	bool strf;
 	
 	virtual void setM() = 0;														//!< Sets the local transformation from the next coordinate system to this coordinate system as a function of nodeAxis
 																					/**< Implemented by Link, RevoluteJoint and PrismaticJoint */

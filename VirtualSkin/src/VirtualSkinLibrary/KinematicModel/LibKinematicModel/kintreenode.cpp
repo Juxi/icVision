@@ -14,7 +14,8 @@ KinTreeNode::KinTreeNode( Robot* robot,
 						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()) ),
 												parentRobot(robot),
 												parentNode(parent),
-												nodeType(aType)
+												nodeType(aType),
+												strf(true)
 {
 	if ( !robot ) { throw KinematicModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
 	if ( !parentNode ) { parentRobot->appendNode(this); }
@@ -130,6 +131,20 @@ void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoi
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {
         (*i)->serialFilter(node,foundLink,foundJoint);
+    }
+}
+
+void KinTreeNode::ignoreBranch( KinTreeNode* node )
+{
+	if ( !node ) node = this;
+	
+    // do not check collision between objects of the same class as this one and objects of the same class as 'node'
+	parentRobot->model->removePairResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+	
+    QVector<KinTreeNode*>::iterator i = 0;
+    for ( i=children.begin(); i!=children.end(); ++i ) {
+        (*i)->ignoreBranch(node);
+		(*i)->ignoreBranch();
     }
 }
 
