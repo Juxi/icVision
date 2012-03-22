@@ -239,7 +239,8 @@ public:
 		if (test)
 			while (true) {
 //				size_t n(qrand() % d_configuration_points.size());
-
+				std::cout << n << std::endl;
+//				n = 279;
 				std::vector<double> random_pose = d_configuration_points[n];//d_grasp_finder.simulator().home_pos();
 				for (size_t i(0); i < random_pose.size(); ++i)
 					std::cout << random_pose[i] << " ";
@@ -257,7 +258,6 @@ public:
 				store_points("table_map.save");
 			}
 	}
-
 };
 
 class OnlineThread : public QThread {
