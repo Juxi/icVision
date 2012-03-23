@@ -55,6 +55,7 @@ public:
 											/**< Call this function directly if you want to be in control of which poses are computed when */
 	void stop();
 	
+	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
 	CompositeObject*	removeWorldObject( CompositeObject* );
 	void clearTheWorld();
@@ -87,9 +88,12 @@ protected:
 
 	DT_RespTableHandle newRobotTable();
 	DT_ResponseClass newResponseClass( DT_RespTableHandle );
-	void removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	
-	void appendObject( KinTreeNode* );
+	void removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+
 	void cleanTheWorld();
 	void updateWorldState();
 	void fwdKin();
@@ -156,11 +160,8 @@ protected:
 		return DT_CONTINUE;
 	}
 	
-	
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-		collisionHandler( client_data, obj1, obj2, coll_data );
-		
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
 		CompositeObject* comp1 = prim1->getCompositeObject();
 		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);

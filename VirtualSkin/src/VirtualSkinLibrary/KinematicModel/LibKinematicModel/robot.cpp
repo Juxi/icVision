@@ -87,11 +87,13 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 		throw KinematicModelException(errStr);
     }
 	
-	if (verbose) printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
+	ignoreAdjacentPairs();
+	//ignoreAdjacentPairs();
+	home();
 	
-	filterCollisionPairs();
-	home(verbose);
-	appendTreeToModel();
+	printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
+	
+	//home(verbose);
 	
 	isConfigured = true;
 }
@@ -105,12 +107,12 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
     }
 }*/
 
-void Robot::filterCollisionPairs()
+void Robot::ignoreAdjacentPairs()
 {
     QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i )
 	{
-        (*i)->filterCollisionPairs();
+        (*i)->ignoreAdjacentPairs();
     }
 }
 
@@ -347,13 +349,13 @@ void Robot::appendMarkersToModel()
 
 int Robot::getNumPrimitives()
 {
-	printf("Robot.getNumPrimitives()\n");
+	//printf("Robot.getNumPrimitives()\n");
 	int result = 0;
 	QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i ) {
         result += (*i)->getNumPrimitives();
     }
-	printf(" num primitives: %d\n", result );
+	//printf(" num primitives: %d\n", result );
 	return result;
 }
 

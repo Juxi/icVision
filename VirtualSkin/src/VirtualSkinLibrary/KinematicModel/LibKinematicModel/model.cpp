@@ -19,6 +19,9 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	scene = DT_CreateScene();
 	responseTables.append(DT_CreateRespTable());
 	
+	
+	printf("Created World Response table %p\n",responseTables.at(0));
+	
 	// create SOLID Response classes for the world table
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
@@ -78,14 +81,41 @@ Model::~Model()
 DT_RespTableHandle Model::newRobotTable()
 {
 	DT_RespTableHandle table = DT_CreateRespTable();
+	printf("Created Robot Response table %p\n",table);
+	DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddDefaultResponse( table, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	responseTables.append( table );
 	return table;
 }
 
-void Model::removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+void Model::removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
 {
+	removeReflexResponse(t,c1,c2);
+	removeVisualResponse(t,c1,c2);
+}
+
+void Model::removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	printf("REMOVE_REFLEX");
 	DT_RemovePairResponse(t, c1, c2, reflexTrigger);
+	printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
+}
+
+void Model::removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	printf("REMOVE_VISUAL");
+	DT_RemovePairResponse(t, c1, c2, collisionHandler);
+	printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
+}
+
+void Model::setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	//printf("SET_VISUAL_RESPONSE\n");
+	//DT_RemovePairResponse(t, c1, c2, reflexTrigger);
+	//printf("  removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
+	
+	DT_AddPairResponse(	t, c1, c2, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	printf("  added   response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
 }
 
 DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
@@ -118,7 +148,12 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose )
 		
 		printf("Loading non-yarp robot.\n");
 		Robot* robot = new Robot( this, newTable, newRobotClass, newBaseClass );
-		robot->open( fileName, verbose );
+		//robot->open( fileName, verbose );
+	
+		//NOTE: the order here is important... first append, then ignore
+		//robot->appendTreeToModel();
+		//robot->ignoreAdjacentPairs();
+		//robot->home();
 	
 		robots.append( robot );
 	
@@ -173,6 +208,7 @@ void Model::appendObject( KinTreeNode* node )
 		//if (verbose) printf("appending robot primitive to world\n");
 		DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
 		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
+		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), collisionHandler );
 		
 		if ( node->isNearRoot() )
 			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseClass() );
@@ -186,6 +222,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
+	printf("Appended KinTreeNode to world Model!!!\n");
 }
 
 void Model::appendObject( CompositeObject* object )

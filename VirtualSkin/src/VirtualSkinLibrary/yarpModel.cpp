@@ -42,6 +42,12 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
 	robot->open( fileName, verbose );
 	
+	//robot->ignoreAdjacentPairs();
+	//NOTE: the order here is important... first append, then ignore
+	//robot->appendTreeToModel();
+	//robot->ignoreAdjacentPairs();
+	//robot->home();
+	
 	robots.append( robot );
 	
 	mutex.unlock();

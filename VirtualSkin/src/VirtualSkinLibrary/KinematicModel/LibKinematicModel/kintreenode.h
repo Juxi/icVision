@@ -57,9 +57,9 @@ public:
 	
 	void kill();
 	
-	bool reflexSubtree() { return strf; }
-	void setReflexSubtree( bool b ) { strf = b; }
-	void ignoreBranch( KinTreeNode* node = NULL );
+	//bool reflexSubtree() { return strf; }
+	//void setReflexSubtree( bool b ) { strf = b; }
+	void removeReflexFromSubTree();
 	
 protected:
 	Robot*                parentRobot;
@@ -74,23 +74,25 @@ protected:
 	//CompositeObject*	  obj;
 	Transformable		  M;
 	QVector<KinTreeNode*> children;
-	bool strf;
+	//bool strf;
 	
 	virtual void setM() = 0;														//!< Sets the local transformation from the next coordinate system to this coordinate system as a function of nodeAxis
 																					/**< Implemented by Link, RevoluteJoint and PrismaticJoint */
-	void filterCollisionPairs();													//!< Recursively parses the tree, calling serialFilter( KinTreeNode* ) on each KinTreeNode with respect to itself and with respect to its siblings
-	void serialFilter( KinTreeNode* node, bool link = false, bool joint = false );	//!< Recursively decends serial chains eliminating SOLID collision response to collisions between 'adjacent' geometries
+	void ignoreAdjacentPairs();													//!< Recursively parses the tree, calling serialFilter( KinTreeNode* ) on each KinTreeNode with respect to itself and with respect to its siblings
+	void ignoreAdjacentPairs( KinTreeNode* node, bool link = false, bool joint = false );	//!< Recursively decends serial chains eliminating SOLID collision response to collisions between 'adjacent' geometries
 																					/**< \param node The KinTreeNode with respect to which we are filtering as we decend the serial chain.
 																						 The function is called on a node (that node's member function is called) with respect to itself (the same node 
 																						 is passed as a parameter) to decend the serial chain associated with that node. Alternatively, it can be called on a 
 																						 node with respect to one of its siblings (pass a pointer to the node to the member function of the sibling) to decend 
-																						 the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by filterCollisionPairs()
-																						 and Robot.filterCollisionPairs(). */
+																						 the serial chain of the siblings and avoid erroneous collisions at branching nodes. These calls are made by ignoreAdjacentPairs()
+																						 and Robot.ignoreAdjacentPairs(). */
+	
+	void getSubTree( QVector<KinTreeNode*>& nodeList );
 	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t );			//!< Turn off collision response to class c in table t
 	void update( const QMatrix4x4& txfr );											//!< Propogates forward kinematics calculations down the tree
 																					/**< Called by Robot.updatePose() */
 
-	friend class Robot;		//!< Robot calls filterCollisionPairs() and update()
+	friend class Robot;		//!< Robot calls ignoreAdjacentPairs() and update()
 };
 
 #endif

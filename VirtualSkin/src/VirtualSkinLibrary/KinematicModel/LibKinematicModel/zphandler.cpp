@@ -15,10 +15,11 @@ using namespace KinematicModel;
 
 ZPHandler::ZPHandler( Model* _model, Robot *robot) : model(_model), robot(robot)
 {
-	bodyPart = 0;
-	motor = 0;
-	node = 0;
-	//object = 0;
+	bodyPart = NULL;
+	motor = NULL;
+	node = NULL;
+	noReflexRoot = NULL;
+	
 	metKinTreeTag = false;
 	markerCounter = 1;
 }
@@ -134,8 +135,9 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			return 0;
 		}
 		
-		if ( attributes.value("noSelfCollision") == "true" )
-			node->setReflexSubtree(false);
+		if ( attributes.value("noSelfCollision") == "true" && !noReflexRoot )
+			noReflexRoot = node;
+			//node->setReflexSubtree(false);
     }
 
 	/*******************************************************************************
@@ -252,9 +254,14 @@ bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /
     else if ( qName == "motor" ) {
         motor = motor->parent();
     }
-    else if ( qName == "link" || qName == "joint" ) {
-		if ( !node->reflexSubtree() )
-			node->ignoreBranch();
+    else if ( qName == "link" || qName == "joint" )
+	{
+		robot->getModel()->appendObject(node);
+		if ( noReflexRoot && node == noReflexRoot )
+		{
+			node->removeReflexFromSubTree();
+			noReflexRoot = NULL;
+		}
 		node = node->parent();
     }
     //else if ( qName == "object" ) {

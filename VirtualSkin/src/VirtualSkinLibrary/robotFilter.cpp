@@ -99,8 +99,7 @@ void RobotFilter::takeControl( int numReflexCollisions )
 {
 	if ( numReflexCollisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
-	if ( isColliding && !haveControl )
-		
+
 	if ( isColliding && !haveControl )
 	{
 		haveControl = true;

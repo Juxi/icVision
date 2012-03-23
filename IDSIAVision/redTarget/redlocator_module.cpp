@@ -95,11 +95,6 @@ bool RedLocatorModule::configure(yarp::os::Searchable& config)
 	return true ;      // let the RFModule know everything went well
 }
 
-double RedLocatorModule::getPeriod()
-{
-   return 0.0;
-   //module periodicity (seconds)
-}
 
 /*
 * This is our main function. Will be called periodically every getPeriod() seconds.

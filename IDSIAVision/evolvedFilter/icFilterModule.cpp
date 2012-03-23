@@ -21,7 +21,7 @@ icFilterModule::icFilterModule() {
 
 double icFilterModule::getPeriod()
 {
-	return 1;//0.02;	// we need something higher than 0.0 else it is too fast?!
+	return 0.05;//0.02;	// we need something higher than 0.0 else it is too fast?!
 	// todo check this!!
 	//module periodicity (seconds)
 }

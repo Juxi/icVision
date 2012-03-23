@@ -56,7 +56,7 @@ public:
 	virtual void publishState();										// emit signals for observations and reflexes
 	
 	// generic 'get' functions that may be useful
-	const Model*		getModel() const { return model; }
+	Model*				getModel() const { return model; }
 	DT_RespTableHandle	getResponseTable() { return responseTable; }
 	DT_ResponseClass	getWorldRobotClass() { return worldRobotClass; }
 	DT_ResponseClass	getWorldBaseClass() { return worldBaseClass; }
@@ -106,6 +106,8 @@ public slots:
 	void updatePose();					//!< Do forward kinematics, pushing results down the link/joint trees
 	
 	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
+	void ignoreAdjacentPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.ignoreAdjacentPairs().
+	void appendTreeToModel( KinTreeNode* node = NULL );
 	
 private:
 	Model*					model;				//!< The Model that is doing collision detection on this Robot
@@ -128,7 +130,8 @@ private:
 	
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index
-	void filterCollisionPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.filterCollisionPairs().
+	
+	
 	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t ); //!< Turn off collision response to class c in table t (for the whole robot)
 	
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
@@ -137,7 +140,6 @@ private:
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
 	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list																		/**< In case you want to populate the list in reverse order */
 	
-	void appendTreeToModel( KinTreeNode* node = NULL );
 	int getNumPrimitives();
 	void kill();
 	
@@ -148,7 +150,7 @@ private:
 	/*** FRIENDS  ***/
 	friend class BodyPart;
 	friend class Motor;
-	friend class KinTreeNode;	// root nodes of the link/joint trees must be able to request other root nodes to filterCollisionPairs().
+	friend class KinTreeNode;	// root nodes of the link/joint trees must be able to request other root nodes to ignoreAdjacentPairs().
 	friend class ZPHandler;		
 };
 

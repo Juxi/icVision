@@ -14,8 +14,8 @@ KinTreeNode::KinTreeNode( Robot* robot,
 						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()) ),
 												parentRobot(robot),
 												parentNode(parent),
-												nodeType(aType),
-												strf(true)
+												nodeType(aType)
+												//strf(true)
 {
 	if ( !robot ) { throw KinematicModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
 	if ( !parentNode ) { parentRobot->appendNode(this); }
@@ -59,21 +59,77 @@ void KinTreeNode::setNodeAxis( const QVector3D& vector )
     }
 }*/
 
-void KinTreeNode::filterCollisionPairs()
+void KinTreeNode::ignoreAdjacentPairs()
 {
     QVector<KinTreeNode*>::iterator i;
 	
     // do not do collision detection between this link and its siblings (or itself)
     if ( !parentNode )
 	{
-        for ( i=parentRobot->tree.begin(); i!=parentRobot->tree.end(); ++i ) serialFilter( *i );
-    } else {
-        for ( i=parentNode->children.begin(); i!=parentNode->children.end(); ++i ) serialFilter( *i );
+        for ( i=parentRobot->tree.begin(); i!=parentRobot->tree.end(); ++i ) 
+			ignoreAdjacentPairs( *i );
+    } else
+	{
+        for ( i=parentNode->children.begin(); i!=parentNode->children.end(); ++i )
+			ignoreAdjacentPairs( *i );
     }
 	
-    for ( i=children.begin(); i!=children.end(); ++i ) {
-        (*i)->filterCollisionPairs();
+    for ( i=children.begin(); i!=children.end(); ++i )
+	{
+        (*i)->ignoreAdjacentPairs();
     }
+}
+
+void KinTreeNode::ignoreAdjacentPairs( KinTreeNode* node, bool foundLink, bool foundJoint )
+{
+    // to control recursion down serial chains
+    if ( this->parent() && this->parent() != node->parent() )
+	{
+        if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
+			return;
+        if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !data().isEmpty() )
+            foundLink = true;
+        else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !data().isEmpty() )
+            foundJoint = true;
+    }
+	
+    // do not check collision between objects of the same class as this one and objects of the same class as 'node'
+	//parentRobot->getModel()->removePairResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+	//parentRobot->getModel()->removeReflexResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+	//parentRobot->getModel()->removeVisualResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+	parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+	
+    QVector<KinTreeNode*>::iterator i = 0;
+    for ( i=children.begin(); i!=children.end(); ++i ) {
+        (*i)->ignoreAdjacentPairs(node,foundLink,foundJoint);
+    }
+}
+
+void KinTreeNode::removeReflexFromSubTree()
+{
+	
+    // turn off reflex response between elements of the sub-tree originating from this node
+	QVector<KinTreeNode*> nodeList;
+	getSubTree(nodeList);
+	QVector<KinTreeNode*>::iterator i,j;
+	
+	for ( i=nodeList.begin(); i!=nodeList.end(); ++i )
+	{
+		for ( j=nodeList.begin(); j!=nodeList.end(); ++j )
+		{
+			parentRobot->getModel()->removeReflexResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
+			//parentRobot->getModel()->setVisualResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
+			//parentRobot->model->removePairResponses( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
+		}
+	}
+}
+
+void KinTreeNode::getSubTree( QVector<KinTreeNode*>& nodeList )
+{
+	QVector<KinTreeNode*>::iterator i;
+	for ( i=children.begin(); i!=children.end(); ++i )
+        (*i)->getSubTree(nodeList);
+	nodeList.append(this);
 }
 
 bool KinTreeNode::isNearRoot( KinTreeNode* node, bool foundLink, bool foundJoint )
@@ -82,70 +138,17 @@ bool KinTreeNode::isNearRoot( KinTreeNode* node, bool foundLink, bool foundJoint
 	
 	// to control recursion up serial chains
 	if ( !parent() ) 
-	{
-		//printf("isNearRoot returns TRUE\n");
 		return true;
-	}
 	
 	if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
-	{
-		//printf("isNearRoot returns FALSE\n");
 		return false;
-	}
 	
 	if ( getNodeType() == LINK && parent()->getNodeType() != LINK /*&& !data().isEmpty()*/ )
-	{
 		foundLink = true;
-	}
 	else if ( getNodeType() != LINK && parent()->getNodeType() == LINK /*&& !data().isEmpty()*/ )
-	{
 		foundJoint = true;
-	}
-	
 	
     return parent()->isNearRoot(node,foundLink,foundJoint);
-}
-
-void KinTreeNode::serialFilter( KinTreeNode* node, bool foundLink, bool foundJoint )
-{
-    // to control recursion down serial chains
-    if ( this->parent() && this->parent() != node->parent() )
-	{
-        if ( foundLink && foundJoint && getNodeType() != node->getNodeType() ) // TODO: handle PJOINT
-		{
-			return;
-		}
-        if ( getNodeType() == LINK && parent()->getNodeType() != LINK && !data().isEmpty() )
-		{
-            foundLink = true;
-        }
-        else if ( getNodeType() != LINK && parent()->getNodeType() == LINK && !data().isEmpty() )
-		{
-            foundJoint = true;
-        }
-    }
-	
-    // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-	parentRobot->model->removePairResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-	
-    QVector<KinTreeNode*>::iterator i = 0;
-    for ( i=children.begin(); i!=children.end(); ++i ) {
-        (*i)->serialFilter(node,foundLink,foundJoint);
-    }
-}
-
-void KinTreeNode::ignoreBranch( KinTreeNode* node )
-{
-	if ( !node ) node = this;
-	
-    // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-	parentRobot->model->removePairResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-	
-    QVector<KinTreeNode*>::iterator i = 0;
-    for ( i=children.begin(); i!=children.end(); ++i ) {
-        (*i)->ignoreBranch(node);
-		(*i)->ignoreBranch();
-    }
 }
 
 void KinTreeNode::update( const QMatrix4x4& txfr )
