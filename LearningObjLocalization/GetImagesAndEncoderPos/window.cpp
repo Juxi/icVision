@@ -17,6 +17,7 @@
 #include <yarp/os/BufferedPort.h>
 
 #include <QtNetwork/QTcpSocket>
+#include <QSound>
 
 #include <opencv/cv.h>
 
@@ -448,10 +449,13 @@ void Window::collectData() {
 					// tilt forward/backward
 					for(float v = 10; v <= 40; v+= 10) {
 						nextposetorso[2] = v;
-
-						moveTheRobot(nextposetorso);
-						// wait longer for the resetting
-						if(15 == v) sleep(5);	
+						
+						if(15 == v) {
+							moveTheRobot(nextposetorso);
+							// wait longer for the resetting
+							sleep(5);	
+						}
+						
 											
 						// HEAD up down
 						for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
@@ -473,8 +477,12 @@ void Window::collectData() {
 										nextposehead[4] = hj4;
 										
 										if(rand() % 100 != 0) continue;
-									
-										moveTheRobotHead(nextposehead);	
+										
+										// try this one 
+										moveTheRobot(nextposetorso);
+										usleep(50*1000);										
+										moveTheRobotHead(nextposehead);
+										
 										waitForMotionDone();
 
 										getYarpStatus();			
@@ -490,12 +498,15 @@ void Window::collectData() {
 				}
 			}
 			
-			// move back to original pose
+			// move back to home position, original pose
 			nextposetorso[0] = 0;
 			nextposetorso[1] = 0;
 			nextposetorso[2] = 15;		
 			moveTheRobot(nextposetorso);
 			waitForMotionDone();
+			
+			// play sound!!!
+			QSound::play("../sounds/Drill.wav");
 		
 		//ending for
 		}
@@ -571,6 +582,8 @@ void Window::timerTimeout() {
 }
 
 void Window::getYarpStatus() {
+	QSound::play("../sounds/Drill.wav");
+	
 	if ( ! dash->btn_connect->isEnabled() ) {	// then we are connected
 		// read
 		showEncoderPositions();
@@ -602,7 +615,7 @@ void Window::waitForMotionDone() {
 	float old_torsojnt_pos[3];
 	float tolerance = 0.1;
 	showEncoderPositions();
-	printf("in waiting .");
+	printf("waitForMotionDone .");
 	
 	usleep(500000);
 	do {
@@ -615,9 +628,9 @@ void Window::waitForMotionDone() {
 		
 		int MoveCount = 0;
 		for(int i = 0; i < HEAD_JOINTS; i++)
-			MoveCount += fabs(old_headjnt_pos[i] - headjnt_pos[i])>=tolerance ? 1 : 0;
+			MoveCount += fabs(old_headjnt_pos[i] - headjnt_pos[i]) >= tolerance ? 1 : 0;
 		for(int i = 0; i < 3; i++)
-			MoveCount += fabs(old_torsojnt_pos[i] - torsojnt_pos[i])>=tolerance ? 1 : 0;
+			MoveCount += fabs(old_torsojnt_pos[i] - torsojnt_pos[i]) >= tolerance ? 1 : 0;
 		
 		if (MoveCount==0)
 			return;
@@ -879,7 +892,7 @@ void Window::moveTheRobot(float value[]) {
 		
 		ctrl->setRefSpeeds( 7.0 );
 		
-		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("H"); }		
+		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("T"); }		
 		else { printf("-\n"); }
 		
 	}
@@ -913,7 +926,7 @@ void Window::moveTheRobotHead(float value[]) {
 			
 		}
 		
-		iCubCtrl->head->ctrl->setRefSpeeds( 10.0 );
+		iCubCtrl->head->ctrl->setRefSpeeds( 8.0 );
 		
 		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
 		else { printf("-\n"); }

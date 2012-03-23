@@ -1,8 +1,9 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "icFilterModule.h"
+#define MAX_ELEMENTS 12
 
 icFilterModule::icFilterModule() {
 	// by default run on one image only
@@ -318,6 +319,16 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	
 	yarp::os::Bottle cmd, response;
 	
+	std::cout << "x: " << x;	
+	x = movingAverageX(x);
+	std::cout << "\tavgx: " << x << std::endl;	
+
+	std::cout << "y: " << y;	
+	y = movingAverageY(y);
+	std::cout << "\tavgy: " << y << std::endl;	
+	
+//	z = runningAverageZ(z);	
+	
 	// get information about the object from rpc
 	cmd.clear();
 	cmd.addString("set");
@@ -334,6 +345,76 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 //	std::cout << "response: " << response.toString() << std::endl;	
 	return r;
 }	
+
+
+double icFilterModule::movingAverageX(double x) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = x;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+	
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+double icFilterModule::movingAverageY(double y) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = y;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+
+double icFilterModule::movingAverageZ(double z) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = z;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+	
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+
 
 bool icFilterModule::send3DPositionToGazeCtrl(double x, double y, double z) {
 	yarp::os::Bottle cmd, response;

@@ -1,2 +1,0 @@
-/Users/kail/imClever/dev/idsiayarpmodules/build/src/modules/firewirecamera2/CMakeFiles/firewirecamera2.dir
-/Users/kail/imClever/dev/idsiayarpmodules/build/src/modules/katana400/CMakeFiles/katana400.dir
