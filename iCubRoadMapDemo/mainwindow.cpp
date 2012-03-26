@@ -55,7 +55,7 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
     QString message = tr("A context menu is available by right-clicking");
     statusBar()->showMessage(message);
 
-    setWindowTitle(tr("Menus"));
+    setWindowTitle(tr("Adaptive Roadmap Planner"));
     setMinimumSize(160, 160);
 
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));

@@ -231,6 +231,8 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 	
 	
 	remove_edge( edge, map );
+    
+    //map[edge].length = 1000000;
 }
 
 void Roadmap::removeAllEdges()

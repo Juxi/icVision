@@ -243,7 +243,8 @@ void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roa
 			} else {
 				QColor color = Qt::lightGray;
 				std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
-				roadmap->setEdgeColor( i->first, color.lighter() );
+				//roadmap->setEdgeColor( i->first, color.lighter() );
+                roadmap->setEdgeColor( i->first, Qt::darkGray );
 				roadmap->removeEdge( i->first );
 			}
 		} else {
