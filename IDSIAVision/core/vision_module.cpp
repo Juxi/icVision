@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -97,7 +97,7 @@ bool VisionModule::configure(yarp::os::Searchable& config)
 
 double VisionModule::getPeriod()
 {
-   return 0.0;
+   return 0.1;
    //module periodicity (seconds)
 }
 

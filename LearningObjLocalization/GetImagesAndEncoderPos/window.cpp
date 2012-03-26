@@ -17,6 +17,7 @@
 #include <yarp/os/BufferedPort.h>
 
 #include <QtNetwork/QTcpSocket>
+#include <QSound>
 
 #include <opencv/cv.h>
 
@@ -52,9 +53,44 @@ Window::Window(QString &t_in, QString &v_in) {
 }
 
 Window::Window(QString &t_in, QString &v_in, iCubController *iCubCtrl_in) {
-	initWindow();
+	initWindow(); 
 	iCubCtrl = iCubCtrl_in;
+	
+	// connect to rpc	
+	// check whether we have F or not!! TODO
+	std::string clientPortName = "/learnpos/katanaCtrl/rpc:o";
+	if(! katanaCtrlPort.open( clientPortName.c_str() )){
+		exit(1);
+	}
+	
+	std::string remotePort = "/katanaCtrl"; //"/katana400F/arm/rpc:i";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", remotePort.c_str());
+	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
+		std::cout << "window.cpp" << ": Unable to connect to port "; 
+		std::cout << remotePort.c_str() << std::endl;
+		exit(1);
+	}	
 
+	// connect to rpc	
+	// check whether we have F or not!! TODO
+	
+	clientPortName = "/learnpos/katana/rpc:o";
+	if(! katanaPort.open( clientPortName.c_str() )){
+		exit(1);
+	}
+	
+	remotePort = "/katana400F/arm/rpc:i";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", remotePort.c_str());
+	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
+		std::cout << "window.cpp" << ": Unable to connect to port "; 
+		std::cout << remotePort.c_str() << std::endl;
+		exit(1);
+	}	
+	
 	// set title
 	title = t_in + " - " + v_in;
     setWindowTitle(title);
@@ -321,11 +357,11 @@ void Window::toggleTimer() {
 
 
 void Window::collectData() {
-	bool usingKatana = false;
+	bool usingKatana = true;
 	
 	int pointsPerRun = 1; //20;	// for katana learning
 	
-	if( usingKatana ) pointsPerRun = 20;
+	if( usingKatana ) pointsPerRun = 10;
 	
 	// todo change
 	if(iCubCtrl) {
@@ -334,36 +370,56 @@ void Window::collectData() {
 		
 			
 			if( usingKatana ) {
-				/// talk to the katana
-				QTcpSocket* socket = new QTcpSocket();
-				socket->connectToHost("195.176.191.21", 5677);
+				/// talk to the katana 
+				// yarp
+
+				yarp::os::Bottle cmd, response;
 				
-				if( ! (socket->waitForConnected(20000)) )
-				{
-					printf("Unable to connect To Katana Server!\n");
-					return;				
+				// get information about the object from rpc
+				cmd.clear();
+				cmd.addString("next");
+				
+				katanaCtrlPort.write(cmd, response);
+				
+				if( response.size() != 2 ) {
+					std::cout << "ARGHAR something went wrong!!" << response.toString() << std::endl;
+					break;
 				}
-				else {
-					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
-					char buf[1] = { 'N' };
-					socket->write(buf, 1);
-					socket->flush();
-					
-					if(socket->waitForReadyRead(10000) == false) {
-						//timedout here;
-						std::cout << "socket timed out!! breaking! " <<std::endl;
-						return;
-						
-					}
-					if(1 == socket->getChar(buf)) { 
-						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
-						printf(".. received %d", (int) *buf);
-					} else {
-						txt_BallPosition->setText( "Nothing_read!" );
-					}
-					
-					socket->disconnect();
-				}
+				std::cout << "Katana moved!!" << std::endl;
+								
+				
+				// HTTP (old)
+//				QTcpSocket* socket = new QTcpSocket();
+//				socket->connectToHost("195.176.191.21", 5677);
+//				
+//				if( ! (socket->waitForConnected(20000)) )
+//				{
+//					printf("Unable to connect To Katana Server!\n");
+//					return;				
+//				}
+//				else {
+//					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
+//					char buf[1] = { 'N' };
+//					socket->write(buf, 1);
+//					socket->flush();
+//					
+//					if(socket->waitForReadyRead(10000) == false) {
+//						//timedout here;
+//						std::cout << "socket timed out!! breaking! " <<std::endl;
+//						return;
+//						
+//					}
+//					if(1 == socket->getChar(buf)) { 
+//						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
+//						printf(".. received %d", (int) *buf);
+//					} else {
+//						txt_BallPosition->setText( "Nothing_read!" );
+//					}
+//					
+//					socket->disconnect();
+//				}
+				
+				
 			}
 			
 			btn_timer->setEnabled(false);
@@ -393,10 +449,13 @@ void Window::collectData() {
 					// tilt forward/backward
 					for(float v = 10; v <= 40; v+= 10) {
 						nextposetorso[2] = v;
-
-						moveTheRobot(nextposetorso);
-						// wait longer for the resetting
-						if(15 == v) sleep(5);	
+						
+						if(15 == v) {
+							moveTheRobot(nextposetorso);
+							// wait longer for the resetting
+							sleep(5);	
+						}
+						
 											
 						// HEAD up down
 						for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
@@ -418,8 +477,12 @@ void Window::collectData() {
 										nextposehead[4] = hj4;
 										
 										if(rand() % 100 != 0) continue;
-									
-										moveTheRobotHead(nextposehead);	
+										
+										// try this one 
+										moveTheRobot(nextposetorso);
+										usleep(50*1000);										
+										moveTheRobotHead(nextposehead);
+										
 										waitForMotionDone();
 
 										getYarpStatus();			
@@ -435,12 +498,15 @@ void Window::collectData() {
 				}
 			}
 			
-			// move back to original pose
+			// move back to home position, original pose
 			nextposetorso[0] = 0;
 			nextposetorso[1] = 0;
 			nextposetorso[2] = 15;		
 			moveTheRobot(nextposetorso);
 			waitForMotionDone();
+			
+			// play sound!!!
+			QSound::play("../sounds/Drill.wav");
 		
 		//ending for
 		}
@@ -516,12 +582,21 @@ void Window::timerTimeout() {
 }
 
 void Window::getYarpStatus() {
+	QSound::play("../sounds/Drill.wav");
+	
 	if ( ! dash->btn_connect->isEnabled() ) {	// then we are connected
 		// read
 		showEncoderPositions();
 		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
 		
+		Bottle cmd, response;
+		cmd.clear();
+		cmd.addString("get");
+		cmd.addString("encs");
+		
+		katanaPort.write(cmd, response);
+		txt_BallPosition->setText( response.get(2).toString().c_str() );
 		//writeCSV();
 				
 	} else {
@@ -540,7 +615,7 @@ void Window::waitForMotionDone() {
 	float old_torsojnt_pos[3];
 	float tolerance = 0.1;
 	showEncoderPositions();
-	printf("in waiting .");
+	printf("waitForMotionDone .");
 	
 	usleep(500000);
 	do {
@@ -553,9 +628,9 @@ void Window::waitForMotionDone() {
 		
 		int MoveCount = 0;
 		for(int i = 0; i < HEAD_JOINTS; i++)
-			MoveCount += fabs(old_headjnt_pos[i] - headjnt_pos[i])>=tolerance ? 1 : 0;
+			MoveCount += fabs(old_headjnt_pos[i] - headjnt_pos[i]) >= tolerance ? 1 : 0;
 		for(int i = 0; i < 3; i++)
-			MoveCount += fabs(old_torsojnt_pos[i] - torsojnt_pos[i])>=tolerance ? 1 : 0;
+			MoveCount += fabs(old_torsojnt_pos[i] - torsojnt_pos[i]) >= tolerance ? 1 : 0;
 		
 		if (MoveCount==0)
 			return;
@@ -817,7 +892,7 @@ void Window::moveTheRobot(float value[]) {
 		
 		ctrl->setRefSpeeds( 7.0 );
 		
-		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("H"); }		
+		if ( iCubCtrl->torso->ctrl->positionMove( pose ) ) { printf("T"); }		
 		else { printf("-\n"); }
 		
 	}
@@ -851,7 +926,7 @@ void Window::moveTheRobotHead(float value[]) {
 			
 		}
 		
-		iCubCtrl->head->ctrl->setRefSpeeds( 10.0 );
+		iCubCtrl->head->ctrl->setRefSpeeds( 8.0 );
 		
 		if ( iCubCtrl->head->ctrl->positionMove( pose ) ) { printf("H"); }		
 		else { printf("-\n"); }

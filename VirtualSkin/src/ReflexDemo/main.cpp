@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 		
 		// path to the XML file that defines the robot model
 		QString robotFile = config.find("robot").asString().c_str();
+		QString robotFile2 = config.find("robot2").asString().c_str();
 	
 		// optional... path to the xml file that contains the world
 		QString worldFile = config.find("world").asString().c_str();
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 	VirtualSkin::YarpModel* yarpModel = NULL;
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
 	ReflexFilter*			filter	  = NULL;
+	
 	int result = 0;
 	
 	try
@@ -75,6 +77,21 @@ int main(int argc, char *argv[])
 			// Open the filter status port
 			//printf("opening filter status port\n");
 			//filter->openStatusPort("/filterStatus");
+		}
+		
+		if ( robotFile2 != "" ) {
+			//load another robot
+			VirtualSkin::YarpRobot* yarpRobot2 = NULL;
+			ReflexFilter* filter2 = NULL;
+			yarpRobot2 = yarpModel->loadYarpRobot( robotFile2, false );
+			yarpRobot2->openCollisionPort("/collisions2");
+			yarpRobot2->openObservationPort("/observations2");
+			sleep(1);
+			printf( " ...opening robot filter for '%s'\n", yarpRobot2->getName().toStdString().c_str() );
+			filter2 = new ReflexFilter( yarpRobot2, false );
+			filter2->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
+			printf("opening filter RPC port\n");
+			filter2->openFilterRpcPort("/filterRpc2");
 		}
         
         // Load a world model from file

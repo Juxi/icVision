@@ -30,7 +30,8 @@ onlySingleOutput = True
 
 import numpy
 def readAndPlotData():
-    d = numpy.loadtxt("calibData5.csv", delimiter=",")
+    # d = numpy.loadtxt("calibData5.csv", delimiter=",")
+    d = numpy.loadtxt("WedThurAll.csv", delimiter=",")
     plotx, ploty, plotz = [] , [], []
     for line in d:
         plotx.append ( line[-2] )
@@ -45,15 +46,15 @@ def readAndPlotData():
     fig = plt.figure()
     ax = fig.add_subplot(111)
     plt.title("Distribution of Reference Points on the Table")
-    ax.axis( [1, 10, 1, 7] )
+    ax.axis( [0, 12, 0, 8] )
     plt.xlabel('X Axis')
     plt.ylabel('Distance from the robot')
-    ax.xaxis.set_major_locator(FixedLocator([1,6,12]))
-    ax.xaxis.set_minor_locator(FixedLocator(range(1,11)))    
-    ax.yaxis.set_major_locator(FixedLocator([1,4]))
+    ax.xaxis.set_major_locator(FixedLocator([0,6,12]))
+    ax.xaxis.set_minor_locator(FixedLocator(range(0,11)))    
+    ax.yaxis.set_major_locator(FixedLocator([0,4]))
     ax.yaxis.set_minor_locator(FixedLocator(range(1,11)))    
     ax.grid(True, which='major') 
-    ax.scatter(plotx, ploty, s=3, facecolors='none', edgecolors='r')
+    ax.scatter(plotx, ploty, s=5, marker='x', facecolors='none', edgecolors='b')
     # pylab.clf()
     # # plt.ion()
     # pylab.title("Distribution of Reference Points on the Table")

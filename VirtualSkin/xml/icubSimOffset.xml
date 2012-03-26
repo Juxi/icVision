@@ -4,7 +4,13 @@
 
 <!-- TORSO -->
 <bodypart name="torso">
-    <!--<link z="-.05" radius="0">-->
+<<<<<<< HEAD
+    <link x="-.5" radius="0">
+=======
+    <!--<link z="-.05" radius="0">
+	this next line is from Juxi -->
+    <link x="0.25">
+>>>>>>> e91a5444146a5bbef3cde81af13dfe1ab045080e
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
@@ -150,14 +156,14 @@
                 
             <sphere radius=".03"/>
                 
-            <link z="-.0625" y="-.016" radius="0" noSelfCollision="true">
+            <link z="-.0625" y="-.016" radius="0">
             
-                <!-- HAND -->
+                <!-- HAND 
                 <link x="-.020" y="-.03" radius="0">
                     <link y="1" radius="0">
                         <marker name="right_hand"/>
                     </link>
-                </link>
+                </link>-->
                 
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
@@ -640,7 +646,12 @@
     </link>
         </joint>
     </motor>
-    <!--</link>-->
+<<<<<<< HEAD
+    </link>
+=======
+    <!-- from Juxi -->
+	</link>
+>>>>>>> e91a5444146a5bbef3cde81af13dfe1ab045080e
 </bodypart>
 <!-- /TORSO -->
 

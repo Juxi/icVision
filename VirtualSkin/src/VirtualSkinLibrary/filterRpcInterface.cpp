@@ -71,7 +71,7 @@ bool FilterRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bot
 	//printf("FilterRpcInterface Handler Called!\n");
 	
 	int n = 0;	// identifier of the current bottle element
-	int cmd;	// the command (see command vocabs in header)
+	//int cmd;	// the command (see command vocabs in header)
 	
 	yarp::os::ConstString prefix = command.get(n).asString();
 	

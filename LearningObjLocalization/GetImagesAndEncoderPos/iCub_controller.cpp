@@ -232,12 +232,12 @@ void iCubController::initHead() {
         head->port = new Port;
         head->port->open("/juxi/head");
 		if(simulation) Network::connect("/icubSim/head/state:o", "/juxi/head"); 
-		else		   Network::connect("/icub/head/state:o", "/juxi/head"); 
+		else		   Network::connect("/icubF/head/state:o", "/juxi/head"); 
 
 		// needs cleanup , TODO, might not need both!
 		head->ctrl = new PartController();
 		if(simulation) head->ctrl->open("icubSim", "head");
-		else head->ctrl->open("icub", "head");
+		else head->ctrl->open("icubF", "head");
 		if( head->ctrl->isValid() ) head->initialized = true;
     }
 }
@@ -253,7 +253,7 @@ void iCubController::closeHead() {
 		}
 
 		if(simulation)  Network::disconnect("/icubSim/head/state:o", "/juxi/head");
-		else			Network::disconnect("/icub/head/state:o", "/juxi/head");
+		else			Network::disconnect("/icubF/head/state:o", "/juxi/head");
 
         head->port->close();
         delete head->port;
@@ -271,12 +271,12 @@ void iCubController::initTorso() {
         torso->port = new Port;
         torso->port->open("/juxi/torso");
 		if(simulation)  Network::connect("/icubSim/torso/state:o", "/juxi/torso"); 
-		else			Network::connect("/icub/torso/state:o", "/juxi/torso"); 
+		else			Network::connect("/icubF/torso/state:o", "/juxi/torso"); 
 		
 		// needs cleanup , TODO, might not need both!
 		torso->ctrl = new PartController();
 		if(simulation) torso->ctrl->open("icubSim", "torso");
-		else torso->ctrl->open("icub", "torso");
+		else torso->ctrl->open("icubF", "torso");
 		if( torso->ctrl->isValid() ) torso->initialized = true;
 	}
 }

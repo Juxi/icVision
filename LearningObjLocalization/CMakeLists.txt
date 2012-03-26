@@ -11,4 +11,3 @@ ADD_SUBDIRECTORY ( GetImagesAndEncoderPos )
 
 # optional builds
 # ADD_SUBDIRECTORY ( ppmpngConverter )
-# ADD_SUBDIRECTORY ( GetImagePosOfRedBall )

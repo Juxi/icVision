@@ -33,6 +33,11 @@ inline void write_poses(poses_map_t &poses_map, std::string filename) {
 inline poses_map_t read_poses(std::string filename) {
 	std::ifstream in_file(filename.c_str());
 
+	if (!in_file) {
+		std::cerr << "No File Found: " << filename << std::endl;
+		return poses_map_t();
+	}
+
 	poses_map_t the_map;
 	poses_vector_t the_poses;
 
@@ -48,6 +53,7 @@ inline poses_map_t read_poses(std::string filename) {
 				the_map[current_name] = the_poses;
 			std::remove(line.begin(), line.end(), ' ');
 			current_name = line;
+			the_poses.clear();
 		} else {
 			std::istringstream line_reader(line);
 			std::vector<double> pose;

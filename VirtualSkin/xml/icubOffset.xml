@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ZeroPositionKinematicTree>
-<ZeroPositionKinematicTree version="1.0" robotName="icubSim">
+<ZeroPositionKinematicTree version="1.0" robotName="icub">
 
 <!-- TORSO -->
 <bodypart name="torso">
-    <!--<link z="-.05" radius="0">-->
+    <link z="-.05" x="0.35" radius="0">
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".0325">
-            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>
-            <box width="0.07" depth="0.18" height="0.18" pz="-0.09"/>-->
-            <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
-            <sphere radius=".07" px=".035" py=".05" pz="-.03"/>
-            <sphere radius=".07" px=".035" py="-.05" pz="-.03"/>
-            <sphere radius=".09" px=".035" pz="-.09"/>
+            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>-->
+            
+            <!-- THESE GEOMS MODEL THE HIPS AND THE STAND
+                 THEY COLLIDE WITH THE TABLE IN world.xml -->
+
+            <sphere radius=".08" px="0" py=".06" pz="-.05"/>
+            <sphere radius=".08" px="0" py="-.06" pz="-.05"/>
+            <sphere radius=".1" px=".035" pz="-.06"/>
+			<sphere radius=".1" px="0.0" pz="-.06" pz="-.03"/>
+            <cylinder radius=".04" height="1" pz="-.5" hz="1"/>
+            
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
@@ -47,9 +52,9 @@
    
         <link z=".0825" radius="0">
         
-        <sphere pz=".07" radius=".11"/><!---->
-        <!--<sphere px=".015" pz=".07" radius=".1"/>
-        <sphere px="-.015" pz=".07" radius=".9"/>-->
+        <sphere pz=".08" radius=".1"/><!---->
+        <sphere px=".015" pz=".08" radius=".1"/>
+        <sphere px="-.015" pz=".08" radius=".1"/>
         
                 <!-- LEFT EYE -->
                 <link x="-.054" y="-.034" radius="0">
@@ -150,12 +155,12 @@
                 
             <sphere radius=".03"/>
                 
-            <link z="-.0625" y="-.016" radius="0" noSelfCollision="true">
+            <link z="-.0625" y="-.016" radius="0">
             
                 <!-- HAND -->
                 <link x="-.020" y="-.03" radius="0">
                     <link y="1" radius="0">
-                        <marker name="right_hand"/>
+                        <!-- <marker name="right_hand"/> -->
                     </link>
                 </link>
                 
@@ -164,10 +169,13 @@
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
                 <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
                 
-                
+                <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
             
                     <!-- THUMB -->
                     <link x="-.015" y=".004" z=".0275" radius="0">
+                    <!--<box width=".015" height=".0399" depth=".015" hx="-.015" hy="-.012" hz="-0.035" px="-.0075" py="-.006" pz="-0.035"/>-->
+                    
+                    
                         <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30">
                         <joint z=".017" minPos="20" maxPos="90" radius=".0075">
                         <link y="-.00375" radius=".0">
@@ -203,8 +211,6 @@
                     </link>
                     <!-- / THUMB -->
 
-
-                <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
                     <!-- INDEX FINGER -->
                     <link x="-.029" y=".008" z="-.0055" radius="0">
                         <joint y="-.017" minPos="-10" maxPos="0" radius="0">
@@ -411,16 +417,10 @@
                 
             <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
-                <!-- HAND 
+                <!-- HAND -->
                 <link x="-.020" y=".03" radius="0">
                     <link y="1" radius="0">
-                        <marker name="left_hand"/>
-                    </link>
-                </link>  -->
-               
-                <link x="-.020" radius="0">
-                    <link y="1" radius="0">
-                        <marker name="left_hand"/>
+                        <!-- <marker name="left_hand"/> -->
                     </link>
                 </link>
                 
@@ -640,7 +640,7 @@
     </link>
         </joint>
     </motor>
-    <!--</link>-->
+    </link>
 </bodypart>
 <!-- /TORSO -->
 

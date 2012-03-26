@@ -38,12 +38,13 @@ class KinematicModel::Robot : public QObject
 
 public:
 	
-	Robot( Model* m, DT_RespTableHandle t );	//!< 
-	~Robot();									//!< Nothing to do here
+	Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass robotClass, DT_ResponseClass baseClass );	
+	~Robot();														
 	
 	//bool Robot::isColliding() const;
 	
 	void open(const QString& fileName, bool verbose = true) throw(KinematicModelException);	//!< Parse the XML config file and construct BodyParts, Motors, Links and RevoluteJoints to build up the robot model
+	void appendMarkersToModel();
 	bool isOpen() const	{ return isConfigured; }											//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();																			//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	
@@ -55,9 +56,11 @@ public:
 	virtual void publishState();										// emit signals for observations and reflexes
 	
 	// generic 'get' functions that may be useful
-	const Model* getModel() const { return model; }
-	DT_RespTableHandle getResponseTable() {return responseTable; }
-	
+	Model*				getModel() const { return model; }
+	DT_RespTableHandle	getResponseTable() { return responseTable; }
+	DT_ResponseClass	getWorldRobotClass() { return worldRobotClass; }
+	DT_ResponseClass	getWorldBaseClass() { return worldBaseClass; }
+
 	const QString&	getName() const { return robotName; }				//!< Get the name of the Robot
 	const QString*	getPartName( int partNum ) const;					//!< Get the name of a BodyPart, given its index (usually for printing messages) 
 	const QString*	getMotorName( int partNum, int motorNum ) const;		//!< Get the name of a Motor, given its index and the index of its body part
@@ -67,20 +70,13 @@ public:
 	Motor*			getMotorByName( const QString& motorName );					//!< Get the moter itself, given its name
 	
 	int				getNumMotors( int partNum ) const;								//!< Get the number of motors in a BodyPart, given its index
-	
-	//void printLinks();			//!< Prints the kinematic tree depth first
-	//void printBodyParts();		//!< Print a list of the Motor objects in each BodyPart
-	
-	int numBodyParts() const { return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
-	int numMotors() const		{ return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
-	int numNodes()			{ return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
+
+	int	numBodyParts() const { return partList.size(); }		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
+	int numMotors() const { return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
+	int numNodes() { return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
 
 signals:
-	
-	//void appendedObject( KinTreeNode* node );
-	//void appendedPrimitive ( PrimitiveObject* primitive );
-	//void removeSelfCollisionPair( DT_ResponseClass, DT_ResponseClass );
-	
+
 	void collisions(int);
 	void reflexCollisions(int);
 	void observation( RobotObservation obs );							//!< make new marker positions and orientations known
@@ -110,17 +106,20 @@ public slots:
 	void updatePose();					//!< Do forward kinematics, pushing results down the link/joint trees
 	
 	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
+	void ignoreAdjacentPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.ignoreAdjacentPairs().
+	void appendTreeToModel( KinTreeNode* node = NULL );
 	
 private:
-	Model*					model;		//!< The Model that is doing collision detection on this Robot
-	DT_RespTableHandle		responseTable;
-	//DT_ResponseClass		responseClass;
+	Model*					model;				//!< The Model that is doing collision detection on this Robot
+	DT_RespTableHandle		responseTable;		//!< For managing self-collisions
+	DT_ResponseClass		worldRobotClass;	//!< For checking the robot w.r.t the world and other robots
+	DT_ResponseClass		worldBaseClass;		//!< So as not to check the robot's base against the world (so a stand can intersect the table for example)
 	
-	QString					robotName;	//!< Human readable identifier for the robot
-	QVector<BodyPart*>		partList;	//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
-	QVector<Motor*>			motorList;	//!< "Motors" serve as an interface to set the position of one or more joints
-	QVector<KinTreeNode*>	tree;		//!< root nodes of the link/joint trees
-	QVector<Marker*>		markers;	//!< list of markers
+	QString					robotName;		//!< Human readable identifier for the robot
+	QVector<BodyPart*>		partList;		//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
+	QVector<Motor*>			motorList;		//!< "Motors" serve as an interface to set the position of one or more joints
+	QVector<KinTreeNode*>	tree;			//!< root nodes of the link/joint trees
+	QVector<Marker*>		markers;		//!< list of markers
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
 	
@@ -131,7 +130,9 @@ private:
 	
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index
-	void filterCollisionPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.filterCollisionPairs().
+	
+	
+	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t ); //!< Turn off collision response to class c in table t (for the whole robot)
 	
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
 	void appendBodyPart( BodyPart* part )	{ partList.append(part); }		//!< Appends a BodyPart to the list
@@ -149,7 +150,7 @@ private:
 	/*** FRIENDS  ***/
 	friend class BodyPart;
 	friend class Motor;
-	friend class KinTreeNode;	// root nodes of the link/joint trees must be able to request other root nodes to filterCollisionPairs().
+	friend class KinTreeNode;	// root nodes of the link/joint trees must be able to request other root nodes to ignoreAdjacentPairs().
 	friend class ZPHandler;		
 };
 

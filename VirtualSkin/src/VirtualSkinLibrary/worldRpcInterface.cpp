@@ -83,7 +83,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		reply.addString("No help for YOU!!!");
 		return true;
 	}
-	else if ( prefix == "world" ) { n++; }
+	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr" ) { n++; }
 	
 	cmd  = command.get(n).asVocab(); n++;
 
