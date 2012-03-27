@@ -155,7 +155,7 @@
                 
             <sphere radius=".03"/>
                 
-            <link z="-.0625" y="-.016" radius="0">
+            <link z="-.0625" y="-.016" radius="0" noSelfCollision="true">
             
                 <!-- HAND -->
                 <link x="-.020" y="-.03" radius="0">
@@ -415,7 +415,7 @@
                 
             <sphere radius=".03"/>
                 
-            <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
+            <link z="-.0625" y=".016" radius="0" noSelfCollision="true"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
                 <link x="-.020" y=".03" radius="0">

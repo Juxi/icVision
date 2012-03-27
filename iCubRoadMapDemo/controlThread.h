@@ -30,11 +30,21 @@ public:
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
 	bool isOnMap();
-	double maxDiff(std::vector<double>,std::vector<double>);
+	//double maxDiff(std::vector<double>,std::vector<double>);
 	
 	//void start();
 	void restart();
 	void stop();
+	
+	enum BehaviorType
+	{
+		SingleEdgeExplore,
+		MultiEdgeExplore,
+		GoToObject
+	};
+	
+	void setBehavior( BehaviorType b ) { currentBehavior = b; }
+	void setSalientObject( QString s ) { salientObject = s; }
 
 protected:
 	
@@ -48,9 +58,12 @@ protected:
 	
 	volatile bool keepRunning;
 	
+	BehaviorType currentBehavior;
+	QString salientObject;
+	
 	void run();
-	void singleEdgeMove();
-	void multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	bool singleEdgeMove();
+	bool multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
 };
 #endif
 /** @} */
