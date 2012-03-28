@@ -166,7 +166,7 @@ void ControlThread::run()
 	while ( keepRunning )
 	{
 		
-		if (worldPort.getOutputCount()==0)
+		/*if (worldPort.getOutputCount()==0)
 		{
 			printf("Trying to connect to %s\n", "/world");
 			yarp.connect("/worldClient","/world");
@@ -185,20 +185,20 @@ void ControlThread::run()
 			
 			if ( response.size() == 17 )
 			{
-				std::vector<double> objectPosition;
-				objectPosition.push_back(response.get(13).asDouble());
-				objectPosition.push_back(response.get(14).asDouble());
-				objectPosition.push_back(response.get(15).asDouble());
+				//std::vector<double> objectPosition;
+				//objectPosition.push_back(response.get(13).asDouble());
+				//objectPosition.push_back(response.get(14).asDouble());
+				//objectPosition.push_back(response.get(15).asDouble());
 				
-				printf("Object Location: ");
-				for (int i=0; i<3; i++)
-				{
-					printf("%f ", objectPosition[i] );
-				}
-				printf("\n");
+				//printf("Object Location: ");
+				//for (int i=0; i<3; i++)
+				//{
+				//	printf("%f ", objectPosition[i] );
+				//}
+				//printf("\n");
 				
 				// find the node in the map that brings a hand closest to cup1
-				Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
+				//Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
 				
 				if ( !isOnMap() )	
 				{
@@ -206,16 +206,23 @@ void ControlThread::run()
 				}
 				else
 				{
-					multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+					//multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
 				}
 			}
 			
-		}
-		yarp::os::Time::delay(1);
+		}*/
+		//yarp::os::Time::delay(1);
 
         // Move to a random other vertex in the map
-        // multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
-        
+if ( !isOnMap() )	
+				{
+					gotoNearest();
+				}
+				else
+				{
+         multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+        }
 		// Move between vertices 0 and 1
 		//else if ( roadmap->currentVertex == 0 )	
 		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
