@@ -1,7 +1,12 @@
 #include "controlThread.h"
 #include <QTime>
 
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), keepRunning(false)
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot),
+																		roadmap(_map),
+																		velocity(5),
+																		keepRunning(false),
+																		currentBehavior(MultiEdgeExplore),
+																		salientObject("")
 {
 	//vSkinStatus.open("/statusOut");
 	//if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -9,9 +14,9 @@ ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_r
 	//	printf("failed to connect to robot filter status port\n");
 	//	return;
 	//}
-	printf("opening world port");
+	printf("opening world port\n");
 	worldPort.open("/worldClient");
-	printf("done");
+	//printf("done");
 }
 
 ControlThread::~ControlThread()
@@ -95,7 +100,7 @@ bool ControlThread::isOnMap()
 	Roadmap::vertex_t	v = roadmap->nearestVertex(a);
 	std::vector<double> b = roadmap->map[v].q;
 	
-				std::vector<double>::iterator k;
+				//std::vector<double>::iterator k;
 				//printf("current: ");
 				//for ( k = a.begin(); k!=a.end(); ++k )
 				//	printf("%f ",*k);
@@ -106,7 +111,7 @@ bool ControlThread::isOnMap()
 				//	printf("%f ",*k);
 				//printf("\n");
 
-	double err = maxDiff(a,b);
+	double err = robot->maxDiff(a,b);
 	
 	if ( err > 5.0 )
 	{
@@ -134,7 +139,7 @@ bool ControlThread::isOnMap()
 	return true;
 }
 
-double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
+/*double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
 {
 	double result = 0;
 	std::vector<double>::iterator i,j;
@@ -143,14 +148,16 @@ double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
 		  i!=a.end() && j!=b.end();
 		  ++i, ++j )
 	{
-		if ( count < 10 || (count > 18 && count < 26) ) {
-			if ( *i-*j > result )
-				result = *i-*j;
+		//if ( count < 10 || (count > 18 && count < 26) )
+		if ( MainWindow::jMask.at(count) )
+		{
+			if ( qAbs(*i-*j) > result )
+				result = qAbs(*i-*j);
 		}
 	count++;
 	}
 	return result;
-}
+}*/
 
 void ControlThread::run()
 {
@@ -165,51 +172,75 @@ void ControlThread::run()
 
 	while ( keepRunning )
 	{
+		//if ( !isOnMap() )	
+		//{
+		//	gotoNearest();
+		//}
 		
-		if (worldPort.getOutputCount()==0)
+		/*** EXPLORE THE GRAPH ONE EDGE AT A TIME ***/
+		if ( currentBehavior == SingleEdgeExplore )
 		{
-			printf("Trying to connect to %s\n", "/world");
-			yarp.connect("/worldClient","/world");
-		} else
-		{
-			// get the position of cup1
-			yarp::os::Bottle cmd;
-			cmd.addString("get");
-			cmd.addString("cup1");
-			
-			//printf("Sending message... %s\n", cmd.toString().c_str());
-			yarp::os::Bottle response;
-			worldPort.write(cmd,response);
-			//printf("Got response: %s\n", response.toString().c_str());
-			//printf("size: %d",response.size());
-			
-			if ( response.size() == 17 )
+			if ( !singleEdgeMove() )
 			{
-				std::vector<double> objectPosition;
-				objectPosition.push_back(response.get(13).asDouble());
-				objectPosition.push_back(response.get(14).asDouble());
-				objectPosition.push_back(response.get(15).asDouble());
+				printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+				break;
+			}
+		}
+		
+		/*** EXPLORE THE GRAPH VIA RANDOM SHORTEST-PATHS ***/
+		else if ( currentBehavior == MultiEdgeExplore )
+		{
+			std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path;
+			path = roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
+			
+			if ( !multipleEdgeMove( path ) )
+			{
+				printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+				break;
+			}
+		}
+		
+		/*** REACH FOR A PARTICULAR OBJECT ***/
+		else if ( currentBehavior == GoToObject )
+		{
+			if (worldPort.getOutputCount()==0)
+			{
+				printf("Trying to connect to %s\n", "/world");
+				yarp.connect("/worldClient","/world");
+			}
+			else
+			{
+				// get the position of cup1
+				yarp::os::Bottle cmd;
+				cmd.addString("get");
+				cmd.addString(salientObject.toStdString().c_str());
 				
-				printf("Object Location: ");
-				for (int i=0; i<3; i++)
-				{
-					printf("%f ", objectPosition[i] );
-				}
-				printf("\n");
+				printf("Sending message... %s\n", cmd.toString().c_str());
+				yarp::os::Bottle response;
+				worldPort.write(cmd,response);
+				printf("Got response: %s\n", response.toString().c_str());
+				printf("size: %d",response.size());
 				
-				// find the node in the map that brings a hand closest to cup1
-				Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
-				
-				if ( !isOnMap() )	
+				if ( response.size() == 17 )
 				{
-					gotoNearest();
-				}
-				else
-				{
+					std::vector<double> objectPosition;
+					objectPosition.push_back(response.get(13).asDouble());
+					objectPosition.push_back(response.get(14).asDouble());
+					objectPosition.push_back(response.get(15).asDouble());
+					
+					printf("Object Location: ");
+					for (int i=0; i<3; i++)
+					{
+						printf("%f ", objectPosition[i] );
+					}
+					printf("\n");
+					
+					// find the node in the map that brings a hand closest to cup1
+					Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
 					multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
 				}
+				
 			}
-			
 		}
 		yarp::os::Time::delay(1);
 
@@ -234,18 +265,18 @@ void ControlThread::run()
 	printf("*** RUN METHOD RETURNED ***\n");
 }
 
-void ControlThread::singleEdgeMove()
+bool ControlThread::singleEdgeMove()
 {
 	// select a random action given our current location in the map
 	std::pair< Roadmap::edge_t, std::vector<double> > thisMove = roadmap->randomMove();
+	if ( thisMove.second.size() == 0 )
+		return false;
 	
 	// if we got a valid action, try it out
 	if ( thisMove.second.size() > 0 )
 	{
-		printf("*** TAKING A RANDOM ACTION ***\n");
+		printf("*** TRAVERSING A RANDOM EDGE ***\n");
 		roadmap->setEdgeColor( thisMove.first, Qt::red );	// mark the currently selected action on the
-		
-		
 		robot->setVelocity( velocity );
 		robot->positionMove( thisMove.second );					// move the robot
 		
@@ -253,6 +284,7 @@ void ControlThread::singleEdgeMove()
 		{
 			std::cout << "POSITION MOVE COMPLETE\n" << std::endl;
 			roadmap->setEdgeColor( thisMove.first, Qt::black ); 
+			roadmap->setCurrentVertex(target(thisMove.first,roadmap->map));
 		}
 		else 
 		{
@@ -262,9 +294,10 @@ void ControlThread::singleEdgeMove()
 			roadmap->removeEdge( thisMove.first );
 		}
 	}
+	return true;
 }
 
-void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
+bool ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
 {
 	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
 	
@@ -278,6 +311,8 @@ void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roa
 		{
 			Roadmap::out_edge_i e, e_end;
 			tie(e, e_end) = out_edges( i->second, roadmap->map );
+			if ( e == e_end )
+				return false;
 
 			robot->setVelocity( velocity );
 			robot->positionMove(roadmap->map[i->second].q);
@@ -299,6 +334,7 @@ void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roa
 			roadmap->setEdgeColor( i->first, Qt::darkGray );
 		}
 	}	
+	return true;
 }
 
 void ControlThread::stop()

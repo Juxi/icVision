@@ -51,7 +51,7 @@ private:
 
 	int numJoints;
 	std::vector<double> min,max;
-	//std::vector<bool> jointMask;
+	std::vector<bool> jointMask;
 	
 	yarp::os::Network network;
 	yarp::dev::PolyDriver *dd;

@@ -52,11 +52,10 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 {
 	setCentralWidget(&graphWidget);
     createActions();
-
     createMenus();
 
-    QString message = tr("A context menu is available by right-clicking");
-    statusBar()->showMessage(message);
+    //QString message = tr("A context menu is available by right-clicking");
+    //statusBar()->showMessage(message);
 
     setWindowTitle(tr("Adaptive Roadmap Planner"));
     setMinimumSize(160, 160);
@@ -79,6 +78,13 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);
 	//setLayout(mainLayout);
+	
+	// add a menu item to reset the joint mask
+	bool iCubJointMask[35] = {	1,1,1,								// use the torso
+								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,	// use the right arm, not the right hand
+								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0};	// use the left arm, not the left hand
+	for ( int i=0; i<35; i++ )
+		jMask.push_back( iCubJointMask[i] );
 }
 //! [2]
 
@@ -105,6 +111,7 @@ void MainWindow::connectToRobot()
 		if ( iCub.open(robotName.toStdString().c_str()) )
 		{
 			roadmap.setDimensionality( iCub.getNumJoints() );
+			iCub.setJointMask(jMask);
 			printf("Opened iCub Robot with %d joints!!!\n", iCub.getNumJoints());
 		}
 		else { printf("failed to open iCub\n"); }
@@ -116,9 +123,34 @@ void MainWindow::disconnectFromRobot()
 	iCub.close();
 }
 
-void MainWindow::explore()
+void MainWindow::singleEdgeExplore()
 {
+	ctrlThread.setBehavior( ControlThread::SingleEdgeExplore );
 	ctrlThread.restart();
+}
+void MainWindow::multiEdgeExplore()
+{
+	ctrlThread.setBehavior( ControlThread::MultiEdgeExplore );
+	ctrlThread.restart();
+}
+void MainWindow::goTo()
+{
+	bool ok;    
+    QString text = QInputDialog::getText( 
+										 this, 
+										 tr("String"), 
+										 tr("Object Name:"), 
+										 QLineEdit::Normal, 
+										 tr("cup1"), 
+										 &ok );
+    if( ok && !text.isEmpty() )
+    {
+		ctrlThread.setSalientObject(text);
+		ctrlThread.setBehavior( ControlThread::GoToObject );
+		ctrlThread.restart();
+    } else {
+		ctrlThread.stop();
+	}
 }
 
 void MainWindow::stopController()
@@ -385,10 +417,21 @@ void MainWindow::createActions()
 	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
 	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
 	
-	exploreAction = new QAction(tr("&Explore"), this);
-	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
-	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
-	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
+	SEExploreAction = new QAction(tr("&Single Edge Explore"), this);
+	SEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	SEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap one edge at a time"));
+	connect(SEExploreAction, SIGNAL(triggered()), this, SLOT(singleEdgeExplore()));
+	
+	MEExploreAction = new QAction(tr("&Multiple Edge Explore"), this);
+	MEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	MEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap from vertex to vertex with shortest path planning"));
+	connect(MEExploreAction, SIGNAL(triggered()), this, SLOT(multiEdgeExplore()));
+
+	GoToAction = new QAction(tr("&Reach To Object"), this);
+	GoToAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	GoToAction->setStatusTip(tr("Reach for an object"));
+	connect(GoToAction, SIGNAL(triggered()), this, SLOT(goTo()));
+	
 	
 	setVelocityAction = new QAction(tr("&Set Velocity"), this);
 	setVelocityAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
@@ -439,7 +482,9 @@ void MainWindow::createMenus()
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
 	controllerMenu->addAction(disconnectFromRobotAction);
-	controllerMenu->addAction(exploreAction);
+	controllerMenu->addAction(SEExploreAction);
+	controllerMenu->addAction(MEExploreAction);
+	controllerMenu->addAction(GoToAction);
 	controllerMenu->addAction(stopControllerAction);
 	controllerMenu->addAction(setVelocityAction);
 	

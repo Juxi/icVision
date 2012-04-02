@@ -259,8 +259,8 @@ void Roadmap::readMapPoses(std::string filename) {
 		cout << i << endl;
 		vector<double> combined_pose;
 		copy(poses_torso[i].begin(), poses_torso[i].end(), back_inserter(combined_pose));
-		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 		copy(poses_right[i].begin(), poses_right[i].end(), back_inserter(combined_pose));
+		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 
 		insert(work_space[i][0], work_space[i][1], combined_pose, work_space[i]);
 	}

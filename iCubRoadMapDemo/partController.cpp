@@ -60,7 +60,7 @@ bool PartController::open( const char* robotName, const char* partName )
 		pid->enablePid(i);
 		lim->getLimits( i, &_min, &_max );
 		
-		//jointMask.push_back(true);
+		jointMask.push_back(true);
 		min.push_back(_min);
 		max.push_back(_max);
 
@@ -137,46 +137,25 @@ void PartController::setVelocity( int v )
 bool PartController::positionMove( const std::vector<double>& poss )
 {
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
-	//if ( isWithinLimits(poss) || !pos ) { return 0; }
+
+	std::vector<double> q = getCurrentPose();
 	
 	double p[numJoints];
 	for ( int i=0; i<numJoints; i++ )
 	{
-		p[i] = poss.at(i);
+		if ( jointMask.at(i) )
+			p[i] = poss.at(i);
+		else
+			p[i] = q.at(i);
 	}
-
-	/*double offset;
-	for ( int j = 0; j < numJoints; j++ ) {
-		offset = (max.at(j) - min.at(j))/20.0;
-		if ( p[j] < min.at(j) + offset )
-			p[j] = min.at(j) + offset;
-		else if ( p[j] > max.at(j) - offset )
-			p[j] = p[j] > max.at(j) - offset;
-	}*/
 
 	return pos->positionMove( p );
 }
-								  
-/*bool PartController::positionMove( const std::vector<double>& poss, const std::vector<double>& vels )
-{ 
-	if ( !vels.empty() && vels.size() != (unsigned int)numJoints ) { return 0; }
-	
-	if ( !vels.empty() )
-	{ 
-		double v[numJoints];
-		for ( int i=0; i<numJoints; i++ )
-		{
-			v[i] = vels.at(i);
-		}
-		if ( !pos->setRefSpeeds( v ) ) { return 0; }
-	}
-	return positionMove(poss);
-}*/
 
 bool PartController::setJointMask( const std::vector<bool>& vals )
 {
 	if ( vals.size() != (unsigned int)numJoints ) { return 0; }
-	//jointMask = vals;
+	jointMask = vals;
 	return 1;
 }
 
@@ -188,14 +167,11 @@ bool PartController::checkMotionDone( bool* flag )
 
 std::vector<double> PartController::getRandomPose()
 {
-	std::vector<double> q;
+	std::vector<double> q = getCurrentPose();
 	for ( int i = 0; i < numJoints; i++ )
 	{
-		if ( i <= 6 )
-		{
-			q.push_back( min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX );
-		}
-		else { q.push_back(0); }
+		if ( jointMask.at(i) )
+			q.at(i) = min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX;
 	}
 	return q;
 }

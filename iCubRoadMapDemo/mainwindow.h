@@ -84,7 +84,9 @@ private slots:
 	
 	void connectToRobot();
 	void disconnectFromRobot();
-	void explore();
+	void singleEdgeExplore();
+	void multiEdgeExplore();
+	void goTo();
 	void stopController();
 	void setVelocity();
 
@@ -111,11 +113,15 @@ private:
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
 	QAction *disconnectFromRobotAction;
-	QAction *exploreAction;
+	QAction *SEExploreAction;
+	QAction *MEExploreAction;
+	QAction *GoToAction;
 	QAction *stopControllerAction;
 	QAction *setVelocityAction;
 
 	iCubController	iCub;
+	std::vector<bool> jMask;
+	
 	Roadmap			roadmap;
 	GraphWidget		graphWidget;
 	

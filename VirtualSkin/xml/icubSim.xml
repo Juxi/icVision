@@ -97,7 +97,7 @@
     <!-- /HEAD -->
     
     <!-- RIGHT ARM -->
-    <bodypart name="right_arm">
+    <bodypart name="right_arm" constraintFile="iCubShoulderConstraints.ini">
       
             <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x=".2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
@@ -370,7 +370,7 @@
     <!-- RIGHT ARM -->
     
     <!-- LEFT ARM -->
-    <bodypart name="left_arm">
+    <bodypart name="left_arm" constraintFile="iCubShoulderConstraints.ini">
  
             <motor name="LeftShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x="-.2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
@@ -409,14 +409,9 @@
                 
             <sphere radius=".03"/>
                 
-            <link z="-.0625" y=".016" radius="0"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
+            <link z="-.0625" y=".016" radius="0" noSelfCollision="true"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
-                <!-- HAND 
-                <link x="-.020" y=".03" radius="0">
-                    <link y="1" radius="0">
-                        <marker name="left_hand"/>
-                    </link>
-                </link>  -->
+                <!-- HAND -->
                
                 <link x="-.020" radius="0">
                     <link y="1" radius="0">
