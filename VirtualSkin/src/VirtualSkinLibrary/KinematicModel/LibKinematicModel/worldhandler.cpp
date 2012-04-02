@@ -84,8 +84,8 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 				//												 attributes.value("b").toInt());
 				
 				QColor collidingColor = freeColor;
-				collidingColor.setAlphaF(0.5);
-                freeColor.setAlphaF(0.5);
+				collidingColor.setAlphaF(0.3);
+                freeColor.setAlphaF(0.3);
 				obj->setFreeColor( freeColor );
 				obj->setCollidingColor( collidingColor );
 				//printf("\n\nSET FREECOLOR\n\n");

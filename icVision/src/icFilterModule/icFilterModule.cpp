@@ -19,6 +19,9 @@ icFilterModule::icFilterModule() {
 	
 	moduleID = -1;
 	isRunning = true;
+	
+	shallLocaliseInThreeD  = false;
+	shallNotifyingGazeCtrl = false;
 }
 
 

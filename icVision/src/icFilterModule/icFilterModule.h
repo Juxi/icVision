@@ -62,6 +62,10 @@ protected:
 	// Variables	
 	bool	isRunning;
 	bool	inDebugMode;
+
+	bool	shallNotifyingGazeCtrl;	
+	bool	shallLocaliseInThreeD;
+	
 	bool	streamRawFilterOutput;
 	bool	streamProcessedFilterOutput;	
 	double  scalingFactor;
@@ -103,6 +107,16 @@ public:
 	static const int RIGHT_IMAGE = 0;
 	void runOnOneImage(int leftOrRight);
 	void runOnBothImages();	
+	
+	// defining 3d localisation connection
+	void localiseInThreeD(bool b) { 	shallLocaliseInThreeD = b;  }
+
+	// heritage (change, maybe?)
+	void useThisForGazeCtrl(bool b) {
+		shallNotifyingGazeCtrl = b;
+	}
+	
+	
 };
 
 #endif

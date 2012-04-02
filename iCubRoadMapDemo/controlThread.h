@@ -43,6 +43,7 @@ protected:
 	
 	yarp::os::Network yarp;
 	//yarp::os::Port vSkinStatus;
+	yarp::os::RpcClient worldPort;
 	
 	iCubController* robot;
 	Roadmap* roadmap;

@@ -4,20 +4,21 @@
 
 using namespace KinematicModel;
 
-Robot::Robot( Model* m, DT_RespTableHandle t ) : model(m),
-												responseTable(t),
-												robotName("unNamedRobot"),
-												numLinks(0),
-												isConfigured(false),
-												numCollisions(0),
-												numReflexCollisions(0)
+Robot::Robot( Model* m, DT_RespTableHandle t,
+						DT_ResponseClass robotClass, 
+						DT_ResponseClass baseClass ) :	model(m),
+														responseTable(t),
+														worldRobotClass(robotClass),
+														worldBaseClass(baseClass),
+														robotName("unNamedRobot"),
+														numLinks(0),
+														isConfigured(false),
+														numCollisions(0),
+														numReflexCollisions(0)
 {
 	if ( !t ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 	qRegisterMetaType< RobotObservation >("RobotObservation");
-	
-	//responseClass = model->newRobotClass(responseTable);
-	//responseTable = model->newRobotTable();
 }
 Robot::~Robot()
 {
@@ -86,19 +87,32 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 		throw KinematicModelException(errStr);
     }
 	
-	if (verbose) printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
+	ignoreAdjacentPairs();
+	//ignoreAdjacentPairs();
+	home();
 	
-	filterCollisionPairs();
-	home(verbose);
+	printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
+	
+	//home(verbose);
+	
 	isConfigured = true;
 }
 
-void Robot::filterCollisionPairs()
+/*void Robot::removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t );
+{
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=tree.begin(); i!=tree.end(); ++i )
+	{
+        (*i)->removeCollisionResponse( c, t );
+    }
+}*/
+
+void Robot::ignoreAdjacentPairs()
 {
     QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i )
 	{
-        (*i)->filterCollisionPairs();
+        (*i)->ignoreAdjacentPairs();
     }
 }
 
@@ -310,15 +324,38 @@ Motor* Robot::getMotorByName(const QString &motorName)
     return 0;
 }
 
+
+void Robot::appendTreeToModel( KinTreeNode* node )
+{
+	QVector<KinTreeNode*>::iterator i;
+	if ( node == NULL ) {
+		for ( i=tree.begin(); i!=tree.end(); ++i )
+			appendTreeToModel(*i);
+	} else {
+		for ( i=node->children.begin(); i!=node->children.end(); ++i ) {
+			appendTreeToModel(*i);
+		}
+		model->appendObject(node);
+	}
+}
+
+void Robot::appendMarkersToModel()
+{
+	QVector<Marker*>::iterator i;
+	for ( i=markers.begin(); i!=markers.end(); ++i ) {
+			model->appendObject( (*i)->getTracerObject() );
+	}
+}
+
 int Robot::getNumPrimitives()
 {
-	printf("Robot.getNumPrimitives()\n");
+	//printf("Robot.getNumPrimitives()\n");
 	int result = 0;
 	QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i ) {
         result += (*i)->getNumPrimitives();
     }
-	printf(" num primitives: %d\n", result );
+	//printf(" num primitives: %d\n", result );
 	return result;
 }
 

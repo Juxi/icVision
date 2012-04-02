@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <yarp/os/all.h>
 
 #define HEAD_JOINTS 6
 
@@ -46,6 +47,8 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 		
 private:
+	yarp::os::RpcClient katanaCtrlPort;	
+	yarp::os::RpcClient katanaPort;
 	// Methods
 	void initWindow();
 	void showYarpImages();

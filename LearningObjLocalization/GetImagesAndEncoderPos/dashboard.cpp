@@ -75,9 +75,9 @@ void Dashboard::checkiCubSimulator() {
  *@brief     checks if the iCub simulator is running and updates the labels accordingly
  */
 void Dashboard::checkiCub() {
-	if(yarp::os::NetworkBase::exists("/icub/head/state:o")) {
+	if(yarp::os::NetworkBase::exists("/icubF/head/state:o")) {
         iCub_accessible = true;
-        lbl_iCubSim_Status->setText("<center> <b> iCub </b><br/> (running) </center>"); //<font color=green>running</b> </font>");
+        lbl_iCubSim_Status->setText("<center> <b> iCubF </b><br/> (running) </center>"); //<font color=green>running</b> </font>");
 		lbl_iCubSim_Status->setStyleSheet("background-color: green;");
     } else {
         iCub_accessible = false;

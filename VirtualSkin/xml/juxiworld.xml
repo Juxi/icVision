@@ -2,18 +2,17 @@
 <!DOCTYPE WorldList>
 <WorldList version="1.0">
 
+<object name="table" pz="-.18" px="-0.145" r="50" g="50" b="50">
+    <box width="1" depth=".001" height="1.5"/>
+</object>
 
+<!--
 
 <object name="cup1" px="-.3" pz="-.1" r="0" g="0" b="100">
     <cylinder radius=".045" height=".15" hz="1"/>
 </object>
 
 
-<object name="table" pz="-.18" px="-0.145" r="50" g="50" b="50">
-    <box width="1" depth=".001" height="1.5"/>
-</object>
-
-<!--
 <object name="cup2" px="-.3" py="-.2" pz="-.1">   
     <cylinder radius=".035" height=".15" hz="1"/>
 </object>

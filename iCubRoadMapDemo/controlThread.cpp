@@ -1,10 +1,7 @@
 #include "controlThread.h"
 #include <QTime>
-#include <iostream>
 
-using namespace std;
-
-ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), goal_vertex(0), keepRunning(false)
+ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot), roadmap(_map), velocity(5), keepRunning(false)
 {
 	//vSkinStatus.open("/statusOut");
 	//if ( !yarp.connect("/filterStatus","/statusOut") )
@@ -12,6 +9,9 @@ ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_r
 	//	printf("failed to connect to robot filter status port\n");
 	//	return;
 	//}
+	printf("opening world port");
+	worldPort.open("/worldClient");
+	printf("done");
 }
 
 ControlThread::~ControlThread()
@@ -50,7 +50,7 @@ bool ControlThread::gotoNearest()
 		return 0;
 	
 	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
-	//msleep(500);
+	msleep(500);
 	
 	if ( !waitForMotion() )
 		return 0;
@@ -61,27 +61,6 @@ bool ControlThread::gotoNearest()
 		return false;
 	}
 	
-	return true;
-}
-
-bool ControlThread::goTo(Roadmap::vertex_t v)
-{
-	robot->setVelocity( velocity );
-	if ( !robot->positionMove(roadmap->getStdPose(v)) )
-		return 0;
-
-	// this is a hack...  need a better waitForMotion that does not rely on iPositionControl::checkMotionDone()
-	//msleep(500);
-
-	if ( !waitForMotion() )
-		return 0;
-
-	if ( !isOnMap() )
-	{
-		printf("Failed to move iCub onto the roadmap\n");
-		return false;
-	}
-
 	return true;
 }
 
@@ -178,32 +157,70 @@ void ControlThread::run()
 	//yarp::os::Port vSkinStatus;
 	//yarp::os::Bottle b;
 	
-	printf("Moving iCub to the nearest state on the roadmap\n");
-//	if ( !gotoNearest() )
-//	{
-//		return;
-//	}
+	//printf("Moving iCub to the nearest state on the roadmap\n");
+	//if ( !gotoNearest() )
+	//{ 
+	//	return;
+	//}
 
 	while ( keepRunning )
 	{
-		cout << "lalalaa" << endl;
-		if ( !isOnMap() )	
-			gotoNearest();
-		else
-			goTo(goal_vertex);
-		cout << "lalalaa" << endl;
-        //else
-        //    multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
-
-//		multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, goal_vertex ) );
-
-
-//		else if ( roadmap->currentVertex == 0 )
-//			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
-//		else
-//			multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 		
-		msleep(100);
+		if (worldPort.getOutputCount()==0)
+		{
+			printf("Trying to connect to %s\n", "/world");
+			yarp.connect("/worldClient","/world");
+		} else
+		{
+			// get the position of cup1
+			yarp::os::Bottle cmd;
+			cmd.addString("get");
+			cmd.addString("cup1");
+			
+			//printf("Sending message... %s\n", cmd.toString().c_str());
+			yarp::os::Bottle response;
+			worldPort.write(cmd,response);
+			//printf("Got response: %s\n", response.toString().c_str());
+			//printf("size: %d",response.size());
+			
+			if ( response.size() == 17 )
+			{
+				std::vector<double> objectPosition;
+				objectPosition.push_back(response.get(13).asDouble());
+				objectPosition.push_back(response.get(14).asDouble());
+				objectPosition.push_back(response.get(15).asDouble());
+				
+				printf("Object Location: ");
+				for (int i=0; i<3; i++)
+				{
+					printf("%f ", objectPosition[i] );
+				}
+				printf("\n");
+				
+				// find the node in the map that brings a hand closest to cup1
+				Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
+				
+				if ( !isOnMap() )	
+				{
+					gotoNearest();
+				}
+				else
+				{
+					multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+				}
+			}
+			
+		}
+		yarp::os::Time::delay(1);
+
+        // Move to a random other vertex in the map
+        // multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+        
+		// Move between vertices 0 and 1
+		//else if ( roadmap->currentVertex == 0 )	
+		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+		//else
+		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 	}
 	
 	//Roadmap::out_edge_i e, e_end;
@@ -274,7 +291,8 @@ void ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roa
 			} else {
 				QColor color = Qt::lightGray;
 				std::cout << "POSITION MOVE INTERRUPTED\n" << std::endl;
-				roadmap->setEdgeColor( i->first, color.lighter() );
+				//roadmap->setEdgeColor( i->first, color.lighter() );
+                roadmap->setEdgeColor( i->first, Qt::darkGray );
 				roadmap->removeEdge( i->first );
 			}
 		} else {

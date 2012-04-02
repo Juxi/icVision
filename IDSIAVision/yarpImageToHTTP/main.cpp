@@ -51,9 +51,14 @@ int main(int argc, char * argv[]) {
 	(void) signal(SIGINT, catch_sigint);	
 	
 	printf("Launching iCub YARP Image HTTP Server \n");
+	
 
 
-	std::string inputPortName, serverPortName;
+	std::string inputPortName, serverPortName, help;
+	
+	bool useHead  = false;
+	bool useTorso = false;
+	bool useArms  = false;
 	
 	/********************************************
 	 ** Init YARP
@@ -73,7 +78,24 @@ int main(int argc, char * argv[]) {
 	if(! config.check("port")) {
 		std::cout << "WARNING! No port defined, using dynamic allocation " << std::endl;	
 	}
-   int portNumber = config.find("port").asInt();
+    int portNumber = config.find("port").asInt();
+	
+	help = (config.find("head-only")).toString().c_str();
+	if( ! help.empty() ) {
+		useTorso = false;
+		useArms  = false;
+		useHead  = true;
+		std::cout << "Only using head (eyes and joints)!" << std::endl;
+	}
+
+	help = (config.find("vision-only")).toString().c_str();
+	if( ! help.empty() ) {
+		useTorso = false;
+		useHead  = false;
+		useArms  = false;		
+		std::cout << "Only using eyes!" << std::endl;
+	}
+	
 	
 	// trying to connect to the left camera
 	inputPortName = "/";		  serverPortName = "/";
@@ -105,67 +127,72 @@ int main(int argc, char * argv[]) {
 		return false;
 	}
 	
-	// trying to connect to Head
-	inputPortName = "/";		  serverPortName = "/";
-	inputPortName += "HTTPSERVER";serverPortName += robotName;
-	inputPortName += "/head";	  serverPortName += "/head/state:o";
-	if(! iCubHeadPort.open( inputPortName.c_str() )){
-		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
+	if( useHead ) {
+		// trying to connect to Head
+		inputPortName = "/";		  serverPortName = "/";
+		inputPortName += "HTTPSERVER";serverPortName += robotName;
+		inputPortName += "/head";	  serverPortName += "/head/state:o";
+		if(! iCubHeadPort.open( inputPortName.c_str() )){
+			std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
 
-	// trying to connect to torso
-	inputPortName = "/";		  serverPortName = "/";
-	inputPortName += "HTTPSERVER";serverPortName += robotName;
-	inputPortName += "/torso";	  serverPortName += "/torso/state:o";
-	if(! iCubTorsoPort.open( inputPortName.c_str() )){
-		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
-		return false;
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
 	}
 	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
-
 	
-	
-	// trying to connect to left arm
-	inputPortName = "/";		  serverPortName = "/";
-	inputPortName += "HTTPSERVER";serverPortName += robotName;
-	inputPortName += "/left_arm"; serverPortName += "/left_arm/state:o";
-	if(! iCubLeftArmPort.open( inputPortName.c_str() )){
-		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
-	// trying to connect to right arm
-	inputPortName = "/";		  serverPortName = "/";
-	inputPortName += "HTTPSERVER";serverPortName += robotName;
-	inputPortName += "/right_arm"; serverPortName += "/right_arm/state:o";
-	if(! iCubRightArmPort.open( inputPortName.c_str() )){
-		std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
-		return false;
+	if( useTorso) {
+		// trying to connect to torso
+		inputPortName = "/";		  serverPortName = "/";
+		inputPortName += "HTTPSERVER";serverPortName += robotName;
+		inputPortName += "/torso";	  serverPortName += "/torso/state:o";
+		if(! iCubTorsoPort.open( inputPortName.c_str() )){
+			std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
+		
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
 	}
 	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
 	
+	if( useArms ) {
+		// trying to connect to left arm
+		inputPortName = "/";		  serverPortName = "/";
+		inputPortName += "HTTPSERVER";serverPortName += robotName;
+		inputPortName += "/left_arm"; serverPortName += "/left_arm/state:o";
+		if(! iCubLeftArmPort.open( inputPortName.c_str() )){
+			std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
+		
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
+		// trying to connect to right arm
+		inputPortName = "/";		  serverPortName = "/";
+		inputPortName += "HTTPSERVER";serverPortName += robotName;
+		inputPortName += "/right_arm"; serverPortName += "/right_arm/state:o";
+		if(! iCubRightArmPort.open( inputPortName.c_str() )){
+			std::cout << "HTTPSERVER" << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
+		
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << "HTTPSERVER" << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+	}	
 	
 	
 	/********************************************
