@@ -45,11 +45,12 @@ public:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
-		qreal x,y;
+		std::vector<double> x;				// robot configuration
+
 		double fitness;
 		int collisions;
 		
-		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
+		Vertex() : qtGraphNode(NULL), type(NULL) {}
 	};
 	
 	struct Edge {
@@ -114,7 +115,6 @@ public:
 	
 	typedef CGAL::Orthogonal_k_neighbor_search<Custom_search_traits> K_neighbor_search;
 	typedef K_neighbor_search::Tree Tree;
-	
 	/*****************************/
 	
 	//std::vector<double> randomSample();
@@ -137,7 +137,8 @@ public:
 	typedef Map::edge_descriptor edge_t;
 	typedef Map::edge_iterator edge_i;
 	typedef Map::out_edge_iterator out_edge_i;
-	
+	typedef std::list<vertex_t> PathList;
+
 	Roadmap();
 	~Roadmap();
 	
@@ -155,7 +156,7 @@ public:
 	void setCurrentVertex( vertex_t );
 //	void setEdgeColor( edge_t, QColor );
 	
-	vertex_t insert( qreal x, qreal y, std::vector<double> _q, double fitness = 0.0, int collisions = 0/*, unsigned int n = 0*/ );
+	vertex_t insert( std::vector<double> _x, std::vector<double> _q, double fitness = 0.0, int collisions = 0/*, unsigned int n = 0*/ );
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
@@ -179,13 +180,21 @@ public:
 
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
-	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
-	std::vector<std::vector<double> > shortestPath( std::vector<double> from, std::vector<double> to );
+	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _w );
+
+
+	std::list<Roadmap::vertex_t> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
+	std::list<Roadmap::vertex_t>  shortestPath( std::vector<double> from, std::vector<double> to );
+
+	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 
 	size_t size() {
 		return num_vertices(map);
 	}
 	//bool insert( std::vector< std::vector<double> > );
+
+	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
+
 //
 //signals:
 //

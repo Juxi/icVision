@@ -2,6 +2,7 @@
 #define __SIMULATOR_H__
 
 #include <vector>
+#include <iostream>
 #include "model.h"
 
 class Simulator {

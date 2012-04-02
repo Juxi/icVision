@@ -4,6 +4,8 @@
 //#include "widgetEdge.h"
 //#include "widgetNode.h"
 
+using namespace std;
+
 Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
 	srand ( time(NULL) );
@@ -113,7 +115,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 	}
 }*/
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -121,6 +123,8 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q, d
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
+	map[vertex].x = _x;
+
 	map[vertex].fitness = fitness;
 	map[vertex].collisions = collisions;
 	//map[vertex].x = _x;
@@ -221,7 +225,7 @@ void Roadmap::readMapPoses(std::string filename) {
 	poses_vector_t poses(poses_map["CFGSPACE"]);
 	poses_vector_t work_space(poses_map["WORKSPACE"]);
 	for (size_t i(0); i < poses.size(); ++i) {
-		insert(work_space[i][0], work_space[i][1], poses[i]);
+		insert(work_space[i], poses[i]);
 	}
 }
 
@@ -252,16 +256,24 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 	for(K_neighbor_search::iterator it = search.begin(); it != search.end(); ++it)
 	{
 		size_t counter(0);
-		if ( ((sqrt(it->second) < .4)) && it->second != 0 && !boost::edge( p.vertex, it->first.vertex, map ).second )
+		if ( it->second != 0)
 		{
-			std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-			map[edge.first].length = sqrt(it->second);
-			++counter;
+			if (!boost::edge( p.vertex, it->first.vertex, map ).second) {
+				std::pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
+				map[edge.first].length = sqrt(it->second);
+				++counter;
+			}
+			if (!boost::edge(it->first.vertex, p.vertex, map ).second) {
+				std::pair<edge_t, bool> edge = boost::add_edge( it->first.vertex, p.vertex, map );
+				map[edge.first].length = sqrt(it->second);
+				++counter;
+			}
+
 //			std::cout << sqrt(it->second) << std::endl;
 			//std::cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << std::endl;
 //			emit appendedEdge( edge.first,
 //							  map[p.vertex].qtGraphNode ,
-//							  map[it->first.vertex].qtGraphNode );
+//							  map[it->first.vertsqrt(it->second)ex].qtGraphNode );
 		}
 	}
 }
@@ -293,21 +305,21 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	std::vector<double> distances(num_vertices(map));
 
 
-	 std::pair<edge_i, edge_i> map_edges(edges(map));
-	 edge_i edge_it(map_edges.first);
-	 std::cout << "adding lengths2" << std::endl;
-	 for (; edge_it != map_edges.second; ++edge_it) {
-		 double value = (map[source(*edge_it, map)].fitness + map[target(*edge_it, map)].fitness);
-		 int collisions1 = map[source(*edge_it, map)].collisions;
-		 int collisions2 = map[target(*edge_it, map)].collisions;
-		 double length = get(&Edge::length, map, *edge_it);
-
-		 length = length * length;
-
-//		  std::cout << value << " " << collisions << std::endl;
-		 put(&Edge::length2, map, *edge_it, length + 1000. * (collisions1 + collisions2));
-	 }
-	 std::cout << "done" << std::endl;
+//	 std::pair<edge_i, edge_i> map_edges(edges(map));
+//	 edge_i edge_it(map_edges.first);
+//	 std::cout << "adding lengths2" << std::endl;
+//	 for (; edge_it != map_edges.second; ++edge_it) {
+//		 double value = (map[source(*edge_it, map)].fitness + map[target(*edge_it, map)].fitness);
+//		 int collisions1 = map[source(*edge_it, map)].collisions;
+//		 int collisions2 = map[target(*edge_it, map)].collisions;
+//		 double length = get(&Edge::length, map, *edge_it);
+//
+//		 length = length * length;
+//
+////		  std::cout << value << " " << collisions << std::endl;
+//		 put(&Edge::length2, map, *edge_it, length + 1000. * (collisions1 + collisions2));
+//	 }
+//	 std::cout << "done" << std::endl;
 
 	try {
 		dijkstra_shortest_paths(	map, from, 
@@ -342,19 +354,57 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	return path;
 }
 
-std::vector<std::vector<double> > Roadmap::shortestPath( std::vector<double> from, std::vector<double> to ) {
+list<Roadmap::vertex_t>  Roadmap::shortestPath( std::vector<double> from, std::vector<double> to ) {
 	Roadmap::vertex_t from_desc = nearestVertex(from);
 	Roadmap::vertex_t to_desc = nearestVertex(to);
 
- 	std::vector<std::vector<double> > vector_path;
-	std::list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	return path;
+}
 
-	std::list<Roadmap::Map::vertex_descriptor>::iterator it(path.begin());
+vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex_t> &path) {
+	vector<vector<double> > vector_path;
+	list<Roadmap::Map::vertex_descriptor>::iterator it(path.begin());
 	for (; it != path.end(); ++it) {
 		vector_path.push_back(map[*it].q);
 	}
 
 	return vector_path;
+}
+
+Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _w )
+{
+//	if ( _q.size() != dim ) { throw("wrong size state vector"); }
+
+	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
+
+//	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , 1);
+//	map[search.begin()->first.vertex].type = type;
+//	return search.begin()->first.vertex;
+
+	double min_dist(9999999999999.);
+
+	std::pair<vertex_i, vertex_i> vp = vertices(map);
+	assert(vp.first != vp.second);
+
+	vertex_i best_vertex(vp.first);
+	for (; vp.first != vp.second; ++(vp.first)) {
+		double distance = calculate_distance(map[*(vp.first)].x, _w);
+		if (min_dist > distance) {
+			min_dist = distance;
+			best_vertex = vp.first;
+		}
+	}
+
+	return *best_vertex;
+}
+
+double Roadmap::calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2) {
+	assert(v1.size() == v2.size());
+	double distance(0.0);
+	for (size_t i(0); i < v1.size(); ++i)
+		distance += pow(v1[i] - v2[i], 2.0);
+	return sqrt(distance);
 }
 
 void Roadmap::project2D( std::vector<double> direction )
