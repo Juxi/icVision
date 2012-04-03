@@ -96,16 +96,16 @@ void Model::removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_Re
 
 void Model::removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
 {
-	printf("REMOVE_REFLEX");
+	//printf("REMOVE_REFLEX");
 	DT_RemovePairResponse(t, c1, c2, reflexTrigger);
-	printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
+	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
 }
 
 void Model::removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
 {
-	printf("REMOVE_VISUAL");
+	//printf("REMOVE_VISUAL");
 	DT_RemovePairResponse(t, c1, c2, collisionHandler);
-	printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
+	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
 }
 
 void Model::setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
@@ -115,7 +115,7 @@ void Model::setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_Res
 	//printf("  removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
 	
 	DT_AddPairResponse(	t, c1, c2, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-	printf("  added   response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
+	//printf("  added   response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
 }
 
 DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
@@ -148,12 +148,7 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose )
 		
 		printf("Loading non-yarp robot.\n");
 		Robot* robot = new Robot( this, newTable, newRobotClass, newBaseClass );
-		//robot->open( fileName, verbose );
-	
-		//NOTE: the order here is important... first append, then ignore
-		//robot->appendTreeToModel();
-		//robot->ignoreAdjacentPairs();
-		//robot->home();
+		robot->open( fileName, verbose );
 	
 		robots.append( robot );
 	
@@ -222,7 +217,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
-	printf("Appended KinTreeNode to world Model!!!\n");
+	//printf("Appended KinTreeNode to world Model!!!\n");
 }
 
 void Model::appendObject( CompositeObject* object )
@@ -388,6 +383,9 @@ int Model::computePose()
 	
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
 	updateWorldState();		// update positions of things in the world
+	
+	//evaluate kinematic constraints
+	evaluateRobotConstraints();
 
 	QVector<DT_RespTableHandle>::iterator i;
 	//uint num = 0;
@@ -418,6 +416,15 @@ void Model::fwdKin()
 	for ( i=robots.begin(); i!=robots.end(); ++i )
 	{
 		(*i)->updatePose();
+	}
+}
+
+void Model::evaluateRobotConstraints()
+{
+	QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		(*i)->evaluateConstraints();
 	}
 }
 
