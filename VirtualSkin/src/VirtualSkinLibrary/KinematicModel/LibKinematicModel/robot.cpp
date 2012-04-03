@@ -227,6 +227,16 @@ void Robot::updatePose()
 	//emit changedState();
 }
 
+
+void Robot::evaluateConstraints()
+{
+	QVector<BodyPart*>::iterator i;
+    for ( i=partList.begin(); i!=partList.end(); ++i ) {
+        if ( !(*i)->evaluateConstraints() )
+			addReflexCollision();
+    }
+}
+
 void Robot::publishState()
 {
 	emit collisions(numCollisions);

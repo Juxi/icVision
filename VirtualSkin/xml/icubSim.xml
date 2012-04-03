@@ -3,7 +3,7 @@
 <ZeroPositionKinematicTree version="1.0" robotName="icubSim">
 
 <!-- TORSO -->
-<bodypart name="torso">
+<bodypart name="torso" >
     <!--<link z="-.05" radius="0">-->
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     
@@ -28,7 +28,7 @@
             <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1" /> <!---->
     
     <!-- HEAD -->
-    <bodypart name="head">
+    <bodypart name="head" >
     
         <link x="-.0256747" z=".0502" radius=".02">
     
@@ -97,7 +97,21 @@
     <!-- /HEAD -->
     
     <!-- RIGHT ARM -->
-    <bodypart name="right_arm" constraintFile="iCubShoulderConstraints.ini">
+    <bodypart name="right_arm" >
+    
+        <!-- Kinematic constraints -->
+        <constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="404.0"/>
+        <constraint a="-1.71  1.71  0.0 " q="0 1 2" b="46.0"/>
+        <constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="431.0"/>
+        <constraint a="-1.71  1.71  1.71" q="0 1 2" b="109.0"/>
+        
+        <constraint a=" 1.0  -1.0   0.0"  q="0 1 2" b="305.7"/>
+        <constraint a="-1.0   1.0   0.0"  q="0 1 2" b="54.3"/>
+        <constraint a="-1.0   1.0   1.0"  q="0 1 2" b="101.7"/>
+        <constraint a=" 1.0  -1.0  -1.0"  q="0 1 2" b="258.3"/>        
+        <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
+        <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
+
       
             <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x=".2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
@@ -370,7 +384,20 @@
     <!-- RIGHT ARM -->
     
     <!-- LEFT ARM -->
-    <bodypart name="left_arm" constraintFile="iCubShoulderConstraints.ini">
+    <bodypart name="left_arm" >
+    
+        <!-- Kinematic constraints -->
+        <constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="404.0"/>
+        <constraint a="-1.71  1.71  0.0 " q="0 1 2" b="46.0"/>
+        <constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="431.0"/>
+        <constraint a="-1.71  1.71  1.71" q="0 1 2" b="109.0"/>
+        
+        <constraint a=" 1.0  -1.0   0.0"  q="0 1 2" b="305.7"/>
+        <constraint a="-1.0   1.0   0.0"  q="0 1 2" b="54.3"/>
+        <constraint a="-1.0   1.0   1.0"  q="0 1 2" b="101.7"/>
+        <constraint a=" 1.0  -1.0  -1.0"  q="0 1 2" b="258.3"/>        
+        <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
+        <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
  
             <motor name="LeftShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x="-.2588" y="-.9659" minPos="-96" maxPos="10" radius="0">

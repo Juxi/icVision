@@ -52,6 +52,7 @@ public:
 	void addReflexCollision() { numReflexCollisions++; }
 	
 	RobotObservation observe();
+	void evaluateConstraints();
 	
 	virtual void publishState();										// emit signals for observations and reflexes
 	
