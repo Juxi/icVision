@@ -217,7 +217,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
-	//printf("Appended KinTreeNode to world Model!!!\n");
+	printf("Appended KinTreeNode to non-yarp world Model!!!\n");
 }
 
 void Model::appendObject( CompositeObject* object )

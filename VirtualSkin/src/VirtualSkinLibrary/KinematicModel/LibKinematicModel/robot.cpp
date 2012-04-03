@@ -348,6 +348,7 @@ void Robot::appendTreeToModel( KinTreeNode* node )
 
 void Robot::appendMarkersToModel()
 {
+	printf("APPENDING MARKERS TO MODEL\n");
 	QVector<Marker*>::iterator i;
 	for ( i=markers.begin(); i!=markers.end(); ++i ) {
 			model->appendObject( (*i)->getTracerObject() );

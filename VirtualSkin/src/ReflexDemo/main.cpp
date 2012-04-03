@@ -42,8 +42,11 @@ int main(int argc, char *argv[])
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
 	VirtualSkin::YarpModel* yarpModel = NULL;
+	KinematicModel::Model* model = NULL;
+	
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
-	//KinematicModel::Robot* nonYarpRobot = NULL;
+	KinematicModel::Robot* nonYarpRobot = NULL;
+	
 	ReflexFilter*			filter	  = NULL;
 	
 	int result = 0;
@@ -51,9 +54,13 @@ int main(int argc, char *argv[])
 	try
 	{
 		yarpModel = new VirtualSkin::YarpModel( visualize );
-		yarpModel->start();	/*	if we want display lists to be created automatically,
+		yarpModel->start();	
+								/*	if we want display lists to be created automatically,
 								the model must be started prior to appending objects by
 								calling loadWorld(), loadRobot(), or appendObject()		*/
+		
+		//model = new KinematicModel::Model( visualize );
+		//model->start();
 		
 		// Load a robot model from file
 		if ( robotFile != "" )
@@ -63,7 +70,7 @@ int main(int argc, char *argv[])
 			yarpRobot->openCollisionPort("/collisions");
 			yarpRobot->openObservationPort("/observations");
 			
-			//nonYarpRobot = yarpModel->loadRobot(robotFile, true);
+			//nonYarpRobot = model->loadRobot(robotFile, true);
 			
 			sleep(1);
 			
