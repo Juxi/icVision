@@ -22,19 +22,20 @@ bool BodyPart::evaluateConstraints()
 {
 	int count = 1;
 	bool result = true;
-	printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
+	//printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
 	QVector<LinearConstraint>::iterator i;
 	for ( i=constraints.begin(); i!=constraints.end(); ++i ){
 		bool thisConstraint = (*i).evaluate();
-		if ( thisConstraint ) printf( "  constraint %d: pass\n", count++ );
-		else {
-			printf( "  constraint %d: fail\n", count++ );
-			result = false;
-		}
+		if ( !thisConstraint ) 
+			return false;
+		//	printf( "  constraint %d: pass\n", count++ );
+		//else {
+			//printf( "  constraint %d: fail\n", count++ );
+		//	result = false;
+		//}
 	}
 	return result;
 }
-
 
 bool BodyPart::setEncPos( const QVector<qreal>& x )
 {
