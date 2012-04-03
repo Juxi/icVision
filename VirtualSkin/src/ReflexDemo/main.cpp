@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	
 	VirtualSkin::YarpModel* yarpModel = NULL;
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
+	//KinematicModel::Robot* nonYarpRobot = NULL;
 	ReflexFilter*			filter	  = NULL;
 	
 	int result = 0;
@@ -61,6 +62,8 @@ int main(int argc, char *argv[])
 			yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
 			yarpRobot->openCollisionPort("/collisions");
 			yarpRobot->openObservationPort("/observations");
+			
+			//nonYarpRobot = yarpModel->loadRobot(robotFile, true);
 			
 			sleep(1);
 			

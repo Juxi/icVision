@@ -88,13 +88,10 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
     }
 	
 	ignoreAdjacentPairs();
-	//ignoreAdjacentPairs();
 	home();
 	
 	printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
-	
-	//home(verbose);
-	
+
 	isConfigured = true;
 }
 

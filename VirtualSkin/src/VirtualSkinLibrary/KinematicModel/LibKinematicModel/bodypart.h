@@ -92,14 +92,13 @@ private:
 			for ( i=a.begin(), j=q.begin(); i!=a.end() && j!=q.end(); ++i, ++j) {
 				if ( parent->at(*j) ) {
 					AdotQ += (*i) * parent->at(*j)->encPos();
-					
-					if ( i!=a.begin() ) printf(" + ");
-					printf("%f * %f", *i, parent->at(*j)->encPos() );
+					//if ( i!=a.begin() ) printf(" + ");
+					//printf("%f * %f", *i, parent->at(*j)->encPos() );
 				}
 			} 
 			
 			double ans = AdotQ + b;
-			printf(" + %f = %f >? 0", b, ans);
+			//printf(" + %f = %f >? 0", b, ans);
 			return ans > 0;
 		}
 	private:
