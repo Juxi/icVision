@@ -347,13 +347,10 @@ public:
 
 	void iterate()
 	{
-		//std::cout << A(0) << " " << A(1) <<  " " << A(2) << std::endl;
-
-		unsigned int i;
+		unsigned int i(0);
 		unsigned int dim = center.rows();
 		Matrix I = Matrix::eye(dim);
 		double denom = pow(2.0 * M_PI, 0.5 * dim) * A.det();
-//		std::cout << A.twonorm() << " " <<  variance() << " " << L.twonorm() << std::endl;
 
 		unsigned int newSamples = 0;
 

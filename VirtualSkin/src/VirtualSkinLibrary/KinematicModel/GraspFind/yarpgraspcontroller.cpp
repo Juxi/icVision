@@ -16,7 +16,10 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	assert(argc == 4);
+	if (argc != 4) {
+		std::cerr << "Usage: " << argv[0] << " [robot file] [world file] [map file]" << std::endl;
+		return 1;
+	}
 	bool visualize = true;
 	
 	//vector<vector<float> > some_poses = read_poses("poses.save")["CFGSPACE"];

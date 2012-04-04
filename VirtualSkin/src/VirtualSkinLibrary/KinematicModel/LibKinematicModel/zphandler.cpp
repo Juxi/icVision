@@ -247,8 +247,8 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 
 		// create the marker, attach it to the node, and make it known to the robot
 		Marker* marker = new Marker(node, name);
-		marker->createTracer( model->GHOST(), 30, 0.008, Qt::red);
-		model->appendObject( marker->getTracerObject() );
+		marker->createTracer( model->GHOST(), 1, 0.008, Qt::red);
+//		model->appendObject( marker->getTracerObject() );
 		robot->markers.push_back(marker);
 	}
 

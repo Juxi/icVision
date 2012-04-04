@@ -27,10 +27,10 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 	try
 	{
 		int dim = d_simulator.total_motors();
-
-
 		Matrix sigma = Matrix::ones(dim);
+
 		sigma *= std;
+
 		int population = population_size;//leave 0 to use default
 
 		d_nes.init(get_start_pos(dim), sigma, population);

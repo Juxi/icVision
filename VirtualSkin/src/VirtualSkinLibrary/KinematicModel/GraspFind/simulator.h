@@ -15,16 +15,21 @@ public:
 
 public:
 	Simulator(KinematicModel::Model& model,  KinematicModel::Robot& robot) : d_model(model), d_robot(robot) {
+		std::cout << "Initializing Simulator" << std::endl;
 		int total_motors(0);
 		int n_parts = d_robot.numBodyParts();
 		std::vector<double> home_pos;
+		std::cout << "N Parts: " << n_parts << std::endl;
+
 		for (size_t i(0); i < n_parts; ++i) {
+			std::cout << "part [" << i << "] = " << d_robot.getPart(i)->name().toStdString() << std::endl;
 			int n_motors = d_robot.getNumMotors(i);
 			total_motors += n_motors;
 			for (size_t m(0); m < n_motors; ++m) {
 				home_pos.push_back(d_robot.getPart(i)->at(m)->normHomePos());
 			}
 		}
+		std::cout << "Total Motors: " << total_motors << std::endl;
 		d_total_motors = total_motors;
 		d_home_pos = home_pos;
 		d_last_position = d_home_pos;

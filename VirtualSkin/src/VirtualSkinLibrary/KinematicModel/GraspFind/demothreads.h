@@ -85,6 +85,7 @@ public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string marker, size_t nn, double alpha)
 	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_marker(marker)
 	{
+		std::cout << "Building constraints" << std::endl;
 		d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .04);
 		d_points = &(d_map_build_constraint->points());
 
@@ -102,7 +103,7 @@ public:
 
 		d_grasp_finder.add_constraint(d_map_build_constraint);
 
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
+		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
 
 	}
 
@@ -222,12 +223,12 @@ public:
 			std::cout << "loading Map" << std::endl;
 			load_points("table_map.save");
 		}
-//		store_points("table_map.save");
+		store_points("table_map.save");
 
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 
-		bool test(true);
+		bool test(false);
 		bool filter(true);
 
 		if (filter) {
@@ -239,7 +240,7 @@ public:
 		if (test)
 			while (true) {
 //				size_t n(qrand() % d_configuration_points.size());
-				std::cout << n << std::endl;
+				std::cout << "Testing!: "<< n << std::endl;
 //				n = 279;
 				std::vector<double> random_pose = d_configuration_points[n];//d_grasp_finder.simulator().home_pos();
 				for (size_t i(0); i < random_pose.size(); ++i)

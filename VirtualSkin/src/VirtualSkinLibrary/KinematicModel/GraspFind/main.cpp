@@ -55,6 +55,7 @@ int grasp_pose_test2(Model &model, Robot &robot, QApplication &app) {
 }
 
 int map_build_test(Model &model, Robot &robot, QApplication &app) {
+	std::cout << "map build test" << std::endl;
 	MapThread grasp_thread(model, robot, "left_hand", 3, .05);
 
 	grasp_thread.start();
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 
 	printf("loading world file: %s\n", argv[1]);
 	model.loadWorld( QString(argv[2]), false );
+
 
 	if (string(argv[3]) == "grasp") {
 		return grasp_pose_test(model, robot, app);

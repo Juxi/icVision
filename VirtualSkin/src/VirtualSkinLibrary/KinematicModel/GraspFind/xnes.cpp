@@ -1,4 +1,5 @@
 #include "xnes.h"
+#include "assert.h"
 
 unsigned int rngState[3] = {0, 0, 0};
 
@@ -180,6 +181,7 @@ Matrix Matrix::zeros(unsigned int rows, unsigned int cols)
 // static
 Matrix Matrix::ones(unsigned int rows, unsigned int cols)
 {
+	ASSERT(rows && cols);
 	Matrix m(rows, cols);
 	unsigned int i, ic = rows * cols;
 	for (i=0; i<ic; i++) m[i] = 1.0;

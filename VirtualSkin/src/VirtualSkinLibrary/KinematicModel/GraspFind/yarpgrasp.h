@@ -12,6 +12,7 @@
 #include "roadmap.h"
 #include "poses_reader.h"
 #include "graspfinder.h"
+#include "iCubController.h"
 
 class YarpGrasp : public QThread {
 	Q_OBJECT
@@ -26,6 +27,8 @@ class YarpGrasp : public QThread {
 
 	GraspFinder d_graspfinder;
 	Roadmap d_roadmap;
+	iCubController i_cub;
+
 	poses_map_t d_poses;
 	std::vector<std::string> d_config_names;
 
@@ -51,8 +54,8 @@ public:
 		d_roadmap.graphConnect(n);
 	}
 
-	void update_map();
-	void update_map_2();
+	void update_map();//check for collisions and change weights
+//	void update_map_2();
 
 	std::vector<std::vector<double> > poses_to_configurations();
 
@@ -69,32 +72,33 @@ public:
 			d_graspfinder.simulator().add_ball(-.3, -0.1, z);
 	}
 
-	void run () {
-		std::cout << "yarp grasp running" << std::endl;
+	bool waitForMotion()
+	{
+		printf("waiting for motion to finish\n");
+		QTime timer;
+		timer.start();
 
-
-		load_map(d_map_file);
-		connect_map(5);
-		add_bullshit();
-		update_map_2();
-		std::vector<std::vector<double> > the_path = find_path();
-//
-		size_t counter(0);
-		while (true) {
-			std::vector<double> q(the_path[counter]);
-			std::vector<double> q_norm = d_graspfinder.simulator().real_to_normal_motors(q);
-			for (size_t i(0); i < q.size(); ++i)
-				std::cout << q_norm[i] << " ";
-			std::cout << std::endl;
-			d_graspfinder.simulator().set_motors(q_norm);
-			d_graspfinder.simulator().computePose();
+		bool flag = false;
+		while ( !flag ) {
+			//printf(".");
 			msleep(500);
-			counter = (counter + 1) % the_path.size();
+			if ( !i_cub.checkMotionDone(&flag))
+				return false;
+			else if ( timer.elapsed() > 30000)
+			{
+				printf("waitForMotion() timed out\n");
+				return false;
+			}
+			else { printf("%.2fs  ",(double)timer.elapsed()/1000.0); }
 		}
+		printf("\n");
+		return true;
 	}
 
+	void run ();
+
 	void stop() {
-		std::cout << "yarp grasp stopping" << std::endl;
+		std::cout << "yarp grasp stopping (stopping thread)" << std::endl;
 	}
 };
 
