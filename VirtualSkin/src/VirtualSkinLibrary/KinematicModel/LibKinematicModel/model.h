@@ -111,6 +111,7 @@ protected:
 	
 	bool keepRunning;		//!< Facilitates stopping and restarting the thread
 	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
+	int	 reflex_col_count;
 	bool encObstacle;
 	bool verbose;
 	
@@ -172,6 +173,9 @@ protected:
 		CompositeObject* comp2 = prim2->getCompositeObject();
 		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
 		if ( node2 ) { node2->robot()->addReflexCollision(); }
+		
+		Model* detector = (Model*)client_data;
+		detector->reflex_col_count++;
 		
 		//return DT_DONE;
 		return DT_CONTINUE;
