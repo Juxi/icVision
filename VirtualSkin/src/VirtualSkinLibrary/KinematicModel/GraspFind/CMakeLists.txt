@@ -15,7 +15,7 @@ SET ( src_files graspfinder.cpp
 		partController.cpp
 )
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h isnan.h yarpgrasp.h iCubController.h partController.h)
+SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h yarpgrasp.h iCubController.h partController.h)
 
 SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpgrasp.h iCubController.h )	
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )

@@ -8,7 +8,7 @@
 
 #include "constraints.h"
 #include "posefitnessfunction.h"
-#include "isnan.h"
+#include "exception.h"
 
 using namespace std;
 
@@ -63,4 +63,3 @@ void GraspFinder::set_variance(double std) {
 
 	d_nes.set_variance(sigma);
 }
-

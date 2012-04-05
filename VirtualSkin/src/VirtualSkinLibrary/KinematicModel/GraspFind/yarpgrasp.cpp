@@ -1,33 +1,35 @@
 #include "yarpgrasp.h"
+#include "exception.h"
 #include <cmath>
 
 using namespace std;
 
 void YarpGrasp::run () {
-	std::cout << "yarp grasp running" << std::endl;
-	i_cub.open("icubSimF");
+	cout << "yarp grasp running" << endl;
+	if (!i_cub.open("icubSimF"))
+		throw StringException("Couldnt open port to icubsimf");
 
 	load_map(d_map_file);
 	connect_map(5);
 	add_bullshit();
 	update_map();
-	std::vector<std::vector<double> > the_path = find_path();
+	vector<vector<double> > the_path = find_path();
 //
 	size_t counter(0);
 
 	while (true) {
-		std::vector<double> q(the_path[counter]);
-		std::vector<double> q_norm = d_graspfinder.simulator().real_to_normal_motors(q);
+		vector<double> q(the_path[counter]);
+		vector<double> q_norm = d_graspfinder.simulator().real_to_normal_motors(q);
 		for (size_t i(0); i < q.size(); ++i)
-			std::cout << q_norm[i] << " ";
-		std::cout << std::endl;
+			cout << q_norm[i] << " ";
+		cout << endl;
 		d_graspfinder.simulator().set_motors(q_norm);
-		d_graspfinder.simulator().computePose();
+		cout << "N COLLISIONS: " << d_graspfinder.simulator().computePose() << endl;
 
 		int velocity(40);
 		i_cub.setVelocity( velocity );
 		if (!i_cub.positionMove(q))
-			std::cout << "Position move error" << std::endl;
+			cout << "Position move error" << endl;
 		bool motionInterrupted = !waitForMotion();
 
 		msleep(500);
@@ -44,13 +46,13 @@ vector<vector<double> > YarpGrasp::poses_to_configurations() {
 
 		vector<double> configuration;
 		for (size_t n(0); n < d_config_names.size(); ++n) {
-//			std::cout << d_config_names[n] << std::endl;
+//			cout << d_config_names[n] << endl;
 			copy(d_poses[d_config_names[n]][i].begin(), d_poses[d_config_names[n]][i].end(), back_inserter(configuration));
 		}
 
 //		for (size_t n(0); n < configuration.size(); ++n)
-//			std::cout << configuration[n] << " ";
-//		std::cout << std::endl;
+//			cout << configuration[n] << " ";
+//		cout << endl;
 		configurations.push_back(configuration);
 	}
 
@@ -66,13 +68,13 @@ void YarpGrasp::insert_poses() {
 	d_roadmap.setDimensionality(dimensionality);
 
 	for (size_t i(0); i < configurations.size(); ++i) {
-		std::vector<double> &q_configuration(configurations[i]);
-		std::vector<double> &x_configuration(d_poses["WORKSPACE"][i]);
+		vector<double> &q_configuration(configurations[i]);
+		vector<double> &x_configuration(d_poses["WORKSPACE"][i]);
 		d_roadmap.insert(x_configuration, q_configuration);
 	}
 }
 
-std::vector<std::vector<double> > YarpGrasp::find_path() {
+vector<vector<double> > YarpGrasp::find_path() {
 	vertex_t start(0);
 	while (true) {
 		start = rand() % num_vertices(d_roadmap.map);
@@ -87,7 +89,7 @@ std::vector<std::vector<double> > YarpGrasp::find_path() {
 			break;
 	}
 	Roadmap::PathList the_path_nodes = d_roadmap.shortestPath(start, goal);
-	std::vector<std::vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
+	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
@@ -96,22 +98,22 @@ std::vector<std::vector<double> > YarpGrasp::find_path() {
 //	Simulator &simulator(d_graspfinder.simulator());
 //
 //	//loop over vertexes
-//	std::pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
+//	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
 //	vertex_i vertex_it(map_vertices.first);
 //
 //	for (; vertex_it != map_vertices.second; ++vertex_it) {
-//		std::vector<double> q_norm(d_roadmap.map[*vertex_it].q);
-//		std::vector<double> q = simulator.real_to_normal_motors(q_norm);
+//		vector<double> q_norm(d_roadmap.map[*vertex_it].q);
+//		vector<double> q = simulator.real_to_normal_motors(q_norm);
 //
 //		simulator.set_motors(q);
 //		size_t n_collisions = simulator.computePose();
 //
-//		std::cout << n_collisions << std::endl;
+//		cout << n_collisions << endl;
 //		d_roadmap.map[*vertex_it].collisions = n_collisions;
 //	}
 //
 //	//loop all edges
-//	std::pair<edge_i, edge_i> map_edges(edges(d_roadmap.map));
+//	pair<edge_i, edge_i> map_edges(edges(d_roadmap.map));
 //	edge_i edge_it(map_edges.first);
 //	for (; edge_it != map_edges.second; ++edge_it) {
 //		size_t n_collisions =  d_roadmap.map[source(*edge_it, d_roadmap.map)].collisions + d_roadmap.map[target(*edge_it, d_roadmap.map)].collisions;
@@ -130,12 +132,12 @@ void YarpGrasp::update_map() {
 	Simulator &simulator(d_graspfinder.simulator());
 
 	//loop over vertexes
-	std::pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
+	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
 	vertex_i vertex_it(map_vertices.first);
 
 	for (; vertex_it != map_vertices.second; ++vertex_it) {
-		std::vector<double> q_norm(d_roadmap.map[*vertex_it].q);
-		std::vector<double> q = simulator.real_to_normal_motors(q_norm);
+		vector<double> q_norm(d_roadmap.map[*vertex_it].q);
+		vector<double> q = simulator.real_to_normal_motors(q_norm);
 
 		simulator.set_motors(q);
 		size_t n_collisions = simulator.computePose();
@@ -159,7 +161,7 @@ void YarpGrasp::update_map() {
 			vector<double> q(q_start.size());
 			for (size_t n(0); n < q.size(); ++n)
 				q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
-			std::vector<double> q_real = simulator.real_to_normal_motors(q);
+			vector<double> q_real = simulator.real_to_normal_motors(q);
 			simulator.set_motors(q_real);
 			n_collisions = max(simulator.computePose(), n_collisions);
 		}

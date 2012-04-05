@@ -32,6 +32,11 @@
 class QtGraphNode;
 class QtGraphEdge;
 
+enum TreeMode {
+	WORKSPACE = 0,
+	CONFIGURATIONSPACE = 1
+};
+
 class Roadmap
 {
 public:
@@ -122,7 +127,8 @@ public:
 	
 	unsigned int			dim;
 	Map						map;
-	Tree					tree;
+	Tree					tree, workspace_tree;
+
 	Map::vertex_descriptor	currentVertex;
 	Map::edge_descriptor	currentEdge;
 	
@@ -157,8 +163,8 @@ public:
 //	void setEdgeColor( edge_t, QColor );
 	
 	vertex_t insert( std::vector<double> _x, std::vector<double> _q, double fitness = 0.0, int collisions = 0/*, unsigned int n = 0*/ );
-	void graphConnect( Pose, unsigned int n = 3 );
-	void graphConnect( unsigned int n = 3 );
+	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
+	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
 	
 	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
@@ -184,7 +190,8 @@ public:
 
 
 	std::list<Roadmap::vertex_t> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
-	std::list<Roadmap::vertex_t>  shortestPath( std::vector<double> from, std::vector<double> to );
+	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
+	std::list<Roadmap::vertex_t> shortestWorkspacePath( std::vector<double> from, std::vector<double> to );
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 

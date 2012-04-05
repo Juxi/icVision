@@ -39,10 +39,11 @@ public:
 		  KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( d_model.OBSTACLE() );
 		  KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .02 );
 		  QColor color( 0, 0, 255, 255 );
+		  QColor red_color( 255, 0, 0, 255 );
 		  QVector3D pos(x, y, z);
 		  sphere->translate(pos);
 		  sphere->setFreeColor(color);
-		  sphere->setCollidingColor(color);
+		  sphere->setCollidingColor(red_color);
 		  composite->append(sphere);
 		  d_model.appendObject(composite);
 	}

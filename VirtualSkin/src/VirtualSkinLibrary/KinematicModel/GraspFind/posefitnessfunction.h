@@ -6,7 +6,7 @@
 #include "simulator.h"
 #include "xnes.h"
 #include "constraints.h"
-#include "isnan.h"
+#include "exception.h"
 
 class EvaluationFilter {
 public:

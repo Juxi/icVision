@@ -118,7 +118,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
-	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
+	if ( _q.size() != dim ) { printf("wrong size state vector %lu\n",_q.size()); throw("wrong size state vector"); }
 	
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
@@ -136,6 +136,9 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
 	tree.insert( p );
 	
+	Pose p_workspace( _x.size(), _x.begin(), _x.end(), vertex );
+	workspace_tree.insert(p_workspace);
+
 	// connect it to its n nearest neighbors
 	//graphConnect( p, n );
 	
@@ -250,9 +253,10 @@ void Roadmap::removeAllEdges()
 	}
 }
 
-void Roadmap::graphConnect( Pose p, unsigned int n )
+void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 {	
-	K_neighbor_search search(tree, p , n+1);
+	Tree &the_tree = (tree_mode == CONFIGURATIONSPACE) ? tree : workspace_tree;
+	K_neighbor_search search(the_tree, p , n+1);
 	for(K_neighbor_search::iterator it = search.begin(); it != search.end(); ++it)
 	{
 		size_t counter(0);
@@ -278,12 +282,12 @@ void Roadmap::graphConnect( Pose p, unsigned int n )
 	}
 }
 
-void Roadmap::graphConnect( unsigned int n )
+void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 {
 	std::pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
-		graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n );
+		graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n, tree_mode);
 	}
 }
 
@@ -346,7 +350,7 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	printf("path: ");
 	for (std::list<vertex_t>::iterator i = path.begin(); i != path.end(); ++i )
 	{
-		printf("%d ",*i);
+		printf("%lu ",*i);
 	}
 	printf("/\n");
 	
@@ -362,6 +366,14 @@ list<Roadmap::vertex_t>  Roadmap::shortestPath( std::vector<double> from, std::v
 	return path;
 }
 
+list<Roadmap::vertex_t>  Roadmap::shortestWorkspacePath( std::vector<double> from, std::vector<double> to ) {
+	Roadmap::vertex_t from_desc = nearestWorkspaceVertex(from);
+	Roadmap::vertex_t to_desc = nearestWorkspaceVertex(to);
+
+	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	return path;
+}
+
 vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex_t> &path) {
 	vector<vector<double> > vector_path;
 	list<Roadmap::Map::vertex_descriptor>::iterator it(path.begin());
@@ -372,32 +384,16 @@ vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex
 	return vector_path;
 }
 
-Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _w )
+Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _x)
 {
-//	if ( _q.size() != dim ) { throw("wrong size state vector"); }
+	if ( _x.size() != dim ) { throw("wrong size state vector"); }
 
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
 
-//	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , 1);
-//	map[search.begin()->first.vertex].type = type;
-//	return search.begin()->first.vertex;
-
-	double min_dist(9999999999999.);
-
-	std::pair<vertex_i, vertex_i> vp = vertices(map);
-	assert(vp.first != vp.second);
-
-	vertex_i best_vertex(vp.first);
-	for (; vp.first != vp.second; ++(vp.first)) {
-		double distance = calculate_distance(map[*(vp.first)].x, _w);
-		if (min_dist > distance) {
-			min_dist = distance;
-			best_vertex = vp.first;
-		}
-	}
-
-	return *best_vertex;
+	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ) , 1);
+	return search.begin()->first.vertex;
 }
+
 
 double Roadmap::calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2) {
 	assert(v1.size() == v2.size());
