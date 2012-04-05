@@ -332,7 +332,7 @@ Motor* Robot::getMotorByName(const QString &motorName)
 }
 
 
-void Robot::appendTreeToModel( KinTreeNode* node )
+/*void Robot::appendTreeToModel( KinTreeNode* node )
 {
 	QVector<KinTreeNode*>::iterator i;
 	if ( node == NULL ) {
@@ -344,7 +344,7 @@ void Robot::appendTreeToModel( KinTreeNode* node )
 		}
 		model->appendObject(node);
 	}
-}
+}*/
 
 void Robot::appendMarkersToModel()
 {

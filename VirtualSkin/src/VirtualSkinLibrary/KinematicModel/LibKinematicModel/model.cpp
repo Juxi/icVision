@@ -7,6 +7,7 @@ using namespace KinematicModel;
 
 Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											col_count(0),
+											reflex_col_count(0),
 											encObstacle(false), 
 											verbose(verb), 
 											modelWindow(NULL), 
@@ -134,8 +135,10 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose )
 		DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
 		
 		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 		DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 		
+	
 		QVector<DT_ResponseClass>::iterator i;
 		for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
 		{
@@ -379,6 +382,7 @@ int Model::computePose()
 	
 	// Prepare to do collision detection
 	col_count = 0;			// reset collision counter
+	reflex_col_count = 0;
 	encObstacle = false;	// this is used to trigger a collision response controller
 	
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
@@ -398,7 +402,11 @@ int Model::computePose()
 	
 	emit computedState(col_count);	
 	
-	return col_count;
+	printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
+	
+	msleep(100);
+	
+	return reflex_col_count;
 }
 
 void Model::computePoseSuffix()
