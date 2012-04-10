@@ -13,6 +13,7 @@ SET ( src_files graspfinder.cpp
 		pathplanner.cpp
 		iCubController.cpp
 		partController.cpp
+		simulator.cpp
 		yarpgraspcontroller.cpp
 )
 

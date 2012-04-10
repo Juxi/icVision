@@ -1,6 +1,8 @@
 #ifndef __YARP_GRASP_CONTROLLER__
 #define __YARP_GRASP_CONTROLLER__
 
+#include "model.h"
+
 #include "pathplanner.h"
 #include "exception.h"
 #include <QApplication>
@@ -18,6 +20,7 @@ int const VOCAB_UPDATE = VOCAB2('u', 'p');
 class YarpGraspController :  public QThread {
 	Q_OBJECT
 	PathPlanner *d_path_planner;
+	KinematicModel::Model *d_model;
 
 	yarp::os::Network d_yarp;
     yarp::os::RpcServer d_port;
@@ -26,7 +29,7 @@ class YarpGraspController :  public QThread {
     std::string d_portname, d_mover_portname;
 
 public:
-	YarpGraspController(int argc, char **argv) : d_path_planner(0)
+	YarpGraspController(int argc, char **argv) : d_path_planner(0), d_model(0)
 	{
 		load_config(argc, argv);
 	}

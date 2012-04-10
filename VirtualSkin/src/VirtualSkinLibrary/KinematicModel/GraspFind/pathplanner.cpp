@@ -49,11 +49,8 @@ vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<dou
 }
 
 vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target) {
-	cout << "lala" << endl;
 	Roadmap::PathList the_path_nodes = d_roadmap.shortestWorkspacePath(source, target);
-	cout << "lalaasdf" << endl;
 	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
-	cout << "return" << endl;
 	return the_path;
 }
 
@@ -116,10 +113,9 @@ void PathPlanner::update_map() {
 
 		simulator.set_motors(q);
 		size_t n_collisions = simulator.computePose();
-
 		d_roadmap.map[*vertex_it].collisions = n_collisions;
-	}
 
+	}
 	//loop all edges
 	pair<edge_i, edge_i> map_edges(edges(d_roadmap.map));
 	edge_i edge_it(map_edges.first);
@@ -150,6 +146,6 @@ void PathPlanner::update_map() {
 
 		//length should be distance of q's
 	}
-
+	cout << "2134" << endl;
 //		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 }

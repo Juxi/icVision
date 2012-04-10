@@ -1,10 +1,10 @@
 #include "yarpgraspcontroller.h"
 
-#include "model.h"
 #include "sphere.h"
 #include "cylinder.h"
 #include "box.h"
 #include "util.h"
+#include "exception.h"
 
 #include <iostream>
 #include <vector>
@@ -60,7 +60,13 @@ void YarpGraspController::load_config(int argc, char **argv) {
     }
 
     bool visualize(true);
-	Model model( visualize, false );
+    if (d_model) {
+    	delete d_model;
+    	d_model = 0;
+    }
+	d_model = new Model( visualize, false );
+	Model &model(*d_model);
+
 	model.start();	/* if we want display lists to be created automatically,
 					   the model must be started prior to appending objects */
 
@@ -76,8 +82,10 @@ void YarpGraspController::load_config(int argc, char **argv) {
 
 void YarpGraspController::load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) {
 	cout << "loading path planner" << endl;
-	if (d_path_planner)
+	if (d_path_planner) {
 		delete d_path_planner;
+		d_path_planner = 0;
+	}
 	d_path_planner = new PathPlanner(model, robot, map_file);
 	cout << "loaded " << endl;
 }
@@ -119,10 +127,12 @@ void YarpGraspController::run () {
 	cout << "Opening port: " << d_portname << endl;
 	if (!d_port.open(d_portname.c_str()))
 		throw StringException("Couldnt open rpc Server");
-	if (!d_mover.open("/blaat"))
+	if (!d_mover.open("/to_mover"))
 		throw StringException("Couldnt open rpc mover Client");
-	if (!d_yarp.connect("/blaat", d_mover_portname.c_str()))
+	if (!d_mover.addOutput(d_mover_portname.c_str()))
 		throw StringException("Couldnt connect the ports");
+//	if (!d_yarp.connect("/blaat", d_mover_portname.c_str()))
+//			throw StringException("Couldnt connect the ports");
 	while (true) {
 		cout << "Waiting for a message..." << endl;
 		Bottle query;
@@ -133,65 +143,73 @@ void YarpGraspController::run () {
 
 		vector<vector<double> > path;
 		vector<double> source, target;
+		try {
+			switch ( command ) {
+				case VOCAB_GO:
+					cout << "GO command, size: " << query.size() << endl;
+					if (!(query.size() >= 2)) {
+						response.addString("FAIL: not enough parameters");
+						break;
+					}
 
-		switch ( command ) {
-			case VOCAB_GO:
-				cout << "GO command, size: " << query.size() << endl;
-				if (!(query.size() >= 2)) {
-					response.addString("FAIL: not enough parameters");
-					break;
-				}
-
-				cout << "getting source" << endl;
-				source = bottle_to_vector(query.get(1));
-				cout << "getting target" << endl;
-				target = bottle_to_vector(query.get(2));
-				cout << "planning path" << endl;
-				print_vector(source);
-				print_vector(target);
-				path = d_path_planner->find_workspace_path(source, target);
-				cout << path.size() << endl;
-				response.addString("path found");
-				follow_path(path);
-				response.addString("OK");
-
-	//                        success           = (query.size() >= 1)  ?  mover.parseTrajBottle(query.get(1), thisTraj)  :  false;
-	//                        thisDistThreshold = (query.size() <= 2)  ?  distThreshold  :  query.get(2).asDouble();
-	//                        thisStepTimeout   = (query.size() <= 3)  ?  stepTimeout  :  query.get(3).asDouble();
-	//                        success = success && mover.go(thisTraj, thisDistThreshold, thisStepTimeout);
-	//                        if (success)
-	//                                response.addString("OK");
-	//                        else
-	//                                response.addString("FAIL");
-				break;
-			case VOCAB_HELP:
-					cout << "HELP command" << endl;
-	//                        response.addVocab(Vocab::encode("many"));
-					response.addString("iCub Path Planner: \n");
-					response.addString("go: ((source) (target)).\n");
-					break;
-			case VOCAB_LOAD:
-				if (query.size() >= 2 && query.get(1).isString()) {
-					std::string map_file = query.get(1).asString().c_str();
-					d_path_planner->load_map(map_file);
+					cout << "getting source" << endl;
+					source = bottle_to_vector(query.get(1));
+					cout << "getting target" << endl;
+					target = bottle_to_vector(query.get(2));
+					cout << "planning path" << endl;
+					print_vector(source);
+					print_vector(target);
+					path = d_path_planner->find_workspace_path(source, target);
+					cout << path.size() << endl;
+					response.addString("path found");
+					follow_path(path);
 					response.addString("OK");
-				} else
-					response.addString("FAIL");
-				break;
-			case VOCAB_CONNECT:
-				if (query.size() >= 2 && query.get(1).isInt()) {
-					int number = query.get(1).asInt();
-					d_path_planner->connect_map(number);
+
+		//                        success           = (query.size() >= 1)  ?  mover.parseTrajBottle(query.get(1), thisTraj)  :  false;
+		//                        thisDistThreshold = (query.size() <= 2)  ?  distThreshold  :  query.get(2).asDouble();
+		//                        thisStepTimeout   = (query.size() <= 3)  ?  stepTimeout  :  query.get(3).asDouble();
+		//                        success = success && mover.go(thisTraj, thisDistThreshold, thisStepTimeout);
+		//                        if (success)
+		//                                response.addString("OK");
+		//                        else
+		//                                response.addString("FAIL");
+					break;
+				case VOCAB_HELP:
+						cout << "HELP command" << endl;
+		//                        response.addVocab(Vocab::encode("many"));
+						response.addString("iCub Path Planner: \n");
+						response.addString("go: ((source) (target)).\n");
+						break;
+				case VOCAB_LOAD:
+					if (query.size() >= 2 && query.get(1).isString()) {
+						std::string map_file = query.get(1).asString().c_str();
+						d_path_planner->load_map(map_file);
+						response.addString("OK");
+					} else
+						response.addString("FAIL");
+					break;
+				case VOCAB_CONNECT:
+					if (query.size() >= 2 && query.get(1).isInt()) {
+						int number = query.get(1).asInt();
+						d_path_planner->connect_map(number);
+						response.addString("OK");
+					} else
+						response.addString("FAIL");
+					break;
+				case VOCAB_UPDATE:
+					cout << "planner ptr: " << d_path_planner << endl;
+					d_path_planner->update_map();
 					response.addString("OK");
-				} else
-					response.addString("FAIL");
-				break;
-			case VOCAB_UPDATE:
-				d_path_planner->update_map();
-				break;
-			default:
+					break;
+				default:
+					response.addString("OK");
 					response.addString("Unknown Command. Type help for more information.");
 					break;
+			}
+		}
+		catch (StringException &error) {
+			response.addString("FAIL");
+			response.addString(error.what());
 		}
 		d_port.reply(response);
 	}
