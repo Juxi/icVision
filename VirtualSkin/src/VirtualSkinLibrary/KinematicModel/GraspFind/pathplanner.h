@@ -1,5 +1,5 @@
-#ifndef _YARP_GRASP_H_
-#define _YARP_GRASP_H_
+#ifndef _PATH_PLANNER_H_
+#define _PATH_PLANNER_H_
 
 #include <vector>
 #include <string>
@@ -12,11 +12,8 @@
 #include "roadmap.h"
 #include "poses_reader.h"
 #include "graspfinder.h"
-#include "iCubController.h"
 
-class YarpGrasp : public QThread {
-	Q_OBJECT
-
+class PathPlanner {
 
 	typedef Roadmap::CGAL_Point Point;
 	typedef Roadmap::vertex_i vertex_i;
@@ -27,7 +24,6 @@ class YarpGrasp : public QThread {
 
 	GraspFinder d_graspfinder;
 	Roadmap d_roadmap;
-	iCubController i_cub;
 
 	poses_map_t d_poses;
 	std::vector<std::string> d_config_names;
@@ -35,7 +31,8 @@ class YarpGrasp : public QThread {
 	std::string d_map_file;
 
 public:
-	YarpGrasp(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) :
+
+	PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) :
 		  d_graspfinder(model, robot),
 		  d_map_file(map_file)
 	{
@@ -43,6 +40,8 @@ public:
 		d_config_names.push_back("CFGSPACE_HEAD");
 		d_config_names.push_back("CFGSPACE_RIGHT_ARM");
 		d_config_names.push_back("CFGSPACE_LEFT_ARM");
+		if (d_map_file.size())
+			load_map(d_map_file);
 	}
 
 	void load_map(std::string filename) {
@@ -59,9 +58,12 @@ public:
 
 	std::vector<std::vector<double> > poses_to_configurations();
 
+	Roadmap &roadmap() {return d_roadmap;}
+
 	void insert_poses();
 
-	std::vector<std::vector<double> > find_path();
+	std::vector<std::vector<double> > find_path(std::vector<double> source, std::vector<double> target);
+	std::vector<std::vector<double> > find_workspace_path(std::vector<double> source, std::vector<double> target);
 
 	size_t n_poses() {
 		return d_poses["WORKSPACE"].size();
@@ -72,34 +74,7 @@ public:
 			d_graspfinder.simulator().add_ball(-.3, -0.1, z);
 	}
 
-	bool waitForMotion()
-	{
-		printf("waiting for motion to finish\n");
-		QTime timer;
-		timer.start();
 
-		bool flag = false;
-		while ( !flag ) {
-			//printf(".");
-			msleep(500);
-			if ( !i_cub.checkMotionDone(&flag))
-				return false;
-			else if ( timer.elapsed() > 30000)
-			{
-				printf("waitForMotion() timed out\n");
-				return false;
-			}
-			else { printf("%.2fs  ",(double)timer.elapsed()/1000.0); }
-		}
-		printf("\n");
-		return true;
-	}
-
-	void run ();
-
-	void stop() {
-		std::cout << "yarp grasp stopping (stopping thread)" << std::endl;
-	}
 };
 
 #endif

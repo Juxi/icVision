@@ -1,5 +1,6 @@
 #include "roadmap.h"
 #include "poses_reader.h"
+#include "exception.h"
 //#include "graphwidget.h"
 //#include "widgetEdge.h"
 //#include "widgetNode.h"
@@ -118,7 +119,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
-	if ( _q.size() != dim ) { printf("wrong size state vector %lu\n",_q.size()); throw("wrong size state vector"); }
+	if ( _q.size() != dim ) { printf("wrong size state vector %lu\n",_q.size()); throw StringException("wrong size state vector"); }
 	
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
@@ -127,10 +128,6 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _
 
 	map[vertex].fitness = fitness;
 	map[vertex].collisions = collisions;
-	//map[vertex].x = _x;
-	//map[vertex].y = _y;
-	
-//	emit appendedNode( vertex, _x, _y );
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -293,7 +290,7 @@ void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 
 Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 {
-	if ( _q.size() != dim ) { throw("wrong size state vector"); }
+	if ( _q.size() != dim ) { throw StringException("wrong size state vector"); }
 	
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
 	
@@ -367,10 +364,13 @@ list<Roadmap::vertex_t>  Roadmap::shortestPath( std::vector<double> from, std::v
 }
 
 list<Roadmap::vertex_t>  Roadmap::shortestWorkspacePath( std::vector<double> from, std::vector<double> to ) {
+	cout << "asdf" << endl;
 	Roadmap::vertex_t from_desc = nearestWorkspaceVertex(from);
+	cout << "asdf" << endl;
 	Roadmap::vertex_t to_desc = nearestWorkspaceVertex(to);
-
+	cout << "asdf" << endl;
 	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	cout << "asdf" << endl;
 	return path;
 }
 
@@ -386,11 +386,11 @@ vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex
 
 Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _x)
 {
-	if ( _x.size() != dim ) { throw("wrong size state vector"); }
+//	if ( _x.size() != dim_x ) { throw StringException("wrong size state vector"); }
 
-	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
+	std::cout << "(" << _x.size() << "," << workspace_tree.size() << " " << tree.size() << std::endl;
 
-	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ) , 1);
+	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ), 1);
 	return search.begin()->first.vertex;
 }
 
@@ -419,7 +419,7 @@ void Roadmap::project2D( std::vector<double> direction )
 //	}
 //	printf("\n");*/
 //
-//	if ( direction.size() != dim ) { throw("wrong size direction vector"); }
+//	if ( direction.size() != dim ) { throw StringException("wrong size direction vector"); }
 //
 //
 //	K::Vector_d i,j,k,r;

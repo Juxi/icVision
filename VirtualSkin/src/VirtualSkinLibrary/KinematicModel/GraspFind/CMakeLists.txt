@@ -10,18 +10,19 @@ SET ( src_files graspfinder.cpp
 		roadmap.cpp 
 		sliderwindow.cpp
 		valueslider.cpp
-		yarpgrasp.cpp
+		pathplanner.cpp
 		iCubController.cpp
 		partController.cpp
+		yarpgraspcontroller.cpp
 )
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h yarpgrasp.h iCubController.h partController.h)
+SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h pathplanner.h iCubController.h partController.h)
 
-SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpgrasp.h iCubController.h )	
+SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpgraspcontroller.h iCubController.h )
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
 ADD_EXECUTABLE ( GraspFind ${hdr_files} ${src_files} main.cpp)
-ADD_EXECUTABLE ( GraspControl ${hdr_files} ${src_files} yarpgraspcontroller.cpp)
+ADD_EXECUTABLE ( GraspControl ${hdr_files} ${src_files} yarpgraspcontroller.h controller_main.cpp)
 ADD_DEPENDENCIES( GraspFind WorldModel )
 ADD_DEPENDENCIES( GraspControl WorldModel )
 
