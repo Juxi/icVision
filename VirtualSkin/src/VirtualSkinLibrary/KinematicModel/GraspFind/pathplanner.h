@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
 //#include <CGAL/Homogeneous_d.h>
 //#include <CGAL/Gmpz.h>
 //#include <CGAL/Delaunay_d.h>
@@ -64,6 +63,8 @@ public:
 
 	std::vector<std::vector<double> > find_path(std::vector<double> source, std::vector<double> target);
 	std::vector<std::vector<double> > find_workspace_path(std::vector<double> source, std::vector<double> target);
+
+	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
 
 	size_t n_poses() {
 		return d_poses["WORKSPACE"].size();

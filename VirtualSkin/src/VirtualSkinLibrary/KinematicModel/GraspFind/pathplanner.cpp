@@ -1,6 +1,7 @@
 #include "pathplanner.h"
 #include "exception.h"
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -47,7 +48,7 @@ vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<dou
 	return the_path;
 }
 
-std::vector<std::vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target) {
+vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target) {
 	cout << "lala" << endl;
 	Roadmap::PathList the_path_nodes = d_roadmap.shortestWorkspacePath(source, target);
 	cout << "lalaasdf" << endl;
@@ -56,6 +57,16 @@ std::vector<std::vector<double> > PathPlanner::find_workspace_path(vector<double
 	return the_path;
 }
 
+vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
+	vector<vector<double> > cut_pose;
+	size_t counter(0);
+	for (size_t i(0); i < d_config_names.size(); ++i) {
+		size_t len(d_poses[d_config_names[i]][0].size());
+		cut_pose.push_back(vector<double>(&pose[counter], &pose[counter + len]));
+		counter += len;
+	}
+	return cut_pose;
+}
 
 //void PathPlanner::update_map() {
 //	//get simulator

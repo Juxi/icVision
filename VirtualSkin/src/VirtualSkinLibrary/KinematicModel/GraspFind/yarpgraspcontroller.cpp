@@ -98,18 +98,31 @@ Bottle YarpGraspController::path_to_bottle(vector<vector<vector<double> > > &pat
 }
 
 void YarpGraspController::follow_path(vector<vector<double> > &path) {
+	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.size(); ++i) {
-
+		vector<double> pose(path[i]);
+		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
+		crazy_path.push_back(cut_pose);
 	}
+	Bottle path_bottle = path_to_bottle(crazy_path);
+	Bottle command;
+	command.addString("go");
+	command.addList() = path_bottle;
+	Bottle response;
+	cout << "writing path" << endl;
+	d_mover.write(command, response);
+	cout << response.toString() << endl;
+	cout << "done" << endl;
 }
 
 void YarpGraspController::run () {
 	cout << "Opening port: " << d_portname << endl;
 	if (!d_port.open(d_portname.c_str()))
 		throw StringException("Couldnt open rpc Server");
-	if (!d_mover.open(d_mover_portname.c_str()))
+	if (!d_mover.open("/blaat"))
 		throw StringException("Couldnt open rpc mover Client");
-
+	if (!d_yarp.connect("/blaat", d_mover_portname.c_str()))
+		throw StringException("Couldnt connect the ports");
 	while (true) {
 		cout << "Waiting for a message..." << endl;
 		Bottle query;
