@@ -155,6 +155,42 @@ public:
 	}
 };
 
+class PointingMarkerConstraint : public Constraint {
+	std::string d_marker, d_target;
+	std::vector<double> d_goal_position;
+	double d_distance;
+	size_t d_axis;
+	int d_dir;
+public:
+	PointingMarkerConstraint(std::string marker, std::string target, double distance, size_t axis, size_t dir = 1)
+	: d_marker(marker),
+	  d_target(target),
+	  d_distance(distance),
+	  d_axis(axis),
+	  d_dir(dir)
+	{
+
+	}
+
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
+		std::vector<double> goal_orientation(9);
+		std::vector<double> mask_orientation(9);
+
+		std::vector<double> position_marker = observation.markerPosition(QString(d_marker.c_str()));
+		std::vector<double> target_pos = observation.markerPosition(QString(d_target.c_str()));
+		std::vector<double> marker_diff(diff(target_pos, position_marker));
+		double marker_distance = pos_error(target_pos, position_marker);
+		double marker_distance_measure = fabs(marker_distance - d_distance);
+
+		copy(marker_diff.begin(), marker_diff.end(), goal_orientation.begin() + 3 * d_axis);
+		for (size_t i(0); i < goal_orientation.size(); ++i)
+			goal_orientation[i] *= d_dir;
+		fill(mask_orientation.begin() + 3 * d_axis, mask_orientation.begin() + 3 * d_axis + 3, 1.);
+		double marker_to_object = observation.orientationMeasure(QString(d_marker.c_str()), goal_orientation, mask_orientation);
+		return 10. * marker_distance_measure + marker_to_object;
+	}
+};
+
 class OppositeConstraint : public Constraint {
 	std::string d_marker1, d_marker2;
 	std::vector<double> d_goal_position;

@@ -46,11 +46,11 @@
             <joint z="1" minPos="-52" maxPos="52" radius="0">
    
         <link z=".0825" radius="0">
-        
         <sphere pz=".07" radius=".11"/><!---->
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
-        
+	  <marker name="head"/>
+
                 <!-- LEFT EYE -->
                 <link x="-.054" y="-.034" radius="0">
                     <motor name="eyeTilt" minPos="-35" maxPos="15"> <joint y="1" minPos="-35" maxPos="15" radius="0">

@@ -85,6 +85,71 @@ public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string marker, size_t nn, double alpha)
 	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_marker(marker)
 	{
+		nullspace_function();
+//		hold_something_function();
+//		hand_left_function();
+	}
+
+	void nullspace_function() {
+		std::cout << "Building constraints" << std::endl;
+		d_marker = "head";
+		d_map_build_constraint = new MapBuildConstraint("head", 3, .02);
+		d_points = &(d_map_build_constraint->points());
+
+//		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .5);
+
+//		d_grasp_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
+//		d_grasp_finder.add_constraint(new PointingMarkerConstraint("right_hand", "left_hand", .1, 1), .1);
+
+		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2176, -0.1642, 0.16900)), 3.);
+		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2176, 0.1642, 0.16900)), 3.);
+
+		//pointing straight
+		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
+		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
+
+		//keeping straight
+		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
+		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
+
+//		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
+
+		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
+
+		d_grasp_finder.add_constraint(d_map_build_constraint);
+
+//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+	}
+
+	void hold_something_function() {
+		std::cout << "Building constraints" << std::endl;
+		d_map_build_constraint = new MapBuildConstraint("left_hand", 3, .04);
+		d_points = &(d_map_build_constraint->points());
+
+		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .4);
+
+		d_grasp_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
+		d_grasp_finder.add_constraint(new PointingMarkerConstraint("right_hand", "left_hand", .1, 1), .1);
+
+//		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+
+//		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
+
+	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
+
+//		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
+
+		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
+
+		d_grasp_finder.add_constraint(d_map_build_constraint);
+
+//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+	}
+
+	void hand_left_function() {
 		std::cout << "Building constraints" << std::endl;
 		d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .04);
 		d_points = &(d_map_build_constraint->points());
@@ -228,7 +293,6 @@ public:
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 
-		bool test(false);
 		bool filter(true);
 
 		if (filter) {
@@ -237,6 +301,7 @@ public:
 		}
 
 		size_t n(0);
+		bool test(true);
 		if (test)
 			while (true) {
 //				size_t n(qrand() % d_configuration_points.size());
