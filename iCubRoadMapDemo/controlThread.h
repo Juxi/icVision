@@ -40,7 +40,8 @@ public:
 	{
 		SingleEdgeExplore,
 		MultiEdgeExplore,
-		GoToObject
+		GoToObject,
+		velocityMove
 	};
 	
 	void setBehavior( BehaviorType b ) { currentBehavior = b; }
@@ -63,7 +64,11 @@ protected:
 	
 	void run();
 	bool singleEdgeMove();
-	bool multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path, double c ); 
+	
+	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
+	Roadmap::CGAL_Point currentPose();
 };
 #endif
 /** @} */

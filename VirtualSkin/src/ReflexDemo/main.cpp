@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 	KinematicModel::Robot* nonYarpRobot = NULL;
 	
 	// according to this
-	bool useYarp = false;
+	bool useYarp = true;
 	
 	
 	int result = 0;

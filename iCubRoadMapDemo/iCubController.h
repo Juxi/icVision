@@ -38,6 +38,8 @@ public:
 	
 	std::vector<double> withinLimits( const std::vector<double>& poss );
 	bool positionMove( std::vector<double> );		//!< Moves the device to a specified position
+	bool velocityMove( std::vector<double> );		//!< Moves the device to a specified position
+	
 	bool setJointMask( std::vector<bool> );
 	void setVelocity( int );
 	double maxDiff(std::vector<double> a,std::vector<double> b);

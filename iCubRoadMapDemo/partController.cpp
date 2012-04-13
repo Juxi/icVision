@@ -134,6 +134,25 @@ void PartController::setVelocity( int v )
 	//	 printf("Set velocity succeeded\n");
 }
 
+bool PartController::velocityMove( const std::vector<double>& v )
+{
+	if ( v.size() != (unsigned int)numJoints || !pos ) { return 0; }
+	
+	//std::vector<double> q = getCurrentPose();
+	
+	double cmd[numJoints];
+	for ( int i=0; i<numJoints; i++ )
+	{
+		if ( jointMask.at(i) )
+			cmd[i] = v.at(i);
+		else
+			cmd[i] = 0.0;
+	}
+	
+	return vel->velocityMove( cmd );
+	//return pos->positionMove( p );
+}
+
 bool PartController::positionMove( const std::vector<double>& poss )
 {
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }

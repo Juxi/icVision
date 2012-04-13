@@ -193,15 +193,16 @@ void ControlThread::run()
 			std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path;
 			path = roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
 			
-			if ( !multipleEdgeMove( path ) )
+			//if ( !positionMoveImpl( path ) )
+			if ( !velocityMoveImpl( path, 0.1 ) )
 			{
-				printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
+				printf("velocityMoveImpl() failed.\n");
 				break;
 			}
 		}
 		
 		/*** REACH FOR A PARTICULAR OBJECT ***/
-		else if ( currentBehavior == GoToObject )
+		else if ( currentBehavior == GoToObject || currentBehavior == velocityMove )
 		{
 			if (worldPort.getOutputCount()==0)
 			{
@@ -237,7 +238,10 @@ void ControlThread::run()
 					
 					// find the node in the map that brings a hand closest to cup1
 					Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
-					multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+					if ( currentBehavior == GoToObject )
+						positionMoveImpl( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+					else if ( currentBehavior == velocityMove )
+						velocityMoveImpl( roadmap->aToB( roadmap->currentVertex, graspingVertex ), 50 );
 				}
 				
 			}
@@ -245,13 +249,13 @@ void ControlThread::run()
 		yarp::os::Time::delay(1);
 
         // Move to a random other vertex in the map
-        // multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
+        // positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
         
 		// Move between vertices 0 and 1
 		//else if ( roadmap->currentVertex == 0 )	
-		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
+		//	positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
 		//else
-		//	multipleEdgeMove( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
+		//	positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 	}
 	
 	//Roadmap::out_edge_i e, e_end;
@@ -297,7 +301,7 @@ bool ControlThread::singleEdgeMove()
 	return true;
 }
 
-bool ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
+bool ControlThread::positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
 {
 	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
 	
@@ -334,6 +338,131 @@ bool ControlThread::multipleEdgeMove( std::list< std::pair< Roadmap::edge_t, Roa
 		}
 	}	
 	return true;
+}
+
+
+std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> ControlThread::funnelAccel( double axialCoeff, Roadmap::edge_t e )
+{
+	Roadmap::CGAL_Point		p = roadmap->getCgalPose(source(e,roadmap->map)),	// last control point
+							q = roadmap->getCgalPose(target(e,roadmap->map)),	// active control point
+							t = currentPose();									// robot configuration
+	Roadmap::CGAL_Vector	qt = t-q,											// configuration w.r.t. active control point
+							qp = p-q,											// active edge vector
+							r;													// shortest segment from t to the line qp
+	double					x,													// axial parameter
+							y;													// radial parameter
+	
+	qp /= sqrt(qp.squared_length());	// make qp a unit vector
+	x   = qp * qt;						// compute the magnitude of the projection of qt onto qp
+	r   = x*qp - qt;					// find the radial direction by doing the projection
+	y   = sqrt(r.squared_length());		// compute the distance to the line defined by qp
+	r  /= r.squared_length();			// make the radial direction also a unit vector
+	
+	//TODO: Replacable vector function?
+	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> a;
+									a.first  = -x/abs(x) * axialCoeff * qp;	// axial acceleration
+									a.second = (y+abs(x)) * r;				// radial acceleration
+	
+	return a;
+}
+
+bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path, double c )
+{
+	// visualize the motion
+	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i;
+	for ( i = path.begin(); i != path.end(); ++i )
+		roadmap->setEdgeColor( i->first, Qt::red );
+	
+	Roadmap::CGAL_Point	 s,		// (last) config space pose at time t-1
+						 p,		// (current) config space pose at time t
+						 q;		// curently active control point
+	Roadmap::CGAL_Vector ei,	// in edge direction
+						 eo,	// out edge direction
+						 err,	// error
+						 v,		// velocity (q-p)
+						 a;		// net acceleration direction
+	
+	// first = axial acceleration, second = radial acceleration
+	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> ai,		// acceleration from in edge
+														 ao;		// acceleration from out edge
+	double												 w,			// weight the contribution from eo ( 0<= w <= 1 )
+														 t = 20;	// control period in ms
+	
+	bool motionInterrupted = false;
+	p = currentPose();
+	for ( i = path.begin(); i != path.end(); ++i )
+	{
+		if ( !motionInterrupted )
+		{
+			// for the 'in' edge
+			ei = roadmap->getCgalEdge( i->first );	// the edge vector (source to target)
+			ei /= sqrt(ei.squared_length());		// now a unit vector
+			
+			
+			printf("\nNEW CONTROL POINT\n");
+			do { // velocity control
+				q = roadmap->getCgalPose(target(i->first,roadmap->map));	// active control point
+				s = p;														// configuration at time t-1
+				p = currentPose();											// configuration at time t
+				v = p-s;													// velocity at time t
+				err = q-p;													// the error vector
+				err /= sqrt(err.squared_length());
+				
+				// compute the acceleration contributed by this edge
+				ai = funnelAccel( 20, i->first );
+				ao = ai;
+				
+				std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator j = i;
+				if ( ++j != path.end() )
+				{
+					// compute the acceleration contributed by the next edge
+					// (note that the axial component is zero such that the attractor remains q)
+					ao = funnelAccel( 0, i->first );
+					
+					// compute the mixing ratio for corner ei -> eo
+					// (note eo contributes more when the corner is not sharp
+					eo = roadmap->getCgalEdge( j->first );
+					eo /= sqrt(eo.squared_length());
+					w = ( ei*eo + 1 ) / 2;
+				} 
+				else w = 0;
+				
+				// compute the total acceleration
+				//printf("AIax: %f, AIrad: %f, AOax: %f, AOrad: %f\n",	sqrt(ai.first.squared_length()), 
+				//														sqrt(ai.second.squared_length()), 
+				//														sqrt(ao.first.squared_length()), 
+				//														sqrt(ao.second.squared_length()) );
+				a = ai.first + ai.second + w * ( ao.first + ao.second );
+				a /= sqrt(a.squared_length());
+				
+				// set velocity
+				v = -c*v + (t)*a;
+				
+				//printf("vDimension: %d\n", v.dimension());
+				//printf("aDimension: %d\n", a.dimension());
+				
+				std::cout << "v: " << v << " (" << sqrt(v.squared_length()) << ")" << std::endl << std::endl;
+				//std::cout << "a: " << a << " (" << sqrt(a.squared_length()) << ")" << std::endl;
+				
+				robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
+				
+				msleep(t);
+				
+			} while ( 
+					 (ai.second-ao.second).squared_length() > 10 ||
+					 (v/sqrt(v.squared_length())) * err < 0.9
+					);
+				
+			
+		}
+	}
+	return motionInterrupted;
+}
+
+Roadmap::CGAL_Point ControlThread::currentPose()
+{
+	std::vector<double> p = robot->getCurrentPose();
+	return Roadmap::CGAL_Point( p.size(), p.begin(), p.end() );
 }
 
 void ControlThread::stop()
