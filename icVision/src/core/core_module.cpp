@@ -98,7 +98,7 @@ bool CoreModule::configure(yarp::os::Searchable& config)
 		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
 		return false;
 	}
-//
+
 //	// trying to connect to the right camera
 //	inputPortName = "/";		serverPortName = "/";
 //	inputPortName += getName(); serverPortName += robotName;

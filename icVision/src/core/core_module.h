@@ -49,6 +49,7 @@ protected:
 	
 	yarp::os::RpcServer rpcPort; 	//!< The port to handle RPC messages (e.g. quit)	
 	
+	// needed for the overlay of all filters
 	BufferedPort<ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
 //	BufferedPort<ImageOf<Pixelbgr> > rightInPort;		//!< The port to handle incoming right eye images
 	
