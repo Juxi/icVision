@@ -1,5 +1,6 @@
-// Copyright: (C) 2011 Juxi Leitner, Simon Harding
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #ifndef _GABOR_IMAGE_H_

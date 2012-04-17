@@ -1,9 +1,8 @@
-/****************************************************************************
-**
-** Copyright (C) Juxi Leitner, 2011
-** Contact: juxi@idsia.ch
-** based on Nokia Corporation (qt-info@nokia.com) QT Example Toolkit
-****************************************************************************/
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
+// based on Nokia Corporation (qt-info@nokia.com) QT Example Toolkit
 
 #ifndef _ICVISION_GUI_WINDOW_H
 #define _ICVISION_GUI_WINDOW_H

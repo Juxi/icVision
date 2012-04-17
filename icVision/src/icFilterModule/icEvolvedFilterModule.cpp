@@ -1,10 +1,12 @@
 // Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include <cstdlib>
 #include <iostream>
-#include <time.h>	
+#include <time.h>
+#include <yarp/os/Stamp.h>
 #include "icEvolvedFilterModule.h"
 
 #include "icImage.h"
@@ -64,23 +66,39 @@ bool EvolvedFilterModule::updateModule()
 	
 	ImageOf<PixelBgr> *left_image = NULL;
 	ImageOf<PixelBgr> *right_image = NULL;	
+	Stamp left_timeStamp, right_timeStamp;
+	
 	
 	if( isReadingFileFromHDD ) {
 		in = cvLoadImage(fileName.c_str());
-	} else {	
-		// read image from the port
-		left_image = leftInPort.read();  // read an image
-		if (left_image == NULL) { 
-			std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
-			return false;
-		}
-		// read image from the right port
-		right_image = rightInPort.read();  // read an image
-		if (right_image == NULL) { 
-			std::cout << "ERROR: Could not read from port '" << rightInPort.getName() << "'!" << std::endl;
-			return false;
-		}
+	} else {
+		int tries = 0;
+		// try to synchronize the image frames
+		do {
+			// read image from the port
+			left_image = leftInPort.read();  // read an image
+			if (left_image == NULL) { 
+				std::cout << "ERROR: Could not read from port '" << leftInPort.getName() << "'!" << std::endl;
+				return false;
+			}
+			leftInPort.getEnvelope(left_timeStamp);
+			
 
+			// read image from the right port
+			right_image = rightInPort.read();  // read an image
+			if (right_image == NULL) { 
+				std::cout << "ERROR: Could not read from port '" << rightInPort.getName() << "'!" << std::endl;
+				return false;
+			}
+			rightInPort.getEnvelope(right_timeStamp);		
+			
+			
+			// prevent infinite loop!
+			if(++tries > MAX_TRIES) {
+				std::cout << "ERROR: Could not get synchronized images in " << MAX_TRIES << " tries!" << std::endl;
+				return false;
+			}
+		} while(! checkTS(left_timeStamp.getTime(), right_timeStamp.getTime()));
 	}
 	
 	bool allFramesDone = true;
@@ -261,6 +279,7 @@ bool EvolvedFilterModule::updateModule()
 			if(outputImageToWrite == NULL)
 				outputImageToWrite = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
 			
+			// TODO FIX this BUG: on Ubuntu that next line seems to fail
 			cvCopy(out8, outputImageToWrite);			
 			ImageOf<PixelBgr>& output = imgOutputPort.prepare();
 			output.wrapIplImage(outputImageToWrite); 
@@ -278,16 +297,47 @@ bool EvolvedFilterModule::updateModule()
 	}while(!allFramesDone);
 
 	// only if we do it on both images
-	if( runOnLeft == runOnRight == true )	{
-		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
-		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+	if( !isReadingFileFromHDD && ( runOnLeft || runOnRight ))	{
+//		if(inDebugMode) {
+			std::cout << "frame1.x: " << (int) ph1.x/scalingFactor << "\ty: " << (int) ph1.y/scalingFactor;
+			std::cout << "\t\tframe2.x: " << (int) ph2.x/scalingFactor << "\ty:" << (int) ph2.y/scalingFactor << std::endl;		
+//		}
 
-		// calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
+		// TODO check this
+		// stream the position (2D in the filters) out
+		Bottle& output = posOutputPort.prepare();
+		output.clear();
+//		output.addString("test");
 		
-		// TODO stream the position out
+		Bottle leftImgPosBottle, rightImgPosBottle;
+
+		if( runOnLeft ) {
+			leftImgPosBottle.addInt((int) (ph1.x/scalingFactor));
+			leftImgPosBottle.addInt((int) (ph1.y/scalingFactor));		
+			if(inDebugMode)
+				leftImgPosBottle.addString("XY in left");	
+		}
+
+		if( runOnRight ) {
+			rightImgPosBottle.addInt((int) (ph2.x/scalingFactor));
+			rightImgPosBottle.addInt((int) (ph2.y/scalingFactor));		
+			if(inDebugMode)
+				rightImgPosBottle.addString("XY in right");	
+		}
 		
+		if( runOnLeft )  output.addList() = leftImgPosBottle;
+		if( runOnRight ) output.addList() = rightImgPosBottle;
+
+		// if( runOnLeft == runOnRight == true)
+		//	calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
 		// use get3DPositions(<#Vector v#>)
 		// and put that out onto the posOutputPort;
+		
+		//		output.addList() = 3Dpos?
+		
+		std::cout << "Bottle: " << output.toString() << std::endl;
+
+		posOutputPort.write();
 		
 //		// workaround!!
 //		
@@ -316,12 +366,12 @@ bool EvolvedFilterModule::updateModule()
 				
 	}
 
-	if( inDebugMode ) {
+//	if( inDebugMode ) {
 //		end = clock();	
 //		double diffms = (end-start)*1000.0/CLOCKS_PER_SEC;
-		// Debug
+//		// Debug
 //		std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
-	}
+//	}
 		
 	// return	(when we read from HDD we only run once!)
 	return !isReadingFileFromHDD;
@@ -699,6 +749,16 @@ void EvolvedFilterModule::setUsedInputs() {
 	
 	//	node99 is output
 //}
+
+// from stereoCalibThread
+bool EvolvedFilterModule::checkTS(double TSLeft, double TSRight, double th) {
+    double diff=fabs(TSLeft-TSRight);
+    if(diff <th)
+        return true;
+    else return false;
+}
+
+
 /*
 * Message handler. Just echo all received messages.
 */

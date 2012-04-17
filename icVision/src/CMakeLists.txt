@@ -15,10 +15,19 @@ IF ( LINK_ACE )
 ENDIF ( LINK_ACE )
 
 ### Add sources
-ADD_SUBDIRECTORY (core)
-ADD_SUBDIRECTORY (icFilterModule)
-# ADD_SUBDIRECTORY (httpModule)
 
+# core and coreGUI
+ADD_SUBDIRECTORY (core)
+
+# core functionality: filter (base functionality), disparity
+ADD_SUBDIRECTORY (icFilterModule)
+ADD_SUBDIRECTORY (icDisparityModule)
+
+# # TBA localisation and saliency, http ...
+
+# FilterModules and evolved Filters
+# TBA evolved parts
+# ADD_SUBDIRECTORY (httpModule)
 #ADD_SUBDIRECTORY (evolvedFilters)
 # ?! ADD_SUBDIRECTORY (redTarget)
 

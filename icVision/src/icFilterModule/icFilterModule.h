@@ -55,7 +55,7 @@ protected:
 	// output ports
 	BufferedPort< ImageOf<PixelBgr> > rawOutputPort;
 	BufferedPort< ImageOf<PixelBgr> > imgOutputPort;
-	BufferedPort<Vector>			  posOutputPort;	
+	BufferedPort< Bottle >			  posOutputPort;	
 	
 	
 	

@@ -1,11 +1,7 @@
-/*
- *  module_thread.h
- *  IDSIAVision
- *
- *  Created by Juxi Leitner on 10/10/11.
- *  Copyright 2011 __MyCompanyName__. All rights reserved.
- *
- */
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #ifndef _MODULE_THREAD_H_
 #define _MODULE_THREAD_H_

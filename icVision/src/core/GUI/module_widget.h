@@ -1,11 +1,7 @@
-/*
- *  dashboard.h
- *  HelloQT
- *
- *  Created by Juxi Leitner on 3/16/11.
- *
- */
-
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #ifndef _ICVISION_GUI_MODULE_WIDGET_H
 #define _ICVISION_GUI_MODULE_WIDGET_H
