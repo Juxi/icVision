@@ -90,7 +90,7 @@ bool EvolvedFilterModule::updateModule()
 				std::cout << "ERROR: Could not read from port '" << rightInPort.getName() << "'!" << std::endl;
 				return false;
 			}
-			rightInPort.getEnvelope(right_timeStamp);		
+			rightInPort.getEnvelope(right_timeStamp);
 			
 			
 			// prevent infinite loop!
