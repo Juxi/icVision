@@ -8,13 +8,7 @@
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 
-#include "redFilterModule.h"
-#include "testModule.h"
-
-#include "../evolvedFilters/blue_detector.h"
-//#include "evolved_filters/glass_detector.h"
-//#include "../evolvedFilters/redblock_detector.h"
-//#include "evolved_filters/teabox.h"
+#include "disparityModule.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
@@ -28,24 +22,13 @@ int main(int argc, char * argv[]) {
 	}
 
 	std::string version = "v0.1";
-	printf("Launching icVision Test Module (%s)...\n", version.c_str());
+	printf("Launching icVision Disparity Module (%s)...\n", version.c_str());
 	
-	//TestModule *module = new TestModule();
-	
-	// TODO remove that, this is just testing
-	//RedBlockDetector *module = new RedBlockDetector();
-	BlueCupDetector *module = new BlueCupDetector();
-	
-//	RedFilterModule* module = new RedFilterModule();		
+	DisparityModule *module = new DisparityModule();
 
-	
+	// Needs both images!
 	module->runOnBothImages();
 
-	// TODO create possibility
-	// module->localiseInThreeD(true);
-	// module->useThisForGazeCtrl(true);
-	
-//	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
 	module->runModule(argc, argv);
 	module->interrupt();

@@ -5,19 +5,16 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "testModule.h"
+#include "disparityModule.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
 
-TestModule::TestModule() {
-	char s[50];
-	double n = yarp::os::Time::now();
-	sprintf(s, "Test%5.2f", n);
-	setName(s);
+DisparityModule::DisparityModule() {
+	setName("DisparityModule");
 }
 
-TestModule::~TestModule() { 
+DisparityModule::~DisparityModule() { 
 }
 
 
@@ -26,9 +23,8 @@ TestModule::~TestModule() {
  * resource finder object. Use it to configure your module.
  * Open port and attach it to message handler.
  */
-bool TestModule::configure(yarp::os::Searchable& config)
+bool DisparityModule::configure(yarp::os::Searchable& config)
 {
-	printf("Test: %s\n", getName().c_str());
 	if( icFilterModule::configure(config) == false) 
 		return false;
 	
@@ -42,7 +38,7 @@ bool TestModule::configure(yarp::os::Searchable& config)
 /*
 * This is our main function. Will be called periodically every getPeriod() seconds.
 */
-bool TestModule::updateModule()
+bool DisparityModule::updateModule()
 {
 	if(! isRunning ) return false;
 
