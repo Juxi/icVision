@@ -52,6 +52,7 @@ public:
 	void addReflexCollision() { numReflexCollisions++; }
 	
 	RobotObservation observe();
+	void evaluateConstraints();
 	
 	virtual void publishState();										// emit signals for observations and reflexes
 	
@@ -107,7 +108,7 @@ public slots:
 	
 	void home(bool verbose = true);		//!< Set the position of the robot to the home position (also calls updatePose())
 	void ignoreAdjacentPairs();							//!< Turn off collision response (via SOLID) between 'adjacent pairs of objects'. See KinTreeNode.ignoreAdjacentPairs().
-	void appendTreeToModel( KinTreeNode* node = NULL );
+	//void appendTreeToModel( KinTreeNode* node = NULL );
 	
 private:
 	Model*					model;				//!< The Model that is doing collision detection on this Robot

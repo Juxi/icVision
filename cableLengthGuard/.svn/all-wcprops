@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/robotcub/!svn/ver/13325/trunk/iCub/contrib/src/misc/cableLengthGuard
+END
+cableLengthGuard.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/robotcub/!svn/ver/12144/trunk/iCub/contrib/src/misc/cableLengthGuard/cableLengthGuard.h
+END
+collectorPort.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/robotcub/!svn/ver/12144/trunk/iCub/contrib/src/misc/cableLengthGuard/collectorPort.h
+END
+main.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/robotcub/!svn/ver/13325/trunk/iCub/contrib/src/misc/cableLengthGuard/main.cpp
+END
+cableLengthGuard.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/robotcub/!svn/ver/13325/trunk/iCub/contrib/src/misc/cableLengthGuard/cableLengthGuard.cpp
+END
+collectorPort.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/robotcub/!svn/ver/10257/trunk/iCub/contrib/src/misc/cableLengthGuard/collectorPort.cpp
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/robotcub/!svn/ver/13315/trunk/iCub/contrib/src/misc/cableLengthGuard/CMakeLists.txt
+END
+config_icub_left_arm.ini
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/robotcub/!svn/ver/10257/trunk/iCub/contrib/src/misc/cableLengthGuard/config_icub_left_arm.ini
+END

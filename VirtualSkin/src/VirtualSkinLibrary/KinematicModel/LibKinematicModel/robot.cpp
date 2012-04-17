@@ -88,13 +88,10 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
     }
 	
 	ignoreAdjacentPairs();
-	//ignoreAdjacentPairs();
 	home();
 	
 	printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
-	
-	//home(verbose);
-	
+
 	isConfigured = true;
 }
 
@@ -227,6 +224,16 @@ void Robot::updatePose()
 	//emit changedState();
 }
 
+
+void Robot::evaluateConstraints()
+{
+	QVector<BodyPart*>::iterator i;
+    for ( i=partList.begin(); i!=partList.end(); ++i ) {
+        if ( !(*i)->evaluateConstraints() )
+			addReflexCollision();
+    }
+}
+
 void Robot::publishState()
 {
 	emit collisions(numCollisions);
@@ -325,7 +332,7 @@ Motor* Robot::getMotorByName(const QString &motorName)
 }
 
 
-void Robot::appendTreeToModel( KinTreeNode* node )
+/*void Robot::appendTreeToModel( KinTreeNode* node )
 {
 	QVector<KinTreeNode*>::iterator i;
 	if ( node == NULL ) {
@@ -337,10 +344,11 @@ void Robot::appendTreeToModel( KinTreeNode* node )
 		}
 		model->appendObject(node);
 	}
-}
+}*/
 
 void Robot::appendMarkersToModel()
 {
+	printf("APPENDING MARKERS TO MODEL\n");
 	QVector<Marker*>::iterator i;
 	for ( i=markers.begin(); i!=markers.end(); ++i ) {
 			model->appendObject( (*i)->getTracerObject() );

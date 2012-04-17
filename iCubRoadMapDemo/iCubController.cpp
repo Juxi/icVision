@@ -72,7 +72,7 @@ int	iCubController::getNumJoints()
 std::vector<double>  iCubController::withinLimits( const std::vector<double>& poss )
 {
 	std::vector<double> torsoPoss, leftPoss, rightPoss, result;
-	if ( !chop( poss, torsoPoss, leftPoss, rightPoss ) ) {
+	if ( !chop( poss, torsoPoss, rightPoss, leftPoss ) ) {
 		printf("chop failed\n");
 		return result;
 	}
@@ -103,6 +103,22 @@ void iCubController::setVelocity( int v )
 	right_arm.setVelocity(v);
 }
 
+bool iCubController::velocityMove( std::vector<double> v )
+{ 
+	if ( !isValid() ) { return 0; }
+	
+	if ( v.size() != getNumJoints() )
+		return 0;
+	
+	std::vector<double> torsoCmd, leftCmd, rightCmd;
+	if ( !chop( v, torsoCmd, rightCmd, leftCmd ) ) { printf("chop failed\n"); return 0; }
+	if ( !torso.velocityMove(torsoCmd) ) { printf("torso move failed\n"); return 0; }
+	if ( !left_arm.velocityMove(leftCmd) ) { printf("left arm move failed\n"); return 0; }
+	if ( !right_arm.velocityMove(rightCmd) ) { printf("right arm move failed\n"); return 0; }
+	
+	return 1;
+}
+
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }
@@ -111,7 +127,7 @@ bool iCubController::positionMove( std::vector<double> poss )
 		return 0;
 	
 	std::vector<double> torsoCmd, leftCmd, rightCmd;
-	if ( !chop( poss, torsoCmd, leftCmd, rightCmd ) ) { printf("chop failed\n"); return 0; }
+	if ( !chop( poss, torsoCmd, rightCmd, leftCmd ) ) { printf("chop failed\n"); return 0; }
 	if ( !torso.positionMove(torsoCmd) ) { printf("torso move failed\n"); return 0; }
 	if ( !left_arm.positionMove(leftCmd) ) { printf("left arm move failed\n"); return 0; }
 	if ( !right_arm.positionMove(rightCmd) ) { printf("right arm move failed\n"); return 0; }
@@ -121,8 +137,9 @@ bool iCubController::positionMove( std::vector<double> poss )
 
 bool iCubController::setJointMask( std::vector<bool> vals )
 {
+	jointMask = vals;
 	std::vector<bool> torsoMask, leftMask, rightMask;
-	if ( !chop( vals, torsoMask, leftMask, rightMask ) ) { return 0; }
+	if ( !chop( vals, torsoMask, rightMask, leftMask ) ) { return 0; }
 	if ( !torso.setJointMask(torsoMask) ) { return 0; }
 	if ( !left_arm.setJointMask(leftMask) ) { return 0; }
 	if ( !right_arm.setJointMask(rightMask) ) { return 0; }
@@ -171,6 +188,27 @@ std::vector<double> iCubController::getRandomPose()
 	
 	emit newSample(q);
 	return q;
+}
+
+
+double iCubController::maxDiff(std::vector<double> a,std::vector<double> b)
+{
+	double result = 0;
+	std::vector<double>::iterator i,j;
+	int count = 0;
+	for ( i=a.begin(), j=b.begin();
+		 i!=a.end() && j!=b.end();
+		 ++i, ++j )
+	{
+		//if ( count < 10 || (count > 18 && count < 26) )
+		if ( jointMask.at(count) )
+		{
+			if ( qAbs(*i-*j) > result )
+				result = qAbs(*i-*j);
+		}
+		count++;
+	}
+	return result;
 }
 
 //TODO This should pass by reference and return a bool

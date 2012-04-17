@@ -57,11 +57,57 @@ public:
 																	 valid motor positions will be set. */
 	bool verify();												//!< Returns 'true' if there are no void pointers in the QVector and 'false' otherwise
 	
-	// TODO: implement: bool setNormPos( const QVector<qreal>& x );
+	void addConstraint( QStringList _a, QStringList _q, qreal _b );
+	bool evaluateConstraints();
 	
 private:
     BodyPart* parentPart;	//!< Requires a parent object for compatibility with the hierarchical ZPHandler
     QString   partName;		//!< A human readable name
+	
+	// linear constraints C*q > d
+	
+	class LinearConstraint {
+	public: 
+		LinearConstraint(){}
+		LinearConstraint( BodyPart *_parent, QStringList _a, QStringList _q, qreal _b) : parent(_parent), b(_b) {
+			QStringList::iterator i,j;
+			for ( i=_a.begin(), j=_q.begin(); i!=_a.end() && j!=_q.end(); ++i, ++j)
+			{
+				a.append( (*i).toDouble() );
+				q.append( (*j).toInt() );
+			}
+		}
+		~LinearConstraint(){}
+		
+		bool evaluate()
+		{
+			if ( !parent || a.begin()==a.end() || q.begin()==q.end() ) {
+				printf("Bad constraint encountered!\n");
+				return false;
+			}
+			
+			double AdotQ = 0.0;
+			QList<qreal>::iterator i;
+			QList<int>::iterator j;
+			for ( i=a.begin(), j=q.begin(); i!=a.end() && j!=q.end(); ++i, ++j) {
+				if ( parent->at(*j) ) {
+					AdotQ += (*i) * parent->at(*j)->encPos();
+					//if ( i!=a.begin() ) printf(" + ");
+					//printf("%f * %f", *i, parent->at(*j)->encPos() );
+				}
+			} 
+			
+			double ans = AdotQ + b;
+			//printf(" + %f = %f >? 0", b, ans);
+			return ans > 0;
+		}
+	private:
+		BodyPart		*parent;
+		QList<qreal>	a;
+		QList<int>		q;
+		qreal			b;
+	};
+	QVector<LinearConstraint> constraints;
 };
 
 #endif
