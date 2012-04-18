@@ -177,8 +177,12 @@ void YarpGraspController::run () {
 				case VOCAB_HELP:
 						cout << "HELP command" << endl;
 		//                        response.addVocab(Vocab::encode("many"));
-						response.addString("iCub Path Planner: \n");
-						response.addString("go: ((source) (target)).\n");
+						response.addString("iCub Path Planner:\n"
+											"plan: go (source) (target)\n"
+											"load map: load map_file \n"
+											"connect map: con {n nearest neighbours}\n"
+											"update edge weights: up\n"
+											"get workspace range: ran");
 						break;
 				case VOCAB_LOAD:
 					if (query.size() >= 2 && query.get(1).isString()) {
@@ -201,6 +205,22 @@ void YarpGraspController::run () {
 					d_path_planner->update_map();
 					response.addString("OK");
 					break;
+				case VOCAB_GET_RANGE:
+				{
+					cout << "Calculating range" << endl;
+					pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap().get_workspace_bounding_box();
+					ostringstream oss("range:");
+					oss << endl;
+					oss << "[";
+					for (size_t i(0); i < bbox.first.size(); ++i)
+						oss << bbox.first[i] << " ";
+					oss << "] [";
+					for (size_t i(0); i < bbox.second.size(); ++i)
+						oss << bbox.second[i] << " ";
+					oss << "]" << endl;
+					response.addString(oss.str().c_str());
+					break;
+				}
 				default:
 					response.addString("OK");
 					response.addString("Unknown Command. Type help for more information.");

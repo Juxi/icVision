@@ -15,6 +15,7 @@ SET ( src_files graspfinder.cpp
 		partController.cpp
 		simulator.cpp
 		yarpgraspcontroller.cpp
+		demothreads.cpp
 )
 
 SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h pathplanner.h iCubController.h partController.h)

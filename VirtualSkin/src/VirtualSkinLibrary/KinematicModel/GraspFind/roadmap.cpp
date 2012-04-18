@@ -281,6 +281,11 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 
 void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 {
+	std::cout << "IS BUILT: " << tree.is_built() << " " << workspace_tree.is_built() << std::endl;
+	tree.build();
+	workspace_tree.build();
+	std::cout << "IS BUILT: " << tree.is_built() << " " << workspace_tree.is_built() << std::endl;
+
 	std::pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{

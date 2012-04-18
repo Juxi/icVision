@@ -202,6 +202,14 @@ public:
 
 	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
 
+	std::pair<std::vector<float>, std::vector<float> > get_workspace_bounding_box() {
+		std::pair<std::vector<float>, std::vector<float> > bbox;
+		for (size_t i(0); i < workspace_tree.bounding_box().dimension(); ++i) {
+			bbox.first.push_back(workspace_tree.bounding_box().min_coord(i));
+			bbox.second.push_back(workspace_tree.bounding_box().max_coord(i));
+		}
+		return bbox;
+	}
 //
 //signals:
 //

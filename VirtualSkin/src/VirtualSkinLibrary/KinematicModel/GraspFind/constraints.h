@@ -187,7 +187,10 @@ public:
 			goal_orientation[i] *= d_dir;
 		fill(mask_orientation.begin() + 3 * d_axis, mask_orientation.begin() + 3 * d_axis + 3, 1.);
 		double marker_to_object = observation.orientationMeasure(QString(d_marker.c_str()), goal_orientation, mask_orientation);
-		return 10. * marker_distance_measure + marker_to_object;
+		if (d_distance)
+			return 10. * marker_distance_measure + marker_to_object;
+		else
+			return marker_to_object;
 	}
 };
 

@@ -56,7 +56,7 @@ int grasp_pose_test2(Model &model, Robot &robot, QApplication &app) {
 
 int map_build_test(Model &model, Robot &robot, QApplication &app) {
 	std::cout << "map build test" << std::endl;
-	MapThread grasp_thread(model, robot, "left_hand", 3, .05);
+	MapThread grasp_thread(model, robot);
 
 	grasp_thread.start();
 

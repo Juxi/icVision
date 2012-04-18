@@ -49,7 +49,7 @@ public:
 	}
 
 	void connect_map(size_t n) {
-		d_roadmap.graphConnect(n, WORKSPACE);
+		d_roadmap.graphConnect(n, CONFIGURATIONSPACE);
 	}
 
 	void update_map();//check for collisions and change weights
