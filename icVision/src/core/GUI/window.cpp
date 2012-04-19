@@ -1,9 +1,8 @@
-/*
- *  window.cpp
- *
- *  Copyright: Juxi Leitner <juxi.leitner@gmail.com>, 2011
- *  based on the helloQt main_window.cpp from Nokia Corporation (Contact: qt-info@nokia.com)
- */
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
+// based on the helloQt main_window.cpp from Nokia Corporation (Contact: qt-info@nokia.com)
 
 #include <QtGui>
 #include "window.h"

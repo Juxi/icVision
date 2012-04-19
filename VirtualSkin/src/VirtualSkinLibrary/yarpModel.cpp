@@ -39,14 +39,18 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	robotResponseClasses.append( newRobotClass );
 	robotBaseClasses.append( newBaseClass );
 	
-	printf("Loading yarp robot.\n");
+	//printf("Loading yarp robot.\n");
 	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
+
+	//printf("Opening yarp robot\n");
 	robot->open( fileName, verbose );
 	
+
 	robots.append( robot );
 	
 	mutex.unlock();
 	
+	// these are normal objects not KintreeNodes.  Appending them locks the model mutex
 	robot->appendMarkersToModel();
 	
 	return robot;

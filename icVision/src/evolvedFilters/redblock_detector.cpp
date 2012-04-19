@@ -1,5 +1,6 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "redblock_detector.h"
@@ -24,7 +25,6 @@ RedBlockDetector::~RedBlockDetector() {
 icImage* RedBlockDetector::runFilter() {	
 	// filter red block things on icub
 
-//	icImage* node987654321 = new icImage(0, ImageWidth, ImageHeight);
 	icImage*  node3 = InputImages[0];
 	icImage* node5 = node3->Normalize();
 	icImage* node6 = node5->gauss(3);

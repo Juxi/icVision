@@ -19,9 +19,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
 	responseTables.append(DT_CreateRespTable());
-	
-	
-	printf("Created World Response table %p\n",responseTables.at(0));
+	//printf("Created World Response table %p\n",responseTables.at(0));
 	
 	// create SOLID Response classes for the world table
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
@@ -33,7 +31,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	// set up the window for OpenGL
 	if ( visualize )
 	{ 
-		printf("CREATING WINDOW AND CONNECTING SIGNALS AND SLOTS\n");
+		//printf("CREATING WINDOW AND CONNECTING SIGNALS AND SLOTS\n");
 		
 		modelWindow = new ModelWindow();
 		
@@ -42,11 +40,11 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		QObject::connect( this, SIGNAL(computedState(int)),					modelWindow->glWidget, SLOT(update(int)) );
 		QObject::connect( modelWindow->glWidget, SIGNAL(renderStuff()),		this, SLOT(renderModel()), Qt::DirectConnection );
 
-		printf("showing model window\n");
+		//printf("showing model window\n");
 		modelWindow->show();
 		 
 	}
-	printf("model constructor returns\n");
+	//printf("model constructor returns\n");
 }
 
 Model::~Model()
@@ -82,7 +80,7 @@ Model::~Model()
 DT_RespTableHandle Model::newRobotTable()
 {
 	DT_RespTableHandle table = DT_CreateRespTable();
-	printf("Created Robot Response table %p\n",table);
+	//printf("Created Robot Response table %p\n",table);
 	DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddDefaultResponse( table, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	responseTables.append( table );
@@ -149,7 +147,7 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose )
 		robotResponseClasses.append( newRobotClass );
 		robotBaseClasses.append( newBaseClass );
 		
-		printf("Loading non-yarp robot.\n");
+		//printf("Loading non-yarp robot.\n");
 		Robot* robot = new Robot( this, newTable, newRobotClass, newBaseClass );
 		robot->open( fileName, verbose );
 	
@@ -164,7 +162,7 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose )
 
 void Model::loadWorld( const QString& fileName, bool verbose )
 {
-	printf("Loading world file...\n");
+	//printf("Loading world file...\n");
     WorldHandler handler( this );
     QXmlSimpleReader reader;
     reader.setContentHandler(&handler);
@@ -220,7 +218,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
-	printf("Appended KinTreeNode to non-yarp world Model!!!\n");
+	//printf("Appended KinTreeNode to non-yarp world Model!!!\n");
 }
 
 void Model::appendObject( CompositeObject* object )
@@ -451,10 +449,12 @@ void Model::updateWorldState()
 
 void Model::run()
 {
-	printf("Starting collision detection thread\n");
+	printf("Starting collision detection thread.\n");
 	while ( keepRunning )
 	{
 		computePose();
+		//if ( robots.at(0) && robots.at(0)->isOpen() ) printf("OPEN\n");
+		//else printf("CLOSED\n");
 		msleep( COLLISION_THREAD_PERIOD );
 	}
 }

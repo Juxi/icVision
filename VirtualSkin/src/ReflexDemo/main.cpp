@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
 	// according to this
 	bool useYarp = false;
 	
-	
 	int result = 0;
 	
 	try
@@ -77,12 +76,13 @@ int main(int argc, char *argv[])
 				sleep(1);
 				
 				// Enable Virtual Skin for the robot model
-				printf( "  ...opening robot filter for '%s'\n", yarpRobot->getName().toStdString().c_str() );
+				printf( "\n\nOPENING PORT FILTERS FOR ROBOT: %s\n", yarpRobot->getName().toStdString().c_str() );
+
 				filter = new ReflexFilter( yarpRobot, visualize );
 				filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 				 
 				// Open the RPC interface to the filter
-				printf("opening filter RPC port\n");
+				printf("\n\nOPENING FILTER RPC PORT\n");
 				filter->openFilterRpcPort("/filterRpc");
 				
 				// THIS CAUSES DEADLOCK PROBLEMS
@@ -109,12 +109,12 @@ int main(int argc, char *argv[])
 			// Load a world model from file
 			if ( worldFile != "" )
 			{
-				printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
+				printf( "\nLOADING WORLD MODEL FROM: %s\n", worldFile.toStdString().c_str() );
 				yarpModel->loadWorld( worldFile, false );
 			}
 			
 			// Open the RPC interface to the world model
-			printf("opening world RPC port\n");
+			printf("\nOPENING WORLD RPC PORT\n");
 			yarpModel->openWorldRpcPort("/world");
 		} 
 		else
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 			
 			if ( worldFile != "" )
 			{
-				printf( "loading world model from: %s\n", worldFile.toStdString().c_str() );
+				printf( "LOADING WORLD MODEL FROM: %s\n", worldFile.toStdString().c_str() );
 				model->loadWorld( worldFile, false );
 			}
 		}

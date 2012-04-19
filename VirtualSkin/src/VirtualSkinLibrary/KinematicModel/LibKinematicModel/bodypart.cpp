@@ -16,11 +16,11 @@ void BodyPart::addConstraint( QStringList _a, QStringList _q, qreal _b )
 {
 	LinearConstraint c(this,_a,_q,_b);
 	constraints.append(c);
-	printf("Added constraint %d to %s\n", constraints.size(), partName.toStdString().c_str());
 }
+
 bool BodyPart::evaluateConstraints()
 {
-	int count = 1;
+	//int count = 1;
 	bool result = true;
 	//printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
 	QVector<LinearConstraint>::iterator i;

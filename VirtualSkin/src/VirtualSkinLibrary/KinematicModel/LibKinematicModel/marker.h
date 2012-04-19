@@ -45,7 +45,7 @@ public:
 			if ( i > 0 ) qc.setAlphaF( 1 - (double)i/(double)num);
 			p->setFreeColor(qc);
 		}
-		printf("created %d balls\n",i);
+		//printf("created %d balls\n",i);
 	}
 	
 	inline void updateTracer()

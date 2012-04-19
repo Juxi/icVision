@@ -1,11 +1,7 @@
-/*
- *  GaborImage.cpp
- *  IDSIAVision
- *
- *  Created by Juxi Leitner on 10/11/11.
- *  Copyright 2011 __MyCompanyName__. All rights reserved.
- *
- */
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "GaborImage.h"
 #include <math.h>

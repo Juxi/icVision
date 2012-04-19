@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DepthOO", "DepthOO\DepthOO.vcproj", "{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		MinSizeRel|Win32 = MinSizeRel|Win32
+		Release|Win32 = Release|Win32
+		RelWithDebInfo|Win32 = RelWithDebInfo|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.Debug|Win32.Build.0 = Debug|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.MinSizeRel|Win32.ActiveCfg = Release|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.MinSizeRel|Win32.Build.0 = Release|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.Release|Win32.ActiveCfg = Release|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.Release|Win32.Build.0 = Release|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
+		{CE9FD3EB-F721-48F7-B87C-F0A4F50F1FEA}.RelWithDebInfo|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
