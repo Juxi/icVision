@@ -289,7 +289,10 @@ void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 	std::pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
-		graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n, tree_mode);
+	  if (tree_mode == CONFIGURATIONSPACE)
+	    graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n, tree_mode);
+	  else
+	    graphConnect( Pose(map[*(vp.first)].x.size(),map[*(vp.first)].x.begin(),map[*(vp.first)].x.end(),*(vp.first)), n, tree_mode);
 	}
 }
 
@@ -298,10 +301,17 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 	if ( _q.size() != dim ) { throw StringException("wrong size state vector"); }
 	
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
-	
-	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , 1);	
-	map[search.begin()->first.vertex].type = type;
-	return search.begin()->first.vertex;
+
+	size_t const check_n(10);
+	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , check_n);
+	K_neighbor_search::iterator it = search.begin();
+	for(; it != search.end(); ++it)
+	  if (map[it->first.vertex].collisions == 0)
+	    break;
+	if (it == search.end())
+	  throw StringException("couldnt find nearest vertex");
+	map[it->first.vertex].type = type;
+	return it->first.vertex;
 }
 
 std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
@@ -395,8 +405,17 @@ Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _x)
 
 	std::cout << "(" << _x.size() << "," << workspace_tree.size() << " " << tree.size() << std::endl;
 
-	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ), 1);
-	return search.begin()->first.vertex;
+
+	size_t const check_n(10);
+	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ), check_n);
+	K_neighbor_search::iterator it = search.begin();
+	for(; it != search.end(); ++it)
+	  if (map[it->first.vertex].collisions == 0)
+	    break;
+	if (it == search.end())
+	  throw StringException("couldnt find nearest workspace vertex");
+
+	return it->first.vertex;
 }
 
 

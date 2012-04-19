@@ -113,6 +113,8 @@ void PathPlanner::update_map() {
 
 		simulator.set_motors(q);
 		size_t n_collisions = simulator.computePose();
+		
+		put(&Roadmap::Vertex::collisions, d_roadmap.map, *vertex_it, n_collisions);
 		d_roadmap.map[*vertex_it].collisions = n_collisions;
 
 	}
@@ -134,7 +136,7 @@ void PathPlanner::update_map() {
 				q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
 			vector<double> q_real = simulator.real_to_normal_motors(q);
 			simulator.set_motors(q_real);
-			n_collisions = max(simulator.computePose(), n_collisions);
+			n_collisions += max(simulator.computePose(), n_collisions);
 		}
 
 		double length = get(&Roadmap::Edge::length, d_roadmap.map, *edge_it);
@@ -146,6 +148,5 @@ void PathPlanner::update_map() {
 
 		//length should be distance of q's
 	}
-	cout << "2134" << endl;
 //		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 }
