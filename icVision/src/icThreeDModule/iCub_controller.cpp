@@ -100,7 +100,7 @@ void iCubController::initializeRobot() {
  */
 void iCubController::initHead() {
     if(!head->initialized) {	
-		std::cout << " initialising head..." << std::endl;
+		std::cout << "initialising head..." << std::endl;
 		
 //        head->port = BufferedPort<Bottle>();
 		head->port = new Port();
