@@ -43,6 +43,10 @@ private:
 	bool readEncoders();
 	bool checkTS(double TSLeft, double TSRight, double th=0.08);	
 	
+	// HACK 
+	void calcuatePositionUsingSimonsMethod(double *,double *,double *, int, int, int, int, Stamp);
+	
+	void getEncoderPositions(double *headjnt_pos, double *torsojnt_pos, Stamp stamp);
 	
 	DataProcessor *processor;
 	
@@ -52,30 +56,13 @@ public:
 
 	virtual bool updateModule();
 	bool configure		(yarp::os::Searchable& config);
-	Bottle& calculatePosition(Bottle &b);
+	Bottle& calculatePosition(Bottle &b, Stamp &stamp);
 	
 };
 
 class DataProcessor : public PortReader {
 	
-	virtual bool read(ConnectionReader& connection) {
-		Bottle in, out;
-		bool ok = in.read(connection);
-		if (!ok) return false;
-		
-		// process data "in", prepare "out"
-		out.append(in);
-		out.addList() = module->calculatePosition(in);
-		
-		std::cout << "DataProcessor: " << in.toString() << std::endl;
-		
-		// reply
-		ConnectionWriter *returnToSender = connection.getWriter();
-		if (returnToSender!=NULL) {
-			out.write(*returnToSender);
-		}
-		return true;
-	}
+	virtual bool read(ConnectionReader& connection);
 	
 	ThreeDModule *module;
 
