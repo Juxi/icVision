@@ -15,6 +15,8 @@ using namespace yarp::sig;
 class EvolvedFilterModule : public icFilterModule {
 protected:
 	
+	static const int MAX_TRIES = 5;
+	
 	// the pointers to the images
 	IplImage* gray;
 	IplImage* red;
@@ -37,6 +39,8 @@ protected:
 	
 	// image memory containers for the buffered port 
 	IplImage *rawImageToWrite, *outputImageToWrite;	
+	
+    bool checkTS(double TSLeft, double TSRight, double th=0.08);
 	
 public:
 	EvolvedFilterModule();

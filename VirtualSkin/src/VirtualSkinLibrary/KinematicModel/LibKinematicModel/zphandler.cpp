@@ -247,9 +247,14 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 
 		// create the marker, attach it to the node, and make it known to the robot
 		Marker* marker = new Marker(node, name);
+<<<<<<< HEAD
 
 		marker->createTracer( model->GHOST(), 20, 0.008, Qt::red);
 		
+=======
+		marker->createTracer( model->GHOST(), 30, 0.008, Qt::red);
+		//model->appendObject( marker->getTracerObject() ); // this makes deadlock!!!
+>>>>>>> d215838db3debdc474fe8ee087b74dad0152afde
 		robot->markers.push_back(marker);
 	}
 

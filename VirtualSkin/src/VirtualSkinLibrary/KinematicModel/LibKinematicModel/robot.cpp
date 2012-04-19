@@ -68,13 +68,15 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
     reader.setErrorHandler(&handler);
     QFile file(fileName);
 	
+	//printf("set up xml parser\n");
+	
     if ( !file.open(QFile::ReadOnly | QFile::Text) )
 	{
 		QString errStr = "failed to open file '";
 		errStr.append(fileName);
 		errStr.append("'");
 		throw KinematicModelException(errStr);
-    }
+    } //else printf("text file found\n");
 	
     QXmlInputSource xmlInputSource( &file );
     if ( !reader.parse( xmlInputSource ) )
@@ -85,12 +87,18 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 		errStr.append(fileName);
 		errStr.append("'");
 		throw KinematicModelException(errStr);
-    }
+    } //else printf("text file parsed\n");
+	
+	//printf("Parsed the robot file\n");
 	
 	ignoreAdjacentPairs();
 	home();
 	
+<<<<<<< HEAD
 	printf("Created Robot: %s with %d primitives\n",getName().toStdString().c_str(), getNumPrimitives());
+=======
+	printf("Created Robot: %s (%d primitives)\n",getName().toStdString().c_str(), getNumPrimitives());
+>>>>>>> d215838db3debdc474fe8ee087b74dad0152afde
 
 	isConfigured = true;
 }
@@ -348,7 +356,11 @@ Motor* Robot::getMotorByName(const QString &motorName)
 
 void Robot::appendMarkersToModel()
 {
+<<<<<<< HEAD
 	printf("APPENDING MARKERS TO MODEL\n");
+=======
+	//printf("APPENDING MARKERS TO MODEL\n");
+>>>>>>> d215838db3debdc474fe8ee087b74dad0152afde
 	QVector<Marker*>::iterator i;
 	for ( i=markers.begin(); i!=markers.end(); ++i ) {
 			model->appendObject( (*i)->getTracerObject() );

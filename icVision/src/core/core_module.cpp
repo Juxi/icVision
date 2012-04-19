@@ -1,5 +1,6 @@
 // Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include <cstdlib>
@@ -92,12 +93,12 @@ bool CoreModule::configure(yarp::os::Searchable& config)
 		cout << getName() << ": Unable to open port " << inputPortName << endl;
 		return false;
 	}
-	printf("Trying to connect to %s\n", inputPortName.c_str());
+	printf("Trying to connect to %s\n", serverPortName.c_str());
 	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
 		cout << getName() << ": Unable to connect to port " << serverPortName.c_str() << " with " << inputPortName.c_str() << endl;
 		return false;
 	}
-//
+
 //	// trying to connect to the right camera
 //	inputPortName = "/";		serverPortName = "/";
 //	inputPortName += getName(); serverPortName += robotName;

@@ -1,5 +1,6 @@
 // Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #ifndef _ICVISION_CORE_MODULE_H_
@@ -48,6 +49,7 @@ protected:
 	
 	yarp::os::RpcServer rpcPort; 	//!< The port to handle RPC messages (e.g. quit)	
 	
+	// needed for the overlay of all filters
 	BufferedPort<ImageOf<PixelBgr> > leftInPort;		//!< The port to handle incoming left eye images
 //	BufferedPort<ImageOf<Pixelbgr> > rightInPort;		//!< The port to handle incoming right eye images
 	

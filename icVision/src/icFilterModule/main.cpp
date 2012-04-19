@@ -1,5 +1,6 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include <cstdio>
@@ -10,10 +11,9 @@
 #include "redFilterModule.h"
 #include "testModule.h"
 
-//#include "evolved_filter_module.h"
 #include "../evolvedFilters/blue_detector.h"
 //#include "evolved_filters/glass_detector.h"
-#include "../evolvedFilters/redblock_detector.h"
+//#include "../evolvedFilters/redblock_detector.h"
 //#include "evolved_filters/teabox.h"
 
 using namespace yarp::os;

@@ -1,5 +1,6 @@
 // Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include <cstdlib>
@@ -10,7 +11,6 @@ using namespace yarp::os;
 using namespace yarp::sig;
 
 TestModule::TestModule() {
-	//moduleName = "IM-CLeVeR::Vision::Reaching";
 	char s[50];
 	double n = yarp::os::Time::now();
 	sprintf(s, "Test%5.2f", n);
@@ -48,7 +48,7 @@ bool TestModule::updateModule()
 
 	if(! isReadingFileFromHDD) return false;
 	
-	// printDebug(fileName.c_str());
+	printDebug(fileName.c_str());
 	
 	IplImage* rgb = cvLoadImage(fileName.c_str());
 	ImageWidth = rgb->width;

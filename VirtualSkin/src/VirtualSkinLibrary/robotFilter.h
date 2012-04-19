@@ -97,9 +97,7 @@ public:
 			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
 			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
 			
-			
-			
-			printf("Getting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
+			printf("\nGetting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
 			printf("----------------------------------------------------------------\n");
 			
 			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
@@ -147,7 +145,6 @@ public:
 			printf( "\nConnecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			printf("----------------------------------------------------------------\n");
 			
-			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
 				cbFilters.append(p_cbf);
@@ -166,7 +163,6 @@ public:
 				responseObservers.append(p_ro);
 				
 				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),			robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
@@ -178,7 +174,7 @@ public:
 				close();
 				throw( VirtualSkinException(errStr) );
 			}
-			printf("\n");
+			//printf("\n");
 		} 
 		
 		extraOpenStuff();
@@ -257,6 +253,7 @@ private:
 	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
 	
 	friend class StateObserver;
+	friend class CallObserver;
 	
 };
 #endif
