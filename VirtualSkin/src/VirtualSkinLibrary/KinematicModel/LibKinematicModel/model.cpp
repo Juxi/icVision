@@ -218,11 +218,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
-<<<<<<< HEAD
-	printf("Appended KinTreeNode to non-yarp world Model!!!\n");
-=======
 	//printf("Appended KinTreeNode to non-yarp world Model!!!\n");
->>>>>>> d215838db3debdc474fe8ee087b74dad0152afde
 }
 
 void Model::appendObject( CompositeObject* object )
@@ -404,11 +400,7 @@ int Model::computePose()
 	
 	emit computedState(col_count);	
 	
-<<<<<<< HEAD
-	printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
-=======
 	//printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
->>>>>>> d215838db3debdc474fe8ee087b74dad0152afde
 	
 	msleep(100);
 	
