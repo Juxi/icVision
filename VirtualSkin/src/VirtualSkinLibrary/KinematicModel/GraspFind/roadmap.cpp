@@ -116,6 +116,29 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 	}
 }*/
 
+std::vector<double>  Roadmap::scale_q( std::vector<double> q) {
+	assert(q.size() == scale_vector.size());
+	std::vector<double> q_scaled(q);
+	std::vector<double>::iterator it1(q_scaled.begin()), it1_end(q_scaled.end()), it2(scale_vector.begin());
+
+	for (; it1 != it1_end; ++it1, ++it2)
+		*it1 *= *it2;
+	return q_scaled;
+}
+
+std::vector<double>  Roadmap::unscale_q( std::vector<double> q_scaled) {
+	std::vector<double> q(q_scaled);
+	std::vector<double>::iterator it1(q.begin()), it1_end(q.end()), it2(scale_vector.begin());
+
+	for (; it1 != it1_end; ++it1, ++it2) {
+		if (*it2 == 0)
+			continue;
+		*it1 /= *it2;
+	}
+	return q;
+}
+
+
 Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
 {
 	//printf("called insert\n");
@@ -136,6 +159,9 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _
 	Pose p_workspace( _x.size(), _x.begin(), _x.end(), vertex );
 	workspace_tree.insert(p_workspace);
 
+	std::vector<double> q_scaled = scale_q(_q);
+	Pose p_scaled( q_scaled.size(), q_scaled.begin(), q_scaled.end(), vertex );
+	scaled_tree.insert(p_scaled);
 	// connect it to its n nearest neighbors
 	//graphConnect( p, n );
 	
@@ -250,12 +276,29 @@ void Roadmap::removeAllEdges()
 	}
 }
 
+
+Roadmap::Tree &Roadmap::get_tree(TreeMode tree_mode){
+	switch(tree_mode) {
+	case WORKSPACE:
+		return workspace_tree;
+	case CONFIGURATIONSPACE:
+		return tree;
+	case SCALEDCONFIGURATIONSPACE:
+		return scaled_tree;
+	}
+	throw StringException("Tree not found");
+}
+
 void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 {	
-	Tree &the_tree = (tree_mode == CONFIGURATIONSPACE) ? tree : workspace_tree;
+	Tree &the_tree = get_tree(tree_mode);
 	K_neighbor_search search(the_tree, p , n+1);
 	for(K_neighbor_search::iterator it = search.begin(); it != search.end(); ++it)
 	{
+	  //std::cout << sqrt(it->second) << " ";
+	  //for (size_t i(0); i < map[it->first.vertex].x.size(); ++i)
+	  //  std::cout << map[it->first.vertex].x[i] << " ";
+	  //std::cout << std::endl;
 		size_t counter(0);
 		if ( it->second != 0)
 		{
@@ -281,18 +324,25 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 
 void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 {
-	std::cout << "IS BUILT: " << tree.is_built() << " " << workspace_tree.is_built() << std::endl;
 	tree.build();
 	workspace_tree.build();
-	std::cout << "IS BUILT: " << tree.is_built() << " " << workspace_tree.is_built() << std::endl;
+	scaled_tree.build();
 
 	std::pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
 	{
-	  if (tree_mode == CONFIGURATIONSPACE)
+	  switch(tree_mode) {
+	  case CONFIGURATIONSPACE:
 	    graphConnect( Pose(map[*(vp.first)].q.size(),map[*(vp.first)].q.begin(),map[*(vp.first)].q.end(),*(vp.first)), n, tree_mode);
-	  else
+	    break;
+	  case WORKSPACE:
 	    graphConnect( Pose(map[*(vp.first)].x.size(),map[*(vp.first)].x.begin(),map[*(vp.first)].x.end(),*(vp.first)), n, tree_mode);
+	    break;
+	  case SCALEDCONFIGURATIONSPACE:
+		std::vector<double> scaled_q = scale_q(map[*(vp.first)].q);
+	    graphConnect( Pose(scaled_q.size(), scaled_q.begin(), scaled_q.end(),*(vp.first)), n, tree_mode);
+	    break;
+	  }
 	}
 }
 

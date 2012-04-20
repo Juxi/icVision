@@ -27,6 +27,18 @@ vector<vector<double> > PathPlanner::poses_to_configurations() {
 	return configurations;
 }
 
+vector<double> PathPlanner::get_scale_vector() {
+	size_t map_size(n_poses());
+
+	vector<double> scale_vector;
+	for (size_t n(0); n < d_config_names.size(); ++n) {
+		//size_t part_size = d_poses[d_config_names[n]][i].size();
+		copy(d_scale_map[d_config_names[n]].begin(), d_scale_map[d_config_names[n]].end(), back_inserter(scale_vector));
+	}
+
+	return scale_vector;
+}
+
 void PathPlanner::insert_poses() {
 	vector<vector<double> > configurations = poses_to_configurations();
 	cout << configurations.size() << endl;

@@ -68,7 +68,7 @@ void YarpGraspController::load_config(int argc, char **argv) {
 	Model &model(*d_model);
 
 	model.start();	/* if we want display lists to be created automatically,
-					   the model must be started prior to appending objects */
+					  // the model must be started prior to appending objects */
 
 	Robot &robot = *model.loadRobot(QString(robot_file.c_str()), false);
     d_portname = "/" + robot.getName().toStdString() + "/" + d_portname; // the name of the RPC server
@@ -77,6 +77,7 @@ void YarpGraspController::load_config(int argc, char **argv) {
 	model.loadWorld( QString(world_file.c_str()), false );
 
     load_path_planner(model, robot, map_file);
+    model.stop();
 
 }
 

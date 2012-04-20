@@ -34,7 +34,8 @@ class QtGraphEdge;
 
 enum TreeMode {
 	WORKSPACE = 0,
-	CONFIGURATIONSPACE = 1
+	CONFIGURATIONSPACE = 1,
+	SCALEDCONFIGURATIONSPACE = 2
 };
 
 class Roadmap
@@ -127,11 +128,12 @@ public:
 	
 	unsigned int			dim;
 	Map						map;
-	Tree					tree, workspace_tree;
+	Tree					tree, workspace_tree, scaled_tree;
 
 	Map::vertex_descriptor	currentVertex;
 	Map::edge_descriptor	currentEdge;
 	
+	std::vector<double> scale_vector;
 protected:
 	void run();
 	
@@ -210,6 +212,11 @@ public:
 		}
 		return bbox;
 	}
+
+	std::vector<double>  scale_q( std::vector<double> q);
+	std::vector<double>  unscale_q( std::vector<double> scaled_q);
+	Tree &get_tree(TreeMode tree_mode);
+
 //
 //signals:
 //
