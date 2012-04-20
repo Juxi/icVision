@@ -26,6 +26,7 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
 	
 	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	
 	QVector<DT_ResponseClass>::iterator i;
@@ -38,20 +39,16 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	robotResponseClasses.append( newRobotClass );
 	robotBaseClasses.append( newBaseClass );
 	
-	printf("Loading yarp robot.\n");
+	//printf("Loading yarp robot.\n");
 	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
+
 	robot->open( fileName, verbose );
-	
-	//robot->ignoreAdjacentPairs();
-	//NOTE: the order here is important... first append, then ignore
-	//robot->appendTreeToModel();
-	//robot->ignoreAdjacentPairs();
-	//robot->home();
 	
 	robots.append( robot );
 	
 	mutex.unlock();
 	
+	// these are normal objects not KintreeNodes.  Appending them locks the model mutex
 	robot->appendMarkersToModel();
 	
 	return robot;

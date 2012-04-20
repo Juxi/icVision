@@ -61,7 +61,25 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
             if ( !attributes.value("name").isEmpty() ) bodyPart->setName( attributes.value("name") );
         }
     }
-
+	
+	/******************************************************************
+	 *** HANDLE CONSTRAINTS ***
+	 ******************************************************************/
+	else if ( QString::compare(qName,"constraint",caseSensitivity) == 0 ) {
+		if ( !bodyPart ) printf("WARNING: ignoring <constraint/> outside of <bodypart></>\n");
+		else {
+			bool ok;
+			double b = attributes.value("b").toDouble(&ok);
+			QStringList a = attributes.value("a").split(" ",QString::SkipEmptyParts);
+			QStringList q = attributes.value("q").split(" ",QString::SkipEmptyParts);
+			
+			if ( ok && a.size() > 0 && a.size() == q.size() )
+			{
+				bodyPart->addConstraint( a, q, b );
+			}
+			else { printf("WARNING: skipping badly formed <constraint/>\n"); }
+		}
+	}
 	/***********************************************************************************
 	*** HANDLE MOTORS ... i.e. the interface through which the robot should be moved ***
 	***********************************************************************************/
@@ -229,8 +247,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 
 		// create the marker, attach it to the node, and make it known to the robot
 		Marker* marker = new Marker(node, name);
-		marker->createTracer( model->GHOST(), 30, 0.008, Qt::red);
-		model->appendObject( marker->getTracerObject() );
+		marker->createTracer( model->GHOST(), 20, 0.008, Qt::red);
 		robot->markers.push_back(marker);
 	}
 

@@ -18,6 +18,14 @@ Roadmap::~Roadmap()
 {
 }
 
+/*
+std::vector<double> makeStd( CGAL_Point ) {
+	
+}
+std::vector<double> makeStd( CGAL_Vector ) {
+	
+}*/
+
 void Roadmap::setDimensionality( int d )
 {
 	// dimensionality can only be set when the map is empty
@@ -259,8 +267,8 @@ void Roadmap::readMapPoses(std::string filename) {
 		cout << i << endl;
 		vector<double> combined_pose;
 		copy(poses_torso[i].begin(), poses_torso[i].end(), back_inserter(combined_pose));
-		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 		copy(poses_right[i].begin(), poses_right[i].end(), back_inserter(combined_pose));
+		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 
 		insert(work_space[i][0], work_space[i][1], combined_pose, work_space[i]);
 	}
@@ -460,6 +468,7 @@ void Roadmap::project2D( std::vector<double> direction )
 		r = K::Vector_d(	map[*(vp.first)].q.size(), 
 							map[*(vp.first)].q.begin(),
 							map[*(vp.first)].q.end() );
+		//r = getCgalPose(*(vp.first));
 		
 		//std::cout << "r: " << r << std::endl;
 		

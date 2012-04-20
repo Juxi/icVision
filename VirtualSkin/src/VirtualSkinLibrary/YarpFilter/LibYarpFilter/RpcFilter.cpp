@@ -37,7 +37,7 @@ bool RpcFilter::open(ConstString targetPortName, ConstString clientsidePortName)
 			{
 				clientsidePort.setReader(impl);
 				isOpen = true;
-				printf("Success!!\n\n");
+				printf("Success!!\n");
 				return true;
 			}
 			else
