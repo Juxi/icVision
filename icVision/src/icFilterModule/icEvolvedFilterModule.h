@@ -42,6 +42,7 @@ protected:
 	
     bool checkTS(double TSLeft, double TSRight, double th=0.08);
 	
+
 public:
 	EvolvedFilterModule();
 	virtual ~EvolvedFilterModule();
