@@ -295,38 +295,57 @@ bool EvolvedFilterModule::updateModule()
 		InputImages.clear();
 		
 	}while(!allFramesDone);
-
+	
+	
 	// only if we do it on both images
-	if( !isReadingFileFromHDD && ( runOnLeft || runOnRight ))	{
+	for(; !isReadingFileFromHDD && ( runOnLeft || runOnRight ); )	{
 //		if(inDebugMode) {
 			std::cout << "frame1.x: " << (int) ph1.x/scalingFactor << "\ty: " << (int) ph1.y/scalingFactor;
 			std::cout << "\t\tframe2.x: " << (int) ph2.x/scalingFactor << "\ty:" << (int) ph2.y/scalingFactor << std::endl;		
 //		}
+		
+		if((int) ph1.x/scalingFactor < 0 || (int) ph1.x/scalingFactor > 640) break;
+		if((int) ph2.x/scalingFactor < 0 || (int) ph2.x/scalingFactor > 640) break;		
+		if((int) ph1.y/scalingFactor < 0 || (int) ph1.y/scalingFactor > 480) break;
+		if((int) ph2.y/scalingFactor < 0 || (int) ph2.y/scalingFactor > 480) break;		
 
 		// TODO check this
 		// stream the position (2D in the filters) out
 		Bottle& output = posOutputPort.prepare();
 		output.clear();
-//		output.addString("test");
-		
-		Bottle leftImgPosBottle, rightImgPosBottle;
 
-		if( runOnLeft ) {
-			leftImgPosBottle.addInt((int) (ph1.x/scalingFactor));
-			leftImgPosBottle.addInt((int) (ph1.y/scalingFactor));		
-			if(inDebugMode)
-				leftImgPosBottle.addString("XY in left");	
-		}
-
-		if( runOnRight ) {
-			rightImgPosBottle.addInt((int) (ph2.x/scalingFactor));
-			rightImgPosBottle.addInt((int) (ph2.y/scalingFactor));		
-			if(inDebugMode)
-				rightImgPosBottle.addString("XY in right");	
-		}
+		bool outputSingleBottle = true;
 		
-		if( runOnLeft )  output.addList() = leftImgPosBottle;
-		if( runOnRight ) output.addList() = rightImgPosBottle;
+		if(outputSingleBottle) {
+			if(runOnLeft == runOnRight == true) {
+				// for the iKinGaze e.g.
+				output.addInt((int) (ph1.x/scalingFactor));
+				output.addInt((int) (ph1.y/scalingFactor));		
+				output.addInt((int) (ph2.x/scalingFactor));	
+				output.addInt((int) (ph2.y/scalingFactor));					
+			}
+			
+		} else {
+			Bottle leftImgPosBottle, rightImgPosBottle;
+
+			if( runOnLeft ) {
+				leftImgPosBottle.addInt((int) (ph1.x/scalingFactor));
+				leftImgPosBottle.addInt((int) (ph1.y/scalingFactor));		
+				if(inDebugMode)
+					leftImgPosBottle.addString("XY in left");	
+			}
+
+			if( runOnRight ) {
+				rightImgPosBottle.addInt((int) (ph2.x/scalingFactor));
+				rightImgPosBottle.addInt((int) (ph2.y/scalingFactor));		
+				if(inDebugMode)
+					rightImgPosBottle.addString("XY in right");	
+			}
+			
+			if( runOnLeft )  output.addList() = leftImgPosBottle;
+			if( runOnRight ) output.addList() = rightImgPosBottle;
+			
+		}
 
 		// if( runOnLeft == runOnRight == true)
 		//	calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
@@ -338,6 +357,8 @@ bool EvolvedFilterModule::updateModule()
 		std::cout << "Bottle: " << output.toString() << std::endl;
 
 		posOutputPort.write();
+		
+		
 		
 //		// workaround!!
 //		
@@ -363,7 +384,54 @@ bool EvolvedFilterModule::updateModule()
 //		}
 ////		std::cout << "ending ikinport " << std::endl;				
 		
-				
+		
+		// TODO
+		// should be done somewhere else
+
+//		bool icFilterModule::send3DPositionToGazeCtrl(double x, double y, double z) {
+			yarp::os::Bottle cmd, response;
+//			
+//			if(! sendToGazeCtrl) return false;
+//			if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+//				std::cout << "NOT setting gaze ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+//				
+//				cmd.clear();
+//				cmd.addString("set");
+//				cmd.addString("track");		
+//				cmd.addInt(0);
+//				return false;
+//			}
+			
+//			// set information about the object from rpc
+//			cmd.clear();
+//			cmd.addString("set");
+//			cmd.addString("track");
+//			cmd.addInt(1);	
+//			bool r = gazeportRPC.write(cmd, response);
+//			if(inDebugMode) {
+//				std::cout << "gaze response: " << response.toString() << std::endl;	
+//				std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+//			}
+			
+			cmd.clear();
+//			cmd.addDouble(x);
+//			cmd.addDouble(y);
+//			cmd.addDouble(z);
+			cmd.addInt((int) (ph1.x/scalingFactor));
+			cmd.addInt((int) (ph1.y/scalingFactor));		
+			cmd.addInt((int) (ph2.x/scalingFactor));	
+			cmd.addInt((int) (ph2.y/scalingFactor));					
+		
+			std::cout << "gazePos bottle sent: " << cmd.toString() << std::endl;	
+		
+			bool b = gazeportPos.write(cmd);
+//			if(inDebugMode)
+				std::cout << "gazePos response: " << b << std::endl;	
+			
+//		}	
+		
+		
+		break;		
 	}
 
 //	if( inDebugMode ) {

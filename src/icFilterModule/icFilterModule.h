@@ -59,11 +59,16 @@ protected:
 	
 	
 	
+	//	HACK 	HACK
+	yarp::os::Port gazeportPos;
+
+	
+	
 	// Variables	
 	bool	isRunning;
 	bool	inDebugMode;
 
-	bool	shallNotifyingGazeCtrl;	
+	bool	shallNotifyGazeCtrl;	
 	bool	shallLocaliseInThreeD;
 	
 	bool	streamRawFilterOutput;
@@ -111,10 +116,10 @@ public:
 	// defining 3d localisation connection
 	void localiseInThreeD(bool b) { 	shallLocaliseInThreeD = b;  }
 
-	// heritage (change, maybe?)
-	void useThisForGazeCtrl(bool b) {
-		shallNotifyingGazeCtrl = b;
-	}
+	// heritage, delete and move to icVisionCore (change, maybe?)
+//	void useThisForGazeCtrl(bool b) {
+//		shallNotifyGazeCtrl = b;
+//	}
 	
 	
 };

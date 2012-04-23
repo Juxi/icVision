@@ -22,7 +22,7 @@ icFilterModule::icFilterModule() {
 	isRunning = true;
 	
 	shallLocaliseInThreeD  = false;
-	shallNotifyingGazeCtrl = false;
+	shallNotifyGazeCtrl = false;
 }
 
 
@@ -34,7 +34,7 @@ void icFilterModule::printDebug(const char* str)
 
 double icFilterModule::getPeriod()
 {
-	return 0.1;	// we need something higher than 0.0 else it is too fast?!
+	return 2;	// we need something higher than 0.0 else it is too fast?!
 	// todo check this!!
 	//module periodicity (seconds)
 }
@@ -317,6 +317,23 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 //	portIKinOut->open("/cubeDetector/iKinOut");
 //	Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
 //	portIKinOut->setStrict(true);
+	
+	
+	
+	std::string clientPortName = "/evolvedfilter";
+	clientPortName += "/gaze-client-3D";
+	if(! gazeportPos.open( clientPortName.c_str() )){
+		return false;
+	}
+	//	
+	std::string inputPortName = "/iKinGazeCtrl/head/stereo:i";	
+	
+	printf("Trying to connect to %s\n", inputPortName.c_str());
+	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+		std::cout << getName() << ": Unable to connect to port "; 
+		std::cout << inputPortName.c_str() << std::endl;
+		return false;
+	}	
 	
 	
 	
