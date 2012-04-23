@@ -20,12 +20,18 @@ private:
 
 	// disparity map output
 	BufferedPort< ImageOf<PixelBgr> > outPort;
+	
+	
+	RpcServer rpcPort; 	//!< The port to handle RPC messages (e.g. quit)	
+	
 
 	// reference to the Depth Perception algorithm.
 	DisparityMapper *mapper;
 
 	// the current disparitymap
 	IplImage *dispMap;
+	
+	double scalingFactor;
 
 public:
 	// constructor & destructor
@@ -36,6 +42,9 @@ public:
 	virtual bool open(Searchable &config);
 	virtual bool close();
 	virtual bool interruptModule();
+
+	virtual double getPeriod();
+	
 
 	// the actual run function
 	virtual bool updateModule();

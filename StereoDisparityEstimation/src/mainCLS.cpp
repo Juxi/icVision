@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	bool show = false;
 	
 	if(argc < 3) {
-		printf("To few parameters...\nDepthOO <leftImg> <rightImg> [horizontalStart] [horizontalEnd] [horizontalStep] [verticalStart] [verticalEnd] [verticalStep] [lklhdparam]");
+		printf("To few parameters...\nDepthOO <leftImg> <rightImg> [horizontalStart] [horizontalEnd] [horizontalStep] [verticalStart] [verticalEnd] [verticalStep] [lklhdparam] [filterParam]");
 		return 1;
 	}
 	// parameter conversion
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	horizontal[0] = -30;		vertical[0] = 0;
 	horizontal[1] = 30;			vertical[1] = 0;
 	horizontal[2] = 1;			vertical[2] = 2;
-	double lklhdParam = .67, filterParam = .67;
+	double lklhdParam = .67, filterParam = 0.67;
 	// check if more parameters are given
 	for(int i = 0;i < 3;i++) {
 		if(argc > 3+i) {
@@ -77,6 +77,7 @@ int main(int argc, char* argv[])
 	// start program
 	clock_t start = clock();
 	DisparityMapper *mapper = new DisparityMapper();
+	
 	mapper->loadLeftImage(leftImgFile);
 	mapper->loadRightImage(rightImgFile);
 	
@@ -136,9 +137,17 @@ int main(int argc, char* argv[])
 	IplImage *map = mapper->getHorizontalDisparityMap();
 	IplImage *mainImg = cvCloneImage(map);
 	IplImage* img = cvCreateImage( cvGetSize(mainImg), 8, 1 );
-	cvConvertScale(mainImg, img, 255, 0);
-	cvSaveImage("map.bmp", img);
-	//cvSmooth(img, img, CV_BLUR);//, 3, 3);
+	
+	cvConvertScale(map, img, 255, 0);
+//	cvSmooth(img, img, CV_BLUR, 1, 1);	
+	
+//	cvSmooth(img, img, CV_MEDIAN, 3, 1);	
+	
+	
+	
+	IplImage* imgOut = cvCreateImage( cvSize(640,480), 8, 1 );
+	cvResize(img, imgOut, CV_BILATERAL);
+	cvSaveImage("map.bmp", imgOut);
 	
 	if(show) {
 		cvNamedWindow("main");

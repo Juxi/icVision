@@ -15,11 +15,11 @@
 // standard constructor, sets initial values to the DisparityMapper
 DepthYARP::DepthYARP(){
 	mapper = new DisparityMapper();
-	mapper->setShiftingRange(-40, 40, 2);
-	mapper->setLikelihoodParameters("gaussian", .67);
+//	mapper->setShiftingRange(-40, 40, 2);
+	mapper->setLikelihoodParameters("gaussian", .8);
 
 	// set the filter parameters for the standard linear filter
-	((LinFilter *)mapper->getFilter())->setParameter(.45);
+	((LinFilter *)mapper->getFilter())->setParameter(.66);
 
 	// init the map image
 	dispMap = NULL;
@@ -29,6 +29,10 @@ DepthYARP::DepthYARP(){
 DepthYARP::~DepthYARP() { 
 	free(mapper);
 	if(dispMap) free(dispMap);
+}
+
+double DepthYARP::getPeriod() {
+	return 1;
 }
 
 // open function for the YARP module
@@ -42,13 +46,47 @@ bool DepthYARP::open(Searchable &config) {
 	}
 
 	//TODO: parse parameters for mapper and filter from ini file ...
+	
+	
+	if ( config.check("scale") ) {
+		scalingFactor = (config.find("scale")).asDouble();
+	} else {
+		scalingFactor = 1.0;
+	}
+	std::cout << "Scaling input images with factor: " << scalingFactor << std::endl;		
+	
+	
+	int vStep, hStep, vRange, hRange;
+	
+	hStep = config.check("hStep", Value(2.0)).asInt();
+	vStep = config.check("vStep", Value(4.0)).asInt();
+	hRange = config.check("hRange", Value(40.0)).asInt();
+	vRange = config.check("vRange", Value(8.0)).asInt();
+	
+	//	-70 70 5 -6 6 2  0.3 0.66	
+	mapper->setShiftingRange(-hRange, hRange, hStep, -vRange, vRange, vStep);
+	
 
 	// Set the name of the port (use "/DepthPerception" if there is no --name option)
 	setName(config.check("name", Value("/DepthPerception")).asString());
+	
+	std::string rpcPortName;
+	rpcPortName = getName("rpc:i");
+	std::cout << "blu: " << rpcPortName;
+	
+	if(! rpcPort.open( rpcPortName.c_str() )){
+		return false;
+	}
+	
+	
 	// open the ports
-	leftIn.open(getName(config.check("LeftImage", Value("/LeftImage")).asString()));
-	rightIn.open(getName(config.check("RightImage", Value("/RightImage")).asString()));
-	outPort.open(getName(config.check("DisparityMap", Value("/DisparityMap")).asString()));
+	leftIn.open(  getName(config.check("LeftImage", Value("/LeftImage")).asString()));
+	rightIn.open( getName(config.check("RightImage", Value("/RightImage")).asString()));
+	outPort.open( getName(config.check("DisparityMap", Value("/DisparityMap")).asString()));
+	
+	Network::connect("/icub/cam/left", getName(config.check("LeftImage", Value("/LeftImage")).asString())); 
+	Network::connect("/icub/cam/right", getName(config.check("RightImage", Value("/RightImage")).asString())); 
+	
 	return true;
 }
 
@@ -99,14 +137,21 @@ bool DepthYARP::updateModule() {
 		// converting the images to be usable and also resize them (reduce calculation time)
 		IplImage *newLeft = NULL, *newRight = NULL, *helper = NULL;
 		if(!helper) helper = cvCreateImage(cvGetSize(rightImg), rightImg->depth, 1); 
-		if(!newRight) newRight = cvCreateImage(cvSize(400, 300), rightImg->depth, 1); 
-		if(!newLeft) newLeft = cvCreateImage(cvSize(400, 300), rightImg->depth, 1); 
+		if(!newRight) newRight = cvCreateImage(cvSize(rightImg->width*scalingFactor, rightImg->height*scalingFactor), rightImg->depth, 1); 
+		if(!newLeft) newLeft = cvCreateImage(cvSize(rightImg->width*scalingFactor, rightImg->height*scalingFactor), rightImg->depth, 1); 
 
+		std::cout << "The image size was set to width: " << newLeft->width << " height: " << newLeft->height << std::endl;
+		
+				
 		// convert to grayscale
 		cvCvtColor(rightImg, helper, CV_RGB2GRAY);
 		cvResize(helper, newRight);
 		cvCvtColor(leftImg, helper, CV_RGB2GRAY);
 		cvResize(helper, newLeft);
+		
+		cvSaveImage("left.bmp", newLeft);
+		cvSaveImage("right.bmp", newRight);
+		
 		
 		cvReleaseImage(&helper); helper = NULL;
 
@@ -120,17 +165,27 @@ bool DepthYARP::updateModule() {
 		// normalize disparity map for displaying purposes
 		mapper->normalizeDisparityMap();
 
-		dispMap = mapper->getHorizontalDisparityMap();
+//		dispMap = mapper->getHorizontalDisparityMap();
 
 		// for output convert the map (dispMap) to 32bit RGB (helper) for output
 		ImageOf<PixelBgr> yarpReturnImage;
-		helper = cvCreateImage(cvGetSize(dispMap), IPL_DEPTH_8U, 3);
-		cvConvertImage(dispMap, helper);
+		IplImage *map = mapper->getHorizontalDisparityMap();
+		IplImage* img = cvCreateImage( cvGetSize(map), 8, 1 );
+		
+		cvConvertScale(map, img, 255, 0);
+
+		IplImage* imgOut = cvCreateImage( cvSize(640,480), 8, 1 );
+		cvResize(img, imgOut, CV_BILATERAL);
+		
+		helper = cvCreateImage(cvGetSize(imgOut), IPL_DEPTH_8U, 3);
+		cvConvertImage(imgOut, helper);
 		yarpReturnImage.wrapIplImage(helper);
 		outPort.prepare() = yarpReturnImage;
 		outPort.write();
 
+		cvSaveImage("map.out.bmp", imgOut);
+
 		cvReleaseImage(&helper); helper = NULL;
 	}
-	return true;
+	return false;
 }

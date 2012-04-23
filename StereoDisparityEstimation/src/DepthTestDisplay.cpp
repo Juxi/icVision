@@ -27,7 +27,7 @@ DepthTestDisplay::DepthTestDisplay(void)
 
 void DepthTestDisplay::setLeftImage(IplImage *leftImage) {
 	if(m_leftImage) cvReleaseImage(&m_leftImage);
-	m_leftImage = cvCloneImage(leftImage);
+	m_leftImage = cvCloneImage(leftImage);	
 	//updateDisplay();
 }
 
