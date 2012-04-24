@@ -55,14 +55,12 @@ protected:
 	// output ports
 	BufferedPort< ImageOf<PixelBgr> > rawOutputPort;
 	BufferedPort< ImageOf<PixelBgr> > imgOutputPort;
-	BufferedPort< Bottle >			  posOutputPort;	
+	BufferedPort< Bottle >			  posOutputPort;
 	
-	
+	RpcClient  threeDPort;	
 	
 	//	HACK 	HACK
 	yarp::os::Port gazeportPos;
-
-	
 	
 	// Variables	
 	bool	isRunning;
@@ -88,7 +86,7 @@ protected:
 	bool icVisionCoreIsAvailable();
 	bool registerModuleWithCore();
 	bool deregisterModuleWithCore();
-	bool get3DPosition(Vector &v);
+//	bool get3DPosition(Vector &v);
 	//bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
 	
 	void printDebug(const char* str);
@@ -114,7 +112,7 @@ public:
 	void runOnBothImages();	
 	
 	// defining 3d localisation connection
-	void localiseInThreeD(bool b) { 	shallLocaliseInThreeD = b;  }
+	void localiseInThreeD(bool b) { shallLocaliseInThreeD = b;  }
 
 	// heritage, delete and move to icVisionCore (change, maybe?)
 //	void useThisForGazeCtrl(bool b) {

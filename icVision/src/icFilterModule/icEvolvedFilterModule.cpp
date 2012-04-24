@@ -66,7 +66,7 @@ bool EvolvedFilterModule::updateModule()
 	
 	ImageOf<PixelBgr> *left_image = NULL;
 	ImageOf<PixelBgr> *right_image = NULL;	
-	Stamp left_timeStamp, right_timeStamp;
+	Stamp left_timeStamp, right_timeStamp, outbottleTS;
 	
 	
 	if( isReadingFileFromHDD ) {
@@ -83,7 +83,6 @@ bool EvolvedFilterModule::updateModule()
 			}
 			leftInPort.getEnvelope(left_timeStamp);
 			
-
 			// read image from the right port
 			right_image = rightInPort.read();  // read an image
 			if (right_image == NULL) { 
@@ -91,12 +90,21 @@ bool EvolvedFilterModule::updateModule()
 				return false;
 			}
 			rightInPort.getEnvelope(right_timeStamp);
+
+			// set output TS
+			if(left_timeStamp.getTime() < right_timeStamp.getTime())
+				outbottleTS = left_timeStamp;
+			else
+				outbottleTS = right_timeStamp;
 			
 			
 			// prevent infinite loop!
 			if(++tries > MAX_TRIES) {
 				std::cout << "ERROR: Could not get synchronized images in " << MAX_TRIES << " tries!" << std::endl;
-				return false;
+				std::cout << "Images still in buffer Left: " << leftInPort.getPendingReads();
+				std::cout << "\tRight: " << rightInPort.getPendingReads() << std::endl;				
+				// keep trying...
+				return true;
 			}
 		} while(! checkTS(left_timeStamp.getTime(), right_timeStamp.getTime()));
 	}
@@ -209,7 +217,6 @@ bool EvolvedFilterModule::updateModule()
 		if(wewanttothreshold) {
 			cvThreshold(out8, out8, 250.0, 255.0, CV_THRESH_BINARY);
 			
-			
 			// Blob detection
 			cvCvtColor(out8, out_single, CV_RGB2GRAY);
 			//Linked list of connected pixel sequences in a binary image
@@ -283,6 +290,7 @@ bool EvolvedFilterModule::updateModule()
 			cvCopy(out8, outputImageToWrite);			
 			ImageOf<PixelBgr>& output = imgOutputPort.prepare();
 			output.wrapIplImage(outputImageToWrite); 
+			imgOutputPort.setEnvelope(outbottleTS);
 			imgOutputPort.write();	
 		}
 			
@@ -296,144 +304,9 @@ bool EvolvedFilterModule::updateModule()
 		
 	}while(!allFramesDone);
 	
+	// write the first blob found onto the network .../position:o port
+	writePositionBottle(ph1, ph2, outbottleTS);
 	
-	// only if we do it on both images
-	for(; !isReadingFileFromHDD && ( runOnLeft || runOnRight ); )	{
-//		if(inDebugMode) {
-			std::cout << "frame1.x: " << (int) ph1.x/scalingFactor << "\ty: " << (int) ph1.y/scalingFactor;
-			std::cout << "\t\tframe2.x: " << (int) ph2.x/scalingFactor << "\ty:" << (int) ph2.y/scalingFactor << std::endl;		
-//		}
-		
-		if((int) ph1.x/scalingFactor < 0 || (int) ph1.x/scalingFactor > 640) break;
-		if((int) ph2.x/scalingFactor < 0 || (int) ph2.x/scalingFactor > 640) break;		
-		if((int) ph1.y/scalingFactor < 0 || (int) ph1.y/scalingFactor > 480) break;
-		if((int) ph2.y/scalingFactor < 0 || (int) ph2.y/scalingFactor > 480) break;		
-
-		// TODO check this
-		// stream the position (2D in the filters) out
-		Bottle& output = posOutputPort.prepare();
-		output.clear();
-
-		bool outputSingleBottle = true;
-		
-		if(outputSingleBottle) {
-			if(runOnLeft == runOnRight == true) {
-				// for the iKinGaze e.g.
-				output.addInt((int) (ph1.x/scalingFactor));
-				output.addInt((int) (ph1.y/scalingFactor));		
-				output.addInt((int) (ph2.x/scalingFactor));	
-				output.addInt((int) (ph2.y/scalingFactor));					
-			}
-			
-		} else {
-			Bottle leftImgPosBottle, rightImgPosBottle;
-
-			if( runOnLeft ) {
-				leftImgPosBottle.addInt((int) (ph1.x/scalingFactor));
-				leftImgPosBottle.addInt((int) (ph1.y/scalingFactor));		
-				if(inDebugMode)
-					leftImgPosBottle.addString("XY in left");	
-			}
-
-			if( runOnRight ) {
-				rightImgPosBottle.addInt((int) (ph2.x/scalingFactor));
-				rightImgPosBottle.addInt((int) (ph2.y/scalingFactor));		
-				if(inDebugMode)
-					rightImgPosBottle.addString("XY in right");	
-			}
-			
-			if( runOnLeft )  output.addList() = leftImgPosBottle;
-			if( runOnRight ) output.addList() = rightImgPosBottle;
-			
-		}
-
-		// if( runOnLeft == runOnRight == true)
-		//	calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
-		// use get3DPositions(<#Vector v#>)
-		// and put that out onto the posOutputPort;
-		
-		//		output.addList() = 3Dpos?
-		
-		std::cout << "Bottle: " << output.toString() << std::endl;
-
-		posOutputPort.write();
-		
-		
-		
-//		// workaround!!
-//		
-//		Vector X = Vector();
-//		X.push_back(ph1.x/2);
-//		X.push_back(ph1.y/2);
-//		X.push_back(ph2.x/2);
-//		X.push_back(ph2.y/2);
-		
-//		Vector &Xsend=portIKinIn->prepare(); // get pointer
-//		Xsend = X; // set to port
-//		
-//		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
-//		
-////		std::cout << "trying to connect to the ikinport " << std::endl;		
-//		if (portIKinOut->getInputCount() > 0) {
-//			portIKinIn->writeStrict();
-//			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
-////			if (ret->size() >= 3) {
-////				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
-////			}
-//			std::cout << "Bottle: " << ret->toString() << std::endl;
-//		}
-////		std::cout << "ending ikinport " << std::endl;				
-		
-		
-		// TODO
-		// should be done somewhere else
-
-//		bool icFilterModule::send3DPositionToGazeCtrl(double x, double y, double z) {
-			yarp::os::Bottle cmd, response;
-//			
-//			if(! sendToGazeCtrl) return false;
-//			if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
-//				std::cout << "NOT setting gaze ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
-//				
-//				cmd.clear();
-//				cmd.addString("set");
-//				cmd.addString("track");		
-//				cmd.addInt(0);
-//				return false;
-//			}
-			
-//			// set information about the object from rpc
-//			cmd.clear();
-//			cmd.addString("set");
-//			cmd.addString("track");
-//			cmd.addInt(1);	
-//			bool r = gazeportRPC.write(cmd, response);
-//			if(inDebugMode) {
-//				std::cout << "gaze response: " << response.toString() << std::endl;	
-//				std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
-//			}
-			
-			cmd.clear();
-//			cmd.addDouble(x);
-//			cmd.addDouble(y);
-//			cmd.addDouble(z);
-			cmd.addInt((int) (ph1.x/scalingFactor));
-			cmd.addInt((int) (ph1.y/scalingFactor));		
-			cmd.addInt((int) (ph2.x/scalingFactor));	
-			cmd.addInt((int) (ph2.y/scalingFactor));					
-		
-			std::cout << "gazePos bottle sent: " << cmd.toString() << std::endl;	
-		
-			bool b = gazeportPos.write(cmd);
-//			if(inDebugMode)
-				std::cout << "gazePos response: " << b << std::endl;	
-			
-//		}	
-		
-		
-		break;		
-	}
-
 //	if( inDebugMode ) {
 //		end = clock();	
 //		double diffms = (end-start)*1000.0/CLOCKS_PER_SEC;
@@ -441,7 +314,7 @@ bool EvolvedFilterModule::updateModule()
 //		std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
 //	}
 		
-	// return	(when we read from HDD we only run once!)
+	// return	(when we read from HDD we only run once --> return false then)
 	return !isReadingFileFromHDD;
 }
 //
@@ -575,6 +448,170 @@ bool EvolvedFilterModule::updateModule()
 //}
 
 
+
+bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint fp2, Stamp outTS) {
+	if( isReadingFileFromHDD ) return false;
+
+	if(inDebugMode) {
+		std::cout << "frame1.x: " << (int) fp1.x/scalingFactor << "\ty: " << (int) fp1.y/scalingFactor;
+		std::cout << "\t\tframe2.x: " << (int) fp2.x/scalingFactor << "\ty:" << (int) fp2.y/scalingFactor << std::endl;		
+	}
+		
+	// sanity check
+	if((int) fp1.x/scalingFactor < 0 || (int) fp1.x/scalingFactor > 640) return false;
+	if((int) fp2.x/scalingFactor < 0 || (int) fp2.x/scalingFactor > 640) return false;		
+	if((int) fp1.y/scalingFactor < 0 || (int) fp1.y/scalingFactor > 480) return false;
+	if((int) fp2.y/scalingFactor < 0 || (int) fp2.y/scalingFactor > 480) return false;		
+			
+	bool streamGazePos = false;
+	
+	if(streamGazePos) {
+		// stream the position (2D in the filters) out
+		Bottle& output = posOutputPort.prepare();
+		output.clear();
+		
+		if( runOnLeft ) {
+			// for the iKinGaze e.g.
+			output.addInt((int) (fp1.x/scalingFactor));
+			output.addInt((int) (fp1.y/scalingFactor));		
+		}
+		if( runOnRight ) {
+			output.addInt((int) (fp2.x/scalingFactor));	
+			output.addInt((int) (fp2.y/scalingFactor));					
+		}
+		
+		std::cout << "Bottle (4Gaz): " << output.toString() << std::endl;
+		posOutputPort.setEnvelope(outTS);
+		posOutputPort.write();		
+	}
+	
+	if (shallLocaliseInThreeD) {
+		if(inDebugMode) {
+			std::cout << "shall localise in 3D" << std::endl;		
+		}
+		
+		Bottle leftImgPosBottle, rightImgPosBottle;
+		Bottle output, in;
+		output.clear();
+		
+		if( runOnLeft ) {
+			leftImgPosBottle.addInt((int) (fp1.x/scalingFactor));
+			leftImgPosBottle.addInt((int) (fp1.y/scalingFactor));		
+			if(inDebugMode)
+				leftImgPosBottle.addString("XY in left");	
+		}
+		
+		if( runOnRight ) {
+			rightImgPosBottle.addInt((int) (fp2.x/scalingFactor));
+			rightImgPosBottle.addInt((int) (fp2.y/scalingFactor));		
+			if(inDebugMode)
+				rightImgPosBottle.addString("XY in right");	
+		}
+		
+		if( runOnLeft )  output.addList() = leftImgPosBottle;
+		if( runOnRight ) output.addList() = rightImgPosBottle;
+		
+//		std::cout << "sending output:" << output.toString() << std::endl;		
+		
+		threeDPort.setEnvelope(outTS);
+	
+
+		threeDPort.write(output, in);	
+		
+//		if( in.get(0).asString() == "OK" ) {
+//			// TODO add to do something with rest of bottle
+//			moduleID = response.get(1).asInt();
+//			return true;
+//		}
+		std::cout << "sent!" << output.toString() << std::endl;		
+		std::cout << "recvd!" << in.toString() << std::endl;				
+
+//		Bottle *in = threeDPort.read();
+//		
+//		if(! in->isNull()) {
+//			std::cout << "Bottle: " << in->toString() << std::endl;
+//			posOutputPort.setEnvelope(outTS);			
+//			posOutputPort.write(in);			
+//		}
+		
+	}
+
+	
+	
+	
+
+// iKin library usage? move to separte module!	
+	//		// workaround!!
+	//		
+	//		Vector X = Vector();
+	//		X.push_back(ph1.x/2);
+	//		X.push_back(ph1.y/2);
+	//		X.push_back(ph2.x/2);
+	//		X.push_back(ph2.y/2);
+	
+	//		Vector &Xsend=portIKinIn->prepare(); // get pointer
+	//		Xsend = X; // set to port
+	//		
+	//		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
+	//		
+	////		std::cout << "trying to connect to the ikinport " << std::endl;		
+	//		if (portIKinOut->getInputCount() > 0) {
+	//			portIKinIn->writeStrict();
+	//			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
+	////			if (ret->size() >= 3) {
+	////				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
+	////			}
+	//			std::cout << "Bottle: " << ret->toString() << std::endl;
+	//		}
+	////		std::cout << "ending ikinport " << std::endl;				
+	
+	
+	// TODO
+	// should be done somewhere else
+	
+
+	yarp::os::Bottle cmd, response;
+	//			if(! sendToGazeCtrl) return false;
+	//			if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+	//				std::cout << "NOT setting gaze ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+	//				
+	//				cmd.clear();
+	//				cmd.addString("set");
+	//				cmd.addString("track");		
+	//				cmd.addInt(0);
+	//				return false;
+	//			}
+	
+	//			// set information about the object from rpc
+	//			cmd.clear();
+	//			cmd.addString("set");
+	//			cmd.addString("track");
+	//			cmd.addInt(1);	
+	//			bool r = gazeportRPC.write(cmd, response);
+	//			if(inDebugMode) {
+	//				std::cout << "gaze response: " << response.toString() << std::endl;	
+	//				std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	//			}
+
+
+//	cmd.clear();
+//			cmd.addDouble(x);
+//			cmd.addDouble(y);
+//			cmd.addDouble(z);
+
+//	cmd.addInt((int) (ph1.x/scalingFactor));
+//	cmd.addInt((int) (ph1.y/scalingFactor));		
+//	cmd.addInt((int) (ph2.x/scalingFactor));	
+//	cmd.addInt((int) (ph2.y/scalingFactor));					
+	
+//	bool b = gazeportPos.write(output);
+//	if(inDebugMode)	{
+//		std::cout << "gazePos bottle sent: " << output.toString() << std::endl;	
+//		std::cout << "gazePos response: " << b << std::endl;	
+//	}
+	return true;
+
+}
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();
 	

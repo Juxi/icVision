@@ -59,15 +59,24 @@ ThreeDModule::ThreeDModule(iCubController *ctrl_in) {
 //		}	
 //	}	
 	
+	
 	posPortName  = portPrefix;
 	posPortName += getName();
 	posPortName += "/position:i";
+	
 	if(! posPort.open( posPortName.c_str() )){
 		std::cout << "ERROR: could not connect port to " << posPortName.c_str() << "!" << std::endl;
 		exit(1);
 	}	
-	processor = new DataProcessor(this);
-	posPort.setReader(*processor);
+		
+	// start RPC thread
+	rpcThread = new ModuleRPCThread(this);
+	rpcThread->start();	
+	
+	// TODO remove this we don't need it anymore ... right?
+//	processor = new DataProcessor(this);
+//	posPort.setReader(*processor);
+	
 	
 }
 
@@ -176,7 +185,7 @@ bool ThreeDModule::checkTS(double TSLeft, double TSRight, double th) {
 /*
  * This is our main function. The bottle callback calls this one.
  */
-Bottle& ThreeDModule::calculatePosition(Bottle &in, Stamp &stamp) {
+Bottle& ThreeDModule::calculatePosition(const Bottle &in, Stamp &stamp) {
 	std::cout << "Calculate Position!\ngot " << in.toString() << endl;
 	Bottle *threeDpos = new Bottle();;	
 	
@@ -201,10 +210,34 @@ Bottle& ThreeDModule::calculatePosition(Bottle &in, Stamp &stamp) {
 }
 
 
+
+bool ThreeDModule::respond(const yarp::os::Bottle& in, yarp::os::Bottle& out, yarp::os::Stamp stamp) {
+//?	Stamp stamp;
+	std::cout << "responding: " << in.toString() << std::endl;
+
+	//TODO sanity check
+	//...
+	
+
+	out.clear();	
+	// process data "in", prepare "out"
+	out.append(in);
+	out.addList() = calculatePosition(in, stamp);
+	
+	
+	// reply
+	return true;
+	
+	
+}
+
 bool DataProcessor::read(ConnectionReader& connection) {
 	Bottle in, out;
 	bool ok = in.read(connection);
-	Stamp stamp; stamp.read(connection);
+	std::cout << "DataProcessor read bottle "  << std::endl;	
+	Stamp stamp;
+//	stamp.read(connection);
+//	std::cout << "DataProcessor read stamp!"  << std::endl;		
 	if (!ok) return false;
 
 	// process data "in", prepare "out"
@@ -272,18 +305,65 @@ void ThreeDModule::calcuatePositionUsingSimonsMethod(double *retX, double *retY,
 	estimatedX += 8.5;
 	estimatedY -= 6.5;
 	
+	estimatedX = round(estimatedX*10)/10.0;
+	estimatedY = round(estimatedY*10)/10.0;	
+	
 	*retX = -estimatedX/100.0;
 	*retY = estimatedY/100.0;
 	*retZ = estimatedZ;
 }
 
-void ThreeDModule::getEncoderPositions(double *headjnt_pos, double *torsojnt_pos, Stamp stamp) {
-	Bottle head = headState[headIdx];	
-	Bottle torso = torsoState[torsoIdx];
+void ThreeDModule::getEncoderPositions(double *headjnt_pos, double *torsojnt_pos, Stamp stamp) {	
+	mutex.wait();
+		
+	if(stamp.getTime() == 0) {
+		std::cout << "WARNING: No timestamp found in this bottle!! check your implementation!! " << std::endl;
+		stamp.update();
+	}
+	
+	// store the current (start) indices in the circular buffer
+	int tIdx = torsoIdx;
+	int hIdx = headIdx;
+	
+	// helpers
+	int idxH = -1, idxT = -1;
+	int hH, hT;
+	double smallestDiffH = 10000;
+	double smallestDiffT = 10000;	
+	double tDiff;
+
+	// the bottles to be copied out of the circ buffer
+	Bottle head, torso;
+	
+	// going through the circular buffer
+	for(int k = 0; k < LIST_LENGTH; k++) {
+		hT = (LIST_LENGTH + tIdx - k) % LIST_LENGTH;	
+		hH = (LIST_LENGTH + hIdx - k) % LIST_LENGTH;
+		
+		tDiff = fabs(stamp.getTime() - torsoStamp[hT].getTime());
+//		std::cout << stamp.getTime() << " idx: " << hT <<  " getTime: " << torsoStamp[hT].getTime() << ", diffT: "<< tDiff << std::endl;		
+		if( tDiff < smallestDiffT ) {
+			idxT = hT;				
+			smallestDiffT = tDiff;
+		}
+
+		tDiff = fabs(stamp.getTime() - torsoStamp[hH].getTime());
+		if( tDiff < smallestDiffH ) { 
+			idxH = hH;		
+			smallestDiffH = tDiff;
+		}
+	}
+	
+	if( idxH != -1 ) head = headState[idxH];	
+	if( idxT != -1 ) torso = torsoState[idxT];
+	std::cout <<  "idxT: " << idxT << "/" << idxT-tIdx <<  " val: " << torso.toString() <<  std::endl;			
+	std::cout <<  "idxH: " << idxH << "/" << idxH-hIdx << " val: " << head.toString() <<  std::endl;				
 	
 	for(int i = 0; i < 6; i++) {
 		headjnt_pos[i] = head.get(i).asDouble();
 		if(i < 3) torsojnt_pos[i] = torso.get(i).asDouble();
 	}
+	
+	mutex.post();
 }
 
