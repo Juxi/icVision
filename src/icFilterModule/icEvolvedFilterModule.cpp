@@ -534,6 +534,12 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 //			posOutputPort.write(in);			
 //		}
 		
+		
+		// TODO sanity check
+		Bottle *pos3d = in.get(2).asList();
+		if(!pos3d->isNull())
+			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1");
+		
 	}
 
 	

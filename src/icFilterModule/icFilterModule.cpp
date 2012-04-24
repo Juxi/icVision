@@ -262,13 +262,36 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/3DCon").c_str() << std::endl;
 			return false;
 		}
+		
+		outputPortName = "/icVision/ThreeDModule/position:i";
 		// trying to connect to the rpc icVision 3d localisation 
-		printf("Trying to connect to %s\n", "/icVision/ThreeDModule/position:i");
-		if(! yarp.connect((handlerPortName + "/3DCon").c_str(), "/icVision/ThreeDModule/position:i") ) {
+		printf("Trying to connect to %s\n", outputPortName.c_str());
+		if(! yarp.connect((handlerPortName + "/3DCon").c_str(), outputPortName.c_str()) ) {
 			std::cout << getName() << ": Unable to connect to port "; 
 			std::cout << "/icVision/ThreeDModule/position:i" << std::endl;
 			return false;
 		}
+		
+		// HACK HACK TODO check
+		// connect to rpc	
+		// check whether we have F or not!! TODO
+		std::string clientPortName = "/evolvedfilter";
+		clientPortName += "/world-client";
+		if(! vSkinPort.open( clientPortName.c_str() )){
+			return false;
+		}
+		
+		outputPortName = "/world";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", outputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), outputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << outputPortName.c_str() << std::endl;
+			return false;
+		}	
 		
 	}
 	
@@ -303,27 +326,6 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 //		std::cout << " with " << portName.c_str() << std::endl;
 //		return false;
 //	}
-	
-//	// connect to rpc	
-//	// check whether we have F or not!! TODO
-//	std::string clientPortName = "/evolvedfilter";
-//	clientPortName += "/world-client";
-//	if(! vSkinPort.open( clientPortName.c_str() )){
-//		return false;
-//	}
-	
-//	inputPortName = "/world";	
-//	//	inputPortName += robotName; 
-//	//	inputPortName += "F/world";
-//	
-//	// trying to connect to the rpc server (world interface)
-//	printf("Trying to connect to %s\n", inputPortName.c_str());
-//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-//		std::cout << getName() << ": Unable to connect to port "; 
-//		std::cout << inputPortName.c_str() << std::endl;
-//		return false;
-//	}	
-	
 	
 //	portIKinIn = new BufferedPort<Vector>;
 //	portIKinIn->open("/cubeDetector/iKinIn");
@@ -448,22 +450,22 @@ bool icFilterModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& 
 
 // TODO create world interface
 // to kail's world model
-//bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
-//	yarp::os::Bottle cmd, response;
-//	
-//	// get information about the object from rpc
-//	cmd.clear();
-//	cmd.addString("set");
-//	cmd.addString(objName);
-//	
-//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
-//	
-//	cmd.addDouble(x);
-//	cmd.addDouble(y);
-//	cmd.addDouble(z);
-//	
-//	bool r = vSkinPort.write(cmd, response);
-//	std::cout << "response: " << response.toString() << std::endl;	
-//	// return r;
-//	return true;
-//}	
+bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
+	yarp::os::Bottle cmd, response;
+	
+	// get information about the object from rpc
+	cmd.clear();
+	cmd.addString("set");
+	cmd.addString(objName);
+	
+	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	
+	cmd.addDouble(x);
+	cmd.addDouble(y);
+	cmd.addDouble(z);
+	
+	bool r = vSkinPort.write(cmd, response);
+	std::cout << "response: " << response.toString() << std::endl;	
+	// return r;
+	return true;
+}	

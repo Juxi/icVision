@@ -57,7 +57,8 @@ protected:
 	BufferedPort< ImageOf<PixelBgr> > imgOutputPort;
 	BufferedPort< Bottle >			  posOutputPort;
 	
-	RpcClient  threeDPort;	
+	RpcClient	vSkinPort;
+	RpcClient	threeDPort;	
 	
 	//	HACK 	HACK
 	yarp::os::Port gazeportPos;
@@ -87,7 +88,7 @@ protected:
 	bool registerModuleWithCore();
 	bool deregisterModuleWithCore();
 //	bool get3DPosition(Vector &v);
-	//bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
+	bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
 	
 	void printDebug(const char* str);
 	
