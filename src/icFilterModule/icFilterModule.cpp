@@ -34,7 +34,7 @@ void icFilterModule::printDebug(const char* str)
 
 double icFilterModule::getPeriod()
 {
-	return 2;	// we need something higher than 0.0 else it is too fast?!
+	return 0.2;	// we need something higher than 0.0 else it is too fast?!
 	// todo check this!!
 	//module periodicity (seconds)
 }
@@ -185,6 +185,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/icVisionConnection").c_str() << std::endl;
 			return false;
 		}
+		
 		// trying to connect to the rpc icVision core 
 		printf("Trying to connect to %s\n", icVisionPortName.c_str());
 		if(! yarp.connect((handlerPortName + "/icVisionConnection").c_str(), icVisionPortName.c_str()) ) {
@@ -254,6 +255,22 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	}
 	/////////////////////////////////////
 
+
+	if(shallLocaliseInThreeD) {
+		// trying to connect to the left camera
+		if(! threeDPort.open((handlerPortName + "/3DCon").c_str())) {
+			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/3DCon").c_str() << std::endl;
+			return false;
+		}
+		// trying to connect to the rpc icVision 3d localisation 
+		printf("Trying to connect to %s\n", "/icVision/ThreeDModule/position:i");
+		if(! yarp.connect((handlerPortName + "/3DCon").c_str(), "/icVision/ThreeDModule/position:i") ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << "/icVision/ThreeDModule/position:i" << std::endl;
+			return false;
+		}
+		
+	}
 	
 //	// TEMP Solution TODO change
 //	// connect to streams
@@ -320,20 +337,20 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	
 	
 	
-	std::string clientPortName = "/evolvedfilter";
-	clientPortName += "/gaze-client-3D";
-	if(! gazeportPos.open( clientPortName.c_str() )){
-		return false;
-	}
-	//	
-	std::string inputPortName = "/iKinGazeCtrl/head/stereo:i";	
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port "; 
-		std::cout << inputPortName.c_str() << std::endl;
-		return false;
-	}	
+//	std::string clientPortName = "/evolvedfilter";
+//	clientPortName += "/gaze-client-3D";
+//	if(! gazeportPos.open( clientPortName.c_str() )){
+//		return false;
+//	}
+//	//	
+//	std::string inputPortName = "/iKinGazeCtrl/head/stereo:i";	
+//	
+//	printf("Trying to connect to %s\n", inputPortName.c_str());
+//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+//		std::cout << getName() << ": Unable to connect to port "; 
+//		std::cout << inputPortName.c_str() << std::endl;
+//		return false;
+//	}	
 	
 	
 	
@@ -425,14 +442,6 @@ bool icFilterModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& 
 	reply.addString("The command is not valid! Try: quit");	
 
 	return true;
-}
-
-
-bool get3DPosition(Vector &v_2D, Vector &v_3D) {
-	// connect to 3D module of core (rpc) 
-	// send the vector
-	// get reply
-	// put it into the v_3D
 }
 
 

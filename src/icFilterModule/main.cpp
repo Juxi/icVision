@@ -40,9 +40,10 @@ int main(int argc, char * argv[]) {
 
 	
 	module->runOnBothImages();
-
+	module->localiseInThreeD(true);
+	
 	// TODO create possibility
-	// module->localiseInThreeD(true);
+
 	// module->useThisForGazeCtrl(true);
 	
 //	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
