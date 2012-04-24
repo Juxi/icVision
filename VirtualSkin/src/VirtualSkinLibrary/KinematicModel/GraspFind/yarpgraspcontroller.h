@@ -58,6 +58,8 @@ public:
 	yarp::os::Bottle vector_to_bottle(std::vector<double> vec);
 	std::vector<double> bottle_to_vector(yarp::os::Value &val);
 
+	std::vector<double> get_current_pose();
+
 	void plan_path(std::vector<double> workspace_source, std::vector<double> workspace_goal);
 
 };

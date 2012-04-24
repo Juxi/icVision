@@ -124,6 +124,21 @@ void YarpGraspController::follow_path(vector<vector<double> > &path) {
 	cout << "done" << endl;
 }
 
+vector<double> YarpGraspController::get_current_pose() {
+	Bottle command;
+	command.addString("get");
+	command.addString("pose");
+	Bottle response;
+	cout << "getting pose" << endl;
+	d_mover.write(command, response);
+	cout << response.toString() << endl;
+
+	vector<double> result_vector = bottle_to_vector(response.get(0));
+	cout << "resulting pose vector: " << endl;
+	print_vector(result_vector);
+	return result_vector;
+}
+
 void YarpGraspController::run () {
 	cout << "Opening port: " << d_portname << endl;
 	if (!d_port.open(d_portname.c_str()))
@@ -153,14 +168,34 @@ void YarpGraspController::run () {
 						break;
 					}
 
-					cout << "getting source" << endl;
-					source = bottle_to_vector(query.get(1));
-					cout << "getting target" << endl;
-					target = bottle_to_vector(query.get(2));
-					cout << "planning path" << endl;
-					print_vector(source);
-					print_vector(target);
-					path = d_path_planner->find_workspace_path(source, target);
+					if (query.size() == 2) {
+						cout << "size==2 get source from mover" << endl;
+						source = get_current_pose();
+						cout << "target::" << endl;
+						target = bottle_to_vector(query.get(1));
+						cout << "target::" << endl;
+						print_vector(target);
+
+						cout << "finding path:" << endl;
+
+						assert(source.size() && target.size());
+						cout << "finding path:" << endl;
+						path = d_path_planner->find_configuration_workspace_path(source, target);
+						cout << "done:" << endl;
+
+					}
+					if (query.size() == 3) {
+						cout << "size==3 source to target" << endl;
+						cout << "getting source" << endl;
+						source = bottle_to_vector(query.get(1));
+						target = bottle_to_vector(query.get(2));
+						cout << "source:" << endl;
+						print_vector(source);
+						cout << "target:" << endl;
+						print_vector(target);
+						cout << "finding path:" << endl;
+						path = d_path_planner->find_workspace_path(source, target);
+					}
 					cout << path.size() << endl;
 					response.addString("path found");
 					follow_path(path);
@@ -290,8 +325,16 @@ std::vector<double> YarpGraspController::bottle_to_vector(yarp::os::Value &val) 
     if (!val.isList()) { throw StringException("Value not a list"); }
     Bottle* val_pointer = val.asList();
 
-    for (size_t i(0); i < val_pointer->size(); ++i)
-    	values.push_back(val_pointer->get(i).asDouble());
+    cout << "before loop " << endl;
+    for (size_t i(0); i < val_pointer->size(); ++i) {
+    	if (val_pointer->get(i).isList()) {
+    		Bottle* val2_pointer = val_pointer->get(i).asList();
+    		for (size_t i(0); i < val2_pointer->size(); ++i)
+        		values.push_back(val2_pointer->get(i).asDouble());
+    	} else
+    		values.push_back(val_pointer->get(i).asDouble());
+    }
+    cout << "after loop " << endl;
     return values;
 }
 

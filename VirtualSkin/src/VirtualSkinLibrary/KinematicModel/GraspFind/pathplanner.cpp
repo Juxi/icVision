@@ -66,6 +66,12 @@ vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, 
 	return the_path;
 }
 
+vector<vector<double> > PathPlanner::find_configuration_workspace_path(vector<double> source, vector<double> target) {
+	Roadmap::PathList the_path_nodes = d_roadmap.shortestConfigurationWorkspacePath(source, target);
+	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
+	return the_path;
+}
+
 vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 	vector<vector<double> > cut_pose;
 	size_t counter(0);

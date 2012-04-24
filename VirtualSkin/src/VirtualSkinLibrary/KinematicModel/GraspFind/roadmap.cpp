@@ -349,7 +349,8 @@ void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 {
 	if ( _q.size() != dim ) { throw StringException("wrong size state vector"); }
-	
+	if ( tree.size() == 0 ) { throw StringException("nothing in tree"); }
+
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
 
 	size_t const check_n(10);
@@ -420,6 +421,14 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	return path;
 }
 
+list<Roadmap::vertex_t>  Roadmap::shortestConfigurationWorkspacePath( std::vector<double> from, std::vector<double> to ) {
+	Roadmap::vertex_t from_desc = nearestVertex(from);
+	Roadmap::vertex_t to_desc = nearestWorkspaceVertex(to);
+
+	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	return path;
+}
+
 list<Roadmap::vertex_t>  Roadmap::shortestPath( std::vector<double> from, std::vector<double> to ) {
 	Roadmap::vertex_t from_desc = nearestVertex(from);
 	Roadmap::vertex_t to_desc = nearestVertex(to);
@@ -429,11 +438,8 @@ list<Roadmap::vertex_t>  Roadmap::shortestPath( std::vector<double> from, std::v
 }
 
 list<Roadmap::vertex_t>  Roadmap::shortestWorkspacePath( std::vector<double> from, std::vector<double> to ) {
-	cout << "asdf" << endl;
 	Roadmap::vertex_t from_desc = nearestWorkspaceVertex(from);
-	cout << "asdf" << endl;
 	Roadmap::vertex_t to_desc = nearestWorkspaceVertex(to);
-	cout << "asdf" << endl;
 	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
 	cout << "asdf" << endl;
 	return path;
@@ -452,7 +458,8 @@ vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex
 Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _x)
 {
 //	if ( _x.size() != dim_x ) { throw StringException("wrong size state vector"); }
-
+	if ( workspace_tree.size() == 0 ) { throw StringException("nothing in tree"); }
+	if (_x.size() != 3) { throw StringException("Nothing in X"); }
 	std::cout << "(" << _x.size() << "," << workspace_tree.size() << " " << tree.size() << std::endl;
 
 

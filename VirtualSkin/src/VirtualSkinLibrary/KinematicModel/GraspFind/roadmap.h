@@ -194,6 +194,7 @@ public:
 	std::list<Roadmap::vertex_t> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
 	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
 	std::list<Roadmap::vertex_t> shortestWorkspacePath( std::vector<double> from, std::vector<double> to );
+	std::list<Roadmap::vertex_t>  shortestConfigurationWorkspacePath( std::vector<double> from, std::vector<double> to );
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 

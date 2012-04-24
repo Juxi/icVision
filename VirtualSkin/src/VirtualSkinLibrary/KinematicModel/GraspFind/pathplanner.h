@@ -64,6 +64,7 @@ public:
 
 		if (d_map_file.size())
 			load_map(d_map_file);
+		add_bullshit();
 	}
 
 	void load_map(std::string filename) {
@@ -87,6 +88,8 @@ public:
 
 	std::vector<std::vector<double> > find_path(std::vector<double> source, std::vector<double> target);
 	std::vector<std::vector<double> > find_workspace_path(std::vector<double> source, std::vector<double> target);
+	std::vector<std::vector<double> > find_configuration_workspace_path(std::vector<double> source, std::vector<double> target);
+
 
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
 
@@ -96,7 +99,7 @@ public:
 
 	void add_bullshit() {
 		for (float z(-.2); z < .2; z += .03)
-			d_graspfinder.simulator().add_ball(-.3, -0.1, z);
+			d_graspfinder.simulator().add_ball(-.3, 0.13, z);
 	}
 
 	std::vector<double> get_scale_vector();
