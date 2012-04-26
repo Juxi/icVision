@@ -265,7 +265,7 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 				
 				freeColor = Qt::blue;
 				freeColor = freeColor.lighter();
-				//freeColor.setBlue(130);
+
 				collidingColor = freeColor;
                 
                 freeColor.setAlphaF(0.5);

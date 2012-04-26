@@ -42,10 +42,8 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 	//printf("Loading yarp robot.\n");
 	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
 
-	//printf("Opening yarp robot\n");
 	robot->open( fileName, verbose );
 	
-
 	robots.append( robot );
 	
 	mutex.unlock();

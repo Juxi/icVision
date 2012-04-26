@@ -402,9 +402,7 @@ int Model::computePose()
 	
 	emit computedState(col_count);
 	
-//	printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
-	
-//	msleep(100);
+	//printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
 	
 	return reflex_col_count;
 }

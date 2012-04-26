@@ -38,6 +38,7 @@ public:
 	
 	std::vector<double>  withinLimits( const std::vector<double>& poss );
 	bool positionMove( const std::vector<double>& poss );
+	bool velocityMove( const std::vector<double>& v );
 	//bool positionMove( const std::vector<double>& poss, const std::vector<double>& vels );		//!< Moves the device to a specified position
 
 	bool setJointMask( const std::vector<bool>& vals );

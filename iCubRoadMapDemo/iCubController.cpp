@@ -103,6 +103,22 @@ void iCubController::setVelocity( int v )
 	right_arm.setVelocity(v);
 }
 
+bool iCubController::velocityMove( std::vector<double> v )
+{ 
+	if ( !isValid() ) { return 0; }
+	
+	if ( v.size() != getNumJoints() )
+		return 0;
+	
+	std::vector<double> torsoCmd, leftCmd, rightCmd;
+	if ( !chop( v, torsoCmd, rightCmd, leftCmd ) ) { printf("chop failed\n"); return 0; }
+	if ( !torso.velocityMove(torsoCmd) ) { printf("torso move failed\n"); return 0; }
+	if ( !left_arm.velocityMove(leftCmd) ) { printf("left arm move failed\n"); return 0; }
+	if ( !right_arm.velocityMove(rightCmd) ) { printf("right arm move failed\n"); return 0; }
+	
+	return 1;
+}
+
 bool iCubController::positionMove( std::vector<double> poss )
 { 
 	if ( !isValid() ) { return 0; }

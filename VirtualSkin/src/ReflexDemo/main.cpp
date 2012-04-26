@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 	KinematicModel::Robot* nonYarpRobot = NULL;
 	
 	// according to this
-	bool useYarp = false;
+	bool useYarp = true;
 	
 	int result = 0;
 	
@@ -68,8 +68,10 @@ int main(int argc, char *argv[])
 			// Load a robot model from file
 			if ( robotFile != "" )
 			{
-				printf( "loading robot model from: %s\n", robotFile.toStdString().c_str() );
+				printf( "\nLOADING ROBOT MODEL FROM: %s\n", robotFile.toStdString().c_str() );
 				yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
+				//printf("done loading robot\n");
+				
 				yarpRobot->openCollisionPort("/collisions");
 				yarpRobot->openObservationPort("/observations");
 				
