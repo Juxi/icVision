@@ -1,4 +1,4 @@
-#include "yarpgraspcontroller.h"
+#include "yarpposecontroller.h"
 
 #include "sphere.h"
 #include "cylinder.h"
@@ -21,7 +21,7 @@ using namespace yarp::dev;
 using namespace KinematicModel;
 using namespace std;
 
-void YarpGraspController::load_config(int argc, char **argv) {
+void YarpPoseController::load_config(int argc, char **argv) {
 	Property command_config;
     command_config.fromCommand(argc, argv);
     Property file_config;
@@ -81,7 +81,7 @@ void YarpGraspController::load_config(int argc, char **argv) {
 
 }
 
-void YarpGraspController::load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) {
+void YarpPoseController::load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) {
 	cout << "loading path planner" << endl;
 	if (d_path_planner) {
 		delete d_path_planner;
@@ -91,7 +91,7 @@ void YarpGraspController::load_path_planner(KinematicModel::Model& model, Kinema
 	cout << "loaded " << endl;
 }
 
-Bottle YarpGraspController::path_to_bottle(vector<vector<vector<double> > > &path) {
+Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path) {
 	Bottle root;
 	for (int i = 0; i < path.size(); i++) {
 		Bottle node_l1;
@@ -106,7 +106,7 @@ Bottle YarpGraspController::path_to_bottle(vector<vector<vector<double> > > &pat
 	return root;
 }
 
-void YarpGraspController::follow_path(vector<vector<double> > &path) {
+void YarpPoseController::follow_path(vector<vector<double> > &path) {
 	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.size(); ++i) {
 		vector<double> pose(path[i]);
@@ -124,7 +124,7 @@ void YarpGraspController::follow_path(vector<vector<double> > &path) {
 	cout << "done" << endl;
 }
 
-vector<double> YarpGraspController::get_current_pose() {
+vector<double> YarpPoseController::get_current_pose() {
 	Bottle command;
 	command.addString("get");
 	command.addString("pose");
@@ -139,7 +139,7 @@ vector<double> YarpGraspController::get_current_pose() {
 	return result_vector;
 }
 
-void YarpGraspController::run () {
+void YarpPoseController::run () {
 	cout << "Opening port: " << d_portname << endl;
 	if (!d_port.open(d_portname.c_str()))
 		throw StringException("Couldnt open rpc Server");
@@ -302,11 +302,11 @@ void YarpGraspController::run () {
 //			counter = (counter + 1) % the_path.size();
 //		}
 
-void YarpGraspController::plan_path(vector<double> workspace_source, vector<double> workspace_goal){
+void YarpPoseController::plan_path(vector<double> workspace_source, vector<double> workspace_goal){
 	vector<vector<double> > path = d_path_planner->find_workspace_path(workspace_source, workspace_goal);
 }
 
-Bottle YarpGraspController::poses_to_bottle(vector<vector<double> > &path) {
+Bottle YarpPoseController::poses_to_bottle(vector<vector<double> > &path) {
 	Bottle b;
 //	b.clear();
 	for (size_t p(0); p < path.size(); ++p) {
@@ -320,7 +320,7 @@ Bottle YarpGraspController::poses_to_bottle(vector<vector<double> > &path) {
 	return b;
 }
 
-std::vector<double> YarpGraspController::bottle_to_vector(yarp::os::Value &val) {
+std::vector<double> YarpPoseController::bottle_to_vector(yarp::os::Value &val) {
 	std::vector<double> values;
     if (!val.isList()) { throw StringException("Value not a list"); }
     Bottle* val_pointer = val.asList();

@@ -15,40 +15,40 @@
 using namespace KinematicModel;
 using namespace std;
 
-int grasp_pose_fast_test(Model &model, Robot &robot, QApplication &app) {
-	GraspThread grasp_thread(model, robot, true, true);
+int pose_pose_fast_test(Model &model, Robot &robot, QApplication &app) {
+	PoseThread pose_thread(model, robot, true, true);
 
-	grasp_thread.start();
+	pose_thread.start();
 
 	int result = app.exec();						// run the Qt application
 
-	grasp_thread.stop();
+	pose_thread.stop();
 	model.stop();
 
 	return result;
 }
 
-int grasp_pose_test(Model &model, Robot &robot, QApplication &app) {
-	GraspThread grasp_thread(model, robot, false);
+int pose_pose_test(Model &model, Robot &robot, QApplication &app) {
+	PoseThread pose_thread(model, robot, false);
 
-	grasp_thread.start();
+	pose_thread.start();
 
 	int result = app.exec();						// run the Qt application
 
-	grasp_thread.stop();
+	pose_thread.stop();
 	model.stop();
 
 	return result;
 }
 
-int grasp_pose_test2(Model &model, Robot &robot, QApplication &app) {
-	GraspThread grasp_thread(model, robot, true);
+int pose_pose_test2(Model &model, Robot &robot, QApplication &app) {
+	PoseThread pose_thread(model, robot, true);
 
-	grasp_thread.start();
+	pose_thread.start();
 
 	int result = app.exec();						// run the Qt application
 
-	grasp_thread.stop();
+	pose_thread.stop();
 	model.stop();
 
 	return result;
@@ -56,13 +56,13 @@ int grasp_pose_test2(Model &model, Robot &robot, QApplication &app) {
 
 int map_build_test(Model &model, Robot &robot, QApplication &app) {
 	std::cout << "map build test" << std::endl;
-	MapThread grasp_thread(model, robot);
+	MapThread pose_thread(model, robot);
 
-	grasp_thread.start();
+	pose_thread.start();
 
 	int result = app.exec();						// run the Qt application
 
-	grasp_thread.stop();
+	pose_thread.stop();
 	model.stop();
 
 	return result;
@@ -117,16 +117,16 @@ int main(int argc, char *argv[])
 	model.loadWorld( QString(argv[2]), false );
 
 
-	if (string(argv[3]) == "grasp") {
-		return grasp_pose_test(model, robot, app);
+	if (string(argv[3]) == "pose") {
+		return pose_pose_test(model, robot, app);
 	}
 
-	if (string(argv[3]) == "grasp2") {
-		return grasp_pose_test2(model, robot, app);
+	if (string(argv[3]) == "pose2") {
+		return pose_pose_test2(model, robot, app);
 	}
 
-	if (string(argv[3]) == "grasp2_fast") {
-		return grasp_pose_fast_test(model, robot, app);
+	if (string(argv[3]) == "pose2_fast") {
+		return pose_pose_fast_test(model, robot, app);
 	}
 
 	if (string(argv[3]) == "map") {

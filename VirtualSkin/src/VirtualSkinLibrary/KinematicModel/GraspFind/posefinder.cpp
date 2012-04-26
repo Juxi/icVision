@@ -1,4 +1,4 @@
-#include "graspfinder.h"
+#include "posefinder.h"
 
 #include <iostream>
 #include <algorithm>
@@ -12,18 +12,18 @@
 
 using namespace std;
 
-vector<double> GraspFinder::best_point() {
+vector<double> PoseFinder::best_point() {
 	return d_best_point;
 }
 
-Matrix GraspFinder::get_start_pos(int dim) {
+Matrix PoseFinder::get_start_pos(int dim) {
 	Matrix pt = Matrix::zeros(dim);
 	for (size_t i(0); i < d_simulator.d_home_pos.size(); ++i)
 	  pt[i] = d_simulator.d_home_pos[i];
 	return pt;
 }
 
-void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
 	try
 	{
 		int dim = d_simulator.total_motors();
@@ -45,7 +45,7 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 				break;
 			}
 			n_evaluations += population_size;
-//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
+			//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
 		while (d_nes.bestFitness() > fitness_threshold && d_nes.evaluations() < maxevals && d_nes.variance() > variance_threshold);
 
@@ -57,7 +57,7 @@ void GraspFinder::find_pose(unsigned int maxevals, double fitness_threshold, dou
 	}
 }
 
-void GraspFinder::set_variance(double std) {
+void PoseFinder::set_variance(double std) {
 	Matrix sigma = Matrix::ones(d_nes.dim());
 	sigma *= std;
 

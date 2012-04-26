@@ -3,7 +3,7 @@
 #include <cassert>
 #include <string>
 
-#include "yarpgraspcontroller.h"
+#include "yarpposecontroller.h"
 
 using namespace std;
 
@@ -12,16 +12,16 @@ int main(int argc, char *argv[])
 	bool visualize = true;
 	QApplication app(argc, argv, visualize);	// create the QT application
 
-	YarpGraspController yarp_grasp_controller(argc, argv);
+	YarpPoseController yarp_pose_controller(argc, argv);
 
-	cout << "starting grasp thread" << endl;
-	yarp_grasp_controller.start();
+	cout << "starting pose thread" << endl;
+	yarp_pose_controller.start();
 
 	cout << "starting app" << endl;
 	int result = app.exec();
 
-	cout << "stopping grasp thread" << endl;
-	yarp_grasp_controller.stop();
+	cout << "stopping pose thread" << endl;
+	yarp_pose_controller.stop();
 
 	return result;
 }

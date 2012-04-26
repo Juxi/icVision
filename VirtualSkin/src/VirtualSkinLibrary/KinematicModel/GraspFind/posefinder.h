@@ -1,5 +1,5 @@
-#ifndef GRASPFINDER_H_
-#define GRASPFINDER_H_
+#ifndef POSEFINDER_H_
+#define POSEFINDER_H_
 
 #include <cmath>
 #include <iostream>
@@ -13,17 +13,17 @@
 #include "simulator.h"
 #include "xnes.h"
 
-class GraspFinder
+class PoseFinder
 {
 public:
-	GraspFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot) :
+	PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot) :
 		d_simulator(model, robot),
 		d_pose_fitness_function(d_simulator),
 		d_nes(d_pose_fitness_function, false, false)
 	{
 	}
 
-	~GraspFinder() {}
+	~PoseFinder() {}
 
 	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
 
@@ -66,4 +66,4 @@ private:
 };
 
 #endif
-/** @} */
+

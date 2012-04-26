@@ -6,7 +6,7 @@
 #include <algorithm>
 
 #include "sliderwindow.h"
-#include "graspfinder.h"
+#include "posefinder.h"
 #include "path_extractor.h"
 #include "poses_reader.h"
 
@@ -15,41 +15,41 @@ inline bool exists(std::string filename) {
 	return in_file;
 }
 
-class GraspThread : public QThread {
+class PoseThread : public QThread {
 	bool keepRunning;
 	bool verbose;
 	bool d_fast;
-	GraspFinder d_grasp_finder;
+	PoseFinder d_pose_finder;
 
 public:
-	GraspThread(KinematicModel::Model& model,  KinematicModel::Robot& robot, bool with_things, bool fast = false)
-	: verbose(false), keepRunning(true), d_grasp_finder(model, robot), d_fast(fast)
+	PoseThread(KinematicModel::Model& model,  KinematicModel::Robot& robot, bool with_things, bool fast = false)
+	: verbose(false), keepRunning(true), d_pose_finder(model, robot), d_fast(fast)
 	{
 		if (with_things) {
 			for (float z(-.2); z < .2; z += .03)
-				d_grasp_finder.simulator().add_ball(-.2, .15, z);
+				d_pose_finder.simulator().add_ball(-.2, .15, z);
 			for (float z(-.2); z < .2; z += .03)
-				d_grasp_finder.simulator().add_ball(-.2, .3, z);
+				d_pose_finder.simulator().add_ball(-.2, .3, z);
 		}
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 10.);
+		d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 10.);
 
-		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
+		d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
 
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
+		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.simulator().add_point(-0.237605, 0.234241,  0.1390077);
+		d_pose_finder.simulator().add_point(-0.237605, 0.234241,  0.1390077);
 
-		d_grasp_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
+		d_pose_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.add_constraint(new CollisionConstraint());
+		d_pose_finder.add_constraint(new CollisionConstraint());
 	}
 
 
 	void stop()
 	{
-		printf("GraspFinder thread is shutting down ");
+		printf("PoseFinder thread is shutting down ");
 		keepRunning = false;
 		while ( isRunning() )
 		{
@@ -64,9 +64,9 @@ public:
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 		if (d_fast)
-			d_grasp_finder.find_pose(100000, 0., .04, 50);
+			d_pose_finder.find_pose(100000, 0., .04, 50);
 		else
-			d_grasp_finder.find_pose(100000, 0., .4, 150);
+			d_pose_finder.find_pose(100000, 0., .4, 150);
 	}
 };
 
@@ -74,7 +74,7 @@ class MapThread : public QThread {
 	bool keepRunning;
 	bool verbose;
 
-	GraspFinder d_grasp_finder;
+	PoseFinder d_pose_finder;
 	MapBuildConstraint *d_map_build_constraint;
 	std::vector<std::vector<double> > *d_points;
 	std::vector<std::vector<double> > d_configuration_points;
@@ -82,142 +82,32 @@ class MapThread : public QThread {
 	std::string d_marker;
 
 public:
-	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
-	: verbose(false), keepRunning(true), d_grasp_finder(model, robot)
-	{
-//		nullspace_function();
-//		hold_something_function();
-//		hand_left_function();
-		hand_right_function();
-	}
+	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
 
-	void nullspace_function() {
-		std::cout << "Building constraints" << std::endl;
-		d_marker = "head";
-		d_map_build_constraint = new MapBuildConstraint("head", 3, .02);
-		d_points = &(d_map_build_constraint->points());
+	void nullspace_function();
 
-//		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .5);
+	void hold_something_function();
 
-//		d_grasp_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
-//		d_grasp_finder.add_constraint(new PointingMarkerConstraint("right_hand", "left_hand", .1, 1), .1);
+	void hand_left_function();
 
-		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2176, -0.1642, 0.16900)), 3.);
-		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2176, 0.1642, 0.16900)), 3.);
-
-		//pointing straight
-		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
-
-		//keeping straight
-		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-
-	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-//		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
-
-		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
-
-		d_grasp_finder.add_constraint(d_map_build_constraint);
-
-//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-	}
-
-	void hold_something_function() {
-		std::cout << "Building constraints" << std::endl;
-		d_map_build_constraint = new MapBuildConstraint("left_hand", 3, .04);
-		d_marker = "left_hand";
-		d_points = &(d_map_build_constraint->points());
-
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .4);
-
-		d_grasp_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
-		d_grasp_finder.add_constraint(new PointingMarkerConstraint("right_hand", "left_hand", .1, 1), .1);
-
-//		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
-
-//		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
-
-	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-//		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
-
-		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
-
-		d_grasp_finder.add_constraint(d_map_build_constraint);
-
-//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-
-	}
-
-	void hand_left_function() {
-		std::cout << "Building constraints" << std::endl;
-		d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .04);
-		d_marker = "left_hand";
-
-		d_points = &(d_map_build_constraint->points());
-
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .1);
-
-		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
-
-		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
-
-	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
-
-		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
-
-		d_grasp_finder.add_constraint(d_map_build_constraint);
-
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-
-	}
-
-	void hand_right_function() {
-		std::cout << "Building constraints" << std::endl;
-		d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04);
-		d_marker = "right_hand";
-		d_points = &(d_map_build_constraint->points());
-
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), .1);
-
-		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
-
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-
-	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		d_grasp_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 5.);
-
-		d_grasp_finder.add_constraint(new CollisionConstraint(), 1.);
-
-		d_grasp_finder.add_constraint(d_map_build_constraint);
-
-		d_grasp_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
-
-		d_grasp_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));
-
-	}
+	void hand_right_function();
 
 	void add_best_pose() {
-		std::vector<double> best_point = d_grasp_finder.best_point();
-		KinematicModel::RobotObservation observation = d_grasp_finder.simulator().robot().observe();
-		std::vector<double> position = observation.markerPosition(QString(d_marker.c_str()));
+		std::vector<double> best_point = d_pose_finder.best_point();
+		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
+		std::vector<double> position = observation.markerPosition(QString(d_map_build_constraint->marker().c_str()));
 
 		d_configuration_points.push_back(best_point);
-		d_points->push_back(position);
-
-		d_grasp_finder.simulator().add_point(position[0], position[1], position[2]);
+		d_map_build_constraint->add_point(position, best_point);
+		
+		d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
 	}
 
 	void store_points(std::string filename) {
 		poses_map_t store_map;
 		std::vector<std::vector<double> > real_poses = convert_to_real(d_configuration_points);
 		for (size_t i(0); i < real_poses.size(); ++i) {
-			std::map<std::string, std::vector<double> > a_motor_map(d_grasp_finder.simulator().to_motor_named_map(real_poses[i]));
+			std::map<std::string, std::vector<double> > a_motor_map(d_pose_finder.simulator().to_motor_named_map(real_poses[i]));
 			std::string name("CFGSPACE_");
 			std::map<std::string, std::vector<double> >::iterator it(a_motor_map.begin());
 			for (; it != a_motor_map.end(); ++it) {
@@ -235,21 +125,21 @@ public:
 	void load_points(std::string filename) {
 		poses_map_t poses_map = read_poses(filename);
 
-		*d_points = poses_map["WORKSPACE"];
 		size_t n_poses = poses_map["WORKSPACE"].size();
 
 		d_configuration_points = std::vector<std::vector<double> >(n_poses);
-		std::cout << "test" << std::endl;
-		for (size_t i(0); i < d_grasp_finder.simulator().total_parts(); ++i) {
+		
+		for (size_t i(0); i < d_pose_finder.simulator().total_parts(); ++i) {
 			std::string name("CFGSPACE_");
-			name += d_grasp_finder.simulator().part_name(i);
+			name += d_pose_finder.simulator().part_name(i);
 			std::transform(name.begin(), name.end(), name.begin(), toupper);
 			std::vector<std::vector<double> > &part_configuration(poses_map[name]);
 			for (size_t n(0); n < part_configuration.size(); ++n)
 				std::copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_configuration_points[n]));
 		}
-		std::cout << "test" << std::endl;
 
+		d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
+		
 		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
 			std::cout << d_configuration_points[0][i] << " ";
 		std::cout << std::endl;
@@ -258,7 +148,7 @@ public:
 		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
 			std::cout << d_configuration_points[0][i] << " ";
 		for (size_t i(0); i < d_points->size(); ++i)
-			d_grasp_finder.simulator().add_point((*d_points)[i][0], (*d_points)[i][1], (*d_points)[i][2]);
+			d_pose_finder.simulator().add_point((*d_points)[i][0], (*d_points)[i][1], (*d_points)[i][2]);
 
 		std::cout << "N Points: " << d_points->size() << std::endl;
 		std::cout << "Dim Points: " << d_points->at(0).size() << std::endl;
@@ -268,21 +158,21 @@ public:
 	std::vector<std::vector<double> > convert_to_real(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i)
-			out.push_back(d_grasp_finder.simulator().normal_to_real_motors(in[i]));
+			out.push_back(d_pose_finder.simulator().normal_to_real_motors(in[i]));
 		return out;
 	}
 
 	std::vector<std::vector<double> > convert_to_normal(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i) {
-			out.push_back(d_grasp_finder.simulator().real_to_normal_motors(in[i]));
+			out.push_back(d_pose_finder.simulator().real_to_normal_motors(in[i]));
 		}
 		return out;
 	}
 
 	void stop()
 	{
-		printf("GraspFinder thread is shutting down ");
+		printf("PoseFinder thread is shutting down ");
 		keepRunning = false;
 		while ( isRunning() )
 		{
@@ -297,7 +187,7 @@ public:
 		std::vector<std::vector<double> > filtered_points;
 
 		for (size_t i(0); i < d_configuration_points.size(); ++i) {
-			std::vector<double> pose = d_configuration_points[i];//d_grasp_finder.simulator().home_pos();
+			std::vector<double> pose = d_configuration_points[i];//d_pose_finder.simulator().home_pos();
 			simulator.set_motors(pose);
 			double n_collisions = simulator.computePose();
 			if (n_collisions) {
@@ -321,30 +211,30 @@ class OnlineThread : public QThread {
 	bool keepRunning;
 	bool verbose;
 
-	GraspFinder d_grasp_finder;
+	PoseFinder d_pose_finder;
 	SliderWindow slider_window;
 
 	double d_test;
 public:
 	OnlineThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
-	: verbose(false), keepRunning(true), d_grasp_finder(model, robot)
+	: verbose(false), keepRunning(true), d_pose_finder(model, robot)
 	{
 		PositionConstraint *position_constraint = new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900));
 
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
+		d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 1.);
 
-		d_grasp_finder.add_constraint(position_constraint);
+		d_pose_finder.add_constraint(position_constraint);
 
 		OrientationConstraint *orientation_constraint = new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.));
-		d_grasp_finder.add_constraint(orientation_constraint);
+		d_pose_finder.add_constraint(orientation_constraint);
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.add_constraint(new PlaneConstraint("left_hand", 2, .0), 10.);
+		d_pose_finder.add_constraint(new PlaneConstraint("left_hand", 2, .0), 10.);
 
-		d_grasp_finder.add_constraint(new CollisionConstraint());
+		d_pose_finder.add_constraint(new CollisionConstraint());
 
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
+		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
 
 		slider_window.show();
 
@@ -363,7 +253,7 @@ public:
 
 	void stop()
 	{
-		printf("GraspFinder thread is shutting down ");
+		printf("PoseFinder thread is shutting down ");
 		keepRunning = false;
 		while ( isRunning() )
 		{
@@ -381,7 +271,7 @@ public:
 
 		while (true) {
 			if (slider_window.changed()) {
-				d_grasp_finder.find_pose(2000000, 0., 1.0e-6, .10, 50);
+				d_pose_finder.find_pose(2000000, 0., 1.0e-6, .10, 50);
 				slider_window.changed(false);
 				std::cout << "Found pose" << std::endl;
 			}
@@ -394,12 +284,12 @@ public:
 public slots:
 	void reset_variance() {
 		std::cout << "RESETTING VARIANCE" << std::endl;
-		d_grasp_finder.set_variance(.04);
+		d_pose_finder.set_variance(.04);
 	}
 };
 
 class StoreFilter : public EvaluationFilter{
-public:
+ public:
 	std::vector<std::vector<double> > d_configurations;
 	std::vector<double> d_fitnesses;
 	std::vector<int> d_collisions;
@@ -438,7 +328,7 @@ class PathThread : public QThread {
 	bool keepRunning;
 	bool verbose;
 
-	GraspFinder d_grasp_finder;
+	PoseFinder d_pose_finder;
 	MapBuildConstraint *d_map_build_constraint;
 	std::vector<std::vector<double> > *d_points;
 	std::vector<std::vector<double> > d_configuration_points;
@@ -448,49 +338,49 @@ class PathThread : public QThread {
 public:
 	PathThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 	: verbose(false), keepRunning(true),
-	  d_grasp_finder(model, robot)
+	  d_pose_finder(model, robot)
 	{
 		if (true) {
 			for (float z(-.2); z < .2; z += .03)
-				d_grasp_finder.simulator().add_ball(-.2, .25, z);
+				d_pose_finder.simulator().add_ball(-.2, .25, z);
 //			for (float z(-.2); z < .2; z += .03)
-//				d_grasp_finder.simulator().add_ball(-.2, .3, z);
+//				d_pose_finder.simulator().add_ball(-.2, .3, z);
 		}
 		float x(-0.2076), y(0.2942), z(0.13900);
 
-		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 10.);
+		d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 10.);
 
-		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
+		d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
 
-		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
+		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-		d_grasp_finder.simulator().add_point(x, y, z);
+		d_pose_finder.simulator().add_point(x, y, z);
 
-		d_grasp_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(x, y, z)));
+		d_pose_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(x, y, z)));
 
-		d_grasp_finder.add_constraint(new CollisionConstraint(), 2.);
+		d_pose_finder.add_constraint(new CollisionConstraint(), 2.);
 //
-//		d_grasp_finder.add_constraint(new HomePoseConstraint(d_grasp_finder.simulator().d_home_pos), 1.);
+//		d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 1.);
 //
-//		d_grasp_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
+//		d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
 //
-//		d_grasp_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
+//		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
 //
 //	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 //
-//		d_grasp_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+//		d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
 //
-//		d_grasp_finder.add_constraint(new CollisionConstraint());
+//		d_pose_finder.add_constraint(new CollisionConstraint());
 //
-		d_grasp_finder.set_filter(new StoreFilter("position"));
+		d_pose_finder.set_filter(new StoreFilter("position"));
 	}
 
 
 	void stop()
 	{
-		printf("GraspFinder thread is shutting down ");
+		printf("PoseFinder thread is shutting down ");
 		keepRunning = false;
 		while ( isRunning() )
 		{
@@ -504,15 +394,15 @@ public:
 	{
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
-		d_grasp_finder.find_pose(10000, 0.,.1, 100);
-//		d_grasp_finder.find_pose(10000, 0., .04, 50);
+		d_pose_finder.find_pose(10000, 0.,.1, 100);
+//		d_pose_finder.find_pose(10000, 0., .04, 50);
 
-		StoreFilter &store_filter = reinterpret_cast<StoreFilter&>(d_grasp_finder.get_filter());
+		StoreFilter &store_filter = reinterpret_cast<StoreFilter&>(d_pose_finder.get_filter());
 		std::cout << "n_points: " << store_filter.d_configurations.size() << std::endl;
 
 		std::vector<std::vector<double> > path;
 		try {
-			path = extract_path(store_filter.configurations(), store_filter.fitnesses(), store_filter.collisions(), d_grasp_finder.simulator().home_pos(), d_grasp_finder.best_point());
+			path = extract_path(store_filter.configurations(), store_filter.fitnesses(), store_filter.collisions(), d_pose_finder.simulator().home_pos(), d_pose_finder.best_point());
 		}
 		catch (char const *message) {
 			std::cout << message << std::endl;
@@ -523,10 +413,10 @@ public:
 				std::cout << "step " << i << "/" << path.size() << std::endl;
 				if (i)
 					std::cout << "distance: " << Constraint::pos_error(path[i-1], path[i]) << std::endl;
-				d_grasp_finder.simulator().set_motors(path[i]);
-				d_grasp_finder.simulator().computePose();
+				d_pose_finder.simulator().set_motors(path[i]);
+				d_pose_finder.simulator().computePose();
 
-				std::vector<double> position = d_grasp_finder.simulator().robot().observe().markerPosition(QString("right_hand"));
+				std::vector<double> position = d_pose_finder.simulator().robot().observe().markerPosition(QString("right_hand"));
 				std::cout << "pos" << std::endl;
 				for (size_t i(0); i < position.size(); ++i)
 				  std::cout << position[i] << " ";

@@ -5,7 +5,7 @@
 FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 	
-SET ( src_files graspfinder.cpp 
+SET ( src_files posefinder.cpp 
 		xnes.cpp 
 		roadmap.cpp 
 		sliderwindow.cpp
@@ -14,21 +14,22 @@ SET ( src_files graspfinder.cpp
 		iCubController.cpp
 		partController.cpp
 		simulator.cpp
-		yarpgraspcontroller.cpp
+		yarpposecontroller.cpp
 		demothreads.cpp
+		constraints.cpp
 )
 
-SET ( hdr_files	graspfinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h pathplanner.h iCubController.h partController.h)
+SET ( hdr_files	posefinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h pathplanner.h iCubController.h partController.h)
 
-SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpgraspcontroller.h iCubController.h )
+SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpposecontroller.h iCubController.h )
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
 
-ADD_EXECUTABLE ( GraspFind ${hdr_files} ${src_files} main.cpp)
-ADD_EXECUTABLE ( GraspControl ${hdr_files} ${src_files} yarpgraspcontroller.h controller_main.cpp)
-ADD_DEPENDENCIES( GraspFind WorldModel )
-ADD_DEPENDENCIES( GraspControl WorldModel )
+ADD_EXECUTABLE ( PoseFind ${hdr_files} ${src_files} main.cpp)
+ADD_EXECUTABLE ( PoseControl ${hdr_files} ${src_files} yarpposecontroller.h controller_main.cpp)
+ADD_DEPENDENCIES( PoseFind WorldModel )
+ADD_DEPENDENCIES( PoseControl WorldModel )
 
-TARGET_LINK_LIBRARIES ( GraspFind 	KinematicModel
+TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}
@@ -37,7 +38,7 @@ TARGET_LINK_LIBRARIES ( GraspFind 	KinematicModel
 					gmp
 )
 
-TARGET_LINK_LIBRARIES ( GraspControl 	KinematicModel
+TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}
@@ -46,5 +47,5 @@ TARGET_LINK_LIBRARIES ( GraspControl 	KinematicModel
 					gmp
 )
 
-INSTALL ( TARGETS GraspFind DESTINATION ${CMAKE_SOURCE_DIR}/bin )
-INSTALL ( TARGETS GraspControl DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS PoseFind DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS PoseControl DESTINATION ${CMAKE_SOURCE_DIR}/bin )

@@ -10,7 +10,7 @@
 
 #include "roadmap.h"
 #include "poses_reader.h"
-#include "graspfinder.h"
+#include "posefinder.h"
 
 template <typename T>
 inline std::vector<T> string_to_vector(std::string str) {
@@ -36,7 +36,7 @@ class PathPlanner {
 	typedef Roadmap::edge_t edge_t;
 
 
-	GraspFinder d_graspfinder;
+	PoseFinder d_posefinder;
 	Roadmap d_roadmap;
 
 	poses_map_t d_poses;
@@ -48,7 +48,7 @@ class PathPlanner {
 public:
 
 	PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) :
-		  d_graspfinder(model, robot),
+		  d_posefinder(model, robot),
 		  d_map_file(map_file)
 	{
 		d_config_names.push_back("CFGSPACE_TORSO");
@@ -99,7 +99,7 @@ public:
 
 	void add_bullshit() {
 		for (float z(-.2); z < .2; z += .03)
-			d_graspfinder.simulator().add_ball(-.3, 0.13, z);
+			d_posefinder.simulator().add_ball(-.3, 0.13, z);
 	}
 
 	std::vector<double> get_scale_vector();

@@ -85,7 +85,7 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 
 //void PathPlanner::update_map() {
 //	//get simulator
-//	Simulator &simulator(d_graspfinder.simulator());
+//	Simulator &simulator(d_posefinder.simulator());
 //
 //	//loop over vertexes
 //	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
@@ -119,7 +119,7 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 
 void PathPlanner::update_map() {
 	//get simulator
-	Simulator &simulator(d_graspfinder.simulator());
+	Simulator &simulator(d_posefinder.simulator());
 
 	//loop over vertexes
 	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));

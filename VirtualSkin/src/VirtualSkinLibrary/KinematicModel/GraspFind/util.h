@@ -11,4 +11,11 @@ inline void print_vector(std::vector<T> &vec) {
   std::cout << std::endl;
 }
 
+struct LessDereference {
+  template <class T>
+  bool operator()(const T * lhs, const T * rhs) const {
+    return *lhs < *rhs;
+  }
+};
+
 #endif

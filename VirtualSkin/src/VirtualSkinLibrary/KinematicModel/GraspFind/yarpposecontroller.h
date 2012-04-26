@@ -1,5 +1,5 @@
-#ifndef __YARP_GRASP_CONTROLLER__
-#define __YARP_GRASP_CONTROLLER__
+#ifndef __YARP_POSE_CONTROLLER__
+#define __YARP_POSE_CONTROLLER__
 
 #include "model.h"
 
@@ -18,7 +18,7 @@ int const VOCAB_UPDATE = VOCAB2('u', 'p');
 int const VOCAB_GET_RANGE = VOCAB3('r', 'a', 'n');
 
 
-class YarpGraspController :  public QThread {
+class YarpPoseController :  public QThread {
 	Q_OBJECT
 	PathPlanner *d_path_planner;
 	KinematicModel::Model *d_model;
@@ -30,12 +30,12 @@ class YarpGraspController :  public QThread {
     std::string d_portname, d_mover_portname;
 
 public:
-	YarpGraspController(int argc, char **argv) : d_path_planner(0), d_model(0)
+	YarpPoseController(int argc, char **argv) : d_path_planner(0), d_model(0)
 	{
 		load_config(argc, argv);
 	}
 
-	~YarpGraspController() {
+	~YarpPoseController() {
 		if (d_path_planner)
 			delete d_path_planner;
 	}
