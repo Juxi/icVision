@@ -43,5 +43,6 @@ ENDIF ( WIN32 )
 ### Parse the directories where build targets are ###
 ADD_SUBDIRECTORY ( VirtualSkinLibrary )
 ADD_SUBDIRECTORY ( ReflexDemo )
+ADD_SUBDIRECTORY ( PoseFinder )
 #ADD_SUBDIRECTORY ( RoadmapDemo )
 #ADD_SUBDIRECTORY ( iCubBabble )
