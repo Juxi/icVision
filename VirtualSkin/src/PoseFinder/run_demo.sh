@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./GraspFind ../../../../xml/icubSim_grasp.xml ../../../../xml/world.xml map
+./PoseFind ../../xml/icubSim_grasp.xml ../../xml/world.xml map
