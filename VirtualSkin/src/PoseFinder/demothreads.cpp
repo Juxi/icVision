@@ -14,7 +14,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 
 void MapThread::run()
 {
-  string load_file_name("map.save");
+  string load_file_name("maps/nullspace.save");
   string store_file_name("map.save");
   if (exists(load_file_name)) {
     std::cout << "loading Map " << load_file_name << std::endl;
@@ -33,7 +33,7 @@ void MapThread::run()
   }
 
   size_t n(0);
-  bool test(false);
+  bool test(true);
   if (test)
     while (true) {
       //				size_t n(qrand() % d_configuration_points.size());
