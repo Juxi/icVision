@@ -27,11 +27,14 @@ public:
 	std::vector<double> d_weights;
 	EvaluationFilter *d_filter;
 
+	bool d_debug;
+
 	public:
 
 	PoseFitnessFunction(Simulator &simulator) :
 		d_simulator(simulator),
-		d_filter(new DummyFilter())
+		  d_filter(new DummyFilter()),
+		  d_debug(false)
 	{
 	}
 
@@ -56,6 +59,8 @@ public:
 		return *d_filter;
 	}
 
+	bool &debug() {return d_debug;}
+
 	double eval(const Matrix& point) const
 	{
 		std::vector<double> motor_values(point.get_data());
@@ -67,9 +72,15 @@ public:
 
 		double fitness(0.0);
 		KinematicModel::RobotObservation observation(d_simulator.robot().observe());
-		for (size_t i(0); i < d_constraints.size(); ++i)
+		for (size_t i(0); i < d_constraints.size(); ++i) {
 			fitness += d_weights[i] * d_constraints[i]->evaluate(motor_values, observation, n_collisions);
-
+		}
+		if (d_debug) {
+		  for (size_t i(0); i < d_constraints.size(); ++i)
+		    std::cerr << d_constraints[i]->name() << " = " << d_weights[i] << "*" << d_constraints[i]->evaluate(motor_values, observation, n_collisions) << "  ";
+		  std::cerr << std::endl;
+		}
+				
 		(*d_filter)(motor_values, fitness, n_collisions, observation);
 		return fitness;
 	}

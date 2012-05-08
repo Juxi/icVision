@@ -5,7 +5,7 @@
 #include <vector>
 
 template <typename T>
-inline void print_vector(std::vector<T> &vec) {
+inline void print_vector(std::vector<T> vec) {
   for (size_t i(0); i < vec.size(); ++i)
     std::cout << vec[i] << " ";
   std::cout << std::endl;

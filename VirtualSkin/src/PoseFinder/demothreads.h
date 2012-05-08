@@ -92,6 +92,10 @@ public:
 
 	void hand_right_function();
 
+	void hand_right_look_varun_function();
+
+	void hand_right_mark_function();
+
 	void add_best_pose() {
 		std::vector<double> best_point = d_pose_finder.best_point();
 		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
@@ -137,7 +141,7 @@ public:
 			for (size_t n(0); n < part_configuration.size(); ++n)
 				std::copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_configuration_points[n]));
 		}
-
+//		Maybe conversion?
 		d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
 		
 		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
