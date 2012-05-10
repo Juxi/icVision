@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ZeroPositionKinematicTree>
-<ZeroPositionKinematicTree version="1.0" robotName="icubSim">
+<ZeroPositionKinematicTree version="1.0" robotName="icub">
 
 <!-- TORSO -->
 <bodypart name="torso">
