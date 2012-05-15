@@ -17,7 +17,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 
 void MapThread::run()
 {
-  string load_file_name("maps/nullspace.save");
+  string load_file_name("map.save");
   string store_file_name("map.save");
   if (exists(load_file_name)) {
     std::cout << "loading Map " << load_file_name << std::endl;
@@ -224,7 +224,7 @@ void MapThread::hand_right_look_varun_function() {
   d_pose_finder.add_constraint(d_map_build_constraint);
 
   d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
-  d_pose_finder.add_constraint(new PointingConstraint("head", Constraint::vector3(-0.2076, 0.0, 0.10900), 0.0, 0));
+  //d_pose_finder.add_constraint(new PointingConstraint("head", Constraint::vector3(-0.2076, 0.0, 0.10900), 0.0, 0));
   d_pose_finder.add_constraint(new PositionConstraint("head", Constraint::vector3(0.00658101, 0.0396648, 0.204938)));
 
   //d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));

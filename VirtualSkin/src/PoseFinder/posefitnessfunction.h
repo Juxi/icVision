@@ -28,13 +28,16 @@ public:
 	EvaluationFilter *d_filter;
 
 	bool d_debug;
+	bool d_colliding; //variable will stay on if latest pose collided
 
 	public:
+
 
 	PoseFitnessFunction(Simulator &simulator) :
 		d_simulator(simulator),
 		  d_filter(new DummyFilter()),
-		  d_debug(false)
+		  d_debug(false),
+		  d_colliding(false)
 	{
 	}
 
@@ -43,6 +46,7 @@ public:
 		d_weights.push_back(weight);
 	}
 
+	bool colliding(){return d_colliding;}
 	void clear_constraints() {
 		for (size_t i(0); i < d_constraints.size(); ++i)
 			delete(d_constraints[i]);
@@ -61,7 +65,7 @@ public:
 
 	bool &debug() {return d_debug;}
 
-	double eval(const Matrix& point) const
+	double eval(const Matrix& point)
 	{
 		std::vector<double> motor_values(point.get_data());
 		if (isnan(motor_values[0])) {
@@ -69,6 +73,7 @@ public:
 		}
 		d_simulator.set_motors(motor_values);
 		double n_collisions = d_simulator.computePose();
+		d_colliding = n_collisions;
 
 		double fitness(0.0);
 		KinematicModel::RobotObservation observation(d_simulator.robot().observe());

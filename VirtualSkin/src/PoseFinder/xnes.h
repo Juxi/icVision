@@ -183,7 +183,7 @@ public:
 	Function() { }
 	virtual ~Function() { }
 
-	virtual double eval(const Matrix& point) const = 0;
+	virtual double eval(const Matrix& point) = 0;
 };
 
 
@@ -240,7 +240,7 @@ class NES
 {
 	size_t d_dim;
 public:
-	NES(const Function& f, bool importanceMixing = true, bool baseline = false)
+	NES(Function& f, bool importanceMixing = true, bool baseline = false)
 	: d_dim(0), m_fitness(f)
 	{
 		rngSeed(time(0));
@@ -498,7 +498,7 @@ protected:
 		double density;				// density in the backtransformed distribution
 	};
 
-	const Function& m_fitness;
+	Function &m_fitness;
 
 	///////////////////////////////////////////////////////
 	// algorithm hyper-parameters

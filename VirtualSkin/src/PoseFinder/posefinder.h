@@ -51,6 +51,7 @@ public:
 
 	void set_variance(double std);
 
+	PoseFitnessFunction &pose_fitness_function(){return d_pose_fitness_function;}
 public:
 	Simulator d_simulator;
 

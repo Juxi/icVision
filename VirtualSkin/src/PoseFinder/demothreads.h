@@ -100,6 +100,8 @@ public:
 		std::vector<double> best_point = d_pose_finder.best_point();
 		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
 		std::vector<double> position = observation.markerPosition(QString(d_map_build_constraint->marker().c_str()));
+		if (d_pose_finder.pose_fitness_function().colliding())
+		  return;
 
 		d_configuration_points.push_back(best_point);
 		d_map_build_constraint->add_point(position, best_point);
