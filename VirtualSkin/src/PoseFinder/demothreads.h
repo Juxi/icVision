@@ -127,40 +127,9 @@ public:
 		store_map["WORKSPACE"] = *d_points;
 		write_poses(store_map, filename);
 	}
-
-	void load_points(std::string filename) {
-		poses_map_t poses_map = read_poses(filename);
-
-		size_t n_poses = poses_map["WORKSPACE"].size();
-
-		d_configuration_points = std::vector<std::vector<double> >(n_poses);
-		
-		for (size_t i(0); i < d_pose_finder.simulator().total_parts(); ++i) {
-			std::string name("CFGSPACE_");
-			name += d_pose_finder.simulator().part_name(i);
-			std::transform(name.begin(), name.end(), name.begin(), toupper);
-			std::vector<std::vector<double> > &part_configuration(poses_map[name]);
-			for (size_t n(0); n < part_configuration.size(); ++n)
-				std::copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_configuration_points[n]));
-		}
-//		Maybe conversion?
-		d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
-		
-		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
-			std::cout << d_configuration_points[0][i] << " ";
-		std::cout << std::endl;
-		d_configuration_points = convert_to_normal(d_configuration_points);
-
-		for (size_t i(0); i < d_configuration_points[0].size(); ++i)
-			std::cout << d_configuration_points[0][i] << " ";
-		for (size_t i(0); i < d_points->size(); ++i)
-			d_pose_finder.simulator().add_point((*d_points)[i][0], (*d_points)[i][1], (*d_points)[i][2]);
-
-		std::cout << "N Points: " << d_points->size() << std::endl;
-		std::cout << "Dim Points: " << d_points->at(0).size() << std::endl;
-
-	}
-
+	
+	void load_points(std::string filename);
+	
 	std::vector<std::vector<double> > convert_to_real(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i)
