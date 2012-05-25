@@ -35,15 +35,18 @@ void MapThread::load_points(string filename) {
       copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_configuration_points[n]));
   }
 //		Maybe conversion?
-  d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
   
   for (size_t i(0); i < d_configuration_points[0].size(); ++i)
     cout << d_configuration_points[0][i] << " ";
   cout << endl;
   d_configuration_points = convert_to_normal(d_configuration_points);
+  d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
   
+  cout << "conf point, should be normalized:" << endl;
   for (size_t i(0); i < d_configuration_points[0].size(); ++i)
     cout << d_configuration_points[0][i] << " ";
+  for (size_t i(0); i < d_configuration_points[0].size(); ++i)
+    cout << d_configuration_points[1][i] << " ";
   for (size_t i(0); i < d_points->size(); ++i)
     d_pose_finder.simulator().add_point((*d_points)[i][0], (*d_points)[i][1], (*d_points)[i][2]);
   
@@ -73,7 +76,7 @@ void MapThread::run()
   }
 
   size_t n(0);
-  bool test(true);
+  bool test(false);
   if (test)
     while (true) {
       //				size_t n(qrand() % d_configuration_points.size());
@@ -109,6 +112,7 @@ void MapThread::nullspace_function() {
   cout << "Building constraints" << endl;
   d_marker = "head";
   d_map_build_constraint = new MapBuildConstraint("head", 2, .02, .1);
+  
   d_points = &(d_map_build_constraint->points());
   
   d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), .03);
