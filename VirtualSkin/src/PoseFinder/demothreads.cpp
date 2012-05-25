@@ -76,7 +76,7 @@ void MapThread::run()
   }
 
   size_t n(0);
-  bool test(false);
+  bool test(true);
   if (test)
     while (true) {
       //				size_t n(qrand() % d_configuration_points.size());
