@@ -13,7 +13,7 @@
 
 #include "../evolvedFilters/blue_detector.h"
 //#include "evolved_filters/glass_detector.h"
-//#include "../evolvedFilters/redblock_detector.h"
+#include "../evolvedFilters/redblock_detector.h"
 //#include "evolved_filters/teabox.h"
 
 using namespace yarp::os;
@@ -33,14 +33,17 @@ int main(int argc, char * argv[]) {
 	//TestModule *module = new TestModule();
 	
 	// TODO remove that, this is just testing
-	//RedBlockDetector *module = new RedBlockDetector();
-	BlueCupDetector *module = new BlueCupDetector();
-	
-//	RedFilterModule* module = new RedFilterModule();		
+//	RedBlockDetector *module = new RedBlockDetector();
+	BlueCupDetector *module = new BlueCupDetector();	
+	module->runOnBothImages();
+	module->localiseInThreeD(false);
+
+	//	RedFilterModule* module = new RedFilterModule();		
 
 	
-	module->runOnBothImages();
-	module->localiseInThreeD(true);
+	//BlueCupDetector *module = new BlueCupDetector();	
+	//module->runOnBothImages();
+	//module->localiseInThreeD(true);
 	
 	// TODO create possibility
 
