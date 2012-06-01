@@ -114,16 +114,21 @@ bool EvolvedFilterModule::updateModule()
 		allFramesDone = false;
 	}
 	
-	CvPoint frame1_1, frame1_2, frame2_1, frame2_2;
+	// TL .. top left point (of the rectange in the image plane)
+	// BR .. bottom right
+	// BC .. bottom centre
+	CvPoint frameLeft_TL, frameLeft_BR, frameRight_TL, frameRight_BR;
+	CvPoint ph, frameLeft_BC, frameRight_BC;
 	
-	frame1_1.x = frame2_1.x = 0.0;
-	frame1_1.y = frame2_1.y = 0.0;
-	frame1_2.x = frame2_2.x = 0.0;
-	frame1_2.y = frame2_2.y = 0.0;
+	frameLeft_BC.x = frameRight_BC.x = -1.0;
+	frameLeft_BC.y = frameRight_BC.y = -1.0;
 	
-	CvPoint ph, ph1, ph2;
-	
-	do {		
+	do {
+		frameLeft_TL.x = frameRight_TL.x = -1.0;
+		frameLeft_TL.y = frameRight_TL.y = -1.0;
+		frameLeft_BR.x = frameRight_BR.x = -1.0;
+		frameLeft_BR.y = frameRight_BR.y = -1.0;
+		
 		if(in == NULL) {
 			// first run 
 			in = (IplImage*) left_image->getIplImage();
@@ -140,8 +145,7 @@ bool EvolvedFilterModule::updateModule()
 			std::cout << "DEBUG: Got input image!" << std::endl;	
 			icImage* inputImg = new icImage(in);
 			char fileIn[80];
-			sprintf(fileIn, "input-frame-%05d.png", index++
-					);
+			sprintf(fileIn, "input-frame-%05d.png", index++);
 			inputImg->Save(fileIn);
 		}
 		
@@ -255,9 +259,10 @@ bool EvolvedFilterModule::updateModule()
 					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
 					ph.x = x; ph.y = y;
 					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
-					
-					if(allFramesDone) ph1 = ph;
-					else ph2 = ph;			
+
+					// set bottom center
+					if(allFramesDone) frameRight_BC = ph;
+					else frameLeft_BC = ph;			
 
 				} else {
 					cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
@@ -265,11 +270,11 @@ bool EvolvedFilterModule::updateModule()
 				
 				
 				if(allFramesDone) {
-					frame1_1 = p1;
-					frame1_2 = p2;
+					frameRight_TL = p1;
+					frameRight_BR = p2;
 				}else{
-					frame2_1 = p1;
-					frame2_2 = p2;
+					frameLeft_TL = p1;
+					frameLeft_BR = p2;
 				}
 				// only do for one block // HACK // TODO
 				break;
@@ -305,7 +310,7 @@ bool EvolvedFilterModule::updateModule()
 	}while(!allFramesDone);
 	
 	// write the first blob found onto the network .../position:o port
-	writePositionBottle(ph1, ph2, outbottleTS);
+	writePositionBottle(frameLeft_BC, frameRight_BC, outbottleTS);
 	
 //	if( inDebugMode ) {
 //		end = clock();	
@@ -458,12 +463,16 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 	}
 		
 	// sanity check
-	if((int) fp1.x/scalingFactor < 0 || (int) fp1.x/scalingFactor > 640) return false;
-	if((int) fp2.x/scalingFactor < 0 || (int) fp2.x/scalingFactor > 640) return false;		
-	if((int) fp1.y/scalingFactor < 0 || (int) fp1.y/scalingFactor > 480) return false;
-	if((int) fp2.y/scalingFactor < 0 || (int) fp2.y/scalingFactor > 480) return false;		
+	if((int) fp1.x/scalingFactor < 0 || (int) fp1.x/scalingFactor > 640)  {
+		std::cout << "sanity 1 " << fp1.x  << std::endl;					
+		return false;
+	}
+	if((int) fp2.x/scalingFactor < 0 || (int) fp2.x/scalingFactor > 640) { 		std::cout << "sanity 2 " << fp2.x << std::endl;					 return false;		}
+		
+	if((int) fp1.y/scalingFactor < 0 || (int) fp1.y/scalingFactor > 480) { 		std::cout << "sanity 3" << std::endl;					return false; }
+	if((int) fp2.y/scalingFactor < 0 || (int) fp2.y/scalingFactor > 480) { 		std::cout << "sanity 4" << std::endl;					return false;		}
 			
-	bool streamGazePos = false;
+	bool streamGazePos = true;
 	
 	if(streamGazePos) {
 		// stream the position (2D in the filters) out
@@ -480,9 +489,10 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 			output.addInt((int) (fp2.y/scalingFactor));					
 		}
 		
-		std::cout << "Bottle (4Gaz): " << output.toString() << std::endl;
+//		std::cout << "Bottle (4Gaz): " << output.toString() << std::endl;
 		posOutputPort.setEnvelope(outTS);
 		posOutputPort.write();		
+
 	}
 	
 	if (shallLocaliseInThreeD) {
@@ -618,6 +628,7 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 	return true;
 
 }
+	
 void EvolvedFilterModule::createInputImages(IplImage* in) {
 	InputImages.clear();
 	
