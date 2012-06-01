@@ -51,7 +51,9 @@ def readData():
     return DS
     
 def read2DData():
-    d = numpy.loadtxt("calibData5.csv", delimiter=",")    
+    d = numpy.loadtxt("test_Tuesday20120110_botheyes_01234567.csv", delimiter=",")    
+    
+#    d = numpy.loadtxt("calibData5.csv", delimiter=",")    
     DS = SupervisedDataSet(13, 1 if onlySingleOutput else 2)
     i = 0
     for data in d:
@@ -63,7 +65,7 @@ def read2DData():
         else:
             DS.addSample(data[:-2], data[12:])
         
-        # print data
+        print data
         #print data[:-3], "|", data[-3:-2]
         # i = i + 1
         # if (i == 3): return i
