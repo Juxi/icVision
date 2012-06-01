@@ -286,8 +286,8 @@ void ThreeDModule::calcuatePositionUsingSimonsMethod(double *retX, double *retY,
 	double estimatedX = 17.453409 + 0.13380532*x[7] + 0.14905137*x[4] - 0.11798947*x[12] - 0.018469423*x[1];
 	double estimatedY = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/pow(x[12], 0.18780835) + log(x[12]) - 2.1461744;
 	
-		
-//	std::cout <<  "Prediction: " << round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
+	// lala
+	std::cout <<  "Prediction: " << round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
 	double CellSize = 6;
 	estimatedY *= CellSize;
@@ -297,13 +297,13 @@ void ThreeDModule::calcuatePositionUsingSimonsMethod(double *retX, double *retY,
 	double leftOffset = CellSize * 6 + 2.5;
 	double forwardOffset = 17.5;
 
-	estimatedY -= leftOffset;
 	estimatedX += forwardOffset;
+	estimatedY -= leftOffset;
 	
 //	std::cout <<  "Prediction x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
 	
-	estimatedX += 8.5;
-	estimatedY -= 6.5;
+//	estimatedX += 8.5;
+//	estimatedY -= 6.5;
 	
 	estimatedX = round(estimatedX*10)/10.0;
 	estimatedY = round(estimatedY*10)/10.0;	
