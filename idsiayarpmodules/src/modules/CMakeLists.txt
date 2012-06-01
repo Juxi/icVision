@@ -11,7 +11,6 @@ PROJECT( IdsiaYarpModules )
 ###
 ### DEVICE-DRIVER modules
 ###
-
 INCLUDE_DIRECTORIES ( ${YARP_OS_INC} ${YARP_sig_INC} ${YARP_dev_INC} )
 IF ( WIN32 )
   IF ( NOT CYGWIN )
@@ -39,6 +38,7 @@ ENDIF ( MERGE_DEVICE_LIBRARY_MODULES )
 
 # Prepare a device library called "idsiayarpmod".
 # A test executable called "idsiayarpmoddev" will also be produced.
+
 BEGIN_DEVICE_LIBRARY ( idsiayarpmod )
   ADD_SUBDIRECTORY ( firewirecamera2 )
   ADD_SUBDIRECTORY ( katana400 )

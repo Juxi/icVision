@@ -41,7 +41,6 @@ public:
 	RedLocatorModule();
 	virtual ~RedLocatorModule();
 	
-	double getPeriod();
 	bool updateModule();
 	
 	bool open			(yarp::os::Searchable& config);

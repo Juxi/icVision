@@ -7,6 +7,7 @@ using namespace KinematicModel;
 
 Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											col_count(0),
+											reflex_col_count(0),
 											encObstacle(false), 
 											verbose(verb), 
 											modelWindow(NULL), 
@@ -14,28 +15,23 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											numPrimitives(0)
 {
 	qRegisterMetaType< DT_ResponseClass >("GL_DisplayList");
-	//qRegisterMetaType< DT_ResponseClass >("DT_ObjectHandle");
-	//qRegisterMetaType< DT_ResponseClass >("DT_ShapeHandle");
 	
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
 	responseTables.append(DT_CreateRespTable());
+	//printf("Created World Response table %p\n",responseTables.at(0));
 	
 	// create SOLID Response classes for the world table
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
-	robotClass = DT_GenResponseClass(responseTables.at(0));
-	//worldCriticalClass = DT_GenResponseClass(responseTables.at(0));
-	//robotCriticalClass = DT_GenResponseClass(responseTables.at(0));
+	ghostClass = DT_GenResponseClass(responseTables.at(0));	
 
 	// define some collision responses for the world table
-	DT_AddPairResponse(	responseTables.at(0), robotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), robotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	
 	// set up the window for OpenGL
 	if ( visualize )
 	{ 
-		printf("CREATING WINDOW AND CONNECTING SIGNALS AND SLOTS\n");
+		//printf("CREATING WINDOW AND CONNECTING SIGNALS AND SLOTS\n");
 		
 		modelWindow = new ModelWindow();
 		
@@ -44,15 +40,11 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		QObject::connect( this, SIGNAL(computedState(int)),					modelWindow->glWidget, SLOT(update(int)) );
 		QObject::connect( modelWindow->glWidget, SIGNAL(renderStuff()),		this, SLOT(renderModel()), Qt::DirectConnection );
 
-		//QObject::connect( robot, SIGNAL(requestDisplayList(RobotModel::DisplayList*)),	skinWindow->glWidget, SLOT(addDisplayList(RobotModel::DisplayList*)) );
-		//QObject::connect( robot, SIGNAL(outdatedDisplayList(int)),						skinWindow->glWidget, SLOT(removeDisplayList(int)) );
-		//QObject::connect( skinWindow->glWidget, SIGNAL(renderStuff()),	this, SLOT(renderRobot()) );
-		
-		printf("showing model window\n");
+		//printf("showing model window\n");
 		modelWindow->show();
 		 
 	}
-	printf("model constructor returns\n");
+	//printf("model constructor returns\n");
 }
 
 Model::~Model()
@@ -87,46 +79,90 @@ Model::~Model()
 ****************/
 DT_RespTableHandle Model::newRobotTable()
 {
-	//printf("locking mutex\n");
-	QMutexLocker locker(&mutex);
-	//printf("Creating Robot Table\n");
 	DT_RespTableHandle table = DT_CreateRespTable();
+	//printf("Created Robot Response table %p\n",table);
+	DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddDefaultResponse( table, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	responseTables.append( table );
 	return table;
 }
 
-void Model::removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+void Model::removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
 {
-	QMutexLocker locker(&mutex);
+	removeReflexResponse(t,c1,c2);
+	removeVisualResponse(t,c1,c2);
+}
+
+void Model::removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	//printf("REMOVE_REFLEX");
 	DT_RemovePairResponse(t, c1, c2, reflexTrigger);
+	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
+}
+
+void Model::removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	//printf("REMOVE_VISUAL");
+	DT_RemovePairResponse(t, c1, c2, collisionHandler);
+	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
+}
+
+void Model::setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	//printf("SET_VISUAL_RESPONSE\n");
+	//DT_RemovePairResponse(t, c1, c2, reflexTrigger);
+	//printf("  removed response '%p' from collision pair (%d,%d) in table %p\n", reflexTrigger, c1, c2, t );
+	
+	DT_AddPairResponse(	t, c1, c2, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	//printf("  added   response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
 }
 
 DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 {
-	QMutexLocker locker(&mutex);
 	//if (verbose) printf("Creating Robot Response Class\n");
 	DT_ResponseClass respClass = DT_GenResponseClass(table);
 	return respClass;
 }
 
 Robot* Model::loadRobot( const QString& fileName, bool verbose )
-{
-	DT_RespTableHandle newTable = newRobotTable();
+{	
+	mutex.lock();
+		
+		DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
+		DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+		DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+		
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+		
 	
-	printf("Loading non-yarp robot.\n");
-	Robot* robot = new Robot( this, newTable );
-	robot->open( fileName, verbose );
-	robot->home( verbose );
+		QVector<DT_ResponseClass>::iterator i;
+		for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
+		{
+			DT_AddPairResponse(	responseTables.at(0), newRobotClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+			DT_AddPairResponse(	responseTables.at(0), newBaseClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+		}
+		
+		robotResponseClasses.append( newRobotClass );
+		robotBaseClasses.append( newBaseClass );
+		
+		//printf("Loading non-yarp robot.\n");
+		Robot* robot = new Robot( this, newTable, newRobotClass, newBaseClass );
+		robot->open( fileName, verbose );
 	
-	//responseTables.append( newTable );
-	robots.append( robot );
+		robots.append( robot );
+	
+	mutex.unlock();
+	
+	robot->appendMarkersToModel();
+	
 	return robot;
 }
 
 void Model::loadWorld( const QString& fileName, bool verbose )
 {
-	printf("Loading world file...\n");
+	//printf("Loading world file...\n");
     WorldHandler handler( this );
     QXmlSimpleReader reader;
     reader.setContentHandler(&handler);
@@ -155,8 +191,7 @@ void Model::loadWorld( const QString& fileName, bool verbose )
 void Model::appendObject( KinTreeNode* node )
 {
 	//if ( verbose ) printf("  appending robot object.\n");
-	QMutexLocker locker(&mutex);
-	if ( !node->getResponseClass() || !node->robot()->getResponseTable() )
+	if ( !node->getResponseClass() || !node->robot()->getResponseTable() || !node->robot()->getWorldRobotClass() )
 	{
 		throw KinematicModelException("CompositeObject must have a DT_RespTableHandle and a DT_ResponseClass to be appended to the world.");
 	}
@@ -167,9 +202,15 @@ void Model::appendObject( KinTreeNode* node )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending robot primitive to world\n");
-		DT_SetResponseClass(	node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
-		DT_RemovePairResponse(	node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
-		DT_SetResponseClass(	responseTables.at(0), (*i)->getSolidObjectHandle(), robotClass );
+		DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
+		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
+		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), collisionHandler );
+		
+		if ( node->isNearRoot() )
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseClass() );
+		else
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldRobotClass() );
+		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		(*i)->setIdx( ++numPrimitives );
@@ -177,6 +218,7 @@ void Model::appendObject( KinTreeNode* node )
 	}
 	node->setInModel(true);
 	world.append(node);
+	//printf("Appended KinTreeNode to non-yarp world Model!!!\n");
 }
 
 void Model::appendObject( CompositeObject* object )
@@ -338,10 +380,14 @@ int Model::computePose()
 	
 	// Prepare to do collision detection
 	col_count = 0;			// reset collision counter
+	reflex_col_count = 0;
 	encObstacle = false;	// this is used to trigger a collision response controller
 	
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
 	updateWorldState();		// update positions of things in the world
+	
+	//evaluate kinematic constraints
+	evaluateRobotConstraints();
 
 	QVector<DT_RespTableHandle>::iterator i;
 	//uint num = 0;
@@ -352,9 +398,11 @@ int Model::computePose()
 	
 	computePoseSuffix();			
 	
-	emit computedState(col_count);	// this number may not be correct as we stop DT_TEST early in the case of reflexive response
+	emit computedState(col_count);	
 	
-	return col_count;
+	//printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
+	
+	return reflex_col_count;
 }
 
 void Model::computePoseSuffix()
@@ -375,6 +423,15 @@ void Model::fwdKin()
 	}
 }
 
+void Model::evaluateRobotConstraints()
+{
+	QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i )
+	{
+		(*i)->evaluateConstraints();
+	}
+}
+
 void Model::updateWorldState()
 {
 	fwdKin();
@@ -388,10 +445,12 @@ void Model::updateWorldState()
 
 void Model::run()
 {
-	printf("Starting collision detection thread\n");
+	printf("Starting collision detection thread.\n");
 	while ( keepRunning )
 	{
 		computePose();
+		//if ( robots.at(0) && robots.at(0)->isOpen() ) printf("OPEN\n");
+		//else printf("CLOSED\n");
 		msleep( COLLISION_THREAD_PERIOD );
 	}
 }

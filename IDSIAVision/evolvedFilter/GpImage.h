@@ -79,31 +79,51 @@ public:
 	GpImage* laplace(int) const;
 	
 	GpImage* log(void) const;
-	GpImage* Pow(double P) const;	
+	GpImage* pow(double P) const;	
+	GpImage* exp() const;
+	GpImage* sqrt() const;	
+	
+	GpImage* avg () const;
+	GpImage* max () const;
+	GpImage* min () const;
 	
 	GpImage* max (GpImage* a) const;
+	GpImage* max (float v) const;
 	GpImage* min (GpImage* a) const;
+	GpImage* min (float v) const;
 	GpImage* gauss (int) const;
 	
 	GpImage* sobelx (int) const;
 	GpImage* sobely(int) const;
 	GpImage* unsharpen(int) const;
 	GpImage* threshold (double) const;
+	GpImage* thresholdInv (double) const;
 	GpImage* SmoothMedian (int) const;
+	GpImage* SmoothBilateral (int) const;		
+	GpImage* SmoothBlur (int) const;
 	GpImage* Normalize(void) const;
+
+	GpImage* gabor(int, int) const;
+	GpImage* ResizeThenGabor(int Frequency, int Orientation, double Scale) const;
 	
-	GpImage* gabor(int) const;
-	GpImage* ResizeThenGabor(int Orientation, double Scale) const;
-	
+	GpImage* Shift(int, int) const;
 	GpImage* ShiftDown() const;
 	GpImage* ShiftUp() const;
 	GpImage* ShiftLeft() const;
 	GpImage* ShiftRight() const;	
-		
+	
+	GpImage* ReScale(double) const;
+	
+	GpImage* LocalMax(int) const;
+	GpImage* LocalMin(int) const;
+	GpImage* LocalAvg(int) const;
+	
 	void Save(std::string FileName) const;
 	
 private:
 	int m_width, m_height;
+	
+	double getSum() const;
 	
 };
 

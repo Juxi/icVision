@@ -1,8 +1,9 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "icFilterModule.h"
+#define MAX_ELEMENTS 12
 
 icFilterModule::icFilterModule() {
 	// by default run on one image only
@@ -21,7 +22,7 @@ icFilterModule::icFilterModule() {
 
 double icFilterModule::getPeriod()
 {
-	return 0.02;	// we need something higher than 0.0 else it is too fast?!
+	return 0.05;//0.02;	// we need something higher than 0.0 else it is too fast?!
 	// todo check this!!
 	//module periodicity (seconds)
 }
@@ -98,40 +99,42 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	
 	attach(handlerPort); 
 	
-
-	// open the input ports from the cameras
 	std::string inputPortName, serverPortName;
-	
-	inputPortName = portPrefix;	serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/left";	serverPortName += "/cam/left";
-	
-	// trying to connect to the left camera
-	if(! leftInPort.open( inputPortName.c_str() )){
-		std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;
-		return false;
-	}
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
-		std::cout << " with " << inputPortName.c_str() << std::endl;
-		return false;
-	}
-	
-	inputPortName = portPrefix;	serverPortName = "/";
-	inputPortName += getName(); serverPortName += robotName;
-	inputPortName += "/right";	serverPortName += "/cam/right";
-	// trying to connect to the right camera
-	if(! rightInPort.open( inputPortName.c_str() )){
-		std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;		
-		return false;
-	}
-	
-	printf("Trying to connect to %s\n", inputPortName.c_str());
-	if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
-		std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
-		std::cout << " with " << inputPortName.c_str() << std::endl;
-		return false;
+
+	if(! isReadingFileFromHDD) {
+		// open the input ports from the cameras
+		
+		inputPortName = portPrefix;	serverPortName = "/";
+		inputPortName += getName(); serverPortName += robotName;
+		inputPortName += "/left";	serverPortName += "/cam/left";
+		
+		// trying to connect to the left camera
+		if(! leftInPort.open( inputPortName.c_str() )){
+			std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;
+			return false;
+		}
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
+			std::cout << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
+		
+		inputPortName = portPrefix;	serverPortName = "/";
+		inputPortName += getName(); serverPortName += robotName;
+		inputPortName += "/right";	serverPortName += "/cam/right";
+		// trying to connect to the right camera
+		if(! rightInPort.open( inputPortName.c_str() )){
+			std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;		
+			return false;
+		}
+		
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
+			std::cout << " with " << inputPortName.c_str() << std::endl;
+			return false;
+		}
 	}
 	
 	outputPortName  = portPrefix;
@@ -147,6 +150,14 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	if(! rawOutputPort.open( rawOutputPortName.c_str() )){
 		return false;
 	}
+	
+	outputPortName  = portPrefix;
+	outputPortName += getName();
+	outputPortName += "/position:o";
+	if(! posOutputPort.open( outputPortName.c_str() )){
+		return false;
+	}
+	
 	
 	// TEMP Solution TODO change
 	
@@ -181,37 +192,99 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	
-//	// connect to rpc	
-//	// check whether we have F or not!! TODO
-//	std::string clientPortName = "/evolvedfilter";
-//	clientPortName += "/world-client";
-//	if(! port.open( clientPortName.c_str() )){
-//		return false;
-//	}
-//	
-//	inputPortName = "/world";	
-//	//	inputPortName += robotName; 
-//	//	inputPortName += "F/world";
-//	
-//	// trying to connect to the rpc server (world interface)
-//	printf("Trying to connect to %s\n", inputPortName.c_str());
-//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
-//		std::cout << getName() << ": Unable to connect to port "; 
-//		std::cout << inputPortName.c_str() << std::endl;
-//		return false;
-//	}	
-	
-	portIKinIn = new BufferedPort<Vector>;
-	portIKinIn->open("/cubeDetector/iKinIn");
-	Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
-	portIKinIn->setStrict(true);
-	
-	portIKinOut = new BufferedPort<Bottle>;
-	portIKinOut->open("/cubeDetector/iKinOut");
-	Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
-	portIKinOut->setStrict(true);
 	
 	
+	if(addToWorldModel) {
+	
+		// connect to rpc	
+		// check whether we have F or not!! TODO
+		std::string clientPortName = "/evolvedfilter";
+		clientPortName += "/world-client";
+		if(! port.open( clientPortName.c_str() )){
+			return false;
+		}
+	//	
+		inputPortName = "/world";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+
+	//	inputPortName = "/stereoDisparity/rpc";	
+	//	//	inputPortName += robotName; 
+	//	//	inputPortName += "F/world";
+	//	
+	//	// trying to connect to the rpc server (world interface)
+	//	printf("Trying to connect to %s\n", inputPortName.c_str());
+	//	if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+	//		std::cout << getName() << ": Unable to connect to port "; 
+	//		std::cout << inputPortName.c_str() << std::endl;
+	//		return false;
+	//	}	
+		
+//		portIKinIn = new BufferedPort<Vector>;
+//		portIKinIn->open("/cubeDetector/iKinIn");
+//		Network::connect("/cubeDetector/iKinIn", "/eyeTriangulation/x:i");
+//		portIKinIn->setStrict(true);
+//		
+//		portIKinOut = new BufferedPort<Bottle>;
+//		portIKinOut->open("/cubeDetector/iKinOut");
+//		Network::connect("/eyeTriangulation/X:o", "/cubeDetector/iKinOut");
+//		portIKinOut->setStrict(true);
+	}
+	
+	
+	if(sendToGazeCtrl) {
+		
+		// connect to rpc	
+		// check whether we have F or not!! TODO
+		std::string clientPortName = "/evolvedfilter";
+		clientPortName += "/gaze-client";
+		if(! gazeportRPC.open( clientPortName.c_str() )){
+			return false;
+		}
+		//	
+		inputPortName = "/iKinGazeCtrl/head/rpc";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+		
+		
+		
+		// check whether we have F or not!! TODO
+		clientPortName = "/evolvedfilter";
+		clientPortName += "/gaze-client-3D";
+		if(! gazeportPos.open( clientPortName.c_str() )){
+			return false;
+		}
+		//	
+		inputPortName = "/iKinGazeCtrl/head/xd:i";	
+		//	inputPortName += robotName; 
+		//	inputPortName += "F/world";
+		
+		// trying to connect to the rpc server (world interface)
+		printf("Trying to connect to %s\n", inputPortName.c_str());
+		if(! yarp.connect(clientPortName.c_str(), inputPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port "; 
+			std::cout << inputPortName.c_str() << std::endl;
+			return false;
+		}	
+
+	}
+		
 	
 	
 	
@@ -238,14 +311,31 @@ void icFilterModule::runOnBothImages() {
 // TODO create world interface
 // to kail's world model
 bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
+	if(! addToWorldModel) return false;
+	if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+		std::cout << "NOT setting cup1 ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+		return false;
+	}
+	
 	yarp::os::Bottle cmd, response;
+	
+	std::cout << "x: " << x;	
+	x = movingAverageX(x);
+	std::cout << "\tavgx: " << x << std::endl;	
+
+	std::cout << "y: " << y;	
+	y = movingAverageY(y);
+	std::cout << "\tavgy: " << y << std::endl;	
+	
+//	z = runningAverageZ(z);	
 	
 	// get information about the object from rpc
 	cmd.clear();
 	cmd.addString("set");
 	cmd.addString(objName);
 	
-	//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	if(inDebugMode)
+		std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
 	
 	cmd.addDouble(x);
 	cmd.addDouble(y);
@@ -253,5 +343,130 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	
 	bool r = port.write(cmd, response);
 //	std::cout << "response: " << response.toString() << std::endl;	
+	return r;
+}	
+
+
+double icFilterModule::movingAverageX(double x) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = x;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+	
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+double icFilterModule::movingAverageY(double y) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = y;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+
+double icFilterModule::movingAverageZ(double z) {
+	static int elements = 0;	
+	static double values[MAX_ELEMENTS] = { 0.0 };
+	static double* start = values;
+	
+	*start = z;
+	if(elements < MAX_ELEMENTS) elements++;
+	if(start == &values[MAX_ELEMENTS-1])
+		start = values;
+	else start++;
+	
+	
+//	std::cout << std::endl << "values: ";
+	double sum = 0.0;
+	for(int i = 0; i < elements;i++) {
+//		std::cout << values[i];
+		sum += values[i];
+	}
+//	std::cout << std::endl << "val: " << sum/(elements*1.0) << std::endl;
+	return sum/(elements*1.0);
+}
+
+
+
+bool icFilterModule::send3DPositionToGazeCtrl(double x, double y, double z) {
+	yarp::os::Bottle cmd, response;
+	
+	if(! sendToGazeCtrl) return false;
+	if(std::isnan(x) || std::isnan(y) || std::isnan(z) ) {
+		std::cout << "NOT setting gaze ISNAN!! -- " << x <<"," << y <<"," << z << std::endl;		
+		
+		cmd.clear();
+		cmd.addString("set");
+		cmd.addString("track");		
+		cmd.addInt(0);
+		return false;
+	}
+	
+	// get information about the object from rpc
+	cmd.clear();
+	cmd.addString("set");
+	cmd.addString("track");
+	cmd.addInt(1);	
+	bool r = gazeportRPC.write(cmd, response);
+	if(inDebugMode) {
+		std::cout << "gaze response: " << response.toString() << std::endl;	
+		std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	}
+
+	cmd.clear();
+	cmd.addDouble(x);
+	cmd.addDouble(y);
+	cmd.addDouble(z);
+	
+	bool b = gazeportPos.write(cmd);
+	if(inDebugMode)
+		std::cout << "gazePos response: " << response.toString() << std::endl;	
+	
+	return b && r;
+}	
+
+bool icFilterModule::sendPixelPosOfObject(double x1, double y1, double x2, double y2) {
+	yarp::os::Bottle cmd, response;
+	
+	// get information about the object from rpc
+	cmd.clear();
+//	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
+	// check which image first
+	
+	cmd.addDouble(x2);
+	cmd.addDouble(y2);
+	cmd.addDouble(x1);
+	cmd.addDouble(y1);
+	
+	bool r = port.write(cmd, response);
+	std::cout << "response from 3dstereo crap-a-thingie: " << response.toString() << std::endl;	
 	return r;
 }	

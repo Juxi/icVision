@@ -47,6 +47,7 @@ private:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
+		std::vector<double> w;				// workspace 
 		qreal x,y;
 		
 		Vertex() : qtGraphNode(NULL), type(NULL), x(0), y(0) {}
@@ -103,7 +104,7 @@ private:
 	class Custom_search_traits {		
 		public:
 			typedef K::Cartesian_const_iterator_d Cartesian_const_iterator_d;
-			typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
+            typedef K::Construct_cartesian_const_iterator_d Construct_cartesian_const_iterator_d;
 			typedef K::Construct_iso_box_d Construct_iso_box_d;
 			typedef K::Construct_min_vertex_d Construct_min_vertex_d;
 			typedef K::Construct_max_vertex_d Construct_max_vertex_d;
@@ -131,19 +132,26 @@ protected:
 	
 public:
 	
+	typedef K::Vector_d CGAL_Vector;
 	typedef K::Point_d CGAL_Point;
 	typedef Map::vertex_descriptor vertex_t;
 	typedef Map::vertex_iterator vertex_i;
 	typedef Map::edge_descriptor edge_t;
 	typedef Map::edge_iterator edge_i;
+	typedef Map::out_edge_iterator out_edge_i;
 	
 	Roadmap();
 	~Roadmap();
 	
+	std::vector<double> makeStd( CGAL_Point );
+	std::vector<double> makeStd( CGAL_Vector );
 	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
+	CGAL_Vector			getCgalEdge( edge_t e ) { return CGAL_Vector( getCgalPose(target(e,map)) - getCgalPose(source(e,map)) ); }
 	
-	std::pair< edge_t, std::vector<double> > randomMove();
+	std::pair< edge_t, std::vector<double> >	randomMove();
+	std::list< std::pair< edge_t, vertex_t > >	randomMoves();
+	std::list< std::pair< edge_t, vertex_t > >	aToB( vertex_t, vertex_t );
 	
 	
 	int dimensionality() { return dim; }
@@ -153,6 +161,8 @@ public:
 	void setEdgeColor( edge_t, QColor );
 	
 	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
+	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ );
+
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
@@ -161,6 +171,8 @@ public:
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
+	void readMapPoses(std::string filename);
+
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	
@@ -176,6 +188,9 @@ public:
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
 	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
 	
+private:
+	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
+	Roadmap::vertex_t nearestWorkspaceVertex( std::vector<double> _w );
 	//bool insert( std::vector< std::vector<double> > );
 	
 signals:

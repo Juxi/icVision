@@ -12,6 +12,7 @@
 
 #include "joint.h"
 #include "interval.h"
+#include "modelexception.h"
 
 namespace KinematicModel { class Motor; }
 
@@ -49,6 +50,10 @@ public:
 	qreal maxPos() const { return motorLimits.getMax(); }	//!< Returns the maximum encoderPosition
 	qreal encPos() const { return encoderPosition; }		//!< Returns the current encoderPosition
 	qreal normPos() const { return normalPosition; }		//!< Returns the current normalPosition
+	qreal homePos() const { return homePosition; }			//!< Returns the current homePosition
+	qreal normHomePos() const { return (homePosition - minPos()) / (maxPos() - minPos()); }			//!< Returns the current homePosition
+
+
 	void print();											//!< Prints the Motor's member variables to the terminal
 
 	void setName( const QString& name ) { motorName = name; }
@@ -67,6 +72,10 @@ public:
 	void setNormPos( qreal );									//!< Sets the normalPosition directly
 																/**< Values outside the interval [0,1] will be replaced by either 0 or 1 as is appropriate */
 	void home(bool verbose = true);								//!< Sets encoderPosition = homePosition
+
+
+	qreal normToEnc( qreal );										//!< Converts normalized encoder to real encoder value
+	qreal encToNorm( qreal );										//!< Converts real encoder to normalized encoder value
 
 private:
 	

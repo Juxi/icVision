@@ -80,12 +80,15 @@ private slots:
 	void saveMap();
 	void connectMap();
 	void projectMap();
+	void importNesMap();
 	
 	void connectToRobot();
 	void disconnectFromRobot();
-	void setRefVel();
-	void explore();
+	void singleEdgeExplore();
+	void multiEdgeExplore();
+	void goTo();
 	void stopController();
+	void setVelocity();
 
 //! [1]
 
@@ -101,16 +104,21 @@ private:
 	QAction *loadMapAction;
 	QAction *saveMapAction;
 	QAction *connectMapAction;
-	QAction *projectMapAction;			////
+	QAction *projectMapAction;
+	QAction *importNesMapAction;
 	
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
-	QAction *disconnectFromRobotAction; ////
-	QAction *setRefVelAction;
-	QAction *exploreAction;
-	QAction *stopControllerAction;		////
+	QAction *disconnectFromRobotAction;
+	QAction *SEExploreAction;
+	QAction *MEExploreAction;
+	QAction *GoToAction;
+	QAction *stopControllerAction;
+	QAction *setVelocityAction;
 
 	iCubController	iCub;
+	std::vector<bool> jMask;
+	
 	Roadmap			roadmap;
 	GraphWidget		graphWidget;
 	

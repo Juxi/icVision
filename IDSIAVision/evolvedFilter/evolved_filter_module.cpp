@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -53,9 +53,8 @@ EvolvedFilterModule::~EvolvedFilterModule() {
 */
 bool EvolvedFilterModule::updateModule()
 {
-	if( ! inDebugMode) {
-		putchar('.'); std::cout.flush();
-	} else {
+//	putchar('.'); std::cout.flush();
+	if( inDebugMode) {
 		std::cout << "DEBUG: Run filter!" << std::endl;	
 		start = clock();
 	}
@@ -90,22 +89,24 @@ bool EvolvedFilterModule::updateModule()
 	
 	CvPoint frame1_1, frame1_2, frame2_1, frame2_2;
 	
-	frame1_1.x = frame2_1.x = 0.0;
-	frame1_1.y = frame2_1.y = 0.0;
-	frame1_2.x = frame2_2.x = 0.0;
-	frame1_2.y = frame2_2.y = 0.0;
+	frame1_1.x = frame2_1.x = -1.0;
+	frame1_1.y = frame2_1.y = -1.0;
+	frame1_2.x = frame2_2.x = -1.0;
+	frame1_2.y = frame2_2.y = -1.0;
 	
-	CvPoint ph, ph1, ph2;
+	CvPoint ph, ph1 = {-1,-1}, ph2 = {-1,-1};
 	
 	do {
 		readEncoderPositions();
 		
-		if(in == NULL) {
-			// first run 
-			in = (IplImage*) left_image->getIplImage();
-		}else{
-			allFramesDone = true;
-			in = (IplImage*) right_image->getIplImage();
+		if(! isReadingFileFromHDD) {
+			if(in == NULL) {
+				// first run 
+				in = (IplImage*) left_image->getIplImage();
+			}else{
+				allFramesDone = true;
+				in = (IplImage*) right_image->getIplImage();
+			}
 		}
 
 		ImageWidth  = in->width * scalingFactor;
@@ -116,8 +117,7 @@ bool EvolvedFilterModule::updateModule()
 			std::cout << "DEBUG: Got input image!" << std::endl;	
 			GpImage* inputImg = new GpImage(in);
 			char fileIn[80];
-			sprintf(fileIn, "input-frame-%05d.png", index++
-					);
+			sprintf(fileIn, "input-frame-%05d.png", index++	);
 			inputImg->Save(fileIn);
 		}
 		
@@ -183,7 +183,7 @@ bool EvolvedFilterModule::updateModule()
 			cvSplit(rgb, b, g, r, NULL);
 			cvAdd(r, filteredImg->Image, r);
 			cvMerge(b, g, r, NULL, rgb);	
-			
+						
 			cvReleaseImage(&r);
 			cvReleaseImage(&g);	
 			cvReleaseImage(&b);	
@@ -213,13 +213,23 @@ bool EvolvedFilterModule::updateModule()
 			for(; seq; seq = seq->h_next) {
 				//Find minimal bounding box for each sequence
 				CvRect boundbox = cvBoundingRect(seq);
+				if( boundbox.width * boundbox.height < 35) continue;				
 				boxes.push_back(boundbox);
 			}
 			
 			cvReleaseMemStorage(&storage);
+			
+			CvFont font;
+			double hScale=1.0*0.5;
+			double vScale=1.0*0.5;
+			int    lineWidth=1;
+			cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, hScale,vScale,0,lineWidth);
 
 			for(unsigned int boxNr = 0; boxNr < boxes.size(); boxNr++) {
 				CvRect r = boxes[boxNr];
+				
+				if( r.width * r.height < 35) continue;
+				
 				//std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
 				CvPoint p1, p2;
 				p1.x = r.x; p1.y = r.y;
@@ -228,19 +238,34 @@ bool EvolvedFilterModule::updateModule()
 				int x = r.x + r.width/2;
 				int y = r.y + r.height;
 
-				if(wewantoverlay) {
-					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
-					ph.x = x; ph.y = y;
-					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
-					
-					if(allFramesDone) ph1 = ph;
-					else ph2 = ph;			
+				if(boxNr == 0) {
+					if(allFramesDone) { 
+						ph1.x = x;
+						ph1.y = y;
+					}else{
+						ph2.x = x;
+						ph2.y = y;
+					}
+				}
 
+				
+				if(wewantoverlay) {
+					// bounding box
+					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+					//text
+					char s[100];
+					sprintf(s, "%s:[%d]", getName().c_str(), boxNr);
+					ph = p1; ph.x -= 10; ph.y -= 10; 
+					cvPutText (rgb, s, ph, &font, cvScalar(255,255,0));
+					
+					ph.x = x; ph.y = y;
+					// mid dot
+					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
 				} else {
 					cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
 				}
 				
-				
+				// TODO correspondance problem? more than one thing in the frame>?!
 				if(allFramesDone) {
 					frame1_1 = p1;
 					frame1_2 = p2;
@@ -249,7 +274,7 @@ bool EvolvedFilterModule::updateModule()
 					frame2_2 = p2;
 				}
 				// only do for one block // HACK // TODO
-				break;
+				// break;
 			}
 			
 		}
@@ -267,6 +292,10 @@ bool EvolvedFilterModule::updateModule()
 			ImageOf<PixelBgr>& output = outputPort_Image.prepare();
 			output.wrapIplImage(outputImageToWrite); 
 			outputPort_Image.write();	
+			
+			if(isReadingFileFromHDD)
+				cvSaveImage("output.png", outputImageToWrite);
+			
 		}
 			
 		// cleanup 
@@ -281,8 +310,15 @@ bool EvolvedFilterModule::updateModule()
 
 	// only if we do it on both images
 	if( runOnLeft == runOnRight == true )	{
-		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
-		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+//		std::cout << "frame1.x/2: " << ph1.x/2 << "\ty/2: " << ph1.y/2;
+//		std::cout << "\t\tframe2.x/2: " << ph2.x/2 << "\ty/2:" << ph2.y/2 << std::endl;		
+		if(inDebugMode) {
+			printEncoderPositions();
+			std::cout << "frame1.x: " << ph1.x << "\ty: " << ph1.y;
+			std::cout << "\t\tframe2.x: " << ph2.x << "\ty:" << ph2.y << std::endl;		
+		}
+		
+		
 		calculateAndSetObjectWorldPosition(frame1_1, frame1_2, frame2_1,frame2_2);
 
 		
@@ -290,27 +326,28 @@ bool EvolvedFilterModule::updateModule()
 		// workaround!!
 		
 		Vector X = Vector();
-		X.push_back(ph1.x/2);
-		X.push_back(ph1.y/2);
-		X.push_back(ph2.x/2);
-		X.push_back(ph2.y/2);
+		X.push_back(ph1.x);
+		X.push_back(ph1.y);
+		X.push_back(ph2.x);
+		X.push_back(ph2.y);
 		
-		Vector &Xsend=portIKinIn->prepare(); // get pointer
-		Xsend = X; // set to port
 		
-		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
-		
-//		std::cout << "trying to connect to the ikinport " << std::endl;		
-		if (portIKinOut->getInputCount() > 0) {
-			portIKinIn->writeStrict();
-			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
-//			if (ret->size() >= 3) {
-//				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
-//			}
-			std::cout << "Bottle: " << ret->toString() << std::endl;
-		}
-//		std::cout << "ending ikinport " << std::endl;				
-		
+		posOutputPort.prepare() = X;
+		posOutputPort.write();
+
+//		//CvPoint3D32f p3d = cvPoint3D32f(FLT_MAX, FLT_MAX, FLT_MAX);
+//		
+////		std::cout << "trying to connect to the ikinport " << std::endl;		
+//		if (portIKinOut->getInputCount() > 0) {
+//			portIKinIn->writeStrict();
+//			Bottle *ret = portIKinOut->read(true); //#TODO: the iKinHead thread should actually wait for a new coordinate to arrive, which can be achieved by changing the .read command in iKinEyeTriangulate.cpp..
+////			if (ret->size() >= 3) {
+////				p3d = cvPoint3D32f(ret->get(0).asDouble(), ret->get(1).asDouble(), ret->get(2).asDouble());
+////			}
+//			std::cout << "Bottle: " << ret->toString() << std::endl;
+//		}
+////		std::cout << "ending ikinport " << std::endl;				
+//		
 				
 	}
 
@@ -365,25 +402,45 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	double estimatedX = 16.336582 + 0.1394611*x[7] + 0.15662868*x[4] - 0.11288279*x[12] - 0.018227309*x[1];
 	double estimatedY = 2.3311224 + 0.012280603*x[0] + 0.075872004*x[10] + 0.00019401088*x[0]*x[8] + cos(5.1875334 - 0.075872004*x[10] - 0.00019401088*x[0]*x[8] - 0.013261461*x[0]);
 	//1.4924586 + 43.674198/x[0] + 1.5535291*pow((28.112892/x[0]),0.11274087)*abs(13.024383 + 0.11767572*x[7] + 0.13460229*x[4] - 0.1140458*x[12] - 0.015047867*x[1]);
-	double estimatedZ = 0;
+	double estimatedZ = -.15;	//15cm is the table right roughtly
 	
 	
 	
-	// tuesday jan 10
-	
-//	estimatedY = (0.13074341*x[10] + 0.017721422*x[2] + 0.13263743*x[8])*tanh(0.13074341*x[10] + 0.017721422*x[2] + 0.13263743*x[8]);
-//	estimatedX = 9.5463333 + 0.060173385*x[7] + 0.066696353*x[4] - 0.050383791*x[12] - 0.0086153438*x[1];
-	
-//	printf("%f %f\t", x[0],x[1]);
+//	///////
+//	// wed jan 11
+//	// misc1
+//	estimatedY = 2.4449713 + 0.45422038*pow(0.014661767*x[0] + 0.11048388*x[10] + 0.10637926*x[8], 1.4340008);
+//	estimatedX = 16.690353 + 0.12812519*x[7] + 0.14214782*x[4] - 0.11215064*x[12] - 0.017972222*x[1];
+//		
+//	// misc2
+//	estimatedX = 16.083103 + 0.12178416*x[7] + 0.13797964*x[4] - 0.10328569*x[12] - 0.017162004*x[1];
+//	estimatedY = 1.3739585 + 0.01655753*x[0] + 0.11799882*x[10] + 0.12334365*x[8] - 0.11540742*x[8]*pow(0.87538558, 0.25877491*x[0]);
+//	
+//	// misc3
+//	estimatedX = 16.776382 + 0.13043526*x[7] + 0.14312536*x[4] - 0.10902537*x[12] - 0.018313933*x[1];
+//	estimatedY = 1.9018469 + 0.014656176*x[0] + 0.12437823*x[10] + 0.11133261*x[8] + (0.11133261*x[8] + 0.057853397*x[0] - 15.825777)/x[12];3	
+//	//	printf("%f %f\t", x[0],x[1]);
 //	printf("%f %f\n ", x[2],x[3]);	
 	
-	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
+	///////
+	// thu jan 12
+	// includes last two days
+	estimatedX = 16.776382 + 0.13043526*x[7] + 0.14312536*x[4] - 0.10902537*x[12] - 0.018313933*x[1];
+	estimatedY = 1.9018469 + 0.014656176*x[0] + 0.12437823*x[10] + 0.11133261*x[8] + (0.11133261*x[8] + 0.057853397*x[0] - 15.825777)/x[12];	
+
+	
+	estimatedX = 17.453409 + 0.13380532*x[7] + 0.14905137*x[4] - 0.11798947*x[12] - 0.018469423*x[1];
+	estimatedY = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/pow(x[12], 0.18780835) + log(x[12]) - 2.1461744;
+	
+	
+	
+//	std::cout <<  "Predition: "<< round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
 	double CellSize = 6;
 	
 	estimatedY *= CellSize;
 	estimatedX *= CellSize;
-	estimatedZ *= CellSize;
+	//estimatedZ *= CellSize;
 	
 	double leftOffset = CellSize * 6 + 2.5;
 	double forwardOffset = 17.5;
@@ -392,10 +449,28 @@ void EvolvedFilterModule::calculateAndSetObjectWorldPosition(CvPoint frame1_1, C
 	estimatedX += forwardOffset;
 	
 	
-	std::cout <<  "Predition x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
+//	std::cout <<  "Predition x/y/z(cm): "<< estimatedX << ", "<< estimatedY << ", " << estimatedZ << std::endl;	
 	
 	// todo 
-	//setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+	// hacking from thurs 12 jan
+//	estimatedX += 8.5;
+//	estimatedY -= 6.5;
+	
+	if(frame1_1.x == -1 || frame2_1.x == -1 || 
+	   frame1_2.x == -1 || frame2_2.x == -1) {
+		estimatedZ = -2;
+		setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+		return;
+		// don't set the Gaze if we don't see stuff!
+		// keep tracking old stuff
+		
+	}
+
+	setWorldPositionOfObject(-estimatedX/100.0, estimatedY/100.0, estimatedZ, "cup1");
+	send3DPositionToGazeCtrl(-estimatedX/100.0, estimatedY/100.0, estimatedZ);
+	
+	// todo create output!
+//	sendPixelPosOfObject(x[0], x[1], x[2], x[3]);
 }
 
 void EvolvedFilterModule::readEncoderPositions() {
@@ -427,6 +502,19 @@ void EvolvedFilterModule::readEncoderPositions() {
 			}
 		}
 	}
+}
+
+void EvolvedFilterModule::printEncoderPositions() {
+	std::cout << "Encoders: (Head, Torso)" << std::endl;	
+	
+	for(int i = 0; i < HEAD_JOINTS; i++) {
+		std::cout << headjnt_pos[i] << ",";
+	}
+
+	for(int i = 0; i < 3; i++) {
+		std::cout << torsojnt_pos[i] << ",";
+	}
+	std::cout << std::endl;
 }
 
 

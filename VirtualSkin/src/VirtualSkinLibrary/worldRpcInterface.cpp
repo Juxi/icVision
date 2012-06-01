@@ -83,7 +83,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		reply.addString("No help for YOU!!!");
 		return true;
 	}
-	else if ( prefix == "world" ) { n++; }
+	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr" ) { n++; }
 	
 	cmd  = command.get(n).asVocab(); n++;
 
@@ -264,7 +264,11 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 			case VOCAB_OBSTACLE:
 				
 				freeColor = Qt::blue;
+				freeColor = freeColor.lighter();
+
 				collidingColor = freeColor;
+                
+                freeColor.setAlphaF(0.5);
 				collidingColor.setAlphaF(0.5);
 				
 				object->setResponseClass(model->OBSTACLE());
@@ -278,7 +282,10 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 			case VOCAB_TARGET:
 				
 				freeColor = Qt::green;
+				freeColor = freeColor.lighter();
 				collidingColor = freeColor;
+				
+				freeColor.setAlphaF(1.0);
 				collidingColor.setAlphaF(0.5);
 				
 				object->setResponseClass(model->TARGET());

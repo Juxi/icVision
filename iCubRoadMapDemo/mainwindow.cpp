@@ -48,16 +48,15 @@
 MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 {
 	setCentralWidget(&graphWidget);
-	
     createActions();
     createMenus();
 
-    QString message = tr("A context menu is available by right-clicking");
-    statusBar()->showMessage(message);
+    //QString message = tr("A context menu is available by right-clicking");
+    //statusBar()->showMessage(message);
 
-    setWindowTitle(tr("Menus"));
+    setWindowTitle(tr("Adaptive Roadmap Planner"));
     setMinimumSize(160, 160);
-	
+
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
 	
@@ -76,6 +75,13 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);
 	//setLayout(mainLayout);
+	
+	// add a menu item to reset the joint mask
+	bool iCubJointMask[35] = {	1,1,1,								// use the torso
+								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,	// use the right arm, not the right hand
+								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0};	// use the left arm, not the left hand
+	for ( int i=0; i<35; i++ )
+		jMask.push_back( iCubJointMask[i] );
 }
 //! [2]
 
@@ -102,21 +108,10 @@ void MainWindow::connectToRobot()
 		if ( iCub.open(robotName.toStdString().c_str()) )
 		{
 			roadmap.setDimensionality( iCub.getNumJoints() );
+			iCub.setJointMask(jMask);
 			printf("Opened iCub Robot with %d joints!!!\n", iCub.getNumJoints());
 		}
 		else { printf("failed to open iCub\n"); }
-	}
-}
-
-void MainWindow::setRefVel()
-{
-	bool ok;
-	int vel = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
-						 tr("Percentage:"), 5, 1, 20, 1, &ok);
-	
-	if (ok)
-	{
-		iCub.setRefVels(vel);
 	}
 }
 
@@ -125,9 +120,34 @@ void MainWindow::disconnectFromRobot()
 	iCub.close();
 }
 
-void MainWindow::explore()
+void MainWindow::singleEdgeExplore()
 {
+	ctrlThread.setBehavior( ControlThread::SingleEdgeExplore );
 	ctrlThread.restart();
+}
+void MainWindow::multiEdgeExplore()
+{
+	ctrlThread.setBehavior( ControlThread::MultiEdgeExplore );
+	ctrlThread.restart();
+}
+void MainWindow::goTo()
+{
+	bool ok;    
+    QString text = QInputDialog::getText( 
+										 this, 
+										 tr("String"), 
+										 tr("Object Name:"), 
+										 QLineEdit::Normal, 
+										 tr("cup1"), 
+										 &ok );
+    if( ok && !text.isEmpty() )
+    {
+		ctrlThread.setSalientObject(text);
+		ctrlThread.setBehavior( ControlThread::GoToObject );
+		ctrlThread.restart();
+    } else {
+		ctrlThread.stop();
+	}
 }
 
 void MainWindow::stopController()
@@ -229,7 +249,8 @@ void MainWindow::loadMap()
 
 		/*** HANDLE VERTICES ***/
 		double n;				// dimension of p
-		std::vector<double> p;	// an n dimensional point
+		std::vector<double> p,
+							q;	// an n dimensional point
 		
 		//int count = 0;
 		while ( !in.atEnd() )
@@ -241,9 +262,10 @@ void MainWindow::loadMap()
 			{
 				QTextStream lineStream(&line);
 				p.clear();
+				q.clear();
 				
-				// put the line into a std::vector and don't worry about number of entries
-				for ( int i=0; i < roadmap.dimensionality()+2; i++)
+				// read the 2D position of the vertex for the graph visualization
+				/*for ( int j=0; j < 2; j++ )
 				{
 					if ( !lineStream.atEnd() ) {
 						lineStream >> n;
@@ -251,12 +273,44 @@ void MainWindow::loadMap()
 					} else {
 						p.push_back(0.0);
 					}
-				}
-				if ( p.size() != roadmap.dimensionality()+2 )
+				}*/
+
+				// read the DD point and don't worry about number of entries
+				for ( int i=0; i < roadmap.dimensionality()+2; i++)
 				{
-					printf("file parse error. wrong size point.");
-					return;
+					if ( !lineStream.atEnd() ) {
+						lineStream >> n;
+						if ( i < 2 )
+							p.push_back(n);
+						else 
+							q.push_back(n);
+					} else {
+						if ( i < 2 )
+							p.push_back(0.0);
+						else 
+							q.push_back(0.0);
+					}
 				}
+				printf("pSize = %d\n",p.size());
+				printf("qSize = %d\n",q.size());
+
+				//respect the robot's joint constraints
+				std::vector<double>::iterator k;
+				printf("qBefore: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+					q = iCub.withinLimits(q);
+				printf("qAfter: ");
+				for ( k = q.begin(); k!=q.end(); ++k )
+					printf("%f ",*k);
+				printf("\n");
+
+				// put q into p
+				for ( k = q.begin(); k!=q.end(); ++k )
+					p.push_back(*k);
+		
+				printf("totalSize = %d\n",p.size());
 				graphNodes.push_back(p);
 				//printf("lineCount: %d\n", count );
 				//count ++;
@@ -292,6 +346,36 @@ void MainWindow::connectMap()
 		roadmap.graphConnect(i);
 }
 
+void MainWindow::importNesMap()
+{
+	if ( !iCub.isValid() )
+	{
+		printf("Cannot load map file because iCub is not valid!!!\n");
+		return;
+	}
+
+
+	QString fileName = QFileDialog::getOpenFileName(this,
+													tr("Open Address Book"), "",
+													tr("All Files (*)"));
+	printf("Reading poses...");
+	roadmap.readMapPoses(fileName.toStdString());\
+	printf("Done");
+//
+//	QMessageBox::information(this, tr("Unable to open file"),
+//							 file.errorString());
+}
+
+
+void MainWindow::setVelocity()
+{
+	bool ok;
+	int i = QInputDialog::getInt(this, tr("QInputDialog::getInteger()"),
+									   tr("Velocity:"), 2, 1, 100, 1, &ok);
+	if (ok)
+		ctrlThread.setVelocity(i);
+}
+
 void MainWindow::projectMap()
 {
 	roadmap.project2D();
@@ -311,20 +395,31 @@ void MainWindow::createActions()
 	disconnectFromRobotAction->setStatusTip(tr("Disconnect from the iCub"));
 	connect(disconnectFromRobotAction, SIGNAL(triggered()), this, SLOT(disconnectFromRobot()));
 	
-	setRefVelAction = new QAction(tr("&Set Ref Velocity"), this);
-	setRefVelAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
-	setRefVelAction->setStatusTip(tr("Set the reference velocity on all joints"));
-	connect(setRefVelAction, SIGNAL(triggered()), this, SLOT(setRefVel()));
-	
-	exploreAction = new QAction(tr("&Explore"), this);
-	exploreAction->setShortcut( QKeySequence(tr("Ctrl+E")) );
-	exploreAction->setStatusTip(tr("Move the iCub around on the Roadmap"));
-	connect(exploreAction, SIGNAL(triggered()), this, SLOT(explore()));
-	
 	stopControllerAction = new QAction(tr("&Stop Controller"), this);
 	stopControllerAction->setShortcut( QKeySequence(tr("Ctrl+X")) );
 	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
 	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
+	
+	SEExploreAction = new QAction(tr("&Single Edge Explore"), this);
+	SEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	SEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap one edge at a time"));
+	connect(SEExploreAction, SIGNAL(triggered()), this, SLOT(singleEdgeExplore()));
+	
+	MEExploreAction = new QAction(tr("&Multiple Edge Explore"), this);
+	MEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	MEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap from vertex to vertex with shortest path planning"));
+	connect(MEExploreAction, SIGNAL(triggered()), this, SLOT(multiEdgeExplore()));
+
+	GoToAction = new QAction(tr("&Reach To Object"), this);
+	GoToAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
+	GoToAction->setStatusTip(tr("Reach for an object"));
+	connect(GoToAction, SIGNAL(triggered()), this, SLOT(goTo()));
+	
+	
+	setVelocityAction = new QAction(tr("&Set Velocity"), this);
+	setVelocityAction->setShortcut( QKeySequence(tr("Ctrl+V")) );
+	setVelocityAction->setStatusTip(tr("Set the robot velocity for position moves"));
+	connect(setVelocityAction, SIGNAL(triggered()), this, SLOT(setVelocity()));
 	
 	// MAP MENU
 	newMapAction = new QAction(tr("&New Map"), this);
@@ -347,6 +442,11 @@ void MainWindow::createActions()
     connectMapAction->setStatusTip(tr("Connect Nodes to their N nearest neighbors"));
     connect(connectMapAction, SIGNAL(triggered()), this, SLOT(connectMap()));
 	
+	importNesMapAction = new QAction(tr("&Import NES Map"), this);
+	importNesMapAction->setShortcuts(QKeySequence::Open);
+	importNesMapAction->setStatusTip(tr("Import a NES map from file"));
+    connect(importNesMapAction, SIGNAL(triggered()), this, SLOT(importNesMap()));
+
 	projectMapAction = new QAction(tr("&Project Map"), this);
 	projectMapAction->setShortcut( QKeySequence(tr("Ctrl+P")) );
     projectMapAction->setStatusTip(tr("Make a new 2D map projection"));
@@ -360,9 +460,11 @@ void MainWindow::createMenus()
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
 	controllerMenu->addAction(disconnectFromRobotAction);
-	controllerMenu->addAction(setRefVelAction);
-	controllerMenu->addAction(exploreAction);
+	controllerMenu->addAction(SEExploreAction);
+	controllerMenu->addAction(MEExploreAction);
+	controllerMenu->addAction(GoToAction);
 	controllerMenu->addAction(stopControllerAction);
+	controllerMenu->addAction(setVelocityAction);
 	
     mapMenu = menuBar()->addMenu(tr("&Map"));
 	mapMenu->addAction(newMapAction);
@@ -370,5 +472,6 @@ void MainWindow::createMenus()
 	mapMenu->addAction(saveMapAction);
 	mapMenu->addAction(connectMapAction);
 	mapMenu->addAction(projectMapAction);
+	mapMenu->addAction(importNesMapAction);
 }
 //! [12]

@@ -66,12 +66,29 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 			}
 			else if ( attributes.value("type").toStdString() == "target" )
 			{
-				obj = new CompositeObject( model->TARGET() ) ;
+				obj = new CompositeObject( model->TARGET() );
 			}
 			else
 			{
 				errorStr = "the 'type' attribute of an <object> tag must be 'obstacle' or 'target'.";
 				return 0;
+			}
+			
+			if ( !attributes.value("r").isEmpty() || !attributes.value("g").isEmpty() || !attributes.value("b").isEmpty() )
+			{
+				QColor freeColor(	attributes.value("r").toInt(),
+									attributes.value("g").toInt(),
+									attributes.value("b").toInt()	);
+				//printf("setting object color to: %d, %d, %d \n", attributes.value("r").toInt(),
+				//												 attributes.value("g").toInt(),
+				//												 attributes.value("b").toInt());
+				
+				QColor collidingColor = freeColor;
+				collidingColor.setAlphaF(0.3);
+                freeColor.setAlphaF(1.0);
+				obj->setFreeColor( freeColor );
+				obj->setCollidingColor( collidingColor );
+				//printf("\n\nSET FREECOLOR\n\n");
 			}
 			
 			QVector3D heightAxis = QVector3D( attributes.value("hx").toDouble(), attributes.value("hy").toDouble(), attributes.value("hz").toDouble() );
@@ -150,7 +167,26 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 
 bool WorldHandler::endElement(const QString & /* namespaceURI */, const QString & /* localName */, const QString &qName)
 {
-    if ( qName == "object") {
+    if ( qName == "object")
+	{
+	/*	QColor freeColor,collidingColor;
+		
+		if ( obj->getResponseClass() == model->OBSTACLE() )
+		{
+			freeColor = Qt::blue;
+			freeColor.setBlue(75);
+		}
+		else if ( obj->getResponseClass() == model->TARGET() )
+		{
+			freeColor = Qt::green;
+			freeColor.setGreen(75);
+		}
+		
+		collidingColor = freeColor;
+		collidingColor.setAlphaF(0.5);
+		obj->setFreeColor( freeColor );
+		obj->setCollidingColor( collidingColor );*/
+		
 		model->appendObject(obj);
 		obj = NULL;
     }

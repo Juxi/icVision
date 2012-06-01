@@ -72,24 +72,24 @@ fprintf('Solving with normal equations...\n');
 %% Load Data
 # data = load('../reddot_calibData3d_dec6.csv');
 # X = data(:, 1:13);
-# y = data(:, 14:16);
-data = load('../calibData5.csv');
+# y = data(:, -2:-1);
+data = load('../WedThurAll.csv');
+size(data)
 X = data(:, 1:13);
-y = data(:, 14:15);
+y = data(:, 23:24) * 6 / 100;
 m = length(y);
 
 % Calculate the parameters from the normal equation
-theta = normalEqn(X, y);
+theta = normalEqn(X, y)
 
 % Display normal equation's result
-fprintf('Theta computed from the normal equations: \n');
-% fprintf(' %f \n', theta);
-fprintf('\n');
+# fprintf('Theta computed from the normal equations: \n');
+# fprintf(' %f \n', theta);
+# fprintf('\n');
 
 
 price = 0; % You should change this
 % price = [1, 1650, 3.5] * theta; 
-
 sqrt(sum(((X * theta - y).^2)' )');
 %%sum((X * theta - y).^2)/m
 
@@ -97,15 +97,22 @@ sqrt(sum(((X * theta - y).^2)' )');
 # solution = testtry3D * theta
 # fprintf("should be 419.082969427109,-1.60571467131376,77.0522654056549");
 
-testtry = [167.6399, 59.86364,189.7391,105.5901,-20.000195,0.000256,0.000171,-10.000172,-0.00181,-0.000899,0.043956,0.131868,35.032967];
-solution = testtry * theta
-fprintf("should be: 4,6")
-
-squarederror = zeros(m, 2);
+testtry = [237.55,363.35,	260.75,	383.9375,	-20.0007,	0.000256241,	0.000171495,	-0.000446343,	10.004,	-0.000899328,	-15.0769,	-9.97802,	20]; %,	4,	6];
+solution = testtry * theta;
+##fprintf("should be: 4,6");
+fprintf('something...')
+squarederror = zeros(m, 1);
 for i= 1:m
-	solution = X(i,:) * theta;
-	squarederror(i,:) = (solution - y(i,:)).^2;
+	sol(i,:) = X(i,:) * theta;
+	solution(i,:) = abs(X(i,:) * theta - y(i,:));
+	squarederror(i,:) = solution(i,1).^2 + solution(i,2).^2;
 	% fprintf("should be: %d, %d\n", y(i,1), y(i,2));
 end
-squarederror;
-meansquerror = sum(squarederror)/m
+mi = min(solution)
+ma = max(solution)
+av = mean(solution)
+med = median(solution)
+# squarederror;
+meansquerror = sqrt(	median(squarederror))
+mimeansquerr = sqrt(	min(squarederror)	)
+maxsquerror  = sqrt(	max(squarederror)	)

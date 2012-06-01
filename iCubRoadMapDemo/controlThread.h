@@ -24,26 +24,51 @@ public:
 	ControlThread( iCubController* _robot, Roadmap* _map );
 	~ControlThread();
 	
+	void setVelocity( int i );
+	
 	bool gotoNearest();
-	bool isOnMap();
 	//Roadmap::edge_t randomMove();
 	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
+	bool isOnMap();
+	//double maxDiff(std::vector<double>,std::vector<double>);
 	
 	//void start();
 	void restart();
 	void stop();
+	
+	enum BehaviorType
+	{
+		SingleEdgeExplore,
+		MultiEdgeExplore,
+		GoToObject,
+		velocityMove
+	};
+	
+	void setBehavior( BehaviorType b ) { currentBehavior = b; }
+	void setSalientObject( QString s ) { salientObject = s; }
 
 protected:
 	
 	yarp::os::Network yarp;
-	yarp::os::Port vSkinStatus;
+	//yarp::os::Port vSkinStatus;
+	yarp::os::RpcClient worldPort;
 	
 	iCubController* robot;
-	Roadmap* map;
+	Roadmap* roadmap;
+	double	velocity;
+	
 	volatile bool keepRunning;
 	
+	BehaviorType currentBehavior;
+	QString salientObject;
+	
 	void run();
-
+	bool singleEdgeMove();
+	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path, double c ); 
+	
+	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
+	Roadmap::CGAL_Point currentPose();
 };
 #endif
 /** @} */

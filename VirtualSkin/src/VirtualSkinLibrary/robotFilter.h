@@ -78,10 +78,6 @@ public:
 		}
 		yarp::os::Network yarp;
 		
-		//robot = model.loadRobot(fileName);
-		//model.robot->open(fileName);
-		//model.world->load(worldFileName);
-		
 		const QString deviceBaseName( robot->getName() );
 		const QString filterBaseName( robot->getName() + "F" );
 		
@@ -101,6 +97,8 @@ public:
 			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
 			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
 			
+			printf("\nGetting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
+			printf("----------------------------------------------------------------\n");
 			
 			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
 			yarp::os::RpcClient port;
@@ -115,31 +113,37 @@ public:
 				cmd.addVocab(VOCAB_GET);
 				cmd.addVocab(VOCAB_LIMITS);
 				cmd.addInt(i);
-				printf("Sending message... %s\n", cmd.toString().c_str());
+				//printf("Sending message... %s\n", cmd.toString().c_str());
 				
 				yarp::os::Bottle response;
 				port.write(cmd,response);
-				printf("Got response: %s\n", response.toString().c_str());
+				//printf("Got response: %s\n", response.toString().c_str());
+				
+				if(response.size() != 5) {	// we did not get the limits
+					printf("No correct joint limit response at joint #%d! got: %s\n", i, response.toString().c_str());	
+					printf("Warning! Using the XML provided values!\n");	
+					continue;
+				}
 				
 				double min = response.get(2).asDouble();
 				double max = response.get(3).asDouble();
-				printf("setting motor limits: %f, %f\n", min, max);
+				//printf("setting motor limits: %f, %f\n", min, max);
 				
 				robot->getPart(bodyPart)->at(i)->setMin(min);
 				robot->getPart(bodyPart)->at(i)->setMax(max);
 				
 				if ( robot->getPart(bodyPart)->at(i)->size() == 1 )
 				{
-					printf("setting joint limits: %f, %f\n", min, max);
+					//printf("setting joint limits: %f, %f\n", min, max);
 					robot->getPart(bodyPart)->at(i)->at(0)->setMin(min*M_PI/180);
 					robot->getPart(bodyPart)->at(i)->at(0)->setMax(max*M_PI/180);
-				} else { printf("skipping this joint\n"); }
+				} //else { printf("skipping this joint\n"); }
 			}
 			port.close();
-			/************************/
-			
+            
+			/*** CREATE CONTROL BOARD FILTERS ***/
+			printf( "\nConnecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			printf("----------------------------------------------------------------\n");
-			printf( "connecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
@@ -159,11 +163,10 @@ public:
 				responseObservers.append(p_ro);
 				
 				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),				robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
-				//printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
+				printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
 				QString errStr = "failed to find YARP port '";
 				errStr.append(targetName);
 				errStr.append("'");
@@ -171,24 +174,28 @@ public:
 				close();
 				throw( VirtualSkinException(errStr) );
 			}
+			//printf("\n");
 		} 
 		
 		extraOpenStuff();
-		
-		
-		isOpen = true;
-		//statusPort.setBottle("1");
-		//model.start();
-		
+
 		// this is to let all the control board filters and observers come up
 		sleep(1);
+        isOpen = true;
+        
+        // not sure why i had to add this
+        // open the filters
+        for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+        {
+            cbFilters.at(bodyPart)->cutConnection(false);
+        }
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction
 	virtual void extraOpenStuff() {}		//!< This is called shortly before open<>(const QString&) returns
 											/**< In your sub-classes, replace the empty implementation with any initialization code required.
 												 For an example of this, see ReflexFilter. */ 
-	//virtual void stopRobot() {}		//!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
+	//virtual void stopRobot() {}           //!< Provides a mechanism to respond to collision events by injecting control code. See the implementation in ReflexFilter.
 											/**< This is executed once the RobotFilter has detected collisions and cut its connection. */
 	virtual void collisionResponse() {}		//!< Should waits for the commands issued in stopRobot() to finish running
 											/**< This is called right after stopRobot() and runs in its own thread.
@@ -246,6 +253,7 @@ private:
 	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
 	
 	friend class StateObserver;
+	friend class CallObserver;
 	
 };
 #endif

@@ -49,7 +49,7 @@
 static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
 
-QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	color(Qt::black)
+QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	color(Qt::darkGray)
 																			//newColor(Qt::black)
 																			//deleteMe(false),
 																			//changed(false)
@@ -152,8 +152,11 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 	
 		QLineF offLine(a,b);
 		
-	
-	painter->setPen(QPen(color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+	int lineWeight = 1;
+	if ( color == Qt::red || color == Qt::black )
+		lineWeight = 3;
+
+	painter->setPen(QPen(color, lineWeight, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 	painter->drawLine(offLine);
 	
 		//double angle = ::acos(line.dx() / line.length());

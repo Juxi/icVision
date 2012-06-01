@@ -25,28 +25,17 @@ ReflexFilter::~ReflexFilter()
 {
 }
 
-void ReflexFilter::extraOpenStuff()
-{
-	//originalPose.resize(robot->numBodyParts());
-	//targetPose.resize(robot->numBodyParts());
-	//history.resize(robot->numBodyParts());
-}
-
-/*void ReflexFilter::stopRobot()
-{
-	yarp::os::Bottle stop;
-	stop.addVocab(VOCAB_SET);
-	stop.addVocab(VOCAB_STOPS);
-	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
-	{
-		cbFilters.at(bodyPart)->injectCall(stop);
-	}
-	printf("sent stop commands\n");
-}*/
-
 void ReflexFilter::collisionResponse()
 {
-	int n = 10;			// we will use every nth pose in the buffer
+	// cut the connection to the client program
+	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
+	{
+		cbFilters.at(bodyPart)->cutConnection(true);	// take control away from the user
+		//cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
+	}
+	//statusPort.setBottle( yarp::os::Bottle("0") );
+	printf("*** ALL STOPPED - INITIATING COLLISION RESPONSE ***\n");
+	
 
 	// get the pose history and the average period between arriving state bottles
 	QVector< QVector< VirtualSkin::CircularBuffer::Item > > history;
@@ -64,6 +53,9 @@ void ReflexFilter::collisionResponse()
 	yarp::os::Bottle& bodyPartPose = rewind.addList();
 	prefix.addVocab(VOCAB_POSITION_MOVES);
 	
+	int n = 20;			// use every nth pose in the buffer
+						// n = 20 -->  5Hz
+	
 	bool wpReached = false;
 	QVector<double>::const_iterator joint;
 	for ( int i = 0; i < POSE_BUFFER_SIZE ; i++ )
@@ -74,7 +66,7 @@ void ReflexFilter::collisionResponse()
 			//printf("i = %d\n",i);
 			if ( i % n == 0 )	// use every nth pose in the buffer
 			{
-				//printf("------------------------------------------\n");
+				printf("------------------------------------------\n");
 				for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 				{
 					printf("Pose: %d, Part: %d, Label: %d\n", i, bodyPart, history.at(bodyPart).at(i).label );
@@ -97,13 +89,11 @@ void ReflexFilter::collisionResponse()
 					else { wpReached = false; }
 				}
 	
-				//printf("sleeping %f msec\n\n", n*period );
+				printf("sleeping %f msec\n\n", n*period );
 				msleep( n*period );
 			}
 		}
 	}
-	
-	//stopRobot();
 	
 	/*
 	// wait for stupid response to complete or for 10 seconds, whichever comes first
@@ -116,12 +106,3 @@ void ReflexFilter::collisionResponse()
 		msleep(20);
 	}*/
 }
-
-/*void ReflexFilter::setWaypoint()
-{
-	printf("setting a waypoint in the pose buffer\n");
-	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
-	{
-		cbFilters.at(bodyPart)->setWaypoint();
-	}
-}*/

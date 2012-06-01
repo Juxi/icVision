@@ -2,8 +2,9 @@
 
 using namespace VirtualSkin;
 
-YarpRobot::YarpRobot( KinematicModel::Model* m, DT_RespTableHandle t ) : KinematicModel::Robot(m,t)
+YarpRobot::YarpRobot( KinematicModel::Model* m, DT_RespTableHandle t, DT_ResponseClass c, DT_ResponseClass b ) : KinematicModel::Robot(m,t,c,b)
 {
+	//printf("YarpRobot Constructor\n");
 }
 YarpRobot::~YarpRobot()
 {

@@ -53,6 +53,21 @@ void Motor::setNormPos( qreal pos )
 	encoderPosition = minPos() + normalPosition * (maxPos() - minPos()); /***********/
 	setJointPositions();
 }
+
+qreal Motor::normToEnc(qreal pos) {
+	if ( pos < 0 )		{ pos = 0; }
+	else if ( pos > 1 ) { pos = 1; }
+	qreal new_pos = minPos() + pos * (maxPos() - minPos()); /***********/
+	return new_pos;
+}
+
+qreal Motor::encToNorm(qreal pos) {
+	qreal new_pos = (pos - minPos()) / (maxPos() - minPos());
+	if ( new_pos < 0 ) new_pos = 0;
+	else if ( new_pos > 1 ) new_pos = 1;
+	return new_pos;
+}
+
 void Motor::home(bool verbose)
 {
 	setEncPos(homePosition);

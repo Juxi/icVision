@@ -99,20 +99,10 @@ void RobotFilter::takeControl( int numReflexCollisions )
 {
 	if ( numReflexCollisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
-	
+
 	if ( isColliding && !haveControl )
 	{
 		haveControl = true;
-		
-		for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++)
-		{
-			cbFilters.at(bodyPart)->cutConnection(true);	// take control away from the user
-			cbFilters.at(bodyPart)->injectCall(stop_command);		// stop the robot
-		}
-		
-		statusPort.setBottle( yarp::os::Bottle("0") );
-
-		printf("*** ALL STOPPED - INITIATING COLLISION RESPONSE ***\n");
 		
 		// do some control in response
 		start();
@@ -143,19 +133,15 @@ void RobotFilter::openFilter()
 {	
 	// reinitialize the pose buffer with the current pose
 	setWaypoint();
-	//for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
-	//{
-	//	stateObservers.at(bodyPart)->initPoseBuffer( stateObservers.at(bodyPart)->currentPose() );
-	//}
 	
-	// reopen the filter... 
+	// reopen the proxy (if necessary)... 
 	for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
 	{
 		cbFilters.at(bodyPart)->cutConnection(false);
 	}
 	
 	//inform the user
-	statusPort.setBottle( yarp::os::Bottle("1") );
+	//statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("*** CONTROL RESTORED ***\n");
 	haveControl = false;
 }

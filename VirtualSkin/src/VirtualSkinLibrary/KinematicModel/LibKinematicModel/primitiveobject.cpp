@@ -4,8 +4,8 @@ using namespace KinematicModel;
 
 PrimitiveObject::PrimitiveObject() : /*deathWish(false),*/index(0), parentObject(NULL), solidShape(NULL), solidObject(NULL), displayList(0), listPending(false)
 {
-	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
-		 freeColor[0] = 0.9;	  freeColor[1] = 0.9;	   freeColor[2] = 0.9;	    freeColor[3] = 0.5; 
+	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.3;
+		 freeColor[0] = 0.3;	  freeColor[1] = 0.3;	   freeColor[2] = 0.3;	    freeColor[3] = 1.0; 
 			 black[0] = 0.0;		  black[0] = 0.0;		   black[0] = 0.0;			black[0] = 1.0;
 }
 
