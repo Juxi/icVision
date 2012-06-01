@@ -36,6 +36,7 @@
 #define VOCAB_DEF VOCAB3('d','e','f')		//!< Define an object target or obstacle
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
+#define VOCAB_GRAB VOCAB4('g','r','a','b')	//!< Attach an object to a marker
 #define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
 
 // object types

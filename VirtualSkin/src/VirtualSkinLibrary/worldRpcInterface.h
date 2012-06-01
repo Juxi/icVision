@@ -57,6 +57,7 @@ private:
 	void setPos( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Sets the position of an object (called by set() above)
 	void setRot( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Rotate an object
 	void removeObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Remove and delete an object
+	void grabObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Attach an object to a marker
 	void getList(yarp::os::Bottle& reply);											//!< Get a list of objects in the world
 	void getState(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n);		//!< Get the 4x4 rototranslation matrix of an object
 	

@@ -20,7 +20,7 @@
 
 using namespace VirtualSkin;
 
-WorldRpcInterface::WorldRpcInterface() : keepRunning(false), s(0), c(0), b(0), ss(0), sc(0), sb(0)
+WorldRpcInterface::WorldRpcInterface() : keepRunning(false), s(0), c(0), b(0), ss(0), sc(0), sb(0), model(NULL)
 {
 	
 }
@@ -83,7 +83,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		reply.addString("No help for YOU!!!");
 		return true;
 	}
-	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr" ) { n++; }
+	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr, grab" ) { n++; }
 	
 	cmd  = command.get(n).asVocab(); n++;
 
@@ -95,7 +95,8 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		case VOCAB_DEF: respClass(command,reply,n); break;
 		case VOCAB_GET:	getState(command,reply,n); break;
 		case VOCAB_ROT:	setRot(command,reply,n); break;
-		case VOCAB_REM:	removeObject(command,reply,n); break;	
+		case VOCAB_REM:	removeObject(command,reply,n); break;
+		case VOCAB_GRAB: grabObject(command,reply,n); break;
 		case VOCAB_CLEAR: 
 				printf("CLEARING THE WORLD\n");
 				model->clearTheWorld();
@@ -255,7 +256,9 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 	
 	if ( object )
 	{
-		object = model->removeWorldObject(object);
+		if (!model->removeWorldObject(object)) {
+			return;
+		}
 
 		int type = command.get(n).asVocab();
 		QColor collidingColor,freeColor;
@@ -304,6 +307,41 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 		model->appendObject( object );
 	}
 }
+
+
+void WorldRpcInterface::grabObject( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
+{
+	KinematicModel::CompositeObject* object = getObject(command, reply, n);
+	if (!object)
+		return;
+
+	QString robotName = command.get(n).asString(); n++;
+	KinematicModel::Robot *robot = model->getRobot(robotName);
+	if (!robot) {
+		reply.addString("Robot not found.");
+		return;
+	}
+	reply.addString("Robot found.");
+
+	QString markerName = command.get(n).asString(); n++;
+	int markerIndex = -1;
+	KinematicModel::RobotObservation robotObs = robot->observe();
+	for (int i = 0; i<robotObs.getNumMarkers(); i++) {
+		if (robotObs.markerName(i).compare(markerName) == 0)
+			markerIndex = i;
+	}
+
+	if (markerIndex < 0) {
+		reply.addString("Marker not found, releasing object.");
+	//	return;
+	} else
+		reply.addString("Marker found, grabbing object.");
+ 
+	model->grabObject(object, robot, markerIndex);
+
+	//printf("Grabbing object \"%s\" with marker \"%s\" on robot \"%s\"\n", object->getName().toStdString().c_str(), markerName.toStdString().c_str(), robotName.toStdString().c_str());
+}
+
 
 QString WorldRpcInterface::getName( const yarp::os::Bottle& command, int& n  )
 {
