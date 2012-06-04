@@ -80,7 +80,20 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	yarp::os::ConstString prefix = command.get(n).asString();
 	if ( prefix=="help" )
 	{
-		reply.addString("No help for YOU!!!");
+			reply.addVocab(yarp::os::Vocab::encode("many"));
+			reply.addString("ReflexDemo of VirtualSkin, arguments within brackets: \n");
+			reply.addString(	"ls: list objects");
+			reply.addString(	"mk sph [radius] [xpos] [ypos] [zpos]: create sphere");
+			reply.addString(	"mk cyl [radius] [height] [xpos] [ypos] [zpos]: create sphere");
+			reply.addString(	"mk box [xsize] [ysize] [zsize] [xpos] [ypos] [zpos]: create sphere");
+			reply.addString(	"set [objectname] [xpos] [ypos] [zpos]: set object location (m)");
+			reply.addString(	"def [objectname] [targ/obs]: set object class to target or obstacle");
+			reply.addString(	"get [objectname]: return object state");
+			reply.addString(	"rot [objectname] [xrot] [yrot] [zrot]: set object rotation (degrees)");
+			reply.addString(	"rm [objectname]: remove object (ghost objects cannot be removed)");
+			reply.addString(	"clr: remove all but ghost objects from the world, and reset object counters");
+			reply.addString(	"grab [objectname] [robotname] [markername]: attach object to robot marker");
+			reply.addString(	"grab [objectname] [robotname]: detach object from robot");
 		return true;
 	}
 	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr, grab" ) { n++; }

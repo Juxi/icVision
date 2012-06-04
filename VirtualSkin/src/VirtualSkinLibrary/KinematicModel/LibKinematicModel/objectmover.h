@@ -54,7 +54,7 @@ private:
 	QVector<KinematicModel::CompositeObject*> objectList;
 	QVector<int> markerList;
 	QVector<int> robotList;
-	QVector<QMatrix4x4> rtList;
+	QVector<QMatrix4x4> rtList;  //<! Offset between marker and object at grab
 
 	bool keepRunning;
 };
