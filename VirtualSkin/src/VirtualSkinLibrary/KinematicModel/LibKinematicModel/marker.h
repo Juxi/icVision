@@ -35,6 +35,7 @@ public:
 	{
 		d = 2*r;
 		tracerObject = new CompositeObject(c);
+		tracerObject->persistent = true;
 		tracerObject->setFreeColor(qc);
 		
 		int i;

@@ -270,9 +270,7 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 	
 	if ( object )
 	{
-		if (!model->removeWorldObject(object)) {
-			return;
-		}
+		model->removeWorldObject(object);
 
 		int type = command.get(n).asVocab();
 		QColor collidingColor,freeColor;

@@ -252,16 +252,6 @@ void Model::appendObject( CompositeObject* object )
 
 bool Model::removeWorldObject( CompositeObject* object )
 {
-	if (object->getResponseClass() == ghostClass) {
-		if (verbose) printf("Object %s is a ghost object, and cannot be removed.\n", object->getName().toStdString().c_str());
-		return false;
-	}
-
-	if (object->persistent) {
-		if (verbose) printf("Object %s is persistent, and cannot be removed.\n", object->getName().toStdString().c_str());
-		return false;
-	}
-
 	QMutexLocker locker(&mutex);
 	
 	// remove the pointer to the object from the world vector
@@ -381,11 +371,10 @@ void Model::cleanTheWorld()
 			if ( !displayListPending )
 			{
 				//if (verbose) printf(" no pending display lists\n");
-				CompositeObject* dyingObject = *i;		// get a non-iterator ref to the object in question
-				if (removeWorldObject( dyingObject )) {	// this would f*** up the iterator passed to it because we call QVector::erase( <T> ) inside here
-					objectMover->check();				// check objectMover lists and remove object if necessary
-					delete( dyingObject );				// and delete the object from memory
-				}
+				CompositeObject* dyingObject = *i;	// get a non-iterator ref to the object in question
+				removeWorldObject( dyingObject );	// this would f*** up the iterator passed to it because we call QVector::erase( <T> ) inside here
+				objectMover->check();				// check objectMover lists and remove object if necessary
+				delete( dyingObject );				// and delete the object from memory
 			}
 			//else
 			//{

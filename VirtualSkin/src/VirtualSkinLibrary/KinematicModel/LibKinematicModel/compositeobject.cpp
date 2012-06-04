@@ -155,5 +155,5 @@ void CompositeObject::render()
 
 void CompositeObject::kill()
 {
-	deathWish = true;
+	deathWish = !persistent;
 }
