@@ -257,6 +257,11 @@ bool Model::removeWorldObject( CompositeObject* object )
 		return false;
 	}
 
+	if (object->persistent) {
+		if (verbose) printf("Object %s is persistent, and cannot be removed.\n", object->getName().toStdString().c_str());
+		return false;
+	}
+
 	QMutexLocker locker(&mutex);
 	
 	// remove the pointer to the object from the world vector

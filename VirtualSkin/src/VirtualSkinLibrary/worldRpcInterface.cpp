@@ -113,6 +113,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		case VOCAB_CLEAR: 
 				printf("CLEARING THE WORLD\n");
 				model->clearTheWorld();
+				s = 0; c = 0; b = 0; ss = 0; sc = 0; sb = 0; // set counters to 0, for icub simulator compatibility
 				reply.addString("Removed all world objects");
 				printf("FINISHED CLEARING THE WORLD\n");
 				break;

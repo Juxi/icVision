@@ -2,25 +2,18 @@
 <!DOCTYPE WorldList>
 <WorldList version="1.0">
 
-<object name="table" pz="-0.06" px="-0.32" r="50" g="50" b="50">
-    <box width="0.4" height="0.7" depth=".001" height="1.5"/>
+<object name="table" pz="-0.0976" px="-0.326" r="50" g="50" b="50" persistent="1">
+    <box width="0.4" height="0.7" depth=".03"/>
 </object>
 
-<!--<object name="cup" px="-.05" pz="0.1" r="0" g="0" b="100">
-    <cylinder radius=".045" height=".15" hz="1"/>
+<object name="ball" px="-0.3726" py=".15" pz="-0.0426" type="target" r="0" g="100" b="0">
+    <sphere radius=".04"/>
 </object>
 
-<object name="cup2" px="-.3" py="-.2" pz="-.1">   
-    <cylinder radius=".035" height=".15" hz="1"/>
-</object>
-<object name="cup3" px="-.3" py=".2"  pz="-.1">
-    <cylinder radius=".035" height=".15" hz="1"/>
+
+<object name="cube" px="-0.3726" py="-0.05" pz="-0.0326" type="target" r="0" g="100" b="0">
+    <box width=".1" height=".1" depth=".1"/>
 </object>
 
-<object name="" pz="">
-    <box width=".005" depth="1" height=".71" px=".355"/>
-    <box width="1" depth="1" height=".005" px="-.145" py=".355"/>
-    <box width="1" depth="1" height=".005" px="-.145" py="-.355"/>
-</object>-->
 
 </WorldList>

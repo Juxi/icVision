@@ -74,6 +74,10 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 				return 0;
 			}
 			
+			if ( !attributes.value("persistent").isEmpty() ) {
+				obj->persistent = (bool) attributes.value("persistent").toInt();
+			}
+
 			if ( !attributes.value("r").isEmpty() || !attributes.value("g").isEmpty() || !attributes.value("b").isEmpty() )
 			{
 				QColor freeColor(	attributes.value("r").toInt(),
