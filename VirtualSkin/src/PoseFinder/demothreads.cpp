@@ -11,11 +11,11 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), d_pose_finder(model, robot)
 {
   //nullspace_function();
-  hold_something_function();
+  //hold_something_function();
   //		hand_left_function();
   //		hand_right_function();
 //  hand_right_mark_function();
-  //hand_right_look_varun_function();
+  hand_right_look_varun_function();
 }
 
 void MapThread::load_points(string filename) {
@@ -57,6 +57,7 @@ void MapThread::load_points(string filename) {
 
 void MapThread::run()
 {
+  //string load_file_name("maps/table_map_right_hand.save");
   string load_file_name("map.save");
   string store_file_name("map.save");
   if (exists(load_file_name)) {
@@ -76,7 +77,7 @@ void MapThread::run()
   }
 
   size_t n(0);
-  bool test(true);
+  bool test(false);
   if (test)
     while (true) {
       //				size_t n(qrand() % d_configuration_points.size());
@@ -252,7 +253,8 @@ void MapThread::hand_right_mark_function() {
 }
 
 
-void MapThread::hand_right_look_varun_function() {
+void MapThread::hand_right_look_varun_function() {     
+  float height(.1);
   cout << "Building constraints" << endl;
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_marker = "right_hand";
@@ -266,7 +268,7 @@ void MapThread::hand_right_look_varun_function() {
 
   //		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-  d_pose_finder.add_constraint(new PlaneConstraint(d_marker, 2, .0), 2.);
+  d_pose_finder.add_constraint(new PlaneConstraint(d_marker, 2, height), 2.);
 
   d_pose_finder.add_constraint(new CollisionConstraint(), 1.);
 
