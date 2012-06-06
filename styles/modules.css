@@ -1,0 +1,61 @@
+/*  # Copyright: (C) 2011-2012 Juxi Leitner
+    # Author: Juxi Leitner <juxi.leitner@gmail.com>
+    # CopyPolicy: Released under the terms of the GNU GPL v2.0. */
+
+
+/*    QLabel {
+            border: 2px solid gray;
+            padding: 0 8px;
+             background: yellow;
+             selection-background-color: darkgray;
+    }
+*/
+
+QWidget { margin: 0px; padding: 0px;}
+QPushButton { margin: 2px; padding: 6px; }
+QLabel {
+    padding: 0px; margin: 0px;
+    margin-top: 10px;
+    padding-left: 10px;
+    font-family: Helvetica, Arial, Verdana, sans-serif; font-weight: 400;
+    font-size: 11px;
+}
+
+ModuleWidget > QLabel {
+    margin: 0px;    
+    color: white;
+    padding: 5px;
+    font-size: 12px; 
+}
+ModuleWidget > QPushButton {
+    margin: 0px;
+    color: #222;
+    padding: 6px;
+    font-size: 12px; 
+}       
+       
+
+ModuleWidget {
+    height: 85px;
+    margin: 0px; padding: 50px; 
+    border-radius: 0px;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                        stop:0 #ddd, 
+/*                                        stop: 0.5 #505050,
+                                        stop: 0.6 #434343,*/ 
+                                        stop:1 #aaa);
+        padding-left: 4px;
+        border-top: 1px solid #888;
+/*        border-bottom: 2px solid #c6c6c6;        */
+}
+ModuleWidget:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                            stop:0 #eee, 
+                                            stop:1 #bbb);
+}
+
+ModuleWidget:enabled {
+        background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                            stop:0 #ada, 
+                                            stop:1 #aaa);
+}
