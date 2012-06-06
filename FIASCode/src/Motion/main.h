@@ -41,7 +41,7 @@
 #define BOUNDARY_CHECK 1 // do you want to do the boundary check?
 #define DISPLAY_VALUES 1 //Display motor values
 #define RECOIL_FACTOR 0.66 //When it goes outside the boundary, by howmuch amount you want to come back into your field of view.
-#define BIND_NECK_ROLL 0
+#define BIND_NECK   1
 
 char imageFileNameLeft[200];
 char imageFileNameRight[200];

@@ -1,6 +1,6 @@
 #define TRAINING 1 //0 FOR TESTING
 #define ASK_USER 0
-#define DURATION_RUN 60 //in seconds
+#define DURATION_RUN 100 //in seconds
 
 //Segmenting objects
 #define POSES_PER_OBJECT_STATIC 1   // When ASK_USER is 0, you just leave the icub running and allow it to focuss objects in the scene and segment and save the results
