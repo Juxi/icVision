@@ -13,9 +13,10 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   //nullspace_function();
   //hold_something_function();
   //		hand_left_function();
-  //		hand_right_function();
+  //hand_right_function();
 //  hand_right_mark_function();
-  hand_right_look_varun_function();
+  //hand_right_look_varun_function();
+  grasp_function();
 }
 
 void MapThread::load_points(string filename) {
@@ -57,6 +58,13 @@ void MapThread::load_points(string filename) {
 
 void MapThread::run()
 {
+  //add bullshit
+    for (float z(-.1); z < .3; z += .03)
+      d_pose_finder.simulator().add_ball(-.26, 0.06, z);
+    for (float z(-.1); z < .3; z += .03)
+      d_pose_finder.simulator().add_ball(-.26, 0.20, z);
+    //(-0.307605, 0.134241, 0.1090077)
+
   //string load_file_name("maps/table_map_right_hand.save");
   string load_file_name("map.save");
   string store_file_name("map.save");
@@ -65,7 +73,6 @@ void MapThread::run()
     load_points(load_file_name);
   }
 //  store_points(store_file_name);
-
   QTime time = QTime::currentTime();
   qsrand((uint)time.msec());
 
@@ -100,7 +107,12 @@ void MapThread::run()
     }
   else
     while (true) {
-      d_pose_finder.find_pose(2000000, 0., 1.0e-6, .30, 50);
+      //double start_std(.30);
+      //size_t population_size(50);
+      double start_std(.70);
+      size_t population_size(250);
+
+      d_pose_finder.find_pose(2000000, 0., 1.0e-6, start_std, population_size);
       add_best_pose();
       KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
       print_vector<double>(observation.markerPosition("head"));
@@ -204,7 +216,7 @@ void MapThread::hand_right_function() {
   d_marker = "right_hand";
   d_points = &(d_map_build_constraint->points());
 
-  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), .1);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 1);
 
   d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
 
@@ -254,13 +266,13 @@ void MapThread::hand_right_mark_function() {
 
 
 void MapThread::hand_right_look_varun_function() {     
-  float height(.1);
+  float height(.0);
   cout << "Building constraints" << endl;
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_marker = "right_hand";
   d_points = &(d_map_build_constraint->points());
 
-  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 2.);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 3.);
 
   d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
 
@@ -280,4 +292,30 @@ void MapThread::hand_right_look_varun_function() {
 
   //d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));
 
+}
+
+
+void MapThread::grasp_function() {     
+  float height(.0);
+  cout << "Building constraints" << endl;
+  d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
+  d_marker = "right_hand";
+  d_points = &(d_map_build_constraint->points());
+
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 7.);
+
+  d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
+
+  d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+  double point_factor(10);
+  d_pose_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .01, Constraint::vector3(-0.307605, 0.134241, 0.1090077), point_factor), .04);
+
+  d_pose_finder.add_constraint(new CollisionConstraint(), 1.);
+
+  d_pose_finder.add_constraint(d_map_build_constraint);
+
+  //d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+  d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_index", 0.0, 0));
 }

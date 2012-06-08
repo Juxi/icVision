@@ -96,6 +96,8 @@ public:
 
 	void hand_right_mark_function();
 
+	void grasp_function();
+
 	void add_best_pose() {
 		std::vector<double> best_point = d_pose_finder.best_point();
 		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();

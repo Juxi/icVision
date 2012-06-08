@@ -173,7 +173,7 @@
                 <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
                 
                 <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
-            
+		  
                     <!-- THUMB -->
                     <link x="-.015" y=".004" z=".0275" radius="0">
                     <!--<box width=".015" height=".0399" depth=".015" hx="-.015" hy="-.012" hz="-0.035" px="-.0075" py="-.006" pz="-0.035"/>-->
@@ -193,8 +193,8 @@
                                 <link x="-.022" radius=".0075">
                                 <joint y="-.015" minPos="0" maxPos="90" radius="0.0075">
                                 <link x="-.025" radius=".0075">
-                                
-                                    <sphere radius=".008" px="-.025"/>
+				  <marker name="right_thumb"/>
+				  <sphere radius=".008" px="-.025"/>
                                     
                                 </link>
                                 </joint>
@@ -230,8 +230,8 @@
                                 <joint x="-.017" minPos="0" maxPos="90" radius="0.0075">
                                 <link z="-.022" radius=".0075">
                                 <joint x="-.017" minPos="0" maxPos="90" radius="0.0075">
-                                <link z="-.025" radius=".0075">
-                            
+				  <link z="-.025" radius=".0075">
+				    <marker name="right_index" />
                                     <sphere radius=".008" pz="-.025"/>
                                     
                                 </link>

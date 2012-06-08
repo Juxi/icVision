@@ -259,21 +259,22 @@ class GraspConstraint : public Constraint {
 
 	PointingConstraint d_point_constraint1, d_point_constraint2;
 	OppositeConstraint d_opposite_constraint;
-
+	double d_factor;
 public:
-	GraspConstraint(std::string marker_1, std::string marker_2, size_t axis1, size_t axis2, double distance, std::vector<double> goal_position) :
+ GraspConstraint(std::string marker_1, std::string marker_2, size_t axis1, size_t axis2, double distance, std::vector<double> goal_position, double factor = 1.) :
 	Constraint("GraspConstraint"),
 	d_marker_1(marker_1), d_marker_2(marker_2),
 	d_point_constraint1(marker_1, goal_position, distance, axis1),
 	d_point_constraint2(marker_2, goal_position, distance, axis2),
-	d_opposite_constraint(marker_1, marker_2, goal_position)
+	  d_opposite_constraint(marker_1, marker_2, goal_position),
+	  d_factor(factor)
 	{}
 
 
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
 		return d_point_constraint1.evaluate(motor_values, observation, collisions) +
 			d_point_constraint2.evaluate(motor_values, observation, collisions) +
-			d_opposite_constraint.evaluate(motor_values, observation, collisions);
+		  d_factor * d_opposite_constraint.evaluate(motor_values, observation, collisions);
 	}
 
 };

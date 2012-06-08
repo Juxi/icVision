@@ -1,7 +1,3 @@
-# Copyright: (C) 2010 Mikhail Frank
-# Author: Mikhail Frank
-# CopyPolicy: Released under the terms of the GNU GPL v2.0.
-
 FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 	
@@ -23,6 +19,14 @@ SET ( hdr_files	posefinder.h xnes.h constraints.h posefitnessfunction.h simulato
 
 SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpposecontroller.h iCubController.h )
 QT4_WRAP_CPP( src_files ${QT_MOC_FILES} )
+
+find_package(CGAL QUIET COMPONENTS Core )
+if ( CGAL_FOUND )
+  include( ${CGAL_USE_FILE} )
+  include( CGAL_CreateSingleSourceCGALProgram )
+else()
+  message(STATUS "This program requires the CGAL library, and will not be compiled.")
+endif()
 
 ADD_EXECUTABLE ( PoseFind ${hdr_files} ${src_files} main.cpp)
 ADD_EXECUTABLE ( PoseControl ${hdr_files} ${src_files} yarpposecontroller.h controller_main.cpp)

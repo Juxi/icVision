@@ -87,6 +87,7 @@ public:
 		}
 				
 		(*d_filter)(motor_values, fitness, n_collisions, observation);
+		usleep(5000);
 		return fitness;
 	}
 
