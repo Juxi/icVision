@@ -1,2 +1,2 @@
 #!/bin/sh
-./GraspControl --file graspcontrol.ini
+./PoseControl --file graspcontrol.ini

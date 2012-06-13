@@ -14,8 +14,8 @@
             <!-- THESE GEOMS MODEL THE HIPS AND THE STAND
                  THEY COLLIDE WITH THE TABLE IN world.xml -->
 
-            <sphere radius=".11" px="0" py=".06" pz="-.05"/>
-            <sphere radius=".11" px="0" py="-.06" pz="-.05"/>
+            <sphere radius=".09" px="0" py=".06" pz="-.05"/>
+            <sphere radius=".09" px="0" py="-.06" pz="-.05"/>
             <sphere radius=".1" px=".035" pz="-.06"/>
 			<sphere radius=".1" px="0.0" pz="-.06" pz="-.03"/>
             <cylinder radius=".04" height="1" pz="-.5" hz="1"/>

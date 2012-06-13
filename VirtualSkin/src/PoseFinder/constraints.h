@@ -27,6 +27,13 @@ public:
 			distance += pow(values[i] - goal_pos[i], 2.0);
 		return sqrt(distance);
 	}
+	
+	static double pos_error(std::vector<double> const &values, std::vector<double> const &goal_pos, std::vector<double> const &mask) {
+		double distance(0.0);
+		for (size_t i(0); i < values.size(); ++i)
+			distance += pow(values[i] - goal_pos[i], 2.0) * mask[i];
+		return sqrt(distance);
+	}
 
 	static std::vector<double> diff(std::vector<double> const &left, std::vector<double> const &right) {
 		std::vector<double> diff(left);
@@ -58,11 +65,14 @@ public:
 
 class HomePoseConstraint : public Constraint {
 	std::vector<double> d_home_pose;
+	std::vector<double> d_home_pose_mask;
+
 public:
- HomePoseConstraint(std::vector<double> home_pose) : Constraint("HomePoseConstraint"), d_home_pose(home_pose){}
+ HomePoseConstraint(std::vector<double> home_pose) : Constraint("HomePoseConstraint"), d_home_pose(home_pose), d_home_pose_mask(d_home_pose.size()) { std::fill(d_home_pose_mask.begin(), d_home_pose_mask.end(), 1.0); }
+ HomePoseConstraint(std::vector<double> home_pose, std::vector<double> home_pose_mask) : Constraint("HomePoseConstraint"), d_home_pose(home_pose), d_home_pose_mask(home_pose_mask) {}
 
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
-		return Constraint::pos_error(d_home_pose, motor_values) / d_home_pose.size();
+	  return Constraint::pos_error(d_home_pose, motor_values, d_home_pose_mask) / d_home_pose.size();
 	}
 
 };
@@ -302,7 +312,7 @@ public:
 	}
 
 	std::vector<std::vector<double> > &configurations() {
-		return d_configurations;
+	  return d_configurations;
 	}
 
 	void add_point(std::vector<double> &x, std::vector<double> &q) {

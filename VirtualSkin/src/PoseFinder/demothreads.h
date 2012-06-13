@@ -81,6 +81,8 @@ class MapThread : public QThread {
 
 	std::string d_marker;
 
+	size_t d_population_size;
+	double d_start_std;
 public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
 

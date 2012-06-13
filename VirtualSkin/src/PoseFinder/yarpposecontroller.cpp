@@ -111,6 +111,7 @@ void YarpPoseController::follow_path(vector<vector<double> > &path) {
 	for (size_t i(0); i < path.size(); ++i) {
 		vector<double> pose(path[i]);
 		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
+		
 		crazy_path.push_back(cut_pose);
 	}
 	Bottle path_bottle = path_to_bottle(crazy_path);

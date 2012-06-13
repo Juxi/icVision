@@ -18,8 +18,8 @@ vector<double> PoseFinder::best_point() {
 
 Matrix PoseFinder::get_start_pos(int dim) {
 	Matrix pt = Matrix::zeros(dim);
-	for (size_t i(0); i < d_simulator.d_home_pos.size(); ++i)
-	  pt[i] = d_simulator.d_home_pos[i];
+	for (size_t i(0); i < d_start_search_pos.size(); ++i)
+	  pt[i] = d_start_search_pos[i];
 	return pt;
 }
 
@@ -38,9 +38,10 @@ void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, doub
 		size_t n_evaluations(0);
 		d_pose_fitness_function.debug() = false;
 		do
-		{
+		  {
 			try {
-				d_nes.iterate();
+			  d_nes.iterate();
+			  usleep(3000);
 			} catch (NanException &e) {
 				std::cout << "breaking isnan" << std::endl;
 				break;
