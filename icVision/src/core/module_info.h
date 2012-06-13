@@ -40,6 +40,14 @@ public:
 			}
 		}
 	}
+
+	void set(const char* name_in, int in_ID = -1) {
+		ID = in_ID;
+		name = name_in;
+		// portname = "/icVision/" + name + "/rawoutput:o";
+		shortName = name.substr(0, 8);
+	}
+	
 	std::string toStdString() {
 		std::ostringstream oss;
 		oss << "Module Info: ";
@@ -55,6 +63,7 @@ public:
 	void setPort(icFilterPort *p_in, const char *str) { port = p_in; portname = str;}
 	
 	std::string getName() { return name; }
+	int getID() { return ID; }	
 	
 }; 
 

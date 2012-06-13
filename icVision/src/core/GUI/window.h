@@ -10,9 +10,11 @@
 #include <QWidget>
 #include <QtGui>
 
-#include "../core_module.h"
 #include <iostream>
 #include <fstream>
+
+#include "../core_module.h"
+#include "module_widget.h"
 
 class Window : public QWidget {
     Q_OBJECT
@@ -29,14 +31,18 @@ public:
 public slots:
 //	void addModule();
 //	void toggleTimer();	
-	void updateList();
+	void refreshClicked();
 	
 protected:
     void keyPressEvent(QKeyEvent *event);
 		
 private:
 	void initWindow();
-	void showYarpImages();
+	void createCoreModulesList();
+
+	void updateList();
+	
+	//?void showYarpImages();
 
 	// Variables
 private:
@@ -48,12 +54,22 @@ private:
 /******** GUI Variables **********/
 private:
 	QString title;
+	
+	QVBoxLayout *window_layout, *lay_FilterModuleList;
+	QWidget *wdg_FilterModuleList;	
+	QLabel *lbl_FilterModuleCount;
+	
+	QVBoxLayout *lay_CoreModuleList;
+	QWidget *wdg_CoreModuleList;	
+	QLabel *lbl_CoreModuleCount;
+	
+	QWidget *wdg_BottomButtons;
+	QPushButton *btn_refresh, *btn_quit;
 
-	QVBoxLayout *window_layout, *lay_ModuleList;
-	QWidget *wdg_ModuleList;	
-
-	QPushButton *btn_quit;
-	QLabel *lbl_ModuleCount;
+	// icVision::Core module widgets
+	ModuleWidget *coreModule_Localisation, *coreModule_HTTP;
+	// TODO not yet impl
+	ModuleWidget *coreModule_Disparity, *coreModule_Saliency;
 };
 
 #endif
