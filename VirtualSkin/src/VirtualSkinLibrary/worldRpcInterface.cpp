@@ -327,7 +327,7 @@ void WorldRpcInterface::grabObject( const yarp::os::Bottle& command, yarp::os::B
 	if (!object)
 		return;
 
-	QString robotName = command.get(n).asString(); n++;
+	QString robotName = command.get(n).asString().c_str(); n++;
 	KinematicModel::Robot *robot = model->getRobot(robotName);
 	if (!robot) {
 		reply.addString("Robot not found.");
@@ -335,7 +335,7 @@ void WorldRpcInterface::grabObject( const yarp::os::Bottle& command, yarp::os::B
 	}
 	reply.addString("Robot found.");
 
-	QString markerName = command.get(n).asString(); n++;
+	QString markerName = command.get(n).asString().c_str(); n++;
 	int markerIndex = -1;
 	KinematicModel::RobotObservation robotObs = robot->observe();
 	for (int i = 0; i<robotObs.getNumMarkers(); i++) {
