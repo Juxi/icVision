@@ -296,21 +296,21 @@ void MainWindow::loadMap()
 
 				//respect the robot's joint constraints
 				std::vector<double>::iterator k;
-				printf("qBefore: ");
+				//printf("qBefore: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
-				printf("\n");
+				//printf("\n");
 					q = iCub.withinLimits(q);
-				printf("qAfter: ");
+				//printf("qAfter: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
-				printf("\n");
+				//printf("\n");
 
 				// put q into p
 				for ( k = q.begin(); k!=q.end(); ++k )
 					p.push_back(*k);
 		
-				printf("totalSize = %d\n",p.size());
+				//printf("totalSize = %d\n",p.size());
 				graphNodes.push_back(p);
 				//printf("lineCount: %d\n", count );
 				//count ++;

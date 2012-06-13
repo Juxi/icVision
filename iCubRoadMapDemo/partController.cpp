@@ -35,10 +35,12 @@ bool PartController::open( const char* robotName, const char* partName )
 	options.put( "local", localPort.c_str() );
 	options.put( "remote", remotePort.c_str() );
 	
+	//sleep(1);
+	
 	dd = new yarp::dev::PolyDriver(options);
 	if (!dd->isValid())
 	{
-		printf("Device not available. Failed to create PolyDriver.");
+		printf("Device not available. Failed to create PolyDriver.\n");
 		return 0;
 	}
 
@@ -49,7 +51,9 @@ bool PartController::open( const char* robotName, const char* partName )
 	dd->view(amp);	if (amp==0) { printf("IAmplifierControl Error!"); return 0; }
 	dd->view(lim);	if (lim==0) { printf("IControlLimits Error!"); return 0; }
 	
+	printf("getting num joints\n");
 	pos->getAxes(&numJoints);
+	printf("got num joints\n");
 	
 	printf("\n");
 	double _min,_max;
@@ -122,7 +126,7 @@ std::vector<double> PartController::withinLimits( const std::vector<double>& pos
 	return p;
 }
 
-void PartController::setVelocity( int v )
+void PartController::setRefVelocity( int v )
 {
 	double vels[numJoints];
 	for ( int i = 0; i < numJoints; i++ )
@@ -134,12 +138,25 @@ void PartController::setVelocity( int v )
 	//	 printf("Set velocity succeeded\n");
 }
 
+void PartController::setRefAcceleration( int a )
+{
+	double accels[numJoints];
+	for ( int i = 0; i < numJoints; i++ )
+	{
+		accels[i] = (double)a;
+	}
+	bool ok = vel->setRefAccelerations(accels);
+	//if( ok )
+	//	 printf("Set velocity succeeded\n");
+}
+
 bool PartController::velocityMove( const std::vector<double>& v )
 {
 	if ( v.size() != (unsigned int)numJoints || !pos ) { return 0; }
 	
 	//std::vector<double> q = getCurrentPose();
 	
+	//printf("velocity move: " );
 	double cmd[numJoints];
 	for ( int i=0; i<numJoints; i++ )
 	{
@@ -147,7 +164,9 @@ bool PartController::velocityMove( const std::vector<double>& v )
 			cmd[i] = v.at(i);
 		else
 			cmd[i] = 0.0;
+		//printf("%f ", cmd[i]);
 	}
+	//printf("\n\n");
 	
 	return vel->velocityMove( cmd );
 	//return pos->positionMove( p );

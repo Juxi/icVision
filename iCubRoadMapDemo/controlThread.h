@@ -50,12 +50,13 @@ public:
 protected:
 	
 	yarp::os::Network yarp;
-	//yarp::os::Port vSkinStatus;
+	yarp::os::Port MoBeEStatus;
 	yarp::os::RpcClient worldPort;
 	
 	iCubController* robot;
 	Roadmap* roadmap;
-	double	velocity;
+	double	refVelocity;
+	double  refAcceleration;
 	
 	volatile bool keepRunning;
 	
@@ -63,11 +64,14 @@ protected:
 	QString salientObject;
 	
 	void run();
-	bool singleEdgeMove();
-	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
-	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path, double c ); 
+	bool singleEdgePositionMove();
+	//bool singleEdgeVelocityMove();
 	
-	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
+	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); 
+	bool simpleVelocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); //uses one spherical attractor at a time to move through the path
+	
+	Roadmap::CGAL_Vector funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
 	Roadmap::CGAL_Point currentPose();
 };
 #endif
