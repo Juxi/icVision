@@ -141,7 +141,7 @@ void RobotFilter::openFilter()
 	}
 	
 	//inform the user
-	//statusPort.setBottle( yarp::os::Bottle("1") );
+	statusPort.setBottle( yarp::os::Bottle("1") );
 	printf("*** CONTROL RESTORED ***\n");
 	haveControl = false;
 }

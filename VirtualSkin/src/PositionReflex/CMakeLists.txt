@@ -9,11 +9,11 @@ SET ( src_files	main.cpp
 SET ( hdr_files	reflexFilter.h
 )
 
-ADD_EXECUTABLE ( ReflexDemo ${hdr_files} ${src_files} )
+ADD_EXECUTABLE ( PositionReflex ${hdr_files} ${src_files} )
 
-ADD_DEPENDENCIES( ReflexDemo KinematicModel )
+ADD_DEPENDENCIES( PositionReflex KinematicModel )
 
-TARGET_LINK_LIBRARIES ( ReflexDemo 	VirtualSkin
+TARGET_LINK_LIBRARIES ( PositionReflex 	VirtualSkin
 					KinematicModel
 					YarpFilter
 					
@@ -23,5 +23,5 @@ TARGET_LINK_LIBRARIES ( ReflexDemo 	VirtualSkin
 					${YARP_LIBRARIES}
 )
 
-INSTALL ( TARGETS ReflexDemo DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS PositionReflex DESTINATION ${CMAKE_SOURCE_DIR}/bin )
 

@@ -88,8 +88,8 @@ int main(int argc, char *argv[])
 				
 				// THIS CAUSES DEADLOCK PROBLEMS
 				// Open the filter status port
-				//printf("opening filter status port\n");
-				//filter->openStatusPort("/filterStatus");
+				printf("opening filter status port\n");
+				filter->openStatusPort("/filterStatus");
 			}
 			
 			if ( robotFile2 != "" ) {
