@@ -2,6 +2,7 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
+
 SET ( src_files	main.cpp
 		reflexFilter.cpp
 )
