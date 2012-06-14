@@ -16,32 +16,48 @@ using namespace yarp::os;
 using namespace yarp::sig;
 
 int main(int argc, char * argv[]) {
-	QString version = "v0.21";
+	QString version = "v0.5";
 	QString title = "icVision GUI";
 		
 	Network yarp;
 
 	printf("Launching icVision Core Module ...\n");
-
-	// start the vision core module
-	//icVision::CoreModule
-	CoreModule *module = new CoreModule();
-	ModuleThread ctrl_t(module, argc, argv); 
-	ctrl_t.start();	
 	
-	QApplication app(argc, argv);
+	if(argc > 1 && strcmp(argv[1], "--UItest") == 0) {
+//		std::cout << argv[1] << strcmp(argv[1], "--UItest") << std::endl;
+		std::cout << "TESTING the User Interface!! (no yarp!)" << std::endl;
 		
-	// Main Window
-	Window window(title, version, module);
-    window.setFocusPolicy(Qt::StrongFocus);
-	window.setupSignalsAndSlots();
-	window.show();
-	
-	int ret = app.exec();	
+		QApplication app(argc, argv);
+		
+		// Main Window
+		Window window(title, version, NULL);
+		window.setFocusPolicy(Qt::StrongFocus);
+		window.setupSignalsAndSlots();
+		window.show();
+		
+		app.exec();
+	} else {
+		// start the vision core module
+		//icVision::CoreModule
+		CoreModule *module = new CoreModule();
+		ModuleThread ctrl_t(module, argc, argv); 
+		ctrl_t.start();	
 
-	// cleanup
-	ctrl_t.stop();
+		QApplication app(argc, argv);
+		
+		// Main Window
+		Window window(title, version, module);
+		window.setFocusPolicy(Qt::StrongFocus);
+		window.setupSignalsAndSlots();
+		window.show();
+		
+		int ret = app.exec();	
+		
+		// cleanup
+		ctrl_t.stop();
+
+		return ret;
+	}
 	
-	
-	return ret;
+	return 0;
 }

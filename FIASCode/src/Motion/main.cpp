@@ -74,9 +74,16 @@ bool LookAtLocation::threadInit()
 
     // set trajectory time:
     igaze->setNeckTrajTime(2.0);//(1.5);
-    igaze->setEyesTrajTime(1.5);//(1.0);
-#if BIND_NECK_ROLL
-    igaze->bindNeckRoll(-5.0,5.0);
+    igaze->setEyesTrajTime(0.75);//(1.0);
+//#if BIND_NECK_ROLL
+#if BIND_NECK
+	// set Teyes 0.3
+	// bind pitch -25 5
+	// bind roll -5 5
+	// bind yaw -45 45
+    igaze->bindNeckPitch(-25.0,5.0);
+    igaze->bindNeckRoll(0.0,0.0);
+    igaze->bindNeckYaw(-40.0,40.0);    
 #endif
     //igaze->blockNeckRoll();
 
@@ -532,13 +539,27 @@ bool   AutoMovModule::updateModule()
             thr->track = false;
             //thr->interrupt();
             //thr->MotionPortLeft.lastRead();
+            
+            double homeState[5];
+            homeState[0] = -20;
+            homeState[1] = 0;
+            homeState[2] = 0;            
+            homeState[3] = -20;
+            homeState[4] = 0;
+                        
             encs->getEncoders(nencoders.data());
-            if     (nencoders[0]<0.3 && nencoders[0]>-0.3 &&
-                    nencoders[1]<0.3 && nencoders[1]>-0.3 &&
-                    nencoders[2]<0.3 && nencoders[2]>-0.3 &&
-                    nencoders[3]<0.3 && nencoders[3]>-0.3 &&
-                    nencoders[4]<0.3 && nencoders[4]>-0.3)
+            if ( fabs(nencoders[0]-homeState[0]) < 0.3 &&
+                 fabs(nencoders[1]-homeState[1]) < 0.3 &&
+                 fabs(nencoders[2]-homeState[2]) < 0.3 &&
+                 fabs(nencoders[3]-homeState[3]) < 0.3 &&
+                 fabs(nencoders[4]-homeState[4]) < 0.3 )
             {
+            // if     (nencoders[0]<0.3 && nencoders[0]>-0.3 &&
+            //         nencoders[1]<0.3 && nencoders[1]>-0.3 &&
+            //         nencoders[2]<0.3 && nencoders[2]>-0.3 &&
+            //         nencoders[3]<0.3 && nencoders[3]>-0.3 &&
+            //         nencoders[4]<0.3 && nencoders[4]>-0.3)
+            // {
                 thr->gohome=false;
                 thr->end=false;
                 thr->track=false;
@@ -551,10 +572,9 @@ bool   AutoMovModule::updateModule()
                 for(int i =0; i<jnts;i++)
                 {
                     {
-
-                        if (nencoders[i]>0.3)
+                        if (nencoders[i]-homeState[i] > 0.3)
                             vel->velocityMove(i,-5);
-                        else if(nencoders[i]<-0.3)
+                        else if(nencoders[i]-homeState[i] < 0.3)
                             vel->velocityMove(i,5);
                         encs->getEncoders(nencoders.data());
                     }
@@ -598,8 +618,7 @@ int main(int argc, char *argv[])
     // we need to initialize the drivers list
     YARP_REGISTER_DEVICES(icubmod)
 
-            AutoMovModule mod;
-
+    AutoMovModule mod;
     mod.runModule(rf);
 
     printf("returned to main \n");

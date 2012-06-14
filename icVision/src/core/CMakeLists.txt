@@ -79,6 +79,7 @@ if( CORE_GUI )
 
 	SET ( QT_MOC_FILES
 			GUI/window.h
+			GUI/module_widget.h
 	)
 	
 

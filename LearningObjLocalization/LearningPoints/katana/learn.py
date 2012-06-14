@@ -29,7 +29,12 @@ from pylab import figure
 
 onlySingleOutput = True
 
-limits = [(640,0), (480, 0), (640, 0), (480,0), (25,-25), (25,-25), (10,-10), (20,-20), (15, -15), (5, 0), (20,-20), (20,-20), (50,0)]
+
+limits = [(640,0), (480, 0), (640,0), (480, 0), (640,0), (480, 0),  #first image
+          (640,0), (480, 0), (640,0), (480, 0), (640, 0), (480,0),  # second image
+          (10,-40), (10,-10), (10,-10), (25,-25), (25,-25), (10,-10), (20,-20), (15, -15), (50, 0), #joint encoders
+          (600,100), (300, -550), (200, -300)]
+
 
 #from __future__ import print_function 
 
@@ -56,13 +61,7 @@ def readData():
     return DS
     
 def read2DData():
-<<<<<<< HEAD
-    d = numpy.loadtxt("test_Tuesday20120110_botheyes_01234567.csv", delimiter=",")    
-    
-#    d = numpy.loadtxt("calibData5.csv", delimiter=",")    
-=======
     d = numpy.loadtxt("WedThurAll.Shuffled.csv", delimiter=",")    
->>>>>>> a510dd3eb6e9838988140b0612e6513fd66020ec
     DS = SupervisedDataSet(13, 1 if onlySingleOutput else 2)
     i = 0
     for line in d:
@@ -72,21 +71,38 @@ def read2DData():
         if onlySingleOutput: 
             DS.addSample(data[:13], normalizeOutput(line[-2]))         
         else:
-<<<<<<< HEAD
-            DS.addSample(data[:-2], data[12:])
-        
-        print data
-=======
             DS.addSample(data[:13], normalizeOutput(line[-2:]))
     
         # print data
->>>>>>> a510dd3eb6e9838988140b0612e6513fd66020ec
         #print data[:-3], "|", data[-3:-2]
         # i = i + 1
         # if (i == 3): return i
         
     #print "bl:", DS.__len__()
     return DS
+
+def read3DData():
+    d = numpy.loadtxt("thingtolearn.csv", delimiter=",")    
+    DS = SupervisedDataSet(21, 1 if onlySingleOutput else 3)
+    i = 0
+    for line in d:
+        # print line
+        data = normalize(line[:21])
+        # print data
+        if onlySingleOutput: 
+            print "HACK FOR Y"
+            DS.addSample(data[:21], normalizeOutput(line[-2]))         
+        else:
+            DS.addSample(data[:21], normalizeOutput(line[-2:]))
+
+        # print data
+        #print data[:-3], "|", data[-3:-2]
+        # i = i + 1
+        # if (i == 3): return i
+
+    #print "bl:", DS.__len__()
+    return DS
+
     
     
 def read2DDataY():
@@ -156,9 +172,10 @@ def normalize(val):
 def denormalizeOutput(val):
     """docstring for fname"""
     vec = []
-    llim = [(11, 0)]
+#    llim = [(600,100), (300, -550), (200, -300)]
+    llim = [(600,100)]
     if not onlySingleOutput:
-        llim = [llim, (450,-450),  (500,-300)]
+        llim = [llim, (300, -550), (200, -300)]
 
         for l, s in zip(llim, val):
             #print l,s
@@ -171,9 +188,9 @@ def denormalizeOutput(val):
 def normalizeOutput(val):
     """docstring for fname"""
     vec = []
-    llim = [(11, 0)]
+    llim = [(600,100)]
     if not onlySingleOutput:
-        llim = [llim, (450,-450),  (500,-300)]
+        llim = [llim, (300, -550), (200, -300)]
 
         for l, s in zip(llim, val):
             #print l,s
@@ -184,8 +201,8 @@ def normalizeOutput(val):
 
 def denormalizeOutputY(val):
     """docstring for fname"""
-    vec = []
-    llim = [(8, 0)]
+#    llim = [(600,100), (300, -550), (200, -300)]
+    llim = [(300, -550)]
     if not onlySingleOutput:
         llim = [llim, (450,-450),  (500,-300)]
 
@@ -200,7 +217,7 @@ def denormalizeOutputY(val):
 def normalizeOutputY(val):
     """docstring for fname"""
     vec = []
-    llim = [(8, 0)]
+    llim = [(300, -550)]
     if not onlySingleOutput:
         llim = [llim, (450,-450),  (500,-300)]
 
@@ -217,9 +234,9 @@ def verify(ann, data, testset, inputIsY = False):
     avgeuclerr = 0
     avgerr = [0] * data.outdim
     cumerr = [0] * data.outdim    
-    # print "START!!!!!\ninp, outp, net_output"
+    print "START!!!!!\noutp, net_output"
     result = []    
-    for inp, outp in testset:
+    for inp, outp in data:
         net_output = ann.activate(inp)
         
         # print inp
@@ -242,18 +259,26 @@ def verify(ann, data, testset, inputIsY = False):
         # outp = denormalize(outp)
         #         net_output = denormalize(net_output)
         if inputIsY: 
-            plotx.append((outp[0] + 1) * 9/2 * 6)  # 12 fields (0,11) with 6 cm
+##J            plotx.append((outp[0] + 1) * 9/2 * 6)  # 12 fields (0,11) with 6 cm
+            plotx.append(denormalizeOutputY(outp[0])[0])  # 12 fields (0,11) with 6 cm
+            print denormalizeOutputY(outp[0])[0], ",",
         else: 
-            plotx.append((outp[0] + 1) * 12/2 * 6)  # 12 fields (0,11) with 6 cm
+            plotx.append(denormalizeOutput(outp[0])[0])  # 12 fields (0,11) with 6 cm
+            print denormalizeOutput(outp[0])[0],  ",",  # 12 fields (0,11) with 6 cm            
+##J            plotx.append((outp[0] + 1) * 12/2 * 6)  # 12 fields (0,11) with 6 cm            
     
         if not onlySingleOutput:
             ploty.append(outp[1])
             plotz.append(outp[2])        
 
         if inputIsY: 
-            plotpredx.append((net_output[0] + 1) * 9/2 * 6)  # 12 fields (0,11) with 6 cm
+##J            plotpredx.append((net_output[0] + 1) * 9/2 * 6)  # 12 fields (0,11) with 6 cm
+            plotpredx.append(denormalizeOutputY(net_output[0])[0])  # 12 fields (0,11) with 6 cm
+            print denormalizeOutputY(net_output[0])[0]  # 12 fields (0,11) with 6 cm            
         else:
-            plotpredx.append((net_output[0] + 1) * 12/2 * 6)
+##J            plotpredx.append((net_output[0] + 1) * 12/2 * 6)
+            print denormalizeOutput(net_output[0])[0]
+            plotpredx.append(denormalizeOutput(net_output[0])[0])
         if not onlySingleOutput:
             plotpredy.append(net_output[1])
             plotpredz.append(net_output[2])        
@@ -267,9 +292,9 @@ def verify(ann, data, testset, inputIsY = False):
         
         if onlySingleOutput:
             if inputIsY: 
-                err = abs(outp - net_output) * 9 * 6
+                err = abs(denormalizeOutputY(outp)[0] - denormalizeOutputY(net_output)[0])##J * 9 * 6
             else:
-                err = abs(outp - net_output) * 12 * 6
+                err = abs(denormalizeOutput(outp)[0] - denormalizeOutput(net_output)[0])##J * 12 * 6
         else:
             err = 0
             for o,n in zip(outp, net_output):
@@ -285,9 +310,9 @@ def verify(ann, data, testset, inputIsY = False):
     # print "Test Set: avg error: ", math.sqrt(sum(result)/len(result)), "mm"
     # print "\tmin error: ", math.sqrt(min(result)), "mm",
     # print "\tmax error: ", math.sqrt(max(result)), "mm"   
-    print "Test Set: avg error: ", (sum(result)/len(result)), "cm"
-    print "\tmin error: ", (min(result)), "cm",
-    print "\tmax error: ", (max(result)), "cm"   
+    print "Test Set: avg error: ", (sum(result)/len(result)), "mm"
+    print "\tmin error: ", (min(result)), "mm",
+    print "\tmax error: ", (max(result)), "mm"   
     
 #    print "sizE: ", len(result)
         
@@ -390,9 +415,9 @@ def main():
     #     data = readXData()
     # else:
     # data = readData()
-    data = read2DData()    
-    
-    dataY = read2DDataY()        
+    data = read3DData()    
+#    dataY = read3DDataY()
+##J    dataY = read2DDataY()        
     # print data
     
     ## normalize
@@ -435,13 +460,13 @@ def main():
     # ann.sortModules()
     
     ann = buildNetwork( data.indim, hidden, data.outdim, bias=True, hiddenclass=SigmoidLayer)
-    annY = buildNetwork( dataY.indim, hidden, dataY.outdim, bias=True, hiddenclass=SigmoidLayer)    
+##J    annY = buildNetwork( dataY.indim, hidden, dataY.outdim, bias=True, hiddenclass=SigmoidLayer)    
     #trainingset, testset = data.splitWithProportion(.2)
     # todo try that
     # does not work :( random.shuffle(range(len(data)))
     
     trainingset, testset = data.splitWithProportion(.8)
-    trainingsetY, testsetY = dataY.splitWithProportion(.8)
+##J    trainingsetY, testsetY = dataY.splitWithProportion(.8)
     
     # for input, output in trainingset:
     #     print input[0], output[0]
@@ -456,12 +481,12 @@ def main():
                 )
 
 
-    trainerY = BackpropTrainer( annY, dataset=trainingsetY,
-                verbose = True,
-                learningrate = 0.35,
-                # lrdecay=.2, 
-                momentum = 0.1
-                )
+##J    trainerY = BackpropTrainer( annY, dataset=trainingsetY,
+##J                verbose = True,
+##J                learningrate = 0.35,
+##J                # lrdecay=.2, 
+##J                momentum = 0.1
+##J                )
                 
     #info
     print "Number of training patterns:\t", len(trainingset)
@@ -471,72 +496,73 @@ def main():
     errTest = 1
     MAX_EPOCH = 2000
     
-    # # for i in range(1,20):
-    #  errsTrain = []
-    #  errsTest = []    
-    #  while trainer.totalepochs < MAX_EPOCH: # and errTest > 0.0005:
-    #      # err = trainer.train()
-    #      trainer.trainOnDataset(trainingset, 10)
-    #      errTest = trainer.testOnData(dataset=testset,verbose = False)
-    #      print "epoch: %4d" % trainer.totalepochs, \
-    #            "  train error: %.7f" % trainer.testOnData(dataset=trainingset), \
-    #            "  test error: %.7f" % errTest    
-    #      # errTrain = trainer.testOnData(dataset=trainingset)
-    #      
-    #      # print errTrain, errTest
-    #      # errsTrain.append(errTrain)
-    #      # errsTest.append(errTest)
-    # 
-    #      if trainer.totalepochs == 500 or trainer.totalepochs == 1000 or trainer.totalepochs >= 1500 : 
-    #          verify(ann, data, testset)
-    # 
-    # 
-    #  #############
-    #  ## finished with X
-    #  fname = 'ANN-forX.xml'
-    #  NetworkWriter.writeToFile(ann, fname)
-    #  print ("XNetwork saved to: " + fname)
-    #  #########################################
-    #  
-    fname = 'ANN-forX.xml'
-    ann = NetworkReader.readFrom(fname)
-    print ("XNetwork read from: " + fname)   
-            
-            
-    #info
-    print "Number of training patterns:\t", len(trainingsetY)
-    print "Input/output dimensions: \t", trainingsetY.indim, "/", trainingsetY.outdim
-
-    # errTest = trainer.trainOnDataset(trainingset)
-    errTest = 1
-
     # for i in range(1,20):
     errsTrain = []
     errsTest = []    
-    while trainerY.totalepochs < MAX_EPOCH: # and errTest > 0.0005:
+    while trainer.totalepochs < MAX_EPOCH: # and errTest > 0.0005:
         # err = trainer.train()
-        trainerY.trainOnDataset(trainingsetY, 10)
-        errTest = trainerY.testOnData(dataset=testsetY,verbose = False)
-        print "epoch: %4d" % trainerY.totalepochs, \
-              "  train error: %.7f" % trainerY.testOnData(dataset=trainingsetY), \
+        trainer.trainOnDataset(trainingset, 10)
+        errTest = trainer.testOnData(dataset=testset,verbose = False)
+        print "epoch: %4d" % trainer.totalepochs, \
+              "  train error: %.7f" % trainer.testOnData(dataset=trainingset), \
               "  test error: %.7f" % errTest    
         # errTrain = trainer.testOnData(dataset=trainingset)
-
+    
         # print errTrain, errTest
         # errsTrain.append(errTrain)
         # errsTest.append(errTest)
-
-        if trainerY.totalepochs == 500 or trainerY.totalepochs == 1000 or trainerY.totalepochs >= 1500 : 
-            verify(annY, dataY, testsetY, True)
     
-
+        if trainer.totalepochs == 500 or trainer.totalepochs == 1000 or trainer.totalepochs >= 1500 : 
+            verify(ann, data, testset)
+    
+    #############
     ## finished with X
-    fname = 'ANN-forY.xml'
-    NetworkWriter.writeToFile(annY, fname)
-    print ("YNetwork saved to: " + fname)
+    fname = 'ANN-forX.xml'
+    NetworkWriter.writeToFile(ann, fname)
+    print ("XNetwork saved to: " + fname)
     #########################################
+     
+    fname = 'ANN-forX.xml'
+    ann = NetworkReader.readFrom(fname)
+    print ("XNetwork read from: " + fname)   
 
-    verifyBoth(ann, annY, data, dataY, testset, testsetY)
+    verify(ann, data, testset)
+            
+            
+    #info
+##J    print "Number of training patterns:\t", len(trainingsetY)
+##J    print "Input/output dimensions: \t", trainingsetY.indim, "/", trainingsetY.outdim
+##J
+##J    # errTest = trainer.trainOnDataset(trainingset)
+##J    errTest = 1
+##J
+##J    # for i in range(1,20):
+##J    errsTrain = []
+##J    errsTest = []    
+##J    while trainerY.totalepochs < MAX_EPOCH: # and errTest > 0.0005:
+##J        # err = trainer.train()
+##J        trainerY.trainOnDataset(trainingsetY, 10)
+##J        errTest = trainerY.testOnData(dataset=testsetY,verbose = False)
+##J        print "epoch: %4d" % trainerY.totalepochs, \
+##J              "  train error: %.7f" % trainerY.testOnData(dataset=trainingsetY), \
+##J              "  test error: %.7f" % errTest    
+##J        # errTrain = trainer.testOnData(dataset=trainingset)
+##J
+##J        # print errTrain, errTest
+##J        # errsTrain.append(errTrain)
+##J        # errsTest.append(errTest)
+##J
+##J        if trainerY.totalepochs == 500 or trainerY.totalepochs == 1000 or trainerY.totalepochs >= 1500 : 
+##J            verify(annY, dataY, testsetY, True)
+##J    
+##J
+##J    ## finished with X
+##J    fname = 'ANN-forY.xml'
+##J    NetworkWriter.writeToFile(annY, fname)
+##J    print ("YNetwork saved to: " + fname)
+##J    #########################################
+
+##J    verifyBoth(ann, annY, data, dataY, testset, testsetY)
     plt.ioff()    
     plt.show()
     
@@ -545,4 +571,5 @@ def main():
     
 if __name__ == '__main__':
     main()
+
 

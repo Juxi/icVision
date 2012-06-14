@@ -21,6 +21,7 @@ ADD_SUBDIRECTORY (core)
 
 # core functionality: filter (base functionality), disparity
 ADD_SUBDIRECTORY (icFilterModule)
+ADD_SUBDIRECTORY (icGazeModule)
 ADD_SUBDIRECTORY (icThreeDModule)
 ADD_SUBDIRECTORY (icDisparityModule)
 

@@ -109,7 +109,7 @@ public:
 	// TODO multi-thread this
 	static const int LEFT_IMAGE = 1;
 	static const int RIGHT_IMAGE = 0;
-	void runOnOneImage(int leftOrRight);
+	void runOnOneImage(int leftOrRight = LEFT_IMAGE);
 	void runOnBothImages();	
 	
 	// defining 3d localisation connection

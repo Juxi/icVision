@@ -1,12 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <time.h>
+
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
+
+char pathResults[250];
+
+using namespace std;
+using namespace yarp::os;
+using namespace yarp::sig;
 
 #include "iCub/main.h"
 
+void initStuff() {
+    std::cout << "init stuff " << std::endl;    
+    camicubLeft = new CameraiCub("Camera","left","main");
+    camicubRight = new CameraiCub("Camera","right","main");
+    #if DEBUGMAIN
+    dispImageLeft = new DisplayIplImage("DisplayImage","left","Camera_left",0,0);
+    dispImageRight= new DisplayIplImage("DisplayImage","right","Camera_right",320,0);
+    #endif
+
+    featureLeft  = new feature2D("Harris","left");
+    featureRight = new feature2D("Harris","right");
+
+    GaborLeft = new GaborDescriptor("Gabor","left","Harris_left");
+    GaborRight = new GaborDescriptor("Gabor","right","Harris_right");
+
+    Match = new DetectObject("Match");
+
+    Sal = new Saliency("Saliency");
+
+    SegmentObj = new Segmentation("Segmentation");
+    #if DEBUGMAIN
+        DisplayMatch = new DisplayMatching("DisplayMatch","Match",0,240);
+    #endif
+}
+
 int main(int argc, char* argv[])
 {
+    // exit(1);
+// int main(int argc, char* argv[])
+// {    
     ofstream myfile;
+    
+    if(argc >= 2) {
+        //sprintf(pathResults,"/home/pramod/robot/CuriousVisionSystem20Feb2012/FIASforIDSIA/Images");
+        sprintf(pathResults, argv[1]);
+    } else
+        sprintf(pathResults, "Images");
 
-    sprintf(pathResults,"/home/pramod/robot/CuriousVisionSystem20Feb2012/FIASforIDSIA/Images");
     char command[250];
+    
+    printf("lala: %s\n", pathResults);
+    
     sprintf(command, "rm -r %s",pathResults);
     system(command);
     sprintf(command, "mkdir %s",pathResults);
@@ -16,6 +65,7 @@ int main(int argc, char* argv[])
 
     //set up yarp network
     Network yarp;
+    initStuff();
 
     BalisticDoneInPort.open("/main/BalisticDone/in");
     Network::connect("/motion/BalisticDone/out","/main/BalisticDone/in");
@@ -30,11 +80,11 @@ int main(int argc, char* argv[])
 
     Network::connect("/InhibitHarris/left/out","/InhibitHarris/left/in");
 
-    featureLeft.setParam();
-    featureRight.setParam();
+    featureLeft->setParam();
+    featureRight->setParam();
 
-    GaborLeft.setParam();
-    GaborRight.setParam();
+    GaborLeft->setParam();
+    GaborRight->setParam();
 
     bool quitprogram = false;
 
@@ -56,26 +106,26 @@ int main(int argc, char* argv[])
             sendcommand("getlocation");
 
             //std::cout<<endl<<"obtain locations to inhibit from motion code"<<endl;
-            SegmentObj.setSelectHarris();
+            SegmentObj->setSelectHarris();
 
             //std::cout<<endl<<"inhibiting already visited locations"<<endl;
-            SegmentObj.inhibitSamplesLocationHistory();
+            SegmentObj->inhibitSamplesLocationHistory();
 
             //std::cout<<endl<<"sending inhibition to saliency"<<endl;
-            SegmentObj.sendInhibitionToSaliency();
+            SegmentObj->sendInhibitionToSaliency();
 
-            Sal.execute();
+            Sal->execute();
 
-            if (Sal.move == true)
+            if (Sal->move == true)
             {
                 std::cout<<"\nFound Salient Point"<<endl<<endl;
 
                 sendcommand("moverobot");
 
-                double pointSalLeftX = Sal.pointOL.x;
-                double pointSalLeftY = Sal.pointOL.y;
-                double pointSalRightX = Sal.pointOR.x;
-                double pointSalRightY = Sal.pointOR.y;
+                double pointSalLeftX = Sal->pointOL.x;
+                double pointSalLeftY = Sal->pointOL.y;
+                double pointSalRightX = Sal->pointOR.x;
+                double pointSalRightY = Sal->pointOR.y;
 
                 sendtomotion(pointSalLeftX,pointSalLeftY,pointSalRightX,pointSalRightY, "Balistic");
 
@@ -93,33 +143,33 @@ int main(int argc, char* argv[])
 
             std::cout<<"\n Segmenting the Object near the Saliency point"<<endl;
 
-            SegmentObj.fileSave = false;
-            SegmentObj.segmentObject(cvPoint(160,120),false);
+            SegmentObj->fileSave = false;
+            SegmentObj->segmentObject(cvPoint(160,120),false);
 
             //std::cout<<"segmentation done"<<endl;
 #if TRAINING
-            if (SegmentObj.numberfeatures>FEATURE_COUNT_TRESHOLD)
+            if (SegmentObj->numberfeatures>FEATURE_COUNT_TRESHOLD)
             {
 
                 std::cout<<endl<<"Now move to the center of the object"<<endl;
 
                 sendcommand("moverobot");
 
-                double pointSalLeftX = SegmentObj.meanObjectLeft.x;
-                double pointSalLeftY = SegmentObj.meanObjectLeft.y;
-                double pointSalRightX = SegmentObj.meanObjectRight.x;
-                double pointSalRightY = SegmentObj.meanObjectRight.x;
+                double pointSalLeftX = SegmentObj->meanObjectLeft.x;
+                double pointSalLeftY = SegmentObj->meanObjectLeft.y;
+                double pointSalRightX = SegmentObj->meanObjectRight.x;
+                double pointSalRightY = SegmentObj->meanObjectRight.x;
 
                 sendtomotion(pointSalLeftX,pointSalLeftY,pointSalRightX,pointSalRightY, "Balistic");
 
                 if(!waitMotionDone())
                     break;
 
-                SegmentObj.segmentObject(cvPoint(160,120),false);
-                if(SegmentObj.numberfeatures<FEATURE_COUNT_TRESHOLD)
+                SegmentObj->segmentObject(cvPoint(160,120),false);
+                if(SegmentObj->numberfeatures<FEATURE_COUNT_TRESHOLD)
                 {
                     std::cout<<endl<<"Very few features. Cannot segment the object. Searching for a new object"<<endl;
-                    Sal.inib(SALIENCY_INHIBIT_CENTER);
+                    Sal->inib(SALIENCY_INHIBIT_CENTER);
                     decide = SALIENCYMAP;
                     break;
                 }
@@ -134,7 +184,7 @@ int main(int argc, char* argv[])
                 if(ch=='s')
                 {
                     std::cout<<"Object skipped"<<endl;
-                    Sal.inib(SALIENCY_INHIBIT_CENTER);
+                    Sal->inib(SALIENCY_INHIBIT_CENTER);
                     decide = SALIENCYMAP;
                     break;
                 }
@@ -149,20 +199,21 @@ int main(int argc, char* argv[])
 
                 cvWaitKey(1000);
 
-                SegmentObj.objectCount++;
-                SegmentObj.numberPoses=0;
+                SegmentObj->objectCount++;
+                SegmentObj->numberPoses=0;
 
                 for(int i=0;i<poses_Total;i++)
                 {
                     runFeatures();
 
-                    SegmentObj.fileSave = true;
-                    SegmentObj.numberPoses++;
+                    SegmentObj->fileSave = true;
+                    SegmentObj->numberPoses++;
 
-                    SegmentObj.segmentObject(cvPoint(160,120),false);
-                    std::cout<<endl<<"saving the image..."<<endl;
+                    SegmentObj->segmentObject(cvPoint(160,120),false);
+                    std::cout<<endl<<"saving the image...";
                     cvWaitKey(1000);
-                    SegmentObj.displayObject();
+                    SegmentObj->displayObject();
+                    std::cout<<"saved!"<<endl;                    
 
                 }
 
@@ -176,10 +227,10 @@ int main(int argc, char* argv[])
 
             sendcommand("moverobot");
 
-            double pointSalLeftX = SegmentObj.meanObjectLeft.x;
-            double pointSalLeftY = SegmentObj.meanObjectLeft.y;
-            double pointSalRightX = SegmentObj.meanObjectRight.x;
-            double pointSalRightY = SegmentObj.meanObjectRight.x;
+            double pointSalLeftX = SegmentObj->meanObjectLeft.x;
+            double pointSalLeftY = SegmentObj->meanObjectLeft.y;
+            double pointSalRightX = SegmentObj->meanObjectRight.x;
+            double pointSalRightY = SegmentObj->meanObjectRight.x;
 
             sendtomotion(pointSalLeftX,pointSalLeftY,pointSalRightX,pointSalRightY, "Balistic");
 
@@ -193,7 +244,7 @@ int main(int argc, char* argv[])
 
 #endif
 
-            Sal.inib(SALIENCY_INHIBIT_CENTER);
+            Sal->inib(SALIENCY_INHIBIT_CENTER);
             decide = SALIENCYMAP;
             break;
 
@@ -202,15 +253,30 @@ int main(int argc, char* argv[])
 
 
     }
-    SegmentObj.saveFeatures();
+    
+    std::cout<<endl<<"main: end of loop!"<<endl;    
+
+    std::cout<<endl<<"main: saveFeatures() ... ";        
+    std::cout<<" ... "<<endl;        
+    SegmentObj->saveFeatures();
+    std::cout<<" done!"<<endl;    
+    
+    std::cout<<endl<<"main: close balsitic port";            
     BalisticDoneInPort.interrupt();
     BalisticDoneInPort.close();
+    std::cout<<" done!"<<endl;        
+
+    std::cout<<endl<<"main: close command location port";            
     commandLocationPort.interrupt();
     commandLocationPort.close();
+    std::cout<<" done!"<<endl;    
+    
+    std::cout<<endl<<"main: close motion ports";                
     MotionPortLeftPort.interrupt();
-    MotionPortLeftPort.close();
+    MotionPortLeftPort.close();    
     MotionPortRightPort.interrupt();
     MotionPortRightPort.close();
+    std::cout<<" done!"<<endl;    
 }
 
 
@@ -302,22 +368,21 @@ bool waitMotionDone()
 
 void runFeatures()
 {
-    camicubLeft.execute();
-    camicubRight.execute();
+    camicubLeft->execute();
+    camicubRight->execute();
 
 #if DEBUGMAIN
-    dispImageLeft.execute();
-    dispImageRight.execute();
+    dispImageLeft->execute();
+    dispImageRight->execute();
 #endif
-    featureLeft.execute();
-    featureRight.execute();
-    GaborLeft.execute();
-    GaborRight.execute();
+    featureLeft->execute();
+    featureRight->execute();
+    GaborLeft->execute();
+    GaborRight->execute();
 
-    Match.execute();
+    Match->execute();
 #if DEBUGMAIN
-    DisplayMatch.execute();
+    DisplayMatch->execute();
 #endif
-    SegmentObj.readfromport();
-
+    SegmentObj->readfromport();
 }

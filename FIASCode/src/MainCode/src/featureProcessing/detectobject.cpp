@@ -476,7 +476,11 @@ unsigned int DetectObject::compareleftright()
 				#endif
 				*/
                                 //11.0 is for compensating the vertical shift(in pixels) in cameras
-                                if(dispy-11.0 > - m_verdispthres && dispy-11.0 < m_verdispthres)
+//                                if(dispy-11.0 > - m_verdispthres && dispy-11.0 < m_verdispthres)
+                                //if(fabs(dispy) < m_verdispthres)
+                int VERTICAL_SHIFT_COMPENSATION = -13;
+                if( dispy-VERTICAL_SHIFT_COMPENSATION > - m_verdispthres && 
+                    dispy-VERTICAL_SHIFT_COMPENSATION < m_verdispthres)
                                 //if(fabs(dispy) < m_verdispthres)
 				{
 					if(dispx < -m_hordispthres)
