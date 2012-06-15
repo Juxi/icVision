@@ -64,16 +64,14 @@ protected:
 	QString salientObject;
 	
 	void run();
-	//bool singleEdgePositionMove();
-	//bool singleEdgeVelocityMove();
-	
-	//bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+
 	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); 
-	bool simpleVelocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); //uses one spherical attractor at a time to move through the path
 	
-	Roadmap::CGAL_Vector funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
+	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
 	Roadmap::CGAL_Vector positionErr( Roadmap::edge_t edge );
-	Roadmap::CGAL_Point currentPose();
+	Roadmap::CGAL_Vector zeroVector();
+	double dot(Roadmap::edge_t i,Roadmap::edge_t o);
+	//Roadmap::CGAL_Point currentPose();
 };
 #endif
 /** @} */
