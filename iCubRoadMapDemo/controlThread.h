@@ -26,10 +26,10 @@ public:
 	
 	void setVelocity( int i );
 	
-	bool gotoNearest();
+	//bool gotoNearest();
 	//Roadmap::edge_t randomMove();
-	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
-	bool isOnMap();
+	//bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
+	//bool isOnMap();
 	//double maxDiff(std::vector<double>,std::vector<double>);
 	
 	//void start();
@@ -38,10 +38,10 @@ public:
 	
 	enum BehaviorType
 	{
-		SingleEdgeExplore,
+		//SingleEdgeExplore,
 		MultiEdgeExplore,
 		GoToObject,
-		velocityMove
+		//velocityMove
 	};
 	
 	void setBehavior( BehaviorType b ) { currentBehavior = b; }
@@ -64,14 +64,15 @@ protected:
 	QString salientObject;
 	
 	void run();
-	bool singleEdgePositionMove();
+	//bool singleEdgePositionMove();
 	//bool singleEdgeVelocityMove();
 	
-	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
+	//bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
 	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); 
 	bool simpleVelocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); //uses one spherical attractor at a time to move through the path
 	
 	Roadmap::CGAL_Vector funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
+	Roadmap::CGAL_Vector positionErr( Roadmap::edge_t edge );
 	Roadmap::CGAL_Point currentPose();
 };
 #endif

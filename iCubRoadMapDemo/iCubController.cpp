@@ -218,6 +218,24 @@ double iCubController::maxDiff(std::vector<double> a,std::vector<double> b)
 	return result;
 }
 
+std::vector<double> iCubController::diff( std::vector<double> a )
+{
+	std::vector<double> cp = getCurrentPose(),
+						result;
+	std::vector<double>::iterator i;
+	int count = 0;
+	for ( i=a.begin(); i!=a.end(); ++i )
+	{
+		if ( jointMask.at(count) )
+			result.push_back( a.at(count)-cp.at(count) );
+		else
+			result.push_back( 0 );
+		
+		count++;
+	}
+	return result;
+}
+
 //TODO This should pass by reference and return a bool
 std::vector<double> iCubController::getCurrentPose()
 {

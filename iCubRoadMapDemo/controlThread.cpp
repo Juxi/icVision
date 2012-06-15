@@ -45,7 +45,7 @@ void ControlThread::setVelocity( int i )
 	refVelocity = (double)i;
 }
 
-bool ControlThread::gotoNearest()
+/*bool ControlThread::gotoNearest()
 {
 	std::vector<double> p = robot->getCurrentPose();
 	if ( p.size() == 0 ) return false;
@@ -139,7 +139,7 @@ bool ControlThread::isOnMap()
 		printf("failed to set waypoint in the VSkin history\n");
 	
 	return true;
-}
+}*/
 
 /*double ControlThread::maxDiff(std::vector<double> a,std::vector<double> b)
 {
@@ -163,40 +163,15 @@ bool ControlThread::isOnMap()
 
 void ControlThread::run()
 {
-	//yarp::os::Port vSkinStatus;
-	//yarp::os::Bottle b;
-	
-	//printf("Moving iCub to the nearest state on the roadmap\n");
-	//if ( !gotoNearest() )
-	//{ 
-	//	return;
-	//}
-
 	while ( keepRunning )
 	{
-		//if ( !isOnMap() )	
-		//{
-		//	gotoNearest();
-		//}
-		
-		/*** EXPLORE THE GRAPH ONE EDGE AT A TIME ***/
-		if ( currentBehavior == SingleEdgeExplore )
-		{
-			if ( !singleEdgePositionMove() )
-			{
-				printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
-				break;
-			}
-		}
-		
 		/*** EXPLORE THE GRAPH VIA RANDOM SHORTEST-PATHS ***/
 		//else 
 		if ( currentBehavior == MultiEdgeExplore )
 		{
 			std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path;
 			path = roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
-			
-			//if ( !positionMoveImpl( path ) )
+		
 			if ( !velocityMoveImpl( path ) )
 			//if ( !simpleVelocityMoveImpl( path ) )
 			{
@@ -206,7 +181,7 @@ void ControlThread::run()
 		}
 		
 		/*** REACH FOR A PARTICULAR OBJECT ***/
-		else if ( currentBehavior == GoToObject || currentBehavior == velocityMove )
+		else if ( currentBehavior == GoToObject )
 		{
 			if (worldPort.getOutputCount()==0)
 			{
@@ -242,38 +217,17 @@ void ControlThread::run()
 					
 					// find the node in the map that brings a hand closest to cup1
 					Roadmap::vertex_t graspingVertex = roadmap->nearestWorkspaceVertex( objectPosition );
-					if ( currentBehavior == GoToObject )
-						positionMoveImpl( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
-					else if ( currentBehavior == velocityMove )
-						velocityMoveImpl( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
+					velocityMoveImpl( roadmap->aToB( roadmap->currentVertex, graspingVertex ) );
 				}
 				
 			}
 		}
 		yarp::os::Time::delay(1);
-
-        // Move to a random other vertex in the map
-        // positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map) ) ) );
-        
-		// Move between vertices 0 and 1
-		//else if ( roadmap->currentVertex == 0 )	
-		//	positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(1) ) );
-		//else
-		//	positionMoveImpl( roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(0) ) );
 	}
-	
-	//Roadmap::out_edge_i e, e_end;
-	//tie(e, e_end) = out_edges( roadmap->currentVertex, roadmap->map );
-	//if ( e == e_end ) {
-	//printf("There are no out edges from the current vertex. Please resolve the situation manually.\n");
-	//keepRunning = false;
-	
-	//vSkinStatus.interrupt();
-	//yarp.disconnect("/filterStatus","/statusOut",false);
 	printf("*** RUN METHOD RETURNED ***\n");
 }
 
-bool ControlThread::singleEdgePositionMove()
+/*bool ControlThread::singleEdgePositionMove()
 {
 	// select a random action given our current location in the map
 	std::pair< Roadmap::edge_t, std::vector<double> > thisMove = roadmap->randomMove();
@@ -345,7 +299,7 @@ bool ControlThread::positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 		}
 	}	
 	return true;
-}
+}*/
 
 bool ControlThread::simpleVelocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path )
 {	
@@ -478,13 +432,14 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 			
 			std::cout << "-------------------" << std::endl;
 			v = funnelAccel(20, i->first);
-			std::cout << "|v|:     " << sqrt(v.squared_length()) << std::endl;
-			//std::cout << "|err|:   " << sqrt(err.squared_length()) << std::endl;
-			//std::cout << "maxDiff: " << robot->maxDiff( std::vector<double>( q.cartesian_begin(), q.cartesian_end() ),
-			//										   std::vector<double>( p.cartesian_begin(), p.cartesian_end() )
-			//										   ) << std::endl;
-			//cmd =	20.0 * ( 1 - pow( 2.71828183, (-0.001*err.squared_length()) ) ) * err/sqrt(err.squared_length());
-			//std::cout << "cmd: " << cmd << "(" << sqrt(cmd.squared_length()) << ")" << std::endl;
+			
+				std::cout << "|v|:     " << sqrt(v.squared_length()) << std::endl;
+				//std::cout << "|err|:   " << sqrt(err.squared_length()) << std::endl;
+				//std::cout << "maxDiff: " << robot->maxDiff( std::vector<double>( q.cartesian_begin(), q.cartesian_end() ),
+				//										   std::vector<double>( p.cartesian_begin(), p.cartesian_end() )
+				//										   ) << std::endl;
+				//cmd =	20.0 * ( 1 - pow( 2.71828183, (-0.001*err.squared_length()) ) ) * err/sqrt(err.squared_length());
+				//std::cout << "cmd: " << cmd << "(" << sqrt(cmd.squared_length()) << ")" << std::endl;
 			
 			robot->setRefAcceleration( refAcceleration );
 			robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
@@ -517,14 +472,15 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 
 Roadmap::CGAL_Vector ControlThread::funnelAccel( double c, Roadmap::edge_t e )
 {
+	Roadmap::CGAL_Vector err = positionErr(e);	// configuration w.r.t. active control point (error vector)
+	qreal errMag = sqrt(err.squared_length()),	// magnitude of error verctor
+		  x,									// axial error
+		  y;									// radial error
+	
 	Roadmap::CGAL_Point	p = roadmap->getCgalPose(source(e,roadmap->map)),	// last control point
 						q = roadmap->getCgalPose(target(e,roadmap->map));	// active control point
-	Roadmap::CGAL_Vector	err = currentPose()-q,							// configuration w.r.t. active control point (error vector)
-							axial = p-q,									// active edge vector (axial direction)
+	Roadmap::CGAL_Vector	axial = p-q,									// active edge vector (axial direction)
 							radial;											// shortest segment from t to the line q + a*t, where t is the parameter (radial direction)
-	qreal errMag = sqrt(err.squared_length()),		// magnitude of error verctor
-		  x,										// axial error
-		  y;										// radial error
 	
 	axial /= sqrt(axial.squared_length());	// normalize the axial direction vector
 	x = err * axial;						// compute the magnitude of the projection of qt onto qp
@@ -544,6 +500,14 @@ Roadmap::CGAL_Vector ControlThread::funnelAccel( double c, Roadmap::edge_t e )
 	std::cout << "|Ar| = " << sqrt(Ar.squared_length()) << std::endl;
 	
 	return Aa + Ar;
+}
+
+
+Roadmap::CGAL_Vector ControlThread::positionErr( Roadmap::edge_t edge )
+{
+	std::vector<double> err = robot->diff( roadmap->getStdPose(target(edge,roadmap->map)) );
+	Roadmap::CGAL_Vector CGAL_err( err.size(), err.begin(), err.end() );
+	return -CGAL_err;
 }
 
 Roadmap::CGAL_Point ControlThread::currentPose()

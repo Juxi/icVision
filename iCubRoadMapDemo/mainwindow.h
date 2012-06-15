@@ -84,7 +84,6 @@ private slots:
 	
 	void connectToRobot();
 	void disconnectFromRobot();
-	void singleEdgeExplore();
 	void multiEdgeExplore();
 	void goTo();
 	void stopController();
@@ -110,7 +109,6 @@ private:
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
 	QAction *disconnectFromRobotAction;
-	QAction *SEExploreAction;
 	QAction *MEExploreAction;
 	QAction *GoToAction;
 	QAction *stopControllerAction;

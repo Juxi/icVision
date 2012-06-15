@@ -120,11 +120,6 @@ void MainWindow::disconnectFromRobot()
 	iCub.close();
 }
 
-void MainWindow::singleEdgeExplore()
-{
-	ctrlThread.setBehavior( ControlThread::SingleEdgeExplore );
-	ctrlThread.restart();
-}
 void MainWindow::multiEdgeExplore()
 {
 	ctrlThread.setBehavior( ControlThread::MultiEdgeExplore );
@@ -400,11 +395,6 @@ void MainWindow::createActions()
 	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
 	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
 	
-	SEExploreAction = new QAction(tr("&Single Edge Explore"), this);
-	SEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
-	SEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap one edge at a time"));
-	connect(SEExploreAction, SIGNAL(triggered()), this, SLOT(singleEdgeExplore()));
-	
 	MEExploreAction = new QAction(tr("&Multiple Edge Explore"), this);
 	MEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
 	MEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap from vertex to vertex with shortest path planning"));
@@ -460,7 +450,6 @@ void MainWindow::createMenus()
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
 	controllerMenu->addAction(disconnectFromRobotAction);
-	controllerMenu->addAction(SEExploreAction);
 	controllerMenu->addAction(MEExploreAction);
 	controllerMenu->addAction(GoToAction);
 	controllerMenu->addAction(stopControllerAction);

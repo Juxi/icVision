@@ -45,6 +45,7 @@ public:
 	bool setJointMask( std::vector<bool> );
 	std::vector<double> withinLimits( const std::vector<double>& poss );
 	double maxDiff(std::vector<double> a,std::vector<double> b);
+	std::vector<double> diff( std::vector<double> a ); // returns a - currentPose()
 	
 public slots:
 	std::vector<double> getRandomPose();
