@@ -9,17 +9,12 @@
     
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".0325">
-            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>-->
-            
-            <!-- THESE GEOMS MODEL THE HIPS AND THE STAND
-                 THEY COLLIDE WITH THE TABLE IN world.xml -->
-
-            <sphere radius=".08" px="0" py=".06" pz="-.05"/>
-            <sphere radius=".08" px="0" py="-.06" pz="-.05"/>
-            <sphere radius=".1" px=".035" pz="-.06"/>
-			<sphere radius=".1" px="0.0" pz="-.06" pz="-.03"/>
-            <cylinder radius=".04" height="1" pz="-.5" hz="1"/>
-            
+            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>
+            <box width="0.07" depth="0.18" height="0.18" pz="-0.09"/>-->
+            <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
+            <sphere radius=".095" px=".005" py=".03" pz="-.02"/>
+            <sphere radius=".095" px=".005" py="-.03" pz="-.02"/>
+            <sphere radius=".09" px=".035" pz="-.09"/>
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
@@ -33,7 +28,7 @@
             <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1" /> <!---->
     
     <!-- HEAD -->
-    <bodypart name="head">
+    <bodypart name="head" >
     
         <link x="-.0256747" z=".0502" radius=".02">
     
@@ -52,9 +47,10 @@
    
         <link z=".0825" radius="0">
         
-        <sphere pz=".08" radius=".1"/><!---->
-        <sphere px=".015" pz=".08" radius=".1"/>
-        <sphere px="-.015" pz=".08" radius=".1"/>
+        <sphere pz=".07" radius=".11"/><!---->
+        <marker name="head" />
+        <!--<sphere px=".015" pz=".07" radius=".1"/>
+        <sphere px="-.015" pz=".07" radius=".9"/>-->
         
                 <!-- LEFT EYE -->
                 <link x="-.054" y="-.034" radius="0">
@@ -117,6 +113,7 @@
         <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
         <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
 
+      
             <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x=".2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
                     <box depth=".15" height=".14" width=".07" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" />
@@ -152,7 +149,7 @@
             
             <motor name="RightElbow" minPos="15" maxPos="106" home="50">
               <!--wrong angle joint x="-.2588" y=".9659" minPos="15" maxPos="106" radius=".035" length=".07"-->
-              <joint y="1" minPos="15" maxPos="106" radius=".035" length=".07">
+              <joint y="1" minPos="15" maxPos="106" radius=".045" length=".07">
                     
             <!-- LOWER ARM - this <link> tag is just a bit easier than figuring out the parameters to add the cylinder with a <cylinder> tag -->
             <link x="-.02" z="-.1373" radius=".035"></link>
@@ -184,16 +181,13 @@
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".03" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
                 <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
-                
+
                 <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
             
                     <!-- THUMB -->
                     <link x="-.015" y=".004" z=".0275" radius="0">
-                    <!--<box width=".015" height=".0399" depth=".015" hx="-.015" hy="-.012" hz="-0.035" px="-.0075" py="-.006" pz="-0.035"/>-->
-                    
-                    
                         <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30">
-                        <joint z=".017" minPos="20" maxPos="90" radius=".0075">
+                        <joint z="1" minPos="20" maxPos="90" radius="0">
                         <link y="-.00375" radius=".0">
                         <link x="-.02" radius=".0075">
                         
@@ -227,11 +221,11 @@
                     </link>
                     <!-- / THUMB -->
 
+
+               
                     <!-- INDEX FINGER -->
                     <link x="-.029" y=".008" z="-.0055" radius="0">
                         <joint y="-.017" minPos="-10" maxPos="0" radius="0">
-                        
-                        
                         <link z="-.012" radius=".0075">
                         <cylinder height=".017" radius=".0075"/>
                         
@@ -428,7 +422,7 @@
             
             <motor name="LeftElbow" minPos="15" maxPos="106" home="50">
                 <!-- wrong angle joint x=".2588" y=".9659" minPos="15" maxPos="106" radius=".035" length=".07"-->
-                <joint y="1" minPos="15" maxPos="106" radius=".035" length=".07">
+                <joint y="1" minPos="15" maxPos="106" radius=".045" length=".07">
                 
             <!-- LOWER ARM - this <link> tag is just a bit easier than figuring out the parameters to add the cylinder with a <cylinder> tag -->
             <link x="-.02" z="-.1373" radius=".035"></link>
@@ -450,7 +444,8 @@
             <link z="-.0625" y=".016" radius="0" noSelfCollision="true"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
-                <link x="-.020" y=".03" radius="0">
+               
+                <link x="-.020" radius="0">
                     <link y="1" radius="0">
                         <marker name="left_hand"/>
                     </link>
@@ -672,7 +667,7 @@
     </link>
         </joint>
     </motor>
-    </link>
+    </link>>
 </bodypart>
 <!-- /TORSO -->
 

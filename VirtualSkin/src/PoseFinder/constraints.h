@@ -295,14 +295,15 @@ class MapBuildConstraint : public Constraint {
 	std::vector<std::vector<double> > d_configurations;
 	size_t d_nNN;
 	double d_alpha, d_config_measure;
-
+	double d_exploration_force;
 public:
- MapBuildConstraint(std::string marker, size_t nNN, double alpha, double config_measure = 0.0) :
+ MapBuildConstraint(std::string marker, size_t nNN, double alpha, double config_measure = 0.0, double exploration_force = 0.0) :
 	Constraint("MapBuildConstraint"),
 	  d_marker(marker),
 	  d_nNN(nNN),
 	  d_alpha(alpha),
-	  d_config_measure(config_measure)
+	  d_config_measure(config_measure),
+	  d_exploration_force(exploration_force)
 	{}
 
 	std::string marker() {return d_marker;}
@@ -326,9 +327,11 @@ public:
 	}
 
 	double close_measure(std::vector<double> &values, double alpha, std::vector<size_t> &indexes) const {
+
+	  double total_dist(0);
 	  std::vector<double> distances(d_points.size());
 	  for (size_t i(0); i < d_points.size(); ++i) {
-	    distances[i] = pos_error(values, d_points[i]);
+	    total_dist += distances[i] = pos_error(values, d_points[i]);
 	  }
 	  
 	  std::vector<double*> distances_ptrs(distances.size());
@@ -348,8 +351,11 @@ public:
 	    indexes[i] = distances_ptrs[i] - &distances[0];
 	  }
 	    
-
-	  return measure;// + exp(-total_dist);
+	  //std::cout << measure << " " << exp(-total_dist) << " " << total_dist << std::endl;
+	  if (d_exploration_force)
+		return measure + exp(-total_dist * d_exploration_force);
+	  else
+		return measure;
 	}
 
 	double config_measure(std::vector<double> &values, std::vector<size_t> &indexes) const;

@@ -36,7 +36,7 @@ void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, doub
 		d_nes.init(get_start_pos(dim), sigma, population);
 
 		size_t n_evaluations(0);
-		d_pose_fitness_function.debug() = false;
+		//d_pose_fitness_function.debug() = ;
 		do
 		  {
 			try {

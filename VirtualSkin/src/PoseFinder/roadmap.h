@@ -148,6 +148,7 @@ public:
 	typedef std::list<vertex_t> PathList;
 
 	Roadmap();
+	Roadmap(Roadmap const &other){}
 	~Roadmap();
 	
 	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }

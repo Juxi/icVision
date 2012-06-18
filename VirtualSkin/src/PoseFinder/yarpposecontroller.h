@@ -40,7 +40,7 @@ public:
 			delete d_path_planner;
 	}
 
-	void load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file);
+	void load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot);
 
 	void load_config(int argc, char **argv);
 

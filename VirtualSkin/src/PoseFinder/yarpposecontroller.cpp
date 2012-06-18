@@ -46,7 +46,6 @@ void YarpPoseController::load_config(int argc, char **argv) {
     string map_file = ""; // default is simulator
     if ( settings.check("map") )  { map_file = settings.find("map").asString().c_str(); }
     if ( command_config.check("map") )  { map_file = command_config.find("map").asString().c_str(); }
-    cout << "map file: " << map_file << endl;
 
     if ( settings.check("port") )  { d_portname = settings.find("port").asString().c_str(); }
     if ( command_config.check("port") )  { d_portname = command_config.find("port").asString().c_str(); }
@@ -54,9 +53,9 @@ void YarpPoseController::load_config(int argc, char **argv) {
     if ( settings.check("mover_port") )  { d_mover_portname = settings.find("mover_port").asString().c_str(); }
     if ( command_config.check("mover_port") )  { d_mover_portname = command_config.find("mover_port").asString().c_str(); }
 
-    if (!robot_file.size() || !world_file.size() || !map_file.size() || !d_portname.size()) {
+    if (!robot_file.size() || !world_file.size() || !d_portname.size()) {
     	cout << robot_file << endl << world_file << endl << map_file << endl << d_portname << endl;
-    	throw StringException("One of the files/names not defined [robot/world/map/port]");
+    	throw StringException("One of the files/names not defined [robot/world/port]");
     }
 
     bool visualize(true);
@@ -76,18 +75,20 @@ void YarpPoseController::load_config(int argc, char **argv) {
 	printf("loading world file: %s\n", argv[2]);
 	model.loadWorld( QString(world_file.c_str()), false );
 
-    load_path_planner(model, robot, map_file);
+    load_path_planner(model, robot);
+	if (map_file.size())
+	  d_path_planner->load_map("default", map_file);
     model.stop();
 
 }
 
-void YarpPoseController::load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string map_file) {
+void YarpPoseController::load_path_planner(KinematicModel::Model& model, KinematicModel::Robot& robot) {
 	cout << "loading path planner" << endl;
 	if (d_path_planner) {
 		delete d_path_planner;
 		d_path_planner = 0;
 	}
-	d_path_planner = new PathPlanner(model, robot, map_file);
+	d_path_planner = new PathPlanner(model, robot);
 	cout << "loaded " << endl;
 }
 
@@ -107,9 +108,11 @@ Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path
 }
 
 void YarpPoseController::follow_path(vector<vector<double> > &path) {
+  
 	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.size(); ++i) {
 		vector<double> pose(path[i]);
+		std::cout << pose.size() << std::endl;
 		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
 		
 		crazy_path.push_back(cut_pose);
@@ -184,9 +187,8 @@ void YarpPoseController::run () {
 						path = d_path_planner->find_configuration_workspace_path(source, target);
 						cout << "done:" << endl;
 
-					}
-					if (query.size() == 3) {
-						cout << "size==3 source to target" << endl;
+					} else if (query.size() == 3 && query.get(1).isList()) {
+						cout << "size==3, first is list" << endl;
 						cout << "getting source" << endl;
 						source = bottle_to_vector(query.get(1));
 						target = bottle_to_vector(query.get(2));
@@ -196,9 +198,35 @@ void YarpPoseController::run () {
 						print_vector(target);
 						cout << "finding path:" << endl;
 						path = d_path_planner->find_workspace_path(source, target);
+					} else if (query.size() == 3 && query.get(1).isString()) {
+						cout << "size==3 source, first is string" << endl;
+						cout << "getting source" << endl;
+						source = get_current_pose();
+						target = bottle_to_vector(query.get(2));
+						cout << "source:" << endl;
+						print_vector(source);
+						cout << "target:" << endl;
+						print_vector(target);
+						cout << "finding path:" << endl;
+						string mapname(query.get(1).asString().c_str());
+						path = d_path_planner->find_configuration_workspace_path(source, target, mapname);
+					} else if (query.size() == 4 && query.get(1).isString()) {
+					 	cout << "size==3 source to target" << endl;
+						cout << "getting source" << endl;
+						source = bottle_to_vector(query.get(2));
+						target = bottle_to_vector(query.get(3));
+						cout << "source:" << endl;
+						print_vector(source);
+						cout << "target:" << endl;
+						print_vector(target);
+						cout << "finding path:" << endl;
+						string mapname(query.get(1).asString().c_str());
+						path = d_path_planner->find_workspace_path(source, target, mapname);
 					}
+
 					cout << path.size() << endl;
 					response.addString("path found");
+					
 					follow_path(path);
 					response.addString("OK");
 
@@ -214,17 +242,20 @@ void YarpPoseController::run () {
 				case VOCAB_HELP:
 						cout << "HELP command" << endl;
 		//                        response.addVocab(Vocab::encode("many"));
+						response.addVocab(Vocab::encode("many"));
 						response.addString("iCub Path Planner:\n"
 											"plan: go (source) (target)\n"
-											"load map: load map_file \n"
+											"      go mapname (source) (target)\n"
+											"load map: load map_name map_file \n"
 											"connect map: con {n nearest neighbours}\n"
 											"update edge weights: up\n"
-											"get workspace range: ran");
+											"get workspace range: ran {map_name}");
 						break;
 				case VOCAB_LOAD:
-					if (query.size() >= 2 && query.get(1).isString()) {
-						std::string map_file = query.get(1).asString().c_str();
-						d_path_planner->load_map(map_file);
+				  if (query.size() >= 3 && query.get(1).isString() && query.get(2).isString()) {
+						std::string map_name = query.get(1).asString().c_str();
+						std::string map_file = query.get(2).asString().c_str();
+						d_path_planner->load_map(map_name, map_file);
 						response.addString("OK");
 					} else
 						response.addString("FAIL");
@@ -232,29 +263,38 @@ void YarpPoseController::run () {
 				case VOCAB_CONNECT:
 					if (query.size() >= 2 && query.get(1).isInt()) {
 						int number = query.get(1).asInt();
-						d_path_planner->connect_map(number);
+						d_path_planner->connect_maps(number);
 						response.addString("OK");
 					} else
 						response.addString("FAIL");
 					break;
 				case VOCAB_UPDATE:
 					cout << "planner ptr: " << d_path_planner << endl;
-					d_path_planner->update_map();
+					d_path_planner->update_maps();
 					response.addString("OK");
 					break;
 				case VOCAB_GET_RANGE:
 				{
-					cout << "Calculating range" << endl;
-					pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap().get_workspace_bounding_box();
+				  std::string map_name("default");
+				  if (query.size() >= 2 && query.get(1).isString())
+					map_name = query.get(1).asString().c_str();
+				  
 					ostringstream oss("range:");
-					oss << endl;
-					oss << "[";
-					for (size_t i(0); i < bbox.first.size(); ++i)
+					try {
+					  cout << "Calculating range of map [" << map_name << "]" << endl;
+					  pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap(map_name).get_workspace_bounding_box();
+					  
+					  oss << endl;
+					  oss << "[";
+					  for (size_t i(0); i < bbox.first.size(); ++i)
 						oss << bbox.first[i] << " ";
-					oss << "] [";
-					for (size_t i(0); i < bbox.second.size(); ++i)
+					  oss << "] [";
+					  for (size_t i(0); i < bbox.second.size(); ++i)
 						oss << bbox.second[i] << " ";
-					oss << "]" << endl;
+					  oss << "]" << endl;
+					} catch (...) {
+					  oss << "Failed" << endl;
+					}
 					response.addString(oss.str().c_str());
 					break;
 				}

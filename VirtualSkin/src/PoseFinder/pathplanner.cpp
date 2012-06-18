@@ -6,8 +6,8 @@
 using namespace std;
 
 
-vector<vector<double> > PathPlanner::poses_to_configurations() {
-	size_t map_size(n_poses());
+vector<vector<double> > PathPlanner::poses_to_configurations(poses_map_t &poses) {
+  size_t map_size(poses["WORKSPACE"].size());
 	vector<vector<double> > configurations;
 
 	for (size_t i(0); i < map_size; ++i) {
@@ -15,7 +15,7 @@ vector<vector<double> > PathPlanner::poses_to_configurations() {
 		vector<double> configuration;
 		for (size_t n(0); n < d_config_names.size(); ++n) {
 //			cout << d_config_names[n] << endl;
-			copy(d_poses[d_config_names[n]][i].begin(), d_poses[d_config_names[n]][i].end(), back_inserter(configuration));
+			copy(poses[d_config_names[n]][i].begin(), poses[d_config_names[n]][i].end(), back_inserter(configuration));
 		}
 
 //		for (size_t n(0); n < configuration.size(); ++n)
@@ -28,47 +28,44 @@ vector<vector<double> > PathPlanner::poses_to_configurations() {
 }
 
 vector<double> PathPlanner::get_scale_vector() {
-	size_t map_size(n_poses());
-
 	vector<double> scale_vector;
 	for (size_t n(0); n < d_config_names.size(); ++n) {
-		//size_t part_size = d_poses[d_config_names[n]][i].size();
-		copy(d_scale_map[d_config_names[n]].begin(), d_scale_map[d_config_names[n]].end(), back_inserter(scale_vector));
+	  copy(d_scale_map[d_config_names[n]].begin(), d_scale_map[d_config_names[n]].end(), back_inserter(scale_vector));
 	}
 
 	return scale_vector;
 }
 
-void PathPlanner::insert_poses() {
-	vector<vector<double> > configurations = poses_to_configurations();
+void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
+	vector<vector<double> > configurations = poses_to_configurations(poses);
 	cout << configurations.size() << endl;
 	int dimensionality(configurations[0].size());
 	cout << "INSERTING POSES" << endl;
 
-	d_roadmap.setDimensionality(dimensionality);
+	d_roadmaps[mapname].setDimensionality(dimensionality);
 
 	for (size_t i(0); i < configurations.size(); ++i) {
 		vector<double> &q_configuration(configurations[i]);
-		vector<double> &x_configuration(d_poses["WORKSPACE"][i]);
-		d_roadmap.insert(x_configuration, q_configuration);
+		vector<double> &x_configuration(poses["WORKSPACE"][i]);
+		d_roadmaps[mapname].insert(x_configuration, q_configuration);
 	}
 }
 
-vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target) {
-	Roadmap::PathList the_path_nodes = d_roadmap.shortestPath(source, target);
-	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
+vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target, std::string mapname) {
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestPath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
-vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target) {
-	Roadmap::PathList the_path_nodes = d_roadmap.shortestWorkspacePath(source, target);
-	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
+vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target, std::string mapname) {
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestWorkspacePath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
-vector<vector<double> > PathPlanner::find_configuration_workspace_path(vector<double> source, vector<double> target) {
-	Roadmap::PathList the_path_nodes = d_roadmap.shortestConfigurationWorkspacePath(source, target);
-	vector<vector<double> > the_path = d_roadmap.vertex_list_to_q(the_path_nodes);
+vector<vector<double> > PathPlanner::find_configuration_workspace_path(vector<double> source, vector<double> target, std::string mapname) {
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestConfigurationWorkspacePath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
@@ -76,7 +73,7 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 	vector<vector<double> > cut_pose;
 	size_t counter(0);
 	for (size_t i(0); i < d_config_names.size(); ++i) {
-		size_t len(d_poses[d_config_names[i]][0].size());
+		size_t len(d_pose_sizes[d_config_names[i]]);
 		cut_pose.push_back(vector<double>(&pose[counter], &pose[counter + len]));
 		counter += len;
 	}
@@ -117,33 +114,35 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 ////		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 //}
 
-void PathPlanner::update_map() {
+void PathPlanner::update_map(std::string mapname) {
 	//get simulator
 	Simulator &simulator(d_posefinder.simulator());
 
 	//loop over vertexes
-	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
+
+	Roadmap &roadmap(d_roadmaps[mapname]);
+	pair<vertex_i, vertex_i> map_vertices(vertices(roadmap.map));
 	vertex_i vertex_it(map_vertices.first);
 
 	for (; vertex_it != map_vertices.second; ++vertex_it) {
-		vector<double> q_norm(d_roadmap.map[*vertex_it].q);
+		vector<double> q_norm(roadmap.map[*vertex_it].q);
 		vector<double> q = simulator.real_to_normal_motors(q_norm);
 
 		simulator.set_motors(q);
 		size_t n_collisions = simulator.computePose();
 		
-		put(&Roadmap::Vertex::collisions, d_roadmap.map, *vertex_it, n_collisions);
-		d_roadmap.map[*vertex_it].collisions = n_collisions;
+		put(&Roadmap::Vertex::collisions, roadmap.map, *vertex_it, n_collisions);
+		roadmap.map[*vertex_it].collisions = n_collisions;
 
 	}
 	//loop all edges
-	pair<edge_i, edge_i> map_edges(edges(d_roadmap.map));
+	pair<edge_i, edge_i> map_edges(edges(roadmap.map));
 	edge_i edge_it(map_edges.first);
 	for (; edge_it != map_edges.second; ++edge_it) {
-		vector<double> q_start = d_roadmap.map[source(*edge_it, d_roadmap.map)].q;
-		vector<double> q_end = d_roadmap.map[target(*edge_it, d_roadmap.map)].q;
+		vector<double> q_start = roadmap.map[source(*edge_it, roadmap.map)].q;
+		vector<double> q_end = roadmap.map[target(*edge_it, roadmap.map)].q;
 		size_t resolution(10);
-		int n_collisions = d_roadmap.map[source(*edge_it, d_roadmap.map)].collisions + d_roadmap.map[source(*edge_it, d_roadmap.map)].collisions;
+		int n_collisions = roadmap.map[source(*edge_it, roadmap.map)].collisions + roadmap.map[source(*edge_it, roadmap.map)].collisions;
 
 		for (size_t i(0); i < resolution; ++i) {
 			if (n_collisions > 0)
@@ -157,14 +156,21 @@ void PathPlanner::update_map() {
 			n_collisions += max(simulator.computePose(), n_collisions);
 		}
 
-		double length = get(&Roadmap::Edge::length, d_roadmap.map, *edge_it);
-		put(&Roadmap::Edge::length2, d_roadmap.map, *edge_it, length + 100000. * n_collisions);
+		double length = get(&Roadmap::Edge::length, roadmap.map, *edge_it);
+		put(&Roadmap::Edge::length2, roadmap.map, *edge_it, length + 100000. * n_collisions);
 
-//		size_t n_collisions =  d_roadmap.map[source(*edge_it, d_roadmap.map)].collisions + d_roadmap.map[target(*edge_it, d_roadmap.map)].collisions;
-		//d_roadmap.map[*edge_it].length = 1. + n_collisions * 99999.;+
+//		size_t n_collisions =  roadmap.map[source(*edge_it, roadmap.map)].collisions + roadmap.map[target(*edge_it, roadmap.map)].collisions;
+		//roadmap.map[*edge_it].length = 1. + n_collisions * 99999.;+
 
 
 		//length should be distance of q's
 	}
-//		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
+//		road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
+}
+
+void PathPlanner::update_maps() {
+  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+  
+  for (; it != it_end; ++it)
+	update_map(it->first);
 }

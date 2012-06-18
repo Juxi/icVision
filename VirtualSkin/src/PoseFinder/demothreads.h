@@ -83,10 +83,14 @@ class MapThread : public QThread {
 
 	size_t d_population_size;
 	double d_start_std;
+	std::vector<double> d_simulator_home_pose, d_simulator_wide_pose;
+
 public:
 	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
 
 	void nullspace_function();
+
+	void move_box_function();
 
 	void hold_something_function();
 
@@ -181,6 +185,7 @@ public:
 		*d_points = filtered_points;
 	}
 
+	void init_standard_poses();
 	void run();
 };
 
@@ -319,7 +324,7 @@ public:
 	: verbose(false), keepRunning(true),
 	  d_pose_finder(model, robot)
 	{
-		if (true) {
+		if (false) {
 			for (float z(-.2); z < .2; z += .03)
 				d_pose_finder.simulator().add_ball(-.2, .25, z);
 //			for (float z(-.2); z < .2; z += .03)

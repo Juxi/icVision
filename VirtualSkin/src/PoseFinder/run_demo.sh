@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./PoseFind ../../xml/icubSim_fat.xml ../../xml/world.xml map
+./PoseFind ../../xml/icub2.xml ../../xml/world.xml map
