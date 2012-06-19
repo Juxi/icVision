@@ -74,7 +74,7 @@ void GraphWidget::addNode( Roadmap::vertex_t n, qreal _x, qreal _y )
 	scene()->addItem(node);
 	node->setNormPos(QPointF(_x,_y));
 	emit newQtGraphNode(n,node);
-	//printf("added node to graph\n");
+	printf("added node to graph\n");
 }
 
 void GraphWidget::addEdge( Roadmap::edge_t n, QtGraphNode* a, QtGraphNode* b )

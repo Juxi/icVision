@@ -131,7 +131,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 	}
 }*/
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q, bool display )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -139,10 +139,11 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
-	//map[vertex].x = _x;
-	//map[vertex].y = _y;
+	map[vertex].x = _x;
+	map[vertex].y = _y;
 	
-	emit appendedNode( vertex, _x, _y );
+	if ( display )
+		emit appendedNode( vertex, _x, _y );
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -155,7 +156,7 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	return vertex;
 }
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w, bool display )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -167,10 +168,11 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  
 	cout << endl;
 	map[vertex].q = _q;
 	map[vertex].w = _w;
-	//map[vertex].x = _x;
-	//map[vertex].y = _y;
+	map[vertex].x = _x;
+	map[vertex].y = _y;
 
-	emit appendedNode( vertex, _x, _y );
+	if ( display )
+		emit appendedNode( vertex, _x, _y );
 
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -183,7 +185,7 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  
 	return vertex;
 }
 
-void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges )
+void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges, bool display )
 {
 	//TODO Clean out the boost graph first
 	//int count = 0;
@@ -203,7 +205,8 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 		
 		vertex = insert( *(v->begin()),
 						 *(v->begin()+1),
-						 q
+						 q,
+						 display
 						);
 		vertices.push_back( vertex );
 	}
@@ -218,7 +221,7 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 		//std::cout << edge.first << std::endl;
 		if ( !edge.second )
 			printf("boost::add_edge() failed.\n");
-		else
+		else if ( display )
 		{
 			//printf("appended edge to boost graph\n");
 			emit appendedEdge( edge.first, 

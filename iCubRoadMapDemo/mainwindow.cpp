@@ -60,6 +60,9 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
 	
+	qRegisterMetaType< Roadmap::vertex_t >("vertex_t");
+	qRegisterMetaType< Roadmap::edge_t >("edge_t");
+	
 	connect( &roadmap, SIGNAL(appendedNode(vertex_t, qreal, qreal)),			&graphWidget, SLOT(addNode(vertex_t, qreal, qreal)));
 	connect( &roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	&graphWidget, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
 	
@@ -215,7 +218,7 @@ void MainWindow::saveMap()
 	}
 }
 
-void MainWindow::loadMap()
+void MainWindow::loadMap( bool display )
 {
 	if ( !iCub.isValid() )
 	{
@@ -327,7 +330,7 @@ void MainWindow::loadMap()
 		}
 		
 		printf("loaded file: %d nodes, %d edges\n",graphNodes.size(),graphEdges.size());
-		roadmap.load( graphNodes, graphEdges );
+		roadmap.load( graphNodes, graphEdges, display );
 		
 		file.close();
 	}
@@ -423,6 +426,11 @@ void MainWindow::createActions()
     loadMapAction->setStatusTip(tr("Load a Roadmap from file"));
     connect(loadMapAction, SIGNAL(triggered()), this, SLOT(loadMap()));
 	
+	stealthLoadMapAction = new QAction(tr("&Stealth Load Map"), this);
+	stealthLoadMapAction->setShortcuts(QKeySequence::Open);
+    stealthLoadMapAction->setStatusTip(tr("Load a Roadmap from file (don't display)"));
+    connect(stealthLoadMapAction, SIGNAL(triggered()), this, SLOT(stealthLoadMap()));
+	
 	saveMapAction = new QAction(tr("&Save Map"), this);
 	saveMapAction->setShortcuts(QKeySequence::Save);
     saveMapAction->setStatusTip(tr("Save the current map to file"));
@@ -459,6 +467,7 @@ void MainWindow::createMenus()
     mapMenu = menuBar()->addMenu(tr("&Map"));
 	mapMenu->addAction(newMapAction);
 	mapMenu->addAction(loadMapAction);
+	mapMenu->addAction(stealthLoadMapAction);
 	mapMenu->addAction(saveMapAction);
 	mapMenu->addAction(connectMapAction);
 	mapMenu->addAction(projectMapAction);

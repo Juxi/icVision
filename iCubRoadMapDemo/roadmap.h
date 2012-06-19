@@ -162,15 +162,15 @@ public:
 	void setEdgeColor( edge_t, QColor );
 	void setEdgeWeight( edge_t, int );
 	
-	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
-	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ );
+	vertex_t insert( qreal x, qreal y, std::vector<double> _q, bool display = true );
+	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w, bool display = true );
 
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
 	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
-	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
+	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges, bool display = true );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
 	void readMapPoses(std::string filename);

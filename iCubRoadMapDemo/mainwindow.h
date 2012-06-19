@@ -76,7 +76,8 @@ signals:
 //! [1]
 private slots:
 	void newMap();
-	void loadMap();
+	void loadMap( bool display = true );
+	void stealthLoadMap() { loadMap(false); }
 	void saveMap();
 	void connectMap();
 	void projectMap();
@@ -101,6 +102,7 @@ private:
     QMenu *mapMenu;
 	QAction *newMapAction;
 	QAction *loadMapAction;
+	QAction *stealthLoadMapAction;
 	QAction *saveMapAction;
 	QAction *connectMapAction;
 	QAction *projectMapAction;

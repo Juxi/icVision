@@ -50,18 +50,14 @@ void ControlThread::run()
 	while ( keepRunning )
 	{
 		/*** EXPLORE THE GRAPH VIA RANDOM SHORTEST-PATHS ***/
-		//else 
 		if ( currentBehavior == MultiEdgeExplore )
 		{
 			std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path;
-			path = roadmap->aToB( roadmap->currentVertex, Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
+			path = roadmap->aToB( roadmap->nearestVertex(robot->getCurrentPose()),
+								  Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
 		
 			if ( !velocityMoveImpl( path ) )
-			//if ( !simpleVelocityMoveImpl( path ) )
-			{
 				printf("velocityMoveImpl() failed.\n");
-				//break;
-			}
 		}
 		
 		/*** REACH FOR A PARTICULAR OBJECT ***/
@@ -140,6 +136,34 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 	for ( i = path.begin(); i != path.end(); ++i )
 	{
 		printf("\nNEW CONTROL POINT\n");
+		
+		// 
+		if ( !roadmap->map[source(i->first,roadmap->map)].qtGraphNode ) {
+			roadmap->emit appendedNode( source(i->first,roadmap->map), 
+									    roadmap->map[source(i->first,roadmap->map)].x,
+									    roadmap->map[source(i->first,roadmap->map)].y );
+			while (!roadmap->map[source(i->first,roadmap->map)].qtGraphNode)
+				msleep(20);
+		}
+		if ( !roadmap->map[target(i->first,roadmap->map)].qtGraphNode ) {
+			roadmap->emit appendedNode( target(i->first,roadmap->map), 
+									   roadmap->map[target(i->first,roadmap->map)].x,
+									   roadmap->map[target(i->first,roadmap->map)].y );
+			while (!roadmap->map[target(i->first,roadmap->map)].qtGraphNode)
+				msleep(20);
+		}
+		if ( !roadmap->map[i->first].qtGraphEdge )
+		{
+			roadmap->emit appendedEdge( i->first, 
+									    roadmap->map[source(i->first,roadmap->map)].qtGraphNode, 
+									    roadmap->map[target(i->first,roadmap->map)].qtGraphNode  );
+			while ( !roadmap->map[i->first].qtGraphEdge )
+				msleep(20);
+			roadmap->setEdgeColor( i->first, Qt::red );
+			roadmap->setEdgeWeight( i->first, 1 );
+		}
+		
+		// the next control point... for smooth transitions through corners
 		j = i;
 		j++;
 
