@@ -58,7 +58,12 @@ void Roadmap::setEdgeColor( edge_t e, QColor color )
 {
 	if ( map[e].qtGraphEdge )
 		emit newEdgeColor( map[e].qtGraphEdge, color );
-		//map[e].qtGraphEdge->setColor( color );
+}
+
+void Roadmap::setEdgeWeight( edge_t e, int w )
+{
+	if ( map[e].qtGraphEdge )
+		emit newEdgeWeight( map[e].qtGraphEdge, w );
 }
 
 std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
@@ -282,7 +287,14 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 	
 	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
 	
+	// important to do this in this order...  the Qt edge object outlives the boost graph edge
+	// TODO: fix this...  its ugly
+
+	//deletedEdge = map[edge].qtGraphEdge;
+	//if ( deletedEdge )
+	//	emit newEdgeWeight( deletedEdge, 0 );
 	
+	setEdgeWeight( edge, 0 );
 	remove_edge( edge, map );
     
     //map[edge].length = 1000000;

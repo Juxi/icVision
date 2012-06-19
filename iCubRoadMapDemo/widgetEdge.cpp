@@ -49,7 +49,9 @@
 static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
 
-QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	color(Qt::darkGray)
+QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	//renderMe(true),
+																			color(Qt::darkGray),
+																			weight(1)
 																			//newColor(Qt::black)
 																			//deleteMe(false),
 																			//changed(false)
@@ -96,6 +98,14 @@ void QtGraphEdge::setColor( QColor c )
 	//mutex.unlock();
 }
 
+void QtGraphEdge::setWeight( int w )
+{
+	//if ( weight > 0 ) {
+		weight = w;
+		update();
+	//}
+}
+
 void QtGraphEdge::adjust()
 {
     if (!source || !dest)
@@ -137,7 +147,7 @@ QRectF QtGraphEdge::boundingRect() const
 
 void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    if (!source || !dest)
+    if ( !source || !dest || weight < 1 )
         return;
 
 	//mutex.lock();
@@ -152,11 +162,11 @@ void QtGraphEdge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 	
 		QLineF offLine(a,b);
 		
-	int lineWeight = 1;
-	if ( color == Qt::red || color == Qt::black )
-		lineWeight = 3;
+	//int lineWeight = 1;
+	//if ( color == Qt::red || color == Qt::black )
+	//	lineWeight = 3;
 
-	painter->setPen(QPen(color, lineWeight, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+	painter->setPen(QPen(color, weight, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 	painter->drawLine(offLine);
 	
 		//double angle = ::acos(line.dx() / line.length());

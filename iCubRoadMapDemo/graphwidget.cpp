@@ -101,6 +101,11 @@ void GraphWidget::setEdgeColor( QtGraphEdge* edge, QColor c )
 	if ( edge ) edge->setColor(c);
 }
 
+void GraphWidget::setEdgeWeight( QtGraphEdge* edge, int w)
+{
+	if ( edge ) edge->setWeight(w);
+}
+
 /*void GraphWidget::update()
 {
     foreach (QGraphicsItem *item, scene()->items())

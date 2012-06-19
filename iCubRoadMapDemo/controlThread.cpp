@@ -122,7 +122,10 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 	// set the whole path to be red
 	std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > >::iterator i,j;
 	for ( i = path.begin(); i != path.end(); ++i )
+	{
 		roadmap->setEdgeColor( i->first, Qt::red );
+		roadmap->setEdgeWeight( i->first, 3 );
+	}
 	
 	std::cout << std::setprecision(3);
 	std::cout << std::setw(4);
@@ -139,11 +142,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 		printf("\nNEW CONTROL POINT\n");
 		j = i;
 		j++;
-		
-		//att = 0;
-		//if ( j != path.end() )
-		//	att = (dot(i->first,j->first)+1)/2;
-		
+
 		do {
 			// if MoBeE cut us off, give up
 			MoBeEStatus.read(statusBottle);
@@ -175,13 +174,27 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 			robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
 		} while ( vIn.first.squared_length() > vOut.first.squared_length() && v.squared_length() > 5 && keepRunning );
 		
-		// if MoBeE cut us off, give up
-		if ( interrupted || !keepRunning )
+		if ( !keepRunning ) { // we don't know if the edge is good or not, mark it untested
+			roadmap->setEdgeColor( i->first, Qt::black );
+			roadmap->setEdgeWeight( i->first, 1 );
+		}
+		else if ( !interrupted ) { // the edge is good, mark it bold black
+			roadmap->setEdgeColor( i->first, Qt::black );
+		}
+		else { // the edge is bad, get rid of it and mark the rest untested
+			roadmap->removeEdge( i->first );
+			while ( ++i != path.end() ) {
+				roadmap->setEdgeColor( i->first, Qt::black );
+				roadmap->setEdgeWeight( i->first, 1 );
+			}
 			break;
+		}
 	}
 	
 	if ( interrupted ) {
 		printf("motion interrupted.\n");
+		// wait for the MoBeE filter to reopen
+		// TODO: implement timeout
 		while (true) {
 			MoBeEStatus.read(statusBottle);
 			if ( statusBottle.get(0).asInt() == 1 )
@@ -194,8 +207,8 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 		robot->setRefAcceleration( refAcceleration );
 		Roadmap::CGAL_Vector v = zeroVector();
 		robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
-		for ( i = path.begin(); i != path.end(); ++i )
-			roadmap->setEdgeColor( i->first, Qt::black );
+		//for ( i = path.begin(); i != path.end(); ++i )
+		//	roadmap->setEdgeColor( i->first, Qt::black );
 		return true;
 	}
 }

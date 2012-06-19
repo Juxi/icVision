@@ -71,6 +71,7 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 
 	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
 	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	connect( &roadmap, SIGNAL(newEdgeWeight(QtGraphEdge*,int)),					&graphWidget, SLOT(setEdgeWeight(QtGraphEdge*,int)));
 	
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);
