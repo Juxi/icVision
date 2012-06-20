@@ -135,9 +135,14 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 	//double att;
 	for ( i = path.begin(); i != path.end(); ++i )
 	{
-		printf("\nNEW CONTROL POINT\n");
+		printf("\nNEW CONTROL EDGE\n");
 		
-		// 
+		if ( !robot->isWithinLimits( roadmap->map[source(i->first,roadmap->map)].q ) ||
+			 !robot->isWithinLimits( roadmap->map[target(i->first,roadmap->map)].q ) )
+		{
+			interrupted = true;
+		}
+		
 		if ( !roadmap->map[source(i->first,roadmap->map)].qtGraphNode ) {
 			roadmap->emit appendedNode( source(i->first,roadmap->map), 
 									    roadmap->map[source(i->first,roadmap->map)].x,
@@ -167,36 +172,39 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 		j = i;
 		j++;
 
-		do {
-			// if MoBeE cut us off, give up
-			MoBeEStatus.read(statusBottle);
-			if ( statusBottle.get(0).asInt() == 0 )
-			{
-				interrupted = true;
-				break;
-			}
-			msleep(period);
-			std::cout << "-------------------" << std::endl;
-			
-			// compute velocity control signal
-			vIn = funnelAccel(	vMax,	i->first );
-			if ( j != path.end() ) {
-				vOut = funnelAccel(	vMax,	j->first );
-				v = (vIn.first+vIn.second+vOut.first)/3;
-			} else {
-				vOut.first = 0;
-				vOut.second = 0;
-				v = (vIn.first+vIn.second)/2;
-			}
-			
-			//std::cout << "|vIn.first|:     " << sqrt(vIn.first.squared_length()) << std::endl;
-			//std::cout << "|vIn.second|:    " << sqrt(vIn.second.squared_length()) << std::endl;
-			//std::cout << "|vOut.first|:    " << sqrt(vOut.first.squared_length()) << std::endl;
-			std::cout << "|v|:             " << sqrt(v.squared_length()) << std::endl;
-			
-			robot->setRefAcceleration( refAcceleration );
-			robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
-		} while ( vIn.first.squared_length() > vOut.first.squared_length() && v.squared_length() > 5 && keepRunning );
+		if ( !interrupted ) {
+			do {
+				// if MoBeE cut us off, give up
+				MoBeEStatus.read(statusBottle);
+				if ( statusBottle.get(0).asInt() == 0 )
+				{
+					interrupted = true;
+					break;
+				}
+				msleep(period);
+				std::cout << "-------------------" << std::endl;
+				
+				// compute velocity control signal
+				vIn = funnelAccel(	vMax,	i->first );
+				if ( j != path.end() ) {
+					vOut = funnelAccel(	vMax,	j->first );
+					v = (vIn.first+vIn.second+vOut.first)/3;
+				} else {
+					vOut.first = 0;
+					vOut.second = 0;
+					v = (vIn.first+vIn.second)/2;
+				}
+				
+				//std::cout << "|vIn.first|:     " << sqrt(vIn.first.squared_length()) << std::endl;
+				//std::cout << "|vIn.second|:    " << sqrt(vIn.second.squared_length()) << std::endl;
+				//std::cout << "|vOut.first|:    " << sqrt(vOut.first.squared_length()) << std::endl;
+				std::cout << "|v|:             " << sqrt(v.squared_length()) << std::endl;
+				//std::cout << v << std::endl;
+				
+				robot->setRefAcceleration( refAcceleration );
+				robot->velocityMove( std::vector<double>( v.cartesian_begin(), v.cartesian_end() ) );
+			} while ( vIn.first.squared_length() > vOut.first.squared_length() && v.squared_length() > 5 && keepRunning );
+		}
 		
 		if ( !keepRunning ) { // we don't know if the edge is good or not, mark it untested
 			roadmap->setEdgeColor( i->first, Qt::black );
@@ -210,6 +218,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 			while ( ++i != path.end() ) {
 				roadmap->setEdgeColor( i->first, Qt::black );
 				roadmap->setEdgeWeight( i->first, 1 );
+				std::cout << "Marked an edge black" << std::endl;
 			}
 			break;
 		}
@@ -259,6 +268,7 @@ std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> ControlThread::funnelAccel(
 	a.first = -c*x/qAbs(x) * ( 1 - pow( 2.71828183, -0.01*qAbs(x) ) ) * axial;
 	a.second = c*( 1 - pow( 2.71828183, -0.1*y ) ) * radial; // y is positive by definition
 	
+	//std::cout << err << std::endl;
 	/*std::cout << "err = " << errMag << std::endl;
 	std::cout << "x = " << x << std::endl;
 	std::cout << "y = " << y << std::endl;

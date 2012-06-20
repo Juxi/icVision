@@ -1,6 +1,7 @@
 #include "iCubController.h"
 #include <time.h>
 #include <iostream>
+#include "roadmap.h"
 
 iCubController::iCubController() : numJoints(0)
 {
@@ -69,7 +70,31 @@ int	iCubController::getNumJoints()
 	return torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints();
 }
 
-std::vector<double>  iCubController::withinLimits( const std::vector<double>& poss )
+bool iCubController::isWithinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> torsoPoss, leftPoss, rightPoss;
+	if ( !chop( poss, torsoPoss, rightPoss, leftPoss ) ) {
+		printf("chop failed\n");
+		return false;
+	}
+	
+	bool returnVal = true;
+	
+	if ( !torso.isWithinLimits(torsoPoss) ) returnVal = false;
+	else if ( !left_arm.isWithinLimits(leftPoss) ) returnVal = false;
+	else if ( !right_arm.isWithinLimits(rightPoss) ) returnVal = false;
+	
+	if ( !returnVal ) {
+		std::cout << Roadmap::CGAL_Vector(torsoPoss.size(),torsoPoss.begin(),torsoPoss.end()) << std::endl;
+		std::cout << Roadmap::CGAL_Vector(leftPoss.size(),leftPoss.begin(),leftPoss.end()) << std::endl;
+		std::cout << Roadmap::CGAL_Vector(rightPoss.size(),rightPoss.begin(),rightPoss.end()) << std::endl;
+		return false;
+	}
+	
+	return true;
+}
+
+std::vector<double> iCubController::withinLimits( const std::vector<double>& poss )
 {
 	std::vector<double> torsoPoss, leftPoss, rightPoss, result;
 	if ( !chop( poss, torsoPoss, rightPoss, leftPoss ) ) {

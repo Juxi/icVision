@@ -199,7 +199,7 @@ void MainWindow::saveMap()
 		std::vector<double>::iterator j;
 		for ( v = graphNodes.begin(); v !=graphNodes.end(); ++v )
 		{
-			for ( j = v->begin(); j !=v->end(); ++j )
+			for ( j = v->begin(); j != v->end(); ++j )
 			{
 				out << *j << " ";
 			}

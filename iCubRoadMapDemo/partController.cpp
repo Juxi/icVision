@@ -126,6 +126,26 @@ std::vector<double> PartController::withinLimits( const std::vector<double>& pos
 	return p;
 }
 
+bool PartController::isWithinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> p;
+	if ( poss.size() != (unsigned int)numJoints )
+	{ 
+		printf("PartController::isWithinLimits() received wrong sized position vector.");
+		return false;
+	}
+	
+	double offset = 0;
+	for ( int i = 0; i < numJoints; i++ ) {
+		//offset = (max.at(i) - min.at(i))/20.0;
+		if ( poss.at(i) < min.at(i) + offset )
+			return false;
+		else if ( poss.at(i) > max.at(i) - offset )
+			return false;
+	}
+	return true;
+}
+
 void PartController::setRefVelocity( int v )
 {
 	double vels[numJoints];

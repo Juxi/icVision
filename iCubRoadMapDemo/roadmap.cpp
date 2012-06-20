@@ -437,7 +437,18 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	return path;
 }
 
+// project into 2D
 void Roadmap::project2D( std::vector<double> direction )
+{
+	std::pair<vertex_i, vertex_i> vp;
+	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
+	{
+		if ( map[*(vp.first)].qtGraphNode )
+			emit update2DPosition(map[*(vp.first)].qtGraphNode, QPointF((double)rand()/RAND_MAX,(double)rand()/RAND_MAX));
+	}
+}
+
+/*void Roadmap::project2D( std::vector<double> direction )
 {
 	if ( direction.size() == 0 ) {
 		//printf("choosing random direction\n");
@@ -446,12 +457,12 @@ void Roadmap::project2D( std::vector<double> direction )
 		}
 	}
 	
-	/*std::vector<double>::iterator fuck;
-	for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
-	{
-		printf("%f ",*fuck);
-	}
-	printf("\n");*/
+	//std::vector<double>::iterator fuck;
+	//for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
+	//{
+	//	printf("%f ",*fuck);
+	//}
+	//printf("\n");
 	
 	if ( direction.size() != dim ) { throw("wrong size direction vector"); }
 	
@@ -583,4 +594,4 @@ void Roadmap::project2D( std::vector<double> direction )
 	}
 	
 	
-}
+}*/
