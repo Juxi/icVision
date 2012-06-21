@@ -299,7 +299,7 @@ void MainWindow::loadMap( bool display )
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
 				//printf("\n");
-					q = iCub.withinLimits(q);
+					//q = iCub.withinLimits(q);
 				//printf("qAfter: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);

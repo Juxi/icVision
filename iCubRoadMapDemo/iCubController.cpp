@@ -103,15 +103,15 @@ std::vector<double> iCubController::withinLimits( const std::vector<double>& pos
 	}
 	
 	result = torso.withinLimits(torsoPoss);
-	leftPoss = left_arm.withinLimits(leftPoss);
 	rightPoss = right_arm.withinLimits(rightPoss);
+	leftPoss = left_arm.withinLimits(leftPoss);
 	
 	std::vector<double>::iterator i;
-	for ( i = leftPoss.begin(); i != leftPoss.end(); ++i )
+	for ( i = rightPoss.begin(); i != rightPoss.end(); ++i )
 	{
 		result.push_back(*i);
 	}
-	for ( i = rightPoss.begin(); i != rightPoss.end(); ++i )
+	for ( i = leftPoss.begin(); i != leftPoss.end(); ++i )
 	{
 		result.push_back(*i);
 	}
