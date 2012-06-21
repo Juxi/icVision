@@ -18,11 +18,13 @@
 #include "primitiveobject.h"
 #include "modelexception.h"
 #include "modelconstants.h"
+#include "objectmover.h"
 
 namespace KinematicModel
 {
 	class Model;
 	class ModelWindow;
+	class ObjectMover;
 }
 
 /** \brief Computes the current pose of the Robot and does collision detection using the SOLID library
@@ -50,42 +52,31 @@ public:
 									/**< \param visualize If true, a SkinWindow (with its associated GLWidget) is constructed and its signals and slots are
 										 connected to Robot and World (both of which are RenderLists) as described in the docs for GLWidget */
 	virtual ~Model();				//!< Nothing special to do here
-
-	DT_RespTableHandle newRobotTable();
-	DT_ResponseClass newResponseClass( DT_RespTableHandle );
-	void removePairResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	
 	int computePose();						//!< Causes the Robot's pose to be computed in cartesian space and the collision detection to be run using SOLID
 											/**< Call this function directly if you want to be in control of which poses are computed when */
 	void stop();
 	
-	//void appendRobotObject( CompositeObject* );
+	void grabObject( CompositeObject* object, Robot* robot, int markerIndex );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
-	CompositeObject*	removeWorldObject( CompositeObject* );
+	bool removeWorldObject( CompositeObject* );
 	void clearTheWorld();
 	
 	QVector< QString > listWorldObjects();
 	CompositeObject* getObject( const QString& name );
+	Robot* getRobot( const QString& name );
 	
 	Robot*	loadRobot( const QString& fileName, bool verbose = true );
 	void	loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }
 	DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }
-	//DT_RespTableHandle	getRobotTable() const { return robotTable; }
 	
 	// collision response classes for the world table
-	//DT_ResponseClass	WORLD_CRITICAL() const { return worldCriticalClass; }
 	DT_ResponseClass	OBSTACLE() const { return obstacleClass; }
 	DT_ResponseClass	TARGET() const { return targetClass; }
-	DT_ResponseClass	ROBOT() const { return robotClass; }
 	DT_ResponseClass	GHOST() const { return ghostClass; }
-	//DT_ResponseClass	ROBOT_CRITICAL() const { return robotCriticalClass; }
-	
-	
-	//DT_RespTableHandle	getRobotTable() { return robotTable; }
-	//DT_ResponseClass	body_partResponseClass() { return BODY_PART; }
 	
 public slots:
 	
@@ -98,27 +89,22 @@ signals:
 	void computedState( int collisions );	//! Indicates that a state has been computed and reports the number of collisions
 	
 protected:
+
+	DT_RespTableHandle newRobotTable();
+	DT_ResponseClass newResponseClass( DT_RespTableHandle );
 	
-	bool keepRunning;		//!< Facilitates stopping and restarting the thread
-	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
-	bool encObstacle;
-	bool verbose;
-	
-	QVector<DT_RespTableHandle> responseTables;
-	
-	QVector<Robot*> robots;
-	QVector<CompositeObject*> world;
-	
+	void removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	void setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+
 	void cleanTheWorld();
 	void updateWorldState();
 	void fwdKin();
-	//void emitRobotStates();
-	
-	//Robot*				removeRobot( Robot* );
-	
+	void evaluateRobotConstraints();
+
 	void run();				//!< Allows a thread to call computePose() periodically
 							/**< \note IMPORTANT: Call start() not run() !!! */
-	
 	
 	//virtual void onStartUp() {}
 	virtual void computePosePrefix() {}								//!< This is executed by computePose() just before forward kinematics is computed 
@@ -127,21 +113,34 @@ protected:
 										   PrimitiveObject*,
 										   const DT_CollData* ) {}	
 	
-private:
+	bool keepRunning;		//!< Facilitates stopping and restarting the thread
+	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
+	int	 reflex_col_count;
+	bool encObstacle;
+	bool verbose;
+	
+	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
+	QVector<DT_ResponseClass> robotResponseClasses;
+	QVector<DT_ResponseClass> robotBaseClasses;
+	
+	QVector<Robot*> robots;
+	QVector<CompositeObject*> world;
 	
 	ModelWindow	*modelWindow;	//! The visualization
 	
-	DT_SceneHandle				scene;
-	
-	DT_ResponseClass obstacleClass;		//!< objects in this response class trigger reflexes
-	DT_ResponseClass targetClass;		//!< these don't
-	DT_ResponseClass ghostClass;		//!< these are left out of collision detection computations
-	DT_ResponseClass robotClass;		//!< these belong to the robot's body
-	//DT_ResponseClass robotBaseClass;
+	DT_SceneHandle		scene;
+	DT_ResponseClass	obstacleClass;	//!< objects in this response class trigger reflexes
+	DT_ResponseClass	targetClass;	//!< these don't
+	DT_ResponseClass	ghostClass;		//!< these are left out of collision detection computations
 	
 	uint numObjects, numPrimitives;
 	
 	QMutex mutex;
+	
+	ObjectMover *objectMover;			//!< Object mover
+
+	friend class Robot;
+	friend class KinTreeNode;
 
 	
 	/*************************
@@ -169,11 +168,8 @@ private:
 		return DT_CONTINUE;
 	}
 	
-	
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-		collisionHandler( client_data, obj1, obj2, coll_data );
-		
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
 		CompositeObject* comp1 = prim1->getCompositeObject();
 		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
@@ -183,6 +179,9 @@ private:
 		CompositeObject* comp2 = prim2->getCompositeObject();
 		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
 		if ( node2 ) { node2->robot()->addReflexCollision(); }
+		
+		Model* detector = (Model*)client_data;
+		detector->reflex_col_count++;
 		
 		//return DT_DONE;
 		return DT_CONTINUE;

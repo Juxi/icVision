@@ -97,9 +97,7 @@ public:
 			filterName = "/" + robot->getName() + "F/" + *(robot->getPartName(bodyPart));
 			targetName = "/" + robot->getName() + "/" + *(robot->getPartName(bodyPart));
 			
-			
-			
-			printf("Getting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
+			printf("\nGetting number of joints and joint limits for: %s\n", targetName.toStdString().c_str());
 			printf("----------------------------------------------------------------\n");
 			
 			/*** AUTOMATICALLY RESET MOTOR AND JOINT LIMITS ACCORDING TO THE ROBOT TO WHICH WE ARE CONNECTED ***/
@@ -121,6 +119,12 @@ public:
 				port.write(cmd,response);
 				//printf("Got response: %s\n", response.toString().c_str());
 				
+				if(response.size() != 5) {	// we did not get the limits
+					printf("No correct joint limit response at joint #%d! got: %s\n", i, response.toString().c_str());	
+					printf("Warning! Using the XML provided values!\n");	
+					continue;
+				}
+				
 				double min = response.get(2).asDouble();
 				double max = response.get(3).asDouble();
 				//printf("setting motor limits: %f, %f\n", min, max);
@@ -141,7 +145,6 @@ public:
 			printf( "\nConnecting to %s:%s\n", robot->getName().toStdString().c_str(), robot->getPartName(bodyPart)->toStdString().c_str() );
 			printf("----------------------------------------------------------------\n");
 			
-			
 			if ( p_cbf->open(filterName.toStdString().c_str(), targetName.toStdString().c_str()) )
 			{
 				cbFilters.append(p_cbf);
@@ -160,11 +163,10 @@ public:
 				responseObservers.append(p_ro);
 				
 				QObject::connect(p_so, SIGNAL(setPosition(int,const QVector<qreal>&)),	robot, SLOT(setEncoderPosition(int,const QVector<qreal>&)) );
-				//QObject::connect(p_ro, SIGNAL(setPosition(int,int,qreal)),			robot, SLOT(setEncoderPosition(int,int,qreal)) );
 			}
 			else
 			{
-				//printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
+				printf("Failed to find YARP port: %s\n", targetName.toStdString().c_str());
 				QString errStr = "failed to find YARP port '";
 				errStr.append(targetName);
 				errStr.append("'");
@@ -172,7 +174,7 @@ public:
 				close();
 				throw( VirtualSkinException(errStr) );
 			}
-			printf("\n");
+			//printf("\n");
 		} 
 		
 		extraOpenStuff();
@@ -180,6 +182,13 @@ public:
 		// this is to let all the control board filters and observers come up
 		sleep(1);
         isOpen = true;
+        
+        // not sure why i had to add this
+        // open the filters
+        for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+        {
+            cbFilters.at(bodyPart)->cutConnection(false);
+        }
 	}
 	
 	void close();							//!< Deletes all ControlBoardFilters and IObservers, returning the RobotFilter to the state it was in just after construction
@@ -244,6 +253,7 @@ private:
 	void run();							//!< Collision response is handled in a separate thread so as not to interrupt anything
 	
 	friend class StateObserver;
+	friend class CallObserver;
 	
 };
 #endif

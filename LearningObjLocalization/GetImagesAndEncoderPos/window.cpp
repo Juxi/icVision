@@ -53,9 +53,44 @@ Window::Window(QString &t_in, QString &v_in) {
 }
 
 Window::Window(QString &t_in, QString &v_in, iCubController *iCubCtrl_in) {
-	initWindow();
+	initWindow(); 
 	iCubCtrl = iCubCtrl_in;
+	
+	// connect to rpc	
+	// check whether we have F or not!! TODO
+	std::string clientPortName = "/learnpos/katanaCtrl/rpc:o";
+	if(! katanaCtrlPort.open( clientPortName.c_str() )){
+		exit(1);
+	}
+	
+	std::string remotePort = "/katanaCtrl"; //"/katana400F/arm/rpc:i";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", remotePort.c_str());
+	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
+		std::cout << "window.cpp" << ": Unable to connect to port "; 
+		std::cout << remotePort.c_str() << std::endl;
+		exit(1);
+	}	
 
+	// connect to rpc	
+	// check whether we have F or not!! TODO
+	
+	clientPortName = "/learnpos/katana/rpc:o";
+	if(! katanaPort.open( clientPortName.c_str() )){
+		exit(1);
+	}
+	
+	remotePort = "/katana400F/arm/rpc:i";
+	
+	// trying to connect to the rpc server (world interface)
+	printf("Trying to connect to %s\n", remotePort.c_str());
+	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
+		std::cout << "window.cpp" << ": Unable to connect to port "; 
+		std::cout << remotePort.c_str() << std::endl;
+		exit(1);
+	}	
+	
 	// set title
 	title = t_in + " - " + v_in;
     setWindowTitle(title);
@@ -322,11 +357,11 @@ void Window::toggleTimer() {
 
 
 void Window::collectData() {
-	bool usingKatana = false;
+	bool usingKatana = true;
 	
 	int pointsPerRun = 1; //20;	// for katana learning
 	
-	if( usingKatana ) pointsPerRun = 20;
+	if( usingKatana ) pointsPerRun = 10;
 	
 	// todo change
 	if(iCubCtrl) {
@@ -335,36 +370,56 @@ void Window::collectData() {
 		
 			
 			if( usingKatana ) {
-				/// talk to the katana
-				QTcpSocket* socket = new QTcpSocket();
-				socket->connectToHost("195.176.191.21", 5677);
+				/// talk to the katana 
+				// yarp
+
+				yarp::os::Bottle cmd, response;
 				
-				if( ! (socket->waitForConnected(20000)) )
-				{
-					printf("Unable to connect To Katana Server!\n");
-					return;				
+				// get information about the object from rpc
+				cmd.clear();
+				cmd.addString("next");
+				
+				katanaCtrlPort.write(cmd, response);
+				
+				if( response.size() != 2 ) {
+					std::cout << "ARGHAR something went wrong!!" << response.toString() << std::endl;
+					break;
 				}
-				else {
-					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
-					char buf[1] = { 'N' };
-					socket->write(buf, 1);
-					socket->flush();
-					
-					if(socket->waitForReadyRead(10000) == false) {
-						//timedout here;
-						std::cout << "socket timed out!! breaking! " <<std::endl;
-						return;
-						
-					}
-					if(1 == socket->getChar(buf)) { 
-						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
-						printf(".. received %d", (int) *buf);
-					} else {
-						txt_BallPosition->setText( "Nothing_read!" );
-					}
-					
-					socket->disconnect();
-				}
+				std::cout << "Katana moved!!" << std::endl;
+								
+				
+				// HTTP (old)
+//				QTcpSocket* socket = new QTcpSocket();
+//				socket->connectToHost("195.176.191.21", 5677);
+//				
+//				if( ! (socket->waitForConnected(20000)) )
+//				{
+//					printf("Unable to connect To Katana Server!\n");
+//					return;				
+//				}
+//				else {
+//					printf("Connection to Katana (Simon) established.. \nasking for next point 'N'...");
+//					char buf[1] = { 'N' };
+//					socket->write(buf, 1);
+//					socket->flush();
+//					
+//					if(socket->waitForReadyRead(10000) == false) {
+//						//timedout here;
+//						std::cout << "socket timed out!! breaking! " <<std::endl;
+//						return;
+//						
+//					}
+//					if(1 == socket->getChar(buf)) { 
+//						txt_BallPosition->setText( QString("%1").arg( (int) buf[0]) );
+//						printf(".. received %d", (int) *buf);
+//					} else {
+//						txt_BallPosition->setText( "Nothing_read!" );
+//					}
+//					
+//					socket->disconnect();
+//				}
+				
+				
 			}
 			
 			btn_timer->setEnabled(false);
@@ -535,6 +590,13 @@ void Window::getYarpStatus() {
 		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
 		
+		Bottle cmd, response;
+		cmd.clear();
+		cmd.addString("get");
+		cmd.addString("encs");
+		
+		katanaPort.write(cmd, response);
+		txt_BallPosition->setText( response.get(2).toString().c_str() );
 		//writeCSV();
 				
 	} else {

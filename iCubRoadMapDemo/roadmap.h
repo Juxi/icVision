@@ -126,12 +126,14 @@ private:
 	Tree					tree;
 	Map::vertex_descriptor	currentVertex;
 	Map::edge_descriptor	currentEdge;
+	//QtGraphEdge*			deletedEdge;
 	
 protected:
 	void run();
 	
 public:
 	
+	typedef K::Vector_d CGAL_Vector;
 	typedef K::Point_d CGAL_Point;
 	typedef Map::vertex_descriptor vertex_t;
 	typedef Map::vertex_iterator vertex_i;
@@ -142,12 +144,15 @@ public:
 	Roadmap();
 	~Roadmap();
 	
+	std::vector<double> makeStd( CGAL_Point );
+	std::vector<double> makeStd( CGAL_Vector );
 	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
+	CGAL_Vector			getCgalEdge( edge_t e ) { return CGAL_Vector( getCgalPose(target(e,map)) - getCgalPose(source(e,map)) ); }
 	
-	std::pair< edge_t, std::vector<double> > randomMove();
-	std::list< std::pair< edge_t, vertex_t > > randomMoves();
-	std::list< std::pair< edge_t, vertex_t > > aToB( vertex_t, vertex_t );
+	std::pair< edge_t, std::vector<double> >	randomMove();
+	std::list< std::pair< edge_t, vertex_t > >	randomMoves();
+	std::list< std::pair< edge_t, vertex_t > >	aToB( vertex_t, vertex_t );
 	
 	
 	int dimensionality() { return dim; }
@@ -155,16 +160,17 @@ public:
 	void setDimensionality( int );
 	void setCurrentVertex( vertex_t );
 	void setEdgeColor( edge_t, QColor );
+	void setEdgeWeight( edge_t, int );
 	
-	vertex_t insert( qreal x, qreal y, std::vector<double> _q /*, unsigned int n = 0*/ );
-	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ );
+	vertex_t insert( qreal x, qreal y, std::vector<double> _q, bool display = true );
+	vertex_t insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w, bool display = true );
 
 	void graphConnect( Pose, unsigned int n = 3 );
 	void graphConnect( unsigned int n = 3 );
 	
 	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
-	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
+	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges, bool display = true );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	
 	void readMapPoses(std::string filename);
@@ -187,9 +193,8 @@ public:
 private:
 	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
 	Roadmap::vertex_t nearestWorkspaceVertex( std::vector<double> _w );
-
 	//bool insert( std::vector< std::vector<double> > );
-public:
+	
 signals:
 	
 	void appendedNode( vertex_t, qreal, qreal );
@@ -197,6 +202,7 @@ signals:
 	void update2DPosition( QtGraphNode*, QPointF );
 	void newNodeColor( QtGraphNode*, QColor, QColor );
 	void newEdgeColor( QtGraphEdge*, QColor );
+	void newEdgeWeight( QtGraphEdge*, int );
 	//void removeQtGraphEdge( QtGraphEdge* );
 	
 public slots:

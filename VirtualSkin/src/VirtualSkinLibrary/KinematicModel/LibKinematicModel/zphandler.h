@@ -46,6 +46,7 @@ private:
 	BodyPart	*bodyPart;
 	Motor		*motor;
 	KinTreeNode *node;
+	KinTreeNode *noReflexRoot;
 
 	BodyPart*		createChildPart();
 	Motor*			createChildMotor( const int motorIdx );

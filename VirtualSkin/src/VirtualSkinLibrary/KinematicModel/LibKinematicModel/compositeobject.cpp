@@ -6,13 +6,14 @@
 using namespace std;
 using namespace KinematicModel;
 
-CompositeObject::CompositeObject( DT_ResponseClass c /*, DT_RespTableHandle t*/ ) : index(0),
-																			   responseClass(c),
-																			   inModel(false), 
-																			   deathWish(false),
-																			   numSpheres(0),
-																			   numCylinders(0),
-																			   numBoxes(0)
+CompositeObject::CompositeObject( DT_ResponseClass c ) :	index(0),
+															responseClass(c),
+															inModel(false), 
+															deathWish(false),
+															numSpheres(0),
+															numCylinders(0),
+															numBoxes(0),
+															persistent(false)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
     //collidingColor[0] = 0.3; collidingColor[1] = 0.3; collidingColor[2] = 0.3; collidingColor[3] = 0.2;
@@ -23,16 +24,12 @@ CompositeObject::CompositeObject( DT_ResponseClass c /*, DT_RespTableHandle t*/ 
 
 CompositeObject::~CompositeObject()
 {
-	//QMutexLocker locker(&mutex);
-	
-	//printf("CompositeObject destructor called on: %s\n", getName().toStdString().c_str());
 	QVector<PrimitiveObject*>::iterator i;
 	for ( i=primitives.end(); i!=primitives.begin(); )
 	{
 		--i;
 		delete(*i);
 	}
-	//printf("deleted CompositeObject\n");
 }
 
 QString	CompositeObject::getName() const
@@ -82,6 +79,7 @@ bool CompositeObject::remove( PrimitiveObject* primitive )
 	{
 		throw KinematicModelException("Tried to remove primitives from a CompositeObject already in the Model. Remove the CompositeObject, edit it, and then re-append to the model.");
 	}
+	
 	QVector<PrimitiveObject*>::iterator i;
 	for ( i=primitives.end(); i!=primitives.begin(); )
 	{
@@ -104,15 +102,6 @@ PrimitiveObject* CompositeObject::get( const QString& name ) const
 	}
 	return NULL;
 }
-
-//void CompositeObject::setListPending()
-//{
-//    QVector<PrimitiveObject*>::iterator i;
-//    for (i=primitives.begin(); i!=primitives.end(); ++i)
-//	{
-//        (*i)->setListPending(true);
-//    }
-//}
 
 void CompositeObject::updateSolid()
 {
@@ -154,8 +143,6 @@ void CompositeObject::setFreeColor( QColor c )
 
 void CompositeObject::render()
 {
-	//QMutexLocker locker(&mutex);
-	
 	glPushMatrix();
 	glMultMatrixd( T.constData() );
 		QVector<PrimitiveObject*>::const_iterator i;
@@ -166,45 +153,7 @@ void CompositeObject::render()
 	glPopMatrix();
 }
 
-/*bool CompositeObject::isColliding()
-{
-	QVector<PrimitiveObject*>::const_iterator i;
-	for ( i=primitives.begin(); i!=primitives.end(); ++i )
-	{
-		if ( (*i)->isColliding() )
-		{
-			return true;
-		}
-	}
-	return false;
-}*/
-
 void CompositeObject::kill()
 {
-	//QVector<PrimitiveObject*>::iterator i;
-	//for ( i=primitives.end(); i!=primitives.begin(); )
-	//{
-	//	(*i)->kill();
-	//}
-	deathWish = true;
+	deathWish = !persistent;
 }
-/*QVector<Garbage> CompositeObject::collectGarbage()
-{
-	Garbage garbage;
-	QVector<Garbage> theTrash;
-	QVector<PrimitiveObject*>::iterator i;
-	for ( i=primitives.end(); i!=primitives.begin(); )
-	{
-		--i;
-		if ( (*i)->deleteMe() && !(*i)->listIsPending() )
-		{
-			if ( (*i)->getObjectHandle() )
-			garbage.solidObject = (*i)->getObjectHandle();
-			garbage.displayList = (*i)->getDisplayList();
-			theTrash.append(garbage);
-			primitives.erase(i);
-			delete(*i);
-		}
-	}
-	return theTrash;
-}*/

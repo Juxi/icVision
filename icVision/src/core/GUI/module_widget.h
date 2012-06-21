@@ -1,19 +1,23 @@
-/*
- *  dashboard.h
- *  HelloQT
- *
- *  Created by Juxi Leitner on 3/16/11.
- *
- */
-
+// Copyright: (C) 2011-2012 Juxi Leitner
+// Author: Juxi Leitner <juxi.leitner@gmail.com>
+// find more information at http://Juxi.net/projects/icVision/
+// CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #ifndef _ICVISION_GUI_MODULE_WIDGET_H
 #define _ICVISION_GUI_MODULE_WIDGET_H
 
+#include <QApplication>
+#include <QWidget>
+#include <QObject>
 #include <QtGui>
+#include <QFile>
+#include <QDir>
 #include "../module_info.h"
 
-class StatusWidget;
+
+// #define USE_INDICATOR_TOO
+
+// class StatusWidget;
 
 ///**
 // *@brief    Dashboard
@@ -52,47 +56,31 @@ class StatusWidget;
 //
 //	
 //};
-
 class ModuleWidget : public QWidget {
+	Q_OBJECT
 private:
 	ModuleInfo *modInfo;
-	
+	bool moduleStatus;
+		
 	QHBoxLayout *layout;	
+#ifdef USE_INDICATOR_TOO
 	QLabel *lbl_Indicator;
+#endif	
 	QLabel *lbl_Name;
-	QLabel *lbl_StatusMsg;	
+	QPushButton *btn_Status;
+
+	void init();
+	void showErrorToolTip();
 	
-	void init() {
-		layout = new QHBoxLayout();
-		
-		lbl_Indicator = new QLabel();
-		lbl_Indicator->setMinimumSize(15, 15);
-		lbl_Indicator->setMaximumSize(15, 15);	
-		lbl_Indicator->setStyleSheet("background-color: red;");
-		
-		std::string s = "<b>" + modInfo->getName() + " </b>";
-		lbl_Name = new QLabel(s.c_str());
-		lbl_Name->setMinimumSize(80, 15);
-		lbl_Name->setMaximumHeight(15);	
-		
-		lbl_StatusMsg = new QLabel();
-		lbl_StatusMsg->setStyleSheet("font-size: 10pt");
-		lbl_StatusMsg->setAlignment(Qt::AlignBottom);
-		lbl_StatusMsg->setMinimumSize(80, 15);
-		lbl_StatusMsg->setMaximumHeight(15);	
-		
-		layout->addWidget(lbl_Indicator);
-		layout->addWidget(lbl_Name);	
-		layout->addWidget(lbl_StatusMsg);	
-		
-		layout->setMargin(2);
-		
-		this->setLayout(layout);
-		this->show();
-	}
+public slots:
+	void tryToStartTheModule();
+	void tryToStopTheModule();	
 	
 public:
-	ModuleWidget() {}
+	static QString loadedStyleSheet;	
+	static void loadStyleSheet();	
+	
+	ModuleWidget() { }
 	ModuleWidget(ModuleInfo &mod) {	
 		this->modInfo = &mod;
 		init();
@@ -101,11 +89,29 @@ public:
 		this->modInfo = mod;
 		init();
 	}
+	ModuleWidget(const char* name) {
+		this->modInfo = new ModuleInfo();
+		modInfo->set(name);
+		init();
+	}
 	~ModuleWidget() {
 		delete layout;
 	}
-	
+
 	void setStatus(bool b, const char* msg = NULL);
+
+	// for drawing and stylesheeting
+	void paintEvent(QPaintEvent *);
+	
+protected:
+	// for clicks, qwidget does not have signals
+	void mousePressEvent(QMouseEvent *event);
+//	void mouseMoveEvent(QMouseEvent *event);
+//	void mouseReleaseEvent(QMouseEvent *event);
+//	void resizeEvent(QResizeEvent *event);	
 };
+
+
+
 
 #endif 

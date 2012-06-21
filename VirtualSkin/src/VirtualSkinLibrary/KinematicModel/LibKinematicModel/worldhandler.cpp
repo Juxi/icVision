@@ -74,6 +74,10 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 				return 0;
 			}
 			
+			if ( !attributes.value("persistent").isEmpty() ) {
+				obj->persistent = (bool) attributes.value("persistent").toInt();
+			}
+
 			if ( !attributes.value("r").isEmpty() || !attributes.value("g").isEmpty() || !attributes.value("b").isEmpty() )
 			{
 				QColor freeColor(	attributes.value("r").toInt(),
@@ -84,10 +88,10 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 				//												 attributes.value("b").toInt());
 				
 				QColor collidingColor = freeColor;
-				collidingColor.setAlphaF(0.5);
-                freeColor.setAlphaF(0.5);
+				collidingColor.setAlphaF(0.3);
+                freeColor.setAlphaF(1.0);
 				obj->setFreeColor( freeColor );
-				obj->setCollidingColor( collidingColor );
+				//obj->setCollidingColor( collidingColor );
 				//printf("\n\nSET FREECOLOR\n\n");
 			}
 			

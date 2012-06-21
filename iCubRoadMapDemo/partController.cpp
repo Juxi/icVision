@@ -35,10 +35,12 @@ bool PartController::open( const char* robotName, const char* partName )
 	options.put( "local", localPort.c_str() );
 	options.put( "remote", remotePort.c_str() );
 	
+	//sleep(1);
+	
 	dd = new yarp::dev::PolyDriver(options);
 	if (!dd->isValid())
 	{
-		printf("Device not available. Failed to create PolyDriver.");
+		printf("Device not available. Failed to create PolyDriver.\n");
 		return 0;
 	}
 
@@ -49,7 +51,9 @@ bool PartController::open( const char* robotName, const char* partName )
 	dd->view(amp);	if (amp==0) { printf("IAmplifierControl Error!"); return 0; }
 	dd->view(lim);	if (lim==0) { printf("IControlLimits Error!"); return 0; }
 	
+	printf("getting num joints\n");
 	pos->getAxes(&numJoints);
+	printf("got num joints\n");
 	
 	printf("\n");
 	double _min,_max;
@@ -60,7 +64,7 @@ bool PartController::open( const char* robotName, const char* partName )
 		pid->enablePid(i);
 		lim->getLimits( i, &_min, &_max );
 		
-		//jointMask.push_back(true);
+		jointMask.push_back(true);
 		min.push_back(_min);
 		max.push_back(_max);
 
@@ -122,7 +126,27 @@ std::vector<double> PartController::withinLimits( const std::vector<double>& pos
 	return p;
 }
 
-void PartController::setVelocity( int v )
+bool PartController::isWithinLimits( const std::vector<double>& poss )
+{
+	std::vector<double> p;
+	if ( poss.size() != (unsigned int)numJoints )
+	{ 
+		printf("PartController::isWithinLimits() received wrong sized position vector.");
+		return false;
+	}
+	
+	double offset = 0;
+	for ( int i = 0; i < numJoints; i++ ) {
+		//offset = (max.at(i) - min.at(i))/20.0;
+		if ( poss.at(i) < min.at(i) + offset )
+			return false;
+		else if ( poss.at(i) > max.at(i) - offset )
+			return false;
+	}
+	return true;
+}
+
+void PartController::setRefVelocity( int v )
 {
 	double vels[numJoints];
 	for ( int i = 0; i < numJoints; i++ )
@@ -134,49 +158,62 @@ void PartController::setVelocity( int v )
 	//	 printf("Set velocity succeeded\n");
 }
 
+void PartController::setRefAcceleration( int a )
+{
+	double accels[numJoints];
+	for ( int i = 0; i < numJoints; i++ )
+	{
+		accels[i] = (double)a;
+	}
+	bool ok = vel->setRefAccelerations(accels);
+	//if( ok )
+	//	 printf("Set velocity succeeded\n");
+}
+
+bool PartController::velocityMove( const std::vector<double>& v )
+{
+	if ( v.size() != (unsigned int)numJoints || !pos ) { return 0; }
+	
+	//std::vector<double> q = getCurrentPose();
+	
+	//printf("velocity move: " );
+	double cmd[numJoints];
+	for ( int i=0; i<numJoints; i++ )
+	{
+		if ( jointMask.at(i) )
+			cmd[i] = v.at(i);
+		else
+			cmd[i] = 0.0;
+		//printf("%f ", cmd[i]);
+	}
+	//printf("\n\n");
+	
+	return vel->velocityMove( cmd );
+	//return pos->positionMove( p );
+}
+
 bool PartController::positionMove( const std::vector<double>& poss )
 {
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
-	//if ( isWithinLimits(poss) || !pos ) { return 0; }
+
+	std::vector<double> q = getCurrentPose();
 	
 	double p[numJoints];
 	for ( int i=0; i<numJoints; i++ )
 	{
-		p[i] = poss.at(i);
+		if ( jointMask.at(i) )
+			p[i] = poss.at(i);
+		else
+			p[i] = q.at(i);
 	}
-
-	/*double offset;
-	for ( int j = 0; j < numJoints; j++ ) {
-		offset = (max.at(j) - min.at(j))/20.0;
-		if ( p[j] < min.at(j) + offset )
-			p[j] = min.at(j) + offset;
-		else if ( p[j] > max.at(j) - offset )
-			p[j] = p[j] > max.at(j) - offset;
-	}*/
 
 	return pos->positionMove( p );
 }
-								  
-/*bool PartController::positionMove( const std::vector<double>& poss, const std::vector<double>& vels )
-{ 
-	if ( !vels.empty() && vels.size() != (unsigned int)numJoints ) { return 0; }
-	
-	if ( !vels.empty() )
-	{ 
-		double v[numJoints];
-		for ( int i=0; i<numJoints; i++ )
-		{
-			v[i] = vels.at(i);
-		}
-		if ( !pos->setRefSpeeds( v ) ) { return 0; }
-	}
-	return positionMove(poss);
-}*/
 
 bool PartController::setJointMask( const std::vector<bool>& vals )
 {
 	if ( vals.size() != (unsigned int)numJoints ) { return 0; }
-	//jointMask = vals;
+	jointMask = vals;
 	return 1;
 }
 
@@ -188,14 +225,11 @@ bool PartController::checkMotionDone( bool* flag )
 
 std::vector<double> PartController::getRandomPose()
 {
-	std::vector<double> q;
+	std::vector<double> q = getCurrentPose();
 	for ( int i = 0; i < numJoints; i++ )
 	{
-		if ( i <= 6 )
-		{
-			q.push_back( min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX );
-		}
-		else { q.push_back(0); }
+		if ( jointMask.at(i) )
+			q.at(i) = min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX;
 	}
 	return q;
 }

@@ -18,19 +18,39 @@ YarpModel::~YarpModel()
 //}
 
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
-{
-	printf("creating robot response table\n");
-	DT_RespTableHandle newTable = newRobotTable();
+{	
+	mutex.lock();
 	
-	printf("creating robot object\n");
-	YarpRobot* robot = new YarpRobot( this, newTable );
+	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
+	DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
+	DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
 	
-	printf("calling open robot\n");
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	
+	QVector<DT_ResponseClass>::iterator i;
+	for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
+	{
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newBaseClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+	}
+	
+	robotResponseClasses.append( newRobotClass );
+	robotBaseClasses.append( newBaseClass );
+	
+	//printf("Loading yarp robot.\n");
+	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
+
 	robot->open( fileName, verbose );
-	robot->home( verbose );
 	
-	//responseTables.append( newTable );
 	robots.append( robot );
+	
+	mutex.unlock();
+	
+	// these are normal objects not KintreeNodes.  Appending them locks the model mutex
+	robot->appendMarkersToModel();
+	
 	return robot;
 }
 

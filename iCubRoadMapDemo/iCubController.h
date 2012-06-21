@@ -26,20 +26,28 @@ public:
     iCubController();	//!< Nothing special
     ~iCubController();	//!< Nothing special
 	
-	bool open( const char* _robotName );	//!< Connects to the remote device
-	void close();							//!< Closes the connection to the remote device
+	bool open( const char* _robotName );		//!< Connects to the remote device
+	void close();								//!< Closes the connection to the remote device
 	
-	bool isValid();							//!< Checks if the remote device is ready and the interface is working
-	int	getNumJoints();						//!< Returns the number of controllable axes
-	bool checkMotionDone( bool* );			//!< Checks if a position move has finished
+	bool isValid();								//!< Checks if the remote device is ready and the interface is working
+	int	getNumJoints();							//!< Returns the number of controllable axes
+	bool checkMotionDone( bool* );				//!< Checks if a position move has finished
 	bool setWaypoint();
 	
-	bool stop();							//!< Stops all joints immediately
+	bool stop();								//!< Stops all joints immediately
 	
-	std::vector<double> withinLimits( const std::vector<double>& poss );
-	bool positionMove( std::vector<double> );		//!< Moves the device to a specified position
+	bool positionMove( std::vector<double> );	//!< Moves the device to a specified position
+	bool velocityMove( std::vector<double> );	//!< Moves the device to a specified velocity
+	
+	void setRefVelocity( int );
+	void setRefAcceleration( int );
+	
 	bool setJointMask( std::vector<bool> );
-	void setVelocity( int );
+	
+	bool isWithinLimits( const std::vector<double>& poss );
+	std::vector<double> withinLimits( const std::vector<double>& poss );
+	double maxDiff(std::vector<double> a,std::vector<double> b);
+	std::vector<double> diff( std::vector<double> a ); // returns a - currentPose()
 	
 public slots:
 	std::vector<double> getRandomPose();
@@ -51,6 +59,7 @@ signals:
 private:
 
 	int numJoints;
+	std::vector<bool> jointMask;
 	PartController torso, left_arm, right_arm;
 	
 	yarp::os::Network yarp;
@@ -59,20 +68,16 @@ private:
 	template <class T>
 	bool chop( const std::vector<T>& data,
 					 std::vector<T>& torsoData, 
-					 std::vector<T>& left_armData, 
-					 std::vector<T>& right_armData  )
+					 std::vector<T>& right_armData,
+					 std::vector<T>& left_armData  )
 	{ 
-		if ( data.size() != (unsigned int)numJoints ) { return 0; }
-		std::vector<T> a, b, c;
+		if ( data.size() != (unsigned int)numJoints ){ return 0; }
 		for ( int i=0; (unsigned int)i<data.size(); i++ )
 		{
-			if ( i < torso.getNumJoints() ) { a.push_back( data.at(i) ); }
-			else if ( i < torso.getNumJoints() + left_arm.getNumJoints() ) { b.push_back( data.at(i) ); }
-			else if ( i < torso.getNumJoints() + left_arm.getNumJoints() + right_arm.getNumJoints() ) { c.push_back( data.at(i) ); }
+			if ( i < torso.getNumJoints() ) { torsoData.push_back( data.at(i) ); }
+			else if ( i < torso.getNumJoints() + right_arm.getNumJoints() ) { right_armData.push_back( data.at(i) ); }
+			else if ( i < torso.getNumJoints() + right_arm.getNumJoints() + left_arm.getNumJoints() ) { left_armData.push_back( data.at(i) ); }
 		}
-		torsoData = a;
-		left_armData = b;
-		right_armData = c;
 		return 1;
 	}
 };

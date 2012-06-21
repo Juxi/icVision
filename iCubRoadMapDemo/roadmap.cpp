@@ -18,6 +18,14 @@ Roadmap::~Roadmap()
 {
 }
 
+/*
+std::vector<double> makeStd( CGAL_Point ) {
+	
+}
+std::vector<double> makeStd( CGAL_Vector ) {
+	
+}*/
+
 void Roadmap::setDimensionality( int d )
 {
 	// dimensionality can only be set when the map is empty
@@ -50,7 +58,12 @@ void Roadmap::setEdgeColor( edge_t e, QColor color )
 {
 	if ( map[e].qtGraphEdge )
 		emit newEdgeColor( map[e].qtGraphEdge, color );
-		//map[e].qtGraphEdge->setColor( color );
+}
+
+void Roadmap::setEdgeWeight( edge_t e, int w )
+{
+	if ( map[e].qtGraphEdge )
+		emit newEdgeWeight( map[e].qtGraphEdge, w );
 }
 
 std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
@@ -118,7 +131,7 @@ std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMove
 	}
 }*/
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q, bool display )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -126,10 +139,11 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
-	//map[vertex].x = _x;
-	//map[vertex].y = _y;
+	map[vertex].x = _x;
+	map[vertex].y = _y;
 	
-	emit appendedNode( vertex, _x, _y );
+	if ( display )
+		emit appendedNode( vertex, _x, _y );
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -142,7 +156,7 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q /*
 	return vertex;
 }
 
-Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  std::vector<double> _w, bool display )
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %d\n",_q.size()); throw("wrong size state vector"); }
@@ -154,10 +168,11 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  
 	cout << endl;
 	map[vertex].q = _q;
 	map[vertex].w = _w;
-	//map[vertex].x = _x;
-	//map[vertex].y = _y;
+	map[vertex].x = _x;
+	map[vertex].y = _y;
 
-	emit appendedNode( vertex, _x, _y );
+	if ( display )
+		emit appendedNode( vertex, _x, _y );
 
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -170,7 +185,7 @@ Roadmap::vertex_t Roadmap::insert( qreal _x, qreal _y, std::vector<double> _q,  
 	return vertex;
 }
 
-void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges )
+void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges, bool display )
 {
 	//TODO Clean out the boost graph first
 	//int count = 0;
@@ -190,7 +205,8 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 		
 		vertex = insert( *(v->begin()),
 						 *(v->begin()+1),
-						 q
+						 q,
+						 display
 						);
 		vertices.push_back( vertex );
 	}
@@ -205,7 +221,7 @@ void Roadmap::load( std::vector< std::vector<double> >& graphNodes, std::vector<
 		//std::cout << edge.first << std::endl;
 		if ( !edge.second )
 			printf("boost::add_edge() failed.\n");
-		else
+		else if ( display )
 		{
 			//printf("appended edge to boost graph\n");
 			emit appendedEdge( edge.first, 
@@ -259,8 +275,8 @@ void Roadmap::readMapPoses(std::string filename) {
 		cout << i << endl;
 		vector<double> combined_pose;
 		copy(poses_torso[i].begin(), poses_torso[i].end(), back_inserter(combined_pose));
-		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 		copy(poses_right[i].begin(), poses_right[i].end(), back_inserter(combined_pose));
+		copy(poses_left[i].begin(), poses_left[i].end(), back_inserter(combined_pose));
 
 		insert(work_space[i][0], work_space[i][1], combined_pose, work_space[i]);
 	}
@@ -274,8 +290,17 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 	
 	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
 	
+	// important to do this in this order...  the Qt edge object outlives the boost graph edge
+	// TODO: fix this...  its ugly
+
+	//deletedEdge = map[edge].qtGraphEdge;
+	//if ( deletedEdge )
+	//	emit newEdgeWeight( deletedEdge, 0 );
 	
+	setEdgeWeight( edge, 0 );
 	remove_edge( edge, map );
+    
+    //map[edge].length = 1000000;
 }
 
 void Roadmap::removeAllEdges()
@@ -412,7 +437,18 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	return path;
 }
 
+// project into 2D
 void Roadmap::project2D( std::vector<double> direction )
+{
+	std::pair<vertex_i, vertex_i> vp;
+	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
+	{
+		if ( map[*(vp.first)].qtGraphNode )
+			emit update2DPosition(map[*(vp.first)].qtGraphNode, QPointF((double)rand()/RAND_MAX,(double)rand()/RAND_MAX));
+	}
+}
+
+/*void Roadmap::project2D( std::vector<double> direction )
 {
 	if ( direction.size() == 0 ) {
 		//printf("choosing random direction\n");
@@ -421,12 +457,12 @@ void Roadmap::project2D( std::vector<double> direction )
 		}
 	}
 	
-	/*std::vector<double>::iterator fuck;
-	for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
-	{
-		printf("%f ",*fuck);
-	}
-	printf("\n");*/
+	//std::vector<double>::iterator fuck;
+	//for ( fuck = direction.begin(); fuck !=direction.end(); ++fuck )
+	//{
+	//	printf("%f ",*fuck);
+	//}
+	//printf("\n");
 	
 	if ( direction.size() != dim ) { throw("wrong size direction vector"); }
 	
@@ -458,6 +494,7 @@ void Roadmap::project2D( std::vector<double> direction )
 		r = K::Vector_d(	map[*(vp.first)].q.size(), 
 							map[*(vp.first)].q.begin(),
 							map[*(vp.first)].q.end() );
+		//r = getCgalPose(*(vp.first));
 		
 		//std::cout << "r: " << r << std::endl;
 		
@@ -557,4 +594,4 @@ void Roadmap::project2D( std::vector<double> direction )
 	}
 	
 	
-}
+}*/

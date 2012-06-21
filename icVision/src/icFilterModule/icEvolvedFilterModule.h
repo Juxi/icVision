@@ -7,6 +7,7 @@
 
 #include "icFilterModule.h"
 #include "boolList.h"
+#include <yarp/os/Stamp.h>
 
 using namespace yarp::os;
 using namespace std;
@@ -14,6 +15,8 @@ using namespace yarp::sig;
 
 class EvolvedFilterModule : public icFilterModule {
 protected:
+	
+	static const int MAX_TRIES = 5;
 	
 	// the pointers to the images
 	IplImage* gray;
@@ -35,9 +38,15 @@ protected:
 //	void calculateAndSetObjectWorldPosition(CvPoint, CvPoint, CvPoint, CvPoint);
 //	void readEncoderPositions();
 	
+	// output of position information over network
+	bool writePositionBottle(const CvPoint fp1, const CvPoint fp2, Stamp outTS);
+		
 	// image memory containers for the buffered port 
 	IplImage *rawImageToWrite, *outputImageToWrite;	
 	
+    bool checkTS(double TSLeft, double TSRight, double th=0.08);
+	
+
 public:
 	EvolvedFilterModule();
 	virtual ~EvolvedFilterModule();

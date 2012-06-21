@@ -3,12 +3,12 @@
 <ZeroPositionKinematicTree version="1.0" robotName="katana400">
 
 <bodypart name="arm">
-    <link z="-.2" radius="0">
-    
+    <link z="-.2">
+    <box width=".12" depth=".012" height=".1" pz="-0.2"/>
+	
     <motor minPos="6.65" maxPos="352.64" home="6.65">
-    <joint minPos="6.65" maxPos="352.64" z="-1" radius="0">
+    <joint minPos="6.65" maxPos="352.64" z="1" radius="0">
         <link z="1" radius="0.04" length="0.19"><!--LINK0-->
-        <box width=".12" depth=".012" height=".1"/>
             
             <motor minPos="-15.75" maxPos="124.25" home="124">
             <joint minPos="-15.75" maxPos="124.25" y="1" radius="0.03" length="0.1">
@@ -30,15 +30,17 @@
                                         <motor minPos="-121.58" maxPos="8.7" home="-50">
                                         <joint minPos="90" maxPos="180" y="-1" radius="0">
                                                 <link z="-.13" radius="0"><!---->
-                                                    <box width=".01" depth=".13" height=".03"  px="-.01" pz=".066"/>
+                                                    <!-- <box width=".01" depth=".13" height=".03"  px="-.01" pz=".066"/> -->
+                                                    <box width=".06" depth=".06" height=".06"  pz=".03"/>
+
                                                 </link><!---->
                                         </joint>
                                         <joint minPos="90" maxPos="180" y="1" radius="0">
                                                 <link z=".13" radius="0"><!---->
-                                                    <box width=".01" depth=".13" height=".03" px="-.01" pz="-.066"/>
-                                                </link><!---->
+                                                    <!-- <box width=".01" depth=".13" height=".03" px="-.01" pz="-.066"/>  -->
+                                                </link>
                                         </joint>
-                                        </motor>
+                                        </motor> 
                                         <!--/MANIPULATOR-->
 
                                     </link>
@@ -57,7 +59,7 @@
         </link>
     </joint>
     </motor>
-    </link>
+ </link>
 </bodypart>
 
 </ZeroPositionKinematicTree>

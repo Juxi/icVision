@@ -29,7 +29,8 @@ ControlBoardFilter::ControlBoardFilter() :
 ControlBoardFilter::~ControlBoardFilter() {
 }
 
-bool ControlBoardFilter::open(ConstString filterName, ConstString targetName) {
+bool ControlBoardFilter::open(ConstString filterName, ConstString targetName)
+{
 	ConstString commandInPortName = filterName + "/command:i";
 	ConstString commandOutPortName = filterName + "/command:o";
 	commandFilter.open(commandInPortName, commandOutPortName);

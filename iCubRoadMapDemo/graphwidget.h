@@ -73,6 +73,7 @@ public slots:
 	void setNodePosition( QtGraphNode*, QPointF );
 	void setNodeColor( QtGraphNode*, QColor, QColor );
 	void setEdgeColor( QtGraphEdge*, QColor );
+	void setEdgeWeight( QtGraphEdge*, int );
 	//void removeEdge( QtGraphEdge* );
 
 signals:

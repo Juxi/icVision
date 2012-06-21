@@ -76,7 +76,8 @@ signals:
 //! [1]
 private slots:
 	void newMap();
-	void loadMap();
+	void loadMap( bool display = true );
+	void stealthLoadMap() { loadMap(false); }
 	void saveMap();
 	void connectMap();
 	void projectMap();
@@ -84,7 +85,8 @@ private slots:
 	
 	void connectToRobot();
 	void disconnectFromRobot();
-	void explore();
+	void multiEdgeExplore();
+	void goTo();
 	void stopController();
 	void setVelocity();
 
@@ -100,6 +102,7 @@ private:
     QMenu *mapMenu;
 	QAction *newMapAction;
 	QAction *loadMapAction;
+	QAction *stealthLoadMapAction;
 	QAction *saveMapAction;
 	QAction *connectMapAction;
 	QAction *projectMapAction;
@@ -108,11 +111,14 @@ private:
 	QMenu *controllerMenu;
 	QAction *connectToRobotAction;
 	QAction *disconnectFromRobotAction;
-	QAction *exploreAction;
+	QAction *MEExploreAction;
+	QAction *GoToAction;
 	QAction *stopControllerAction;
 	QAction *setVelocityAction;
 
 	iCubController	iCub;
+	std::vector<bool> jMask;
+	
 	Roadmap			roadmap;
 	GraphWidget		graphWidget;
 	

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WorldList>
+<WorldList version="1.0">
+
+<object name="table" pz="-0.0976" px="-0.326" r="50" g="50" b="50" persistent="1">
+    <box width="0.4" height="0.7" depth=".03"/>
+</object>
+
+<object name="ball" px="-0.3726" py=".15" pz="-0.0426" type="target" r="0" g="100" b="0">
+    <sphere radius=".04"/>
+</object>
+
+
+<object name="cube" px="-0.3726" py="-0.05" pz="-0.0326" type="target" r="0" g="100" b="0">
+    <box width=".1" height=".1" depth=".1"/>
+</object>
+
+
+</WorldList>

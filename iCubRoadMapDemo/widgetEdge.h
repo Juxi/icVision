@@ -64,6 +64,8 @@ public:
 	
 	// these are thread safe
 	void setColor( QColor c );
+	void setWeight( int w );
+	//void setRender( bool r ) { renderMe = r; }
 	//void flagRemoval() { deleteMe = true; }
 	//bool removeMe() { return deleteMe; }
 	//bool reRenderMe() { return changed; }
@@ -75,12 +77,14 @@ protected:
     
 private:
 	
+	//bool renderMe;
     QtGraphNode *source, *dest;
 
     QPointF sourcePoint;
     QPointF destPoint;
 	
 	QColor color;
+	int weight;
 	
 	//bool changed;
 	

@@ -94,7 +94,9 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 		return false;
 	}
 
+	//printf("Checking that call observer exists ... ");
 	if (NULL != callObserver) {
+		//printf(" ... OK. Calling onDataObserved(RPC_Call)\n");
 		callObserver->onDataObserved(call);
 	}
 
@@ -104,8 +106,10 @@ bool RpcFilterImpl::read(ConnectionReader& connection) {
 	}
 
 	if (true != isCut) {
+		//printf("  ... Forwarding RPC_Call to robot\n");
 		return forwardCall(call, returnToSender);
 	} else {
+		//printf("  ... Filter cut. RPC_Call intercepted\n");
 		// ask a possibly existing replier for it's response(s)
 		bool responded = false;
 		if (replier != NULL) {
