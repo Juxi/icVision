@@ -13,7 +13,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 {
   init_standard_poses();
 
-  nullspace_function();
+  //nullspace_function();
  //move_box_function();
 
   //hold_something_function();
@@ -21,11 +21,9 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   //hand_right_function();
 //  hand_right_mark_function();
   
-  //hand_right_look_varun_function();
+  hand_right_look_varun_function();
   //grasp_function();
   
-
-  std::cout << "sdfsd: " << d_simulator_wide_pose.size() << std::endl;
 }
 
 void MapThread::init_standard_poses() {
@@ -84,6 +82,8 @@ void MapThread::run()
     //(-0.307605, 0.134241, 0.1090077)
 
   //string load_file_name("maps/table_map_right_hand.save");
+  
+  //string load_file_name("maps/crappy_map.save");
   string load_file_name("map.save");
   string store_file_name("map.save");
 
@@ -110,8 +110,9 @@ void MapThread::run()
       cout << "Testing!: "<< n << endl;
       //				n = 279;
       vector<double> random_pose = d_configuration_points[n];//d_pose_finder.simulator().home_pos();
+	  
       for (size_t i(0); i < random_pose.size(); ++i)
-	cout << random_pose[i] << " ";
+		cout << random_pose[i] << " ";
       cout << endl;
 
       d_pose_finder.simulator().set_motors(random_pose);
@@ -120,7 +121,7 @@ void MapThread::run()
       print_vector<double>(observation.markerPosition("head"));
 
       cout << n_collisions << endl;
-      usleep(500000);
+      usleep(2000000);
       cout << d_configuration_points.size() << endl;
       n = rand() % d_configuration_points.size();
     }
@@ -354,7 +355,7 @@ void MapThread::hand_right_mark_function() {
 
 
 void MapThread::hand_right_look_varun_function() {     
-  float height(.0);
+  float height(.1);
   cout << "Building constraints" << endl;
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_points = &(d_map_build_constraint->points());
@@ -368,14 +369,16 @@ void MapThread::hand_right_look_varun_function() {
   //		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
   d_pose_finder.add_constraint(new PlaneConstraint("right_hand", 2, height), 2.);
-  d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+  d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.))); //left
+  //d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., 0., -1.))); //down
 
   d_pose_finder.add_constraint(d_map_build_constraint);
   d_pose_finder.add_constraint(new CollisionConstraint(), 1.);
 
   //d_pose_finder.add_constraint(new PointingConstraint("head", Constraint::vector3(-0.20, 0.0, 0.000), 0.0, 0), .2);
   
-  //d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));
+  d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));
 
 }
 

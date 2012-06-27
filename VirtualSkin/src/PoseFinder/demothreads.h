@@ -106,14 +106,22 @@ public:
 
 	void add_best_pose() {
 		std::vector<double> best_point = d_pose_finder.best_point();
+
+		//assumed last pose was best pose?
+		d_pose_finder.d_simulator.set_motors(best_point);
+		double n_collisions = d_pose_finder.d_simulator.computePose();
+
+		//
 		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
 		std::vector<double> position = observation.markerPosition(QString(d_map_build_constraint->marker().c_str()));
-		if (d_pose_finder.pose_fitness_function().colliding())
+		if (n_collisions)
 		  return;
 
 		d_configuration_points.push_back(best_point);
 		d_map_build_constraint->add_point(position, best_point);
-		
+		for (size_t i(0); i < position.size(); ++i)
+		  std::cout << position[i] << " ";
+		std::cout << std::endl;
 		d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
 	}
 
