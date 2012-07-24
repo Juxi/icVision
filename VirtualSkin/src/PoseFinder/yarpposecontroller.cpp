@@ -255,8 +255,11 @@ void YarpPoseController::run () {
 				  if (query.size() >= 3 && query.get(1).isString() && query.get(2).isString()) {
 						std::string map_name = query.get(1).asString().c_str();
 						std::string map_file = query.get(2).asString().c_str();
-						d_path_planner->load_map(map_name, map_file);
-						response.addString("OK");
+						if (d_path_planner->load_map(map_name, map_file)) {
+							response.addString("OK");
+						} else {
+							response.addString("FAIL");
+						}
 					} else
 						response.addString("FAIL");
 					break;
@@ -278,24 +281,30 @@ void YarpPoseController::run () {
 				  std::string map_name("default");
 				  if (query.size() >= 2 && query.get(1).isString())
 					map_name = query.get(1).asString().c_str();
-				  
-					ostringstream oss("range:");
-					try {
-					  cout << "Calculating range of map [" << map_name << "]" << endl;
-					  pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap(map_name).get_workspace_bounding_box();
+					if (d_path_planner->hasMap(map_name)) {
+
+						ostringstream oss("range:");
+						try {
+							cout << "Calculating range of map [" << map_name << "]" << endl;
+							pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap(map_name).get_workspace_bounding_box();
 					  
-					  oss << endl;
-					  oss << "[";
-					  for (size_t i(0); i < bbox.first.size(); ++i)
-						oss << bbox.first[i] << " ";
-					  oss << "] [";
-					  for (size_t i(0); i < bbox.second.size(); ++i)
-						oss << bbox.second[i] << " ";
-					  oss << "]" << endl;
-					} catch (...) {
-					  oss << "Failed" << endl;
-					}
-					response.addString(oss.str().c_str());
+							oss << endl;
+							oss << "[";
+							for (size_t i(0); i < bbox.first.size(); ++i)
+								oss << bbox.first[i] << " ";
+							oss << "] [";
+							for (size_t i(0); i < bbox.second.size(); ++i)
+								oss << bbox.second[i] << " ";
+							oss << "]" << endl;
+							}
+						catch (...) {
+							oss << "Failed" << endl;
+						}
+						response.addVocab(Vocab::encode("many"));
+						response.addString(oss.str().c_str());
+					} else
+						response.addString("FAIL");
+						response.addString("map not found");
 					break;
 				}
 				default:

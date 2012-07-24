@@ -72,11 +72,15 @@ class PathPlanner {
 		//add_bullshit();
 	  }
 		  
-	void load_map(std::string mapname, std::string filename) {
-	  d_roadmaps[mapname] = new Roadmap();
+	bool load_map(std::string mapname, std::string filename) {
 	  poses_map_t poses = read_poses(filename);
-	  d_roadmaps[mapname]->scale_vector = get_scale_vector();
-	  insert_poses(mapname, poses);
+	  if (poses.size() > 0) {
+		d_roadmaps[mapname] = new Roadmap();
+	    d_roadmaps[mapname]->scale_vector = get_scale_vector();
+		insert_poses(mapname, poses);
+		return true;
+	  } else
+		  return false;
 	}
 
 	void connect_map(std::string mapname, size_t n) {
@@ -99,6 +103,8 @@ class PathPlanner {
 	std::vector<std::vector<double> > poses_to_configurations(poses_map_t &poses);
 
 	Roadmap &roadmap(std::string mapname) {return *d_roadmaps[mapname];}
+	
+	bool hasMap(std::string mapname) {return d_roadmaps.count(mapname) > 0; }
 
 	void insert_poses(std::string mapname, poses_map_t &poses);
 

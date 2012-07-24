@@ -458,7 +458,7 @@ vector<std::vector<double> > Roadmap::vertex_list_to_q(std::list<Roadmap::vertex
 Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _x)
 {
 //	if ( _x.size() != dim_x ) { throw StringException("wrong size state vector"); }
-	if ( workspace_tree.size() == 0 ) { throw StringException("nothing in tree"); }
+	if ( workspace_tree.empty() ) { throw StringException("nothing in tree"); } // doesn't throw but access violation on workspace_tree instead
 	if (_x.size() != 3) { throw StringException("Nothing in X"); }
 	std::cout << "(" << _x.size() << "," << workspace_tree.size() << " " << tree.size() << std::endl;
 

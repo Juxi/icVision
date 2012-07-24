@@ -38,7 +38,7 @@ vector<double> PathPlanner::get_scale_vector() {
 
 void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
 	vector<vector<double> > configurations = poses_to_configurations(poses);
-	cout << configurations.size() << endl;
+	//cout << configurations.size() << endl;
 	int dimensionality(configurations[0].size());
 	cout << "INSERTING POSES" << endl;
 
