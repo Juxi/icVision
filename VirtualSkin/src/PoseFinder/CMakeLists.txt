@@ -22,6 +22,12 @@ SET ( src_files posefinder.cpp
 		constraints.cpp
 )
 
+IF ( WIN32 )
+	SET (Q_WS_WIN TRUE)
+	ADD_DEFINITIONS( /D "NOMINMAX" )
+ENDIF ( WIN32 )
+
+
 SET ( hdr_files	posefinder.h xnes.h constraints.h posefitnessfunction.h simulator.h demothreads.h roadmap.h path_extractor.h sliderwindow.h valueslider.h exception.h pathplanner.h iCubController.h partController.h)
 
 SET ( QT_MOC_FILES sliderwindow.h valueslider.h demothreads.h yarpposecontroller.h iCubController.h )
@@ -50,7 +56,6 @@ TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
 					${OPENGL_LIBRARIES}
 					${YARP_LIBRARIES}
 					${CGAL_LIBRARIES}
-					gmp
 )
 
 TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
@@ -59,7 +64,6 @@ TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
 					${OPENGL_LIBRARIES}
 					${YARP_LIBRARIES}
 					${CGAL_LIBRARIES}
-					gmp
 )
 
 INSTALL ( TARGETS PoseFind DESTINATION ${CMAKE_SOURCE_DIR}/bin )

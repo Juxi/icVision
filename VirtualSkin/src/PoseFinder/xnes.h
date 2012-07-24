@@ -19,6 +19,7 @@
   
 #ifndef _XNES_H_
 #define _XNES_H_
+#define _USE_MATH_DEFINES
 
 #include <stdio.h>
 #include <math.h>
@@ -261,6 +262,12 @@ public:
 		for (i=0; i<ic; i++) ssz(i) = stepsize;
 		init(point, ssz, _lambda, _lrSigma, _lrCovar);
 	}
+
+	// Calculates log2 of number.  
+	double log2( double n ) {  // log(n)/log(2) is log2.  
+		return std::log( n ) / std::log( 2. );  
+	}
+
 
 	void init(const Matrix& point, const Matrix& stepsize, unsigned int _lambda = 0, double _lrSigma = 0.0, double _lrCovar = 0.0)
 	{

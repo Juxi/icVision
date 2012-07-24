@@ -42,30 +42,30 @@ void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
 	int dimensionality(configurations[0].size());
 	cout << "INSERTING POSES" << endl;
 
-	d_roadmaps[mapname].setDimensionality(dimensionality);
+	d_roadmaps[mapname]->setDimensionality(dimensionality);
 
 	for (size_t i(0); i < configurations.size(); ++i) {
 		vector<double> &q_configuration(configurations[i]);
 		vector<double> &x_configuration(poses["WORKSPACE"][i]);
-		d_roadmaps[mapname].insert(x_configuration, q_configuration);
+		d_roadmaps[mapname]->insert(x_configuration, q_configuration);
 	}
 }
 
 vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target, std::string mapname) {
-	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestPath(source, target);
-	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname]->shortestPath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname]->vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
 vector<vector<double> > PathPlanner::find_workspace_path(vector<double> source, vector<double> target, std::string mapname) {
-	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestWorkspacePath(source, target);
-	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname]->shortestWorkspacePath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname]->vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
 vector<vector<double> > PathPlanner::find_configuration_workspace_path(vector<double> source, vector<double> target, std::string mapname) {
-	Roadmap::PathList the_path_nodes = d_roadmaps[mapname].shortestConfigurationWorkspacePath(source, target);
-	vector<vector<double> > the_path = d_roadmaps[mapname].vertex_list_to_q(the_path_nodes);
+	Roadmap::PathList the_path_nodes = d_roadmaps[mapname]->shortestConfigurationWorkspacePath(source, target);
+	vector<vector<double> > the_path = d_roadmaps[mapname]->vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
 
@@ -74,7 +74,8 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 	size_t counter(0);
 	for (size_t i(0); i < d_config_names.size(); ++i) {
 		size_t len(d_pose_sizes[d_config_names[i]]);
-		cut_pose.push_back(vector<double>(&pose[counter], &pose[counter + len]));
+		//cut_pose.push_back(vector<double>(&pose[counter], &pose[counter + len]));
+		cut_pose.push_back(vector<double>(pose.begin() + counter, pose.begin() + counter + len));
 		counter += len;
 	}
 	return cut_pose;
@@ -120,7 +121,7 @@ void PathPlanner::update_map(std::string mapname) {
 
 	//loop over vertexes
 
-	Roadmap &roadmap(d_roadmaps[mapname]);
+	Roadmap &roadmap(*d_roadmaps[mapname]);
 	pair<vertex_i, vertex_i> map_vertices(vertices(roadmap.map));
 	vertex_i vertex_it(map_vertices.first);
 

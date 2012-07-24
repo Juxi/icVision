@@ -59,6 +59,7 @@ inline bool check_map(poses_map_t &the_map) {
 			if (vector[i].size() != n_vec)
 				throw MapError("Vector not of correct size");
 	}
+	return true;
 }
 
 inline poses_map_t read_poses(std::string filename) {

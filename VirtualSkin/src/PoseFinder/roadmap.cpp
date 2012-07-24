@@ -62,7 +62,7 @@ std::pair< Roadmap::edge_t, std::vector<double> > Roadmap::randomMove()
 		vertex_t v = currentVertex;
 		
 		//int count = 0;
-		for (tie(e, e_end) = out_edges( v, map ); e != e_end; ++e)
+		for (boost::tuples::tie(e, e_end) = out_edges( v, map ); e != e_end; ++e)
 		{
 			moves.push_back( *e );
 			//count++;
@@ -269,7 +269,7 @@ void Roadmap::removeEdge( Roadmap::edge_t edge )
 void Roadmap::removeAllEdges()
 {
 	edge_i ei, ei_end, next;
-	tie(ei, ei_end) = edges(map);
+	boost::tuples::tie(ei, ei_end) = edges(map);
 	for (next = ei; ei != ei_end; ei = next) {
 		++next;
 		removeEdge(*ei);

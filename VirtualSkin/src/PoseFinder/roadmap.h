@@ -117,6 +117,10 @@ public:
 			typedef Pose Point_d;
 			typedef K::Iso_box_d Iso_box_d;
 			typedef K::FT FT;
+			
+			K::Construct_cartesian_const_iterator_d construct_cartesian_const_iterator_d_object() const {
+					return K::Construct_cartesian_const_iterator_d();
+			};
 	};
 	
 	typedef CGAL::Orthogonal_k_neighbor_search<Custom_search_traits> K_neighbor_search;

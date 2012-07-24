@@ -41,7 +41,8 @@ void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, doub
 		  {
 			try {
 			  d_nes.iterate();
-			  usleep(3000);
+			  //usleep(3000);
+			  Sleep(3000);
 			} catch (NanException &e) {
 				std::cout << "breaking isnan" << std::endl;
 				break;

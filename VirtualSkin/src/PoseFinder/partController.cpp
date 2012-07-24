@@ -124,12 +124,12 @@ std::vector<double> PartController::withinLimits( const std::vector<double>& pos
 
 void PartController::setVelocity( int v )
 {
-	double vels[numJoints];
+	std::vector<double> vels(numJoints, 0.);
 	for ( int i = 0; i < numJoints; i++ )
 	{
 		vels[i] = (double)v;
 	}
-	bool ok = pos->setRefSpeeds(vels);
+	bool ok = pos->setRefSpeeds(&vels[0]);
 	//if( ok )
 	//	 printf("Set velocity succeeded\n");
 }
@@ -139,8 +139,7 @@ bool PartController::positionMove( const std::vector<double>& poss )
 	if ( poss.size() != (unsigned int)numJoints || !pos ) { return 0; }
 
 	std::vector<double> q = getCurrentPose();
-	
-	double p[numJoints];
+	std::vector<double> p(numJoints, 0.);
 	for ( int i=0; i<numJoints; i++ )
 	{
 		if ( jointMask.at(i) )
@@ -149,7 +148,7 @@ bool PartController::positionMove( const std::vector<double>& poss )
 			p[i] = q.at(i);
 	}
 
-	return pos->positionMove( p );
+	return pos->positionMove( &p[0] );
 }
 
 bool PartController::setJointMask( const std::vector<bool>& vals )

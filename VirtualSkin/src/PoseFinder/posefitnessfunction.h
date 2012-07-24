@@ -2,7 +2,7 @@
 #define __POSE_FITNESS_FUNCTION_H__
 
 #include <vector>
-
+#include <boost\math\special_functions\fpclassify.hpp> // for isnan
 #include "simulator.h"
 #include "xnes.h"
 #include "constraints.h"
@@ -68,7 +68,7 @@ public:
 	double eval(const Matrix& point)
 	{
 		std::vector<double> motor_values(point.get_data());
-		if (isnan(motor_values[0])) {
+		if (boost::math::isnan(motor_values[0])) {
 			throw NanException();
 		}
 		d_simulator.set_motors(motor_values);

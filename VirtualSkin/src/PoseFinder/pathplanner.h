@@ -35,10 +35,11 @@ class PathPlanner {
 	typedef Roadmap::vertex_t vertex_t;
 	typedef Roadmap::edge_i edge_i;
 	typedef Roadmap::edge_t edge_t;
-	typedef typename std::map<std::string, Roadmap>::iterator roadmap_iterator;
+	//typedef typename std::map<std::string, Roadmap>::iterator roadmap_iterator;
+	typedef std::map<std::string, Roadmap*>::iterator roadmap_iterator; // C99: typename cannot be used outside a template declaration
 
 	PoseFinder d_posefinder;
-	std::map<std::string, Roadmap> d_roadmaps;
+	std::map<std::string, Roadmap*> d_roadmaps;
 	
 	std::map<std::string, poses_map_t> d_poses;
 	std::map<std::string, std::vector<double> > d_scale_map;
@@ -72,14 +73,14 @@ class PathPlanner {
 	  }
 		  
 	void load_map(std::string mapname, std::string filename) {
-	  d_roadmaps[mapname] = Roadmap();
+	  d_roadmaps[mapname] = new Roadmap();
 	  poses_map_t poses = read_poses(filename);
-	  d_roadmaps[mapname].scale_vector = get_scale_vector();
+	  d_roadmaps[mapname]->scale_vector = get_scale_vector();
 	  insert_poses(mapname, poses);
 	}
 
 	void connect_map(std::string mapname, size_t n) {
-		d_roadmaps[mapname].graphConnect(n, SCALEDCONFIGURATIONSPACE);
+		d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	}
 	
 	void connect_maps(size_t n) {
@@ -97,7 +98,7 @@ class PathPlanner {
 
 	std::vector<std::vector<double> > poses_to_configurations(poses_map_t &poses);
 
-	Roadmap &roadmap(std::string mapname) {return d_roadmaps[mapname];}
+	Roadmap &roadmap(std::string mapname) {return *d_roadmaps[mapname];}
 
 	void insert_poses(std::string mapname, poses_map_t &poses);
 
