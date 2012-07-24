@@ -1,0 +1,144 @@
+The system is: Darwin - 9.8.0 - i386
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/g++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/local/Cellar/cmake/2.8.8/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec4149846448 -configuration Debug
+=== BUILDING NATIVE TARGET cmTryCompileExec4149846448 OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/Objects-normal/i386/testCCompiler.o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/testCCompiler.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/DerivedSources/i386 -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/DerivedSources -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/testCCompiler.c -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/Objects-normal/i386/testCCompiler.o
+
+Ld /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec4149846448 normal i386
+    mkdir /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/Objects-normal/i386/cmTryCompileExec4149846448.LinkFileList -mmacosx-version-min=10.5 -Wl,-search_paths_first -Wl,-headerpad_max_install_names -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec4149846448
+
+PhaseScriptExecution /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/Script-24E935824A3A498D90E4B323.sh
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec4149846448.build/Script-24E935824A3A498D90E4B323.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.cmTryCompileExec4149846448.Debug
+make[1]: Nothing to be done for `PostBuild.cmTryCompileExec4149846448.Debug'.
+** BUILD SUCCEEDED **
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/local/Cellar/cmake/2.8.8/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec580762815 -configuration Debug
+=== BUILDING NATIVE TARGET cmTryCompileExec580762815 OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Objects-normal/i386/CMakeCCompilerABI.o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/../../../../../../../../usr/local/Cellar/cmake/2.8.8/share/cmake/Modules/CMakeCCompilerABI.c normal i386 c com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -gdwarf-2 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/DerivedSources/i386 -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/DerivedSources -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/../../../../../../../../usr/local/Cellar/cmake/2.8.8/share/cmake/Modules/CMakeCCompilerABI.c -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Objects-normal/i386/CMakeCCompilerABI.o
+
+Ld /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec580762815 normal i386
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Objects-normal/i386/cmTryCompileExec580762815.LinkFileList -mmacosx-version-min=10.5 -v -Wl,-search_paths_first -Wl,-headerpad_max_install_names -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec580762815
+Using built-in specs.
+Target: i686-apple-darwin9
+Configured with: /var/tmp/gcc/gcc-5493~1/src/configure --disable-checking -enable-werror --prefix=/usr --mandir=/share/man --enable-languages=c,objc,c++,obj-c++ --program-transform-name=/^[cg][^.-]*$/s/$/-4.0/ --with-gxx-include-dir=/include/c++/4.0.0 --with-slibdir=/usr/lib --build=i686-apple-darwin9 --with-arch=apple --with-tune=generic --host=i686-apple-darwin9 --target=i686-apple-darwin9
+Thread model: posix
+gcc version 4.0.1 (Apple Inc. build 5493)
+ /Developer/usr/bin/../libexec/gcc/i686-apple-darwin9/4.0.1/collect2 -dynamic -arch i386 -macosx_version_min 10.5 -syslibroot /Developer/SDKs/MacOSX10.5.sdk -weak_reference_mismatches non-weak -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec580762815 -lcrt1.10.5.o -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/i686-apple-darwin9/4.0.1 -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc -L/usr/lib/gcc/i686-apple-darwin9/4.0.1 -L/usr/lib/gcc/i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1/../../../i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1/../../.. -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin9/4.0.1/../../../i686-apple-darwin9/4.0.1 -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin9/4.0.1/../../.. -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Objects-normal/i386/cmTryCompileExec580762815.LinkFileList -search_paths_first -headerpad_max_install_names -lgcc_s.10.5 -lgcc -lSystem -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug
+
+PhaseScriptExecution /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Script-9F225119F30B4F22B72F02A6.sh
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec580762815.build/Script-9F225119F30B4F22B72F02A6.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.cmTryCompileExec580762815.Debug
+make[1]: Nothing to be done for `PostBuild.cmTryCompileExec580762815.Debug'.
+** BUILD SUCCEEDED **
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/local/Cellar/cmake/2.8.8/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec644409534 -configuration Debug
+=== BUILDING NATIVE TARGET cmTryCompileExec644409534 OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/Objects-normal/i386/testCXXCompiler.o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/testCXXCompiler.cxx normal i386 c++ com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/DerivedSources/i386 -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/DerivedSources -g -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/testCXXCompiler.cxx -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/Objects-normal/i386/testCXXCompiler.o
+
+Ld /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec644409534 normal i386
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/g++-4.0 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/Objects-normal/i386/cmTryCompileExec644409534.LinkFileList -mmacosx-version-min=10.5 -Wl,-search_paths_first -Wl,-headerpad_max_install_names -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec644409534
+
+PhaseScriptExecution /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/Script-55D3155E7D384D8BA408680C.sh
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec644409534.build/Script-55D3155E7D384D8BA408680C.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.cmTryCompileExec644409534.Debug
+make[1]: Nothing to be done for `PostBuild.cmTryCompileExec644409534.Debug'.
+** BUILD SUCCEEDED **
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/local/Cellar/cmake/2.8.8/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcodeproj build -target cmTryCompileExec1608750703 -configuration Debug
+=== BUILDING NATIVE TARGET cmTryCompileExec1608750703 OF PROJECT CMAKE_TRY_COMPILE WITH CONFIGURATION Debug ===
+
+Checking Dependencies...
+
+CompileC CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Objects-normal/i386/CMakeCXXCompilerABI.o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/../../../../../../../../usr/local/Cellar/cmake/2.8.8/share/cmake/Modules/CMakeCXXCompilerABI.cpp normal i386 c++ com.apple.compilers.gcc.4_0
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/gcc-4.0 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mdynamic-no-pic -DCMAKE_INTDIR="Debug" -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5 -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/include -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/DerivedSources/i386 -I/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/DerivedSources -g -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/../../../../../../../../usr/local/Cellar/cmake/2.8.8/share/cmake/Modules/CMakeCXXCompilerABI.cpp -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Objects-normal/i386/CMakeCXXCompilerABI.o
+
+Ld /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1608750703 normal i386
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /Developer/usr/bin/g++-4.0 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Objects-normal/i386/cmTryCompileExec1608750703.LinkFileList -mmacosx-version-min=10.5 -v -Wl,-search_paths_first -Wl,-headerpad_max_install_names -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1608750703
+Using built-in specs.
+Target: i686-apple-darwin9
+Configured with: /var/tmp/gcc/gcc-5493~1/src/configure --disable-checking -enable-werror --prefix=/usr --mandir=/share/man --enable-languages=c,objc,c++,obj-c++ --program-transform-name=/^[cg][^.-]*$/s/$/-4.0/ --with-gxx-include-dir=/include/c++/4.0.0 --with-slibdir=/usr/lib --build=i686-apple-darwin9 --with-arch=apple --with-tune=generic --host=i686-apple-darwin9 --target=i686-apple-darwin9
+Thread model: posix
+gcc version 4.0.1 (Apple Inc. build 5493)
+ /Developer/usr/bin/../libexec/gcc/i686-apple-darwin9/4.0.1/collect2 -dynamic -arch i386 -macosx_version_min 10.5 -syslibroot /Developer/SDKs/MacOSX10.5.sdk -weak_reference_mismatches non-weak -o /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1608750703 -lcrt1.10.5.o -L/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/i686-apple-darwin9/4.0.1 -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc -L/usr/lib/gcc/i686-apple-darwin9/4.0.1 -L/usr/lib/gcc/i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1/../../../i686-apple-darwin9/4.0.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin9/4.0.1/../../.. -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin9/4.0.1/../../../i686-apple-darwin9/4.0.1 -L/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin9/4.0.1/../../.. -filelist /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Objects-normal/i386/cmTryCompileExec1608750703.LinkFileList -search_paths_first -headerpad_max_install_names -lstdc++ -lgcc_s.10.5 -lgcc -lSystem -F/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/Debug
+
+PhaseScriptExecution /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Script-20057BE1F1A244C4AACCDA03.sh
+    cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp
+    /bin/sh -c /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMAKE_TRY_COMPILE.build/Debug/cmTryCompileExec1608750703.build/Script-20057BE1F1A244C4AACCDA03.sh
+echo "Depend check for xcode"
+Depend check for xcode
+cd /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp && make -C /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp -f /Users/kail/imClever/dev/PartController/xcode/CMakeFiles/CMakeTmp/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.cmTryCompileExec1608750703.Debug
+make[1]: Nothing to be done for `PostBuild.cmTryCompileExec1608750703.Debug'.
+** BUILD SUCCEEDED **
+
+
