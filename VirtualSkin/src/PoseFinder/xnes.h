@@ -22,7 +22,7 @@
 #define _USE_MATH_DEFINES
 
 #include <stdio.h>
-#include <math.h>
+#include <cmath>
 #include <cstring> // <-------------- ***** This is the library missing! *****
 #include <vector>
 #include <algorithm>

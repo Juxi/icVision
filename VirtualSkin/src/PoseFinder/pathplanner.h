@@ -73,6 +73,8 @@ class PathPlanner {
 	  }
 		  
 	bool load_map(std::string mapname, std::string filename) {
+	  if (!hasMap(mapname))
+		throw StringException("map doesnt exist");
 	  poses_map_t poses = read_poses(filename);
 	  if (poses.size() > 0) {
 		d_roadmaps[mapname] = new Roadmap();
@@ -84,6 +86,8 @@ class PathPlanner {
 	}
 
 	void connect_map(std::string mapname, size_t n) {
+	  if (!hasMap(mapname))
+		throw StringException("map doesnt exist");
 		d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	}
 	
@@ -102,7 +106,11 @@ class PathPlanner {
 
 	std::vector<std::vector<double> > poses_to_configurations(poses_map_t &poses);
 
-	Roadmap &roadmap(std::string mapname) {return *d_roadmaps[mapname];}
+	Roadmap &roadmap(std::string mapname) {	  
+	  if (!hasMap(mapname))
+		throw StringException("map doesnt exist");
+	  return *d_roadmaps[mapname];
+	}
 	
 	bool hasMap(std::string mapname) {return d_roadmaps.count(mapname) > 0; }
 

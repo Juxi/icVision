@@ -2,7 +2,7 @@
 #define __POSE_FITNESS_FUNCTION_H__
 
 #include <vector>
-#include <boost\math\special_functions\fpclassify.hpp> // for isnan
+#include <boost/math/special_functions/fpclassify.hpp> // for isnan
 #include "simulator.h"
 #include "xnes.h"
 #include "constraints.h"

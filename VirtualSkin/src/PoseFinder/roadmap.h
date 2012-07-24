@@ -138,6 +138,7 @@ public:
 	Map::edge_descriptor	currentEdge;
 	
 	std::vector<double> scale_vector;
+
 protected:
 	void run();
 	

@@ -209,6 +209,8 @@ void YarpPoseController::run () {
 						print_vector(target);
 						cout << "finding path:" << endl;
 						string mapname(query.get(1).asString().c_str());
+						if (!d_path_planner->hasMap(mapname))
+						  throw StringException("Map doesnt exist");
 						path = d_path_planner->find_configuration_workspace_path(source, target, mapname);
 					} else if (query.size() == 4 && query.get(1).isString()) {
 					 	cout << "size==3 source to target" << endl;
@@ -221,6 +223,8 @@ void YarpPoseController::run () {
 						print_vector(target);
 						cout << "finding path:" << endl;
 						string mapname(query.get(1).asString().c_str());
+						if (!d_path_planner->hasMap(mapname))
+						  throw StringException("Map doesnt exist");
 						path = d_path_planner->find_workspace_path(source, target, mapname);
 					}
 
