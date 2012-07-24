@@ -3,7 +3,9 @@ FIND_PACKAGE ( YARP REQUIRED )
 FIND_PACKAGE ( Qt4 REQUIRED )
 
 INCLUDE ( ${QT_USE_FILE} )
+
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
+#INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../VirtualSkinLibrary/KinematicModel/LibKinematicModel" )
 
 	
 SET ( src_files posefinder.cpp 
@@ -35,8 +37,12 @@ endif()
 
 ADD_EXECUTABLE ( PoseFind ${hdr_files} ${src_files} main.cpp)
 ADD_EXECUTABLE ( PoseControl ${hdr_files} ${src_files} yarpposecontroller.h controller_main.cpp)
+
 ADD_DEPENDENCIES( PoseFind WorldModel )
 ADD_DEPENDENCIES( PoseControl WorldModel )
+ADD_DEPENDENCIES( PoseFind KinematicModel )
+ADD_DEPENDENCIES( PoseControl KinematicModel )
+
 
 TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
 					${SOLID_LIBRARY}

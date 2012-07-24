@@ -44,5 +44,8 @@ ENDIF ( WIN32 )
 ADD_SUBDIRECTORY ( VirtualSkinLibrary )
 ADD_SUBDIRECTORY ( PositionReflex )
 ADD_SUBDIRECTORY ( VelocityReflex )
+
+ADD_SUBDIRECTORY ( PoseFinder )
+
 #ADD_SUBDIRECTORY ( RoadmapDemo )
 #ADD_SUBDIRECTORY ( iCubBabble )

@@ -6,7 +6,9 @@
 #include <QVector>
 #include <cassert>
 
-#include "model.h"
+#include "yarprobot.h"
+#include "yarpModel.h"
+
 #include "sphere.h"
 
 #include "posefitnessfunction.h"
