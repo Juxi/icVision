@@ -12,7 +12,8 @@ CompositeObject::CompositeObject( DT_ResponseClass c ) :	index(0),
 															deathWish(false),
 															numSpheres(0),
 															numCylinders(0),
-															numBoxes(0)
+															numBoxes(0),
+															persistent(false)
 {
 	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
     //collidingColor[0] = 0.3; collidingColor[1] = 0.3; collidingColor[2] = 0.3; collidingColor[3] = 0.2;
@@ -154,5 +155,5 @@ void CompositeObject::render()
 
 void CompositeObject::kill()
 {
-	deathWish = true;
+	deathWish = !persistent;
 }

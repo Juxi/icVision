@@ -31,6 +31,7 @@ public:
 	virtual void collisionResponse();									//!< Waits for the commands from stopRobot() to finish
 																		/**< This example is straightforward, as stopRobot()
 																				issues a position move command */
+	bool stillMoving();
 };
 #endif
 /** @} */

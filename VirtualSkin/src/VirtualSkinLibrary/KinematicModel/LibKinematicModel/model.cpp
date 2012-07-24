@@ -44,6 +44,8 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		modelWindow->show();
 		 
 	}
+	objectMover = new ObjectMover(this, &robots);
+
 	//printf("model constructor returns\n");
 }
 
@@ -65,7 +67,9 @@ Model::~Model()
 	}
 	
 	cleanTheWorld();
-		
+	
+	delete objectMover;
+
 	if ( modelWindow ) { delete(modelWindow); }
 	
 	QVector<DT_RespTableHandle>::iterator j;
@@ -248,7 +252,7 @@ void Model::appendObject( CompositeObject* object )
 	world.append(object);
 }
 
-CompositeObject* Model::removeWorldObject( CompositeObject* object )
+bool Model::removeWorldObject( CompositeObject* object )
 {
 	QMutexLocker locker(&mutex);
 	
@@ -278,7 +282,7 @@ CompositeObject* Model::removeWorldObject( CompositeObject* object )
 	
 	object->setInModel(false); // allow primitives to be edited once again
 	
-	return object;
+	return true;
 }
 
 QVector< QString > Model::listWorldObjects()
@@ -308,6 +312,12 @@ QVector< QString > Model::listWorldObjects()
 }
 
 
+void Model::grabObject( CompositeObject* object, Robot* robot, int markerIndex ) {
+	QMutexLocker locker(&mutex);
+	objectMover->grabObject( object, robot, markerIndex );
+}
+
+
 CompositeObject* Model::getObject( const QString& _name )
 {
 	QVector<CompositeObject*>::iterator i;
@@ -320,6 +330,21 @@ CompositeObject* Model::getObject( const QString& _name )
 	}
 	return NULL;
 }
+
+
+Robot* Model::getRobot( const QString& _name )
+{
+	QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); i++ )
+	{
+		if( (*i)->getName().compare( _name ) == 0 ) // if there's a match
+		{
+			return *i;
+		}
+	}
+	return NULL;
+}
+
 
 void Model::cleanTheWorld()
 {
@@ -350,6 +375,7 @@ void Model::cleanTheWorld()
 				//if (verbose) printf(" no pending display lists\n");
 				CompositeObject* dyingObject = *i;	// get a non-iterator ref to the object in question
 				removeWorldObject( dyingObject );	// this would f*** up the iterator passed to it because we call QVector::erase( <T> ) inside here
+				objectMover->check();				// check objectMover lists and remove object if necessary
 				delete( dyingObject );				// and delete the object from memory
 			}
 			//else
@@ -387,7 +413,7 @@ int Model::computePose()
 	
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
 	updateWorldState();		// update positions of things in the world
-	
+
 	//evaluate kinematic constraints
 	evaluateRobotConstraints();
 
@@ -438,6 +464,8 @@ void Model::updateWorldState()
 {
 	fwdKin();
 	
+	objectMover->update();  // update object positions that are attached to the robots' markers
+
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.begin(); i!=world.end(); ++i )
 	{

@@ -36,6 +36,7 @@ public:
 	
 	bool stop();												//!< Stops all joints immediately
 	
+	bool isWithinLimits( const std::vector<double>& poss );
 	std::vector<double>  withinLimits( const std::vector<double>& poss );
 	bool positionMove( const std::vector<double>& poss );
 	bool velocityMove( const std::vector<double>& v );
@@ -45,7 +46,8 @@ public:
 	std::vector<double> getRandomPose();
 	std::vector<double> getCurrentPose();
 	
-	void setVelocity( int );
+	void setRefVelocity( int );
+	void setRefAcceleration( int );
 	
 	
 private:

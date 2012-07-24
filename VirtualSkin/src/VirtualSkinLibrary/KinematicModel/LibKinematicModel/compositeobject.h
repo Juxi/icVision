@@ -78,6 +78,7 @@ public:
 	void setInModel( bool b ) { inModel = b; }
 	bool isInModel() { return inModel; }
 	
+	bool persistent;										//!< If persistent is true, the object cannot be removed via the normal interfaces
 	virtual void kill();									//!< Sets a flag that the Composite object should be deleted ASAP (in a thread safe way by Model)
 	bool isDead() const { return deathWish; }
 	

@@ -27,6 +27,7 @@ SET ( src_files		model.cpp			# the center of it all
 				
 			zphandler.cpp
 			worldhandler.cpp
+			objectmover.cpp
 				
 )
 
@@ -64,7 +65,7 @@ SET ( hdr_files		modelconstants.h
 				
 			zphandler.h
 			worldhandler.h
-
+			objectmover.h
 				
 )
 

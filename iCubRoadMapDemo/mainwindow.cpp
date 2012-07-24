@@ -63,6 +63,9 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
 	
+	qRegisterMetaType< Roadmap::vertex_t >("vertex_t");
+	qRegisterMetaType< Roadmap::edge_t >("edge_t");
+	
 	connect( &roadmap, SIGNAL(appendedNode(vertex_t, qreal, qreal)),			&graphWidget, SLOT(addNode(vertex_t, qreal, qreal)));
 	connect( &roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	&graphWidget, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
 	
@@ -74,13 +77,16 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 
 	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
 	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	connect( &roadmap, SIGNAL(newEdgeWeight(QtGraphEdge*,int)),					&graphWidget, SLOT(setEdgeWeight(QtGraphEdge*,int)));
 	
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);
 	//setLayout(mainLayout);
 	
 	// add a menu item to reset the joint mask
-	bool iCubJointMask[35] = {	1,1,1,								// use the torso
+	bool iCubJointMask[35] = {	1,1,1,						// use the torso
+					//1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+					//1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,	// use the right arm, not the right hand
 								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0};	// use the left arm, not the left hand
 	for ( int i=0; i<35; i++ )
@@ -123,11 +129,6 @@ void MainWindow::disconnectFromRobot()
 	iCub.close();
 }
 
-void MainWindow::singleEdgeExplore()
-{
-	ctrlThread.setBehavior( ControlThread::SingleEdgeExplore );
-	ctrlThread.restart();
-}
 void MainWindow::multiEdgeExplore()
 {
 	ctrlThread.setBehavior( ControlThread::MultiEdgeExplore );
@@ -217,7 +218,7 @@ void MainWindow::saveMap()
 		std::vector<double>::iterator j;
 		for ( v = graphNodes.begin(); v !=graphNodes.end(); ++v )
 		{
-			for ( j = v->begin(); j !=v->end(); ++j )
+			for ( j = v->begin(); j != v->end(); ++j )
 			{
 				out << *j << " ";
 			}
@@ -236,7 +237,7 @@ void MainWindow::saveMap()
 	}
 }
 
-void MainWindow::loadMap()
+void MainWindow::loadMap( bool display )
 {
 	if ( !iCub.isValid() )
 	{
@@ -313,21 +314,21 @@ void MainWindow::loadMap()
 
 				//respect the robot's joint constraints
 				std::vector<double>::iterator k;
-				printf("qBefore: ");
+				//printf("qBefore: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
-				printf("\n");
+				//printf("\n");
 					q = iCub.withinLimits(q);
-				printf("qAfter: ");
+				//printf("qAfter: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
-				printf("\n");
+				//printf("\n");
 
 				// put q into p
 				for ( k = q.begin(); k!=q.end(); ++k )
 					p.push_back(*k);
 		
-				printf("totalSize = %d\n",p.size());
+				//printf("totalSize = %d\n",p.size());
 				graphNodes.push_back(p);
 				//printf("lineCount: %d\n", count );
 				//count ++;
@@ -348,7 +349,7 @@ void MainWindow::loadMap()
 		}
 		
 		printf("loaded file: %d nodes, %d edges\n",graphNodes.size(),graphEdges.size());
-		roadmap.load( graphNodes, graphEdges );
+		roadmap.load( graphNodes, graphEdges, display );
 		
 		file.close();
 	}
@@ -417,11 +418,6 @@ void MainWindow::createActions()
 	stopControllerAction->setStatusTip(tr("Stop controlling the iCub"));
 	connect(stopControllerAction, SIGNAL(triggered()), this, SLOT(stopController()));
 	
-	SEExploreAction = new QAction(tr("&Single Edge Explore"), this);
-	SEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
-	SEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap one edge at a time"));
-	connect(SEExploreAction, SIGNAL(triggered()), this, SLOT(singleEdgeExplore()));
-	
 	MEExploreAction = new QAction(tr("&Multiple Edge Explore"), this);
 	MEExploreAction->setShortcut( QKeySequence(tr("Ctrl+R")) );
 	MEExploreAction->setStatusTip(tr("Move the iCub around the Roadmap from vertex to vertex with shortest path planning"));
@@ -448,6 +444,11 @@ void MainWindow::createActions()
 	loadMapAction->setShortcuts(QKeySequence::Open);
     loadMapAction->setStatusTip(tr("Load a Roadmap from file"));
     connect(loadMapAction, SIGNAL(triggered()), this, SLOT(loadMap()));
+	
+	stealthLoadMapAction = new QAction(tr("&Stealth Load Map"), this);
+	stealthLoadMapAction->setShortcuts(QKeySequence::Open);
+    stealthLoadMapAction->setStatusTip(tr("Load a Roadmap from file (don't display)"));
+    connect(stealthLoadMapAction, SIGNAL(triggered()), this, SLOT(stealthLoadMap()));
 	
 	saveMapAction = new QAction(tr("&Save Map"), this);
 	saveMapAction->setShortcuts(QKeySequence::Save);
@@ -482,7 +483,6 @@ void MainWindow::createMenus()
 	controllerMenu = menuBar()->addMenu(tr("&Controller"));
 	controllerMenu->addAction(connectToRobotAction);
 	controllerMenu->addAction(disconnectFromRobotAction);
-	controllerMenu->addAction(SEExploreAction);
 	controllerMenu->addAction(MEExploreAction);
 	controllerMenu->addAction(GoToAction);
 	controllerMenu->addAction(stopControllerAction);
@@ -491,6 +491,7 @@ void MainWindow::createMenus()
     mapMenu = menuBar()->addMenu(tr("&Map"));
 	mapMenu->addAction(newMapAction);
 	mapMenu->addAction(loadMapAction);
+	mapMenu->addAction(stealthLoadMapAction);
 	mapMenu->addAction(saveMapAction);
 	mapMenu->addAction(connectMapAction);
 	mapMenu->addAction(projectMapAction);

@@ -79,7 +79,6 @@ int main(int argc, char *argv[])
 				
 				// Enable Virtual Skin for the robot model
 				printf( "\n\nOPENING PORT FILTERS FOR ROBOT: %s\n", yarpRobot->getName().toStdString().c_str() );
-
 				filter = new ReflexFilter( yarpRobot, visualize );
 				filter->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 				 
@@ -89,8 +88,8 @@ int main(int argc, char *argv[])
 				
 				// THIS CAUSES DEADLOCK PROBLEMS
 				// Open the filter status port
-				//printf("opening filter status port\n");
-				//filter->openStatusPort("/filterStatus");
+				printf("opening filter status port\n");
+				filter->openStatusPort("/filterStatus");
 			}
 			
 			if ( robotFile2 != "" ) {

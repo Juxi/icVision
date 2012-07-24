@@ -2,6 +2,7 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
+
 SET ( src_files	main.cpp
 		reflexFilter.cpp
 )
@@ -9,11 +10,11 @@ SET ( src_files	main.cpp
 SET ( hdr_files	reflexFilter.h
 )
 
-ADD_EXECUTABLE ( ReflexDemo ${hdr_files} ${src_files} )
+ADD_EXECUTABLE ( VelocityReflex ${hdr_files} ${src_files} )
 
-ADD_DEPENDENCIES( ReflexDemo KinematicModel )
+ADD_DEPENDENCIES( VelocityReflex KinematicModel )
 
-TARGET_LINK_LIBRARIES ( ReflexDemo 	VirtualSkin
+TARGET_LINK_LIBRARIES ( VelocityReflex 	VirtualSkin
 					KinematicModel
 					YarpFilter
 					
@@ -23,5 +24,5 @@ TARGET_LINK_LIBRARIES ( ReflexDemo 	VirtualSkin
 					${YARP_LIBRARIES}
 )
 
-INSTALL ( TARGETS ReflexDemo DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS VelocityReflex DESTINATION ${CMAKE_SOURCE_DIR}/bin )
 

@@ -18,11 +18,13 @@
 #include "primitiveobject.h"
 #include "modelexception.h"
 #include "modelconstants.h"
+#include "objectmover.h"
 
 namespace KinematicModel
 {
 	class Model;
 	class ModelWindow;
+	class ObjectMover;
 }
 
 /** \brief Computes the current pose of the Robot and does collision detection using the SOLID library
@@ -55,13 +57,15 @@ public:
 											/**< Call this function directly if you want to be in control of which poses are computed when */
 	void stop();
 	
+	void grabObject( CompositeObject* object, Robot* robot, int markerIndex );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
-	CompositeObject*	removeWorldObject( CompositeObject* );
+	bool removeWorldObject( CompositeObject* );
 	void clearTheWorld();
 	
 	QVector< QString > listWorldObjects();
 	CompositeObject* getObject( const QString& name );
+	Robot* getRobot( const QString& name );
 	
 	Robot*	loadRobot( const QString& fileName, bool verbose = true );
 	void	loadWorld( const QString& fileName, bool verbose = true );
@@ -133,6 +137,8 @@ protected:
 	
 	QMutex mutex;
 	
+	ObjectMover *objectMover;			//!< Object mover
+
 	friend class Robot;
 	friend class KinTreeNode;
 

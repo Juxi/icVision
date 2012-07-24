@@ -26,13 +26,10 @@ public:
 	
 	void setVelocity( int i );
 	
-	bool gotoNearest();
-	bool goTo(Roadmap::vertex_t v);
-
-
+	//bool gotoNearest();
 	//Roadmap::edge_t randomMove();
-	bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
-	bool isOnMap();
+	//bool waitForMotion();	// wait until the motion is done or we are cut off from the robot
+	//bool isOnMap();
 	//double maxDiff(std::vector<double>,std::vector<double>);
 	
 	//void start();
@@ -41,10 +38,10 @@ public:
 	
 	enum BehaviorType
 	{
-		SingleEdgeExplore,
+		//SingleEdgeExplore,
 		MultiEdgeExplore,
 		GoToObject,
-		velocityMove
+		//velocityMove
 	};
 	
 	void setBehavior( BehaviorType b ) { currentBehavior = b; }
@@ -53,14 +50,13 @@ public:
 protected:
 	
 	yarp::os::Network yarp;
-	//yarp::os::Port vSkinStatus;
+	yarp::os::Port MoBeEStatus;
 	yarp::os::RpcClient worldPort;
 	
 	iCubController* robot;
 	Roadmap* roadmap;
-	double	velocity;
-public:
-	Roadmap::vertex_t goal_vertex;
+	double	refVelocity;
+	double  refAcceleration;
 	
 protected:
 	volatile bool keepRunning;
@@ -69,12 +65,14 @@ protected:
 	QString salientObject;
 	
 	void run();
-	bool singleEdgeMove();
-	bool positionMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path );
-	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path, double c ); 
+
+	bool velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path ); 
 	
 	std::pair<Roadmap::CGAL_Vector,Roadmap::CGAL_Vector> funnelAccel( double axialCoeff, Roadmap::edge_t edge ); 
-	Roadmap::CGAL_Point currentPose();
+	Roadmap::CGAL_Vector positionErr( Roadmap::edge_t edge );
+	Roadmap::CGAL_Vector zeroVector();
+	double dot(Roadmap::edge_t i,Roadmap::edge_t o);
+	//Roadmap::CGAL_Point currentPose();
 };
 #endif
 /** @} */

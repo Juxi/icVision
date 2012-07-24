@@ -6,7 +6,7 @@
     <box width="1" depth=".001" height="1.5"/>
 </object>
 
-<object name="cup1" px="-.3" pz="-.1" r="0" g="0" b="100">
+<object name="cup1" px="-.3" pz="-.15" r="0" g="0" b="100">
     <cylinder radius=".045" height=".15" hz="1"/>
 </object>
 
