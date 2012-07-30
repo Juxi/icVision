@@ -193,17 +193,16 @@ public:
 	//bool randomMove();
 	
 	//std::list< double[3] > 
-	void project2D( std::vector<double> d = std::vector<double>() );
+	//void project2D( std::vector<double> d = std::vector<double>() );
 
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
 	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _w );
 
-
+	std::vector<double> nearestVector(std::vector<double> q);
+	std::vector<double> nearestWorkspaceVector(std::vector<double> q);
 
 	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
-	std::list<Roadmap::vertex_t> shortestWorkspacePath( std::vector<double> from, std::vector<double> to );
-	std::list<Roadmap::vertex_t>  shortestConfigurationWorkspacePath( std::vector<double> from, std::vector<double> to );
 
 	std::list<Roadmap::vertex_t> shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
 	std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR

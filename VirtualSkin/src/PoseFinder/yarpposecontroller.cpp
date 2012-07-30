@@ -161,10 +161,8 @@ void YarpPoseController::run () {
 
 		int command = query.get(0).asVocab();
 
-		vector<vector<double> > path;
-		vector<double> source, target;
 		
-		char *help = "Possible Commands:\n"
+		char *help_message = "Possible Commands:\n"
 		  "load [name] [file]\t--\tload map in [file] under name [name]\n"
 		  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
 		  "con [name] [n]\t--\tconnect map [name] with n neirest neighbours\n"
@@ -176,17 +174,97 @@ void YarpPoseController::run () {
 		  "info\t--\tshow info about all maps\n";
 
 		try {
-			switch ( command ) {
-				case VOCAB_GO:
+		  switch ( command ) {
+		  case VOCAB_GO:
+			if (query.size() == 2 && query.get(1).isString()) { //go [name]
+			  vector<vector<double> > path;
+			  vector<double> source_conf = get_current_pose();
+			  string mapname = query.get(1).asString().c_str();
+			  vector<double> target_conf = d_path_planner->closest_configurationspace(mapname, source_conf);
+
+			  path = d_path_planner->move_to_path(source_conf, target_conf);
+			  follow_path(path);
+			}
+
+			if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
+			  vector<vector<double> > path;
+
+			  vector<double> source_conf = get_current_pose();
+			  string mapname = query.get(1).asString().c_str();
+			  vector<double> target_work = bottle_to_vector(query.get(2));
+			  vector<double> target_conf = d_path_planner->closest_workspace(mapname, target_work);
+
+			  cout << "source:" << endl;
+			  print_vector(source_conf);
+			  cout << "target:" << endl;
+			  print_vector(target_work);
+			  cout << "finding path:" << endl;
+
+			  path = d_path_planner->find_path(source_conf, target_conf);
+			  follow_path(path);
+			}
+			break;
+
+		  case VOCAB_HELP:
+			if (query.size() == 1) { //help
+			  response.addVocab(Vocab::encode("many"));
+			  response.addString(help_message);
+			}
+			break;
+
+		  case VOCAB_LOAD:
+			if (query.size() == 3 && query.get(1).isString() && query.get(2).isString()) {//load [name] [file]
+			  std::string map_name(query.get(1).asString().c_str());
+			  std::string map_file(query.get(2).asString().c_str());
+			  d_path_planner->load_map(map_name, map_file);
+			}
+			break;
+
+		  case VOCAB_CONNECT:
+			if (query.size() == 2 && query.get(1).isInt()) { //con [n]
+			  int number = query.get(1).asInt();
+			  d_path_planner->connect_maps(number);
+			}
+			if (query.size() == 3 && query.get(1).isString() && query.get(2).isInt()) { //con [name] [n]
+			  throw StringException("Not Implemented");
+			}
+			break;
+
+		  case VOCAB_GET_RANGE:
+			if (query.size() == 1) //ran
+			  throw StringException("Not Implemented");
+			if (query.size() == 2 && query.get(1).isString()) //ran [name]
+			  throw StringException("Not Implemented");
+			break;
+
+		  case VOCAB_INFO:  //info
+			if (query.size() == 1) //info
+			  throw StringException("Not Implemented");
+			break;
+		  }
+		}
+		catch (StringException &error) {
+			response.addString("FAIL");
+			response.addString(error.what());
+		}
+		response.addString("==READY==");
+		d_port.reply(response);
+	}
+}
+
+
+	/*
+
+
 					cout << "GO command, size: " << query.size() << endl;
 					if (!(query.size() >= 2)) {
 						response.addString("FAIL: not enough parameters");
 						break;
-					}
+						}
 
 					if (query.size() == 2) {
-						cout << "size==2 get source from mover" << endl;
-						source = get_current_pose();
+					cout << "size==2 get source from mover" << endl;
+					source = get_current_pose();
 						cout << "target::" << endl;
 						target = bottle_to_vector(query.get(1));
 						cout << "target::" << endl;
@@ -256,7 +334,8 @@ void YarpPoseController::run () {
 		//                                response.addString("FAIL");
 					break;
 				case VOCAB_HELP:
-						cout << "HELP command" << endl;
+
+				cout << "HELP command" << endl;
 		//                        response.addVocab(Vocab::encode("many"));
 						response.addVocab(Vocab::encode("many"));
 						response.addString("iCub Path Planner:\n"
@@ -269,7 +348,7 @@ void YarpPoseController::run () {
 						break;
 				case VOCAB_LOAD:
 				  if (query.size() >= 3 && query.get(1).isString() && query.get(2).isString()) {
-						std::string map_name = query.get(1).asString().c_str();
+				        std::string map_name = query.get(1).asString().c_str();
 						std::string map_file = query.get(2).asString().c_str();
 						if (d_path_planner->load_map(map_name, map_file)) {
 							response.addString("OK");
@@ -281,7 +360,7 @@ void YarpPoseController::run () {
 					break;
 				case VOCAB_CONNECT:
 					if (query.size() >= 2 && query.get(1).isInt()) {
-						int number = query.get(1).asInt();
+					    int number = query.get(1).asInt();
 						d_path_planner->connect_maps(number);
 						response.addString("OK");
 					} else
@@ -328,49 +407,8 @@ void YarpPoseController::run () {
 					response.addString("Unknown Command. Type help for more information.");
 					break;
 			}
-		}
-		catch (StringException &error) {
-			response.addString("FAIL");
-			response.addString(error.what());
-		}
-		d_port.reply(response);
-	}
-}
+	*/
 
-//		cout << "yarp grasp running" << endl;
-//		if (!i_cub.open("icubSimF"))
-//			throw StringException("Couldnt open port to icubsimf");
-//
-//		load_map(d_map_file);
-//		connect_map(5);
-//		add_bullshit();
-//		update_map();
-//		vector<vector<double> > the_path = find_path();
-//	//
-//		size_t counter(0);
-//
-//		while (true) {
-//			vector<double> q(the_path[counter]);
-//			vector<double> q_norm = d_graspfinder.simulator().real_to_normal_motors(q);
-//			for (size_t i(0); i < q.size(); ++i)
-//				cout << q_norm[i] << " ";
-//			cout << endl;
-//			d_graspfinder.simulator().set_motors(q_norm);
-//			cout << "N COLLISIONS: " << d_graspfinder.simulator().computePose() << endl;
-//
-//			int velocity(40);
-//			i_cub.setVelocity( velocity );
-//			if (!i_cub.positionMove(q))
-//				cout << "Position move error" << endl;
-//			bool motionInterrupted = !waitForMotion();
-//
-//			msleep(500);
-//			counter = (counter + 1) % the_path.size();
-//		}
-
-void YarpPoseController::plan_path(vector<double> workspace_source, vector<double> workspace_goal){
-	vector<vector<double> > path = d_path_planner->find_workspace_path(workspace_source, workspace_goal);
-}
 
 Bottle YarpPoseController::poses_to_bottle(vector<vector<double> > &path) {
 	Bottle b;

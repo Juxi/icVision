@@ -48,11 +48,13 @@ class PathPlanner {
 	std::vector<std::string> d_config_names;
 
 	std::map<std::string, size_t> d_pose_sizes;
+	size_t d_dimensionality;
 
  public:
 	
- PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot) :
-	d_posefinder(model, robot)
+	PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot, size_t dimensionality = 41) :
+	d_posefinder(model, robot),
+	  d_dimensionality(dimensionality)
 	  {
 		d_config_names.push_back("CFGSPACE_TORSO");
 		d_config_names.push_back("CFGSPACE_HEAD");
@@ -70,22 +72,23 @@ class PathPlanner {
 		d_pose_sizes["CFGSPACE_HEAD"] = d_scale_map["CFGSPACE_HEAD"].size();
 		d_pose_sizes["CFGSPACE_RIGHT_ARM"] = d_scale_map["CFGSPACE_RIGHT_ARM"].size();
 		d_pose_sizes["CFGSPACE_LEFT_ARM"] = d_scale_map["CFGSPACE_LEFT_ARM"].size();
-		
+
+		d_main_roadmap.setDimensionality(d_dimensionality);
+		d_main_roadmap.scale_vector = get_scale_vector();
 		//add_bullshit();
 	  }
 		  
-	bool load_map(std::string mapname, std::string filename) {
+	void load_map(std::string mapname, std::string filename) {
 	  if (hasMap(mapname))
 		throw StringException("map already exist");
+
 	  poses_map_t poses = read_poses(filename);
 
 	  if (poses.size() > 0) {
 		d_roadmaps[mapname] = new Roadmap();
-	    d_roadmaps[mapname]->scale_vector = get_scale_vector();
 		insert_poses(mapname, poses);
-		return true;
 	  } else
-		  return false;
+		throw StringException("Loading failed");
 	}
 
 	void connect_map(std::string mapname, size_t n) {
@@ -119,12 +122,16 @@ class PathPlanner {
 
 	void insert_poses(std::string mapname, poses_map_t &poses);
 
-	std::vector<std::vector<double> > find_path(std::vector<double> source, std::vector<double> target, std::string mapname = "default");
-	std::vector<std::vector<double> > find_workspace_path(std::vector<double> source, std::vector<double> target, std::string mapname = "default");
-	std::vector<std::vector<double> > find_configuration_workspace_path(std::vector<double> source, std::vector<double> target, std::string mapname = "default");
+	std::vector<double> closest_configurationspace(std::string mapname, std::vector<double> conf);
+	std::vector<double> closest_workspace(std::string mapname, std::vector<double> work);
 
+	std::vector<std::vector<double> > find_path(std::vector<double> source_conf, std::vector<double> target_conf);
+
+	std::vector<std::vector<double> > move_to_path(std::vector<double> source, std::vector<double> target);
 
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
+
+	bool check_map(std::string mapname) {if (!hasMap(mapname)) throw StringException("Map does not exist");}
 
 	void add_bullshit() {
 		for (float z(-.2); z < .2; z += .03)

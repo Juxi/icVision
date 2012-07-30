@@ -61,8 +61,7 @@ public:
 
 	std::vector<double> get_current_pose();
 
-	void plan_path(std::vector<double> workspace_source, std::vector<double> workspace_goal);
-
+	
 };
 
 #endif
