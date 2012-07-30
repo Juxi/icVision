@@ -68,6 +68,7 @@ int map_build_test(Model &model, Robot &robot, QApplication &app) {
 	return result;
 }
 
+/*
 int path_test(Model &model, Robot &robot, QApplication &app) {
 	PathThread path_thread(model, robot);
 
@@ -80,6 +81,7 @@ int path_test(Model &model, Robot &robot, QApplication &app) {
 
 	return result;
 }
+*/
 
 int online_test(Model &model, Robot &robot, QApplication &app) {
 	OnlineThread online_thread(model, robot);
@@ -133,9 +135,9 @@ int main(int argc, char *argv[])
 		return map_build_test(model, robot, app);
 	}
 
-	if (string(argv[3]) == "path") {
-		return path_test(model, robot, app);
-	}
+	//if (string(argv[3]) == "path") {
+	//	return path_test(model, robot, app);
+	//}
 
 	if (string(argv[3]) == "online") {
 		return online_test(model, robot, app);

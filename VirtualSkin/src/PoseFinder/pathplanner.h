@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <map>
 //#include <CGAL/Homogeneous_d.h>
 //#include <CGAL/Gmpz.h>
 //#include <CGAL/Delaunay_d.h>
@@ -11,7 +12,7 @@
 #include "roadmap.h"
 #include "poses_reader.h"
 #include "posefinder.h"
-#include <map>
+
 
 template <typename T>
 inline std::vector<T> string_to_vector(std::string str) {
@@ -39,7 +40,8 @@ class PathPlanner {
 	typedef std::map<std::string, Roadmap*>::iterator roadmap_iterator; // C99: typename cannot be used outside a template declaration
 
 	PoseFinder d_posefinder;
-	std::map<std::string, Roadmap*> d_roadmaps;
+	std::map<std::string, Roadmap*> d_roadmaps;	
+	Roadmap d_main_roadmap;
 	
 	std::map<std::string, poses_map_t> d_poses;
 	std::map<std::string, std::vector<double> > d_scale_map;
@@ -73,9 +75,10 @@ class PathPlanner {
 	  }
 		  
 	bool load_map(std::string mapname, std::string filename) {
-	  if (!hasMap(mapname))
-		throw StringException("map doesnt exist");
+	  if (hasMap(mapname))
+		throw StringException("map already exist");
 	  poses_map_t poses = read_poses(filename);
+
 	  if (poses.size() > 0) {
 		d_roadmaps[mapname] = new Roadmap();
 	    d_roadmaps[mapname]->scale_vector = get_scale_vector();

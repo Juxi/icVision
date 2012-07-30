@@ -37,6 +37,9 @@ vector<double> PathPlanner::get_scale_vector() {
 }
 
 void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
+    if (!hasMap(mapname))
+	    throw StringException("map doesnt exist");
+
 	vector<vector<double> > configurations = poses_to_configurations(poses);
 	//cout << configurations.size() << endl;
 	int dimensionality(configurations[0].size());
@@ -47,7 +50,8 @@ void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
 	for (size_t i(0); i < configurations.size(); ++i) {
 		vector<double> &q_configuration(configurations[i]);
 		vector<double> &x_configuration(poses["WORKSPACE"][i]);
-		d_roadmaps[mapname]->insert(x_configuration, q_configuration);
+		d_roadmaps[mapname]->insert(x_configuration, q_configuration, mapname);
+		d_main_roadmap.insert(x_configuration, q_configuration, mapname);
 	}
 }
 
@@ -168,6 +172,7 @@ void PathPlanner::update_map(std::string mapname) {
 	}
 //		road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 }
+
 
 void PathPlanner::update_maps() {
   roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());

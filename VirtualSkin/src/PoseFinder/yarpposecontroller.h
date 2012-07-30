@@ -13,9 +13,10 @@
 int const VOCAB_GO = VOCAB2('g','o');        // run trajectory
 int const VOCAB_HELP = VOCAB4('h','e','l','p');      // display help
 int const VOCAB_LOAD = VOCAB4('l','o','a','d'); //load map
-int const VOCAB_CONNECT = VOCAB3('c', 'o', 'n');
+int const VOCAB_CONNECT = VOCAB3('c', 'o', 'n'); //connect map
 int const VOCAB_UPDATE = VOCAB2('u', 'p');
 int const VOCAB_GET_RANGE = VOCAB3('r', 'a', 'n');
+int const VOCAB_INFO = VOCAB4('i', 'n', 'f', 'o');
 
 
 class YarpPoseController :  public QThread {

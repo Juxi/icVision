@@ -25,6 +25,7 @@
 
 //#include "iCubController.h"
 
+#include "astar.h"
 #include <QThread>
 //#include <QtGui/QGraphicsView>
 
@@ -41,8 +42,8 @@ enum TreeMode {
 class Roadmap
 {
 public:
-	
-	typedef CGAL::Cartesian_d<double> K;
+  
+    typedef CGAL::Cartesian_d<double> K;
 	
 	/* FIRST, THE BOOST GRAPH */
 	class Pose;
@@ -52,7 +53,7 @@ public:
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
 		std::vector<double> x;				// robot configuration
-
+	    std::string map_name;
 		double fitness;
 		int collisions;
 		
@@ -63,7 +64,8 @@ public:
 		QtGraphEdge* qtGraphEdge;
 		double length, length2;
 		double successRate;
-		Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0){}
+	  bool evaluated;
+	Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0), evaluated(false) {}
 	};
 	
 	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::directedS, 
@@ -170,7 +172,8 @@ public:
 	void setCurrentVertex( vertex_t );
 //	void setEdgeColor( edge_t, QColor );
 	
-	vertex_t insert( std::vector<double> _x, std::vector<double> _q, double fitness = 0.0, int collisions = 0/*, unsigned int n = 0*/ );
+
+	vertex_t insert( std::vector<double> _x, std::vector<double> _q, std::string name);
 	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
 	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
 	
@@ -178,7 +181,7 @@ public:
 	
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
-	void readMapPoses(std::string filename);
+	void readMapPoses(std::string filename, std::string mapname);
 
 	void removeEdge( edge_t );
 	void removeAllEdges();
@@ -197,10 +200,13 @@ public:
 	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _w );
 
 
-	std::list<Roadmap::vertex_t> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
+
 	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
 	std::list<Roadmap::vertex_t> shortestWorkspacePath( std::vector<double> from, std::vector<double> to );
 	std::list<Roadmap::vertex_t>  shortestConfigurationWorkspacePath( std::vector<double> from, std::vector<double> to );
+
+	std::list<Roadmap::vertex_t> shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
+	std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 

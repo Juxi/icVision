@@ -10,6 +10,7 @@
 #include <CGAL/Gmpz.h>
 #include <CGAL/Delaunay_d.h>
 
+/*
 inline std::vector<std::vector<double> > extract_path(std::vector<std::vector<double> > configurations, std::vector<double> fitnesses, std::vector<int> collisions, std::vector<double> start, std::vector<double> goal) {
 	typedef CGAL::Gmpz RT;
 	typedef CGAL::Homogeneous_d<RT> Kernel;
@@ -55,5 +56,7 @@ inline std::vector<std::vector<double> > extract_path(std::vector<std::vector<do
 	std::vector<std::vector<double> > the_path = road_map.vertex_list_to_q(the_path_nodes);
 	return the_path;
 }
+*/
+
 
 #endif

@@ -315,7 +315,7 @@ class StoreFilter : public EvaluationFilter{
 		return d_collisions;
 	}
 };
-
+/*
 class PathThread : public QThread {
 	bool keepRunning;
 	bool verbose;
@@ -394,7 +394,7 @@ public:
 
 		std::vector<std::vector<double> > path;
 		try {
-			path = extract_path(store_filter.configurations(), store_filter.fitnesses(), store_filter.collisions(), d_pose_finder.simulator().home_pos(), d_pose_finder.best_point());
+		  path = extract_path(store_filter.configurations(), store_filter.fitnesses(), store_filter.collisions(), d_pose_finder.simulator().home_pos(), d_pose_finder.best_point());
 		}
 		catch (char const *message) {
 			std::cout << message << std::endl;
@@ -419,5 +419,6 @@ public:
 	}
 
 };
+*/
 
 #endif

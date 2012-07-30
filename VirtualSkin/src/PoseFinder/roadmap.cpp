@@ -1,11 +1,13 @@
 #include "roadmap.h"
 #include "poses_reader.h"
 #include "exception.h"
+
 //#include "graphwidget.h"
 //#include "widgetEdge.h"
 //#include "widgetNode.h"
 
 using namespace std;
+using namespace boost;
 
 Roadmap::Roadmap() : dim(0), currentVertex(0)
 {
@@ -139,7 +141,7 @@ std::vector<double>  Roadmap::unscale_q( std::vector<double> q_scaled) {
 }
 
 
-Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, double fitness, int collisions /*, unsigned int n*/ )
+Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _q, std::string name)
 {
 	//printf("called insert\n");
 	if ( _q.size() != dim ) { printf("wrong size state vector %lu\n",_q.size()); throw StringException("wrong size state vector"); }
@@ -148,9 +150,10 @@ Roadmap::vertex_t Roadmap::insert( std::vector<double> _x, std::vector<double> _
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
 	map[vertex].x = _x;
+	map[vertex].map_name = name;
 
-	map[vertex].fitness = fitness;
-	map[vertex].collisions = collisions;
+	map[vertex].fitness = 0;
+	map[vertex].collisions = 0;
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -246,12 +249,12 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 //	}
 }
 
-void Roadmap::readMapPoses(std::string filename) {
+void Roadmap::readMapPoses(std::string filename, std::string mapname) {
 	poses_map_t poses_map = read_poses(filename);
 	poses_vector_t poses(poses_map["CFGSPACE"]);
 	poses_vector_t work_space(poses_map["WORKSPACE"]);
 	for (size_t i(0); i < poses.size(); ++i) {
-		insert(work_space[i], poses[i]);
+	  insert(work_space[i], poses[i], mapname);
 	}
 }
 
@@ -353,7 +356,7 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 
 	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
 
-	size_t const check_n(10);
+	size_t const check_n(40);
 	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , check_n);
 	K_neighbor_search::iterator it = search.begin();
 	for(; it != search.end(); ++it)
@@ -365,7 +368,7 @@ Roadmap::vertex_t Roadmap::nearestVertex( std::vector<double> _q, char* type )
 	return it->first.vertex;
 }
 
-std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
+std::list<Roadmap::vertex_t> Roadmap::shortestPath_backup( vertex_t from, vertex_t to )
 {
 	std::cout << std::endl << "Running Dijkstra's... " << from << " " << to << std::endl; 
 	std::vector<vertex_t> parents(num_vertices(map));
@@ -420,6 +423,75 @@ std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	
 	return path;
 }
+
+
+std::list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
+{
+	std::cout << std::endl << "Running Dijkstra's... " << from << " " << to << std::endl; 
+	std::vector<vertex_t> parents(num_vertices(map));
+	std::vector<double> distances(num_vertices(map));
+
+
+//	 std::pair<edge_i, edge_i> map_edges(edges(map));
+//	 edge_i edge_it(map_edges.first);
+//	 std::cout << "adding lengths2" << std::endl;
+//	 for (; edge_it != map_edges.second; ++edge_it) {
+//		 double value = (map[source(*edge_it, map)].fitness + map[target(*edge_it, map)].fitness);
+//		 int collisions1 = map[source(*edge_it, map)].collisions;
+//		 int collisions2 = map[target(*edge_it, map)].collisions;
+//		 double length = get(&Edge::length, map, *edge_it);
+//
+//		 length = length * length;
+//
+////		  std::cout << value << " " << collisions << std::endl;
+//		 put(&Edge::length2, map, *edge_it, length + 1000. * (collisions1 + collisions2));
+//	 }
+//	 std::cout << "done" << std::endl;
+	
+	//set visited to zero
+	{
+	  pair<edge_i, edge_i> map_edges(edges(map));
+	  edge_i edge_it(map_edges.first);
+	  for (; edge_it != map_edges.second; ++edge_it)
+		put(&Roadmap::Edge::evaluated, map, *edge_it, false);
+	}
+	
+	vector<vertex_t> p(num_vertices(map));
+	vector<double> d(num_vertices(map));
+	try {
+	  // call astar named parameter interface 
+
+	  astar_search
+		(map, from,
+		 distance_heuristic<Map, double>
+		 (map, to),
+		 weight_map( get(&Edge::length2, map) )
+		 .predecessor_map(&p[0])
+		 .distance_map(&d[0])
+		 .visitor(astar_goal_visitor<vertex_t, edge_t>(to)));
+
+  
+	} catch(found_goal fg) { // found a path to the goal 
+	  list<vertex_t> path;
+
+	  for(vertex_t v = to;; v = p[v]) {
+		path.push_front(v);
+		if(p[v] == v)
+		  break;
+	  }
+	  
+	  printf("path: ");
+	  for (std::list<vertex_t>::iterator i = path.begin(); i != path.end(); ++i )
+		{
+		  printf("%lu ",*i);
+		}
+	  printf("/\n");
+
+	  return path;
+	}
+	
+	
+}	
 
 list<Roadmap::vertex_t>  Roadmap::shortestConfigurationWorkspacePath( std::vector<double> from, std::vector<double> to ) {
 	Roadmap::vertex_t from_desc = nearestVertex(from);

@@ -163,6 +163,18 @@ void YarpPoseController::run () {
 
 		vector<vector<double> > path;
 		vector<double> source, target;
+		
+		char *help = "Possible Commands:\n"
+		  "load [name] [file]\t--\tload map in [file] under name [name]\n"
+		  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
+		  "con [name] [n]\t--\tconnect map [name] with n neirest neighbours\n"
+		  "ran\t--\tshow all ranges\n"
+		  "ran [name]\t--\tshow range of mape [name]\n"
+		  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
+		  "go [name]\t--\tmove to closest position on map [name]\n"
+		  "help\t--\tshow this help message\n"
+		  "info\t--\tshow info about all maps\n";
+
 		try {
 			switch ( command ) {
 				case VOCAB_GO:
