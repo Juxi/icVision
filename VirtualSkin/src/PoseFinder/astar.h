@@ -47,6 +47,7 @@ template <class Vertex, class Edge>
 	
 	template <class Graph>
 	  void examine_vertex(Vertex u, Graph& g) {
+	  std::cout << "examining vertex " << u << " " << m_goal << std::endl;
 	  if(u == m_goal)
 		throw found_goal();
 	}

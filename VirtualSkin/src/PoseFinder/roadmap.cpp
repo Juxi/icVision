@@ -143,7 +143,7 @@ vector<double>  Roadmap::unscale_q( vector<double> q_scaled) {
 
 Roadmap::vertex_t Roadmap::insert( vector<double> _x, vector<double> _q, string name)
 {
-	//printf("called insert\n");
+  //printf("called insert\n");
   //if (!dim)
   //setDimensionality(_q.size());
 
@@ -434,7 +434,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath_backup( vertex_t from, vertex_t to
 
 list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 {
-	cout << endl << "Running Dijkstra's... " << from << " " << to << endl; 
+	cout << endl << "Running A*... " << from << " " << to << endl; 
 	vector<vertex_t> parents(num_vertices(map));
 	vector<double> distances(num_vertices(map));
 
@@ -462,11 +462,17 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	  for (; edge_it != map_edges.second; ++edge_it)
 		put(&Roadmap::Edge::evaluated, map, *edge_it, false);
 	}
-	
+		
 	vector<vertex_t> p(num_vertices(map));
 	vector<double> d(num_vertices(map));
+
+	list<vertex_t> path;
+
 	try {
 	  // call astar named parameter interface 
+	  cout << "Starting Search: " << endl;
+	  cout << "num vertices: " << num_vertices(map) << endl;
+	  cout << "num edges: " << num_edges(map) << endl;
 
 	  astar_search
 		(map, from,
@@ -479,7 +485,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 
   
 	} catch(found_goal fg) { // found a path to the goal 
-	  list<vertex_t> path;
+	  cout << "Found Goal" << endl;
 
 	  for(vertex_t v = to;; v = p[v]) {
 		path.push_front(v);
@@ -494,11 +500,10 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 		}
 	  printf("/\n");
 
-	  return path;
 	}
-	
-	
-}	
+
+	return path;
+}  
 
 list<Roadmap::vertex_t>  Roadmap::shortestPath( vector<double> from, vector<double> to ) {
 	Roadmap::vertex_t from_desc = nearestVertex(from);
@@ -511,8 +516,10 @@ list<Roadmap::vertex_t>  Roadmap::shortestPath( vector<double> from, vector<doub
 vector<vector<double> > Roadmap::vertex_list_to_q(list<Roadmap::vertex_t> &path) {
 	vector<vector<double> > vector_path;
 	list<Roadmap::Map::vertex_descriptor>::iterator it(path.begin());
+	cout << "path len: " << path.size() << endl;
 	for (; it != path.end(); ++it) {
-		vector_path.push_back(map[*it].q);
+	  cout << "v: " << *it << endl;
+	  vector_path.push_back(map[*it].q);
 	}
 
 	return vector_path;
@@ -521,12 +528,12 @@ vector<vector<double> > Roadmap::vertex_list_to_q(list<Roadmap::vertex_t> &path)
 Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( vector<double> _x)
 {
 //	if ( _x.size() != dim_x ) { throw StringException("wrong size state vector"); }
-  if ( workspace_tree.size() > 0 ) { throw StringException("nothing in tree"); } // doesn't throw but access violation on workspace_tree instead
+  if (! workspace_tree.size() > 0 ) { throw StringException("nothing in tree"); } // doesn't throw but access violation on workspace_tree instead
 	if (_x.size() != 3) { throw StringException("Nothing in X"); }
 	cout << "(" << _x.size() << "," << workspace_tree.size() << " " << tree.size() << endl;
 
 
-	size_t const check_n(10);
+	size_t const check_n(40);
 	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ), check_n);
 	K_neighbor_search::iterator it = search.begin();
 	for(; it != search.end(); ++it)

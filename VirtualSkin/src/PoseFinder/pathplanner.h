@@ -92,9 +92,8 @@ class PathPlanner {
 	}
 
 	void connect_map(std::string mapname, size_t n) {
-	  if (!hasMap(mapname))
-		throw StringException("map doesnt exist");
-		d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  check_map(mapname);
+	  d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	}
 	
 	void connect_maps(size_t n) {
@@ -102,11 +101,16 @@ class PathPlanner {
 	  
 	  for (; it != it_end; ++it)
 		connect_map(it->first, n);
+
+	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	}
 
 
 	void update_maps();//check for collisions and change weights
 	void update_map(std::string mapname);
+
+	std::string range_string(std::string map_name);
+	std::string range_strings();
 
 //	void update_map_2();
 

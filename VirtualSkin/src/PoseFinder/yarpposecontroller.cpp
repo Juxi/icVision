@@ -180,6 +180,7 @@ void YarpPoseController::run () {
 			  vector<vector<double> > path;
 			  vector<double> source_conf = get_current_pose();
 			  string mapname = query.get(1).asString().c_str();
+
 			  vector<double> target_conf = d_path_planner->closest_configurationspace(mapname, source_conf);
 
 			  path = d_path_planner->move_to_path(source_conf, target_conf);
@@ -192,12 +193,16 @@ void YarpPoseController::run () {
 			  vector<double> source_conf = get_current_pose();
 			  string mapname = query.get(1).asString().c_str();
 			  vector<double> target_work = bottle_to_vector(query.get(2));
+
+			  cout << "finding target conf" << endl;
 			  vector<double> target_conf = d_path_planner->closest_workspace(mapname, target_work);
 
 			  cout << "source:" << endl;
 			  print_vector(source_conf);
 			  cout << "target:" << endl;
 			  print_vector(target_work);
+			  cout << "target:" << endl;
+			  print_vector(target_conf);
 			  cout << "finding path:" << endl;
 
 			  path = d_path_planner->find_path(source_conf, target_conf);
@@ -226,15 +231,25 @@ void YarpPoseController::run () {
 			  d_path_planner->connect_maps(number);
 			}
 			if (query.size() == 3 && query.get(1).isString() && query.get(2).isInt()) { //con [name] [n]
-			  throw StringException("Not Implemented");
+			  std::string map_name(query.get(1).asString().c_str());
+			  int n = query.get(2).asInt();
+			  if (n < 1)
+				throw StringException("n is too small or negative");
+			  d_path_planner->connect_map(map_name, n);
 			}
 			break;
 
 		  case VOCAB_GET_RANGE:
-			if (query.size() == 1) //ran
-			  throw StringException("Not Implemented");
-			if (query.size() == 2 && query.get(1).isString()) //ran [name]
-			  throw StringException("Not Implemented");
+			if (query.size() == 1) {//ran
+			  response.addVocab(Vocab::encode("many"));
+			  response.addString(d_path_planner->range_strings().c_str());
+			}
+
+			if (query.size() == 2 && query.get(1).isString()) {//ran [name]
+			  std::string map_name(query.get(1).asString().c_str());
+			  response.addVocab(Vocab::encode("many"));
+			  response.addString(d_path_planner->range_string(map_name).c_str());
+			}
 			break;
 
 		  case VOCAB_INFO:  //info
@@ -429,7 +444,6 @@ std::vector<double> YarpPoseController::bottle_to_vector(yarp::os::Value &val) {
     if (!val.isList()) { throw StringException("Value not a list"); }
     Bottle* val_pointer = val.asList();
 
-    cout << "before loop " << endl;
     for (size_t i(0); i < val_pointer->size(); ++i) {
     	if (val_pointer->get(i).isList()) {
     		Bottle* val2_pointer = val_pointer->get(i).asList();
@@ -438,7 +452,6 @@ std::vector<double> YarpPoseController::bottle_to_vector(yarp::os::Value &val) {
     	} else
     		values.push_back(val_pointer->get(i).asDouble());
     }
-    cout << "after loop " << endl;
     return values;
 }
 

@@ -68,6 +68,7 @@ vector<double> PathPlanner::closest_workspace(string mapname, vector<double> wor
 vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target) {
 	Roadmap::PathList the_path_nodes = d_main_roadmap.shortestPath(source, target);
 	vector<vector<double> > the_path = d_main_roadmap.vertex_list_to_q(the_path_nodes);
+	cout << "Path len: " << the_path.size() << endl;
 	return the_path;
 }
 
@@ -123,6 +124,38 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 //
 ////		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 //}
+
+
+string PathPlanner::range_string(string map_name) {
+  check_map(map_name);
+  ostringstream oss("range:");
+  try {
+	oss << "range of map [" << map_name << "]" << endl;
+	pair<vector<float>, vector<float> > bbox = roadmap(map_name).get_workspace_bounding_box();
+	
+	oss << "[";
+	for (size_t i(0); i < bbox.first.size(); ++i)
+							  oss << bbox.first[i] << " ";
+	oss << "] [";
+	for (size_t i(0); i < bbox.second.size(); ++i)
+	  oss << bbox.second[i] << " ";
+	oss << "]" << endl;
+  }
+  catch (...) {
+	oss << "Failed" << endl;
+  }
+  return oss.str();
+}
+
+string PathPlanner::range_strings() {
+  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+  
+  string str;
+  for (; it != it_end; ++it)
+	str += range_string(it->first) + "\n";
+  return str;
+}
+
 
 void PathPlanner::update_map(std::string mapname) {
 	//get simulator
