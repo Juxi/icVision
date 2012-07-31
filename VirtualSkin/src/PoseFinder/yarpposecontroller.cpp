@@ -165,7 +165,6 @@ void YarpPoseController::run () {
 		char *help_message = "Possible Commands:\n"
 		  "load [name] [file]\t--\tload map in [file] under name [name]\n"
 		  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
-		  "con [name] [n]\t--\tconnect map [name] with n neirest neighbours\n"
 		  "ran\t--\tshow all ranges\n"
 		  "ran [name]\t--\tshow range of mape [name]\n"
 		  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
@@ -230,6 +229,7 @@ void YarpPoseController::run () {
 			  int number = query.get(1).asInt();
 			  d_path_planner->connect_maps(number);
 			}
+			/*
 			if (query.size() == 3 && query.get(1).isString() && query.get(2).isInt()) { //con [name] [n]
 			  std::string map_name(query.get(1).asString().c_str());
 			  int n = query.get(2).asInt();
@@ -237,6 +237,7 @@ void YarpPoseController::run () {
 				throw StringException("n is too small or negative");
 			  d_path_planner->connect_map(map_name, n);
 			}
+			*/
 			break;
 
 		  case VOCAB_GET_RANGE:
@@ -267,162 +268,6 @@ void YarpPoseController::run () {
 	}
 }
 
-
-	/*
-
-
-					cout << "GO command, size: " << query.size() << endl;
-					if (!(query.size() >= 2)) {
-						response.addString("FAIL: not enough parameters");
-						break;
-						}
-
-					if (query.size() == 2) {
-					cout << "size==2 get source from mover" << endl;
-					source = get_current_pose();
-						cout << "target::" << endl;
-						target = bottle_to_vector(query.get(1));
-						cout << "target::" << endl;
-						print_vector(target);
-
-						cout << "finding path:" << endl;
-
-						assert(source.size() && target.size());
-						cout << "finding path:" << endl;
-						path = d_path_planner->find_configuration_workspace_path(source, target);
-						cout << "done:" << endl;
-
-					} else if (query.size() == 3 && query.get(1).isList()) {
-						cout << "size==3, first is list" << endl;
-						cout << "getting source" << endl;
-						source = bottle_to_vector(query.get(1));
-						target = bottle_to_vector(query.get(2));
-						cout << "source:" << endl;
-						print_vector(source);
-						cout << "target:" << endl;
-						print_vector(target);
-						cout << "finding path:" << endl;
-						path = d_path_planner->find_workspace_path(source, target);
-					} else if (query.size() == 3 && query.get(1).isString()) {
-						cout << "size==3 source, first is string" << endl;
-						cout << "getting source" << endl;
-						source = get_current_pose();
-						target = bottle_to_vector(query.get(2));
-						cout << "source:" << endl;
-						print_vector(source);
-						cout << "target:" << endl;
-						print_vector(target);
-						cout << "finding path:" << endl;
-						string mapname(query.get(1).asString().c_str());
-						if (!d_path_planner->hasMap(mapname))
-						  throw StringException("Map doesnt exist");
-						path = d_path_planner->find_configuration_workspace_path(source, target, mapname);
-					} else if (query.size() == 4 && query.get(1).isString()) {
-					 	cout << "size==3 source to target" << endl;
-						cout << "getting source" << endl;
-						source = bottle_to_vector(query.get(2));
-						target = bottle_to_vector(query.get(3));
-						cout << "source:" << endl;
-						print_vector(source);
-						cout << "target:" << endl;
-						print_vector(target);
-						cout << "finding path:" << endl;
-						string mapname(query.get(1).asString().c_str());
-						if (!d_path_planner->hasMap(mapname))
-						  throw StringException("Map doesnt exist");
-						path = d_path_planner->find_workspace_path(source, target, mapname);
-					}
-
-					cout << path.size() << endl;
-					response.addString("path found");
-					
-					follow_path(path);
-					response.addString("OK");
-
-		//                        success           = (query.size() >= 1)  ?  mover.parseTrajBottle(query.get(1), thisTraj)  :  false;
-		//                        thisDistThreshold = (query.size() <= 2)  ?  distThreshold  :  query.get(2).asDouble();
-		//                        thisStepTimeout   = (query.size() <= 3)  ?  stepTimeout  :  query.get(3).asDouble();
-		//                        success = success && mover.go(thisTraj, thisDistThreshold, thisStepTimeout);
-		//                        if (success)
-		//                                response.addString("OK");
-		//                        else
-		//                                response.addString("FAIL");
-					break;
-				case VOCAB_HELP:
-
-				cout << "HELP command" << endl;
-		//                        response.addVocab(Vocab::encode("many"));
-						response.addVocab(Vocab::encode("many"));
-						response.addString("iCub Path Planner:\n"
-											"plan: go (source) (target)\n"
-											"      go mapname (source) (target)\n"
-											"load map: load map_name map_file \n"
-											"connect map: con {n nearest neighbours}\n"
-											"update edge weights: up\n"
-											"get workspace range: ran {map_name}");
-						break;
-				case VOCAB_LOAD:
-				  if (query.size() >= 3 && query.get(1).isString() && query.get(2).isString()) {
-				        std::string map_name = query.get(1).asString().c_str();
-						std::string map_file = query.get(2).asString().c_str();
-						if (d_path_planner->load_map(map_name, map_file)) {
-							response.addString("OK");
-						} else {
-							response.addString("FAIL");
-						}
-					} else
-						response.addString("FAIL");
-					break;
-				case VOCAB_CONNECT:
-					if (query.size() >= 2 && query.get(1).isInt()) {
-					    int number = query.get(1).asInt();
-						d_path_planner->connect_maps(number);
-						response.addString("OK");
-					} else
-						response.addString("FAIL");
-					break;
-				case VOCAB_UPDATE:
-					cout << "planner ptr: " << d_path_planner << endl;
-					d_path_planner->update_maps();
-					response.addString("OK");
-					break;
-				case VOCAB_GET_RANGE:
-				{
-				  std::string map_name("default");
-				  if (query.size() >= 2 && query.get(1).isString())
-					map_name = query.get(1).asString().c_str();
-					if (d_path_planner->hasMap(map_name)) {
-
-						ostringstream oss("range:");
-						try {
-							cout << "Calculating range of map [" << map_name << "]" << endl;
-							pair<vector<float>, vector<float> > bbox = d_path_planner->roadmap(map_name).get_workspace_bounding_box();
-					  
-							oss << endl;
-							oss << "[";
-							for (size_t i(0); i < bbox.first.size(); ++i)
-								oss << bbox.first[i] << " ";
-							oss << "] [";
-							for (size_t i(0); i < bbox.second.size(); ++i)
-								oss << bbox.second[i] << " ";
-							oss << "]" << endl;
-							}
-						catch (...) {
-							oss << "Failed" << endl;
-						}
-						response.addVocab(Vocab::encode("many"));
-						response.addString(oss.str().c_str());
-					} else
-						response.addString("FAIL");
-						response.addString("map not found");
-					break;
-				}
-				default:
-					response.addString("OK");
-					response.addString("Unknown Command. Type help for more information.");
-					break;
-			}
-	*/
 
 
 Bottle YarpPoseController::poses_to_bottle(vector<vector<double> > &path) {

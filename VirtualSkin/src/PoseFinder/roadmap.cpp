@@ -80,7 +80,7 @@ pair< Roadmap::edge_t, vector<double> > Roadmap::randomMove()
 	return result;
 }
 
-
+/*
 list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::aToB( Roadmap::vertex_t from, Roadmap::vertex_t to )
 {
 	list< pair< edge_t, vertex_t > > result;
@@ -98,7 +98,9 @@ list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::aToB( Roadmap::verte
 	}
 	return result;
 }
+*/
 
+ /*
 list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
 {
 	list< pair< edge_t, vertex_t > > result;
@@ -109,6 +111,7 @@ list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
 	}
 	return result;
 }
+ */
 
 /*void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
 {
@@ -430,9 +433,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath_backup( vertex_t from, vertex_t to
 	
 	return path;
 }
-
-
-list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
+list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester)
 {
 	cout << endl << "Running A*... " << from << " " << to << endl; 
 	vector<vertex_t> parents(num_vertices(map));
@@ -474,6 +475,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	  cout << "num vertices: " << num_vertices(map) << endl;
 	  cout << "num edges: " << num_edges(map) << endl;
 
+
 	  astar_search
 		(map, from,
 		 distance_heuristic<Map, double>
@@ -481,7 +483,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 		 weight_map( get(&Edge::length2, map) )
 		 .predecessor_map(&p[0])
 		 .distance_map(&d[0])
-		 .visitor(astar_goal_visitor<vertex_t, edge_t>(to)));
+		 .visitor(astar_goal_visitor<vertex_t, edge_t>(to, edge_tester)));
 
   
 	} catch(found_goal fg) { // found a path to the goal 
@@ -505,11 +507,11 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to )
 	return path;
 }  
 
-list<Roadmap::vertex_t>  Roadmap::shortestPath( vector<double> from, vector<double> to ) {
+list<Roadmap::vertex_t>  Roadmap::shortestPath( vector<double> from, vector<double> to, EdgeTester<edge_t> &edge_tester) {
 	Roadmap::vertex_t from_desc = nearestVertex(from);
 	Roadmap::vertex_t to_desc = nearestVertex(to);
 
-	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc);
+	list<Roadmap::vertex_t> path = shortestPath(from_desc, to_desc, edge_tester);
 	return path;
 }
 

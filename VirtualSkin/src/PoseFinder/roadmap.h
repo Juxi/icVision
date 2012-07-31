@@ -202,10 +202,13 @@ public:
 	std::vector<double> nearestVector(std::vector<double> q);
 	std::vector<double> nearestWorkspaceVector(std::vector<double> q);
 
-	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
+	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester);
+	//std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
 
 	std::list<Roadmap::vertex_t> shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
-	std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR
+
+	std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
+	//std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR 
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 

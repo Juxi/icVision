@@ -75,7 +75,7 @@ class PathPlanner {
 
 		d_main_roadmap.setDimensionality(d_dimensionality);
 		d_main_roadmap.scale_vector = get_scale_vector();
-		//add_bullshit();
+		add_bullshit();
 	  }
 		  
 	void load_map(std::string mapname, std::string filename) {
@@ -145,6 +145,40 @@ class PathPlanner {
 	std::vector<double> get_scale_vector();
 
 
+
+	class CollisionEdgeTester : public EdgeTester<edge_t>{
+	public:
+	  Roadmap &d_roadmap;
+	  Simulator &d_simulator;
+	  size_t d_resolution;
+	  
+	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, size_t resolution) : d_roadmap(roadmap), d_simulator(simulator), d_resolution(resolution) {}
+	  
+	  void operator()(edge_t &edge) {
+		std::vector<double> q_start = d_roadmap.map[source(edge, d_roadmap.map)].q;
+		std::vector<double> q_end = d_roadmap.map[target(edge, d_roadmap.map)].q;
+		
+		int n_collisions = d_roadmap.map[source(edge, d_roadmap.map)].collisions + d_roadmap.map[source(edge, d_roadmap.map)].collisions;
+		
+		for (size_t i(0); i < d_resolution; ++i) {
+		  if (n_collisions > 0)
+			break;
+		  float portion(static_cast<float>(i) / (d_resolution - 1));
+		  std::vector<double> q(q_start.size());
+		  for (size_t n(0); n < q.size(); ++n)
+			q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
+		  std::vector<double> q_real = d_simulator.real_to_normal_motors(q);
+		  d_simulator.set_motors(q_real);
+		  n_collisions = std::max(d_simulator.computePose(), n_collisions);
+		}
+		
+		double length = get(&Roadmap::Edge::length, d_roadmap.map, edge);
+		put(&Roadmap::Edge::length2, d_roadmap.map, edge, length + 100000. * n_collisions);
+		
+	  }
+	};
+
+	
 };
 
 #endif

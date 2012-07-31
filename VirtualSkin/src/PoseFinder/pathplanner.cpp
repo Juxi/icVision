@@ -66,7 +66,10 @@ vector<double> PathPlanner::closest_workspace(string mapname, vector<double> wor
 }
 
 vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target) {
-	Roadmap::PathList the_path_nodes = d_main_roadmap.shortestPath(source, target);
+  size_t resolution(10);
+  CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), resolution);
+
+  Roadmap::PathList the_path_nodes = d_main_roadmap.shortestPath(source, target, collision_edge_tester);
 	vector<vector<double> > the_path = d_main_roadmap.vertex_list_to_q(the_path_nodes);
 	cout << "Path len: " << the_path.size() << endl;
 	return the_path;
@@ -90,40 +93,6 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 	}
 	return cut_pose;
 }
-
-//void PathPlanner::update_map() {
-//	//get simulator
-//	Simulator &simulator(d_posefinder.simulator());
-//
-//	//loop over vertexes
-//	pair<vertex_i, vertex_i> map_vertices(vertices(d_roadmap.map));
-//	vertex_i vertex_it(map_vertices.first);
-//
-//	for (; vertex_it != map_vertices.second; ++vertex_it) {
-//		vector<double> q_norm(d_roadmap.map[*vertex_it].q);
-//		vector<double> q = simulator.real_to_normal_motors(q_norm);
-//
-//		simulator.set_motors(q);
-//		size_t n_collisions = simulator.computePose();
-//
-//		cout << n_collisions << endl;
-//		d_roadmap.map[*vertex_it].collisions = n_collisions;
-//	}
-//
-//	//loop all edges
-//	pair<edge_i, edge_i> map_edges(edges(d_roadmap.map));
-//	edge_i edge_it(map_edges.first);
-//	for (; edge_it != map_edges.second; ++edge_it) {
-//		size_t n_collisions =  d_roadmap.map[source(*edge_it, d_roadmap.map)].collisions + d_roadmap.map[target(*edge_it, d_roadmap.map)].collisions;
-//		//d_roadmap.map[*edge_it].length = 1. + n_collisions * 99999.;+
-//		double length = get(&Roadmap::Edge::length, d_roadmap.map, *edge_it);
-//		put(&Roadmap::Edge::length2, d_roadmap.map, *edge_it, length + 100000. * n_collisions);
-//
-//		//length should be distance of q's
-//	}
-//
-////		d_road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
-//}
 
 
 string PathPlanner::range_string(string map_name) {

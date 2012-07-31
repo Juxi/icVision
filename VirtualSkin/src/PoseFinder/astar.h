@@ -38,12 +38,18 @@ template <class Graph, class CostType>
 
 struct found_goal {}; // exception for termination
 
+template <typename Edge>
+class EdgeTester {
+ public:
+  virtual void operator()(Edge &edge) = 0;
+};
+
 // visitor that terminates when we find the goal
 template <class Vertex, class Edge>
   class astar_goal_visitor : public boost::default_astar_visitor
   {
   public:
-  astar_goal_visitor(Vertex goal) : m_goal(goal) {}
+  astar_goal_visitor(Vertex goal, EdgeTester<Edge> &edge_tester) : m_goal(goal), d_edge_tester(edge_tester) {}
 	
 	template <class Graph>
 	  void examine_vertex(Vertex u, Graph& g) {
@@ -54,11 +60,13 @@ template <class Vertex, class Edge>
 
 	template <class Graph>
 	  void examine_edge(Edge e, Graph& g) {
+	  d_edge_tester(e);
 	  std::cout << "e " << e << std::endl;
 	}
 
   private:
 	Vertex m_goal;
+	EdgeTester<Edge> &d_edge_tester;
   };
 
 
