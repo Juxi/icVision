@@ -66,18 +66,21 @@ vector<double> PathPlanner::closest_workspace(string mapname, vector<double> wor
 }
 
 vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target) {
-  size_t resolution(10);
+  size_t resolution(3);
   CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), resolution);
 
   Roadmap::PathList the_path_nodes = d_main_roadmap.shortestPath(source, target, collision_edge_tester);
 	vector<vector<double> > the_path = d_main_roadmap.vertex_list_to_q(the_path_nodes);
 	cout << "Path len: " << the_path.size() << endl;
+	cout << "N evaluated: " << collision_edge_tester.n_evaluations() << endl;
+	cout << "avg time: " << collision_edge_tester.n_seconds() / collision_edge_tester.n_evaluations() << endl;
+	cout << "total time: " << collision_edge_tester.n_seconds() << endl;
 	return the_path;
 }
 
 vector<vector<double> > PathPlanner::move_to_path(vector<double> source, vector<double> target) {
   vector<vector<double> > the_path;
-  the_path.push_back(source);
+  //the_path.push_back(source);
   the_path.push_back(target);
   return the_path;
 }

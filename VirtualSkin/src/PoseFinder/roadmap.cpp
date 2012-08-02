@@ -6,6 +6,9 @@
 //#include "widgetEdge.h"
 //#include "widgetNode.h"
 
+#include <boost/graph/random.hpp>
+#include <boost/random.hpp>
+
 using namespace std;
 using namespace boost;
 
@@ -298,6 +301,8 @@ Roadmap::Tree &Roadmap::get_tree(TreeMode tree_mode){
 	throw StringException("Tree not found");
 }
 
+
+
 void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 {	
 	Tree &the_tree = get_tree(tree_mode);
@@ -314,6 +319,7 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 			if (!boost::edge( p.vertex, it->first.vertex, map ).second) {
 				pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
 				map[edge.first].length = sqrt(it->second);
+				cout << sqrt(it->second) << endl;
 				++counter;
 			}
 			if (!boost::edge(it->first.vertex, p.vertex, map ).second) {
@@ -353,6 +359,20 @@ void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 	    break;
 	  }
 	}
+}
+
+
+void Roadmap::random_connect(size_t n) {
+  static mt19937 gen(23);
+  cout << "==random" << endl;
+  for (size_t i(0); i < n; ++i) {
+	vertex_t v1(random_vertex(map, gen)), v2(random_vertex(map, gen));
+	if (!boost::edge( v1, v2, map ).second) {
+	  pair<edge_t, bool> edge = boost::add_edge( v1, v2, map );
+	  map[edge.first].length = calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q));
+	  cout << calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q)) << endl;
+	}
+  }
 }
 
 Roadmap::vertex_t Roadmap::nearestVertex( vector<double> _q, char* type )

@@ -53,7 +53,7 @@ template <class Vertex, class Edge>
 	
 	template <class Graph>
 	  void examine_vertex(Vertex u, Graph& g) {
-	  std::cout << "examining vertex " << u << " " << m_goal << std::endl;
+	  //std::cout << "examining vertex " << u << " " << m_goal << std::endl;
 	  if(u == m_goal)
 		throw found_goal();
 	}
@@ -61,7 +61,7 @@ template <class Vertex, class Edge>
 	template <class Graph>
 	  void examine_edge(Edge e, Graph& g) {
 	  d_edge_tester(e);
-	  std::cout << "e " << e << std::endl;
+	  //std::cout << "e " << e << std::endl;
 	}
 
   private:

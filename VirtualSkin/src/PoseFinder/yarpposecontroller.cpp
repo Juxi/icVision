@@ -109,6 +109,8 @@ Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path
 
 void YarpPoseController::follow_path(vector<vector<double> > &path) {
   
+  if (path.size() == 0)
+	throw StringException("No Path Found");
 	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.size(); ++i) {
 		vector<double> pose(path[i]);
@@ -184,8 +186,7 @@ void YarpPoseController::run () {
 
 			  path = d_path_planner->move_to_path(source_conf, target_conf);
 			  follow_path(path);
-			}
-
+			} else
 			if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
 			  vector<vector<double> > path;
 
@@ -206,14 +207,16 @@ void YarpPoseController::run () {
 
 			  path = d_path_planner->find_path(source_conf, target_conf);
 			  follow_path(path);
-			}
+			} else
+			  throw StringException("Wrong arguments in command");
 			break;
 
 		  case VOCAB_HELP:
 			if (query.size() == 1) { //help
 			  response.addVocab(Vocab::encode("many"));
 			  response.addString(help_message);
-			}
+			} else
+			  throw StringException("Wrong arguments in command");
 			break;
 
 		  case VOCAB_LOAD:
@@ -221,14 +224,17 @@ void YarpPoseController::run () {
 			  std::string map_name(query.get(1).asString().c_str());
 			  std::string map_file(query.get(2).asString().c_str());
 			  d_path_planner->load_map(map_name, map_file);
-			}
+			} else
+			  throw StringException("Wrong arguments in command");
+
 			break;
 
 		  case VOCAB_CONNECT:
 			if (query.size() == 2 && query.get(1).isInt()) { //con [n]
 			  int number = query.get(1).asInt();
 			  d_path_planner->connect_maps(number);
-			}
+			} else
+			  throw StringException("Wrong arguments in command");
 			/*
 			if (query.size() == 3 && query.get(1).isString() && query.get(2).isInt()) { //con [name] [n]
 			  std::string map_name(query.get(1).asString().c_str());
@@ -244,19 +250,25 @@ void YarpPoseController::run () {
 			if (query.size() == 1) {//ran
 			  response.addVocab(Vocab::encode("many"));
 			  response.addString(d_path_planner->range_strings().c_str());
-			}
+			} else
 
 			if (query.size() == 2 && query.get(1).isString()) {//ran [name]
 			  std::string map_name(query.get(1).asString().c_str());
 			  response.addVocab(Vocab::encode("many"));
 			  response.addString(d_path_planner->range_string(map_name).c_str());
-			}
+			} else
+			  throw StringException("Wrong arguments in command");
 			break;
 
 		  case VOCAB_INFO:  //info
 			if (query.size() == 1) //info
 			  throw StringException("Not Implemented");
+			else
+			  throw StringException("Wrong arguments in command");
 			break;
+
+		default:
+		  throw StringException("Not a recognized command");
 		  }
 		}
 		catch (StringException &error) {

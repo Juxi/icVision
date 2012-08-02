@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <ctime>
+
 //#include <CGAL/Homogeneous_d.h>
 //#include <CGAL/Gmpz.h>
 //#include <CGAL/Delaunay_d.h>
@@ -97,12 +99,16 @@ class PathPlanner {
 	}
 	
 	void connect_maps(size_t n) {
+	  if (d_main_roadmap.size() == 0)
+		throw StringException("No maps loaded yet");
 	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
 	  
 	  for (; it != it_end; ++it)
 		connect_map(it->first, n);
 
 	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
+	  //d_main_roadmap.connect_delaunay();
 	}
 
 
@@ -151,10 +157,16 @@ class PathPlanner {
 	  Roadmap &d_roadmap;
 	  Simulator &d_simulator;
 	  size_t d_resolution;
-	  
-	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, size_t resolution) : d_roadmap(roadmap), d_simulator(simulator), d_resolution(resolution) {}
+	  size_t d_n_evaluations;
+	  std::clock_t d_clock;
+
+	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, size_t resolution) : d_roadmap(roadmap), d_simulator(simulator), d_resolution(resolution), d_n_evaluations(0), d_clock(0) {}
 	  
 	  void operator()(edge_t &edge) {
+		if (get(&Roadmap::Edge::evaluated, d_roadmap.map, edge))
+		  return;
+
+		std::clock_t start_clock(std::clock());
 		std::vector<double> q_start = d_roadmap.map[source(edge, d_roadmap.map)].q;
 		std::vector<double> q_end = d_roadmap.map[target(edge, d_roadmap.map)].q;
 		
@@ -173,9 +185,20 @@ class PathPlanner {
 		}
 		
 		double length = get(&Roadmap::Edge::length, d_roadmap.map, edge);
-		put(&Roadmap::Edge::length2, d_roadmap.map, edge, length + 100000. * n_collisions);
-		
+		if (!n_collisions)
+		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, length);
+		else
+		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, FLT_MAX);
+		put(&Roadmap::Edge::evaluated, d_roadmap.map, edge, true);
+
+		++d_n_evaluations;
+		std::clock_t end_clock(std::clock());
+		d_clock += end_clock - start_clock;
 	  }
+
+	  size_t n_evaluations(){return d_n_evaluations;}
+
+	  double n_seconds(){return static_cast<double>(d_clock) / CLOCKS_PER_SEC;}
 	};
 
 	

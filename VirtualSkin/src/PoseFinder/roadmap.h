@@ -68,7 +68,7 @@ public:
 	Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0), evaluated(false) {}
 	};
 	
-	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::directedS, 
+	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::undirectedS, 
 									Vertex,
 									Edge											>	Map;
 	
@@ -176,7 +176,10 @@ public:
 	vertex_t insert( std::vector<double> _x, std::vector<double> _q, std::string name);
 	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
 	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
-	
+
+	void random_connect(size_t n);
+	void connect_delaunay();
+
 	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
 	void load( std::vector< std::vector<double> >& graphNodes, std::vector< std::pair<int,int> >& graphEdges );

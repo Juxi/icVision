@@ -55,7 +55,7 @@ inline std::vector<std::vector<double> > extract_path(std::vector<std::vector<do
 	Roadmap::PathList the_path_nodes = road_map.shortestPath(start, goal);
 	std::vector<std::vector<double> > the_path = road_map.vertex_list_to_q(the_path_nodes);
 	return the_path;
-}
+
 */
 
 

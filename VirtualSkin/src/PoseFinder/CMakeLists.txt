@@ -20,6 +20,7 @@ SET ( src_files posefinder.cpp
 		yarpposecontroller.cpp
 		demothreads.cpp
 		constraints.cpp
+		connect_delauny.cpp
 )
 
 IF ( WIN32 )
