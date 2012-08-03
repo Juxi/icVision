@@ -128,7 +128,7 @@ string PathPlanner::range_strings() {
   return str;
 }
 
-
+/*
 void PathPlanner::update_map(std::string mapname) {
 	//get simulator
 	Simulator &simulator(d_posefinder.simulator());
@@ -182,10 +182,10 @@ void PathPlanner::update_map(std::string mapname) {
 //		road_map.insert(0, 0, configurations[i], fitnesses[i], collisions[i]);
 }
 
-
 void PathPlanner::update_maps() {
   roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
   
   for (; it != it_end; ++it)
 	update_map(it->first);
 }
+*/

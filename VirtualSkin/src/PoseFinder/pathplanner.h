@@ -112,8 +112,8 @@ class PathPlanner {
 	}
 
 
-	void update_maps();//check for collisions and change weights
-	void update_map(std::string mapname);
+	//void update_maps();//check for collisions and change weights
+	//void update_map(std::string mapname);
 
 	std::string range_string(std::string map_name);
 	std::string range_strings();
@@ -186,7 +186,7 @@ class PathPlanner {
 		
 		double length = get(&Roadmap::Edge::length, d_roadmap.map, edge);
 		if (!n_collisions)
-		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, length);
+		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, pow(length, 1.2));
 		else
 		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, FLT_MAX);
 		put(&Roadmap::Edge::evaluated, d_roadmap.map, edge, true);

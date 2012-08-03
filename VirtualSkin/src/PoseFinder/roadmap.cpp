@@ -369,7 +369,8 @@ void Roadmap::random_connect(size_t n) {
 	vertex_t v1(random_vertex(map, gen)), v2(random_vertex(map, gen));
 	if (!boost::edge( v1, v2, map ).second) {
 	  pair<edge_t, bool> edge = boost::add_edge( v1, v2, map );
-	  map[edge.first].length = calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q));
+	  double distance = calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q));
+	  map[edge.first].length = distance;
 	  cout << calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q)) << endl;
 	}
   }
@@ -377,9 +378,9 @@ void Roadmap::random_connect(size_t n) {
 
 Roadmap::vertex_t Roadmap::nearestVertex( vector<double> _q, char* type )
 {
-	if ( _q.size() != dim ) { throw StringException("wrong size state vector"); }
+  if ( _q.size() != dim ) { printf("2: wrong size state vector, is %lu, not %lu\n",_q.size(), dim); throw StringException("wrong size state vector"); }
 	if ( tree.size() == 0 ) { throw StringException("nothing in tree"); }
-
+	
 	//cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << endl;
 
 	size_t const check_n(40);
@@ -528,6 +529,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeT
 }  
 
 list<Roadmap::vertex_t>  Roadmap::shortestPath( vector<double> from, vector<double> to, EdgeTester<edge_t> &edge_tester) {
+  cout << "shortest path: " << from.size() << " " << to.size() << endl;
 	Roadmap::vertex_t from_desc = nearestVertex(from);
 	Roadmap::vertex_t to_desc = nearestVertex(to);
 

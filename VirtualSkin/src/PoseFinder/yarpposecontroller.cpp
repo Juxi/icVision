@@ -10,6 +10,8 @@
 #include <vector>
 #include <cassert>
 #include <string>
+
+#include "sprintf.h"
 //
 //#include "pathplanner.h"
 #include <yarp/os/all.h>
@@ -152,7 +154,7 @@ void YarpPoseController::run () {
 	if (!d_mover.open("/to_mover"))
 		throw StringException("Couldnt open rpc mover Client");
 	if (!d_mover.addOutput(d_mover_portname.c_str()))
-		throw StringException("Couldnt connect the ports");
+		throw StringException("Couldnt connect to port of mover");
 //	if (!d_yarp.connect("/blaat", d_mover_portname.c_str()))
 //			throw StringException("Couldnt connect the ports");
 	while (true) {
@@ -204,6 +206,10 @@ void YarpPoseController::run () {
 			  cout << "target:" << endl;
 			  print_vector(target_conf);
 			  cout << "finding path:" << endl;
+
+			  if (source_conf.size() != target_conf.size()) {
+				throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
+			  }
 
 			  path = d_path_planner->find_path(source_conf, target_conf);
 			  follow_path(path);
