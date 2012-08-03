@@ -1,5 +1,6 @@
-#include "xnes.h"
-#include "assert.h"
+#include "matrix.h"
+#include <string.h>
+#include <algorithm>
 
 unsigned int rngState[3] = {0, 0, 0};
 
@@ -38,6 +39,12 @@ Matrix::Matrix(double* data, unsigned int rows, unsigned int cols)
 {
 	resize(rows, cols);
 	if (size() > 0) memcpy(&m_data[0], data, size() * sizeof(double));
+}
+
+Matrix::Matrix(std::vector<double> &other)
+{
+  resize(other.size(), 1);
+	if (size() > 0) memcpy(&m_data[0], &other[0], size() * sizeof(double));
 }
 
 Matrix::~Matrix()
