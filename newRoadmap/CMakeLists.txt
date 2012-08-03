@@ -40,7 +40,7 @@ ENDIF ( WIN32 )
 # 
 # FIND AND CONFIGURE CGAL
 #
-#SET ( CGAL_DIR "/opt/local/lib" )
+SET ( CGAL_DIR "/opt/local/lib/cmake" )
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 if ( COMMAND cmake_policy )
   cmake_policy( SET CMP0003 NEW )  
@@ -49,6 +49,7 @@ find_package(CGAL QUIET COMPONENTS Core )
 if ( CGAL_FOUND )
   include( ${CGAL_USE_FILE} )
   include( CGAL_CreateSingleSourceCGALProgram )
+  include_directories (BEFORE "../include")
 else()
   message(STATUS "This program requires the CGAL library, and will not be compiled.")
 endif()
@@ -59,6 +60,7 @@ SET ( src_files	main.cpp
 		#iCubController.cpp
 		roadmap.cpp
 		graphwidget.cpp
+		bodyPartWidget.cpp
 		widgetNode.cpp
 		widgetEdge.cpp
 		#newMapDialog.cpp
@@ -70,6 +72,7 @@ SET ( hdr_files	roadmap.h
 		#partController.h
 		#iCubController.h
 		graphwidget.h
+		bodyPartWidget.h
 		widgetNode.h
 		widgetEdge.h
 		#newMapDialog.h
@@ -80,6 +83,7 @@ SET ( hdr_files	roadmap.h
 
 SET ( QT_MOC_FILES 	#iCubController.h
 			graphwidget.h
+			bodyPartWidget.h
 			roadmap.h
 			#newMapDialog.h
 			mainwindow.h

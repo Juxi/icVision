@@ -32,9 +32,9 @@ bool Roadmap::insert( std::vector<double> q, vertex_t& v, bool display )
 	v = boost::add_vertex( Vertex(q.size(),q.begin(),q.end() ), boostGraph );
 	boostGraph[v].vertex_t = v;
 	
-	std::cout << "Vertex " << v << " " << boostGraph[v].vertex_t << ": " << boostGraph[v] << std::endl;
+	//std::cout << "Vertex " << v << " " << boostGraph[v].vertex_t << ": " << boostGraph[v] << std::endl;
 	
-	cgalTree.insert(boostGraph[v]);
+	cgalTree->insert(boostGraph[v]);
 	
 	if ( display )
 		emit appendedNode( v );
@@ -84,37 +84,33 @@ bool Roadmap::shortestPath( vertex_t from, vertex_t to, std::list<vertex_t>& pat
 	} catch( ... ) { printf("dijkstra's threw an exception\n\n"); }
 	
 	path.push_front(to);
-	while ( path.front() != from )
-	{
-		if ( parents[path.front()] == path.front() )
-		{
-			printf("target pose unreachable. no path through the graph\n");
-			return false;
-		}
-		path.push_front(parents[path.front()]);
-	}
+	//std::vector<vertex_t>::iterator i = path.front();
+	//while ( path.front() != from )
+	//{
+		//if ( parents[path.front()] == path.front() )
+		//{
+		//	printf("target pose unreachable. no path through the graph\n");
+		//	return false;
+		//}
+		//path.push_front(parents[path.front()]);
+	//}
 	
-	printf("path: ");
-	for (std::list<vertex_t>::iterator i = path.begin(); i != path.end(); ++i )
-		printf("%d ",*i);
-	printf("\n");
+	//printf("path: ");
+	//for (std::list<vertex_t>::iterator i = path.begin(); i != path.end(); ++i )
+	//	printf("%d ",*i);
+	//printf("\n");
 	
 	return true;
 }
 
 bool Roadmap::nearestVertices( vertex_t vertex, std::vector<vertex_t>& neighbors, std::vector<double>& distances, int n )
 {
-	//if ( _q.size() != dim ) { throw("wrong size state vector"); }	
-	//std::cout << "(" << _q.size() << "," << (unsigned int)iCub.getNumJoints() << ")" << std::endl;
-	
-	printf("tree size: %d\n", cgalTree.size());
+	printf("tree size: %d\n", cgalTree->size());
 	printf("graph size: %d\n", num_vertices(boostGraph));
 	
-	std::cout << "QUERYING VERTEX " << vertex << ". vertex_t = " << boostGraph[vertex].vertex_t << ". Point_d = " << boostGraph[vertex] << std::endl;
+	//std::cout << "QUERYING VERTEX " << vertex << ". vertex_t = " << boostGraph[vertex].vertex_t << ". Point_d = " << boostGraph[vertex] << std::endl;
 	printf("SEARCHING FOR %d NEAREST NEIGHBORS\n", n);
-	K_neighbor_search search( cgalTree, boostGraph[vertex], n );
-	//if ( search.begin() == search.end() )
-	//	return false;
+	K_neighbor_search search( *cgalTree, boostGraph[vertex], n );
 	
 	int count = 0;
 	K_neighbor_search::iterator i;
@@ -125,13 +121,14 @@ bool Roadmap::nearestVertices( vertex_t vertex, std::vector<vertex_t>& neighbors
 	}
 	
 	printf("FOUND %d NEIGHBORS\n", count);
-	printf("size of neighbors: %d\n", neighbors.size());
-	printf("size of distances: %d\n", distances.size());
+	printf("BoostGraph Vertex: %p, CGAL Point: %p\n", &boostGraph[vertex], &(search.begin()->first) );
+	//printf("size of neighbors: %d\n", neighbors.size());
+	//printf("size of distances: %d\n", distances.size());
 	
 	std::vector<vertex_t>::iterator j;
 	std::vector<double>::iterator k;
 	for ( j=neighbors.begin(), k=distances.begin(); j!=neighbors.end() && k!=distances.end(); j++, k++ )
-		std::cout << "vertex " << *j << " " << boostGraph[*j].vertex_t << ": " << boostGraph[*j] << ", distance: " << *k << std::endl;
+		std::cout << "vertex " << *j << ": " << boostGraph[*j] << ", distance: " << *k << std::endl;
 	std::cout << std::endl;
 	
 	return true;
@@ -240,24 +237,34 @@ void Roadmap::data( std::vector< std::vector<double> >* graphNodes, std::vector<
 	cout << "DONE loading poses" << endl;
 }*/
 
+void Roadmap::removeNode( Roadmap::vertex_t node )
+{
+	printf("\nremoving node %d\n", boostGraph[node].vertex_t);
+	emit removeQtGraphNode(boostGraph[node].qtGraphNode);
+
+	clear_vertex( node, boostGraph );
+	remove_vertex( node, boostGraph );
+	
+	
+	//cgalTree->invalidate_built();
+	CGAL_Tree newTree;
+	cgalTree = new CGAL_Tree();
+	cgalTree->statistics(std::cout);
+	
+	Roadmap::vertex_i vi, vi_end;
+	std::vector<Roadmap::Vertex> graphNodes;
+	tie(vi, vi_end) = vertices(boostGraph);
+	for (  ; vi != vi_end; ++vi ) {
+		graphNodes.push_back( boostGraph[*vi] );
+	}
+
+	cgalTree->insert(graphNodes.begin(),graphNodes.end());
+}
+
 void Roadmap::removeEdge( Roadmap::edge_t edge )
 {
-	//if ( map[edge].qtGraphEdge )
-		//map[edge].qtGraphEdge->flagRemoval();
-	
-	//emit removeQtGraphEdge(map[edge].qtGraphEdge);
-	
-	// important to do this in this order...  the Qt edge object outlives the boost graph edge
-	// TODO: fix this...  its ugly
-
-	//deletedEdge = map[edge].qtGraphEdge;
-	//if ( deletedEdge )
-	//	emit newEdgeWeight( deletedEdge, 0 );
-	
-	setEdgeWeight( edge, 0 );
+	emit removeQtGraphEdge(boostGraph[edge].qtGraphEdge);
 	remove_edge( edge, boostGraph );
-    
-    //map[edge].length = 1000000;
 }
 
 void Roadmap::removeAllEdges()

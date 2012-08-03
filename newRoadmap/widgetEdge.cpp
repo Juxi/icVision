@@ -49,7 +49,8 @@
 static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
 
-QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	//renderMe(true),
+QtGraphEdge::QtGraphEdge(QtGraphNode *sourceNode, QtGraphNode *destNode) :	deathWish(false),
+																			//renderMe(true),
 																			color(Qt::darkGray),
 																			weight(1)
 																			//newColor(Qt::black)

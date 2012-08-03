@@ -7,275 +7,274 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		2440639FE4A6467BB38FAEB2 /* ZERO_CHECK */ = {
+		666FD3A0912F4273A9570AAA /* ALL_BUILD */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = C8E03452E4CF496E9B87424C /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildConfigurationList = 6971A5E2A14B4DCBA5EE846D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
 			buildPhases = (
-				4BEAD6C3DCC641DEA333B751 /* CMake Rules */,
+				90689EF95B714DE39390FE15 /* CMake Rules */,
+			);
+			dependencies = (
+				39E2D10DD2B1472798315168 /* PBXTargetDependency */,
+				962ADBD4875040688462FD71 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		773E3D3249D748D9AA653387 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A71B483A4E834E6D95FD65B6 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				D238F5B9E76E45D4A4912D0A /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				9F5F2F95CA724FB692F0DB9C /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		9670216539A14FD494ACCDB5 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3697510D97124CC4A590FD32 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				A842A2F68CF049BF970395AA /* CMake Rules */,
 			);
 			dependencies = (
 			);
 			name = ZERO_CHECK;
 			productName = ZERO_CHECK;
 		};
-		6D242558986947739F99C646 /* ALL_BUILD */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = EDCDCC9398AD4CB09D063AFF /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
-			buildPhases = (
-				B3DEA5D42E264278B36EAA41 /* CMake Rules */,
-			);
-			dependencies = (
-				0BE8711D471F4864A67F033A /* PBXTargetDependency */,
-				5B9AE6AAE2AB4E6B83381528 /* PBXTargetDependency */,
-			);
-			name = ALL_BUILD;
-			productName = ALL_BUILD;
-		};
-		95C04AF57BC941A4B075C658 /* install */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = E30080CD3074451EA8F40BF6 /* Build configuration list for PBXAggregateTarget "install" */;
-			buildPhases = (
-				8B34A17C58E24447A980FFFB /* CMake PostBuild Rules */,
-			);
-			dependencies = (
-				11777700D1EA47179184AFF6 /* PBXTargetDependency */,
-			);
-			name = install;
-			productName = install;
-		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		18FD32F71CF943F9BFA5D385 /* mainwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF62E240B5AF4482A2931C28 /* mainwindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		2D97294667E84DED89EBA212 /* widgetEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13E3C145559841A785195E25 /* widgetEdge.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		4C94AD82A180401FA6B79806 /* moc_graphwidget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 1C9162A4C83941E48D6CD903 /* moc_graphwidget.cxx */; settings = {COMPILER_FLAGS = ""; }; };
-		528EE22A501D455683AE6974 /* widgetNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6DC7F0B5F4A138269A70B /* widgetNode.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		64B959740068497694EF60DD /* moc_roadmap.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD24331E4E46CD9A1D3A54 /* moc_roadmap.cxx */; settings = {COMPILER_FLAGS = ""; }; };
-		762A58FFCDC84D46AA2553E0 /* moc_mainwindow.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CE8C45623A9347DA8CD9AE35 /* moc_mainwindow.cxx */; settings = {COMPILER_FLAGS = ""; }; };
-		9BDBB454BC73483384530AE9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A804D86A136439FA7F04137 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		AFA8919856324EAD904E8483 /* roadmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC9035B139B42478A1408C7 /* roadmap.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		B542F69C13E64D4F8FEC28CC /* graphwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 426FA5A05BA140F6AE6974ED /* graphwidget.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		155E4432F7584854AA36631F /* moc_roadmap.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 3602F3A7C8164A10B4C82D25 /* moc_roadmap.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		4FCE5EE37ECB42D68AD8D848 /* moc_mainwindow.cxx in Sources */ = {isa = PBXBuildFile; fileRef = E2E83BA3B5D04185A7B65E32 /* moc_mainwindow.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		57CAD6B2B3A942F0B538C915 /* roadmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 374CA4D94B2B44C3BFF0FDB2 /* roadmap.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6B6B8A8F94D643718FF24697 /* bodyPartWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B42D60EE3B48CD85E6A82A /* bodyPartWidget.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A2DDED9EA1814C03A6800DCD /* moc_graphwidget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = EF505417EA3A4DF5A4FC53C7 /* moc_graphwidget.cxx */; settings = {COMPILER_FLAGS = ""; }; };
+		B3470723400C42049CFF31A6 /* widgetNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0CD42624E3C4AB092B86BDB /* widgetNode.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		B9912B832B534C12ABB19FD5 /* mainwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3868DE6986FF4B469CDC16F3 /* mainwindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D26E4EFB429A46F28A1CF6F3 /* graphwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E4D39541BA742A8A5BF7AA0 /* graphwidget.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D4E6E64DDC0940C3A2D9CFBF /* widgetEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C4AF7B847847C19BC1F4D5 /* widgetEdge.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		E8E3C194DF254477A97F7910 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D427BE4EACC34B7E980698F5 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		ECA5279ECCBE4B7992A2E78F /* moc_bodyPartWidget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E8A71513344458A8B8465 /* moc_bodyPartWidget.cxx */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		297824F7BAFD4C24BD2E6F43 /* PBXContainerItemProxy */ = {
+		6D7BDE5909464935BAB4301E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9AAEB5333E5448E7B0BC21CD /* Project object */;
+			containerPortal = 96242D592E5E4A64BA0126C8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2440639FE4A6467BB38FAEB2;
-			remoteInfo = ZERO_CHECK;
+			remoteGlobalIDString = 666FD3A0912F4273A9570AAA;
+			remoteInfo = ALL_BUILD;
 		};
-		5ABA2EAE70D54EFCBAC3CB1D /* PBXContainerItemProxy */ = {
+		859CCB5022DF4DC2964C5122 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9AAEB5333E5448E7B0BC21CD /* Project object */;
+			containerPortal = 96242D592E5E4A64BA0126C8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5A454827ACD643E0A9EF5824;
+			remoteGlobalIDString = 690F214BB104456789AD75C5;
 			remoteInfo = RoadmapDemo;
 		};
-		E166FB4486B14E57840EA503 /* PBXContainerItemProxy */ = {
+		8A19E4A2AC4F4401BE3A5E2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9AAEB5333E5448E7B0BC21CD /* Project object */;
+			containerPortal = 96242D592E5E4A64BA0126C8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6D242558986947739F99C646;
-			remoteInfo = ALL_BUILD;
+			remoteGlobalIDString = 9670216539A14FD494ACCDB5;
+			remoteInfo = ZERO_CHECK;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A804D86A136439FA7F04137 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
-		13E3C145559841A785195E25 /* widgetEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widgetEdge.cpp; sourceTree = SOURCE_ROOT; };
-		1C9162A4C83941E48D6CD903 /* moc_graphwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_graphwidget.cxx; path = xcode/moc_graphwidget.cxx; sourceTree = SOURCE_ROOT; };
-		426FA5A05BA140F6AE6974ED /* graphwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphwidget.cpp; sourceTree = SOURCE_ROOT; };
-		4E829376FC0845158CD931E6 /* moc_graphwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_graphwidget.cxx.rule; path = xcode/moc_graphwidget.cxx.rule; sourceTree = SOURCE_ROOT; };
-		60E22E6476E643A9A5A52BA7 /* RoadmapDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = RoadmapDemo; sourceTree = BUILT_PRODUCTS_DIR; };
-		77F9F17BB6A641C8B739E25E /* roadmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roadmap.h; sourceTree = SOURCE_ROOT; };
-		85F33BF0375E404AB733B52D /* mainwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainwindow.h; sourceTree = SOURCE_ROOT; };
-		8AB6DC7F0B5F4A138269A70B /* widgetNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widgetNode.cpp; sourceTree = SOURCE_ROOT; };
-		8E7D2E34A48E4B7CA143C4E1 /* widgetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widgetNode.h; sourceTree = SOURCE_ROOT; };
-		9AFD24331E4E46CD9A1D3A54 /* moc_roadmap.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_roadmap.cxx; path = xcode/moc_roadmap.cxx; sourceTree = SOURCE_ROOT; };
-		AE46EFE9BD0E4B13BD662BBB /* moc_mainwindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_mainwindow.cxx.rule; path = xcode/moc_mainwindow.cxx.rule; sourceTree = SOURCE_ROOT; };
-		AF62E240B5AF4482A2931C28 /* mainwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainwindow.cpp; sourceTree = SOURCE_ROOT; };
-		B4C071A252114FCC895443FA /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		CDBB275A72834160B85E7318 /* moc_roadmap.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_roadmap.cxx.rule; path = xcode/moc_roadmap.cxx.rule; sourceTree = SOURCE_ROOT; };
-		CE8C45623A9347DA8CD9AE35 /* moc_mainwindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_mainwindow.cxx; path = xcode/moc_mainwindow.cxx; sourceTree = SOURCE_ROOT; };
-		D3268E0EB83443AB82403CF4 /* widgetEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widgetEdge.h; sourceTree = SOURCE_ROOT; };
-		DAC9035B139B42478A1408C7 /* roadmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = roadmap.cpp; sourceTree = SOURCE_ROOT; };
-		F162228CE7B745DE9F1B123E /* graphwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphwidget.h; sourceTree = SOURCE_ROOT; };
+		04D2A90D19D24304A108F537 /* mainwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainwindow.h; sourceTree = SOURCE_ROOT; };
+		07A3D9D419F545529F7C89A5 /* RoadmapDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = RoadmapDemo; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E4D39541BA742A8A5BF7AA0 /* graphwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphwidget.cpp; sourceTree = SOURCE_ROOT; };
+		1C07496003074DC193CDF061 /* moc_mainwindow.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_mainwindow.cxx.rule; path = xcode/moc_mainwindow.cxx.rule; sourceTree = SOURCE_ROOT; };
+		3602F3A7C8164A10B4C82D25 /* moc_roadmap.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_roadmap.cxx; path = xcode/moc_roadmap.cxx; sourceTree = SOURCE_ROOT; };
+		374CA4D94B2B44C3BFF0FDB2 /* roadmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = roadmap.cpp; sourceTree = SOURCE_ROOT; };
+		3868DE6986FF4B469CDC16F3 /* mainwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainwindow.cpp; sourceTree = SOURCE_ROOT; };
+		38EB431FF9004272A7973AD2 /* widgetEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widgetEdge.h; sourceTree = SOURCE_ROOT; };
+		3D2E8A71513344458A8B8465 /* moc_bodyPartWidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_bodyPartWidget.cxx; path = xcode/moc_bodyPartWidget.cxx; sourceTree = SOURCE_ROOT; };
+		51B42D60EE3B48CD85E6A82A /* bodyPartWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bodyPartWidget.cpp; sourceTree = SOURCE_ROOT; };
+		6BC8B311C8DE4D139FECA18C /* graphwidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphwidget.h; sourceTree = SOURCE_ROOT; };
+		78AE701076734DA2BD61F821 /* moc_graphwidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_graphwidget.cxx.rule; path = xcode/moc_graphwidget.cxx.rule; sourceTree = SOURCE_ROOT; };
+		A0CD42624E3C4AB092B86BDB /* widgetNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widgetNode.cpp; sourceTree = SOURCE_ROOT; };
+		ADE7239A1A4945F59DE7CD92 /* moc_bodyPartWidget.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_bodyPartWidget.cxx.rule; path = xcode/moc_bodyPartWidget.cxx.rule; sourceTree = SOURCE_ROOT; };
+		B2C4AF7B847847C19BC1F4D5 /* widgetEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widgetEdge.cpp; sourceTree = SOURCE_ROOT; };
+		B45A2B61FEDE455BAA56B889 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		C16A60A393374DB484ECF2BC /* widgetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widgetNode.h; sourceTree = SOURCE_ROOT; };
+		D427BE4EACC34B7E980698F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		D4448E9388BE4E03B33B958A /* roadmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roadmap.h; sourceTree = SOURCE_ROOT; };
+		E2E83BA3B5D04185A7B65E32 /* moc_mainwindow.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_mainwindow.cxx; path = xcode/moc_mainwindow.cxx; sourceTree = SOURCE_ROOT; };
+		EBDA96A17988490C880DF890 /* bodyPartWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bodyPartWidget.h; sourceTree = SOURCE_ROOT; };
+		EF505417EA3A4DF5A4FC53C7 /* moc_graphwidget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_graphwidget.cxx; path = xcode/moc_graphwidget.cxx; sourceTree = SOURCE_ROOT; };
+		EF9885DD59BD47DE8C2CCEF2 /* moc_roadmap.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = moc_roadmap.cxx.rule; path = xcode/moc_roadmap.cxx.rule; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		1CA0E6544B0B4CD297CC4F11 /* RoadmapDemo */ = {
-			isa = PBXGroup;
-			children = (
-				8DA25E4311874DE995EB0571 /* Header Files */,
-				A840B90DD9704D40BF0619AD /* Source Files */,
-				3E724C26012A40E8AF355513 /* CMake Rules */,
-				B4C071A252114FCC895443FA /* CMakeLists.txt */,
-			);
-			name = RoadmapDemo;
-			sourceTree = "<group>";
-		};
-		1F2A963A33AB4189BA66F945 /* CMake Rules */ = {
+		076B580E3AD841249E4CFB2C /* CMake Rules */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = "CMake Rules";
 			sourceTree = "<group>";
 		};
-		2716CF50454B42889DDA35BB /* CMake Rules */ = {
+		1CFADAA481EC411896E75C9A /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		3E724C26012A40E8AF355513 /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-				4E829376FC0845158CD931E6 /* moc_graphwidget.cxx.rule */,
-				CDBB275A72834160B85E7318 /* moc_roadmap.cxx.rule */,
-				AE46EFE9BD0E4B13BD662BBB /* moc_mainwindow.cxx.rule */,
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		43D4822963454D7FA2B12177 /* ALL_BUILD */ = {
-			isa = PBXGroup;
-			children = (
-				2716CF50454B42889DDA35BB /* CMake Rules */,
-				B4C071A252114FCC895443FA /* CMakeLists.txt */,
-			);
-			name = ALL_BUILD;
-			sourceTree = "<group>";
-		};
-		74A1058FF9AD4C23B7A8C7A8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				60E22E6476E643A9A5A52BA7 /* RoadmapDemo */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		8DA25E4311874DE995EB0571 /* Header Files */ = {
-			isa = PBXGroup;
-			children = (
-				77F9F17BB6A641C8B739E25E /* roadmap.h */,
-				F162228CE7B745DE9F1B123E /* graphwidget.h */,
-				8E7D2E34A48E4B7CA143C4E1 /* widgetNode.h */,
-				D3268E0EB83443AB82403CF4 /* widgetEdge.h */,
-				85F33BF0375E404AB733B52D /* mainwindow.h */,
+				D4448E9388BE4E03B33B958A /* roadmap.h */,
+				6BC8B311C8DE4D139FECA18C /* graphwidget.h */,
+				EBDA96A17988490C880DF890 /* bodyPartWidget.h */,
+				C16A60A393374DB484ECF2BC /* widgetNode.h */,
+				38EB431FF9004272A7973AD2 /* widgetEdge.h */,
+				04D2A90D19D24304A108F537 /* mainwindow.h */,
 			);
 			name = "Header Files";
 			sourceTree = "<group>";
 		};
-		A840B90DD9704D40BF0619AD /* Source Files */ = {
+		4B257ADD6A1A4AA7B4AF6EF1 /* ALL_BUILD */ = {
 			isa = PBXGroup;
 			children = (
-				0A804D86A136439FA7F04137 /* main.cpp */,
-				DAC9035B139B42478A1408C7 /* roadmap.cpp */,
-				426FA5A05BA140F6AE6974ED /* graphwidget.cpp */,
-				8AB6DC7F0B5F4A138269A70B /* widgetNode.cpp */,
-				13E3C145559841A785195E25 /* widgetEdge.cpp */,
-				AF62E240B5AF4482A2931C28 /* mainwindow.cpp */,
-				1C9162A4C83941E48D6CD903 /* moc_graphwidget.cxx */,
-				9AFD24331E4E46CD9A1D3A54 /* moc_roadmap.cxx */,
-				CE8C45623A9347DA8CD9AE35 /* moc_mainwindow.cxx */,
+				076B580E3AD841249E4CFB2C /* CMake Rules */,
+				B45A2B61FEDE455BAA56B889 /* CMakeLists.txt */,
 			);
-			name = "Source Files";
+			name = ALL_BUILD;
 			sourceTree = "<group>";
 		};
-		DA2921E678794D6C8D0C732F /* Sources */ = {
+		601D2B3DBF734E2FA0472F13 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				43D4822963454D7FA2B12177 /* ALL_BUILD */,
-				1CA0E6544B0B4CD297CC4F11 /* RoadmapDemo */,
-				FF4E8FC78940467C8097F2DA /* ZERO_CHECK */,
+				4B257ADD6A1A4AA7B4AF6EF1 /* ALL_BUILD */,
+				C217BAB6A1BE49038B3111F2 /* RoadmapDemo */,
+				7FDB3742483340248A929B07 /* ZERO_CHECK */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
 		};
-		DC6EB638C9FC4956B58B069D = {
+		61B447A45CED44F3BAF5FF10 = {
 			isa = PBXGroup;
 			children = (
-				DA2921E678794D6C8D0C732F /* Sources */,
-				FE38E7D49ECB4F029229D783 /* Resources */,
-				74A1058FF9AD4C23B7A8C7A8 /* Products */,
+				601D2B3DBF734E2FA0472F13 /* Sources */,
+				C4188FB74DC84B9E97766B82 /* Resources */,
+				CD427D25F05F437AB2C2CF30 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FE38E7D49ECB4F029229D783 /* Resources */ = {
+		7FDB3742483340248A929B07 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				AFB0021381EB4815B077BAF6 /* CMake Rules */,
+				B45A2B61FEDE455BAA56B889 /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		AFB0021381EB4815B077BAF6 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		B46EC5BE4083462A89160C94 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				78AE701076734DA2BD61F821 /* moc_graphwidget.cxx.rule */,
+				ADE7239A1A4945F59DE7CD92 /* moc_bodyPartWidget.cxx.rule */,
+				EF9885DD59BD47DE8C2CCEF2 /* moc_roadmap.cxx.rule */,
+				1C07496003074DC193CDF061 /* moc_mainwindow.cxx.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		C217BAB6A1BE49038B3111F2 /* RoadmapDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1CFADAA481EC411896E75C9A /* Header Files */,
+				ECAAF0CD0AB7462A8ABE1058 /* Source Files */,
+				B46EC5BE4083462A89160C94 /* CMake Rules */,
+				B45A2B61FEDE455BAA56B889 /* CMakeLists.txt */,
+			);
+			name = RoadmapDemo;
+			sourceTree = "<group>";
+		};
+		C4188FB74DC84B9E97766B82 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		FF4E8FC78940467C8097F2DA /* ZERO_CHECK */ = {
+		CD427D25F05F437AB2C2CF30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A963A33AB4189BA66F945 /* CMake Rules */,
-				B4C071A252114FCC895443FA /* CMakeLists.txt */,
+				07A3D9D419F545529F7C89A5 /* RoadmapDemo */,
 			);
-			name = ZERO_CHECK;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECAAF0CD0AB7462A8ABE1058 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				D427BE4EACC34B7E980698F5 /* main.cpp */,
+				374CA4D94B2B44C3BFF0FDB2 /* roadmap.cpp */,
+				0E4D39541BA742A8A5BF7AA0 /* graphwidget.cpp */,
+				51B42D60EE3B48CD85E6A82A /* bodyPartWidget.cpp */,
+				A0CD42624E3C4AB092B86BDB /* widgetNode.cpp */,
+				B2C4AF7B847847C19BC1F4D5 /* widgetEdge.cpp */,
+				3868DE6986FF4B469CDC16F3 /* mainwindow.cpp */,
+				EF505417EA3A4DF5A4FC53C7 /* moc_graphwidget.cxx */,
+				3D2E8A71513344458A8B8465 /* moc_bodyPartWidget.cxx */,
+				3602F3A7C8164A10B4C82D25 /* moc_roadmap.cxx */,
+				E2E83BA3B5D04185A7B65E32 /* moc_mainwindow.cxx */,
+			);
+			name = "Source Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5A454827ACD643E0A9EF5824 /* RoadmapDemo */ = {
+		690F214BB104456789AD75C5 /* RoadmapDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8FF23676815C4A2692F26BF0 /* Build configuration list for PBXNativeTarget "RoadmapDemo" */;
+			buildConfigurationList = 0F88B003C1A6484A894E6823 /* Build configuration list for PBXNativeTarget "RoadmapDemo" */;
 			buildPhases = (
-				B6EDC77478EE42F3A71D25AF /* CMake Rules */,
-				E9CE622C7BA847849E2DCBF7 /* Sources */,
-				6B0EE7AE7A754F908D7FCD97 /* CMake PostBuild Rules */,
+				F4DE5F36E58A4366BD07EE64 /* CMake Rules */,
+				6EE1B71602A7481784F83143 /* Sources */,
+				7209C4569D5A44CB8A490AA2 /* CMake PostBuild Rules */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0BE8711D471F4864A67F033A /* PBXTargetDependency */,
+				39E2D10DD2B1472798315168 /* PBXTargetDependency */,
 			);
 			name = RoadmapDemo;
 			productName = RoadmapDemo;
-			productReference = 60E22E6476E643A9A5A52BA7 /* RoadmapDemo */;
+			productReference = 07A3D9D419F545529F7C89A5 /* RoadmapDemo */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9AAEB5333E5448E7B0BC21CD /* Project object */ = {
+		96242D592E5E4A64BA0126C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 			};
-			buildConfigurationList = 75C22070C2BF472983239571 /* Build configuration list for PBXProject "iCubRoadMapDemo" */;
+			buildConfigurationList = 7F03D0D8547F4A63A15C80CC /* Build configuration list for PBXProject "iCubRoadMapDemo" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 0;
-			mainGroup = DC6EB638C9FC4956B58B069D;
+			mainGroup = 61B447A45CED44F3BAF5FF10;
 			projectDirPath = ..;
 			projectRoot = "";
 			targets = (
-				6D242558986947739F99C646 /* ALL_BUILD */,
-				5A454827ACD643E0A9EF5824 /* RoadmapDemo */,
-				2440639FE4A6467BB38FAEB2 /* ZERO_CHECK */,
-				95C04AF57BC941A4B075C658 /* install */,
+				666FD3A0912F4273A9570AAA /* ALL_BUILD */,
+				690F214BB104456789AD75C5 /* RoadmapDemo */,
+				9670216539A14FD494ACCDB5 /* ZERO_CHECK */,
+				773E3D3249D748D9AA653387 /* install */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4BEAD6C3DCC641DEA333B751 /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-		6B0EE7AE7A754F908D7FCD97 /* CMake PostBuild Rules */ = {
+		7209C4569D5A44CB8A490AA2 /* CMake PostBuild Rules */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,18 +285,7 @@
 			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/RoadmapDemo_postBuildPhase.make$CONFIGURATION all";
 			showEnvVarsInLog = 0;
 		};
-		8B34A17C58E24447A980FFFB /* CMake PostBuild Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake PostBuild Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-		B3DEA5D42E264278B36EAA41 /* CMake Rules */ = {
+		90689EF95B714DE39390FE15 /* CMake Rules */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,7 +296,29 @@
 			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
 			showEnvVarsInLog = 0;
 		};
-		B6EDC77478EE42F3A71D25AF /* CMake Rules */ = {
+		A842A2F68CF049BF970395AA /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		D238F5B9E76E45D4A4912D0A /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		F4DE5F36E58A4366BD07EE64 /* CMake Rules */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -322,157 +332,46 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E9CE622C7BA847849E2DCBF7 /* Sources */ = {
+		6EE1B71602A7481784F83143 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BDBB454BC73483384530AE9 /* main.cpp in Sources */,
-				AFA8919856324EAD904E8483 /* roadmap.cpp in Sources */,
-				B542F69C13E64D4F8FEC28CC /* graphwidget.cpp in Sources */,
-				528EE22A501D455683AE6974 /* widgetNode.cpp in Sources */,
-				2D97294667E84DED89EBA212 /* widgetEdge.cpp in Sources */,
-				18FD32F71CF943F9BFA5D385 /* mainwindow.cpp in Sources */,
-				4C94AD82A180401FA6B79806 /* moc_graphwidget.cxx in Sources */,
-				64B959740068497694EF60DD /* moc_roadmap.cxx in Sources */,
-				762A58FFCDC84D46AA2553E0 /* moc_mainwindow.cxx in Sources */,
+				E8E3C194DF254477A97F7910 /* main.cpp in Sources */,
+				57CAD6B2B3A942F0B538C915 /* roadmap.cpp in Sources */,
+				D26E4EFB429A46F28A1CF6F3 /* graphwidget.cpp in Sources */,
+				6B6B8A8F94D643718FF24697 /* bodyPartWidget.cpp in Sources */,
+				B3470723400C42049CFF31A6 /* widgetNode.cpp in Sources */,
+				D4E6E64DDC0940C3A2D9CFBF /* widgetEdge.cpp in Sources */,
+				B9912B832B534C12ABB19FD5 /* mainwindow.cpp in Sources */,
+				A2DDED9EA1814C03A6800DCD /* moc_graphwidget.cxx in Sources */,
+				ECA5279ECCBE4B7992A2E78F /* moc_bodyPartWidget.cxx in Sources */,
+				155E4432F7584854AA36631F /* moc_roadmap.cxx in Sources */,
+				4FCE5EE37ECB42D68AD8D848 /* moc_mainwindow.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0BE8711D471F4864A67F033A /* PBXTargetDependency */ = {
+		39E2D10DD2B1472798315168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2440639FE4A6467BB38FAEB2 /* ZERO_CHECK */;
-			targetProxy = 297824F7BAFD4C24BD2E6F43 /* PBXContainerItemProxy */;
+			target = 9670216539A14FD494ACCDB5 /* ZERO_CHECK */;
+			targetProxy = 8A19E4A2AC4F4401BE3A5E2C /* PBXContainerItemProxy */;
 		};
-		11777700D1EA47179184AFF6 /* PBXTargetDependency */ = {
+		962ADBD4875040688462FD71 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D242558986947739F99C646 /* ALL_BUILD */;
-			targetProxy = E166FB4486B14E57840EA503 /* PBXContainerItemProxy */;
+			target = 690F214BB104456789AD75C5 /* RoadmapDemo */;
+			targetProxy = 859CCB5022DF4DC2964C5122 /* PBXContainerItemProxy */;
 		};
-		5B9AE6AAE2AB4E6B83381528 /* PBXTargetDependency */ = {
+		9F5F2F95CA724FB692F0DB9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A454827ACD643E0A9EF5824 /* RoadmapDemo */;
-			targetProxy = 5ABA2EAE70D54EFCBAC3CB1D /* PBXContainerItemProxy */;
+			target = 666FD3A0912F4273A9570AAA /* ALL_BUILD */;
+			targetProxy = 6D7BDE5909464935BAB4301E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0F86536EAC1D46AEA0A1F563 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_NO_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				LIBRARY_SEARCH_PATHS = (
-					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
-					/opt/local/lib,
-				);
-				OTHER_CFLAGS = "-DNDEBUG";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-arch",
-					i386,
-					"-frounding-math",
-					"-DNDEBUG",
-				);
-				OTHER_LDFLAGS = (
-					"-L/opt/local/lib",
-					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
-					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt.dylib",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt.dylib",
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					/opt/local/lib/libgsl.dylib,
-					/opt/local/lib/libgslcblas.dylib,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					/usr/local/lib/libACE.dylib,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = RoadmapDemo;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = MinSizeRel;
-		};
-		1A4966F3C022423797D32633 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode/build;
-			};
-			name = Debug;
-		};
-		1BC1512F0A924539B0072A64 /* RelWithDebInfo */ = {
+		0DD5A796A42E4D34874DF651 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -489,6 +388,111 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		133CE83EB36D4D528D3C95D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		16E330A939544C369976DDF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode/build;
+			};
+			name = Release;
+		};
+		1C2B908C3FED4BEDB5088999 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -518,7 +522,7 @@
 			};
 			name = RelWithDebInfo;
 		};
-		1D88578493CA419D9BA5955C /* MinSizeRel */ = {
+		1D6F3DF78BDA4793BC829F80 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -535,6 +539,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -562,9 +567,9 @@
 					"-Wno-unknown-pragmas",
 				);
 			};
-			name = MinSizeRel;
+			name = RelWithDebInfo;
 		};
-		259F313A0D8E47F093FDD359 /* MinSizeRel */ = {
+		389E2C8E9C194588B9DE78E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -577,10 +582,11 @@
 					QT_GUI_LIB,
 					QT_XML_LIB,
 					QT_CORE_LIB,
-					QT_NO_DEBUG,
+					QT_DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -598,7 +604,7 @@
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PREBINDING = NO;
-				PRODUCT_NAME = install;
+				PRODUCT_NAME = ZERO_CHECK;
 				SECTORDER_FLAGS = "";
 				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
 				USE_HEADERMAP = NO;
@@ -608,158 +614,9 @@
 					"-Wno-unknown-pragmas",
 				);
 			};
-			name = MinSizeRel;
+			name = Debug;
 		};
-		3213547AD67F48CAA2D10C21 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_NO_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				LIBRARY_SEARCH_PATHS = (
-					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
-					/opt/local/lib,
-				);
-				OTHER_CFLAGS = "-DNDEBUG";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-arch",
-					i386,
-					"-frounding-math",
-					"-DNDEBUG",
-				);
-				OTHER_LDFLAGS = (
-					"-L/opt/local/lib",
-					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
-					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt.dylib",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt.dylib",
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					/opt/local/lib/libgsl.dylib,
-					/opt/local/lib/libgslcblas.dylib,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					/usr/local/lib/libACE.dylib,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = RoadmapDemo;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
-		360AF3A2E0884D4C812344E4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_NO_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = install;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
-		43C374FAEB7F41068DAC0D72 /* RelWithDebInfo */ = {
+		40F06934C26F421E9011C7A2 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
@@ -778,6 +635,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -800,9 +658,12 @@
 					"-arch",
 					i386,
 					"-frounding-math",
+					"-fno-strict-aliasing",
 				);
 				OTHER_LDFLAGS = (
 					"-L/opt/local/lib",
+					"-arch",
+					i386,
 					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
 					"-Wl,-search_paths_first",
 					"-Wl,-headerpad_max_install_names",
@@ -861,7 +722,7 @@
 			};
 			name = RelWithDebInfo;
 		};
-		50BCDC2EF56642679F3D50B9 /* RelWithDebInfo */ = {
+		4409F9DF404548FE82560782 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -878,6 +739,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -895,7 +757,7 @@
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PREBINDING = NO;
-				PRODUCT_NAME = ZERO_CHECK;
+				PRODUCT_NAME = ALL_BUILD;
 				SECTORDER_FLAGS = "";
 				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
 				USE_HEADERMAP = NO;
@@ -905,9 +767,116 @@
 					"-Wno-unknown-pragmas",
 				);
 			};
-			name = RelWithDebInfo;
+			name = MinSizeRel;
 		};
-		53A7EA1B6AE94738A448BE62 /* MinSizeRel */ = {
+		489E0C71A73146298F8DA869 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/opt/local/lib,
+				);
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-arch",
+					i386,
+					"-frounding-math",
+					"-fno-strict-aliasing",
+					"-DNDEBUG",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-arch",
+					i386,
+					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					/usr/local/lib/libACE.dylib,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RoadmapDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		4D6C17005E5F4FD7912BBFA1 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -924,6 +893,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -953,7 +923,160 @@
 			};
 			name = MinSizeRel;
 		};
-		61AF332AC58E471487534EDF /* RelWithDebInfo */ = {
+		655320B43B564605A81B058A /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		7EFB33ABA82544639A4D8A9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/opt/local/lib,
+				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-arch",
+					i386,
+					"-frounding-math",
+					"-fno-strict-aliasing",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-arch",
+					i386,
+					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					/usr/local/lib/libACE.dylib,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RoadmapDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		7F1D5182B6804B96ABFBECAD /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -963,7 +1086,7 @@
 			};
 			name = RelWithDebInfo;
 		};
-		6D32455BCF2E43C7AC7767BA /* Debug */ = {
+		8FC9CB367BEE48289DE20A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -980,6 +1103,218 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		BC08BB7559EF48BD93369ED3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode/build;
+			};
+			name = Debug;
+		};
+		C75BC380135646378B5BF838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/opt/local/lib,
+				);
+				OTHER_CFLAGS = "-DNDEBUG";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-arch",
+					i386,
+					"-frounding-math",
+					"-fno-strict-aliasing",
+					"-DNDEBUG",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-arch",
+					i386,
+					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					/opt/local/lib/libCGAL_Core.dylib,
+					/opt/local/lib/libCGAL.dylib,
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
+					/opt/local/lib/libgmpxx.dylib,
+					/opt/local/lib/libmpfr.dylib,
+					/opt/local/lib/libgmp.dylib,
+					"/opt/local/lib/libboost_thread-mt.dylib",
+					"-framework",
+					QtOpenGL,
+					"-framework",
+					QtGui,
+					"-framework",
+					QtXml,
+					"-framework",
+					QtCore,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
+					/opt/local/lib/libgsl.dylib,
+					/opt/local/lib/libgslcblas.dylib,
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
+					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
+					/usr/local/lib/libACE.dylib,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = RoadmapDemo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		DF0C8D44839845E5AEC2DC29 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_NO_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
+					"/Users/kail/Library/yarp-2.3.4/generated_include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
+					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
+					/Library/Frameworks/QtOpenGL.framework/Headers,
+					/Library/Frameworks/QtGui.framework/Headers,
+					/Library/Frameworks/QtXml.framework/Headers,
+					/Library/Frameworks/QtCore.framework/Headers,
+					/Users/kail/imClever/dev/newRoadmap/xcode,
+					/opt/local/include,
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		E14B2EF5347F4D35B240026B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					QT_OPENGL_LIB,
+					QT_GUI_LIB,
+					QT_XML_LIB,
+					QT_CORE_LIB,
+					QT_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -1009,201 +1344,7 @@
 			};
 			name = Debug;
 		};
-		856EEEAC205B4942A994A350 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_NO_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
-		929BAE09DB684640A0EF5BF6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode/build;
-			};
-			name = Release;
-		};
-		BC4B5F83F9B9454598A6BB60 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
-		};
-		BE5A7BAEA845401CBEC1A2FD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_NO_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
-		DEE61CA63DCB47999D6F686B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
-		};
-		EA240CB04638492CBAFEE1A3 /* MinSizeRel */ = {
+		E46B6A417D954231BB5ED2A3 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1213,7 +1354,7 @@
 			};
 			name = MinSizeRel;
 		};
-		EDD551E35D0F45B199EFA0FF /* RelWithDebInfo */ = {
+		E70748B3062D403BBFD5680D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -1230,6 +1371,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
+					/Users/kail/imClever/dev/newRoadmap/../include,
 					"/Users/kail/Library/yarp-2.3.4/generated_include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
 					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
@@ -1257,169 +1399,67 @@
 					"-Wno-unknown-pragmas",
 				);
 			};
-			name = RelWithDebInfo;
-		};
-		F46932A657F3401F94120ABB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					QT_OPENGL_LIB,
-					QT_GUI_LIB,
-					QT_XML_LIB,
-					QT_CORE_LIB,
-					QT_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/kail/Library/yarp-2.3.4/generated_include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include",
-					"/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include",
-					/Library/Frameworks/QtOpenGL.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Users/kail/imClever/dev/newRoadmap/xcode,
-					/opt/local/include,
-				);
-				INSTALL_PATH = "";
-				LIBRARY_SEARCH_PATHS = (
-					"/opt/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
-					/opt/local/lib,
-				);
-				OTHER_CFLAGS = "";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-arch",
-					i386,
-					"-frounding-math",
-				);
-				OTHER_LDFLAGS = (
-					"-L/opt/local/lib",
-					"-Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib",
-					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt-d.dylib",
-					/opt/local/lib/libCGAL_Core.dylib,
-					/opt/local/lib/libCGAL.dylib,
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_init.a",
-					/opt/local/lib/libgmpxx.dylib,
-					/opt/local/lib/libmpfr.dylib,
-					/opt/local/lib/libgmp.dylib,
-					"/opt/local/lib/libboost_thread-mt-d.dylib",
-					"-framework",
-					QtOpenGL,
-					"-framework",
-					QtGui,
-					"-framework",
-					QtXml,
-					"-framework",
-					QtCore,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a",
-					/opt/local/lib/libgsl.dylib,
-					/opt/local/lib/libgslcblas.dylib,
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_dev.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a",
-					"/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a",
-					/usr/local/lib/libACE.dylib,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = RoadmapDemo;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/kail/imClever/dev/newRoadmap/xcode;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75C22070C2BF472983239571 /* Build configuration list for PBXProject "iCubRoadMapDemo" */ = {
+		0F88B003C1A6484A894E6823 /* Build configuration list for PBXNativeTarget "RoadmapDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A4966F3C022423797D32633 /* Debug */,
-				929BAE09DB684640A0EF5BF6 /* Release */,
-				EA240CB04638492CBAFEE1A3 /* MinSizeRel */,
-				61AF332AC58E471487534EDF /* RelWithDebInfo */,
+				7EFB33ABA82544639A4D8A9A /* Debug */,
+				C75BC380135646378B5BF838 /* Release */,
+				489E0C71A73146298F8DA869 /* MinSizeRel */,
+				40F06934C26F421E9011C7A2 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		8FF23676815C4A2692F26BF0 /* Build configuration list for PBXNativeTarget "RoadmapDemo" */ = {
+		3697510D97124CC4A590FD32 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F46932A657F3401F94120ABB /* Debug */,
-				3213547AD67F48CAA2D10C21 /* Release */,
-				0F86536EAC1D46AEA0A1F563 /* MinSizeRel */,
-				43C374FAEB7F41068DAC0D72 /* RelWithDebInfo */,
+				389E2C8E9C194588B9DE78E5 /* Debug */,
+				0DD5A796A42E4D34874DF651 /* Release */,
+				4D6C17005E5F4FD7912BBFA1 /* MinSizeRel */,
+				655320B43B564605A81B058A /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C8E03452E4CF496E9B87424C /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+		6971A5E2A14B4DCBA5EE846D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BC4B5F83F9B9454598A6BB60 /* Debug */,
-				BE5A7BAEA845401CBEC1A2FD /* Release */,
-				53A7EA1B6AE94738A448BE62 /* MinSizeRel */,
-				50BCDC2EF56642679F3D50B9 /* RelWithDebInfo */,
+				8FC9CB367BEE48289DE20A09 /* Debug */,
+				E70748B3062D403BBFD5680D /* Release */,
+				4409F9DF404548FE82560782 /* MinSizeRel */,
+				1D6F3DF78BDA4793BC829F80 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E30080CD3074451EA8F40BF6 /* Build configuration list for PBXAggregateTarget "install" */ = {
+		7F03D0D8547F4A63A15C80CC /* Build configuration list for PBXProject "iCubRoadMapDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6D32455BCF2E43C7AC7767BA /* Debug */,
-				360AF3A2E0884D4C812344E4 /* Release */,
-				259F313A0D8E47F093FDD359 /* MinSizeRel */,
-				1BC1512F0A924539B0072A64 /* RelWithDebInfo */,
+				BC08BB7559EF48BD93369ED3 /* Debug */,
+				16E330A939544C369976DDF8 /* Release */,
+				E46B6A417D954231BB5ED2A3 /* MinSizeRel */,
+				7F1D5182B6804B96ABFBECAD /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		EDCDCC9398AD4CB09D063AFF /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+		A71B483A4E834E6D95FD65B6 /* Build configuration list for PBXAggregateTarget "install" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DEE61CA63DCB47999D6F686B /* Debug */,
-				856EEEAC205B4942A994A350 /* Release */,
-				1D88578493CA419D9BA5955C /* MinSizeRel */,
-				EDD551E35D0F45B199EFA0FF /* RelWithDebInfo */,
+				E14B2EF5347F4D35B240026B /* Debug */,
+				133CE83EB36D4D528D3C95D3 /* Release */,
+				DF0C8D44839845E5AEC2DC29 /* MinSizeRel */,
+				1C2B908C3FED4BEDB5088999 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9AAEB5333E5448E7B0BC21CD /* Project object */;
+	rootObject = 96242D592E5E4A64BA0126C8 /* Project object */;
 }

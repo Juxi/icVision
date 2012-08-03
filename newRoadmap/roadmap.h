@@ -10,22 +10,21 @@
 #ifndef ROADMAP_H_
 #define ROADMAP_H_
 
+//#include <boost/graph/visitors.hpp>
 #include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/dijkstra_shortest_paths.hpp>
 
 #include <CGAL/Cartesian_d.h>
 #include <CGAL/Orthogonal_k_neighbor_search.h>
 #include <CGAL/Search_traits.h>
 
-//#include <boost/graph/visitors.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
-
-#include <list>
-#include <cmath>
-#include <vector>
+//#include <list>
+//#include <cmath>
+//#include <vector>
 
 //#include "iCubController.h"
 
-#include <QThread>
+//#include <QThread>
 #include <QtGui/QGraphicsView>
 
 //class Node;
@@ -103,7 +102,7 @@ public:
 	// The actual boost graph
 	typedef boost::adjacency_list<	boost::listS, 
 									boost::vecS, 
-									boost::directedS, 
+									boost::bidirectionalS, 
 									Vertex, 
 									Edge, 
 									boost::disallow_parallel_edge_tag >	Boost_Graph;
@@ -138,7 +137,7 @@ public:
 
 public:
 	Boost_Graph						boostGraph;
-	CGAL_Tree						cgalTree;
+	CGAL_Tree						*cgalTree;
 	Boost_Graph::vertex_descriptor	currentVertex;
 	
 	//Map::edge_descriptor	currentEdge;
@@ -156,8 +155,9 @@ public:
 	typedef Boost_Graph::edge_descriptor edge_t;
 	typedef Boost_Graph::edge_iterator edge_i;
 	typedef Boost_Graph::out_edge_iterator out_edge_i;
+	typedef Boost_Graph::in_edge_iterator in_edge_i;
 	
-	Roadmap(){}
+	Roadmap(){ cgalTree = new CGAL_Tree(); }
 	~Roadmap(){}
 	
 	bool insert( std::vector<qreal> q, vertex_t& v, bool display = true );
@@ -183,6 +183,7 @@ public:
 	
 	//void readMapPoses(std::string filename);
 
+	void removeNode( vertex_t );
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	
@@ -211,7 +212,8 @@ signals:
 	void newNodeColor( QtGraphNode*, QColor, QColor );
 	void newEdgeColor( QtGraphEdge*, QColor );
 	void newEdgeWeight( QtGraphEdge*, int );
-	//void removeQtGraphEdge( QtGraphEdge* );
+	void removeQtGraphNode( QtGraphNode* );
+	void removeQtGraphEdge( QtGraphEdge* );
 	
 public slots:
 	

@@ -42,12 +42,19 @@
 #include <QtGui>
 
 #include "mainwindow.h"
+#include "roadmap.h"
+
 //#include "newMapDialog.h"
 
 //! [0]
 MainWindow::MainWindow()
 {
-	setCentralWidget(&graphWidget);
+	Roadmap* m = new Roadmap();
+	GraphWidget* g = new GraphWidget(m); 
+	roadmap.push_back(m);
+	graphWidget.push_back(g);
+	
+	setCentralWidget(g);
     createActions();
     createMenus();
 
@@ -57,35 +64,14 @@ MainWindow::MainWindow()
     setWindowTitle(tr("Adaptive Roadmap Planner"));
     setMinimumSize(160, 160);
 
-	connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	&graphWidget, SLOT(resize(QResizeEvent*)));
+	std::vector<GraphWidget*>::iterator i;
+	for ( i=graphWidget.begin(); i!=graphWidget.end(); ++i )
+		connect( this, SIGNAL(resizedMainWindow(QResizeEvent*)),	*i, SLOT(resize(QResizeEvent*)));
 	resize(480, 320);
-	
-	qRegisterMetaType< Roadmap::vertex_t >("vertex_t");
-	qRegisterMetaType< Roadmap::edge_t >("edge_t");
-	
-	connect( &roadmap, SIGNAL(appendedNode(vertex_t, qreal, qreal)),			&graphWidget, SLOT(addNode(vertex_t, qreal, qreal)));
-	connect( &roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	&graphWidget, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
-	
-	connect( &graphWidget, SIGNAL(newQtGraphNode(vertex_t,QtGraphNode*)),		&roadmap, SLOT(setQtGraphNode( vertex_t, QtGraphNode* )));
-	connect( &graphWidget, SIGNAL(newQtGraphEdge(edge_t,QtGraphEdge*)),			&roadmap, SLOT(setQtGraphEdge( edge_t, QtGraphEdge* )));
-	
-	connect( &roadmap, SIGNAL(update2DPosition(QtGraphNode*,QPointF)),			&graphWidget, SLOT(setNodePosition(QtGraphNode*,QPointF)));
-	//connect( &roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					&graphWidget, SLOT(removeEdge(QtGraphEdge*)));
-
-	connect( &roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),		&graphWidget, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
-	connect( &roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				&graphWidget, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
-	connect( &roadmap, SIGNAL(newEdgeWeight(QtGraphEdge*,int)),					&graphWidget, SLOT(setEdgeWeight(QtGraphEdge*,int)));
 	
 	//QVBoxLayout *mainLayout = new QVBoxLayout;
 	//mainLayout->addWidget(&graphWidget);
 	//setLayout(mainLayout);
-	
-	// add a menu item to reset the joint mask
-	bool iCubJointMask[35] = {	1,1,1,								// use the torso
-								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,	// use the right arm, not the right hand
-								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0};	// use the left arm, not the left hand
-	//for ( int i=0; i<35; i++ )
-	//	jMask.push_back( iCubJointMask[i] );
 }
 //! [2]
 
@@ -119,13 +105,71 @@ void MainWindow::connectToRobot()
 
 void MainWindow::disconnectFromRobot()
 {
+	std::vector<Roadmap*>::iterator j = roadmap.begin();
+	Roadmap* firstMap = *j;
+	
 	//iCub.close();
+	for ( int count=0; count<10; count++ ) {
+		std::vector<qreal> point;
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		Roadmap::vertex_t v;
+		firstMap->insert(point, v);
+	}
 }
 
 void MainWindow::multiEdgeExplore()
 {
-	//ctrlThread.setBehavior( ControlThread::MultiEdgeExplore );
-	//ctrlThread.restart();
+	Roadmap* firstMap = *roadmap.begin();
+	
+	// do nearest neighbor search
+	Roadmap::vertex_t query = 0;
+	std::vector<Roadmap::vertex_t> neighbors;
+	std::vector<double> distances;
+	firstMap->nearestVertices( query, neighbors, distances, 5 );
+	
+	// list all node indices
+	Roadmap::vertex_i vi, vi_end;
+	//tie(vi, vi_end) = vertices(firstMap->boostGraph);
+	//for (  ; vi != vi_end; ++vi ) {
+	//	printf("index: %d\n", firstMap->boostGraph[*vi].vertex_t);
+	//}
+	
+	printf("--------------------------------------\n");
+	
+	// clear out the boost graph
+	tie(vi, vi_end) = vertices(firstMap->boostGraph);
+	for (  ; vi != vi_end; ) {
+		--vi_end;
+		firstMap->removeNode(*vi_end);
+	}
+	
+	// add more nodes
+	for ( int count=0; count<5; count++ ) {
+		std::vector<qreal> point;
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		point.push_back((double)rand()/RAND_MAX*10);
+		Roadmap::vertex_t v;
+		firstMap->insert(point, v);
+	}
+	
+	// do nearest neighbor search again
+	neighbors.clear();
+	distances.clear();
+	firstMap->nearestVertices( query, neighbors, distances, 10 );
+	
+	// list the node indices again
+	//tie(vi, vi_end) = vertices(firstMap->boostGraph);
+	//for (  ; vi != vi_end; ++vi ) {
+	//	printf("index: %d\n", firstMap->boostGraph[*vi].vertex_t);
+	//}
+	
 }
 
 void MainWindow::goTo()

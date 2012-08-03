@@ -69,6 +69,7 @@ public:
 	//void flagRemoval() { deleteMe = true; }
 	//bool removeMe() { return deleteMe; }
 	//bool reRenderMe() { return changed; }
+	void kill() { deathWish = true; }
     
 protected:
 	
@@ -78,6 +79,7 @@ protected:
 private:
 	
 	//bool renderMe;
+	bool deathWish;
     QtGraphNode *source, *dest;
 
     QPointF sourcePoint;

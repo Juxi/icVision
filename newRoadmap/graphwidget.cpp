@@ -49,7 +49,7 @@
 
 #include <math.h>
 
-GraphWidget::GraphWidget()
+GraphWidget::GraphWidget( Roadmap *_roadmap ) : roadmap(_roadmap)
 {
 	//createMenu();
 	
@@ -63,27 +63,62 @@ GraphWidget::GraphWidget()
     setRenderHint(QPainter::Antialiasing);
     setWindowTitle(tr("Kail's Roadmap Environment"));
 	
+	qRegisterMetaType< Roadmap::vertex_t >("vertex_t");
+	qRegisterMetaType< Roadmap::edge_t >("edge_t");
+	
+	connect( roadmap, SIGNAL(appendedNode(vertex_t)),							this, SLOT(addNode(vertex_t)));
+	connect( roadmap, SIGNAL(appendedEdge(edge_t,QtGraphNode*,QtGraphNode*)),	this, SLOT(addEdge(edge_t,QtGraphNode*,QtGraphNode*)));
+	connect( roadmap, SIGNAL(removeQtGraphNode(QtGraphNode*)),					this, SLOT(removeNode(QtGraphNode*)));
+	connect( roadmap, SIGNAL(removeQtGraphEdge(QtGraphEdge*)),					this, SLOT(removeEdge(QtGraphEdge*)));
+	
+	connect( this, SIGNAL(newQtGraphNode(vertex_t,QtGraphNode*)),				roadmap, SLOT(setQtGraphNode( vertex_t, QtGraphNode* )));
+	connect( this, SIGNAL(newQtGraphEdge(edge_t,QtGraphEdge*)),					roadmap, SLOT(setQtGraphEdge( edge_t, QtGraphEdge* )));
+	
+	connect( roadmap, SIGNAL(update2DPosition(QtGraphNode*,QPointF)),			this, SLOT(setNodePosition(QtGraphNode*,QPointF)));
+	
+	connect( roadmap, SIGNAL(newNodeColor(QtGraphNode*,QColor,QColor)),			this, SLOT(setNodeColor(QtGraphNode*,QColor,QColor)));
+	connect( roadmap, SIGNAL(newEdgeColor(QtGraphEdge*,QColor)),				this, SLOT(setEdgeColor(QtGraphEdge*,QColor)));
+	connect( roadmap, SIGNAL(newEdgeWeight(QtGraphEdge*,int)),					this, SLOT(setEdgeWeight(QtGraphEdge*,int)));
+	
 	//connect( &timer, SIGNAL(timeout()), this, SLOT(update()));
 	timer.start(100);
 }
 
-void GraphWidget::addNode( Roadmap::vertex_t n, qreal _x, qreal _y )
+void GraphWidget::addNode( Roadmap::vertex_t n )
 {
 	QtGraphNode* node = new QtGraphNode(this);
-	nodes << node;
+	//nodes << node;
+	//printf("Before scene()->addItem()...  GraphWidgetScene: %p, ItemScene %p\n", scene(), node->scene() );
 	scene()->addItem(node);
-	node->setNormPos(QPointF(_x,_y));
+	//printf("After scene()->addItem()...  GraphWidgetScene: %p, ItemScene %p\n", scene(), node->scene() );
+	node->setNormPos(QPointF((double)rand()/RAND_MAX,(double)rand()/RAND_MAX));
 	emit newQtGraphNode(n,node);
-	printf("added node to graph\n");
+	//printf("added node to graph\n");
 }
 
 void GraphWidget::addEdge( Roadmap::edge_t n, QtGraphNode* a, QtGraphNode* b )
 {
 	QtGraphEdge* edge = new QtGraphEdge( a, b );
-	edges << edge;
+	//edges << edge;
 	scene()->addItem(edge);
 	emit newQtGraphEdge(n,edge);
 	//printf("added edge to graph\n");
+}
+
+void GraphWidget::removeNode( QtGraphNode* n ) {
+	if ( scene() && n && n->scene() ) {
+		//printf("Deleting Graph Node\n");
+		//if (n) printf("GraphWidgetScene: %p, ItemScene %p\n", scene(), n->scene() );
+		scene()->removeItem(n);
+		delete n;
+	} // else { printf("FOUND WEIRDNESS!!!\n"); }
+}
+
+void GraphWidget::removeEdge( QtGraphEdge* e ) {
+	if (e) {
+		scene()->removeItem(e);
+		delete e;
+	}
 }
 
 void GraphWidget::setNodePosition( QtGraphNode* node, QPointF p )
@@ -169,6 +204,11 @@ void GraphWidget::resize( QResizeEvent* event )
 						   hScale*event->size().width(),
 						   vScale*event->size().height());
 	
-    foreach (QtGraphNode *node, nodes)
-		node->updatePosition();
+	
+	std::pair<Roadmap::vertex_i, Roadmap::vertex_i> p = boost::vertices(roadmap->boostGraph);
+	for ( ; p.first!=p.second; p.first++ )
+		roadmap->boostGraph[*(p.first)].qtGraphNode->updatePosition();
+	
+    //foreach (QtGraphNode *node, nodes)
+	//	node->updatePosition();
 }

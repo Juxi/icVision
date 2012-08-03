@@ -48,7 +48,8 @@
 #include "widgetNode.h"
 #include "graphwidget.h"
 
-QtGraphNode::QtGraphNode(GraphWidget *graphWidget) :	graph(graphWidget),
+QtGraphNode::QtGraphNode(GraphWidget *graphWidget) :	deathWish(false),
+														graph(graphWidget),
 														//x(0), y(0),
 														primaryColor(Qt::lightGray),
 														secondaryColor(Qt::gray)

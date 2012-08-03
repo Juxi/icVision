@@ -76,6 +76,8 @@ public:
 	void setColor( QColor c1, QColor c2 );
 	//bool reRenderMe() { return changed; }
 	
+	void kill() { deathWish = true; }
+	
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
@@ -84,6 +86,7 @@ protected:
 	
 private:
 	int idx;
+	bool deathWish;
 	GraphWidget *graph;
     QList<QtGraphEdge *> edgeList;
 	

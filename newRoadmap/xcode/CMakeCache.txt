@@ -14,8 +14,8 @@
 # EXTERNAL cache entries
 ########################
 
-//The directory containing a CMake configuration file for CGAL.
-CGAL_DIR:PATH=/opt/local/lib/CGAL
+//Link with static Boost libraries
+CGAL_Boost_USE_STATIC_LIBS:BOOL=OFF
 
 //Set this to TRUE if you want to define or modify any of CMAKE_*_FLAGS.
 // When this is FALSE, all the CMAKE_*_FLAGS flags are overriden
@@ -39,7 +39,7 @@ CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release;MinSizeRel;RelWithDebInfo
 CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++
 
 //C++ compiler flags for both Release and Debug
-CMAKE_CXX_FLAGS:STRING=-arch i386  -frounding-math
+CMAKE_CXX_FLAGS:STRING=-O2 -arch i386  -frounding-math -fno-strict-aliasing
 
 //Flags used by the compiler during debug builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
@@ -74,7 +74,7 @@ CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g
 
 //Linker flags for both Release and Debug
-CMAKE_EXE_LINKER_FLAGS:STRING=-L/opt/local/lib -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+CMAKE_EXE_LINKER_FLAGS:STRING= -L/opt/local/lib -arch i386 -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
 
 //Flags used by the linker during debug builds.
 CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
@@ -787,7 +787,9 @@ iCubRoadMapDemo_SOURCE_DIR:STATIC=/Users/kail/imClever/dev/newRoadmap
 ########################
 
 //Stored Xcode object GUID
-ALL_BUILD_GUID_CMAKE:INTERNAL=6D242558986947739F99C646
+ALL_BUILD_GUID_CMAKE:INTERNAL=666FD3A0912F4273A9570AAA
+//ADVANCED property for variable: CGAL_Boost_USE_STATIC_LIBS
+CGAL_Boost_USE_STATIC_LIBS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_BUILD_TOOL
@@ -914,7 +916,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/usr/bin/qmake][/Developer/Tools/Qt/m
 //Generator uses intermediate configuration directory
 HAS_CFG_INTDIR:INTERNAL=TRUE
 //Stored Xcode object GUID
-PROJECT_iCubRoadMapDemo_GUID_CMAKE:INTERNAL=9AAEB5333E5448E7B0BC21CD
+PROJECT_iCubRoadMapDemo_GUID_CMAKE:INTERNAL=96242D592E5E4A64BA0126C8
 //ADVANCED property for variable: QT_ARTHURPLUGIN_PLUGIN_DEBUG
 QT_ARTHURPLUGIN_PLUGIN_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: QT_ARTHURPLUGIN_PLUGIN_RELEASE
@@ -1326,9 +1328,9 @@ Q_WS_WIN:INTERNAL=
 //Have symbol Q_WS_X11
 Q_WS_X11:INTERNAL=
 //Stored Xcode object GUID
-RoadmapDemo_GUID_CMAKE:INTERNAL=5A454827ACD643E0A9EF5824
+RoadmapDemo_GUID_CMAKE:INTERNAL=690F214BB104456789AD75C5
 //Stored Xcode object GUID
-ZERO_CHECK_GUID_CMAKE:INTERNAL=2440639FE4A6467BB38FAEB2
+ZERO_CHECK_GUID_CMAKE:INTERNAL=9670216539A14FD494ACCDB5
 //Stored Xcode object GUID
-install_GUID_CMAKE:INTERNAL=95C04AF57BC941A4B075C658
+install_GUID_CMAKE:INTERNAL=773E3D3249D748D9AA653387
 

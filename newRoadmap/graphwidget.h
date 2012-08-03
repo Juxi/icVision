@@ -49,9 +49,8 @@
 
 #include "roadmap.h"
 
-class QtGraphNode;
-class QtGraphEdge;
-//class Roadmap;
+#include "widgetEdge.h"
+#include "widgetNode.h"
 
 class GraphWidget : public QGraphicsView
 {
@@ -62,11 +61,11 @@ class GraphWidget : public QGraphicsView
 
 public:
 	
-    GraphWidget();
+    GraphWidget( Roadmap *roadmap );
 
 public slots:
 	
-	void addNode( vertex_t, qreal, qreal );
+	void addNode( vertex_t );
 	void addEdge( edge_t, QtGraphNode* a, QtGraphNode* b );
 	void resize( QResizeEvent* event );
 	
@@ -74,7 +73,10 @@ public slots:
 	void setNodeColor( QtGraphNode*, QColor, QColor );
 	void setEdgeColor( QtGraphEdge*, QColor );
 	void setEdgeWeight( QtGraphEdge*, int );
-	//void removeEdge( QtGraphEdge* );
+	//void removeNode( QtGraphNode* n ) { if (n) n->kill(); }
+	//void removeEdge( QtGraphEdge* e ) { if (e) e->kill(); }
+	void removeNode( QtGraphNode* n );
+	void removeEdge( QtGraphEdge* e );
 
 signals:
 	
@@ -91,23 +93,12 @@ protected:
 	
 	QTimer timer;
 	
-private slots:
-	
-	//void update();
-	
 private:
 
+	Roadmap *roadmap;
 	// this is because the cast in the elastic nodes example fails...
-	QList<QtGraphNode *> nodes;
-	QList<QtGraphEdge *> edges;
-	
-	/***   WHEN I DO IT LIKE THIS, MY EDGES ALSO CAST TO NODES! ( probably its the ENUM type thingy i removed from edge and node )
-	 QList<Node *> nodes;
-	 foreach (QGraphicsItem *item, scene()->items()) {
-	 if (Node *node = qgraphicsitem_cast<Node *>(item))
-	 nodes << node;
-	 }
-		*/
+	//QList<QtGraphNode *> nodes;
+	//QList<QtGraphEdge *> edges;
 
 };
 

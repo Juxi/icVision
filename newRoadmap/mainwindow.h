@@ -119,8 +119,8 @@ private:
 	//iCubController	iCub;
 	//std::vector<bool> jMask;
 	
-	Roadmap			roadmap;
-	GraphWidget		graphWidget;
+	std::vector<Roadmap*> roadmap;
+	std::vector<GraphWidget*> graphWidget;
 	
 	//friend class ControlThread;
 	//ControlThread	ctrlThread;

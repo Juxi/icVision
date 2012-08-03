@@ -10,7 +10,7 @@ default:
 /opt/local/lib/libgmpxx.dylib:
 /opt/local/lib/libmpfr.dylib:
 /opt/local/lib/libgmp.dylib:
-/opt/local/lib/libboost_thread-mt-d.dylib:
+/opt/local/lib/libboost_thread-mt.dylib:
 /Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a:
 /Users/kail/Library/yarp-2.3.4/lib/libYARP_sig.a:
 /Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a:
@@ -19,7 +19,6 @@ default:
 /opt/local/lib/libgsl.dylib:
 /opt/local/lib/libgslcblas.dylib:
 /usr/local/lib/libACE.dylib:
-/opt/local/lib/libboost_thread-mt.dylib:
 
 
 # Rules to remove targets that are older than anything to which they
@@ -32,7 +31,7 @@ PostBuild.RoadmapDemo.Debug:
 	/opt/local/lib/libgmpxx.dylib\
 	/opt/local/lib/libmpfr.dylib\
 	/opt/local/lib/libgmp.dylib\
-	/opt/local/lib/libboost_thread-mt-d.dylib\
+	/opt/local/lib/libboost_thread-mt.dylib\
 	/opt/local/lib/libCGAL_Core.dylib\
 	/opt/local/lib/libCGAL.dylib\
 	/Users/kail/Library/yarp-2.3.4/lib/libYARP_OS.a\
@@ -43,7 +42,7 @@ PostBuild.RoadmapDemo.Debug:
 	/opt/local/lib/libgmpxx.dylib\
 	/opt/local/lib/libmpfr.dylib\
 	/opt/local/lib/libgmp.dylib\
-	/opt/local/lib/libboost_thread-mt-d.dylib\
+	/opt/local/lib/libboost_thread-mt.dylib\
 	/Users/kail/Library/yarp-2.3.4/lib/libYARP_math.a\
 	/opt/local/lib/libgsl.dylib\
 	/opt/local/lib/libgslcblas.dylib\
