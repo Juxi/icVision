@@ -81,7 +81,9 @@ MainWindow::MainWindow() : ctrlThread( &iCub, &roadmap )
 	//setLayout(mainLayout);
 	
 	// add a menu item to reset the joint mask
-	bool iCubJointMask[35] = {	1,1,1,								// use the torso
+	bool iCubJointMask[35] = {	1,1,1,						// use the torso
+					//1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+					//1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,	// use the right arm, not the right hand
 								1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0};	// use the left arm, not the left hand
 	for ( int i=0; i<35; i++ )
@@ -299,7 +301,7 @@ void MainWindow::loadMap( bool display )
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);
 				//printf("\n");
-					//q = iCub.withinLimits(q);
+					q = iCub.withinLimits(q);
 				//printf("qAfter: ");
 				for ( k = q.begin(); k!=q.end(); ++k )
 					printf("%f ",*k);

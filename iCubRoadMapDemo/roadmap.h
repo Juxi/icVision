@@ -159,6 +159,7 @@ public:
 	
 	void setDimensionality( int );
 	void setCurrentVertex( vertex_t );
+	vertex_t getCurrentVertex() { return currentVertex; }
 	void setEdgeColor( edge_t, QColor );
 	void setEdgeWeight( edge_t, int );
 	

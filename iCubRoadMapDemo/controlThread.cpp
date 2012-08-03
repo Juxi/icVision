@@ -5,7 +5,7 @@
 ControlThread::ControlThread( iCubController* _robot, Roadmap* _map ) : robot(_robot),
 																		roadmap(_map),
 																		refVelocity(5),
-																		refAcceleration(5),
+																		refAcceleration(1),
 																		keepRunning(false),
 																		currentBehavior(MultiEdgeExplore),
 																		salientObject("")
@@ -53,7 +53,7 @@ void ControlThread::run()
 		if ( currentBehavior == MultiEdgeExplore )
 		{
 			std::list< std::pair< Roadmap::edge_t, Roadmap::vertex_t > > path;
-			path = roadmap->aToB( roadmap->nearestVertex(robot->getCurrentPose()),
+			path = roadmap->aToB( roadmap->getCurrentVertex(),
 								  Roadmap::vertex_t(rand()%num_vertices(roadmap->map)) );
 		
 			if ( !velocityMoveImpl( path ) )
@@ -143,6 +143,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 		// check that the edge is within joint limits
 		if ( !robot->isWithinLimits( roadmap->map[source(i->first,roadmap->map)].q ) ||
 		     !robot->isWithinLimits( roadmap->map[target(i->first,roadmap->map)].q ) ) {
+			std::cout << "DETECTED ENDPOINT OUT OF RANGE" << std::endl;
 			interrupted = true;
 		}
 		
@@ -193,11 +194,12 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 				vIn = funnelAccel(	vMax,	i->first );
 				if ( j != path.end() ) {
 					vOut = funnelAccel(	vMax,	j->first );
-					v = (vIn.first+vIn.second+vOut.first)/3;
+					v = (vIn.first+vIn.second+vOut.second);// /3; // use both the axial and radial components of the current edge
+										  // along with the radial component of the next edge
 				} else {
 					vOut.first = 0;
 					vOut.second = 0;
-					v = (vIn.first+vIn.second)/2;
+					v = (vIn.first+vIn.second); ///2;
 				}
 				
 				//std::cout << "|vIn.first|:     " << sqrt(vIn.first.squared_length()) << std::endl;
@@ -212,6 +214,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 			}
 			// until the control from the second edge begins to dominate
 			while ( vIn.first.squared_length() > vOut.first.squared_length() && v.squared_length() > 5 && keepRunning );
+			roadmap->setCurrentVertex( target(i->first,roadmap->map ));
 		}
 		
 		// handle the various exit conditions w.r.t. removal of infeasible edges and the visualization
@@ -233,6 +236,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 				roadmap->setEdgeWeight( i->first, 1 );
 				//std::cout << "Marked an edge black" << std::endl;
 			}
+			roadmap->setCurrentVertex( source(path.begin()->first,roadmap->map ));
 			break;
 		}
 	}
@@ -246,6 +250,7 @@ bool ControlThread::velocityMoveImpl( std::list< std::pair< Roadmap::edge_t, Roa
 			if ( statusBottle.get(0).asInt() == 1 )
 				break;
 		}
+		
 		return false;
 	}
 	else {

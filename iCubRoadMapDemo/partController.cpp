@@ -113,9 +113,9 @@ std::vector<double> PartController::withinLimits( const std::vector<double>& pos
 		return p;
 	}
 	
-	double offset;
+	double offset = 2;
 	for ( int i = 0; i < numJoints; i++ ) {
-		offset = (max.at(i) - min.at(i))/20.0;
+		//offset = (max.at(i) - min.at(i))/20.0;
 		if ( poss.at(i) < min.at(i) + offset )
 			p.push_back( min.at(i) + offset );
 		else if ( poss.at(i) > max.at(i) - offset )
