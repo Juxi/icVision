@@ -64,8 +64,8 @@ public:
 		QtGraphEdge* qtGraphEdge;
 		double length, length2;
 		double successRate;
-	  bool evaluated;
-	Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0), evaluated(false) {}
+		bool evaluated;
+		Edge() : qtGraphEdge(NULL), length(1.0), successRate(1.0), evaluated(false) {}
 	};
 	
 	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::undirectedS, 

@@ -37,27 +37,23 @@ void YarpPoseController::load_config(int argc, char **argv) {
     } else
     	throw StringException("no init file");
 
-    string robot_file = ""; // default is simulator
+    string robot_file = "";
     if ( settings.check("robot") )  { robot_file = settings.find("robot").asString().c_str(); }
     if ( command_config.check("robot") )  { robot_file = command_config.find("robot").asString().c_str(); }
 
-    string world_file = ""; // default is simulator
+    string world_file = "";
     if ( settings.check("world") )  { world_file = settings.find("world").asString().c_str(); }
     if ( command_config.check("world") )  { world_file = command_config.find("world").asString().c_str(); }
 
-    string map_file = ""; // default is simulator
+    string map_file = "";
     if ( settings.check("map") )  { map_file = settings.find("map").asString().c_str(); }
     if ( command_config.check("map") )  { map_file = command_config.find("map").asString().c_str(); }
-
-    if ( settings.check("port") )  { d_portname = settings.find("port").asString().c_str(); }
-    if ( command_config.check("port") )  { d_portname = command_config.find("port").asString().c_str(); }
 
     if ( settings.check("mover_port") )  { d_mover_portname = settings.find("mover_port").asString().c_str(); }
     if ( command_config.check("mover_port") )  { d_mover_portname = command_config.find("mover_port").asString().c_str(); }
 
-    if (!robot_file.size() || !world_file.size() || !d_portname.size()) {
-    	cout << robot_file << endl << world_file << endl << map_file << endl << d_portname << endl;
-    	throw StringException("One of the files/names not defined [robot/world/port]");
+    if (!robot_file.size()) {
+    	throw StringException("No robot file specified");
     }
 
     bool visualize(true);
@@ -65,22 +61,22 @@ void YarpPoseController::load_config(int argc, char **argv) {
     	delete d_model;
     	d_model = 0;
     }
-	d_model = new Model( visualize, false );
-	Model &model(*d_model);
-
-	model.start();	/* if we want display lists to be created automatically,
+	d_model = new VirtualSkin::YarpModel( visualize );
+	
+	d_model->start(); /* if we want display lists to be created automatically,
 					  // the model must be started prior to appending objects */
+	d_model->openWorldRpcPort(QString("/poseControl/world"));
 
-	Robot &robot = *model.loadRobot(QString(robot_file.c_str()), false);
-    d_portname = "/" + robot.getName().toStdString() + "/" + d_portname; // the name of the RPC server
+	Robot &robot = *d_model->loadRobot(QString(robot_file.c_str()), false);
+    
+	if (world_file.size()) {
+		d_model->loadWorld( QString(world_file.c_str()), false );
+	}
 
-	printf("loading world file: %s\n", argv[2]);
-	model.loadWorld( QString(world_file.c_str()), false );
-
-    load_path_planner(model, robot);
+    load_path_planner(*d_model, robot);
 	if (map_file.size())
 	  d_path_planner->load_map("default", map_file);
-    model.stop();
+    d_model->stop();
 
 }
 
@@ -148,10 +144,7 @@ vector<double> YarpPoseController::get_current_pose() {
 }
 
 void YarpPoseController::run () {
-	cout << "Opening port: " << d_portname << endl;
-	if (!d_port.open(d_portname.c_str()))
-		throw StringException("Couldnt open rpc Server");
-	if (!d_mover.open("/to_mover"))
+	if (!d_mover.open("/poseControl/to_mover"))
 		throw StringException("Couldnt open rpc mover Client");
 	if (!d_mover.addOutput(d_mover_portname.c_str()))
 		throw StringException("Couldnt connect to port of mover");
@@ -164,17 +157,16 @@ void YarpPoseController::run () {
 		d_port.read(query,true);
 
 		int command = query.get(0).asVocab();
-
 		
 		char *help_message = "Possible Commands:\n"
-		  "load [name] [file]\t--\tload map in [file] under name [name]\n"
-		  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
-		  "ran\t--\tshow all ranges\n"
-		  "ran [name]\t--\tshow range of mape [name]\n"
-		  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
-		  "go [name]\t--\tmove to closest position on map [name]\n"
-		  "help\t--\tshow this help message\n"
-		  "info\t--\tshow info about all maps\n";
+			  "load [name] [file]\t--\tload map in [file] under name [name]\n"
+			  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
+			  "ran\t--\tshow all ranges\n"
+			  "ran [name]\t--\tshow range of mape [name]\n"
+			  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
+			  "go [name]\t--\tmove to closest position on map [name]\n"
+			  "help\t--\tshow this help message\n"
+			  "info\t--\tshow info about all maps\n";
 
 		try {
 		  switch ( command ) {

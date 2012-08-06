@@ -50,7 +50,7 @@ ADD_DEPENDENCIES( PoseFind WorldModel )
 ADD_DEPENDENCIES( PoseFind KinematicModel )
 ADD_DEPENDENCIES( PoseControl WorldModel )
 ADD_DEPENDENCIES( PoseControl KinematicModel )
-ADD_DEPENDENCIES( PoseControl WorldModel )
+ADD_DEPENDENCIES( PoseControl VirtualSkin )
 ADD_DEPENDENCIES( TEST KinematicModel )
 
 
@@ -63,6 +63,7 @@ TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
 )
 
 TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
+					VirtualSkin
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}

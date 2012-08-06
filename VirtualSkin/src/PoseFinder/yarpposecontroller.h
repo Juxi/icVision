@@ -1,7 +1,8 @@
 #ifndef __YARP_POSE_CONTROLLER__
 #define __YARP_POSE_CONTROLLER__
 
-#include "model.h"
+#include "yarprobot.h"
+#include "yarpModel.h"
 
 #include "pathplanner.h"
 #include "exception.h"
@@ -22,13 +23,13 @@ int const VOCAB_INFO = VOCAB4('i', 'n', 'f', 'o');
 class YarpPoseController :  public QThread {
 	Q_OBJECT
 	PathPlanner *d_path_planner;
-	KinematicModel::Model *d_model;
+	VirtualSkin::YarpModel *d_model;
 
 	yarp::os::Network d_yarp;
     yarp::os::RpcServer d_port;
     yarp::os::RpcClient d_mover;
 
-    std::string d_portname, d_mover_portname;
+    std::string d_mover_portname;
 
 public:
 	YarpPoseController(int argc, char **argv) : d_path_planner(0), d_model(0)

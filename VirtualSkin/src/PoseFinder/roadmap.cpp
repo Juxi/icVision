@@ -482,7 +482,7 @@ list<Roadmap::vertex_t> Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeT
 	  pair<edge_i, edge_i> map_edges(edges(map));
 	  edge_i edge_it(map_edges.first);
 	  for (; edge_it != map_edges.second; ++edge_it)
-		put(&Roadmap::Edge::evaluated, map, *edge_it, false);
+		put(&Edge::evaluated, map, *edge_it, false);
 	}
 		
 	vector<vertex_t> p(num_vertices(map));

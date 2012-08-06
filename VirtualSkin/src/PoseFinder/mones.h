@@ -57,9 +57,9 @@ struct MoNes {
   double d_na, d_nsigma_plus, d_nsigma_min;
 
 MoNes(Function &fitness_function, size_t dim, size_t n) : d_fitness_function(fitness_function), d_dim(dim), d_n(n) {
-  d_na = 1./4 * pow(static_cast<float>(dim), 1.5);
-  d_nsigma_min = 1./5 * pow(static_cast<float>(dim), 1.5);
-  d_nsigma_plus = pow(static_cast<float>(dim), 1.5);
+  d_na = 1./4 * pow(static_cast<float>(dim), (float) 1.5);
+  d_nsigma_min = 1./5 * pow(static_cast<float>(dim), (float) 1.5);
+  d_nsigma_plus = pow(static_cast<float>(dim), (float) 1.5);
 }
   
   void init(std::vector<double> mu, double sigma) {
