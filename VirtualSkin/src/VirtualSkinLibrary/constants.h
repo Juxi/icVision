@@ -37,7 +37,9 @@
 #define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
 #define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
 #define VOCAB_GRAB VOCAB4('g','r','a','b')	//!< Attach an object to a marker
+#define VOCAB_SIM VOCAB3('s','i','m')		//!< set rototranslation from simulator coordinates
 #define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
+#define VOCAB_FAIL VOCAB4('f','a','i','l')	//!< fail
 
 // object types
 #define VOCAB_OBSTACLE VOCAB3('o','b','s')	//!< an obstacle that triggers reflexive response 

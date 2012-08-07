@@ -45,7 +45,8 @@ public:
 	//bool WorldRpcPortIsOpen() { return rpcIsOpen; }
 	
 	void showBottle( yarp::os::Bottle& anUnknownBottle, int indentation = 0 );			//!< Print a yarp::os::bottle to the terminal
-	
+	WorldRpcInterface& getRpcInterface() { return worldRpcInterface; }
+
 private:
 	
 	void computePosePrefix();											//!< Clears the yarp::os::bottle bottle

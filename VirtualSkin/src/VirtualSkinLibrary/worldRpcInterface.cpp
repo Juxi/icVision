@@ -92,6 +92,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 			reply.addString(	"set [objectname] [xpos] [ypos] [zpos]: set object location (m)");
 			reply.addString(	"def [objectname] [targ/obs]: set object class to target or obstacle");
 			reply.addString(	"get [objectname]: return object state");
+			reply.addString(    "sim [objectname] [xpos] [ypos] [zpos] [xrot] [yrot] [zrot]: set rototranslation as returned in iCubSim coordinates");
 			reply.addString(	"rot [objectname] [xrot] [yrot] [zrot]: set object rotation (degrees)");
 			reply.addString(    "rot [objectname] [1*9 rotation matrix]: set object rotation cosine matrix");
 			reply.addString(	"rm [objectname]: remove object (persistent objects cannot be removed)");
@@ -114,6 +115,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		case VOCAB_ROT:	setRot(command,reply,n); break;
 		case VOCAB_REM:	removeObject(command,reply,n); break;
 		case VOCAB_GRAB: grabObject(command,reply,n); break;
+		case VOCAB_SIM: setRTfromSim(command, reply, n); break;
 		case VOCAB_CLEAR: 
 				printf("CLEARING THE WORLD\n");
 				model->clearTheWorld();
@@ -238,6 +240,61 @@ void WorldRpcInterface::set( const yarp::os::Bottle& command, yarp::os::Bottle& 
 		reply.addString("Set Cartesian position of object.");
 	}
 }
+
+void WorldRpcInterface::setRTfromSim(const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n) {
+	KinematicModel::CompositeObject* object = getObject( command, reply, n );
+	if ( object ) {
+		QMatrix4x4 rt;
+		std::string name = object->getName().toStdString();
+		if(parseSimRTBottle(name, command, n, rt)) {
+			object->setT(rt);
+		} else {
+			reply.addString("parseSimRTBottle: invalid number of arguments supplied");
+		}
+
+	}
+}
+
+bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os::Bottle& command, int& n, QMatrix4x4 &rt) {
+	if ( (command.size()-n) != 6) {
+		return false;
+	}
+
+	//position
+	double px = command.get(n).asDouble(); n++;
+	double py = command.get(n).asDouble(); n++;
+	double pz = command.get(n).asDouble(); n++;
+		
+	// rotation
+	double rx = command.get(n).asDouble(); n++;
+	double ry = command.get(n).asDouble(); n++;
+	double rz = command.get(n).asDouble(); n++;
+		
+	// special simulator rotation:
+	QQuaternion qrx = QQuaternion::fromAxisAndAngle( QVector3D(1, 0, 0), rx);
+	QQuaternion qry = QQuaternion::fromAxisAndAngle( QVector3D(0, 1, 0), ry);
+	QQuaternion qrz = QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), rz);
+	rt.rotate(qry * (qrz*qrx));
+
+	// cylinders are rotated 90 degrees on the z-axis with respect to iCubSIM:
+	QRegExp rxtype("(.*)(?:\\s*\\d+)"); // check for some characters that end with a number
+	int pos = rxtype.indexIn(QString(name.c_str()));
+	if (pos > -1) {
+		yarp::os::Value type(rxtype.cap(1).toStdString().c_str());
+		int vtype = type.asVocab();
+		if (vtype == VOCAB_CYL || vtype == VOCAB_SCYL) {
+			rt.rotate( QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), 90));
+		}
+	}
+
+	// position translation
+	rt(0, 3) = -(pz + 0.026);
+	rt(1, 3) = -px;
+	rt(2, 3) = py-0.5976;
+
+	return true;
+}
+
 
 void WorldRpcInterface::setRot( const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n  )
 {
