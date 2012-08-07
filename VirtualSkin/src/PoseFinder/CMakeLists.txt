@@ -21,6 +21,7 @@ SET ( src_files posefinder.cpp
 		constraints.cpp
 		connect_delauny.cpp
 		matrix.cpp 
+		mones.cpp
 )
 
 IF ( WIN32 )

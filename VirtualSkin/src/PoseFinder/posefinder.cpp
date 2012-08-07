@@ -9,6 +9,7 @@
 #include "constraints.h"
 #include "posefitnessfunction.h"
 #include "exception.h"
+#include "mones.h"
 
 using namespace std;
 
@@ -23,6 +24,21 @@ Matrix PoseFinder::get_start_pos(int dim) {
 	return pt;
 }
 
+void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+  int dim = d_simulator.total_motors();
+  MoNes mones(d_pose_fitness_function, dim, 100);
+
+  mones.init(d_start_search_pos, std);
+
+  for (size_t i(0); i < 100; ++i) {
+	mones.iterate();
+	mones.d_individuals[0].d_A.print();
+	cout << "sigma: " << mones.d_individuals[0].d_sigma << endl;
+  }
+  d_best_point = mones.bestPoint().get_data();
+}
+
+/*
 void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
 	try
 	{
@@ -62,6 +78,7 @@ void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, doub
 		printf("\n\nEXCEPTION: %s\n\n", exception);
 	}
 }
+*/
 
 void PoseFinder::set_variance(double std) {
 	Matrix sigma = Matrix::ones(d_nes.dim());

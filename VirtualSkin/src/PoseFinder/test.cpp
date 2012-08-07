@@ -32,9 +32,9 @@ inline void mones_test() {
 	double fit_p = test_function.eval(ind.d_u);
 	double fit_o = test_function.eval(offspring.d_u);
 	if (fit_o < fit_p) {
-	  //offspring.update_win(.2, .2);
-	  //ind = offspring;
-	  ind.update_win(.2, .2);
+	  offspring.update_win_offspring(.2, .2);
+	  ind = offspring;
+	  //ind.update_win(.2, .2);
 	} else {
 	  ind.update_lose(.05);
 	}

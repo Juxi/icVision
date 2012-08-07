@@ -572,12 +572,3 @@ Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( vector<double> _x)
 vector<double> Roadmap::nearestWorkspaceVector(vector<double> q) {
   return map[nearestWorkspaceVertex(q)].q;
 }
-
-double Roadmap::calculate_distance( vector<double> const &v1,  vector<double> const &v2) {
-	assert(v1.size() == v2.size());
-	double distance(0.0);
-	for (size_t i(0); i < v1.size(); ++i)
-		distance += pow(v1[i] - v2[i], 2.0);
-	return sqrt(distance);
-}
-

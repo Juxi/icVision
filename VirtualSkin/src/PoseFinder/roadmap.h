@@ -26,6 +26,8 @@
 //#include "iCubController.h"
 
 #include "astar.h"
+#include "general.h"
+
 #include <QThread>
 //#include <QtGui/QGraphicsView>
 
@@ -219,8 +221,6 @@ public:
 		return num_vertices(map);
 	}
 	//bool insert( std::vector< std::vector<double> > );
-
-	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
 
 	std::pair<std::vector<float>, std::vector<float> > get_workspace_bounding_box() {
 		std::pair<std::vector<float>, std::vector<float> > bbox;
