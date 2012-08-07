@@ -55,7 +55,8 @@ ADD_DEPENDENCIES( PoseControl VirtualSkin )
 ADD_DEPENDENCIES( TEST KinematicModel )
 
 
-TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
+TARGET_LINK_LIBRARIES ( PoseFind KinematicModel 
+                    VirtualSkin
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}
@@ -64,7 +65,7 @@ TARGET_LINK_LIBRARIES ( PoseFind 	KinematicModel
 )
 
 TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
-					VirtualSkin
+                    VirtualSkin
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}
@@ -73,6 +74,7 @@ TARGET_LINK_LIBRARIES ( PoseControl 	KinematicModel
 )
 
 TARGET_LINK_LIBRARIES ( TEST 	KinematicModel
+                    VirtualSkin
 					${SOLID_LIBRARY}
 					${QT_LIBRARIES}
 					${OPENGL_LIBRARIES}
