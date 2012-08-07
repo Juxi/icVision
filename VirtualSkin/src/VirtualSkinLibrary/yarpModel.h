@@ -40,7 +40,7 @@ public:
 
 	YarpRobot* loadYarpRobot( const QString& fileName, bool verbose );
 	
-	void openWorldRpcPort( const QString& name ) { worldRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
+	void openWorldRpcPort( const QString& name ) { worldRpcInterface.open(name); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
 	void closeWorldRpcPort() { worldRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
 	//bool WorldRpcPortIsOpen() { return rpcIsOpen; }
 	
