@@ -276,6 +276,7 @@ void WorldRpcInterface::startSimSyncer(const yarp::os::Bottle& command, yarp::os
 	reply.addString("ok");
 }
 
+
 bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os::Bottle& command, int& n, QMatrix4x4 &rt) {
 	if ( (command.size()-n) != 6) {
 		return false;
@@ -304,7 +305,6 @@ bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os:
 		yarp::os::Value type(rxtype.cap(1).toStdString().c_str());
 		int vtype = type.asVocab();
 		if (vtype == VOCAB_CYL || vtype == VOCAB_SCYL) {
-			printf("cylinder detected: rotating 90 degrees\n");
 			rt.rotate( QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), 90));
 		}
 	}
