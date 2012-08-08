@@ -11,6 +11,7 @@
 #define SIMSYNCER_H
 
 #include <QThread>
+#include <QMutex>
 #include <QMatrix4x4>
 #include <QElapsedTimer>
 #include <yarp/os/all.h>
@@ -52,7 +53,7 @@ private:
 	void interruptableSleeper(qint64 time); //<! Interruptable sleeper, time in millis
 
 	VirtualSkin::YarpModel* model; //!< The model (world) on which this simSyncer operates
-	
+	 QMutex mutex;
 	yarp::os::Bottle cmd, response;
 	yarp::os::Network	yarp;
 	yarp::os::RpcClient	port;
