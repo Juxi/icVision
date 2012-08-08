@@ -66,8 +66,8 @@ vector<double> PathPlanner::closest_workspace(string mapname, vector<double> wor
 }
 
 vector<vector<double> > PathPlanner::find_path(vector<double> source, vector<double> target) {
-  size_t resolution(3);
-  CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), resolution);
+  double granularity(5);
+  CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), granularity);
 
   Roadmap::PathList the_path_nodes = d_main_roadmap.shortestPath(source, target, collision_edge_tester);
 	vector<vector<double> > the_path = d_main_roadmap.vertex_list_to_q(the_path_nodes);

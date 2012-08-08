@@ -127,7 +127,7 @@ void MapThread::run()
     }
   else
     while (true) {
-      double start_std(.30);
+      double start_std(.10);
       size_t population_size(100);
 
       //double start_std(.70);

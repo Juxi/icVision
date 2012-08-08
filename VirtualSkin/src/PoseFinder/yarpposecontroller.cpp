@@ -20,7 +20,7 @@
 using namespace yarp::os;
 using namespace yarp::dev;
 
-using namespace KinematicModel;
+//using namespace KinematicModel;
 using namespace std;
 
 void YarpPoseController::load_config(int argc, char **argv) {
@@ -67,7 +67,7 @@ void YarpPoseController::load_config(int argc, char **argv) {
 					  // the model must be started prior to appending objects */
 	d_model->openWorldRpcPort(QString("/poseControl/world"));
 
-	Robot &robot = *d_model->loadRobot(QString(robot_file.c_str()), false);
+	KinematicModel::Robot &robot = *d_model->loadRobot(QString(robot_file.c_str()), false);
     
 	if (world_file.size()) {
 		d_model->loadWorld( QString(world_file.c_str()), false );

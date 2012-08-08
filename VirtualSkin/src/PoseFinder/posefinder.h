@@ -14,7 +14,6 @@
 #include "posefitnessfunction.h"
 #include "simulator.h"
 #include "xnes.h"
-#include "mones.h"
 
 
 class PoseFinder

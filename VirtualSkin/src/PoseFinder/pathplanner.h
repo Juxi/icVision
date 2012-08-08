@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <cmath>
 #include <ctime>
 
 //#include <CGAL/Homogeneous_d.h>
@@ -156,26 +157,29 @@ class PathPlanner {
 	public:
 	  Roadmap &d_roadmap;
 	  Simulator &d_simulator;
-	  size_t d_resolution;
+	  double d_granularity;
 	  size_t d_n_evaluations;
 	  std::clock_t d_clock;
 
-	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, size_t resolution) : d_roadmap(roadmap), d_simulator(simulator), d_resolution(resolution), d_n_evaluations(0), d_clock(0) {}
+	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity) : d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity), d_n_evaluations(0), d_clock(0) {}
 	  
 	  void operator()(edge_t &edge) {
 		if (get(&Roadmap::Edge::evaluated, d_roadmap.map, edge))
 		  return;
 
 		std::clock_t start_clock(std::clock());
-		std::vector<double> q_start = d_roadmap.map[source(edge, d_roadmap.map)].q;
-		std::vector<double> q_end = d_roadmap.map[target(edge, d_roadmap.map)].q;
+		std::vector<double> &q_start = d_roadmap.map[source(edge, d_roadmap.map)].q;
+		std::vector<double> &q_end = d_roadmap.map[target(edge, d_roadmap.map)].q;
 		
 		int n_collisions = d_roadmap.map[source(edge, d_roadmap.map)].collisions + d_roadmap.map[source(edge, d_roadmap.map)].collisions;
-		
-		for (size_t i(0); i < d_resolution; ++i) {
+
+		//adaptive resolution, at least 2 (check start and end)
+		size_t resolution = std::floor(std::max(2., calculate_distance(q_start, q_end) / d_granularity));
+
+		for (size_t i(0); i < resolution; ++i) {
 		  if (n_collisions > 0)
 			break;
-		  float portion(static_cast<float>(i) / (d_resolution - 1));
+		  float portion(static_cast<float>(i) / (resolution - 1));
 		  std::vector<double> q(q_start.size());
 		  for (size_t n(0); n < q.size(); ++n)
 			q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
@@ -186,7 +190,7 @@ class PathPlanner {
 		
 		double length = get(&Roadmap::Edge::length, d_roadmap.map, edge);
 		if (!n_collisions)
-		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, pow(length, 1.2));
+		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, length);
 		else
 		  put(&Roadmap::Edge::length2, d_roadmap.map, edge, FLT_MAX);
 		put(&Roadmap::Edge::evaluated, d_roadmap.map, edge, true);
