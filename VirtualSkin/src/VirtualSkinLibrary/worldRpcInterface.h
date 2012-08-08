@@ -46,7 +46,10 @@ public:
 	void open( const QString& portName );
 	void close();
 	
-	
+	bool parseSimRTBottle(const std::string name, const yarp::os::Bottle& command, int& n, QMatrix4x4 &rt);
+	KinematicModel::CompositeObject* getObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );												//!< Return a pointer to an object by looking up its name
+	QString getName( const yarp::os::Bottle& cmd, int& n  );																								//!< Parse the RPC command and get a name string out
+
 private:
 	
 	void run();
@@ -56,14 +59,12 @@ private:
 	void respClass( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Sets the properties of an object
 	void setPos( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Sets the position of an object (called by set() above)
 	void setRot( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Rotate an object
+	void setRTfromSim ( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );	//!< Set rototranslation from simulator
 	void removeObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Remove and delete an object
 	void grabObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );		//!< Attach an object to a marker
 	void getList(yarp::os::Bottle& reply);											//!< Get a list of objects in the world
 	void getState(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n);		//!< Get the 4x4 rototranslation matrix of an object
 	
-	KinematicModel::CompositeObject* getObject( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply, int& n  );												//!< Return a pointer to an object by looking up its name
-	QString getName( const yarp::os::Bottle& cmd, int& n  );																								//!< Parse the RPC command and get a name string out
-
 	KinematicModel::Model* model;
 	
 	yarp::os::Network	yarp;
