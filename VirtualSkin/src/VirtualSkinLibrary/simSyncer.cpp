@@ -88,7 +88,7 @@ void SimSyncer::interruptableSleeper(qint64 time) {
 
 void SimSyncer::step() {
 	QMutexLocker locker(&mutex); // multiple threads may call step(), so protect it with a mutex
-
+	 
 	bool moved = false, doUpdate = false, rtok = false, success = false;
 	int n = 0;	// identifier of the current bottle element
 	yarp::os::Bottle empty;
