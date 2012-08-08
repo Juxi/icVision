@@ -77,7 +77,11 @@ int main(int argc, char *argv[])
 				yarpRobot->openCollisionPort("/virtualSkin/collisions");
 				yarpRobot->openObservationPort("/virtualSkin/observations");
 				
-				Sleep(1);
+			  #ifdef WIN32
+			    Sleep(1);
+			  #else
+				usleep(1000);
+			  #endif
 				
 				// Enable Virtual Skin for the robot model
 				printf( "\n\nOPENING PORT FILTERS FOR ROBOT: %s\n", yarpRobot->getName().toStdString().c_str() );
@@ -101,7 +105,13 @@ int main(int argc, char *argv[])
 				yarpRobot2 = yarpModel->loadYarpRobot( robotFile2, false );
 				yarpRobot2->openCollisionPort("/virtualSkin/collisions2");
 				yarpRobot2->openObservationPort("/virtualSkin/observations2");
-				Sleep(1);
+				
+             #ifdef WIN32
+			    Sleep(1);
+			  #else
+				usleep(1000);
+			  #endif
+
 				printf( " ...opening robot filter for '%s'\n", yarpRobot2->getName().toStdString().c_str() );
 				filter2 = new ReflexFilter( yarpRobot2, false );
 				filter2->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
