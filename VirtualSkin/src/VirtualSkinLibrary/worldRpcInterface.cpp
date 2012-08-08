@@ -138,7 +138,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 
 void WorldRpcInterface::getList(yarp::os::Bottle& reply)
 {
-	printf("called getList\n");
+	//printf("called getList\n");
 	QVector<QString>::iterator i;
 	QVector<QString> list = model->listWorldObjects();
 	for ( i=list.begin(); i!=list.end(); ++i )
@@ -293,13 +293,14 @@ bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os:
 	double rz = command.get(n).asDouble(); n++;
 		
 	// special simulator rotation:
-	QQuaternion qrx = QQuaternion::fromAxisAndAngle( QVector3D(1, 0, 0), rx);
-	QQuaternion qry = QQuaternion::fromAxisAndAngle( QVector3D(0, 1, 0), ry);
-	QQuaternion qrz = QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), rz);
+	QQuaternion qrx = QQuaternion::fromAxisAndAngle( QVector3D(1, 0, 0), -rz);
+	QQuaternion qry = QQuaternion::fromAxisAndAngle( QVector3D(0, 1, 0), -rx);
+	QQuaternion qrz = QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), ry);
+	rt.setToIdentity();
 	rt.rotate(qry * (qrz*qrx));
 
 	// cylinders are rotated 90 degrees on the z-axis with respect to iCubSIM:
-	QRegExp rxtype("(.*)(?:\\s*\\d+)"); // check for some characters that end with a number
+	QRegExp rxtype("([^\\d]+)(?:\\s*\\d+)"); // check for: {[one or more non-numeric characters]: return as part 1} {[zero or more whitespace characters followed by one or more numeric characters]: do not return}
 	int pos = rxtype.indexIn(QString(name.c_str()));
 	if (pos > -1) {
 		yarp::os::Value type(rxtype.cap(1).toStdString().c_str());
@@ -308,7 +309,7 @@ bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os:
 			rt.rotate( QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), 90));
 		}
 	}
-
+	
 	// position translation
 	rt(0, 3) = -(pz + 0.026);
 	rt(1, 3) = -px;

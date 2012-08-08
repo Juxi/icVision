@@ -67,7 +67,7 @@ void SimSyncer::stop() {
 
 void SimSyncer::run() {
 	if (keepRunning) { printf("\n\n\niCubSim synchronization thread already running!\n\n\n"); return; }
-
+	port.resume();
 	keepRunning = true;
 	QElapsedTimer t; t.start();
 	while ( keepRunning ) {
@@ -103,7 +103,6 @@ void SimSyncer::step() {
 			for (int i=0; i<response.size(); i++) {
 				n = 0;
 				empty.clear();
-				rt.setToIdentity();
 
 				// parse line
 				line = response.get(i).asList(); // get bottle for current object
