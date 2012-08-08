@@ -73,6 +73,8 @@ void YarpPoseController::load_config(int argc, char **argv) {
 		d_model->loadWorld( QString(world_file.c_str()), false );
 	}
 
+	d_model->openSimSyncer(QString("/poseControl/simSync"), QString("/icubSim/world"));
+
     load_path_planner(*d_model, robot);
 	if (map_file.size())
 	  d_path_planner->load_map("default", map_file);

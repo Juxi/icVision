@@ -1,5 +1,5 @@
 /*******************************************************************
- ***               Copyright (C) 2011 Mikhail Frank              ***
+ ***               Copyright (C) 2011 Mikhail Frank, Leo Pape    ***
  ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
  ******************************************************************/
 
@@ -12,6 +12,7 @@
 
 //#include "yarpStreamPort.h"
 #include "worldRpcInterface.h"
+#include "simSyncer.h"
 #include "model.h"
 
 namespace VirtualSkin
@@ -19,6 +20,7 @@ namespace VirtualSkin
 	class YarpModel;
 	class YarpRobot;
 	class WorldRpcInterface;
+	class SimSyncer;
 }
 
 /*! \brief Wraps RobotModel::Model with YARP functionality
@@ -40,12 +42,15 @@ public:
 
 	YarpRobot* loadYarpRobot( const QString& fileName, bool verbose );
 	
+	void openSimSyncer (const QString& portName, const QString& simWorldPortName) {simSyncer.open(portName, simWorldPortName); } // !< Open SimSyncer port and connect to iCubSim world port
+	void closeSimSyncer () { simSyncer.close(); };
 	void openWorldRpcPort( const QString& name ) { worldRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
-	void closeWorldRpcPort() { worldRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
+	void closeWorldRpcPort() { worldRpcInterface.close(); }														//!< Closes the RPC interface to the RobotModel::Model
 	//bool WorldRpcPortIsOpen() { return rpcIsOpen; }
 	
 	void showBottle( yarp::os::Bottle& anUnknownBottle, int indentation = 0 );			//!< Print a yarp::os::bottle to the terminal
 	WorldRpcInterface& getRpcInterface() { return worldRpcInterface; }
+	SimSyncer& getSimSyncer() { return simSyncer; }
 
 private:
 	
@@ -64,7 +69,7 @@ private:
 	
 	
 	WorldRpcInterface	worldRpcInterface;		//!< The YARP RPC port that provides an interface to the RobotModel::World
-	
+	SimSyncer			simSyncer;				//!< Synchronization with iCubSim world
 };
 #endif
 /** @} */

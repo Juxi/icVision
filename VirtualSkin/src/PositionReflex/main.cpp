@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
 	VirtualSkin::YarpModel* yarpModel = NULL;
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
 	ReflexFilter*			filter	  = NULL;
-	VirtualSkin::SimSyncer* simSyncer = NULL;
 
 	// or these
 	KinematicModel::Model* model = NULL;
@@ -121,8 +120,7 @@ int main(int argc, char *argv[])
 			yarpModel->openWorldRpcPort("/virtualSkin/world");
 
 			// Start syncer instance
-			simSyncer = new VirtualSkin::SimSyncer(yarpModel, 0.25);
-			simSyncer->open("/virtualSkin/syncer", "/icubSim/world");
+			yarpModel->openSimSyncer("/virtualSkin/syncer", "/icubSim/world");
 		} 
 		else
 		{
@@ -151,11 +149,6 @@ int main(int argc, char *argv[])
 		}
 		delete filter;
 		
-		if ( simSyncer) {
-			simSyncer->close();
-			delete simSyncer;
-		}
-
 		if ( yarpModel )
 		{
 			//yarpModel->closeWorldRpcPort();

@@ -141,7 +141,7 @@ class PathPlanner {
 
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
 
-	bool check_map(std::string mapname) {if (!hasMap(mapname)) throw StringException("Map does not exist");}
+	bool check_map(std::string mapname) {if (!hasMap(mapname)) throw StringException("Map does not exist"); return true; }
 
 	void add_bullshit() {
 		for (float z(-.2); z < .2; z += .03)
