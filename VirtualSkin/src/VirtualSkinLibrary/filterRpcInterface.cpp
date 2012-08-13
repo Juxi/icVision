@@ -62,7 +62,7 @@ void FilterRpcInterface::run()
 			port.reply(response);
 			//if (debug) { printf("reply: %s\n",response.toString().c_str()); }
 		}
-		msleep(YARP_PERIOD);
+		//msleep(YARP_PERIOD); this doesn't do anything as msleep takes unsigned long
 	}
 }
 
@@ -77,7 +77,7 @@ bool FilterRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bot
 	
 	if ( prefix=="help" )
 	{
-		reply.addString("No help for YOU!!!");
+		reply.addString("setWP: set waypoint at current robot pose");
 		return true;
 	}
 	if ( prefix=="setWP" )

@@ -30,16 +30,21 @@
  *	VOCABS
  */
 // commands for objects
-#define VOCAB_MK VOCAB2('m','k')			//!< Make a new object
-#define VOCAB_SET VOCAB3('s','e','t')		//!< Set the position of an object
-#define VOCAB_GET VOCAB3('g','e','t')		//!< Returns the 4x4 rototranslation matrix for an object
-#define VOCAB_DEF VOCAB3('d','e','f')		//!< Define an object target or obstacle
-#define VOCAB_ROT VOCAB3('r','o','t')		//!< Rotate an object
-#define VOCAB_REM VOCAB2('r','m')			//!< Remove an object
-#define VOCAB_GRAB VOCAB4('g','r','a','b')	//!< Attach an object to a marker
-#define VOCAB_SIM VOCAB3('s','i','m')		//!< set rototranslation from simulator coordinates
-#define VOCAB_LS VOCAB2('l','s')			//!< list the objects in the world
-#define VOCAB_FAIL VOCAB4('f','a','i','l')	//!< fail
+#define VOCAB_MK VOCAB2('m','k')					//!< Make a new object
+#define VOCAB_SET VOCAB3('s','e','t')				//!< Set the position of an object
+#define VOCAB_GET VOCAB3('g','e','t')				//!< Returns the 4x4 rototranslation matrix for an object
+#define VOCAB_DEF VOCAB3('d','e','f')				//!< Define an object target or obstacle
+#define VOCAB_ROT VOCAB3('r','o','t')				//!< Rotate an object
+#define VOCAB_REM VOCAB2('r','m')					//!< Remove an object
+#define VOCAB_GRAB VOCAB4('g','r','a','b')			//!< Attach an object to a marker
+#define VOCAB_SIM VOCAB3('s','i','m')				//!< set rototranslation from simulator coordinates
+
+// commands for iCubSim synchronization
+#define VOCAB_LS VOCAB2('l','s')					//!< list the objects in the world
+#define VOCAB_FAIL VOCAB4('f','a','i','l')			//!< fail
+#define VOCAB_SIMSYNC_RUN VOCAB4('s','r','u','n')	//!< run iCubSim synchronization threat
+#define VOCAB_SIMSYNC_STOP VOCAB4('s','s','t','p')	//!< pause iCubSim synchronization threat
+#define VOCAB_SIMSYNC_NOW VOCAB4('s','y','n','c')	//!< perform one iCubSim synchronization step
 
 // object types
 #define VOCAB_OBSTACLE VOCAB3('o','b','s')	//!< an obstacle that triggers reflexive response 

@@ -8,9 +8,9 @@ MoNes::MoNes(Function &fitness_function, WorkspaceFunction &workspace_function, 
 	d_workspace_function(workspace_function),
 	d_dim(dim), d_n(n) {
   rngSeed(time(0));
-  d_na = 1./4 * pow(static_cast<float>(dim), -1.5);
-  d_nsigma_min = 1./5 * pow(static_cast<float>(dim), -1.5);
-  d_nsigma_plus = pow(static_cast<float>(dim), -1.5);
+  d_na = 1./4 * pow(static_cast<float>(dim), static_cast<float>(-1.5));
+  d_nsigma_min = 1./5 * pow(static_cast<float>(dim), static_cast<float>(-1.5));
+  d_nsigma_plus = pow(static_cast<float>(dim), static_cast<float>(-1.5));
   
   //d_na = 1./8.;
   //d_nsigma_min = 1./10.;

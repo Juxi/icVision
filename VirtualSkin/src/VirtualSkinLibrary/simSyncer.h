@@ -11,9 +11,10 @@
 #define SIMSYNCER_H
 
 #include <QThread>
+#include <QMutex>
 #include <QMatrix4x4>
+#include <QElapsedTimer>
 #include <yarp/os/all.h>
-#include "yarpModel.h"
 
 namespace KinematicModel
 {
@@ -22,8 +23,8 @@ namespace KinematicModel
 
 namespace VirtualSkin
 {
-	class SimSyncer;
 	class YarpModel;
+	class SimSyncer;
 }
 	
 /** \brief Updates VirtualSkin world with iCub Simulator objects
@@ -35,24 +36,30 @@ class VirtualSkin::SimSyncer : public QThread
 		
 public:
 
-	SimSyncer(VirtualSkin::YarpModel* model, double period); //!< Constructor; set model and update period in seconds
-	virtual ~SimSyncer();	                  //!< Destructor
+	SimSyncer();			//!< Constructor
+	virtual ~SimSyncer();	//!< Destructor
 	
-	void open( const QString& portName, const QString& simPortName ); //!< open YARP port with PORTNAME, and connect to simulator world port with SIMPORTNAME
-	void close(); //!< Stop thread; close port
+	void setModel(VirtualSkin::YarpModel* m) { model = m; };			//!< Set model on which the iCubSim synchronization operates
+	void setRefreshPeriod(double p) { period = (qint64) (p*1000.);};	//!< Set thread update period in seconds
+	void open( const QString& portName, const QString& simPortName );	//!< open YARP port with PORTNAME, and connect to simulator world port with SIMPORTNAME
+	void close();														//!< Stop thread; close port
+	void stop();														//!< Stop thread
+	void step();														//!< One sync step
 	
 private:
 	
 	void run();
 	bool handler( const yarp::os::Bottle& reply );	//!< Handles incomming RPC commands (expressed as YARP bottles)
+	void interruptableSleeper(qint64 time); //<! Interruptable sleeper, time in millis
 
 	VirtualSkin::YarpModel* model; //!< The model (world) on which this simSyncer operates
-	
+	 QMutex mutex;
+	yarp::os::Bottle cmd, response;
 	yarp::os::Network	yarp;
 	yarp::os::RpcClient	port;
-	double period;
+	qint64 period;
 	bool keepRunning;
-	
+	QElapsedTimer sleepTimer;
 };
 #endif
 /** @} */

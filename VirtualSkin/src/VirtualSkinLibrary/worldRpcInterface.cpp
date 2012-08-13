@@ -11,7 +11,7 @@
 #include "worldRpcInterface.h"
 #include "modelexception.h"
 #include "virtualskinexception.h"
-#include "model.h"
+#include "yarpModel.h"
 #include "constants.h"
 #include "compositeobject.h"
 #include "sphere.h"
@@ -47,7 +47,7 @@ void WorldRpcInterface::close()
 	while ( isRunning() )
 	{ 
 		printf("."); 
-		msleep(1); 
+		msleep(YARP_PERIOD_ms); 
 	}
 	printf("\n");
 	port.close();
@@ -71,7 +71,7 @@ void WorldRpcInterface::run()
 		 }
 		 //if (debug) { printf("reply: %s\n",response.toString().c_str()); }
 		 }
-		msleep(YARP_PERIOD);
+		//msleep(YARP_PERIOD); this doesn't do anything as msleep takes unsigned long
 	}
 }
 
@@ -84,7 +84,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 	if ( prefix=="help" )
 	{
 			reply.addVocab(yarp::os::Vocab::encode("many"));
-			reply.addString("ReflexDemo of VirtualSkin, arguments within brackets: \n");
+			reply.addString("\nVirtualSkin world interface, arguments within brackets: \n");
 			reply.addString(	"ls: list objects");
 			reply.addString(	"mk sph [radius] [xpos] [ypos] [zpos]: create sphere");
 			reply.addString(	"mk cyl [radius] [height] [xpos] [ypos] [zpos]: create sphere");
@@ -92,16 +92,20 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 			reply.addString(	"set [objectname] [xpos] [ypos] [zpos]: set object location (m)");
 			reply.addString(	"def [objectname] [targ/obs]: set object class to target or obstacle");
 			reply.addString(	"get [objectname]: return object state");
-			reply.addString(    "sim [objectname] [xpos] [ypos] [zpos] [xrot] [yrot] [zrot]: set rototranslation as returned in iCubSim coordinates");
 			reply.addString(	"rot [objectname] [xrot] [yrot] [zrot]: set object rotation (degrees)");
 			reply.addString(    "rot [objectname] [1*9 rotation matrix]: set object rotation cosine matrix");
 			reply.addString(	"rm [objectname]: remove object (persistent objects cannot be removed)");
 			reply.addString(	"clr: remove all but persistent objects from the world, and reset object counters");
 			reply.addString(	"grab [objectname] [robotname] [markername]: attach object to robot marker");
 			reply.addString(	"grab [objectname] [robotname]: detach object from robot");
+			reply.addString("\niCub simulator synchronization commands:");
+			reply.addString(    "sim [objectname] [xpos] [ypos] [zpos] [xrot] [yrot] [zrot]: set rototranslation as returned in iCubSim coordinates");
+			reply.addString(	"srun [period]: run iCubSim synchronization thread");
+			reply.addString(	"sstp: stop iCubSim synchronization thread");
+			reply.addString(	"sync: do one iCubSim synchronization step");
 		return true;
 	}
-	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr, grab" ) { n++; }
+	else if ( prefix == "ls, mk (sph, cyl, box), set, def (obs/tgt), get, rot, rm, clr, grab, sim, srun, sstp, sync" ) { n++; }
 	
 	cmd  = command.get(n).asVocab(); n++;
 
@@ -116,6 +120,9 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 		case VOCAB_REM:	removeObject(command,reply,n); break;
 		case VOCAB_GRAB: grabObject(command,reply,n); break;
 		case VOCAB_SIM: setRTfromSim(command, reply, n); break;
+		case VOCAB_SIMSYNC_RUN: startSimSyncer(command, reply, n); break;
+		case VOCAB_SIMSYNC_STOP: model->getSimSyncer().stop(); reply.addString("ok"); break;
+		case VOCAB_SIMSYNC_NOW: model->getSimSyncer().step(); reply.addString("ok"); break;
 		case VOCAB_CLEAR: 
 				printf("CLEARING THE WORLD\n");
 				model->clearTheWorld();
@@ -131,7 +138,7 @@ bool WorldRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bott
 
 void WorldRpcInterface::getList(yarp::os::Bottle& reply)
 {
-	printf("called getList\n");
+	//printf("called getList\n");
 	QVector<QString>::iterator i;
 	QVector<QString> list = model->listWorldObjects();
 	for ( i=list.begin(); i!=list.end(); ++i )
@@ -255,6 +262,21 @@ void WorldRpcInterface::setRTfromSim(const yarp::os::Bottle& command, yarp::os::
 	}
 }
 
+void WorldRpcInterface::startSimSyncer(const yarp::os::Bottle& command, yarp::os::Bottle& reply, int& n) {
+	if ((command.size() - n) != 1) {
+		reply.addString("Please provide the refresh period for the synchronization thread in seconds");
+		return;
+	}
+	double period = command.get(n).asDouble(); n++;
+	if (model->getSimSyncer().isRunning()) {
+		model->getSimSyncer().stop();
+	}
+	model->getSimSyncer().setRefreshPeriod(period);
+	model->getSimSyncer().start();
+	reply.addString("ok");
+}
+
+
 bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os::Bottle& command, int& n, QMatrix4x4 &rt) {
 	if ( (command.size()-n) != 6) {
 		return false;
@@ -271,13 +293,14 @@ bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os:
 	double rz = command.get(n).asDouble(); n++;
 		
 	// special simulator rotation:
-	QQuaternion qrx = QQuaternion::fromAxisAndAngle( QVector3D(1, 0, 0), rx);
-	QQuaternion qry = QQuaternion::fromAxisAndAngle( QVector3D(0, 1, 0), ry);
-	QQuaternion qrz = QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), rz);
+	QQuaternion qrx = QQuaternion::fromAxisAndAngle( QVector3D(1, 0, 0), -rz);
+	QQuaternion qry = QQuaternion::fromAxisAndAngle( QVector3D(0, 1, 0), -rx);
+	QQuaternion qrz = QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), ry);
+	rt.setToIdentity();
 	rt.rotate(qry * (qrz*qrx));
 
 	// cylinders are rotated 90 degrees on the z-axis with respect to iCubSIM:
-	QRegExp rxtype("(.*)(?:\\s*\\d+)"); // check for some characters that end with a number
+	QRegExp rxtype("([^\\d]+)(?:\\s*\\d+)"); // check for: {[one or more non-numeric characters]: return as part 1} {[zero or more whitespace characters followed by one or more numeric characters]: do not return}
 	int pos = rxtype.indexIn(QString(name.c_str()));
 	if (pos > -1) {
 		yarp::os::Value type(rxtype.cap(1).toStdString().c_str());
@@ -286,7 +309,7 @@ bool WorldRpcInterface::parseSimRTBottle(const std::string name, const yarp::os:
 			rt.rotate( QQuaternion::fromAxisAndAngle( QVector3D(0, 0, 1), 90));
 		}
 	}
-
+	
 	// position translation
 	rt(0, 3) = -(pz + 0.026);
 	rt(1, 3) = -px;
