@@ -22,6 +22,7 @@ SET ( src_files posefinder.cpp
 		connect_delauny.cpp
 		matrix.cpp 
 		mones.cpp
+		posefitnessfunction.cpp
 )
 
 IF ( WIN32 )

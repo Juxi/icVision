@@ -9,11 +9,11 @@ using namespace std;
 
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), d_pose_finder(model, robot),
-	d_population_size(100), d_start_std(.3)
+	d_population_size(100), d_start_std(.1)
 {
   init_standard_poses();
-
-  //nullspace_function();
+  
+  nullspace_function();
  //move_box_function();
 
   //hold_something_function();
@@ -21,7 +21,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   //hand_right_function();
 //  hand_right_mark_function();
   
-  hand_right_look_varun_function();
+  //hand_right_look_varun_function();
   //grasp_function();
   
 }
@@ -95,7 +95,7 @@ void MapThread::run()
   QTime time = QTime::currentTime();
   qsrand((uint)time.msec());
 
-  bool filter(true);
+  bool filter(false);
 
   if (filter) {
     filter_collisions(d_pose_finder.simulator());
@@ -127,9 +127,6 @@ void MapThread::run()
     }
   else
     while (true) {
-      double start_std(.10);
-      size_t population_size(100);
-
       //double start_std(.70);
       //size_t population_size(250);
 
@@ -154,7 +151,7 @@ void MapThread::nullspace_function() {
 
   
   d_pose_finder.set_start_search_pos(d_simulator_wide_pose);
- d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 2);
+ d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 3);
   
   
   //d_pose_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
@@ -164,8 +161,8 @@ void MapThread::nullspace_function() {
   //d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.3076, 0.0542, 0.06900)), 3.);
  
 
- d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2476, -0.05, height)), 1.);
- d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2476, 0.05, height)), 1.);
+ d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2476, -0.1, height)), 1.);
+ d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2476, 0.1, height)), 1.);
 
   //pointing straight
   d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));

@@ -36,27 +36,34 @@ Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_
 	
 	Matrix x = d_u + d_sigma * d_A * d_z;
 	Individual individual(x, *this);
+	d_parent_id = 0;
 	return individual;
   }
 
   void set_fitness(double fitness) {d_fitness = fitness;}
   double get_fitness() const {return d_fitness;}
+  double get_rank() const {return d_rank;}
 
   void set_workspace(std::vector<double> workspace) {d_workspace = workspace;}
   
   void update_win_parent(double nsigma_plus) {
+	//std::cout << "win parent" << std::endl;
 	d_sigma *= exp(nsigma_plus);
   }
 
   void update_win_offspring(double na, double nsigma_plus) {
+	//std::cout << "win offspring" << std::endl;
 	Matrix Ga = d_z * d_z.T() - Matrix::eye(d_z.size());
 	//std::cout << d_u.size() << " " << d_A.size() << " " << d_z.size() << std::endl;
-	d_u = d_u + d_A * d_z;
+
+	d_u = d_u + d_sigma * d_A * d_z;
+	//d_u = d_u + d_A * d_z;
 	d_A = d_A * (na * Ga).exp();
 	d_sigma *= exp(nsigma_plus);
   }
 
   void update_lose(double nsigma_min) {
+	//std::cout << "lose" << std::endl;
 	d_sigma /= exp(nsigma_min);
   }
 
@@ -65,8 +72,10 @@ Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_
   void print() {d_u.print();}
 };
 
+
 struct MoNes {
   Function &d_fitness_function;
+  WorkspaceFunction &d_workspace_function;
   //WorkspaceFunction &d_workspace_function;
 
 
@@ -75,38 +84,22 @@ struct MoNes {
   
   double d_na, d_nsigma_plus, d_nsigma_min;
 
-  MoNes(Function &fitness_function, size_t dim, size_t);
+  MoNes(Function &fitness_function, WorkspaceFunction &workspace_function, size_t dim, size_t);
 
-  void init(std::vector<double> mu, double sigma) {
-	
-	Individual individual(mu, sigma);
-	
-	for (size_t i(0); i < d_n; ++i) 
-	  d_individuals.push_back(individual.offspring());
-  }
+  void init(std::vector<double> mu, double sigma);
 
   Matrix bestPoint() {return d_individuals[0].d_u;}
   double bestFitness() {return d_individuals[0].get_fitness();}
 
   void evaluate() {
-	for (size_t i(0); i < d_individuals.size(); ++i)
+	for (size_t i(0); i < d_individuals.size(); ++i) {
 	  d_individuals[i].set_fitness(d_fitness_function.eval(d_individuals[i].d_u));
+	  d_individuals[i].d_workspace = d_workspace_function.get_workspace(d_fitness_function);
+	}
   }
 
-  void rank() {
-	sort(d_individuals, &Individual::get_fitness);
-	for (size_t i(0); i < d_individuals.size(); ++i)
-	  d_individuals[i].d_rank = i;
+  void rank();
 
-	std::map<size_t, size_t> id_rank_map;
-	for (size_t i(0); i < d_individuals.size(); ++i)
-	  if (d_individuals[i].d_id)
-		id_rank_map[d_individuals[i].d_id] = d_individuals[i].d_rank;
-	for (size_t i(0); i < d_individuals.size(); ++i)
-	  if (d_individuals[i].d_parent_id)
-		d_individuals[i].d_parent_rank = id_rank_map[d_individuals[i].d_parent_id];
-  }
-  
   void reproduce() {
 	for (size_t i(0); i < d_n; ++i)
 	  d_individuals.push_back(d_individuals[i].offspring());
@@ -117,8 +110,16 @@ struct MoNes {
   }
 
   void print_fitnesses() {
+	std::cout << std::endl;
 	for (size_t i(0); i < d_individuals.size(); ++i)
-	  std::cout << "=" << d_individuals[i].get_fitness() << std::endl;
+	  std::cout << "=" << d_individuals[i].get_fitness() << " "  << d_individuals[i].get_rank() << " " << d_individuals[i].d_id << std::endl;
+  }
+
+  void print_centers() {
+	for (size_t i(0); i < d_individuals.size(); ++i) {
+ 	  std::cout << "=> ";
+	  d_individuals[i].d_u.print();
+	}
   }
 
   void update() {
@@ -126,9 +127,9 @@ struct MoNes {
 	for (size_t i(0); i < d_individuals.size(); ++i)
 	  if (d_individuals[i].d_id)
 		id_index_map[d_individuals[i].d_id] = i;
-	for (size_t i(0); i < d_individuals.size(); ++i)
+	for (size_t i(0); i < d_individuals.size(); ++i) {
+	  //std::cout << d_individuals[i].d_parent_id << std::endl;
 	  if (d_individuals[i].d_parent_id) {
-
 		if (d_individuals[i].d_rank < d_individuals[i].d_parent_rank) {
 		  d_individuals[i].update_win_offspring(d_na, d_nsigma_plus);
 		  d_individuals[id_index_map[d_individuals[i].d_parent_id]].update_win_parent(d_nsigma_plus);
@@ -137,21 +138,25 @@ struct MoNes {
 		  d_individuals[id_index_map[d_individuals[i].d_parent_id]].update_lose(d_nsigma_min);
 		}
 	  }
+	}
   }
 
   void set_ids() {
 	for (size_t i(0); i < d_individuals.size(); ++i) {
 	  d_individuals[i].d_id = i + 1;
-	  d_individuals[i].d_parent_id = 0;	  
 	}
   }
 
   void iterate() {
 	set_ids();
 	reproduce();
-	evaluate();
-	rank();
+	set_ids();
 
+	evaluate();
+
+	rank();
+	//print_fitnesses();
+	
 	update();
 	
 	select();

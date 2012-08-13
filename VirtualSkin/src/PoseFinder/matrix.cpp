@@ -558,7 +558,7 @@ Matrix Matrix::diag() const
 void Matrix::print() const
 {
 	unsigned int r, c;
-	printf("%d x %d matrix at object address %p and memory address %p:\n", m_rows, m_cols, this, (size() > 0) ? &m_data[0] : NULL);
+	printf("%d x %d matrix:\n", m_rows, m_cols);
 	for (r=0; r<m_rows; r++)
 	{
 		for (c=0; c<m_cols; c++)

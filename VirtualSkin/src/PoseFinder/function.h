@@ -16,13 +16,9 @@ public:
 	virtual double eval(const Matrix& point) = 0;
 };
 
-class WorkspaceFunction
-{
-public:
-  WorkspaceFunction() { }
-  virtual ~WorkspaceFunction() { }
-  
-  virtual double eval(const Matrix& point) = 0;
+struct WorkspaceFunction {
+  WorkspaceFunction(){}
+  virtual std::vector<double> get_workspace(Function &fitness_funtion) = 0; //use fitness function object to gather workspace info
 };
 
 

@@ -6,13 +6,27 @@ using namespace std;
 
 class TestFunction : public Function {
   std::vector<double> d_goal;
+  std::vector<double> d_workspace;
+
  public:
   TestFunction(std::vector<double> goal) : d_goal(goal){}
   virtual double eval(const Matrix& point) {
 	double cost(0);
 	for (size_t i(0); i < d_goal.size(); ++i)
 	  cost += (point[i] - d_goal[i]) * (point[i] - d_goal[i]);
+	d_workspace = std::vector<double>(1);
+	d_workspace[0] = point[0];
 	return cost;
+  }
+
+  std::vector<double> &workspace() {
+	return d_workspace;
+  }
+};
+
+struct TestWorkspaceFunction : public WorkspaceFunction {
+  virtual std::vector<double> get_workspace(Function &fitness_funtion) {
+	return dynamic_cast<TestFunction&>(fitness_funtion).workspace();
   }
 };
 
@@ -25,7 +39,9 @@ inline void mones_test2() {
 
   cout << "start" << endl;
   std::vector<double> start(3);
-  MoNes mones(test_function, 3, 50);
+  
+  TestWorkspaceFunction test_workspace_function;
+  MoNes mones(test_function, test_workspace_function, 3, 10);
   cout << "start" << endl;
   mones.init(start, 1);
 
@@ -34,7 +50,14 @@ inline void mones_test2() {
 	//cout << "iterate" << endl;
 	mones.iterate();
   }
-  mones.bestPoint().print();
+  
+  mones.print_fitnesses();
+
+  mones.d_individuals[0].print();
+  cout << "dsfdsf" << endl;
+  mones.d_individuals[1].print();
+  
+  mones.d_individuals[2].print();
   
 }
 

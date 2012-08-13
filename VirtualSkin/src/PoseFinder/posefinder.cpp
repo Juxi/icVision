@@ -26,14 +26,15 @@ Matrix PoseFinder::get_start_pos(int dim) {
 
 void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
   int dim = d_simulator.total_motors();
-  MoNes mones(d_pose_fitness_function, dim, 100);
+
+  ObservationWorkspaceFunction test_function;
+  MoNes mones(d_pose_fitness_function, test_function, dim, 10);
 
   mones.init(d_start_search_pos, std);
 
-  for (size_t i(0); i < 100; ++i) {
+  for (size_t i(0); i < 10000; ++i) {
 	mones.iterate();
-	mones.d_individuals[0].d_A.print();
-	cout << "sigma: " << mones.d_individuals[0].d_sigma << endl;
+	//mones.d_individuals[0].d_A.print();
   }
   d_best_point = mones.bestPoint().get_data();
 }
