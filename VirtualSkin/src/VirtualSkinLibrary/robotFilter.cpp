@@ -97,6 +97,8 @@ void RobotFilter::close()
 
 void RobotFilter::takeControl( int numReflexCollisions )
 {
+	if (!active) {isColliding = false; return; };
+
 	if ( numReflexCollisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
 

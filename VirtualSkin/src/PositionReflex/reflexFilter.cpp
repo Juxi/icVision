@@ -60,11 +60,21 @@ void ReflexFilter::collisionResponse()
 	QVector<double>::const_iterator joint;
 	for ( int i = 0; i < POSE_BUFFER_SIZE ; i++ )
 	{
-		if ( wpReached ) { break; }
+		if (!active) {
+			printf("Filter set inactive, ongoing reflex cancelled\n\n");
+			break;
+		}
+
+		if ( wpReached ) { 
+			printf("FOUND WAYPOINT!!!\n\n");
+			break; 
+		}		
 		else {
-			
+			for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
+				wpReached = wpReached || (history.at(bodyPart).at(i).label == VirtualSkin::StateObserver::WAYPOINT); // at least one bodypart reaches the waypoint
+
 			//printf("i = %d\n",i);
-			if ( i % n == 0 )	// use every nth pose in the buffer
+			if ( (i % n == 0) || wpReached )	// use every nth pose in the buffer or when the waypoint was reached
 			{
 				printf("------------------------------------------\n");
 				for ( int bodyPart = 0; bodyPart < robot->numBodyParts(); bodyPart++ )
@@ -79,14 +89,6 @@ void ReflexFilter::collisionResponse()
 					}
 					cbFilters.at(bodyPart)->injectCommand(rewind);
 					//if ( bodyPart ==2 ) { printf("%s\n", rewind.toString().c_str()); }
-					
-					if ( /*!isColliding &&*/ history.at(bodyPart).at(i).label == VirtualSkin::StateObserver::WAYPOINT )
-					{ 
-						wpReached = true;
-						printf("FOUND WAYPOINT!!!\n\n");
-						//setWaypoint();
-					}
-					else { wpReached = false; }
 				}
 	
 				printf("sleeping %f msec\n\n", n*period );
@@ -106,7 +108,7 @@ void ReflexFilter::collisionResponse()
 		msleep(100);
 	}*/
 	printf("Waiting for reflex to finish. Err is: ");
-	while (stillMoving()) {
+	while (stillMoving() && active) {
 		printf(".");
 		msleep(100);
 	}

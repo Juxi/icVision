@@ -75,19 +75,29 @@ bool FilterRpcInterface::handler( const yarp::os::Bottle& command, yarp::os::Bot
 	
 	yarp::os::ConstString prefix = command.get(n).asString();
 	
-	if ( prefix=="help" )
-	{
-		reply.addString("setWP: set waypoint at current robot pose");
+	if ( prefix=="help" ) {
+		reply.addVocab(yarp::os::Vocab::encode("many"));
+		reply.addString("setWP: set waypoint at current robot pose\n");
+		reply.addString("pause: do not execute responses to collisions\n");
+		reply.addString("resume: execute collision responses normally\n");
+		reply.addString("active: returns 1 when collision response is active and 0 otherwise\n");
 		return true;
-	}
-	if ( prefix=="setWP" )
-	{
+	} else if ( prefix=="setWP" ) {
 		filter->setWaypoint();
 		reply.addString("set a waypoint!");
 		return true;
-	}
-	else
-	{
+	} else if ( prefix=="pause" ) {
+		filter->setActive(false);
+		reply.addString("collision response execution paused");
+		return true;
+	} else if ( prefix=="resume" ) {
+		filter->setActive(true);
+		reply.addString("collision response execution resumed");
+		return true;
+	} else if ( prefix=="active" ) {
+		reply.addInt((int) filter->isActive());
+		return true;
+	} else {
 		reply.addString("Unknown RPC command");
 		return false;
 	}
