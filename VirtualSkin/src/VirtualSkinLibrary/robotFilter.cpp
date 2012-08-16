@@ -36,6 +36,7 @@ RobotFilter::RobotFilter(	KinematicModel::Robot* r,
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
+	active = true;
 	filterRpcInterface.setFilter(this);
 	
 	statusPort.setBottle("1");
