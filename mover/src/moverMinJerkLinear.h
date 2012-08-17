@@ -34,6 +34,7 @@ public:
 	bool setMask(Value &v);
 	bool go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout);
 	bool parseTrajBottle(Value &v, vector<vector<vector<double> > >& poses);
+	void setStop();											//!< Set stop flag on ongoing movement
 
 	void maskFingers();
 	void maskEyes();
@@ -52,6 +53,8 @@ private:
 	int nparts, monIndex;
 	double delay, faceConnected;
 	double TS;
+
+	volatile bool stop;
 
 	Network network;
 	RpcClient vSkinRpcClient;
