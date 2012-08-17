@@ -20,8 +20,31 @@ CompareClass(value_func_t value_func) : d_value_func(value_func){}
 };
 
 template <typename T>
+struct CompareClass2 {
+  typedef double (T::*value_func_t)()const;
+  value_func_t d_value_func;
+  value_func_t d_value_func2;
+
+CompareClass2(value_func_t value_func, value_func_t value_func2) : d_value_func(value_func), d_value_func2(value_func2){}
+
+
+  bool operator()(T const &e1, T const &e2) const {
+	if ((e1.*d_value_func)() < (e2.*d_value_func)())
+	  return true;
+	if ((e1.*d_value_func)() > (e2.*d_value_func)())
+	  return false;
+	return ((e1.*d_value_func2)() < (e2.*d_value_func2)());
+  }
+};
+
+template <typename T>
 void sort(std::vector<T> &vec, typename CompareClass<T>::value_func_t value_func) {
   std::sort(vec.begin(), vec.end(), CompareClass<T>(value_func));
+}
+
+template <typename T>
+void sort(std::vector<T> &vec, typename CompareClass2<T>::value_func_t value_func, typename CompareClass2<T>::value_func_t value_func2) {
+  std::sort(vec.begin(), vec.end(), CompareClass2<T>(value_func, value_func2));
 }
 
 inline double calculate_distance( std::vector<double> const &v1, std::vector<double> const &v2) {

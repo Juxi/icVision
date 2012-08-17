@@ -77,8 +77,6 @@ void MoNes::rank() {
 	
 	for (size_t i(0); i < d_individuals.size(); ++i)
 	  d_individuals[i].d_rank = i;
-
-	 
 	
 	map<size_t, size_t> id_rank_map;
 	for (size_t i(0); i < d_individuals.size(); ++i)
@@ -90,7 +88,7 @@ void MoNes::rank() {
 	for (size_t i(0); i < d_individuals.size(); ++i)
 	  d_individuals[i].d_rank = id_rank_map[d_individuals[i].d_id];
 
-	sort(d_individuals, &Individual::get_rank);
+	sort(d_individuals, &Individual::get_domination_factor, &Individual::get_rank);
 
 	for (size_t i(0); i < d_individuals.size(); ++i)
 	  if (d_individuals[i].d_parent_id)
@@ -108,4 +106,16 @@ void MoNes::init(std::vector<double> mu, double sigma) {
   
   //print_centers();
   //exit(1);
+}
+
+bool MoNes::dominates(Individual &i1, Individual &i2) { //does i1 dominate i2?
+  if (i2.get_fitness() < i1.get_fitness())
+	return false;
+  double distance = calculate_distance(i1.get_workspace(), i2.get_workspace());
+  double constant(5);
+  double factor = distance * distance * constant;
+  if (i1.get_fitness() + factor < i2.get_fitness())
+	return true;
+  else
+	return false;	
 }

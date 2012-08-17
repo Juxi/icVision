@@ -19,10 +19,16 @@
 class PoseFinder
 {
 public:
-	PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot) :
+  enum BuildMode {
+	XNES,
+	MONES
+  };
+  
+ PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
 		d_simulator(model, robot),
-		d_pose_fitness_function(d_simulator),
-		d_nes(d_pose_fitness_function, false, false)
+		  d_build_mode(build_mode),
+		d_pose_fitness_function(d_simulator)
+		  //d_nes(d_pose_fitness_function, false, false)
 	{
 	  d_start_search_pos = d_simulator.home_pos();
 	}
@@ -34,6 +40,8 @@ public:
 	}
 	
 	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
+	void find_pose_mones(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size);
+	void find_pose_xnes(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size);
 
 	void add_constraint(Constraint *constraint, double weight = 1.0){
 		d_pose_fitness_function.add_constraint(constraint, weight);
@@ -57,8 +65,6 @@ public:
 		return d_simulator;
 	}
 
-	void set_variance(double std);
-
 	PoseFitnessFunction &pose_fitness_function(){return d_pose_fitness_function;}
 public:
 	Simulator d_simulator;
@@ -66,9 +72,10 @@ public:
 	std::vector<double> d_best_point;
 	std::vector<double> d_start_search_pos;
 
+	BuildMode d_build_mode;
 	PoseFitnessFunction d_pose_fitness_function;
 
-	NES d_nes;
+	//NES d_nes;
 
 private:
 	Matrix get_start_pos(int dim);

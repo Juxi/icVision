@@ -25,39 +25,50 @@ Matrix PoseFinder::get_start_pos(int dim) {
 }
 
 void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+  switch (d_build_mode) {
+  case XNES:
+	find_pose_xnes(maxevals, fitness_threshold, variance_threshold, std, population_size);
+	break;
+  case MONES:
+	find_pose_mones(maxevals, fitness_threshold, variance_threshold, std, population_size);
+	break;
+  }
+}
+
+void PoseFinder::find_pose_mones(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
   int dim = d_simulator.total_motors();
 
   ObservationWorkspaceFunction test_function;
-  MoNes mones(d_pose_fitness_function, test_function, dim, 10);
+  MoNes mones(d_pose_fitness_function, test_function, dim, 50);
 
   mones.init(d_start_search_pos, std);
 
   for (size_t i(0); i < 10000; ++i) {
 	mones.iterate();
-	//mones.d_individuals[0].d_A.print();
-  }
+	//mones.d_individuals[0].d_A.print();  }
   d_best_point = mones.bestPoint().get_data();
+  }
 }
 
-/*
-void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
-	try
+void PoseFinder::find_pose_xnes(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+  
+  try
 	{
-		int dim = d_simulator.total_motors();
+	  NES nes(d_pose_fitness_function, false, false);
+	  int dim = d_simulator.total_motors();
 		Matrix sigma = Matrix::ones(dim);
-
 		sigma *= std;
 
 		int population = population_size;//leave 0 to use default
 		
-		d_nes.init(get_start_pos(dim), sigma, population);
+		nes.init(get_start_pos(dim), sigma, population);
 
 		size_t n_evaluations(0);
 		//d_pose_fitness_function.debug() = ;
 		do
 		  {
 			try {
-			  d_nes.iterate();
+			  nes.iterate();
 			  #ifdef WIN32
 			    Sleep(3);
 			  #else
@@ -70,20 +81,12 @@ void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, doub
 			n_evaluations += population_size;
 			//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
-		while (d_nes.bestFitness() > fitness_threshold && d_nes.evaluations() < maxevals && d_nes.variance() > variance_threshold);
+		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals && nes.variance() > variance_threshold);
 
-		d_best_point = (d_nes.bestPoint().get_data());
+		d_best_point = (nes.bestPoint().get_data());
 	}
 	catch (const char* exception)
 	{
 		printf("\n\nEXCEPTION: %s\n\n", exception);
 	}
-}
-*/
-
-void PoseFinder::set_variance(double std) {
-	Matrix sigma = Matrix::ones(d_nes.dim());
-	sigma *= std;
-
-	d_nes.set_variance(sigma);
 }

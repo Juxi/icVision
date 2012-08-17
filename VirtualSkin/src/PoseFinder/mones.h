@@ -15,19 +15,22 @@ struct Individual {
   Matrix d_z;
   double d_sigma;
   double d_fitness;
+  double d_domination_factor;
   //double d_parent_fitness;
   size_t d_id, d_parent_id;
   size_t d_rank, d_parent_rank;
   std::vector<double> d_workspace;
 
-Individual(Matrix u, double sigma): d_dim(u.size()), d_u(u), d_z(Matrix::zeros(d_dim)), d_sigma(sigma), d_fitness(0), 
+Individual(Matrix u, double sigma): d_dim(u.size()), d_u(u), d_z(Matrix::zeros(d_dim)), 
+	d_sigma(sigma), d_fitness(0), d_domination_factor(0),
 	d_id(0), d_parent_id(0),
 	d_rank(0), d_parent_rank(0) 
   {d_A = Matrix::eye(d_dim);}
 
-Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_A), d_z(parent.d_z), d_sigma(parent.d_sigma), 
+Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_A), d_z(parent.d_z), 
+	d_sigma(parent.d_sigma), d_fitness(0), d_domination_factor(0),
 	d_id(0), d_parent_id(parent.d_id),
-	d_fitness(0), d_rank(0) 
+	d_rank(0), d_parent_rank(0)
   {}
   
 
@@ -43,13 +46,17 @@ Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_
   void set_fitness(double fitness) {d_fitness = fitness;}
   double get_fitness() const {return d_fitness;}
   double get_rank() const {return d_rank;}
+  double get_domination_factor() const {return d_domination_factor;}
 
   void set_workspace(std::vector<double> workspace) {d_workspace = workspace;}
+  std::vector<double> &get_workspace() {return d_workspace;}
   
   void update_win_parent(double nsigma_plus) {
 	//std::cout << "win parent" << std::endl;
 	d_sigma *= exp(nsigma_plus);
   }
+
+  double &domination_factor() {return d_domination_factor;}
 
   void update_win_offspring(double na, double nsigma_plus) {
 	//std::cout << "win offspring" << std::endl;
@@ -100,6 +107,16 @@ struct MoNes {
 
   void rank();
 
+  bool dominates(Individual &i1, Individual &i2); //does i1 dominate i2?
+  void calculate_domination() {
+	for (size_t i(0); i < d_individuals.size(); ++i)
+	  d_individuals[i].domination_factor() = 0;
+
+	for (size_t i(0); i < d_individuals.size(); ++i)
+	  for (size_t j(0); j < d_individuals.size(); ++j)
+		d_individuals[j].domination_factor() += dominates(d_individuals[i], d_individuals[j]);	
+  }
+
   void reproduce() {
 	for (size_t i(0); i < d_n; ++i)
 	  d_individuals.push_back(d_individuals[i].offspring());
@@ -120,6 +137,12 @@ struct MoNes {
  	  std::cout << "=> ";
 	  d_individuals[i].d_u.print();
 	}
+  }
+
+  void print_domination_factors() {
+	std::cout << "==>" << std::endl;
+	for (size_t i(0); i < d_individuals.size(); ++i)
+ 	  std::cout << d_individuals[i].domination_factor() << std::endl;
   }
 
   void update() {
@@ -153,8 +176,11 @@ struct MoNes {
 	set_ids();
 
 	evaluate();
-
+	calculate_domination();
+	
 	rank();
+	print_domination_factors();
+
 	//print_fitnesses();
 	
 	update();

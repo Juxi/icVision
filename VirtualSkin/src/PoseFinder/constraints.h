@@ -170,15 +170,16 @@ class PointingConstraint : public Constraint {
 	std::string d_marker;
 	std::vector<double> d_goal_position;
 	double d_distance;
-	size_t d_axis;
+	size_t d_axis, d_dir;
 
 public:
-	PointingConstraint(std::string marker, std::vector<double> goal_position, double distance, size_t axis)
+	PointingConstraint(std::string marker, std::vector<double> goal_position, double distance, size_t axis, size_t dir = 1)
 	  : Constraint("PointingConstraint"),
 	d_marker(marker),
 	  d_goal_position(goal_position),
 	  d_distance(distance),
-	  d_axis(axis)
+	  d_axis(axis),
+	  d_dir(dir)
 	{
 
 	}

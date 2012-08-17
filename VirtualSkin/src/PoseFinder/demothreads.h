@@ -104,6 +104,8 @@ public:
 
 	void grasp_function();
 
+	void around_object_function();
+
 	void add_best_pose() {
 		std::vector<double> best_point = d_pose_finder.best_point();
 
@@ -270,13 +272,6 @@ public:
 			else
 				sleep(1);
 		}
-	}
-
-
-public slots:
-	void reset_variance() {
-		std::cout << "RESETTING VARIANCE" << std::endl;
-		d_pose_finder.set_variance(.04);
 	}
 };
 

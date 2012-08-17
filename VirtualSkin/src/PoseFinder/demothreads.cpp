@@ -8,22 +8,24 @@
 using namespace std;
 
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
-  : verbose(false), keepRunning(true), d_pose_finder(model, robot),
+  : verbose(false), keepRunning(true), 
+	d_pose_finder(model, robot),
 	d_population_size(100), d_start_std(.1)
 {
   init_standard_poses();
   
-  nullspace_function();
+  //nullspace_function();
  //move_box_function();
 
   //hold_something_function();
   //		hand_left_function();
   //hand_right_function();
-//  hand_right_mark_function();
+  //  hand_right_mark_function();
   
   //hand_right_look_varun_function();
   //grasp_function();
-  
+  around_object_function();
+
 }
 
 void MapThread::init_standard_poses() {
@@ -118,8 +120,7 @@ void MapThread::run()
       d_pose_finder.simulator().set_motors(random_pose);
       double n_collisions = d_pose_finder.simulator().computePose();
       KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
-      print_vector<double>(observation.markerPosition("head"));
-
+      
       cout << n_collisions << endl;
       usleep(2000000);
       cout << d_configuration_points.size() << endl;
@@ -268,6 +269,38 @@ void MapThread::hold_something_function() {
   d_pose_finder.add_constraint(d_map_build_constraint);
 
   //		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+
+}
+
+
+void MapThread::around_object_function() {
+  //d_population_size = 200;
+  //d_start_std = .3;
+
+  cout << "Building constraints" << endl;
+  d_map_build_constraint = new MapBuildConstraint("right_handpalm", 2, .04, 0.1);
+  d_points = &(d_map_build_constraint->points());
+
+
+  d_pose_finder.set_start_search_pos(d_simulator_home_pose);
+
+
+  double pose_mask_arr[] = {1, 1, 1, 
+						.2, .2, .2, 0, 0, 0,
+						1, 1, 1, 1, 1, 1, .1, .1, .1, .1, .1, .1, .1, .1, .1, .1, 
+						1, 1, 1, 1, 1, 1, .1, .1, .1, .1, .1, .1, .1, .1, .1, .1};
+  vector<double> pose_mask(pose_mask_arr, pose_mask_arr + 41);
+
+
+  double goal_pos_arr[] = {-.3, .2, .0};
+  vector<double> goal_pos(goal_pos_arr, goal_pos_arr + 3);
+  
+  //d_pose_finder.add_constraint(new HomePoseConstraint(d_simulator_wide_pose), 10);
+  d_pose_finder.add_constraint(new PointingConstraint("right_handpalm", goal_pos, .05, 1, -1));
+
+  d_pose_finder.add_constraint(new CollisionConstraint(), 1.);
+
+  d_pose_finder.add_constraint(d_map_build_constraint, 4);
 
 }
 
