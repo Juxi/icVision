@@ -52,6 +52,9 @@ void YarpPoseController::load_config(int argc, char **argv) {
     if ( settings.check("mover_port") )  { d_mover_portname = settings.find("mover_port").asString().c_str(); }
     if ( command_config.check("mover_port") )  { d_mover_portname = command_config.find("mover_port").asString().c_str(); }
 
+	if ( settings.check("port") )  { d_portname = settings.find("port").asString().c_str(); }
+    if ( command_config.check("port") )  { d_portname = command_config.find("port").asString().c_str(); }
+
     if (!robot_file.size()) {
     	throw StringException("No robot file specified");
     }
@@ -146,6 +149,8 @@ vector<double> YarpPoseController::get_current_pose() {
 }
 
 void YarpPoseController::run () {
+	if (!d_port.open(d_portname.c_str()))
+		throw StringException("Couldnt open rpc Server");
 	if (!d_mover.open("/poseControl/to_mover"))
 		throw StringException("Couldnt open rpc mover Client");
 	if (!d_mover.addOutput(d_mover_portname.c_str()))

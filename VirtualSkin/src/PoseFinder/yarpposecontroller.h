@@ -30,6 +30,7 @@ class YarpPoseController :  public QThread {
     yarp::os::RpcClient d_mover;
 
     std::string d_mover_portname;
+	std::string d_portname;
 
 public:
 	YarpPoseController(int argc, char **argv) : d_path_planner(0), d_model(0)
