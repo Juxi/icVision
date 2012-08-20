@@ -33,7 +33,6 @@ inline std::vector<T> string_to_vector(std::string str) {
 
 
 class PathPlanner {
-
 	typedef Roadmap::CGAL_Point Point;
 	typedef Roadmap::vertex_i vertex_i;
 	typedef Roadmap::vertex_t vertex_t;
@@ -42,6 +41,14 @@ class PathPlanner {
 	//typedef typename std::map<std::string, Roadmap>::iterator roadmap_iterator;
 	typedef std::map<std::string, Roadmap*>::iterator roadmap_iterator; // C99: typename cannot be used outside a template declaration
 
+ public:
+	struct path_t {
+	  std::vector<std::vector<double> > path;
+	  double distance;
+	  std::vector<double> goal;
+	};
+
+ private:
 	PoseFinder d_posefinder;
 	std::map<std::string, Roadmap*> d_roadmaps;	
 	Roadmap d_main_roadmap;
@@ -167,9 +174,10 @@ class PathPlanner {
 	std::vector<double> closest_configurationspace(std::string mapname, std::vector<double> conf);
 	std::vector<double> closest_workspace(std::string mapname, std::vector<double> work);
 
-	std::vector<std::vector<double> > find_path(std::vector<double> source_conf, std::vector<double> target_conf);
+	
+	path_t find_path(std::vector<double> source_conf, std::vector<double> target_conf);
 
-	std::vector<std::vector<double> > move_to_path(std::vector<double> source, std::vector<double> target);
+	//path_t move_to_path(std::vector<double> source, std::vector<double> target);
 
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
 

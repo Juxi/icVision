@@ -54,7 +54,7 @@ public:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
-		std::vector<double> x;				// robot configuration
+		std::vector<double> x;				// workspace configuration
 	    std::string map_name;
 		double fitness;
 		int collisions;
@@ -156,6 +156,12 @@ public:
 	typedef Map::out_edge_iterator out_edge_i;
 	typedef std::list<vertex_t> PathList;
 
+	struct path_t {
+	  PathList path;
+	  double distance;
+	  std::vector<double> goal;
+	};
+	
 	Roadmap();
 	Roadmap(Roadmap const &other){}
 	~Roadmap();
@@ -208,22 +214,22 @@ public:
 	std::vector<double> nearestVector(std::vector<double> q);
 	std::vector<double> nearestWorkspaceVector(std::vector<double> q);
 
-	std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester);
-	//std::list<Roadmap::vertex_t> shortestPath( std::vector<double> from, std::vector<double> to );
+	path_t shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester);
 
-	std::list<Roadmap::vertex_t> shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
+	//PathList shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
 
-	std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
-	//std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR 
+	path_t shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 
 	void clear() {
 	  map.clear();
-
-	  tree = K_neighbor_search::Tree();
-	  workspace_tree = K_neighbor_search::Tree();
-	  scaled_tree = K_neighbor_search::Tree();
+	  //tree.clear();
+	  //workspace_tree.clear();
+	  //scale_tree.clear();
+	  //tree = K_neighbor_search::Tree();
+	  //workspace_tree = K_neighbor_search::Tree();
+	  //scaled_tree = K_neighbor_search::Tree();
 	}
 
 	size_t size() {

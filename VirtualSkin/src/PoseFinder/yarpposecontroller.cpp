@@ -110,13 +110,12 @@ Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path
 	return root;
 }
 
-void YarpPoseController::follow_path(vector<vector<double> > &path) {
-  
-  if (path.size() == 0)
+void YarpPoseController::follow_path(PathPlanner::path_t &path) {
+  if (path.path.size() == 0)
 	throw StringException("No Path Found");
 	vector<vector<vector<double> > > crazy_path;
-	for (size_t i(0); i < path.size(); ++i) {
-		vector<double> pose(path[i]);
+	for (size_t i(0); i < path.path.size(); ++i) {
+		vector<double> pose(path.path[i]);
 		std::cout << pose.size() << std::endl;
 		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
 		
@@ -170,8 +169,10 @@ void YarpPoseController::run () {
 			  "con [n]\t--\tconnect all maps with n neirest neighbours\n"
 			  "ran\t--\tshow all ranges\n"
 			  "ran [name]\t--\tshow range of mape [name]\n"
-			  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
-			  "go [name]\t--\tmove to closest position on map [name]\n"
+		      "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
+      		  "go [name]\t--\tmove to closest position on map [name]\n"
+	          "try [name] [workspace]\t--\treturn goal workspace and path distance of a move to point [workspace] of map [name]\n"
+      		  "try [name]\t--\treturn goal workspace and path distance of a move to closest position on map [name]\n"
       		  "clr\t--\tremove all maps"
 			  "help\t--\tshow this help message\n"
 			  "info\t--\tshow info about all maps\n";
@@ -182,17 +183,18 @@ void YarpPoseController::run () {
 		  switch ( command ) {
 		  case VOCAB_GO:
 			if (query.size() == 2 && query.get(1).isString()) { //go [name]
-			  vector<vector<double> > path;
+			  PathPlanner::path_t path;
 			  vector<double> source_conf = get_current_pose();
 			  string mapname = query.get(1).asString().c_str();
 
 			  vector<double> target_conf = d_path_planner->closest_configurationspace(mapname, source_conf);
 
-			  path = d_path_planner->move_to_path(source_conf, target_conf);
+			  path = d_path_planner->find_path(source_conf, target_conf);
+			  //path = d_path_planner->move_to_path(source_conf, target_conf);
 			  follow_path(path);
 			} else
 			if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
-			  vector<vector<double> > path;
+			  PathPlanner::path_t path;
 
 			  vector<double> source_conf = get_current_pose();
 			  string mapname = query.get(1).asString().c_str();
@@ -215,6 +217,50 @@ void YarpPoseController::run () {
 
 			  path = d_path_planner->find_path(source_conf, target_conf);
 			  follow_path(path);
+			} else
+			  throw StringException("Wrong arguments in command");
+			break;
+		  case VOCAB_TRY:
+			if (query.size() == 2 && query.get(1).isString()) { //go [name]
+			  PathPlanner::path_t path;
+			  vector<double> source_conf = get_current_pose();
+			  string mapname = query.get(1).asString().c_str();
+
+			  vector<double> target_conf = d_path_planner->closest_configurationspace(mapname, source_conf);
+
+			  path = d_path_planner->find_path(source_conf, target_conf);
+			  
+			  Bottle goal_workspace;
+			  for (size_t i(0); i < path.goal.size(); ++i)
+			   goal_workspace.addDouble(path.goal[i]);
+			  response.addList() = goal_workspace;
+			  response.addDouble(path.distance);
+			
+			  //path = d_path_planner->move_to_path(source_conf, target_conf);
+			  //follow_path(path);
+			} else
+			if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
+			  PathPlanner::path_t path;
+
+			  vector<double> source_conf = get_current_pose();
+			  string mapname = query.get(1).asString().c_str();
+			  vector<double> target_work = bottle_to_vector(query.get(2));
+
+			  cout << "finding target conf" << endl;
+			  vector<double> target_conf = d_path_planner->closest_workspace(mapname, target_work);
+
+			  if (source_conf.size() != target_conf.size())
+				throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
+
+			  path = d_path_planner->find_path(source_conf, target_conf);
+
+			  Bottle goal_workspace;
+			  for (size_t i(0); i < path.goal.size(); ++i)
+			   goal_workspace.addDouble(path.goal[i]);
+
+			  response.addList() = goal_workspace;
+			  response.addDouble(path.distance);
+			  //follow_path(path);
 			} else
 			  throw StringException("Wrong arguments in command");
 			break;

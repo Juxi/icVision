@@ -19,6 +19,7 @@ int const VOCAB_UPDATE = VOCAB2('u', 'p');
 int const VOCAB_GET_RANGE = VOCAB3('r', 'a', 'n');
 int const VOCAB_INFO = VOCAB4('i', 'n', 'f', 'o');
 int const VOCAB_CLEAR = VOCAB3('c', 'l', 'r');
+int const VOCAB_TRY = VOCAB3('t', 'r', 'y');
 
 
 class YarpPoseController :  public QThread {
@@ -48,7 +49,7 @@ public:
 
 	void load_config(int argc, char **argv);
 
-	void follow_path(std::vector<std::vector<double> > &path);
+	void follow_path(PathPlanner::path_t &path);
 	yarp::os::Bottle path_to_bottle(std::vector<std::vector<std::vector<double> > > &path);
 
 	void run ();
