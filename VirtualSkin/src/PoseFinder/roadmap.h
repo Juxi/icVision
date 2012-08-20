@@ -157,6 +157,9 @@ public:
 	typedef std::list<vertex_t> PathList;
 
 	struct path_t {
+	  path_t() : distance(0) {}
+	  path_t(PathList p, double d, std::vector<double>& g) : path(p), distance(d), goal(g) {}
+
 	  PathList path;
 	  double distance;
 	  std::vector<double> goal;
