@@ -1,5 +1,6 @@
-//#include "moverPosition.h"
+#include "moverPosition.h"
 #include "moverMinJerkLinear.h"
+#include "mover.h"
 
 #include <string>
 #include <iostream>
@@ -24,8 +25,9 @@ using namespace yarp::dev;
 #define MAX_REFERENCE_SPEED 20.
 #define MAX_REFERENCE_ACCELERATION 10.
 
-typedef MoverMinJerkLinear mover_type;
-//typedef MoverPosition mover_type;
+//typedef MoverMinJerkLinear mover_type;
+typedef MoverPosition mover_type;
+//typedef Mover mover_type;
 
 
 int main(int argc, char *argv[]) {
@@ -78,9 +80,13 @@ int main(int argc, char *argv[]) {
 	if ( settings.check("trajtimeout") )  { trajTimeout = settings.find("trajtimeout").asDouble(); }
 	if ( command.check("trajtimeout") )  { trajTimeout = command.find("trajtimeout").asDouble(); }
 
-	string vSkinRpcPort = "/filterRpc";
+	string vSkinRpcPort = "/virtualSkin/filterRpc";
 	if ( settings.check("vskinrpc") )  { vSkinRpcPort = settings.find("vskinrpc").asString().c_str(); }
 	if ( command.check("vskinrpc") )  { vSkinRpcPort = command.find("vskinrpc").asString().c_str(); }
+
+	string vSkinStatus = "/virtualSkin/filterStatus";
+	if ( settings.check("vskinstatus") )  { vSkinStatus = settings.find("vskinstatus").asString().c_str(); }
+	if ( command.check("vskinstatus") )  { vSkinStatus = command.find("vskinstatus").asString().c_str(); }
 
 	Bottle defaultMasks;
 	if ( settings.check("defaultmasks") )  { defaultMasks = settings.findGroup("defaultmasks"); }
@@ -110,8 +116,8 @@ int main(int argc, char *argv[]) {
 	// open mover and initialize
 	mover_type mover;
 	if (!mover.init(robot, partnames)) { return 0; }
-	mover.setRefSpeed(refSpd);
-	mover.setRefAcceleration(refAcc);
+	//mover.setRefSpeed(refSpd);
+	//mover.setRefAcceleration(refAcc);
 
 	// parse and set default masks
 	if (defaultMasks.size() > 1) {
@@ -124,11 +130,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	// connect face for monitoring
-	if (!mover.connectFace(robot, rawFacePort))
+	if (!mover.connectFace(rawFacePort))
 	{ cout << "Warning: Facial Expressions disabled! " << endl << endl; }
 
 	// connect virtual skin
-	if (!mover.connnectVSkin(robot, vSkinRpcPort))
+	if (!mover.connnectVSkin(vSkinRpcPort, vSkinStatus))
 	{ cout << "Warning: Virtual Skin interaction not established! " << endl << endl; }
 
 	// open rpc port
