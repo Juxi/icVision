@@ -172,8 +172,11 @@ void YarpPoseController::run () {
 			  "ran [name]\t--\tshow range of mape [name]\n"
 			  "go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
 			  "go [name]\t--\tmove to closest position on map [name]\n"
+      		  "clr\t--\tremove all maps"
 			  "help\t--\tshow this help message\n"
 			  "info\t--\tshow info about all maps\n";
+
+		std::string info;
 
 		try {
 		  switch ( command ) {
@@ -234,6 +237,12 @@ void YarpPoseController::run () {
 
 			break;
 
+		  case VOCAB_CLEAR:
+			if (query.size() == 1) { //clr
+			  d_path_planner->clear();
+			} else
+			  throw StringException("Wrong arguments in command");
+			break;
 		  case VOCAB_CONNECT:
 			if (query.size() == 2 && query.get(1).isInt()) { //con [n]
 			  int number = query.get(1).asInt();
@@ -266,9 +275,11 @@ void YarpPoseController::run () {
 			break;
 
 		  case VOCAB_INFO:  //info
-			if (query.size() == 1) //info
-			  throw StringException("Not Implemented");
-			else
+			if (query.size() == 1) { //info
+			  info = d_path_planner->info();
+			  response.addVocab(Vocab::encode("many"));
+			  response.addString(info.c_str());
+			} else
 			  throw StringException("Wrong arguments in command");
 			break;
 

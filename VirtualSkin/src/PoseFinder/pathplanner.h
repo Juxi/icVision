@@ -78,8 +78,18 @@ class PathPlanner {
 
 		d_main_roadmap.setDimensionality(d_dimensionality);
 		d_main_roadmap.scale_vector = get_scale_vector();
-		add_bullshit();
+		//add_bullshit();
 	  }
+	
+	void clear() {
+	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+	  
+	  for (; it != it_end; ++it)
+		delete(it->second);
+	  
+	  d_roadmaps.clear();
+	  d_main_roadmap.clear();
+	}
 		  
 	void load_map(std::string mapname, std::string filename) {
 	  if (hasMap(mapname))
@@ -100,6 +110,8 @@ class PathPlanner {
 	}
 	
 	void connect_maps(size_t n) {
+	  clear_connections();
+
 	  if (d_main_roadmap.size() == 0)
 		throw StringException("No maps loaded yet");
 	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
@@ -112,6 +124,25 @@ class PathPlanner {
 	  //d_main_roadmap.connect_delaunay();
 	}
 
+	void clear_connections() {
+	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+
+	  for (; it != it_end; ++it)
+		it->second->removeAllEdges();
+	  d_main_roadmap.removeAllEdges();
+	}
+	
+	std::string info() {
+	  std::ostringstream oss;
+	  oss << " ==INFO== " << std::endl;
+	  oss << d_roadmaps.size() << " roadmaps:" << std::endl;
+
+	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+	  for (; it != it_end; ++it)
+		oss << "[" << it->first << "] : " << it->second->size() << " poses, " << it->second->n_edges() << " edges" << std::endl;
+	  oss << std::endl << "total: " << d_main_roadmap.size() << " poses, " << d_main_roadmap.n_edges() << " edges" << std::endl;
+	  return oss.str();
+	}
 
 	//void update_maps();//check for collisions and change weights
 	//void update_map(std::string mapname);

@@ -18,6 +18,7 @@ int const VOCAB_CONNECT = VOCAB3('c', 'o', 'n'); //connect map
 int const VOCAB_UPDATE = VOCAB2('u', 'p');
 int const VOCAB_GET_RANGE = VOCAB3('r', 'a', 'n');
 int const VOCAB_INFO = VOCAB4('i', 'n', 'f', 'o');
+int const VOCAB_CLEAR = VOCAB3('c', 'l', 'r');
 
 
 class YarpPoseController :  public QThread {

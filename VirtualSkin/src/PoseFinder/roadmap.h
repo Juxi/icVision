@@ -191,6 +191,7 @@ public:
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	
+	size_t n_edges() {return num_edges(map);}
 	//bool startController();
 	//bool gotoNearest();
 	//bool isOnMap();
@@ -216,6 +217,14 @@ public:
 	//std::list<Roadmap::vertex_t> shortestPath( vertex_t from, vertex_t to );  //ASTAR 
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
+
+	void clear() {
+	  map.clear();
+
+	  tree = K_neighbor_search::Tree();
+	  workspace_tree = K_neighbor_search::Tree();
+	  scaled_tree = K_neighbor_search::Tree();
+	}
 
 	size_t size() {
 		return num_vertices(map);
