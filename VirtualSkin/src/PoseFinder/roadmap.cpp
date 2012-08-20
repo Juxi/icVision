@@ -339,9 +339,9 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 
 void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 {
-	tree.build();
-	workspace_tree.build();
-	scaled_tree.build();
+  //tree.build();
+  //workspace_tree.build();
+  //scaled_tree.build();
 
 	pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)

@@ -116,11 +116,11 @@ class PathPlanner {
 		throw StringException("No maps loaded yet");
 	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
 	  
-	  for (; it != it_end; ++it)
-		connect_map(it->first, n);
+	  //for (; it != it_end; ++it)
+	  //connect_map(it->first, n);
 
 	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
-	  d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
+	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
 	}
 
