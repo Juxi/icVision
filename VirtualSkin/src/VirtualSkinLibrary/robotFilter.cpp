@@ -36,6 +36,7 @@ RobotFilter::RobotFilter(	KinematicModel::Robot* r,
 	stop_command.addVocab(VOCAB_SET);
 	stop_command.addVocab(VOCAB_STOPS);
 
+	active = true;
 	filterRpcInterface.setFilter(this);
 	
 	statusPort.setBottle("1");
@@ -97,6 +98,8 @@ void RobotFilter::close()
 
 void RobotFilter::takeControl( int numReflexCollisions )
 {
+	if (!active) {isColliding = false; return; };
+
 	if ( numReflexCollisions > 0 ) { isColliding = true; }
 	else { isColliding = false; }
 

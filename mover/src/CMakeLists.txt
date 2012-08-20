@@ -15,7 +15,7 @@ INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} ${ICUB_INCLUDE_DIRS} )
 
 SET ( src_files	main.cpp
 		moverPosition.cpp
-		#moverMinJerkLinear.cpp
+		moverMinJerkLinear.cpp
 )
 
 SET ( hdr_files	moverPosition.h

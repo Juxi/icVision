@@ -12,7 +12,8 @@ using namespace yarp::dev;
 
 MoverPosition::MoverPosition( ) {
 	delay = 20; // delay in millis
-	
+	TS = delay/1000.;
+
 	// face expressions monitor
 	monIndex = 0;
 	vector<string> monVal;
@@ -363,7 +364,13 @@ void MoverPosition::blink(){
 }
 
 
+void MoverPosition::setStop() {
+	stop = true;
+}
+
+
 bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
+	stop = false;
 	size_t nposes = poses.size();
 	int count;
 	bool reached;
@@ -374,7 +381,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 	
 	// cycle through poses
 	startTraj = Time::now();
-	for (int ipose=0; ipose<nposes; ipose++) {
+	for (int ipose=0; ((ipose<nposes) && !stop); ipose++) {
 		// uncomment line below to set waypoint at each pose in the pose buffer
 		// setWayPoint();
 
@@ -385,7 +392,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 			return false;
 		}
 
-		for (int ipart=0; ipart<nparts; ipart++) {
+		for (int ipart=0; ((ipart<nparts) && !stop); ipart++) {
 			if (poses[ipose][ipart].size() != nJoints[ipart]) {
 				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
 				return false;
@@ -417,7 +424,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 		reached = false;
 		startStep = Time::now();
 		count = 0;
-		while (!reached) {
+		while (!reached && !stop) {
 			// get encoder positions
 			for (int ipart=0; ipart<nparts; ipart++) {
 				encs[ipart]->getEncoders(&encvals[ipart][0]);
@@ -449,8 +456,8 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 			if (colliding) {
 				monReflexing();
 				cout << "Warning: collision while trying to reach pose " << ipose+1 << "." << endl << "Waiting for reflex..."; 
-				while (colliding) {
-					Time::delay(delay/1000.);
+				while (colliding && !stop) {
+					Time::delay(TS);
 					if ((Time::now() - startTraj) >= trajtimeout) { break; }
 					colliding = ((encs.size() > 0) && !encs[0]->getEncoder(0, &temp));
 				}
@@ -467,7 +474,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 			// timing
 			count++;
 			nowTime = Time::now();
-			cntTime = startStep + count * delay/1000.; // expected time according to counter
+			cntTime = startStep + count * TS; // expected time according to counter
 			waitTime = cntTime - nowTime;
 			nowTime = Time::now();
 			if ( (nowTime - startTraj) >= trajtimeout)
@@ -486,7 +493,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 		}
 	}
 
-	Time::delay(0.1); // hopefully this will fix commands arriving in the wrong order...
+	Time::delay(TS*5.); // hopefully this will fix reflex commands arriving in the wrong order...
 	monDone(reached);
 
 	return reached;

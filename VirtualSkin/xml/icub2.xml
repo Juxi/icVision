@@ -24,8 +24,8 @@
     <motor name="TorsoYaw" minPos="-50" maxPos="50" idx="0">  
         <joint z="-.05" minPos="-50" maxPos="50" radius="0">
         <link x=".0233647" z=".1433" radius="0">
-            <cylinder radius=".062" height=".14" px="-.05" pz=".1033" hz="1" />
-            <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1" /> <!---->
+            <!--cylinder radius=".062" height=".14" px="-.05" pz=".1033" hz="1" />
+            <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1" /--> <!---->
     
     <!-- HEAD -->
     <bodypart name="head" >
@@ -48,7 +48,6 @@
         <link z=".0825" radius="0">
         
         <sphere pz=".07" radius=".11"/><!---->
-        <marker name="head" />
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
         

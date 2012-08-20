@@ -1,5 +1,5 @@
-#include "moverPosition.h"
-//#include "moverMinJerkLinear.h"
+//#include "moverPosition.h"
+#include "moverMinJerkLinear.h"
 
 #include <string>
 #include <iostream>
@@ -19,13 +19,13 @@ using namespace yarp::dev;
 #define VOCAB_DIST_THRESHOLD VOCAB3('t','h','r')   // distance threshold
 #define VOCAB_OK VOCAB2('o','k')
 #define VOCAB_FAIL VOCAB4('f','a','i','l')
+#define VOCAB_STOP VOCAB4('s','t','o','p') // cancel ongoing movement
 
 #define MAX_REFERENCE_SPEED 20.
 #define MAX_REFERENCE_ACCELERATION 10.
 
-//typedef MoverMinJerkLinear mover_type;
-
-typedef MoverPosition mover_type;
+typedef MoverMinJerkLinear mover_type;
+//typedef MoverPosition mover_type;
 
 
 int main(int argc, char *argv[]) {
@@ -248,6 +248,7 @@ int main(int argc, char *argv[]) {
 				break;
 			default:
 				response.addString("Unknown set command. Type help for more information.");
+				cout << "Unknown set command received." << endl;
 				break;
 			}
 			break;
@@ -266,6 +267,7 @@ int main(int argc, char *argv[]) {
 				break;
 			default:
 				response.addString("Unknown get command. Type help for more information.");
+				cout << "Unknown get command received." << endl;
 				break;
 			}
 			break;
@@ -273,6 +275,13 @@ int main(int argc, char *argv[]) {
 		case VOCAB_BLINK:
 			mover.blink();
 			response.addVocab(VOCAB_OK);
+			cout << "Blinked." << endl;
+			break;
+
+		case VOCAB_STOP:
+			mover.setStop();
+			response.addVocab(VOCAB_OK);
+			cout << "Stop flag set." << endl;
 			break;
 
 		case VOCAB_HELP:
@@ -309,9 +318,11 @@ int main(int argc, char *argv[]) {
 			response.addString( "get pose: return current robot pose as a list of lists with the \n\t"
 								"encoder position of each joint for that part.\n");
 			response.addString( "blnk: blink with eyes.\n");
+			response.addString( "stop: stop ongoing movement command\n");
 			break;
 		default:
 			response.addString("Unknown command. Type help for more information.");
+			cout << "Unknown command received." << endl;
 			break;
 		}
 
