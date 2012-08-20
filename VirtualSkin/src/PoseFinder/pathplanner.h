@@ -88,16 +88,6 @@ class PathPlanner {
 		//add_bullshit();
 	  }
 	
-	void clear() {
-	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
-	  
-	  for (; it != it_end; ++it)
-		delete(it->second);
-	  
-	  d_roadmaps.clear();
-	  d_main_roadmap.clear();
-	}
-		  
 	void load_map(std::string mapname, std::string filename) {
 	  if (hasMap(mapname))
 		throw StringException("map already exist");

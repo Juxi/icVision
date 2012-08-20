@@ -26,6 +26,7 @@ class YarpPoseController :  public QThread {
 	Q_OBJECT
 	PathPlanner *d_path_planner;
 	VirtualSkin::YarpModel *d_model;
+	KinematicModel::Robot *d_robot;
 
 	yarp::os::Network d_yarp;
     yarp::os::RpcServer d_port;
