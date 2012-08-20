@@ -70,7 +70,8 @@ void YarpPoseController::load_config(int argc, char **argv) {
 					  // the model must be started prior to appending objects */
 	d_model->openWorldRpcPort(QString("/poseControl/world"));
 
-	KinematicModel::Robot &robot = *d_model->loadRobot(QString(robot_file.c_str()), false);
+	//KinematicModel::Robot &robot = *d_model->loadRobot(QString(robot_file.c_str()), false);
+	d_robot = d_model->loadRobot(QString(robot_file.c_str()), false);
     
 	if (world_file.size()) {
 		d_model->loadWorld( QString(world_file.c_str()), false );
@@ -78,7 +79,7 @@ void YarpPoseController::load_config(int argc, char **argv) {
 
 	d_model->openSimSyncer(QString("/poseControl/simSync"), QString("/icubSim/world"));
 
-    load_path_planner(*d_model, robot);
+    load_path_planner(*d_model, *d_robot);
 	if (map_file.size())
 	  d_path_planner->load_map("default", map_file);
     d_model->stop();
@@ -239,7 +240,7 @@ void YarpPoseController::run () {
 
 		  case VOCAB_CLEAR:
 			if (query.size() == 1) { //clr
-			  d_path_planner->clear();
+				load_path_planner(*d_model, *d_robot);
 			} else
 			  throw StringException("Wrong arguments in command");
 			break;
