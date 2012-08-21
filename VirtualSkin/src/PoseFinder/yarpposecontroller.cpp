@@ -310,6 +310,14 @@ void YarpPoseController::run () {
 			*/
 			break;
 
+		  case VOCAB4('c', 'o', 'n','2'):
+			if (query.size() == 2 && query.get(1).isInt()) { //con [n]
+			  int number = query.get(1).asInt();
+			  d_path_planner->connect_maps2(number);
+			} else
+			  throw StringException("Wrong arguments in command");
+			break;
+
 		  case VOCAB_GET_RANGE:
 			if (query.size() == 1) {//ran
 			  response.addVocab(Vocab::encode("many"));

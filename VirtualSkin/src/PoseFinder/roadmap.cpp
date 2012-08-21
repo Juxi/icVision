@@ -8,7 +8,7 @@
 
 #include <boost/graph/random.hpp>
 #include <boost/random.hpp>
-#include <boost/graph/graphviz.hpp>
+//#include <boost/graph/graphviz.hpp>
 
 using namespace std;
 using namespace boost;
@@ -275,7 +275,6 @@ void Roadmap::write_graph(std::string filename) {
 	write_vector(map[target(*edge_it, map)].x, out_file);
 	out_file << endl;
   }
-
 }
 
 void Roadmap::readMapPoses(string filename, string mapname) {
@@ -339,7 +338,7 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 			if (!boost::edge( p.vertex, it->first.vertex, map ).second) {
 				pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
 				map[edge.first].length = sqrt(it->second);
-				cout << sqrt(it->second) << endl;
+				//cout << sqrt(it->second) << endl;
 				++counter;
 			}
 			if (!boost::edge(it->first.vertex, p.vertex, map ).second) {
@@ -372,6 +371,8 @@ void Roadmap::mapDistances(int p, std::vector<double>& d) {
 
 void Roadmap::graphConnect2( int p, unsigned int n)
 {	
+	double nearby_penalty = 100.0;
+
 	pair<vertex_i, vertex_i> vp;
 	vp = vertices(map);
 	int nmap = *(vp.second) - *(vp.first);
@@ -391,11 +392,16 @@ void Roadmap::graphConnect2( int p, unsigned int n)
 		mapDistances(neighbor_i, pdist);
 
 		// add inverse pdist to mdist
-		for (int m = 0; m<n; m++) {
-			mdist[m] = mdist[m] + 1.0/pdist[m];
+		for (int m = 0; m<nmap; m++) {
+			//mdist[m] = mdist[m] + nearby_penalty/pdist[m];
+			//double penalty = nearby_penalty*exp(-sqrt(pdist[m]));
+			//double penalty = 100*exp(-pdist[m]/10);
+			double penalty = 200*exp(-pdist[m]/20);
+			mdist[m] = mdist[m] + penalty;
 		}
 		
 		// set neighbor distance to FLT_MAX, such that another neighbor is selected next
+		//cout << mdist[neighbor_i] << " ";
 		mdist[neighbor_i] = FLT_MAX;
 
 		// add neighbor
@@ -419,7 +425,7 @@ void Roadmap::graphConnect2( unsigned int n, TreeMode tree_mode)
 	
 	for (int m = 0; m<nmap; m++) {		
 	    graphConnect2( m, n);
-		cout << m << " / " << nmap << " processed" << endl;
+		//cout << m << " / " << nmap << " processed" << endl;
 	}
 }
 

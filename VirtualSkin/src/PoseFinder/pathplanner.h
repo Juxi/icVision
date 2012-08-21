@@ -87,7 +87,6 @@ class PathPlanner {
 
 		d_main_roadmap.setDimensionality(d_dimensionality);
 		d_main_roadmap.scale_vector = get_scale_vector();
-
 		//add_bullshit();
 	  }
 	
@@ -106,8 +105,7 @@ class PathPlanner {
 
 	void connect_map(std::string mapname, size_t n) {
 	  check_map(mapname);
-	  //d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
-	  d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
+	  d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	}
 	
 	void connect_maps(size_t n) {
@@ -120,10 +118,25 @@ class PathPlanner {
 	  //for (; it != it_end; ++it)
 	  //connect_map(it->first, n);
 
-	  //d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
-	  d_main_roadmap.graphConnect2(n, SCALEDCONFIGURATIONSPACE);
+	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
 	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
+	}
+
+
+	void connect_map2(std::string mapname, size_t n) {
+	  check_map(mapname);
+	  d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
+	}
+	
+	void connect_maps2(size_t n) {
+	  clear_connections();
+
+	  if (d_main_roadmap.size() == 0)
+		throw StringException("No maps loaded yet");
+	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+	  
+	  d_main_roadmap.graphConnect2(n, SCALEDCONFIGURATIONSPACE);	  
 	}
 
 	void clear_connections() {
@@ -218,7 +231,7 @@ class PathPlanner {
 
 		//adaptive resolution, at least 2 (check start and end)
 		size_t resolution = std::floor(std::max(2., calculate_distance(q_start, q_end) / d_granularity));
-
+		std::cout << resolution << " " << std::endl;
 		for (size_t i(0); i < resolution; ++i) {
 		  if (n_collisions > 0)
 			break;
