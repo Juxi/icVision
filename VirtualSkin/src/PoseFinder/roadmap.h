@@ -197,6 +197,21 @@ public:
 	void data( std::vector< std::vector<double> >* graphNodes, std::vector< std::pair<int,int> >* graphEdges );
 	void readMapPoses(std::string filename, std::string mapname);
 
+
+	class label_writer {
+	  Map &d_map;
+	public:
+	label_writer(Map &map) : d_map(map) {}
+	  void operator()(std::ostream& out, const vertex_t& v) const {
+		out << "[label=\"" << d_map[v].x[0] << "\"]";
+	  }
+
+	};
+
+	
+	void write_graph(std::string filename);
+
+
 	void removeEdge( edge_t );
 	void removeAllEdges();
 	

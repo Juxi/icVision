@@ -8,6 +8,7 @@
 
 #include <boost/graph/random.hpp>
 #include <boost/random.hpp>
+#include <boost/graph/graphviz.hpp>
 
 using namespace std;
 using namespace boost;
@@ -256,6 +257,25 @@ void Roadmap::data( vector< vector<double> >* graphNodes, vector< pair<int,int> 
 //		thisEdge.second = map[target(*(ep.first), map)].idx;
 //		graphEdges->push_back( thisEdge );
 //	}
+}
+
+
+void Roadmap::write_graph(std::string filename) {  
+  /*
+  dynamic_properties dp;
+  dp.property("id", get(vertex_index, map));
+  write_graphviz(out_file, map, dp);
+  */
+  std::ofstream out_file(filename.c_str());
+
+  pair<edge_i, edge_i> map_edges(edges(map));
+  edge_i edge_it(map_edges.first);
+  for (; edge_it != map_edges.second; ++edge_it) {
+	write_vector(map[source(*edge_it, map)].x, out_file);
+	write_vector(map[target(*edge_it, map)].x, out_file);
+	out_file << endl;
+  }
+
 }
 
 void Roadmap::readMapPoses(string filename, string mapname) {
