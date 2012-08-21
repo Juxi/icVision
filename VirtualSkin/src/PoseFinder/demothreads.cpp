@@ -393,7 +393,7 @@ void MapThread::hand_right_look_varun_function() {
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_points = &(d_map_build_constraint->points());
 
-  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 3.);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 1.);
 
   d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
 
