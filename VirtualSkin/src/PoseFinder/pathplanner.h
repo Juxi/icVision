@@ -87,6 +87,7 @@ class PathPlanner {
 
 		d_main_roadmap.setDimensionality(d_dimensionality);
 		d_main_roadmap.scale_vector = get_scale_vector();
+
 		//add_bullshit();
 	  }
 	
@@ -131,6 +132,15 @@ class PathPlanner {
 	  for (; it != it_end; ++it)
 		it->second->removeAllEdges();
 	  d_main_roadmap.removeAllEdges();
+	}
+
+	void write_graph(std::string filename) {
+	  d_main_roadmap.write_graph(filename);
+	}
+
+	void write_graph(std::string filename, std::string mapname) {
+	  check_map(mapname);
+	  d_roadmaps[mapname]->write_graph(filename);
 	}
 	
 	std::string info() {

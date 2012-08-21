@@ -20,6 +20,7 @@ int const VOCAB_GET_RANGE = VOCAB3('r', 'a', 'n');
 int const VOCAB_INFO = VOCAB4('i', 'n', 'f', 'o');
 int const VOCAB_CLEAR = VOCAB3('c', 'l', 'r');
 int const VOCAB_TRY = VOCAB3('t', 'r', 'y');
+int const VOCAB_WRITE = VOCAB3('w', 'r', 't');
 
 
 class YarpPoseController :  public QThread {

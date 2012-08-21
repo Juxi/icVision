@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <cmath>
 #include <assert.h>
+#include <iostream>
+
 
 template <typename T>
 struct CompareClass {
@@ -55,6 +57,11 @@ inline double calculate_distance( std::vector<double> const &v1, std::vector<dou
 	for (; it != it_end; ++it, ++it2)
 	  distance += std::pow(*it - *it2, 2.0);
 	return std::sqrt(distance);
+}
+
+inline void write_vector(std::vector<double> v1, std::ostream &out = std::cout) {
+  for (size_t i(0); i < v1.size(); ++i)
+	out << v1[i] << " ";
 }
 
 #endif

@@ -157,6 +157,7 @@ void YarpPoseController::run () {
 		throw StringException("Couldnt connect to port of mover");
 //	if (!d_yarp.connect("/blaat", d_mover_portname.c_str()))
 //			throw StringException("Couldnt connect the ports");
+	
 	while (true) {
 		cout << "Waiting for a message..." << endl;
 		Bottle query;
@@ -174,6 +175,8 @@ void YarpPoseController::run () {
       		  "go [name]\t--\tmove to closest position on map [name]\n"
 	          "try [name] [workspace]\t--\treturn goal workspace and path distance of a move to point [workspace] of map [name]\n"
       		  "try [name]\t--\treturn goal workspace and path distance of a move to closest position on map [name]\n"
+		      "wrt [filename]\t--\twrite the map edges into file [filename] (format source and target workspace of an edge per line"
+		      "wrt [filename] [name]\t--\twrite the map edges of map [name] into file [filename] (format source and target workspace of an edge per line"
       		  "clr\t--\tremove all maps"
 			  "help\t--\tshow this help message\n"
 			  "info\t--\tshow info about all maps\n";
@@ -329,7 +332,14 @@ void YarpPoseController::run () {
 			} else
 			  throw StringException("Wrong arguments in command");
 			break;
-
+		  case VOCAB_WRITE:  //info
+			if (query.size() == 2 && query.get(1).isString()) // wrt
+			  d_path_planner->write_graph(query.get(1).asString().c_str());
+			else if (query.size() == 3 && query.get(1).isString() && query.get(2).isString())//wrt [name]
+			  d_path_planner->write_graph(query.get(2).asString().c_str(), query.get(1).asString().c_str());
+			else
+			  throw StringException("Wrong arguments in command");
+			break;
 		default:
 		  throw StringException("Not a recognized command");
 		  }

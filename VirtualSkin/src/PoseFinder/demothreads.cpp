@@ -6,6 +6,7 @@
 #include <cctype>
 
 using namespace std;
+using namespace boost;
 
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), 
@@ -94,6 +95,8 @@ void MapThread::run()
     load_points(load_file_name);
   }
 //  store_points(store_file_name);
+
+  
   QTime time = QTime::currentTime();
   qsrand((uint)time.msec());
 
@@ -393,7 +396,7 @@ void MapThread::hand_right_look_varun_function() {
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_points = &(d_map_build_constraint->points());
 
-  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 1.);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), .3);
 
   d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
 
@@ -401,7 +404,7 @@ void MapThread::hand_right_look_varun_function() {
 
   //		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-  d_pose_finder.add_constraint(new PlaneConstraint("right_hand", 2, height), 2.);
+  //d_pose_finder.add_constraint(new PlaneConstraint("right_hand", 2, height), 2.);
 
   d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.))); //left
   //d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., 0., -1.))); //down
@@ -411,7 +414,7 @@ void MapThread::hand_right_look_varun_function() {
 
   //d_pose_finder.add_constraint(new PointingConstraint("head", Constraint::vector3(-0.20, 0.0, 0.000), 0.0, 0), .2);
   
-  d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0), .3);
+  //d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0), .3);
 
 }
 
