@@ -15,61 +15,6 @@ inline bool exists(std::string filename) {
 	return in_file;
 }
 
-class PoseThread : public QThread {
-	bool keepRunning;
-	bool verbose;
-	bool d_fast;
-	PoseFinder d_pose_finder;
-
-public:
-	PoseThread(KinematicModel::Model& model,  KinematicModel::Robot& robot, bool with_things, bool fast = false)
-	: verbose(false), keepRunning(true), d_pose_finder(model, robot), d_fast(fast)
-	{
-		if (with_things) {
-			for (float z(-.2); z < .2; z += .03)
-				d_pose_finder.simulator().add_ball(-.2, .15, z);
-			for (float z(-.2); z < .2; z += .03)
-				d_pose_finder.simulator().add_ball(-.2, .3, z);
-		}
-		d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 10.);
-
-		d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.13900)));
-
-		d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., -1., 0.)));
-
-	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		d_pose_finder.simulator().add_point(-0.237605, 0.234241,  0.1390077);
-
-		d_pose_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
-
-		d_pose_finder.add_constraint(new CollisionConstraint());
-	}
-
-
-	void stop()
-	{
-		printf("PoseFinder thread is shutting down ");
-		keepRunning = false;
-		while ( isRunning() )
-		{
-			printf(".");
-			msleep(1000);
-		}
-		printf("\n");
-	}
-
-	void run()
-	{
-		QTime time = QTime::currentTime();
-		qsrand((uint)time.msec());
-		if (d_fast)
-			d_pose_finder.find_pose(100000, 0., .04, 50);
-		else
-			d_pose_finder.find_pose(100000, 0., .4, 150);
-	}
-};
-
 class MapThread : public QThread {
 	bool keepRunning;
 	bool verbose;
@@ -265,7 +210,7 @@ public:
 
 		while (true) {
 			if (slider_window.changed()) {
-				d_pose_finder.find_pose(2000000, 0., 1.0e-6, .10, 50);
+			  d_pose_finder.find_pose(d_pose_finder.get_normal_homepos(), 0., 1.0e-6, .10, 50);
 				slider_window.changed(false);
 				std::cout << "Found pose" << std::endl;
 			}

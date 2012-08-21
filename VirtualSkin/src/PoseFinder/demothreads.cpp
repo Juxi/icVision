@@ -22,9 +22,9 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   //hand_right_function();
   //  hand_right_mark_function();
   
-  //hand_right_look_varun_function();
+  hand_right_look_varun_function();
   //grasp_function();
-  around_object_function();
+  //around_object_function();
 
 }
 
@@ -131,10 +131,9 @@ void MapThread::run()
       //double start_std(.70);
       //size_t population_size(250);
 
-      d_pose_finder.find_pose(2000000, 0., 1.0e-6, d_start_std, d_population_size);
+	  
+      d_pose_finder.find_pose(d_pose_finder.get_normal_homepos(), 0., 1.0e-6, d_start_std, d_population_size);
       add_best_pose();
-      KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
-      print_vector<double>(observation.markerPosition("head"));
       store_points(store_file_name);
     }
 }
@@ -151,8 +150,8 @@ void MapThread::nullspace_function() {
   std::cout << "blaat" << std::endl;
 
   
-  d_pose_finder.set_start_search_pos(d_simulator_wide_pose);
- d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 3);
+  //d_pose_finder.set_start_search_pos(d_simulator_wide_pose);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 3);
   
   
   //d_pose_finder.add_constraint(new PointingMarkerConstraint("left_hand", "right_hand", .1, 1, -1), .1);
@@ -187,7 +186,7 @@ void MapThread::move_box_function() {
 
   std::cout << "blaat " << d_simulator_wide_pose.size() << std::endl;
 
-  d_pose_finder.set_start_search_pos(d_simulator_wide_pose);  
+  //d_pose_finder.set_start_search_pos(d_simulator_wide_pose);  
  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 1);
   
   
@@ -230,7 +229,7 @@ void MapThread::hold_something_function() {
   d_points = &(d_map_build_constraint->points());
 
 
-  d_pose_finder.set_start_search_pos(d_simulator_home_pose);
+  //d_pose_finder.set_start_search_pos(d_simulator_home_pose);
 
 
   double pose_mask_arr[] = {1, 1, 1, 
@@ -282,7 +281,7 @@ void MapThread::around_object_function() {
   d_points = &(d_map_build_constraint->points());
 
 
-  d_pose_finder.set_start_search_pos(d_simulator_home_pose);
+  //d_pose_finder.set_start_search_pos(d_simulator_home_pose);
 
 
   double pose_mask_arr[] = {1, 1, 1, 
@@ -313,9 +312,9 @@ void MapThread::hand_left_function() {
 
   d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), .1);
 
-  d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
+  d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, 0.2342, 0.13900)));
 
-  d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
+  d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 1., 0.)));
 
   //		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
@@ -325,7 +324,7 @@ void MapThread::hand_left_function() {
 
   d_pose_finder.add_constraint(d_map_build_constraint);
 
-  d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
+  d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., -1., 0.)));
 
 }
 
@@ -390,7 +389,7 @@ void MapThread::hand_right_look_varun_function() {
   d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
   d_points = &(d_map_build_constraint->points());
 
-  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 5.);
+  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().d_home_pos), 3.);
 
   d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2376, -0.2342, 0.10900)));
 
@@ -408,7 +407,7 @@ void MapThread::hand_right_look_varun_function() {
 
   //d_pose_finder.add_constraint(new PointingConstraint("head", Constraint::vector3(-0.20, 0.0, 0.000), 0.0, 0), .2);
   
-  d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0));
+  d_pose_finder.add_constraint(new PointingMarkerConstraint("head", "right_hand", 0.0, 0), .3);
 
 }
 

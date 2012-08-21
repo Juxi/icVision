@@ -30,21 +30,20 @@ public:
 		d_pose_fitness_function(d_simulator)
 		  //d_nes(d_pose_fitness_function, false, false)
 	{
-	  d_start_search_pos = d_simulator.home_pos();
 	}
 
 	~PoseFinder() {}
-
-	void set_start_search_pos(std::vector<double> start_search_pos) {
-	  d_start_search_pos = d_simulator.real_to_normal_motors(start_search_pos);
-	}
-	
-	void find_pose(unsigned int maxevals = 100000, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
-	void find_pose_mones(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size);
-	void find_pose_xnes(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size);
+	void find_pose(std::vector<double> start_search_pos, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
+	void find_pose_mones(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
+	void find_pose_xnes(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
 
 	void add_constraint(Constraint *constraint, double weight = 1.0){
 		d_pose_fitness_function.add_constraint(constraint, weight);
+	}
+
+	std::vector<double> get_normal_homepos() {
+	  return d_simulator.home_pos();
+	  //return d_simulator.real_to_normal_motors(d_simulator.home_pos());
 	}
 
 	void set_filter(EvaluationFilter *filter) {
@@ -70,15 +69,13 @@ public:
 	Simulator d_simulator;
 
 	std::vector<double> d_best_point;
-	std::vector<double> d_start_search_pos;
-
+	
 	BuildMode d_build_mode;
 	PoseFitnessFunction d_pose_fitness_function;
 
 	//NES d_nes;
 
 private:
-	Matrix get_start_pos(int dim);
 
 };
 

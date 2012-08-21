@@ -6,7 +6,7 @@
 #include <QString>
 #include <QMatrix4x4>
 #include <cassert>
-
+#include <sstream>
 namespace KinematicModel {
 
 
@@ -57,7 +57,9 @@ public:
 			if (m_markerName[i] == name)
 				return m_markerConfiguration[i];
 		}
-		throw KinematicModelException("marker name not found");
+		std::ostringstream oss;
+		oss << "marker name [" << name.toStdString() << "] not found";
+		throw KinematicModelException(oss.str().c_str());
 	}
 
 	inline std::vector<double> markerPosition(QString name) {

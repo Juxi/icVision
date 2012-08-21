@@ -112,7 +112,7 @@ Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path
 }
 
 void YarpPoseController::follow_path(PathPlanner::path_t &path) {
-  if (path.path.size() == 0)
+  if (path.path.size() == 0 || path.distance > 1000000)
 	throw StringException("No Path Found");
 	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.path.size(); ++i) {

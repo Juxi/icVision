@@ -15,44 +15,7 @@
 using namespace KinematicModel;
 using namespace std;
 
-int pose_pose_fast_test(Model &model, Robot &robot, QApplication &app) {
-	PoseThread pose_thread(model, robot, true, true);
 
-	pose_thread.start();
-
-	int result = app.exec();						// run the Qt application
-
-	pose_thread.stop();
-	model.stop();
-
-	return result;
-}
-
-int pose_pose_test(Model &model, Robot &robot, QApplication &app) {
-	PoseThread pose_thread(model, robot, false);
-
-	pose_thread.start();
-
-	int result = app.exec();						// run the Qt application
-
-	pose_thread.stop();
-	model.stop();
-
-	return result;
-}
-
-int pose_pose_test2(Model &model, Robot &robot, QApplication &app) {
-	PoseThread pose_thread(model, robot, true);
-
-	pose_thread.start();
-
-	int result = app.exec();						// run the Qt application
-
-	pose_thread.stop();
-	model.stop();
-
-	return result;
-}
 
 int map_build_test(Model &model, Robot &robot, QApplication &app) {
 	std::cout << "map build test" << std::endl;
@@ -118,18 +81,6 @@ int main(int argc, char *argv[])
 	printf("loading world file: %s\n", argv[1]);
 	model.loadWorld( QString(argv[2]), false );
 
-
-	if (string(argv[3]) == "pose") {
-		return pose_pose_test(model, robot, app);
-	}
-
-	if (string(argv[3]) == "pose2") {
-		return pose_pose_test2(model, robot, app);
-	}
-
-	if (string(argv[3]) == "pose2_fast") {
-		return pose_pose_fast_test(model, robot, app);
-	}
 
 	if (string(argv[3]) == "map") {
 		return map_build_test(model, robot, app);

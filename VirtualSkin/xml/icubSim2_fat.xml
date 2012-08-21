@@ -30,7 +30,7 @@
     <bodypart name="head" >
     
         <link x="-.0256747" z=".0502" radius=".02">
-    
+		  
         <motor name="NeckPitch" minPos="-39" maxPos="24">
             <joint y=".05" minPos="-39" maxPos="24" radius=".02">
             
@@ -49,7 +49,7 @@
         <sphere pz=".07" radius=".09"/><!---->
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
-        
+            <marker name="head"/>
                 <!-- LEFT EYE -->
                 <link x="-.054" y="-.034" radius="0">
                     <motor name="eyeTilt" minPos="-35" maxPos="15"> <joint y="1" minPos="-35" maxPos="15" radius="0">
@@ -153,8 +153,9 @@
                 
                 <!-- HAND -->
                 <link x="-.020" y="-.03" radius="0">
+
                     <link y="1" radius="0">
-                        <marker name="right_hand"/>
+					  <marker name="right_hand"/>
                     </link>
                 </link>
 
