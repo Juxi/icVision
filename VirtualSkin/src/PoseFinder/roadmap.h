@@ -187,6 +187,9 @@ public:
 	vertex_t insert( std::vector<double> _x, std::vector<double> _q, std::string name);
 	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
 	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
+	void graphConnect2( int p, unsigned int n);
+	void graphConnect2( unsigned int n, TreeMode tree_mode);
+	void mapDistances(int v, std::vector<double> &d);
 
 	void random_connect(size_t n);
 	void connect_delaunay();

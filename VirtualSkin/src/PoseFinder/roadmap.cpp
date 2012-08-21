@@ -337,6 +337,72 @@ void Roadmap::graphConnect( Pose p, unsigned int n, TreeMode tree_mode)
 	}
 }
 
+
+void Roadmap::mapDistances(int p, std::vector<double>& d) {
+	int n = d.size();
+	double diff;
+	for (int m = 0; m<n; m++) {		
+		for (int i = 0; i<map[m].q.size(); i++) {
+			diff = map[m].q[i] - map[p].q[i];
+			d[m] = d[m] + (diff * diff);
+		}
+	}
+}
+
+
+void Roadmap::graphConnect2( int p, unsigned int n)
+{	
+	pair<vertex_i, vertex_i> vp;
+	vp = vertices(map);
+	int nmap = *(vp.second) - *(vp.first);
+	vector<double> mdist(nmap, 0.0); // distances
+	vector<int> neighbors; // neighbor indices
+	mapDistances(p, mdist);
+	vector<double> odist = mdist; // make a copy of original distances
+	mdist[p] = FLT_MAX;
+	int neighbor_i;
+
+	// cycle through map to find neighbors
+	for (int k=0; k<n; k++) {
+		neighbor_i = min_element(mdist.begin(), mdist.end()) - mdist.begin(); // index of k-nearest neighbor
+
+		// compute distances between k-nearest neighbour and all other points on the map
+		vector<double> pdist(nmap, 0.0);
+		mapDistances(neighbor_i, pdist);
+
+		// add inverse pdist to mdist
+		for (int m = 0; m<n; m++) {
+			mdist[m] = mdist[m] + 1.0/pdist[m];
+		}
+		
+		// set neighbor distance to FLT_MAX, such that another neighbor is selected next
+		mdist[neighbor_i] = FLT_MAX;
+
+		// add neighbor
+		neighbors.push_back(neighbor_i);
+	}
+
+	for(int k=0; k<n; k++) {
+		if (!boost::edge( p, neighbors[k], map ).second) {
+			pair<edge_t, bool> edge = boost::add_edge( p, neighbors[k], map );
+			map[edge.first].length = sqrt(odist[k]);
+		}
+	}
+}
+
+
+void Roadmap::graphConnect2( unsigned int n, TreeMode tree_mode)
+{
+    pair<vertex_i, vertex_i> vp;
+	vp = vertices(map);
+	int nmap = *(vp.second) - *(vp.first);
+	
+	for (int m = 0; m<nmap; m++) {		
+	    graphConnect2( m, n);
+		cout << m << " / " << nmap << " processed" << endl;
+	}
+}
+
 void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 {
   //tree.build();

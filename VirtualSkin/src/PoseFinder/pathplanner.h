@@ -105,7 +105,8 @@ class PathPlanner {
 
 	void connect_map(std::string mapname, size_t n) {
 	  check_map(mapname);
-	  d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  //d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
 	}
 	
 	void connect_maps(size_t n) {
@@ -118,7 +119,8 @@ class PathPlanner {
 	  //for (; it != it_end; ++it)
 	  //connect_map(it->first, n);
 
-	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  //d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  d_main_roadmap.graphConnect2(n, SCALEDCONFIGURATIONSPACE);
 	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
 	}
