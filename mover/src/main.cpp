@@ -25,8 +25,8 @@ using namespace yarp::dev;
 #define MAX_REFERENCE_SPEED 20.
 #define MAX_REFERENCE_ACCELERATION 10.
 
-//typedef MoverMinJerkLinear mover_type;
-typedef MoverPosition mover_type;
+typedef MoverMinJerkLinear mover_type;
+//typedef MoverPosition mover_type;
 //typedef Mover mover_type;
 
 
@@ -116,8 +116,8 @@ int main(int argc, char *argv[]) {
 	// open mover and initialize
 	mover_type mover;
 	if (!mover.init(robot, partnames)) { return 0; }
-	//mover.setRefSpeed(refSpd);
-	//mover.setRefAcceleration(refAcc);
+	mover.setRefSpeed(refSpd);
+	mover.setRefAcceleration(refAcc);
 
 	// parse and set default masks
 	if (defaultMasks.size() > 1) {

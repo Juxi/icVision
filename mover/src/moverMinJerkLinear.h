@@ -32,7 +32,7 @@ protected:
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
 	vector<minJerkVelCtrl*> vctrls;
-	
+	double maxSpeed;
 
 };
 #endif
