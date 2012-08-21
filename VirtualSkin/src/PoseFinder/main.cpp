@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 	printf("loading robot file: %s\n", argv[1]);
 	Robot &robot = *model.loadRobot(QString(argv[1]), false);
 
-	printf("loading world file: %s\n", argv[1]);
+	printf("loading world file: %s\n", argv[2]);
 	model.loadWorld( QString(argv[2]), false );
 
 
