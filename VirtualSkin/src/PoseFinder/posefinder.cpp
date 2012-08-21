@@ -17,31 +17,24 @@ vector<double> PoseFinder::best_point() {
 	return d_best_point;
 }
 
-Matrix PoseFinder::get_start_pos(int dim) {
-	Matrix pt = Matrix::zeros(dim);
-	for (size_t i(0); i < d_start_search_pos.size(); ++i)
-	  pt[i] = d_start_search_pos[i];
-	return pt;
-}
-
-void PoseFinder::find_pose(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+void PoseFinder::find_pose(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
   switch (d_build_mode) {
   case XNES:
-	find_pose_xnes(maxevals, fitness_threshold, variance_threshold, std, population_size);
+	find_pose_xnes(start_search_pos, fitness_threshold, variance_threshold, std, population_size);
 	break;
   case MONES:
-	find_pose_mones(maxevals, fitness_threshold, variance_threshold, std, population_size);
+	find_pose_mones(start_search_pos, fitness_threshold, variance_threshold, std, population_size);
 	break;
   }
 }
 
-void PoseFinder::find_pose_mones(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+void PoseFinder::find_pose_mones(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
   int dim = d_simulator.total_motors();
 
   ObservationWorkspaceFunction test_function;
   MoNes mones(d_pose_fitness_function, test_function, dim, 50);
 
-  mones.init(d_start_search_pos, std);
+  mones.init(start_search_pos, std);
 
   for (size_t i(0); i < 10000; ++i) {
 	mones.iterate();
@@ -50,7 +43,7 @@ void PoseFinder::find_pose_mones(unsigned int maxevals, double fitness_threshold
   }
 }
 
-void PoseFinder::find_pose_xnes(unsigned int maxevals, double fitness_threshold, double variance_threshold, double std, int population_size) {
+void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
   
   try
 	{
@@ -60,8 +53,7 @@ void PoseFinder::find_pose_xnes(unsigned int maxevals, double fitness_threshold,
 		sigma *= std;
 
 		int population = population_size;//leave 0 to use default
-		
-		nes.init(get_start_pos(dim), sigma, population);
+		nes.init(start_search_pos, sigma, population);
 
 		size_t n_evaluations(0);
 		//d_pose_fitness_function.debug() = ;
@@ -81,7 +73,7 @@ void PoseFinder::find_pose_xnes(unsigned int maxevals, double fitness_threshold,
 			n_evaluations += population_size;
 			//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
 		}
-		while (nes.bestFitness() > fitness_threshold && nes.evaluations() < maxevals && nes.variance() > variance_threshold);
+		while (nes.bestFitness() > fitness_threshold && nes.variance() > variance_threshold);
 
 		d_best_point = (nes.bestPoint().get_data());
 	}
