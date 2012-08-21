@@ -131,8 +131,12 @@ void MapThread::run()
       //double start_std(.70);
       //size_t population_size(250);
 
-	  
-      d_pose_finder.find_pose(d_pose_finder.get_normal_homepos(), 0., 1.0e-6, d_start_std, d_population_size);
+	  std::vector<double> start_pose;
+	  if (!d_configuration_points.size())
+		start_pose = d_pose_finder.get_normal_homepos();
+	  else
+		start_pose = random_pose();
+	  d_pose_finder.find_pose(start_pose, 0., 1.0e-6, d_start_std, d_population_size);
       add_best_pose();
       store_points(store_file_name);
     }

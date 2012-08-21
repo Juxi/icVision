@@ -72,6 +72,10 @@ public:
 		d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
 	}
 
+	std::vector<double> random_pose() {
+	  return d_configuration_points[rand() % d_configuration_points.size()];
+	}
+
 	void store_points(std::string filename) {
 		poses_map_t store_map;
 		std::vector<std::vector<double> > real_poses = convert_to_real(d_configuration_points);
