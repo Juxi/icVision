@@ -3,7 +3,6 @@
 #include <cstring>
 #include <cmath>
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 using namespace yarp::os;
@@ -12,7 +11,8 @@ using namespace yarp::dev;
 
 Mover::Mover( ) {
 	delay = 20; // delay in millis
-	
+	TS = delay/1000.;
+
 	// face expressions monitor
 	monIndex = 0;
 	vector<string> monVal;
@@ -40,15 +40,18 @@ Mover::~Mover() {
 }
 
 
-bool Mover::init(string& robot, vector<string>& parts ) {
-	if ( !network.checkNetwork() ) { throw "Cannot find YARP network."; }
+bool Mover::init(string& r, vector<string>& p ) {
+	if ( !network.checkNetwork() ) { cout << "Cannot find YARP network." << endl; return false;}
+
+	partnames = p;
+	nparts = partnames.size();
+	robot = r;
+	
 	string part;
 	Property options;
 
 	// create drivers and controls for all parts
-	dd.clear(); encs.clear(); lims.clear(); amps.clear(); pids.clear(); poss.clear();
-	partnames = parts;
-	nparts = partnames.size();
+	dd.clear(); encs.clear();
 	
 	for (int i=0; i<nparts; i++) {
 		options.clear();	
@@ -68,25 +71,13 @@ bool Mover::init(string& robot, vector<string>& parts ) {
 
 			IControlLimits *lim;
 			dd.back()->view(lim);
-			lims.push_back(lim);
-
-			IAmplifierControl *amp;
-			dd.back()->view(amp);
-			amps.push_back(amp);
-
-			IPidControl *pid;
-			dd.back()->view(pid);
-			pids.push_back(pid);
-
-			IPositionControl *pos;
-			dd.back()->view(pos);
-			poss.push_back(pos);
+			lims.push_back(lim);			
 		}
 	}
 	
 	if (!checkValidity()) { return false; }
 
-	// get and set some useful values, and turn on the amplifiers
+	// get and set some useful values
 	nJoints.assign(nparts, 0);
 	limitsmin.clear(); limitsmax.clear(); encvals.clear();
 	for (int ipart=0; ipart<nparts; ipart++) {
@@ -97,10 +88,6 @@ bool Mover::init(string& robot, vector<string>& parts ) {
 		mask.push_back(vector<bool>(nJoints[ipart]));
 		for (int j=0; j<nJoints[ipart]; j++) {
 			lims[ipart]->getLimits(j, &(limitsmin[ipart][j]), &(limitsmax[ipart][j]));
-
-			// switch on amplifiers before the pids, otherwise the amplifiers are switched off!
-			//amps[ipart]->enableAmp(j);
-			//pids[ipart]->enablePid(j);
 		}
 	}
 
@@ -108,7 +95,18 @@ bool Mover::init(string& robot, vector<string>& parts ) {
 }
 
 
-bool Mover::connectFace(string& robot, string& rawFacePort) {
+bool Mover::checkValidity() {
+	for (int i=0; i<nparts; i++) {
+		if ( !dd[i] ) { cout << "Error: PolyDriver for part " << partnames[i] << " was not created." << endl; return false; }
+		if ( !dd[i]->isValid() ) { cout << "Error: PolyDriver for part " << partnames[i] << " is invalid." << endl; return false; }
+		if ( !encs[i] ) { cout << "IEncoders part " << partnames[i] << " error" << endl; return false; }
+		if ( !lims[i] ) { cout << "IControlLimits part " << partnames[i] << " error" << endl; return false; }
+	}
+	return true;
+}
+
+
+bool Mover::connectFace(string& rawFacePort) {
 	// connect to emotions interface, if available
 	string localPort = "/mover/" + robot + "/face/rpc";
 	facePort.open(localPort.c_str());
@@ -121,74 +119,29 @@ bool Mover::connectFace(string& robot, string& rawFacePort) {
 }
 
 
-bool Mover::connnectVSkin(string& robot, string& portRpc) {
+bool Mover::connnectVSkin(string& portRpc, string& statusPort) {
 	bool success = true;
 
 	// connect to Virtual Skin
 	string vSkinRpcClientName = "/mover/" + robot + "/vskinrpc";
 	success = success && vSkinRpcClient.open(vSkinRpcClientName.c_str());
 	success = success && vSkinRpcClient.addOutput(portRpc.c_str());
+	
+	string vSkinStatusClientName = "/mover/" + robot + "/vskinstatus";
+	success = success && vSkinStatus.open(vSkinStatusClientName.c_str());
+	success = success && network.connect(statusPort.c_str(), vSkinStatusClientName.c_str());
 
 	return success;
 }
 
 
-bool Mover::checkValidity() {
-	for (int i=0; i<nparts; i++) {
-		if ( !dd[i] ) { cout << "Error: PolyDriver for part " << partnames[i] << " was not created." << endl; return false; }
-		if ( !dd[i]->isValid() ) { cout << "Error: PolyDriver for part " << partnames[i] << " is invalid." << endl; return false; }
-		if ( !poss[i] ) { cout << "IPositionControl part " << partnames[i] << " error" << endl; return false; }
-		if ( !encs[i] ) { cout << "IEncoders part " << partnames[i] << " error" << endl; return false; }
-		if ( !amps[i] ) { cout << "IAmplifierControl part " << partnames[i] << " error" << endl; return false; }
-		if ( !lims[i] ) { cout << "IControlLimits part " << partnames[i] << " error" << endl; return false; }
-	}
-	return true;
-}
-
-
 void Mover::close() {
-	//if (vel || pos) { stop(); }
-
 	for (int i=0; i<nparts; i++) {
 		if (dd[i]) {
 			dd[i]->close();
 			delete dd[i];
 		}
 	}
-}
-
-
-bool Mover::setRefSpeed(double spd) {
-	bool success = true;
-	for (int ipart=0; ipart<nparts; ipart++) {
-		vector<double> spds(nJoints[ipart], spd);
-		success = success && poss[ipart]->setRefSpeeds(&spds[0]);
-	}
-	return success;
-}
-
-
-bool Mover::setRefAcceleration(double acc) {
-	bool success = true;
-	for (int ipart=0; ipart<nparts; ipart++) {
-		vector<double> accs(nJoints[ipart], acc);
-		success = success && poss[ipart]->setRefAccelerations(&accs[0]);
-	}
-	return success;
-}
-
-
-void Mover::getMask(Bottle &b) {
-	Bottle yParts;
-	for (int ipart=0; ipart<nparts; ipart++) {
-		Bottle yPart;
-		for (int j=0; j<nJoints[ipart]; j++) {
-			yPart.addInt(mask[ipart][j]);
-		}
-		yParts.addList() = yPart;
-	}
-	b.clear();
-	b.addList() = yParts;
 }
 
 
@@ -199,6 +152,20 @@ void Mover::getPose(Bottle &b) {
 		Bottle yPart;
 		for (int j=0; j<nJoints[ipart]; j++) {
 			yPart.addDouble(encvals[ipart][j]);
+		}
+		yParts.addList() = yPart;
+	}
+	b.clear();
+	b.addList() = yParts;
+}
+
+
+void Mover::getMask(Bottle &b) {
+	Bottle yParts;
+	for (int ipart=0; ipart<nparts; ipart++) {
+		Bottle yPart;
+		for (int j=0; j<nJoints[ipart]; j++) {
+			yPart.addInt(mask[ipart][j]);
 		}
 		yParts.addList() = yPart;
 	}
@@ -254,7 +221,6 @@ bool Mover::setMask(Value &v) {
 	vector<vector<bool> > newmask;
 
 	if (!v.isList() || v.asList()->size() != nparts) { 
-	  cout << v.asList()->size() << " " <<  nparts << endl;
 		cout << "Error: incorrect number of parts in mask." << endl;
 		return false;
 	}
@@ -295,7 +261,6 @@ bool Mover::parseTrajBottle(Value &v, vector<vector<vector<double> > >& poses) {
 			yPose = yPoses->get(ipose).asList();
 			if (!yPose->get(ipart).isList() || yPose->get(ipart).asList()->size() != nJoints[ipart]) { 
 				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
-				cout << yPose->get(ipart).asList()->size() << " " << nJoints[ipart] << endl;
 				return false;
 			}
 			yPos = yPose->get(ipart).asList();
@@ -365,131 +330,23 @@ void Mover::blink(){
 }
 
 
-bool Mover::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
-	size_t nposes = poses.size();
-	int count;
-	bool reached;
-	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
-
-	// set virtual skin waypoint at begin of trajectory
-	setWayPoint();
-	
-	// cycle through poses
-	startTraj = Time::now();
-	for (int ipose=0; ipose<nposes; ipose++) {
-		// uncomment line below to set waypoint at each pose in the pose buffer
-		// setWayPoint();
-
-		cout << "Moving the robot to pose " << ipose+1<< " / " << nposes << "." << endl;
-		
-		if (poses[ipose].size() != nparts) { 
-			cout << "Error: incorrect number of parts in pose " << ipose+1 << "." << endl;
-			return false;
-		}
-
-		for (int ipart=0; ipart<nparts; ipart++) {
-			if (poses[ipose][ipart].size() != nJoints[ipart]) {
-				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
-				return false;
-			}
-		
-			// set the values within joint limits range
-			poses[ipose][ipart] = max(poses[ipose][ipart], limitsmin[ipart]);
-			poses[ipose][ipart] = min(poses[ipose][ipart], limitsmax[ipart]);
-			
-			// set masked parts to current encoder position
-			encs[ipart]->getEncoders(&encvals[ipart][0]);
-			for (int j=0; j < nJoints[ipart]; j++) {
-				if (mask[ipart][j]) {
-					poses[ipose][ipart][j] = encvals[ipart][j];
-				}
-			}
-
-			// send part positions
-			poss[ipart]->positionMove(&poses[ipose][ipart][0]);
-		}
-		
-		monMoving(); // monitor moving command
-
-		// for the final pose, use a bit more accuracy. This also prevents reflexes after the final pose is within range, while the position controller is not yet finished.
-		if (ipose == (nposes-1))
-			distancethreshold = finaldistancethreshold;
-
-		// wait until distance is within distancethreshold, or until timeout
-		reached = false;
-		startStep = Time::now();
-		count = 0;
-		while (!reached) {
-			// get encoder positions
-			for (int ipart=0; ipart<nparts; ipart++) {
-				encs[ipart]->getEncoders(&encvals[ipart][0]);
-			}
-
-			// distances
-			sssedist = rmse(encvals, poses[ipose], mask);
-			vector<vector<double> > diff = encvals - poses[ipose];
-			diff = abs(diff);
-			maxdist = max(diff, mask);
-
-//for (int ipart=0; ipart<nparts; ipart++) {
-//	for (int j=0; j < nJoints[ipart]; j++) {
-//		cout << diff[ipart][j] <<  " " << endl;
-//	}
-//	cout << endl;
-//}
+void Mover::setStop() {
+	stop = true;
+}
 
 
-			// threshold
-			if ((maxdist < distancethreshold) && (sssedist < distancethreshold)) {reached = true; break;}
-			
-			//if there is a collision, wait until the reflex ends, or until the total trajectory timeout
-			//Bottle* b = vSkinCollisions.read(false);
-			//if (b != NULL && !b->get(0).isDouble())...
-			// this is a workaround that just checks if rpc communication is possible; future version should read the collisionn status port directly
-			double temp;
-			bool colliding = ((encs.size() > 0) && !encs[0]->getEncoder(0, &temp));
-			if (colliding) {
-				monReflexing();
-				cout << "Warning: collision while trying to reach pose " << ipose+1 << "." << endl << "Waiting for reflex..."; 
-				while (colliding) {
-					Time::delay(delay/1000.);
-					if ((Time::now() - startTraj) >= trajtimeout) { break; }
-					colliding = ((encs.size() > 0) && !encs[0]->getEncoder(0, &temp));
-				}
-
-				if (colliding)
-					cout << " reflex unsuccesful." << endl;
-				else
-					cout << " reflex done." << endl;
-
-				ipose = nposes; // this will exit poses loop
-				break; // exit the while(!reached) loop
-			}
-
-			// timing
-			count++;
-			nowTime = Time::now();
-			cntTime = startStep + count * delay/1000.; // expected time according to counter
-			waitTime = cntTime - nowTime;
-			nowTime = Time::now();
-			if ( (nowTime - startTraj) >= trajtimeout)
-				break;
-			if (waitTime > 0.) // if expected time is before counter, wait a little bit
-				Time::delay(waitTime);
-			if ((cntTime - startStep) >= steptimeout) {
-				cout << "Warning: step timeout while trying to reach pose " << ipose+1 << "." << endl;
-				break;
-			}
-		}
-		
-		if ( (nowTime - startTraj) >= trajtimeout) {
-			cout << "Warning: trajectory timeout while trying to reach pose " << ipose+1 << "." << endl;
-			break;
-		}
+bool Mover::isColliding() {
+	Bottle* b;
+	if (vSkinStatus.getInputCount() > 0) {
+		b = vSkinStatus.read(false);
+		return (b != NULL && (b->get(0).asInt() != 1));
+	} else {
+		return true;
 	}
+}
 
-	Time::delay(0.1); // hopefully this will fix commands arriving in the wrong order...
-	monDone(reached);
 
-	return reached;
+bool Mover::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
+	printf("Not implemented\n");
+	return false;
 }

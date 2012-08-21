@@ -531,7 +531,7 @@ Roadmap::path_t Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<ed
 
 	}
 
-	return path_t{path, distance, map[to].x};
+	return path_t(path, distance, map[to].x);
 }  
 
 Roadmap::path_t  Roadmap::shortestPath( vector<double> from, vector<double> to, EdgeTester<edge_t> &edge_tester) {

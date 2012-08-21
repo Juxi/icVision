@@ -43,6 +43,8 @@ class PathPlanner {
 
  public:
 	struct path_t {
+	  path_t() : distance(0) {}
+	  path_t(std::vector<std::vector<double> >& p, double d, std::vector<double>& g) : path(p), distance(d), goal(g) {}
 	  std::vector<std::vector<double> > path;
 	  double distance;
 	  std::vector<double> goal;

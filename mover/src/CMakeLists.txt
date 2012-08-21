@@ -14,11 +14,13 @@ FIND_PACKAGE ( YARP REQUIRED )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} ${ICUB_INCLUDE_DIRS} )
 
 SET ( src_files	main.cpp
+		mover.cpp
 		moverPosition.cpp
 		moverMinJerkLinear.cpp
 )
 
-SET ( hdr_files	moverPosition.h
+SET ( hdr_files	mover.h
+		moverPosition.h
 		moverMinJerkLinear.h
 		vectormath.h
 )

@@ -79,7 +79,7 @@ PathPlanner::path_t PathPlanner::find_path(vector<double> source, vector<double>
 	cout << "goal: " << goal[0] << endl;
 	cout << "avg time: " << collision_edge_tester.n_seconds() / collision_edge_tester.n_evaluations() << endl;
 	cout << "total time: " << collision_edge_tester.n_seconds() << endl;
-	return PathPlanner::path_t{the_path_nodes, distance, goal};
+	return PathPlanner::path_t(the_path_nodes, distance, goal);
 }
 
 /*
