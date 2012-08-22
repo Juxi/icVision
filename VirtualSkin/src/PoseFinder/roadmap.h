@@ -242,6 +242,7 @@ public:
 	path_t shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
+	std::vector<std::vector<double> > vertex_list_to_x(std::list<Roadmap::vertex_t> &list);
 
 
 	size_t size() {

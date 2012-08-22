@@ -51,11 +51,14 @@ void sort(std::vector<T> &vec, typename CompareClass2<T>::value_func_t value_fun
 
 inline double calculate_distance( std::vector<double> const &v1, std::vector<double> const &v2) {
 	assert(v1.size() == v2.size());
-	double distance(0.0);
+	double distance(0.0), diff;
 	std::vector<double>::const_iterator it(v1.begin()), it_end(v1.end()), it2(v2.begin());
 	
-	for (; it != it_end; ++it, ++it2)
-	  distance += std::pow(*it - *it2, 2.0);
+	for (; it != it_end; ++it, ++it2) {
+	  //distance += std::pow(*it - *it2, 2.0); // pow is slow!
+		diff = *it - *it2;
+	    distance += diff * diff;
+	}
 	return std::sqrt(distance);
 }
 

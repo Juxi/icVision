@@ -646,6 +646,17 @@ vector<vector<double> > Roadmap::vertex_list_to_q(list<Roadmap::vertex_t> &path)
 	return vector_path;
 }
 
+
+vector<vector<double> > Roadmap::vertex_list_to_x(list<Roadmap::vertex_t> &path) {
+	vector<vector<double> > vector_path;
+	list<Roadmap::Map::vertex_descriptor>::iterator it(path.begin());
+	for (; it != path.end(); ++it) {
+	  vector_path.push_back(map[*it].x);
+	}
+
+	return vector_path;
+}
+
 Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( vector<double> _x)
 {
 //	if ( _x.size() != dim_x ) { throw StringException("wrong size state vector"); }

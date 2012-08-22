@@ -44,8 +44,9 @@ class PathPlanner {
  public:
 	struct path_t {
 	  path_t() : distance(0) {}
-	  path_t(std::vector<std::vector<double> >& p, double d, std::vector<double>& g) : path(p), distance(d), goal(g) {}
-	  std::vector<std::vector<double> > path;
+	  path_t(std::vector<std::vector<double> >& p, std::vector<std::vector<double> >& w, double d, std::vector<double>& g) : path_nodes(p), path_workspace(w), distance(d), goal(g) {}
+	  std::vector<std::vector<double> > path_nodes;
+	  std::vector<std::vector<double> > path_workspace;
 	  double distance;
 	  std::vector<double> goal;
 	};

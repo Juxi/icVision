@@ -1,7 +1,7 @@
 #ifndef __PATH_EXTRACTOR_H__
 #define __PATH_EXTRACTOR_H__
 
-#include "roadmap.h"
+//#include "roadmap.h"
 #include <vector>
 #include <iostream>
 
