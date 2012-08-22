@@ -44,7 +44,7 @@ bool Mover::init(string& r, vector<string>& p ) {
 	if ( !network.checkNetwork() ) { cout << "Cannot find YARP network." << endl; return false;}
 
 	partnames = p;
-	nparts = partnames.size();
+	nparts = (int) partnames.size();
 	robot = r;
 	
 	string part;
@@ -268,7 +268,12 @@ bool Mover::parseTrajBottle(Value &v, vector<vector<vector<double> > >& poses) {
 			for (int j=0; j<nJoints[ipart]; j++) {
 				vPose[ipart][j] = yPos->get(j).asDouble();
 			}
+
+			// set within limits
+			vPose[ipart] = max(vPose[ipart], limitsmin[ipart]);
+			vPose[ipart] = min(vPose[ipart], limitsmax[ipart]);
 		}
+
 		poses.push_back(vPose);
 	}
 	

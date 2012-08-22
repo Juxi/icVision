@@ -26,13 +26,16 @@ public:
 	virtual bool go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout);
 	virtual bool setRefSpeed(double spd);
 	virtual bool setRefAcceleration(double acc);
+	virtual bool setFwdSteps(int steps);
 
 protected:
 	virtual void close();									//!< Closes the connection to the remote device
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
+	vector<IPositionControl*> poss;
 	vector<minJerkVelCtrl*> vctrls;
 	double maxSpeed;
+	int nForwardSteps;
 
 };
 #endif

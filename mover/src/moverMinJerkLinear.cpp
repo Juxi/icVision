@@ -26,6 +26,7 @@ bool MoverMinJerkLinear::init(string& robot, vector<string>& parts ) {
 			vctrls.push_back(new minJerkVelCtrl(TS,nJoints[i]));
 		}
 	}
+	maxSpeed = 10;
 
 	return true;
 }
@@ -63,7 +64,7 @@ bool MoverMinJerkLinear::setRefAcceleration(double acc) {
 
 bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
-	size_t nposes = poses.size();
+	int nposes = (int) poses.size();
 	int count;
 	bool reached;
 	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
@@ -91,21 +92,9 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 
 		cout << "Moving the robot to pose " << ipose+1<< " / " << nposes << "." << endl;
 		
-		if (poses[ipose].size() != nparts) { 
-			cout << "Error: incorrect number of parts in pose " << ipose+1 << "." << endl;
-			return false;
-		}
+		
 
 		for (int ipart=0; ((ipart<nparts) && !stop); ipart++) {
-			if (poses[ipose][ipart].size() != nJoints[ipart]) {
-				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
-				return false;
-			}
-		
-			// set the values within joint limits range
-			poses[ipose][ipart] = max(poses[ipose][ipart], limitsmin[ipart]);
-			poses[ipose][ipart] = min(poses[ipose][ipart], limitsmax[ipart]);
-			
 			// set masked parts to current encoder position
 			encs[ipart]->getEncoders(&encvals[ipart][0]);
 			for (int j=0; j < nJoints[ipart]; j++) {

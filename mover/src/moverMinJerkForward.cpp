@@ -14,6 +14,7 @@ using namespace yarp::dev;
 bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
 	MoverPosition::init(robot, parts);
 
+	poss.clear();
 	vels.clear(); vctrls.clear();
 	
 	for (int i=0; i<nparts; i++) {
@@ -22,10 +23,16 @@ bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
 			dd[i]->view(vel);
 			vels.push_back(vel);
 	
+			IPositionControl *pos;
+			dd[i]->view(pos);
+			poss.push_back(pos);
+
 			//vctrls.push_back(new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]));
 			vctrls.push_back(new minJerkVelCtrl(TS,nJoints[i]));
 		}
 	}
+	nForwardSteps = 25;
+	maxSpeed = 10;
 
 	return true;
 }
@@ -61,13 +68,20 @@ bool MoverMinJerkForward::setRefAcceleration(double acc) {
 }
 
 
+bool MoverMinJerkForward::setFwdSteps(int s) {
+	nForwardSteps = s;
+	return true;
+}
+
+
 bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
-	size_t nposes = poses.size();
+	int nposes = (int) poses.size();
 	int count;
-	bool reached;
-	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
-	
+	bool reached = false;
+	double sssedist, maxdist, pmaxdist, trajTime, startTraj, nowTime, cntTime, waitTime;
+	int currentIndex = 0, tForwardSteps, targetIndex;
+
 	// set virtual skin waypoint at begin of trajectory
 	setWayPoint();
 	vector<vector<double > > lastVels;
@@ -83,141 +97,103 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
 	}
 
-	// cycle through poses
+	// moving loop
+	count = 0;
 	startTraj = Time::now();
-	for (int ipose=0; ((ipose<nposes) && !stop); ipose++) {
-		// uncomment line below to set waypoint at each pose in the pose buffer
-		// setWayPoint();
-
-		cout << "Moving the robot to pose " << ipose+1<< " / " << nposes << "." << endl;
-		
-		if (poses[ipose].size() != nparts) { 
-			cout << "Error: incorrect number of parts in pose " << ipose+1 << "." << endl;
-			return false;
-		}
-
-		for (int ipart=0; ((ipart<nparts) && !stop); ipart++) {
-			if (poses[ipose][ipart].size() != nJoints[ipart]) {
-				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
-				return false;
-			}
-		
-			// set the values within joint limits range
-			poses[ipose][ipart] = max(poses[ipose][ipart], limitsmin[ipart]);
-			poses[ipose][ipart] = min(poses[ipose][ipart], limitsmax[ipart]);
-			
-			// set masked parts to current encoder position
+	while (!reached && !stop) {
+		// get encoder positions
+		for (int ipart=0; ipart<nparts; ipart++) {
 			encs[ipart]->getEncoders(&encvals[ipart][0]);
-			for (int j=0; j < nJoints[ipart]; j++) {
-				if (mask[ipart][j]) {
-					poses[ipose][ipart][j] = encvals[ipart][j];
-				}
-			}
 		}
-		
-		monMoving(); // monitor moving command
-
-		// for the final pose, use a bit more accuracy. This also prevents reflexes after the final pose is within range, while the position controller is not yet finished.
-		if (ipose == (nposes-1))
-			distancethreshold = finaldistancethreshold;
-
-		// wait until distance is within distancethreshold, or until timeout
-		reached = false;
-		startStep = Time::now();
-		count = 0;
-		while (!reached && !stop) {
-			// get encoder positions
-			for (int ipart=0; ipart<nparts; ipart++) {
-				encs[ipart]->getEncoders(&encvals[ipart][0]);
-			}
-
-			///////////////////////
-			// match the robot's pose with poses between tracerIndex and tracerIndex+nForwardSteps
-			size_t tracerIndex = 0;
-			size_t nForwardSteps = 10; // requested number of forward steps
-			size_t tForwardSteps = min(nposes, tracerIndex + nForwardSteps) - tracerIndex; // actual number of forward steps
-			vector<double> fwdDistances(tForwardSteps, 0.0);
-			for (size_t icp=0; icp < tForwardSteps; icp++) {
-				fwdDistances[tracerIndex+icp] = rmse(encvals, poses[icp], mask);
-			}
-
-			vector<double>::iterator mine = std::min_element(fwdDistances.begin(), fwdDistances.end());
-			tracerIndex = tracerIndex + (mine - fwdDistances.begin());
-
-			////////////////////
-
-			// distances
-			sssedist = rmse(encvals, poses[ipose], mask);
-			vector<vector<double> > diff = poses[ipose] - encvals;
-			vector<vector<double> > absdiff = abs(diff);
-			maxdist = max(absdiff, mask);
-
-			// threshold
-			if ((maxdist < distancethreshold) && (sssedist < distancethreshold)) {reached = true; break;}
 			
-			//if there is a collision, wait until the reflex ends, or until the total trajectory timeout
-			bool colliding = isColliding();
-			if (colliding) {
-				monReflexing();
-				cout << "Warning: collision while trying to reach pose " << ipose+1 << "." << endl << "Waiting for reflex..."; 
-				while (colliding && !stop) {
-					Time::delay(TS);
-					if ((Time::now() - startTraj) >= trajtimeout) { break; }
-					colliding = isColliding();
-				}
+		// match the robot's pose with poses between currentIndex and currentIndex+nForwardSteps
+		tForwardSteps = max(0, min(nposes, currentIndex+nForwardSteps) - currentIndex); // number of available forward steps
+		vector<double> fwdDistances(tForwardSteps, 0.0);
+		for (int icp = 0; icp < tForwardSteps; icp++) {
+			fwdDistances[icp] = rmse(encvals, poses[currentIndex+icp], mask);
+		}
 
-				if (colliding)
-					cout << " reflex unsuccesful." << endl;
-				else
-					cout << " reflex done." << endl;
+		vector<double>::iterator mine = std::min_element(fwdDistances.begin(), fwdDistances.end());
+		currentIndex = currentIndex + (int) (mine - fwdDistances.begin()); // current pose index
+		targetIndex = min(nposes-1, currentIndex+nForwardSteps); // target pose index
 
-				// reset minJerk controls
-				for (int ipart=0; ipart<nparts; ipart++) {
-					//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
-				}
+		// distances to the pose at targetIndex
+		vector<vector<double> > diff = poses[targetIndex] - encvals;
+		sssedist = rmse(encvals, poses[targetIndex], mask); 
+		vector<vector<double> > absdiff = abs(diff);
+		maxdist = max(absdiff, mask);
 
-				ipose = nposes; // this will exit poses loop
-				break; // exit the while(!reached) loop
-			}
-
-			for (int ipart=0; ipart<nparts; ipart++) {
-				//vector<double> q = yarp2std(vctrls[ipart]->computeCmd(1, std2yarp(diff[ipart])));
-				vector<double> q = yarp2std(vctrls[ipart]->computeCmd(0.33, std2yarp(diff[ipart])));
-				q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
-				
-				for (int j=0; j < nJoints[ipart]; j++) {
-					if (!mask[ipart][j]  && lastVels[ipart][j] != q[j]) {
-						vels[ipart]->velocityMove(j, lastVels[ipart][j]=q[j]);
-					}
-				}
-				
-				//vels[ipart]->velocityMove(&q[0]);
-
-				/*for (int j=0;j<nJoints[ipart];j++) {
-					cout << " " << q[j] << " ";
-				}
-				cout << endl;*/
-			}
-
-
-			// timing
-			count++;
-			nowTime = Time::now();
-			cntTime = startStep + count * TS; // expected time according to counter
-			waitTime = cntTime - nowTime;
-			nowTime = Time::now();
-			if ( (nowTime - startTraj) >= trajtimeout)
-				break;
-			if (waitTime > 0.) // if expected time is before counter, wait a little bit
-				Time::delay(waitTime);
-			if ((cntTime - startStep) >= steptimeout) {
-				cout << "Warning: step timeout while trying to reach pose " << ipose+1 << "." << endl;
-				break;
+		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
+		if (targetIndex == (nposes-1)) {
+			//cout << "targetting final pose; ssse: " << sssedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
+			if ((maxdist < finaldistancethreshold) && (sssedist < finaldistancethreshold)) {
+				reached = true; break;
 			}
 		}
-		
+			
+		//if there is a collision, wait until the reflex ends, or until the total trajectory timeout
+		bool colliding = isColliding();
+		if (colliding) {
+			monReflexing();
+			cout << "Warning: collision while trying to reach pose " << targetIndex+1 << "." << endl << "Waiting for reflex..."; 
+			while (colliding && !stop) {
+				Time::delay(TS);
+				if ((Time::now() - startTraj) >= trajtimeout) { break; }
+				colliding = isColliding();
+			}
+
+			if (colliding)
+				cout << " reflex unsuccesful." << endl;
+			else
+				cout << " reflex done." << endl;
+
+			// reset minJerk controls
+			for (int ipart=0; ipart<nparts; ipart++) {
+				//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
+			}
+
+			break; // exit the while(!reached) loop
+		}
+
+		// send velocities
+		//cout << "current index: " << currentIndex << " target index " << targetIndex << endl;
+		//cout << "trajectory times :";
+		for (int ipart=0; ipart<nparts; ipart++) {
+			// dynamically adjust the trajectory time by the maximum distance in joint space:
+			pmaxdist = max(absdiff[ipart], mask[ipart]);
+			trajTime = max(0.33, pmaxdist/maxSpeed); // damping can be achieved either by lower-capping the trajectory time, or by upper-capping the speed
+			
+			vector<double> q = yarp2std(vctrls[ipart]->computeCmd(trajTime, std2yarp(diff[ipart])));
+			q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
+			// minabsvel = 0.5
+
+			for (int j=0; j < nJoints[ipart]; j++) {
+				/*if (!mask[ipart][j]) {
+					poss[ipart]->positionMove(j, poses[targetIndex][ipart][j]);
+				}*/
+				if (!mask[ipart][j]  && lastVels[ipart][j] != q[j]) {
+					vels[ipart]->velocityMove(j, lastVels[ipart][j]=q[j]);
+				}
+			}
+			//vels[ipart]->velocityMove(&q[0]);
+
+			/*for (int j=0;j<nJoints[ipart];j++) {
+				cout << " " << q[j] << " ";
+			}
+			cout << endl;*/
+			//cout << " " << trajTime;
+		}
+		//cout << endl;
+
+		// timing
+		count++;
+		nowTime = Time::now();
+		cntTime = startTraj + count * TS; // expected time according to counter
+		waitTime = cntTime - nowTime;
+		if (waitTime > 0.) // if expected time is before counter, wait a little bit
+			Time::delay(waitTime);
 		if ( (nowTime - startTraj) >= trajtimeout) {
-			cout << "Warning: trajectory timeout while trying to reach pose " << ipose+1 << "." << endl;
+			cout << "Warning: trajectory timeout while trying to reach pose " << targetIndex+1 << "." << endl;
 			break;
 		}
 	}

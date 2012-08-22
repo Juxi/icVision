@@ -1,5 +1,6 @@
 #include "moverPosition.h"
 #include "moverMinJerkLinear.h"
+#include "moverMinJerkForward.h"
 #include "mover.h"
 
 #include <string>
@@ -15,6 +16,7 @@ using namespace yarp::dev;
 #define VOCAB_GET  VOCAB3('g','e','t')		// get 
 #define VOCAB_SPD  VOCAB3('s','p','d')		// set reference speed
 #define VOCAB_ACC  VOCAB3('a','c','c')		// set reference accelleration
+#define VOCAB_FWD  VOCAB3('f','w','d')		// set number of forward steps
 #define VOCAB_HELP VOCAB4('h','e','l','p')	// display help
 #define VOCAB_BLINK VOCAB4('b','l','n','k')	// blink eyes
 #define VOCAB_DIST_THRESHOLD VOCAB3('t','h','r')   // distance threshold
@@ -22,10 +24,11 @@ using namespace yarp::dev;
 #define VOCAB_FAIL VOCAB4('f','a','i','l')
 #define VOCAB_STOP VOCAB4('s','t','o','p') // cancel ongoing movement
 
-#define MAX_REFERENCE_SPEED 20.
+#define MAX_REFERENCE_SPEED 40.
 #define MAX_REFERENCE_ACCELERATION 10.
 
-typedef MoverMinJerkLinear mover_type;
+typedef MoverMinJerkForward mover_type;
+//typedef MoverMinJerkLinear mover_type;
 //typedef MoverPosition mover_type;
 //typedef Mover mover_type;
 
@@ -63,6 +66,11 @@ int main(int argc, char *argv[]) {
 	if ( settings.check("acceleration") )  { refAcc = settings.find("acceleration").asDouble(); }
 	if ( command.check("acceleration") )  { refAcc = command.find("acceleration").asDouble(); }
 	refAcc = max(0., min(refAcc, MAX_REFERENCE_ACCELERATION));
+
+	int fwdSteps = 25;	// forward steps for moverMinJerkForward
+	if ( settings.check("fwdsteps") )  { fwdSteps = settings.find("fwdsteps").asDouble(); }
+	if ( command.check("fwdsteps") )  { fwdSteps = command.find("fwdsteps").asDouble(); }
+	fwdSteps = max(1, fwdSteps);
 
 	double distThreshold = 1;	// default distance threshold before moving to the next pose in degrees
 	if ( settings.check("distthreshold") )  { distThreshold = settings.find("distthreshold").asDouble(); }
@@ -252,6 +260,22 @@ int main(int argc, char *argv[]) {
 					response.addVocab(VOCAB_FAIL);
 				}
 				break;
+			case VOCAB_FWD:
+				success = query.size() >= 2;
+				if (!success) { cout << "Invalid number of arguments." << endl; }
+				success = success && (query.get(2).isInt() || query.get(2).isDouble());
+				if (!success) { cout << "Forward steps should be a number." << endl; }
+				fwdSteps = query.get(2).asInt();
+				fwdSteps = max(1, fwdSteps);
+				success = success && mover.setFwdSteps(fwdSteps);
+				if (success) { 
+					cout << "New number of forward steps set to " << fwdSteps << endl;
+					response.addVocab(VOCAB_OK);
+				} else {
+					cout << "Sending number of forward steps failed." << endl;
+					response.addVocab(VOCAB_FAIL);
+				}
+				break;
 			default:
 				response.addString("Unknown set command. Type help for more information.");
 				cout << "Unknown set command received." << endl;
@@ -318,6 +342,7 @@ int main(int argc, char *argv[]) {
 			response.addString( "set mask off: disable mask for all joints in all parts.\n");
 			response.addString( "set spd VALUE: set reference speed for all parts for all joints.\n");
 			response.addString( "set acc VALUE: set reference acceleration for all parts for all joints.\n");
+			response.addString( "set fwd VALUE: set number of forward steps.\n");
 			response.addString( "set thr VALUE: set distance threshold.\n");
 			response.addString( "get mask: return current mask as a list of lists with the mask value \n\t"
 								"of each joint for that part.\n");
