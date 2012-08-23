@@ -11,19 +11,18 @@ using namespace yarp::dev;
 
 
 bool MoverPosition::init(string& robot, vector<string>& parts ) {
-	Mover::init(robot, parts);
-	poss.clear();
+	if (!Mover::init(robot, parts)) { return false; }
+
+	poss.clear(); poss.resize(nparts);
 	for (int i=0; i<nparts; i++) {
 		if (dd[i] && dd[i]->isValid() ) {
 			IPositionControl *pos;
 			dd[i]->view(pos);
-			poss.push_back(pos);
+			poss[i] = pos;
 		}
 	}
 	
-	if (!checkPosDrivers()) { return false; }
-		
-	return true;
+	return checkPosDrivers();
 }
 
 

@@ -23,9 +23,12 @@ using namespace yarp::dev;
 #define VOCAB_OK VOCAB2('o','k')
 #define VOCAB_FAIL VOCAB4('f','a','i','l')
 #define VOCAB_STOP VOCAB4('s','t','o','p') // cancel ongoing movement
+#define VOCAB_MOVE_MODE VOCAB4('m','o','d','e')
+#define VOCAB_MIN_TRAJ_TIME VOCAB4('m','i','n','t')
 
 #define MAX_REFERENCE_SPEED 40.
 #define MAX_REFERENCE_ACCELERATION 10.
+#define HARD_MIN_TRAJ_TIME 0.1
 
 typedef MoverMinJerkForward mover_type;
 //typedef MoverMinJerkLinear mover_type;
@@ -87,6 +90,15 @@ int main(int argc, char *argv[]) {
 	double trajTimeout = 10; // default trajectory timeout in seconds
 	if ( settings.check("trajtimeout") )  { trajTimeout = settings.find("trajtimeout").asDouble(); }
 	if ( command.check("trajtimeout") )  { trajTimeout = command.find("trajtimeout").asDouble(); }
+
+	double minTrajTime = 0.5; // default minimum trajectory time
+	if ( settings.check("mintrajtime") )  { minTrajTime = settings.find("mintrajtime").asDouble(); }
+	if ( command.check("mintrajtime") )  { minTrajTime = command.find("mintrajtime").asDouble(); }
+
+	int moveMode = VOCAB_MODE_VELOCITY; // default mode is velocity
+	if ( settings.check("movemode") )  { moveMode = settings.find("movemode").asDouble(); }
+	if ( command.check("movemode") )  { moveMode = command.find("movemode").asDouble(); }
+
 
 	string vSkinRpcPort = "/virtualSkin/filterRpc";
 	if ( settings.check("vskinrpc") )  { vSkinRpcPort = settings.find("vskinrpc").asString().c_str(); }
@@ -276,6 +288,37 @@ int main(int argc, char *argv[]) {
 					response.addVocab(VOCAB_FAIL);
 				}
 				break;
+			case VOCAB_MIN_TRAJ_TIME:
+				success = query.size() >= 2;
+				if (!success) { cout << "Invalid number of arguments." << endl; }
+				success = success && (query.get(2).isInt() || query.get(2).isDouble());
+				if (!success) { cout << "Minimum trajectory time should be a number." << endl; }
+				minTrajTime = query.get(2).asDouble();
+				minTrajTime = max(HARD_MIN_TRAJ_TIME, minTrajTime);
+				success = success && mover.setMinTrajTime(minTrajTime);
+				if (success) { 
+					cout << "New minimum trajectory time set to " << minTrajTime << endl;
+					response.addVocab(VOCAB_OK);
+				} else {
+					cout << "Sending minimum trajectory time failed." << endl;
+					response.addVocab(VOCAB_FAIL);
+				}
+				break;
+			case VOCAB_MOVE_MODE:
+				success = query.size() >= 2;
+				if (!success) { cout << "Invalid number of arguments." << endl; }
+				success = success && (query.get(2).isVocab());
+				if (!success) { cout << "Move mode command invalid." << endl; }
+				moveMode = query.get(2).asVocab();
+				success = success && mover.setMode(moveMode);
+				if (success) { 
+					cout << "Move mode set to " << query.get(2).asString().c_str() << endl;
+					response.addVocab(VOCAB_OK);
+				} else {
+					cout << "Move mode command invalid." << endl;
+					response.addVocab(VOCAB_FAIL);
+				}
+				break;
 			default:
 				response.addString("Unknown set command. Type help for more information.");
 				cout << "Unknown set command received." << endl;
@@ -343,6 +386,9 @@ int main(int argc, char *argv[]) {
 			response.addString( "set spd VALUE: set reference speed for all parts for all joints.\n");
 			response.addString( "set acc VALUE: set reference acceleration for all parts for all joints.\n");
 			response.addString( "set fwd VALUE: set number of forward steps.\n");
+			response.addString( "set mint VALUE: set minimum trajectory time.\n");
+			response.addString( "set mode pos: set position move mode.\n");
+			response.addString( "set mode vel: set velocity move mode.\n");
 			response.addString( "set thr VALUE: set distance threshold.\n");
 			response.addString( "get mask: return current mask as a list of lists with the mask value \n\t"
 								"of each joint for that part.\n");

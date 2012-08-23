@@ -12,29 +12,27 @@ using namespace yarp::dev;
 
 
 bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
-	MoverPosition::init(robot, parts);
+	if (!MoverPosition::init(robot, parts)) {return false; }
 
-	poss.clear();
 	vels.clear(); vctrls.clear();
+	vels.resize(nparts); vctrls.resize(nparts);
 	
 	for (int i=0; i<nparts; i++) {
 		if (dd[i] && dd[i]->isValid() ) {
 			IVelocityControl *vel;
 			dd[i]->view(vel);
-			vels.push_back(vel);
-	
-			IPositionControl *pos;
-			dd[i]->view(pos);
-			poss.push_back(pos);
+			vels[i] = vel;
 
-			//vctrls.push_back(new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]));
-			vctrls.push_back(new minJerkVelCtrl(TS,nJoints[i]));
+			//vctrls[i] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
+			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
 		}
 	}
+	minTrajTime = 0.5;
 	nForwardSteps = 25;
 	maxSpeed = 10;
+	moveMode = VOCAB_MODE_VELOCITY;
 
-	return true;
+	return checkVelDrivers();
 }
 
 
@@ -58,19 +56,33 @@ void MoverMinJerkForward::close() {
 
 
 bool MoverMinJerkForward::setRefSpeed(double spd) {
+	MoverPosition::setRefSpeed(spd);
 	maxSpeed = spd;
 	return true;
 }
 
 
 bool MoverMinJerkForward::setRefAcceleration(double acc) {
-	return true;
+	return MoverPosition::setRefAcceleration(acc);
 }
 
 
 bool MoverMinJerkForward::setFwdSteps(int s) {
 	nForwardSteps = s;
 	return true;
+}
+
+bool MoverMinJerkForward::setMinTrajTime(double m) {
+	minTrajTime = m;
+	return true;
+}
+
+bool MoverMinJerkForward::setMode(int m) {
+	if ((moveMode == VOCAB_MODE_POSITION) || (moveMode == VOCAB_MODE_VELOCITY)) {
+		moveMode = m;
+		return true;
+	} else
+		return false;
 }
 
 
@@ -161,21 +173,20 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		for (int ipart=0; ipart<nparts; ipart++) {
 			// dynamically adjust the trajectory time by the maximum distance in joint space:
 			pmaxdist = max(absdiff[ipart], mask[ipart]);
-			trajTime = max(0.33, pmaxdist/maxSpeed); // damping can be achieved either by lower-capping the trajectory time, or by upper-capping the speed
+			trajTime = max(minTrajTime, pmaxdist/maxSpeed); // damping can be achieved either by lower-capping the trajectory time, or by upper-capping the speed
 			
 			vector<double> q = yarp2std(vctrls[ipart]->computeCmd(trajTime, std2yarp(diff[ipart])));
 			q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
 			// minabsvel = 0.5
 
-			for (int j=0; j < nJoints[ipart]; j++) {
-				/*if (!mask[ipart][j]) {
-					poss[ipart]->positionMove(j, poses[targetIndex][ipart][j]);
-				}*/
-				if (!mask[ipart][j]  && lastVels[ipart][j] != q[j]) {
-					vels[ipart]->velocityMove(j, lastVels[ipart][j]=q[j]);
+			for (int iax=0; iax < nJoints[ipart]; iax++) {
+				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
+					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);
+				}
+				if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+					vels[ipart]->velocityMove(iax, lastVels[ipart][iax]=q[iax]);
 				}
 			}
-			//vels[ipart]->velocityMove(&q[0]);
 
 			/*for (int j=0;j<nJoints[ipart];j++) {
 				cout << " " << q[j] << " ";

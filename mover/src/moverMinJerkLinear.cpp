@@ -12,23 +12,24 @@ using namespace yarp::dev;
 
 
 bool MoverMinJerkLinear::init(string& robot, vector<string>& parts ) {
-	MoverPosition::init(robot, parts);
+	if (!MoverPosition::init(robot, parts)) { return false; }
 
 	vels.clear(); vctrls.clear();
-	
+	vels.resize(nparts); vctrls.resize(nparts);
+
 	for (int i=0; i<nparts; i++) {
 		if (dd[i] && dd[i]->isValid() ) {
 			IVelocityControl *vel;
 			dd[i]->view(vel);
-			vels.push_back(vel);
+			vels[i] = vel;
 	
-			//vctrls.push_back(new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]));
-			vctrls.push_back(new minJerkVelCtrl(TS,nJoints[i]));
+			//vctrls[i] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
+			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
 		}
 	}
 	maxSpeed = 10;
 
-	return true;
+	return checkVelDrivers();
 }
 
 
@@ -52,13 +53,14 @@ void MoverMinJerkLinear::close() {
 
 
 bool MoverMinJerkLinear::setRefSpeed(double spd) {
+	MoverPosition::setRefSpeed(spd);
 	maxSpeed = spd;
 	return true;
 }
 
 
 bool MoverMinJerkLinear::setRefAcceleration(double acc) {
-	return true;
+	return MoverPosition::setRefAcceleration(acc);
 }
 
 

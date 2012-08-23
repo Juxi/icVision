@@ -19,6 +19,9 @@ using namespace yarp::os;
 using namespace yarp::dev;
 using namespace iCub::ctrl;
 
+#define VOCAB_MODE_POSITION VOCAB3('p','o','s')
+#define VOCAB_MODE_VELOCITY VOCAB3('v','e','l')
+
 class MoverMinJerkForward : public MoverPosition {
 	
 public:
@@ -27,15 +30,16 @@ public:
 	virtual bool setRefSpeed(double spd);
 	virtual bool setRefAcceleration(double acc);
 	virtual bool setFwdSteps(int steps);
+	virtual bool setMinTrajTime(double m);
+	virtual bool setMode(int mode);
 
 protected:
 	virtual void close();									//!< Closes the connection to the remote device
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
-	vector<IPositionControl*> poss;
 	vector<minJerkVelCtrl*> vctrls;
-	double maxSpeed;
-	int nForwardSteps;
+	double maxSpeed, minTrajTime;
+	int nForwardSteps, moveMode;
 
 };
 #endif
