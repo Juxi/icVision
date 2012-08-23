@@ -66,7 +66,7 @@ vector<double> PathPlanner::closest_workspace(string mapname, vector<double> wor
 }
 
 PathPlanner::path_t PathPlanner::find_path(vector<double> source, vector<double> target) {
-  double granularity(0.5);
+  double granularity(2.0);
   CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), granularity);
 
   Roadmap::path_t the_path = d_main_roadmap.shortestPath(source, target, collision_edge_tester);
@@ -77,6 +77,7 @@ PathPlanner::path_t PathPlanner::find_path(vector<double> source, vector<double>
 	cout << "Path len: " << the_path_nodes.size() << endl;
 	cout << "Path dist: " << distance << endl;
 	cout << "N evaluated: " << collision_edge_tester.n_evaluations() << endl;
+	cout << "N collision checks per edge: " << (double) collision_edge_tester.n_vskincalls() / (double) collision_edge_tester.n_evaluations() << endl;
 	cout << "goal: " << goal[0] << endl;
 	cout << "avg time: " << collision_edge_tester.n_seconds() / collision_edge_tester.n_evaluations() << endl;
 	cout << "total time: " << collision_edge_tester.n_seconds() << endl;

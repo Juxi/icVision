@@ -16,6 +16,7 @@ SET ( src_control controller_main.cpp
 )
 
 SET ( hdr_control 
+		astar.h
 		pathplanner.h
 		roadmap.h
 		yarpposecontroller.h		

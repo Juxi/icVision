@@ -54,11 +54,10 @@ public:
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
 		std::vector<double> q;				// robot configuration
+		std::vector<double> qs;              // scaled robot configuration
 		std::vector<double> x;				// workspace configuration
 	    std::string map_name;
 		double fitness;
-		int collisions;
-		
 		Vertex() : qtGraphNode(NULL), type(NULL) {}
 	};
 	
@@ -186,13 +185,13 @@ public:
 
 	vertex_t insert( std::vector<double> _x, std::vector<double> _q, std::string name);
 	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
-	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
+	void graphConnect( unsigned int n, TreeMode tree_mode);
 	void graphConnect2( int p, unsigned int n);
 	void graphConnect2( unsigned int n, TreeMode tree_mode);
 	void mapDistances(int v, std::vector<double> &d);
 
-	void random_connect(size_t n);
-	void connect_delaunay();
+	//void random_connect(size_t n);
+	//void connect_delaunay();
 
 	//void buildRandomMap( unsigned int numVertices, unsigned int numNeighbors );
 	
@@ -230,10 +229,10 @@ public:
 
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
-	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _w );
+	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _x );
 
 	std::vector<double> nearestVector(std::vector<double> q);
-	std::vector<double> nearestWorkspaceVector(std::vector<double> q);
+	std::vector<double> nearestWorkspaceVector(std::vector<double> x);
 
 	path_t shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester);
 
@@ -260,7 +259,7 @@ public:
 	}
 
 	std::vector<double>  scale_q( std::vector<double> q);
-	std::vector<double>  unscale_q( std::vector<double> scaled_q);
+	std::vector<double>  unscale_q( std::vector<double> sq);
 	Tree &get_tree(TreeMode tree_mode);
 
 //

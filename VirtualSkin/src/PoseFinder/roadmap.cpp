@@ -159,11 +159,11 @@ Roadmap::vertex_t Roadmap::insert( vector<double> _x, vector<double> _q, string 
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
 	map[vertex].q = _q;
+	map[vertex].qs = scale_q(_q);
 	map[vertex].x = _x;
 	map[vertex].map_name = name;
 
 	map[vertex].fitness = 0;
-	map[vertex].collisions = 0;
 	
 	// put it in the CGAL tree
 	Pose p( _q.size(), _q.begin(), _q.end(), vertex );
@@ -446,15 +446,14 @@ void Roadmap::graphConnect( unsigned int n, TreeMode tree_mode)
 	    graphConnect( Pose(map[*(vp.first)].x.size(),map[*(vp.first)].x.begin(),map[*(vp.first)].x.end(),*(vp.first)), n, tree_mode);
 	    break;
 	  case SCALEDCONFIGURATIONSPACE:
-		vector<double> scaled_q = scale_q(map[*(vp.first)].q);
-	    graphConnect( Pose(scaled_q.size(), scaled_q.begin(), scaled_q.end(),*(vp.first)), n, tree_mode);
+		graphConnect( Pose(map[*(vp.first)].qs.size(),map[*(vp.first)].qs.begin(),map[*(vp.first)].qs.end(),*(vp.first)), n, tree_mode);
 	    break;
 	  }
 	}
 }
 
 
-void Roadmap::random_connect(size_t n) {
+/*void Roadmap::random_connect(size_t n) {
   static mt19937 gen(23);
   cout << "==random" << endl;
   for (size_t i(0); i < n; ++i) {
@@ -466,7 +465,7 @@ void Roadmap::random_connect(size_t n) {
 	  cout << calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q)) << endl;
 	}
   }
-}
+}*/
 
 Roadmap::vertex_t Roadmap::nearestVertex( vector<double> _q, char* type )
 {
@@ -478,9 +477,13 @@ Roadmap::vertex_t Roadmap::nearestVertex( vector<double> _q, char* type )
 	size_t const check_n(40);
 	K_neighbor_search search(tree, Pose( _q.size(), _q.begin(), _q.end() ) , check_n);
 	K_neighbor_search::iterator it = search.begin();
-	for(; it != search.end(); ++it)
-	  if (map[it->first.vertex].collisions == 0)
-	    break;
+	for(; it != search.end(); ++it) {
+		//TODO: realtime test for collisions
+	    //std::vector<double> q_real = d_posefinder.simulator().real_to_normal_motors(q);
+		//d_posefinder.simulator().set_motors(q_real);
+		//if (d_simulator.computePose() == 0)
+			break;
+	}
 	if (it == search.end())
 	  throw StringException("couldnt find nearest vertex");
 	map[it->first.vertex].type = type;
@@ -668,15 +671,19 @@ Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( vector<double> _x)
 	size_t const check_n(40);
 	K_neighbor_search search(workspace_tree, Pose( _x.size(), _x.begin(), _x.end() ), check_n);
 	K_neighbor_search::iterator it = search.begin();
-	for(; it != search.end(); ++it)
-	  if (map[it->first.vertex].collisions == 0)
-	    break;
+	for(; it != search.end(); ++it) {
+		//TODO: realtime test for collisions
+	    //std::vector<double> q_real = d_posefinder.simulator().real_to_normal_motors(q);
+		//d_posefinder.simulator().set_motors(q_real);
+		//if (d_simulator.computePose() == 0)
+		break;
+	}
 	if (it == search.end())
 	  throw StringException("couldnt find nearest workspace vertex");
 
 	return it->first.vertex;
 }
 
-vector<double> Roadmap::nearestWorkspaceVector(vector<double> q) {
-  return map[nearestWorkspaceVertex(q)].q;
+vector<double> Roadmap::nearestWorkspaceVector(vector<double> x) {
+  return map[nearestWorkspaceVertex(x)].q;
 }
