@@ -6,6 +6,10 @@
 #ifndef MOVER_H
 #define MOVER_H
 
+#define VOCAB_STATUS_ROBOT VOCAB4('r','b','o','t')
+#define VOCAB_STATUS_TARGET VOCAB3('t','g','t')
+#define VOCAB_STATUS_TIME VOCAB4('t','i','m','e')
+
 #include <iostream>
 #include <vector>
 #include "vectormath.h"
@@ -43,7 +47,7 @@ public:
 	void maskOff();
 	void blink();
 	bool isColliding();
-	
+	void pose2LinBottle(vector<vector<double> > &pose, Bottle &b);	
 
 protected:
 	virtual void close();									//!< Closes the connection to the remote device
@@ -63,6 +67,7 @@ protected:
 	Network network;
 	RpcClient vSkinRpcClient;
 	BufferedPort<Bottle> vSkinStatus;
+	BufferedPort<Bottle> moveStatus;
 	Port facePort;
 	vector<int> nJoints;
 	vector<vector<bool> > mask;

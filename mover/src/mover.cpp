@@ -280,6 +280,13 @@ bool Mover::parseTrajBottle(Value &v, vector<vector<vector<double> > >& poses) {
 	return true;
 }
 
+void Mover::pose2LinBottle(vector<vector<double> > &pose, Bottle &b) {
+	for (int i = 0; i < pose.size(); i++) {
+		for (int j = 0; j < pose[i].size(); j++) {
+			b.addDouble(pose[i][j]);
+		}
+	}
+}
 
 void Mover::setWayPoint() {
 	// set waypoint in VirtualSkin

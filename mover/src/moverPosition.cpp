@@ -102,6 +102,12 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 				encs[ipart]->getEncoders(&encvals[ipart][0]);
 			}
 
+			// send to status port
+			Bottle &r = moveStatus.prepare();
+			r.addVocab(VOCAB_STATUS_ROBOT); pose2LinBottle(encvals, r.addList());
+			r.addVocab(VOCAB_STATUS_TARGET); pose2LinBottle(poses[ipose], r.addList());
+			r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
+
 			// distances
 			sssedist = rmse(encvals, poses[ipose], mask);
 			vector<vector<double> > diff = encvals - poses[ipose];

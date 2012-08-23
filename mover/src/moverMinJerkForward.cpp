@@ -135,6 +135,12 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		vector<vector<double> > absdiff = abs(diff);
 		maxdist = max(absdiff, mask);
 
+		// send to status port
+		Bottle &r = moveStatus.prepare();
+		r.addVocab(VOCAB_STATUS_ROBOT); pose2LinBottle(encvals, r.addList());
+		r.addVocab(VOCAB_STATUS_TARGET); pose2LinBottle(poses[targetIndex], r.addList());
+		r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
+
 		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
 		if (targetIndex == (nposes-1)) {
 			//cout << "targetting final pose; ssse: " << sssedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
