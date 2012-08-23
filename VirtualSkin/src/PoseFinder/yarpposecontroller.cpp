@@ -133,7 +133,7 @@ void YarpPoseController::follow_path(PathPlanner::path_t &path) {
 void YarpPoseController::follow_interpolated_path(PathPlanner::path_t &path) {
 	int nposes = path.path_nodes.size();
 	vector<vector<vector<double> > > crazy_path;
-	const int dist_mode = 2; // 1 = whole pose distance; 2 = max axis distance; 3 = work-space distance
+	const int dist_mode = 3; // 1 = whole pose distance; 2 = max axis distance; 3 = work-space distance
 
 	if (nposes == 0 || path.distance > 1000000)
 		throw StringException("No Path Found");
