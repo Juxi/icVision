@@ -25,8 +25,9 @@
 
 //#include "iCubController.h"
 
-#include "astar.h"
 #include "general.h"
+#include "treemode.h"
+#include "astar.h"
 
 #include <QThread>
 //#include <QtGui/QGraphicsView>
@@ -35,11 +36,6 @@
 class QtGraphNode;
 class QtGraphEdge;
 
-enum TreeMode {
-	WORKSPACE = 0,
-	CONFIGURATIONSPACE = 1,
-	SCALEDCONFIGURATIONSPACE = 2
-};
 
 class Roadmap
 {
@@ -53,7 +49,8 @@ public:
 		int	idx;
 		QtGraphNode* qtGraphNode;
 		char* type;							//just for debugging
-		std::vector<double> q;				// robot configuration
+      std::vector<double> q;				// robot configuration
+      std::vector<double> qs;				// robot configuration
 		std::vector<double> x;				// workspace configuration
 	    std::string map_name;
 		double fitness;
@@ -235,11 +232,11 @@ public:
 	std::vector<double> nearestVector(std::vector<double> q);
 	std::vector<double> nearestWorkspaceVector(std::vector<double> q);
 
-	path_t shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester);
+	path_t shortestPath( std::vector<double> from, std::vector<double> to, EdgeTester<edge_t> &edge_tester, TreeMode distance_mode);
 
 	//PathList shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
 
-	path_t shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
+	path_t shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester, TreeMode distance_mode); //ASTAR
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
 	std::vector<std::vector<double> > vertex_list_to_x(std::list<Roadmap::vertex_t> &list);

@@ -1,0 +1,10 @@
+#ifndef __TREEMODE_H__
+#define __TREEMODE_H__
+
+enum TreeMode {
+	WORKSPACE = 0,
+	CONFIGURATIONSPACE = 1,
+	SCALEDCONFIGURATIONSPACE = 2
+};
+
+#endif

@@ -57,9 +57,11 @@ HOME_LEFT_ARM = True
 
 #low_limit_x = [-.35, .0, .03]
 #high_limit_x = [-.26, .22, .05]
-low_limit_x = [-.35, .0, -.02]
-high_limit_x = [-.19, .30, .05]
-
+#low_limit_x = [-.35, .0, -.02]
+#high_limit_x = [-.19, .30, .05]
+high_limit_x = [-.2, .3, .1]
+low_limit_x = [-.4, .1, 0]
+    
 d = .05 #in simulation meter
 
 sigma = .1 #std perturbation in q-space
@@ -217,7 +219,7 @@ def train_controller():
         
         
             new_goal_pos = explore.step_func(fraction)
-
+ 
             new_q, _, _ = explore.map.activate(new_goal_pos)
             #explore_deviation = explore.get_deviation(new_goal_pos)
             #new_q = np.add(new_q, explore_deviation)
@@ -270,6 +272,8 @@ def train_controller():
 def move_for_sf():
     vr = .02
     m = .75
+    #vr = .6
+    #m =.8
 
     n_steps = 40000
     
@@ -279,28 +283,60 @@ def move_for_sf():
     global a_timer
 
     global low_limit_x, high_limit_x
-    low_limit_x = [-.17, .72, .25] #orientation was divided by 10
-    high_limit_x = [.01, .87, .35]
-    low_limit_x = [-.08, .72, .25]
+    #[-0.384979  0.213882  0.06758 ]
 
+    outfile_q, outfile_x = open('q.data', 'w+'), open('x.data', 'w+')
+    outfile_q_dot, outfile_x_dot = open('q_dot.data', 'w+'), open('x_dot.data', 'w+')
+    
+    #high_limit_x = [.01, .87, .35]
+    #low_limit_x = [-.08, .72, .25]
+
+    #high_limit_x = [-.2, .3, .1]
+    #low_limit_x = [-.4, .1, 0]
+    print "ESTIMATE:"
+    low_limit_x, high_limit_x = explore.map.estimate_limits()
+    print "DONE"
+    
     positions = []
     
     previous_speed = llm.vec([0] * len(start_real_pos))
     total_steps = 0
     
     for step in range(n_steps):
+        print(step)
         start_q = previous_q #used in case of home
 
         while True:
             new_goal_pos = np.add(np.add(previous_goal_pos, previous_speed * m), llm.vec(np.random.normal([0] * len(previous_goal_pos), vr)) * (1.0 - m))
+            print low_limit_x, high_limit_x
+            print new_goal_pos
             if check_limit(new_goal_pos):
                 break
             previous_speed *= .5
-
+        print("bla")
         new_q, _, _ = explore.map.activate(new_goal_pos)
+        print("bla")
         move(new_q)
+
         new_real_pos = llm.vec(an_environment.getHandPos())
         positions.append([float(i) for i in new_real_pos])
+
+        #print(new_q - previous_q, new_goal_pos - previous_goal_pos, new_real_pos - previous_real_pos)
+        print " ".join([str(float(i)) for i in new_q - previous_q])
+
+        write_str = " ".join([str(float(i)) for i in new_q - previous_q])
+        outfile_q_dot.write(write_str)
+        outfile_q_dot.write("\n")
+        write_str = " ".join([str(float(i)) for i in new_real_pos - previous_real_pos])
+        outfile_x_dot.write(write_str)
+        outfile_x_dot.write("\n")
+
+        write_str = " ".join([str(float(i)) for i in new_q])
+        outfile_q.write(write_str)
+        outfile_q.write("\n")
+        write_str = " ".join([str(float(i)) for i in new_real_pos])
+        outfile_x.write(write_str)
+        outfile_x.write("\n")
 
         previous_speed = new_goal_pos - previous_goal_pos
         print "previous speed", previous_speed
@@ -416,8 +452,8 @@ def print_pos():
             counter += 1
 
 #train_controller()
-#move_for_sf()
+move_for_sf()
 
-move_with_mouse()
+#move_with_mouse()
 
 #print_pos()

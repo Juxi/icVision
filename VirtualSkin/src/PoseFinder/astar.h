@@ -8,6 +8,7 @@
 #include <boost/random.hpp>
 #include <iostream>
 
+#include "treemode.h"
 
 
 template <class Graph, class CostType>
@@ -15,17 +16,33 @@ template <class Graph, class CostType>
   {
   public:
     typedef typename boost::graph_traits<Graph>::vertex_descriptor Vertex;
-  distance_heuristic(Graph &g, Vertex goal)
-	: m_graph(g), m_goal(goal) {}
+  distance_heuristic(Graph &g, Vertex goal, TreeMode distance_mode)
+	: m_graph(g), m_goal(goal), d_distance_mode(distance_mode) {}
 
+    std::vector<double> &choose_vector(Vertex &u, TreeMode distance_mode) {
+      switch (distance_mode) {
+      case CONFIGURATIONSPACE:
+        return m_graph[u].q;
+        break;
+      case SCALEDCONFIGURATIONSPACE:
+        return m_graph[u].qs;
+        break;
+      case WORKSPACE:
+        return m_graph[u].x;
+        break;
+      }
+    }
+    
     CostType operator()(Vertex u)
     {
 	  Vertex &from(u);
 	  Vertex &to(m_goal);
-	  std::vector<double>::iterator it(m_graph[from].q.begin()), it_end(m_graph[from].q.end());
-	  std::vector<double>::iterator it2(m_graph[to].q.begin());
-	  //std::vector<double>::iterator it(m_graph[from].x.begin()), it_end(m_graph[from].x.end());
-	  //std::vector<double>::iterator it2(m_graph[to].x.begin());
+      std::vector<double> &from_v(choose_vector(from, d_distance_mode));
+      std::vector<double> &to_v(choose_vector(to, d_distance_mode));
+      
+	  std::vector<double>::iterator it(from_v.begin()), it_end(from_v.end());
+	  std::vector<double>::iterator it2(to_v.begin());
+
 	  CostType cost(0.0);
 	  for (; it != it_end; ++it, ++it2)
 		cost += (*it - *it2) * (*it - *it2);
@@ -35,8 +52,9 @@ template <class Graph, class CostType>
   private:
     Graph &m_graph;
     Vertex m_goal;
+    TreeMode d_distance_mode;
   };
-
+    
 
 struct found_goal {}; // exception for termination
 

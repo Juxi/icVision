@@ -16,14 +16,16 @@ SET ( src_control controller_main.cpp
 )
 
 SET ( hdr_control 
+        astar.h
+        treemode.h
 		pathplanner.h
 		roadmap.h
-		yarpposecontroller.h		
+		yarpposecontroller.h
 		spline.hpp
 )
 
 
-SET ( src_finder_lib posefinder.cpp 
+SET ( src_finder_lib posefinder.cpp
 		simulator.cpp
 		demothreads.cpp
 		constraints.cpp

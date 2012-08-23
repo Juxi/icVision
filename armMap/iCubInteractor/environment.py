@@ -89,7 +89,7 @@ class iCubEnvironment(Environment, Named):
         parts = {}
         for e in elements:
             if len(e.strip()) == 0: continue
-            info = [i for i in e[1:].split(' ') if len(i.strip())]
+            info = [i for i in e[1:].replace('(','').split(' ') if len(i.strip())]
             part = info[0]
             values = [float(i) for i in info[1:]]
             parts[part] = values
@@ -160,12 +160,14 @@ class iCubEnvironment(Environment, Named):
 #            yarp.Network.connect('/collisions', '/iCubInteractor/collisions')
 #            
             self.observations = yarp.BufferedPortBottle()
-            self.observations.open('/iCubInteractor/observe')
-            yarp.Network.connect('/observations', '/iCubInteractor/observe')
+            self.observations.open('/iCubInteractor/observe')            
+            #yarp.Network.connect('/observations', '/iCubInteractor/observe')
+            yarp.Network.connect('/virtualSkin/observations', '/iCubInteractor/observe')
             
             self.collide = yarp.BufferedPortBottle()
             self.collide.open('/iCubInteractor/collisions')
-            yarp.Network.connect('/collisions', '/iCubInteractor/collisions')
+            #yarp.Network.connect('/collisions', '/iCubInteractor/collisions')
+            yarp.Network.connect('/virtualSkin/collisions', '/iCubInteractor/collisions')
             
 
 #        # throw away the cube and the ball
@@ -363,6 +365,7 @@ class iCubEnvironment(Environment, Named):
         #print observations['right_hand'], observations['right_hand'][13:16]
         if not observations:
             return None
+        print(observations)
         return np.array(observations['right_hand'][12:15])
         
         # delete all existing objects

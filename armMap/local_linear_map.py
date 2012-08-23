@@ -148,6 +148,16 @@ class LocalLinearMap:
     
     def set_d(self, d):
         self.d = d
+
+    def estimate_limits(self):
+        low_limit = self.points[0].center.copy()
+        high_limit = self.points[0].center.copy()
+        
+        for p in self.points:
+            for i, v in enumerate(p.center):
+                low_limit[i] = min(float(low_limit[i]), float(v))
+                high_limit[i] = max(float(high_limit[i]), float(v))
+        return low_limit, high_limit
     
     def output_ident(self):
         return matrix(zeros((self.n_q, 1)))

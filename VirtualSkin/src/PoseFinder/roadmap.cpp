@@ -158,7 +158,10 @@ Roadmap::vertex_t Roadmap::insert( vector<double> _x, vector<double> _q, string 
 	
 	// put the configuration in the boost graph
 	vertex_t vertex = boost::add_vertex( map );
+
+	vector<double> q_scaled = scale_q(_q);
 	map[vertex].q = _q;
+	map[vertex].qs = q_scaled;
 	map[vertex].x = _x;
 	map[vertex].map_name = name;
 
@@ -172,7 +175,6 @@ Roadmap::vertex_t Roadmap::insert( vector<double> _x, vector<double> _q, string 
 	Pose p_workspace( _x.size(), _x.begin(), _x.end(), vertex );
 	workspace_tree.insert(p_workspace);
 
-	vector<double> q_scaled = scale_q(_q);
 	Pose p_scaled( q_scaled.size(), q_scaled.begin(), q_scaled.end(), vertex );
 	scaled_tree.insert(p_scaled);
 	// connect it to its n nearest neighbors
@@ -549,7 +551,7 @@ std::pair<PathList, double> Roadmap::shortestPath_backup( vertex_t from, vertex_
 }
 */
 
-Roadmap::path_t Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester)
+Roadmap::path_t Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester, TreeMode distance_mode)
 {
 	cout << endl << "Running A*... " << from << " " << to << endl; 
 	vector<vertex_t> parents(num_vertices(map));
@@ -596,7 +598,7 @@ Roadmap::path_t Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<ed
 	  astar_search
 		(map, from,
 		 distance_heuristic<Map, double>
-		 (map, to),
+		 (map, to, distance_mode),
 		 weight_map( get(&Edge::length2, map) )
 		 .predecessor_map(&p[0])
 		 .distance_map(&d[0])
@@ -626,12 +628,12 @@ Roadmap::path_t Roadmap::shortestPath( vertex_t from, vertex_t to, EdgeTester<ed
 	return path_t(path, distance, map[to].x);
 }  
 
-Roadmap::path_t  Roadmap::shortestPath( vector<double> from, vector<double> to, EdgeTester<edge_t> &edge_tester) {
+Roadmap::path_t  Roadmap::shortestPath( vector<double> from, vector<double> to, EdgeTester<edge_t> &edge_tester, TreeMode distance_mode) {
   cout << "shortest path: " << from.size() << " " << to.size() << endl;
 	Roadmap::vertex_t from_desc = nearestVertex(from);
 	Roadmap::vertex_t to_desc = nearestVertex(to);
 
-	return shortestPath(from_desc, to_desc, edge_tester);
+	return shortestPath(from_desc, to_desc, edge_tester, distance_mode);
 }
 
 vector<vector<double> > Roadmap::vertex_list_to_q(list<Roadmap::vertex_t> &path) {

@@ -62,12 +62,14 @@ class PathPlanner {
 
 	std::map<std::string, size_t> d_pose_sizes;
 	size_t d_dimensionality;
+    TreeMode d_distance_mode;
 
  public:
 	
 	PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot, size_t dimensionality = 41) :
 	d_posefinder(model, robot),
-	  d_dimensionality(dimensionality)
+	  d_dimensionality(dimensionality),
+      d_distance_mode(SCALEDCONFIGURATIONSPACE)
 	  {
 		d_config_names.push_back("CFGSPACE_TORSO");
 		d_config_names.push_back("CFGSPACE_HEAD");
@@ -112,7 +114,7 @@ class PathPlanner {
 
 	void connect_map(std::string mapname, size_t n) {
 	  check_map(mapname);
-	  d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  d_roadmaps[mapname]->graphConnect(n, d_distance_mode);
 	  //d_roadmaps[mapname]->graphConnect(n, WORKSPACE);
 	}
 	
@@ -126,7 +128,7 @@ class PathPlanner {
 	  //for (; it != it_end; ++it)
 	  //connect_map(it->first, n);
 
-	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  d_main_roadmap.graphConnect(n, d_distance_mode);
 	  //d_main_roadmap.graphConnect(n, WORKSPACE);
 	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
@@ -135,7 +137,7 @@ class PathPlanner {
 
 	void connect_map2(std::string mapname, size_t n) {
 	  check_map(mapname);
-	  d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
+	  d_roadmaps[mapname]->graphConnect2(n, d_distance_mode);
 	}
 	
 	void connect_maps2(size_t n) {

@@ -69,7 +69,7 @@ PathPlanner::path_t PathPlanner::find_path(vector<double> source, vector<double>
   double granularity(0.5);
   CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), granularity);
 
-  Roadmap::path_t the_path = d_main_roadmap.shortestPath(source, target, collision_edge_tester);
+  Roadmap::path_t the_path = d_main_roadmap.shortestPath(source, target, collision_edge_tester, d_distance_mode);
   double distance = the_path.distance;
    vector<vector<double> > the_path_nodes = d_main_roadmap.vertex_list_to_q(the_path.path);
    vector<vector<double> > the_path_workspace = d_main_roadmap.vertex_list_to_x(the_path.path);
