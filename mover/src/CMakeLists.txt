@@ -17,11 +17,13 @@ SET ( src_files	main.cpp
 		mover.cpp
 		moverPosition.cpp
 		moverMinJerkLinear.cpp
+		moverMinJerkForward.cpp
 )
 
 SET ( hdr_files	mover.h
 		moverPosition.h
 		moverMinJerkLinear.h
+		moverMinJerkForward.h
 		vectormath.h
 )
 

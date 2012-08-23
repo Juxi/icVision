@@ -6,7 +6,6 @@
 #include <cctype>
 
 using namespace std;
-using namespace boost;
 
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), 

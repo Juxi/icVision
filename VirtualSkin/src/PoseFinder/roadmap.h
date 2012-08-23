@@ -187,6 +187,9 @@ public:
 	vertex_t insert( std::vector<double> _x, std::vector<double> _q, std::string name);
 	void graphConnect( Pose, unsigned int n, TreeMode tree_mode);
 	void graphConnect( unsigned int n, TreeMode tree_mode = CONFIGURATIONSPACE);
+	void graphConnect2( int p, unsigned int n);
+	void graphConnect2( unsigned int n, TreeMode tree_mode);
+	void mapDistances(int v, std::vector<double> &d);
 
 	void random_connect(size_t n);
 	void connect_delaunay();
@@ -239,6 +242,7 @@ public:
 	path_t shortestPath( vertex_t from, vertex_t to, EdgeTester<edge_t> &edge_tester); //ASTAR
 
 	std::vector<std::vector<double> > vertex_list_to_q(std::list<Roadmap::vertex_t> &list);
+	std::vector<std::vector<double> > vertex_list_to_x(std::list<Roadmap::vertex_t> &list);
 
 
 	size_t size() {

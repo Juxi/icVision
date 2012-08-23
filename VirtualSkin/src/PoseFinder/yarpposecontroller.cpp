@@ -1,10 +1,7 @@
 #include "yarpposecontroller.h"
-
-#include "sphere.h"
-#include "cylinder.h"
-#include "box.h"
 #include "util.h"
 #include "exception.h"
+#include "spline.hpp"
 
 #include <iostream>
 #include <vector>
@@ -112,11 +109,11 @@ Bottle YarpPoseController::path_to_bottle(vector<vector<vector<double> > > &path
 }
 
 void YarpPoseController::follow_path(PathPlanner::path_t &path) {
-  if (path.path.size() == 0 || path.distance > 1000000)
+  if (path.path_nodes.size() == 0 || path.distance > 1000000)
 	throw StringException("No Path Found");
 	vector<vector<vector<double> > > crazy_path;
-	for (size_t i(0); i < path.path.size(); ++i) {
-		vector<double> pose(path.path[i]);
+	for (size_t i(0); i < path.path_nodes.size(); ++i) {
+		vector<double> pose(path.path_nodes[i]);
 		std::cout << pose.size() << std::endl;
 		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
 		
@@ -132,6 +129,95 @@ void YarpPoseController::follow_path(PathPlanner::path_t &path) {
 	cout << response.toString() << endl;
 	cout << "done" << endl;
 }
+
+void YarpPoseController::follow_interpolated_path(PathPlanner::path_t &path) {
+	int nposes = path.path_nodes.size();
+	vector<vector<vector<double> > > crazy_path;
+	const int dist_mode = 3; // 1 = whole pose distance; 2 = max axis distance; 3 = work-space distance
+
+	if (nposes == 0 || path.distance > 1000000)
+		throw StringException("No Path Found");
+	
+	if (nposes < 3) { // we need at least two poses for interpolation
+	  for (int ipose(0); ipose<nposes; ipose++)
+		crazy_path.push_back(d_path_planner->cut_pose(path.path_nodes[ipose]));
+	} else {
+		
+		int naxes = path.path_nodes[0].size();
+		vector<magnet::math::Spline> splines(naxes, magnet::math::Spline());
+		double cumDist = 0.0; // cumulative distance
+		vector<double> tmpDist(naxes, 0.0);
+		for (size_t ipose(0); ipose < nposes; ++ipose) {
+			if (ipose > 0) {
+				switch (dist_mode) {
+				case 1: 	// take the rmse distance between the current and the previous pose
+					cumDist = cumDist + calculate_distance( path.path_nodes[ipose], path.path_nodes[ipose-1]);
+					break;
+				case 2:
+				//take the maximum change between the current and the previous pose
+					for (size_t iax(0); iax < naxes; iax++) {
+						tmpDist[iax] = fabs(path.path_nodes[ipose][iax] - path.path_nodes[ipose-1][iax]);
+					}
+					cumDist = cumDist + *(std::max_element(tmpDist.begin(), tmpDist.end()));
+					break;
+				case 3:
+					//take the distance between current and previous end-effector pose
+					cumDist = cumDist + calculate_distance( path.path_workspace[ipose], path.path_workspace[ipose-1]);
+					break;
+				}
+			}
+
+			for (size_t iax(0); iax < naxes; iax++) {
+				splines[iax].addPoint(cumDist, path.path_nodes[ipose][iax]);			
+			}
+		}
+
+		// create regularly-spaced vector
+		int nsteps; // cumDist * stepFactor;
+		switch (dist_mode) {
+		case 1: 	// take the rmse distance between the current and the previous pose
+			nsteps = cumDist * 5; // 5 interpolation steps per degree of rmse movement
+			break;
+		case 2:
+		//take the maximum change between the current and the previous pose
+			nsteps = cumDist * 10; // 10 interpolation steps per degree of fastest-moving joint
+			break;
+		case 3:
+			//take the distance between current and previous end-effector pose
+			nsteps = cumDist * 1000; // 1000 interpolation step per meter workspace change (i.e. one step per mm)
+			break;
+		}
+		double stepsize = 1.0/(double)(nsteps - 1);
+		vector<double> regDistances(nsteps, 0.0);
+		for (int i(0); i<nsteps; i++) { 
+			regDistances[i] = i*stepsize*cumDist;
+		}
+
+		// interpolate
+		vector<vector<double > > interpolated(nsteps, vector<double>(naxes, 0.0));
+		for (size_t istep(0); istep < nsteps; istep++) {
+			for (size_t iax(0); iax < naxes; iax++) {
+				interpolated[istep][iax] = splines[iax](regDistances[istep]);
+			}
+			vector<vector<double> > cut_pose = d_path_planner->cut_pose(interpolated[istep]);
+			crazy_path.push_back(cut_pose);
+		}
+		cout << "cumulative max distance: " << cumDist << " number of interpolated steps: " << nsteps << endl;		
+	}
+
+	
+	// send crazy_path
+	Bottle path_bottle = path_to_bottle(crazy_path);
+	Bottle command;
+	command.addString("go");
+	command.addList() = path_bottle;
+	Bottle response;
+	cout << "writing path" << endl;
+	d_mover.write(command, response);
+	cout << response.toString() << endl;
+	cout << "done" << endl;
+}
+
 
 vector<double> YarpPoseController::get_current_pose() {
 	Bottle command;
@@ -220,7 +306,8 @@ void YarpPoseController::run () {
 			  }
 
 			  path = d_path_planner->find_path(source_conf, target_conf);
-			  follow_path(path);
+			  //follow_path(path);
+			  follow_interpolated_path(path);
 			} else
 			  throw StringException("Wrong arguments in command");
 			break;
@@ -308,6 +395,14 @@ void YarpPoseController::run () {
 			  d_path_planner->connect_map(map_name, n);
 			}
 			*/
+			break;
+
+		  case VOCAB4('c', 'o', 'n','2'):
+			if (query.size() == 2 && query.get(1).isInt()) { //con [n]
+			  int number = query.get(1).asInt();
+			  d_path_planner->connect_maps2(number);
+			} else
+			  throw StringException("Wrong arguments in command");
 			break;
 
 		  case VOCAB_GET_RANGE:

@@ -28,6 +28,7 @@ public:
 	virtual bool go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout);
 	virtual bool setRefSpeed(double spd) { cout << "SetRefSpeed not implemented" << endl; return false; };
 	virtual bool setRefAcceleration(double acc) {cout << "SetRefAcceleration not implemented" << endl; return false;};
+	virtual bool setFwdSteps(int steps) {cout << "SetFwdSteps not implemented" << endl; return false;};
 
 	bool connnectVSkin(string &portRpc, string& statusPort);
 	bool connectFace(string& rawFacePort);
@@ -53,8 +54,9 @@ protected:
 	void monReflexing();									//!< Monitor reflexing behavior
 	void setWayPoint();										//!< Set waypoint in Virtual Skin
 	
+	bool faceConnected;
 	int monIndex, nparts;
-	double delay, faceConnected, TS;
+	double delay, TS;
 	volatile bool stop;
 	string robot;
 

@@ -12,22 +12,24 @@ using namespace yarp::dev;
 
 
 bool MoverMinJerkLinear::init(string& robot, vector<string>& parts ) {
-	MoverPosition::init(robot, parts);
+	if (!MoverPosition::init(robot, parts)) { return false; }
 
 	vels.clear(); vctrls.clear();
-	
+	vels.resize(nparts); vctrls.resize(nparts);
+
 	for (int i=0; i<nparts; i++) {
 		if (dd[i] && dd[i]->isValid() ) {
 			IVelocityControl *vel;
-			dd.back()->view(vel);
-			vels.push_back(vel);
+			dd[i]->view(vel);
+			vels[i] = vel;
 	
-			//vctrls.push_back(new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]));
-			vctrls.push_back(new minJerkVelCtrl(TS,nJoints[i]));
+			//vctrls[i] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
+			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
 		}
 	}
+	maxSpeed = 10;
 
-	return true;
+	return checkVelDrivers();
 }
 
 
@@ -51,26 +53,34 @@ void MoverMinJerkLinear::close() {
 
 
 bool MoverMinJerkLinear::setRefSpeed(double spd) {
-	//#TODO: implement some maximum velocity setting
+	MoverPosition::setRefSpeed(spd);
+	maxSpeed = spd;
 	return true;
 }
 
 
 bool MoverMinJerkLinear::setRefAcceleration(double acc) {
-	return true;
+	return MoverPosition::setRefAcceleration(acc);
 }
 
 
 bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
-	stop  = false;
-	size_t nposes = poses.size();
+	stop = false;
+	int nposes = (int) poses.size();
 	int count;
 	bool reached;
 	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
-
+	
 	// set virtual skin waypoint at begin of trajectory
 	setWayPoint();
-	
+	vector<vector<double > > lastVels;
+
+	for (int ipart=0; ipart<nparts; ipart++) {
+		vels[ipart]->setVelocityMode();
+		vector<double> lastVel(nJoints[ipart], 0.0);
+		lastVels.push_back(lastVel);
+	}
+
 	// reset minJerk controls
 	for (int ipart=0; ipart<nparts; ipart++) {
 		//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
@@ -84,21 +94,9 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 
 		cout << "Moving the robot to pose " << ipose+1<< " / " << nposes << "." << endl;
 		
-		if (poses[ipose].size() != nparts) { 
-			cout << "Error: incorrect number of parts in pose " << ipose+1 << "." << endl;
-			return false;
-		}
+		
 
 		for (int ipart=0; ((ipart<nparts) && !stop); ipart++) {
-			if (poses[ipose][ipart].size() != nJoints[ipart]) {
-				cout << "Error: incorrect number of joints in pose " << ipose+1 << " for part " << ipart+1 << "." << endl;
-				return false;
-			}
-		
-			// set the values within joint limits range
-			poses[ipose][ipart] = max(poses[ipose][ipart], limitsmin[ipart]);
-			poses[ipose][ipart] = min(poses[ipose][ipart], limitsmax[ipart]);
-			
 			// set masked parts to current encoder position
 			encs[ipart]->getEncoders(&encvals[ipart][0]);
 			for (int j=0; j < nJoints[ipart]; j++) {
@@ -159,14 +157,22 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 			}
 
 			for (int ipart=0; ipart<nparts; ipart++) {
-				vector<double> q = yarp2std(vctrls[ipart]->computeCmd(1, std2yarp(diff[ipart])));
-				q = max(q, -10.); q = min(q, 10.); // limit velocities
-				vels[ipart]->velocityMove(&q[0]);
+				//vector<double> q = yarp2std(vctrls[ipart]->computeCmd(1, std2yarp(diff[ipart])));
+				vector<double> q = yarp2std(vctrls[ipart]->computeCmd(0.33, std2yarp(diff[ipart])));
+				q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
+				
+				for (int j=0; j < nJoints[ipart]; j++) {
+					if (!mask[ipart][j]  && lastVels[ipart][j] != q[j]) {
+						vels[ipart]->velocityMove(j, lastVels[ipart][j]=q[j]);
+					}
+				}
+				
+				//vels[ipart]->velocityMove(&q[0]);
 
-				//for (int j=0;j<nJoints[ipart];j++) {
-				//	cout << " " << q[j] << " ";
-				//}
-				//cout << endl;
+				/*for (int j=0;j<nJoints[ipart];j++) {
+					cout << " " << q[j] << " ";
+				}
+				cout << endl;*/
 			}
 
 

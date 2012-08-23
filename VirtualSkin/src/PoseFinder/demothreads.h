@@ -7,7 +7,7 @@
 
 #include "sliderwindow.h"
 #include "posefinder.h"
-#include "path_extractor.h"
+//#include "path_extractor.h"
 #include "poses_reader.h"
 
 inline bool exists(std::string filename) {

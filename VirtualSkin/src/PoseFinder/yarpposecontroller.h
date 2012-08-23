@@ -52,6 +52,8 @@ public:
 	void load_config(int argc, char **argv);
 
 	void follow_path(PathPlanner::path_t &path);
+	void follow_interpolated_path(PathPlanner::path_t &path);
+
 	yarp::os::Bottle path_to_bottle(std::vector<std::vector<std::vector<double> > > &path);
 
 	void run ();

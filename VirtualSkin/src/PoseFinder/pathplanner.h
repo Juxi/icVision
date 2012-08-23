@@ -44,8 +44,9 @@ class PathPlanner {
  public:
 	struct path_t {
 	  path_t() : distance(0) {}
-	  path_t(std::vector<std::vector<double> >& p, double d, std::vector<double>& g) : path(p), distance(d), goal(g) {}
-	  std::vector<std::vector<double> > path;
+	  path_t(std::vector<std::vector<double> >& p, std::vector<std::vector<double> >& w, double d, std::vector<double>& g) : path_nodes(p), path_workspace(w), distance(d), goal(g) {}
+	  std::vector<std::vector<double> > path_nodes;
+	  std::vector<std::vector<double> > path_workspace;
 	  double distance;
 	  std::vector<double> goal;
 	};
@@ -74,10 +75,16 @@ class PathPlanner {
 		d_config_names.push_back("CFGSPACE_LEFT_ARM");
 
 		//hack
-		d_scale_map["CFGSPACE_TORSO"] = string_to_vector<double>("1.0 1.0 1.0");
+		/*d_scale_map["CFGSPACE_TORSO"] = string_to_vector<double>("1.0 1.0 1.0");
 		d_scale_map["CFGSPACE_HEAD"] = string_to_vector<double>("1.0 1.0 1.0 0.0 0.0 0.0");
 		d_scale_map["CFGSPACE_RIGHT_ARM"] = string_to_vector<double>("1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
-		d_scale_map["CFGSPACE_LEFT_ARM"]  = string_to_vector<double>("1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+		d_scale_map["CFGSPACE_LEFT_ARM"]  = string_to_vector<double>("1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");*/
+
+		//hack2
+		d_scale_map["CFGSPACE_TORSO"] = string_to_vector<double>("0.75 0.75 1.0");
+		d_scale_map["CFGSPACE_HEAD"] = string_to_vector<double>("0.1 0.1 0.1 0.0 0.0 0.0");
+		d_scale_map["CFGSPACE_RIGHT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.1 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+		d_scale_map["CFGSPACE_LEFT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.1 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
 		
 		
 		d_pose_sizes["CFGSPACE_TORSO"] = d_scale_map["CFGSPACE_TORSO"].size();
@@ -87,7 +94,6 @@ class PathPlanner {
 
 		d_main_roadmap.setDimensionality(d_dimensionality);
 		d_main_roadmap.scale_vector = get_scale_vector();
-
 		//add_bullshit();
 	  }
 	
@@ -107,6 +113,7 @@ class PathPlanner {
 	void connect_map(std::string mapname, size_t n) {
 	  check_map(mapname);
 	  d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  //d_roadmaps[mapname]->graphConnect(n, WORKSPACE);
 	}
 	
 	void connect_maps(size_t n) {
@@ -120,8 +127,25 @@ class PathPlanner {
 	  //connect_map(it->first, n);
 
 	  d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
+	  //d_main_roadmap.graphConnect(n, WORKSPACE);
 	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
+	}
+
+
+	void connect_map2(std::string mapname, size_t n) {
+	  check_map(mapname);
+	  d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
+	}
+	
+	void connect_maps2(size_t n) {
+	  clear_connections();
+
+	  if (d_main_roadmap.size() == 0)
+		throw StringException("No maps loaded yet");
+	  roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+	  
+	  d_main_roadmap.graphConnect2(n, SCALEDCONFIGURATIONSPACE);	  
 	}
 
 	void clear_connections() {
@@ -216,7 +240,7 @@ class PathPlanner {
 
 		//adaptive resolution, at least 2 (check start and end)
 		size_t resolution = std::floor(std::max(2., calculate_distance(q_start, q_end) / d_granularity));
-
+		std::cout << resolution << " " << std::endl;
 		for (size_t i(0); i < resolution; ++i) {
 		  if (n_collisions > 0)
 			break;
