@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	if ( command.check("acceleration") )  { refAcc = command.find("acceleration").asDouble(); }
 	refAcc = max(0., min(refAcc, MAX_REFERENCE_ACCELERATION));
 
-	int fwdSteps = 25;	// forward steps for moverMinJerkForward
+	int fwdSteps = 10;	// forward steps for moverMinJerkForward
 	if ( settings.check("fwdsteps") )  { fwdSteps = settings.find("fwdsteps").asDouble(); }
 	if ( command.check("fwdsteps") )  { fwdSteps = command.find("fwdsteps").asDouble(); }
 	fwdSteps = max(1, fwdSteps);
@@ -307,7 +307,7 @@ int main(int argc, char *argv[]) {
 			case VOCAB_MOVE_MODE:
 				success = query.size() >= 2;
 				if (!success) { cout << "Invalid number of arguments." << endl; }
-				success = success && (query.get(2).isVocab());
+				success = success && (query.get(2).isString() || query.get(2).isVocab());
 				if (!success) { cout << "Move mode command invalid." << endl; }
 				moveMode = query.get(2).asVocab();
 				success = success && mover.setMode(moveMode);
