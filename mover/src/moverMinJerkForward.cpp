@@ -88,6 +88,7 @@ bool MoverMinJerkForward::setMode(int m) {
 
 bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
+	int dragFactor = 10;
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
@@ -126,8 +127,11 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		}
 
 		vector<double>::iterator mine = std::min_element(fwdDistances.begin(), fwdDistances.end());
-		currentIndex = currentIndex + (int) (mine - fwdDistances.begin()); // current pose index
+		int fwdStep = (int) (mine - fwdDistances.begin());
+		//currentIndex = currentIndex + (int) (mine - fwdDistances.begin()); // current pose index
+		currentIndex = currentIndex + min(fwdStep, max(1, tForwardSteps/dragFactor)); // increment current index, but not more than 1/10th of the number of forward steps (drag)
 		targetIndex = min(nposes-1, currentIndex+nForwardSteps); // target pose index
+		targetIndex = min(count*(nForwardSteps/dragFactor), targetIndex); // make sure the targetindex does not suddenly jump to nForwardSteps at the beginning of the movement
 
 		// distances to the pose at targetIndex
 		vector<vector<double> > diff = poses[targetIndex] - encvals;
