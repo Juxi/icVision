@@ -65,6 +65,12 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 	// set virtual skin waypoint at begin of trajectory
 	setWayPoint();
 	
+
+	// send start to move monitor
+	Bottle &s = monitorPort.prepare(); s.clear();
+	s.addVocab(VOCAB_STATUS_START);
+	monitorPort.writeStrict();
+
 	// cycle through poses
 	startTraj = Time::now();
 	for (int ipose=0; ((ipose<nposes) && !stop); ipose++) {
@@ -103,10 +109,11 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 			}
 
 			// send to status port
-			Bottle &r = moveStatus.prepare();
+			Bottle &r = monitorPort.prepare(); r.clear();
 			r.addVocab(VOCAB_STATUS_ROBOT); pose2LinBottle(encvals, r.addList());
 			r.addVocab(VOCAB_STATUS_TARGET); pose2LinBottle(poses[ipose], r.addList());
 			r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
+			monitorPort.write();
 
 			// distances
 			sssedist = rmse(encvals, poses[ipose], mask);
@@ -169,6 +176,10 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 
 	Time::delay(TS*5.); // hopefully this will fix reflex commands arriving in the wrong order...
 	monDone(reached);
+
+	Bottle &e = monitorPort.prepare(); e.clear();
+	e.addVocab(VOCAB_STATUS_END);
+	monitorPort.writeStrict();
 
 	return reached;
 }

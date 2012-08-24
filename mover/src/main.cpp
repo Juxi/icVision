@@ -138,7 +138,10 @@ int main(int argc, char *argv[]) {
 	if (!mover.init(robot, partnames)) { return 0; }
 	mover.setRefSpeed(refSpd);
 	mover.setRefAcceleration(refAcc);
-
+	mover.setFwdSteps(fwdSteps);
+	mover.setMinTrajTime(minTrajTime);
+	mover.setMode(moveMode);
+	
 	// parse and set default masks
 	if (defaultMasks.size() > 1) {
 		for (int iMask=1; iMask<defaultMasks.size(); iMask++) {
@@ -160,6 +163,10 @@ int main(int argc, char *argv[]) {
 	// open rpc port
 	RpcServer port;
 	port.open(portname.c_str());
+
+	// open monitor port
+	if (!mover.connectMonitor())
+	{ cout << "Warning: Could not open monitor port " << endl << endl; }
 
 	while (true) {
 		cout << "Waiting for a message..." << endl;

@@ -106,6 +106,12 @@ bool Mover::checkValidity() {
 }
 
 
+bool Mover::connectMonitor() {
+	// connect to emotions interface, if available
+	string localPort = "/mover/" + robot + "/monitor";
+	return monitorPort.open(localPort.c_str());
+}
+
 bool Mover::connectFace(string& rawFacePort) {
 	// connect to emotions interface, if available
 	string localPort = "/mover/" + robot + "/face/rpc";
