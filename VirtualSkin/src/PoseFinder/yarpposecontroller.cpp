@@ -62,6 +62,8 @@ void YarpPoseController::load_config(int argc, char **argv) {
     	d_model = 0;
     }
 	d_model = new VirtualSkin::YarpModel( visualize );
+	d_model->setStopOnFirstCollision(true); // we can stop at the first collision
+
 	
 	d_model->start(); /* if we want display lists to be created automatically,
 					  // the model must be started prior to appending objects */

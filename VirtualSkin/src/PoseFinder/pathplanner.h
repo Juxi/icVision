@@ -239,19 +239,20 @@ class PathPlanner {
 		
 		int n_collisions = 0;
 		
-		// adaptive resolution, at least 2 (check half-way and end)
+		// adaptive resolution
 		// start is not checked, because it is end of previous expansion
-		size_t resolution = std::floor(std::max(2., calculate_distance(q_start, q_end) / d_granularity));
+		size_t resolution = std::floor(std::max(1.0, calculate_distance(q_start, q_end) / d_granularity));
 		for (size_t i(0); i < resolution; ++i) {
 		  if (n_collisions > 0)
 			break;
-		  float portion(static_cast<float>(i+1) / resolution);
+		  double portion(static_cast<double>(i+1) / resolution);
 		  std::vector<double> q(q_start.size());
 		  for (size_t n(0); n < q.size(); ++n)
 			q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
 		  std::vector<double> q_real = d_simulator.real_to_normal_motors(q);
 		  d_simulator.set_motors(q_real);
 		  n_collisions = std::max(d_simulator.computePose(), n_collisions);
+		  //if (n_collisions > 0) { std::cout << "collisions: " << n_collisions << std::endl; };
 		  ++d_n_vskincalls;
 		}
 		

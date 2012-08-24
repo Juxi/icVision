@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv, visualize);	// create the QT application
 	
 	Model model( visualize, false );
+	model.setStopOnFirstCollision(true); // stop checking for collisions after the first collision in a pose
 	model.start();	/* if we want display lists to be created automatically,
 					   the model must be started prior to appending objects */
 	

@@ -62,7 +62,9 @@ public:
 	void appendObject( CompositeObject* );	
 	bool removeWorldObject( CompositeObject* );
 	void clearTheWorld();
-	
+	void setStopOnFirstCollision(bool b) { stopOnFirstCollision = b ? DT_DONE : DT_CONTINUE; }
+	DT_Bool getStopOnFirstCollision() { return stopOnFirstCollision; };
+
 	QVector< QString > listWorldObjects();
 	CompositeObject* getObject( const QString& name );
 	Robot* getRobot( const QString& name );
@@ -142,6 +144,8 @@ protected:
 	friend class Robot;
 	friend class KinTreeNode;
 
+	DT_Bool stopOnFirstCollision;
+	
 	
 	/*************************
 	 *** COLLISION HANDLING ***
@@ -165,7 +169,7 @@ protected:
 		
 		detector->collisionHandlerAddendum( prim1, prim2, coll_data );
 		
-		return DT_CONTINUE;
+		return detector->getStopOnFirstCollision();
 	}
 	
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
@@ -184,7 +188,7 @@ protected:
 		detector->reflex_col_count++;
 		
 		//return DT_DONE;
-		return DT_CONTINUE;
+		return detector->getStopOnFirstCollision();
 	}
 };
 

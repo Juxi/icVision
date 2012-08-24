@@ -12,7 +12,9 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											verbose(verb), 
 											modelWindow(NULL), 
 											numObjects(0),
-											numPrimitives(0)
+											numPrimitives(0),
+											stopOnFirstCollision(DT_CONTINUE)
+
 {
 	qRegisterMetaType< DT_ResponseClass >("GL_DisplayList");
 	
@@ -44,6 +46,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		modelWindow->show();
 		 
 	}
+	
 	objectMover = new ObjectMover(this, &robots);
 
 	//printf("model constructor returns\n");
