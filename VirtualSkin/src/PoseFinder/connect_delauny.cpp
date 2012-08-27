@@ -12,8 +12,8 @@ using namespace std;
 void Roadmap::connect_delaunay()
 {
 	tree.build();
-	workspace_tree.build();
-	scaled_tree.build();
+	tree_x.build();
+	tree_qs.build();
 
 	typedef CGAL::Gmpz RT;
 	typedef CGAL::Homogeneous_d<float> Kernel;
