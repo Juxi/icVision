@@ -19,7 +19,8 @@ class PoseFinder
 public:
   enum BuildMode {
 	XNES,
-	MONES
+	MONES,
+    MC
   };
   
  PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
@@ -34,7 +35,8 @@ public:
 	void find_pose(std::vector<double> start_search_pos, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
 	void find_pose_mones(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
 	void find_pose_xnes(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
-
+    void find_pose_mc(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
+  
 	void add_constraint(Constraint *constraint, double weight = 1.0){
 		d_pose_fitness_function.add_constraint(constraint, weight);
 	}

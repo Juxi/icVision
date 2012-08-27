@@ -6,7 +6,7 @@
 #include <cmath>
 #include <assert.h>
 #include <iostream>
-
+#include <climits>
 
 template <typename T>
 struct CompareClass {
@@ -66,5 +66,31 @@ inline void write_vector(std::vector<double> v1, std::ostream &out = std::cout) 
   for (size_t i(0); i < v1.size(); ++i)
 	out << v1[i] << " ";
 }
+
+inline double rand_double(double max) {
+  return max * static_cast<double>(rand() % INT_MAX) / INT_MAX;
+}
+
+
+struct Mean {
+  size_t n, index;
+  std::vector<double> values;
+  
+ Mean(size_t n_) : n(n_), index(0), values(n) {}
+
+  void update(double val) {
+    values[index++] = val;
+    index = index % n;
+  }
+
+  double mean() {
+    double total(0.0);
+    std::vector<double>::iterator it(values.begin()), end(values.end());
+    for (;it != end; ++it)
+      total += *it;
+
+    return total / n;
+  }
+};
 
 #endif

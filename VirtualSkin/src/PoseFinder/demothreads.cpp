@@ -10,7 +10,7 @@ using namespace std;
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), 
 	d_pose_finder(model, robot),
-	d_population_size(100), d_start_std(.1)
+	d_population_size(100), d_start_std(.02)
 {
   init_standard_poses();
   

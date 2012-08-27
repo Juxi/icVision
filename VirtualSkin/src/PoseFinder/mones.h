@@ -36,9 +36,9 @@ Individual(Matrix u, Individual &parent): d_dim(u.size()), d_u(u), d_A(parent.d_
 
   Individual offspring() {
 	d_z = rngGauss(d_dim);
-	
 	Matrix x = d_u + d_sigma * d_A * d_z;
 	Individual individual(x, *this);
+
 	d_parent_id = 0;
 	return individual;
   }
