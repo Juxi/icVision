@@ -106,6 +106,12 @@ bool Mover::checkValidity() {
 }
 
 
+bool Mover::connectMonitor() {
+	// connect to emotions interface, if available
+	string localPort = "/mover/" + robot + "/monitor";
+	return monitorPort.open(localPort.c_str());
+}
+
 bool Mover::connectFace(string& rawFacePort) {
 	// connect to emotions interface, if available
 	string localPort = "/mover/" + robot + "/face/rpc";
@@ -280,6 +286,13 @@ bool Mover::parseTrajBottle(Value &v, vector<vector<vector<double> > >& poses) {
 	return true;
 }
 
+void Mover::pose2LinBottle(vector<vector<double> > &pose, Bottle &b) {
+	for (int i = 0; i < pose.size(); i++) {
+		for (int j = 0; j < pose[i].size(); j++) {
+			b.addDouble(pose[i][j]);
+		}
+	}
+}
 
 void Mover::setWayPoint() {
 	// set waypoint in VirtualSkin

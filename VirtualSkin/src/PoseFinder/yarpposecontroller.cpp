@@ -62,6 +62,8 @@ void YarpPoseController::load_config(int argc, char **argv) {
     	d_model = 0;
     }
 	d_model = new VirtualSkin::YarpModel( visualize );
+	d_model->setStopOnFirstCollision(true); // we can stop at the first collision
+
 	
 	d_model->start(); /* if we want display lists to be created automatically,
 					  // the model must be started prior to appending objects */
@@ -133,7 +135,7 @@ void YarpPoseController::follow_path(PathPlanner::path_t &path) {
 void YarpPoseController::follow_interpolated_path(PathPlanner::path_t &path) {
 	int nposes = path.path_nodes.size();
 	vector<vector<vector<double> > > crazy_path;
-	const int dist_mode = 3; // 1 = whole pose distance; 2 = max axis distance; 3 = work-space distance
+	const int dist_mode = 2; // 1 = whole pose distance; 2 = max axis distance; 3 = work-space distance
 
 	if (nposes == 0 || path.distance > 1000000)
 		throw StringException("No Path Found");
@@ -202,7 +204,7 @@ void YarpPoseController::follow_interpolated_path(PathPlanner::path_t &path) {
 			vector<vector<double> > cut_pose = d_path_planner->cut_pose(interpolated[istep]);
 			crazy_path.push_back(cut_pose);
 		}
-		cout << "cumulative max distance: " << cumDist << " number of interpolated steps: " << nsteps << endl;		
+		cout << "cumulative distance: " << cumDist << " number of interpolated steps: " << nsteps << endl;		
 	}
 
 	

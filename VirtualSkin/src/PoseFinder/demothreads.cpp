@@ -14,7 +14,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 {
   init_standard_poses();
   
-  //nullspace_function();
+  nullspace_function();
  //move_box_function();
 
   //hold_something_function();
@@ -22,7 +22,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   //hand_right_function();
   //  hand_right_mark_function();
   
-  hand_right_look_varun_function();
+  //hand_right_look_varun_function();
   //grasp_function();
   //around_object_function();
 

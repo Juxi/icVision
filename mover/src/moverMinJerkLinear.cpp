@@ -86,6 +86,11 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 		//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
 	}
 
+	// send start to move monitor
+	Bottle &s = monitorPort.prepare(); s.clear();
+	s.addVocab(VOCAB_STATUS_START);
+	monitorPort.writeStrict();
+
 	// cycle through poses
 	startTraj = Time::now();
 	for (int ipose=0; ((ipose<nposes) && !stop); ipose++) {
@@ -121,6 +126,13 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 			for (int ipart=0; ipart<nparts; ipart++) {
 				encs[ipart]->getEncoders(&encvals[ipart][0]);
 			}
+
+			// send to status port
+			Bottle &r = monitorPort.prepare(); r.clear();
+			r.addVocab(VOCAB_STATUS_ROBOT); pose2LinBottle(encvals, r.addList());
+			r.addVocab(VOCAB_STATUS_TARGET); pose2LinBottle(poses[ipose], r.addList());
+			r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
+			monitorPort.write();
 
 			// distances
 			sssedist = rmse(encvals, poses[ipose], mask);
@@ -204,6 +216,10 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 	for (int ipart=0; ipart<nparts; ipart++) { vels[ipart]->stop(); }
 	
 	monDone(reached);
+	
+	Bottle &e = monitorPort.prepare(); e.clear();
+	e.addVocab(VOCAB_STATUS_END);
+	monitorPort.writeStrict();
 
 	return reached;
 }

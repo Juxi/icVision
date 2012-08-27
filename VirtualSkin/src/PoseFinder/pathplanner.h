@@ -130,7 +130,7 @@ class PathPlanner {
 
 	  d_main_roadmap.graphConnect(n, d_distance_mode);
 	  //d_main_roadmap.graphConnect(n, WORKSPACE);
-	  //d_main_roadmap.random_connect(d_main_roadmap.size() / 10);
+	  //d_main_roadmap./*om_connect(d_main_roadmap.size() / 10);
 	  //d_main_roadmap.connect_delaunay();
 	}
 
@@ -227,8 +227,9 @@ class PathPlanner {
 	  double d_granularity;
 	  size_t d_n_evaluations;
 	  std::clock_t d_clock;
+	  size_t d_n_vskincalls;
 
-	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity) : d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity), d_n_evaluations(0), d_clock(0) {}
+	CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity) : d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity), d_n_evaluations(0), d_clock(0), d_n_vskincalls(0) {}
 	  
 	  void operator()(edge_t &edge) {
 		if (get(&Roadmap::Edge::evaluated, d_roadmap.map, edge))
@@ -238,21 +239,23 @@ class PathPlanner {
 		std::vector<double> &q_start = d_roadmap.map[source(edge, d_roadmap.map)].q;
 		std::vector<double> &q_end = d_roadmap.map[target(edge, d_roadmap.map)].q;
 		
-		int n_collisions = d_roadmap.map[source(edge, d_roadmap.map)].collisions + d_roadmap.map[source(edge, d_roadmap.map)].collisions;
-
-		//adaptive resolution, at least 2 (check start and end)
-		size_t resolution = std::floor(std::max(2., calculate_distance(q_start, q_end) / d_granularity));
-		std::cout << resolution << " " << std::endl;
+		int n_collisions = 0;
+		
+		// adaptive resolution
+		// start is not checked, because it is end of previous expansion
+		size_t resolution = std::floor(std::max(1.0, calculate_distance(q_start, q_end) / d_granularity));
 		for (size_t i(0); i < resolution; ++i) {
 		  if (n_collisions > 0)
 			break;
-		  float portion(static_cast<float>(i) / (resolution - 1));
+		  double portion(static_cast<double>(i+1) / resolution);
 		  std::vector<double> q(q_start.size());
 		  for (size_t n(0); n < q.size(); ++n)
 			q[n] = q_start[n] * portion + q_end[n] * (1. - portion);
 		  std::vector<double> q_real = d_simulator.real_to_normal_motors(q);
 		  d_simulator.set_motors(q_real);
 		  n_collisions = std::max(d_simulator.computePose(), n_collisions);
+		  //if (n_collisions > 0) { std::cout << "collisions: " << n_collisions << std::endl; };
+		  ++d_n_vskincalls;
 		}
 		
 		double length = get(&Roadmap::Edge::length, d_roadmap.map, edge);
@@ -268,7 +271,7 @@ class PathPlanner {
 	  }
 
 	  size_t n_evaluations(){return d_n_evaluations;}
-
+	  size_t n_vskincalls(){return d_n_vskincalls; }
 	  double n_seconds(){return static_cast<double>(d_clock) / CLOCKS_PER_SEC;}
 	};
 

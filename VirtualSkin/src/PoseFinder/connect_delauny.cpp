@@ -1,4 +1,4 @@
-#include <CGAL/Homogeneous_d.h>
+/*#include <CGAL/Homogeneous_d.h>
 //#include <CGAL/leda_integer.h>
 #include <CGAL/Gmpz.h>
 #include <CGAL/Delaunay_d.h>
@@ -53,4 +53,4 @@ void Roadmap::connect_delaunay()
 	  cout << *it << endl;
 	}
 
-}
+}*/

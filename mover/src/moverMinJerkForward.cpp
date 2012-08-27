@@ -89,6 +89,7 @@ bool MoverMinJerkForward::setMode(int m) {
 bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
 	int dragFactor = 10;
+	double minabsvel = 0.5;
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
@@ -109,6 +110,11 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 	for (int ipart=0; ipart<nparts; ipart++) {
 		//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
 	}
+	
+	// send start to move monitor
+	Bottle &s = monitorPort.prepare(); s.clear();
+	s.addVocab(VOCAB_STATUS_START);
+	monitorPort.writeStrict();
 
 	// moving loop
 	count = 0;
@@ -129,7 +135,7 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		vector<double>::iterator mine = std::min_element(fwdDistances.begin(), fwdDistances.end());
 		int fwdStep = (int) (mine - fwdDistances.begin());
 		//currentIndex = currentIndex + (int) (mine - fwdDistances.begin()); // current pose index
-		currentIndex = currentIndex + min(fwdStep, max(1, tForwardSteps/dragFactor)); // increment current index, but not more than 1/10th of the number of forward steps (drag)
+		currentIndex = currentIndex + min(fwdStep, max(1, tForwardSteps/dragFactor)); // increment current index to a maximum of scaled dragFactor
 		targetIndex = min(nposes-1, currentIndex+nForwardSteps); // target pose index
 		targetIndex = min(count*(nForwardSteps/dragFactor), targetIndex); // make sure the targetindex does not suddenly jump to nForwardSteps at the beginning of the movement
 
@@ -138,6 +144,14 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		sssedist = rmse(encvals, poses[targetIndex], mask); 
 		vector<vector<double> > absdiff = abs(diff);
 		maxdist = max(absdiff, mask);
+
+		// send to status port
+		Bottle &r = monitorPort.prepare(); r.clear();
+		r.addVocab(VOCAB_STATUS_ROBOT); pose2LinBottle(encvals, r.addList());
+		r.addVocab(VOCAB_STATUS_TARGET); pose2LinBottle(poses[targetIndex], r.addList());
+		r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
+		monitorPort.write();
+		
 
 		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
 		if (targetIndex == (nposes-1)) {
@@ -188,6 +202,12 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);
 				}
 				if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+					// apply bang-bang control for unachievably low velocities
+					if ((q[iax] > -minabsvel) && (q[iax] < minabsvel) && (q[iax]!=0.0)) {
+						q[iax]=sign(diff[ipart][iax])*minabsvel;
+					}
+
+					// send velocities to robot
 					vels[ipart]->velocityMove(iax, lastVels[ipart][iax]=q[iax]);
 				}
 			}
@@ -219,6 +239,10 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 	for (int ipart=0; ipart<nparts; ipart++) { vels[ipart]->stop(); }
 	
 	monDone(reached);
+
+	Bottle &e = monitorPort.prepare(); e.clear();
+	e.addVocab(VOCAB_STATUS_END);
+	monitorPort.writeStrict();
 
 	return reached;
 }

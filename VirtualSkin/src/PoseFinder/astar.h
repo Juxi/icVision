@@ -37,12 +37,12 @@ template <class Graph, class CostType>
     {
 	  Vertex &from(u);
 	  Vertex &to(m_goal);
-      std::vector<double> &from_v(choose_vector(from, d_distance_mode));
-      std::vector<double> &to_v(choose_vector(to, d_distance_mode));
-      
-	  std::vector<double>::iterator it(from_v.begin()), it_end(from_v.end());
-	  std::vector<double>::iterator it2(to_v.begin());
-
+	  //std::vector<double>::iterator it(m_graph[from].q.begin()), it_end(m_graph[from].q.end());
+	  //std::vector<double>::iterator it2(m_graph[to].q.begin());
+	  std::vector<double>::iterator it(m_graph[from].qs.begin()), it_end(m_graph[from].qs.end());
+	  std::vector<double>::iterator it2(m_graph[to].qs.begin());
+	  //std::vector<double>::iterator it(m_graph[from].x.begin()), it_end(m_graph[from].x.end());
+	  //std::vector<double>::iterator it2(m_graph[to].x.begin());
 	  CostType cost(0.0);
 	  for (; it != it_end; ++it, ++it2)
 		cost += (*it - *it2) * (*it - *it2);

@@ -6,6 +6,13 @@
 #ifndef MOVER_H
 #define MOVER_H
 
+#define VOCAB_STATUS_ROBOT VOCAB4('r','b','o','t')
+#define VOCAB_STATUS_TARGET VOCAB3('t','g','t')
+#define VOCAB_STATUS_TIME VOCAB4('t','i','m','e')
+#define VOCAB_STATUS_START VOCAB2('s','t')
+#define VOCAB_STATUS_END VOCAB3('e','n','d')
+
+
 #include <iostream>
 #include <vector>
 #include "vectormath.h"
@@ -30,6 +37,7 @@ public:
 	virtual bool setRefAcceleration(double acc) {cout << "SetRefAcceleration not implemented" << endl; return false;};
 	virtual bool setFwdSteps(int steps) {cout << "SetFwdSteps not implemented" << endl; return false;};
 
+	bool connectMonitor();
 	bool connnectVSkin(string &portRpc, string& statusPort);
 	bool connectFace(string& rawFacePort);
 	void getMask(Bottle &b);
@@ -43,7 +51,7 @@ public:
 	void maskOff();
 	void blink();
 	bool isColliding();
-	
+	void pose2LinBottle(vector<vector<double> > &pose, Bottle &b);	
 
 protected:
 	virtual void close();									//!< Closes the connection to the remote device
@@ -63,6 +71,7 @@ protected:
 	Network network;
 	RpcClient vSkinRpcClient;
 	BufferedPort<Bottle> vSkinStatus;
+	BufferedPort<Bottle> monitorPort;
 	Port facePort;
 	vector<int> nJoints;
 	vector<vector<bool> > mask;
