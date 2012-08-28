@@ -25,8 +25,6 @@
 
 #include "astar.h"
 #include "general.h"
-#include "treemode.h"
-#include "astar.h"
 
 class Roadmap
 {

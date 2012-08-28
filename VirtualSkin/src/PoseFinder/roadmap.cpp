@@ -528,7 +528,8 @@ Roadmap::vertex_t Roadmap::nearestVertex(vector<double> &v, VertexTester &evalua
 			{
 				vector<double> &qs = map[it->first.vertex].qs;
 				//cout << "dist: " << it->second << " qs: "; for (int i = 0; i< qs.size(); i++) { cout << qs[i] << " "; }; cout << endl;
-				found = evaluate.check(unscale_q(v), qs);
+                vector<double> unscaled_q(unscale_q(v));
+				found = evaluate.check(unscaled_q, qs);
 			}
 			break;
 		case WORKSPACE: 

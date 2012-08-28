@@ -36,7 +36,7 @@ public:
 	path_t find_path(vertex_t &source, vertex_t &target, TreeMode mode=CONNECTIONMODE, std::string mapname="");
 
 	Vertex &getVertex(vertex_t index, std::string mapname="");
-	Roadmap &PathPlanner::get_map(std::string mapname="");
+	Roadmap &get_map(std::string mapname="");
 
 	void connect_map(size_t n, TreeMode mode, std::string mapname="");
 	void connect_map2(size_t n, TreeMode mode, std::string mapname="");

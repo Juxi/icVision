@@ -33,7 +33,8 @@ d_posefinder(model, robot), d_dimensionality(dimensionality)
 	d_pose_sizes["CFGSPACE_LEFT_ARM"] = d_scale_map["CFGSPACE_LEFT_ARM"].size();
 
 	d_main_roadmap.setDimensionality(d_dimensionality);
-	d_main_roadmap.setScaleVector(parse_scale_vector());
+    vector<double> parsed_scale_vector(parse_scale_vector());
+	d_main_roadmap.setScaleVector(parsed_scale_vector);
 	//add_bullshit();
 }
 
@@ -173,7 +174,8 @@ void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
 	cout << "INSERTING POSES" << endl;
 
 	map.setDimensionality(d_dimensionality);
-	map.setScaleVector(parse_scale_vector());
+    vector<double> parsed_scale_vector(parse_scale_vector());
+	map.setScaleVector(parsed_scale_vector);
 
 	for (size_t i(0); i < configurations.size(); ++i) {
 		vector<double> &q_configuration(configurations[i]);
