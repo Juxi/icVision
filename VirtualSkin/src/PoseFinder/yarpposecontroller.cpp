@@ -115,7 +115,7 @@ void YarpPoseController::follow_path(Roadmap::path_t &path) {
 		throw StringException("No Path Found");
 	vector<vector<vector<double> > > crazy_path;
 	for (size_t i(0); i < path.path.size(); ++i) {
-		vector<double> pose(d_path_planner->getVertex(i).q);
+		vector<double> pose(d_path_planner->getVertex(path.path[i]).q);
 		//std::cout << pose.size() << std::endl;
 		vector<vector<double> > cut_pose = d_path_planner->cut_pose(pose);
 
@@ -135,26 +135,26 @@ void YarpPoseController::follow_path(Roadmap::path_t &path) {
 void YarpPoseController::follow_interpolated_path(Roadmap::path_t &path) {
 	int nposes = path.path.size();
 	vector<vector<vector<double> > > crazy_path;
-	const int dist_mode = MAXCONFIGURATIONSPACE;
+	const TreeMode dist_mode = MAXCONFIGURATIONSPACE;
 
 	if (nposes == 0 || path.length > 1000000)
 		throw StringException("No Path Found");
 
 	if (nposes < 3) { // we need at least two poses for interpolation
 		for (int ipose(0); ipose<nposes; ipose++)
-			crazy_path.push_back(d_path_planner->cut_pose(d_path_planner->getVertex(ipose).q));
+			crazy_path.push_back(d_path_planner->cut_pose(d_path_planner->getVertex(path.path[ipose]).q));
 	} else {
 
-		int naxes = d_path_planner->getVertex(0).q.size();
+		int naxes = d_path_planner->getVertex(path.path.front()).q.size();
 		vector<magnet::math::Spline> splines(naxes, magnet::math::Spline());
 		double cumDist = 0.0; // cumulative distance
 		vector<double> tmpDist(naxes, 0.0);
 		
 		for (size_t ipose(0); ipose < nposes; ++ipose) {
-			Roadmap::Vertex second = d_path_planner->getVertex(ipose);
+			Roadmap::Vertex second = d_path_planner->getVertex(path.path[ipose]);
 			
 			if (ipose > 0) {
-				Roadmap::Vertex first = d_path_planner->getVertex(ipose-1);
+				Roadmap::Vertex first = d_path_planner->getVertex(path.path[ipose-1]);
 				
 				switch (dist_mode) {
 				case CONFIGURATIONSPACE: 	// take the rmse distance between the current and the previous pose
@@ -291,10 +291,10 @@ void YarpPoseController::run () {
 					vector<double> source_conf = get_current_pose();
 					string mapname = query.get(1).asString().c_str();
 
-					vector<double> target_conf = d_path_planner->nearestQ(mapname, source_conf, CONFIGURATIONSPACE);
+					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
+					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE, mapname);
 
-					Roadmap::path_t path = d_path_planner->find_path(source_conf, target_conf);
-					//path = d_path_planner->move_to_path(source_conf, target_conf);
+					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 					follow_path(path);
 				} else
 					if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
@@ -302,15 +302,21 @@ void YarpPoseController::run () {
 						vector<double> source_conf = get_current_pose();
 						string mapname = query.get(1).asString().c_str();
 						vector<double> target_work = bottle_to_vector(query.get(2));
+						
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
+						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_work, WORKSPACE, mapname);
+						vector<double> target_conf = d_path_planner->getVertex(target_v).q;
 
-						cout << "finding target conf" << endl;
-						vector<double> target_conf = d_path_planner->nearestQ(mapname, target_work, WORKSPACE);
+						if (source_conf.size() != target_conf.size())
+							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
 
-						cout << "source:" << endl;
+						cout << "robot:" << endl;
 						print_vector(source_conf);
-						cout << "target:" << endl;
+						cout << "source:" << endl;
+						print_vector(d_path_planner->getVertex(source_v).q);
+						cout << "target workspace:" << endl;
 						print_vector(target_work);
-						cout << "target:" << endl;
+						cout << "target configuration space:" << endl;
 						print_vector(target_conf);
 						cout << "finding path:" << endl;
 
@@ -318,7 +324,7 @@ void YarpPoseController::run () {
 							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
 						}
 
-						Roadmap::path_t path = d_path_planner->find_path(source_conf, target_conf);
+						Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 						//follow_path(path);
 						follow_interpolated_path(path);
 					} else
@@ -331,8 +337,9 @@ void YarpPoseController::run () {
 					vector<double> source_conf = get_current_pose();
 					string mapname = query.get(1).asString().c_str();
 
-					vector<double> target_conf = d_path_planner->nearestQ(mapname, source_conf, CONFIGURATIONSPACE);
-					Roadmap::path_t path = d_path_planner->find_path(source_conf, target_conf);
+					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
+					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE, mapname);
+					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 
 					Bottle bgoal;
 					Roadmap::Vertex vgoal = d_path_planner->getVertex(path.path.back());
@@ -348,14 +355,15 @@ void YarpPoseController::run () {
 						vector<double> source_conf = get_current_pose();
 						string mapname = query.get(1).asString().c_str();
 						vector<double> target_work = bottle_to_vector(query.get(2));
-
-						cout << "finding target conf" << endl;
-						vector<double> target_conf = d_path_planner->nearestQ(mapname, target_work, WORKSPACE);
+						
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
+						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_work, WORKSPACE, mapname);
+						vector<double> target_conf = d_path_planner->getVertex(target_v).q;
 
 						if (source_conf.size() != target_conf.size())
 							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
 
-						Roadmap::path_t path = d_path_planner->find_path(source_conf, target_conf);
+						Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 
 						Bottle bgoal;
 						Roadmap::Vertex vgoal = d_path_planner->getVertex(path.path.back());
@@ -397,7 +405,7 @@ void YarpPoseController::run () {
 			case VOCAB_CONNECT:
 				if (query.size() == 2 && query.get(1).isInt()) { //con [n]
 					int number = query.get(1).asInt();
-					d_path_planner->connect_maps(number);
+					d_path_planner->connect_map(number, SCALEDCONFIGURATIONSPACE);
 				} else
 					throw StringException("Wrong arguments in command");
 				/*
@@ -414,7 +422,7 @@ void YarpPoseController::run () {
 			case VOCAB4('c', 'o', 'n','2'):
 				if (query.size() == 2 && query.get(1).isInt()) { //con [n]
 					int number = query.get(1).asInt();
-					d_path_planner->connect_maps2(number);
+					d_path_planner->connect_map2(number, SCALEDCONFIGURATIONSPACE);
 				} else
 					throw StringException("Wrong arguments in command");
 				break;

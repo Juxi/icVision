@@ -29,25 +29,23 @@ public:
 	
 	PathPlanner(KinematicModel::Model& model, KinematicModel::Robot& robot, size_t dimensionality = 41);
 	
-	std::vector<double> nearestQ(std::string mapname, std::vector<double> &v, TreeMode mode=CONNECTIONMODE);
-	std::vector<double> nearestQ(Roadmap &map, std::vector<double> &v, TreeMode mode=CONNECTIONMODE);
-				
+	Roadmap::vertex_t nearestMainMapVertex(std::vector<double> &v, TreeMode mode, std::string mapname="");
+	Roadmap::vertex_t nearestVertex(std::vector<double> &v, TreeMode mode, std::string mapname="");
+
 	//Roadmap::Path shortestPath_backup( Map::vertex_descriptor from, Map::vertex_descriptor to ); //DIJKSTRA
-	path_t find_path(std::vector<double> &source_conf, std::vector<double> &target_conf, TreeMode mode=CONNECTIONMODE);
+	path_t find_path(vertex_t &source, vertex_t &target, TreeMode mode=CONNECTIONMODE, std::string mapname="");
 
-	Vertex &getVertex(int index, std::string mapname="");
+	Vertex &getVertex(vertex_t index, std::string mapname="");
+	Roadmap &PathPlanner::get_map(std::string mapname="");
 
-	void connect_map(std::string mapname, size_t n);
-	void connect_maps(size_t n);
-	void connect_map2(std::string mapname, size_t n);
-	void connect_maps2(size_t n);
+	void connect_map(size_t n, TreeMode mode, std::string mapname="");
+	void connect_map2(size_t n, TreeMode mode, std::string mapname="");
 
-	void clear_connections();
+	//void clear_connections();
 	void insert_poses(std::string mapname, poses_map_t &poses);
 
 	void load_map(std::string mapname, std::string filename);
-	void write_graph(std::string filename);
-	void write_graph(std::string filename, std::string mapname);
+	void write_graph(std::string filename, std::string mapname="");
 
 	std::string info();
 
@@ -61,10 +59,6 @@ public:
 	std::vector<std::vector<double> > poses_to_configurations(poses_map_t &poses);
 	std::vector<double> parse_scale_vector();
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
-
-	Roadmap &roadmap(std::string mapname);
-	bool hasMap(std::string mapname);
-	bool check_map(std::string mapname);
 
 	//Roadmap::path_t move_to_path(std::vector<double> source, std::vector<double> target);
 
@@ -93,13 +87,27 @@ public:
 		size_t d_n_evaluations;
 		std::clock_t d_clock;
 		size_t d_n_vskincalls;
+		TreeMode conmode;
 
-		CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity) : d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity), d_n_evaluations(0), d_clock(0), d_n_vskincalls(0) {}
+		CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity, TreeMode mode=CONNECTIONMODE);
 
 		void operator()(edge_t &edge);
 		size_t n_evaluations(){return d_n_evaluations;}
 		size_t n_vskincalls(){return d_n_vskincalls; }
 		double n_seconds(){return static_cast<double>(d_clock) / CLOCKS_PER_SEC;}
+	};
+
+
+	class CollisionVertexTester : public Roadmap::VertexTester {
+	public:
+		Roadmap &d_roadmap;
+		Simulator &d_simulator;
+		double d_granularity;
+		
+		CollisionVertexTester(Roadmap &roadmap, Simulator &simulator, double granularity) :
+		d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity) {};
+
+		virtual bool check(std::vector<double> &q1, std::vector<double> &q2);
 	};
 };
 

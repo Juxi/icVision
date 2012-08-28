@@ -46,10 +46,10 @@ public:
 	};
 
 	struct Edge {
-		double length, length_evaluated;
+		double length_x, length_q, length_qs, length_evaluated;
 		double successRate;
 		bool evaluated;
-		Edge() : length(1.0), length_evaluated(1.0), successRate(1.0), evaluated(false) {}
+		Edge() : length_x(1.0), length_q(1.0), length_qs(1.0), length_evaluated(1.0), successRate(1.0), evaluated(false) {}
 	};
 
 	typedef boost::adjacency_list<	boost::listS, boost::vecS, boost::undirectedS, 
@@ -112,6 +112,11 @@ public:
 	typedef K_neighbor_search::Tree Tree;
 	/*****************************/
 
+	class VertexTester {
+	public:
+		virtual bool check(std::vector<double> &q1, std::vector<double> &q2) = 0;
+	};
+
 	typedef K::Point_d CGAL_Point;
 	typedef Map::vertex_descriptor vertex_t;
 	typedef Map::vertex_iterator vertex_i;
@@ -149,6 +154,7 @@ public:
 	std::pair<std::vector<float>, std::vector<float> > get_workspace_bounding_box();
 
 	Tree &get_tree(TreeMode mode=CONNECTIONMODE);
+	TreeMode getConMode() { return conmode; };
 
 	std::vector<double> getStdPose( vertex_t v ) { return map[v].q; }
 	CGAL_Point			getCgalPose( vertex_t v ) { return CGAL_Point( map[v].q.size(), map[v].q.begin(), map[v].q.end() ); }
@@ -168,7 +174,7 @@ public:
 	void mapDistances(int v, std::vector<double> &d);
 
 	path_t shortestPath(vertex_t &from, vertex_t &to, EdgeTester<edge_t> &edge_tester, TreeMode mode=CONNECTIONMODE); //ASTAR
-	vertex_t nearestVertex(std::vector<double> &v, void* evaluate, TreeMode mode=CONNECTIONMODE, char* type="");
+	vertex_t nearestVertex(std::vector<double> &v, VertexTester &evaluate, TreeMode mode, char* type="");
 
 	//std::vector<double> randomSample();
 	//void random_connect(size_t n);

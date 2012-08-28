@@ -15,11 +15,9 @@ class distance_heuristic : public boost::astar_heuristic<Graph, CostType>
 {
 public:
 	typedef typename boost::graph_traits<Graph>::vertex_descriptor Vertex;
-	distance_heuristic(Graph &g, Vertex goal, TreeMode m)
-		: m_graph(g), m_goal(goal), mode(m) {}
+	distance_heuristic(Graph &g, Vertex goal, TreeMode m) : m_graph(g), m_goal(goal), mode(m) {};
 
-	CostType operator()(Vertex u)
-	{
+	CostType operator()(Vertex u) {
 		Vertex &from(u);
 		Vertex &to(m_goal);
 		std::vector<double>::iterator it, it_end, it2;
@@ -39,10 +37,13 @@ public:
 			it_end = m_graph[from].x.end();
 			it2 = m_graph[to].x.begin();
 			break;
+		default:
+			throw StringException("Invalid distance mode in A*");
 		}
 		CostType cost(0.0);
 		for (; it != it_end; ++it, ++it2)
 			cost += (*it - *it2) * (*it - *it2);
+		//cout << cost << " ";
 		return sqrt(cost);
 	}
 

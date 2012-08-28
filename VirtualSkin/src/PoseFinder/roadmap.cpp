@@ -65,41 +65,41 @@ pair< Roadmap::edge_t, vector<double> > Roadmap::randomMove()
 /*
 list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::aToB( Roadmap::vertex_t from, Roadmap::vertex_t to )
 {
-	list< pair< edge_t, vertex_t > > result;
-	if ( num_vertices( map ) > 0 )
-	{
-		list<Map::vertex_descriptor> vertex_list = shortestPath( from, to );
-		for ( list<Map::vertex_descriptor>::iterator i = vertex_list.begin(); i != vertex_list.end(); )
-		{
-			vertex_t a = *i;
-			vertex_t b = *(++i);
-			pair<edge_t,bool> ab = edge(a,b,map);
-			if (ab.second)
-				result.push_back( pair< edge_t, vertex_t >( ab.first, b ) );
-		}
-	}
-	return result;
+list< pair< edge_t, vertex_t > > result;
+if ( num_vertices( map ) > 0 )
+{
+list<Map::vertex_descriptor> vertex_list = shortestPath( from, to );
+for ( list<Map::vertex_descriptor>::iterator i = vertex_list.begin(); i != vertex_list.end(); )
+{
+vertex_t a = *i;
+vertex_t b = *(++i);
+pair<edge_t,bool> ab = edge(a,b,map);
+if (ab.second)
+result.push_back( pair< edge_t, vertex_t >( ab.first, b ) );
+}
+}
+return result;
 }
 
 
 
 list< pair< Roadmap::edge_t, Roadmap::vertex_t > > Roadmap::randomMoves()
 {
-	list< pair< edge_t, vertex_t > > result;
-	if ( num_vertices( map ) > 0 )
-	{
-		vertex_t rand_vertex = (vertex_t)(rand() % (int)num_vertices(map));
-		result = aToB(currentVertex, rand_vertex);
-	}
-	return result;
+list< pair< edge_t, vertex_t > > result;
+if ( num_vertices( map ) > 0 )
+{
+vertex_t rand_vertex = (vertex_t)(rand() % (int)num_vertices(map));
+result = aToB(currentVertex, rand_vertex);
+}
+return result;
 }
 
 void Roadmap::buildRandomMap( unsigned int numVertices, unsigned int numNeighbors )
 {
-	for ( unsigned int j=0; j<numVertices; j++ )
-	{
-		//insert( randomSample(), numNeighbors );
-	}
+for ( unsigned int j=0; j<numVertices; j++ )
+{
+//insert( randomSample(), numNeighbors );
+}
 }*/
 
 
@@ -127,7 +127,7 @@ Roadmap::vertex_t Roadmap::insert( vector<double> _x, vector<double> _q, string 
 	vector<double> q_scaled = scale_q(_q);
 	Pose p_scaled( q_scaled.size(), q_scaled.begin(), q_scaled.end(), vertex );
 	tree_qs.insert(p_scaled);
-	
+
 	Pose p_workspace( _x.size(), _x.begin(), _x.end(), vertex );
 	tree_x.insert(p_workspace);
 
@@ -274,21 +274,22 @@ void Roadmap::graphConnect( Pose p, unsigned int n)
 		{
 			if (!boost::edge( p.vertex, it->first.vertex, map ).second) {
 				pair<edge_t, bool> edge = boost::add_edge( p.vertex, it->first.vertex, map );
-				map[edge.first].length = sqrt(it->second);
+				map[edge.first].length_x = calculate_distance(map[p.vertex].x, map[it->first.vertex].x);
+				map[edge.first].length_q = calculate_distance(map[p.vertex].q, map[it->first.vertex].q);
+				map[edge.first].length_qs = calculate_distance(map[p.vertex].qs, map[it->first.vertex].qs);
+				//map[edge.first].length = sqrt(it->second);
+
+
 				//cout << sqrt(it->second) << endl;
 				++counter;
 			}
-			if (!boost::edge(it->first.vertex, p.vertex, map ).second) {
-				pair<edge_t, bool> edge = boost::add_edge( it->first.vertex, p.vertex, map );
-				map[edge.first].length = sqrt(it->second);
-				++counter;
-			}
-
-			//			cout << sqrt(it->second) << endl;
-			//cout << "connected " << p.vertex << " - " << it->first.vertex << " " << "(" << map[edge.first].length << ")" << endl;
-			//			emit appendedEdge( edge.first,
-			//							  map[p.vertex].qtGraphNode ,
-			//							  map[it->first.vertsqrt(it->second)ex].qtGraphNode );
+			/*if (!boost::edge(it->first.vertex, p.vertex, map ).second) {
+			pair<edge_t, bool> edge = boost::add_edge( it->first.vertex, p.vertex, map );
+			map[p.vertex].length_x = calculate_distance(map[p.vertex].x, map[it->first.vertex].x);
+			map[p.vertex].length_q = calculate_distance(map[p.vertex].q, map[it->first.vertex].q);
+			map[p.vertex].length_qs = calculate_distance(map[p.vertex].qs, map[it->first.vertex].qs);
+			++counter;
+			}*/			
 		}
 	}
 }
@@ -296,9 +297,6 @@ void Roadmap::graphConnect( Pose p, unsigned int n)
 
 void Roadmap::graphConnect( unsigned int n, TreeMode mode)
 {
-	//tree_q.build();
-	//tree_x.build();
-	//tree_qs.build();
 	conmode = mode;
 	pair<vertex_i, vertex_i> vp;
 	for (vp = vertices(map); vp.first != vp.second; ++vp.first)
@@ -335,6 +333,8 @@ void Roadmap::mapDistances(int p, std::vector<double>& d) {
 
 void Roadmap::graphConnect2( int p, unsigned int n)
 {	
+	throw StringException("Graphconnect2 not implemented");
+	/*
 	double nearby_penalty = 100.0;
 
 	pair<vertex_i, vertex_i> vp;
@@ -349,70 +349,77 @@ void Roadmap::graphConnect2( int p, unsigned int n)
 
 	// cycle through map to find neighbors
 	for (int k=0; k<n; k++) {
-		neighbor_i = min_element(mdist.begin(), mdist.end()) - mdist.begin(); // index of k-nearest neighbor
+	neighbor_i = min_element(mdist.begin(), mdist.end()) - mdist.begin(); // index of k-nearest neighbor
 
-		// compute distances between k-nearest neighbour and all other points on the map
-		vector<double> pdist(nmap, 0.0);
-		mapDistances(neighbor_i, pdist);
+	// compute distances between k-nearest neighbour and all other points on the map
+	vector<double> pdist(nmap, 0.0);
+	mapDistances(neighbor_i, pdist);
 
-		// add inverse pdist to mdist
-		for (int m = 0; m<nmap; m++) {
-			//mdist[m] = mdist[m] + nearby_penalty/pdist[m];
-			//double penalty = nearby_penalty*exp(-sqrt(pdist[m]));
-			//double penalty = 100*exp(-pdist[m]/10);
-			double penalty = 200*exp(-pdist[m]/20);
-			mdist[m] = mdist[m] + penalty;
-		}
+	// add inverse pdist to mdist
+	for (int m = 0; m<nmap; m++) {
+	//mdist[m] = mdist[m] + nearby_penalty/pdist[m];
+	//double penalty = nearby_penalty*exp(-sqrt(pdist[m]));
+	//double penalty = 100*exp(-pdist[m]/10);
+	double penalty = 200*exp(-pdist[m]/20);
+	mdist[m] = mdist[m] + penalty;
+	}
 
-		// set neighbor distance to FLT_MAX, such that another neighbor is selected next
-		//cout << mdist[neighbor_i] << " ";
-		mdist[neighbor_i] = FLT_MAX;
+	// set neighbor distance to FLT_MAX, such that another neighbor is selected next
+	//cout << mdist[neighbor_i] << " ";
+	mdist[neighbor_i] = FLT_MAX;
 
-		// add neighbor
-		neighbors.push_back(neighbor_i);
+	// add neighbor
+	neighbors.push_back(neighbor_i);
 	}
 
 	for(int k=0; k<n; k++) {
-		if (!boost::edge( p, neighbors[k], map ).second) {
-			pair<edge_t, bool> edge = boost::add_edge( p, neighbors[k], map );
-			map[edge.first].length = sqrt(odist[k]);
-		}
+	if (!boost::edge( p, neighbors[k], map ).second) {
+	pair<edge_t, bool> edge = boost::add_edge( p, neighbors[k], map );
+	map[edge.first].length = sqrt(odist[k]);
 	}
+	}
+	*/
 }
 
 
 void Roadmap::graphConnect2( unsigned int n, TreeMode mode)
 {
+	/*
 	pair<vertex_i, vertex_i> vp;
 	vp = vertices(map);
 	int nmap = *(vp.second) - *(vp.first);
 	conmode = mode;
 
 	for (int m = 0; m<nmap; m++) {		
-		graphConnect2( m, n);
-		//cout << m << " / " << nmap << " processed" << endl;
+	graphConnect2( m, n);
+	//cout << m << " / " << nmap << " processed" << endl;
 	}
+	*/
 }
 
 
 /*void Roadmap::random_connect(size_t n) {
-	static mt19937 gen(23);
-	cout << "==random" << endl;
-	for (size_t i(0); i < n; ++i) {
-		vertex_t v1(random_vertex(map, gen)), v2(random_vertex(map, gen));
-		if (!boost::edge( v1, v2, map ).second) {
-			pair<edge_t, bool> edge = boost::add_edge( v1, v2, map );
-			double distance = calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q));
-			map[edge.first].length = distance;
-			cout << calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q)) << endl;
-		}
-	}
+static mt19937 gen(23);
+cout << "==random" << endl;
+for (size_t i(0); i < n; ++i) {
+vertex_t v1(random_vertex(map, gen)), v2(random_vertex(map, gen));
+if (!boost::edge( v1, v2, map ).second) {
+pair<edge_t, bool> edge = boost::add_edge( v1, v2, map );
+double distance = calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q));
+map[edge.first].length = distance;
+cout << calculate_distance(scale_q(map[v1].q), scale_q(map[v2].q)) << endl;
+}
+}
 }*/
 
 
 
 Roadmap::path_t Roadmap::shortestPath(vertex_t &from, vertex_t &to, EdgeTester<edge_t> &edge_tester, TreeMode mode)
 {
+	if (mode == CONNECTIONMODE) {
+		mode = conmode;
+	}
+
 	cout << endl << "Running A*... from node #" << from << " to node #" << to << endl; 
 	vector<vertex_t> parents(num_vertices(map));
 	vector<double> distances(num_vertices(map));
@@ -449,7 +456,7 @@ Roadmap::path_t Roadmap::shortestPath(vertex_t &from, vertex_t &to, EdgeTester<e
 		cout << "Starting Search: " << endl;
 		cout << "num vertices: " << num_vertices(map) << endl;
 		cout << "num edges: " << num_edges(map) << endl;
-		
+
 		astar_search
 			(map, from,
 			distance_heuristic<Map, double> (map, to, mode),
@@ -459,51 +466,89 @@ Roadmap::path_t Roadmap::shortestPath(vertex_t &from, vertex_t &to, EdgeTester<e
 			.visitor(astar_goal_visitor<vertex_t, edge_t>(to, edge_tester)));
 
 	} catch(found_goal fg) { // found a path to the goal 
-		cout << "Found Goal" << endl;
+		cout << "\nFound Goal" << endl;
 
 		for(vertex_t v = to;; v = out[v]) {
 			path.push_back(v);
 			if(out[v] == v)
 				break;
 		}
-		reverse(path.begin(),path.end());
+		reverse(path.begin(), path.end());
+
+		printf("workspace start: ");
+		for (vector<double>::iterator i = map[from].x.begin(); i != map[from].x.end(); ++i ) {
+			printf("%f ", *i);
+		}
+		printf("\n");
+
+		printf("workspace goal: ");
+		for (vector<double>::iterator i = map[to].x.begin(); i != map[to].x.end(); ++i ) {
+			printf("%f ", *i);
+		}
+		printf("\n");
 
 		length = d[to];
-		printf("goal: %f", map[to].x[0]);
-		printf("length: %f", length);
+		printf("length: %f\n", length);
 
 		printf("path: ");
 		for (Path::iterator i = path.begin(); i != path.end(); ++i ) {
 			printf("%lu ",*i);
 		}
-		printf("/\n");
+		printf("\n");
 	}
 
 	return path_t(path, length);
 }
 
 
-Roadmap::vertex_t Roadmap::nearestVertex(vector<double> &v, void* evaluate, TreeMode mode, char* type)
+Roadmap::vertex_t Roadmap::nearestVertex(vector<double> &v, VertexTester &evaluate, TreeMode mode, char* type)
 {
 	Tree &the_tree = get_tree(mode);
-	
+	cout << "starting knn search in mode: " << mode << endl;
+	cout << "search neighbor for: "; for (int i = 0; i< v.size(); i++) { cout << v[i] << " "; }; cout << endl;
+
 	if ( ((mode == CONFIGURATIONSPACE) || (mode == SCALEDCONFIGURATIONSPACE)) && v.size() != dim ) { printf("2: wrong size state vector, is %lu, not %lu\n", v.size(), dim); throw StringException("wrong size state vector"); }
 	if ( the_tree.size() == 0 ) { throw StringException("nothing in tree"); }
+	bool found;
 
 	size_t const check_n(40);
 	K_neighbor_search search(the_tree, Pose( v.size(), v.begin(), v.end() ), check_n);
 	K_neighbor_search::iterator it = search.begin();
 	for(; it != search.end(); ++it) {
-		//if (evaluate)
+		found = false;
+		switch (mode) {
+		case CONFIGURATIONSPACE: 
+			{
+				vector<double> &q = map[it->first.vertex].q;
+				//cout << "dist: " << it->second << " q: "; for (int i = 0; i< q.size(); i++) { cout << q[i] << " "; }; cout << endl;
+				found = evaluate.check(v, q);
+			}
 			break;
-		//TODO: realtime test for collisions
-	    //std::vector<double> q_real = d_posefinder.simulator().real_to_normal_motors(q);
-		//d_posefinder.simulator().set_motors(q_real);
-		//if (d_simulator.computePose() == 0)
+		case SCALEDCONFIGURATIONSPACE: 
+			{
+				vector<double> &qs = map[it->first.vertex].qs;
+				//cout << "dist: " << it->second << " qs: "; for (int i = 0; i< qs.size(); i++) { cout << qs[i] << " "; }; cout << endl;
+				found = evaluate.check(unscale_q(v), qs);
+			}
+			break;
+		case WORKSPACE: 
+			{
+				vector<double> &x = map[it->first.vertex].x;
+				//cout << "dist: " << it->second << " x: "; for (int i = 0; i< x.size(); i++) { cout << x[i] << " "; }; cout << endl;
+				found = evaluate.check(map[it->first.vertex].q, map[it->first.vertex].q); // here we don't have the corresponding configurationspace vector, so we just check the neighbor
+			}
+			break;
+		default:
+			throw StringException("Invalid distance mode in nearestVertex");
+			break;
+		}
+		if (found) { break; };
 	}
 	if (it == search.end())
-	  throw StringException("couldnt find nearest vertex");
-	
+		throw StringException("couldnt find nearest vertex");
+
+	cout << "neighbor found, knn done." << endl << endl;
+
 	map[it->first.vertex].type = type;
 	return it->first.vertex;
 }

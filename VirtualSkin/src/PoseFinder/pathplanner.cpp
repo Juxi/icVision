@@ -49,7 +49,7 @@ vector<double> PathPlanner::parse_scale_vector() {
 
 
 void PathPlanner::load_map(std::string mapname, std::string filename) {
-	if (hasMap(mapname))
+	if (d_roadmaps.count(mapname) > 0)
 		throw StringException("map already exist");
 
 	poses_map_t poses = read_poses(filename);
@@ -62,64 +62,45 @@ void PathPlanner::load_map(std::string mapname, std::string filename) {
 }
 
 
-void PathPlanner::connect_map(std::string mapname, size_t n) {
-	check_map(mapname);
-	d_roadmaps[mapname]->graphConnect(n, SCALEDCONFIGURATIONSPACE);
-	//d_roadmaps[mapname]->graphConnect(n, WORKSPACE);
+void PathPlanner::connect_map(size_t n, TreeMode mode, string mapname) {
+	Roadmap &map = get_map(mapname);
+	if (map.size() == 0)
+		throw StringException("Cannot connect empty map");
+	if (mapname == "") { // connect main roadmap and all other roadmaps
+		roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+		for (; it != it_end; ++it)
+			connect_map(n, mode, it->first);
+	}
+	map.removeAllEdges();
+	map.graphConnect(n, mode);
 }
 
 
-void PathPlanner::connect_maps(size_t n) {
-	clear_connections();
-
-	if (d_main_roadmap.size() == 0)
-		throw StringException("No maps loaded yet");
-	
-	//roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
-	//for (; it != it_end; ++it)
-	//connect_map(it->first, n);
-
-	d_main_roadmap.graphConnect(n, SCALEDCONFIGURATIONSPACE);
-	//d_main_roadmap.graphConnect(n, WORKSPACE);
-	//d_main_roadmap./*om_connect(d_main_roadmap.size() / 10);
-	//d_main_roadmap.connect_delaunay();
+void PathPlanner::connect_map2(size_t n, TreeMode mode, string mapname) {
+	Roadmap &map = get_map(mapname);
+	if (map.size() == 0)
+		throw StringException("Cannot connect empty map");
+	if (mapname == "") { // connect main roadmap and all other roadmaps
+		roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
+		for (; it != it_end; ++it)
+			connect_map2(n, mode, it->first);
+	}
+	map.removeAllEdges();
+	map.graphConnect2(n, mode);
 }
 
-
-void PathPlanner::connect_map2(std::string mapname, size_t n) {
-	check_map(mapname);
-	d_roadmaps[mapname]->graphConnect2(n, SCALEDCONFIGURATIONSPACE);
-}
-
-
-void PathPlanner::connect_maps2(size_t n) {
-	clear_connections();
-
-	if (d_main_roadmap.size() == 0)
-		throw StringException("No maps loaded yet");
-	roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
-
-	d_main_roadmap.graphConnect2(n, SCALEDCONFIGURATIONSPACE);	  
-}
-
-
-void PathPlanner::clear_connections() {
+/*void PathPlanner::clear_connections() {
 	roadmap_iterator it(d_roadmaps.begin()), it_end(d_roadmaps.end());
 
 	for (; it != it_end; ++it)
 		it->second->removeAllEdges();
 	d_main_roadmap.removeAllEdges();
-}
-
-
-void PathPlanner::write_graph(std::string filename) {
-	d_main_roadmap.write_graph(filename);
-}
+}*/
 
 
 void PathPlanner::write_graph(std::string filename, std::string mapname) {
-	check_map(mapname);
-	d_roadmaps[mapname]->write_graph(filename);
+	Roadmap &map = get_map(mapname);
+	map.write_graph(filename);
 }
 
 
@@ -136,37 +117,20 @@ std::string PathPlanner::info() {
 }
 
 
-Roadmap & PathPlanner::roadmap(std::string mapname) {	  
-	if (!hasMap(mapname))
-		throw StringException("map doesnt exist");
-	return *d_roadmaps[mapname];
+Roadmap::Vertex &PathPlanner::getVertex(vertex_t index, std::string mapname) {
+	Roadmap &map = get_map(mapname);
+	if ( index <0 || index >= map.size())
+		throw StringException("Vertex out of range");
+	return map.getMap()[index];
 }
 
 
-bool PathPlanner::hasMap(std::string mapname) {
-	return d_roadmaps.count(mapname) > 0; 
-}
-
-
-Roadmap::Vertex &PathPlanner::getVertex(int index, std::string mapname) {
-	if (mapname == "") {
-		if ( index >=0 && index < d_main_roadmap.size())
-			return d_main_roadmap.getMap()[index];
-		else
-			throw StringException("Vertex out of range");
-	} else if (!hasMap(mapname)) {
+Roadmap &PathPlanner::get_map(std::string mapname) {
+	if (mapname == "")
+		return d_main_roadmap;
+	else if (d_roadmaps.count(mapname) <= 0)
 		throw StringException("Map does not exist");
-	} else {
-		if ( index >=0 && index < d_roadmaps[mapname]->size())
-			return d_roadmaps[mapname]->getMap()[index];
-		else
-			throw StringException("Vertex out of range");
-	}
-}
-
-bool PathPlanner::check_map(std::string mapname) {
-	if (!hasMap(mapname)) throw StringException("Map does not exist"); 
-	return true; 
+	return *d_roadmaps[mapname];
 }
 
 
@@ -199,37 +163,37 @@ vector<vector<double> > PathPlanner::poses_to_configurations(poses_map_t &poses)
 
 
 void PathPlanner::insert_poses(std::string mapname, poses_map_t &poses) {
-	check_map(mapname);
+	Roadmap &map = get_map(mapname);
+	if (mapname == "")
+		throw StringException("Cannot directly insert poses in main roadmap");
 
 	vector<vector<double> > configurations = poses_to_configurations(poses);
 	//cout << configurations.size() << endl;
 	int dimensionality(configurations[0].size());
 	cout << "INSERTING POSES" << endl;
 
-	d_roadmaps[mapname]->setDimensionality(d_dimensionality);
-	d_roadmaps[mapname]->setScaleVector(parse_scale_vector());
+	map.setDimensionality(d_dimensionality);
+	map.setScaleVector(parse_scale_vector());
 
 	for (size_t i(0); i < configurations.size(); ++i) {
 		vector<double> &q_configuration(configurations[i]);
 		vector<double> &x_configuration(poses["WORKSPACE"][i]);
-		d_roadmaps[mapname]->insert(x_configuration, q_configuration, mapname);
+		map.insert(x_configuration, q_configuration, mapname);
 		d_main_roadmap.insert(x_configuration, q_configuration, mapname);
 	}
 }
 
 
-Roadmap::path_t PathPlanner::find_path(vector<double> &source, vector<double> &target, TreeMode mode) {
+Roadmap::path_t PathPlanner::find_path(vertex_t &source, vertex_t &target, TreeMode mode, string mapname) {
 	double granularity(2.0);
-	CollisionEdgeTester collision_edge_tester(d_main_roadmap, d_posefinder.simulator(), granularity);
-	Roadmap::vertex_t from_v = d_main_roadmap.nearestVertex(source, 0, mode);
-	Roadmap::vertex_t to_v = d_main_roadmap.nearestVertex(target, 0, mode);
+	Roadmap &map = get_map(mapname);
+	CollisionEdgeTester collision_edge_tester(map, d_posefinder.simulator(), granularity, mode);
 
-	Roadmap::path_t the_path = d_main_roadmap.shortestPath(from_v, to_v, collision_edge_tester, mode);
+	Roadmap::path_t the_path = map.shortestPath(source, target, collision_edge_tester, mode);
 
-	cout << "dimensions: " << source.size() << " x " << target.size() << endl;
-	cout << "vertices: " << the_path.path.size() << endl;
-	cout << "N evaluated: " << collision_edge_tester.n_evaluations() << endl;
-	cout << "N collision checks per edge: " << (double) collision_edge_tester.n_vskincalls() / (double) collision_edge_tester.n_evaluations() << endl;
+	cout << "vertices in path: " << the_path.path.size() << endl;
+	cout << "evaluated edges: " << collision_edge_tester.n_evaluations() << endl;
+	cout << "collision checks per edge: " << (double) collision_edge_tester.n_vskincalls() / (double) collision_edge_tester.n_evaluations() << endl;
 	cout << "avg time: " << collision_edge_tester.n_seconds() / collision_edge_tester.n_evaluations() << endl;
 	cout << "total time: " << collision_edge_tester.n_seconds() << endl;
 	return the_path;
@@ -258,12 +222,12 @@ vector<vector<double> > PathPlanner::cut_pose(std::vector<double> &pose) {
 }
 
 
-string PathPlanner::range_string(string map_name) {
-  check_map(map_name);
+string PathPlanner::range_string(string mapname) {
+  Roadmap &map = get_map(mapname);
   ostringstream oss("range:");
   try {
-	oss << "range of map [" << map_name << "]" << endl;
-	pair<vector<float>, vector<float> > bbox = roadmap(map_name).get_workspace_bounding_box();
+	oss << "range of map [" << mapname << "]" << endl;
+	pair<vector<float>, vector<float> > bbox = map.get_workspace_bounding_box();
 	
 	oss << "[";
 	for (size_t i(0); i < bbox.first.size(); ++i)
@@ -290,18 +254,24 @@ string PathPlanner::range_strings() {
 }
 
 
-vector<double> PathPlanner::nearestQ(Roadmap &map, vector<double> &v, TreeMode mode) {
-	return map.getMap()[map.nearestVertex(v, 0, mode)].q;
+Roadmap::vertex_t PathPlanner::nearestMainMapVertex(vector<double> &v, TreeMode mode, string mapname) {
+	double granularity = 2.0;
+	Roadmap &map = get_map(mapname);
+	CollisionVertexTester collision_vertex_tester(map, d_posefinder.simulator(), granularity);
+	Roadmap::vertex_t map_vertex = map.nearestVertex(v, collision_vertex_tester, mode);
+	if (mapname == "")
+		return map_vertex;
+	else // return vertex in main roadmap
+		return d_main_roadmap.nearestVertex(getVertex(map_vertex, mapname).x, collision_vertex_tester, WORKSPACE);
 }
 
 
-vector<double> PathPlanner::nearestQ(string mapname, vector<double> &v, TreeMode mode) {
-	check_map(mapname);
-	return nearestQ(*d_roadmaps[mapname], v, mode);
+Roadmap::vertex_t PathPlanner::nearestVertex(vector<double> &v, TreeMode mode, string mapname) {
+	double granularity = 2.0;
+	Roadmap &map = get_map(mapname);
+	CollisionVertexTester collision_vertex_tester(map, d_posefinder.simulator(), granularity);
+	return map.nearestVertex(v, collision_vertex_tester, mode);
 }
-
-
-
 
 /*
 std::pair<Path, double> Roadmap::shortestPath_backup( vertex_t from, vertex_t to )
@@ -361,13 +331,24 @@ std::pair<Path, double> Roadmap::shortestPath_backup( vertex_t from, vertex_t to
 }
 */
 
+
+PathPlanner::CollisionEdgeTester::CollisionEdgeTester(Roadmap &roadmap, Simulator &simulator, double granularity, TreeMode mode) :
+d_roadmap(roadmap), d_simulator(simulator), d_granularity(granularity), d_n_evaluations(0), d_clock(0), d_n_vskincalls(0)
+{
+	if (mode == CONNECTIONMODE) {
+		conmode = d_roadmap.getConMode();
+	}
+}
+
+
 void PathPlanner::CollisionEdgeTester::operator()(edge_t &edge) {
-	if (get(&Roadmap::Edge::evaluated, d_roadmap.getMap(), edge))
+	Roadmap::Map &map = d_roadmap.getMap();
+	if (get(&Roadmap::Edge::evaluated, map, edge))
 		return;
 
 	std::clock_t start_clock(std::clock());
-	std::vector<double> &q_start = d_roadmap.getMap()[source(edge, d_roadmap.getMap())].q;
-	std::vector<double> &q_end = d_roadmap.getMap()[target(edge, d_roadmap.getMap())].q;
+	std::vector<double> &q_start = map[source(edge, map)].q;
+	std::vector<double> &q_end = map[target(edge, map)].q;
 
 	int n_collisions = 0;
 
@@ -388,16 +369,52 @@ void PathPlanner::CollisionEdgeTester::operator()(edge_t &edge) {
 		++d_n_vskincalls;
 	}
 
-	double length = get(&Roadmap::Edge::length, d_roadmap.getMap(), edge);
+	double length = 0.0;
+	switch(conmode) {
+	case WORKSPACE:
+		length = get(&Roadmap::Edge::length_x, map, edge);
+		break;
+	case CONFIGURATIONSPACE:
+		length = get(&Roadmap::Edge::length_q, map, edge);
+		break;
+	case SCALEDCONFIGURATIONSPACE:
+		length = get(&Roadmap::Edge::length_qs, map, edge);
+		break;
+	default:
+		throw StringException("Invalide connection mode");
+	}
+	
 	if (!n_collisions)
-		put(&Roadmap::Edge::length_evaluated, d_roadmap.getMap(), edge, length);
+		put(&Roadmap::Edge::length_evaluated, map, edge, length);
 	else
-		put(&Roadmap::Edge::length_evaluated, d_roadmap.getMap(), edge, FLT_MAX);
-	put(&Roadmap::Edge::evaluated, d_roadmap.getMap(), edge, true);
+		put(&Roadmap::Edge::length_evaluated, map, edge, FLT_MAX);
+	put(&Roadmap::Edge::evaluated, map, edge, true);
 
 	++d_n_evaluations;
 	std::clock_t end_clock(std::clock());
 	d_clock += end_clock - start_clock;
+}
+
+
+bool PathPlanner::CollisionVertexTester::check(std::vector<double> &q1, std::vector<double> &q2) {
+	int n_collisions = 0;
+
+	// adaptive resolution
+	size_t resolution = std::floor(std::max(1.0, calculate_distance(q1, q2) / d_granularity));
+	for (size_t i(0); i < resolution+1; ++i) {
+		if (n_collisions > 0)
+			break;
+		double portion(static_cast<double>(i) / resolution);
+		std::vector<double> q(q1.size());
+		for (size_t n(0); n < q.size(); ++n)
+			q[n] = q1[n] * portion + q2[n] * (1. - portion);
+		std::vector<double> q_real = d_simulator.real_to_normal_motors(q);
+		d_simulator.set_motors(q_real);
+		n_collisions = std::max(d_simulator.computePose(), n_collisions);
+		//cout << "testing collision percentage: " << portion*100 << "%" << endl;
+	}
+	
+	return n_collisions==0;
 }
 
 /*
