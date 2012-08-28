@@ -10,6 +10,30 @@
 #include "simulator.h"
 
 
+enum TreeMode {
+	WORKSPACE = 0,
+	CONFIGURATIONSPACE = 1,
+	SCALEDCONFIGURATIONSPACE = 2,
+	CONNECTIONMODE = 3,
+	MAXCONFIGURATIONSPACE = 4
+};
+
+
+template <typename T>
+inline std::vector<T> string_to_vector(std::string str) {
+	std::vector<T> vec;
+	std::istringstream iss(str.c_str());
+	while (true) {
+		T val;
+		iss >> val;
+		if (!iss)
+			break;
+		vec.push_back(val);
+	}
+	return vec;
+}
+
+
 template <typename T>
 struct CompareClass {
   typedef double (T::*value_func_t)()const;
