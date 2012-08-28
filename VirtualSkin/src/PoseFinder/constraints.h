@@ -8,9 +8,13 @@
 #include <numeric>
 #include <iterator>
 #include <math.h>
+//#include <yarp/dev/all.h>                                                                                            
+#include <yarp/os/all.h>                                                                                             
 
 #include "util.h"
 #include "model.h"
+#include "simulator.h"
+#include "general.h"
 
 class Constraint {
  public:
@@ -60,6 +64,9 @@ public:
 		return a_vector;
 	}
 
+    virtual void post_hook(Simulator &simulator) {
+    }
+
 	std::string name() {return d_name;}
 };
 
@@ -75,6 +82,9 @@ public:
 	  return Constraint::pos_error(d_home_pose, motor_values, d_home_pose_mask) / d_home_pose.size();
 	}
 
+    virtual void post_hook(Simulator &simulator) {
+      d_home_pose = simulator.real_to_normal_motors(d_home_pose);
+    }
 };
 
 class CollisionConstraint : public Constraint {
@@ -323,6 +333,12 @@ public:
 	}
 
 	void add_points(std::vector<std::vector<double> > xs, std::vector<std::vector<double> > qs) {
+      std::cout << "=> " << xs.size();
+      std::cout << " " <<
+        qs.size() << " ";
+      std::cout << d_points.size() << " ";
+
+      std::cout << d_configurations.size() << std::endl;
 	  std::copy(xs.begin(), xs.end(), back_inserter(d_points));
 	  std::copy(qs.begin(), qs.end(), back_inserter(d_configurations));
 	}
@@ -365,5 +381,10 @@ public:
 
 };
 
+class ConstraintFactory {
+ public:
+  ConstraintFactory(){}
+  std::pair<Constraint*, double> constraint_from_bottle(yarp::os::Bottle &bottle, yarp::os::Property &main);
+};
 
 #endif

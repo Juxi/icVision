@@ -49,7 +49,9 @@ SET ( hdr_finder_lib	constraints.h
 		sprintf.h
 		sliderwindow.h
 		valueslider.h
-		xnes.h)
+		xnes.h
+        yarp_misc.h
+        )
 
 IF (MSVC)
 	ADD_DEFINITIONS("/Gm /Zi")

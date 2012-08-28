@@ -65,7 +65,8 @@ public:
 	yarp::os::Bottle poses_to_bottle(std::vector<std::vector<double> > &path);
 
 	yarp::os::Bottle vector_to_bottle(std::vector<double> vec);
-	std::vector<double> bottle_to_vector(yarp::os::Value &val);
+    
+    std::vector<double> bottle_to_vector(yarp::os::Value &val);
 
 	std::vector<double> get_current_pose();
 

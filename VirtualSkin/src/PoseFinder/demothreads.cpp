@@ -4,17 +4,21 @@
 #include <algorithm>
 #include <string>
 #include <cctype>
+#include <yarp/os/all.h>                                                                                             
+#include "yarp_misc.h"
 
+using namespace yarp::os;
 using namespace std;
 
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), 
 	d_pose_finder(model, robot),
-	d_population_size(100), d_start_std(.02)
+	d_population_size(100), d_start_std(.2)
 {
   init_standard_poses();
   
-  nullspace_function();
+  //nullspace_function();
+  read_constraints("test.config");
  //move_box_function();
 
   //hold_something_function();
@@ -29,7 +33,7 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 }
 
 void MapThread::init_standard_poses() {
-  std::cout << "init poses" << std::endl;
+  cout << "init poses" << endl;
   double simulator_home_pose_arr[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, -26., 20., 0, 50, 0, 0, 0, 10, 30, 0, 0, 0, 0, 0, 0, 0, -26, 20, 0, 50, 0, 0, 0, 10, 30, 0, 0, 0, 0, 0, 0, 0};
   d_simulator_home_pose = vector<double>(simulator_home_pose_arr, simulator_home_pose_arr + 41);
 
@@ -47,7 +51,7 @@ void MapThread::load_points(string filename) {
   for (size_t i(0); i < d_pose_finder.simulator().total_parts(); ++i) {
     string name("CFGSPACE_");
     name += d_pose_finder.simulator().part_name(i);
-    transform(name.begin(), name.end(), name.begin(),  (int (*)(int))std::toupper);
+    transform(name.begin(), name.end(), name.begin(),  (int (*)(int))toupper);
 
     vector<vector<double> > &part_configuration(poses_map[name]);
     for (size_t n(0); n < part_configuration.size(); ++n)
@@ -58,7 +62,7 @@ void MapThread::load_points(string filename) {
   for (size_t i(0); i < d_configuration_points[0].size(); ++i)
     cout << d_configuration_points[0][i] << " ";
   cout << endl;
-  d_configuration_points = convert_to_normal(d_configuration_points);
+  d_configuration_points = convert_all_to_normal(d_configuration_points);
   d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
   
   cout << "conf point, should be normalized:" << endl;
@@ -133,7 +137,7 @@ void MapThread::run()
       //double start_std(.70);
       //size_t population_size(250);
 
-	  std::vector<double> start_pose;
+	  vector<double> start_pose;
 	  if (!d_configuration_points.size())
 		start_pose = d_pose_finder.get_normal_homepos();
 	  else
@@ -153,8 +157,6 @@ void MapThread::nullspace_function() {
   //d_pose_finder.pose_fitness_function().debug() = true;
   d_points = &(d_map_build_constraint->points());
 
-  std::cout << "blaat" << std::endl;
-
   
   //d_pose_finder.set_start_search_pos(d_simulator_wide_pose);
   d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 3);
@@ -167,8 +169,8 @@ void MapThread::nullspace_function() {
   //d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.3076, 0.0542, 0.06900)), 3.);
  
 
- d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2476, -0.1, height)), 1.);
- d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2476, 0.1, height)), 1.);
+  d_pose_finder.add_constraint(new PositionConstraint("left_hand", Constraint::vector3(-0.2476, -0.1, height)), 1.);
+  d_pose_finder.add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.2476, 0.1, height)), 1.);
 
   //pointing straight
   d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 1, Constraint::vector3(0., -1., 0.)));
@@ -177,10 +179,51 @@ void MapThread::nullspace_function() {
   //keeping straight
   d_pose_finder.add_constraint(new OrientationConstraint("right_hand", 0, Constraint::vector3(0., 0., 1.)));
   d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 0, Constraint::vector3(0., 0., 1.)));
-
+  
   d_pose_finder.add_constraint(new CollisionConstraint(), 1.);
-
+  
   d_pose_finder.add_constraint(d_map_build_constraint);
+}
+
+void MapThread::read_constraints(string filename) {
+  cout << "reading constraints" << endl;
+  ConstraintFactory constraint_factory;
+
+  Property file_config;  
+  file_config.fromConfigFile(filename.c_str());
+  cout << file_config.isNull() << endl;
+  
+  vector<string> constraints;
+
+  Bottle &settings = file_config.findGroup("settings");
+  cout << settings.isNull() << endl;
+  Bottle &constraints_b = settings.findGroup("constraints");
+  cout << constraints_b.isNull() << endl;
+
+  //read the constraint list
+  for (size_t i(1); i < constraints_b.size(); ++i)
+    constraints.push_back(constraints_b.get(i).asString().c_str());
+
+  //read the configurations for the constraints in constraint list
+  for (size_t i(0); i < constraints.size(); ++i) {
+    cout << "constraint name: " << constraints[i] << endl;
+    pair<Constraint*, double> constraint_weight = constraint_factory.constraint_from_bottle(file_config.findGroup(constraints[i].c_str()), file_config);
+    constraint_weight.first->post_hook(d_pose_finder.simulator());
+    d_pose_finder.add_constraint(constraint_weight.first, constraint_weight.second);
+  }
+
+  //add map constraint
+  string map_marker = find_and_check<string>(settings, "map_marker");
+  size_t n_neighbours = find_and_check<int>(settings, "n_neighbours");
+  double distance = find_and_check<double>(settings, "distance");
+  double push_factor = find_and_check<double>(settings, "push_factor");
+
+  
+  d_map_build_constraint = new MapBuildConstraint(map_marker, n_neighbours, distance, push_factor);
+  d_points = &(d_map_build_constraint->points());
+  d_pose_finder.add_constraint(d_map_build_constraint);
+
+  cout << "done" << endl;
 }
 
 void MapThread::move_box_function() {
@@ -189,8 +232,6 @@ void MapThread::move_box_function() {
   
   
   d_points = &(d_map_build_constraint->points());
-
-  std::cout << "blaat " << d_simulator_wide_pose.size() << std::endl;
 
   //d_pose_finder.set_start_search_pos(d_simulator_wide_pose);  
  d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 1);

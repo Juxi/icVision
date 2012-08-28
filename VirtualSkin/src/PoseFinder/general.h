@@ -7,6 +7,8 @@
 #include <assert.h>
 #include <iostream>
 #include <climits>
+#include "simulator.h"
+
 
 template <typename T>
 struct CompareClass {

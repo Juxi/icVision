@@ -51,6 +51,8 @@ public:
 
 	void around_object_function();
 
+    void read_constraints(std::string filename);
+
 	void add_best_pose() {
 		std::vector<double> best_point = d_pose_finder.best_point();
 
@@ -78,7 +80,9 @@ public:
 
 	void store_points(std::string filename) {
 		poses_map_t store_map;
-		std::vector<std::vector<double> > real_poses = convert_to_real(d_configuration_points);
+
+		std::vector<std::vector<double> > real_poses = convert_all_to_real(d_configuration_points);
+
 		for (size_t i(0); i < real_poses.size(); ++i) {
 			std::map<std::string, std::vector<double> > a_motor_map(d_pose_finder.simulator().to_motor_named_map(real_poses[i]));
 			std::string name("CFGSPACE_");
@@ -97,14 +101,14 @@ public:
 	
 	void load_points(std::string filename);
 	
-	std::vector<std::vector<double> > convert_to_real(std::vector<std::vector<double> > &in) {
+	std::vector<std::vector<double> > convert_all_to_real(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i)
 			out.push_back(d_pose_finder.simulator().normal_to_real_motors(in[i]));
 		return out;
 	}
 
-	std::vector<std::vector<double> > convert_to_normal(std::vector<std::vector<double> > &in) {
+	std::vector<std::vector<double> > convert_all_to_normal(std::vector<std::vector<double> > &in) {
 		std::vector<std::vector<double> >  out;
 		for (size_t i(0); i < in.size(); ++i) {
 			out.push_back(d_pose_finder.simulator().real_to_normal_motors(in[i]));
