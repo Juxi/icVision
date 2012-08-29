@@ -164,6 +164,36 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 	}
 }
 
+QVector< KinTreeNode::JColumn > KinTreeNode::computeJacobian()
+{
+    QVector< KinTreeNode::JColumn > J;
+    QVector4D p = getT()*QVector4D(0,0,0,1);
+    
+    KinTreeNode* up = this;
+    while (up->parent())
+    {
+        up = up->parent();
+        if ( up->getNodeType() == RJOINT )
+        {
+            QVector4D q = up->getT()*QVector4D(0,0,0,1);
+            QVector3D qp = (p-q).toVector3D();
+            QVector3D jointAxis = up->getNodeAxis();
+            jointAxis.normalize();
+            
+            // component of qp orthogonal to the joint axis
+            qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
+ 
+            // make a column of the jacobian
+            JColumn c;
+            c.T = jointAxis;
+            c.F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
+            J.append(c);
+        }
+    }
+    return J;
+}
+
+
 int KinTreeNode::getNumPrimitives()
 {
 	int result = primitives.size();

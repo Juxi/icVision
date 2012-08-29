@@ -7,4 +7,4 @@ all: \
 
 RoadmapDemo_buildpart_0: 
 	echo "Depend check for xcode"
-	cd /Users/kail/imClever/dev/newRoadmap/xcode && make -C /Users/kail/imClever/dev/newRoadmap/xcode -f /Users/kail/imClever/dev/newRoadmap/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.RoadmapDemo.$(CONFIGURATION)
+	cd /Users/kailfrank/imClever/dev/newRoadmap/xcode && make -C /Users/kailfrank/imClever/dev/newRoadmap/xcode -f /Users/kailfrank/imClever/dev/newRoadmap/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.RoadmapDemo.$(CONFIGURATION)

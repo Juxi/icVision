@@ -34,8 +34,8 @@ IF ( WIN32 )
 	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
 ENDIF ( WIN32 )
 
-#FIND_PACKAGE ( BOOST REQUIRED )
-#INCLUDE_DIRECTORIES ( ${BOOST_INCLUDE_DIR} )
+FIND_PACKAGE ( Boost REQUIRED )
+INCLUDE_DIRECTORIES ( ${Boost_INCLUDE_DIR} )
 
 # 
 # FIND AND CONFIGURE CGAL
@@ -55,7 +55,7 @@ else()
 endif()
 
 
-SET ( src_files	main.cpp
+SET ( src_files		main.cpp
 		#partController.cpp
 		#iCubController.cpp
 		roadmap.cpp
@@ -94,7 +94,10 @@ SET ( QT_MOC_FILES 	#iCubController.h
 #)
 
 #QT4_ADD_RESOURCES( qrc_files ${QT_RESOURCES})
-QT4_WRAP_CPP( moc_files ${QT_MOC_FILES} )
+
+# This weirdness prevents MOC from choking on a boost header
+QT4_WRAP_CPP( moc_files ${QT_MOC_FILES} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
+
 
 ADD_EXECUTABLE ( RoadmapDemo ${hdr_files} ${src_files} ${moc_files} #${qrc_files}
 )

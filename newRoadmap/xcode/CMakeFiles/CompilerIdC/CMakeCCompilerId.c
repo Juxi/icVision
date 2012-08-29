@@ -281,6 +281,9 @@ char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
 # elif defined(_M_IX86)
 #  define ARCHITECTURE_ID "X86"
 
+# elif defined(_M_ARM)
+#  define ARCHITECTURE_ID "ARM"
+
 # else /* unknown architecture */
 #  define ARCHITECTURE_ID ""
 # endif

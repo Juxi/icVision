@@ -2,24 +2,24 @@
 # Custom rules for RoadmapDemo
 .SUFFIXES: 
 all: \
-	/Users/kail/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx\
-	/Users/kail/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx\
-	/Users/kail/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx\
-	/Users/kail/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx
+	/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx\
+	/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx\
+	/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx\
+	/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx
 
 
-/Users/kail/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx: \
-/Users/kail/imClever/dev/newRoadmap/graphwidget.h
-	/Developer/Tools/Qt/moc -I/Users/kail/imClever/dev/newRoadmap/../include -I/Users/kail/Library/yarp-2.3.4/generated_include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include -I/usr/include -F/Library/Frameworks -I/Library/Frameworks/QtOpenGL.framework/Headers -I/Library/Frameworks/QtGui.framework/Headers -I/Library/Frameworks/QtXml.framework/Headers -I/Library/Frameworks/QtCore.framework/Headers -I/Users/kail/imClever/dev/newRoadmap/xcode -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kail/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx /Users/kail/imClever/dev/newRoadmap/graphwidget.h
+/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx: \
+/Users/kailfrank/imClever/dev/newRoadmap/graphwidget.h
+	/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/newRoadmap/../include -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/newRoadmap/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx /Users/kailfrank/imClever/dev/newRoadmap/graphwidget.h
 
-/Users/kail/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx: \
-/Users/kail/imClever/dev/newRoadmap/bodyPartWidget.h
-	/Developer/Tools/Qt/moc -I/Users/kail/imClever/dev/newRoadmap/../include -I/Users/kail/Library/yarp-2.3.4/generated_include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include -I/usr/include -F/Library/Frameworks -I/Library/Frameworks/QtOpenGL.framework/Headers -I/Library/Frameworks/QtGui.framework/Headers -I/Library/Frameworks/QtXml.framework/Headers -I/Library/Frameworks/QtCore.framework/Headers -I/Users/kail/imClever/dev/newRoadmap/xcode -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kail/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx /Users/kail/imClever/dev/newRoadmap/bodyPartWidget.h
+/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx: \
+/Users/kailfrank/imClever/dev/newRoadmap/bodyPartWidget.h
+	/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/newRoadmap/../include -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/newRoadmap/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_bodyPartWidget.cxx /Users/kailfrank/imClever/dev/newRoadmap/bodyPartWidget.h
 
-/Users/kail/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx: \
-/Users/kail/imClever/dev/newRoadmap/roadmap.h
-	/Developer/Tools/Qt/moc -I/Users/kail/imClever/dev/newRoadmap/../include -I/Users/kail/Library/yarp-2.3.4/generated_include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include -I/usr/include -F/Library/Frameworks -I/Library/Frameworks/QtOpenGL.framework/Headers -I/Library/Frameworks/QtGui.framework/Headers -I/Library/Frameworks/QtXml.framework/Headers -I/Library/Frameworks/QtCore.framework/Headers -I/Users/kail/imClever/dev/newRoadmap/xcode -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kail/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx /Users/kail/imClever/dev/newRoadmap/roadmap.h
+/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx: \
+/Users/kailfrank/imClever/dev/newRoadmap/roadmap.h
+	/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/newRoadmap/../include -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/newRoadmap/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_roadmap.cxx /Users/kailfrank/imClever/dev/newRoadmap/roadmap.h
 
-/Users/kail/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx: \
-/Users/kail/imClever/dev/newRoadmap/mainwindow.h
-	/Developer/Tools/Qt/moc -I/Users/kail/imClever/dev/newRoadmap/../include -I/Users/kail/Library/yarp-2.3.4/generated_include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_OS/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_sig/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_math/include -I/Users/kail/Library/yarp-2.3.4/src/libYARP_dev/include -I/usr/include -F/Library/Frameworks -I/Library/Frameworks/QtOpenGL.framework/Headers -I/Library/Frameworks/QtGui.framework/Headers -I/Library/Frameworks/QtXml.framework/Headers -I/Library/Frameworks/QtCore.framework/Headers -I/Users/kail/imClever/dev/newRoadmap/xcode -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -I/opt/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kail/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx /Users/kail/imClever/dev/newRoadmap/mainwindow.h
+/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx: \
+/Users/kailfrank/imClever/dev/newRoadmap/mainwindow.h
+	/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/newRoadmap/../include -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/newRoadmap/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -I/usr/local/include -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_mainwindow.cxx /Users/kailfrank/imClever/dev/newRoadmap/mainwindow.h

@@ -1,3 +1,0 @@
-/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/ALL_BUILD.dir
-/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/ZERO_CHECK.dir
-/Users/kail/imClever/dev/PartController/xcode/CMakeFiles/partController.dir

@@ -129,7 +129,7 @@ public:
 	template <class Vertex_Type, class Tag>
 	target_visitor<Vertex_Type, Tag> target_visit(Vertex_Type u, Tag)
 	{
-		return target_visitor<Vertex_Type, Tag>(u);
+		return target/Users/kailfrank/imClever/dev/newRoadmap/xcode/moc_graphwidget.cxx_visitor<Vertex_Type, Tag>(u);
 	}
 	/*****************************/
 	

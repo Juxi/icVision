@@ -74,6 +74,12 @@ protected:
 	//CompositeObject*	  obj;
 	Transformable		  M;
 	QVector<KinTreeNode*> children;
+    
+    struct JColumn { QVector3D T;
+                     QVector3D F;
+    };
+    //QVector<JacobianColumn> Jacobian;
+    
 	//bool strf;
 	
 	virtual void setM() = 0;														//!< Sets the local transformation from the next coordinate system to this coordinate system as a function of nodeAxis
@@ -90,8 +96,11 @@ protected:
 	void getSubTree( QVector<KinTreeNode*>& nodeList );
 	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t );			//!< Turn off collision response to class c in table t
 	void update( const QMatrix4x4& txfr );											//!< Propogates forward kinematics calculations down the tree
+    
 																					/**< Called by Robot.updatePose() */
 
+    QVector< JColumn > computeJacobian();
+    
 	friend class Robot;		//!< Robot calls ignoreAdjacentPairs() and update()
 };
 
