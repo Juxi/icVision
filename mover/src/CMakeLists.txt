@@ -18,17 +18,19 @@ SET ( src_files	main.cpp
 		moverPosition.cpp
 		moverMinJerkLinear.cpp
 		moverMinJerkForward.cpp
+		moverVelocityForward.cpp
 )
 
 SET ( hdr_files	mover.h
 		moverPosition.h
 		moverMinJerkLinear.h
 		moverMinJerkForward.h
+		moverVelocityForward.h
 		vectormath.h
 )
 
 ADD_EXECUTABLE ( iCubMover ${hdr_files} ${src_files} )
 
-TARGET_LINK_LIBRARIES ( iCubMover ${YARP_LIBRARIES} icubmod  )
+TARGET_LINK_LIBRARIES ( iCubMover ${YARP_LIBRARIES} iKin )
 
 INSTALL ( TARGETS iCubMover DESTINATION ${CMAKE_SOURCE_DIR}/bin )

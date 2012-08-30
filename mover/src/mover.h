@@ -35,7 +35,9 @@ public:
 	virtual bool go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout);
 	virtual bool setRefSpeed(double spd) { cout << "SetRefSpeed not implemented" << endl; return false; };
 	virtual bool setRefAcceleration(double acc) {cout << "SetRefAcceleration not implemented" << endl; return false;};
+	virtual bool setMinTrajTime(double m) {cout << "SetMinTrajTime not implemented" << endl; return false;};
 	virtual bool setFwdSteps(int steps) {cout << "SetFwdSteps not implemented" << endl; return false;};
+	virtual bool setKp(double kp) {cout << "SetKp not implemented" << endl; return false;};
 
 	bool connectMonitor();
 	bool connnectVSkin(string &portRpc, string& statusPort);

@@ -1,74 +1,40 @@
-#include "moverMinJerkForward.h"
+#include "moverVelocityForward.h"
 #include <sstream>
 #include <cstring>
 #include <cmath>
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
+using std::vector;
 using namespace yarp::os;
 using namespace yarp::dev;
-#define NEWYARP 1
 
 
-bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
+bool MoverVelocityForward::init(string& robot, vector<string>& parts ) {
 	if (!MoverPosition::init(robot, parts)) {return false; }
 
-	vels.clear(); vctrls.clear();
-	vels.resize(nparts); vctrls.resize(nparts);
-	
-	ResourceFinder rf;
-	rf.setVerbose(true);
-	rf.setDefaultContext("mover/conf");
-	rf.setDefault("robot","icubSim");
-	int argc = 0; char *argv[1];
-	rf.configure("ICUB_ROOT",argc,argv);
-	
-	
+	vels.clear();
+	vels.resize(nparts);	
 
 	for (int ipart=0; ipart<nparts; ipart++) {
 		if (dd[ipart] && dd[ipart]->isValid() ) {
 			IVelocityControl *vel;
 			dd[ipart]->view(vel);
 			vels[ipart] = vel;
-#ifdef NEWYARP			
-			//vctrls[ipart] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
-			vctrls[ipart] = new minJerkVelCtrlForNonIdealPlant(TS,nJoints[ipart]);
-	
-			Property config, plantprop, getp;
-			string keyname = "key_" + partnames[ipart];
-			string filename = "plant_model_" + partnames[ipart] + ".ini";
-			rf.setDefault(keyname.c_str(), filename.c_str());
-			
-			config.fromConfigFile(rf.findFile(keyname.c_str()),false);
-			Bottle &optPlantModel=config.findGroup("PLANT_MODEL");
-			if (!optPlantModel.isNull()) {
-				fprintf(stdout,"PLANT_MODEL group detected\n");
-				plantprop.fromString(optPlantModel.toString().c_str());
-				
-				if (plantprop.check("plant_compensator",Value("off")).asString()=="on") {
-					dynamic_cast<minJerkVelCtrlForNonIdealPlant*>(vctrls[ipart])->setPlantParameters(plantprop, "joint");
-					dynamic_cast<minJerkVelCtrlForNonIdealPlant*>(vctrls[ipart])->getPlantParameters(getp, "joint");
-					cout << endl << endl << plantprop.toString() << endl << endl;
-					cout << endl << endl << getp.toString() << endl << endl;
-				}
-			}
-#else
-			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
-#endif
-			
 		}
 	}
-	minTrajTime = 0.5;
+
 	nForwardSteps = 40;
 	maxSpeed = 10;
 	moveMode = VOCAB_MODE_VELOCITY;
+	maxAcceleration = 1000;
+	Kp = 2.0; // proportional part of P-controller
 
 	return checkVelDrivers();
 }
 
 
-bool MoverMinJerkForward::checkVelDrivers() {
+bool MoverVelocityForward::checkVelDrivers() {
 	for (int i=0; i<nparts; i++) {
 		if ( !vels[i] ) { cout << "IVelocityControl part " << partnames[i] << " error" << endl; return false; }
 	}
@@ -76,40 +42,30 @@ bool MoverMinJerkForward::checkVelDrivers() {
 }
 
 
-void MoverMinJerkForward::close() {
-	MoverPosition::close();
-
-	for (int i=0; i<nparts; i++) {
-		if (vctrls[i]) {
-			delete vctrls[i];
-		}
-	}
+bool MoverVelocityForward::setRefSpeed(double spd) {
+	maxSpeed = spd;
+	return MoverPosition::setRefSpeed(spd);;
 }
 
 
-bool MoverMinJerkForward::setRefSpeed(double spd) {
-	MoverPosition::setRefSpeed(spd);
-	maxSpeed = spd;
+bool MoverVelocityForward::setKp(double kp) {
+	Kp = kp;
 	return true;
 }
 
+bool MoverVelocityForward::setRefAcceleration(double acc) {
+	maxAcceleration = acc;
+	return MoverPosition::setRefAcceleration(MAX_ACCELERATION);
 
-bool MoverMinJerkForward::setRefAcceleration(double acc) {
-	return MoverPosition::setRefAcceleration(acc);
 }
 
 
-bool MoverMinJerkForward::setFwdSteps(int s) {
+bool MoverVelocityForward::setFwdSteps(int s) {
 	nForwardSteps = s;
 	return true;
 }
 
-bool MoverMinJerkForward::setMinTrajTime(double m) {
-	minTrajTime = m;
-	return true;
-}
-
-bool MoverMinJerkForward::setMode(int m) {
+bool MoverVelocityForward::setMode(int m) {
 	if ((moveMode == VOCAB_MODE_POSITION) || (moveMode == VOCAB_MODE_VELOCITY)) {
 		moveMode = m;
 		return true;
@@ -118,14 +74,14 @@ bool MoverMinJerkForward::setMode(int m) {
 }
 
 
-bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
+bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
 	int dragFactor = 10;
 	double minabsvel = 0.5;
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
-	double sssedist, maxdist, pmaxdist, trajTime, startTraj, nowTime, cntTime, waitTime;
+	double sssedist, maxdist, startTraj, nowTime, cntTime, waitTime, maxChange;
 	int currentIndex = 0, tForwardSteps, targetIndex;
 
 	// set virtual skin waypoint at begin of trajectory
@@ -137,13 +93,6 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		vector<double> lastVel(nJoints[ipart], 0.0);
 		lastVels.push_back(lastVel);
 	}
-		
-#ifdef NEWYARP
-	// reset minJerk controls
-	for (int ipart=0; ipart<nparts; ipart++) {
-		vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
-	}
-#endif
 
 	// send start to move monitor
 	Bottle &s = monitorPort.prepare(); s.clear();
@@ -154,6 +103,8 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 	count = 0;
 	startTraj = Time::now();
 	while (!reached && !stop) {
+		maxChange = maxAcceleration * TS; // maximum allowed absolute change in velocity
+
 		// get encoder positions
 		for (int ipart=0; ipart<nparts; ipart++) {
 			encs[ipart]->getEncoders(&encvals[ipart][0]);
@@ -186,7 +137,6 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		r.addVocab(VOCAB_STATUS_TIME); r.addDouble(Time::now());
 		monitorPort.write();
 		
-
 		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
 		if (targetIndex == (nposes-1)) {
 			//cout << "targetting final pose; ssse: " << sssedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
@@ -212,13 +162,6 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 				cout << " reflex done." << endl;
 
 			
-#ifdef NEWYARP
-			// reset minJerk controls
-			for (int ipart=0; ipart<nparts; ipart++) {
-				vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
-			}
-#endif
-
 			break; // exit the while(!reached) loop
 		}
 
@@ -226,13 +169,10 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 		//cout << "current index: " << currentIndex << " target index " << targetIndex << endl;
 		//cout << "trajectory times :";
 		for (int ipart=0; ipart<nparts; ipart++) {
-			// dynamically adjust the trajectory time by the maximum distance in joint space:
-			pmaxdist = max(absdiff[ipart], mask[ipart]);
-			trajTime = max(minTrajTime, pmaxdist/maxSpeed); // damping can be achieved either by lower-capping the trajectory time, or by upper-capping the speed
-			
-			vector<double> q = yarp2std(vctrls[ipart]->computeCmd(trajTime, std2yarp(diff[ipart])));
-			q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
-			// minabsvel = 0.5
+			vector<double> q = Kp * diff[ipart];
+			q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities to maxSpeed
+			q = max(min(q, lastVels[ipart] + maxChange), lastVels[ipart] - maxChange); // limit accelerations
+			//q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities to maxSpeed (just for safety)
 
 			for (int iax=0; iax < nJoints[ipart]; iax++) {
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
@@ -241,14 +181,12 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 				if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
 					// apply bang-bang control for unachievably low velocities
 					if ((q[iax] > -minabsvel) && (q[iax] < minabsvel) && (q[iax]!=0.0)) {
-						q[iax]=iCub::ctrl::sign(diff[ipart][iax])*minabsvel;
+						q[iax]=sign(diff[ipart][iax])*minabsvel;
 					}
 
 					// send velocities to robot
 					vels[ipart]->velocityMove(iax, lastVels[ipart][iax]=q[iax]);
 				}
-				//double s = diff[ipart][iax];
-				//vels[ipart]->velocityMove(iax, min(max(s, -maxSpeed), maxSpeed));
 			}
 
 			/*for (int j=0;j<nJoints[ipart];j++) {

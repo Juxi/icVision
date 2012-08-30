@@ -1,6 +1,7 @@
 #include "moverPosition.h"
 #include "moverMinJerkLinear.h"
 #include "moverMinJerkForward.h"
+#include "moverVelocityForward.h"
 #include "mover.h"
 
 #include <string>
@@ -21,16 +22,18 @@ using namespace yarp::dev;
 #define VOCAB_BLINK VOCAB4('b','l','n','k')	// blink eyes
 #define VOCAB_DIST_THRESHOLD VOCAB3('t','h','r')   // distance threshold
 #define VOCAB_OK VOCAB2('o','k')
+#define VOCAB_KP VOCAB2('k', 'p')
 #define VOCAB_FAIL VOCAB4('f','a','i','l')
 #define VOCAB_STOP VOCAB4('s','t','o','p') // cancel ongoing movement
 #define VOCAB_MOVE_MODE VOCAB4('m','o','d','e')
 #define VOCAB_MIN_TRAJ_TIME VOCAB4('m','i','n','t')
 
 #define MAX_REFERENCE_SPEED 40.
-#define MAX_REFERENCE_ACCELERATION 10.
+#define MAX_REFERENCE_ACCELERATION 1000.
 #define HARD_MIN_TRAJ_TIME 0.1
 
-typedef MoverMinJerkForward mover_type;
+typedef MoverVelocityForward mover_type;
+//typedef MoverMinJerkForward mover_type;
 //typedef MoverMinJerkLinear mover_type;
 //typedef MoverPosition mover_type;
 //typedef Mover mover_type;
@@ -60,17 +63,17 @@ int main(int argc, char *argv[]) {
 	if ( settings.check("port") )  { portname = settings.find("port").asString().c_str(); } 
 	if ( command.check("port") )  { portname = command.find("port").asString().c_str(); } 
 
-	double refSpd = 20.0;	// reference velocity for position control moves
+	double refSpd = 10.0;	// reference velocity for position control moves
 	if ( settings.check("refspeed") )  { refSpd = settings.find("refspeed").asDouble(); }
 	if ( command.check("refspeed") )  { refSpd = command.find("refspeed").asDouble(); }
 	refSpd = max(0., min(refSpd, MAX_REFERENCE_SPEED));
 
-	double refAcc = 10.0;	// reference acceleration for the yarp remote control board interface
+	double refAcc = 1000.0;	// reference acceleration for the yarp remote control board interface
 	if ( settings.check("acceleration") )  { refAcc = settings.find("acceleration").asDouble(); }
 	if ( command.check("acceleration") )  { refAcc = command.find("acceleration").asDouble(); }
 	refAcc = max(0., min(refAcc, MAX_REFERENCE_ACCELERATION));
 
-	int fwdSteps = 10;	// forward steps for moverMinJerkForward
+	int fwdSteps = 40;	// forward steps for moverMinJerkForward
 	if ( settings.check("fwdsteps") )  { fwdSteps = settings.find("fwdsteps").asDouble(); }
 	if ( command.check("fwdsteps") )  { fwdSteps = command.find("fwdsteps").asDouble(); }
 	fwdSteps = max(1, fwdSteps);
@@ -95,6 +98,10 @@ int main(int argc, char *argv[]) {
 	if ( settings.check("mintrajtime") )  { minTrajTime = settings.find("mintrajtime").asDouble(); }
 	if ( command.check("mintrajtime") )  { minTrajTime = command.find("mintrajtime").asDouble(); }
 
+	double kp = 2; // default proporitional part of P-controller
+	if ( settings.check("kp") )  { kp = settings.find("kp").asDouble(); }
+	if ( command.check("kp") )  { kp = command.find("kp").asDouble(); }
+
 	int moveMode = VOCAB_MODE_VELOCITY; // default mode is velocity
 	if ( settings.check("movemode") )  { moveMode = settings.find("movemode").asDouble(); }
 	if ( command.check("movemode") )  { moveMode = command.find("movemode").asDouble(); }
@@ -115,8 +122,7 @@ int main(int argc, char *argv[]) {
 	string rawFacePort = "/" + robot + "/face/raw/in";
 	if ( settings.check("rawfaceport") )  { rawFacePort = settings.find("rawfaceport").asString(); }
 	if ( command.check("rawfaceport") )  { rawFacePort = command.find("rawfaceport").asString().c_str(); }
-	
-	
+		
 	// parse partnames
 	vector<string> partnames;
 	bool hasParts = false;
@@ -141,6 +147,7 @@ int main(int argc, char *argv[]) {
 	mover.setFwdSteps(fwdSteps);
 	mover.setMinTrajTime(minTrajTime);
 	mover.setMode(moveMode);
+	mover.setKp(kp);
 	
 	// parse and set default masks
 	if (defaultMasks.size() > 1) {
@@ -311,6 +318,22 @@ int main(int argc, char *argv[]) {
 					response.addVocab(VOCAB_FAIL);
 				}
 				break;
+			case VOCAB_KP:
+				success = query.size() >= 2;
+				if (!success) { cout << "Invalid number of arguments." << endl; }
+				success = success && (query.get(2).isInt() || query.get(2).isDouble());
+				if (!success) { cout << "kp should be a number." << endl; }
+				kp = query.get(2).asDouble();
+				kp = max(0.0, kp); // no negative kp allowed
+				success = success && mover.setKp(kp);
+				if (success) { 
+					cout << "New kp set to " << kp << endl;
+					response.addVocab(VOCAB_OK);
+				} else {
+					cout << "Sending new kp failed." << endl;
+					response.addVocab(VOCAB_FAIL);
+				}
+				break;
 			case VOCAB_MOVE_MODE:
 				success = query.size() >= 2;
 				if (!success) { cout << "Invalid number of arguments." << endl; }
@@ -393,6 +416,7 @@ int main(int argc, char *argv[]) {
 			response.addString( "set spd VALUE: set reference speed for all parts for all joints.\n");
 			response.addString( "set acc VALUE: set reference acceleration for all parts for all joints.\n");
 			response.addString( "set fwd VALUE: set number of forward steps.\n");
+			response.addString( "set kp VALUE: set proportional term of P-controller.\n");
 			response.addString( "set mint VALUE: set minimum trajectory time.\n");
 			response.addString( "set mode pos: set position move mode.\n");
 			response.addString( "set mode vel: set velocity move mode.\n");
