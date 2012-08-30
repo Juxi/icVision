@@ -16,7 +16,6 @@
 #include <QMutex>
 #include <QVector3D>
 #include <QMatrix4x4>
-#include <yarp/os/all.h>
 
 //#include "model.h"
 
