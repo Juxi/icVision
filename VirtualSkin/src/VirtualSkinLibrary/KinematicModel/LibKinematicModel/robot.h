@@ -38,7 +38,14 @@ class KinematicModel::Robot : public QObject
 
 public:
 	
-	Robot( Model* m, DT_RespTableHandle t, DT_ResponseClass robotClass, DT_ResponseClass baseClass );	
+	Robot( Model* m,
+          DT_RespTableHandle roobtTable,
+          DT_RespTableHandle fieldTable,
+          DT_ResponseClass robotClass,
+          DT_ResponseClass baseClass,
+          DT_ResponseClass robotField,
+          DT_ResponseClass robotBaseField
+          );
 	~Robot();														
 	
 	//bool Robot::isColliding() const;
@@ -59,8 +66,12 @@ public:
 	// generic 'get' functions that may be useful
 	Model*				getModel() const { return model; }
 	DT_RespTableHandle	getResponseTable() { return responseTable; }
+	DT_RespTableHandle	getFieldResponseTable() { return fieldResponseTable; }
 	DT_ResponseClass	getWorldRobotClass() { return worldRobotClass; }
 	DT_ResponseClass	getWorldBaseClass() { return worldBaseClass; }
+    DT_ResponseClass	getWorldFieldClass() { return worldFieldClass; }
+    DT_ResponseClass	getWorldBaseFieldClass() { return worldBaseFieldClass; }
+    
 
 	const QString&	getName() const { return robotName; }				//!< Get the name of the Robot
 	const QString*	getPartName( int partNum ) const;					//!< Get the name of a BodyPart, given its index (usually for printing messages) 
@@ -112,9 +123,12 @@ public slots:
 	
 private:
 	Model*					model;				//!< The Model that is doing collision detection on this Robot
-	DT_RespTableHandle		responseTable;		//!< For managing self-collisions
-	DT_ResponseClass		worldRobotClass;	//!< For checking the robot w.r.t the world and other robots
-	DT_ResponseClass		worldBaseClass;		//!< So as not to check the robot's base against the world (so a stand can intersect the table for example)
+	DT_RespTableHandle		responseTable,		//!< For managing self-collisions
+                            fieldResponseTable; //!< For managing self-repulsion
+	DT_ResponseClass		worldRobotClass,	//!< For checking the robot w.r.t the world and other robots
+                            worldBaseClass,		//!< So as not to check the robot's base against the world    (so a stand can intersect the table for example)
+                            worldFieldClass,
+                            worldBaseFieldClass;
 	
 	QString					robotName;		//!< Human readable identifier for the robot
 	QVector<BodyPart*>		partList;		//!< "Body Parts" correspond to Yarp motor control groups such as 'torso' and 'leftArm'
@@ -126,6 +140,7 @@ private:
 	
 	int						numCollisions;
 	int						numReflexCollisions;
+    QVector< QVector3D >    force;
 	
 	QMutex mutex;
 	

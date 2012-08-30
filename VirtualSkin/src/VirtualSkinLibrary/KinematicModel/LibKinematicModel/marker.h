@@ -34,7 +34,7 @@ public:
 	inline void createTracer( DT_ResponseClass c, int num, double r, QColor qc )
 	{
 		d = 2*r;
-		tracerObject = new CompositeObject(c);
+		tracerObject = new CompositeObject(c,c); 
 		tracerObject->persistent = true;
 		tracerObject->setFreeColor(qc);
 		
@@ -42,7 +42,7 @@ public:
 		for (i=0; i<num; i++)
 		{
 			PrimitiveObject* p = new Sphere(r);
-			tracerObject->append(p);
+			tracerObject->appendPrimitive(p);
 			if ( i > 0 ) qc.setAlphaF( 1 - (double)i/(double)num);
 			p->setFreeColor(qc);
 		}

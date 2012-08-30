@@ -137,18 +137,26 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			{
 				PrimitiveObject* cylinder = new KinematicModel::Cylinder( radius, height );
 				cylinder->setSpecialEulerOrientation(axis);
+                
+                PrimitiveObject* field = new KinematicModel::Cylinder( 1.8*radius, height );
+				field->setSpecialEulerOrientation(axis);
 				
-				if (node->getNodeType() == KinTreeNode::LINK ) { cylinder->translate( axis/2 ); }
+				if (node->getNodeType() == KinTreeNode::LINK )
+                {
+                    cylinder->translate( axis/2 );
+                    field->translate(axis/2);
+                }
 				else if ( node->getNodeType() != KinTreeNode::RJOINT &&  node->getNodeType() != KinTreeNode::PJOINT ) { 
 					errorStr = "Encountered KinTreeNode of unknown type";
 					return 0;
 				}
 				
-				node->append(cylinder);
+				node->appendPrimitive(cylinder);
+                node->appendField(field);
 			}
         }
 		catch (std::exception& e)
-		{ 
+		{
 			errorStr = e.what();
 			return 0;
 		}
@@ -223,7 +231,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 									   attributes.value("pz").toDouble() );
 		primitive->translate(position);
 		//primitive->setOpaque();
-		node->append(primitive);
+		node->appendPrimitive(primitive);
     }
 
 	/*******************************************************************************

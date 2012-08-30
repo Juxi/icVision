@@ -41,7 +41,7 @@ class KinematicModel::CompositeObject : public Transformable
 	
 public:
 	
-    CompositeObject( DT_ResponseClass c );	//!< Simply initializes indices
+    CompositeObject( DT_ResponseClass c, DT_ResponseClass fc );	//!< Simply initializes indices
     virtual ~CompositeObject();					//!< Deletes the primitives in the QVector first then this object
 	
 	//virtual Robot* robot() const { return NULL; }
@@ -56,11 +56,15 @@ public:
 	
 	void				setResponseClass( DT_ResponseClass c ) { responseClass = c; }
 	DT_ResponseClass	getResponseClass() const { return responseClass; }
+    
+    DT_ResponseClass	getFieldResponseClass() const { return fieldResponseClass; }
+    const QVector<PrimitiveObject*>& getFieldPrimitives() { return fieldPrimitives; }
 	
 	void setCollidingColor( QColor color );
 	void setFreeColor( QColor color );
 	
-	void append( PrimitiveObject* primitive );	//!< Append a PrimitiveObject to the CompositeObject
+    void appendPrimitive ( PrimitiveObject* primitive );
+    void appendField ( PrimitiveObject* primitive );
 	bool remove( PrimitiveObject* primitive );	//!< Remove a PrimitiveObject from the CompositeObject and delete that primitive
 
 	//int getNumPrimitives() { return primitives.size() }
@@ -85,20 +89,29 @@ public:
 protected:
 	
 	uint				index;
+    bool				inModel;
+	bool				deathWish;
+    
 	QString				objectName;				//!< A human readable identifier for the object
 	DT_ResponseClass	responseClass;
-	bool				inModel;
-	bool				deathWish;
+    DT_ResponseClass    fieldResponseClass;
 	
+	
+    GLfloat freeColor[4];
 	GLfloat collidingColor[4];
-	GLfloat freeColor[4];
+    GLfloat fieldColor[4];
+	GLfloat fieldCollidingColor[4];
 	
 	QVector<PrimitiveObject*> primitives;
+    QVector<PrimitiveObject*> fieldPrimitives;
 
 	int numSpheres,					//!< Counts calls to newSphere( double r, const QVector3D& pos ) so that spheres can be named 'sph1', 'sph2', ect.
 		numCylinders,				//!< Counts calls to newCylinder( double r, double h, const QVector3D& pos ) so that cylinders can be named 'cyl1', 'cyl2', ect.
 		numBoxes;					//!< Counts calls to newBox( const QVector3D& size, const QVector3D& pos ) so that boxes can be named 'box1', 'box2', ect.
 	
+    
+	void append( PrimitiveObject* primitive );	//!< Append a PrimitiveObject to the CompositeObject
+    
 	//QMutex mutex;
 	
 	friend class Model;

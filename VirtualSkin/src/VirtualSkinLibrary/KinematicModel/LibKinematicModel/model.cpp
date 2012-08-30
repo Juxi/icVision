@@ -2,6 +2,7 @@
 #include "robot.h"
 #include "worldhandler.h"
 #include "modelwindow.h"
+#include <iostream.h>
 
 using namespace KinematicModel;
 
@@ -18,15 +19,15 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 	
 	// initialize the SOLID datastructures for managing collision response
 	scene = DT_CreateScene();
-	responseTables.append(DT_CreateRespTable());
+	responseTables.append(DT_CreateRespTable());                // the first response table is for managing the world
+                                                                // (with multiple robots and other objects)
 	//printf("Created World Response table %p\n",responseTables.at(0));
 	
 	// create SOLID Response classes for the world table
 	obstacleClass = DT_GenResponseClass(responseTables.at(0));
 	targetClass = DT_GenResponseClass(responseTables.at(0));
-	ghostClass = DT_GenResponseClass(responseTables.at(0));	
-
-	// define some collision responses for the world table
+	ghostClass = DT_GenResponseClass(responseTables.at(0));
+    fieldClass = DT_GenResponseClass(responseTables.at(0));
 	
 	// set up the window for OpenGL
 	if ( visualize )
@@ -85,9 +86,18 @@ DT_RespTableHandle Model::newRobotTable()
 {
 	DT_RespTableHandle table = DT_CreateRespTable();
 	//printf("Created Robot Response table %p\n",table);
-	DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddDefaultResponse( table, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	responseTables.append( table );
+	return table;
+}
+
+DT_RespTableHandle Model::newRobotFieldTable()
+{
+	DT_RespTableHandle table = DT_CreateRespTable();
+    DT_AddDefaultResponse( table, repel, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+	//responseTables.append( table );
 	return table;
 }
 
@@ -95,6 +105,7 @@ void Model::removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_Re
 {
 	removeReflexResponse(t,c1,c2);
 	removeVisualResponse(t,c1,c2);
+    removeForceResponse(t,c1,c2);
 }
 
 void Model::removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
@@ -108,6 +119,13 @@ void Model::removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_
 {
 	//printf("REMOVE_VISUAL");
 	DT_RemovePairResponse(t, c1, c2, collisionHandler);
+	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
+}
+
+void Model::removeForceResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 )
+{
+	//printf("REMOVE_VISUAL");
+	DT_RemovePairResponse(t, c1, c2, repel);
 	//printf(" removed response '%p' from collision pair (%d,%d) in table %p\n", collisionHandler, c1, c2, t );
 }
 
@@ -128,31 +146,45 @@ DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 	return respClass;
 }
 
-Robot* Model::loadRobot( const QString& fileName, bool verbose )
+Robot* Model::loadRobot( const QString& fileName, bool limitAvoidance, bool collisionAvoidance, bool verbose)
 {	
 	mutex.lock();
 		
-		DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
-		DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
-		DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
-		
+		DT_ResponseClass newRobotClass     = newResponseClass( responseTables.at(0) );
+		DT_ResponseClass newBaseClass      = newResponseClass( responseTables.at(0) );
+        DT_ResponseClass newFieldClass     = newResponseClass( responseTables.at(0) );
+        DT_ResponseClass newBaseFieldClass = newResponseClass( responseTables.at(0) );
+    
 		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 		DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-		DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 		
-	
 		QVector<DT_ResponseClass>::iterator i;
 		for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
 		{
-			DT_AddPairResponse(	responseTables.at(0), newRobotClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-			DT_AddPairResponse(	responseTables.at(0), newBaseClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+			DT_AddPairResponse(	responseTables.at(0), newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+			DT_AddPairResponse(	responseTables.at(0), newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
+            DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_WITNESSED_RESPONSE, (void*) this );
+            DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_WITNESSED_RESPONSE, (void*) this );
 		}
 		
-		robotResponseClasses.append( newRobotClass );
-		robotBaseClasses.append( newBaseClass );
+        robotResponseClasses.append( newRobotClass );
+        robotResponseClasses.append( newFieldClass );
+        //fieldResponseClasses.append( newFieldClass );
+		//robotBaseClasses.append( newBaseClass );
 		
 		//printf("Loading non-yarp robot.\n");
-		Robot* robot = new Robot( this, newTable, newRobotClass, newBaseClass );
+        DT_RespTableHandle newTable = newRobotTable();              // a table for handling self collisions
+        DT_RespTableHandle newFieldTable = newRobotFieldTable();	// a table for handling self repulsion
+		Robot* robot = new Robot( this,
+                                    newTable,
+                                    newFieldTable,
+                                    newRobotClass,
+                                    newBaseClass,
+                                    newFieldClass,
+                                    newBaseFieldClass );
 		robot->open( fileName, verbose );
 	
 		robots.append( robot );
@@ -201,8 +233,9 @@ void Model::appendObject( KinTreeNode* node )
 	}
 
 	node->setIdx( ++numObjects );
-	const QVector<PrimitiveObject*>& primitives = node->data();
 	QVector<PrimitiveObject*>::const_iterator i;
+    const QVector<PrimitiveObject*>& primitives = node->data();
+    const QVector<PrimitiveObject*>& fieldPrimitives = node-> getFieldPrimitives();
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending robot primitive to world\n");
@@ -214,6 +247,24 @@ void Model::appendObject( KinTreeNode* node )
 			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseClass() );
 		else
 			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldRobotClass() );
+		
+		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+		if ( modelWindow ) { (*i)->setListPending(true); }
+		(*i)->setIdx( ++numPrimitives );
+		emit addedPrimitive(*i);
+	}
+    for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
+	{
+		//if (verbose) printf("appending robot primitive to world\n");
+		DT_SetResponseClass( node->robot()->getFieldResponseTable(), (*i)->getSolidObjectHandle(), node->getFieldResponseClass() );
+        
+		DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), repel );
+		DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), collisionHandler );
+		
+		if ( node->isNearRoot() )
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseFieldClass() );
+		else
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), node->robot()->getWorldFieldClass() );
 		
 		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		if ( modelWindow ) { (*i)->setListPending(true); }

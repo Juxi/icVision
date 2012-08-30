@@ -6,20 +6,21 @@
 using namespace std;
 using namespace KinematicModel;
 
-CompositeObject::CompositeObject( DT_ResponseClass c ) :	index(0),
-															responseClass(c),
-															inModel(false), 
-															deathWish(false),
-															numSpheres(0),
-															numCylinders(0),
-															numBoxes(0),
-															persistent(false)
+CompositeObject::CompositeObject( DT_ResponseClass c, DT_ResponseClass fc ) :	index(0),
+                                                                                responseClass(c),
+                                                                                fieldResponseClass(fc),
+                                                                                inModel(false),
+                                                                                deathWish(false),
+                                                                                numSpheres(0),
+                                                                                numCylinders(0),
+                                                                                numBoxes(0),
+                                                                                persistent(false)
 {
-	collidingColor[0] = 0.7; collidingColor[1] = 0.0; collidingColor[2] = 0.0; collidingColor[3] = 0.5;
-    //collidingColor[0] = 0.3; collidingColor[1] = 0.3; collidingColor[2] = 0.3; collidingColor[3] = 0.2;
 	
-    freeColor[0] = 0.3;	  freeColor[1] = 0.3;	   freeColor[2] = 0.3;	    freeColor[3] = 1.0; 
-	//black[0] = 0.0;		  black[0] = 0.0;		   black[0] = 0.0;			black[0] = 1.0;
+    freeColor[0] = 0.3;             freeColor[1] = 0.3;             freeColor[2] = 0.3;             freeColor[3] = 1.0;
+	collidingColor[0] = 0.7;        collidingColor[1] = 0.0;        collidingColor[2] = 0.0;        collidingColor[3] = 0.5;
+    fieldColor[0] = 0.9;            fieldColor[1] = 0.9;            fieldColor[2] = 1.0;            fieldColor[3] = 0.3;
+	fieldCollidingColor[0] = 1.0;   fieldCollidingColor[1] = 0.9;   fieldCollidingColor[2] = 1.0;   fieldCollidingColor[3] = 0.3;
 }
 
 CompositeObject::~CompositeObject()
@@ -62,15 +63,34 @@ void CompositeObject::append( PrimitiveObject* primitive )
 		}
 		primitive->setName(name);
 	}
-	QColor fc,cc;
+	
+	primitive->setCompositeObject(this);
+}
+
+void CompositeObject::appendPrimitive( PrimitiveObject* primitive )
+{
+    QColor fc,cc;
 	fc.setRedF(freeColor[0]); fc.setGreenF(freeColor[1]); fc.setBlueF(freeColor[2]); fc.setAlphaF(freeColor[3]);
 	cc.setRedF(collidingColor[0]); cc.setGreenF(collidingColor[1]); cc.setBlueF(collidingColor[2]);	cc.setAlphaF(collidingColor[3]);
 	
-	primitive->setCompositeObject(this);
-	primitive->setFreeColor(fc);
+    primitive->setFreeColor(fc);
 	primitive->setCollidingColor(cc);
+    
+    append(primitive);
+    primitives.append(primitive);
+}
+
+void CompositeObject::appendField( PrimitiveObject* primitive )
+{
+    QColor fc,cc;
+	fc.setRedF(fieldColor[0]); fc.setGreenF(fieldColor[1]); fc.setBlueF(fieldColor[2]); fc.setAlphaF(fieldColor[3]);
+	cc.setRedF(fieldCollidingColor[0]); cc.setGreenF(fieldCollidingColor[1]); cc.setBlueF(fieldCollidingColor[2]);	cc.setAlphaF(fieldCollidingColor[3]);
 	
-	primitives.append(primitive);
+    primitive->setFreeColor(fc);
+	primitive->setCollidingColor(cc);
+    
+    append(primitive);
+    fieldPrimitives.append(primitive);
 }
 
 bool CompositeObject::remove( PrimitiveObject* primitive )
@@ -81,13 +101,23 @@ bool CompositeObject::remove( PrimitiveObject* primitive )
 	}
 	
 	QVector<PrimitiveObject*>::iterator i;
+    bool removed = false;
 	for ( i=primitives.end(); i!=primitives.begin(); )
 	{
 		--i;
 		if ( *i == primitive )
 		{
 			primitives.erase(i);
-			return 1;
+			removed = true;
+		}
+	}
+    for ( i=fieldPrimitives.end(); i!=fieldPrimitives.begin(); )
+	{
+		--i;
+		if ( *i == primitive )
+		{
+			fieldPrimitives.erase(i);
+			removed = true;
 		}
 	}
 	return 0;
@@ -150,6 +180,10 @@ void CompositeObject::render()
 		{
 			(*i)->render();
 		}
+        for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
+        {
+            (*i)->render();
+        }
 	glPopMatrix();
 }
 

@@ -45,6 +45,9 @@ public:
 	virtual ~KinTreeNode();					//!< First delete the child KinTreeNodes and PrimitiveObjects associated with this KinTreeNode
 											/**< Also emit a signal to the graphics thread that it should delete all relevant display lists */
 
+    //DT_ResponseClass	getFieldResponseClass() const { return fieldResponseClass; }
+    //const QVector<PrimitiveObject*>& getFieldPrimitives() { return fieldPrimitives; }
+    
 	void setNodeAxis( const QVector3D& vector );		//!< Sets the value of a vector that represents either a body vector (like a bone in a skeleton) or a joint axis. See nodeAxis.
 
 	KinTreeNode* parent() const { return parentNode; }	//!< Returns the parent KinTreeNode of this object in the kinematic tree structure
@@ -74,6 +77,9 @@ protected:
 	//CompositeObject*	  obj;
 	Transformable		  M;
 	QVector<KinTreeNode*> children;
+    //DT_ResponseClass    fieldResponseClass;
+    //QVector<PrimitiveObject*> fieldPrimitives;
+    
     
     struct JColumn { QVector3D T;
                      QVector3D F;

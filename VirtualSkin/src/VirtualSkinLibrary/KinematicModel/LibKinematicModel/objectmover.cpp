@@ -9,7 +9,7 @@
 #include <QString>
 #include "objectmover.h"
 #include "model.h"
-#include "constants.h"
+//#include "constants.h"
 #include "compositeobject.h"
 
 using namespace KinematicModel;

@@ -62,11 +62,11 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 		{
 			if ( attributes.value("type").isEmpty() || attributes.value("type").toStdString() == "obstacle" )
 			{
-				obj = new CompositeObject( model->OBSTACLE() );
+				obj = new CompositeObject( model->OBSTACLE(), model->FIELD() );
 			}
 			else if ( attributes.value("type").toStdString() == "target" )
 			{
-				obj = new CompositeObject( model->TARGET() );
+				obj = new CompositeObject( model->TARGET(), model->FIELD() );
 			}
 			else
 			{
@@ -143,7 +143,7 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 										   attributes.value("depth").toDouble());
 				prim = new Box(size,true);
 			}
-			obj->append(prim);
+			obj->appendPrimitive(prim);
         }
 		catch (std::exception& e)
 		{ 

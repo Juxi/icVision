@@ -4,19 +4,25 @@
 
 using namespace KinematicModel;
 
-Robot::Robot( Model* m, DT_RespTableHandle t,
-						DT_ResponseClass robotClass, 
-						DT_ResponseClass baseClass ) :	model(m),
-														responseTable(t),
-														worldRobotClass(robotClass),
-														worldBaseClass(baseClass),
-														robotName("unNamedRobot"),
-														numLinks(0),
-														isConfigured(false),
-														numCollisions(0),
-														numReflexCollisions(0)
+Robot::Robot( Model* m, DT_RespTableHandle robotTable,
+                        DT_RespTableHandle fieldTable,
+                        DT_ResponseClass robotClass,
+                        DT_ResponseClass baseClass,
+                        DT_ResponseClass robotField,
+                        DT_ResponseClass robotBaseField ) :	model(m),
+                                                            responseTable(robotTable),
+                                                            fieldResponseTable(fieldTable),
+                                                            worldRobotClass(robotClass),
+                                                            worldBaseClass(baseClass),
+                                                            worldFieldClass(robotField),
+                                                            worldBaseFieldClass(robotBaseField),
+                                                            robotName("unNamedRobot"),
+                                                            numLinks(0),
+                                                            isConfigured(false),
+                                                            numCollisions(0),
+                                                            numReflexCollisions(0)
 {
-	if ( !t ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
+	if ( !robotTable ) { throw KinematicModelException("The Robot constructor requires a valid DT_RespTableHandle."); }
 	qRegisterMetaType< QVector<qreal> >("QVector<qreal>");
 	qRegisterMetaType< RobotObservation >("RobotObservation");
 }
@@ -67,7 +73,7 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
     reader.setContentHandler(&handler);
     reader.setErrorHandler(&handler);
     QFile file(fileName);
-	
+    
 	//printf("set up xml parser\n");
 	
     if ( !file.open(QFile::ReadOnly | QFile::Text) )

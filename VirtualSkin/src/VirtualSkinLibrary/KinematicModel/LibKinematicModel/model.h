@@ -67,7 +67,10 @@ public:
 	CompositeObject* getObject( const QString& name );
 	Robot* getRobot( const QString& name );
 	
-	Robot*	loadRobot( const QString& fileName, bool verbose = true );
+	Robot*	loadRobot( const QString& fileName,
+                       bool limitAvoidance = true,
+                       bool collisionAvoidance = true,
+                       bool verbose = true );
 	void	loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }
@@ -77,6 +80,7 @@ public:
 	DT_ResponseClass	OBSTACLE() const { return obstacleClass; }
 	DT_ResponseClass	TARGET() const { return targetClass; }
 	DT_ResponseClass	GHOST() const { return ghostClass; }
+	DT_ResponseClass	FIELD() const { return fieldClass; }
 	
 public slots:
 	
@@ -91,10 +95,12 @@ signals:
 protected:
 
 	DT_RespTableHandle newRobotTable();
+    DT_RespTableHandle newRobotFieldTable();
 	DT_ResponseClass newResponseClass( DT_RespTableHandle );
 	
 	void removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+    void removeForceResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 
@@ -121,7 +127,8 @@ protected:
 	
 	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
 	QVector<DT_ResponseClass> robotResponseClasses;
-	QVector<DT_ResponseClass> robotBaseClasses;
+	//QVector<DT_ResponseClass> fieldResponseClasses;
+	//QVector<DT_ResponseClass> robotBaseClasses;
 	
 	QVector<Robot*> robots;
 	QVector<CompositeObject*> world;
@@ -132,6 +139,7 @@ protected:
 	DT_ResponseClass	obstacleClass;	//!< objects in this response class trigger reflexes
 	DT_ResponseClass	targetClass;	//!< these don't
 	DT_ResponseClass	ghostClass;		//!< these are left out of collision detection computations
+    DT_ResponseClass    fieldClass;
 	
 	uint numObjects, numPrimitives;
 	
@@ -184,6 +192,13 @@ protected:
 		detector->reflex_col_count++;
 		
 		//return DT_DONE;
+		return DT_CONTINUE;
+	}
+    
+    static DT_Bool repel( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
+	{
+        printf("The Callback is calling!!!\n");
+		// compute repuslive fictitous force and append it to a list somewhere
 		return DT_CONTINUE;
 	}
 };

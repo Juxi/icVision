@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	model.loadRobot( QString(argv[1]), false );
 
 	//printf( "loading world file: %s\n", argv[1] );
-	model.loadWorld( QString(argv[2]), false );
+	//model.loadWorld( QString(argv[2]), false );
 	
 	ObjectSoup soup( model, 5, false );
 	soup.start();

@@ -47,7 +47,7 @@ void ObjectSoup::run()
 
 KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 {
-	KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
+	KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE(), theModel.OBSTACLE() );
 	
 	// choose a random color for the object
 	QColor collidingColor = QColor( qrand()%255, qrand()%255, qrand()%255, 0.5 );
@@ -83,7 +83,7 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 		//primitive->setFreeColor(freeColor);
 		primitive->translate(randomTranslation(0.1));
 		primitive->cartesianRotate(randomRotation());
-		obj->append(primitive);
+		obj->appendPrimitive(primitive);
 	}
 	obj->translate(randomTranslation(1.0));
 	primitive->cartesianRotate(randomRotation());

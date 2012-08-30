@@ -11,7 +11,8 @@ using namespace KinematicModel;
 
 KinTreeNode::KinTreeNode( Robot* robot, 
 						  KinTreeNode* parent,
-						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()) ),
+						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()),
+                                                                 robot->model->newResponseClass(robot->getFieldResponseTable())),
 												parentRobot(robot),
 												parentNode(parent),
 												nodeType(aType)
@@ -20,6 +21,9 @@ KinTreeNode::KinTreeNode( Robot* robot,
 	if ( !robot ) { throw KinematicModelException("The KinTreeNode constructor requires a pointer to a valid Robot."); }
 	if ( !parentNode ) { parentRobot->appendNode(this); }
 	else { parentNode->children.append(this); }
+    
+    // kintreenosed are repulsive hahaha!
+    //fieldResponseClass = robot->model->newResponseClass(robot->getResponseTable());
 }
 
 KinTreeNode::~KinTreeNode()
@@ -94,10 +98,8 @@ void KinTreeNode::ignoreAdjacentPairs( KinTreeNode* node, bool foundLink, bool f
     }
 	
     // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-	//parentRobot->getModel()->removePairResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-	//parentRobot->getModel()->removeReflexResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-	//parentRobot->getModel()->removeVisualResponse( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
 	parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+    parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getFieldResponseClass(), node->getFieldResponseClass() );
 	
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {
