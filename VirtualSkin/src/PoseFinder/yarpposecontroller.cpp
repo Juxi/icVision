@@ -274,9 +274,9 @@ void YarpPoseController::run () {
 			"go [name]\t--\tmove to closest position on map [name]\n"
 			"try [name] [workspace]\t--\treturn goal workspace and path distance of a move to point [workspace] of map [name]\n"
 			"try [name]\t--\treturn goal workspace and path distance of a move to closest position on map [name]\n"
-			"wrt [filename]\t--\twrite the map edges into file [filename] (format source and target workspace of an edge per line"
-			"wrt [filename] [name]\t--\twrite the map edges of map [name] into file [filename] (format source and target workspace of an edge per line"
-			"clr\t--\tremove all maps"
+			"wrt [filename]\t--\twrite the map edges into file [filename] (format source and target workspace of an edge per line\n"
+			"wrt [filename] [name]\t--\twrite the map edges of map [name] into file [filename] (format source and target workspace of an edge per line\n"
+			"clr\t--\tremove all maps\n"
 			"help\t--\tshow this help message\n"
 			"info\t--\tshow info about all maps\n";
 
