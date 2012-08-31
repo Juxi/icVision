@@ -76,7 +76,7 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 	vector<vector<double > > lastVels;
 
 	for (int ipart=0; ipart<nparts; ipart++) {
-		vels[ipart]->setVelocityMode();
+		//vels[ipart]->setVelocityMode();
 		vector<double> lastVel(nJoints[ipart], 0.0);
 		lastVels.push_back(lastVel);
 	}
