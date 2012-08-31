@@ -348,8 +348,8 @@ def move_for_sf():
 
         previous_q = new_q
 
-        icub_eyes.grabImages()
-        icub_eyes.saveImages(save_dir = "/tmp/dataset/", time_stamp = total_steps, right_image = 0)
+        #icub_eyes.grabImages()
+        #icub_eyes.saveImages(save_dir = "/tmp/dataset/", time_stamp = total_steps, right_image = 0)
         total_steps += 1
 
     print "saving positions"
