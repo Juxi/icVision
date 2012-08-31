@@ -59,6 +59,8 @@ public:
 	std::vector<std::vector<double> > poses_to_configurations(poses_map_t &poses);
 	std::vector<double> parse_scale_vector();
 	std::vector<std::vector<double> > cut_pose(std::vector<double> &pose);
+	std::vector<double> scale_q( std::vector<double> q, std::string mapname="");
+	std::vector<double> unscale_q( std::vector<double> sq, std::string mapname="");
 
 	//Roadmap::path_t move_to_path(std::vector<double> source, std::vector<double> target);
 

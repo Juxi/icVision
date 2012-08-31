@@ -10,23 +10,53 @@ using namespace yarp::os;
 using namespace yarp::dev;
 
 
-
 bool MoverMinJerkLinear::init(string& robot, vector<string>& parts ) {
 	if (!MoverPosition::init(robot, parts)) { return false; }
 
 	vels.clear(); vctrls.clear();
 	vels.resize(nparts); vctrls.resize(nparts);
 
+	ResourceFinder rf;
+	rf.setVerbose(true);
+	rf.setDefaultContext("mover/conf");
+	rf.setDefault("robot","icubSim");
+	int argc = 0; char *argv[1];
+	rf.configure("ICUB_ROOT",argc,argv);
+
 	for (int ipart=0; ipart<nparts; ipart++) {
 		if (dd[ipart] && dd[ipart]->isValid() ) {
 			IVelocityControl *vel;
 			dd[ipart]->view(vel);
 			vels[ipart] = vel;
-
-			vctrls[ipart] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
-			//vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
+#ifdef NEWYARP			
+			//vctrls[ipart] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
+			vctrls[ipart] = new minJerkVelCtrlForNonIdealPlant(TS,nJoints[ipart]);
+	
+			Property config, plantprop, getp;
+			string keyname = "key_" + partnames[ipart];
+			string filename = "plant_model_" + partnames[ipart] + ".ini";
+			rf.setDefault(keyname.c_str(), filename.c_str());
+			
+			config.fromConfigFile(rf.findFile(keyname.c_str()),false);
+			Bottle &optPlantModel=config.findGroup("PLANT_MODEL");
+			if (!optPlantModel.isNull()) {
+				fprintf(stdout,"PLANT_MODEL group detected\n");
+				plantprop.fromString(optPlantModel.toString().c_str());
+				
+				if (plantprop.check("plant_compensator",Value("off")).asString()=="on") {
+					dynamic_cast<minJerkVelCtrlForNonIdealPlant*>(vctrls[ipart])->setPlantParameters(plantprop, "joint");
+					dynamic_cast<minJerkVelCtrlForNonIdealPlant*>(vctrls[ipart])->getPlantParameters(getp, "joint");
+					cout << endl << endl << plantprop.toString() << endl << endl;
+					cout << endl << endl << getp.toString() << endl << endl;
+				}
+			}
+#else
+			vctrls[ipart] = new minJerkVelCtrl(TS,nJoints[ipart]);
+#endif
+			
 		}
 	}
+
 	maxSpeed = 10;
 
 	return checkVelDrivers();
@@ -81,10 +111,12 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 		lastVels.push_back(lastVel);
 	}
 
+#ifdef NEWYARP
 	// reset minJerk controls
 	for (int ipart=0; ipart<nparts; ipart++) {
-		//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
+		vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
 	}
+#endif
 
 	// send start to move monitor
 	Bottle &s = monitorPort.prepare(); s.clear();
@@ -159,10 +191,12 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 				else
 					cout << " reflex done." << endl;
 
+#ifdef NEWYARP
 				// reset minJerk controls
 				for (int ipart=0; ipart<nparts; ipart++) {
-					//vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
+					vctrls[ipart]->reset(std2yarp(vector<double>(nJoints[ipart], 0.)));
 				}
+#endif
 
 				ipose = nposes; // this will exit poses loop
 				break; // exit the while(!reached) loop

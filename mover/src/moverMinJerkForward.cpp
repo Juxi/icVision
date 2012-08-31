@@ -8,7 +8,6 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
-#define NEWYARP 1
 
 
 bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
@@ -23,8 +22,7 @@ bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
 	rf.setDefault("robot","icubSim");
 	int argc = 0; char *argv[1];
 	rf.configure("ICUB_ROOT",argc,argv);
-	
-	
+		
 
 	for (int ipart=0; ipart<nparts; ipart++) {
 		if (dd[ipart] && dd[ipart]->isValid() ) {
@@ -54,7 +52,7 @@ bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
 				}
 			}
 #else
-			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
+			vctrls[ipart] = new minJerkVelCtrl(TS,nJoints[ipart]);
 #endif
 			
 		}

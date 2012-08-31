@@ -288,40 +288,42 @@ void YarpPoseController::run () {
 			case VOCAB_GO:
 				if (query.size() == 2 && query.get(1).isString()) { //go [name]
 
-					vector<double> source_conf = get_current_pose();
+					vector<double> source_q = get_current_pose();
+					vector<double> source_sq = d_path_planner->scale_q(source_q);
 					string mapname = query.get(1).asString().c_str();
 
-					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
-					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE, mapname);
+					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
+					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE, mapname);
 
 					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 					follow_path(path);
 				} else
 					if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
 						
-						vector<double> source_conf = get_current_pose();
+						vector<double> source_q = get_current_pose();
+						vector<double> source_sq = d_path_planner->scale_q(source_q);
 						string mapname = query.get(1).asString().c_str();
-						vector<double> target_work = bottle_to_vector(query.get(2));
+						vector<double> target_x = bottle_to_vector(query.get(2));
 						
-						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
-						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_work, WORKSPACE, mapname);
-						vector<double> target_conf = d_path_planner->getVertex(target_v).q;
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_q, SCALEDCONFIGURATIONSPACE);
+						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_x, WORKSPACE, mapname);
+						vector<double> target_q = d_path_planner->getVertex(target_v).q;
 
-						if (source_conf.size() != target_conf.size())
-							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
+						if (source_q.size() != target_q.size())
+							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_q.size(), target_q.size()));
 
 						cout << "robot:" << endl;
-						print_vector(source_conf);
+						print_vector(source_q);
 						cout << "source:" << endl;
 						print_vector(d_path_planner->getVertex(source_v).q);
 						cout << "target workspace:" << endl;
-						print_vector(target_work);
+						print_vector(target_x);
 						cout << "target configuration space:" << endl;
-						print_vector(target_conf);
+						print_vector(target_q);
 						cout << "finding path:" << endl;
 
-						if (source_conf.size() != target_conf.size()) {
-							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
+						if (source_q.size() != target_q.size()) {
+							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_q.size(), target_q.size()));
 						}
 
 						Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
@@ -334,11 +336,13 @@ void YarpPoseController::run () {
 			case VOCAB_TRY:
 				if (query.size() == 2 && query.get(1).isString()) { //go [name]
 
-					vector<double> source_conf = get_current_pose();
+					vector<double> source_q = get_current_pose();
+					vector<double> source_sq = d_path_planner->scale_q(source_q);
 					string mapname = query.get(1).asString().c_str();
-
-					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
-					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE, mapname);
+					
+					
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
+					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE, mapname);
 					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 
 					Bottle bgoal;
@@ -348,20 +352,21 @@ void YarpPoseController::run () {
 					response.addList() = bgoal;
 					response.addDouble(path.length);
 
-					//path = d_path_planner->move_to_path(source_conf, target_conf);
+					//path = d_path_planner->move_to_path(source_q, target_q);
 					//follow_path(path);
 				} else
 					if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
-						vector<double> source_conf = get_current_pose();
+						vector<double> source_q = get_current_pose();
+						vector<double> source_sq = d_path_planner->scale_q(source_q);
 						string mapname = query.get(1).asString().c_str();
-						vector<double> target_work = bottle_to_vector(query.get(2));
+						vector<double> target_x = bottle_to_vector(query.get(2));
 						
-						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_conf, CONFIGURATIONSPACE);
-						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_work, WORKSPACE, mapname);
-						vector<double> target_conf = d_path_planner->getVertex(target_v).q;
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
+						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_x, WORKSPACE, mapname);
+						vector<double> target_q = d_path_planner->getVertex(target_v).q;
 
-						if (source_conf.size() != target_conf.size())
-							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_conf.size(), target_conf.size()));
+						if (source_q.size() != target_q.size())
+							throw StringException(Sprintf("source (from mover) and target vector size dont match: ", source_q.size(), target_q.size()));
 
 						Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 

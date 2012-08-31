@@ -275,6 +275,20 @@ Roadmap::vertex_t PathPlanner::nearestVertex(vector<double> &v, TreeMode mode, s
 	return map.nearestVertex(v, collision_vertex_tester, mode);
 }
 
+
+
+vector<double> PathPlanner::scale_q(vector<double> q, string mapname) {
+	Roadmap &map = get_map(mapname);
+	return map.scale_q(q);
+}
+
+
+vector<double> PathPlanner::unscale_q(vector<double> q_scaled, string mapname) {
+	Roadmap &map = get_map(mapname);
+	return map.unscale_q(q_scaled);
+}
+
+
 /*
 std::pair<Path, double> Roadmap::shortestPath_backup( vertex_t from, vertex_t to )
 {

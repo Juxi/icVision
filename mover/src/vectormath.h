@@ -6,15 +6,16 @@
 #ifndef VECTOR_MATH_H
 #define VECTOR_MATH_H
 
-//#include <vector>
-//#include <cmath>
-//#include <limits>
-//#include <string>
+#include <vector>
+#include <cmath>
+#include <limits>
 #include <yarp/dev/all.h>
 using std::vector;
 using std::numeric_limits;
 using std::max; 
 using std::min;
+using std::abs;
+using std::sqrt;
 
 inline double sign(const double& v) {
     return ((v==0.0)?0.0:((v>0.0)?1.0:-1.0));
