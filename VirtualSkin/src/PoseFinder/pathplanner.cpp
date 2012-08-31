@@ -23,8 +23,8 @@ d_posefinder(model, robot), d_dimensionality(dimensionality)
 	//hack2
 	d_scale_map["CFGSPACE_TORSO"] = string_to_vector<double>("0.75 0.75 1.0");
 	d_scale_map["CFGSPACE_HEAD"] = string_to_vector<double>("0.1 0.1 0.1 0.0 0.0 0.0");
-	d_scale_map["CFGSPACE_RIGHT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.1 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
-	d_scale_map["CFGSPACE_LEFT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.1 0.1 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+	d_scale_map["CFGSPACE_RIGHT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.25 0.25 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+	d_scale_map["CFGSPACE_LEFT_ARM"] = string_to_vector<double>("0.5 0.5 0.5 0.25 0.25 0.1 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
 
 
 	d_pose_sizes["CFGSPACE_TORSO"] = d_scale_map["CFGSPACE_TORSO"].size();

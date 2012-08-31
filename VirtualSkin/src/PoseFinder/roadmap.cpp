@@ -519,22 +519,22 @@ Roadmap::vertex_t Roadmap::nearestVertex(vector<double> &v, VertexTester &evalua
 		switch (mode) {
 		case CONFIGURATIONSPACE: 
 			{
-				vector<double> &q = map[it->first.vertex].q;
+				//vector<double> &q = map[it->first.vertex].q;
 				//cout << "dist: " << it->second << " q: "; for (int i = 0; i< q.size(); i++) { cout << q[i] << " "; }; cout << endl;
-				found = evaluate.check(v, q);
+				found = evaluate.check(v, map[it->first.vertex].q);
 			}
 			break;
 		case SCALEDCONFIGURATIONSPACE: 
 			{
-				vector<double> &qs = map[it->first.vertex].qs;
+				//vector<double> &qs = map[it->first.vertex].qs;
 				//cout << "dist: " << it->second << " qs: "; for (int i = 0; i< qs.size(); i++) { cout << qs[i] << " "; }; cout << endl;
-                vector<double> unscaled_q(unscale_q(v));
-				found = evaluate.check(unscaled_q, qs);
+				vector<double> unscaled_q(unscale_q(v));
+				found = evaluate.check(unscaled_q, map[it->first.vertex].q);
 			}
 			break;
 		case WORKSPACE: 
 			{
-				vector<double> &x = map[it->first.vertex].x;
+				//vector<double> &x = map[it->first.vertex].x;
 				//cout << "dist: " << it->second << " x: "; for (int i = 0; i< x.size(); i++) { cout << x[i] << " "; }; cout << endl;
 				found = evaluate.check(map[it->first.vertex].q, map[it->first.vertex].q); // here we don't have the corresponding configurationspace vector, so we just check the neighbor
 			}

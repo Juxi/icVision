@@ -341,7 +341,7 @@ void YarpPoseController::run () {
 					string mapname = query.get(1).asString().c_str();
 					
 					
-						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
+					Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
 					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE, mapname);
 					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
 
