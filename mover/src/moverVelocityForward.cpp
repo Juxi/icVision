@@ -99,7 +99,7 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 	vector<vector<double > > lastVels;
 
 	for (int ipart=0; ipart<nparts; ipart++) {
-		vels[ipart]->setVelocityMode();
+		//vels[ipart]->setVelocityMode();
 		vector<double> lastVel(nJoints[ipart], 0.0);
 		lastVels.push_back(lastVel);
 	}
@@ -188,7 +188,7 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
 					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);
 				}
-				//if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+				//if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) { // doesn't work on the robot
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_VELOCITY)) {
 					// apply bang-bang control for unachievably low velocities
 					if ((q[iax] > -minabsvel) && (q[iax] < minabsvel) && (q[iax]!=0.0)) {
@@ -200,12 +200,12 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 				}
 			}
 
-			if (nJoints[ipart] == 3) {// print torso
+			/*if (nJoints[ipart] == 3) {// print torso
 				for (int j=0;j<nJoints[ipart];j++) {
 					cout << " " << q[j] << " ";
 				}
 				cout << endl;
-			}
+			}*/
 		}
 		//cout << endl;
 

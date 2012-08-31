@@ -242,7 +242,8 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
 					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);
 				}
-				if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+				//if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) { // doesnt' work on the robot
+				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_VELOCITY)) {
 					// apply bang-bang control for unachievably low velocities
 					if ((q[iax] > -minabsvel) && (q[iax] < minabsvel) && (q[iax]!=0.0)) {
 						q[iax]=iCub::ctrl::sign(diff[ipart][iax])*minabsvel;
@@ -251,8 +252,6 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 					// send velocities to robot
 					vels[ipart]->velocityMove(iax, lastVels[ipart][iax]=q[iax]);
 				}
-				//double s = diff[ipart][iax];
-				//vels[ipart]->velocityMove(iax, min(max(s, -maxSpeed), maxSpeed));
 			}
 
 			/*for (int j=0;j<nJoints[ipart];j++) {
