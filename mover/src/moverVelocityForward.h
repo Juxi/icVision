@@ -3,8 +3,8 @@
  ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
  ******************************************************************/
 
-#ifndef MOVER_MIN_JERK_FORWARD_H
-#define MOVER_MIN_JERK_FORWARD_H
+#ifndef MOVER_VELOCITY_FORWARD_H
+#define MOVER_VELOCITY_FORWARD_H
 
 #include "mover.h"
 #include "moverPosition.h"
@@ -12,17 +12,18 @@
 #include "vectormath.h"
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
-#include <iCub/ctrl/minJerkCtrl.h>
+
 
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::dev;
-using namespace iCub::ctrl;
+
 
 #define VOCAB_MODE_POSITION VOCAB3('p','o','s')
 #define VOCAB_MODE_VELOCITY VOCAB3('v','e','l')
+#define MAX_ACCELERATION 1e9 // we handle acceleration limits ourselves, and therefore don't use the acceleration limit of the velocity controllers
 
-class MoverMinJerkForward : public MoverPosition {
+class MoverVelocityForward : public MoverPosition {
 	
 public:
 	virtual bool init(string& robot, vector<string>& partnames);	//!< Connects to the remote device
@@ -30,18 +31,16 @@ public:
 	virtual bool setRefSpeed(double spd);
 	virtual bool setRefAcceleration(double acc);
 	virtual bool setFwdSteps(int steps);
-	virtual bool setMinTrajTime(double m);
-	virtual bool setMode(int mode);
+	virtual bool setKp(double kp);
 	virtual bool setMinAbsVel(double v);
+	virtual bool setMode(int mode);
 
 protected:
-	virtual void close();									//!< Closes the connection to the remote device
+							//!< Closes the connection to the remote device
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
-	vector<minJerkVelCtrl*> vctrls;
-	double maxSpeed, minTrajTime, minabsvel;
+	double maxSpeed, maxAcceleration, Kp, minabsvel;
 	int nForwardSteps, moveMode;
-
 };
 #endif
 /** @} */

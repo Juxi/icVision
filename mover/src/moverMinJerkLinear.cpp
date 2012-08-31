@@ -17,14 +17,14 @@ bool MoverMinJerkLinear::init(string& robot, vector<string>& parts ) {
 	vels.clear(); vctrls.clear();
 	vels.resize(nparts); vctrls.resize(nparts);
 
-	for (int i=0; i<nparts; i++) {
-		if (dd[i] && dd[i]->isValid() ) {
+	for (int ipart=0; ipart<nparts; ipart++) {
+		if (dd[ipart] && dd[ipart]->isValid() ) {
 			IVelocityControl *vel;
-			dd[i]->view(vel);
-			vels[i] = vel;
-	
-			//vctrls[i] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
-			vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
+			dd[ipart]->view(vel);
+			vels[ipart] = vel;
+
+			vctrls[ipart] = new minJerkVelCtrlForIdealPlant(TS,nJoints[ipart]);
+			//vctrls[i] = new minJerkVelCtrl(TS,nJoints[i]);
 		}
 	}
 	maxSpeed = 10;
@@ -76,7 +76,7 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 	vector<vector<double > > lastVels;
 
 	for (int ipart=0; ipart<nparts; ipart++) {
-		vels[ipart]->setVelocityMode();
+		//vels[ipart]->setVelocityMode();
 		vector<double> lastVel(nJoints[ipart], 0.0);
 		lastVels.push_back(lastVel);
 	}
