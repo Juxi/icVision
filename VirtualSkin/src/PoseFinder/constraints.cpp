@@ -43,12 +43,20 @@ pair<Constraint*, double> ConstraintFactory::constraint_from_bottle(yarp::os::Bo
     //double weight = bottle.find("weight").asDouble();
     double weight = find_and_check<double>(bottle, "weight");
     string pose_name = find_and_check<string>(bottle, "pose");
+    string mask_name = find_and_check<string>(bottle, "mask");
     vector<double> home_pos = group_to_vector(main.findGroup(pose_name.c_str()).findGroup("pose"));
+    vector<double> mask = group_to_vector(main.findGroup(mask_name.c_str()).findGroup("pose"));
+    
     cout << "home pose: [";
     for (size_t i(0); i < home_pos.size(); ++i)
       cout << home_pos[i] << " ";
-    cout << "]" << endl;
-    constraint_weight.first = new HomePoseConstraint(home_pos);
+    cout << "] = " << home_pos.size() << endl;
+
+    cout << "mask: [";
+    for (size_t i(0); i < mask.size(); ++i)
+      cout << mask[i] << " ";
+    cout << "] = " << mask.size() << endl;
+    constraint_weight.first = new HomePoseConstraint(home_pos, mask);
     constraint_weight.second = weight;
     cout << weight << endl;
   } else

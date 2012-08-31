@@ -13,12 +13,12 @@ using namespace std;
 MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
   : verbose(false), keepRunning(true), 
 	d_pose_finder(model, robot),
-	d_population_size(100), d_start_std(.2)
+	d_population_size(250), d_start_std(.1)
 {
   init_standard_poses();
   
   //nullspace_function();
-  read_constraints("test.config");
+  read_constraints("nullspace.config");
  //move_box_function();
 
   //hold_something_function();
