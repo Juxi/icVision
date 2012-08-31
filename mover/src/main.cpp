@@ -30,7 +30,7 @@ using namespace yarp::dev;
 #define VOCAB_MIN_ABS_VEL VOCAB3('m','a','v')
 
 #define MAX_REFERENCE_SPEED 40.
-#define MAX_REFERENCE_ACCELERATION 10000.
+#define MAX_REFERENCE_ACCELERATION 1000.
 #define HARD_MIN_TRAJ_TIME 0.1
 #define HARD_MAX_MIN_ABS_VEL 2.0 // controller should not do bang-bang control above this velocity
 

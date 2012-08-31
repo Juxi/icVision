@@ -62,8 +62,12 @@ bool MoverVelocityForward::setMinAbsVel(double v) {
 
 bool MoverVelocityForward::setRefAcceleration(double acc) {
 	maxAcceleration = acc;
-	return MoverPosition::setRefAcceleration(MAX_ACCELERATION);
-
+	bool success = true;
+	for (int ipart=0; ipart<nparts; ipart++) {
+		vector<double> accs(nJoints[ipart], MAX_ACCELERATION);
+		success = success && vels[ipart]->setRefAccelerations(&accs[0]);
+	}
+	return success;
 }
 
 
@@ -95,7 +99,7 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 	vector<vector<double > > lastVels;
 
 	for (int ipart=0; ipart<nparts; ipart++) {
-		//vels[ipart]->setVelocityMode();
+		vels[ipart]->setVelocityMode();
 		vector<double> lastVel(nJoints[ipart], 0.0);
 		lastVels.push_back(lastVel);
 	}
@@ -184,7 +188,8 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
 					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);
 				}
-				if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+				//if (!mask[ipart][iax] && (lastVels[ipart][iax] != q[iax]) && (moveMode == VOCAB_MODE_VELOCITY)) {
+				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_VELOCITY)) {
 					// apply bang-bang control for unachievably low velocities
 					if ((q[iax] > -minabsvel) && (q[iax] < minabsvel) && (q[iax]!=0.0)) {
 						q[iax]=sign(diff[ipart][iax])*minabsvel;
@@ -195,11 +200,12 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 				}
 			}
 
-			/*for (int j=0;j<nJoints[ipart];j++) {
-				cout << " " << q[j] << " ";
+			if (nJoints[ipart] == 3) {// print torso
+				for (int j=0;j<nJoints[ipart];j++) {
+					cout << " " << q[j] << " ";
+				}
+				cout << endl;
 			}
-			cout << endl;*/
-			//cout << " " << trajTime;
 		}
 		//cout << endl;
 
