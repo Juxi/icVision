@@ -29,6 +29,7 @@ bool MoverVelocityForward::init(string& robot, vector<string>& parts ) {
 	moveMode = VOCAB_MODE_VELOCITY;
 	maxAcceleration = 1000;
 	Kp = 2.0; // proportional part of P-controller
+	minabsvel = 0.0;
 
 	return checkVelDrivers();
 }
@@ -50,6 +51,12 @@ bool MoverVelocityForward::setRefSpeed(double spd) {
 
 bool MoverVelocityForward::setKp(double kp) {
 	Kp = kp;
+	return true;
+}
+
+
+bool MoverVelocityForward::setMinAbsVel(double v) {
+	minabsvel = v;
 	return true;
 }
 
@@ -77,7 +84,6 @@ bool MoverVelocityForward::setMode(int m) {
 bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
 	int dragFactor = 10;
-	double minabsvel = 0.5;
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;

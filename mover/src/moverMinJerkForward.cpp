@@ -62,6 +62,7 @@ bool MoverMinJerkForward::init(string& robot, vector<string>& parts ) {
 	minTrajTime = 0.5;
 	nForwardSteps = 40;
 	maxSpeed = 10;
+	minabsvel = 0.0;
 	moveMode = VOCAB_MODE_VELOCITY;
 
 	return checkVelDrivers();
@@ -117,11 +118,15 @@ bool MoverMinJerkForward::setMode(int m) {
 		return false;
 }
 
+bool MoverMinJerkForward::setMinAbsVel(double v) {
+	minabsvel = v;
+	return true;
+}
+
 
 bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double distancethreshold, double finaldistancethreshold, double steptimeout, double trajtimeout) {
 	stop = false;
 	int dragFactor = 10;
-	double minabsvel = 0.5;
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
@@ -232,8 +237,7 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 			
 			vector<double> q = yarp2std(vctrls[ipart]->computeCmd(trajTime, std2yarp(diff[ipart])));
 			q = max(q, -maxSpeed); q = min(q, maxSpeed); // limit velocities
-			// minabsvel = 0.5
-
+			
 			for (int iax=0; iax < nJoints[ipart]; iax++) {
 				if (!mask[ipart][iax] && (moveMode == VOCAB_MODE_POSITION)) {
 					poss[ipart]->positionMove(iax, poses[targetIndex][ipart][iax]);

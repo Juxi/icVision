@@ -32,13 +32,14 @@ public:
 	virtual bool setFwdSteps(int steps);
 	virtual bool setMinTrajTime(double m);
 	virtual bool setMode(int mode);
+	virtual bool setMinAbsVel(double v);
 
 protected:
 	virtual void close();									//!< Closes the connection to the remote device
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
 	vector<minJerkVelCtrl*> vctrls;
-	double maxSpeed, minTrajTime;
+	double maxSpeed, minTrajTime, minabsvel;
 	int nForwardSteps, moveMode;
 
 };

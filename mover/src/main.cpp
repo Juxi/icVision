@@ -27,10 +27,12 @@ using namespace yarp::dev;
 #define VOCAB_STOP VOCAB4('s','t','o','p') // cancel ongoing movement
 #define VOCAB_MOVE_MODE VOCAB4('m','o','d','e')
 #define VOCAB_MIN_TRAJ_TIME VOCAB4('m','i','n','t')
+#define VOCAB_MIN_ABS_VEL VOCAB3('m','a','v')
 
 #define MAX_REFERENCE_SPEED 40.
-#define MAX_REFERENCE_ACCELERATION 1000.
+#define MAX_REFERENCE_ACCELERATION 10000.
 #define HARD_MIN_TRAJ_TIME 0.1
+#define HARD_MAX_MIN_ABS_VEL 2.0 // controller should not do bang-bang control above this velocity
 
 typedef MoverVelocityForward mover_type;
 //typedef MoverMinJerkForward mover_type;
@@ -102,12 +104,16 @@ int main(int argc, char *argv[]) {
 	if ( settings.check("kp") )  { kp = settings.find("kp").asDouble(); }
 	if ( command.check("kp") )  { kp = command.find("kp").asDouble(); }
 
+	double minabsvel = 0.0; // default minimum velocity before switching to bang-bang controler
+	if ( settings.check("minabsvel") )  { minabsvel = settings.find("minabsvel").asDouble(); }
+	if ( command.check("minabsvel") )  { minabsvel = command.find("minabsvel").asDouble(); }
+
+
 	int moveMode = VOCAB_MODE_VELOCITY; // default mode is velocity
 	if ( settings.check("movemode") )  { moveMode = settings.find("movemode").asDouble(); }
 	if ( command.check("movemode") )  { moveMode = command.find("movemode").asDouble(); }
 
-
-	string vSkinRpcPort = "/virtualSkin/filterRpc";
+		string vSkinRpcPort = "/virtualSkin/filterRpc";
 	if ( settings.check("vskinrpc") )  { vSkinRpcPort = settings.find("vskinrpc").asString().c_str(); }
 	if ( command.check("vskinrpc") )  { vSkinRpcPort = command.find("vskinrpc").asString().c_str(); }
 
@@ -148,6 +154,7 @@ int main(int argc, char *argv[]) {
 	mover.setMinTrajTime(minTrajTime);
 	mover.setMode(moveMode);
 	mover.setKp(kp);
+	mover.setMinAbsVel(minabsvel);
 	
 	// parse and set default masks
 	if (defaultMasks.size() > 1) {
@@ -334,6 +341,22 @@ int main(int argc, char *argv[]) {
 					response.addVocab(VOCAB_FAIL);
 				}
 				break;
+			case VOCAB_MIN_ABS_VEL:
+				success = query.size() >= 2;
+				if (!success) { cout << "Invalid number of arguments." << endl; }
+				success = success && (query.get(2).isInt() || query.get(2).isDouble());
+				if (!success) { cout << "Minimum velocity should be a number." << endl; }
+				minabsvel = query.get(2).asDouble();
+				minabsvel = min(max(0.0, minabsvel), HARD_MAX_MIN_ABS_VEL); // limit minabsvel between 0 and HARD_MAX_MIN_ABS_VEL
+				success = success && mover.setMinAbsVel(minabsvel);
+				if (success) { 
+					cout << "New minimum velocity for bang-bang control set to " << kp << endl;
+					response.addVocab(VOCAB_OK);
+				} else {
+					cout << "Setting minimum velocity for bang-bang control failed." << endl;
+					response.addVocab(VOCAB_FAIL);
+				}
+				break;
 			case VOCAB_MOVE_MODE:
 				success = query.size() >= 2;
 				if (!success) { cout << "Invalid number of arguments." << endl; }
@@ -417,6 +440,7 @@ int main(int argc, char *argv[]) {
 			response.addString( "set acc VALUE: set reference acceleration for all parts for all joints.\n");
 			response.addString( "set fwd VALUE: set number of forward steps.\n");
 			response.addString( "set kp VALUE: set proportional term of P-controller.\n");
+			response.addString( "set mav VALUE: set velocity below which bang-bang control is used.\n");
 			response.addString( "set mint VALUE: set minimum trajectory time.\n");
 			response.addString( "set mode pos: set position move mode.\n");
 			response.addString( "set mode vel: set velocity move mode.\n");

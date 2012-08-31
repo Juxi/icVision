@@ -32,15 +32,15 @@ public:
 	virtual bool setRefAcceleration(double acc);
 	virtual bool setFwdSteps(int steps);
 	virtual bool setKp(double kp);
+	virtual bool setMinAbsVel(double v);
 	virtual bool setMode(int mode);
 
 protected:
 							//!< Closes the connection to the remote device
 	bool checkVelDrivers();
 	vector<IVelocityControl*> vels;
-	double maxSpeed, maxAcceleration, Kp;
+	double maxSpeed, maxAcceleration, Kp, minabsvel;
 	int nForwardSteps, moveMode;
-
 };
 #endif
 /** @} */

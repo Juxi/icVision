@@ -38,6 +38,7 @@ public:
 	virtual bool setMinTrajTime(double m) {cout << "SetMinTrajTime not implemented" << endl; return false;};
 	virtual bool setFwdSteps(int steps) {cout << "SetFwdSteps not implemented" << endl; return false;};
 	virtual bool setKp(double kp) {cout << "SetKp not implemented" << endl; return false;};
+	virtual bool setMinAbsVel(double v) {cout << "SetMinAbsVel not implemented" << endl; return false;};
 
 	bool connectMonitor();
 	bool connnectVSkin(string &portRpc, string& statusPort);
