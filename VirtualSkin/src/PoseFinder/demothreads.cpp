@@ -143,7 +143,7 @@ void MapThread::run()
 	  else
 		start_pose = random_pose();
 
-	  double minfitness = 0.00001;
+	  double minfitness = 0.0001;
 	  d_pose_finder.find_pose(start_pose, minfitness, 1.0e-6, d_start_std, d_population_size);
       add_best_pose(minfitness);
       store_points(store_file_name);

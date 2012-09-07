@@ -24,8 +24,8 @@ public:
 	SIMPLEX
   };
   
-//PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
-PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = SIMPLEX) :
+PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
+//PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = SIMPLEX) :
 		d_simulator(model, robot),
 		  d_build_mode(build_mode),
 		d_pose_fitness_function(d_simulator)
