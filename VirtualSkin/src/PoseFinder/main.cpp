@@ -61,10 +61,10 @@ int online_test(Model &model, Robot &robot, QApplication &app) {
 
 int main(int argc, char *argv[])
 {
-	if (argc != 4) {
+	/*if (argc != 4) {
 		cout << "not enough arguments" << endl;
 		return 1;
-	}
+	}*/
 	bool visualize = true;
 	
 	//vector<vector<float> > some_poses = read_poses("poses.save")["CFGSPACE"];
@@ -72,10 +72,16 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv, visualize);	// create the QT application
 	
 	Model model( visualize, false );
-	model.setStopOnFirstCollision(true); // stop checking for collisions after the first collision in a pose
+	
+	model.setStopOnFirstCollision(false); // stop checking for collisions after the first collision in a pose, enabling this means the the optimization algorithm will not find any gradient information for colliding positions
 	model.start();	/* if we want display lists to be created automatically,
 					   the model must be started prior to appending objects */
 	
+	if (model.getStopOnFirstCollision())
+		printf("model returns on first collision\n");
+	else
+		printf("model computes all collisions\n");
+
 	printf("loading robot file: %s\n", argv[1]);
 	Robot &robot = *model.loadRobot(QString(argv[1]), false);
 

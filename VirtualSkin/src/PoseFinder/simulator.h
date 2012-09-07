@@ -65,7 +65,7 @@ public:
 		return d_model.computePose();
 	}
 
-	void set_motors(std::vector<double> &motor_values) {
+	void set_motors(const std::vector<double> &motor_values) {
 		assert(motor_values.size() == d_total_motors);
 		size_t i(0);
 		int n_parts = d_robot.numBodyParts();

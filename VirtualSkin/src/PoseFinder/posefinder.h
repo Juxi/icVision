@@ -20,10 +20,12 @@ public:
   enum BuildMode {
 	XNES,
 	MONES,
-    MC
+    MC,
+	SIMPLEX
   };
   
- PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
+//PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = XNES) :
+PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = SIMPLEX) :
 		d_simulator(model, robot),
 		  d_build_mode(build_mode),
 		d_pose_fitness_function(d_simulator)
@@ -34,6 +36,7 @@ public:
 	~PoseFinder() {}
 	void find_pose(std::vector<double> start_search_pos, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
 	void find_pose_mones(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
+	void find_pose_simplex(std::vector<double> start_search_pos, double fitness_threshold);
 	void find_pose_xnes(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
     void find_pose_mc(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size);
   

@@ -53,26 +53,7 @@ public:
 
     void read_constraints(std::string filename);
 
-	void add_best_pose() {
-		std::vector<double> best_point = d_pose_finder.best_point();
-
-		//assumed last pose was best pose?
-		d_pose_finder.d_simulator.set_motors(best_point);
-		double n_collisions = d_pose_finder.d_simulator.computePose();
-
-		//
-		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
-		std::vector<double> position = observation.markerPosition(QString(d_map_build_constraint->marker().c_str()));
-		if (n_collisions)
-		  return;
-
-		d_configuration_points.push_back(best_point);
-		d_map_build_constraint->add_point(position, best_point);
-		for (size_t i(0); i < position.size(); ++i)
-		  std::cout << position[i] << " ";
-		std::cout << std::endl;
-		d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
-	}
+	void add_best_pose(double minfitness);
 
 	std::vector<double> random_pose() {
 	  return d_configuration_points[rand() % d_configuration_points.size()];
@@ -96,7 +77,8 @@ public:
 			}
 		}
 		store_map["WORKSPACE"] = *d_points;
-		write_poses(store_map, filename);
+		if (d_points->size() > 0)
+			write_poses(store_map, filename);
 	}
 	
 	void load_points(std::string filename);
@@ -216,7 +198,7 @@ public:
 		QTime time = QTime::currentTime();
 		qsrand((uint)time.msec());
 
-		while (true) {
+		while (keepRunning) {
 			if (slider_window.changed()) {
 			  d_pose_finder.find_pose(d_pose_finder.get_normal_homepos(), 0., 1.0e-6, .10, 50);
 				slider_window.changed(false);
@@ -239,7 +221,7 @@ class StoreFilter : public EvaluationFilter{
 
 	}
 
-	virtual void operator()(std::vector<double> &values, double fitness, int n_collisions, KinematicModel::RobotObservation &observation) {
+	virtual void operator()(const std::vector<double> &values, double fitness, int n_collisions, KinematicModel::RobotObservation &observation) {
 //		if (n_collisions)
 //			return;
 		d_configurations.push_back(values);

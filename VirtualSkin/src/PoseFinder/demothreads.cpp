@@ -17,9 +17,9 @@ MapThread::MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot)
 {
   init_standard_poses();
   
-  //nullspace_function();
-  read_constraints("nullspace.config");
- //move_box_function();
+  nullspace_function();
+  //read_constraints("nullspace.config");
+  //move_box_function();
 
   //hold_something_function();
   //		hand_left_function();
@@ -113,7 +113,7 @@ void MapThread::run()
   size_t n(0);
   bool test(false);
   if (test)
-    while (true) {
+    while (keepRunning) {
       //				size_t n(qrand() % d_configuration_points.size());
       cout << "Testing!: "<< n << endl;
       //				n = 279;
@@ -133,7 +133,7 @@ void MapThread::run()
       n = rand() % d_configuration_points.size();
     }
   else
-    while (true) {
+    while (keepRunning) {
       //double start_std(.70);
       //size_t population_size(250);
 
@@ -142,12 +142,44 @@ void MapThread::run()
 		start_pose = d_pose_finder.get_normal_homepos();
 	  else
 		start_pose = random_pose();
-	  d_pose_finder.find_pose(start_pose, 0., 1.0e-6, d_start_std, d_population_size);
-      add_best_pose();
+
+	  double minfitness = 0.00001;
+	  d_pose_finder.find_pose(start_pose, minfitness, 1.0e-6, d_start_std, d_population_size);
+      add_best_pose(minfitness);
       store_points(store_file_name);
     }
 }
 
+
+void MapThread::add_best_pose(double minfitness) {
+		std::vector<double> best_point = d_pose_finder.best_point();
+
+		//assumed last pose was best pose?
+		d_pose_finder.d_simulator.set_motors(best_point);
+		double n_collisions = d_pose_finder.d_simulator.computePose();
+
+		//
+		KinematicModel::RobotObservation observation = d_pose_finder.simulator().robot().observe();
+		std::vector<double> position = observation.markerPosition(QString(d_map_build_constraint->marker().c_str()));
+		if (n_collisions > 0) {
+			cout << "Skipping point with collisions";
+			return;
+		}
+
+		// we might need a couple of bad points in the beginning, to get the search started, so don't throw out bad points yet
+		//if (d_pose_finder.d_pose_fitness_function.eval(best_point) > minfitness) {
+		//	cout << "Skipping point sub-threshold fitness";
+		//	return;
+		//}
+
+
+		d_configuration_points.push_back(best_point);
+		d_map_build_constraint->add_point(position, best_point);
+		for (size_t i(0); i < position.size(); ++i)
+		  std::cout << position[i] << " ";
+		std::cout << std::endl;
+		d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
+	}
 
 void MapThread::nullspace_function() {
   cout << "Building constraints" << endl;

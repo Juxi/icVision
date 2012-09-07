@@ -45,6 +45,7 @@ SET ( hdr_finder_lib	constraints.h
 		poses_reader.h
 		posefinder.h
 		simulator.h
+		simplex.h
 		sprintf.h
 		sliderwindow.h
 		valueslider.h
