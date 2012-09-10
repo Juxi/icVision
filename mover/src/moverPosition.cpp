@@ -60,7 +60,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 	int nposes = (int) poses.size();
 	int count;
 	bool reached;
-	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
+	double rmsedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
 
 	// set virtual skin waypoint at begin of trajectory
 	setWayPoint();
@@ -116,7 +116,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 			monitorPort.write();
 
 			// distances
-			sssedist = rmse(encvals, poses[ipose], mask);
+			rmsedist = rmse(encvals, poses[ipose], mask);
 			vector<vector<double> > diff = encvals - poses[ipose];
 			diff = abs(diff);
 			maxdist = max(diff, mask);
@@ -130,7 +130,7 @@ bool MoverPosition::go(vector<vector<vector<double> > > &poses, double distancet
 
 
 			// threshold
-			if ((maxdist < distancethreshold) && (sssedist < distancethreshold)) {reached = true; break;}
+			if ((maxdist < distancethreshold) && (rmsedist < distancethreshold)) {reached = true; break;}
 			
 			//if there is a collision, wait until the reflex ends, or until the total trajectory timeout
 			bool colliding = isColliding();

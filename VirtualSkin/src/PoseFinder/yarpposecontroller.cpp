@@ -305,7 +305,7 @@ void YarpPoseController::run () {
 						string mapname = query.get(1).asString().c_str();
 						vector<double> target_x = bottle_to_vector(query.get(2));
 						
-						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_q, SCALEDCONFIGURATIONSPACE);
+						Roadmap::vertex_t source_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE);
 						Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(target_x, WORKSPACE, mapname);
 						vector<double> target_q = d_path_planner->getVertex(target_v).q;
 

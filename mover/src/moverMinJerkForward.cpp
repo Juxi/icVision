@@ -128,7 +128,7 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
-	double sssedist, maxdist, pmaxdist, trajTime, startTraj, nowTime, cntTime, waitTime;
+	double rmsedist, maxdist, pmaxdist, trajTime, startTraj, nowTime, cntTime, waitTime;
 	int currentIndex = 0, tForwardSteps, targetIndex;
 
 	// set virtual skin waypoint at begin of trajectory
@@ -178,7 +178,7 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 
 		// distances to the pose at targetIndex
 		vector<vector<double> > diff = poses[targetIndex] - encvals;
-		sssedist = rmse(encvals, poses[targetIndex], mask); 
+		rmsedist = rmse(encvals, poses[targetIndex], mask); 
 		vector<vector<double> > absdiff = abs(diff);
 		maxdist = max(absdiff, mask);
 
@@ -192,8 +192,8 @@ bool MoverMinJerkForward::go(vector<vector<vector<double> > > &poses, double dis
 
 		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
 		if (targetIndex == (nposes-1)) {
-			//cout << "targetting final pose; ssse: " << sssedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
-			if ((maxdist < finaldistancethreshold) && (sssedist < finaldistancethreshold)) {
+			//cout << "targetting final pose; ssse: " << rmsedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
+			if ((maxdist < finaldistancethreshold) && (rmsedist < finaldistancethreshold)) {
 				reached = true; break;
 			}
 		}

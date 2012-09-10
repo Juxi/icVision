@@ -91,7 +91,7 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 	int nposes = (int) poses.size();
 	int count;
 	bool reached = false;
-	double sssedist, maxdist, startTraj, nowTime, cntTime, waitTime, maxChange;
+	double rmsedist, maxdist, startTraj, nowTime, cntTime, waitTime, maxChange;
 	int currentIndex = 0, tForwardSteps, targetIndex;
 
 	// set virtual skin waypoint at begin of trajectory
@@ -124,7 +124,12 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 		tForwardSteps = max(0, min(nposes, currentIndex+nForwardSteps) - currentIndex); // number of available forward steps
 		vector<double> fwdDistances(tForwardSteps, 0.0);
 		for (int icp = 0; icp < tForwardSteps; icp++) {
-			fwdDistances[icp] = rmse(encvals, poses[currentIndex+icp], mask);
+			//fwdDistances[icp] = rmse(encvals, poses[currentIndex+icp], mask);
+			rmsedist = rmse(encvals, poses[currentIndex+icp], mask);
+			vector<vector<double> > diff = poses[currentIndex+icp] - encvals;
+			vector<vector<double> > absdiff = abs(diff);
+			maxdist = max(absdiff, mask);
+			fwdDistances[icp] = rmsedist + maxdist;
 		}
 
 		vector<double>::iterator mine = std::min_element(fwdDistances.begin(), fwdDistances.end());
@@ -136,7 +141,7 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 
 		// distances to the pose at targetIndex
 		vector<vector<double> > diff = poses[targetIndex] - encvals;
-		sssedist = rmse(encvals, poses[targetIndex], mask); 
+		rmsedist = rmse(encvals, poses[targetIndex], mask); 
 		vector<vector<double> > absdiff = abs(diff);
 		maxdist = max(absdiff, mask);
 
@@ -149,8 +154,8 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 		
 		// check if final pose is reached; both ssse distance and maximum distance should be smaller than distancethreshold
 		if (targetIndex == (nposes-1)) {
-			//cout << "targetting final pose; ssse: " << sssedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
-			if ((maxdist < finaldistancethreshold) && (sssedist < finaldistancethreshold)) {
+			//cout << "targetting final pose; ssse: " << rmsedist << " maxabse: " << maxdist << " threshold: " << finaldistancethreshold << endl;
+			if ((maxdist < finaldistancethreshold) && (rmsedist < finaldistancethreshold)) {
 				reached = true; break;
 			}
 		}
@@ -200,12 +205,18 @@ bool MoverVelocityForward::go(vector<vector<vector<double> > > &poses, double di
 				}
 			}
 
-			/*if (nJoints[ipart] == 3) {// print torso
-				for (int j=0;j<nJoints[ipart];j++) {
-					cout << " " << q[j] << " ";
-				}
+			//if (nJoints[ipart] == 16) {
+			if (ipart == 3 && count%10 == 0) { // right arm
+				//for (int j=0;j<nJoints[ipart];j++) {
+				//	cout << " " << q[j] << " ";
+				//}
+				cout << " enc: " << encvals[ipart][2];
+				cout << " desired: " << poses[targetIndex][ipart][2];
+				cout << " error: " << diff[ipart][2];
+				cout << " velocity: " << lastVels[ipart][2];  // second arm joint
+
 				cout << endl;
-			}*/
+			}
 		}
 		//cout << endl;
 

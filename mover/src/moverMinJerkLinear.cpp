@@ -99,7 +99,7 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 	int nposes = (int) poses.size();
 	int count;
 	bool reached;
-	double sssedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
+	double rmsedist, maxdist, startStep, startTraj, nowTime, cntTime, waitTime;
 	
 	// set virtual skin waypoint at begin of trajectory
 	setWayPoint();
@@ -167,13 +167,13 @@ bool MoverMinJerkLinear::go(vector<vector<vector<double> > > &poses, double dist
 			monitorPort.write();
 
 			// distances
-			sssedist = rmse(encvals, poses[ipose], mask);
+			rmsedist = rmse(encvals, poses[ipose], mask);
 			vector<vector<double> > diff = poses[ipose] - encvals;
 			vector<vector<double> > absdiff = abs(diff);
 			maxdist = max(absdiff, mask);
 
 			// threshold
-			if ((maxdist < distancethreshold) && (sssedist < distancethreshold)) {reached = true; break;}
+			if ((maxdist < distancethreshold) && (rmsedist < distancethreshold)) {reached = true; break;}
 			
 			//if there is a collision, wait until the reflex ends, or until the total trajectory timeout
 			bool colliding = isColliding();
