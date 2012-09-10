@@ -14,6 +14,8 @@
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 
+#include <boost/math/special_functions/sign.hpp>
+
 using namespace yarp::os;
 using namespace yarp::dev;
 
@@ -135,60 +137,93 @@ void YarpPoseController::follow_path(Roadmap::path_t &path) {
 void YarpPoseController::follow_interpolated_path(Roadmap::path_t &path) {
 	int nposes = path.path.size();
 	vector<vector<vector<double> > > crazy_path;
-	const TreeMode dist_mode = MAXCONFIGURATIONSPACE;
+	const TreeMode dist_mode = MAXSCALEDCONFIGURATIONSPACE;
 
 	if (nposes == 0 || path.length > 1000000)
 		throw StringException("No Path Found");
+	
+	// copy trajectory
+	int naxes = d_path_planner->getVertex(path.path.front()).q.size();
+	int nwork = d_path_planner->getVertex(path.path.front()).x.size();
+	vector< vector<double> > trajectory_q(nposes, vector<double>(naxes, 0.0));
+	vector< vector<double> > trajectory_qs(nposes, vector<double>(naxes, 0.0));
+	vector< vector<double> > trajectory_x(nposes, vector<double>(nwork, 0.0));
+	for (size_t ipose(0); ipose < nposes; ++ipose) {
+		trajectory_q[ipose] = d_path_planner->getVertex(path.path[ipose]).q;
+		trajectory_qs[ipose] = d_path_planner->getVertex(path.path[ipose]).qs;
+		trajectory_x[ipose] = d_path_planner->getVertex(path.path[ipose]).x;
+	}
+	
+	// When the robot moves from its current pose (not on the roadmap) to the first pose in the trajectory, it should not move in the wrong direction just to get on the roadmap.
+	// When adding the first pose, we therefore take the coordinate from the roadmap if the robot has to move in that direction anyway, and the actual robot position if the robot has to move the other way after reaching the first trajectory pose.
+	if (nposes >= 2) {
+		vector<double> source_q = get_current_pose();
+		vector<double> source_sq = d_path_planner->scale_q(source_q);
+		double dfirst2second, dnow2first;
+		for (size_t iax(0); iax < naxes; iax++) {
+			dfirst2second = d_path_planner->getVertex(path.path[1]).q[iax] - d_path_planner->getVertex(path.path[0]).q[iax];
+			dnow2first    = d_path_planner->getVertex(path.path[0]).q[iax] - source_q[iax];
+			if (boost::math::sign(dfirst2second) != boost::math::sign(dnow2first)) {
+				trajectory_q[0][iax] = source_q[iax];
+				trajectory_qs[0][iax] = source_sq[iax];
+			}
+		}
+	}
 
-	if (nposes < 3) { // we need at least two poses for interpolation
+	if (nposes <= 2) { // we need more than two poses for interpolation
 		for (int ipose(0); ipose<nposes; ipose++)
-			crazy_path.push_back(d_path_planner->cut_pose(d_path_planner->getVertex(path.path[ipose]).q));
-	} else {
-
-		int naxes = d_path_planner->getVertex(path.path.front()).q.size();
+			crazy_path.push_back(d_path_planner->cut_pose(trajectory_q[ipose]));
+	} else { // interpolate
 		vector<magnet::math::Spline> splines(naxes, magnet::math::Spline());
 		double cumDist = 0.0; // cumulative distance
 		vector<double> tmpDist(naxes, 0.0);
-		
+
+		// add poses as spline points
 		for (size_t ipose(0); ipose < nposes; ++ipose) {
-			Roadmap::Vertex second = d_path_planner->getVertex(path.path[ipose]);
-			
+			// get the distance on the 'time' axis
 			if (ipose > 0) {
-				Roadmap::Vertex first = d_path_planner->getVertex(path.path[ipose-1]);
-				
 				switch (dist_mode) {
-				case CONFIGURATIONSPACE: 	// take the rmse distance between the current and the previous pose
-					cumDist = cumDist + calculate_distance(first.qs, second.qs);
+				case CONFIGURATIONSPACE: // take the rmse distance between the current and the previous pose
+					cumDist = cumDist + calculate_distance(trajectory_q[ipose-1], trajectory_q[ipose]);
 					break;
-				case MAXCONFIGURATIONSPACE:
-					//take the maximum change between the current and the previous pose
+				case MAXCONFIGURATIONSPACE: // take the maximum change between the current and the previous pose
 					for (size_t iax(0); iax < naxes; iax++) {
-						tmpDist[iax] = fabs(first.qs[iax] - second.qs[iax]);
+						tmpDist[iax] = fabs(trajectory_q[ipose-1][iax] - trajectory_q[ipose][iax]);
 					}
 					cumDist = cumDist + *(std::max_element(tmpDist.begin(), tmpDist.end()));
 					break;
-				case WORKSPACE:
-					//take the distance between current and previous end-effector pose
-					cumDist = cumDist + calculate_distance( first.x, second.x);
+				case SCALEDCONFIGURATIONSPACE: // take the rmse distance between the current and the previous pose
+					cumDist = cumDist + calculate_distance(trajectory_qs[ipose-1], trajectory_qs[ipose]);
+					break;
+				case MAXSCALEDCONFIGURATIONSPACE: // take the maximum change between the current and the previous pose
+					for (size_t iax(0); iax < naxes; iax++) {
+						tmpDist[iax] = fabs(trajectory_qs[ipose-1][iax] - trajectory_qs[ipose][iax]);
+					}
+					cumDist = cumDist + *(std::max_element(tmpDist.begin(), tmpDist.end()));
+					break;
+				case WORKSPACE: //take the distance between current and previous workspace coordinate
+					cumDist = cumDist + calculate_distance( trajectory_x[ipose-1], trajectory_x[ipose]);
 					break;
 				default:
-					throw StringException("invalid distance mode");
+					throw StringException("invalid distance mode in interpolation");
 					break;
 				}
 			}
 
 			for (size_t iax(0); iax < naxes; iax++) {
-				splines[iax].addPoint(cumDist, second.q[iax]);
+				splines[iax].addPoint(cumDist, trajectory_q[ipose][iax]);
 			}
 		}
 
-		// create regularly-spaced vector
+		// Create regularly-spaced vector with NSTEPS poses. 
 		int nsteps; // cumDist * stepFactor;
 		switch (dist_mode) {
 		case CONFIGURATIONSPACE: 	// take the rmse distance between the current and the previous pose
+		case SCALEDCONFIGURATIONSPACE:
 			nsteps = cumDist * 5; // 5 interpolation steps per degree of rmse movement
 			break;
 		case MAXCONFIGURATIONSPACE:
+		case MAXSCALEDCONFIGURATIONSPACE:
 			//take the maximum change between the current and the previous pose
 			nsteps = cumDist * 10; // 10 interpolation steps per degree of fastest-moving joint
 			break;
@@ -197,7 +232,7 @@ void YarpPoseController::follow_interpolated_path(Roadmap::path_t &path) {
 			nsteps = cumDist * 1000; // 1000 interpolation step per meter workspace change (i.e. one step per mm)
 			break;
 		default:
-			throw StringException("invalid distance mode");
+			throw StringException("invalid distance mode in interpolation");
 			break;
 		}
 		double stepsize = 1.0/(double)(nsteps - 1);
@@ -266,19 +301,19 @@ void YarpPoseController::run () {
 		int command = query.get(0).asVocab();
 
 		char *help_message = "Possible Commands:\n"
-			"load [name] [file]\t--\tload map in [file] under name [name]\n"
-			"con [n]\t--\tconnect all maps with n neirest neighbours\n"
-			"ran\t--\tshow all ranges\n"
-			"ran [name]\t--\tshow range of mape [name]\n"
-			"go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n"
-			"go [name]\t--\tmove to closest position on map [name]\n"
-			"try [name] [workspace]\t--\treturn goal workspace and path distance of a move to point [workspace] of map [name]\n"
-			"try [name]\t--\treturn goal workspace and path distance of a move to closest position on map [name]\n"
-			"wrt [filename]\t--\twrite the map edges into file [filename] (format source and target workspace of an edge per line\n"
-			"wrt [filename] [name]\t--\twrite the map edges of map [name] into file [filename] (format source and target workspace of an edge per line\n"
-			"clr\t--\tremove all maps\n"
-			"help\t--\tshow this help message\n"
-			"info\t--\tshow info about all maps\n";
+			"load [name] [file]\t--\tload map in [file] under name [name]\n\n"
+			"con [n]\t--\tconnect all maps with n neirest neighbours\n\n"
+			"ran\t--\tshow all ranges\n\n"
+			"ran [name]\t--\tshow range of mape [name]\n\n"
+			"go [name] [workspace]\t--\tmove to point [workspace] of map [name]\n\n"
+			"go [name]\t--\tmove to closest position on map [name]\n\n"
+			"try [name] [workspace]\t--\treturn goal workspace and path distance of a move to point [workspace] of map [name]\n\n"
+			"try [name]\t--\treturn goal workspace and path distance of a move to closest position on map [name]\n\n"
+			"wrt [filename]\t--\twrite the map edges into file [filename] (format source and target workspace of an edge per line\n\n"
+			"wrt [filename] [name]\t--\twrite the map edges of map [name] into file [filename] (format source and target workspace of an edge per line\n\n"
+			"clr\t--\tremove all maps\n\n"
+			"help\t--\tshow this help message\n\n"
+			"info\t--\tshow info about all maps\n\n";
 
 		std::string info;
 
@@ -296,7 +331,8 @@ void YarpPoseController::run () {
 					Roadmap::vertex_t target_v = d_path_planner->nearestMainMapVertex(source_sq, SCALEDCONFIGURATIONSPACE, mapname);
 
 					Roadmap::path_t path = d_path_planner->find_path(source_v, target_v);
-					follow_path(path);
+					//follow_path(path);
+					follow_interpolated_path(path);
 				} else
 					if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
 						
@@ -351,9 +387,6 @@ void YarpPoseController::run () {
 						bgoal.addDouble(vgoal.x[i]);
 					response.addList() = bgoal;
 					response.addDouble(path.length);
-
-					//path = d_path_planner->move_to_path(source_q, target_q);
-					//follow_path(path);
 				} else
 					if (query.size() == 3 && query.get(1).isString() && query.get(2).isList()) { //go [name] [workspace]
 						vector<double> source_q = get_current_pose();
@@ -376,8 +409,6 @@ void YarpPoseController::run () {
 							bgoal.addDouble(vgoal.x[i]);
 						response.addList() = bgoal;
 						response.addDouble(path.length);
-
-						//follow_path(path);
 					} else
 						throw StringException("Wrong arguments in command");
 					break;
