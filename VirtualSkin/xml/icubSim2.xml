@@ -8,12 +8,7 @@
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".031">
-            <!--<box width=".15" depth=".14" height=".25" pz="-.075"/>
-            <box width="0.07" depth="0.18" height="0.18" pz="-0.09"/>-->
-            <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
-          <!--sphere radius=".07" px=".035" py=".05" pz="-.03"/>
-            <sphere radius=".07" px=".035" py="-.05" pz="-.03"/>
-            <sphere radius=".09" px=".035" pz="-.09"/-->
+           <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
@@ -23,8 +18,6 @@
     <motor name="TorsoYaw" minPos="-50" maxPos="50" idx="0">  
         <joint z="-.05" minPos="-50" maxPos="50" radius="0">
         <link x=".0233647" z=".1433" radius="0">
-          <!--cylinder radius=".062" height=".14" px="-.05" pz=".1033" hz="1" />
-            <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1" /--> <!---->
     
     <!-- HEAD -->
     <bodypart name="head" >
@@ -125,9 +118,7 @@
                 <joint z="1" minPos="-37" maxPos="80" radius="0">
 
             <link z="-.153016" radius=".026">
-              <!--cylinder radius=".035" height=".13" px="-.0116" py="-.00312" pz="-.1" hz="1"/>
-                <cylinder radius=".035" height=".13" px=".0116" py=".00312" pz="-.1" hz="1"/-->
-
+              
             <link z="-1" x="-1" radius="0" length=".015">
             
             <motor name="RightElbow" minPos="15" maxPos="106" home="50">
@@ -145,8 +136,6 @@
             <motor name="RightWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
 
-                <!--sphere radius=".03"/-->
-                
                 <link z="-.0645" y="-0.011" radius="0" noSelfCollision="true">
                 
                 <!-- HAND -->
@@ -156,13 +145,7 @@
                     </link>
                 </link>
 
-
                 <box width=".022" height=".065" depth=".069" hx="1" py="-0.011" pz="-0.034"/>
-                <!--box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
-                <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
-                <box width=".001" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
-                <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/-->
-
 
                 <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
 
@@ -393,9 +376,7 @@
                 <joint z="-1" minPos="-37" maxPos="80" radius="0">
 
             <link z="-.15228" radius=".026">
-              <!--cylinder radius=".035" height=".13" px="-.0116" py=".00312" pz="-.1" hz="1"/>
-                <cylinder radius=".035" height=".13" px=".0116" py="-.00312" pz="-.1" hz="1"/-->
-
+             
             <link z="-1" x="-1" radius="0" length=".015">
             
             <motor name="LeftElbow" minPos="15" maxPos="106" home="50">
@@ -425,10 +406,6 @@
                 </link>
 
                 <box width=".022" height=".065" depth=".069" hx="1" py="0.011" pz="-0.034"/>
-                <!--box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
-                <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
-                <box width=".001" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>
-                <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/-->
                 
                 <motor name="LeftHandSpread" minPos="0" maxPos="60" home="10">
             

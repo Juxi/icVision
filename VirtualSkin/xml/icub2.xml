@@ -132,9 +132,13 @@
                 <joint z="1" minPos="-37" maxPos="80" radius="0">
 
             <link z="-.153016" radius=".026">
-              <cylinder radius=".035" height=".13" px="-.0116" py="-.00312" pz="-.1" hz="1"/>
-                <cylinder radius=".035" height=".13" px=".0116" py=".00312" pz="-.1" hz="1"/>
-
+              <!--cylinder radius=".035" height=".13" px="-.0116" py="-.00312" pz="-.1" hz="1"/>
+              <cylinder radius=".035" height=".13" px=".0116" py=".00312" pz="-.1" hz="1"/-->
+              <cylinder radius=".02" height=".115" px="-.015" py=".007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".02" height=".115" px="-.015" py="-.007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".02" height=".125" px=".02" py=".007" pz="-.105" hz="1"/>
+              <cylinder radius=".02" height=".125" px=".02" py="-.007" pz="-.105" hz="1"/>
+              
             <link z="-1" x="-1" radius="0" length=".015">
             
             <motor name="RightElbow" minPos="15" maxPos="106" home="50">
@@ -142,8 +146,7 @@
                     
             <!-- LOWER ARM -->
             <link z="-.1373" radius=".03">
-                <cylinder radius=".02" height=".1373" px=".015" pz="-.0687" hz="1" hx="0.15"/>
-                <sphere radius=".045"/>
+                <sphere radius=".03"/>
                 
             <motor name="RightWristYaw" minPos="-90" maxPos="90">
                 <joint z="1" minPos="-90" maxPos="90" radius="0">
@@ -153,6 +156,7 @@
             
             <motor name="RightWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
+                <cylinder radius=".025" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
 
                 <sphere radius=".03"/>
                 
