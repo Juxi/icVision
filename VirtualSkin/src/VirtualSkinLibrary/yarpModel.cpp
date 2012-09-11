@@ -6,11 +6,13 @@ using namespace VirtualSkin;
 YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)//, rpcIsOpen(false)
 {
 	worldRpcInterface.setModel(this);
+	simSyncer.setModel(this);
 	//worldPort.setReader(rpcReader);
 }
 YarpModel::~YarpModel()
 {
 	worldRpcInterface.close();
+	simSyncer.close();
 }
 
 //void YarpModel::onStartUp()

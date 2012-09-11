@@ -210,7 +210,9 @@ public:
 	void openFilterRpcPort( const QString& name ) { filterRpcInterface.open(name.toStdString().c_str()); }		//!< Start a YARP port that provides an RPC interface to the RobotModel::Model
 	void closeFilterRpcPort() { filterRpcInterface.close(); }												//!< Closes the RPC interface to the RobotModel::Model
 	void setWaypoint();
-	
+	void setActive(bool a) {active = a;}				//!< An active filter will start the collision response, an inactive filter will do nothing
+	bool isActive() {return active;}					//!< return whether the filter will execute collisions responses
+
 public slots:
 	
 	//void collisionStatus(int);
@@ -239,6 +241,7 @@ protected:
 	bool				isOpen,					//!< Indicates whether or not filter is forwarding commands
 						haveControl,			//!< Indicates whether or not the filter currently has control of the robot
 						isColliding;			//!< Indicates whether or not the robot's current pose is colliding
+	bool active;								//!< Determines wether the filter's collision response will be started
 
 	QVector<yarp::os::ControlBoardFilter *> cbFilters;	//!< A QVector of ControlBoardFilters - one for each of the robot's BodyParts
 														/**< These filters have a 1-to-1 correspondence to the YARP

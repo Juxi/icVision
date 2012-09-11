@@ -386,6 +386,8 @@ Roadmap::vertex_t Roadmap::nearestWorkspaceVertex( std::vector<double> _w )
 	double min_dist(9999999999999.);
 
 	std::pair<vertex_i, vertex_i> vp = vertices(map);
+	assert(vp.first != vp.second);
+
 	vertex_i best_vertex(vp.first);
 	for (; vp.first != vp.second; ++(vp.first)) {
 		double distance = calculate_distance(map[*(vp.first)].w, _w);
@@ -453,7 +455,7 @@ void Roadmap::project2D( std::vector<double> direction )
 	if ( direction.size() == 0 ) {
 		//printf("choosing random direction\n");
 		for ( unsigned int i = 0; i < dim; i++ ) {
-			direction.push_back( (double)rand()/(double)RAND_MAX );
+			direction.push_back( 2.0 * (double)rand()/(double)RAND_MAX - 1.0);
 		}
 	}
 	

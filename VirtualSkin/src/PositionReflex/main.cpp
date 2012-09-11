@@ -4,6 +4,7 @@
 //#include "model.h"
 #include "yarprobot.h"
 #include "yarpModel.h"
+#include "simSyncer.h"
 #include "reflexFilter.h"
 //#include "worldRpcInterface.h"
 //#include "filterRpcInterface.h"
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 	VirtualSkin::YarpModel* yarpModel = NULL;
 	VirtualSkin::YarpRobot* yarpRobot = NULL;
 	ReflexFilter*			filter	  = NULL;
-	
+
 	// or these
 	KinematicModel::Model* model = NULL;
 	KinematicModel::Robot* nonYarpRobot = NULL;
@@ -72,10 +73,14 @@ int main(int argc, char *argv[])
 				yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
 				//printf("done loading robot\n");
 				
-				yarpRobot->openCollisionPort("/collisions");
-				yarpRobot->openObservationPort("/observations");
+				yarpRobot->openCollisionPort("/virtualSkin/collisions");
+				yarpRobot->openObservationPort("/virtualSkin/observations");
 				
-				sleep(1);
+			  #ifdef WIN32
+			    Sleep(1);
+			  #else
+				usleep(1000);
+			  #endif
 				
 				// Enable Virtual Skin for the robot model
 				printf( "\n\nOPENING PORT FILTERS FOR ROBOT: %s\n", yarpRobot->getName().toStdString().c_str() );
@@ -84,12 +89,12 @@ int main(int argc, char *argv[])
 				 
 				// Open the RPC interface to the filter
 				printf("\n\nOPENING FILTER RPC PORT\n");
-				filter->openFilterRpcPort("/filterRpc");
+				filter->openFilterRpcPort("/virtualSkin/filterRpc");
 				
 				// THIS CAUSES DEADLOCK PROBLEMS
 				// Open the filter status port
 				printf("opening filter status port\n");
-				filter->openStatusPort("/filterStatus");
+				filter->openStatusPort("/virtualSkin/filterStatus");
 			}
 			
 			if ( robotFile2 != "" ) {
@@ -97,14 +102,20 @@ int main(int argc, char *argv[])
 				VirtualSkin::YarpRobot* yarpRobot2 = NULL;
 				ReflexFilter* filter2 = NULL;
 				yarpRobot2 = yarpModel->loadYarpRobot( robotFile2, false );
-				yarpRobot2->openCollisionPort("/collisions2");
-				yarpRobot2->openObservationPort("/observations2");
-				sleep(1);
+				yarpRobot2->openCollisionPort("/virtualSkin/collisions2");
+				yarpRobot2->openObservationPort("/virtualSkin/observations2");
+				
+             #ifdef WIN32
+			    Sleep(1);
+			  #else
+				usleep(1000);
+			  #endif
+
 				printf( " ...opening robot filter for '%s'\n", yarpRobot2->getName().toStdString().c_str() );
 				filter2 = new ReflexFilter( yarpRobot2, false );
 				filter2->open<VirtualSkin::StateObserver,VirtualSkin::CallObserver,VirtualSkin::ResponseObserver>(); 
 				printf("opening filter RPC port\n");
-				filter2->openFilterRpcPort("/filterRpc2");
+				filter2->openFilterRpcPort("/virtualSkin/filterRpc2");
 			}
 			
 			// Load a world model from file
@@ -116,7 +127,10 @@ int main(int argc, char *argv[])
 			
 			// Open the RPC interface to the world model
 			printf("\nOPENING WORLD RPC PORT\n");
-			yarpModel->openWorldRpcPort("/world");
+			yarpModel->openWorldRpcPort("/virtualSkin/world");
+
+			// Start syncer instance
+			yarpModel->openSimSyncer("/virtualSkin/syncer", "/icubSim/world");
 		} 
 		else
 		{

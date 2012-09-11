@@ -1,5 +1,6 @@
 #include "robot.h"
 #include "modelexception.h"
+#include <iostream>
 
 using namespace std;
 using namespace KinematicModel;
@@ -65,6 +66,7 @@ qreal Motor::encToNorm(qreal pos) {
 	qreal new_pos = (pos - minPos()) / (maxPos() - minPos());
 	if ( new_pos < 0 ) new_pos = 0;
 	else if ( new_pos > 1 ) new_pos = 1;
+
 	return new_pos;
 }
 

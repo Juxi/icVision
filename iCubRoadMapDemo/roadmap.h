@@ -189,11 +189,14 @@ public:
 	void project2D( std::vector<double> d = std::vector<double>() );
 	
 	Map::vertex_descriptor nearestVertex( std::vector<double>, char* type="" );
+	Map::vertex_descriptor nearestWorkspaceVertex( std::vector<double> _w );
 	std::list<Map::vertex_descriptor> shortestPath( Map::vertex_descriptor from, Map::vertex_descriptor to );
-	
+
+
 private:
 	double calculate_distance( std::vector<double> const &v1,  std::vector<double> const &v2);
-	Roadmap::vertex_t nearestWorkspaceVertex( std::vector<double> _w );
+
+	//Roadmap::vertex_t nearestWorkspaceVertex( std::vector<double> _w );
 	//bool insert( std::vector< std::vector<double> > );
 	
 signals:

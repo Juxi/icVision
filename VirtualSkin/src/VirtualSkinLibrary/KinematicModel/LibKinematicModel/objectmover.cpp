@@ -42,7 +42,6 @@ void ObjectMover::update() // mutex is already set in Model::computePose
 
 void ObjectMover::check( )
 {
-	QVector<KinematicModel::CompositeObject*>::iterator i;
 	for (int i = objectList.size()-1; i>=0; i--) {
 		if (!model->getObject(objectList[i]->getName())) {
 			printf("ObjectMover: detaching object \"%s\".\n", objectList[i]->getName().toStdString().c_str());

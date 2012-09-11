@@ -58,6 +58,7 @@ protected:
 	double	refVelocity;
 	double  refAcceleration;
 	
+protected:
 	volatile bool keepRunning;
 	
 	BehaviorType currentBehavior;

@@ -13,7 +13,9 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 											verbose(verb), 
 											modelWindow(NULL), 
 											numObjects(0),
-											numPrimitives(0)
+											numPrimitives(0),
+											stopOnFirstCollision(DT_CONTINUE)
+
 {
 	qRegisterMetaType< DT_ResponseClass >("GL_DisplayList");
 	
@@ -45,6 +47,7 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		modelWindow->show();
 		 
 	}
+	
 	objectMover = new ObjectMover(this, &robots);
 
 	//printf("model constructor returns\n");
@@ -291,8 +294,10 @@ void Model::appendObject( CompositeObject* object )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending primitive to world\n");
-		DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
-		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+		if (object->getResponseClass() != TARGET()) {
+			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
+			DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+		}
 		if ( modelWindow ) { (*i)->setListPending(true); }
 		(*i)->setIdx( ++numPrimitives );
 		emit addedPrimitive(*i);
@@ -475,7 +480,7 @@ int Model::computePose()
 	
 	computePoseSuffix();			
 	
-	emit computedState(col_count);	
+	emit computedState(col_count);
 	
 	//printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
 	

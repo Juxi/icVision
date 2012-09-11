@@ -7,7 +7,7 @@ S'o'
 cnumpy.core.multiarray
 _reconstruct
 p4
-(cnumpy.core.defmatrix
+(cnumpy.matrixlib.defmatrix
 matrix
 p5
 (I0

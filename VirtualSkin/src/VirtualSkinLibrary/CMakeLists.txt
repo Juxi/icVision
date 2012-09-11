@@ -14,6 +14,7 @@ SET ( src_files	yarpModel.cpp
 		filterRpcInterface.cpp
 		yarpStreamPort.cpp
 		virtualskinexception.cpp
+		simSyncer.cpp
 )
 
 SET ( hdr_files	constants.h
@@ -29,6 +30,7 @@ SET ( hdr_files	constants.h
 		worldRpcInterface.h
 		filterRpcInterface.h
 		yarpStreamPort.h
+		simSyncer.h
 		
 )
 

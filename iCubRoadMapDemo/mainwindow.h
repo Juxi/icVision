@@ -90,6 +90,8 @@ private slots:
 	void stopController();
 	void setVelocity();
 
+	void test_shit();
+
 //! [1]
 
 //! [2]
@@ -106,6 +108,7 @@ private:
 	QAction *saveMapAction;
 	QAction *connectMapAction;
 	QAction *projectMapAction;
+	QAction *testShitAction;
 	QAction *importNesMapAction;
 	
 	QMenu *controllerMenu;
