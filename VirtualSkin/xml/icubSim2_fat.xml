@@ -165,11 +165,9 @@
                 </link>
 
 
-                <box width=".022" height=".065" depth=".069" hx="1" py="-0.011" pz="-0.034"/>
-                <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
-                <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
-                <box width=".001" height=".07" depth=".04" hx="1" px="-.005" py=".02" pz="-0.045"/>
-                <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
+                  <box width=".022" height=".075" depth=".069" hx="1" py="-0.011" pz="-0.034"/>
+                  <box width=".02" height=".075" depth=".079" hx="1" py="0.01" pz="-0.039"/>
+                  
 
 
                 <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
@@ -436,12 +434,15 @@
                     </link>
                 </link>
 
-                <box width=".022" height=".065" depth=".069" hx="1" py="0.011" pz="-0.034"/>
+              <!--box width=".022" height=".065" depth=".069" hx="1" py="0.011" pz="-0.034"/>
                 <box width=".035" height=".05" depth=".025" hx="1" px="-.00" pz="-0.0125"/>
                 <box width=".035" height=".03" depth=".02" hx="1" px=".015" pz="-0.035"/>
                 <box width=".001" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>
-                <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/>
+                <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/-->
                 
+                <box width=".022" height=".075" depth=".069" hx="1" py="0.011" pz="-0.034"/>
+                <box width=".02" height=".075" depth=".079" hx="1" py="-0.01" pz="-0.039"/>
+              
                 <motor name="LeftHandSpread" minPos="0" maxPos="60" home="10">
             
                     <!-- THUMB -->
