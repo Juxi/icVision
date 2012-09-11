@@ -152,7 +152,9 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 				}
 				
 				node->appendPrimitive(cylinder);
-                node->appendField(field);
+                
+                if (robot->hasField())
+                    node->appendField(field);
 			}
         }
 		catch (std::exception& e)
@@ -349,7 +351,7 @@ KinTreeNode* ZPHandler::createChildLink()
 {
 	try
 	{
-		KinTreeNode* link = new Link( robot, node );
+		KinTreeNode* link = new Link( robot, bodyPart->index(), node );
 		if (!link) errorStr = "Failed to allocate link.";
 		return link;
 	}
@@ -372,7 +374,7 @@ KinTreeNode* ZPHandler::createChildJoint( const QString& type )
 	try
 	{
 		KinTreeNode* joint;
-		if ( type == "revolute" || type == "" ) { joint = new RevoluteJoint( robot, node, motor); }		
+		if ( type == "revolute" || type == "" ) { joint = new RevoluteJoint( robot, bodyPart->index(), node, motor); }
 		else if ( type == "prismatic" )			{ errorStr = "Prismatic joints are not yet supported\n"; }
 		else									{ errorStr = "Tried to create <joint> of unknown type!! Known types are 'revolute' and 'prismatic'\n"; }
 		// TODO: add prismatic joints

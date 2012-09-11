@@ -69,10 +69,7 @@ public:
 	CompositeObject* getObject( const QString& name );
 	Robot* getRobot( const QString& name );
 	
-	Robot*	loadRobot( const QString& fileName,
-                       bool limitAvoidance = true,
-                       bool collisionAvoidance = true,
-                       bool verbose = true );
+	Robot*	loadRobot( const QString& fileName, bool verbose = true );
 	void	loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }

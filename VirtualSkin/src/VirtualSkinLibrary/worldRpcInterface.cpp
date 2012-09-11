@@ -163,7 +163,7 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 	n++;
 	 
 	try {
-		KinematicModel::CompositeObject* composite = new KinematicModel::CompositeObject( model->OBSTACLE() );
+		KinematicModel::CompositeObject* composite = new KinematicModel::CompositeObject( model->OBSTACLE(), model->FIELD() );
 		KinematicModel::PrimitiveObject* primitive;
 		if ( geom == VOCAB_SPH || geom == VOCAB_SSPH ) {
 			
@@ -173,7 +173,7 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			double pz = command.get(n).asDouble(); n++; // z position
 			
 			primitive = new KinematicModel::Sphere( r );
-			composite->append( primitive );
+			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
 			
 			if ( geom == VOCAB_SPH ) { composite->setName( "sph" + QString::number(++s) ); }
@@ -193,7 +193,7 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			//else if ( geom == VOCAB_SCYL ) { world->newSCylinder( r, h, QVector3D(px,py,pz) ); }
 			
 			primitive = new KinematicModel::Cylinder( r, h );
-			composite->append( primitive );
+			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
 			
 			if ( geom == VOCAB_CYL ) { composite->setName( "cyl" + QString::number(++c) ); }
@@ -214,7 +214,7 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			//else if ( geom == VOCAB_SBOX ) { world->newSBox( QVector3D(x,y,z), QVector3D(px,py,pz) ); }
 			
 			primitive = new KinematicModel::Box( QVector3D(x,y,z) );
-			composite->append( primitive );
+			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
 			
 			if ( geom == VOCAB_BOX ) { composite->setName( "box" + QString::number(++b) ); }

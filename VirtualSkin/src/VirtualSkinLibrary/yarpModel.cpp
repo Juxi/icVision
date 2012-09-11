@@ -20,33 +20,47 @@ YarpModel::~YarpModel()
 //}
 
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
-{	
-	mutex.lock();
+{
+    mutex.lock();
+    
+    DT_ResponseClass newRobotClass     = newResponseClass( responseTables.at(0) );
+    DT_ResponseClass newBaseClass      = newResponseClass( responseTables.at(0) );
+    DT_ResponseClass newFieldClass     = newResponseClass( responseTables.at(0) );
+    DT_ResponseClass newBaseFieldClass = newResponseClass( responseTables.at(0) );
+    
+    DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    
+    QVector<DT_ResponseClass>::iterator i;
+    for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
+    {
+        DT_AddPairResponse(	responseTables.at(0), newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_WITNESSED_RESPONSE, (void*) this );
+    }
+    
+    robotResponseClasses.append( newRobotClass );
+    robotResponseClasses.append( newFieldClass );
+    //fieldResponseClasses.append( newFieldClass );
+    //robotBaseClasses.append( newBaseClass );
+    
+    //printf("Loading non-yarp robot.\n");
+    DT_RespTableHandle newTable = newRobotTable();              // a table for handling self collisions
+    DT_RespTableHandle newFieldTable = newRobotFieldTable();	// a table for handling self repulsion
+    YarpRobot* robot = new YarpRobot( this,
+                                     newTable,
+                                     newFieldTable,
+                                     newRobotClass,
+                                     newBaseClass,
+                                     newFieldClass,
+                                     newBaseFieldClass );
+    robot->open( fileName, verbose );
 	
-	DT_RespTableHandle newTable = newRobotTable();							// a table for handling self collisions
-	DT_ResponseClass newRobotClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
-	DT_ResponseClass newBaseClass = newResponseClass( responseTables.at(0) );	// a class for handling the robot w.r.t the world or other robots
-	
-	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-	
-	QVector<DT_ResponseClass>::iterator i;
-	for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
-	{
-		DT_AddPairResponse(	responseTables.at(0), newRobotClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-		DT_AddPairResponse(	responseTables.at(0), newBaseClass, *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-	}
-	
-	robotResponseClasses.append( newRobotClass );
-	robotBaseClasses.append( newBaseClass );
-	
-	//printf("Loading yarp robot.\n");
-	YarpRobot* robot = new YarpRobot( this, newTable, newRobotClass, newBaseClass );
-
-	robot->open( fileName, verbose );
-	
-	robots.append( robot );
+    robots.append( robot );
 	
 	mutex.unlock();
 	

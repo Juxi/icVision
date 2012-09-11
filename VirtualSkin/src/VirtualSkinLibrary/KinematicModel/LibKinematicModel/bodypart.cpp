@@ -3,7 +3,7 @@
 
 using namespace KinematicModel;
 
-BodyPart::BodyPart( Robot* robot, BodyPart* parentPart ) : parentPart(parentPart)
+BodyPart::BodyPart( Robot* robot, BodyPart* parentPart ) : idx(0), parentPart(parentPart)
 {
 	if ( !robot ) { throw KinematicModelException("The BodyPart constructor requires a pointer to a valid Robot."); }
     robot->appendBodyPart(this);

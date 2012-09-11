@@ -9,11 +9,13 @@
 
 using namespace KinematicModel;
 
-KinTreeNode::KinTreeNode( Robot* robot, 
+KinTreeNode::KinTreeNode( Robot* robot,
+                         int part,
 						  KinTreeNode* parent,
 						  NodeType aType ) :	CompositeObject( robot->model->newResponseClass(robot->getResponseTable()),
                                                                  robot->model->newResponseClass(robot->getFieldResponseTable())),
 												parentRobot(robot),
+                                                bodyPart(part),
 												parentNode(parent),
 												nodeType(aType)
 												//strf(true)
@@ -97,10 +99,28 @@ void KinTreeNode::ignoreAdjacentPairs( KinTreeNode* node, bool foundLink, bool f
             foundJoint = true;
     }
 	
-    // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-	parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-    parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getFieldResponseClass(), node->getFieldResponseClass() );
-	
+    // filter the collision if nodes are in the same body part
+    bool filter = false;
+    if ( bodyPart == node->getBodyPartIndex() || node == parent() || node->parent() == parent() )
+        filter = true;
+    //else if ( parent() ) {
+    //    if ( node == parent()->parent() || node->parent() == )
+    //    filter = true;
+    //}
+    //else if ( parent() && parent()->getBodyPartIndex() != getBodyPartIndex() )
+    //    filter = true;
+    //else if ( parent() && parent()->parent() && parent()->parent()->getBodyPartIndex() != parent()->getBodyPartIndex() )
+    //    filter = true;
+    else
+        filter = false;
+    
+    if ( filter )
+    {
+        // do not check collision between objects of the same class as this one and objects of the same class as 'node'
+        parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
+        parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getFieldResponseClass(), node->getFieldResponseClass() );
+	}
+    
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {
         (*i)->ignoreAdjacentPairs(node,foundLink,foundJoint);

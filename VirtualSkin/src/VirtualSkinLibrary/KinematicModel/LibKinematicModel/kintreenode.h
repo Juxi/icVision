@@ -38,6 +38,7 @@ public:
 			   };		//!< Indicates the sub-type of this object
 
 	KinTreeNode( Robot* parentRobot,
+                int part,
 				 KinTreeNode* parentNode,
 				 NodeType type = LINK );	//!< Initializes member variables and appends the KinTreeNode to the supplied Robot and KinTreeNode
 											/**< \param parentRobot The robot to which the KinTreeNode belongs
@@ -53,6 +54,7 @@ public:
 	KinTreeNode* parent() const { return parentNode; }	//!< Returns the parent KinTreeNode of this object in the kinematic tree structure
 	Robot* robot() const { return parentRobot; }		//!< Returns the Robot to which this KinTreeNode belongs
 
+    int getBodyPartIndex() { return bodyPart; }
 	NodeType getNodeType() const { return nodeType; }			//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
 	const QVector3D& getNodeAxis() const { return nodeAxis; }	//!< Returns nodeAxis
 	int getNumPrimitives();
@@ -65,6 +67,7 @@ public:
 	void removeReflexFromSubTree();
 	
 protected:
+    int                   bodyPart;
 	Robot*                parentRobot;
 	KinTreeNode*          parentNode;
 	NodeType              nodeType;

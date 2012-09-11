@@ -44,7 +44,8 @@ public:
           DT_ResponseClass robotClass,
           DT_ResponseClass baseClass,
           DT_ResponseClass robotField,
-          DT_ResponseClass robotBaseField
+          DT_ResponseClass robotBaseField,
+          bool openWithField = false
           );
 	~Robot();														
 	
@@ -55,6 +56,8 @@ public:
 	bool isOpen() const	{ return isConfigured; }											//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();																			//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	
+    bool hasField() { return openWithField; }
+    
 	void addCollision() { numCollisions++; }
 	void addReflexCollision() { numReflexCollisions++; }
 	
@@ -137,6 +140,7 @@ private:
 	QVector<Marker*>		markers;		//!< list of markers
 	int						numLinks;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
+    bool                    openWithField;
 	
 	int						numCollisions;
 	int						numReflexCollisions;
@@ -151,13 +155,14 @@ private:
 	//void removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t ); //!< Turn off collision response to class c in table t (for the whole robot)
 	
 	void setName( const QString& name )		{ robotName = name; }			//!< Sets a human readable name of the robot
-	void appendBodyPart( BodyPart* part )	{ partList.append(part); }		//!< Appends a BodyPart to the list
+	void appendBodyPart( BodyPart* part )	{ part->setIndex(partList.size()); partList.append(part); }		//!< Appends a BodyPart to the list
 	void appendMotor( Motor* motor )		{ motorList.append(motor); }	//!< Appends a Motor to the list
 	void resizeMotorList( int size )		{ motorList.resize(size); }		//!< Resizes the list of Motors
 	void appendNode( KinTreeNode* node );									//!< Append a root node of a kinematic tree to the list																		/**< In case you want to populate the list in reverse order */
 	
 	int getNumPrimitives();
 	void kill();
+    
 	
 	//void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
 	

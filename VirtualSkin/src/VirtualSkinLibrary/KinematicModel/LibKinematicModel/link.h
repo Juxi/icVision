@@ -28,7 +28,7 @@ class KinematicModel::Link : public KinTreeNode
 	
 public:
 	
-	Link( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, KinTreeNode* parent );	//!< Calls the KinTreeNode constructor
+	Link( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, int part, KinTreeNode* parent );	//!< Calls the KinTreeNode constructor
 	~Link();									//!< Nothing special to do here
 
 private:

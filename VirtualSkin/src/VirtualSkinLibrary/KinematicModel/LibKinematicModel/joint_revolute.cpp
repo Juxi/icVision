@@ -3,7 +3,7 @@
 
 using namespace KinematicModel;
 
-RevoluteJoint::RevoluteJoint( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, KinTreeNode* parent, Motor* motor ) : Joint( /*nodeResponseClass,*/ robot, parent, motor, RJOINT )
+RevoluteJoint::RevoluteJoint( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, int part, KinTreeNode* parent, Motor* motor ) : Joint( /*nodeResponseClass,*/ robot, part, parent, motor, RJOINT )
 {	
     limits = Interval();
 	limits.setMin(-M_PI);

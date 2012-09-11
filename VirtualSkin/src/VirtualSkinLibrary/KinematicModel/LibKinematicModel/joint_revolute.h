@@ -22,7 +22,7 @@ class KinematicModel::RevoluteJoint : public Joint
 	
 public:
 	
-	RevoluteJoint( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, KinTreeNode* parent, Motor* motor );
+	RevoluteJoint( /*DT_ResponseClass nodeResponseClass,*/ Robot* robot, int part, KinTreeNode* parent, Motor* motor );
 	
 private:
 	

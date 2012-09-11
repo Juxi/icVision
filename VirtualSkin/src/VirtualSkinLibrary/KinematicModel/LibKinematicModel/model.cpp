@@ -149,7 +149,7 @@ DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 	return respClass;
 }
 
-Robot* Model::loadRobot( const QString& fileName, bool limitAvoidance, bool collisionAvoidance, bool verbose)
+Robot* Model::loadRobot( const QString& fileName, bool verbose)
 {	
 	mutex.lock();
 		

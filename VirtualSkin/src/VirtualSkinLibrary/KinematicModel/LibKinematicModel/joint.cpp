@@ -5,11 +5,13 @@
 using namespace KinematicModel;
 
 Joint::Joint( //DT_RespTableHandle robotTable, //DT_ResponseClass nodeResponseClass,
-			  Robot* robot, 
+			  Robot* robot,
+             int part,
 			  KinTreeNode* parent,
 			  Motor* motor,
 			  KinTreeNode::NodeType type) : KinTreeNode( //robotTable,
 														 robot,
+                                                        part,
 														 parent,
 														 type),
 											motor(motor),

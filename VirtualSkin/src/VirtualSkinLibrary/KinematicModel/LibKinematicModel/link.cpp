@@ -3,7 +3,7 @@
 
 using namespace KinematicModel;
 
-Link::Link(  /*DT_RespTableHandle robotTable,*/ Robot* robot, KinTreeNode* parent ) : KinTreeNode(/*robotTable,*/ robot, parent ,LINK)
+Link::Link(  /*DT_RespTableHandle robotTable,*/ Robot* robot, int part, KinTreeNode* parent ) : KinTreeNode(/*robotTable,*/ robot, part, parent ,LINK)
 {
 }
 Link::~Link()

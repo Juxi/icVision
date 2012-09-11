@@ -31,7 +31,15 @@ class VirtualSkin::YarpRobot : public KinematicModel::Robot
 
 public:
 	
-	YarpRobot( KinematicModel::Model* m, DT_RespTableHandle t, DT_ResponseClass robot, DT_ResponseClass base );	//!< 
+	//YarpRobot( KinematicModel::Model* m, DT_RespTableHandle t, DT_ResponseClass robot, DT_ResponseClass base );	//!<
+    YarpRobot( KinematicModel::Model* m,
+              DT_RespTableHandle roobtTable,
+              DT_RespTableHandle fieldTable,
+              DT_ResponseClass robotClass,
+              DT_ResponseClass baseClass,
+              DT_ResponseClass robotField,
+              DT_ResponseClass robotBaseField
+              );
 	virtual ~YarpRobot();											//!< Nothing to do here
 	
 	void openCollisionPort( const QString& name ) { collisionPort.open(name.toStdString().c_str()); }	//!< Starts a YARP Port that streams the results of collision detection (see \ref yarpPorts)
