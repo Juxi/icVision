@@ -7,41 +7,45 @@
     <!--<link z="-.05" radius="0">-->
     <!-- NOTE: Torso joints are backwards with respect to the kinematic chain, therefore "idx" is specified for each -->
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
-        <joint y="-.22" minPos="-22" maxPos="70" radius=".055">
+        <joint y="-.22" minPos="-22" maxPos="70" radius=".05">
+          <!--sphere radius=".04" py="-.0875"/>
+          <sphere radius=".04" py=".0875"/-->
             <!--box width=".15" depth=".14" height=".25" pz="-.075"/-->
-            <box width="0.11" depth="0.11" height="0.22" pz="-0.05"/>
-            <cylinder radius=".044" height="1" pz="-.5" hz="1"/>
+            <box width="0.1" depth="0.1" height="0.22" pz="-0.05"/>
+            <cylinder radius=".048" height="1" pz="-.5" hz="1"/>
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
-        <joint x=".12" minPos="-30" maxPos="30" radius=".034">
+        <joint x=".12" minPos="-30" maxPos="30" radius=".0372">
         <link x="-.0055" radius="0">
     
     <motor name="TorsoYaw" minPos="-50" maxPos="50" idx="0">
         <joint z="-.05" minPos="-50" maxPos="50" radius="0">
           <link x=".0233647" z=".1433" radius="0">
-            <cylinder radius=".068" height=".14" px="-.01" pz=".1033" hz="1" />
-            <cylinder radius=".086" height=".14" px=".022" pz=".1033" hz="1"/>
+            <box depth=".15" height=".14" width=".07" px="0.012" py="0.0440" pz="0.1033" hz="1" angle="15" />
+            <box depth=".15" height=".14" width=".07" px="0.012" py="-0.0440" pz="0.1033" hz="-1" angle="15" />
+            
+            <cylinder radius=".062" height=".14" px="-.01" pz=".1033" hz="1" />
+            <cylinder radius=".078" height=".14" px=".022" pz=".1033" hz="1"/>
 
-            <cylinder radius=".022" height=".154" px="-0.053" py="0.055" pz="0.1033" hz="1"/>
-            <cylinder radius=".022" height=".154" px="-0.053" py="-0.055" pz="0.1033" hz="1"/>
+            <cylinder radius=".024" height=".14" px="-0.053" py="0.05" pz="0.1033" hz="1"/>
+            <cylinder radius=".024" height=".14" px="-0.053" py="-0.05" pz="0.1033" hz="1"/>
 
-            <!--cylinder radius=".02" height=".15" hy=".2588" hx=".9659" px="0.0025" py="0.079" pz="0.053"/-->
-            <cylinder radius=".022" height=".165" hy=".2588" hx=".9659" px="0.005" py="0.07" pz="0.053"/>
-            <cylinder radius=".022" height=".165" hy="-.2588" hx=".9659" px="0.005" py="-0.07" pz="0.053"/>
+            <cylinder radius=".024" height=".15" hy=".2588" hx=".9659" px="0.005" py="0.07" pz="0.053"/>
+            <cylinder radius=".024" height=".15" hy="-.2588" hx=".9659" px="0.005" py="-0.07" pz="0.053"/>
           
     <!-- HEAD -->
     <bodypart name="head" >
     
-        <link x="-.0256747" z=".0502" radius=".022">
+        <link x="-.0256747" z=".0502" radius=".02">
     
         <motor name="NeckPitch" minPos="-39" maxPos="24">
-            <joint y=".05" minPos="-39" maxPos="24" radius=".022">
+            <joint y=".05" minPos="-39" maxPos="24" radius=".02">
             
         <link z=".033" radius="0">
         
         <motor name="NeckRoll" minPos="-47" maxPos="47">
-            <joint x="-.05" minPos="-47" maxPos="47" radius=".022">
+            <joint x="-.05" minPos="-47" maxPos="47" radius=".02">
         
         <link y="-.001" radius="0">
         
@@ -50,7 +54,7 @@
    
         <link z=".0825" radius="0">
         
-        <sphere pz=".07" radius=".099"/><!---->
+        <sphere pz=".07" radius=".108"/><!---->
         <marker name="head" />
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
@@ -116,26 +120,23 @@
         <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
         <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
 
-      
-            <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
+        <link x="-.2588" y=".9659" radius=".031" length=".10774">
+          <!--box depth=".15" height=".14" width=".07" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" /-->
+
+        <motor name="RightShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x=".2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
-                    <box depth=".165" height=".154" width=".077" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" />
-                <link x="-.2588" y=".9659" radius="0" length=".04274">
-                <link x="-.2588" y=".9659" radius=".034" length=".065">
-            
+
             <motor name="RightShoulderRoll" minPos="0" maxPos="161" home="20">
-                <joint y=".2588" x=".9659" minPos="0" maxPos="161" radius=".033" length=".07">
+                <joint y=".2588" x=".9659" minPos="0" maxPos="161" radius=".025" length=".063">
             
             <motor name="RightShoulderYaw" minPos="-37" maxPos="80">
                 <joint z="1" minPos="-37" maxPos="80" radius="0">
 
-            <link z="-.153016" radius=".028">
-              <!--cylinder radius=".035" height=".13" px="-.0116" py="-.00312" pz="-.1" hz="1"/>
-              <cylinder radius=".035" height=".13" px=".0116" py=".00312" pz="-.1" hz="1"/-->
-              <cylinder radius=".022" height=".115" px="-.015" py=".007" pz="-.095" hz="1" hx="-0.2"/>
-              <cylinder radius=".022" height=".115" px="-.015" py="-.007" pz="-.095" hz="1" hx="-0.2"/>
-              <cylinder radius=".022" height=".125" px=".02" py=".007" pz="-.105" hz="1"/>
-              <cylinder radius=".022" height=".125" px=".02" py="-.007" pz="-.105" hz="1"/>
+            <link z="-.153016" radius=".026">
+              <cylinder radius=".024" height=".115" px="-.015" py=".007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".024" height=".115" px="-.015" py="-.007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".024" height=".125" px=".02" py=".007" pz="-.105" hz="1"/>
+              <cylinder radius=".024" height=".125" px=".02" py="-.007" pz="-.105" hz="1"/>
               
             <link z="-1" x="-1" radius="0" length=".015">
             
@@ -143,20 +144,20 @@
               <joint y="1" minPos="15" maxPos="106" radius=".0" length=".07">
                     
             <!-- LOWER ARM -->
-            <link z="-.1373" radius=".033">
-                <sphere radius=".033"/>
+            <link z="-.1373" radius=".036">
+                <sphere radius=".036"/>
                 
             <motor name="RightWristYaw" minPos="-90" maxPos="90">
                 <joint z="1" minPos="-90" maxPos="90" radius="0">
             
             <motor name="RightWristRoll" minPos="-90" maxPos="0">
                 <joint x="-1" minPos="-90" maxPos="0" radius="0">
-                  <cylinder radius=".0275" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
+                  <cylinder radius=".03" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
             
             <motor name="RightWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
-                  
-                <sphere radius=".033"/>
+
+                <sphere radius=".036"/>
                 
                 <link z="-.0645" y="-0.011" radius="0" noSelfCollision="true">
                 
@@ -166,11 +167,8 @@
                   <link y="-0.05" radius="0"><marker name="right_handpalm"/></link>
                 </link>
 
-
-                  <box width=".0242" height=".0825" depth=".0759" hx="1" py="-0.011" pz="-0.034"/>
-                  <box width=".022" height=".0825" depth=".0869" hx="1" py="0.01" pz="-0.039"/>
-                  
-
+                  <box width=".022" height=".085" depth=".069" hx="1" py="-0.011" pz="-0.034"/>
+                  <box width=".025" height=".085" depth=".079" hx="1" py="0.0125" pz="-0.039"/>
 
                 <motor name="RightHandSpread" minPos="0" maxPos="60" home="10">
 
@@ -182,17 +180,17 @@
                         <link x="-.02" radius=".0075">
                         
                             <motor name="RightThumbFirstKnuckleB" minPos="0" maxPos="90">
-                            <joint y="-.015" minPos="0" maxPos="70" radius="0.00825">
+                            <joint y="-.015" minPos="0" maxPos="70" radius=".0075">
                             <link x="-.026" radius=".0075">
                     
                                 <motor name="RightThumbSecondTwo" minPos="0" maxPos="180">
-                                <joint y="-.015" minPos="0" maxPos="90" radius="0.00825">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
                                 <link x="-.022" radius=".0075">
-                                <joint y="-.015" minPos="0" maxPos="90" radius="0.00825">
-                                <link x="-.025" radius=".0075">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
+                                <link x="-.035" radius=".0075">
                                   
                                   <marker name="right_thumb"/>
-                                  <sphere radius=".0088" px="-.025"/>
+                                  <sphere radius=".0096" px="-.035"/>
                                         
                                 </link>
                                 </joint>
@@ -219,17 +217,17 @@
                         <cylinder height=".017" radius=".0075"/>
                         
                             <motor name="RightIndexFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.026" radius=".0075">
                                             
                                 <motor name="RightIndexSecondTwo" minPos="0" maxPos="180">
-                                <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.022" radius=".0075">
-                                <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
-                                <link z="-.025" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <link z="-.035" radius=".0075">
 
                                     <marker name="right_index" />
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                                 </link>
                                 </joint>
@@ -252,16 +250,16 @@
                         <cylinder height=".017" radius=".0075"/>
                         
                             <motor name="RightMiddleFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.028" radius=".0075">
                                             
                                 <motor name="RightMiddleSecondTwo" minPos="0" maxPos="180">
-                                <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.024" radius=".0075">
-                                <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
-                                <link z="-.025" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <link z="-.035" radius=".0075">
                             
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                                 </link>
                                 </joint>
@@ -284,14 +282,14 @@
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="RightRingAndPinky" minPos="0" maxPos="270">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.026" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.022" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
-                            <link z="-.025" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <link z="-.035" radius=".0075">
                                     
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                             </link>
                             </joint>
@@ -313,14 +311,14 @@
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="RightRingAndPinky">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.022" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.019" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius="0.00825">
-                            <link z="-.025" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <link z="-.035" radius=".0075">
                                     
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                             </link>
                             </joint>
@@ -366,11 +364,9 @@
                 </joint>
             </motor>
             
-                </link>
-                </link>
                 </joint>
             </motor>
-            
+        </link>            
     </bodypart>
     <!-- RIGHT ARM -->
     
@@ -389,26 +385,24 @@
         <constraint a=" 1.0  -1.0  -1.0"  q="0 1 2" b="258.3"/>        
         <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
         <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
- 
+
+        <link x="-.2588" y="-.9659" radius=".031" length=".10774">
+          <!--box depth=".15" height=".14" width=".07" px="-0.0116" py="-0.0440" pz="-.04" hz="-1" angle="15" /-->
+
             <motor name="LeftShoulderPitch" minPos="-96" maxPos="10" home="-26">
                 <joint x="-.2588" y="-.9659" minPos="-96" maxPos="10" radius="0">
-                    <box depth=".165" height=".154" width=".088" px="-0.0116" py="-0.0440" pz="-.04" hz="-1" angle="15" />
-                <link x="-.2588" y="-.9659" radius="0" length=".04274">
-                <link x="-.2588" y="-.9659" radius=".034" length=".065">
             
             <motor name="LeftShoulderRoll" minPos="0" maxPos="161" home="20">
-                <joint y=".2588" x="-.9659" minPos="0" maxPos="161" radius=".033" length=".07">
+                <joint y=".2588" x="-.9659" minPos="0" maxPos="161" radius=".025" length=".063">
             
             <motor name="LeftShoulderYaw" minPos="-37" maxPos="80">
                 <joint z="-1" minPos="-37" maxPos="80" radius="0">
 
-            <link z="-.15228" radius=".0286">
-              <!--cylinder radius=".035" height=".13" px="-.0116" py=".00312" pz="-.1" hz="1"/>
-                <cylinder radius=".035" height=".13" px=".0116" py="-.00312" pz="-.1" hz="1"/-->
-              <cylinder radius=".022" height=".115" px="-.015" py="-.007" pz="-.095" hz="1" hx="-0.2"/>
-              <cylinder radius=".022" height=".115" px="-.015" py=".007" pz="-.095" hz="1" hx="-0.2"/>
-              <cylinder radius=".022" height=".125" px=".02" py="-.007" pz="-.105" hz="1"/>
-              <cylinder radius=".022" height=".125" px=".02" py=".007" pz="-.105" hz="1"/>
+            <link z="-.15228" radius=".026">
+              <cylinder radius=".024" height=".115" px="-.015" py="-.007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".024" height=".115" px="-.015" py=".007" pz="-.095" hz="1" hx="-0.2"/>
+              <cylinder radius=".024" height=".125" px=".02" py="-.007" pz="-.105" hz="1"/>
+              <cylinder radius=".024" height=".125" px=".02" py=".007" pz="-.105" hz="1"/>
               
             <link z="-1" x="-1" radius="0" length=".015">
             
@@ -416,20 +410,20 @@
               <joint y="1" minPos="15" maxPos="106" radius="0" length=".07">
 
             <!-- LOWER ARM -->
-                <link z="-.1373" radius=".033">
-                <sphere radius=".033"/>
+                <link z="-.1373" radius=".036">
+                <sphere radius=".036"/>
               
             <motor name="LeftWristYaw" minPos="-90" maxPos="90">
                 <joint z="-1" minPos="-90" maxPos="90" radius="0">
                               
             <motor name="LeftWristRoll" minPos="-90" maxPos="0">
                 <joint x="1" minPos="-90" maxPos="0" radius="0">
-                  <cylinder radius=".0275" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
+                  <cylinder radius=".03" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
                   
             <motor name="LeftWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
                   
-                  <sphere radius=".033"/>
+                  <sphere radius=".036"/>
 
                   <link z="-.0645" y=".011" radius="0" noSelfCollision="true"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
@@ -446,8 +440,8 @@
                 <box width=".001" height=".07" depth=".04" hx="1" px="-.005" py="-.02" pz="-0.045"/>
                 <box width=".035" height=".07" depth=".02" hx="1" px="-.005" pz="-0.055"/-->
                 
-                <box width=".0242" height=".0825" depth=".0759" hx="1" py="0.011" pz="-0.034"/>
-                <box width=".022" height=".0825" depth=".0869" hx="1" py="-0.01" pz="-0.039"/>
+                <box width=".022" height=".085" depth=".069" hx="1" py="0.011" pz="-0.034"/>
+                <box width=".025" height=".085" depth=".079" hx="1" py="-0.0125" pz="-0.039"/>
               
                 <motor name="LeftHandSpread" minPos="0" maxPos="60" home="10">
             
@@ -459,16 +453,16 @@
                         <link x="-.02" radius=".0075">
                         
                             <motor name="LeftThumbFirstKnuckleB" minPos="0" maxPos="90">
-                            <joint y="-.015" minPos="0" maxPos="70" radius="0.00825">
+                            <joint y="-.015" minPos="0" maxPos="70" radius=".0075">
                             <link x="-.026" radius=".0075">
                     
                                 <motor name="LeftThumbSecondTwo" minPos="0" maxPos="180">
-                                <joint y="-.015" minPos="0" maxPos="90" radius="0.00825">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
                                 <link x="-.022" radius=".0075">
-                                <joint y="-.015" minPos="0" maxPos="90" radius="0.00825">
-                                <link x="-.025" radius=".0075">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
+                                <link x="-.035" radius=".0075">
                                 
-                                    <sphere radius=".0088" px="-.025"/>
+                                    <sphere radius=".0096" px="-.035"/>
                                 
                                 </link>
                                 </joint>
@@ -495,16 +489,16 @@
                         <cylinder height=".017" radius=".0075"/>
                         
                             <motor name="LeftIndexFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.026" radius=".0075">
                                             
                                 <motor name="LeftIndexSecondTwo" minPos="0" maxPos="180">
-                                <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                                <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.022" radius=".0075">
-                                <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
-                                <link z="-.025" radius=".0075">
+                                <joint x=".017" minPos="0" maxPos="90" radius=".0075">
+                                <link z="-.035" radius=".0075">
                             
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                                 </link>
                                 </joint>
@@ -527,16 +521,16 @@
                         <cylinder height=".017" radius=".0075"/>
                         
                             <motor name="LeftMiddleFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.028" radius=".0075">
                                             
                                 <motor name="LeftMiddleSecondTwo" minPos="0" maxPos="180">
-                                <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                                <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.024" radius=".0075">
-                                <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
-                                <link z="-.025" radius=".0075">
+                                <joint x=".017" minPos="0" maxPos="90" radius=".0075">
+                                <link z="-.035" radius=".0075">
                             
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                                 </link>
                                 </joint>
@@ -559,14 +553,14 @@
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="LeftRingAndPinky" minPos="0" maxPos="270">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.026" radius=".0075">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.022" radius=".0075">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
-                            <link z="-.025" radius=".0075">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
+                            <link z="-.035" radius=".0075">
                                     
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                             </link>
                             </joint>
@@ -588,14 +582,14 @@
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="LeftRingAndPinky">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.022" radius=".0075">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                             <link z="-.019" radius=".0075">
-                            <joint x=".017" minPos="0" maxPos="90" radius="0.00825">
-                            <link z="-.025" radius=".0075">
+                            <joint x=".017" minPos="0" maxPos="90" radius=".0075">
+                            <link z="-.035" radius=".0075">
                                     
-                                    <sphere radius=".0088" pz="-.025"/>
+                                    <sphere radius=".0096" pz="-.035"/>
                                     
                             </link>
                             </joint>
@@ -639,10 +633,9 @@
                 </joint>
             </motor>
             
-                </link>
-                </link>
                 </joint>
             </motor>
+          </link>
             
     </bodypart>
     <!-- LEFT ARM -->
