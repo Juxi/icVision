@@ -153,10 +153,10 @@
             
             <motor name="RightWristRoll" minPos="-90" maxPos="0">
                 <joint x="-1" minPos="-90" maxPos="0" radius="0">
-            
+                <cylinder radius=".025" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
+                  
             <motor name="RightWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
-                <cylinder radius=".025" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
 
                 <sphere radius=".03"/>
                 
@@ -427,6 +427,7 @@
             <motor name="LeftWristRoll" minPos="-90" maxPos="0">
                 <joint x="1" minPos="-90" maxPos="0" radius="0">
                   <cylinder radius=".025" height=".1373" px=".015" pz=".0687" hz="1" hx="0.15"/> <!-- lower arm cover, should rotate with lower arm -->
+                  
             <motor name="LeftWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
                   

@@ -2,11 +2,8 @@
 #define __SLIDER2_WINDOW__
 
 #include <QSlider>
-#include <QLabel>
-#include <QThread>
+#include <QWidget>
 #include <QGridLayout>
-
-#include <iostream>
 #include <string>
 
 #include "valueslider.h"

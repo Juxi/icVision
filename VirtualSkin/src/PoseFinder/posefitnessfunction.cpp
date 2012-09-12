@@ -1,5 +1,21 @@
 #include "posefitnessfunction.h"
+#include <boost/math/special_functions/fpclassify.hpp> // for isnan
+#include "exception.h"
+#include <iostream>
+#include <QString>
 
+PoseFitnessFunction::PoseFitnessFunction(Simulator &simulator) :
+d_simulator(simulator),
+	d_filter(new DummyFilter()),
+	d_debug(false),
+	d_colliding(false)
+{} 
+
+PoseFitnessFunction::~PoseFitnessFunction() {
+	for (size_t i(0); i < d_constraints.size(); ++i)
+		delete(d_constraints[i]);
+	delete(d_filter);
+}
 
 double PoseFitnessFunction::eval(const Matrix& point) {
 	std::vector<double> motor_values(point.get_data());
@@ -30,3 +46,28 @@ double PoseFitnessFunction::eval(const std::vector<double>& motor_values)
 	(*d_filter)(motor_values, fitness, n_collisions, observation);
 	return fitness;
 }
+
+void PoseFitnessFunction::add_constraint(Constraint *constraint, double weight) {
+	d_constraints.push_back(constraint);
+	d_weights.push_back(weight);
+}
+
+void PoseFitnessFunction::clear_constraints() {
+	for (size_t i(0); i < d_constraints.size(); ++i)
+		delete(d_constraints[i]);
+	d_constraints.clear();
+	d_weights.clear();
+}
+
+void PoseFitnessFunction::set_filter(EvaluationFilter *filter) {
+	delete(d_filter);
+	d_filter = filter;
+}
+
+
+
+std::vector<double> ObservationWorkspaceFunction::get_workspace(Function &fitness_function) {
+	PoseFitnessFunction &pose_fitness_function = dynamic_cast<PoseFitnessFunction &>(fitness_function);
+	return pose_fitness_function.simulator().robot().observe().markerPosition(QString("right_hand"));
+}
+

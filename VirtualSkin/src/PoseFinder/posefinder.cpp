@@ -1,5 +1,7 @@
 #include "posefinder.h"
 
+#include <cassert>
+#include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
@@ -10,6 +12,7 @@
 #include "posefitnessfunction.h"
 #include "exception.h"
 #include "mones.h"
+#include "xnes.h"
 #include "simplex.h"
 
 using namespace std;
@@ -120,8 +123,9 @@ void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fit
 		{
 			try {
 				nes.iterate();
+				
 #ifdef WIN32
-				Sleep(3);
+				
 #else
 				usleep(3000);
 #endif

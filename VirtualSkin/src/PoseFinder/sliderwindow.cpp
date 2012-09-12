@@ -1,4 +1,6 @@
 #include "sliderwindow.h"
+#include <QLabel>
+#include <iostream>
 
 using namespace std;
 

@@ -2,7 +2,7 @@
 #include "robot.h"
 #include "worldhandler.h"
 #include "modelwindow.h"
-#include <iostream.h>
+#include <iostream>
 
 using namespace KinematicModel;
 
