@@ -47,7 +47,7 @@ void MapThread::load_points(string filename) {
 
 	size_t n_poses = poses_map["WORKSPACE"].size();
 
-	d_configuration_points = vector<vector<double> >(n_poses);
+	d_poses_q = vector<vector<double> >(n_poses);
 
 	for (size_t i(0); i < d_pose_finder.simulator().total_parts(); ++i) {
 		string name("CFGSPACE_");
@@ -56,27 +56,27 @@ void MapThread::load_points(string filename) {
 
 		vector<vector<double> > &part_configuration(poses_map[name]);
 		for (size_t n(0); n < part_configuration.size(); ++n)
-			copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_configuration_points[n]));
+			copy(part_configuration[n].begin(), part_configuration[n].end(), back_inserter(d_poses_q[n]));
 	}
 	//		Maybe conversion?
 
-	for (size_t i(0); i < d_configuration_points[0].size(); ++i)
-		cout << d_configuration_points[0][i] << " ";
+	for (size_t i(0); i < d_poses_q[0].size(); ++i)
+		cout << d_poses_q[0][i] << " ";
 	cout << endl;
-	d_configuration_points = convert_all_to_normal(d_configuration_points);
-	d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_configuration_points);
+	d_poses_q = convert_all_to_normal(d_poses_q);
+	d_map_build_constraint->add_points(poses_map["WORKSPACE"], d_poses_q);
 
 	cout << "conf point, should be normalized:" << endl;
-	for (size_t i(0); i < d_configuration_points[0].size(); ++i)
-		cout << d_configuration_points[0][i] << " ";
-	if (d_configuration_points.size() > 1)
-		for (size_t i(0); i < d_configuration_points[1].size(); ++i)
-			cout << d_configuration_points[1][i] << " ";
-	for (size_t i(0); i < d_points->size(); ++i)
-		d_pose_finder.simulator().add_point((*d_points)[i][0], (*d_points)[i][1], (*d_points)[i][2]);
+	for (size_t i(0); i < d_poses_q[0].size(); ++i)
+		cout << d_poses_q[0][i] << " ";
+	if (d_poses_q.size() > 1)
+		for (size_t i(0); i < d_poses_q[1].size(); ++i)
+			cout << d_poses_q[1][i] << " ";
+	for (size_t i(0); i < d_poses_x->size(); ++i)
+		d_pose_finder.simulator().add_point((*d_poses_x)[i][0], (*d_poses_x)[i][1], (*d_poses_x)[i][2]);
 
-	cout << "N Points: " << d_points->size() << endl;
-	cout << "Dim Points: " << d_points->at(0).size() << endl;
+	cout << "N Points: " << d_poses_x->size() << endl;
+	cout << "Dim Points: " << d_poses_x->at(0).size() << endl;
 
 }
 
@@ -119,10 +119,10 @@ void MapThread::run()
 	bool test(false);
 	if (test)
 		while (keepRunning) {
-			//				size_t n(qrand() % d_configuration_points.size());
+			//				size_t n(qrand() % d_poses_q.size());
 			cout << "Testing!: "<< n << endl;
 			//				n = 279;
-			vector<double> random_pose = d_configuration_points[n];//d_pose_finder.simulator().home_pos();
+			vector<double> random_pose = d_poses_q[n];//d_pose_finder.simulator().home_pos();
 
 			for (size_t i(0); i < random_pose.size(); ++i)
 				cout << random_pose[i] << " ";
@@ -134,8 +134,8 @@ void MapThread::run()
 
 			cout << n_collisions << endl;
 			usleep(2000000);
-			cout << d_configuration_points.size() << endl;
-			n = rand() % d_configuration_points.size();
+			cout << d_poses_q.size() << endl;
+			n = rand() % d_poses_q.size();
 		}
 	else
 		while (keepRunning) {
@@ -143,16 +143,19 @@ void MapThread::run()
 			//size_t population_size(250);
 
 			vector<double> start_pose;
-			if (!d_configuration_points.size())
+			if (!d_poses_q.size())
 				start_pose = d_pose_finder.get_normal_homepos();
-			else
-				start_pose = random_pose();
+			else {
+				//start_pose = random_pose();
+				start_pose = outside_pose(d_map_build_constraint->alpha());
+			}
+
 
 			double minfitness = 0.0001;
 			
 			// use large standard deviation on first pose
 			double my_start_std = d_start_std;
-			if (d_configuration_points.size() > 0) {
+			if (d_poses_q.size() > 0) {
 				my_start_std = 	d_start_std*0.1;
 			}
 
@@ -185,7 +188,7 @@ void MapThread::add_best_pose(double minfitness) {
 	//}
 
 
-	d_configuration_points.push_back(best_point);
+	d_poses_q.push_back(best_point);
 	d_map_build_constraint->add_point(position, best_point);
 	for (size_t i(0); i < position.size(); ++i)
 		std::cout << position[i] << " ";
@@ -199,7 +202,7 @@ void MapThread::nullspace_function() {
 	d_map_build_constraint = new MapBuildConstraint("head", 2, .02, .01);
 
 	//d_pose_finder.pose_fitness_function().debug() = true;
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 
 	//d_pose_finder.set_start_search_pos(d_simulator_wide_pose);
@@ -264,7 +267,7 @@ void MapThread::read_constraints(string filename) {
 
 
 	d_map_build_constraint = new MapBuildConstraint(map_marker, n_neighbours, distance, push_factor);
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 	d_pose_finder.add_constraint(d_map_build_constraint);
 
 	cout << "done" << endl;
@@ -275,7 +278,7 @@ void MapThread::move_box_function() {
 	d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .02, .1);
 
 
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	//d_pose_finder.set_start_search_pos(d_simulator_wide_pose);  
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().real_to_normal_motors(d_simulator_wide_pose)), 1);
@@ -317,7 +320,7 @@ void MapThread::hold_something_function() {
 	cout << "Building constraints" << endl;
 	d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .04, 0.1);
 	d_marker = "left_hand";
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 
 	//d_pose_finder.set_start_search_pos(d_simulator_home_pose);
@@ -369,7 +372,7 @@ void MapThread::around_object_function() {
 
 	cout << "Building constraints" << endl;
 	d_map_build_constraint = new MapBuildConstraint("right_handpalm", 2, .04, 0.1);
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 
 	//d_pose_finder.set_start_search_pos(d_simulator_home_pose);
@@ -398,7 +401,7 @@ void MapThread::hand_left_function() {
 	d_map_build_constraint = new MapBuildConstraint("left_hand", 2, .02, 0.1);
 	d_marker = "left_hand";
 
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().home_pos()), .1);
 
@@ -421,7 +424,7 @@ void MapThread::hand_right_function() {
 	cout << "Building constraints" << endl;
 	d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .02, 0.1);
 	d_marker = "right_hand";
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().home_pos()), 1);
 
@@ -446,7 +449,7 @@ void MapThread::hand_right_mark_function() {
 	cout << "Building constraints" << endl;
 	d_map_build_constraint = new MapBuildConstraint("right_hand", 3, .04, 0.1);
 	d_marker = "right_hand";
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().home_pos()), .5);
 
@@ -474,7 +477,7 @@ void MapThread::hand_right_look_varun_function() {
 	float height(.1);
 	cout << "Building constraints" << endl;
 	d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_pose_finder.simulator().home_pos()), .3);
 
@@ -503,7 +506,7 @@ void MapThread::grasp_function() {
 
 	d_map_build_constraint = new MapBuildConstraint("right_hand", 2, .04, 0.1);
 	d_marker = "right_hand";
-	d_points = &(d_map_build_constraint->points());
+	d_poses_x = &(d_map_build_constraint->points());
 
 	d_pose_finder.add_constraint(new HomePoseConstraint(d_simulator_wide_pose), 7.);
 
@@ -525,13 +528,51 @@ void MapThread::grasp_function() {
 
 
 std::vector<double> MapThread::random_pose() {
-	return d_configuration_points[rand() % d_configuration_points.size()];
+	return d_poses_q[rand() % d_poses_q.size()];
+}
+
+
+std::vector<double> MapThread::outside_pose(double threshold) {
+	vector<vector<double > > &poses = *d_poses_x; // we want to augment the range in workspace, not in configuration space
+	//vector<vector<double > > &poses = d_poses_q;
+	int nposes = d_poses_x->size();
+	vector<int > neighbors(nposes, 0); // number of neighbors within area
+
+	double diff;
+	for (int i(0); i< nposes; i++) {
+		vector<double > distances(nposes, 0.0); // not really necessary to put this in a vector, but maybe use it later
+		for (int j(0); j< nposes; j++) {
+			// compute the distance between poses[i] and poses[j]
+			for (int k(0); k< poses[i].size(); k++) {
+				diff = poses[i][k]-poses[j][k];
+				distances[j] = distances[j]+diff*diff;
+			}
+			distances[j] = sqrt(distances[j]);
+			// count the number of point within threshold distance of poses_x[i];
+			if (distances[j] <= threshold)
+				neighbors[i]++;
+		}
+	}
+
+	// randomly pick a pose among the poses with the smallest number of neighbors within threshold:
+	int minvalue = *std::min_element(neighbors.begin(), neighbors.end());
+	vector<int > min_neigbor_indices;
+	for (int j(0); j< nposes; j++) {
+		if (neighbors[j] <= minvalue)
+			min_neigbor_indices.push_back(j);
+	}
+	int min_neighbor_index = min_neigbor_indices[rand() % min_neigbor_indices.size()];
+
+	// return the pose at randomly selected minimum neighbor index
+	cout << "choosing point from " << min_neigbor_indices.size() << " / " << nposes << " poses with " << minvalue << " / " << *std::max_element(neighbors.begin(), neighbors.end()) << " neigbors within " << threshold << " workspace units" << endl;
+	cout << "starting point (workspace): " << poses[min_neighbor_index][0] << " " << poses[min_neighbor_index][1] << " " << poses[min_neighbor_index][2] << endl;
+	return d_poses_q[min_neighbor_index];
 }
 
 void MapThread::store_points(std::string filename) {
 	poses_map_t store_map;
 
-	std::vector<std::vector<double> > real_poses = convert_all_to_real(d_configuration_points);
+	std::vector<std::vector<double> > real_poses = convert_all_to_real(d_poses_q);
 
 	for (size_t i(0); i < real_poses.size(); ++i) {
 		std::map<std::string, std::vector<double> > a_motor_map(d_pose_finder.simulator().to_motor_named_map(real_poses[i]));
@@ -545,8 +586,8 @@ void MapThread::store_points(std::string filename) {
 			store_map[sub_name].push_back(it->second);
 		}
 	}
-	store_map["WORKSPACE"] = *d_points;
-	if (d_points->size() > 0)
+	store_map["WORKSPACE"] = *d_poses_x;
+	if (d_poses_x->size() > 0)
 		write_poses(store_map, filename);
 }
 
@@ -579,8 +620,8 @@ void MapThread::filter_collisions(Simulator &simulator) {
 	std::vector<std::vector<double> > filtered_configurations;
 	std::vector<std::vector<double> > filtered_points;
 
-	for (size_t i(0); i < d_configuration_points.size(); ++i) {
-		std::vector<double> pose = d_configuration_points[i];//d_pose_finder.simulator().home_pos();
+	for (size_t i(0); i < d_poses_q.size(); ++i) {
+		std::vector<double> pose = d_poses_q[i];//d_pose_finder.simulator().home_pos();
 		simulator.set_motors(pose);
 		double n_collisions = simulator.computePose();
 		if (n_collisions) {
@@ -588,11 +629,11 @@ void MapThread::filter_collisions(Simulator &simulator) {
 			continue;
 		}
 		filtered_configurations.push_back(pose);
-		filtered_points.push_back((*d_points)[i]);
+		filtered_points.push_back((*d_poses_x)[i]);
 	}
 
-	d_configuration_points = filtered_configurations;
-	*d_points = filtered_points;
+	d_poses_q = filtered_configurations;
+	*d_poses_x = filtered_points;
 }
 
 

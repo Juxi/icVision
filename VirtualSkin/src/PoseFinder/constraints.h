@@ -153,6 +153,7 @@ public:
 	MapBuildConstraint(std::string marker, size_t nNN, double alpha, double config_measure = 0.0, double exploration_force = 0.0);
 
 	std::string marker() { return d_marker; }
+	double alpha() { return d_alpha; };
 	std::vector<std::vector<double> > &points() { return d_points; }
 	std::vector<std::vector<double> > &configurations() {  return d_configurations; }
 

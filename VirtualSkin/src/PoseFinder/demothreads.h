@@ -9,20 +9,15 @@
 
 
 class MapThread : public QThread {
-
-public:
-	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
-	void run();
-	void stop();
-
 private:
 	bool keepRunning;
 	bool verbose;
 
 	PoseFinder d_pose_finder;
 	MapBuildConstraint *d_map_build_constraint;
-	std::vector<std::vector<double> > *d_points;
-	std::vector<std::vector<double> > d_configuration_points;
+	//std::vector<std::vector<double> > *d_points;
+	std::vector<std::vector<double> > d_poses_q;
+	std::vector<std::vector<double> > *d_poses_x;
 
 	std::string d_marker;
 
@@ -43,13 +38,18 @@ private:
 	void add_best_pose(double minfitness);
 
 	std::vector<double> random_pose();
-	std::vector<double> outside_pose();
+	std::vector<double> outside_pose(double threshold);
 	void store_points(std::string filename);
 	void load_points(std::string filename);
 	std::vector<std::vector<double> > convert_all_to_real(std::vector<std::vector<double> > &in);
 	std::vector<std::vector<double> > convert_all_to_normal(std::vector<std::vector<double> > &in);
 	void filter_collisions(Simulator &simulator);
 	void init_standard_poses();
+
+public:
+	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
+	void run();
+	void stop();
 };
 
 class OnlineThread : public QThread {
@@ -100,8 +100,8 @@ private:
 
 	PoseFinder d_pose_finder;
 	MapBuildConstraint *d_map_build_constraint;
-	std::vector<std::vector<double> > *d_points;
-	std::vector<std::vector<double> > d_configuration_points;
+	std::vector<std::vector<double> > d_poses_x;
+	std::vector<std::vector<double> > d_poses_q;
 
 	std::string d_marker;
 
