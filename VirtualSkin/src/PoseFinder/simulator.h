@@ -9,10 +9,10 @@
 #include "exception.h"
 
 class Simulator {
+private:
 	KinematicModel::Model &d_model;
 	KinematicModel::Robot &d_robot;
 
-public:
 	int d_total_motors;
 	std::vector<double> d_home_pos, d_last_position;
 

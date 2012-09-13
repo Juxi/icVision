@@ -43,6 +43,7 @@ private:
 	void add_best_pose(double minfitness);
 
 	std::vector<double> random_pose();
+	std::vector<double> outside_pose();
 	void store_points(std::string filename);
 	void load_points(std::string filename);
 	std::vector<std::vector<double> > convert_all_to_real(std::vector<std::vector<double> > &in);

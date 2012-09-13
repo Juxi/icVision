@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 	//	return path_test(model, robot, app);
 	//}
 
-	if (string(argv[3]) == "online") {
-		return online_test(model, robot, app);
-	}
+	//if (string(argv[3]) == "online") {
+	//	return online_test(model, robot, app);
+	//}
 }
