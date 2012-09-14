@@ -576,7 +576,7 @@
                     <!-- / RING -->
                     
                     <!-- PINKY FINGER -->
-                    <link x=".022" y="-.008" z="-.0045" radius="0">
+                    <link x=".022" z="-.0045" radius="0">
                         <joint y=".017" minPos="-10" maxPos="0" radius="0">
                         <link z="-.012" radius=".0075">
                         <cylinder height=".017" radius=".0075"/>
