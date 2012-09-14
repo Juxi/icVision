@@ -37,6 +37,7 @@ void PoseFinder::find_pose(std::vector<double> start_search_pos, double fitness_
 		find_pose_simplex(start_search_pos, fitness_threshold);
 		break;
 	}
+	d_pose_fitness_function.mask_pose_hook(d_best_point); // the optimization function did not search for masked pose values, so put fully masked values at their home pose, if any home pose is specified
 }
 
 void PoseFinder::find_pose_mc(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {

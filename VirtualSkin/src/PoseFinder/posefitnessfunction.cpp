@@ -31,22 +31,9 @@ double PoseFitnessFunction::eval(const std::vector<double>& motor_values) {
 
 	// put motors for which mask=0 to their home position values instead of the values defined by the optimization algorithm
 	std::vector<double> masked_motor_values = motor_values; // make a copy
+	mask_pose_hook(masked_motor_values);
 	//print_vector(masked_motor_values);
-	for (size_t i(0); i < d_constraints.size(); ++i) {
-		if (d_constraints[i]->name() == "HomePoseConstraint") {
-			HomePoseConstraint *constraint = dynamic_cast<HomePoseConstraint *>(d_constraints[i]);
-			std::vector<double> &pose = constraint->home_pose();
-			std::vector<double> &mask = constraint->home_pose_mask();
-			for (size_t j(0); j < pose.size(); j++) {
-				if (mask[j] <= 0) {
-					masked_motor_values[j] = pose[j];
-					//std::cout << "setting motor value at index " << j << " to its home position: " << pose[j] << std::endl;
-				}
-			}
-		}
-	}
-
-
+	
 	d_simulator.set_motors(masked_motor_values);
 	double n_collisions = d_simulator.computePose();
 	d_colliding = n_collisions;
@@ -89,6 +76,23 @@ void PoseFitnessFunction::set_filter(EvaluationFilter *filter) {
 	d_filter = filter;
 }
 
+void PoseFitnessFunction::mask_pose_hook(std::vector<double>& pose) {
+	// put motors for which mask=0 to their home position values instead of the values defined by the optimization algorithm
+
+	for (size_t i(0); i < d_constraints.size(); ++i) {
+		if (d_constraints[i]->name() == "HomePoseConstraint") {
+			HomePoseConstraint *constraint = dynamic_cast<HomePoseConstraint *>(d_constraints[i]);
+			std::vector<double> &home_pose = constraint->home_pose();
+			std::vector<double> &mask = constraint->home_pose_mask();
+			for (size_t j(0); j < pose.size(); j++) {
+				if (mask[j] <= 0) {
+					pose[j] = home_pose[j];
+					//std::cout << "setting motor value at index " << j << " to its home position: " << pose[j] << std::endl;
+				}
+			}
+		}
+	}
+}
 
 
 std::vector<double> ObservationWorkspaceFunction::get_workspace(Function &fitness_function) {
