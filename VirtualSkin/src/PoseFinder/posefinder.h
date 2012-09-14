@@ -45,7 +45,7 @@ PoseFinder( KinematicModel::Model& model, KinematicModel::Robot& robot, BuildMod
 	}
 	Simulator &simulator() { return d_simulator; }
 	PoseFitnessFunction &pose_fitness_function(){return d_pose_fitness_function;}
-public:
+private:
 	Simulator d_simulator;
 
 	std::vector<double> d_best_point;
@@ -54,8 +54,6 @@ public:
 	PoseFitnessFunction d_pose_fitness_function;
 
 	//NES d_nes;
-
-private:
 
 };
 

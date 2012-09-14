@@ -118,7 +118,7 @@ protected:
 										   PrimitiveObject*,
 										   const DT_CollData* ) {}	
 	
-	bool keepRunning;		//!< Facilitates stopping and restarting the thread
+	volatile bool keepRunning;		//!< Facilitates stopping and restarting the thread
 	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
 	int	 reflex_col_count;
 	bool encObstacle;

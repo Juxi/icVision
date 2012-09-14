@@ -22,6 +22,7 @@ vector<double> PoseFinder::best_point() {
 }
 
 void PoseFinder::find_pose(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
+	d_pose_fitness_function.startpose_hook(start_search_pos);
 	switch (d_build_mode) {
 	case XNES:
 		find_pose_xnes(start_search_pos, fitness_threshold, variance_threshold, std, population_size);
@@ -119,8 +120,7 @@ void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fit
 
 		size_t n_evaluations(0);
 		//d_pose_fitness_function.debug() = ;
-		do
-		{
+		do {
 			try {
 				nes.iterate();
 				
@@ -134,7 +134,7 @@ void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fit
 				break;
 			}
 			n_evaluations += population_size;
-			//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
+			//std::cout << "n_evaluations: " << n_evaluations << ", fitness " << nes.bestFitness() << ", variance: " << nes.variance() << std::endl;
 		}
 		while (nes.bestFitness() > fitness_threshold && nes.variance() > variance_threshold);
 

@@ -34,7 +34,10 @@ public:
 	double eval(const Matrix& point);
 	double eval(const std::vector<double>& point);
 	void add_constraint(Constraint *constraint, double weight = 1.0);
+	void startpose_hook(std::vector<double>& start_pose);
+	void post_hook(Simulator &sim);
 	void clear_constraints();
+	std::vector<Constraint*>* constraints() { return &d_constraints; };
 	void set_filter(EvaluationFilter *filter);
 	Simulator &simulator() { return d_simulator; };
 	bool colliding(){ return d_colliding; }

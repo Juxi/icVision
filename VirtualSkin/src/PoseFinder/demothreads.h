@@ -2,6 +2,7 @@
 #define __DEMOTHREADS_H__
 
 #include <QThread>
+#include <string>
 #include "sliderwindow.h"
 #include "posefinder.h"
 //#include "path_extractor.h"
@@ -10,7 +11,7 @@
 
 class MapThread : public QThread {
 private:
-	bool keepRunning;
+	volatile bool keepRunning;
 	bool verbose;
 
 	PoseFinder d_pose_finder;
@@ -18,6 +19,8 @@ private:
 	//std::vector<std::vector<double> > *d_points;
 	std::vector<std::vector<double> > d_poses_q;
 	std::vector<std::vector<double> > *d_poses_x;
+	std::string d_load_map_file_name;
+	std::string d_store_map_file_name;
 
 	std::string d_marker;
 
@@ -47,7 +50,7 @@ private:
 	void init_standard_poses();
 
 public:
-	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot);
+	MapThread(KinematicModel::Model& model, KinematicModel::Robot& robot, std::string configfile, std::string mapfile);
 	void run();
 	void stop();
 };
@@ -59,7 +62,7 @@ public:
 	void run();
 	void stop();
 private:
-	bool keepRunning;
+	volatile bool keepRunning;
 	bool verbose;
 
 	PoseFinder d_pose_finder;
@@ -95,7 +98,7 @@ public:
 	void run();
 	void stop();
 private:
-	bool keepRunning;
+	volatile bool keepRunning;
 	bool verbose;
 
 	PoseFinder d_pose_finder;

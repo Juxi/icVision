@@ -17,6 +17,8 @@ public:
 
 	virtual double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) = 0;
 	virtual void post_hook(Simulator &simulator) {};
+	virtual void startpose_hook(std::vector<double> startpoint) {};
+	
 	std::string name() {return d_name;}
 
 	static std::vector<double> vector3(double a1, double a2, double a3) {
@@ -29,6 +31,23 @@ public:
 };
 
 
+class StartPoseConstraint : public Constraint {
+private:
+	std::vector<double> d_start_pose;
+	std::vector<double> d_start_pose_mask;
+public:
+	StartPoseConstraint(std::vector<double> d_start_pose);
+	StartPoseConstraint(std::vector<double> d_start_pose, std::vector<double> d_start_pose_mask);
+
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	std::vector<double> &start_pose_mask() { return d_start_pose_mask; };
+	std::vector<double> &start_pose() { return d_start_pose; };
+
+	virtual void startpose_hook(std::vector<double> start_configuration);
+	virtual void post_hook(Simulator &simulator);
+};
+
+
 class HomePoseConstraint : public Constraint {
 private:
 	std::vector<double> d_home_pose;
@@ -38,6 +57,9 @@ public:
 	HomePoseConstraint(std::vector<double> home_pose, std::vector<double> home_pose_mask);
 
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	std::vector<double> &home_pose_mask() { return d_home_pose_mask; };
+	std::vector<double> &home_pose() { return d_home_pose; };
+
 	virtual void post_hook(Simulator &simulator);
 };
 

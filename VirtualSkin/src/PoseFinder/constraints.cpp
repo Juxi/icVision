@@ -30,7 +30,7 @@ pair<Constraint*, double> ConstraintFactory::constraint_from_bottle(yarp::os::Bo
 		string pose_name = find_and_check<string>(bottle, "pose");
 		string mask_name = find_and_check<string>(bottle, "mask");
 		vector<double> home_pos = group_to_vector(main.findGroup(pose_name.c_str()).findGroup("pose"));
-		vector<double> mask = group_to_vector(main.findGroup(mask_name.c_str()).findGroup("pose"));
+		vector<double> mask = group_to_vector(main.findGroup(mask_name.c_str()).findGroup("mask"));
 
 		cout << "home pose: [";
 		for (size_t i(0); i < home_pos.size(); ++i)
@@ -44,7 +44,28 @@ pair<Constraint*, double> ConstraintFactory::constraint_from_bottle(yarp::os::Bo
 		constraint_weight.first = new HomePoseConstraint(home_pos, mask);
 		constraint_weight.second = weight;
 		cout << weight << endl;
-	} else if (type == "collision") {
+	} else if (type == "startpose") {
+		//double weight = bottle.find("weight").asDouble();
+		double weight = find_and_check<double>(bottle, "weight");
+		string pose_name = find_and_check<string>(bottle, "pose");
+		string mask_name = find_and_check<string>(bottle, "mask");
+		vector<double> start_pos = group_to_vector(main.findGroup(pose_name.c_str()).findGroup("pose"));
+		vector<double> mask = group_to_vector(main.findGroup(mask_name.c_str()).findGroup("mask"));
+
+		cout << "start pose: [";
+		for (size_t i(0); i < start_pos.size(); ++i)
+			cout << start_pos[i] << " ";
+		cout << "] = " << start_pos.size() << endl;
+
+		cout << "mask: [";
+		for (size_t i(0); i < mask.size(); ++i)
+			cout << mask[i] << " ";
+		cout << "] = " << mask.size() << endl;
+		constraint_weight.first = new StartPoseConstraint(start_pos, mask);
+		constraint_weight.second = weight;
+		cout << weight << endl;
+	}
+	else if (type == "collision") {
 		double weight = find_and_check<double>(bottle, "weight");
 		//double weight = bottle.find("weight").asDouble();
 
@@ -160,16 +181,23 @@ pair<Constraint*, double> ConstraintFactory::constraint_from_bottle(yarp::os::Bo
 
 
 static double pos_error(std::vector<double> const &values, std::vector<double> const &goal_pos) {
-	double distance(0.0);
-	for (size_t i(0); i < values.size(); ++i)
-		distance += pow(values[i] - goal_pos[i], 2.0);
+	double distance(0.0), diff;
+	for (size_t i(0); i < values.size(); ++i) {
+		diff = values[i] - goal_pos[i];
+		distance += diff * diff;
+		//distance += pow(values[i] - goal_pos[i], 2.0);//pow=slow
+	}
+	
 	return sqrt(distance);
 }
 
 static double pos_error(std::vector<double> const &values, std::vector<double> const &goal_pos, std::vector<double> const &mask) {
-	double distance(0.0);
-	for (size_t i(0); i < values.size(); ++i)
-		distance += pow(values[i] - goal_pos[i], 2.0) * mask[i];
+	double distance(0.0), diff;
+	for (size_t i(0); i < values.size(); ++i) {
+		diff = values[i] - goal_pos[i];
+		distance += diff * diff * mask[i];
+		//distance += pow(values[i] - goal_pos[i], 2.0) * mask[i]; //pow=slow
+	}
 	return sqrt(distance);
 }
 
@@ -212,6 +240,35 @@ double HomePoseConstraint::evaluate(std::vector<double> motor_values, KinematicM
 
 void HomePoseConstraint::post_hook(Simulator &simulator) {
 	d_home_pose = simulator.real_to_normal_motors(d_home_pose);
+}
+
+
+
+StartPoseConstraint::StartPoseConstraint(std::vector<double> start_pose) : 
+Constraint("StartPoseConstraint"), 
+	d_start_pose(start_pose), 
+	d_start_pose_mask(d_start_pose.size()) 
+{ 
+	std::fill(d_start_pose_mask.begin(), d_start_pose_mask.end(), 1.0);
+}
+
+StartPoseConstraint::StartPoseConstraint(std::vector<double> start_pose, std::vector<double> start_pose_mask) : 
+Constraint("StartPoseConstraint"), 
+	d_start_pose(start_pose), 
+	d_start_pose_mask(start_pose_mask) 
+{}
+
+double StartPoseConstraint::evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {
+	return pos_error(d_start_pose, motor_values, d_start_pose_mask) / d_start_pose.size();
+}
+
+void StartPoseConstraint::post_hook(Simulator &simulator) {
+	d_start_pose = simulator.real_to_normal_motors(d_start_pose);
+}
+
+
+void StartPoseConstraint::startpose_hook(std::vector<double> start_configuration) {
+	d_start_pose = start_configuration;
 }
 
 CollisionConstraint::CollisionConstraint() : Constraint("CollisionConstraint") {}

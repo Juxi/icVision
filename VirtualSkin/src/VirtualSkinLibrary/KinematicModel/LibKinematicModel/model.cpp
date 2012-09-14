@@ -541,7 +541,7 @@ void Model::run()
 
 void Model::stop()
 {
-	QMutexLocker locker(&mutex);
+	//QMutexLocker locker(&mutex); //LEO: this causes deadlock; made keepRunning volatile instead
 	
 	keepRunning = false;
 	printf("KinematicModel main thread is shutting down ");
