@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <ostream>
 #include "model.h"
 #include "simulator.h"
 #include <yarp/os/Bottle.h>
@@ -16,9 +17,11 @@ public:
 	{}
 
 	virtual double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) = 0;
-	virtual void post_hook(Simulator &simulator) {};
-	virtual void startpose_hook(std::vector<double> startpoint) {};
-	
+	virtual void post_hook(Simulator &simulator) {}; // called after initializing the simulator
+	virtual void start_pose_hook(const std::vector<double>& pose) {}; // called before starting search for next map pose
+	virtual void adjust_pose_hook(std::vector<double>& pose) {}; // called before evaluation of each pose
+	virtual std::ostream& toString(std::ostream& o) { return o; };
+
 	std::string name() {return d_name;}
 
 	static std::vector<double> vector3(double a1, double a2, double a3) {
@@ -29,137 +32,185 @@ public:
 		return a_vector;
 	}
 };
-
+//std::ostream& operator<<(std::ostream& o, Constraint& c) { return c.toString(o); }; // causes linking problems
 
 class StartPoseConstraint : public Constraint {
 private:
-	std::vector<double> d_start_pose;
-	std::vector<double> d_start_pose_mask;
+	std::vector<double> d_pose;
+	std::vector<double> d_mask;
 public:
 	StartPoseConstraint(std::vector<double> d_start_pose);
 	StartPoseConstraint(std::vector<double> d_start_pose, std::vector<double> d_start_pose_mask);
-
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	std::vector<double> &start_pose_mask() { return d_start_pose_mask; };
-	std::vector<double> &start_pose() { return d_start_pose; };
-
-	virtual void startpose_hook(std::vector<double> start_configuration);
+	
+	virtual void start_pose_hook(const std::vector<double>& pose);
 	virtual void post_hook(Simulator &simulator);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class HomePoseConstraint : public Constraint {
 private:
-	std::vector<double> d_home_pose;
-	std::vector<double> d_home_pose_mask;
+	std::vector<double> d_pose;
+	std::vector<double> d_mask;
 public:
 	HomePoseConstraint(std::vector<double> home_pose);
 	HomePoseConstraint(std::vector<double> home_pose, std::vector<double> home_pose_mask);
-
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	std::vector<double> &home_pose_mask() { return d_home_pose_mask; };
-	std::vector<double> &home_pose() { return d_home_pose; };
-
 	virtual void post_hook(Simulator &simulator);
+	virtual std::ostream& toString(std::ostream& o);
 };
+
+
+class FixPoseConstraint : public Constraint {
+private:
+	std::vector<double> d_pose;
+	std::vector<double> d_mask;
+public:
+	FixPoseConstraint(std::vector<double> pose);
+	FixPoseConstraint(std::vector<double> pose, std::vector<double> mask);
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {return 0.0; };
+	virtual void post_hook(Simulator &simulator);
+	virtual void adjust_pose_hook(std::vector<double>& pose);
+	virtual std::ostream& toString(std::ostream& o);
+};
+
+
+class LimitConstraint : public Constraint {
+private:
+	std::vector<double> d_min;
+	std::vector<double> d_max;
+	std::vector<double> d_mask;
+public:
+	LimitConstraint(std::vector<double> min, std::vector<double> max);
+	LimitConstraint(std::vector<double> min, std::vector<double> max, std::vector<double> mask);
+
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {return 0.0; };
+	virtual void post_hook(Simulator &simulator);
+	virtual void adjust_pose_hook(std::vector<double>& pose);
+	virtual std::ostream& toString(std::ostream& o);
+};
+
 
 
 class CollisionConstraint : public Constraint {
 public:
 	CollisionConstraint();
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
+};
+
+
+class MinDistanceConstraint : public Constraint {
+private:
+	std::string d_marker2;
+	std::string d_marker1;
+	double d_min_distance;
+public:
+	MinDistanceConstraint(std::string marker1_name, std::string marker2_name, double d_min_distance);
+	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class PositionConstraint : public Constraint {
 private:
-	std::string d_marker_name;
-	std::vector<double> d_goal_position;
+	std::string d_marker;
+	std::vector<double> d_goal;
 public:
-	PositionConstraint(std::string marker_name, std::vector<double> goal_position);
+	PositionConstraint(std::string marker_name, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	std::vector<double> &goal_position() {return d_goal_position; };
+	std::vector<double> &goal() {return d_goal; };
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class AveragePositionConstraint : public Constraint {
 private:
-	std::string d_marker_name, d_marker_name2;
-	std::vector<double> d_goal_position;
+	std::string d_marker1, d_marker2;
+	std::vector<double> d_goal;
 public:
-	AveragePositionConstraint(std::string marker_name, std::string marker_name2, std::vector<double> goal_position);
+	AveragePositionConstraint(std::string marker1, std::string marker2, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class PlaneConstraint : public Constraint {
 private:
-	std::string d_marker_name;
+	std::string d_marker;
 	size_t d_axis;
 	double d_value;
 public:
 	PlaneConstraint(std::string marker_name, size_t axis, double value);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class OrientationConstraint : public Constraint {
 private:
-	std::string d_marker_name;
+	std::string d_marker;
 	std::vector<double> d_goal_orientation;
 	std::vector<double> d_mask_orientation;
 	int d_axis;
 public:
 	OrientationConstraint(std::string marker_name, size_t axis, std::vector<double> goal_orientation);
-	double &element(int index) { return d_goal_orientation[d_axis * 3 + index]; }
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	double &element(int index) { return d_goal_orientation[d_axis * 3 + index]; }
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class PointingConstraint : public Constraint {
 private:
 	std::string d_marker;
-	std::vector<double> d_goal_position;
+	std::vector<double> d_goal;
 	double d_distance;
 	size_t d_axis, d_dir;
 public:
-	PointingConstraint(std::string marker, std::vector<double> goal_position, double distance, size_t axis, size_t dir = 1);
+	PointingConstraint(std::string marker, std::vector<double> goal, double distance, size_t axis, size_t dir = 1);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class PointingMarkerConstraint : public Constraint {
 private:
 	std::string d_marker, d_target;
-	std::vector<double> d_goal_position;
+	std::vector<double> d_goal;
 	double d_distance;
 	size_t d_axis;
 	int d_dir;
 public:
 	PointingMarkerConstraint(std::string marker, std::string target, double distance, size_t axis, size_t dir = 1);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class OppositeConstraint : public Constraint {
 private:
 	std::string d_marker1, d_marker2;
-	std::vector<double> d_goal_position;
+	std::vector<double> d_goal, d_mask;
 public:
-	OppositeConstraint(std::string marker1, std::string marker2, std::vector<double> goal_position);
+	OppositeConstraint(std::string marker1, std::string marker2, std::vector<double> goal, std::vector<double> mask);
+	OppositeConstraint(std::string marker1, std::string marker2, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
 class GraspConstraint : public Constraint {
 private:
-	std::string d_marker_1, d_marker_2;
+	std::string d_marker1, d_marker2;
 	PointingConstraint d_point_constraint1, d_point_constraint2;
 	OppositeConstraint d_opposite_constraint;
 	double d_factor;
 public:
-	GraspConstraint(std::string marker_1, std::string marker_2, size_t axis1, size_t axis2, double distance, std::vector<double> goal_position, double factor = 1.);
+	GraspConstraint(std::string marker_1, std::string marker_2, size_t axis1, size_t axis2, double distance, std::vector<double> goal, double factor = 1.);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 
@@ -185,6 +236,7 @@ public:
 	double close_measure(std::vector<double> &values, double alpha, std::vector<size_t> &indexes) const;
 	double config_measure(std::vector<double> &values, std::vector<size_t> &indexes) const;
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
+	virtual std::ostream& toString(std::ostream& o);
 };
 
 

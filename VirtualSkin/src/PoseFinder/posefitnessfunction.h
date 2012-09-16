@@ -34,8 +34,8 @@ public:
 	double eval(const Matrix& point);
 	double eval(const std::vector<double>& point);
 	void add_constraint(Constraint *constraint, double weight = 1.0);
-	void startpose_hook(std::vector<double>& start_pose);
-	void mask_pose_hook(std::vector<double> &pose);
+	void adjust(std::vector<double> &pose);
+	void start(const std::vector<double> &pose);
 	void clear_constraints();
 	std::vector<Constraint*>* constraints() { return &d_constraints; };
 	void set_filter(EvaluationFilter *filter);

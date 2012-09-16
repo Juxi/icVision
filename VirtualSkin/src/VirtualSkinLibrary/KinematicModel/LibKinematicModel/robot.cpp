@@ -226,13 +226,10 @@ void Robot::updatePose()
     }
 	
 	unsigned int m, mc = markers.size();
-	if (mc > 0)
-	{
-		for (m=0; m<mc; m++)
-		{
-			markers[m]->updateTracer();
-		}
+	for (m=0; m<mc; m++) {
+		markers[m]->updateTracer();
 	}
+	
 	//emit changedState();
 }
 

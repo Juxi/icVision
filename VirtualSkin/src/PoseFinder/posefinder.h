@@ -22,10 +22,11 @@ PoseFinder( KinematicModel::Model& model, KinematicModel::Robot& robot, BuildMod
 //PoseFinder( KinematicModel::Model& model,  KinematicModel::Robot& robot, BuildMode build_mode = SIMPLEX) :
 		d_simulator(model, robot),
 		  d_build_mode(build_mode),
-		d_pose_fitness_function(d_simulator)
+		d_pose_fitness_function(d_simulator),
+		d_total_iterations(0),
+		d_total_time_elapsed(0.0)
 		  //d_nes(d_pose_fitness_function, false, false)
-	{
-	}
+	{}
 
 	~PoseFinder() {}
 	void find_pose(std::vector<double> start_search_pos, double fitness_threshold = 0., double variance_threshold = 0.0, double std = .4, int population_size = 150);
@@ -52,6 +53,8 @@ private:
 	
 	BuildMode d_build_mode;
 	PoseFitnessFunction d_pose_fitness_function;
+	size_t d_n_iterations, d_total_iterations;
+	double d_time_elapsed, d_total_time_elapsed;
 
 	//NES d_nes;
 

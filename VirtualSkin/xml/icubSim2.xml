@@ -9,6 +9,8 @@
     <motor name="TorsoPitch" minPos="-22" maxPos="70" idx="2">
         <joint y="-.175" minPos="-22" maxPos="70" radius=".031">
            <cylinder radius=".015" height="1" pz="-.5" hz="1"/>
+           <link y=".1" radius="0"><link y="1"><marker name="right_hip" /></link></link>
+           <link y="-.1" radius="0"><link y="1"><marker name="left_hip" /></link></link>
         <link z=".032" radius="0">
     
     <motor name="TorsoRoll" minPos="-30" maxPos="30" idx="1">
@@ -50,6 +52,7 @@
         <link z=".0825" radius="0">
         
         <sphere pz=".07" radius=".09"/><!---->
+          <marker name="head" />
         <!--<sphere px=".015" pz=".07" radius=".1"/>
         <sphere px="-.015" pz=".07" radius=".9"/>-->
         
@@ -131,15 +134,16 @@
             
             <motor name="RightElbow" minPos="15" maxPos="106" home="50">
               <joint y="1" minPos="15" maxPos="106" radius=".0" length=".07">
-                  
-                  
-                  
-                  
-            <!-- LOWER ARM -->
-            <link z="-.1373" radius=".02">
             
             <motor name="RightWristYaw" minPos="-90" maxPos="90">
-                <joint z="1" minPos="-90" maxPos="90" radius="0">
+              <joint z="1" minPos="-90" maxPos="90" radius="0">
+                
+                <link z="1" radius="0">
+                  <marker name="right_elbow" />
+                </link>
+                  
+            <!-- WRIST -->
+            <link z="-.1373" radius=".02">
             
             <motor name="RightWristRoll" minPos="-90" maxPos="0">
                 <joint x="-1" minPos="-90" maxPos="0" radius="0">
@@ -150,10 +154,9 @@
                 <link z="-.0645" y="-0.011" radius="0" noSelfCollision="true">
                 
                 <!-- HAND -->
-                <link x="-.020" y="-.03" radius="0">
-                    <link y="1" radius="0">
-                        <marker name="right_hand"/>
-                    </link>
+                <link y="-.03" radius="0">
+                  <link y="1" radius="0"><marker name="right_hand"/></link>
+                  <!--link y="-0.05" radius="0"><marker name="right_handpalm"/></link-->
                 </link>
 
                 <box width=".022" height=".065" depth=".069" hx="1" py="-0.011" pz="-0.034"/>
@@ -175,11 +178,13 @@
                                 <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
                                 <link x="-.022" radius=".0075">
                                 <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
-                                <link x="-.025" radius=".0075">
-                                
+                                  
+                                  <link x="-.0125" radius="0"><link z="-1"><marker name="right_thumb"/></link></link>
+                                  
+                                  <link x="-.025" radius=".0075">
                                     <sphere radius=".008" px="-.025"/>
-                                        
-                                </link>
+                                  </link>
+                                  
                                 </joint>
                                 </link>
                                 </joint>
@@ -211,11 +216,13 @@
                                 <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.022" radius=".0075">
                                 <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
-                                <link z="-.025" radius=".0075">
-                            
+                                  
+                                  <link z="-0.0125" radius="0"><link y="-1" radius="0"><marker name="right_index" /></link></link>
+                                  
+                                  <link z="-.025" radius=".0075">
                                     <sphere radius=".008" pz="-.025"/>
-                                    
-                                </link>
+                                  </link>
+                                  
                                 </joint>
                                 </link>
                                 </joint>
@@ -331,11 +338,11 @@
             
                 </joint>
             </motor>
+
+            </link>
                 
                 </joint>
             </motor>
-            
-            </link>
             
                 </joint>
             </motor>
@@ -392,34 +399,32 @@
             <link z="-1" x="-1" radius="0" length=".015">
             
             <motor name="LeftElbow" minPos="15" maxPos="106" home="50">
-                <joint y="1" minPos="15" maxPos="106" radius="0" length=".07">
-                    
-                <!-- upper arm
-                  <cylinder radius=".035" height=".13" px="-.0116" py="-.00312" pz=".1" hz="1"/>-->
-                
-            <!-- LOWER ARM -->
-            <link z="-.1373" radius=".02">
-
-            <motor name="LeftWristYaw" minPos="-90" maxPos="90">
-                <joint z="-1" minPos="-90" maxPos="90" radius="0">
+              <joint y="1" minPos="15" maxPos="106" radius="0" length=".07">
             
+            <motor name="LeftWristYaw" minPos="-90" maxPos="90">
+              <joint z="-1" minPos="-90" maxPos="90" radius="0">
+                
+                <link z="1" radius="0">
+                  <marker name="left_elbow" />
+                </link>
+                
+            <!-- WRIST -->
+            <link z="-.1373" radius=".02">
+              
             <motor name="LeftWristRoll" minPos="-90" maxPos="0">
                 <joint x="1" minPos="-90" maxPos="0" radius="0">
             
             <motor name="LeftWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
-
-                  <!--sphere radius=".03"/ -->
                 
             <link z="-.0645" y=".011" radius="0" noSelfCollision="true"> <!-- This puts us at the HandCS as described in LiraLab's DH parameters -->
             
                 <!-- HAND -->
-                <link x="-.020" y=".03" radius="0">
-                    <link y="1" radius="0">
-                        <marker name="left_hand"/>
-                    </link>
+                <link y=".03" radius="0">
+                    <link y="1" radius="0"><marker name="left_hand"/></link>
+                    <!--link y="0.05" radius="0"><marker name="left_handpalm"/></link-->
                 </link>
-
+              
                 <box width=".022" height=".065" depth=".069" hx="1" py="0.011" pz="-0.034"/>
                 
                 <motor name="LeftHandSpread" minPos="0" maxPos="60" home="10">
@@ -439,11 +444,13 @@
                                 <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
                                 <link x="-.022" radius=".0075">
                                 <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
-                                <link x="-.025" radius=".0075">
-                                
+                                  
+                                  <link x="-.0125" radius="0"><link z="-1"><marker name="left_thumb"/></link></link>
+                                  
+                                  <link x="-.025" radius=".0075">
                                     <sphere radius=".008" px="-.025"/>
-                                
-                                </link>
+                                  </link>
+                                  
                                 </joint>
                                 </link>
                                 </joint>
@@ -475,11 +482,13 @@
                                 <joint x=".017" minPos="0" maxPos="90" radius=".0075">
                                 <link z="-.022" radius=".0075">
                                 <joint x=".017" minPos="0" maxPos="90" radius=".0075">
-                                <link z="-.025" radius=".0075">
-                            
+                                  
+                                  <link z="-.0125" radius="0"><link y="1"><marker name="left_index"/></link></link>
+                                  
+                                  <link z="-.025" radius=".0075">
                                     <sphere radius=".008" pz="-.025"/>
-                                    
-                                </link>
+                                  </link>
+                                  
                                 </joint>
                                 </link>
                                 </joint>
@@ -593,12 +602,12 @@
             
                 </joint>
             </motor>
+
+            </link>
                 
                 </joint>
             </motor>
-
-            </link>
-            
+           
                 </joint>
             </motor>
             

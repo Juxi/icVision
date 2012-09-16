@@ -153,7 +153,7 @@ void MapThread::run()
 			// use large standard deviation on first pose
 			double my_start_std = d_start_std;
 			if (d_poses_q.size() > 0) {
-				my_start_std = 	d_start_std*0.1;
+				my_start_std = 	d_start_std*0.25;
 			}
 
 			double minfitness = 0.0001;
@@ -657,9 +657,9 @@ OnlineThread::OnlineThread(KinematicModel::Model& model, KinematicModel::Robot& 
 	d_pose_finder.add_constraint(new OrientationConstraint("left_hand", 1, Constraint::vector3(0., 0., 1.)));
 
 	slider_window.show();
-	slider_window.add_slider("Front", &(position_constraint->goal_position()[0]), -.3, .3);
-	slider_window.add_slider("Right", &(position_constraint->goal_position()[1]), -.3, .3);
-	slider_window.add_slider("Up", &(position_constraint->goal_position()[2]), -.3, .3);
+	slider_window.add_slider("Front", &(position_constraint->goal()[0]), -.3, .3);
+	slider_window.add_slider("Right", &(position_constraint->goal()[1]), -.3, .3);
+	slider_window.add_slider("Up", &(position_constraint->goal()[2]), -.3, .3);
 
 	slider_window.add_slider("Pointing Front", &(orientation_constraint->element(0)), -1, 1);
 	slider_window.add_slider("Pointing Right", &(orientation_constraint->element(1)), -1, 1);

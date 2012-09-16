@@ -33,7 +33,8 @@ public:
 	
 	inline void createTracer( DT_ResponseClass c, int num, double r, QColor qc )
 	{
-		d = 2*r;
+		//d = 2*r; // MAJOR PROBLEM: MARKERS ARE *NOT* THE SAME AS TRACERS!!!! Suggest to make different xml tags for "marker" and "tracer"
+		d = 0.0; // Markers need to be updated always!!!
 		tracerObject = new CompositeObject(c,c); 
 		tracerObject->persistent = true;
 		tracerObject->setFreeColor(qc);

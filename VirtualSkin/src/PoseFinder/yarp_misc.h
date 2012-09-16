@@ -9,7 +9,7 @@
 
 inline std::vector<double> group_to_vector(yarp::os::Bottle &val) {
 	std::vector<double> values;
-    std::cout << val.toString().c_str() << std::endl;
+    //std::cout << val.toString().c_str() << std::endl;
     //if (!val.isList()) { throw StringException("Value not a list"); }
     ///yarp::os::Bottle* val_pointer = val.asList();
 
