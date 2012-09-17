@@ -199,13 +199,14 @@ void GLWidget::setZRotation(int angle)
 
 void GLWidget::update(int i)
 { 
-	if ( timeSinceLastRender.elapsed() > 5 )
+	if ( timeSinceLastRender.elapsed() > 10 ) // give the other threads 10 ms time to execute
 	{
 		//printf("UPDATE GL - %p\n",QThread::currentThread());
-		QGLWidget::updateGL();
+		updateGL();
+		timeSinceLastRender.restart();
 	}
 	
-	timeSinceLastRender.restart();
+	
 }
 
 void GLWidget::drawCS()

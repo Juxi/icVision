@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 	Model model( visualize, false );
 	
 	model.setStopOnFirstCollision(true); // stop checking for collisions after the first collision in a pose, enabling this means the the optimization algorithm will not find any gradient information for colliding positions
+	model.setSyncGraphics(false);
 	model.start();	/* if we want display lists to be created automatically,
 					   the model must be started prior to appending objects */
 	

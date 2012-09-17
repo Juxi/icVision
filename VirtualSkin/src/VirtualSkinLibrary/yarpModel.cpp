@@ -21,7 +21,7 @@ YarpModel::~YarpModel()
 
 YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 {
-    mutex.lock();
+    mutex.lockForWrite();
     
     DT_ResponseClass newRobotClass     = newResponseClass( responseTables.at(0) );
     DT_ResponseClass newBaseClass      = newResponseClass( responseTables.at(0) );
@@ -58,12 +58,14 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
                                      newBaseClass,
                                      newFieldClass,
                                      newBaseFieldClass );
-    robot->open( fileName, verbose );
-	
-    robots.append( robot );
-	
 	mutex.unlock();
+
+    robot->open( fileName, verbose ); // open calls appendObject, which locks the mutex by itself
 	
+	mutex.lockForWrite();
+    robots.append( robot );
+	mutex.unlock();
+		
 	// these are normal objects not KintreeNodes.  Appending them locks the model mutex
 	robot->appendMarkersToModel();
 	
