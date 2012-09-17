@@ -687,7 +687,7 @@ double MapBuildConstraint::evaluate(vector<double> motor_values, KinematicModel:
 	if (d_config_measure > 0.0) {
 		measure += d_config_measure * config_measure(motor_values, indexes);
 
-		float configuration_measure = config_measure(motor_values, indexes);
+		//float configuration_measure = config_measure(motor_values, indexes);
 		//cout << map_build_measure << " " << configuration_measure << endl;
 	}
 	return measure;

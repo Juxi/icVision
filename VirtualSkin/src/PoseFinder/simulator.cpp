@@ -1,5 +1,7 @@
 #include "simulator.h"
 #include <iostream>
+#include "box.h"
+#include <QVector3D>
 
 Simulator::Simulator(KinematicModel::Model& model,  KinematicModel::Robot& robot) : d_model(model), d_robot(robot) {
 	std::cout << "Initializing Simulator" << std::endl;
@@ -37,13 +39,14 @@ void Simulator::add_ball(float x, float y, float z) const {
 
 void Simulator::add_point(float x, float y, float z) const {
 	KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( d_model.TARGET(), d_model.GHOST() );
-	KinematicModel::Sphere *sphere = new KinematicModel::Sphere( .004 );
-	QColor color( 0, 0, 255, 255 );
+	//KinematicModel::Sphere *point = new KinematicModel::point( .004 );
+	KinematicModel::Box *point = new KinematicModel::Box(QVector3D(.004, .004, .004), false);
+	QColor color( 0, 255, 255, 255 );
 	QVector3D pos(x, y, z);
-	sphere->translate(pos);
-	sphere->setFreeColor(color);
-	sphere->setCollidingColor(color);
-	composite->appendPrimitive(sphere);
+	point->translate(pos);
+	point->setFreeColor(color);
+	point->setCollidingColor(color);
+	composite->appendPrimitive(point);
 	d_model.appendObject(composite);
 }
 
