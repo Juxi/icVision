@@ -46,7 +46,7 @@ void MapThread::init_standard_poses() {
 
 void MapThread::load_points(string filename) {
 	poses_map_t poses_map = read_poses(filename);
-
+	int mapid = 2; //#TODO: read mapid from file
 	size_t n_poses = poses_map["WORKSPACE"].size();
 
 	d_poses_q = vector<vector<double> >(n_poses);
@@ -75,7 +75,7 @@ void MapThread::load_points(string filename) {
 		for (size_t i(0); i < d_poses_q[1].size(); ++i)
 			cout << d_poses_q[1][i] << " ";
 	for (size_t i(0); i < d_poses_x->size(); ++i)
-		d_pose_finder.simulator().add_point((*d_poses_x)[i][0], (*d_poses_x)[i][1], (*d_poses_x)[i][2]);
+		d_pose_finder.simulator().add_point((*d_poses_x)[i][0], (*d_poses_x)[i][1], (*d_poses_x)[i][2], mapid);
 
 	cout << "N Points: " << d_poses_x->size() << endl;
 	cout << "Dim Points: " << d_poses_x->at(0).size() << endl;
@@ -186,13 +186,13 @@ void MapThread::add_best_pose(double minfitness) {
 	//	return;
 	//}
 
-
+	int mapid = 2; //#TODO: read mapid
 	d_poses_q.push_back(best_point);
 	d_map_build_constraint->add_point(position, best_point);
 	for (size_t i(0); i < position.size(); ++i)
 		std::cout << position[i] << " ";
 	std::cout << std::endl;
-	d_pose_finder.simulator().add_point(position[0], position[1], position[2]);
+	d_pose_finder.simulator().add_point(position[0], position[1], position[2], mapid);
 }
 
 void MapThread::read_constraints(string filename) {
@@ -718,7 +718,7 @@ PathThread::PathThread(KinematicModel::Model& model, KinematicModel::Robot& robo
 
 	//		add_constraint(new PositionConstraint("right_hand", Constraint::vector3(-0.237605, 0.234241,  0.1390077)));
 
-	d_pose_finder.simulator().add_point(x, y, z);
+	d_pose_finder.simulator().add_point(x, y, z, mapid);
 
 	d_pose_finder.add_constraint(new GraspConstraint("right_thumb", "right_index", 2, 1, .04, Constraint::vector3(x, y, z)));
 

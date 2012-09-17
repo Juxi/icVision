@@ -3,6 +3,7 @@
 #include "box.h"
 #include "sphere.h"
 #include <QVector3D>
+#include <QColor>
 
 Simulator::Simulator(KinematicModel::Model& model,  KinematicModel::Robot& robot) : d_model(model), d_robot(robot) {
 	std::cout << "Initializing Simulator" << std::endl;
@@ -23,6 +24,7 @@ Simulator::Simulator(KinematicModel::Model& model,  KinematicModel::Robot& robot
 	d_total_motors = total_motors;
 	d_home_pos = home_pos;
 	d_last_position = d_home_pos;
+	d_color_list = QColor::colorNames();
 }
 
 void Simulator::add_ball(float x, float y, float z) const {
@@ -38,16 +40,16 @@ void Simulator::add_ball(float x, float y, float z) const {
 	d_model.appendObject(composite);
 }
 
-void Simulator::add_point(float x, float y, float z) const {
+void Simulator::add_point(float x, float y, float z, size_t mapid) const {
 	KinematicModel::CompositeObject *composite = new KinematicModel::CompositeObject( d_model.GHOST(), d_model.GHOST() );
 	//KinematicModel::Sphere *point = new KinematicModel::Sphere( .004 );
 	KinematicModel::Box *point = new KinematicModel::Box( QVector3D(.004, .004, .004) ); // boxes use less vertices
 	QColor color( 0, 0, 255, 255 );
 	QVector3D pos(x, y, z);
 	point->translate(pos);
-	point->setFreeColor(color);
-	point->setCollidingColor(color);
+	point->setFreeColor(d_color_list[mapid % d_color_list.size()]);
 	composite->appendPrimitive(point);
+	
 	d_model.appendObject(composite);
 }
 

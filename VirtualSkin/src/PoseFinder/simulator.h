@@ -7,6 +7,7 @@
 #include "model.h"
 #include "robot.h"
 #include "exception.h"
+#include <QColor>
 
 class Simulator {
 private:
@@ -14,13 +15,14 @@ private:
 	KinematicModel::Robot &d_robot;
 
 	int d_total_motors;
+	QStringList d_color_list;
 	std::vector<double> d_home_pos, d_last_position;
 
 public:
 	Simulator(KinematicModel::Model& model,  KinematicModel::Robot& robot);
 
 	void add_ball(float x, float y, float z) const;
-	void add_point(float x, float y, float z) const;
+	void add_point(float x, float y, float z, size_t mapid) const;
 
 	void set_motors(const std::vector<double> &motor_values);
 	std::map<std::string, std::vector<double> > to_motor_named_map(std::vector<double> &vec);
