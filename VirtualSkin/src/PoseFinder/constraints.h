@@ -20,7 +20,7 @@ public:
 	virtual void post_hook(Simulator &simulator) {}; // called after initializing the simulator
 	virtual void start_pose_hook(const std::vector<double>& pose) {}; // called before starting search for next map pose
 	virtual void adjust_pose_hook(std::vector<double>& pose) {}; // called before evaluation of each pose
-	virtual std::ostream& toString(std::ostream& o) { return o; };
+	virtual std::string toString() { return ""; };
 
 	std::string name() {return d_name;}
 
@@ -32,7 +32,7 @@ public:
 		return a_vector;
 	}
 };
-//std::ostream& operator<<(std::ostream& o, Constraint& c) { return c.toString(o); }; // causes linking problems
+//std::string operator<<(std::string o, Constraint& c) { return c.toString(o); }; // causes linking problems
 
 class StartPoseConstraint : public Constraint {
 private:
@@ -45,7 +45,7 @@ public:
 	
 	virtual void start_pose_hook(const std::vector<double>& pose);
 	virtual void post_hook(Simulator &simulator);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -58,7 +58,7 @@ public:
 	HomePoseConstraint(std::vector<double> home_pose, std::vector<double> home_pose_mask);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
 	virtual void post_hook(Simulator &simulator);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -72,7 +72,7 @@ public:
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {return 0.0; };
 	virtual void post_hook(Simulator &simulator);
 	virtual void adjust_pose_hook(std::vector<double>& pose);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -88,7 +88,7 @@ public:
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions) {return 0.0; };
 	virtual void post_hook(Simulator &simulator);
 	virtual void adjust_pose_hook(std::vector<double>& pose);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -97,7 +97,7 @@ class CollisionConstraint : public Constraint {
 public:
 	CollisionConstraint();
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -109,7 +109,7 @@ private:
 public:
 	MinDistanceConstraint(std::string marker1_name, std::string marker2_name, double d_min_distance);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -121,7 +121,7 @@ public:
 	PositionConstraint(std::string marker_name, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
 	std::vector<double> &goal() {return d_goal; };
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -132,7 +132,7 @@ private:
 public:
 	AveragePositionConstraint(std::string marker1, std::string marker2, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -144,7 +144,7 @@ private:
 public:
 	PlaneConstraint(std::string marker_name, size_t axis, double value);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -158,7 +158,7 @@ public:
 	OrientationConstraint(std::string marker_name, size_t axis, std::vector<double> goal_orientation);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
 	double &element(int index) { return d_goal_orientation[d_axis * 3 + index]; }
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -171,7 +171,7 @@ private:
 public:
 	PointingConstraint(std::string marker, std::vector<double> goal, double distance, size_t axis, size_t dir = 1);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -185,7 +185,7 @@ private:
 public:
 	PointingMarkerConstraint(std::string marker, std::string target, double distance, size_t axis, size_t dir = 1);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -197,7 +197,7 @@ public:
 	OppositeConstraint(std::string marker1, std::string marker2, std::vector<double> goal, std::vector<double> mask);
 	OppositeConstraint(std::string marker1, std::string marker2, std::vector<double> goal);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -210,7 +210,7 @@ private:
 public:
 	GraspConstraint(std::string marker_1, std::string marker_2, size_t axis1, size_t axis2, double distance, std::vector<double> goal, double factor = 1.);
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 
@@ -236,7 +236,7 @@ public:
 	double close_measure(std::vector<double> &values, double alpha, std::vector<size_t> &indexes) const;
 	double config_measure(std::vector<double> &values, std::vector<size_t> &indexes) const;
 	double evaluate(std::vector<double> motor_values, KinematicModel::RobotObservation observation, int collisions);
-	virtual std::ostream& toString(std::ostream& o);
+	virtual std::string toString();
 };
 
 

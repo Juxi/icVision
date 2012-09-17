@@ -1,5 +1,6 @@
 #include "constraints.h"
 #include <iostream>
+#include <sstream>
 #include "yarp_misc.h"
 #include <QString>
 
@@ -19,7 +20,8 @@ using namespace yarp::os;
 //using namespace yarp::dev;
 
 
-static void sprintvector(ostream& o, const string name, const vector<double>& vec, const vector<double>& mask) {
+static string printvector(const string name, const vector<double>& vec, const vector<double>& mask) {
+	stringstream o;
 	o << name << ": (" << vec.size() << ") [";
 	for (size_t i(0); i < vec.size(); ++i) {
 		if (mask[i] == 0) {
@@ -29,14 +31,17 @@ static void sprintvector(ostream& o, const string name, const vector<double>& ve
 		}
 	}
 	o << "]" << endl;
+	return o.str();
 }
 
-static void sprintvector(ostream&o, const string name, const vector<double>& vec) {
+static string printvector(const string name, const vector<double>& vec) {
+	stringstream o;
 	o << name << ": (" << vec.size() << ") [";
 	for (size_t i(0); i < vec.size(); ++i) {
 		o << vec[i] << " ";
 	} 
 	o << "]" << endl;
+	return o.str();
 }
 
 static double pos_error(vector<double> const &values, vector<double> const &goal_pos) {
@@ -212,7 +217,7 @@ pair<Constraint*, double> ConstraintFactory::constraint_from_bottle(yarp::os::Bo
 	} else
 		throw StringException(type + "no such type of constraint ");
 	
-	constraint_weight.first->toString(cout);
+	cout << constraint_weight.first->toString();
 	cout << "weight: " << constraint_weight.second << endl << endl;
 	return constraint_weight;
 }
@@ -243,10 +248,11 @@ void FixPoseConstraint::post_hook(Simulator &simulator) {
 	d_pose = simulator.real_to_normal_motors(d_pose);
 }
 
-ostream& FixPoseConstraint::toString(ostream& o) {
+string FixPoseConstraint::toString() {
+	stringstream o;
 	o << "type: [fixpose]" << endl;
-	sprintvector(o, "pose", d_pose, d_mask);
-	return o;
+	o << printvector("pose", d_pose, d_mask);
+	return o.str();
 }
 
 
@@ -280,11 +286,12 @@ void LimitConstraint::post_hook(Simulator &simulator) {
 	d_max = simulator.real_to_normal_motors(d_max);
 }
 
-ostream& LimitConstraint::toString(ostream& o) {
+string LimitConstraint::toString() {
+	stringstream o;
 	o << "type: [limit]" << endl;
-	sprintvector(o, "maximum", d_min, d_mask);
-	sprintvector(o, "minimum", d_max, d_mask);
-	return o;
+	o << printvector("maximum", d_min, d_mask);
+	o << printvector("minimum", d_max, d_mask);
+	return o.str();
 }
 
 
@@ -308,11 +315,12 @@ void HomePoseConstraint::post_hook(Simulator &simulator) {
 	d_pose = simulator.real_to_normal_motors(d_pose);
 }
 
-ostream& HomePoseConstraint::toString(ostream& o) {
+string HomePoseConstraint::toString() {
+	stringstream o;
 	o << "type: [homepose]" << endl;
-	sprintvector(o, "pose", d_pose, d_mask);
-	sprintvector(o, "mask", d_mask);
-	return o;
+	o << printvector("pose", d_pose, d_mask);
+	o << printvector("mask", d_mask);
+	return o.str();
 }	
 
 
@@ -340,11 +348,12 @@ void StartPoseConstraint::start_pose_hook(const vector<double>& pose) {
 	d_pose = pose;
 }
 
-ostream& StartPoseConstraint::toString(ostream& o) {
+string StartPoseConstraint::toString() {
+	stringstream o;
 	o << "type: [startpose]" << endl;
-	sprintvector(o, "pose", d_pose, d_mask);
-	sprintvector(o, "mask", d_mask);
-	return o;
+	o << printvector("pose", d_pose, d_mask);
+	o << printvector("mask", d_mask);
+	return o.str();
 }	
 
 
@@ -354,9 +363,10 @@ double CollisionConstraint::evaluate(vector<double> motor_values, KinematicModel
 	return collisions;
 }
 
-ostream& CollisionConstraint::toString(ostream& o) {
+string CollisionConstraint::toString() {
+	stringstream o;
 	o << "type: [collision]" << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -383,10 +393,11 @@ double MinDistanceConstraint::evaluate(vector<double> motor_values, KinematicMod
 	return evl;
 }
 
-ostream& MinDistanceConstraint::toString(ostream& o) {
+string MinDistanceConstraint::toString() {
+	stringstream o;
 	o << "type: [mindistance]" << endl;
     o << "distance (" << d_marker1 << ", " << d_marker2 <<  ") > " << d_min_distance << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -401,11 +412,12 @@ double PositionConstraint::evaluate(vector<double> motor_values, KinematicModel:
 	return pos_error(position, d_goal);
 }
 
-ostream& PositionConstraint::toString(ostream& o) {
+string PositionConstraint::toString() {
+	stringstream o;
 	o << "type: [position]" << endl;
 	o << "marker: d_marker = ";
-	sprintvector(o, "marker", d_goal);
-	return o;
+	o << printvector("marker", d_goal);
+	return o.str();
 }	
 
 
@@ -424,13 +436,14 @@ double AveragePositionConstraint::evaluate(vector<double> motor_values, Kinemati
 	return pos_error(position1, d_goal);
 }
 
-ostream& AveragePositionConstraint::toString(ostream& o) {
+string AveragePositionConstraint::toString() {
+	stringstream o;
 	o << "type: [averageposition]" << endl;
 	o << "mean (" << d_marker1 << ", " << d_marker2 << ") = ";
 	for (size_t i(0); i < d_goal.size(); i++)
 		o << d_goal[i] << " ";
 	o << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -447,10 +460,11 @@ double PlaneConstraint::evaluate(vector<double> motor_values, KinematicModel::Ro
 	return fabs(position[d_axis] - d_value);
 }
 
-ostream& PlaneConstraint::toString(ostream& o) {
+string PlaneConstraint::toString() {
+	stringstream o;
 	o << "type: [plane]" << endl;
 	o << d_marker << ", axis: " << d_axis << " = " << d_value << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -471,11 +485,12 @@ double OrientationConstraint::evaluate(vector<double> motor_values, KinematicMod
 	return observation.orientationMeasure(QString(d_marker.c_str()), d_goal_orientation, d_mask_orientation);
 }
 
-ostream& OrientationConstraint::toString(ostream& o) {
+string OrientationConstraint::toString() {
+	stringstream o;
 	o << "type: [orientation]" << endl;
 	o << d_marker << ", axis: " << d_axis << endl;
-	sprintvector(o, "goal", d_goal_orientation);
-	return o;
+	o << printvector("goal", d_goal_orientation);
+	return o.str();
 }	
 
 
@@ -506,11 +521,12 @@ double PointingConstraint::evaluate(vector<double> motor_values, KinematicModel:
 		return marker_to_object;
 }
 
-ostream& PointingConstraint::toString(ostream& o) {
+string PointingConstraint::toString() {
+	stringstream o;
 	o << "type: [pointing]" << endl;
 	o << d_marker << ", distance: " << d_distance << ", axis: " << d_axis << ", direction: " << d_dir << endl;
-	sprintvector(o, "goal", d_goal);
-	return o;
+	o << printvector("goal", d_goal);
+	return o.str();
 }	
 
 
@@ -544,12 +560,13 @@ double PointingMarkerConstraint::evaluate(vector<double> motor_values, Kinematic
 		return marker_to_object;
 }
 
-ostream& PointingMarkerConstraint::toString(ostream& o) {
+string PointingMarkerConstraint::toString() {
+	stringstream o;
 	o << "type: [pointingmarker]" << endl;
 	o << "marker: " << d_marker << ", to: " << d_target << ", distance: " << d_distance;
 	o << ", axis " << d_axis << ", direction: " << d_dir << endl;
-	return o;
-}	
+	return o.str();
+}
 
 
 OppositeConstraint::OppositeConstraint(string marker1, string marker2, vector<double> goal) :
@@ -584,12 +601,13 @@ double OppositeConstraint::evaluate(vector<double> motor_values, KinematicModel:
 	return (norm_in_product(marker1_diff, marker2_diff) + 1.0) / 2.0;
 }
 
-ostream& OppositeConstraint::toString(ostream& o) {
+string OppositeConstraint::toString() {
+	stringstream o;
 	o << "type: [opposite]" << endl;
 	o << d_marker1 << " opposite to: " << d_marker2 << " ";
-	sprintvector(o, "at", d_goal, d_mask);
+	o << printvector("at", d_goal, d_mask);
 	o << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -609,14 +627,15 @@ double GraspConstraint::evaluate(vector<double> motor_values, KinematicModel::Ro
 		d_factor * d_opposite_constraint.evaluate(motor_values, observation, collisions);
 }
 
-ostream& GraspConstraint::toString(ostream& o) {
+string GraspConstraint::toString() {
+	stringstream o;
 	o << "type: [grasp]" << endl;
 	o << d_marker1 << " " << d_marker2 << endl;
-	d_point_constraint1.toString(o);
-	d_point_constraint2.toString(o);
-	d_opposite_constraint.toString(o);
+	o << d_point_constraint1.toString();
+	o << d_point_constraint2.toString();
+	o << d_opposite_constraint.toString();
 	o << endl;
-	return o;
+	return o.str();
 }	
 
 
@@ -701,8 +720,9 @@ double MapBuildConstraint::config_measure(vector<double> &values, vector<size_t>
 	return measure;
 }
 
-ostream& MapBuildConstraint::toString(ostream& o) {
+string MapBuildConstraint::toString() {
+	stringstream o;
 	o << "type: [mapbuild]" << endl;
-	return o;
+	return o.str();
 }	
 

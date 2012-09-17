@@ -12,6 +12,7 @@
 
 #include <QThread>
 #include <QMutex>
+#include <QReadWriteLock>
 #include <SOLID.h>
 
 #include "robot.h"
@@ -60,10 +61,13 @@ public:
 	void grabObject( CompositeObject* object, Robot* robot, int markerIndex );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
-	bool removeWorldObject( CompositeObject* );
+	
 	void clearTheWorld();
+	void clearWorldObject( CompositeObject* );
 	void setStopOnFirstCollision(bool b) { stopOnFirstCollision = b ? DT_DONE : DT_CONTINUE; }
 	DT_Bool getStopOnFirstCollision() { return stopOnFirstCollision; };
+	void setSyncGraphics(bool s) { syncGraphics = s; };
+	bool getSyncGraphics() { return syncGraphics; };
 
 	QVector< QString > listWorldObjects();
 	CompositeObject* getObject( const QString& name );
@@ -97,6 +101,8 @@ protected:
     DT_RespTableHandle newRobotFieldTable();
 	DT_ResponseClass newResponseClass( DT_RespTableHandle );
 	
+	bool removeWorldObject( CompositeObject* );
+
 	void removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
     void removeForceResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
@@ -118,12 +124,13 @@ protected:
 										   PrimitiveObject*,
 										   const DT_CollData* ) {}	
 	
-	volatile bool keepRunning;		//!< Facilitates stopping and restarting the thread
+	bool keepRunning;		//!< Facilitates stopping and restarting the thread
 	int	 col_count;			//!< The number of (pairwise) collisions in the current robot/world configuration
 	int	 reflex_col_count;
 	bool encObstacle;
 	bool verbose;
-	
+	bool syncGraphics;      //!< When true, the graphics and the model thread wait for each other. This makes the model thread slow, because it has to wait until the graphics thread finishes drawing. When false, the model thread runs without waiting for the graphics thread, which might cause the graphics thread to show dislocated joints.
+
 	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
 	QVector<DT_ResponseClass> robotResponseClasses;
 	//QVector<DT_ResponseClass> fieldResponseClasses;
@@ -142,7 +149,7 @@ protected:
 	
 	uint numObjects, numPrimitives;
 	
-	QMutex mutex;
+	QReadWriteLock mutex;
 	
 	ObjectMover *objectMover;			//!< Object mover
 

@@ -69,7 +69,7 @@ public:
 
 	//int getNumPrimitives() { return primitives.size() }
 	
-	const QVector<PrimitiveObject*>& data() { return primitives; }
+	const QVector<PrimitiveObject*>& data() { return primitives; }  //!< Get primitives. WARNING: do not use QVector<PrimitiveObject*> p = compositeobject.data(), because this creates a COPY of the primitives. Instead, create a reference to the vector.
 	PrimitiveObject* get( const QString& primitiveName ) const;		//!< Get a pointer to a PrimitiveObject by looking up its name
 																	/**< If there is more than one primitive with the same name, the first one in the vector is returned **/
 	

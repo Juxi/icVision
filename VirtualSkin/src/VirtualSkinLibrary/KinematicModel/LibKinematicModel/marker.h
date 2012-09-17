@@ -52,7 +52,8 @@ public:
 	
 	inline void updateTracer()
 	{
-		QVector<PrimitiveObject*>primitives = tracerObject->data();
+		//QVector<PrimitiveObject*> primitives = tracerObject->data(); // MAJOR PROBLEM2: this creates a COPY of the primitive pointers, which are deleted when the function exits. This deletion causes problems with the GL thread;
+		const QVector<PrimitiveObject*>& primitives = tracerObject->data();
 		
 		qreal* newT = m_object->getT().data();
 		qreal* oldT = (*primitives.begin())->getT().data();
@@ -69,7 +70,7 @@ public:
 		
 		if ( dx > d )
 		{
-			QVector<PrimitiveObject*>::iterator i;
+			QVector<PrimitiveObject*>::const_iterator i;
 			
 			for ( i=primitives.end()-1; i!=primitives.begin(); --i )
 				(*i)->setT( (*(i-1))->getT() );
