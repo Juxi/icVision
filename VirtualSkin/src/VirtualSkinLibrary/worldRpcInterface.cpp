@@ -410,7 +410,7 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 				
 			default:
 				
-				reply.addString("Unknown object type, use 'obs' or 'tgt'.");
+				reply.addString("Unknown definition, use 'obs' or 'tgt'.");
 		}
 		
 		model->appendObject( object );

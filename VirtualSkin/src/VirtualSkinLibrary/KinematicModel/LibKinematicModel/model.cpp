@@ -300,7 +300,7 @@ void Model::appendObject( CompositeObject* object )
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
 	{
 		//if (verbose) printf("appending primitive to world\n");
-		if (object->getResponseClass() != TARGET()) {
+		if (object->getResponseClass() != TARGET() && object->getResponseClass() != GHOST()) {
 			DT_SetResponseClass( responseTables.at(0), (*i)->getSolidObjectHandle(), object->getResponseClass() );
 			DT_AddObject( scene, (*i)->getSolidObjectHandle() );
 		}
@@ -501,7 +501,7 @@ int Model::computePose()
 		DT_Test(scene,*i);
 	}
 	
-	computePoseSuffix();			
+	computePoseSuffix();
 	mutex.unlock();
 
 	emit computedState(col_count);
