@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>ALL_BUILD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>KinematicModel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>WorldModelDemo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>ZERO_CHECK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>install.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>65383E40678A455D9D459BA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9DB11EBA61CD4AD58CA05157</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC60DDB030924BA5A9262185</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E7E1992330624B6A8ADE968F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4CD8D360E4940918C5BAA7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,28 @@
+TZERO_CHECK
+v5
+r1
+cCheck dependencies
+cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh
+c00000000503F5E0A0000000000000105
+t1346330122
+s261
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies4c18518a95efb541^f697518a95efb541^---0#1#0#--18"Check dependencies36"5E8CC874-7D1D-4202-9EDF-AFF49529C428-
+
+CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh
+s368022922.327559
+e368022922.456251
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh
+oecho ""
+o
+omake -f /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make
+omake[1]: `CMakeFiles/cmake.check_cache' is up to date.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'9a06558a95efb541^50a6818a95efb541^-187"echo ""make -f /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.makemake[1]: `CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-368022922#0#8#-0#-----2@123"make -f /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/CMakeScripts/ReRunCMake.make-368022922#9#123#-0#-----2@55"make[1]: `CMakeFiles/cmake.check_cache' is up to date.-368022922#132#55#-0#-----0#0#0#--387"PhaseScriptExecution "CMake Rules" xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    /bin/sh -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ZERO_CHECK.build/Script-73CC9DBECE464DF5B72B1B72.sh36"67562D77-8341-4F46-BB46-3A9DC082AB80-
+

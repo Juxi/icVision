@@ -21,26 +21,32 @@ BodyPart::~BodyPart()
 
 bool BodyPart::evaluateConstraints()
 {
-	//int count = 1;
+	int count = 0;
 	//bool result = true;
 	//printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
 	QVector< QVector<LinearConstraint> >::iterator i;
     QVector<LinearConstraint>::iterator j;
-    printf("evaluating %d body part constraint lists\n", constraints.size());
+    //printf("evaluating %d body part constraint lists\n", constraints.size());
 	for ( i=constraints.begin(); i!=constraints.end(); ++i ){
-        printf(" evaluating %d constraints in list\n", i->size());
+        //printf(" evaluating %d constraints in list %d\n", i->size(), count++);
+        
+        
         // disjunctive list A OR B OR C... etc
         bool inner = false;
-        for ( j=i->begin(); j!=i->end(); ++j ){
-            if (j->evaluate()) {
+        //int innerCount = 0;
+        for ( j=i->begin(); j!=i->end(); ++j )
+        {
+            //printf("    constraint %d: ", innerCount++);
+            if (j->evaluate())
+            {
                 inner = true;
-                printf("pass\n");
+                //printf("pass\n");
                 break;
             }
         }
         
 		if ( !inner ) {
-            printf("fail\n");
+            printf("Body Part %d: Linear Constraint(s) failed... starting reflex\n", idx);
 			return false;
         }
         

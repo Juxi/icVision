@@ -1,0 +1,491 @@
+TKinematicModel
+v5
+r1
+cCheck dependencies
+cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh
+cCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c000000004FF015DA00000000000000AA
+t1341134298
+s170
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodypart.cpp
+c000000004F9945950000000000000754
+t1335444885
+s1876
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp
+c000000004F0ED19D0000000000000AE5
+t1326371229
+s2789
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp
+c00000000503F584E0000000000001555
+t1346328654
+s5461
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp
+c000000004F0ED19D0000000000000D2B
+t1326371229
+s3371
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp
+c000000004F0ED19D0000000000001397
+t1326371229
+s5015
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp
+c000000004F0ED19D0000000000000416
+t1326371229
+s1046
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp
+c000000004F0ED19D00000000000004C5
+t1326371229
+s1221
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp
+c000000004F0ED19D00000000000001AA
+t1326371229
+s426
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp
+c00000000503F5C8A00000000000019C0
+t1346329738
+s6592
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp
+c000000004F0ED19D000000000000011C
+t1326371229
+s284
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp
+c00000000503F584F00000000000045EF
+t1346328655
+s17903
+i"model.h"
+i"robot.h"
+i"worldhandler.h"
+i"modelwindow.h"
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h
+c00000000503F584F0000000000001F8B
+t1346328655
+s8075
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp
+c000000004F0ED19D0000000000000169
+t1326371229
+s361
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp
+c000000004F0ED19D000000000000013F
+t1326371229
+s319
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h
+c000000004F0ED19D0000000000000353
+t1326371229
+s851
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp
+c000000004F54DCE10000000000000A95
+t1330961633
+s2709
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.cpp
+c000000004FD8AAC900000000000009F1
+t1339599561
+s2545
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp
+c000000004F856BC200000000000008C7
+t1334143938
+s2247
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp
+c00000000503F584E0000000000002ABC
+t1346328654
+s10940
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h
+c00000000503F584E00000000000021DE
+t1346328654
+s8670
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp
+c000000004F0ED19D00000000000009F3
+t1326371229
+s2547
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp
+c000000004F0ED19D0000000000000EAA
+t1326371229
+s3754
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp
+c00000000503F5D8D0000000000001AE4
+t1346329997
+s6884
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.h
+c000000004F0ED19D000000000000064E
+t1326371229
+s1614
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zphandler.cpp
+c00000000503F5B9200000000000034DC
+t1346329490
+s13532
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/libKinematicModel.a
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/KinematicModel.LinkFileList
+c00000000503F5E0A0000000000001234
+t1346330122
+s4660
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-B28E1C61F4BB4D1B81CF239A.sh
+c00000000503F5E0A0000000000000127
+t1346330122
+s295
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh
+c00000000503F5E0A000000000000012D
+t1346330122
+s301
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx
+c00000000000000000000000000000000
+t2
+s0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodypart.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zphandler.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies6fd4868a95efb541^2b4b888a95efb541^---0#1#0#--18"Check dependencies36"A69CDF43-10B9-4CA4-AEA8-AC7ABEB66B1A-
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/bodypart.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/interval.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/joint_revolute.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/kintreenode.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/link.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s368022923.285534
+e368022925.956648
+r0
+xCompileC
+xxcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o
+x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+oIn file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp:1:
+oIn file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h:21:
+o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.h:19:10: fatal error: 'yarp/os/all.h' file not found
+o#include <yarp/os/all.h>
+o         ^
+o1 error generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection115"Compile /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp2d3e498b95efb541^cfdbf48d95efb541^-483"In file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp:1:In file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h:21:/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.h:19:10: fatal error: 'yarp/os/all.h' file not found#include <yarp/os/all.h>         ^1 error generated.1(36%IDEClangDiagnosticActivityLogMessage2@30"'yarp/os/all.h' file not found-368022925#18446744073709551615#0#2(2@132"In file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp:1:-368022925#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@123"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp0000000000000000^0#9#0#9#9#0#21"Clang LLVM 1.0 Notice--2@131"In file included from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h:21:-368022925#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@121"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h0000000000000000^20#9#20#9#540#0#21"Clang LLVM 1.0 Notice--2#27"com.apple.dt.IDE.diagnostic3@127"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.h0000000000000000^18#9#18#9#488#0#29"Lexical or Preprocessor Issue--0#0#0#-19%DVTDocumentLocation4@123"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp0000000000000000^2995"CompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-newline-eof -Wc++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/include -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.d --serialize-diagnostics /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.dia -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.cpp -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o36"9C4E3B2F-BCC3-48C6-931C-99069C44D92E-
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s368022923.286345
+e368022923.874294
+r1
+xCompileC
+xxcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o
+x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection124"Compile /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp2f6c498b95efb541^eed1df8b95efb541^---0#0#0#-19%DVTDocumentLocation2@132"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp0000000000000000^3049"CompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-newline-eof -Wc++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/include -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.d --serialize-diagnostics /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.dia -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelexception.cpp -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o36"C9EDC96D-2BE0-4847-92AF-0CE606E36848-
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s368022923.875629
+e368022926.965158
+r1
+xCompileC
+xxcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o
+x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection121"Compile /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cppdb4de08b95efb541^471ff78e95efb541^---0#0#0#-19%DVTDocumentLocation2@129"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp0000000000000000^3031"CompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-newline-eof -Wc++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/include -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.d --serialize-diagnostics /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.dia -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.cpp -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o36"FE1DD442-1029-4CFD-9917-0C925AB07B81-
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/motor.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/objectmover.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/primitiveobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/transformable.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/worldhandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/zphandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CLibtool /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/Debug/libKinematicModel.a normal x86_64
+r0
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-B28E1C61F4BB4D1B81CF239A.sh
+r0
+
+CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh
+s368022922.536929
+e368022923.277429
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh
+o/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h
+o/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h
+o/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h
+o/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'e7ff898a95efb541^8e03478b95efb541^-2838"/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h4(21%IDEActivityLogMessage2@705"/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_model.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h-368022922#0#705#-0#-----2@717"/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_modelwindow.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/modelwindow.h-368022922#705#717#-0#-----2@711"/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_glwidget.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/glwidget.h-368022922#1422#711#-0#-----2@705"/usr/local/Cellar/qt/4.8.2/bin/moc -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/moc_robot.cxx /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/robot.h-368022923#2133#705#-0#-----0#0#0#--431"PhaseScriptExecution "CMake Rules" xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    /bin/sh -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/LibKinematicModel/KinematicModel.build/Debug/KinematicModel.build/Script-FDE7CB7133BC4FDFAD6E4F7F.sh36"A572D693-7E96-408B-B767-36BB43E52FA1-
+
