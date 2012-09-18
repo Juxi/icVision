@@ -234,14 +234,37 @@ void Robot::updatePose()
 }
 
 
+void setColliding(KinTreeNode* node) { // recursively set the whole node to colliding mode
+	const QVector<PrimitiveObject*>& primitives = node->data();
+	QVector<PrimitiveObject*>::const_iterator k;
+	for (k = primitives.begin(); k!=primitives.end(); ++k) {
+		(*k)->setColliding(CONSTRAINT);
+	}
+	const QVector<KinTreeNode*>& children = node->childnodes();
+	QVector<KinTreeNode*>::const_iterator c;
+	for (c = children.begin(); c!=children.end(); ++c) {
+		setColliding((*c));
+	}
+}
+
 void Robot::evaluateConstraints()
 {
 	QVector<BodyPart*>::iterator i;
+	QVector<Motor*>:: iterator m;
+	QVector<Joint*>:: iterator j;
+
     for ( i=partList.begin(); i!=partList.end(); ++i ) {
-        if ( !(*i)->evaluateConstraints() )
+        if ( !(*i)->evaluateConstraints() ) {
+			for (m = (*i)->begin(); m!=(*i)->end(); ++m) {
+				for (j = (*m)->begin(); j!=(*m)->end(); ++j) {
+					setColliding((*j));
+				}
+			}
 			addReflexCollision();
+		}
     }
 }
+
 
 void Robot::publishState()
 {

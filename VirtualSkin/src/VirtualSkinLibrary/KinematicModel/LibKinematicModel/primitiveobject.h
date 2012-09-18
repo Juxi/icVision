@@ -30,6 +30,12 @@ namespace KinematicModel
 					CYLINDER = 1,
 					BOX = 2
 	};
+	enum CollisionType {
+					FREE = 0,
+					COLLISION = 1,
+					CONSTRAINT = 2,
+					FIELD = 3
+	};
 }
 
 /*! \brief A physical object modeled as a geometric primitive
@@ -53,8 +59,8 @@ public:
 	void setListPending( bool b );
 	bool listIsPending() const  { return listPending; }
 	
-	void setColliding() { collisionTimer.restart(); }							//!< Sets the time of last collision to now
-	bool isColliding() { return collisionTimer.elapsed() < COLLISION_TIMEOUT; }	//!< Whether or not this primitive is currently considered colliding
+	bool setColliding(CollisionType t=COLLISION);				//!< Sets the time of last collision to now
+	CollisionType isColliding();					//!< Whether or not this primitive is currently considered colliding
 	
 	//virtual DT_ObjectHandle solidify() = 0;	//!< Initialize object in SOLID
 	//virtual GL_DisplayList	display() = 0;	//!< Make an openGL display list
@@ -68,6 +74,7 @@ public:
 	GL_DisplayList	getDisplayList() { return displayList; }
 	
 	void setCollidingColor( QColor color );
+	void setConstraintColor( QColor color );
 	void setFreeColor( QColor color );
 	
 	//void setCollidingColor( GLfloat color[4] ) { setCollidingColor(QColor(color[0],color[1],color[2])); }
@@ -88,11 +95,13 @@ protected:
 	
 	DT_ShapeHandle		solidShape;		//!< The particular shape of the primitive
 	DT_ObjectHandle		solidObject;	//!< A representation of the object in the Solid library
-	QTime				collisionTimer;	//!< The time stamp of the last collision event
-	
+	//QVector<QTime*>		collisionTimer;	//!< The time stamp of the last collision event
+	QVector<QPair<CollisionType, QTime*> > collisionTimers;
+
 	GL_DisplayList		displayList;
 	bool				listPending;
 	GLfloat				collidingColor[4];
+	GLfloat				constraintColor[4];
 	GLfloat				freeColor[4];
 	GLfloat				black[4];
 	

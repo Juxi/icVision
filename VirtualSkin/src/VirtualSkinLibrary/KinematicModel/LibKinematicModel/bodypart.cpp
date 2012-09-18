@@ -46,7 +46,7 @@ bool BodyPart::evaluateConstraints()
         }
         
 		if ( !inner ) {
-            printf("Body Part %d: Linear Constraint(s) failed... starting reflex\n", idx);
+            //printf("Body Part %d: Linear Constraint(s) failed... starting reflex\n", idx);
 			return false;
         }
         

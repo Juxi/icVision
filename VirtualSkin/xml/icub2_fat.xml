@@ -111,18 +111,25 @@
     <!-- RIGHT ARM -->
     <bodypart name="right_arm" >
     
-        <!-- Kinematic constraints -->
-        <constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="404.0"/>
-        <constraint a="-1.71  1.71  0.0 " q="0 1 2" b="46.0"/>
-        <constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="431.0"/>
-        <constraint a="-1.71  1.71  1.71" q="0 1 2" b="109.0"/>
+        <!-- Constraints are expressed in Conjunctive Normal Form, so we evaluate the conjunction of disjunctive lists 
+             A && (B||C) && (D||E||F) && G && (H||I) etc -->
+
+        <!-- Kinematic shoulder constraints from IIT -->
+        <constraintList><constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="347.0"/></constraintList>
+        <constraintList><constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="366.57"/></constraintList>
+        <constraintList><constraint a="-1.71  1.71  1.71" q="0 1 2" b="112.42"/></constraintList>
+        <constraintList><constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="66.6"/></constraintList>
+        <constraintList><constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="213.3"/></constraintList>
         
-        <constraint a=" 1.0  -1.0   0.0"  q="0 1 2" b="305.7"/>
-        <constraint a="-1.0   1.0   0.0"  q="0 1 2" b="54.3"/>
-        <constraint a="-1.0   1.0   1.0"  q="0 1 2" b="101.7"/>
-        <constraint a=" 1.0  -1.0  -1.0"  q="0 1 2" b="258.3"/>        
-        <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
-        <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
+        <!-- Kail and Leo's forearm constraints -->
+         <constraintList>
+             <constraint negate="true" a="1" q="3" b="-90"/>
+             <constraint a="1" q="4" b="45"/>
+         </constraintList>
+         <constraintList>
+             <constraint negate="true" a="1" q="3" b="-90"/>
+             <constraint negate="true" a="1" q="4" b="-45"/>
+         </constraintList>
 
         <link x="-.2588" y=".9659" radius=".031" length=".10774">
           <!--box depth=".15" height=".14" width=".07" px="-0.0116" py="0.0440" pz="-.04" hz="1" angle="15" /-->
@@ -383,18 +390,25 @@
     <!-- LEFT ARM -->
     <bodypart name="left_arm" >
     
-        <!-- Kinematic constraints -->
-        <constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="404.0"/>
-        <constraint a="-1.71  1.71  0.0 " q="0 1 2" b="46.0"/>
-        <constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="431.0"/>
-        <constraint a="-1.71  1.71  1.71" q="0 1 2" b="109.0"/>
+        <!-- Constraints are expressed in Conjunctive Normal Form, so we evaluate the conjunction of disjunctive lists
+         A && (B||C) && (D||E||F) && G && (H||I) etc -->
         
-        <constraint a=" 1.0  -1.0   0.0"  q="0 1 2" b="305.7"/>
-        <constraint a="-1.0   1.0   0.0"  q="0 1 2" b="54.3"/>
-        <constraint a="-1.0   1.0   1.0"  q="0 1 2" b="101.7"/>
-        <constraint a=" 1.0  -1.0  -1.0"  q="0 1 2" b="258.3"/>        
-        <constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="71.7"/>
-        <constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="228.3"/>
+        <!-- Kinematic shoulder constraints from IIT -->
+        <constraintList><constraint a=" 1.71 -1.71  0.0 " q="0 1 2" b="347.0"/></constraintList>
+        <constraintList><constraint a=" 1.71 -1.71 -1.71" q="0 1 2" b="366.57"/></constraintList>
+        <constraintList><constraint a="-1.71  1.71  1.71" q="0 1 2" b="112.42"/></constraintList>
+        <constraintList><constraint a=" 0.0   1.0   1.0"  q="0 1 2" b="66.6"/></constraintList>
+        <constraintList><constraint a=" 0.0  -1.0  -1.0"  q="0 1 2" b="213.3"/></constraintList>
+        
+        <!-- Kail and Leo's forearm constraints -->
+        <constraintList>
+            <constraint negate="true" a="1" q="3" b="-90"/>
+            <constraint a="1" q="4" b="45"/>
+        </constraintList>
+        <constraintList>
+            <constraint negate="true" a="1" q="3" b="-90"/>
+            <constraint negate="true" a="1" q="4" b="-45"/>
+        </constraintList>
 
         <link x="-.2588" y="-.9659" radius=".031" length=".10774">
           <!--box depth=".15" height=".14" width=".07" px="-0.0116" py="-0.0440" pz="-.04" hz="-1" angle="15" /-->

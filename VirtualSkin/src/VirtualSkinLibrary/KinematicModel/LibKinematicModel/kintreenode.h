@@ -59,7 +59,8 @@ public:
 	const QVector3D& getNodeAxis() const { return nodeAxis; }	//!< Returns nodeAxis
 	int getNumPrimitives();
 	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );	//!< Returns whether or not this CompositeObject is free to move w.r.t the world
-	
+	const QVector<KinTreeNode*>& childnodes() { return children; };
+
 	void kill();
 	
 	//bool reflexSubtree() { return strf; }
