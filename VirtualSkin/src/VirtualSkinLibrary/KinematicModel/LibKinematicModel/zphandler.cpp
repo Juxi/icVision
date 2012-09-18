@@ -19,6 +19,7 @@ ZPHandler::ZPHandler( Model* _model, Robot *robot) : model(_model), robot(robot)
 	motor = NULL;
 	node = NULL;
 	noReflexRoot = NULL;
+    constraintList = NULL;
 	
 	metKinTreeTag = false;
 	markerCounter = 1;
@@ -65,17 +66,31 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 	/******************************************************************
 	 *** HANDLE CONSTRAINTS ***
 	 ******************************************************************/
-	else if ( QString::compare(qName,"constraint",caseSensitivity) == 0 ) {
-		if ( !bodyPart ) printf("WARNING: ignoring <constraint/> outside of <bodypart></>\n");
+	else if ( QString::compare(qName,"constraintList",caseSensitivity) == 0 ) {
+        if ( !bodyPart ) printf("WARNING: ignoring <constraintList/> outside of <bodypart></>\n");
+		else {
+            constraintList = new QVector<LinearConstraint>();
+        }
+    }
+    else if ( QString::compare(qName,"constraint",caseSensitivity) == 0 ) {
+		//if ( !bodyPart ) printf("WARNING: ignoring <constraint/> outside of <bodypart></>\n");
+        if ( !constraintList ) printf("WARNING: ignoring <constraint> outside of <constraintList></>\n");
 		else {
 			bool ok;
 			double b = attributes.value("b").toDouble(&ok);
 			QStringList a = attributes.value("a").split(" ",QString::SkipEmptyParts);
 			QStringList q = attributes.value("q").split(" ",QString::SkipEmptyParts);
-			
+			bool negate = false;
+            if ( attributes.value("negate") == "true" ) {
+                negate = true;
+                printf("negated something\n");
+            }
+            
 			if ( ok && a.size() > 0 && a.size() == q.size() )
 			{
-				bodyPart->addConstraint( a, q, b );
+				//bodyPart->addConstraint( a, q, b );
+                LinearConstraint c(bodyPart,a,q,b,negate);
+                constraintList->append(c);
 			}
 			else { printf("WARNING: skipping badly formed <constraint/>\n"); }
 		}
@@ -276,6 +291,14 @@ bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /
 			return 0;
 		}
         bodyPart = bodyPart->parent();
+    }
+    else if ( qName == "constraintList" ) {
+        if ( !bodyPart ) printf("WARNING: ignoring </constraintList> outside of <bodypart></>. Constraints will not be appended to body part.\n");
+        else {
+            bodyPart->appendConstraints(*constraintList);
+        }
+        delete constraintList;
+        constraintList = NULL;
     }
     else if ( qName == "motor" ) {
         motor = motor->parent();

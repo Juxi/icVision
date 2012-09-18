@@ -12,30 +12,45 @@ BodyPart::~BodyPart()
 {
 }
 
-void BodyPart::addConstraint( QStringList _a, QStringList _q, qreal _b )
-{
-	LinearConstraint c(this,_a,_q,_b);
-	constraints.append(c);
-	//printf("Added constraint %d to %s\n", constraints.size(), partName.toStdString().c_str());
-}
+//void BodyPart::addConstraint( QStringList _a, QStringList _q, qreal _b )
+//{
+//	LinearConstraint c(this,_a,_q,_b);
+//	constraints.append(c);
+//	//printf("Added constraint %d to %s\n", constraints.size(), partName.toStdString().c_str());
+//}
 
 bool BodyPart::evaluateConstraints()
 {
 	//int count = 1;
-	bool result = true;
+	//bool result = true;
 	//printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
-	QVector<LinearConstraint>::iterator i;
+	QVector< QVector<LinearConstraint> >::iterator i;
+    QVector<LinearConstraint>::iterator j;
+    printf("evaluating %d body part constraint lists\n", constraints.size());
 	for ( i=constraints.begin(); i!=constraints.end(); ++i ){
-		bool thisConstraint = (*i).evaluate();
-		if ( !thisConstraint ) 
+        printf(" evaluating %d constraints in list\n", i->size());
+        // disjunctive list A OR B OR C... etc
+        bool inner = false;
+        for ( j=i->begin(); j!=i->end(); ++j ){
+            if (j->evaluate()) {
+                inner = true;
+                printf("pass\n");
+                break;
+            }
+        }
+        
+		if ( !inner ) {
+            printf("fail\n");
 			return false;
+        }
+        
 		//	printf( "  constraint %d: pass\n", count++ );
 		//else {
 			//printf( "  constraint %d: fail\n", count++ );
 		//	result = false;
 		//}
 	}
-	return result;
+	return true;
 }
 
 bool BodyPart::setEncPos( const QVector<qreal>& x )

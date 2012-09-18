@@ -11,6 +11,7 @@
 #define KINTREEHANDLER_H
 
 #include <QXmlDefaultHandler>
+#include "linearconstraint.h"
 
 namespace KinematicModel
 {
@@ -47,6 +48,7 @@ private:
 	Motor		*motor;
 	KinTreeNode *node;
 	KinTreeNode *noReflexRoot;
+    QVector<LinearConstraint> *constraintList;
 
 	BodyPart*		createChildPart();
 	Motor*			createChildMotor( const int motorIdx );

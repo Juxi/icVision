@@ -16,6 +16,7 @@ SET ( src_files		model.cpp			# the center of it all
 	
 			robot.cpp
 			bodypart.cpp
+			linearconstraint.cpp
 			kintreenode.cpp 
 			motor.cpp
 			interval.cpp
@@ -54,6 +55,7 @@ SET ( hdr_files		modelconstants.h
 
 			robot.h
 			bodypart.h
+		      linearconstraint.h
 			kintreenode.h 
 			motor.h
 			interval.h
