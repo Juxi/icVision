@@ -1,138 +1,0 @@
-TWorldModelDemo
-v5
-r1
-cCheck dependencies
-cCompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c000000004FF015DA00000000000000AA
-t1341134298
-s170
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/box.h
-c000000004F0ED19D00000000000005B8
-t1326371229
-s1464
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/cylinder.h
-c000000004F0ED19D0000000000000758
-t1326371229
-s1880
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/model.h
-c00000000503F584F0000000000001F8B
-t1346328655
-s8075
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/sphere.h
-c000000004F0ED19D00000000000006C3
-t1326371229
-s1731
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp
-c000000004F8D4D8C0000000000000335
-t1334660492
-s821
-i<QApplication>
-i"model.h"
-i"sphere.h"
-i"cylinder.h"
-i"box.h"
-i"objectsoup.h"
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp
-c000000004F54DCE10000000000000C0E
-t1330961633
-s3086
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.h
-c000000004F0ED19D0000000000000502
-t1326371229
-s1282
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug/WorldModelDemo
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/WorldModelDemo.LinkFileList
-c00000000503F69ED000000000000016A
-t1346333165
-s362
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Script-EBC4763F33BF42428CBB92C3.sh
-c00000000503F69ED0000000000000121
-t1346333165
-s289
-
-N/usr/local/Cellar/qt/4.8.2/include/QtGui/QApplication
-c00000000503BA06A000000000000001A
-t1346084970
-s26
-
-CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies978ccb6da1efb541^c842cc6da1efb541^---0#1#0#--18"Check dependencies36"C9F9242F-8DDB-438A-B20B-CB01ABFEF0B4-
-
-CCompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s368025965.799979
-e368025968.377612
-r1
-xCompileC
-xxcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o
-x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection111"Compile /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp35efcc6da1efb541^6dac6070a1efb541^---0#0#0#-19%DVTDocumentLocation2@119"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp0000000000000000^2959"CompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o WorldModelDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-newline-eof -Wc++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug/include -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/main.cpp -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/main.o36"EAC01774-450D-4269-BE1A-C78CE22D6D84-
-
-CCompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s368025965.800639
-e368025967.973341
-r0
-xCompileC
-xxcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o
-x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp:50:45: error: no matching constructor for initialization of 'KinematicModel::CompositeObject'
-o        KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE() );
-o                                                   ^                                ~~~~~~~~~~~~~~~~~~~
-o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:39:23: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'DT_ResponseClass' (aka 'unsigned int') to 'const KinematicModel::CompositeObject' for 1st argument; 
-oclass KinematicModel::CompositeObject : public Transformable
-o                      ^
-o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:44:5: note: candidate constructor not viable: requires 2 arguments, but 1 was provided
-o    CompositeObject( DT_ResponseClass c, DT_ResponseClass fc ); //!< Simply initializes indices
-o    ^
-o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp:86:8: error: 'append' is a protected member of 'KinematicModel::CompositeObject'
-o                obj->append(primitive);
-o                     ^
-o/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:113:7: note: declared protected here
-o        void append( PrimitiveObject* primitive );      //!< Append a PrimitiveObject to the CompositeObject
-o             ^
-o2 errors generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection117"Compile /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp4298cf6da1efb541^d941f96fa1efb541^-1678"/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp:50:45: error: no matching constructor for initialization of 'KinematicModel::CompositeObject'        KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( theModel.OBSTACLE() );                                                   ^                                ~~~~~~~~~~~~~~~~~~~/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:39:23: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'DT_ResponseClass' (aka 'unsigned int') to 'const KinematicModel::CompositeObject' for 1st argument; class KinematicModel::CompositeObject : public Transformable                      ^/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:44:5: note: candidate constructor not viable: requires 2 arguments, but 1 was provided    CompositeObject( DT_ResponseClass c, DT_ResponseClass fc ); //!< Simply initializes indices    ^/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp:86:8: error: 'append' is a protected member of 'KinematicModel::CompositeObject'                obj->append(primitive);                     ^/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h:113:7: note: declared protected here        void append( PrimitiveObject* primitive );      //!< Append a PrimitiveObject to the CompositeObject             ^2 errors generated.2(36%IDEClangDiagnosticActivityLogMessage2@79"No matching constructor for initialization of 'KinematicModel::CompositeObject'-368025967#18446744073709551615#0#2(2@192"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'DT_ResponseClass' (aka 'unsigned int') to 'const KinematicModel::CompositeObject' for 1st argument; -368025967#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@131"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h0000000000000000^38#22#38#22#987#0#14"Semantic Issue1(3@131"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h0000000000000000^49#77#49#96#1008#18#-2@74"Candidate constructor not viable: requires 2 arguments, but 1 was provided-368025967#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@131"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h0000000000000000^43#4#43#4#1044#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@125"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp0000000000000000^49#44#49#44#975#0#14"Semantic Issue1(3@125"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp0000000000000000^49#77#49#96#1008#18#-2@67"'append' is a protected member of 'KinematicModel::CompositeObject'-368025967#18446744073709551615#0#1(2@23"Declared protected here-368025967#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@131"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel/compositeobject.h0000000000000000^112#6#112#6#3921#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@125"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp0000000000000000^85#7#85#7#2574#0#14"Semantic Issue--0#0#0#-19%DVTDocumentLocation4@125"file://localhost/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp0000000000000000^2995"CompileC xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o WorldModelDemo/objectsoup.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-newline-eof -Wc++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug/include -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.d --serialize-diagnostics /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.dia -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/WorldModelDemo/objectsoup.cpp -o /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Objects-normal/x86_64/objectsoup.o36"292B128C-F99C-4FE5-B74E-00BDB0E88601-
-
-CLd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/Debug/WorldModelDemo normal x86_64
-r0
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/WorldModelDemo/KinematicModel.build/Debug/WorldModelDemo.build/Script-EBC4763F33BF42428CBB92C3.sh
-r0
-

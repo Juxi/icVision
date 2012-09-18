@@ -1,28 +1,0 @@
-TALL_BUILD
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh
-
-N/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh
-c00000000503F6A4D0000000000000104
-t1346333261
-s260
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesfab34bcda1efb541^a81b4ccda1efb541^---0#1#0#--18"Check dependencies36"DC9FD19A-F180-4830-87AD-65CD4E4051C1-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh
-s368026061.298747
-e368026061.332987
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh
-oecho ""
-o
-oecho Build\ all\ projects
-oBuild all projects
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'90f94ccda1efb541^7c4355cda1efb541^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-368026061#0#8#-0#-----2@26"echo Build\ all\ projects-368026061#9#26#-0#-----2@19"Build all projects-368026061#35#19#-0#-----0#0#0#--385"PhaseScriptExecution "CMake Rules" xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh    cd /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel    /bin/sh -c /Users/kailfrank/imClever/dev/VirtualSkin/src/VirtualSkinLibrary/KinematicModel/xcode/KinematicModel.build/Debug/ALL_BUILD.build/Script-DC8A8E786A7147E6B97B9DF3.sh36"176A7184-DF90-41B6-90B6-4DE1DC0667F9-
-
