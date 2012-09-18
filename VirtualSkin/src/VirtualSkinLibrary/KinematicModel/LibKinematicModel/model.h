@@ -111,8 +111,9 @@ protected:
 
 	void cleanTheWorld();
 	void updateWorldState();
-	void fwdKin();
+	void updateSolid();
 	void evaluateRobotConstraints();
+	void computeCollisions();
 
 	void run();				//!< Allows a thread to call computePose() periodically
 							/**< \note IMPORTANT: Call start() not run() !!! */

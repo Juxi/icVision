@@ -478,12 +478,6 @@ int Model::computePose()
 {
 	cleanTheWorld();		// remove stuff that has been flagged for deletion (this will lock the mutex itself)
 	
-	if (syncGraphics)
-		mutex.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
-	else
-		mutex.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
-	//QReadLocker locker(&mutex);
-	
 	// Prepare to do collision detection
 	col_count = 0;			// reset collision counter
 	reflex_col_count = 0;
@@ -491,19 +485,13 @@ int Model::computePose()
 	
 	computePosePrefix();	// pure virtual function for extra pre-collision-detection computations (like initializing more vars, responding to rpc calls, ect)
 	updateWorldState();		// update positions of things in the world
+	updateSolid();
 
-	//evaluate kinematic constraints
 	evaluateRobotConstraints();
-
-	QVector<DT_RespTableHandle>::iterator i;
-	//uint num = 0;
-	for (i=responseTables.begin();i!=responseTables.end();++i) {
-		DT_Test(scene,*i);
-	}
+	computeCollisions();
 	
 	computePoseSuffix();
-	mutex.unlock();
-
+	
 	emit computedState(col_count);
 	
 	//printf("COMPUTED KINEMATICS AND COLLISION DETECTION: %d collisions, %d reflex collisions\n",col_count, reflex_col_count);
@@ -513,43 +501,64 @@ int Model::computePose()
 
 void Model::computePoseSuffix()
 {
+	QReadLocker locker(&mutex);
 	QVector<Robot*>::iterator i;
-	for ( i=robots.begin(); i!=robots.end(); ++i )
-	{
+	for ( i=robots.begin(); i!=robots.end(); ++i ) {
 		(*i)->publishState();
-	}
-}
-
-void Model::fwdKin()
-{
-	QVector<Robot*>::iterator i;
-	for ( i=robots.begin(); i!=robots.end(); ++i )
-	{
-		(*i)->updatePose();
 	}
 }
 
 void Model::evaluateRobotConstraints()
 {
+	//QWriteLocker locker(&mutex);
+	if (syncGraphics)
+		mutex.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
+	else
+		mutex.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
 	QVector<Robot*>::iterator i;
-	for ( i=robots.begin(); i!=robots.end(); ++i )
-	{
+	for ( i=robots.begin(); i!=robots.end(); ++i ) {
 		(*i)->evaluateConstraints();
+	}
+	mutex.unlock();
+}
+
+void Model::computeCollisions()
+{
+	QReadLocker locker(&mutex);
+	QVector<DT_RespTableHandle>::iterator i;
+	//uint num = 0;
+	for (i=responseTables.begin();i!=responseTables.end();++i) {
+		DT_Test(scene,*i);
 	}
 }
 
 void Model::updateWorldState()
 {
-	fwdKin();
+	//QWriteLocker locker(&mutex);
+	if (syncGraphics)
+		mutex.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
+	else
+		mutex.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
 	
+	// forward kinematics
+	QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i ) {
+		(*i)->updatePose();
+	}
 	objectMover->update();  // update object positions that are attached to the robots' markers
+	mutex.unlock();
+}
 
+
+void Model::updateSolid()
+{
+	QReadLocker locker(&mutex);
 	QVector<CompositeObject*>::iterator i;
-	for ( i=world.begin(); i!=world.end(); ++i )
-	{
+	for ( i=world.begin(); i!=world.end(); ++i ) {
 		(*i)->updateSolid();
 	}
 }
+
 
 void Model::run()
 {
