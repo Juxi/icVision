@@ -33,7 +33,8 @@ public:
 	
 	inline void createTracer( DT_ResponseClass c, int num, double r, QColor qc )
 	{
-		d = 2*r;
+		//d = 2*r; // MAJOR PROBLEM: MARKERS ARE *NOT* THE SAME AS TRACERS!!!! Suggest to make different xml tags for "marker" and "tracer"
+		d = 0.0; // Markers need to be updated always!!!
 		tracerObject = new CompositeObject(c,c); 
 		tracerObject->persistent = true;
 		tracerObject->setFreeColor(qc);
@@ -51,7 +52,8 @@ public:
 	
 	inline void updateTracer()
 	{
-		QVector<PrimitiveObject*>primitives = tracerObject->data();
+		//QVector<PrimitiveObject*> primitives = tracerObject->data(); // MAJOR PROBLEM2: this creates a COPY of the primitive pointers, which are deleted when the function exits. This deletion causes problems with the GL thread;
+		const QVector<PrimitiveObject*>& primitives = tracerObject->data();
 		
 		qreal* newT = m_object->getT().data();
 		qreal* oldT = (*primitives.begin())->getT().data();
@@ -68,7 +70,7 @@ public:
 		
 		if ( dx > d )
 		{
-			QVector<PrimitiveObject*>::iterator i;
+			QVector<PrimitiveObject*>::const_iterator i;
 			
 			for ( i=primitives.end()-1; i!=primitives.begin(); --i )
 				(*i)->setT( (*(i-1))->getT() );

@@ -69,12 +69,13 @@ void CompositeObject::append( PrimitiveObject* primitive )
 
 void CompositeObject::appendPrimitive( PrimitiveObject* primitive )
 {
-    QColor fc,cc;
+	// Not sure why the color of objects should be changed here, but it doesn't work anyway
+    /*QColor fc,cc;
 	fc.setRedF(freeColor[0]); fc.setGreenF(freeColor[1]); fc.setBlueF(freeColor[2]); fc.setAlphaF(freeColor[3]);
 	cc.setRedF(collidingColor[0]); cc.setGreenF(collidingColor[1]); cc.setBlueF(collidingColor[2]);	cc.setAlphaF(collidingColor[3]);
 	
     primitive->setFreeColor(fc);
-	primitive->setCollidingColor(cc);
+	primitive->setCollidingColor(cc);*/
     
     append(primitive);
     primitives.append(primitive);
@@ -82,12 +83,13 @@ void CompositeObject::appendPrimitive( PrimitiveObject* primitive )
 
 void CompositeObject::appendField( PrimitiveObject* primitive )
 {
-    QColor fc,cc;
+	// Not sure why the color of objects should be changed here, but it doesn't work anyway
+    /*QColor fc,cc;
 	fc.setRedF(fieldColor[0]); fc.setGreenF(fieldColor[1]); fc.setBlueF(fieldColor[2]); fc.setAlphaF(fieldColor[3]);
 	cc.setRedF(fieldCollidingColor[0]); cc.setGreenF(fieldCollidingColor[1]); cc.setBlueF(fieldCollidingColor[2]);	cc.setAlphaF(fieldCollidingColor[3]);
 	
     primitive->setFreeColor(fc);
-	primitive->setCollidingColor(cc);
+	primitive->setCollidingColor(cc);*/
     
     append(primitive);
     fieldPrimitives.append(primitive);

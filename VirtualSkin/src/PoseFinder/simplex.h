@@ -37,7 +37,7 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  
 */
 
-//simplex.h
+
 #include <vector>
 #include <limits>
 #include <algorithm>

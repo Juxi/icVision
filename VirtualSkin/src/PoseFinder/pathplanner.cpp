@@ -2,6 +2,7 @@
 #include "exception.h"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 

@@ -17,9 +17,9 @@ using namespace std;
 
 
 
-int map_build_test(Model &model, Robot &robot, QApplication &app) {
-	std::cout << "map build test" << std::endl;
-	MapThread pose_thread(model, robot);
+int map_build_test(Model &model, Robot &robot, std::string configfile, std::string mapfile, QApplication &app) {
+	cout << "started map building moode" << endl;
+	MapThread pose_thread(model, robot, configfile, mapfile);
 
 	pose_thread.start();
 
@@ -61,10 +61,12 @@ int online_test(Model &model, Robot &robot, QApplication &app) {
 
 int main(int argc, char *argv[])
 {
-	/*if (argc != 4) {
-		cout << "not enough arguments" << endl;
+	if (argc != 6) {
+		cout << "Not enough arguments (" << argc << ")." << endl;
+		cout << "Use PoseFind ROBOT_FILE  WORLD_FILE  CONFIG_FILE  MAP_FILE  METHOD." << endl;
+		cout << "METHOD = {map, path, online}." << endl;
 		return 1;
-	}*/
+	}
 	bool visualize = true;
 	
 	//vector<vector<float> > some_poses = read_poses("poses.save")["CFGSPACE"];
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
 	Model model( visualize, false );
 	
 	model.setStopOnFirstCollision(true); // stop checking for collisions after the first collision in a pose, enabling this means the the optimization algorithm will not find any gradient information for colliding positions
+	model.setSyncGraphics(false);
 	model.start();	/* if we want display lists to be created automatically,
 					   the model must be started prior to appending objects */
 	
@@ -87,17 +90,20 @@ int main(int argc, char *argv[])
 
 	printf("loading world file: %s\n", argv[2]);
 	model.loadWorld( QString(argv[2]), false );
-
-
-	if (string(argv[3]) == "map") {
-		return map_build_test(model, robot, app);
+	
+	if (string(argv[5]) == "map") {
+		printf("loading configuration file: %s\n", argv[3]);
+		printf("writing map to file: %s\n", argv[4]);
+		return map_build_test(model, robot, argv[3], argv[4], app);
 	}
 
-	//if (string(argv[3]) == "path") {
-	//	return path_test(model, robot, app);
-	//}
+	if (string(argv[5]) == "path") {
+		cout << "PATH mode not implemented." << endl;
+		return 1;
+		//return path_test(model, robot, app);
+	}
 
-	if (string(argv[3]) == "online") {
+	if (string(argv[5]) == "online") {
 		return online_test(model, robot, app);
 	}
 }

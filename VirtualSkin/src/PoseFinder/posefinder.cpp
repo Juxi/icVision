@@ -1,5 +1,7 @@
 #include "posefinder.h"
 
+#include <cassert>
+#include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
@@ -10,6 +12,7 @@
 #include "posefitnessfunction.h"
 #include "exception.h"
 #include "mones.h"
+#include "xnes.h"
 #include "simplex.h"
 
 using namespace std;
@@ -19,6 +22,11 @@ vector<double> PoseFinder::best_point() {
 }
 
 void PoseFinder::find_pose(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
+	d_pose_fitness_function.start(start_search_pos);
+	d_n_iterations = 0;
+	time_t start, end;
+	time(&start);
+
 	switch (d_build_mode) {
 	case XNES:
 		find_pose_xnes(start_search_pos, fitness_threshold, variance_threshold, std, population_size);
@@ -33,6 +41,17 @@ void PoseFinder::find_pose(std::vector<double> start_search_pos, double fitness_
 		find_pose_simplex(start_search_pos, fitness_threshold);
 		break;
 	}
+	
+	time(&end);
+	d_time_elapsed = difftime (end,start);
+
+	d_total_iterations += d_n_iterations;
+	d_total_time_elapsed += d_time_elapsed;
+	
+	std::cout << "evaluated " << d_n_iterations << " / " << d_total_iterations << " in ";
+	std::cout << d_time_elapsed << " / " << d_total_time_elapsed << " s, poses per second: " << (double) d_n_iterations/ (double) d_time_elapsed << std::endl;
+	// adjust best pose
+	d_pose_fitness_function.adjust(d_best_point);
 }
 
 void PoseFinder::find_pose_mc(std::vector<double> start_search_pos, double fitness_threshold, double variance_threshold, double std, int population_size) {
@@ -53,7 +72,7 @@ void PoseFinder::find_pose_mc(std::vector<double> start_search_pos, double fitne
 
 		double p_accept = min(fitness / last_fitness, 1.0);
 		double r = rand_double(1.0);
-		///cout << last_fitness << " " << p_accept << " " << r << endl;
+		///std::cout << last_fitness << " " << p_accept << " " << r << std::endl;
 		//if (r < p_accept) {
 		if (fitness < last_fitness) {
 			mean.update(1);
@@ -64,8 +83,11 @@ void PoseFinder::find_pose_mc(std::vector<double> start_search_pos, double fitne
 			mean.update(0);
 			ind.update_lose(.0001);
 		}
+
+		d_n_iterations++;
+
 		if (i % 1000 == 0)
-			cout << "mean accept: " << mean.mean() << endl;
+			std::cout << "mean accept: " << mean.mean() << std::endl;
 	}
 
 	/*MoNes mones(d_pose_fitness_function, test_function, dim, 50);
@@ -89,6 +111,7 @@ void PoseFinder::find_pose_mones(std::vector<double> start_search_pos, double fi
 
 	for (size_t i(0); i < 10000; ++i) {
 		mones.iterate();
+		d_n_iterations += population_size;
 		//mones.d_individuals[0].d_A.print();  }
 		d_best_point = mones.bestPoint().get_data();
 	}
@@ -114,14 +137,13 @@ void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fit
 		int population = population_size;//leave 0 to use default
 		nes.init(start_search_pos, sigma, population);
 
-		size_t n_evaluations(0);
 		//d_pose_fitness_function.debug() = ;
-		do
-		{
+		do {
 			try {
 				nes.iterate();
+				
 #ifdef WIN32
-				Sleep(3);
+				
 #else
 				usleep(3000);
 #endif
@@ -129,15 +151,14 @@ void PoseFinder::find_pose_xnes(std::vector<double> start_search_pos, double fit
 				std::cout << "breaking isnan" << std::endl;
 				break;
 			}
-			n_evaluations += population_size;
-			//			std::cout << "n_evaluations: " << n_evaluations << std::endl;
+			d_n_iterations += population_size;
+			
+			//std::cout << "n_evaluations: " << d_n_evaluations << ", fitness " << nes.bestFitness() << ", variance: " << nes.variance() << std::endl;
 		}
 		while (nes.bestFitness() > fitness_threshold && nes.variance() > variance_threshold);
 
-		d_best_point = (nes.bestPoint().get_data());
-	}
-	catch (const char* exception)
-	{
+		d_best_point = nes.bestPoint().get_data();
+	} catch (const char* exception) {
 		printf("\n\nEXCEPTION: %s\n\n", exception);
 	}
 }

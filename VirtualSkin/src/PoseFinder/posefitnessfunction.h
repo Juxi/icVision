@@ -2,11 +2,11 @@
 #define __POSE_FITNESS_FUNCTION_H__
 
 #include <vector>
-#include <boost/math/special_functions/fpclassify.hpp> // for isnan
+#include "matrix.h"
+#include "model.h"
+#include "function.h"
 #include "simulator.h"
-#include "xnes.h"
 #include "constraints.h"
-#include "exception.h"
 
 class EvaluationFilter {
 public:
@@ -18,10 +18,8 @@ public:
 	void operator()(const std::vector<double> &values, double fitness, int n_collisions, KinematicModel::RobotObservation &observation){};
 };
 
-class PoseFitnessFunction : public Function
-{
-public:
-
+class PoseFitnessFunction : public Function {
+private:
 	Simulator &d_simulator;
 	std::vector<Constraint*> d_constraints;
 	std::vector<double> d_weights;
@@ -30,58 +28,26 @@ public:
 	bool d_debug;
 	bool d_colliding; //variable will stay on if latest pose collided
 
-	public:
-
-
-	PoseFitnessFunction(Simulator &simulator) :
-		d_simulator(simulator),
-		  d_filter(new DummyFilter()),
-		  d_debug(false),
-		  d_colliding(false)
-	{
-	}
-
-	void add_constraint(Constraint *constraint, double weight = 1.0) {
-		d_constraints.push_back(constraint);
-		d_weights.push_back(weight);
-	}
-
-	bool colliding(){return d_colliding;}
-	void clear_constraints() {
-		for (size_t i(0); i < d_constraints.size(); ++i)
-			delete(d_constraints[i]);
-		d_constraints.clear();
-		d_weights.clear();
-	}
-
-	void set_filter(EvaluationFilter *filter) {
-		delete(d_filter);
-		d_filter = filter;
-	}
-
-	EvaluationFilter &get_filter() {
-		return *d_filter;
-	}
-
-	bool &debug() {return d_debug;}
-
+public:
+	PoseFitnessFunction(Simulator &simulator);
+	~PoseFitnessFunction();
 	double eval(const Matrix& point);
 	double eval(const std::vector<double>& point);
-
-	~PoseFitnessFunction() {
-		for (size_t i(0); i < d_constraints.size(); ++i)
-			delete(d_constraints[i]);
-		delete(d_filter);
-	}
+	void add_constraint(Constraint *constraint, double weight = 1.0);
+	void adjust(std::vector<double> &pose);
+	void start(const std::vector<double> &pose);
+	void clear_constraints();
+	std::vector<Constraint*>* constraints() { return &d_constraints; };
+	void set_filter(EvaluationFilter *filter);
+	Simulator &simulator() { return d_simulator; };
+	bool colliding(){ return d_colliding; }
+	EvaluationFilter &get_filter() { return *d_filter; }
+	bool &debug() { return d_debug; }
 };
+
 
 struct ObservationWorkspaceFunction : public WorkspaceFunction {
-  std::vector<double> get_workspace(Function &fitness_function) {
-	PoseFitnessFunction &pose_fitness_function = dynamic_cast<PoseFitnessFunction &>(fitness_function);
-	return pose_fitness_function.d_simulator.robot().observe().markerPosition(QString("right_hand"));
-  }
+	std::vector<double> get_workspace(Function &fitness_function);
 };
-
-
 
 #endif
