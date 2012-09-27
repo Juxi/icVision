@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WorldList>
+<WorldList version="1.0">
+
+<object name="table" pz="-.1" px="-0.145">
+    <box width="1" depth=".001" height=".71"/>
+</object>
+
+<!--<object name="ball" px="-0.3" py="-.1" pz=".05" type="target" r="0" g="100" b="0">
+    <sphere radius=".05"/>
+</object>-->
+
+</WorldList>

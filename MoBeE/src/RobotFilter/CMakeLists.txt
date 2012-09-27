@@ -2,7 +2,16 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/KinematicModel/CMakeScripts )
+CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
+
+PROJECT ( RobotFilter )
+
+SET ( RobotFilter_VERSION_MAJOR 1 )
+SET ( RobotFilter_VERSION_MINOR 0 )
+
+MESSAGE(STATUS "*** RobotFilter Project ***")
+
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel/KinematicModel/CMakeScripts )
 
 ### Find Libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
@@ -19,11 +28,10 @@ FIND_PACKAGE ( Qt4 REQUIRED )
 INCLUDE ( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/KinematicModel/LibKinematicModel" )
-
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/YarpFilter" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/VirtualSkinLibrary/YarpFilter/LibYarpFilter" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel/KinematicModel/LibKinematicModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/LibRobotFilter" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/LibRobotFilter/YarpFilter/LibYarpFilter" )
 
 ### Set some platform-specific variables ###
 SET (Q_WS_MAC FALSE)
@@ -43,11 +51,7 @@ IF ( WIN32 )
 ENDIF ( WIN32 )
 
 ### Parse the directories where build targets are ###
-ADD_SUBDIRECTORY ( VirtualSkinLibrary )
-ADD_SUBDIRECTORY ( PositionReflex )
-ADD_SUBDIRECTORY ( VelocityReflex )
+ADD_SUBDIRECTORY ( LibRobotFilter )
+ADD_SUBDIRECTORY ( PositionReflexDemo )
+ADD_SUBDIRECTORY(../YarpModel "${CMAKE_CURRENT_BINARY_DIR}/YarpModel")
 
-#ADD_SUBDIRECTORY ( PoseFinder )
-
-#ADD_SUBDIRECTORY ( RoadmapDemo )
-#ADD_SUBDIRECTORY ( iCubBabble )
