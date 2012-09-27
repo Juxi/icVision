@@ -1,8 +1,0 @@
-*.cmake
-*.a
-*~
-*cxx
-CMakeFiles
-CMakeCache.txt
-MakeFile
-.DS_Store

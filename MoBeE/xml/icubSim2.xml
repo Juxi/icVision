@@ -147,7 +147,7 @@
               <joint z="1" minPos="-90" maxPos="90" radius="0">
                 
                 <link z="1" radius="0">
-                  <marker name="right_elbow" />
+                  <marker name="right_elbow" tracer="30" />
                 </link>
                   
             <!-- WRIST -->

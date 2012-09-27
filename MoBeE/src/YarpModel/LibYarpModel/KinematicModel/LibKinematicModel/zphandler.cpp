@@ -269,10 +269,14 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			name = "marker" + QString(markerCounter);
 			markerCounter++;
 		}
-
+        
+        int tracer = 5;
+        if (!attributes.value("tracer").isEmpty())
+            tracer = attributes.value("tracer").toInt();
+            
 		// create the marker, attach it to the node, and make it known to the robot
 		Marker* marker = new Marker(node, name);
-		marker->createTracer( model->GHOST(), 1, 0.008, Qt::yellow);
+		marker->createTracer( model->GHOST(), tracer, 0.008, Qt::yellow);
 		robot->markers.push_back(marker);
 	}
 
