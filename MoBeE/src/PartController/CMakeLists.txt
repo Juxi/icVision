@@ -4,6 +4,8 @@
 
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
+MESSAGE(STATUS "*** PartController Project ***")
+
 PROJECT ( partController )
 
 SET ( partController_VERSION_MAJOR 1 )
@@ -22,28 +24,11 @@ INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 #INCLUDE_DIRECTORIES ( ${BOOST_INCLUDE_DIR} )
 
 
-SET ( src_files	main.cpp
-				partController.cpp
-		#iCubController.cpp
-		#roadmap.cpp
-		#graphwidget.cpp
-		#widgetNode.cpp
-		#widgetEdge.cpp
-		#newMapDialog.cpp
-		#mainwindow.cpp
-		#controlThread.cpp
+SET ( src_files		main.cpp
+			partController.cpp
 )
 
-SET ( hdr_files	#roadmap.h
-				partController.h
-		#iCubController.h
-		#graphwidget.h
-		#widgetNode.h
-		#widgetEdge.h
-		#newMapDialog.h
-		#mainwindow.h
-		#controlThread.h
-		#poses_reader.h
+SET ( hdr_files		partController.h
 )
 
 ADD_EXECUTABLE ( partController ${hdr_files} ${src_files} )

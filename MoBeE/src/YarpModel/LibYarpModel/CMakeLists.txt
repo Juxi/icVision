@@ -2,21 +2,23 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-SET ( src_files yarpModel.cpp
-		yarprobot.cpp
-		worldRpcInterface.cpp
-		yarpStreamPort.cpp
-		exception.cpp
-		simSyncer.cpp
+SET ( src_files		yarpModel.cpp
+			yarprobot.cpp
+			worldRpcInterface.cpp
+			yarpStreamPort.cpp
+			exception.cpp
+			simSyncer.cpp
+			robotSyncer.cpp
 )
 
-SET ( hdr_files	constants.h
-		exception.h
-		yarpModel.h
-		yarprobot.h
-		worldRpcInterface.h
-		yarpStreamPort.h
-		simSyncer.h
+SET ( hdr_files		constants.h
+			exception.h
+			yarpModel.h
+			yarprobot.h
+			worldRpcInterface.h
+			yarpStreamPort.h
+			simSyncer.h
+			robotSyncer.h
 		
 )
 

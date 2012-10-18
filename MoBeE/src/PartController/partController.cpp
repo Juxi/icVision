@@ -77,6 +77,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		srand ( yarp::os::Time::now() );
 	} //else { throw("could not connect to robot!"); }
 }
+PartController::~PartController(){}
 
 bool PartController::isValid()
 {
@@ -147,7 +148,7 @@ void PartController::run()
 		q0[j] = q1[j];
 	
 	// get new encoder positions
-	enc->getEncoders(q1);
+    getEncoders(q1);
 	
 	for ( int i=0; i<numJoints; i++ ) {
 		e[i] = w[i]*(x[i] - q1[i]);

@@ -83,7 +83,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			bool negate = false;
             if ( attributes.value("negate") == "true" ) {
                 negate = true;
-                printf("negated something\n");
+                //printf("negated something\n");
             }
             
 			if ( ok && a.size() > 0 && a.size() == q.size() )

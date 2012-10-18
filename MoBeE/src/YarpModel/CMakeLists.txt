@@ -55,7 +55,7 @@ IF( NOT PARSED )
 
 	### Parse the directories where build targets are ###
 	ADD_SUBDIRECTORY ( LibYarpModel )
-	ADD_SUBDIRECTORY ( Apps )
+	#ADD_SUBDIRECTORY ( FieldDemo )
 
 	SET( PARSED_YARPMODEL true PARENT_SCOPE)
 
