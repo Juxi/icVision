@@ -29,6 +29,7 @@ public:
 private:
     
     bool getEncoders( double* q );
+    bool computeForces();
 
     KinematicModel::Robot* robot;
     int partNum;

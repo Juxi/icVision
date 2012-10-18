@@ -13,17 +13,17 @@ class Motor;
 class Marker
 {
 public:
-	Marker(CompositeObject* object, QString name) : m_object(object),
+	Marker(KinTreeNode* object, QString name) : m_object(object),
 													tracerObject(NULL),
 													m_name(name),
 													d(0)
 	{
 	}
 
-	inline CompositeObject* object()
+	inline KinTreeNode* node()
 	{ return m_object; }
-	inline const CompositeObject* object() const
-	{ return m_object; }
+	inline const CompositeObject* tracer() const
+	{ return tracerObject; }
 
 	inline QString name() const
 	{ return m_name; }
@@ -77,7 +77,8 @@ public:
 	}
 
 protected:
-	CompositeObject *m_object, *tracerObject;
+	KinTreeNode *m_object;
+    CompositeObject *tracerObject;
 	QString m_name;
 	qreal d;
 };

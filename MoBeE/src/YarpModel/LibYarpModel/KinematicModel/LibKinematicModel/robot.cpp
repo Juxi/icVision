@@ -1,6 +1,7 @@
 #include "robot.h"
 #include "model.h"
 #include <time.h>
+#include <iostream.h>
 
 using namespace KinematicModel;
 
@@ -288,11 +289,27 @@ RobotObservation Robot::observe()
 	{
 		obs.m_markerName.resize(mc);
 		obs.m_markerConfiguration.resize(mc);
+        obs.m_markerJacobian.resize(mc);
 		for (m=0; m<mc; m++)
 		{
 			obs.m_markerName[m] = markers[m]->name();
-			obs.m_markerConfiguration[m] = markers[m]->object()->getT();
-		}
+			obs.m_markerConfiguration[m] = markers[m]->node()->getT();
+			obs.m_markerJacobian[m] = markers[m]->node()->computeJacobian();
+            
+            std::cout << "--- Jacobian ---" << std::endl;
+            QVector< QPair<QVector3D, QVector3D> >::iterator i;
+            for ( i=obs.m_markerJacobian[m].begin(); i!=obs.m_markerJacobian[m].end(); ++i )
+            {
+                std::cout <<
+                            i->first.x() << " " <<
+                            i->first.y() << " " <<
+                            i->first.z() << " " <<
+                            i->second.x() << " " <<
+                            i->second.y() << " " <<
+                            i->second.z() << std::endl;
+            }
+            std::cout << std::endl;
+        }
 	}
 	return obs;
 }

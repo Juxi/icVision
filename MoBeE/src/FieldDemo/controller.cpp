@@ -22,3 +22,8 @@ bool Controller::getEncoders( double* q )
 
     return ok;
 }
+bool Controller::computeForces()
+{
+    //RobotObservation = robot->observe();
+    return true;
+}

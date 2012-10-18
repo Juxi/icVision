@@ -84,10 +84,6 @@ protected:
     //DT_ResponseClass    fieldResponseClass;
     //QVector<PrimitiveObject*> fieldPrimitives;
     
-    
-    struct JColumn { QVector3D T;
-                     QVector3D F;
-    };
     //QVector<JacobianColumn> Jacobian;
     
 	//bool strf;
@@ -109,7 +105,7 @@ protected:
     
 																					/**< Called by Robot.updatePose() */
 
-    QVector< JColumn > computeJacobian();
+    QVector< QPair<QVector3D, QVector3D> > computeJacobian();
     
 	friend class Robot;		//!< Robot calls ignoreAdjacentPairs() and update()
 };

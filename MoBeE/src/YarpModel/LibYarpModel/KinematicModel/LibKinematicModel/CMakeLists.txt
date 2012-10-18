@@ -40,6 +40,7 @@ SET ( QT_MOC_FILES 	model.h
 
 SET ( hdr_files		modelconstants.h
 
+			robotobservation.h
 			model.h			# the center of it all
 			modelexception.h	# when things go wrong
 			modelwindow.h		# the window

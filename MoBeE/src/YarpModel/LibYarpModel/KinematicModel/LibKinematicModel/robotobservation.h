@@ -33,6 +33,8 @@ class Robot;
 class RobotObservation
 {
 public:
+    typedef QVector< QPair<QVector3D, QVector3D> > Jacobian;
+    
 	RobotObservation() { }											//!< default constructor
 	RobotObservation(RobotObservation const& rhs)					//!< copy constructor
 	{ *this = rhs; }
@@ -48,6 +50,9 @@ public:
 	
 	inline QMatrix4x4 const& markerConfiguration(unsigned int index) const	//!< return the marker configuration given an index
 	{ return m_markerConfiguration[index]; }
+    
+    inline Jacobian const& markerJacobian(unsigned int index) const	//!< return the marker configuration given an index
+	{ return m_markerJacobian[index]; }
 	
 	inline QString markerName(unsigned int index) const				//!< return the part marker name given an index
 	{ return m_markerName[index]; }
@@ -87,12 +92,14 @@ public:
 		}
 		return (measure / sqrt(norm1) / sqrt(norm2) + 1.0) / 2.0;
 	}
-
+    
 	friend class Robot;
 
 protected:
 	QVector<QString> m_markerName;								//!< list of part marker names
 	QVector<QMatrix4x4> m_markerConfiguration;					//!< list of part marker configurations
+    
+    QVector< Jacobian > m_markerJacobian;
 };
 
 

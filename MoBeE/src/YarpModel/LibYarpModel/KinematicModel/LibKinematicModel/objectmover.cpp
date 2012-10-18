@@ -28,6 +28,7 @@ ObjectMover::~ObjectMover()
 }
 
 
+//TODO: Leo get the Qt Signal from publishState() instead of calling robot->observe()
 void ObjectMover::update() // mutex is already set in Model::computePose
 {
 	if (hasAttachedObjects) {

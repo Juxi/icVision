@@ -186,9 +186,10 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 	}
 }
 
-QVector< KinTreeNode::JColumn > KinTreeNode::computeJacobian()
+
+QVector< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
 {
-    QVector< KinTreeNode::JColumn > J;
+    QVector< QPair<QVector3D, QVector3D> > J;
     QVector4D p = getT()*QVector4D(0,0,0,1);
     
     KinTreeNode* up = this;
@@ -206,10 +207,14 @@ QVector< KinTreeNode::JColumn > KinTreeNode::computeJacobian()
             qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
  
             // make a column of the jacobian
-            JColumn c;
-            c.T = jointAxis;
-            c.F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
-            J.append(c);
+            J.append(QPair<QVector3D, QVector3D>( jointAxis,
+                                                 qp.length() * QVector3D::crossProduct(jointAxis, qp)
+                                                 )
+                     );
+            //JColumn c;
+            //c.T = jointAxis;
+            //c.F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
+            //J.append(c);
         }
     }
     return J;
