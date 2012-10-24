@@ -54,7 +54,7 @@ protected:
     virtual void run();
     virtual void threadRelease();
     
-private:
+    virtual void computeForces(){}
 
 	int					numJoints;	// number of controllable DOFs
 	double				*x,			// the attractor pose

@@ -11,8 +11,8 @@ YarpModel::YarpModel( bool visualize ) : KinematicModel::Model(visualize)//, rpc
 }
 YarpModel::~YarpModel()
 {
-	worldRpcInterface.close();
-	simSyncer.close();
+	//worldRpcInterface.close();
+	//simSyncer.close();
 }
 
 //void YarpModel::onStartUp()

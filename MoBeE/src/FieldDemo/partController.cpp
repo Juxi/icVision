@@ -49,7 +49,8 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 	if ( !lim ) printf("Joint Limits Error!\n");
 	if ( !pos ) printf("IPositionControl Error!\n");
 	if ( pos && lim ) {
-		double _min,_max;
+		
+        // initialize control vars
 		pos->getAxes(&numJoints);
 		min = new double[numJoints];
 		max = new double[numJoints];
@@ -64,13 +65,16 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		a	= new double[numJoints];
 		f	= new double[numJoints];
 		cmd	= new double[numJoints];
+
+        // set default values
+        double _min,_max;
 		for ( int i = 0; i < numJoints; i++ ) {
 			lim->getLimits( i, &_min, &_max );
 			min[i] = _min;
 			max[i] = _max;
 			w[i] = 1.0;
-			k[i] = 1000.0;
-			c[i] = 40.0;
+			k[i] = 50.0;
+			c[i] = 100.0;
             f[i] = 0.0;
             x[i] = 0.0;
             q0[i] = 0.0;
@@ -78,6 +82,18 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
         
+        // set the attractor to the current pose
+		enc->getEncoders(q1);
+        //std::cout << " q = [";
+		for ( int j=0; j<numJoints; j++ ) {
+			q0[j] = q1[j];
+			x[j] = q1[j];
+            //x[j] = 100;
+            //std::cout << q1[j] << " ";
+		}
+        //std::cout << "]" << std::endl;
+        
+        // open the control port
         yarp::os::ConstString portName("/MoBeE/");
         portName += _partName;
         portName += "/";
@@ -109,18 +125,7 @@ bool PartController::threadInit()
 void PartController::afterStart(bool s)
 {
 	if (s) {
-		//printf("PartController started successfully\n");
-		// set the attractor to the current pose
-		enc->getEncoders(q1);
-        
-        //std::cout << " q = [";
-		for ( int j=0; j<numJoints; j++ ) {
-			q0[j] = q1[j];
-			x[j] = q1[j];
-            //x[j] = 100;
-            //std::cout << q1[j] << " ";
-		}
-        //std::cout << "]" << std::endl;
+		
 	}
 	else
 		printf("PartController did not start\n");
@@ -128,7 +133,7 @@ void PartController::afterStart(bool s)
 
 bool PartController::set( double **var, yarp::os::Bottle* list )
 {
-	if ( list->size() != numJoints ) return false;
+	//if ( list->size() != numJoints ) return false;
 	for ( int i = 0; i < numJoints; i++ )
 		(*var)[i] = list->get(i).asDouble();
 	return true;
@@ -150,7 +155,7 @@ void PartController::run()
 	}
 	
 	// move the attractor and/or change control parameters
-	yarp::os::Bottle* b = NULL;
+	/*yarp::os::Bottle* b = NULL;
 	b = port.read(false);
 	if ( b )
     {
@@ -165,18 +170,17 @@ void PartController::run()
             //increment( &x, list );
 			
 		}
-        else if ( b->get(0).asVocab() == yarp::os::Vocab::encode("f") )	{
-            if ( set( &f, list ) )
-                printf("Set Constant Force!!! (%s)\n", list->toString().c_str());
-            else
-                printf("FAILED TO SET F\n");
-		}
-		/*if ( b->get(0).asVocab() == yarp::os::Vocab::encode("w") )	set( &w, list );
-		if ( b->get(0).asVocab() == yarp::os::Vocab::encode("k") )	set( &k, list );
-		if ( b->get(0).asVocab() == yarp::os::Vocab::encode("c") )	set( &c, list );*/
-	}
+        //else if ( b->get(0).asVocab() == yarp::os::Vocab::encode("f") )	{
+        //    if ( set( &f, list ) )
+        //        printf("Set Constant Force!!! (%s)\n", list->toString().c_str());
+        //    else
+        //        printf("FAILED TO SET F\n");
+		//}
+	}*/
 	
-	
+    // project (fictitious) forces from operational space
+	computeForces();
+    
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
 	
@@ -185,7 +189,7 @@ void PartController::run()
     if ( getEncoders(q1) )
     {
         
-        //std::cout << "-----------------------------------------------" << std::endl;
+        std::cout << "-----------------------------------------------" << std::endl;
         
         for ( int i=0; i<numJoints; i++ ) {
             e[i] = w[i]*(x[i] - q1[i]);
@@ -196,15 +200,19 @@ void PartController::run()
         }
         
         
-         /*int i;
+         int i;
         
         std::cout << "f: [";
         for ( i=0; i<numJoints; i++ )
             std::cout << f[i] << " ";
         std::cout << "]" << std::endl;
         
+        std::cout << "cmd: [";
+        for ( i=0; i<numJoints; i++ )
+            std::cout << cmd[i] << " ";
+        std::cout << "]" << std::endl;
        
-        std::cout << "x: [";
+        /*std::cout << "x: [";
         for ( i=0; i<numJoints; i++ )
             std::cout << x[i] << " ";
         std::cout << "]" << std::endl;
@@ -234,10 +242,7 @@ void PartController::run()
             std::cout << v[i] << " ";
         std::cout << "]" << std::endl;
         
-        std::cout << "cmd: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << cmd[i] << " ";
-        std::cout << "]" << std::endl;
+        
         */
         
         vel->velocityMove( cmd );
@@ -248,7 +253,7 @@ void PartController::threadRelease()
 {
 	vel->stop();
 	
-	printf("Goodbye from PartController\n");
+	printf("\n*** Goodbye from PartController ***\n\n");
 	if ( dd ) { 
 		dd->close();
 		delete dd;

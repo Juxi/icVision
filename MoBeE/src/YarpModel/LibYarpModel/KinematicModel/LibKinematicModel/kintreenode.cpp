@@ -187,34 +187,33 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 }
 
 
-QVector< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
+QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
 {
-    QVector< QPair<QVector3D, QVector3D> > J;
+    QList< QPair<QVector3D, QVector3D> > J;
     QVector4D p = getT()*QVector4D(0,0,0,1);
     
     KinTreeNode* up = this;
     while (up->parent())
+    // TODO: While not root of body part
     {
         up = up->parent();
         if ( up->getNodeType() == RJOINT )
         {
             QVector4D q = up->getT()*QVector4D(0,0,0,1);
             QVector3D qp = (p-q).toVector3D();
-            QVector3D jointAxis = up->getNodeAxis();
-            jointAxis.normalize();
+            QVector3D jointAxis = up->getNodeAxis().normalized();
             
             // component of qp orthogonal to the joint axis
-            qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
- 
+            //qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
             // make a column of the jacobian
-            J.append(QPair<QVector3D, QVector3D>( jointAxis,
-                                                 qp.length() * QVector3D::crossProduct(jointAxis, qp)
-                                                 )
-                     );
-            //JColumn c;
-            //c.T = jointAxis;
-            //c.F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
-            //J.append(c);
+            //QVector3D F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
+            
+            J.prepend(
+                     QPair<QVector3D, QVector3D>(
+                                                  QVector3D::crossProduct(jointAxis, qp),
+                                                  jointAxis
+                                                )
+                    );
         }
     }
     return J;

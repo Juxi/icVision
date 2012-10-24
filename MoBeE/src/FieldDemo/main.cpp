@@ -50,71 +50,52 @@ int main(int argc, char *argv[])
 	//KinematicModel::Robot* nonYarpRobot = NULL;
 	
 	// according to this
-	bool useYarp = true;
+	//bool useYarp = true;
 	
 	int result = 0;
 	
 	try
 	{
-		if ( useYarp ) 
-		{
-			yarpModel = new MoBeE::YarpModel( visualize );
-			yarpModel->start();	
-									/*	if we want display lists to be created automatically,
-									the model must be started prior to appending objects by
-									calling loadWorld(), loadRobot(), or appendObject()		*/
-			
-			// Load a robot model from file
-			if ( robotFile != "" )
-			{
-				printf( "\nLOADING ROBOT MODEL FROM: %s\n", robotFile.toStdString().c_str() );
-				yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
-				//printf("done loading robot\n");
-                
-                for ( int i=0; i < yarpRobot->numBodyParts(); i++ )
-                {
-                    Controller* c = new Controller( yarpRobot,
-                                                    i,
-                                                    20);
-                    controllers.append(c);
-				}
-                
-                QVector<Controller*>::iterator it;
-                for ( it=controllers.begin(); it!=controllers.end(); ++it )
-                    (*it)->start();
-                
-				//yarpRobot->openCollisionPort("/MoBeE/collisions");
-				//yarpRobot->openObservationPort("/MoBeE/observations");
-				
-			  #ifdef WIN32
-			    Sleep(1);
-			  #else
-				usleep(1000);
-			  #endif
-			}
-			
-			// Load a world model from file
-			/*if ( worldFile != "" )
-			{
-				printf( "\nLOADING WORLD MODEL FROM: %s\n", worldFile.toStdString().c_str() );
-				yarpModel->loadWorld( worldFile, false );
-			}*/
-			
-			// Open the RPC interface to the world model
-			//printf("\nOPENING WORLD RPC PORT\n");
-			//yarpModel->openWorldRpcPort("/MoBeE/world");
-
-			// Start synchronization with the IIT iCub Simulator
-			//yarpModel->openSimSyncer("/MoBeE/syncer", "/icubSim/world");
-		} 
+        yarpModel = new MoBeE::YarpModel( visualize );
+        yarpModel->start();	
+                                /*	if we want display lists to be created automatically,
+                                the model must be started prior to appending objects by
+                                calling loadWorld(), loadRobot(), or appendObject()		*/
+        
+        // Load a robot model from file
+        if ( robotFile != "" )
+        {
+            printf( "\nLOADING ROBOT MODEL FROM: %s\n", robotFile.toStdString().c_str() );
+            yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
+            //printf("done loading robot\n");
+            
+            for ( int i=2; i < 3/*yarpRobot->numBodyParts()*/; i++ )
+            {
+                Controller* c = new Controller( yarpRobot,
+                                                i,
+                                                20);
+                controllers.append(c);
+            }
+            
+            QVector<Controller*>::iterator it;
+            for ( it=controllers.begin(); it!=controllers.end(); ++it )
+                (*it)->start();
+   
+          #ifdef WIN32
+            Sleep(1);
+          #else
+            usleep(1000);
+          #endif
+        }
 
 	
 		// run the Qt application
 		result = app.exec();
+        
+        for ( size_t i=0; i < controllers.size(); i++ )
+            controllers.at(i)->stop();
 		
-		if ( yarpModel )
-		{
-			//yarpModel->closeWorldRpcPort();
+		if ( yarpModel ) {
 			yarpModel->stop(); 
 			delete yarpModel;
 		}
@@ -125,5 +106,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+    printf("All finished\n");
     return result;
 }

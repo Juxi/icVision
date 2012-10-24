@@ -296,8 +296,8 @@ RobotObservation Robot::observe()
 			obs.m_markerConfiguration[m] = markers[m]->node()->getT();
 			obs.m_markerJacobian[m] = markers[m]->node()->computeJacobian();
             
-            std::cout << "--- Jacobian ---" << std::endl;
-            QVector< QPair<QVector3D, QVector3D> >::iterator i;
+            /*std::cout << "--- Jacobian Transpose ---" << std::endl;
+            QList< QPair<QVector3D, QVector3D> >::iterator i;
             for ( i=obs.m_markerJacobian[m].begin(); i!=obs.m_markerJacobian[m].end(); ++i )
             {
                 std::cout <<
@@ -306,9 +306,10 @@ RobotObservation Robot::observe()
                             i->first.z() << " " <<
                             i->second.x() << " " <<
                             i->second.y() << " " <<
-                            i->second.z() << std::endl;
+                            i->second.z() <<
+                            std::endl;
             }
-            std::cout << std::endl;
+            std::cout << std::endl;*/
         }
 	}
 	return obs;

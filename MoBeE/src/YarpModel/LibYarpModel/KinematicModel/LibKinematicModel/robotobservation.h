@@ -33,7 +33,7 @@ class Robot;
 class RobotObservation
 {
 public:
-    typedef QVector< QPair<QVector3D, QVector3D> > Jacobian;
+    typedef QList< QPair<QVector3D, QVector3D> > Jacobian;
     
 	RobotObservation() { }											//!< default constructor
 	RobotObservation(RobotObservation const& rhs)					//!< copy constructor

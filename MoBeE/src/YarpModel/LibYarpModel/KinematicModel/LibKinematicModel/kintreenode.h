@@ -105,7 +105,7 @@ protected:
     
 																					/**< Called by Robot.updatePose() */
 
-    QVector< QPair<QVector3D, QVector3D> > computeJacobian();
+    QList< QPair<QVector3D, QVector3D> > computeJacobian();
     
 	friend class Robot;		//!< Robot calls ignoreAdjacentPairs() and update()
 };

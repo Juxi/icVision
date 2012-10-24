@@ -26,11 +26,13 @@ public:
                int partNum,
                int freq );
     
-private:
+protected:
     
     bool getEncoders( double* q );
-    bool computeForces();
+    QVector<qreal> add(QVector<qreal>,QVector<qreal>);
 
+    virtual void computeForces();
+    
     KinematicModel::Robot* robot;
     int partNum;
     //KinematicModel::BodyPart* bodyPart;
