@@ -77,8 +77,11 @@ public:
 	qreal normToEnc( qreal );										//!< Converts normalized encoder to real encoder value
 	qreal encToNorm( qreal );										//!< Converts real encoder to normalized encoder value
 
+    bool isBodyPartRoot() { return bodyPartRoot; }
+    
 private:
 	
+    bool        bodyPartRoot;
 	Motor*		parentMotor;		//!< Just for the XML parser
 	QString		motorName;			//!< A human readable name 
 	Interval	motorLimits;        //!< Encoder position limits
@@ -87,6 +90,8 @@ private:
 				normalPosition;		//!< Normalized encoder position... on the interval [0,1]
 	
 	void setJointPositions();		//!< Update the positions of the joints belonging to this motor
+    
+    friend class ZPHandler;	
 };
 
 #endif 

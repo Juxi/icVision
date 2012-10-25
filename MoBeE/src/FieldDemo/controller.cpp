@@ -51,7 +51,7 @@ void Controller::computeForces()
                 f += obs.markerJacobian(i).at(j).second.z() * T.z();
                 thisForce.append(f);
             }
-            netForce = add(netForce, thisForce);
+            netForce = vectorSum(netForce, thisForce);
         }
         
         yarp::os::Bottle b;
@@ -66,7 +66,7 @@ void Controller::computeForces()
         set(&f,&b);
 }
 
-QVector<qreal> Controller::add(QVector<qreal> a,QVector<qreal> b)
+QVector<qreal> Controller::vectorSum(QVector<qreal> a,QVector<qreal> b)
 {
     QVector<qreal> ans;
     if ( a.size() > b.size() ) {

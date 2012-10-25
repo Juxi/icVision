@@ -29,7 +29,11 @@ public:
 protected:
     
     bool getEncoders( double* q );
-    QVector<qreal> add(QVector<qreal>,QVector<qreal>);
+    QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
+    
+    bool getMarkerNames( QList<QString>& );
+    bool getMarkerPosition( QString, QVector3D& );
+    bool project( QString, QVector3D, QVector<qreal>& );
 
     virtual void computeForces();
     

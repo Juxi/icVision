@@ -13,6 +13,7 @@
 #include "zphandler.h"
 #include "motor.h"
 #include "linearconstraint.h"
+#include "marker.h"
 
 /** \brief Contains classes relevant to the robot model.
  *
@@ -70,7 +71,10 @@ private:
     BodyPart* parentPart;	//!< Requires a parent object for compatibility with the hierarchical ZPHandler
     QString   partName;		//!< A human readable name
 	
+    QVector<Marker*>		markers;		//!< list of markers
 	QVector< QVector<LinearConstraint> > constraints;  // these are in conjunctive normal form
+    
+    friend class ZPHandler;	
 };
 
 #endif

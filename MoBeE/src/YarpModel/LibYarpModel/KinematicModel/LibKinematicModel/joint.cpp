@@ -55,3 +55,10 @@ void Joint::setMax( qreal pos )
 		position = limits.getMax();
 	}
 }
+
+bool Joint::isBodyPartRoot()
+{
+    if ( motor )
+        return motor->isBodyPartRoot();
+    return false;
+}

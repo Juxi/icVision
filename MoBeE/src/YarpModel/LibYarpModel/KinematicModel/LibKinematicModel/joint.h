@@ -41,7 +41,7 @@ public:
 								/**< The position is computed as a function of the position of the Motor. If the Joint's Motor is null, 
 									 position is set to 0. If 0 is out of the range of the joint limits, the position is set to 
 									 limits.getMin() or limits.getMax() accordingly. */
-
+    bool isBodyPartRoot();
 protected:
 	
     Motor*   motor;				//!< The motor that controls this joint

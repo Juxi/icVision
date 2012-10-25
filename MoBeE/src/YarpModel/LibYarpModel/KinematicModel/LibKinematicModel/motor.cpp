@@ -5,7 +5,8 @@
 using namespace std;
 using namespace KinematicModel;
 
-Motor::Motor( Robot* robot, Motor* motor ) : parentMotor(motor),
+Motor::Motor( Robot* robot, Motor* motor ) : bodyPartRoot(false),
+                                             parentMotor(motor),
 											 homePosition(0.0)
 {
 	if ( !robot ) { throw KinematicModelException("The Motor constructor requires a pointer to a valid Robot."); }

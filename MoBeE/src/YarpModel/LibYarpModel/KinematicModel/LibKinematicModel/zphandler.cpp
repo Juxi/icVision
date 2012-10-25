@@ -278,6 +278,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 		Marker* marker = new Marker(node, name);
 		marker->createTracer( model->GHOST(), tracer, 0.008, Qt::yellow);
 		robot->markers.push_back(marker);
+        bodyPart->markers.push_back(marker);
 	}
 
     else { printf("WARNING: Encountered unknown tag: %s ...skipping it.\n",qName.toStdString().c_str()); }
@@ -352,9 +353,10 @@ Motor* ZPHandler::createChildMotor( int motorIdx )
 	{
 		Motor* childMotor = new Motor( robot, motor );
 		if (childMotor) {
-			if ( bodyPart->size() <= motorIdx ) {
+            if (bodyPart->size()==0)
+                childMotor->bodyPartRoot = true;
+			if ( bodyPart->size() <= motorIdx )
 				bodyPart->resize(motorIdx+1);
-			}
 			if ( motorIdx >= 0 ) {
 				if ( bodyPart->at(motorIdx) ) 
 				{
