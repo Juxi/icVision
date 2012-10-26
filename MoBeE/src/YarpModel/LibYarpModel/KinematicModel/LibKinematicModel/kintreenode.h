@@ -66,6 +66,8 @@ public:
 	//bool reflexSubtree() { return strf; }
 	//void setReflexSubtree( bool b ) { strf = b; }
 	void removeReflexFromSubTree();
+    
+    QList< QPair<QVector3D, QVector3D> > computeJacobian();
 	
 protected:
     int                   bodyPart;
@@ -104,8 +106,6 @@ protected:
 	void update( const QMatrix4x4& txfr );											//!< Propogates forward kinematics calculations down the tree
     
 																					/**< Called by Robot.updatePose() */
-
-    QList< QPair<QVector3D, QVector3D> > computeJacobian();
     
 	friend class Robot;		//!< Robot calls ignoreAdjacentPairs() and update()
 };

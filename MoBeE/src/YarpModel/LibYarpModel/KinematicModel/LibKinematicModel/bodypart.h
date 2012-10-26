@@ -64,6 +64,8 @@ public:
     
     void appendConstraints( QVector<LinearConstraint> c ) { constraints.append(c); }
 	bool evaluateConstraints();
+    
+    QVector<Marker*> getMarkers() { return markers; }
 	
 private:
     

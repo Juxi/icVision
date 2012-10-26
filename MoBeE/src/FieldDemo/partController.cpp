@@ -52,19 +52,19 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		
         // initialize control vars
 		pos->getAxes(&numJoints);
-		min = new double[numJoints];
-		max = new double[numJoints];
-		q1  = new double[numJoints];
-		q0	= new double[numJoints];
-		w	= new double[numJoints];
-		x	= new double[numJoints];
-		k	= new double[numJoints];
-		c	= new double[numJoints];
-		e	= new double[numJoints];
-		v	= new double[numJoints];
-		a	= new double[numJoints];
-		f	= new double[numJoints];
-		cmd	= new double[numJoints];
+		min  = new double[numJoints];
+		max  = new double[numJoints];
+		q1   = new double[numJoints];
+		q0	 = new double[numJoints];
+		w	 = new double[numJoints];
+		x	 = new double[numJoints];
+		k	 = new double[numJoints];
+		c	 = new double[numJoints];
+		e	 = new double[numJoints];
+		v	 = new double[numJoints];
+		a	 = new double[numJoints];
+		f	 = new double[numJoints];
+		ctrl = new double[numJoints];
 
         // set default values
         double _min,_max;
@@ -131,20 +131,22 @@ void PartController::afterStart(bool s)
 		printf("PartController did not start\n");
 }
 
-bool PartController::set( double **var, yarp::os::Bottle* list )
+void PartController::set( double **var, yarp::os::Bottle* list )
 {
-	//if ( list->size() != numJoints ) return false;
-	for ( int i = 0; i < numJoints; i++ )
-		(*var)[i] = list->get(i).asDouble();
-	return true;
+	for ( int i = 0; i < numJoints; i++ ) {
+        if (!list->get(i).isNull()) {
+            (*var)[i] = list->get(i).asDouble();
+        }
+    }
 }
 
-bool PartController::increment( double **var, yarp::os::Bottle* list )
+void PartController::increment( double **var, yarp::os::Bottle* list )
 {
-	if ( list->size() != numJoints ) return false;
-	for ( int i = 0; i < numJoints; i++ )
-		(*var)[i] += list->get(i).asDouble();
-	return true;
+	for ( int i = 0; i < numJoints; i++ ) {
+        if (!list->get(i).isNull()) {
+            (*var)[i] += list->get(i).asDouble();
+        }
+    }
 }
 
 void PartController::run() 
@@ -154,54 +156,47 @@ void PartController::run()
 		return;
 	}
 	
-	// move the attractor and/or change control parameters
-	/*yarp::os::Bottle* b = NULL;
+	// read control commands from socket and handle them
+	yarp::os::Bottle* b = NULL;
 	b = port.read(false);
-	if ( b )
-    {
+	if ( b ) {
 		//printf("got a bottle: %s\n", b->toString().c_str());
-		yarp::os::Bottle* list = b->get(1).asList();
-		
-        if ( b->get(0).asVocab() == yarp::os::Vocab::encode("x") )	{
-			if ( set( &x, list ) )
-                printf("Set Attractor Position!!! (%s)\n", list->toString().c_str());
-            else
-                printf("FAILED TO SET X\n");
-            //increment( &x, list );
-			
-		}
-        //else if ( b->get(0).asVocab() == yarp::os::Vocab::encode("f") )	{
-        //    if ( set( &f, list ) )
-        //        printf("Set Constant Force!!! (%s)\n", list->toString().c_str());
-        //    else
-        //        printf("FAILED TO SET F\n");
-		//}
-	}*/
+        int cmd = b->get(0).asVocab();
+        switch (cmd) {
+            case VOCAB_QATTR:
+                set( &x, b->get(1).asList() );
+                printf("Set attractor position!!! (%s)\n", b->get(1).asList()->toString().c_str());
+                break;
+            case VOCAB_QFORCE:
+                set( &f, b->get(1).asList() );
+                printf("Set joint-space force!!! (%s)\n", b->get(1).asList()->toString().c_str());
+                break;
+            default:
+                handle(b);
+                break;
+        }
+	}
 	
     // project (fictitious) forces from operational space
-	computeForces();
+	//computeForces();
     
+
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
-	
-	// get the new encoder positions
-    // and children can set the robot position in KineamticModel
-    if ( getEncoders(q1) )
+    
+    if ( getEncoders(q1) )  // NOTE: the derrived class "Controller" sets the robot position in KineamticModel
     {
-        
-        std::cout << "-----------------------------------------------" << std::endl;
-        
         for ( int i=0; i<numJoints; i++ ) {
             e[i] = w[i]*(x[i] - q1[i]);
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
             a[i] = -c[i]*v[i] + k[i]*e[i] + 100.0*f[i];
-            cmd[i] = v[i] + a[i] * getRate() / 1000.0;
+            ctrl[i] = v[i] + a[i] * getRate() / 1000.0;
 
         }
+        vel->velocityMove( ctrl );
         
-        
-         int i;
-        
+        /*int i;
+        std::cout << "-----------------------------------------------" << std::endl;
         std::cout << "f: [";
         for ( i=0; i<numJoints; i++ )
             std::cout << f[i] << " ";
@@ -212,7 +207,7 @@ void PartController::run()
             std::cout << cmd[i] << " ";
         std::cout << "]" << std::endl;
        
-        /*std::cout << "x: [";
+        std::cout << "x: [";
         for ( i=0; i<numJoints; i++ )
             std::cout << x[i] << " ";
         std::cout << "]" << std::endl;
@@ -241,11 +236,7 @@ void PartController::run()
         for ( i=0; i<numJoints; i++ )
             std::cout << v[i] << " ";
         std::cout << "]" << std::endl;
-        
-        
         */
-        
-        vel->velocityMove( cmd );
     }
 }
 

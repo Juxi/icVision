@@ -1,5 +1,6 @@
 #include <SOLID.h>
 #include "kintreenode.h"
+#include "joint_revolute.h"
 #include "primitiveobject.h"
 #include "robot.h"
 #include "modelexception.h"
@@ -193,27 +194,33 @@ QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
     QVector4D p = getT()*QVector4D(0,0,0,1);
     
     KinTreeNode* up = this;
+    RevoluteJoint* joint = NULL;
+    
     while (up->parent())
-    // TODO: While not root of body part
     {
         up = up->parent();
         if ( up->getNodeType() == RJOINT )
         {
-            QVector4D q = up->getT()*QVector4D(0,0,0,1);
-            QVector3D qp = (p-q).toVector3D();
-            QVector3D jointAxis = up->getNodeAxis().normalized();
-            
-            // component of qp orthogonal to the joint axis
-            //qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
-            // make a column of the jacobian
-            //QVector3D F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
-            
-            J.prepend(
-                     QPair<QVector3D, QVector3D>(
-                                                  QVector3D::crossProduct(jointAxis, qp),
-                                                  jointAxis
-                                                )
-                    );
+            joint = dynamic_cast<KinematicModel::RevoluteJoint*>(up);
+            if (joint) {
+                QVector4D q = up->getT()*QVector4D(0,0,0,1);
+                QVector3D qp = (p-q).toVector3D();
+                QVector3D jointAxis = up->getNodeAxis().normalized();
+                
+                // component of qp orthogonal to the joint axis
+                //qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
+                // make a column of the jacobian
+                //QVector3D F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
+                
+                J.prepend(
+                         QPair<QVector3D, QVector3D>(
+                                                      QVector3D::crossProduct(jointAxis, qp),
+                                                      jointAxis
+                                                    )
+                        );
+                if ( joint->isBodyPartRoot() )
+                    break;
+            }
         }
     }
     return J;

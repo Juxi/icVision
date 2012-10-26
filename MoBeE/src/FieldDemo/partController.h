@@ -14,6 +14,9 @@
 #include <yarp/dev/all.h>
 #include <yarp/sig/all.h>
 
+#define VOCAB_QATTR VOCAB4('q','a','t','t')
+#define VOCAB_QFORCE VOCAB4('q','f','o','r')
+
 /*! \brief Wraps YARP's remote device driver interface neatly
  *  This could be a motor control interface for one part of the iCub for example. see: http://eris.liralab.it/wiki/Motor_control
  */
@@ -40,8 +43,8 @@ public:
 	
 protected:
     
-    bool set( double **var, yarp::os::Bottle* list );
-    bool increment( double **var, yarp::os::Bottle* list );
+    void set( double **var, yarp::os::Bottle* list );
+    void increment( double **var, yarp::os::Bottle* list );
 	
 	yarp::os::Network							network;
 	yarp::os::BufferedPort<yarp::os::Bottle>	port;
@@ -54,7 +57,8 @@ protected:
     virtual void run();
     virtual void threadRelease();
     
-    virtual void computeForces(){}
+    //virtual void computeForces(){}
+    virtual void handle( yarp::os::Bottle* ){}
 
 	int					numJoints;	// number of controllable DOFs
 	double				*x,			// the attractor pose
@@ -69,7 +73,7 @@ protected:
 						*e,			// the error vector x-q1
 						*a,			// the acceleration currently felt by the robot
                         *f,         // a forcing term
-						*cmd;		// the next velocity control command	
+						*ctrl;		// the next velocity control command
 	
 	
 };

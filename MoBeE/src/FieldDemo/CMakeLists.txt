@@ -13,7 +13,9 @@ SET ( hdr_files		partController.h
 
 ADD_EXECUTABLE ( FieldDemo	${hdr_files}
 				${src_files} )
+
 ADD_EXECUTABLE ( SimpleMotion	simpleMotion.cpp )
+ADD_EXECUTABLE ( OpSpaceMotion	opSpaceMotion.cpp )
 
 ADD_DEPENDENCIES( FieldDemo	YarpModel 
 				KinematicModel
@@ -26,8 +28,9 @@ TARGET_LINK_LIBRARIES ( FieldDemo	YarpModel
 					${OPENGL_LIBRARIES}
 					${YARP_LIBRARIES}
 )
-TARGET_LINK_LIBRARIES ( SimpleMotion	${YARP_LIBRARIES}
-)
+
+TARGET_LINK_LIBRARIES ( SimpleMotion	${YARP_LIBRARIES})
+TARGET_LINK_LIBRARIES ( OpSpaceMotion	${YARP_LIBRARIES})
 
 INSTALL ( TARGETS FieldDemo DESTINATION ${CMAKE_SOURCE_DIR}/bin )
 INSTALL ( TARGETS SimpleMotion DESTINATION ${CMAKE_SOURCE_DIR}/bin )

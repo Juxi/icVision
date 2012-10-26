@@ -53,6 +53,8 @@ public:
 
 	//void operator =( const QMatrix4x4& m ) { QMatrix4x4::operator=(m); }
 	//void operator *( const QMatrix4x4& m ) { QMatrix4x4::operator*(m); }
+    
+    QVector3D getPos() { return QVector3D(T(0,3),T(1,3),T(2,3)); }
 	
 	QMatrix4x4 getT() { return T; }
 	void setT( const QMatrix4x4& _T ) { T = _T; }
