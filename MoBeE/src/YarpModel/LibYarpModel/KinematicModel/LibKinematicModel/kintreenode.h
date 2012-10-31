@@ -56,7 +56,7 @@ public:
 
     int getBodyPartIndex() { return bodyPart; }
 	NodeType getNodeType() const { return nodeType; }			//!< Returns the sub-type of the object (Link, RevoluteJoint or PrisMaticJoint)
-	const QVector3D& getNodeAxis() const { return nodeAxis; }	//!< Returns nodeAxis
+	const QVector3D getCurrentNodeAxis();	//!< Returns nodeAxis
 	int getNumPrimitives();
 	bool isNearRoot( KinTreeNode* node = NULL, bool link = false, bool joint = false );	//!< Returns whether or not this CompositeObject is free to move w.r.t the world
 	const QVector<KinTreeNode*>& childnodes() { return children; };
@@ -67,7 +67,7 @@ public:
 	//void setReflexSubtree( bool b ) { strf = b; }
 	void removeReflexFromSubTree();
     
-    QList< QPair<QVector3D, QVector3D> > computeJacobian();
+    QList< QPair<QVector3D, QVector3D> > computeJacobian( QVector3D F = QVector3D(0,0,0), QVector3D T = QVector3D(0,0,0) );
 	
 protected:
     int                   bodyPart;

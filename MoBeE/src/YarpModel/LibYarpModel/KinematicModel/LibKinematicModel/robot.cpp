@@ -136,6 +136,14 @@ void Robot::home(bool verbose)
 	//updatePose();
 }
 
+void Robot::resetExtTorque()
+{
+    QVector<Motor*>::iterator j;
+    for ( j=motorList.begin(); j!=motorList.end(); ++j ) {
+        (*j)->resetExtTorque();
+    }
+}
+
 void Robot::setNormalPosition( qreal pos )
 {
 	//QMutexLocker locker(&mutex);

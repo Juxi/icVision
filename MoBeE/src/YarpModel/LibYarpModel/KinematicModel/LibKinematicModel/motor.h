@@ -79,9 +79,14 @@ public:
 
     bool isBodyPartRoot() { return bodyPartRoot; }
     
+    qreal getExtTorque() { return extTorque; }
+    void addExtTorque( qreal t ) { extTorque += t; }
+    void resetExtTorque() { extTorque = 0.0; }
+    
 private:
 	
     bool        bodyPartRoot;
+    qreal       extTorque;
 	Motor*		parentMotor;		//!< Just for the XML parser
 	QString		motorName;			//!< A human readable name 
 	Interval	motorLimits;        //!< Encoder position limits

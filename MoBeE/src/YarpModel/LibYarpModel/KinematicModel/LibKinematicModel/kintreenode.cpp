@@ -58,6 +58,12 @@ void KinTreeNode::setNodeAxis( const QVector3D& vector )
 	setM();
 }
 
+const QVector3D KinTreeNode::getCurrentNodeAxis()
+{
+    QVector4D zeroPositionAxis = nodeAxis.normalized().toVector4D();
+    return (getT()*zeroPositionAxis).toVector3D();
+}
+
 /*void KinTreeNode::removeCollisionResponse( DT_ResponseClass c, DT_RespTableHandle t )
 {
 	QVector<KinTreeNode*>::iterator i;
@@ -188,10 +194,10 @@ void KinTreeNode::update( const QMatrix4x4& txfr )
 }
 
 
-QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
+/*QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian( QVector3D F, QVector3D T )
 {
     QList< QPair<QVector3D, QVector3D> > J;
-    QVector4D p = getT()*QVector4D(0,0,0,1);
+    QVector3D p = getPos();
     
     KinTreeNode* up = this;
     RevoluteJoint* joint = NULL;
@@ -203,26 +209,65 @@ QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian()
         {
             joint = dynamic_cast<KinematicModel::RevoluteJoint*>(up);
             if (joint) {
-                QVector4D q = up->getT()*QVector4D(0,0,0,1);
-                QVector3D qp = (p-q).toVector3D();
-                QVector3D jointAxis = up->getNodeAxis().normalized();
+                QVector3D q = up->getPos();
+                QVector3D qp = p-q;
+                QVector3D jointAxis = up->getCurrentNodeAxis();
                 
                 // component of qp orthogonal to the joint axis
                 //qp -= QVector3D::dotProduct(qp,jointAxis)*jointAxis;
                 // make a column of the jacobian
                 //QVector3D F = qp.length() * QVector3D::crossProduct(jointAxis, qp);
                 
-                J.prepend(
-                         QPair<QVector3D, QVector3D>(
-                                                      QVector3D::crossProduct(jointAxis, qp),
-                                                      jointAxis
-                                                    )
-                        );
+                QPair<QVector3D, QVector3D> jColumn( QVector3D::crossProduct(jointAxis, qp), jointAxis );
+                
+                J.prepend(jColumn);
+                
                 if ( joint->isBodyPartRoot() )
                     break;
             }
         }
+        
     }
+    return J;
+}*/
+
+QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian( QVector3D F, QVector3D T )
+{
+    QList< QPair<QVector3D, QVector3D> > J;
+    QVector3D p = getPos();
+    
+    KinTreeNode* thisNode = this;
+    
+    while (true)
+    {
+        //printf("entered computeJacobian()\n");
+        if ( thisNode->getNodeType() == RJOINT )
+        {
+            //printf("found a joint\n");
+            RevoluteJoint* joint = dynamic_cast<KinematicModel::RevoluteJoint*>(thisNode);
+            if (joint) {
+                QVector3D q = joint->getPos();
+                QVector3D qp = p-q;
+                QVector3D jointAxis = joint->getCurrentNodeAxis();
+       
+                QPair<QVector3D, QVector3D> jColumn( QVector3D::crossProduct(jointAxis, qp), jointAxis );
+                
+                //printf("jColumn: %f, %f, %f, %f, %f, %f\n", jColumn.first.x(), jColumn.first.y(), jColumn.first.z(),
+                //                                            jColumn.second.x(), jColumn.second.y(), jColumn.second.z());
+                
+                J.prepend(jColumn);
+                
+                if ( joint->isBodyPartRoot() )
+                    break;
+            } //else printf("cast failed unexpectedly\n");
+        } //else printf("found a non-joint\n");
+        
+        if (!thisNode->parent())
+            break;
+        else
+            thisNode = thisNode->parent();
+    }
+    
     return J;
 }
 

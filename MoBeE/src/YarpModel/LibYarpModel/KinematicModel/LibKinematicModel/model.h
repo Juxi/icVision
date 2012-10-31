@@ -163,6 +163,8 @@ protected:
 	/*************************
 	 *** COLLISION HANDLING ***
 	 *************************/
+    
+    // handles the changing of colors to indicate collission status
 	static DT_Bool collisionHandler( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
@@ -185,6 +187,7 @@ protected:
 		return detector->getStopOnFirstCollision();
 	}
 	
+    // triggers robot reflexes
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
@@ -204,10 +207,32 @@ protected:
 		return detector->getStopOnFirstCollision();
 	}
     
+    // creates repulsive forces to prevent unwanted collisions
     static DT_Bool repel( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
         printf("The Callback is calling!!!\n");
 		// compute repuslive fictitous force and append it to a list somewhere
+        
+        if (!coll_data) return DT_CONTINUE;
+        
+        //QVector3D p1( coll_data->point1[0], coll_data->point1[1], coll_data->point1[2]);
+        //QVector3D p2( coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]);
+        QVector3D d12( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
+        
+        PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
+		CompositeObject* comp1 = prim1->getCompositeObject();
+		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
+		if ( node1 )
+        {
+            //node1->robot()->addReflexCollision();
+        }
+		
+		PrimitiveObject* prim2 = (PrimitiveObject*)obj2;
+		CompositeObject* comp2 = prim2->getCompositeObject();
+		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
+		if ( node2 ) { node2->robot()->addReflexCollision(); }
+        
+        
 		return DT_CONTINUE;
 	}
 };

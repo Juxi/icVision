@@ -99,7 +99,7 @@ DT_RespTableHandle Model::newRobotTable()
 DT_RespTableHandle Model::newRobotFieldTable()
 {
 	DT_RespTableHandle table = DT_CreateRespTable();
-    DT_AddDefaultResponse( table, repel, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddDefaultResponse( table, repel, DT_DEPTH_RESPONSE, (void*) this );
     DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	//responseTables.append( table );
 	return table;
@@ -162,7 +162,7 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose)
 	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-	DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_WITNESSED_RESPONSE, (void*) this );
+	DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_DEPTH_RESPONSE, (void*) this );
 	DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
 
 	QVector<DT_ResponseClass>::iterator i;
@@ -170,8 +170,8 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose)
 	{
 		DT_AddPairResponse(	responseTables.at(0), newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
 		DT_AddPairResponse(	responseTables.at(0), newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
-		DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_WITNESSED_RESPONSE, (void*) this );
-		DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_WITNESSED_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_DEPTH_RESPONSE, (void*) this );
+		DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_DEPTH_RESPONSE, (void*) this );
 	}
 
 	robotResponseClasses.append( newRobotClass );
@@ -487,6 +487,7 @@ int Model::computePose()
 	updateWorldState();		// update positions of things in the world
 	updateSolid();
 
+    
 	evaluateRobotConstraints();
 	computeCollisions();
 	
@@ -525,10 +526,16 @@ void Model::evaluateRobotConstraints()
 void Model::computeCollisions()
 {
 	QReadLocker locker(&mutex);
-	QVector<DT_RespTableHandle>::iterator i;
+    
+    QVector<Robot*>::iterator i;
+	for ( i=robots.begin(); i!=robots.end(); ++i ) {
+		(*i)->resetExtTorque();
+	}
+    
+	QVector<DT_RespTableHandle>::iterator j;
 	//uint num = 0;
-	for (i=responseTables.begin();i!=responseTables.end();++i) {
-		DT_Test(scene,*i);
+	for (j=responseTables.begin();j!=responseTables.end();++j) {
+		DT_Test(scene,*j);
 	}
 }
 

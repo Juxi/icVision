@@ -61,6 +61,7 @@ public:
 	void addCollision() { numCollisions++; }
 	void addReflexCollision() { numReflexCollisions++; }
 	
+    void resetExtTorque();
 	RobotObservation observe();
 	void evaluateConstraints();
 	

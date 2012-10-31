@@ -31,7 +31,7 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
     DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
     DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
     DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_DEPTH_RESPONSE, (void*) this );
     DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
     
     QVector<DT_ResponseClass>::iterator i;
@@ -39,8 +39,8 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
     {
         DT_AddPairResponse(	responseTables.at(0), newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
         DT_AddPairResponse(	responseTables.at(0), newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
-        DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_WITNESSED_RESPONSE, (void*) this );
-        DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_DEPTH_RESPONSE, (void*) this );
+        DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_DEPTH_RESPONSE, (void*) this );
     }
     
     robotResponseClasses.append( newRobotClass );
