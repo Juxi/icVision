@@ -434,11 +434,11 @@ void WorldRpcInterface::grabObject( const yarp::os::Bottle& command, yarp::os::B
 
 	QString markerName = command.get(n).asString().c_str(); n++;
 	int markerIndex = -1;
-	KinematicModel::RobotObservation robotObs = robot->observe();
-	for (int i = 0; i<robotObs.getNumMarkers(); i++) {
-		if (robotObs.markerName(i).compare(markerName) == 0)
-			markerIndex = i;
-	}
+	//KinematicModel::RobotObservation robotObs = robot->observe();
+	//for (int i = 0; i<robotObs.getNumMarkers(); i++) {
+	//	if (robotObs.markerName(i).compare(markerName) == 0)
+	//		markerIndex = i;
+	//}
 
 	if (markerIndex < 0) {
 		reply.addString("Marker not found, releasing object.");

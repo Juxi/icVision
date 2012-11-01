@@ -62,7 +62,7 @@ public:
 	void addReflexCollision() { numReflexCollisions++; }
 	
     void resetExtTorque();
-	RobotObservation observe();
+	//RobotObservation observe();
 	void evaluateConstraints();
 	
 	virtual void publishState();										// emit signals for observations and reflexes
@@ -95,7 +95,7 @@ signals:
 
 	void collisions(int);
 	void reflexCollisions(int);
-	void observation( RobotObservation obs );							//!< make new marker positions and orientations known
+	//void observation( RobotObservation obs );							//!< make new marker positions and orientations known
 
 public slots:
 	

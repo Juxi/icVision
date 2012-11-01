@@ -33,9 +33,9 @@ void ObjectMover::update() // mutex is already set in Model::computePose
 {
 	if (hasAttachedObjects) {
 		for (int i = 0; i<objectList.size(); i++) {
-			KinematicModel::RobotObservation robotObs =(*robots)[robotList[i]]->observe(); // marker observation
-			QMatrix4x4 objectPose = robotObs.markerConfiguration(markerList[i]) * rtList[i]; // transform
-			objectList[i]->setT(objectPose); // set
+			//KinematicModel::RobotObservation robotObs =(*robots)[robotList[i]]->observe(); // marker observation
+			//QMatrix4x4 objectPose = robotObs.markerConfiguration(markerList[i]) * rtList[i]; // transform
+			//objectList[i]->setT(objectPose); // set
 		}
 	}
 }
@@ -75,16 +75,16 @@ void ObjectMover::grabObject( CompositeObject* object, Robot* robot, int markerI
 	int robotIndex = (*robots).indexOf(robot);
 
 	// tranformation matrix T = O / M, with O = object rototranslation matrix, M = marker rototranslatio matrix.
-	KinematicModel::RobotObservation robotObs = robot->observe();
-	QMatrix4x4 transform = robotObs.markerConfiguration(markerIndex).inverted() * object->getT();
+	//KinematicModel::RobotObservation robotObs = robot->observe();
+	//QMatrix4x4 transform = robotObs.markerConfiguration(markerIndex).inverted() * object->getT();
 
 	// add the object
 	objectList.append(object);
 	markerList.append(markerIndex);
 	robotList.append(robotIndex);
-	rtList.append(transform);
+	//rtList.append(transform);
 
-	printf("ObjectMover: grabbing object \"%s\" with marker \"%s\" on robot \"%s\"\n", object->getName().toStdString().c_str(), robotObs.markerName(markerIndex).toStdString().c_str(), robot->getName().toStdString().c_str());
+	//printf("ObjectMover: grabbing object \"%s\" with marker \"%s\" on robot \"%s\"\n", object->getName().toStdString().c_str(), robotObs.markerName(markerIndex).toStdString().c_str(), robot->getName().toStdString().c_str());
 
 	hasAttachedObjects = objectList.size() > 0;
 }

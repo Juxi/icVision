@@ -86,7 +86,11 @@ bool Controller::project( QString name, yarp::os::Bottle* opSpaceFT, yarp::os::B
     KinematicModel::BodyPart* bodyPart = robot->getPart(partNum);
     if (bodyPart) {
         KinematicModel::KinTreeNode* node = NULL;
+        
+        
         QVector<KinematicModel::Marker*> markers = bodyPart->getMarkers();
+        
+        
         QVector<KinematicModel::Marker*>::iterator i;
         for ( i=markers.begin(); i!=markers.end(); ++i ) {
             if ( (*i)->name() == name ) {

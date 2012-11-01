@@ -44,7 +44,7 @@ void YarpRobot::publishState()
 	
 	//if ( observationPort.isOpen() )
 	//{
-		KinematicModel::RobotObservation obs = observe();
+		/*KinematicModel::RobotObservation obs = observe();
 		for ( uint i = 0; i < obs.getNumMarkers(); i++ )
 		{
 			yarp::os::Bottle& thisObs = observationBottle.addList();
@@ -54,7 +54,7 @@ void YarpRobot::publishState()
 				thisObs.addDouble( obs.markerConfiguration(i).data()[j] );
 			}
 		}
-		observationPort.write(observationBottle);
+		observationPort.write(observationBottle);*/
 	//}
 }
 

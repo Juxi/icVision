@@ -283,13 +283,13 @@ void Robot::publishState()
 	emit reflexCollisions( numReflexCollisions );
 	numReflexCollisions = 0;
 	
-	RobotObservation obs = observe();
-	emit observation(obs);
+	//RobotObservation obs = observe();
+	//emit observation(obs);
 	
 	//processState();
 }
 
-RobotObservation Robot::observe()
+/*RobotObservation Robot::observe()
 {
 	RobotObservation obs;
 	unsigned int m, mc = markers.size();
@@ -304,7 +304,7 @@ RobotObservation Robot::observe()
 			obs.m_markerConfiguration[m] = markers[m]->node()->getT();
 			obs.m_markerJacobian[m] = markers[m]->node()->computeJacobian();
             
-            /*std::cout << "--- Jacobian Transpose ---" << std::endl;
+            std::cout << "--- Jacobian Transpose ---" << std::endl;
             QList< QPair<QVector3D, QVector3D> >::iterator i;
             for ( i=obs.m_markerJacobian[m].begin(); i!=obs.m_markerJacobian[m].end(); ++i )
             {
@@ -317,11 +317,12 @@ RobotObservation Robot::observe()
                             i->second.z() <<
                             std::endl;
             }
-            std::cout << std::endl;*/
+            std::cout << std::endl;
         }
 	}
 	return obs;
-}
+}*/
+
 /*void Robot::render()
 {
 	QMutexLocker locker(&mutex);

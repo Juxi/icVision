@@ -42,6 +42,9 @@ public:
 									 position is set to 0. If 0 is out of the range of the joint limits, the position is set to 
 									 limits.getMin() or limits.getMax() accordingly. */
     bool isBodyPartRoot();
+    
+    Motor* parentMotor() { return motor; }
+    
 protected:
 	
     Motor*   motor;				//!< The motor that controls this joint
