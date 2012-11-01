@@ -22,6 +22,7 @@ public:
 
 	inline KinTreeNode* node()
 	{ return m_object; }
+    
 	inline const CompositeObject* tracer() const
 	{ return tracerObject; }
 

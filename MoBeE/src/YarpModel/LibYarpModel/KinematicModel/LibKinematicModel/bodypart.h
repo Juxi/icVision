@@ -35,8 +35,9 @@ namespace KinematicModel
  * An instance of BodyPart therefore inherits a QVector of motors and provides a method setEncPos( const QVector<qreal>& x ), to set
  * the encoder positions of the motors.
  */
-class KinematicModel::BodyPart : public QVector<Motor*>
+class KinematicModel::BodyPart : public QObject, public QVector<Motor*>
 {
+	Q_OBJECT
 	
 public:
 	
@@ -66,6 +67,11 @@ public:
 	bool evaluateConstraints();
     
     QVector<Marker*> getMarkers() { return markers; }
+    
+    void publishTorques();
+    
+signals:
+    void torques(QVector<qreal>);
 	
 private:
     

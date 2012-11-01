@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
             yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
             //printf("done loading robot\n");
             
-            for ( int i=2; i < 3/*yarpRobot->numBodyParts()*/; i++ )
+            for ( int i=2; i < 4/*yarpRobot->numBodyParts()*/; i++ )
             {
                 Controller* c = new Controller( yarpRobot,
                                                 i,

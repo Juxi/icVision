@@ -64,6 +64,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		v	 = new double[numJoints];
 		a	 = new double[numJoints];
 		f	 = new double[numJoints];
+		g	 = new double[numJoints];
 		ctrl = new double[numJoints];
 
         // set default values
@@ -76,6 +77,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 			k[i] = 50.0;
 			c[i] = 100.0;
             f[i] = 0.0;
+            g[i] = 0.0;
             x[i] = 0.0;
             q0[i] = 0.0;
             q1[i] = 0.0;
@@ -189,7 +191,7 @@ void PartController::run()
         for ( int i=0; i<numJoints; i++ ) {
             e[i] = w[i]*(x[i] - q1[i]);
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
-            a[i] = -c[i]*v[i] + k[i]*e[i] + 100.0*f[i];
+            a[i] = -c[i]*v[i] + k[i]*e[i] + 100.0*(f[i]+g[i]);
             ctrl[i] = v[i] + a[i] * getRate() / 1000.0;
 
         }

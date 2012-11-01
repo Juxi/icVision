@@ -210,7 +210,7 @@ protected:
     // creates repulsive forces to prevent unwanted collisions
     static DT_Bool repel( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-        printf("The Callback is calling!!!\n");
+        //printf("The Callback is calling!!!\n");
 		// compute repuslive fictitous force and project it into the joint space
         
         if (!coll_data) return DT_CONTINUE;
@@ -218,6 +218,8 @@ protected:
         QVector3D p1( coll_data->point1[0], coll_data->point1[1], coll_data->point1[2]);
         QVector3D p2( coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]);
         QVector3D F2( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
+        
+        F2 *= F2.length()*F2.length() * 50;
         QVector3D F1 = -F2;
         QVector3D T1 = QVector3D::crossProduct(p1, F1);
         QVector3D T2 = QVector3D::crossProduct(p2, F2);

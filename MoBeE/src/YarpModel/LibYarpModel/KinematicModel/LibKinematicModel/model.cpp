@@ -101,7 +101,7 @@ DT_RespTableHandle Model::newRobotFieldTable()
 	DT_RespTableHandle table = DT_CreateRespTable();
     DT_AddDefaultResponse( table, repel, DT_DEPTH_RESPONSE, (void*) this );
     DT_AddDefaultResponse( table, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-	//responseTables.append( table );
+	responseTables.append( table );
 	return table;
 }
 

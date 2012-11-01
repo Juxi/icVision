@@ -43,6 +43,8 @@ public:
 	
 protected:
     
+    //virtual void sumForces() {}
+    
     void set( double **var, yarp::os::Bottle* list );
     void increment( double **var, yarp::os::Bottle* list );
 	
@@ -72,7 +74,8 @@ protected:
 						*v,			// velocity q1-q0
 						*e,			// the error vector x-q1
 						*a,			// the acceleration currently felt by the robot
-                        *f,         // a forcing term
+                        *f,         // joint space force set by user
+                        *g,         // another force for use by derrived classes
 						*ctrl;		// the next velocity control command
 	
 	

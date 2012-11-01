@@ -11,6 +11,8 @@ SET ( hdr_files		partController.h
                     controller.h
 )
 
+QT4_WRAP_CPP( src_files controller.h )
+
 ADD_EXECUTABLE ( FieldDemo	${hdr_files}
 				${src_files} )
 

@@ -283,6 +283,10 @@ void Robot::publishState()
 	emit reflexCollisions( numReflexCollisions );
 	numReflexCollisions = 0;
 	
+    QVector<BodyPart*>::iterator i;
+    for ( i=partList.begin(); i!=partList.end(); ++i )
+        (*i)->publishTorques();
+    
 	//RobotObservation obs = observe();
 	//emit observation(obs);
 	

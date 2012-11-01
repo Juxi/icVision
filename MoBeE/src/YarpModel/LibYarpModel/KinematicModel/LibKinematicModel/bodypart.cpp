@@ -86,3 +86,14 @@ bool BodyPart::verify()
 	}
 	return result;
 }
+
+void BodyPart::publishTorques()
+{
+    QVector<qreal> t;
+    QVector<Motor*>::iterator i;
+    for ( i=begin(); i!=end(); ++i )
+	{
+        t.append((*i)->getExtTorque());
+	}
+    emit torques(t);
+}

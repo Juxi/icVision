@@ -19,8 +19,9 @@
  ***************************************************************************************************************/
  #define VOCAB_OPSPACE VOCAB4('o','p','s','p')
 
-class Controller : public PartController
+class Controller : public QObject, public PartController
 {
+    Q_OBJECT
 	
 public:
     
@@ -30,9 +31,14 @@ public:
                int partNum,
                int freq );
     
+public slots:
+    void setModelTorque(QVector<qreal>);
+    
 protected:
     
-    virtual void handle( yarp::os::Bottle* );
+    //QVector<qreal> modelTorque;
+    
+    void handle( yarp::os::Bottle* );
     
     bool getEncoders( double* q );
     QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);

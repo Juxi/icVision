@@ -9,8 +9,25 @@ Controller::Controller( KinematicModel::Robot* _robot,
                                                     freq),
                         robot(_robot),
                         partNum(_partNum)
-{}
+{
+    QObject::connect( robot->getPart(partNum), SIGNAL(torques(QVector<qreal>)), this, SLOT(setModelTorque(QVector<qreal>)) );
+}
 
+void Controller::setModelTorque(QVector<qreal> t)
+{
+    printf("setting collision reaction: ");
+    if ( t.size() != numJoints )
+        printf("Wrong size body part torque vector\n");
+    
+    for (int i=0; i<numJoints; i++)
+    {
+        if (i<t.size())
+            g[i] = t.at(i);
+        
+        printf("%f ",g[i]);
+    }
+    printf("\n");
+}
 
 void Controller::handle( yarp::os::Bottle* b )
 {
@@ -30,7 +47,7 @@ void Controller::handle( yarp::os::Bottle* b )
                 break;
             }
             set( &f, &jointSpaceForce );
-            printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
+            //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
             break;
         default:
             printf("Controller received unknown command! %s", b->toString().c_str());
@@ -84,13 +101,10 @@ bool Controller::getMarkerPosition( QString name, QVector3D& pos )
 bool Controller::project( QString name, yarp::os::Bottle* opSpaceFT, yarp::os::Bottle& jointSpaceF )
 {
     KinematicModel::BodyPart* bodyPart = robot->getPart(partNum);
-    if (bodyPart) {
+    if (bodyPart)
+    {
         KinematicModel::KinTreeNode* node = NULL;
-        
-        
         QVector<KinematicModel::Marker*> markers = bodyPart->getMarkers();
-        
-        
         QVector<KinematicModel::Marker*>::iterator i;
         for ( i=markers.begin(); i!=markers.end(); ++i ) {
             if ( (*i)->name() == name ) {

@@ -45,7 +45,7 @@ public:
           DT_ResponseClass baseClass,
           DT_ResponseClass robotField,
           DT_ResponseClass robotBaseField,
-          bool openWithField = false
+          bool openWithField = true
           );
 	~Robot();														
 	
