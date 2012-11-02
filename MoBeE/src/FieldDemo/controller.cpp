@@ -15,18 +15,19 @@ Controller::Controller( KinematicModel::Robot* _robot,
 
 void Controller::setModelTorque(QVector<qreal> t)
 {
-    printf("setting collision reaction: ");
     if ( t.size() != numJoints )
         printf("Wrong size body part torque vector\n");
     
+    
+    //printf("setting collision reaction: ");
     for (int i=0; i<numJoints; i++)
     {
         if (i<t.size())
             g[i] = t.at(i);
         
-        printf("%f ",g[i]);
+        //printf("%f ",g[i]);
     }
-    printf("\n");
+    //printf("\n");
 }
 
 void Controller::handle( yarp::os::Bottle* b )

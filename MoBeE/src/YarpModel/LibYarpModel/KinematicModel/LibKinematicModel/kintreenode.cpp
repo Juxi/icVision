@@ -124,8 +124,8 @@ void KinTreeNode::ignoreAdjacentPairs( KinTreeNode* node, bool foundLink, bool f
     if ( filter )
     {
         // do not check collision between objects of the same class as this one and objects of the same class as 'node'
-        parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getResponseClass(), node->getResponseClass() );
-        parentRobot->getModel()->removeAllResponses( parentRobot->responseTable, getFieldResponseClass(), node->getFieldResponseClass() );
+        parentRobot->getModel()->removeAllResponses( parentRobot->getResponseTable(), getResponseClass(), node->getResponseClass() );
+        parentRobot->getModel()->removeAllResponses( parentRobot->getFieldResponseTable(), getFieldResponseClass(), node->getFieldResponseClass() );
 	}
     
     QVector<KinTreeNode*>::iterator i = 0;
@@ -146,7 +146,7 @@ void KinTreeNode::removeReflexFromSubTree()
 	{
 		for ( j=nodeList.begin(); j!=nodeList.end(); ++j )
 		{
-			parentRobot->getModel()->removeReflexResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
+			parentRobot->getModel()->removeReflexResponse( parentRobot->getResponseTable(), (*i)->getResponseClass(), (*j)->getResponseClass() );
 			//parentRobot->getModel()->setVisualResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
 			//parentRobot->model->removePairResponses( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
 		}

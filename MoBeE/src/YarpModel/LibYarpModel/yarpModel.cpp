@@ -23,24 +23,24 @@ YarpRobot* YarpModel::loadYarpRobot( const QString& fileName, bool verbose )
 {
     mutex.lockForWrite();
     
-    DT_ResponseClass newRobotClass     = newResponseClass( responseTables.at(0) );
-    DT_ResponseClass newBaseClass      = newResponseClass( responseTables.at(0) );
-    DT_ResponseClass newFieldClass     = newResponseClass( responseTables.at(0) );
-    DT_ResponseClass newBaseFieldClass = newResponseClass( responseTables.at(0) );
+    DT_ResponseClass newRobotClass     = newResponseClass( worldTable );
+    DT_ResponseClass newBaseClass      = newResponseClass( worldTable );
+    DT_ResponseClass newFieldClass     = newResponseClass( worldTable );
+    DT_ResponseClass newBaseFieldClass = newResponseClass( worldTable );
     
-    DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-    DT_AddPairResponse(	responseTables.at(0), newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-    DT_AddPairResponse(	responseTables.at(0), newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
-    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, repel, DT_DEPTH_RESPONSE, (void*) this );
-    DT_AddPairResponse(	responseTables.at(0), newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	worldTable, newRobotClass, obstacleClass, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	worldTable, newRobotClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	worldTable, newRobotClass, targetClass,   collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
+    DT_AddPairResponse(	worldTable, newFieldClass, obstacleClass, repel, DT_DEPTH_RESPONSE, (void*) this );
+    DT_AddPairResponse(	worldTable, newFieldClass, obstacleClass, collisionHandler, DT_WITNESSED_RESPONSE, (void*) this );
     
     QVector<DT_ResponseClass>::iterator i;
     for ( i = robotResponseClasses.begin(); i != robotResponseClasses.end(); ++i )
     {
-        DT_AddPairResponse(	responseTables.at(0), newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
-        DT_AddPairResponse(	responseTables.at(0), newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
-        DT_AddPairResponse(	responseTables.at(0), newFieldClass,        *i, repel,         DT_DEPTH_RESPONSE, (void*) this );
-        DT_AddPairResponse(	responseTables.at(0), newBaseFieldClass,    *i, repel,     DT_DEPTH_RESPONSE, (void*) this );
+        DT_AddPairResponse(	worldTable, newRobotClass,        *i, reflexTrigger, DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	worldTable, newBaseClass,         *i, reflexTrigger,  DT_WITNESSED_RESPONSE, (void*) this );
+        DT_AddPairResponse(	worldTable, newFieldClass,        *i, repel,         DT_DEPTH_RESPONSE, (void*) this );
+        DT_AddPairResponse(	worldTable, newBaseFieldClass,    *i, repel,     DT_DEPTH_RESPONSE, (void*) this );
     }
     
     robotResponseClasses.append( newRobotClass );

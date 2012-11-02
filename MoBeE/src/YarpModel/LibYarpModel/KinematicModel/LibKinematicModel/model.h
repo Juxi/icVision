@@ -77,7 +77,7 @@ public:
 	void	loadWorld( const QString& fileName, bool verbose = true );
 	
 	DT_SceneHandle		getScene() const { return scene; }
-	DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }
+	//DT_RespTableHandle	getResponseTable( int i ) const { return responseTables.at(i); }
 	
 	// collision response classes for the world table
 	DT_ResponseClass	OBSTACLE() const { return obstacleClass; }
@@ -107,7 +107,7 @@ protected:
 	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
     void removeForceResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void removeAllResponses( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
-	void setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
+	//void setVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 
 	void cleanTheWorld();
 	void updateWorldState();
@@ -132,7 +132,8 @@ protected:
 	bool verbose;
 	bool syncGraphics;      //!< When true, the graphics and the model thread wait for each other. This makes the model thread slow, because it has to wait until the graphics thread finishes drawing. When false, the model thread runs without waiting for the graphics thread, which might cause the graphics thread to show dislocated joints.
 
-	QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
+    DT_RespTableHandle worldTable;
+	//QVector<DT_RespTableHandle> responseTables;		//!< Table 0 describes each robot w.r.t the world and the other robots. The rest are for robots' self-collision
 	QVector<DT_ResponseClass> robotResponseClasses;
 	//QVector<DT_ResponseClass> fieldResponseClasses;
 	//QVector<DT_ResponseClass> robotBaseClasses;
@@ -212,7 +213,7 @@ protected:
 	{
         //printf("The Callback is calling!!!\n");
 		// compute repuslive fictitous force and project it into the joint space
-        
+     
         if (!coll_data) return DT_CONTINUE;
         
         QVector3D p1( coll_data->point1[0], coll_data->point1[1], coll_data->point1[2]);
