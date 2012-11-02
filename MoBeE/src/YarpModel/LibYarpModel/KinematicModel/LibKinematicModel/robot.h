@@ -89,7 +89,7 @@ public:
 
 	int	numBodyParts() const { return partList.size();}		//!< Returns the number of BodyParts currently in the list, which is also the index of the next one to be added
 	int numMotors() const { return motorList.size(); }	//!< Returns the number of Motors currently in the list, which is also the index of the next one to be added
-	int numNodes() { return numLinks++; }			//!< Returns the number of KinTreeNodes currently in the list, which is also the index of the next one to be added
+	
 
 signals:
 
@@ -139,7 +139,7 @@ private:
 	QVector<Motor*>			motorList;		//!< "Motors" serve as an interface to set the position of one or more joints
 	QVector<KinTreeNode*>	tree;			//!< root nodes of the link/joint trees
 	QVector<Marker*>		markers;		//!< list of markers
-	int						numLinks;		//!< Number of KinTreeNodes
+	int						numCompositObjects;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
     bool                    openWithField;
 	
@@ -149,6 +149,9 @@ private:
 	
 	QMutex mutex;
 	
+    // just for debugging
+    void countCompositeObject() { ++numCompositObjects; }	
+    
 	bool partIdxInRange( int idx ) const;					//!< Check validity of a BodyPart index
 	bool motorIdxInRange( int idx, int partNum ) const;		//!< Check validity of a Motor index
 	

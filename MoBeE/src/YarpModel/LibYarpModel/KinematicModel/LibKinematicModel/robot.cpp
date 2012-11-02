@@ -19,7 +19,7 @@ Robot::Robot( Model* m, DT_RespTableHandle robotTable,
                                             worldFieldClass(robotField),
                                             worldBaseFieldClass(robotBaseField),
                                             robotName("unNamedRobot"),
-                                            numLinks(0),
+                                            numCompositObjects(0),
                                             isConfigured(false),
                                             openWithField(_openWithField),
                                             numCollisions(0),
@@ -103,7 +103,7 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 	ignoreAdjacentPairs();
 	home();
 	
-	printf("Created Robot: %s (%d primitives)\n",getName().toStdString().c_str(), getNumPrimitives());
+	printf("Created Robot: %s (%d nodes, %d primitives)\n",getName().toStdString().c_str(), numCompositObjects, getNumPrimitives());
 
 	isConfigured = true;
 }
@@ -425,6 +425,11 @@ int Robot::getNumPrimitives()
 	QVector<KinTreeNode*>::iterator i;
     for ( i=tree.begin(); i!=tree.end(); ++i ) {
         result += (*i)->getNumPrimitives();
+    }
+    QVector<Marker*>::iterator j;
+    for ( j=markers.begin(); j!=markers.end(); ++j ) {
+        result += (*j)->getTracerObject()->getPrimitives().size();
+        result += (*j)->getTracerObject()->getFieldPrimitives().size();
     }
 	//printf(" num primitives: %d\n", result );
 	return result;

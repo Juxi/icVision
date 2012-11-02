@@ -278,10 +278,20 @@ QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian( QVector3D F, 
 
 int KinTreeNode::getNumPrimitives()
 {
-	int result = primitives.size();
+	int result = primitives.size() + fieldPrimitives.size();
 	QVector<KinTreeNode*>::iterator i;
     for ( i=children.begin(); i!=children.end(); ++i ) {
         result += (*i)->getNumPrimitives();
     }
 	return result;
 }
+
+/*int KinTreeNode::getNumNodes()
+{
+	int result = 0;
+	QVector<KinTreeNode*>::iterator i;
+    for ( i=children.begin(); i!=children.end(); ++i ) {
+        result += (*i)->getNumNodes();
+    }
+	return ++result;
+}*/

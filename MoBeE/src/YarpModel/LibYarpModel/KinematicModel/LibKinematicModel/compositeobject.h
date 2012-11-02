@@ -58,6 +58,8 @@ public:
 	DT_ResponseClass	getResponseClass() const { return responseClass; }
     
     DT_ResponseClass	getFieldResponseClass() const { return fieldResponseClass; }
+    
+    const QVector<PrimitiveObject*>& getPrimitives() { return primitives; }
     const QVector<PrimitiveObject*>& getFieldPrimitives() { return fieldPrimitives; }
 	
 	void setCollidingColor( QColor color );

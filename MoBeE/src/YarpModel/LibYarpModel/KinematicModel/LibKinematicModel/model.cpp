@@ -238,52 +238,55 @@ void Model::appendObject( KinTreeNode* node )
 	QWriteLocker locker(&mutex);
 
 	//if ( verbose ) printf("  appending robot object.\n");
-	if ( !node->getResponseClass() || !node->robot()->getResponseTable() || !node->robot()->getWorldRobotClass() )
+	if ( !node || !node->getResponseClass() || !node->robot()->getResponseTable() || !node->robot()->getWorldRobotClass() )
 	{
 		throw KinematicModelException("CompositeObject must have a DT_RespTableHandle and a DT_ResponseClass to be appended to the world.");
 	}
 
-	node->setIdx( ++numObjects );
-	QVector<PrimitiveObject*>::const_iterator i;
-    const QVector<PrimitiveObject*>& primitives = node->data();
-    const QVector<PrimitiveObject*>& fieldPrimitives = node-> getFieldPrimitives();
-	for ( i=primitives.begin(); i!=primitives.end(); ++i )
-	{
-		//if (verbose) printf("appending robot primitive to world\n");
-		DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
-		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
-		DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), collisionHandler );
-		
-		if ( node->isNearRoot() )
-			DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseClass() );
-		else
-			DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldRobotClass() );
-		
-		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
-		if ( modelWindow ) { (*i)->setListPending(true); }
-		(*i)->setIdx( ++numPrimitives );
-		emit addedPrimitive(*i);
-	}
-    for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
-	{
-		//if (verbose) printf("appending robot primitive to world\n");
-		DT_SetResponseClass( node->robot()->getFieldResponseTable(), (*i)->getSolidObjectHandle(), node->getFieldResponseClass() );
-        
-		DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), repel );
-		DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), collisionHandler );
-		
-		if ( node->isNearRoot() )
-			DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseFieldClass() );
-		else
-			DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldFieldClass() );
-		
-		DT_AddObject( scene, (*i)->getSolidObjectHandle() );
-		if ( modelWindow ) { (*i)->setListPending(true); }
-		(*i)->setIdx( ++numPrimitives );
-		emit addedPrimitive(*i);
-	}
-	node->setInModel(true);
-	world.append(node);
+    if ( node->primitives.size()>0 || node->fieldPrimitives.size()>0 )
+    {
+        node->setIdx( ++numObjects );
+        QVector<PrimitiveObject*>::const_iterator i;
+        const QVector<PrimitiveObject*>& primitives = node->data();
+        const QVector<PrimitiveObject*>& fieldPrimitives = node-> getFieldPrimitives();
+        for ( i=primitives.begin(); i!=primitives.end(); ++i )
+        {
+            //if (verbose) printf("appending robot primitive to world\n");
+            DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
+            DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), reflexTrigger );
+            DT_RemovePairResponse( node->robot()->getResponseTable(), node->getResponseClass(), node->getResponseClass(), collisionHandler );
+            
+            if ( node->isNearRoot() )
+                DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseClass() );
+            else
+                DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldRobotClass() );
+            
+            DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+            if ( modelWindow ) { (*i)->setListPending(true); }
+            (*i)->setIdx( ++numPrimitives );
+            emit addedPrimitive(*i);
+        }
+        for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
+        {
+            //if (verbose) printf("appending robot primitive to world\n");
+            DT_SetResponseClass( node->robot()->getFieldResponseTable(), (*i)->getSolidObjectHandle(), node->getFieldResponseClass() );
+            
+            DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), repel );
+            DT_RemovePairResponse( node->robot()->getFieldResponseTable(), node->getFieldResponseClass(), node->getFieldResponseClass(), collisionHandler );
+            
+            if ( node->isNearRoot() )
+                DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldBaseFieldClass() );
+            else
+                DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), node->robot()->getWorldFieldClass() );
+            
+            DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+            if ( modelWindow ) { (*i)->setListPending(true); }
+            (*i)->setIdx( ++numPrimitives );
+            emit addedPrimitive(*i);
+        }
+        node->setInModel(true);
+        world.append(node);
+    }
 	//printf("Appended KinTreeNode to non-yarp world Model!!!\n");
 }
 
@@ -292,27 +295,30 @@ void Model::appendObject( CompositeObject* object )
 	//if ( verbose ) printf("  appending world object.\n");
 	QWriteLocker locker(&mutex);
 
-	if ( !object->getResponseClass() )
+	if ( !object || !object->getResponseClass() )
 	{
 		throw KinematicModelException("CompositeObject must have a DT_ResponseClass to be appended to the world.  Use setResponseClass( DT_ResponseClass )");
 	}
 	
-	object->setIdx( ++numObjects );
-	const QVector<PrimitiveObject*>& primitives = object->data();
-	QVector<PrimitiveObject*>::const_iterator i;
-	for ( i=primitives.begin(); i!=primitives.end(); ++i )
-	{
-		//if (verbose) printf("appending primitive to world\n");
-		if (object->getResponseClass() != TARGET() && object->getResponseClass() != GHOST()) {
-			DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), object->getResponseClass() );
-			DT_AddObject( scene, (*i)->getSolidObjectHandle() );
-		}
-		if ( modelWindow ) { (*i)->setListPending(true); }
-		(*i)->setIdx( ++numPrimitives );
-		emit addedPrimitive(*i);
-	}
-	object->setInModel(true);
-	world.append(object);
+    if ( object->primitives.size()>0 || object->fieldPrimitives.size()>0 )
+    {
+        object->setIdx( ++numObjects );
+        const QVector<PrimitiveObject*>& primitives = object->data();
+        QVector<PrimitiveObject*>::const_iterator i;
+        for ( i=primitives.begin(); i!=primitives.end(); ++i )
+        {
+            //if (verbose) printf("appending primitive to world\n");
+            if (object->getResponseClass() != TARGET() && object->getResponseClass() != GHOST()) {
+                DT_SetResponseClass( worldTable, (*i)->getSolidObjectHandle(), object->getResponseClass() );
+                DT_AddObject( scene, (*i)->getSolidObjectHandle() );
+            }
+            if ( modelWindow ) { (*i)->setListPending(true); }
+            (*i)->setIdx( ++numPrimitives );
+            emit addedPrimitive(*i);
+        }
+        object->setInModel(true);
+        world.append(object);
+    }
 }
 
 bool Model::removeWorldObject( CompositeObject* object )
@@ -535,11 +541,13 @@ void Model::computeCollisions()
 		(*i)->resetExtTorque();
 	}
     
-    DT_Test(scene,worldTable);
+    printf("Doing collision detection on %d composite objects with %d primitives\n", numObjects, numPrimitives);
+    
+    //DT_Test(scene,worldTable);
     
     QVector<Robot*>::iterator j;
 	for ( j=robots.begin(); j!=robots.end(); ++j ) {
-		DT_Test(scene,(*j)->getResponseTable());
+		//DT_Test(scene,(*j)->getResponseTable());
 		DT_Test(scene,(*j)->getFieldResponseTable());
 	}
     

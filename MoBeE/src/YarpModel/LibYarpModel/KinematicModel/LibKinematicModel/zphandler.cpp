@@ -153,7 +153,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 				PrimitiveObject* cylinder = new KinematicModel::Cylinder( radius, height );
 				cylinder->setSpecialEulerOrientation(axis);
                 
-                PrimitiveObject* field = new KinematicModel::Cylinder( 1.8*radius, height );
+                PrimitiveObject* field = new KinematicModel::Cylinder( radius/2, height/2 );
 				field->setSpecialEulerOrientation(axis);
 				
 				if (node->getNodeType() == KinTreeNode::LINK )
@@ -166,7 +166,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 					return 0;
 				}
 				
-				node->appendPrimitive(cylinder);
+				//node->appendPrimitive(cylinder);
                 
                 if (robot->hasField())
                     node->appendField(field);
@@ -248,7 +248,8 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 									   attributes.value("pz").toDouble() );
 		primitive->translate(position);
 		//primitive->setOpaque();
-		node->appendPrimitive(primitive);
+        
+		//node->appendPrimitive(primitive);
     }
 
 	/*******************************************************************************
@@ -278,6 +279,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 		Marker* marker = new Marker(node, name);
 		marker->createTracer( model->GHOST(), tracer, 0.008, Qt::yellow);
 		robot->markers.push_back(marker);
+        robot->countCompositeObject();
         bodyPart->markers.push_back(marker);
 	}
 
@@ -316,6 +318,8 @@ bool ZPHandler::endElement(const QString & /* namespaceURI */, const QString & /
 			node->removeReflexFromSubTree();
 			noReflexRoot = NULL;
 		}
+        
+        robot->countCompositeObject();
 		node = node->parent();
     }
     //else if ( qName == "object" ) {
