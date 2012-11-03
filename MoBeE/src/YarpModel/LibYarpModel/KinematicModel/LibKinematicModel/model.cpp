@@ -249,7 +249,7 @@ void Model::appendObject( KinTreeNode* node )
         QVector<PrimitiveObject*>::const_iterator i;
         const QVector<PrimitiveObject*>& primitives = node->data();
         const QVector<PrimitiveObject*>& fieldPrimitives = node-> getFieldPrimitives();
-        for ( i=primitives.begin(); i!=primitives.end(); ++i )
+        /*for ( i=primitives.begin(); i!=primitives.end(); ++i )
         {
             //if (verbose) printf("appending robot primitive to world\n");
             DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
@@ -265,7 +265,7 @@ void Model::appendObject( KinTreeNode* node )
             if ( modelWindow ) { (*i)->setListPending(true); }
             (*i)->setIdx( ++numPrimitives );
             emit addedPrimitive(*i);
-        }
+        }*/
         for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
         {
             //if (verbose) printf("appending robot primitive to world\n");

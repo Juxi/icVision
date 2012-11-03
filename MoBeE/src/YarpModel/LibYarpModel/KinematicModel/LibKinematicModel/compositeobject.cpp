@@ -142,6 +142,10 @@ void CompositeObject::updateSolid()
 	{
         (*i)->updateSolid(T);
     }
+    for (i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i)
+	{
+        (*i)->updateSolid(T);
+    }
 }
 
 void CompositeObject::setCollidingColor( QColor c )
