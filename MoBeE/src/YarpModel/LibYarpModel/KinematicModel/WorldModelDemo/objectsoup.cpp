@@ -79,8 +79,8 @@ KinematicModel::CompositeObject* ObjectSoup::makeARandomObjectLikeAMothaFucka()
 			default:
 				break;
 		}
-		//primitive->setCollidingColor( collidingColor );
-		//primitive->setFreeColor(freeColor);
+		primitive->setCollidingColor( collidingColor );
+		primitive->setFreeColor(freeColor);
 		primitive->translate(randomTranslation(0.1));
 		primitive->cartesianRotate(randomRotation());
 		obj->appendPrimitive(primitive);

@@ -401,8 +401,8 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 				collidingColor.setAlphaF(0.5);
 				
 				object->setResponseClass(model->TARGET());
-				object->setFreeColor( freeColor );
-				object->setCollidingColor( collidingColor );
+				//object->setFreeColor( freeColor );
+				//object->setCollidingColor( collidingColor );
 	
 				reply.addString("Changed object type to 'target'.");
 				

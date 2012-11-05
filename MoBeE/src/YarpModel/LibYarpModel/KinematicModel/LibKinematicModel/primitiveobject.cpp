@@ -76,6 +76,8 @@ void PrimitiveObject::setFreeColor( QColor color )
 	freeColor[1] = color.greenF();
 	freeColor[2] = color.blueF();
 	freeColor[3] = color.alphaF();
+    
+    printf("\n\n\nFREE COLOR: %f %f %f %f\n\n\n", freeColor[0], freeColor[1], freeColor[2], freeColor[3]);
 }
 
 void PrimitiveObject::setConstraintColor( QColor color )

@@ -23,9 +23,11 @@ void Controller::setModelTorque(QVector<qreal> t)
     for (int i=0; i<numJoints; i++)
     {
         if (i<t.size())
+        {
             g[i] = t.at(i);
+      //      printf("%f ",g[i]);
+        }
         
-        //printf("%f ",g[i]);
     }
     //printf("\n");
 }

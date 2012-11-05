@@ -77,9 +77,6 @@ public:
 	void setConstraintColor( QColor color );
 	void setFreeColor( QColor color );
 	
-	//void setCollidingColor( GLfloat color[4] ) { setCollidingColor(QColor(color[0],color[1],color[2])); }
-	//void setFreeColor( GLfloat color[4] ) { setFreeColor(QColor(color[0],color[1],color[2])); }
-	
 	void setCompositeObject( CompositeObject* o ) { parentObject = o; }
 	CompositeObject* getCompositeObject() { return parentObject; }
 	

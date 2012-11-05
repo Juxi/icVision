@@ -126,10 +126,7 @@ bool PartController::threadInit()
 //successfully
 void PartController::afterStart(bool s)
 {
-	if (s) {
-		
-	}
-	else
+	if (!s)
 		printf("PartController did not start\n");
 }
 
@@ -182,6 +179,7 @@ void PartController::run()
     // project (fictitious) forces from operational space
 	//computeForces();
     
+    yarp::os::Bottle fb,gb;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -191,10 +189,15 @@ void PartController::run()
         for ( int i=0; i<numJoints; i++ ) {
             e[i] = w[i]*(x[i] - q1[i]);
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
-            a[i] = -c[i]*v[i] + k[i]*e[i] + 100.0*(f[i]+g[i]);
+            a[i] = -c[i]*v[i] + k[i]*e[i] + f[i]+g[i];
             ctrl[i] = v[i] + a[i] * getRate() / 1000.0;
-
+            
+            fb.addDouble(f[i]);
+            gb.addDouble(g[i]);
         }
+        
+        printf("forcing: %s)\n", fb.toString().c_str());
+        printf("reaction: %s)\n\n", gb.toString().c_str());
         vel->velocityMove( ctrl );
         
         /*int i;

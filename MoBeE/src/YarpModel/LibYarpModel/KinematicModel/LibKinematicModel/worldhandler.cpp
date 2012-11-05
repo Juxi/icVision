@@ -90,7 +90,7 @@ bool WorldHandler::startElement( const QString & /* namespaceURI */,
 				QColor collidingColor = freeColor;
 				collidingColor.setAlphaF(0.3);
                 freeColor.setAlphaF(1.0);
-				obj->setFreeColor( freeColor );
+				//obj->setFreeColor( freeColor );
 				//obj->setCollidingColor( collidingColor );
 				//printf("\n\nSET FREECOLOR\n\n");
 			}

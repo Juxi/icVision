@@ -39,6 +39,10 @@ Model::Model( bool visualize, bool verb ) : keepRunning(true),
 		//printf("CREATING WINDOW AND CONNECTING SIGNALS AND SLOTS\n");
 		
 		modelWindow = new ModelWindow();
+        modelWindow->setStyleSheet("background-color: black;");
+        
+        //QWidget::setBackgroundColor ( Qt::black );
+        //modelWindow->setColor(QPalette::Background, Qt::black);
 		
 		QObject::connect( this, SIGNAL(addedPrimitive(PrimitiveObject*)),	modelWindow->glWidget, SLOT(addDisplayList(PrimitiveObject*)) );
 		QObject::connect( this, SIGNAL(removedPrimitive(GL_DisplayList)),	modelWindow->glWidget, SLOT(removeDisplayList(GL_DisplayList)) );
@@ -249,7 +253,7 @@ void Model::appendObject( KinTreeNode* node )
         QVector<PrimitiveObject*>::const_iterator i;
         const QVector<PrimitiveObject*>& primitives = node->data();
         const QVector<PrimitiveObject*>& fieldPrimitives = node-> getFieldPrimitives();
-        /*for ( i=primitives.begin(); i!=primitives.end(); ++i )
+        for ( i=primitives.begin(); i!=primitives.end(); ++i )
         {
             //if (verbose) printf("appending robot primitive to world\n");
             DT_SetResponseClass( node->robot()->getResponseTable(), (*i)->getSolidObjectHandle(), node->getResponseClass() );
@@ -265,7 +269,7 @@ void Model::appendObject( KinTreeNode* node )
             if ( modelWindow ) { (*i)->setListPending(true); }
             (*i)->setIdx( ++numPrimitives );
             emit addedPrimitive(*i);
-        }*/
+        }
         for ( i=fieldPrimitives.begin(); i!=fieldPrimitives.end(); ++i )
         {
             //if (verbose) printf("appending robot primitive to world\n");
@@ -541,7 +545,7 @@ void Model::computeCollisions()
 		(*i)->resetExtTorque();
 	}
     
-    printf("Doing collision detection on %d composite objects with %d primitives\n", numObjects, numPrimitives);
+    //printf("Doing collision detection on %d composite objects with %d primitives\n", numObjects, numPrimitives);
     
     //DT_Test(scene,worldTable);
     
@@ -620,6 +624,10 @@ void Model::renderModel()
 	QReadLocker locker(&mutex);
 	
 	QVector<CompositeObject*>::iterator i;
+    for ( i=world.begin(); i!=world.end(); ++i )
+	{
+		(*i)->renderField();
+	}
 	for ( i=world.begin(); i!=world.end(); ++i )
 	{
 		(*i)->render();

@@ -53,8 +53,8 @@ int main(int argc, char *argv[])
         
         yarp::os::Bottle cmd;
         cmd.addDouble(0.0);
-        cmd.addDouble(y.evaluate(t));
-        cmd.addDouble(z.evaluate(t));
+        cmd.addDouble(100*y.evaluate(t));
+        cmd.addDouble(100*z.evaluate(t));
 		
         msgR.addList() = cmd;
         right_arm.write();

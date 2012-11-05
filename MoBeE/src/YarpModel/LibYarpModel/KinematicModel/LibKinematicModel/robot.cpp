@@ -10,8 +10,8 @@ Robot::Robot( Model* m, DT_RespTableHandle robotTable,
                         DT_ResponseClass robotClass,
                         DT_ResponseClass baseClass,
                         DT_ResponseClass robotField,
-                        DT_ResponseClass robotBaseField,
-                        bool _openWithField ) :	model(m),
+                        DT_ResponseClass robotBaseField//,                        bool _openWithField
+                                        ) :	model(m),
                                             responseTable(robotTable),
                                             fieldResponseTable(fieldTable),
                                             worldRobotClass(robotClass),
@@ -21,7 +21,7 @@ Robot::Robot( Model* m, DT_RespTableHandle robotTable,
                                             robotName("unNamedRobot"),
                                             numCompositObjects(0),
                                             isConfigured(false),
-                                            openWithField(_openWithField),
+                                            //openWithField(_openWithField),
                                             numCollisions(0),
                                             numReflexCollisions(0)
 {
@@ -292,51 +292,6 @@ void Robot::publishState()
 	
 	//processState();
 }
-
-/*RobotObservation Robot::observe()
-{
-	RobotObservation obs;
-	unsigned int m, mc = markers.size();
-	if (mc > 0)
-	{
-		obs.m_markerName.resize(mc);
-		obs.m_markerConfiguration.resize(mc);
-        obs.m_markerJacobian.resize(mc);
-		for (m=0; m<mc; m++)
-		{
-			obs.m_markerName[m] = markers[m]->name();
-			obs.m_markerConfiguration[m] = markers[m]->node()->getT();
-			obs.m_markerJacobian[m] = markers[m]->node()->computeJacobian();
-            
-            std::cout << "--- Jacobian Transpose ---" << std::endl;
-            QList< QPair<QVector3D, QVector3D> >::iterator i;
-            for ( i=obs.m_markerJacobian[m].begin(); i!=obs.m_markerJacobian[m].end(); ++i )
-            {
-                std::cout <<
-                            i->first.x() << " " <<
-                            i->first.y() << " " <<
-                            i->first.z() << " " <<
-                            i->second.x() << " " <<
-                            i->second.y() << " " <<
-                            i->second.z() <<
-                            std::endl;
-            }
-            std::cout << std::endl;
-        }
-	}
-	return obs;
-}*/
-
-/*void Robot::render()
-{
-	QMutexLocker locker(&mutex);
-	
-	QVector<KinTreeNode*>::iterator i;
-    for ( i=tree.begin(); i!=tree.end(); ++i ) {
-        (*i)->render();
-    }
-	
-}*/
 
 /**********************
  ***	GET STUFF	***

@@ -44,8 +44,7 @@ public:
           DT_ResponseClass robotClass,
           DT_ResponseClass baseClass,
           DT_ResponseClass robotField,
-          DT_ResponseClass robotBaseField,
-          bool openWithField = true
+          DT_ResponseClass robotBaseField //,bool openWithField = true
           );
 	~Robot();														
 	
@@ -56,7 +55,7 @@ public:
 	bool isOpen() const	{ return isConfigured; }											//!< Returns whether or not open( const QString& ) has been called (and has succeeded)
 	void close();																			//!< Delete the BodyParts, Motors, Links and RevoluteJoints, returning the Robot to the state it was in just after construction
 	
-    bool hasField() { return openWithField; }
+    //bool hasField() { return openWithField; }
     
 	void addCollision() { numCollisions++; }
 	void addReflexCollision() { numReflexCollisions++; }
@@ -141,7 +140,7 @@ private:
 	QVector<Marker*>		markers;		//!< list of markers
 	int						numCompositObjects;		//!< Number of KinTreeNodes
 	bool					isConfigured;	//!<
-    bool                    openWithField;
+    //bool                    openWithField;
 	
 	int						numCollisions;
 	int						numReflexCollisions;
@@ -166,11 +165,6 @@ private:
 	
 	int getNumPrimitives();
 	void kill();
-    
-	
-	//void render();			//!< Recursively calls render() on the link/joint trees, updating the OpenGL display lists
-	
-	//virtual void processState() {}
 	
 	/*** FRIENDS  ***/
 	friend class BodyPart;

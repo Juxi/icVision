@@ -80,6 +80,7 @@ public:
 	
 	void updateSolid();
 	void render();
+    void renderField();
 	
 	void setInModel( bool b ) { inModel = b; }
 	bool isInModel() { return inModel; }

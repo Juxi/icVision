@@ -19,7 +19,7 @@ GLWidget::GLWidget(QWidget *parent)
     zRot = 0;
 	aspect = 16.0/9.0;
 	zoom = 0.4;   // lower numbers are more zoomed in
-    trolltechPurple = QColor::fromRgbF(0.9, 0.9, 0.9, 1.0);
+    bgcolor = QColor::fromRgbF(0.0, 0.0, 0.0, 1.0);
 	timeSinceLastRender.start();
 }
 
@@ -29,7 +29,7 @@ GLWidget::~GLWidget()
 
 void GLWidget::initializeGL()
 {
-    qglClearColor(trolltechPurple);
+    qglClearColor(bgcolor);
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);

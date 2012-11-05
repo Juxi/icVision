@@ -78,7 +78,7 @@ private:
     int yRot;				//!< see HelloGL example
     int zRot;				//!< see HelloGL example
     QPoint lastPos;			//!< see HelloGL example
-    QColor trolltechPurple;	//!< see HelloGL example
+    QColor bgcolor;	//!< see HelloGL example
 	qreal aspect, zoom;
 	
 	QTime timeSinceLastRender;

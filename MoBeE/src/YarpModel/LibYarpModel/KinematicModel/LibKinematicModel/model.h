@@ -168,7 +168,7 @@ protected:
     // handles the changing of colors to indicate collission status
 	static DT_Bool collisionHandler( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-        printf("*** Called ColorChange!!! ***\n");
+        //printf("*** Called ColorChange!!! ***\n");
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
 		prim1->setColliding();
 		CompositeObject* comp1 = prim1->getCompositeObject();
@@ -193,7 +193,7 @@ protected:
 	static DT_Bool reflexTrigger( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
         
-        printf("*** Called Reflex!!! ***\n");
+        //printf("*** Called Reflex!!! ***\n");
 		PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
 		CompositeObject* comp1 = prim1->getCompositeObject();
 		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
@@ -214,32 +214,32 @@ protected:
     // creates repulsive forces to prevent unwanted collisions
     static DT_Bool repel( void* client_data, void* obj1, void* obj2, const DT_CollData *coll_data )
 	{
-        printf("*** Called Repel!!! ***\n");
+        //printf("*** Called Repel!!! ***\n");
         
 		// compute repuslive fictitous force and project it into the joint space
      
-        /*if (!coll_data) return DT_CONTINUE;
+        if (!coll_data) return DT_CONTINUE;
         
         QVector3D p1( coll_data->point1[0], coll_data->point1[1], coll_data->point1[2]);
         QVector3D p2( coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]);
-        QVector3D F2( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
+        QVector3D F = 1000*QVector3D( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
+        F*=F;
         
-        F2 *= F2.length()*F2.length() * 50;
-        QVector3D F1 = -F2;
-        QVector3D T1 = QVector3D::crossProduct(p1, F1);
-        QVector3D T2 = QVector3D::crossProduct(p2, F2);
+        printf("REACTION FORCE: %f\n",F.length());
+        QVector3D T1 = QVector3D::crossProduct(p1, F);
+        QVector3D T2 = QVector3D::crossProduct(p2, -F);
         
         PrimitiveObject* prim1 = (PrimitiveObject*)obj1;
 		CompositeObject* comp1 = prim1->getCompositeObject();
 		KinTreeNode* node1 = dynamic_cast<KinTreeNode*>(comp1);
 		if ( node1 )
-            node1->computeJacobian(F1,T1);
+            node1->computeJacobian(F,T1);
 		
 		PrimitiveObject* prim2 = (PrimitiveObject*)obj2;
 		CompositeObject* comp2 = prim2->getCompositeObject();
 		KinTreeNode* node2 = dynamic_cast<KinTreeNode*>(comp2);
 		if ( node2 )
-            node2->computeJacobian(F2,T2);*/
+            node2->computeJacobian(-F,T2);
         
 		return DT_CONTINUE;
 	}
