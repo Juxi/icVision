@@ -1,0 +1,37 @@
+What is MoBeE? What does it do? 
+
+We have realized the Clever-K architecture in our Modular Behavioral Environment, or MoBeE, which decomposes the problem of learning complex behaviors into manageable chunks. Behaviors are implemented as a distributed system of loosely coupled modules, which interact with one another via ethernet. MoBeE employs a hub-and-spokes network architecture to minimize dependencies between behavioral modules and therefore maximize their reusability. 
+
+
+How is it built?
+
+MoBeE’s hub is based on a parsimonious geometric model of the robot and its surroundings. The model is coupled to a port filter, who’s job it is to regulate the contributions from the behavioral modules running elsewhere on the network. Behavioral modules fall into one of the following three categories: 
+
+Sensory modules discover and compress the state of the robot and its surroundings. Agent modules draw on the world state and plan deliberate actions to explore the world or to exploit previously gained knowledge. Reactive control modules implement reflexive behavior such as closing the hand when an object is detected near the palm. These are typically engineered rather than learned, but still they can serve to bootstrap learning higher up the behavioral hierarchy.
+
+
+What is a “state” in MoBeE? What is the Sensor?
+
+The geometric model at the center of MoBeE allows us to define a very general state machine to control the learning of behaviors. For example, we can define all kinds of discrete states based on collision detection and distance computations; like “self-colliding” or not, “colliding with a target or obstacle”, “target object near palm”, ect. To compute these geometric states, we rely on sensory modules. We have engineered a proprioceptive module to process raw motor encoder values and compute the robots “pose” in 3D space. Learned computer vision modules process raw camera feeds to identify and locate objects of interest in the robot’s environment. In addition to these concrete, geometric “states”, MoBeE’s hub can also relay supplementary state information, from Auto-Encoders, Slow Feature Analysis, or any other sensory learner. This way, we can represent more abstract concepts like an object is standing versus toppled, or a grasp has succeeded or failed. 
+
+What is an "action"?
+
+Our behavioral decomposition differentiates between deliberate and reactive action. These are handled by the Agent and the Controller modules respectively. The Agent plans motions, and the resulting motor commands are sent to the MoBeE hub and eventually executed on the robot. If the planned action fails, in the sense that it causes unwanted collisions, the MoBeE hub stops forwarding motor commands from the Agent, and instead invokes the Controller to resolve the situation.
+
+
+How is the controller implemented?
+
+Currently the controller is based on the history of robot poses, and it approximately rewinds recent motions, returning the robot to a previous state that is known to the Agent module. Control methods based on the Jacobian matrix would also be appropriate here. They would react better in a dynamic environment, but might make it harder for the Agent to learn, as the would not necessarily return a pose that is already in the history of poses.
+
+How is the Agent implemented?
+
+Currently the Agent is based on a graph, which we call a roadmap and is embedded in the robot's 41 dimensional state space. The vertices of the roadmap graph represent full-body poses, and the edges represent motions, which take the robot from one pose to the next. We have developed several Agents, which plan motions using the roadmaps in conjunction with simple graph search algorithms and also more advanced Reinforcement Learning algorithms. The control is done using potential fields, which are also defined directly in the state space and push the robot along the graph edges using velocity control commands.
+
+
+What's good about the Agent/Controller system?
+
+The defining feature of the Agent/Controller system is that it can recover from planner failure. When the Agent tries to do something that is infeasible, a reflex is invoked, and the robot is returned to a previous, known state. The infeasible graph edge is then penalized, or even removed completely, and the Agent re-plans the action. Therefore, we don't need to verify the feasibility of all the graph edges preemptively, which is quite practical if the graph is very large, or if the robot's surroundings change. 
+
+How do you make new graphs?
+
+Roadmap graphs can be constructed autonomously online, as the robot engages in exploratory behavior.  However since the iCub's state space is so large, it takes a very long time for this process to get anywhere. A practical alternative to building maps from experience using the real robot, is to search for sets of interesting poses by using MoBeE's geometric model alone. Without the hardware in the loop, we can search much faster than realtime. 
