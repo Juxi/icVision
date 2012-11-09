@@ -17,7 +17,9 @@
  *** this vocab accompanies the name of a marker and a list of 6 operational space forces and torques, like:  ***
  ***                                                 [[opsp] right_hand_marker [ Fx, Fy, Fz, Tx, Ty, Tz ]]    ***
  ***************************************************************************************************************/
- #define VOCAB_OPSPACE VOCAB4('o','p','s','p')
+#define VOCAB_OPSPACE VOCAB4('o','p','s','p')
+
+typedef QList< QPair<QVector3D, QVector3D> > Jacobian;
 
 class Controller : public QObject, public PartController
 {
@@ -25,34 +27,25 @@ class Controller : public QObject, public PartController
 	
 public:
     
-    typedef QList< QPair<QVector3D, QVector3D> > Jacobian;
-	
-    Controller( KinematicModel::Robot* robot,
-               int partNum,
-               int freq );
+    Controller( KinematicModel::Robot* robot, int partNum, int freq );
     
 public slots:
+    
     void setModelTorque(QVector<qreal>);
     
-protected:
+private:
     
-    //QVector<qreal> modelTorque;
-    
-    void handle( yarp::os::Bottle* );
-    
-    bool getEncoders( double* q );
-    QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
+    void handler( yarp::os::Bottle* );
+    void procEncoders( double* q );
     
     bool getMarkerNames( QList<QString>& );
     bool getMarkerPosition( QString, QVector3D& );
-    bool project( QString name, yarp::os::Bottle* opSpaceFT, yarp::os::Bottle& jointSpaceF );
-
-    //virtual void computeForces();
+    bool projectToJointSpace( QString markerName, yarp::os::Bottle* opSpaceFT, yarp::os::Bottle& jointSpaceF );
     
+    QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
+
     KinematicModel::Robot* robot;
     int partNum;
-    //KinematicModel::BodyPart* bodyPart;
-	
 };
 
 #endif

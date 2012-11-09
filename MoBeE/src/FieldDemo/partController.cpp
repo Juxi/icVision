@@ -54,6 +54,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		pos->getAxes(&numJoints);
 		min  = new double[numJoints];
 		max  = new double[numJoints];
+        nogo = new double[numJoints];
 		q1   = new double[numJoints];
 		q0	 = new double[numJoints];
 		w	 = new double[numJoints];
@@ -65,22 +66,25 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		a	 = new double[numJoints];
 		f	 = new double[numJoints];
 		g	 = new double[numJoints];
+		h	 = new double[numJoints];
 		ctrl = new double[numJoints];
 
         // set default values
         double _min,_max;
 		for ( int i = 0; i < numJoints; i++ ) {
 			lim->getLimits( i, &_min, &_max );
-			min[i] = _min;
-			max[i] = _max;
-			w[i] = 1.0;
-			k[i] = 50.0;
-			c[i] = 100.0;
-            f[i] = 0.0;
-            g[i] = 0.0;
-            x[i] = 0.0;
-            q0[i] = 0.0;
-            q1[i] = 0.0;
+			min[i]  = _min;
+			max[i]  = _max;
+            nogo[i] = 10.0;
+			w[i]    = 1.0;
+			k[i]    = 50.0;
+			c[i]    = 100.0;
+            f[i]    = 0.0;
+            g[i]    = 0.0;
+            h[i]    = 0.0;
+            x[i]    = 0.0;
+            q0[i]   = 0.0;
+            q1[i]   = 0.0;
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
         
@@ -130,23 +134,37 @@ void PartController::afterStart(bool s)
 		printf("PartController did not start\n");
 }
 
-void PartController::set( double **var, yarp::os::Bottle* list )
+void PartController::setAttractor( yarp::os::Bottle* list )
 {
 	for ( int i = 0; i < numJoints; i++ ) {
-        if (!list->get(i).isNull()) {
-            (*var)[i] = list->get(i).asDouble();
+        if (!list->get(i).isNull())
+        {
+            double normPos = list->get(i).asDouble();
+            if (normPos<0) normPos = 0.0;
+            else if (normPos>1) normPos = 1.0;
+            x[i] = min[i] + normPos*(max[i]-min[i]);
         }
     }
 }
 
-void PartController::increment( double **var, yarp::os::Bottle* list )
+void PartController::setForce( yarp::os::Bottle* list )
+{
+    // not sure how to normalize this one
+	for ( int i = 0; i < numJoints; i++ ) {
+        if (!list->get(i).isNull()) {
+            f[i] = list->get(i).asDouble();
+        }
+    }
+}
+
+/*void PartController::increment( double **var, yarp::os::Bottle* list )
 {
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
             (*var)[i] += list->get(i).asDouble();
         }
     }
-}
+}*/
 
 void PartController::run() 
 {
@@ -163,85 +181,67 @@ void PartController::run()
         int cmd = b->get(0).asVocab();
         switch (cmd) {
             case VOCAB_QATTR:
-                set( &x, b->get(1).asList() );
+                setAttractor( b->get(1).asList() );
                 printf("Set attractor position!!! (%s)\n", b->get(1).asList()->toString().c_str());
                 break;
             case VOCAB_QFORCE:
-                set( &f, b->get(1).asList() );
+                setForce( b->get(1).asList() );
                 printf("Set joint-space force!!! (%s)\n", b->get(1).asList()->toString().c_str());
                 break;
             default:
-                handle(b);
+                handler(b);
                 break;
         }
 	}
 	
-    // project (fictitious) forces from operational space
-	//computeForces();
-    
-    yarp::os::Bottle fb,gb;
+
+    yarp::os::Bottle kb,fb,gb,hb;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
     
-    if ( getEncoders(q1) )  // NOTE: the derrived class "Controller" sets the robot position in KineamticModel
+    if ( getEncoders(q1) )
     {
-        for ( int i=0; i<numJoints; i++ ) {
-            e[i] = w[i]*(x[i] - q1[i]);
-            v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
-            a[i] = -c[i]*v[i] + k[i]*e[i] + f[i]+g[i];
-            ctrl[i] = v[i] + a[i] * getRate() / 1000.0;
-            
-            fb.addDouble(f[i]);
-            gb.addDouble(g[i]);
+        // process encoder positions... (the derrived class "Controller" sets the robot position in KineamticModel)
+        procEncoders(q1);
+        
+        //compute joint limit repulsion
+        for ( int i=0; i<numJoints; i++ )
+        {
+            if ( x[i] < min[i] + nogo[i] ) {
+                //make a force in the + direction
+                double dx = min[i] + nogo[i] - x[i];
+                g[i] = dx*dx;
+            }
+            else if ( x[i] > max[i] - nogo[i] ) {
+                //make a force in the - direction
+                double dx = x[i] - (max[i] - nogo[i]);
+                g[i] = -dx*dx;
+            }
+            else { g[i] = 0.0; }
+            g[i]*=10.0;
         }
         
-        printf("forcing: %s)\n", fb.toString().c_str());
-        printf("reaction: %s)\n\n", gb.toString().c_str());
+        
+        for ( int i=0; i<numJoints; i++ )
+        {
+            e[i] = w[i]*(x[i] - q1[i]);
+            v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
+            a[i] = -c[i]*v[i] + k[i]*e[i] + f[i] + g[i] + h[i];
+            ctrl[i] = v[i] + a[i] * getRate()/1000.0;
+            
+            kb.addDouble(k[i]*e[i]);
+            fb.addDouble(f[i]);
+            gb.addDouble(g[i]);
+            hb.addDouble(h[i]);
+        }
+        
+        printf("ke (spring force): %s\n", kb.toString().c_str());
+        printf("f (RPC force): %s\n", fb.toString().c_str());
+        printf("g (limit avoidance): %s\n", gb.toString().c_str());
+        printf("h (field repulsion): %s\n", hb.toString().c_str());
+        printf("\n");
         vel->velocityMove( ctrl );
-        
-        /*int i;
-        std::cout << "-----------------------------------------------" << std::endl;
-        std::cout << "f: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << f[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "cmd: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << cmd[i] << " ";
-        std::cout << "]" << std::endl;
-       
-        std::cout << "x: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << x[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "q0: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << q0[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "q1: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << q1[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "w: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << w[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "e: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << e[i] << " ";
-        std::cout << "]" << std::endl;
-        
-        std::cout << "v: [";
-        for ( i=0; i<numJoints; i++ )
-            std::cout << v[i] << " ";
-        std::cout << "]" << std::endl;
-        */
     }
 }
 
@@ -262,101 +262,3 @@ void PartController::threadRelease()
 	
 }
 
-/*bool PartController::stop()
-{ 
-	if ( !vel ) { return 0; }
-	return vel->stop();
-}
-
-std::vector<double> PartController::withinLimits( const std::vector<double>& poss )
-{
-	std::vector<double> p;
-	if ( poss.size() != (unsigned int)numJoints )
-	{ 
-		printf("PartController::withinLimits() received wrong sized position vector.");
-		return p;
-	}
-	
-	double offset = 0;
-	for ( int i = 0; i < numJoints; i++ ) {
-		//offset = (max.at(i) - min.at(i))/20.0;
-		if ( poss.at(i) < min.at(i) + offset )
-			p.push_back( min.at(i) + offset );
-		else if ( poss.at(i) > max.at(i) - offset )
-			p.push_back( max.at(i) - offset );
-		else
-			p.push_back(poss.at(i));
-	}
-	return p;
-}
-
-bool PartController::isWithinLimits( const std::vector<double>& poss )
-{
-	std::vector<double> p;
-	if ( poss.size() != (unsigned int)numJoints )
-	{ 
-		printf("PartController::isWithinLimits() received wrong sized position vector.");
-		return false;
-	}
-	
-	double offset = 0;
-	for ( int i = 0; i < numJoints; i++ ) {
-		//offset = (max.at(i) - min.at(i))/20.0;
-		if ( poss.at(i) < min.at(i) + offset )
-			return false;
-		else if ( poss.at(i) > max.at(i) - offset )
-			return false;
-	}
-	return true;
-}
-
-bool PartController::velocityMove( const std::vector<double>& v )
-{
-	if ( v.size() != (unsigned int)numJoints || !pos ) { return 0; }
-	
-	//std::vector<double> q = getCurrentPose();
-	
-	//printf("velocity move: " );
-	double cmd[numJoints];
-	for ( int i=0; i<numJoints; i++ )
-	{
-		if ( jointMask.at(i) )
-			cmd[i] = v.at(i);
-		else
-			cmd[i] = 0.0;
-		//printf("%f ", cmd[i]);
-	}
-	//printf("\n\n");
-	
-	return vel->velocityMove( cmd );
-	//return pos->positionMove( p );
-}
-
-
-
-std::vector<double> PartController::getRandomPose()
-{
-	std::vector<double> q = getCurrentPose();
-	for ( int i = 0; i < numJoints; i++ )
-	{
-		if ( weights.at(i) )
-			q.at(i) = min.at(i) + (max.at(i)-min.at(i)) * (double)rand()/RAND_MAX;
-	}
-	return q;
-}
-
-std::vector<double> PartController::getCurrentPose()
-{
-	double val;
-	std::vector<double> q;
-	if ( enc )
-	{
-		for ( int i = 0; i < numJoints; i++ )
-		{
-			enc->getEncoder( i, &val );
-			q.push_back(val);
-		}
-	}
-	
-	return q;
-}*/
