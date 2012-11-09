@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 		i++;
 		
 		
-		sleep(30);
+		sleep(15);
 	}
 	
 	return 1;	

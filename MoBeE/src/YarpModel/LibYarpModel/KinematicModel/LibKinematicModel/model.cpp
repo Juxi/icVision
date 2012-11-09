@@ -501,7 +501,7 @@ int Model::computePose()
 	updateSolid();
 
     
-	evaluateRobotConstraints();
+	//evaluateRobotConstraints();
 	computeCollisions();
 	
 	computePoseSuffix();
@@ -522,7 +522,7 @@ void Model::computePoseSuffix()
 	}
 }
 
-void Model::evaluateRobotConstraints()
+/*void Model::evaluateRobotConstraints()
 {
 	//QWriteLocker locker(&mutex);
 	if (syncGraphics)
@@ -534,7 +534,7 @@ void Model::evaluateRobotConstraints()
 		(*i)->evaluateConstraints();
 	}
 	mutex.unlock();
-}
+}*/
 
 void Model::computeCollisions()
 {
@@ -543,23 +543,18 @@ void Model::computeCollisions()
     QVector<Robot*>::iterator i;
 	for ( i=robots.begin(); i!=robots.end(); ++i ) {
 		(*i)->resetExtTorque();
+        (*i)->evaluateConstraints();
 	}
     
     //printf("Doing collision detection on %d composite objects with %d primitives\n", numObjects, numPrimitives);
     
-    //DT_Test(scene,worldTable);
+    DT_Test(scene,worldTable);
     
     QVector<Robot*>::iterator j;
 	for ( j=robots.begin(); j!=robots.end(); ++j ) {
-		//DT_Test(scene,(*j)->getResponseTable());
+		DT_Test(scene,(*j)->getResponseTable());
 		DT_Test(scene,(*j)->getFieldResponseTable());
 	}
-    
-	//QVector<DT_RespTableHandle>::iterator j;
-	//uint num = 0;
-	//for (j=responseTables.begin();j!=responseTables.end();++j) {
-	//	DT_Test(scene,*j);
-	//}
 }
 
 void Model::updateWorldState()

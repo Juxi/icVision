@@ -19,7 +19,7 @@ namespace KinematicModel
     class BodyPart;
 }
 
-// linear constraints C*q > d
+// linear constraints a*q > d
 class KinematicModel::LinearConstraint {
 public:
     LinearConstraint(){}
@@ -27,6 +27,7 @@ public:
                      QStringList _a,
                      QStringList _q,
                      qreal _b,
+                     //qreal _nogo = 20,
                      bool _negate = false);
     ~LinearConstraint(){}
     
@@ -34,9 +35,10 @@ public:
     
 private:
     BodyPart		*parent;
-    QList<qreal>	a;
+    QList<qreal>	a,norm;
     QList<int>		q;
     qreal			b;
+    qreal           nogo;
     bool            negate;
 };
 #endif

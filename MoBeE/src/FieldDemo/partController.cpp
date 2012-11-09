@@ -208,17 +208,17 @@ void PartController::run()
         //compute joint limit repulsion
         for ( int i=0; i<numJoints; i++ )
         {
-            if ( x[i] < min[i] + nogo[i] ) {
+            g[i] = 0.0;
+            if ( q1[i] < min[i] + nogo[i] ) {
                 //make a force in the + direction
-                double dx = min[i] + nogo[i] - x[i];
-                g[i] = dx*dx;
+                double dx = min[i] + nogo[i] - q1[i];
+                //g[i] = dx*dx;
             }
-            else if ( x[i] > max[i] - nogo[i] ) {
+            else if ( q1[i] > max[i] - nogo[i] ) {
                 //make a force in the - direction
-                double dx = x[i] - (max[i] - nogo[i]);
-                g[i] = -dx*dx;
+                double dx = q1[i] - (max[i] - nogo[i]);
+                //g[i] = -dx*dx;
             }
-            else { g[i] = 0.0; }
             g[i]*=10.0;
         }
         
@@ -230,16 +230,18 @@ void PartController::run()
             a[i] = -c[i]*v[i] + k[i]*e[i] + f[i] + g[i] + h[i];
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             
-            kb.addDouble(k[i]*e[i]);
-            fb.addDouble(f[i]);
-            gb.addDouble(g[i]);
-            hb.addDouble(h[i]);
+            if (i<7) {
+                kb.addDouble(k[i]*e[i]);
+                fb.addDouble(f[i]);
+                gb.addDouble(g[i]);
+                hb.addDouble(h[i]);
+            }
         }
         
-        printf("ke (spring force): %s\n", kb.toString().c_str());
-        printf("f (RPC force): %s\n", fb.toString().c_str());
+        printf("ke (spring force): %s\n",   kb.toString().c_str());
+        //printf("f (RPC force): %s\n",       fb.toString().c_str());
         printf("g (limit avoidance): %s\n", gb.toString().c_str());
-        printf("h (field repulsion): %s\n", hb.toString().c_str());
+        //printf("h (field repulsion): %s\n", hb.toString().c_str());
         printf("\n");
         vel->velocityMove( ctrl );
     }
