@@ -1,7 +1,7 @@
 #include "partController.h"
 #include <iostream.h>
 
-PartController::PartController( const char* _robotName, const char* _partName, int r ) : yarp::os::                RateThread(r), 
+PartController::PartController( const char* _robotName, const char* _partName, int r ) : yarp::os::RateThread(r), 
 																							vel(NULL),
 																							enc(NULL)
 {
@@ -77,7 +77,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 			max[i]  = _max;
             nogo[i] = 10.0;
 			w[i]    = 1.0;
-			k[i]    = 50.0;
+			k[i]    = 20.0;
 			c[i]    = 100.0;
             f[i]    = 0.0;
             g[i]    = 0.0;
@@ -182,11 +182,11 @@ void PartController::run()
         switch (cmd) {
             case VOCAB_QATTR:
                 setAttractor( b->get(1).asList() );
-                printf("Set attractor position!!! (%s)\n", b->get(1).asList()->toString().c_str());
+                printf("\nSet attractor position!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             case VOCAB_QFORCE:
                 setForce( b->get(1).asList() );
-                printf("Set joint-space force!!! (%s)\n", b->get(1).asList()->toString().c_str());
+                printf("\nSet joint-space force!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             default:
                 handler(b);
@@ -195,7 +195,7 @@ void PartController::run()
 	}
 	
 
-    yarp::os::Bottle kb,fb,gb,hb;
+    yarp::os::Bottle qb,kb,fb,gb,hb;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -206,22 +206,20 @@ void PartController::run()
         procEncoders(q1);
         
         //compute joint limit repulsion
-        for ( int i=0; i<numJoints; i++ )
+        /*for ( int i=0; i<numJoints; i++ )
         {
             g[i] = 0.0;
+            double dx = 0.0;
             if ( q1[i] < min[i] + nogo[i] ) {
-                //make a force in the + direction
-                double dx = min[i] + nogo[i] - q1[i];
-                //g[i] = dx*dx;
+                dx = min[i] + nogo[i] - q1[i];
+                g[i] = dx*dx;
             }
             else if ( q1[i] > max[i] - nogo[i] ) {
-                //make a force in the - direction
-                double dx = q1[i] - (max[i] - nogo[i]);
-                //g[i] = -dx*dx;
+                dx = q1[i] - (max[i] - nogo[i]);
+                g[i] = -dx*dx;
             }
             g[i]*=10.0;
-        }
-        
+        }*/
         
         for ( int i=0; i<numJoints; i++ )
         {
@@ -231,6 +229,7 @@ void PartController::run()
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             
             if (i<7) {
+                qb.addDouble(q1[i]);
                 kb.addDouble(k[i]*e[i]);
                 fb.addDouble(f[i]);
                 gb.addDouble(g[i]);
@@ -238,11 +237,14 @@ void PartController::run()
             }
         }
         
-        printf("ke (spring force): %s\n",   kb.toString().c_str());
+        printf("q: %s\n",   qb.toString().c_str());
+        //printf("ke (spring force): %s\n",   kb.toString().c_str());
         //printf("f (RPC force): %s\n",       fb.toString().c_str());
-        printf("g (limit avoidance): %s\n", gb.toString().c_str());
+        //printf("g (limit avoidance): %s\n", gb.toString().c_str());
         //printf("h (field repulsion): %s\n", hb.toString().c_str());
-        printf("\n");
+        //printf("\n");
+        
+        
         vel->velocityMove( ctrl );
     }
 }

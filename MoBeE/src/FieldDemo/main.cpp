@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
             //printf("done loading robot\n");
             
             for ( int i=2; 
-                    i < 4;
+                    i < 3;
                     //yarpRobot->numBodyParts();
                     i++ )
             {

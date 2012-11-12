@@ -46,6 +46,10 @@ private:
 
     KinematicModel::Robot* robot;
     int partNum;
+    
+signals:
+    void setPosition(int,const QVector<qreal>&);
+    //setEncoderPosition( int partNum, const QVector<qreal>& pos )
 };
 
 #endif

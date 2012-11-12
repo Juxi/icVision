@@ -10,6 +10,7 @@ Controller::Controller( KinematicModel::Robot* _robot,
                         robot(_robot),
                         partNum(_partNum)
 {
+    QObject::connect( this, SIGNAL(setPosition(int,QVector<qreal>)), robot, SLOT(setEncoderPosition(int,QVector<qreal>)) );
     QObject::connect( robot->getPart(partNum), SIGNAL(torques(QVector<qreal>)), this, SLOT(setModelTorque(QVector<qreal>)) );
 }
 
@@ -64,7 +65,8 @@ void Controller::procEncoders( double* q )
     for ( int i=0; i<getNumJoints(); i++ )
 		Q.append(q[i]);
     
-    robot->setEncoderPosition(partNum,Q);
+    //robot->setEncoderPosition(partNum,Q);
+    emit setPosition(partNum,Q);
 }
 
 bool Controller::getMarkerNames( QList<QString>& markerList )
