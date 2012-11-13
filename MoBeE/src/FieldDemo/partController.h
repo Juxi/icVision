@@ -53,10 +53,15 @@ private:
 						*q0,		// last pose
 						*v,			// velocity q1-q0
 						*e,			// the error vector x-q1
-						*a,			// the acceleration currently felt by the robot
+                        
                         *f,         // user defined force (from RPC)
                         *g,         // joint limit repulsion
+                        *gMax,      // maximum repulsive force
+                        *s,         // spring force
+                        *sMax,      // maximum spring force
                         //*h,       // a force for use by derrived classes
+    
+                        *a,			// the acceleration currently felt by the robot
 						*ctrl;		// the next velocity control command
     
 protected:

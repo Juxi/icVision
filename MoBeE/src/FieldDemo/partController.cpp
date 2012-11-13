@@ -62,10 +62,13 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		k	 = new double[numJoints];
 		c	 = new double[numJoints];
 		e	 = new double[numJoints];
+        s	 = new double[numJoints];
+        sMax = new double[numJoints];
 		v	 = new double[numJoints];
 		a	 = new double[numJoints];
 		f	 = new double[numJoints];
 		g	 = new double[numJoints];
+        gMax = new double[numJoints];
 		h	 = new double[numJoints];
 		ctrl = new double[numJoints];
 
@@ -77,10 +80,13 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 			max[i]  = _max;
             nogo[i] = 10.0;
 			w[i]    = 1.0;
-			k[i]    = 20.0;
-			c[i]    = 100.0;
+			k[i]    = 50.0;
+			c[i]    = 10.0;
             f[i]    = 0.0;
             g[i]    = 0.0;
+            gMax[i] = 1600.0; // should be significantly bigger than sMax
+            s[i]   = 0.0;
+            sMax[i] = 800.0;  // should be significantly smaller than gMax
             h[i]    = 0.0;
             x[i]    = 0.0;
             q0[i]   = 0.0;
@@ -195,7 +201,7 @@ void PartController::run()
 	}
 	
 
-    yarp::os::Bottle qb,kb,fb,gb,hb;
+    yarp::os::Bottle qb,vb,kb,fb,gb,hb;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -206,41 +212,65 @@ void PartController::run()
         procEncoders(q1);
         
         //compute joint limit repulsion
-        /*for ( int i=0; i<numJoints; i++ )
-        {
-            g[i] = 0.0;
-            double dx = 0.0;
-            if ( q1[i] < min[i] + nogo[i] ) {
-                dx = min[i] + nogo[i] - q1[i];
-                g[i] = dx*dx;
-            }
-            else if ( q1[i] > max[i] - nogo[i] ) {
-                dx = q1[i] - (max[i] - nogo[i]);
-                g[i] = -dx*dx;
-            }
-            g[i]*=10.0;
-        }*/
-        
         for ( int i=0; i<numJoints; i++ )
         {
+            //g[i] = 0.0;
+            double dx = 0.0;
+            if ( q1[i] < min[i] + nogo[i] ) {
+                g[i] = gMax[i] * (q1[i]-min[i])/nogo[i];
+                //dx = min[i] + nogo[i] - q1[i];
+                //g[i] = dx*dx;
+            }
+            else if ( q1[i] > max[i] - nogo[i] ) {
+                g[i] = gMax[i] * (max[i]-q1[i])/nogo[i];
+                //dx = q1[i] - (max[i] - nogo[i]);
+                //g[i] = -dx*dx;
+            }
+            //g[i]*=10.0;
+        }
+        
+        // compute the next control command
+        for ( int i=0; i<numJoints; i++ )
+        {
+            // update error vector (to attractor) and velocity
             e[i] = w[i]*(x[i] - q1[i]);
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
-            a[i] = -c[i]*v[i] + k[i]*e[i] + f[i] + g[i] + h[i];
+            
+            // compute sigmoidal spring force
+            s[i] = sMax[i]*e[i]/(sMax[i]/k[i]+abs(e[i]));
+            
+            // compute joint limit repulsion
+            if ( q1[i] < min[i] + nogo[i] )         g[i] = gMax[i] * (min[i]+nogo[i]-q1[i])/nogo[i];
+            else if ( q1[i] > max[i] - nogo[i] )    g[i] = gMax[i] * -(q1[i]-(max[i]-nogo[i]))/nogo[i];
+            else                                    g[i] = 0.0;
+            
+            // squash f and h
+            
+            // compute acceleration (should squash this too)
+            a[i] =  - c[i]*v[i] + s[i]
+                    //+ f[i]
+                    + g[i]
+                    //+ h[i]
+                    ;
+            
+            // compute next control command
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             
             if (i<7) {
                 qb.addDouble(q1[i]);
-                kb.addDouble(k[i]*e[i]);
+                vb.addDouble(v[i]);
+                kb.addDouble(s[i]);
                 fb.addDouble(f[i]);
                 gb.addDouble(g[i]);
                 hb.addDouble(h[i]);
             }
         }
         
-        printf("q: %s\n",   qb.toString().c_str());
-        //printf("ke (spring force): %s\n",   kb.toString().c_str());
+        //printf("q: %s\n",   qb.toString().c_str());
+        //printf("v: %s\n",   qb.toString().c_str());
+        //printf("s: %s\n",   kb.toString().c_str());
         //printf("f (RPC force): %s\n",       fb.toString().c_str());
-        //printf("g (limit avoidance): %s\n", gb.toString().c_str());
+        printf("g (limit avoidance): %s\n", gb.toString().c_str());
         //printf("h (field repulsion): %s\n", hb.toString().c_str());
         //printf("\n");
         
