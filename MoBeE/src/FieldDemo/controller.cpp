@@ -10,25 +10,39 @@ Controller::Controller( KinematicModel::Robot* _robot,
                         robot(_robot),
                         partNum(_partNum)
 {
-    QObject::connect( this, SIGNAL(setPosition(int,QVector<qreal>)), robot, SLOT(setEncoderPosition(int,QVector<qreal>)) );
-    QObject::connect( robot->getPart(partNum), SIGNAL(torques(QVector<qreal>)), this, SLOT(setModelTorque(QVector<qreal>)) );
+    QObject::connect( this, SIGNAL(setRobotPosition(int,QVector<qreal>)), robot, SLOT(setEncoderPosition(int,QVector<qreal>)) );
+    QObject::connect( robot->getPart(partNum), SIGNAL(repulsiveForce(QVector<qreal>)), this, SLOT(setRepulsiveForce(QVector<qreal>)) );
+    QObject::connect( robot->getPart(partNum), SIGNAL(constraintSpring(QVector<qreal>)), this, SLOT(setConstraintSpring(QVector<qreal>)) );
 }
 
-void Controller::setModelTorque(QVector<qreal> t)
+void Controller::setRepulsiveForce(QVector<qreal> t)
 {
     if ( t.size() != getNumJoints() )
         printf("Wrong size body part torque vector\n");
     
+    //printf("setting collision reaction: ");
+    for (int i=0; i<getNumJoints(); i++)
+    {
+        if (i<t.size()) {
+            fFld[i] = t.at(i);
+            //      printf("%f ",g[i]);
+        }
+    }
+    //printf("\n");
+}
+
+void Controller::setConstraintSpring(QVector<qreal> s)
+{
+    if ( s.size() != getNumJoints() )
+        printf("Wrong size body part torque vector\n");
     
     //printf("setting collision reaction: ");
     for (int i=0; i<getNumJoints(); i++)
     {
-        if (i<t.size())
-        {
-            h[i] = t.at(i);
+        if (i<s.size()) {
+            fCst[i] = s.at(i);
       //      printf("%f ",g[i]);
         }
-        
     }
     //printf("\n");
 }
@@ -66,7 +80,7 @@ void Controller::procEncoders( double* q )
 		Q.append(q[i]);
     
     //robot->setEncoderPosition(partNum,Q);
-    emit setPosition(partNum,Q);
+    emit setRobotPosition(partNum,Q);
 }
 
 bool Controller::getMarkerNames( QList<QString>& markerList )

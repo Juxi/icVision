@@ -254,7 +254,7 @@ QList< QPair<QVector3D, QVector3D> > KinTreeNode::computeJacobian( QVector3D F, 
                 
                 // project F and T onto this joint
                 qreal jointTorque = QVector3D::dotProduct(jColumn.first, F) + QVector3D::dotProduct(jColumn.second, T);
-                joint->parentMotor()->addExtTorque(jointTorque);
+                joint->parentMotor()->addTorque(jointTorque);
                 
                 //printf("jColumn: %f, %f, %f, %f, %f, %f\n", jColumn.first.x(), jColumn.first.y(), jColumn.first.z(),
                 //                                            jColumn.second.x(), jColumn.second.y(), jColumn.second.z());

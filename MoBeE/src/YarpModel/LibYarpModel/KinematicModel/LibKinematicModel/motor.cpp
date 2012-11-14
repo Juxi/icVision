@@ -6,7 +6,8 @@ using namespace std;
 using namespace KinematicModel;
 
 Motor::Motor( Robot* robot, Motor* motor ) : bodyPartRoot(false),
-                                             extTorque(0.0),
+                                             torque(0.0),
+                                             spring(0.0),
                                              parentMotor(motor),
 											 homePosition(0.0)
 {

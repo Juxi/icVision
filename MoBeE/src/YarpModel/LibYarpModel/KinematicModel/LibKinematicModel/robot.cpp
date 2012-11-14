@@ -140,7 +140,7 @@ void Robot::resetExtTorque()
 {
     QVector<Motor*>::iterator j;
     for ( j=motorList.begin(); j!=motorList.end(); ++j ) {
-        (*j)->resetExtTorque();
+        (*j)->resetTorque();
     }
 }
 
@@ -290,7 +290,7 @@ void Robot::publishState()
 	
     QVector<BodyPart*>::iterator i;
     for ( i=partList.begin(); i!=partList.end(); ++i )
-        (*i)->publishTorques();
+        (*i)->publishState();
     
 	//RobotObservation obs = observe();
 	//emit observation(obs);

@@ -42,27 +42,37 @@ private:
 	yarp::dev::IEncoders						*enc;
     
 	int					numJoints;	// number of controllable DOFs
-	double				*x,			// the attractor pose
+	double				*q1,		// current pose
+                        *q0,		// last pose
+                        *v,			// velocity q1-q0
+                        *e,			// the error vector x-q1
+    
+                        *x,			// the attractor pose
+                        *min,		// min joint positions
+                        *max,		// max joint positions
+                        *nogo,      // length (in degrees) of limit avoidance spring
+                        
 						*w,			// weight vector indicates importance of DOFs
 						*k,			// spring constants for each DOF
 						*c,			// damping constants for each DOF
-						*min,		// min joint positions
-						*max,		// max joint positions
-                        *nogo,      // length (in degrees) of limit avoidance spring
-						*q1,		// current pose
-						*q0,		// last pose
-						*v,			// velocity q1-q0
-						*e,			// the error vector x-q1
-                        
-                        *f,         // user defined force (from RPC)
-                        *g,         // joint limit repulsion
-                        *gMax,      // maximum repulsive force
-                        *s,         // spring force
-                        *sMax,      // maximum spring force
-                        //*h,       // a force for use by derrived classes
-    
                         *a,			// the acceleration currently felt by the robot
-						*ctrl;		// the next velocity control command
+                        *ctrl,		// the next velocity control command
+                        
+                        *fX,         // attractor spring force
+                        *fXMax,      // maximum attractor spring force
+                        
+                        *fLim,         // joint limit repulsion
+                        *fLimMax,      // maximum repulsive force
+    
+                        *fRPC;         // user defined force (from RPC)
+    
+                        //*fFld,         // force fields (for use by derrived classes)
+                        //*fFldMax,
+    
+                        //*fCst,         // linear constraint forces (for use by derrived classes)
+                        //*fCstMax,
+    
+                        
     
 protected:
     
@@ -76,7 +86,11 @@ protected:
     virtual void run();
     virtual void threadRelease();
     
-    double              *h; // a force for use by derrived classes
+    double  *fFld,         // force fields (for use by derrived classes)
+            *fFldMax,
+    
+            *fCst,         // linear constraint forces (for use by derrived classes)
+            *fCstMax;
 	
 };
 #endif

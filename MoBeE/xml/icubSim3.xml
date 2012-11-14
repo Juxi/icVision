@@ -176,7 +176,7 @@
                     <!-- THUMB -->
                     
                     <link x="-.015" z=".0275" radius="0">
-                        <!--<sphere radius=".15" field="true"/>-->
+                        <sphere radius=".2" field="true"/>
                         <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30">
                         <joint z="1" minPos="20" maxPos="90" radius="0">
                         <link y="-.00375" radius=".0">
@@ -450,7 +450,7 @@
             
                     <!-- THUMB -->
                     <link x="-.015" z=".0275" radius="0">
-                        <!--<sphere radius=".15" field="true"/>-->
+                        <!--<sphere radius=".2" field="true"/>-->
                         <motor name="LeftThumbFirstKnuckleA" minPos="-0" maxPos="90" home="30">
                         <joint z="-1" minPos="20" maxPos="90" radius="0">
                         <link y=".00375" radius=".0">

@@ -27,18 +27,18 @@ public:
                      QStringList _a,
                      QStringList _q,
                      qreal _b,
-                     //qreal _nogo = 20,
                      bool _negate = false);
     ~LinearConstraint(){}
     
-    bool evaluate();
+    bool evaluate(QVector<qreal>&);
     
 private:
     BodyPart		*parent;
-    QList<qreal>	a,norm;
+    QList<qreal>	a,
+                    norm;
     QList<int>		q;
     qreal			b;
-    qreal           nogo;
+    //qreal           nogo;
     bool            negate;
 };
 #endif

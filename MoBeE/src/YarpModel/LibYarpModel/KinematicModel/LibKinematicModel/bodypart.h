@@ -68,10 +68,12 @@ public:
     
     QVector<Marker*> getMarkers() { return markers; }
     
-    void publishTorques();
+    void publishState();
     
 signals:
-    void torques(QVector<qreal>);
+    
+    void repulsiveForce(QVector<qreal>);
+    void constraintSpring(QVector<qreal>);
 	
 private:
     

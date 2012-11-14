@@ -48,49 +48,80 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 	dd->view(pos);
 	if ( !lim ) printf("Joint Limits Error!\n");
 	if ( !pos ) printf("IPositionControl Error!\n");
-	if ( pos && lim ) {
-		
-        // initialize control vars
+	if ( pos && lim )
+    {
+        // get number of controllable DOFs
 		pos->getAxes(&numJoints);
-		min  = new double[numJoints];
-		max  = new double[numJoints];
+     
+        // initialize control vars
+        q1 = new double[numJoints];
+        q0 = new double[numJoints];
+        v = new double[numJoints];
+        e = new double[numJoints];
+        
+        x = new double[numJoints];
+        min = new double[numJoints];
+        max = new double[numJoints];
         nogo = new double[numJoints];
-		q1   = new double[numJoints];
-		q0	 = new double[numJoints];
-		w	 = new double[numJoints];
-		x	 = new double[numJoints];
-		k	 = new double[numJoints];
-		c	 = new double[numJoints];
-		e	 = new double[numJoints];
-        s	 = new double[numJoints];
-        sMax = new double[numJoints];
-		v	 = new double[numJoints];
-		a	 = new double[numJoints];
-		f	 = new double[numJoints];
-		g	 = new double[numJoints];
-        gMax = new double[numJoints];
-		h	 = new double[numJoints];
-		ctrl = new double[numJoints];
+        
+        w = new double[numJoints];
+        k = new double[numJoints];
+        c = new double[numJoints];
+        
+        fRPC = new double[numJoints];
+        
+        fLim = new double[numJoints];
+        fLimMax = new double[numJoints];
+        
+        fX = new double[numJoints];
+        fXMax = new double[numJoints];
+        
+        fFld = new double[numJoints];
+        fFldMax = new double[numJoints];
+        
+        fCst = new double[numJoints];
+        fCstMax = new double[numJoints];
+        
+        a = new double[numJoints];
+        ctrl = new double[numJoints];
 
         // set default values
-        double _min,_max;
-		for ( int i = 0; i < numJoints; i++ ) {
+		for ( int i = 0; i < numJoints; i++ )
+        {
+            double _min,_max;
 			lim->getLimits( i, &_min, &_max );
-			min[i]  = _min;
-			max[i]  = _max;
-            nogo[i] = 10.0;
-			w[i]    = 1.0;
-			k[i]    = 50.0;
-			c[i]    = 10.0;
-            f[i]    = 0.0;
-            g[i]    = 0.0;
-            gMax[i] = 1600.0; // should be significantly bigger than sMax
-            s[i]   = 0.0;
-            sMax[i] = 800.0;  // should be significantly smaller than gMax
-            h[i]    = 0.0;
-            x[i]    = 0.0;
-            q0[i]   = 0.0;
-            q1[i]   = 0.0;
+            
+            // TODO: should get most of this from config files
+            q1[i]       = 0.0;
+            q0[i]       = 0.0;
+            v[i]        = 0.0;
+            e[i]        = 0.0;
+            
+            x[i]        = 0.0;
+            min[i]      = _min;
+            max[i]      = _max;
+            nogo[i]     = 10.0;
+            
+            w[i]        = 1.0;
+            k[i]        = 50.0;
+            c[i]        = 10.0;
+            a[i]        = 0.0;
+            ctrl[i]     = 0.0;
+            
+            fX[i]       = 0.0;
+            fXMax[i]    = 800.0;
+        
+            fLim[i]     = 0.0;
+            fLimMax[i]  = 1600.0;
+            
+            fRPC[i]     = 0.0;
+            
+            fFld[i]     = 0.0;
+            fFldMax[i]  = 0.0;
+            
+            fCst[i]     = 0.0;
+            fCstMax[i]  = 0.0;
+            
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
         
@@ -158,7 +189,7 @@ void PartController::setForce( yarp::os::Bottle* list )
     // not sure how to normalize this one
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
-            f[i] = list->get(i).asDouble();
+            fRPC[i] = list->get(i).asDouble();
         }
     }
 }
@@ -201,7 +232,7 @@ void PartController::run()
 	}
 	
 
-    yarp::os::Bottle qb,vb,kb,fb,gb,hb;
+    yarp::os::Bottle viewShit;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -211,24 +242,6 @@ void PartController::run()
         // process encoder positions... (the derrived class "Controller" sets the robot position in KineamticModel)
         procEncoders(q1);
         
-        //compute joint limit repulsion
-        for ( int i=0; i<numJoints; i++ )
-        {
-            //g[i] = 0.0;
-            double dx = 0.0;
-            if ( q1[i] < min[i] + nogo[i] ) {
-                g[i] = gMax[i] * (q1[i]-min[i])/nogo[i];
-                //dx = min[i] + nogo[i] - q1[i];
-                //g[i] = dx*dx;
-            }
-            else if ( q1[i] > max[i] - nogo[i] ) {
-                g[i] = gMax[i] * (max[i]-q1[i])/nogo[i];
-                //dx = q1[i] - (max[i] - nogo[i]);
-                //g[i] = -dx*dx;
-            }
-            //g[i]*=10.0;
-        }
-        
         // compute the next control command
         for ( int i=0; i<numJoints; i++ )
         {
@@ -237,41 +250,31 @@ void PartController::run()
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
             
             // compute sigmoidal spring force
-            s[i] = sMax[i]*e[i]/(sMax[i]/k[i]+abs(e[i]));
+            fX[i] = fXMax[i]*e[i]/(fXMax[i]/k[i]+abs(e[i]));
             
             // compute joint limit repulsion
-            if ( q1[i] < min[i] + nogo[i] )         g[i] = gMax[i] * (min[i]+nogo[i]-q1[i])/nogo[i];
-            else if ( q1[i] > max[i] - nogo[i] )    g[i] = gMax[i] * -(q1[i]-(max[i]-nogo[i]))/nogo[i];
-            else                                    g[i] = 0.0;
+            if ( q1[i] < min[i] + nogo[i] )         fLim[i] = fLimMax[i] * (min[i]+nogo[i]-q1[i])/nogo[i];
+            else if ( q1[i] > max[i] - nogo[i] )    fLim[i] = fLimMax[i] * -(q1[i]-(max[i]-nogo[i]))/nogo[i];
+            else                                    fLim[i] = 0.0;
             
             // squash f and h
             
             // compute acceleration (should squash this too)
-            a[i] =  - c[i]*v[i] + s[i]
-                    //+ f[i]
-                    + g[i]
-                    //+ h[i]
+            a[i] =  - c[i]*v[i]
+                    + fX[i]
+                    + fLim[i]
+                    + fCst[i]
+                    + fFld[i]
+                    + fRPC[i]
                     ;
             
             // compute next control command
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             
-            if (i<7) {
-                qb.addDouble(q1[i]);
-                vb.addDouble(v[i]);
-                kb.addDouble(s[i]);
-                fb.addDouble(f[i]);
-                gb.addDouble(g[i]);
-                hb.addDouble(h[i]);
-            }
+            if (i<7) viewShit.addDouble(fCst[i]);
         }
         
-        //printf("q: %s\n",   qb.toString().c_str());
-        //printf("v: %s\n",   qb.toString().c_str());
-        //printf("s: %s\n",   kb.toString().c_str());
-        //printf("f (RPC force): %s\n",       fb.toString().c_str());
-        printf("g (limit avoidance): %s\n", gb.toString().c_str());
-        //printf("h (field repulsion): %s\n", hb.toString().c_str());
+        printf("ViewShit: %s\n", viewShit.toString().c_str());
         //printf("\n");
         
         

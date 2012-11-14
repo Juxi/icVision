@@ -31,7 +31,8 @@ public:
     
 public slots:
     
-    void setModelTorque(QVector<qreal>);
+    void setConstraintSpring(QVector<qreal>);
+    void setRepulsiveForce(QVector<qreal>);
     
 private:
     
@@ -48,7 +49,7 @@ private:
     int partNum;
     
 signals:
-    void setPosition(int,const QVector<qreal>&);
+    void setRobotPosition(int,const QVector<qreal>&);
     //setEncoderPosition( int partNum, const QVector<qreal>& pos )
 };
 

@@ -22,27 +22,24 @@ BodyPart::~BodyPart()
 bool BodyPart::evaluateConstraints()
 {
 	int count = 0;
-	//bool result = true;
-	//printf("Evaluating constraints for %s, size: %d\n",partName.toStdString().c_str(),constraints.size());
 	QVector< QVector<LinearConstraint> >::iterator i;
     QVector<LinearConstraint>::iterator j;
-    //printf("evaluating %d body part constraint lists\n", constraints.size());
-	for ( i=constraints.begin(); i!=constraints.end(); ++i ){
-        //printf(" evaluating %d constraints in list %d\n", i->size(), count++);
-        
+	for ( i=constraints.begin(); i!=constraints.end(); ++i )
+    {
+        bool inner = false;
+        QVector< QVector<qreal> > springs;
         
         // disjunctive list A OR B OR C... etc
-        bool inner = false;
-        //int innerCount = 0;
         for ( j=i->begin(); j!=i->end(); ++j )
         {
-            //printf("    constraint %d: ", innerCount++);
-            if (j->evaluate())
+            QVector<qreal> thisSpring;
+            if (j->evaluate(thisSpring))
             {
                 inner = true;
                 //printf("pass\n");
                 break;
             }
+            springs.append(thisSpring);
         }
         
 		if ( !inner ) {
@@ -87,13 +84,15 @@ bool BodyPart::verify()
 	return result;
 }
 
-void BodyPart::publishTorques()
+void BodyPart::publishState()
 {
-    QVector<qreal> t;
+    QVector<qreal> t,s;
     QVector<Motor*>::iterator i;
     for ( i=begin(); i!=end(); ++i )
 	{
-        t.append((*i)->getExtTorque());
+        t.append((*i)->getTorque());
+        s.append((*i)->getSpring());
 	}
-    emit torques(t);
+    emit repulsiveForce(t);
+    emit constraintSpring(s);
 }
