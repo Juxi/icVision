@@ -21,39 +21,50 @@ BodyPart::~BodyPart()
 
 bool BodyPart::evaluateConstraints()
 {
-	int count = 0;
+	//int count = 0;
+    QVector< QVector< QPair< qreal, QVector<qreal> > > > newlyEvaluatedConstraints;
 	QVector< QVector<LinearConstraint> >::iterator i;
     QVector<LinearConstraint>::iterator j;
+    bool result = true;
 	for ( i=constraints.begin(); i!=constraints.end(); ++i )
     {
         bool inner = false;
-        QVector< QVector<qreal> > springs;
+        QVector<qreal> thisSpring;
+        QVector< QPair< qreal, QVector<qreal> > > thisEvaluatedConstraint;
         
         // disjunctive list A OR B OR C... etc
         for ( j=i->begin(); j!=i->end(); ++j )
         {
-            QVector<qreal> thisSpring;
-            if (j->evaluate(thisSpring))
-            {
+            qreal springVal;
+            if (j->evaluate(springVal))
                 inner = true;
-                //printf("pass\n");
-                break;
-            }
-            springs.append(thisSpring);
+            thisEvaluatedConstraint.append( QPair< qreal, QVector<qreal> >(springVal, j->getNorm()) );
         }
-        
-		if ( !inner ) {
-            //printf("Body Part %d: Linear Constraint(s) failed... starting reflex\n", idx);
-			return false;
-        }
-        
-		//	printf( "  constraint %d: pass\n", count++ );
-		//else {
-			//printf( "  constraint %d: fail\n", count++ );
-		//	result = false;
-		//}
+        newlyEvaluatedConstraints.append(thisEvaluatedConstraint);
+		if ( !inner ) result = false;
 	}
-	return true;
+    evaluatedConstraints = newlyEvaluatedConstraints;
+    printEvaluatedConstraints();
+	return result;
+}
+
+void BodyPart::printEvaluatedConstraints(){
+    QVector< QVector< QPair< qreal, QVector<qreal> > > >::iterator i;
+    QVector< QPair< qreal, QVector<qreal> > >::iterator j;
+    QVector<qreal>::iterator k;
+    printf("-----------------------------------------------------\n");
+    for (i=evaluatedConstraints.begin(); i!=evaluatedConstraints.end(); ++i){
+        printf("Set of constraints...\n");
+        for (j=i->begin(); j!=i->end(); ++j) {
+            printf("  constraint: %f (",j->first);
+            int count = 0;
+            for (k=j->second.begin(); k!=j->second.end(); ++k) {
+                if (count<7) printf(" %f",*k);
+                count++;
+            }
+            printf(")\n");
+        }
+    }
 }
 
 bool BodyPart::setEncPos( const QVector<qreal>& x )
@@ -86,13 +97,10 @@ bool BodyPart::verify()
 
 void BodyPart::publishState()
 {
-    QVector<qreal> t,s;
+    QVector<qreal> t;
     QVector<Motor*>::iterator i;
     for ( i=begin(); i!=end(); ++i )
-	{
         t.append((*i)->getTorque());
-        s.append((*i)->getSpring());
-	}
     emit repulsiveForce(t);
-    emit constraintSpring(s);
+    emit constraintState(evaluatedConstraints);
 }

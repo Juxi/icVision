@@ -11,6 +11,7 @@
 #define LINEARCONSTRAINT_H
 
 #include <QStringList>
+#include <QVector>
 
 
 namespace KinematicModel
@@ -30,14 +31,16 @@ public:
                      bool _negate = false);
     ~LinearConstraint(){}
     
-    bool evaluate(QVector<qreal>&);
+    QVector<qreal> getNorm();
+    bool evaluate(qreal&);
     
 private:
     BodyPart		*parent;
-    QList<qreal>	a,
-                    norm;
+    QList<qreal>	a;
+    //QVector<qreal>  norm;
     QList<int>		q;
     qreal			b;
+    qreal           aLen;
     //qreal           nogo;
     bool            negate;
 };

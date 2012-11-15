@@ -7,18 +7,21 @@ Controller::Controller( KinematicModel::Robot* _robot,
                        int freq ) : PartController( _robot->getName().toStdString().c_str(),
                                                     _robot->getPart(_partNum)->name().toStdString().c_str(),
                                                     freq),
-                        robot(_robot),
-                        partNum(_partNum)
+                                    robot(_robot),
+                                    partNum(_partNum),
+                                    cstThresh(20.0)
 {
     QObject::connect( this, SIGNAL(setRobotPosition(int,QVector<qreal>)), robot, SLOT(setEncoderPosition(int,QVector<qreal>)) );
     QObject::connect( robot->getPart(partNum), SIGNAL(repulsiveForce(QVector<qreal>)), this, SLOT(setRepulsiveForce(QVector<qreal>)) );
-    QObject::connect( robot->getPart(partNum), SIGNAL(constraintSpring(QVector<qreal>)), this, SLOT(setConstraintSpring(QVector<qreal>)) );
+    
+    qRegisterMetaType< QVector< QVector< QPair< qreal, QVector<qreal> > > > >("QVector< QVector< QPair< qreal, QVector<qreal> > > >");
+    QObject::connect( robot->getPart(partNum), SIGNAL(constraintState(QVector< QVector< QPair< qreal, QVector<qreal> > > >)), this, SLOT(setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > >)) );
 }
 
 void Controller::setRepulsiveForce(QVector<qreal> t)
 {
     if ( t.size() != getNumJoints() )
-        printf("Wrong size body part torque vector\n");
+        printf("Wrong size body part torque vector (%d,%d)\n",t.size(),getNumJoints());
     
     //printf("setting collision reaction: ");
     for (int i=0; i<getNumJoints(); i++)
@@ -31,20 +34,36 @@ void Controller::setRepulsiveForce(QVector<qreal> t)
     //printf("\n");
 }
 
-void Controller::setConstraintSpring(QVector<qreal> s)
+void Controller::setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > > evaluatedConstraints)
 {
-    if ( s.size() != getNumJoints() )
-        printf("Wrong size body part torque vector\n");
+    QVector<qreal> springDispl;
+    springDispl.resize(getNumJoints());
     
-    //printf("setting collision reaction: ");
-    for (int i=0; i<getNumJoints(); i++)
+    QVector< QVector< QPair< qreal, QVector<qreal> > > >::iterator i;
+    QVector< QPair< qreal, QVector<qreal> > >::iterator j;
+    for ( i=evaluatedConstraints.begin(); i!=evaluatedConstraints.end(); ++i)
     {
-        if (i<s.size()) {
-            fCst[i] = s.at(i);
-      //      printf("%f ",g[i]);
+        bool applySpringForce = true;
+        QVector<qreal> thisSpringDispl;
+        thisSpringDispl.resize(getNumJoints());
+        for ( j=(*i).begin(); j!=(*i).end(); ++j) {
+            thisSpringDispl = vectorSum(thisSpringDispl, scalarMult(j->first, j->second) );
+            if ( j->first > cstThresh ) {
+                applySpringForce = false;
+                break;
+            }
         }
+        if (applySpringForce)
+            springDispl = vectorSum(springDispl, thisSpringDispl);
     }
-    //printf("\n");
+    //if (!applySpringForce) {
+    //    springDispl.clear();
+    //    springDispl.resize(getNumJoints());
+    //}
+    for (int j=0; j<getNumJoints(); j++) {
+        if (j<springDispl.size())
+            fCst[j] = springDispl.at(j);
+    }
 }
 
 void Controller::handler( yarp::os::Bottle* b )
@@ -146,4 +165,21 @@ bool Controller::projectToJointSpace( QString name, yarp::os::Bottle* opSpaceFT,
         }
     }
     return false;
+}
+
+QVector<qreal> Controller::vectorSum(QVector<qreal> a,QVector<qreal> b) {
+    QVector<qreal> ans;
+    if (a.size() != b.size()) return ans;
+    QVector<qreal>::iterator i,j;
+    for (i=a.begin(),j=b.begin(); i!=a.end() && j!=b.end(); ++i,++j)
+        ans.append((*i)+(*j));
+    return ans;
+}
+
+QVector<qreal> Controller::scalarMult(qreal a,QVector<qreal> b){
+    QVector<qreal> ans;
+    QVector<qreal>::iterator i;
+    for (i=b.begin(); i!=b.end(); ++i)
+        ans.append(a * (*i));
+    return ans;
 }

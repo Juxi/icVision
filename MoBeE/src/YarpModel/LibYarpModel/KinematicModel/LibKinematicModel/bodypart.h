@@ -73,7 +73,7 @@ public:
 signals:
     
     void repulsiveForce(QVector<qreal>);
-    void constraintSpring(QVector<qreal>);
+    void constraintState(QVector< QVector< QPair< qreal, QVector<qreal> > > >);
 	
 private:
     
@@ -83,6 +83,9 @@ private:
 	
     QVector<Marker*>		markers;		//!< list of markers
 	QVector< QVector<LinearConstraint> > constraints;  // these are in conjunctive normal form
+    QVector< QVector< QPair< qreal, QVector<qreal> > > > evaluatedConstraints;
+    
+    void printEvaluatedConstraints();
     
     friend class ZPHandler;	
 };

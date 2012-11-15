@@ -31,7 +31,7 @@ public:
     
 public slots:
     
-    void setConstraintSpring(QVector<qreal>);
+    void setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > >);
     void setRepulsiveForce(QVector<qreal>);
     
 private:
@@ -44,9 +44,12 @@ private:
     bool projectToJointSpace( QString markerName, yarp::os::Bottle* opSpaceFT, yarp::os::Bottle& jointSpaceF );
     
     QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
+    QVector<qreal> scalarMult(qreal,QVector<qreal>);
 
     KinematicModel::Robot* robot;
     int partNum;
+    
+    double cstThresh;
     
 signals:
     void setRobotPosition(int,const QVector<qreal>&);

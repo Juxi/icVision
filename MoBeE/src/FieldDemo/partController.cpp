@@ -274,9 +274,7 @@ void PartController::run()
             if (i<7) viewShit.addDouble(fCst[i]);
         }
         
-        printf("ViewShit: %s\n", viewShit.toString().c_str());
-        //printf("\n");
-        
+        //printf("ViewShit: %s\n", viewShit.toString().c_str());
         
         vel->velocityMove( ctrl );
     }
