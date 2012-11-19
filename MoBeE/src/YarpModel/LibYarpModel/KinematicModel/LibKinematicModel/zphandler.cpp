@@ -80,16 +80,11 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			double b = attributes.value("b").toDouble(&ok);
 			QStringList a = attributes.value("a").split(" ",QString::SkipEmptyParts);
 			QStringList q = attributes.value("q").split(" ",QString::SkipEmptyParts);
-			bool negate = false;
-            if ( attributes.value("negate") == "true" ) {
-                negate = true;
-                //printf("negated something\n");
-            }
             
 			if ( ok && a.size() > 0 && a.size() == q.size() )
 			{
 				//bodyPart->addConstraint( a, q, b );
-                LinearConstraint c(bodyPart,a,q,b,negate);
+                LinearConstraint c(bodyPart,a,q,b);
                 constraintList->append(c);
 			}
 			else { printf("WARNING: skipping badly formed <constraint/>\n"); }

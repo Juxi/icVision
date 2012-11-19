@@ -256,9 +256,7 @@ void PartController::run()
             if ( q1[i] < min[i] + nogo[i] )         fLim[i] = fLimMax[i] * (min[i]+nogo[i]-q1[i])/nogo[i];
             else if ( q1[i] > max[i] - nogo[i] )    fLim[i] = fLimMax[i] * -(q1[i]-(max[i]-nogo[i]))/nogo[i];
             else                                    fLim[i] = 0.0;
-            
-            // squash f and h
-            
+      
             // compute acceleration (should squash this too)
             a[i] =  - c[i]*v[i]
                     + fX[i]
@@ -274,7 +272,7 @@ void PartController::run()
             if (i<7) viewShit.addDouble(fCst[i]);
         }
         
-        //printf("ViewShit: %s\n", viewShit.toString().c_str());
+        printf("ViewShit: %s\n", viewShit.toString().c_str());
         
         vel->velocityMove( ctrl );
     }

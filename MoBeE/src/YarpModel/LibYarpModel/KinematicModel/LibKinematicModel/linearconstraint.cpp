@@ -6,17 +6,14 @@ using namespace KinematicModel;
 LinearConstraint::LinearConstraint( BodyPart *_parent,
                                     QStringList _a,
                                     QStringList _q,
-                                    qreal _b,
-                                    bool _negate ) : parent(_parent),
-                                                    b(_b),
-                                                    negate(_negate)
+                                    qreal _b ) : parent(_parent),
+                                                    b(_b)
 {
     QStringList::iterator i,j;
     for ( i=_a.begin(), j=_q.begin(); i!=_a.end() && j!=_q.end(); ++i, ++j)
     {
         aLen += (*i).toDouble()*(*i).toDouble();
-        if (!negate) a.append( (*i).toDouble() );
-        else a.append( -(*i).toDouble() );
+        a.append( (*i).toDouble() );
         q.append( (*j).toInt() );
     }
     aLen = sqrt(aLen);

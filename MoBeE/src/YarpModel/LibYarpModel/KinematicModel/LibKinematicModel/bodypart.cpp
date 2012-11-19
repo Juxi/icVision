@@ -44,7 +44,7 @@ bool BodyPart::evaluateConstraints()
 		if ( !inner ) result = false;
 	}
     evaluatedConstraints = newlyEvaluatedConstraints;
-    printEvaluatedConstraints();
+    //printEvaluatedConstraints();
 	return result;
 }
 

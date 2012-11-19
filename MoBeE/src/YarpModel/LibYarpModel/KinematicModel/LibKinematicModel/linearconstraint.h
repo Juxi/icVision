@@ -27,8 +27,7 @@ public:
     LinearConstraint( BodyPart *_parent,
                      QStringList _a,
                      QStringList _q,
-                     qreal _b,
-                     bool _negate = false);
+                     qreal _b);
     ~LinearConstraint(){}
     
     QVector<qreal> getNorm();
@@ -37,12 +36,9 @@ public:
 private:
     BodyPart		*parent;
     QList<qreal>	a;
-    //QVector<qreal>  norm;
     QList<int>		q;
     qreal			b;
     qreal           aLen;
-    //qreal           nogo;
-    bool            negate;
 };
 #endif
 
