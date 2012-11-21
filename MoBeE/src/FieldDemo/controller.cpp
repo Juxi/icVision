@@ -18,20 +18,23 @@ Controller::Controller( KinematicModel::Robot* _robot,
     QObject::connect( robot->getPart(partNum), SIGNAL(constraintState(QVector< QVector< QPair< qreal, QVector<qreal> > > >)), this, SLOT(setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > >)) );
 }
 
-void Controller::setRepulsiveForce(QVector<qreal> t)
+void Controller::setRepulsiveForce(QVector<qreal> f)
 {
-    if ( t.size() != getNumJoints() )
-        printf("Wrong size body part torque vector (%d,%d)\n",t.size(),getNumJoints());
+    if ( f.size() != getNumJoints() )
+        printf("Wrong size body part torque vector (%d,%d)\n",f.size(),getNumJoints());
     
-    //printf("setting collision reaction: ");
-    for (int i=0; i<getNumJoints(); i++)
-    {
-        if (i<t.size()) {
-            fFld[i] = t.at(i);
-            //      printf("%f ",g[i]);
-        }
-    }
-    //printf("\n");
+    f = scalarMult(1000.0, f);
+
+    yarp::os::Bottle b;
+    double fMagnitude = 0.0;
+    for (QVector<qreal>::iterator i=f.begin(); i!=f.end(); ++i)
+        fMagnitude += (*i)*(*i);
+    fMagnitude = sqrt(fMagnitude);
+    //if (fMagnitude > 0.0) f = scalarMult(1.0/fMagnitude, f);
+    for (QVector<qreal>::iterator i=f.begin(); i!=f.end(); ++i)
+        b.addDouble(fMagnitude*(*i));
+    
+    setFFLD(&b);
 }
 
 void Controller::setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > > evaluatedConstraints)
@@ -41,29 +44,29 @@ void Controller::setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qre
     
     QVector< QVector< QPair< qreal, QVector<qreal> > > >::iterator i;
     QVector< QPair< qreal, QVector<qreal> > >::iterator j;
-    for ( i=evaluatedConstraints.begin(); i!=evaluatedConstraints.end(); ++i)
-    {
+    for ( i=evaluatedConstraints.begin(); i!=evaluatedConstraints.end(); ++i) { // for the list of constraints
         bool applySpringForce = true;
-        QVector<qreal> thisSpringDispl;
-        thisSpringDispl.resize(getNumJoints());
-        for ( j=(*i).begin(); j!=(*i).end(); ++j) {
-            thisSpringDispl = vectorSum(thisSpringDispl, scalarMult(j->first, j->second) );
-            if ( j->first > cstThresh ) {
+        QVector<qreal> springDisplSum;
+        springDisplSum.resize(getNumJoints());
+        for ( j=(*i).begin(); j!=(*i).end(); ++j) { // each constraint is a list of constraints in Conjunctive Normal Form (CNF)
+            if ( j->first > cstThresh ) { // if one of the constraints in the CNF is satisfied, the set is satisfied
                 applySpringForce = false;
                 break;
             }
+            qreal dx = (cstThresh-j->first)/cstThresh;
+            QVector<qreal> thisSpringDispl = scalarMult(dx, j->second);
+            springDisplSum = vectorSum(thisSpringDispl, springDisplSum );
         }
-        if (applySpringForce)
-            springDispl = vectorSum(springDispl, thisSpringDispl);
+        if (applySpringForce) { // if the CNF set is not satisfied, use it to apply a force to the robot
+            springDispl = vectorSum(springDispl, springDisplSum);
+        }
     }
-    //if (!applySpringForce) {
-    //    springDispl.clear();
-    //    springDispl.resize(getNumJoints());
-    //}
-    for (int j=0; j<getNumJoints(); j++) {
-        if (j<springDispl.size())
-            fCst[j] = springDispl.at(j);
-    }
+    
+    yarp::os::Bottle b;
+    QVector<qreal>::iterator k;
+    for (k=springDispl.begin(); k!=springDispl.end(); ++k)
+        b.addDouble(*k);
+    setFCST(&b);
 }
 
 void Controller::handler( yarp::os::Bottle* b )
@@ -83,7 +86,7 @@ void Controller::handler( yarp::os::Bottle* b )
                 printf("project() failed!!!\n");
                 break;
             }
-            setForce( &jointSpaceForce );
+            //setFRPC( &jointSpaceForce );
             //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
             break;
         default:

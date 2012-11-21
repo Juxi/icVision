@@ -68,8 +68,6 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         k = new double[numJoints];
         c = new double[numJoints];
         
-        fRPC = new double[numJoints];
-        
         fLim = new double[numJoints];
         fLimMax = new double[numJoints];
         
@@ -77,10 +75,16 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         fXMax = new double[numJoints];
         
         fFld = new double[numJoints];
+        kfFld = new double[numJoints];
         fFldMax = new double[numJoints];
         
         fCst = new double[numJoints];
+        kfCst = new double[numJoints];
         fCstMax = new double[numJoints];
+        
+        fRPC = new double[numJoints];
+        kfRPC = new double[numJoints];
+        fRPCMax = new double[numJoints];
         
         a = new double[numJoints];
         ctrl = new double[numJoints];
@@ -104,7 +108,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             
             w[i]        = 1.0;
             k[i]        = 50.0;
-            c[i]        = 10.0;
+            c[i]        = 30.0;
             a[i]        = 0.0;
             ctrl[i]     = 0.0;
             
@@ -112,15 +116,19 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             fXMax[i]    = 800.0;
         
             fLim[i]     = 0.0;
-            fLimMax[i]  = 1600.0;
-            
-            fRPC[i]     = 0.0;
-            
-            fFld[i]     = 0.0;
-            fFldMax[i]  = 0.0;
+            fLimMax[i]  = 1000.0;
             
             fCst[i]     = 0.0;
-            fCstMax[i]  = 0.0;
+            kfCst[i]    = 100.0;
+            fCstMax[i]  = 1600.0;
+            
+            fFld[i]     = 0.0;
+            kfFld[i]    = 100.0;
+            fFldMax[i]  = 1600.0;
+            
+            fRPC[i]     = 0.0;
+            kfRPC[i]    = 20.0;
+            fRPCMax[i]  = 1000.0;
             
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
@@ -171,7 +179,19 @@ void PartController::afterStart(bool s)
 		printf("PartController did not start\n");
 }
 
-void PartController::setAttractor( yarp::os::Bottle* list )
+
+double PartController::magnitude(yarp::os::Bottle* list)
+{
+    double m = 0.0;
+    for ( int i = 0; i < numJoints; i++ ) {
+        if (!list->get(i).isNull()) {
+            m+=list->get(i).asDouble()*list->get(i).asDouble();
+        }
+    }
+    return sqrt(m);
+}
+
+void PartController::setATT( yarp::os::Bottle* list )
 {
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull())
@@ -184,24 +204,42 @@ void PartController::setAttractor( yarp::os::Bottle* list )
     }
 }
 
-void PartController::setForce( yarp::os::Bottle* list )
+void PartController::setFCST(yarp::os::Bottle* list)
 {
-    // not sure how to normalize this one
-	for ( int i = 0; i < numJoints; i++ ) {
+    //printf("setFCST: %s\n",list->toString().c_str());
+
+    // expects a vector where each element is on the interval [-1,1]
+    // enforces a hard limit on each dimension of the force
+    for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
-            fRPC[i] = list->get(i).asDouble();
+            double f = list->get(i).asDouble();
+            if (f>1.0) f=1.0;
+            else if (f<-1.0) f=-1.0;
+            fCst[i] = f*fCstMax[i];
         }
     }
 }
 
-/*void PartController::increment( double **var, yarp::os::Bottle* list )
+void PartController::setFFLD(yarp::os::Bottle* list)
 {
+    // squash the force contained in 'list' but preserve its direction
+    double mag = magnitude(list);
+    for ( int i = 0; i < numJoints; i++ ) {
+        if (!list->get(i).isNull())
+            fFld[i] = fFldMax[i]/(fFldMax[i]/kfFld[i]+mag) * list->get(i).asDouble();
+    }
+}
+
+void PartController::setFRPC( yarp::os::Bottle* list )
+{
+    // squash the force contained in 'list' but preserve its direction
+    double mag = magnitude(list);
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
-            (*var)[i] += list->get(i).asDouble();
+            fRPC[i] = fRPCMax[i]/(fRPCMax[i]/kfRPC[i]+mag) * list->get(i).asDouble();
         }
     }
-}*/
+}
 
 void PartController::run() 
 {
@@ -218,11 +256,11 @@ void PartController::run()
         int cmd = b->get(0).asVocab();
         switch (cmd) {
             case VOCAB_QATTR:
-                setAttractor( b->get(1).asList() );
+                setATT( b->get(1).asList() );
                 printf("\nSet attractor position!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             case VOCAB_QFORCE:
-                setForce( b->get(1).asList() );
+                setFRPC( b->get(1).asList() );
                 printf("\nSet joint-space force!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             default:
@@ -231,8 +269,7 @@ void PartController::run()
         }
 	}
 	
-
-    yarp::os::Bottle viewShit;
+    yarp::os::Bottle view0,view1,view2,view3;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -269,10 +306,18 @@ void PartController::run()
             // compute next control command
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             
-            if (i<7) viewShit.addDouble(fCst[i]);
+            if (i<7) {
+                view0.addDouble(fX[i]);
+                view1.addDouble(fLim[i]);
+                view2.addDouble(fCst[i]);
+                view3.addDouble(fFld[i]);
+            }
         }
-        
-        printf("ViewShit: %s\n", viewShit.toString().c_str());
+        printf("fX:   %s\n", view0.toString().c_str());
+        printf("fLim: %s\n", view1.toString().c_str());
+        printf("fCst: %s\n", view2.toString().c_str());
+        printf("fFld: %s\n", view3.toString().c_str());
+        printf("\n");
         
         vel->velocityMove( ctrl );
     }

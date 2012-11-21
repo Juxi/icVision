@@ -7,7 +7,7 @@ LinearConstraint::LinearConstraint( BodyPart *_parent,
                                     QStringList _a,
                                     QStringList _q,
                                     qreal _b ) : parent(_parent),
-                                                    b(_b)
+                                                 b(_b)
 {
     QStringList::iterator i,j;
     for ( i=_a.begin(), j=_q.begin(); i!=_a.end() && j!=_q.end(); ++i, ++j)
@@ -47,16 +47,6 @@ bool LinearConstraint::evaluate(qreal& ans)
     }
 
     ans = AdotQ + b;
-    
-    /*bool result = ans > 0;
-    if (negate) {
-        result = !result;
-        ans = -ans;
-    }*/
-   
-    //springDispl.clear();
-    //for ( i=norm.begin(), j=q.begin(); i!=norm.end() && j!=q.end(); ++i, ++j)
-    //    springDispl.append(ans*(*i));
 
     return ans > 0;
 }

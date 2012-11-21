@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 	torsoA.add(10.0);   torsoA.add(0.0);    torsoA.add(0.0);
 	torsoB.add(-10.0);  torsoB.add(0.0);    torsoB.add(0.0);
 	
-    yarp::os::Bottle A,B,C,D;
-	A.add(0.5);
-    A.add(0.1);
-    A.add(0.2);
+    yarp::os::Bottle A,B,C,D,E;
+    A.add(0.0);
+    A.add(0.0);
+    A.add(0.0);
     A.add(0.0);
     A.add(0.0);
     A.add(0.0);
@@ -36,10 +36,8 @@ int main(int argc, char *argv[])
     A.add(0.0);
     A.add(0.0);
     
-    B.add(0.5);
-    B.add(0.1);
-    B.add(0.2);
-    B.add(0.0);
+	B.add(0.0);
+    B.add(1.0);
     B.add(1.0);
     B.add(0.0);
     B.add(0.0);
@@ -52,11 +50,13 @@ int main(int argc, char *argv[])
     B.add(0.0);
     B.add(0.0);
     B.add(0.0);
+    B.add(0.0);
+    B.add(0.0);
     
-    C.add(0.5);
-    C.add(0.1);
-    C.add(0.2);
     C.add(1.0);
+    C.add(0.0);
+    C.add(0.0);
+    C.add(0.0);
     C.add(0.0);
     C.add(0.0);
     C.add(0.0);
@@ -71,10 +71,10 @@ int main(int argc, char *argv[])
     C.add(0.0);
     
     D.add(0.5);
-    D.add(0.1);
-    D.add(0.2);
+    D.add(0.5);
+    D.add(0.5);
     D.add(1.0);
-    D.add(1.0);
+    D.add(0.0);
     D.add(0.0);
     D.add(0.0);
     D.add(0.0);
@@ -87,10 +87,27 @@ int main(int argc, char *argv[])
     D.add(0.0);
     D.add(0.0);
     
+    E.add(0.5);
+    E.add(0.5);
+    E.add(0.5);
+    E.add(1.0);
+    E.add(1.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    E.add(0.0);
+    
 	int i = 0;
 	while (true) {
 	
-        /*yarp::os::Bottle& msgA = right_arm.prepare();
+        yarp::os::Bottle& msgA = right_arm.prepare();
         msgA.clear();
         msgA.add("qatt");
         msgA.addList() = A;
@@ -102,19 +119,26 @@ int main(int argc, char *argv[])
         msgB.add("qatt");
         msgB.addList() = B;
         right_arm.write();
-        sleep(15);*/
+        sleep(15);
         
         yarp::os::Bottle& msgC = right_arm.prepare();
         msgC.clear();
         msgC.add("qatt");
-        msgC.addList() = D;
+        msgC.addList() = C;
         right_arm.write();
         sleep(15);
         
         yarp::os::Bottle& msgD = right_arm.prepare();
         msgD.clear();
         msgD.add("qatt");
-        msgD.addList() = C;
+        msgD.addList() = D;
+        right_arm.write();
+        sleep(15);
+        
+        yarp::os::Bottle& msgE = right_arm.prepare();
+        msgE.clear();
+        msgE.add("qatt");
+        msgE.addList() = E;
         right_arm.write();
         sleep(15);
 	}

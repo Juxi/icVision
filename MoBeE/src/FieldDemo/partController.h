@@ -64,20 +64,25 @@ private:
                         *fLim,         // joint limit repulsion
                         *fLimMax,      // maximum repulsive force
     
-                        *fRPC;         // user defined force (from RPC)
-    
-                        //*fFld,         // force fields (for use by derrived classes)
-                        //*fFldMax,
-    
-                        //*fCst,         // linear constraint forces (for use by derrived classes)
-                        //*fCstMax,
-    
+                        *fFld,      // force fields (for use by derrived classes)
+                        *kfFld,
+                        *fFldMax,
                         
+                        *fCst,      // linear constraint forces (for use by derrived classes)
+                        *kfCst,     // spring constant for linear constraint forces
+                        *fCstMax,
+                        
+                        *fRPC,         // user defined force (from RPC)
+                        *kfRPC,
+                        *fRPCMax;
+    
     
 protected:
     
-    void setAttractor(yarp::os::Bottle*);
-    void setForce(yarp::os::Bottle*);
+    void setATT(yarp::os::Bottle*);
+    void setFFLD(yarp::os::Bottle*);
+    void setFCST(yarp::os::Bottle*);
+    void setFRPC(yarp::os::Bottle*);
     
     virtual void handler( yarp::os::Bottle* ){}
     virtual void procEncoders( double* ){}
@@ -86,11 +91,7 @@ protected:
     virtual void run();
     virtual void threadRelease();
     
-    double  *fFld,         // force fields (for use by derrived classes)
-            *fFldMax,
-    
-            *fCst,         // linear constraint forces (for use by derrived classes)
-            *fCstMax;
+    double magnitude(yarp::os::Bottle*);
 	
 };
 #endif

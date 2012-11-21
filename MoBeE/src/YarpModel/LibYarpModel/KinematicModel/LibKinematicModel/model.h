@@ -222,9 +222,7 @@ protected:
         
         QVector3D p1( coll_data->point1[0], coll_data->point1[1], coll_data->point1[2]);
         QVector3D p2( coll_data->point2[0], coll_data->point2[1], coll_data->point2[2]);
-        QVector3D F = //1000*
-                        QVector3D( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
-        //F*=F;
+        QVector3D F = QVector3D( coll_data->normal[0], coll_data->normal[1], coll_data->normal[2]);
         
         //printf("REACTION FORCE: %f\n",F.length());
         QVector3D T1 = QVector3D::crossProduct(p1, F);
