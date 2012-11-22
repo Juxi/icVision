@@ -13,7 +13,7 @@
 
 #include <QObject>
 #include <yarp/os/all.h>
-#include <yarp/os/IObserver.h>
+#include "yarp/os/IObserver.h"
 
 namespace MoBeE
 {	

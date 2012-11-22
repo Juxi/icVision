@@ -2,12 +2,6 @@
 # Author: Gregor Kaufmann
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-## The following section sets up QT support
-FIND_PACKAGE ( Qt4 REQUIRED )
-# SET ( QT_USE_QTOPENGL TRUE )
-# SET ( QT_USE_QTXML TRUE )
-INCLUDE ( ${QT_USE_FILE} )
-
 INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../LibYarpFilter/" )
 
 SET ( demo_src_files SimpleQtObserver.cpp SimpleQtSimulator.cpp filterDemo.cpp )

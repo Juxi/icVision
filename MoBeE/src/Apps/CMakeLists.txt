@@ -2,16 +2,7 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
-
-PROJECT ( RobotFilter )
-
-SET ( RobotFilter_VERSION_MAJOR 1 )
-SET ( RobotFilter_VERSION_MINOR 0 )
-
-MESSAGE(STATUS "*** RobotFilter Project ***")
-
-SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel/KinematicModel/CMakeScripts )
+SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../CMakeScripts )
 
 ### Find Libraries ###
 FIND_PACKAGE ( YARP REQUIRED )
@@ -28,10 +19,10 @@ FIND_PACKAGE ( Qt4 REQUIRED )
 INCLUDE ( ${QT_USE_FILE} )
 INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES ( ${ACE_INCLUDE_DIR} )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../YarpModel/LibYarpModel/KinematicModel/LibKinematicModel" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/LibRobotFilter" )
-INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/LibRobotFilter/YarpFilter/LibYarpFilter" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../LibYarpModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../LibKinematicModel" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../LibRobotFilter" )
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../LibYarpCBFilter" )
 
 ### Set some platform-specific variables ###
 SET (Q_WS_MAC FALSE)
@@ -51,7 +42,10 @@ IF ( WIN32 )
 ENDIF ( WIN32 )
 
 ### Parse the directories where build targets are ###
-ADD_SUBDIRECTORY ( LibRobotFilter )
-ADD_SUBDIRECTORY ( PositionReflexDemo )
-ADD_SUBDIRECTORY(../YarpModel "${CMAKE_CURRENT_BINARY_DIR}/YarpModel")
+# The order of these is important.  Don't F*** with it!
+SET( PARSED_YARPMODEL false )
+
+ADD_SUBDIRECTORY ( KinematicModelDemo )
+ADD_SUBDIRECTORY ( RobotFilterDemo )
+ADD_SUBDIRECTORY ( ForceController )
 

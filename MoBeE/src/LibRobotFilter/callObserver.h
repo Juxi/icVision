@@ -12,7 +12,7 @@
 #define CALLOBSERVER_H_
 
 #include <yarp/os/all.h>
-#include <yarp/os/IObserver.h>
+#include "yarp/os/IObserver.h"
 #include "responseObserver.h"
 
 /** \brief Contains classes relevant to the virtual skin static library.

@@ -1,6 +1,6 @@
 #include <qmath.h>
-#include <cylinder.h>
-#include <transformable.h>
+#include "cylinder.h"
+#include "transformable.h"
 
 using namespace KinematicModel;
 
