@@ -13,7 +13,7 @@
 #include <QThread>
 #include <QMutex>
 #include <QReadWriteLock>
-#include <SOLID.h>
+#include "SOLID.h"
 
 #include "robot.h"
 #include "primitiveobject.h"
