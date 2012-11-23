@@ -3,8 +3,6 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 
-MESSAGE(STATUS "******************************* PARSED_LIB_YARP_MODEL = ${PARSED_LIB_YARP_MODEL}")
-
 SET( PARSED ${PARSED_LIB_YARP_MODEL} )
 IF( NOT PARSED )
 

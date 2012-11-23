@@ -2,8 +2,6 @@
 # Author: Mikhail Frank
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-MESSAGE(STATUS "******************************* PARSED_LIB_KINEMATIC = ${PARSED_LIB_KINEMATIC}")
-
 SET( PARSED ${PARSED_LIB_KINEMATIC} )
 IF( NOT PARSED )
 
