@@ -313,11 +313,11 @@ void PartController::run()
                 view3.addDouble(fFld[i]);
             }
         }
-        printf("fX:   %s\n", view0.toString().c_str());
-        printf("fLim: %s\n", view1.toString().c_str());
-        printf("fCst: %s\n", view2.toString().c_str());
-        printf("fFld: %s\n", view3.toString().c_str());
-        printf("\n");
+        //printf("fX:   %s\n", view0.toString().c_str());
+        //printf("fLim: %s\n", view1.toString().c_str());
+        //printf("fCst: %s\n", view2.toString().c_str());
+        //printf("fFld: %s\n", view3.toString().c_str());
+        //printf("\n");
         
         vel->velocityMove( ctrl );
     }

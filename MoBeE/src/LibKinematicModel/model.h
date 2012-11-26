@@ -61,7 +61,8 @@ public:
 	void grabObject( CompositeObject* object, Robot* robot, int markerIndex );
 	void appendObject( KinTreeNode* );
 	void appendObject( CompositeObject* );	
-	
+	bool removeWorldObject( CompositeObject* );
+    
 	void clearTheWorld();
 	void clearWorldObject( CompositeObject* );
 	void setStopOnFirstCollision(bool b) { stopOnFirstCollision = b ? DT_DONE : DT_CONTINUE; }
@@ -101,7 +102,7 @@ protected:
     DT_RespTableHandle newRobotFieldTable();
 	DT_ResponseClass newResponseClass( DT_RespTableHandle );
 	
-	bool removeWorldObject( CompositeObject* );
+	
 
 	void removeReflexResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );
 	void removeVisualResponse( DT_RespTableHandle t, DT_ResponseClass c1, DT_ResponseClass c2 );

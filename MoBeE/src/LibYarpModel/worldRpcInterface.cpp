@@ -175,11 +175,13 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			primitive = new KinematicModel::Sphere( r );
 			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
-			
-			if ( geom == VOCAB_SPH ) { composite->setName( "sph" + QString::number(++s) ); }
-			else if ( geom == VOCAB_SSPH ) { composite->setName( "ssph" + QString::number(++ss) ); }
-			
-			reply.addString("Made sphere.");
+            
+            QString name;
+			if ( geom == VOCAB_SPH ) { name = "sph" + QString::number(++s); }
+			else if ( geom == VOCAB_SSPH ) { name = "ssph" + QString::number(++ss); }
+            composite->setName(name);
+            //printf("%s\n",name.toLocal8Bit().data());
+			reply.addString( name.toLocal8Bit().data() );
 			
 		} else if ( geom == VOCAB_CYL || geom == VOCAB_SCYL ) {
 			
@@ -196,10 +198,11 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
 			
-			if ( geom == VOCAB_CYL ) { composite->setName( "cyl" + QString::number(++c) ); }
-			else if ( geom == VOCAB_SCYL ) { composite->setName( "scyl" + QString::number(++sc) ); }
-			
-			reply.addString("Made cylinder.");
+			QString name;
+            if ( geom == VOCAB_CYL ) { name = "cyl" + QString::number(++c); }
+			else if ( geom == VOCAB_SCYL ) { name = "scyl" + QString::number(++sc); }
+            composite->setName(name);
+			reply.addString( name.toLocal8Bit().data() );
 			
 		} else if ( geom == VOCAB_BOX || geom == VOCAB_SBOX ) {
 			
@@ -216,12 +219,12 @@ void WorldRpcInterface::make( const yarp::os::Bottle& command, yarp::os::Bottle&
 			primitive = new KinematicModel::Box( QVector3D(x,y,z) );
 			composite->appendPrimitive( primitive );
 			composite->setPosition( QVector3D(px,py,pz) );
-			
-			if ( geom == VOCAB_BOX ) { composite->setName( "box" + QString::number(++b) ); }
-			else if ( geom == VOCAB_SBOX ) { composite->setName( "sbox" + QString::number(++sb) ); }
-			
-			reply.addString("Made box.");
-			
+            
+            QString name;
+            if ( geom == VOCAB_BOX ) { name = "box" + QString::number(++b); }
+			else if ( geom == VOCAB_SBOX ) { name = "sbox" + QString::number(++sb); }
+            composite->setName(name);
+			reply.addString( name.toLocal8Bit().data() );
 		}
 		else { reply.addString("MK ERROR: Unknown geometry... use '(s)sph', '(s)cyl', or '(s)box'"); }
 		
@@ -367,7 +370,8 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 	
 	if ( object )
 	{
-		model->clearWorldObject(object);
+		//model->clearWorldObject(object);
+        model->removeWorldObject(object);
 
 		int type = command.get(n).asVocab();
 		QColor collidingColor,freeColor;
@@ -401,8 +405,8 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 				collidingColor.setAlphaF(0.5);
 				
 				object->setResponseClass(model->TARGET());
-				//object->setFreeColor( freeColor );
-				//object->setCollidingColor( collidingColor );
+				object->setFreeColor( freeColor );
+				object->setCollidingColor( collidingColor );
 	
 				reply.addString("Changed object type to 'target'.");
 				

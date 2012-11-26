@@ -62,6 +62,10 @@ int main(int argc, char *argv[])
                                 the model must be started prior to appending objects by
                                 calling loadWorld(), loadRobot(), or appendObject()		*/
         
+        // Open the RPC interface to the world model
+        printf("\nOPENING WORLD RPC PORT\n");
+        yarpModel->openWorldRpcPort("/MoBeE/world");
+        
         // Load a robot model from file
         if ( robotFile != "" )
         {
@@ -69,15 +73,14 @@ int main(int argc, char *argv[])
             yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
             //printf("done loading robot\n");
             
-            for ( int i=2; 
-                    i < 3;
-                    //yarpRobot->numBodyParts();
-                    i++ )
+            for ( int i=0; i<yarpRobot->numBodyParts(); i++ )
             {
-                Controller* c = new Controller( yarpRobot,
-                                                i,
-                                                20);
-                controllers.append(c);
+                if ( i!=1 ) {   // don't control the head, because the eyes require more tuning
+                    Controller* c = new Controller( yarpRobot,
+                                                    i,
+                                                    20);
+                    controllers.append(c);
+                }
             }
             
             QVector<Controller*>::iterator it;
@@ -98,8 +101,9 @@ int main(int argc, char *argv[])
         
         for ( size_t i=0; i < controllers.size(); i++ )
             controllers.at(i)->stop();
-		
+        
 		if ( yarpModel ) {
+            yarpModel->closeWorldRpcPort();
 			yarpModel->stop(); 
 			delete yarpModel;
 		}
