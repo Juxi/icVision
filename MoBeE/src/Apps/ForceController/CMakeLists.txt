@@ -4,10 +4,10 @@
 
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
-PROJECT ( FictitiousForceControl )
+PROJECT ( MoBeE_Model )
 
-SET ( YarpModel_VERSION_MAJOR 1 )
-SET ( YarpModel_VERSION_MINOR 0 )
+SET ( MoBeE_Model_VERSION_MAJOR 1 )
+SET ( MoBeE_Model_VERSION_MINOR 0 )
 
 SET ( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../CMakeScripts )
 
@@ -49,34 +49,34 @@ ENDIF ( WIN32 )
 
 
 SET ( src_files		main.cpp
-			partController.cpp
-			controller.cpp
-			controllerRpcInterface.cpp
+                    partController.cpp
+                    controller.cpp
+                    controllerRpcInterface.cpp
 )
 
 SET ( hdr_files		partController.h
                     controller.h
-			controllerRpcInterface.h
+                    controllerRpcInterface.h
 )
 
 QT4_WRAP_CPP( src_files controller.h )
 
-ADD_EXECUTABLE ( mobee	${hdr_files}
-				${src_files} )
+ADD_EXECUTABLE ( MoBeE	${hdr_files}
+                        ${src_files} )
 
-ADD_DEPENDENCIES( mobee	YarpModel 
-				KinematicModel
+ADD_DEPENDENCIES( MoBeE	YarpModel 
+                        KinematicModel
 )
 
-TARGET_LINK_LIBRARIES ( mobee	YarpModel 
-				 	KinematicModel
-					${SOLID_LIBRARY}
-					${QT_LIBRARIES}
-					${OPENGL_LIBRARIES}
-					${YARP_LIBRARIES}
+TARGET_LINK_LIBRARIES ( MoBeE	YarpModel 
+                                KinematicModel
+                                ${SOLID_LIBRARY}
+                                ${QT_LIBRARIES}
+                                ${OPENGL_LIBRARIES}
+                                ${YARP_LIBRARIES}
 )
 
-INSTALL ( TARGETS mobee DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS MoBeE DESTINATION ${CMAKE_SOURCE_DIR}/bin )
 
 ADD_SUBDIRECTORY ( ../../LibYarpModel ${CMAKE_CURRENT_BINARY_DIR}/LibYarpModel )
 ADD_SUBDIRECTORY( Demo )
