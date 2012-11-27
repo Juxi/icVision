@@ -51,10 +51,12 @@ ENDIF ( WIN32 )
 SET ( src_files		main.cpp
 			partController.cpp
 			controller.cpp
+			controllerRpcInterface.cpp
 )
 
 SET ( hdr_files		partController.h
                     controller.h
+			controllerRpcInterface.h
 )
 
 QT4_WRAP_CPP( src_files controller.h )

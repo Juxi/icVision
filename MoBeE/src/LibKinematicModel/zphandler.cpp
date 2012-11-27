@@ -274,12 +274,19 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 			markerCounter++;
 		}
         
+        QVector3D norm = QVector3D( attributes.value("nx").toDouble(),
+                                    attributes.value("ny").toDouble(),
+                                    attributes.value("nz").toDouble() );
+        if (norm.length() == 0)
+            norm.setX(1.0);
+        norm.normalize();
+        
         int tracer = 5;
         if (!attributes.value("tracer").isEmpty())
             tracer = attributes.value("tracer").toInt();
             
 		// create the marker, attach it to the node, and make it known to the robot
-		Marker* marker = new Marker(node, name);
+		Marker* marker = new Marker(node, name, norm);
 		marker->createTracer( model->GHOST(), tracer, 0.008, Qt::yellow);
 		robot->markers.push_back(marker);
         robot->countCompositeObject();

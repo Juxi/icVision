@@ -13,15 +13,19 @@ class Motor;
 class Marker
 {
 public:
-	Marker(KinTreeNode* object, QString name) : m_object(object),
-													tracerObject(NULL),
-													m_name(name),
-													d(0)
+	Marker(KinTreeNode* object, QString name, QVector3D n) : m_object(object),
+                                                            normal(QVector4D(n,1)),
+                                                            tracerObject(NULL),
+                                                            m_name(name),
+                                                            d(0)
 	{
 	}
 
 	inline KinTreeNode* node()
 	{ return m_object; }
+    
+    inline const QVector3D getNorm() const
+    { return (m_object->getT()*normal).toVector3D(); }
     
 	inline const CompositeObject* tracer() const
 	{ return tracerObject; }
@@ -79,6 +83,7 @@ public:
 
 protected:
 	KinTreeNode *m_object;
+    QVector4D normal;
     CompositeObject *tracerObject;
 	QString m_name;
 	qreal d;

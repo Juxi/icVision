@@ -127,7 +127,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             fFldMax[i]  = 1600.0;
             
             fRPC[i]     = 0.0;
-            kfRPC[i]    = 20.0;
+            kfRPC[i]    = 100.0;
             fRPCMax[i]  = 1000.0;
             
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
@@ -145,10 +145,9 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         //std::cout << "]" << std::endl;
         
         // open the control port
-        yarp::os::ConstString portName("/MoBeE/");
-        portName += _partName;
-        portName += "/";
-		port.open( portName );
+        portPrefix = "/MoBeE/";
+        portPrefix += _partName;
+		port.open( portPrefix + "/cmd" );
 		srand ( yarp::os::Time::now() );
 	} //else { throw("could not connect to robot!"); }
 }
@@ -234,6 +233,7 @@ void PartController::setFRPC( yarp::os::Bottle* list )
 {
     // squash the force contained in 'list' but preserve its direction
     double mag = magnitude(list);
+    printf("RPC magnitude: %f\n", mag);
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
             fRPC[i] = fRPCMax[i]/(fRPCMax[i]/kfRPC[i]+mag) * list->get(i).asDouble();
@@ -269,7 +269,7 @@ void PartController::run()
         }
 	}
 	
-    yarp::os::Bottle view0,view1,view2,view3;
+    yarp::os::Bottle view0,view1,view2,view3,view4;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -311,12 +311,14 @@ void PartController::run()
                 view1.addDouble(fLim[i]);
                 view2.addDouble(fCst[i]);
                 view3.addDouble(fFld[i]);
+                view4.addDouble(fRPC[i]);
             }
         }
         //printf("fX:   %s\n", view0.toString().c_str());
         //printf("fLim: %s\n", view1.toString().c_str());
         //printf("fCst: %s\n", view2.toString().c_str());
         //printf("fFld: %s\n", view3.toString().c_str());
+        //printf("fRPC: %s\n", view4.toString().c_str());
         //printf("\n");
         
         vel->velocityMove( ctrl );

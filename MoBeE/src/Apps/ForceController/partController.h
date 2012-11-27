@@ -93,6 +93,7 @@ protected:
     
     double magnitude(yarp::os::Bottle*);
 	
+    yarp::os::ConstString portPrefix;
 };
 #endif
 /** @} */

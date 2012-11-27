@@ -165,7 +165,7 @@
                 
                 <!-- HAND -->
                 <link y="-.03" radius="0">
-                  <link y="1" radius="0"><marker name="right_hand" tracer="30"/></link>
+                  <link y="1" radius="0"><marker name="right_hand" nx="0" ny="-1" nz="0" tracer="30"/></link>
                   <!--link y="-0.05" radius="0"><marker name="right_handpalm"/></link-->
                 </link>
 

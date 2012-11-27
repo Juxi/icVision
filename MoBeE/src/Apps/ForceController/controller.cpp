@@ -7,6 +7,7 @@ Controller::Controller( KinematicModel::Robot* _robot,
                        int freq ) : PartController( _robot->getName().toStdString().c_str(),
                                                     _robot->getPart(_partNum)->name().toStdString().c_str(),
                                                     freq),
+                                    rpcPort(this),
                                     robot(_robot),
                                     partNum(_partNum),
                                     cstThresh(20.0)
@@ -16,6 +17,21 @@ Controller::Controller( KinematicModel::Robot* _robot,
     
     qRegisterMetaType< QVector< QVector< QPair< qreal, QVector<qreal> > > > >("QVector< QVector< QPair< qreal, QVector<qreal> > > >");
     QObject::connect( robot->getPart(partNum), SIGNAL(constraintState(QVector< QVector< QPair< qreal, QVector<qreal> > > >)), this, SLOT(setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qreal> > > >)) );
+}
+
+void Controller::afterStart(bool s)
+{
+    PartController::afterStart(s);
+    if (s) {
+        yarp::os::ConstString portName = portPrefix + "/rpc";
+        rpcPort.open(portName);
+        rpcPort.start();
+    }
+}
+void Controller::threadRelease()
+{
+    rpcPort.close();
+    PartController::threadRelease();
 }
 
 void Controller::setRepulsiveForce(QVector<qreal> f)
@@ -86,7 +102,7 @@ void Controller::handler( yarp::os::Bottle* b )
                 printf("project() failed!!!\n");
                 break;
             }
-            //setFRPC( &jointSpaceForce );
+            setFRPC( &jointSpaceForce );
             //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
             break;
         default:
@@ -128,6 +144,22 @@ bool Controller::getMarkerPosition( QString name, QVector3D& pos )
         for ( i=markers.begin(); i!=markers.end(); ++i ) {
             if ( (*i)->name() == name ) {
                 pos = (*i)->node()->getPos();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Controller::getMarkerNormal( QString name, QVector3D& norm )
+{
+    KinematicModel::BodyPart* bodyPart = robot->getPart(partNum);
+    if (bodyPart) {
+        QVector<KinematicModel::Marker*> markers = bodyPart->getMarkers();
+        QVector<KinematicModel::Marker*>::iterator i;
+        for ( i=markers.begin(); i!=markers.end(); ++i ) {
+            if ( (*i)->name() == name ) {
+                norm = (*i)->getNorm();
                 return true;
             }
         }

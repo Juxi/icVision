@@ -12,6 +12,7 @@
 
 #include "partController.h"
 #include "bodypart.h"
+#include "controllerRpcInterface.h"
 
 /****************************************************************************************************************
  *** this vocab accompanies the name of a marker and a list of 6 operational space forces and torques, like:  ***
@@ -35,21 +36,28 @@ public slots:
     void setRepulsiveForce(QVector<qreal>);
     
 private:
+
+    void afterStart(bool s);
+    void threadRelease();
     
     void handler( yarp::os::Bottle* );
     void procEncoders( double* q );
     
     bool getMarkerNames( QList<QString>& );
     bool getMarkerPosition( QString, QVector3D& );
+    bool getMarkerNormal( QString, QVector3D& );
     bool projectToJointSpace( QString markerName, yarp::os::Bottle* opSpaceFT, yarp::os::Bottle& jointSpaceF );
     
     QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
     QVector<qreal> scalarMult(qreal,QVector<qreal>);
 
+    ControllerRpcInterface rpcPort;
     KinematicModel::Robot* robot;
     int partNum;
     
     double cstThresh;
+    
+    friend class ControllerRpcInterface;
     
 signals:
     void setRobotPosition(int,const QVector<qreal>&);
