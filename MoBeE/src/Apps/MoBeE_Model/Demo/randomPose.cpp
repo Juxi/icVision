@@ -1,0 +1,82 @@
+/*******************************************************************
+ ***               Copyright (C) 2012 Mikhail Frank              ***
+ ***  CopyPolicy: Released under the terms of the GNU GPL v2.0.  ***
+ ***                                                             ***
+ ***  This is a demonstration of using feed forward position     ***
+ ***  control in the joint space within the MoBeE framework.     ***
+ ******************************************************************/
+#include <yarp/os/all.h>
+#include <yarp/dev/all.h>
+#include <yarp/sig/all.h>
+#include <unistd.h>
+#include <time.h>
+
+int main(int argc, char *argv[])
+{
+    // prepare the YARP network
+	yarp::os::Network net;
+    
+    // prepare the random number generator
+    srand(time(0));
+    
+    // prepare 3 ports to talk to the iCub's torso and both arms
+	yarp::os::BufferedPort<yarp::os::Bottle> torso, right_arm, left_arm;
+    
+    // fire up the threads
+	torso.open("/torso_cmd");           
+    right_arm.open("/right_arm_cmd");   
+    left_arm.open("/left_arm_cmd");
+    
+    // connect the ports to the MoBeE model
+    net.connect("/torso_cmd","/MoBeE/torso/cmd");
+    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd");
+    net.connect("/left_arm_cmd","/MoBeE/left_arm/cmd");
+	
+    // control the robot through an arbitrary number of poses
+	int i = 0;
+	while (i<100) {
+	
+        yarp::os::Bottle& tBottle = torso.prepare();    // get a bottle for our control command
+        tBottle.clear();                                // make sure it's empty
+        tBottle.add(yarp::os::Vocab::encode("qatt"));   // prefix stands for 'q attractor', an attractor in joint space
+        yarp::os::Bottle tCmd;                          // another bottle to hold the vector of joint positions
+        for (int i=0; i<3; i++)                         // fill the vector with random normalized positions
+            tCmd.addDouble((double)rand()/RAND_MAX);
+        tBottle.addList() = tCmd;                       // nest the vector into the torso command 
+        torso.write();                                  // send it off to MoBeE
+        
+        // repeat the above for the right arm
+        yarp::os::Bottle& rBottle = right_arm.prepare();
+        rBottle.clear();
+        rBottle.add(yarp::os::Vocab::encode("qatt"));
+        yarp::os::Bottle rCmd;
+        for (int i=0; i<16; i++)
+            rCmd.addDouble((double)rand()/RAND_MAX);
+        rBottle.addList() = rCmd;
+        right_arm.write();
+        
+        // and again for the left arm
+        yarp::os::Bottle& lBottle = left_arm.prepare();
+        lBottle.clear();
+        lBottle.add(yarp::os::Vocab::encode("qatt"));
+        yarp::os::Bottle lCmd;
+        for (int i=0; i<16; i++)
+            lCmd.addDouble((double)rand()/RAND_MAX);
+        lBottle.addList() = lCmd;
+        left_arm.write();
+        
+        // inform the user
+        printf("Torso: %s\n",tBottle.toString().c_str());
+        printf("Right: %s\n",rBottle.toString().c_str());
+        printf("Left:  %s\n",lBottle.toString().c_str());
+        printf("\n");
+        
+        // wait an arbitrary time for the motion to happen
+        sleep(7);
+        
+        // increment the counter
+        i++;
+	}
+	
+	return 1;	
+}

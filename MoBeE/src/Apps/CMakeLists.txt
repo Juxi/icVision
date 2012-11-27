@@ -47,5 +47,5 @@ SET( PARSED_YARPMODEL false )
 
 ADD_SUBDIRECTORY ( KinematicModelDemo )
 ADD_SUBDIRECTORY ( RobotFilterDemo )
-ADD_SUBDIRECTORY ( ForceController )
+ADD_SUBDIRECTORY ( MoBeE_Model )
 

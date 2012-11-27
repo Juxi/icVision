@@ -67,12 +67,15 @@ bool ControllerRpcInterface::handler( const yarp::os::Bottle& command, yarp::os:
         case VOCAB_LIST:
             ok = getMarkerList(reply);
             break;
-        case VOCAB_GET_P:
+        case VOCAB_GET_MARKER:
+            ok = getMarker(command,reply);
+            break;
+        /*case VOCAB_GET_P:
             ok = getMarkerPoint(command,reply);
             break;
         case VOCAB_GET_N:
             ok = getMarkerNormal(command,reply);
-            break;
+            break;*/
 		default:
             reply.addString("Unknown RPC command");
             return false;
@@ -82,7 +85,24 @@ bool ControllerRpcInterface::handler( const yarp::os::Bottle& command, yarp::os:
 	return true;
 }
 
-bool ControllerRpcInterface::getMarkerPoint( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )
+bool ControllerRpcInterface::getMarker( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )
+{
+    QVector3D point,norm;
+    bool pok = controller->getMarkerPosition( QString(cmd.get(1).asString()), point );
+    bool nok = controller->getMarkerNormal( QString(cmd.get(1).asString()), norm );
+    if (!pok || !nok) return false;
+    else {
+        reply.addDouble(point.x());
+        reply.addDouble(point.y());
+        reply.addDouble(point.z());
+        reply.addDouble(norm.x());
+        reply.addDouble(norm.y());
+        reply.addDouble(norm.z());
+    }
+    return true;
+}
+
+/*bool ControllerRpcInterface::getMarkerPoint( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )
 {
     QVector3D point;
     bool ok = controller->getMarkerPosition( QString(cmd.get(1).asString()), point );
@@ -106,7 +126,7 @@ bool ControllerRpcInterface::getMarkerNormal( const yarp::os::Bottle& cmd, yarp:
         reply.addDouble(norm.z());
     }
     return true;
-}
+}*/
 
 bool ControllerRpcInterface::getMarkerList( yarp::os::Bottle& reply )
 {

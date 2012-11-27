@@ -233,7 +233,7 @@ void PartController::setFRPC( yarp::os::Bottle* list )
 {
     // squash the force contained in 'list' but preserve its direction
     double mag = magnitude(list);
-    printf("RPC magnitude: %f\n", mag);
+    //printf("RPC magnitude: %f\n", mag);
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull()) {
             fRPC[i] = fRPCMax[i]/(fRPCMax[i]/kfRPC[i]+mag) * list->get(i).asDouble();

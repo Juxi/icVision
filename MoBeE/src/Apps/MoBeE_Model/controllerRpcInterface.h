@@ -15,9 +15,7 @@
 //#include <QMatrix4x4>
 #include <yarp/os/all.h>
 
-#define VOCAB_LIST VOCAB4('l','i','s','t')
-#define VOCAB_GET_P VOCAB4('g','e','t','p')
-#define VOCAB_GET_N VOCAB4('g','e','t','n')
+
 
 class Controller;
 	
@@ -40,12 +38,17 @@ public:
 
 private:
 	
+    #define VOCAB_LIST VOCAB4('l','i','s','t')
+    #define VOCAB_GET_MARKER VOCAB3('g','e','t')
+    //#define VOCAB_GET_N VOCAB4('g','e','t','n')
+    
 	void run();
 	bool handler( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
     
     bool getMarkerList( yarp::os::Bottle& reply );
-    bool getMarkerPoint( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
-    bool getMarkerNormal( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
+    bool getMarker( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
+    //bool getMarkerPoint( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
+    //bool getMarkerNormal( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
 	
 	yarp::os::Network	yarp;
 	yarp::os::RpcServer	port;
