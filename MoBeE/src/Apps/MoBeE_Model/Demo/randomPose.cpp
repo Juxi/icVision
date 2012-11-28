@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	
         yarp::os::Bottle& tBottle = torso.prepare();    // get a bottle for our control command
         tBottle.clear();                                // make sure it's empty
-        tBottle.add(yarp::os::Vocab::encode("qatt"));   // prefix stands for 'q attractor', an attractor in joint space
+        tBottle.addVocab(yarp::os::Vocab::encode("qatt"));   // prefix stands for 'q attractor', an attractor in joint space
         yarp::os::Bottle tCmd;                          // another bottle to hold the vector of joint positions
         for (int i=0; i<3; i++)                         // fill the vector with random normalized positions
             tCmd.addDouble((double)rand()/RAND_MAX);
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         // repeat the above for the right arm
         yarp::os::Bottle& rBottle = right_arm.prepare();
         rBottle.clear();
-        rBottle.add(yarp::os::Vocab::encode("qatt"));
+        rBottle.addVocab(yarp::os::Vocab::encode("qatt"));
         yarp::os::Bottle rCmd;
         for (int i=0; i<16; i++)
             rCmd.addDouble((double)rand()/RAND_MAX);
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         // and again for the left arm
         yarp::os::Bottle& lBottle = left_arm.prepare();
         lBottle.clear();
-        lBottle.add(yarp::os::Vocab::encode("qatt"));
+        lBottle.addVocab(yarp::os::Vocab::encode("qatt"));
         yarp::os::Bottle lCmd;
         for (int i=0; i<16; i++)
             lCmd.addDouble((double)rand()/RAND_MAX);

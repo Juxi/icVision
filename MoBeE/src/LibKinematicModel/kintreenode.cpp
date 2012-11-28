@@ -125,8 +125,10 @@ void KinTreeNode::ignoreAdjacentPairs( KinTreeNode* node, bool foundLink, bool f
     {
         // do not check collision between objects of the same class as this one and objects of the same class as 'node'
         parentRobot->getModel()->removeAllResponses( parentRobot->getResponseTable(), getResponseClass(), node->getResponseClass() );
-        parentRobot->getModel()->removeAllResponses( parentRobot->getFieldResponseTable(), getFieldResponseClass(), node->getFieldResponseClass() );
 	}
+    
+    // remove field responses even across body parts
+    parentRobot->getModel()->removeAllResponses( parentRobot->getFieldResponseTable(), getFieldResponseClass(), node->getFieldResponseClass() );
     
     QVector<KinTreeNode*>::iterator i = 0;
     for ( i=children.begin(); i!=children.end(); ++i ) {

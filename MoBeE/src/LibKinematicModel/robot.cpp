@@ -32,6 +32,8 @@ Robot::Robot( Model* m, DT_RespTableHandle robotTable,
 Robot::~Robot()
 {
 	if ( isOpen() ) { close(); }
+    DT_DestroyRespTable(getResponseTable());
+    DT_DestroyRespTable(getFieldResponseTable());
 }
 
 void Robot::appendNode( KinTreeNode* node )

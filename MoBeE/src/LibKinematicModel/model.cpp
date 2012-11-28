@@ -82,11 +82,13 @@ Model::~Model()
 
 	if ( modelWindow ) { delete(modelWindow); }
 	
-	QVector<Robot*>::iterator j;
-	for ( j=robots.begin(); j!=robots.end(); ++j ) {
+	/*QVector<Robot*>::iterator j;
+	for ( j=robots.end(); j!=robots.begin(); ) {
+        --j;
 		DT_DestroyRespTable((*j)->getResponseTable());
 		DT_DestroyRespTable((*j)->getFieldResponseTable());
 	}
+     */
     DT_DestroyRespTable(worldTable);
 }
 

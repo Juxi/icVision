@@ -252,7 +252,7 @@ void PartController::run()
 	yarp::os::Bottle* b = NULL;
 	b = port.read(false);
 	if ( b ) {
-		//printf("got a bottle: %s\n", b->toString().c_str());
+		printf("got a bottle: %s\n", b->toString().c_str());
         int cmd = b->get(0).asVocab();
         switch (cmd) {
             case VOCAB_QATTR:

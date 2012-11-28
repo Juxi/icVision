@@ -126,7 +126,8 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
                                     attributes.value("y").toDouble(),
                                     attributes.value("z").toDouble() );
         qreal radius = attributes.value("radius").toDouble(),
-			  height = attributes.value("length").toDouble();
+			  height = attributes.value("length").toDouble(),
+              rField = attributes.value("field").toDouble();
 		
 		if ( qFuzzyIsNull(height) ) { height = axis.length(); }
 		
@@ -143,28 +144,41 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 
 		try {
 			node->setNodeAxis(axis);
-			if ( radius > 0 )
+			if ( radius > 0 || rField > 0)
 			{
-				PrimitiveObject* cylinder = new KinematicModel::Cylinder( radius, height );
-				cylinder->setSpecialEulerOrientation(axis);
+				PrimitiveObject* cylinder = NULL;
+                PrimitiveObject* field = NULL;
                 
-                //PrimitiveObject* field = new KinematicModel::Cylinder( 2*radius, height );
-				//field->setSpecialEulerOrientation(axis);
+                if (radius > 0) {
+                    cylinder= new KinematicModel::Cylinder( radius, height );
+                    cylinder->setSpecialEulerOrientation(axis);
+                }
+                
+                if (rField > 0) {
+                    field = new KinematicModel::Cylinder( rField, height );
+                    field->setSpecialEulerOrientation(axis);
+                }
 				
 				if (node->getNodeType() == KinTreeNode::LINK )
                 {
-                    cylinder->translate( axis/2 );
-                    //field->translate(axis/2);
+                    if (cylinder)
+                        cylinder->translate( axis/2 );
+                    if (field)
+                        field->translate(axis/2);
                 }
 				else if ( node->getNodeType() != KinTreeNode::RJOINT &&  node->getNodeType() != KinTreeNode::PJOINT ) { 
 					errorStr = "Encountered KinTreeNode of unknown type";
 					return 0;
 				}
-				
-				node->appendPrimitive(cylinder);
                 
-                //if (robot->hasField())
-                //    node->appendField(field);
+				if (cylinder)
+                    node->appendPrimitive(cylinder);
+                if (field) {
+                    QColor c = Qt::lightGray;
+                    c.setAlphaF(0.3);
+                    field->setFreeColor(c);
+                    node->appendField(field);
+                }
 			}
         }
 		catch (std::exception& e)
@@ -245,7 +259,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
 		//primitive->setOpaque();
         
         if ( QString::compare( attributes.value("field"), "true",caseSensitivity) == 0 ) {
-            QColor c = Qt::green;
+            QColor c = Qt::lightGray;
             c.setAlphaF(0.3);
             primitive->setFreeColor(c);
             node->appendField(primitive);
