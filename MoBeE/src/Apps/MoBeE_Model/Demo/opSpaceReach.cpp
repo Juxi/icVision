@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     
     // gains for the control signal
     double  forceMagnitude = 10000.0,
-            torqueMagnitude = 1000.0;
+            torqueMagnitude = 10000.0;
     
     // reach to each target point
     for (int i=0; i<100; i++)
