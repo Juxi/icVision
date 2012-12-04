@@ -280,7 +280,7 @@
                         <!-- HAND FORCE FIELD -->
                         <link z="-.012" radius="0">
                             <link z="-1" radius="0">
-                                <sphere field="true" radius=".1"/>
+                                <sphere field="true" radius=".15"/>
                             </link>
                         </link>
                             
@@ -573,7 +573,7 @@
                             <!-- HAND FORCE FIELD -->
                             <link z="-.012" radius="0">
                                 <link z="-1" radius="0">
-                                    <sphere field="true" radius=".1"/>
+                                    <sphere field="true" radius=".15"/>
                                 </link>
                             </link>
                             

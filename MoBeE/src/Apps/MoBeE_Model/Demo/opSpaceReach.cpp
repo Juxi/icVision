@@ -134,14 +134,14 @@ int main(int argc, char *argv[])
             cmd.addDouble(forceMagnitude*err[2]);
             
             // either with no torque
-            //cmd.addDouble(0.0);
-            //cmd.addDouble(0.0);
-            //cmd.addDouble(0.0);
+            cmd.addDouble(0.0);
+            cmd.addDouble(0.0);
+            cmd.addDouble(0.0);
             
             // or try some torque
-            cmd.addDouble(torqueMagnitude*t[0]);
-            cmd.addDouble(torqueMagnitude*t[1]);
-            cmd.addDouble(torqueMagnitude*t[2]);
+            //cmd.addDouble(torqueMagnitude*t[0]);
+            //cmd.addDouble(torqueMagnitude*t[1]);
+            //cmd.addDouble(torqueMagnitude*t[2]);
             
             opSpaceForceAndTorque.addList() = cmd;
             

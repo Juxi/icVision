@@ -46,12 +46,18 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 	yarp::dev::IControlLimits   *lim;
 	dd->view(lim);
 	dd->view(pos);
+    
+    
+    
 	if ( !lim ) printf("Joint Limits Error!\n");
 	if ( !pos ) printf("IPositionControl Error!\n");
 	if ( pos && lim )
     {
         // get number of controllable DOFs
-		pos->getAxes(&numJoints);
+        while (!pos->getAxes(&numJoints)) {
+            printf("Failed to get number of DOF... wil try again in 1 second.\n");
+            sleep(1);
+        }
      
         // initialize control vars
         q1 = new double[numJoints];
@@ -93,7 +99,10 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		for ( int i = 0; i < numJoints; i++ )
         {
             double _min,_max;
-			lim->getLimits( i, &_min, &_max );
+            while (!lim->getLimits( i, &_min, &_max )) {
+                printf("Failed to get joint limits... wil try again in 1 second.\n");
+                sleep(1);
+            }
             
             // TODO: should get most of this from config files
             q1[i]       = 0.0;
@@ -107,7 +116,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             nogo[i]     = 10.0;
             
             w[i]        = 1.0;
-            k[i]        = 50.0;
+            k[i]        = 20.0;
             c[i]        = 30.0;
             a[i]        = 0.0;
             ctrl[i]     = 0.0;
@@ -123,7 +132,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             fCstMax[i]  = 1600.0;
             
             fFld[i]     = 0.0;
-            kfFld[i]    = 100.0;
+            kfFld[i]    = 20.0;
             fFldMax[i]  = 1600.0;
             
             fRPC[i]     = 0.0;
@@ -134,7 +143,11 @@ PartController::PartController( const char* _robotName, const char* _partName, i
 		}
         
         // set the attractor to the current pose
-		enc->getEncoders(q1);
+		while (!enc->getEncoders(q1)) {
+            printf("Failed to get motor encoder positions... wil try again in 1 second.\n");
+            sleep(1);
+        }
+        
         //std::cout << " q = [";
 		for ( int j=0; j<numJoints; j++ ) {
 			q0[j] = q1[j];
@@ -269,7 +282,7 @@ void PartController::run()
         }
 	}
 	
-    yarp::os::Bottle view0,view1,view2,view3,view4;
+    yarp::os::Bottle view0,view1,view2,view3,view4,view5;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -312,14 +325,16 @@ void PartController::run()
                 view2.addDouble(fCst[i]);
                 view3.addDouble(fFld[i]);
                 view4.addDouble(fRPC[i]);
+                view5.addDouble(x[i]);
             }
         }
-        //printf("fX:   %s\n", view0.toString().c_str());
-        //printf("fLim: %s\n", view1.toString().c_str());
-        //printf("fCst: %s\n", view2.toString().c_str());
-        //printf("fFld: %s\n", view3.toString().c_str());
-        //printf("fRPC: %s\n", view4.toString().c_str());
-        //printf("\n");
+        printf("x:    %s\n", view5.toString().c_str());
+        printf("fX:   %s\n", view0.toString().c_str());
+        printf("fLim: %s\n", view1.toString().c_str());
+        printf("fCst: %s\n", view2.toString().c_str());
+        printf("fFld: %s\n", view3.toString().c_str());
+        printf("fRPC: %s\n", view4.toString().c_str());
+        printf("\n");
         
         vel->velocityMove( ctrl );
     }
