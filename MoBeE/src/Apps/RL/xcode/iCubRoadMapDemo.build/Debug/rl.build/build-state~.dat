@@ -1,0 +1,132 @@
+Trl
+v5
+r1
+cCheck dependencies
+cCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000503F1B7700000000000000AA
+t1346313079
+s170
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
+c00000000509867D8000000000000178E
+t1352165336
+s6030
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
+c00000000509867D80000000000006762
+t1352165336
+s26466
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp
+c0000000050C991630000000000000001
+t1355387235
+s1
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp
+c0000000050C9916300000000000002F6
+t1355387235
+s758
+i"partController.h"
+i<unistd.h>
+i<time.h>
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp
+c0000000050C991630000000000000001
+t1355387235
+s1
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/rl.LinkFileList
+c0000000050C99164000000000000016C
+t1355387236
+s364
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-F1EB5F6BC0B94FF89C0BB315.sh
+c0000000050C9916400000000000000B7
+t1355387236
+s183
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies60e47de4c879b641^c0937ee4c879b641^---0#1#0#--18"Check dependencies36"7FEC4536-A1AF-4ACE-9187-680C2F8717EB-
+
+CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s377080036.498152
+e377080036.567399
+r1
+xCompileC
+xxcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp1ea87fe4c879b641^6e4e91e4c879b641^---0#0#0#-19%DVTDocumentLocation2@75"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp0000000000000000^2303"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o36"C4F83E05-938B-4FFC-9A3B-8CF43B00D3F0-
+
+CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s377080036.496560
+e377080036.599647
+r0
+xCompileC
+xxcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp:8:5: error: use of undeclared identifier 'srand'
+o    srand(time(0));
+o    ^
+o/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp:35:5: error: use of undeclared identifier 'printf'
+o    printf("All finished\n");
+o    ^
+o2 errors generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cppf6407fe4c879b641^594e9ae4c879b641^-296"/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp:8:5: error: use of undeclared identifier 'srand'    srand(time(0));    ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp:35:5: error: use of undeclared identifier 'printf'    printf("All finished\n");    ^2 errors generated.2(36%IDEClangDiagnosticActivityLogMessage2@36"Use of undeclared identifier 'srand'-377080036#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp0000000000000000^7#4#7#4#113#0#14"Semantic Issue--2@37"Use of undeclared identifier 'printf'-377080036#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp0000000000000000^34#4#34#4#716#0#14"Semantic Issue--0#0#0#-19%DVTDocumentLocation4@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp0000000000000000^2285"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o36"7A42274B-86F5-4984-92F3-EF68248648C8-
+
+CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s377080036.568615
+e377080036.700873
+r1
+xCompileC
+xxcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp70b291e4c879b641^a86db3e4c879b641^---0#0#0#-19%DVTDocumentLocation2@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^2291"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o36"5D6D3FF1-EEBA-4929-9463-C23C8B8728CB-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl normal x86_64
+r0
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-F1EB5F6BC0B94FF89C0BB315.sh
+r0
+

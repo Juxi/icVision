@@ -80,14 +80,6 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         fX = new double[numJoints];
         fXMax = new double[numJoints];
         
-        fFld = new double[numJoints];
-        kfFld = new double[numJoints];
-        fFldMax = new double[numJoints];
-        
-        fCst = new double[numJoints];
-        kfCst = new double[numJoints];
-        fCstMax = new double[numJoints];
-        
         fRPC = new double[numJoints];
         kfRPC = new double[numJoints];
         fRPCMax = new double[numJoints];
@@ -127,14 +119,6 @@ PartController::PartController( const char* _robotName, const char* _partName, i
             fLim[i]     = 0.0;
             fLimMax[i]  = 1000.0;
             
-            fCst[i]     = 0.0;
-            kfCst[i]    = 100.0;
-            fCstMax[i]  = 1600.0;
-            
-            fFld[i]     = 0.0;
-            kfFld[i]    = 20.0;
-            fFldMax[i]  = 1600.0;
-            
             fRPC[i]     = 0.0;
             kfRPC[i]    = 100.0;
             fRPCMax[i]  = 1000.0;
@@ -149,18 +133,13 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         }
         
         //std::cout << " q = [";
-		for ( int j=0; j<numJoints; j++ ) {
+		for ( int j=0; j<numJoints; j++ )
+        {
 			q0[j] = q1[j];
 			x[j] = q1[j];
-            //x[j] = 100;
-            //std::cout << q1[j] << " ";
 		}
         //std::cout << "]" << std::endl;
         
-        // open the control port
-        portPrefix = "/MoBeE/";
-        portPrefix += _partName;
-		port.open( portPrefix + "/cmd" );
 		srand ( yarp::os::Time::now() );
 	} //else { throw("could not connect to robot!"); }
 }
@@ -203,7 +182,7 @@ double PartController::magnitude(yarp::os::Bottle* list)
     return sqrt(m);
 }
 
-void PartController::setATT( yarp::os::Bottle* list )
+void PartController::setAttractorPosition( yarp::os::Bottle* list )
 {
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull())
@@ -216,33 +195,7 @@ void PartController::setATT( yarp::os::Bottle* list )
     }
 }
 
-void PartController::setFCST(yarp::os::Bottle* list)
-{
-    //printf("setFCST: %s\n",list->toString().c_str());
-
-    // expects a vector where each element is on the interval [-1,1]
-    // enforces a hard limit on each dimension of the force
-    for ( int i = 0; i < numJoints; i++ ) {
-        if (!list->get(i).isNull()) {
-            double f = list->get(i).asDouble();
-            if (f>1.0) f=1.0;
-            else if (f<-1.0) f=-1.0;
-            fCst[i] = f*fCstMax[i];
-        }
-    }
-}
-
-void PartController::setFFLD(yarp::os::Bottle* list)
-{
-    // squash the force contained in 'list' but preserve its direction
-    double mag = magnitude(list);
-    for ( int i = 0; i < numJoints; i++ ) {
-        if (!list->get(i).isNull())
-            fFld[i] = fFldMax[i]/(fFldMax[i]/kfFld[i]+mag) * list->get(i).asDouble();
-    }
-}
-
-void PartController::setFRPC( yarp::os::Bottle* list )
+void PartController::setConstForce( yarp::os::Bottle* list )
 {
     // squash the force contained in 'list' but preserve its direction
     double mag = magnitude(list);
@@ -261,27 +214,6 @@ void PartController::run()
 		return;
 	}
 	
-	// read control commands from socket and handle them
-	yarp::os::Bottle* b = NULL;
-	b = port.read(false);
-	if ( b ) {
-		printf("got a bottle: %s\n", b->toString().c_str());
-        int cmd = b->get(0).asVocab();
-        switch (cmd) {
-            case VOCAB_QATTR:
-                setATT( b->get(1).asList() );
-                printf("\nSet attractor position!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
-                break;
-            case VOCAB_QFORCE:
-                setFRPC( b->get(1).asList() );
-                printf("\nSet joint-space force!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
-                break;
-            default:
-                handler(b);
-                break;
-        }
-	}
-	
     yarp::os::Bottle view0,view1,view2,view3,view4,view5;
 
 	for ( int j=0; j<numJoints; j++ )
@@ -289,9 +221,6 @@ void PartController::run()
     
     if ( getEncoders(q1) )
     {
-        // process encoder positions... (the derrived class "Controller" sets the robot position in KineamticModel)
-        procEncoders(q1);
-        
         // compute the next control command
         for ( int i=0; i<numJoints; i++ )
         {
@@ -311,8 +240,6 @@ void PartController::run()
             a[i] =  - c[i]*v[i]
                     + fX[i]
                     + fLim[i]
-                    + fCst[i]
-                    + fFld[i]
                     + fRPC[i]
                     ;
             
@@ -322,17 +249,13 @@ void PartController::run()
             if (i<7) {
                 view0.addDouble(fX[i]);
                 view1.addDouble(fLim[i]);
-                view2.addDouble(fCst[i]);
-                view3.addDouble(fFld[i]);
                 view4.addDouble(fRPC[i]);
                 view5.addDouble(x[i]);
             }
         }
-        //printf("x:    %s\n", view5.toString().c_str());
-        //printf("fX:   %s\n", view0.toString().c_str());
-        //printf("fLim: %s\n", view1.toString().c_str());
-        //printf("fCst: %s\n", view2.toString().c_str());
-        //printf("fFld: %s\n", view3.toString().c_str());
+        printf("x:    %s\n", view5.toString().c_str());
+        printf("fX:   %s\n", view0.toString().c_str());
+        printf("fLim: %s\n", view1.toString().c_str());
         printf("fRPC: %s\n", view4.toString().c_str());
         printf("\n");
         
