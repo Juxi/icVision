@@ -20,8 +20,11 @@ int main(int argc, char *argv[])
 		
 		// path to the XML file that defines the robot model
 		QString robotFile = config.find("robot").asString().c_str();
-		QString robotFile2 = config.find("robot2").asString().c_str();
+		//QString robotFile2 = config.find("robot2").asString().c_str();
 	
+        // path to config dir for robot controllers
+        QString confDir = config.find("conf").asString().c_str();
+    
 		// optional... path to the xml file that contains the world
 		QString worldFile = config.find("world").asString().c_str();
 		
@@ -77,6 +80,7 @@ int main(int argc, char *argv[])
             {
                 if ( i!=1 ) {   // don't control the head, because the eyes require more tuning
                     Controller* c = new Controller( yarpRobot,
+                                                    confDir,
                                                     i,
                                                     20);
                     controllers.append(c);

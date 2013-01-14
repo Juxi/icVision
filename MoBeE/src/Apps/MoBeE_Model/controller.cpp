@@ -3,9 +3,11 @@
 #include <iostream.h>
 
 Controller::Controller( KinematicModel::Robot* _robot,
+                       QString conf_dir,
                        int _partNum,
                        int freq ) : PartController( _robot->getName().toStdString().c_str(),
                                                     _robot->getPart(_partNum)->name().toStdString().c_str(),
+                                                    (conf_dir + "/" + _robot->getPart(_partNum)->name() + ".ini").toStdString().c_str(),
                                                     freq),
                                     rpcPort(this),
                                     robot(_robot),
@@ -87,28 +89,30 @@ void Controller::setConstraintSpring(QVector< QVector< QPair< qreal, QVector<qre
 
 void Controller::handler( yarp::os::Bottle* b )
 {
-    //printf("got a bottle: %s\n", b->toString().c_str());
-    int cmd = b->get(0).asVocab();
-    QString markerName;
-    yarp::os::Bottle* opSpaceForceAndTorque;
-    yarp::os::Bottle jointSpaceForce;
-    
-    
-    switch (cmd) {
-        case VOCAB_OPSPACE:
-            markerName = QString(b->get(1).asString());
-            opSpaceForceAndTorque = b->get(2).asList();
-            if ( !projectToJointSpace( markerName, opSpaceForceAndTorque, jointSpaceForce ) ) {
-                printf("project() failed!!!\n");
+    //if ( isValid() ) {
+        //printf("got a bottle: %s\n", b->toString().c_str());
+        int cmd = b->get(0).asVocab();
+        QString markerName;
+        yarp::os::Bottle* opSpaceForceAndTorque;
+        yarp::os::Bottle jointSpaceForce;
+        
+        
+        switch (cmd) {
+            case VOCAB_OPSPACE:
+                markerName = QString(b->get(1).asString());
+                opSpaceForceAndTorque = b->get(2).asList();
+                if ( !projectToJointSpace( markerName, opSpaceForceAndTorque, jointSpaceForce ) ) {
+                    printf("project() failed!!!\n");
+                    break;
+                }
+                setFRPC( &jointSpaceForce );
+                //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
                 break;
-            }
-            setFRPC( &jointSpaceForce );
-            //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
-            break;
-        default:
-            printf("Controller received unknown command! %s", b->toString().c_str());
-            break;
-    }
+            default:
+                printf("Controller received unknown command! %s", b->toString().c_str());
+                break;
+        }
+    //} else printf("Device driver is not valid\n");
 }
 
 void Controller::procEncoders( double* q )

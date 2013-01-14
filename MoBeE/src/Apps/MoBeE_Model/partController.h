@@ -26,7 +26,7 @@ class PartController : public yarp::os::RateThread
 	
 public:
 	
-    PartController( const char* _robotName, const char* _partName, int r );
+    PartController( const char* _robotName, const char* _partName, const char* _fileName, int r );
     virtual ~PartController();
 
 	bool    isValid();								//!< Checks if the remote device is ready
@@ -50,7 +50,7 @@ private:
                         *x,			// the attractor pose
                         *min,		// min joint positions
                         *max,		// max joint positions
-                        *nogo,      // length (in degrees) of limit avoidance spring
+                        *kfLim,      // length (in degrees) of limit avoidance spring
                         
 						*w,			// weight vector indicates importance of DOFs
 						*k,			// spring constants for each DOF

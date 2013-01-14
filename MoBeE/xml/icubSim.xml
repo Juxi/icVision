@@ -160,7 +160,7 @@
               <joint y="1" minPos="15" maxPos="106" radius=".02" length=".07">
                   
                   <!-- ELBOW FIELD -->
-                  <sphere field="true" radius=".06"/>
+                  <sphere field="true" radius=".1"/>
             
             <motor name="RightWristYaw" minPos="-90" maxPos="90">
               <joint z="1" minPos="-90" maxPos="90" radius="0">
@@ -280,7 +280,7 @@
                         <!-- HAND FORCE FIELD -->
                         <link z="-.012" radius="0">
                             <link z="-1" radius="0">
-                                <sphere field="true" radius=".15"/>
+                                <sphere field="true" radius=".1"/>
                             </link>
                         </link>
                             
@@ -573,7 +573,7 @@
                             <!-- HAND FORCE FIELD -->
                             <link z="-.012" radius="0">
                                 <link z="-1" radius="0">
-                                    <sphere field="true" radius=".15"/>
+                                    <sphere field="true" radius=".1"/>
                                 </link>
                             </link>
                             

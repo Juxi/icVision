@@ -1,7 +1,7 @@
 #include "partController.h"
 #include <iostream.h>
 
-PartController::PartController( const char* _robotName, const char* _partName, int r ) : yarp::os::RateThread(r), 
+PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r), 
 																							vel(NULL),
 																							enc(NULL)
 {
@@ -68,7 +68,7 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         x = new double[numJoints];
         min = new double[numJoints];
         max = new double[numJoints];
-        nogo = new double[numJoints];
+        kfLim = new double[numJoints];
         
         w = new double[numJoints];
         k = new double[numJoints];
@@ -94,8 +94,41 @@ PartController::PartController( const char* _robotName, const char* _partName, i
         
         a = new double[numJoints];
         ctrl = new double[numJoints];
+        
+        yarp::os::Property prop;
+        prop.fromConfigFile(_fileName);
+        yarp::os::Bottle* weight = prop.find("weight").asList();
+        yarp::os::Bottle* spring_const = prop.find("spring_const").asList();
+        yarp::os::Bottle* damping_const = prop.find("damping_const").asList();
+        yarp::os::Bottle* limit_const = prop.find("limit_const").asList();
+        yarp::os::Bottle* field_const = prop.find("field_const").asList();
+        yarp::os::Bottle* constraint_const = prop.find("constraint_const").asList();
+        yarp::os::Bottle* rpc_force_const = prop.find("rpc_force_const").asList();
+        yarp::os::Bottle* max_spring_force = prop.find("max_spring_force").asList();
+        yarp::os::Bottle* max_limit_force = prop.find("max_limit_force").asList();
+        yarp::os::Bottle* max_field_force = prop.find("max_field_force").asList();
+        yarp::os::Bottle* max_constraint_force = prop.find("max_constraint_force").asList();
+        yarp::os::Bottle* max_rpc_force = prop.find("max_rpc_force").asList();
+        
+        // make sure we have all the control params
+        if ( !weight || weight->size()!=numJoints ||
+            !spring_const || spring_const->size()!=numJoints ||
+            !damping_const || damping_const->size()!=numJoints ||
+            !limit_const || limit_const->size()!=numJoints ||
+            !field_const || field_const->size()!=numJoints ||
+            !constraint_const || constraint_const->size()!=numJoints ||
+            !rpc_force_const || rpc_force_const->size()!=numJoints ||
+            !max_spring_force || max_spring_force->size()!=numJoints ||
+            !max_limit_force || max_limit_force->size()!=numJoints ||
+            !max_field_force || max_field_force->size()!=numJoints ||
+            !max_constraint_force || max_constraint_force->size()!=numJoints ||
+            !max_rpc_force || max_rpc_force->size()!=numJoints )
+        {
+            dd->close();
+            return;
+        }
 
-        // set default values
+        // set control params
 		for ( int i = 0; i < numJoints; i++ )
         {
             double _min,_max;
@@ -104,40 +137,42 @@ PartController::PartController( const char* _robotName, const char* _partName, i
                 sleep(1);
             }
             
-            // TODO: should get most of this from config files
+            min[i]      = _min;
+            max[i]      = _max;
+            
             q1[i]       = 0.0;
             q0[i]       = 0.0;
-            v[i]        = 0.0;
             e[i]        = 0.0;
             
             x[i]        = 0.0;
-            min[i]      = _min;
-            max[i]      = _max;
-            nogo[i]     = 10.0;
-            
-            w[i]        = 1.0;
-            k[i]        = 20.0;
-            c[i]        = 30.0;
+            v[i]        = 0.0;
             a[i]        = 0.0;
+            
             ctrl[i]     = 0.0;
             
+            w[i]        = weight->get(i).asDouble();
+            k[i]        = spring_const->get(i).asDouble();
+            c[i]        = damping_const->get(i).asDouble();
+            
+            
             fX[i]       = 0.0;
-            fXMax[i]    = 800.0;
+            fXMax[i]    = max_constraint_force->get(i).asDouble();
         
             fLim[i]     = 0.0;
-            fLimMax[i]  = 1000.0;
+            kfLim[i]    = limit_const->get(i).asDouble();
+            fLimMax[i]  = max_limit_force->get(i).asDouble();
             
             fCst[i]     = 0.0;
-            kfCst[i]    = 100.0;
-            fCstMax[i]  = 1600.0;
+            kfCst[i]    = constraint_const->get(i).asDouble();
+            fCstMax[i]  = max_constraint_force->get(i).asDouble();
             
             fFld[i]     = 0.0;
-            kfFld[i]    = 20.0;
-            fFldMax[i]  = 1600.0;
+            kfFld[i]    = field_const->get(i).asDouble();
+            fFldMax[i]  = max_field_force->get(i).asDouble();
             
             fRPC[i]     = 0.0;
-            kfRPC[i]    = 100.0;
-            fRPCMax[i]  = 1000.0;
+            kfRPC[i]    = rpc_force_const->get(i).asDouble();
+            fRPCMax[i]  = max_rpc_force->get(i).asDouble();
             
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
@@ -303,8 +338,8 @@ void PartController::run()
             fX[i] = fXMax[i]*e[i]/(fXMax[i]/k[i]+abs(e[i]));
             
             // compute joint limit repulsion
-            if ( q1[i] < min[i] + nogo[i] )         fLim[i] = fLimMax[i] * (min[i]+nogo[i]-q1[i])/nogo[i];
-            else if ( q1[i] > max[i] - nogo[i] )    fLim[i] = fLimMax[i] * -(q1[i]-(max[i]-nogo[i]))/nogo[i];
+            if ( q1[i] < min[i] + kfLim[i] )         fLim[i] = fLimMax[i] * (min[i]+kfLim[i]-q1[i])/kfLim[i];
+            else if ( q1[i] > max[i] - kfLim[i] )    fLim[i] = fLimMax[i] * -(q1[i]-(max[i]-kfLim[i]))/kfLim[i];
             else                                    fLim[i] = 0.0;
       
             // compute acceleration (should squash this too)
