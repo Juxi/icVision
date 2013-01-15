@@ -35,8 +35,8 @@ void Learner::print()
             printf("  Action %d: ",actionCount++);
             for (std::list< std::pair<const State*,double> >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
             {
-                //printf("%f ", j->transition_belief.at(k).second);
-                printf("(%p %f) ", k->first, k->second);
+                //printf("(%p %f) ", k->first, k->second);
+                printf("%f ", k->second);
             }
             printf("\n");
         }
