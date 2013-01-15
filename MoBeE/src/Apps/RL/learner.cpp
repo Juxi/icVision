@@ -1,5 +1,29 @@
 #include "learner.h"
 
+bool Learner::threadInit()
+{
+	printf("Starting Reinforcement Learner\n");
+	return true;
+}
+
+//called by start after threadInit, s is true iff the thread started successfully
+void Learner::afterStart(bool s)
+{
+	if (!s)
+		printf("Reinforcement Learner did not start\n");
+}
+
+void Learner::run()
+{
+    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
+    }
+}
+
+void Learner::threadRelease()
+{
+	printf("\n*** Goodbye from Reinforcement Learner ***\n\n");
+}
+
 bool Learner::deleteState( const State* s )
 {
     for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {

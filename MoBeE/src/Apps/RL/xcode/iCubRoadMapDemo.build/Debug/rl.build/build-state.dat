@@ -33,19 +33,19 @@ t1355404546
 s1224
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp
-c0000000050F506CE0000000000000626
-t1358235342
-s1574
+c0000000050F511C700000000000007B3
+t1358238151
+s1971
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h
-c0000000050CA0DB30000000000000AC0
-t1355419059
-s2752
+c0000000050F511C70000000000000B9F
+t1358238151
+s2975
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp
-c0000000050CA0E520000000000000205
-t1355419218
-s517
+c0000000050F511D5000000000000033B
+t1358238165
+s827
 i"learner.h"
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp
@@ -59,20 +59,20 @@ t1355404546
 s2710
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl
-t1355419666
-s44336
+t1358235344
+s44440
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.o
 t1355397655
 s161884
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o
-t1355419666
-s174324
+t1358238153
+s181900
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o
-t1355419220
-s225700
+t2
+s0
 
 N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/rl.LinkFileList
 c0000000050C9D89200000000000000F3
@@ -602,6 +602,256 @@ N/usr/local/Cellar/cgal/4.0.2/include/CGAL/version.h
 c000000004FF40D4C00000000000004A1
 t1341394252
 s1185
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/conf/api.h
+c000000005037D3760000000000000932
+t1345835894
+s2354
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/conf/system.h
+c000000005037D376000000000000042D
+t1345835894
+s1069
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/BinPortable.h
+c000000004E1DD4760000000000000652
+t1310577782
+s1618
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Bottle.h
+c000000005034A9440000000000002DDB
+t1345628484
+s11739
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/BufferedPort.h
+c000000004F57C4AD000000000000202E
+t1331152045
+s8238
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Bytes.h
+c000000004EC2A41A00000000000004BC
+t1321378842
+s1212
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionReader.h
+c000000004F7B730D00000000000013B4
+t1333490445
+s5044
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionWriter.h
+c0000000050369679000000000000134B
+t1345754745
+s4939
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConstString.h
+c000000005034A9150000000000000900
+t1345628437
+s2304
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Contact.h
+c000000004E1DD4760000000000001551
+t1310577782
+s5457
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ContactStyle.h
+c00000000502A6527000000000000031F
+t1344955687
+s799
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Contactable.h
+c000000004F57C4AD0000000000001ACA
+t1331152045
+s6858
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/DummyConnector.h
+c000000004C7D58BA0000000000000912
+t1283283130
+s2322
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Event.h
+c000000004E1DD47600000000000006C8
+t1310577782
+s1736
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/IConfig.h
+c000000004E67D2A30000000000000604
+t1315426979
+s1540
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/LocalReader.h
+c000000004E1DD476000000000000039B
+t1310577782
+s923
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Module.h
+c000000004E1DD4760000000000001D08
+t1310577782
+s7432
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NameStore.h
+c000000004E1DD476000000000000028F
+t1310577782
+s655
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NetFloat64.h
+c000000004E1DD4760000000000001620
+t1310577782
+s5664
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NetInt32.h
+c00000000503696790000000000002068
+t1345754745
+s8296
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Network.h
+c000000005034A9150000000000004709
+t1345628437
+s18185
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Port.h
+c000000004F57C4AD0000000000001F7D
+t1331152045
+s8061
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReader.h
+c000000004E1DD47600000000000003EE
+t1310577782
+s1006
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderBuffer.h
+c000000004E1DD4760000000000003486
+t1310577782
+s13446
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderCreator.h
+c000000004E1DD476000000000000054D
+t1310577782
+s1357
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReport.h
+c000000004EA173EB0000000000000974
+t1319203819
+s2420
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriter.h
+c000000005034A915000000000000067F
+t1345628437
+s1663
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriterBuffer.h
+c000000004E1DD476000000000000115C
+t1310577782
+s4444
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Portable.h
+c000000004E1DD4760000000000000383
+t1310577782
+s899
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortablePair.h
+c000000004E1DD4760000000000000DEA
+t1310577782
+s3562
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Property.h
+c000000004E1DD47600000000000022C3
+t1310577782
+s8899
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RFModule.h
+c000000004F4282E60000000000001A61
+t1329758950
+s6753
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Random.h
+c000000004E1DD4760000000000000665
+t1310577782
+s1637
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RateThread.h
+c000000004E2A87AE0000000000001996
+t1311410094
+s6550
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ResourceFinder.h
+c00000000501299E2000000000000167D
+t1343396322
+s5757
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcClient.h
+c000000004F57C4AD000000000000106F
+t1331152045
+s4207
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcServer.h
+c000000004EC41CF90000000000001500
+t1321475321
+s5376
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Runnable.h
+c000000005034A915000000000000086A
+t1345628437
+s2154
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Searchable.h
+c000000004E1DD476000000000000195E
+t1310577782
+s6494
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Semaphore.h
+c000000004ED541F300000000000006EC
+t1322598899
+s1772
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Stamp.h
+c000000004E1DD47600000000000008F8
+t1310577782
+s2296
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Terminator.h
+c000000005012962600000000000009DA
+t1343395366
+s2522
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Thread.h
+c000000004E2A87AE000000000000156D
+t1311410094
+s5485
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Time.h
+c000000004E1DD4760000000000000562
+t1310577782
+s1378
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Value.h
+c000000004F4E5B3F00000000000029FC
+t1330535231
+s10748
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Vocab.h
+c000000004E1DD47600000000000008C5
+t1310577782
+s2245
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Wire.h
+c00000000502A6527000000000000029E
+t1344955687
+s670
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/WireLink.h
+c00000000502A65270000000000001007
+t1344955687
+s4103
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h
+c000000004FC63F1200000000000005BC
+t1338392338
+s1468
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/api.h
+c00000000502A652700000000000002A8
+t1344955687
+s680
 
 N/usr/local/include/boost/aligned_storage.hpp
 c00000000502D49CF00000000000010C9
@@ -2467,7 +2717,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies261b574e3ea5b641^0056574e3ea5b641^---0#1#0#--18"Check dependencies36"BF0BA4A5-95FB-4562-88B8-59FD250C41B7-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesf3ae525549a5b641^76fd525549a5b641^---0#1#0#--18"Check dependencies36"7B45F812-437E-4BBA-A4FE-3E5888692ACD-
 
 CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
 s377098198.506310
@@ -2568,8 +2818,8 @@ o13 errors generated.
 lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cppddee81d60f7ab641^e7ff05d80f7ab641^-7583"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:3:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:43: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                          ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:3:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:54: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                     ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:3:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:82: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                                 ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:9: error: redefinition of 'Action'Action::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:23:5: note: previous definition is here    Action( State* destination_state, Learner* learner )    ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:66: error: member initializer 'learner' does not name a non-static data member or base classAction::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)                                                                 ^~~~~~~~~~~~~~~~~/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:85: error: member initializer 'destination_state' does not name a non-static data member or base classAction::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)                                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:8:44: error: use of undeclared identifier 'destination_state'; did you mean '_destination_state'?    std::pair< const State*, double > pair(destination_state,1.0);                                           ^~~~~~~~~~~~~~~~~                                           _destination_state/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:24: note: '_destination_state' declared hereAction::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)                       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:12:41: error: use of undeclared identifier 'learner'; did you mean '_learner'?    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                        ^~~~~~~                                        _learner/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:53: note: '_learner' declared hereAction::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)                                                    ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:12:39: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                      ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:12:50: error: 'states' is a private member of 'Learner'    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                 ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:12:69: error: use of undeclared identifier 'learner'; did you mean '_learner'?    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                    ^~~~~~~                                                                    _learner/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:5:53: note: '_learner' declared hereAction::Action( State* _destination_state, Learner* _learner ) : learner(_learner), destination_state(_destination_state)                                                    ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:12:78: error: 'states' is a private member of 'Learner'    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                             ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp:19:9: error: redefinition of '~Action'Action::~Action(){}        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:37:5: note: previous definition is here    ~Action(){}    ^13 errors generated.-0#0#0#-19%DVTDocumentLocation2@74"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp0000000000000000^2297"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.o action.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/action.o36"00A65C4B-8858-4677-9026-595090C19457-
 
 CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s379928142.352551
-e379928143.958368
+s379930951.555000
+e379930953.477283
 r1
 xCompileC
 xxcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o
@@ -2578,11 +2828,11 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cppab5e5a4e3ea5b641^cd57f54f3ea5b641^---0#0#0#-19%DVTDocumentLocation2@75"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp0000000000000000^2303"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o36"F866BF3F-236C-4FAE-98B3-D16791B9DEBC-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cppb22e8e4749a5b641^c977814949a5b641^---0#0#0#-19%DVTDocumentLocation2@75"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp0000000000000000^2303"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/learner.o36"BF6E8B09-ECA0-434B-B0E3-6979783E3696-
 
 CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s377112018.878051
-e377112020.461248
+s379930965.336803
+e379930966.993315
 r1
 xCompileC
 xxcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o
@@ -2591,7 +2841,7 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cppc4ede0d2457ab641^6a1476d4457ab641^---0#0#0#-19%DVTDocumentLocation2@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp0000000000000000^2285"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o36"47708B10-24DE-4AA9-A203-88B0C02D5890-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp245e565549a5b641^384afe5649a5b641^---0#0#0#-19%DVTDocumentLocation2@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp0000000000000000^2285"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/main.o36"795A267A-F005-492D-B527-D946326EE64F-
 
 CCompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
 s377098198.140827
@@ -2747,8 +2997,8 @@ o20 errors generated.
 lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp302f24d60f7ab641^ebc79ed70f7ab641^-12664"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:43: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                          ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:54: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                     ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h:30:82: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                                 ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:30:47: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')            for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                              ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:30:58: error: 'states' is a private member of 'Learner'            for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                         ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:30:86: error: 'states' is a private member of 'Learner'            for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                                     ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:53:43: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                          ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:53:54: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                     ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:53:82: error: 'states' is a private member of 'Learner'        for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                                 ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:54:34: error: no matching conversion for functional-style cast from 'State *' to 'State::Action'            i->actions.push_back(Action(this));                                 ^~~~~~~~~~~/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:24:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'State *' to 'const State::Action' for 1st argument;     class Action          ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:27:9: note: candidate constructor not viable: requires 2 arguments, but 1 was provided        Action( State* destination_state, Learner* learner )        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:56:27: error: no matching conversion for functional-style cast from 'State *' to 'State::Action'        actions.push_back(Action(this));                          ^~~~~~~~~~~/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:24:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'State *' to 'const State::Action' for 1st argument;     class Action          ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:27:9: note: candidate constructor not viable: requires 2 arguments, but 1 was provided        Action( State* destination_state, Learner* learner )        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:61:52: error: use of undeclared identifier 'learner'        actions.push_back(Action(destination_state,learner));                                                   ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:5:8: error: definition of implicitly declared destructorState::~State(){}       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:7:8: error: redefinition of 'State'State::State(CGAL::Cartesian_d<double>::Point_d q, Learner* _learner) : CGAL::Cartesian_d<double>::Point_d( q.dimension(),       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:48:5: note: previous definition is here    State(CGAL::Cartesian_d<double>::Point_d q, Learner* learner) : CGAL::Cartesian_d<double>::Point_d( q.dimension(),    ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:10:73: error: member initializer 'learner' does not name a non-static data member or base class                                                                        learner(_learner)                                                                        ^~~~~~~~~~~~~~~~~/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:16:41: error: use of undeclared identifier 'learner'; did you mean '_learner'?    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                        ^~~~~~~                                        _learner/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:7:61: note: '_learner' declared hereState::State(CGAL::Cartesian_d<double>::Point_d q, Learner* _learner) : CGAL::Cartesian_d<double>::Point_d( q.dimension(),                                                            ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:16:39: error: no viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                      ^ ~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:636:11: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument;     class __normal_iterator          ^/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h:657:9: note: candidate template ignored: substitution failure [with _Iter = Learner::State *]        __normal_iterator(const __normal_iterator<_Iter,        ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:16:50: error: 'states' is a private member of 'Learner'    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                 ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h:56:24: note: declared private here    std::vector<State> states;                       ^/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:16:69: error: use of undeclared identifier 'learner'; did you mean '_learner'?    for (std::vector<State>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i )                                                                    ^~~~~~~                                                                    _learner/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:7:61: note: '_learner' declared hereState::State(CGAL::Cartesian_d<double>::Point_d q, Learner* _learner) : CGAL::Cartesian_d<double>::Point_d( q.dimension(),                                                            ^fatal error: too many errors emitted, stopping now [-ferror-limit=]20 errors generated.20(36%IDEClangDiagnosticActivityLogMessage2@166"No viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')-377098199#18446744073709551615#0#4(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@81"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^16#9#16#9#465#0#21"Clang LLVM 1.0 Notice--2@262"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^635#10#635#10#20262#0#14"Semantic Issue1(3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^29#44#29#67#840#22#-2@80"Candidate template ignored: substitution failure [with _Iter = Learner::State *]-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^656#8#656#8#21087#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h0000000000000000^29#42#29#42#838#0#14"Semantic Issue1(3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h0000000000000000^29#44#29#67#840#22#-2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@81"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^16#9#16#9#465#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h0000000000000000^29#53#29#53#849#0#14"Semantic Issue--2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@81"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h:17:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^16#9#16#9#465#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/action.h0000000000000000^29#81#29#81#877#0#14"Semantic Issue--2@166"No viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@262"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^635#10#635#10#20262#0#14"Semantic Issue1(3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^29#48#29#71#812#22#-2@80"Candidate template ignored: substitution failure [with _Iter = Learner::State *]-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^656#8#656#8#21087#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^29#46#29#46#810#0#14"Semantic Issue1(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^29#48#29#71#812#22#-2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#2(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^29#57#29#57#821#0#14"Semantic Issue--2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#2(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^29#85#29#85#849#0#14"Semantic Issue--2@166"No viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@262"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^635#10#635#10#20262#0#14"Semantic Issue1(3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^52#44#52#67#1976#22#-2@80"Candidate template ignored: substitution failure [with _Iter = Learner::State *]-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^656#8#656#8#21087#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^52#42#52#42#1974#0#14"Semantic Issue1(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^52#44#52#67#1976#22#-2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#2(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^52#53#52#53#1985#0#14"Semantic Issue--2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#2(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^52#81#52#81#2013#0#14"Semantic Issue--2@82"No matching conversion for functional-style cast from 'State *' to 'State::Action'-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@144"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'State *' to 'const State::Action' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^23#10#23#10#570#0#14"Semantic Issue1(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^53#40#53#44#2073#0#-2@74"Candidate constructor not viable: requires 2 arguments, but 1 was provided-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^26#8#26#8#603#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^53#33#53#33#2066#0#14"Semantic Issue2(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^53#33#53#44#2066#7#3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^53#40#53#44#2073#0#-2@82"No matching conversion for functional-style cast from 'State *' to 'State::Action'-377098199#18446744073709551615#0#3(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2@144"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'State *' to 'const State::Action' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^23#10#23#10#570#0#14"Semantic Issue1(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^55#33#55#37#2169#0#-2@74"Candidate constructor not viable: requires 2 arguments, but 1 was provided-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^26#8#26#8#603#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^55#26#55#26#2162#0#14"Semantic Issue2(3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^55#26#55#37#2162#7#3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^55#33#55#37#2169#0#-2@38"Use of undeclared identifier 'learner'-377098199#18446744073709551615#0#1(2@82"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp:2:-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^1#9#1#9#30#0#21"Clang LLVM 1.0 Notice--2#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^60#51#60#51#2302#0#14"Semantic Issue--2@44"Definition of implicitly declared destructor-377098199#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^4#7#4#7#67#0#14"Semantic Issue--2@23"Redefinition of 'State'-377098199#18446744073709551615#0#1(2@27"Previous definition is here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.h0000000000000000^47#4#47#4#1468#0#21"Clang LLVM 1.0 Notice--2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^6#7#6#7#86#0#14"Semantic Issue--2@81"Member initializer 'learner' does not name a non-static data member or base class-377098199#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^9#72#9#72#521#0#14"Semantic Issue1(3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^9#72#9#89#521#16#-2@64"Use of undeclared identifier 'learner'; did you mean '_learner'?-377098199#18446744073709551615#0#1(2@24"'_learner' declared here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^6#60#6#60#139#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#40#15#40#752#0#14"Semantic Issue1(3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#40#15#47#752#7#-2@166"No viable conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'std::vector<State>::iterator' (aka '__normal_iterator<pointer, vector_type>')-377098199#18446744073709551615#0#2(2@262"Candidate constructor (the implicit copy constructor) not viable: no known conversion from 'iterator' (aka '__normal_iterator<pointer, vector_type>') to 'const __gnu_cxx::__normal_iterator<State *, std::vector<State, std::allocator<State>>> &' for 1st argument; -377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^635#10#635#10#20262#0#14"Semantic Issue1(3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^15#40#15#63#752#22#-2@80"Candidate template ignored: substitution failure [with _Iter = Learner::State *]-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@156"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/c++/4.2.1/bits/stl_iterator.h0000000000000000^656#8#656#8#21087#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#38#15#38#750#0#14"Semantic Issue1(3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#40#15#63#752#22#-2@41"'states' is a private member of 'Learner'-377098199#18446744073709551615#0#1(2@21"Declared private here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h0000000000000000^55#23#55#23#2046#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#49#15#49#761#0#14"Semantic Issue--2@64"Use of undeclared identifier 'learner'; did you mean '_learner'?-377098199#18446744073709551615#0#1(2@24"'_learner' declared here-377098199#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^6#60#6#60#139#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#68#15#68#780#0#14"Semantic Issue1(3@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^15#68#15#75#780#7#-2@37"Too many errors emitted, stopping now-377098199#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic-20"Clang LLVM 1.0 Error--0#0#0#-19%DVTDocumentLocation4@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp0000000000000000^2291"CompileC xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/state.cpp -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/state.o36"433B75E0-CE59-4043-99EE-AA5D2EDE1D4D-
 
 CLd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl normal x86_64
-s379928143.965246
-e379928144.051519
+s379930967.000216
+e379930967.173969
 r1
 xLd
 x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl
@@ -2756,7 +3006,7 @@ xnormal
 xx86_64
 old: warning: directory not found for option '-L/usr/local/Cellar/cgal/4.0.2/lib/Debug'
 old: warning: directory not found for option '-L/usr/local/lib/Debug'
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Link /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl8238f74f3ea5b641^51320d503ea5b641^-156"ld: warning: directory not found for option '-L/usr/local/Cellar/cgal/4.0.2/lib/Debug'ld: warning: directory not found for option '-L/usr/local/lib/Debug'2(21%IDEActivityLogMessage2@73"Directory not found for option '-L/usr/local/Cellar/cgal/4.0.2/lib/Debug'-379928143#0#87#-1#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#32"Apple Mach-O Linker (ld) Warning--2@55"Directory not found for option '-L/usr/local/lib/Debug'-379928143#87#69#-1#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#32"Apple Mach-O Linker (ld) Warning--0#0#0#--2262"Ld xcode/Debug/rl normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -L/usr/local/Cellar/cgal/4.0.2/lib/Debug -L/usr/local/Cellar/cgal/4.0.2/lib -L/usr/local/lib/Debug -L/usr/local/lib -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/rl.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl36"B6C720F4-B58F-4295-8567-DD3A8822458B-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection67"Link /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rlb533005749a5b641^b1892c5749a5b641^-156"ld: warning: directory not found for option '-L/usr/local/Cellar/cgal/4.0.2/lib/Debug'ld: warning: directory not found for option '-L/usr/local/lib/Debug'2(21%IDEActivityLogMessage2@73"Directory not found for option '-L/usr/local/Cellar/cgal/4.0.2/lib/Debug'-379930967#0#87#-1#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#32"Apple Mach-O Linker (ld) Warning--2@55"Directory not found for option '-L/usr/local/lib/Debug'-379930967#87#69#-1#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#32"Apple Mach-O Linker (ld) Warning--0#0#0#--2262"Ld xcode/Debug/rl normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -L/usr/local/Cellar/cgal/4.0.2/lib/Debug -L/usr/local/Cellar/cgal/4.0.2/lib -L/usr/local/lib/Debug -L/usr/local/lib -F/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Objects-normal/x86_64/rl.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/Debug/rl36"33D0DFC8-91DC-4121-A34D-959270301333-
 
 CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-0E6F853C84164517AA8A72D5.sh
 s377090455.506295
@@ -2772,8 +3022,8 @@ omake[1]: Nothing to be done for `PostBuild.rl.Debug'.
 lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'af958497f179b641^b3b69197f179b641^-343"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debugmake[1]: Nothing to be done for `PostBuild.rl.Debug'.4(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-377090455#0#30#-0#-----2@23"Depend check for xcode-377090455#30#23#-0#-----2@236"cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debug-377090455#53#236#-0#-----2@54"make[1]: Nothing to be done for `PostBuild.rl.Debug'.-377090455#289#54#-0#-----0#0#0#--319"PhaseScriptExecution "CMake PostBuild Rules" xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-0E6F853C84164517AA8A72D5.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-0E6F853C84164517AA8A72D5.sh36"7D7C1DF5-FE68-4C8A-BE75-AF53FAD12BCA-
 
 CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C598F91BF13F4124ACA4ABC6.sh
-s379928144.059568
-e379928144.117173
+s379930967.181989
+e379930967.310375
 r1
 xPhaseScriptExecution
 xCMake PostBuild Rules
@@ -2782,7 +3032,7 @@ oecho "Depend check for xcode"
 oDepend check for xcode
 ocd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debug
 omake[1]: Nothing to be done for `PostBuild.rl.Debug'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'7ac50f503ea5b641^da021e503ea5b641^-343"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debugmake[1]: Nothing to be done for `PostBuild.rl.Debug'.4(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-379928144#0#30#-0#-----2@23"Depend check for xcode-379928144#30#23#-0#-----2@236"cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debug-379928144#53#236#-0#-----2@54"make[1]: Nothing to be done for `PostBuild.rl.Debug'.-379928144#289#54#-0#-----0#0#0#--319"PhaseScriptExecution "CMake PostBuild Rules" xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C598F91BF13F4124ACA4ABC6.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C598F91BF13F4124ACA4ABC6.sh36"8E13D30A-3EC0-4545-9C29-714D6AFFF58A-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'614f2f5749a5b641^de3d505749a5b641^-343"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debugmake[1]: Nothing to be done for `PostBuild.rl.Debug'.4(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-379930967#0#30#-0#-----2@23"Depend check for xcode-379930967#30#23#-0#-----2@236"cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.rl.Debug-379930967#53#236#-0#-----2@54"make[1]: Nothing to be done for `PostBuild.rl.Debug'.-379930967#289#54#-0#-----0#0#0#--319"PhaseScriptExecution "CMake PostBuild Rules" xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C598F91BF13F4124ACA4ABC6.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C598F91BF13F4124ACA4ABC6.sh36"BAC1B1B0-9219-4AC5-8AC8-8A693D60758F-
 
 CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/rl.build/Script-C7EC02E51F5142149FE4A527.sh
 s377081475.641938

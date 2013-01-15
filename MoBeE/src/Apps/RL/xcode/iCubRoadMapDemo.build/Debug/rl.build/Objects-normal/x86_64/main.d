@@ -1,5 +1,55 @@
 dependencies: /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/main.cpp \
   /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/learner.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/NetInt32.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/api.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/conf/api.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/conf/system.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/BinPortable.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Portable.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReader.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/ConstString.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionReader.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Contact.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Searchable.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Bytes.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriter.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionWriter.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Bottle.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Value.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/BufferedPort.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Contactable.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReport.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Vocab.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Port.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderCreator.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderBuffer.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Thread.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/LocalReader.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriterBuffer.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Network.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/ContactStyle.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Property.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/NameStore.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/PortablePair.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Random.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Semaphore.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Event.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/RateThread.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Runnable.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Stamp.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/NetFloat64.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Terminator.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Time.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Module.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/IConfig.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/RFModule.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcServer.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/ResourceFinder.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/DummyConnector.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcClient.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/Wire.h \
+  /usr/local/Cellar/yarp/HEAD/include/yarp/os/WireLink.h \
   /usr/local/Cellar/cgal/4.0.2/include/CGAL/Cartesian_d.h \
   /usr/local/Cellar/cgal/4.0.2/include/CGAL/basic.h \
   /usr/local/Cellar/cgal/4.0.2/include/CGAL/config.h \

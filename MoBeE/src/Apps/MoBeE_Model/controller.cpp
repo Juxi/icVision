@@ -9,7 +9,7 @@ Controller::Controller( KinematicModel::Robot* _robot,
                                                     _robot->getPart(_partNum)->name().toStdString().c_str(),
                                                     (conf_dir + "/" + _robot->getPart(_partNum)->name() + ".ini").toStdString().c_str(),
                                                     freq),
-                                    rpcPort(this),
+                                    //rpcPort(this),
                                     robot(_robot),
                                     partNum(_partNum),
                                     cstThresh(20.0)
@@ -25,14 +25,16 @@ void Controller::afterStart(bool s)
 {
     PartController::afterStart(s);
     if (s) {
-        yarp::os::ConstString portName = portPrefix + "/rpc";
-        rpcPort.open(portName);
-        rpcPort.start();
+        yarp::os::ConstString portName = portPrefix + "/markerStates";
+        markerStatePort.open(portName);
+        //rpcPort.open(portName);
+        //rpcPort.start();
     }
 }
 void Controller::threadRelease()
 {
-    rpcPort.close();
+    markerStatePort.close();
+    //rpcPort.close();
     PartController::threadRelease();
 }
 
@@ -123,6 +125,32 @@ void Controller::procEncoders( double* q )
     
     //robot->setEncoderPosition(partNum,Q);
     emit setRobotPosition(partNum,Q);
+}
+
+void Controller::publishState()
+{
+    bool sendBottle = true;
+    yarp::os::Bottle states;
+    QList<QString> markerList;
+    if (!getMarkerNames(markerList)) sendBottle = false;
+    for (QList<QString>::iterator i=markerList.begin(); i!=markerList.end(); ++i) {
+        QVector3D pos,norm;
+        if ( getMarkerPosition(*i,pos) && getMarkerNormal(*i,norm) ) {
+            yarp::os::Bottle aState;
+            aState.addString(i->toStdString().c_str());
+            aState.addDouble(pos.x());
+            aState.addDouble(pos.y());
+            aState.addDouble(pos.z());
+            aState.addDouble(norm.x());
+            aState.addDouble(norm.y());
+            aState.addDouble(norm.z());
+            states.addList() = aState;
+        } else {
+            sendBottle = false;
+            break;
+        }
+    }
+    if (sendBottle) markerStatePort.write(states);
 }
 
 bool Controller::getMarkerNames( QList<QString>& markerList )

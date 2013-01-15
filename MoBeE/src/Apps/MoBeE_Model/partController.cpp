@@ -372,6 +372,8 @@ void PartController::run()
         printf("\n");
         
         vel->velocityMove( ctrl );
+        
+        publishState();
     }
 }
 

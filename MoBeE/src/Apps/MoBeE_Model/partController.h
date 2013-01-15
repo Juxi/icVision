@@ -86,6 +86,7 @@ protected:
     
     virtual void handler( yarp::os::Bottle* ){}
     virtual void procEncoders( double* ){}
+    virtual void publishState(){}
     virtual bool threadInit();
 	virtual void afterStart(bool s);
     virtual void run();

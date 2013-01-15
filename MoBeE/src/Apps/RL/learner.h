@@ -10,11 +10,12 @@
 #ifndef LEARNER_H_
 #define LEARNER_H_
 
+#include <yarp/os/all.h>
 #include <CGAL/Cartesian_d.h>
 #include <list>
 typedef CGAL::Cartesian_d<double>::Point_d Point_d;
 
-class Learner
+class Learner : public yarp::os::RateThread
 {
 public:
     class State : public Point_d
@@ -56,7 +57,7 @@ public:
         friend class Learner;
     };
     
-    Learner(){}
+    Learner( int rate ) : yarp::os::RateThread(rate) {}
     ~Learner(){}
     
     inline void appendFullyConnectedState(Point_d& q) { new State(q,this); }
@@ -67,6 +68,11 @@ public:
     void print();
     
 private:
+    
+    virtual bool threadInit();
+	virtual void afterStart(bool s);
+    virtual void run();
+    virtual void threadRelease();
     
     std::list<State*> states;
     

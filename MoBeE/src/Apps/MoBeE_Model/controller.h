@@ -12,7 +12,7 @@
 
 #include "partController.h"
 #include "bodypart.h"
-#include "controllerRpcInterface.h"
+//#include "controllerRpcInterface.h"
 
 /****************************************************************************************************************
  *** this vocab accompanies the name of a marker and a list of 6 operational space forces and torques, like:  ***
@@ -42,6 +42,7 @@ private:
     
     void handler( yarp::os::Bottle* );
     void procEncoders( double* q );
+    void publishState();
     
     bool getMarkerNames( QList<QString>& );
     bool getMarkerPosition( QString, QVector3D& );
@@ -51,7 +52,8 @@ private:
     QVector<qreal> vectorSum(QVector<qreal>,QVector<qreal>);
     QVector<qreal> scalarMult(qreal,QVector<qreal>);
 
-    ControllerRpcInterface rpcPort;
+    yarp::os::Port markerStatePort;
+    //ControllerRpcInterface rpcPort;
     KinematicModel::Robot* robot;
     int partNum;
     
