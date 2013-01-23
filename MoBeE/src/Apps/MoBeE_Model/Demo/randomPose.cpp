@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
     left_arm.open("/left_arm_cmd");
     
     // connect the ports to the MoBeE model
-    net.connect("/torso_cmd","/MoBeE/torso/cmd");
-    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd");
-    net.connect("/left_arm_cmd","/MoBeE/left_arm/cmd");
+    net.connect("/torso_cmd","/MoBeE/torso/cmd:i");
+    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd:i");
+    net.connect("/left_arm_cmd","/MoBeE/left_arm/cmd:i");
 	
     // control the robot through an arbitrary number of poses
 	int i = 0;
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
         printf("\n");
         
         // wait an arbitrary time for the motion to happen
-        sleep(7);
+        sleep(1);
         
         // increment the counter
         i++;

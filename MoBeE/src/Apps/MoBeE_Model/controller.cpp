@@ -25,7 +25,7 @@ void Controller::afterStart(bool s)
 {
     PartController::afterStart(s);
     if (s) {
-        yarp::os::ConstString portName = portPrefix + "/markerStates";
+        yarp::os::ConstString portName = portPrefix + "/markerState:o";
         markerStatePort.open(portName);
         //rpcPort.open(portName);
         //rpcPort.start();

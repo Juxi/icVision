@@ -195,7 +195,7 @@ PartController::PartController( const char* _robotName, const char* _partName, c
         // open the control port
         portPrefix = "/MoBeE/";
         portPrefix += _partName;
-		port.open( portPrefix + "/cmd" );
+		port.open( portPrefix + "/cmd:i" );
 		srand ( yarp::os::Time::now() );
 	} //else { throw("could not connect to robot!"); }
 }
@@ -240,6 +240,7 @@ double PartController::magnitude(yarp::os::Bottle* list)
 
 void PartController::setATT( yarp::os::Bottle* list )
 {
+    printf("setATT: %s\n",list->toString().c_str());
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull())
         {
@@ -315,7 +316,7 @@ void PartController::run()
                 handler(b);
                 break;
         }
-	}
+	} //else { printf("got no bottle!\n"); }
 	
     yarp::os::Bottle view0,view1,view2,view3,view4,view5;
 
@@ -342,7 +343,7 @@ void PartController::run()
             else if ( q1[i] > max[i] - kfLim[i] )    fLim[i] = fLimMax[i] * -(q1[i]-(max[i]-kfLim[i]))/kfLim[i];
             else                                    fLim[i] = 0.0;
       
-            // compute acceleration (should squash this too)
+            // compute acceleration (should squash this too?)
             a[i] =  - c[i]*v[i]
                     + fX[i]
                     + fLim[i]
@@ -368,8 +369,8 @@ void PartController::run()
         //printf("fLim: %s\n", view1.toString().c_str());
         //printf("fCst: %s\n", view2.toString().c_str());
         //printf("fFld: %s\n", view3.toString().c_str());
-        printf("fRPC: %s\n", view4.toString().c_str());
-        printf("\n");
+        //printf("fRPC: %s\n", view4.toString().c_str());
+        //printf("\n");
         
         vel->velocityMove( ctrl );
         

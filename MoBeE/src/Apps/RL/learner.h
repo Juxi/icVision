@@ -57,11 +57,11 @@ public:
         friend class Learner;
     };
     
-    Learner( int rate ) : yarp::os::RateThread(rate) {}
+    Learner( const char* _robotName, const char* _partName, int rate );
     ~Learner(){}
     
     inline void appendFullyConnectedState(Point_d& q) { new State(q,this); }
-    inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
+    //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
     inline int getNumStates() { return states.size(); }
     
     bool deleteState( const State* );
@@ -74,7 +74,12 @@ private:
     virtual void run();
     virtual void threadRelease();
     
+    yarp::os::Network network;
+    yarp::os::Port statePort,commandPort;
     std::list<State*> states;
+    
+    State* currentState;
+    State::Action* currentAction;
     
 };
 #endif
