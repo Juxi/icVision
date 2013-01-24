@@ -1,3 +1,5 @@
+#include <unistd.h>
+#include <time.h>
 #include "learner.h"
 
 Learner::Learner( const char* _robotName, const char* _partName, int rate ) : yarp::os::RateThread(rate)
@@ -22,6 +24,67 @@ Learner::Learner( const char* _robotName, const char* _partName, int rate ) : ya
     commandPort.open(localCommandPort);
     yarp::os::Network::connect(remoteStatePort,localStatePort);
     yarp::os::Network::connect(localCommandPort,remoteCommandPort);
+    
+    // prepare the random number generator
+    srand(time(0));
+}
+
+
+bool Learner::takeRandomAction()
+{
+    if (!currentState) return false;
+    
+    State* startingState = currentState;
+    int actionIdx = rand()%startingState->actions.size();
+    std::list<State::Action>::iterator a=startingState->actions.begin();
+    for (int j=0; j<actionIdx; j++)
+        a++;
+    const State* goalState = a->destination_state;
+    
+    while ( true /*need a timeout here*/ )
+    {
+        // when the current state changes
+        if ( currentState != startingState )
+        {
+            // update transition probabilities for startingState->action (a)
+            updateTransitionBelief( *a, currentState );
+            
+            // find the action associated with the new current state that continues to take us to the desired goal state
+            for ( a=currentState->actions.begin(); a!=currentState->actions.end(); ++a ) {
+                if ( a->destination_state == goalState ) break;
+            }
+            
+            // an action such as is described above should exist.  if not, print a warning and we're done
+            if ( a->destination_state != goalState ) {
+                printf("No action found to continue to goal state! ABORTING RANDOM ACTION!\n");
+                return;
+            }
+            
+            // set starting state to current state
+            startingState = currentState;
+            
+            if ( currentState == goalState ) {
+                printf("\nGOAL REACHED!!!\n\n");
+                break;
+            }
+        }
+        
+        usleep(100000);
+    }
+    return true;
+}
+
+double Learner::updateTransitionBelief( State::Action a, State* s )
+{
+    double delta = 0.0;
+    a.num++;
+    for ( std::list<State::Action::S_Prime>::iterator i=a.transition_belief.begin(); i!=a.transition_belief.end(); ++i){
+        if ( i->s_prime == s ) i->num++;
+        double new_belief = (double)i->num/a.num;
+        delta += abs(new_belief - i->prob);
+        i->prob = new_belief;
+    }
+    return delta;
 }
 
 bool Learner::threadInit()
@@ -79,9 +142,9 @@ bool Learner::deleteState( const State* s )
 {
     for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
         for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j) {
-            for (std::list< std::pair<const State*,double> >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k) {
-                if (k->first==s) {
-                    std::list< std::pair<const State*,double> >::iterator K=k;
+            for (std::list< State::Action::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k) {
+                if (k->s_prime==s) {
+                    std::list< State::Action::S_Prime >::iterator K=k;
                     j->transition_belief.erase(k,++K);
                 }
             }
@@ -108,10 +171,10 @@ void Learner::print()
         for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j)
         {
             printf("  Action %d: ",actionCount++);
-            for (std::list< std::pair<const State*,double> >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
+            for (std::list< State::Action::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
             {
                 //printf("(%p %f) ", k->first, k->second);
-                printf("%f ", k->second);
+                printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
             }
             printf("\n");
         }

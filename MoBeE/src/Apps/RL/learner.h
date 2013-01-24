@@ -24,17 +24,28 @@ public:
         class Action
         {  
         public:
-            Action( State* _destination_state, Learner* parent ) : destination_state(_destination_state) {
+            Action( State* _destination_state, Learner* parent ) : destination_state(_destination_state), num(1), val(0.0) {
                 for (std::list<State*>::iterator i=parent->states.begin(); i!=parent->states.end(); ++i ) {
-                    if (*i==destination_state) transition_belief.push_back(std::pair< const State*, double >(*i,1.0));
-                    else transition_belief.push_back(std::pair< const State*, double >(*i,0.0));
+                    if (*i==destination_state) transition_belief.push_back(S_Prime(*i,1.0,1));
+                    else transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
             }
             ~Action(){}
         private:
             const State* destination_state;
-            std::list< std::pair< const State*, double > > transition_belief;
-            //std::vector< std::vector<int> > transition_history;
+            struct S_Prime
+            {
+                const State* s_prime;
+                double prob;
+                int num;
+                //Transition_Belief() : s_prime(NULL), prob(0.0), num(0){}
+                //Transition_Belief(State* s) : s_prime(s), prob(0.0), num(0){}
+                S_Prime(State* s, double p, int n) : s_prime(s), prob(p), num(n){}
+            };
+            std::list< S_Prime > transition_belief;
+            int num;    // number of times this action has been tried
+            double val; // Q value of this action
+            
             friend class State;
             friend class Learner;
         };
@@ -44,7 +55,7 @@ public:
             for (std::list<State*>::iterator i=parent->states.begin(); i!=parent->states.end(); ++i ) {
                 // add state transition probabilities for all state::actions to lead to this state
                 for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j )
-                    if (*i!=this) j->transition_belief.push_back(std::pair<const State*, double>(this,0.0));
+                    if (*i!=this) j->transition_belief.push_back(Action::S_Prime(this,0.0,0));
                 // append actions 'go to other state' (from here)
                 if (*i!=this) actions.push_back(Action(*i,parent));
                 // append actions 'go to this state' (from elsewhere)
@@ -60,14 +71,20 @@ public:
     Learner( const char* _robotName, const char* _partName, int rate );
     ~Learner(){}
     
-    inline void appendFullyConnectedState(Point_d& q) { new State(q,this); }
+    inline void appendState(Point_d& q) { new State(q,this); }
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
-    inline int getNumStates() { return states.size(); }
+    //inline int getNumStates() { return states.size(); }
     
-    bool deleteState( const State* );
+    bool takeRandomAction();
+    
+    
     void print();
     
 private:
+    
+    double updateTransitionBelief( State::Action, State* );
+    
+    bool deleteState( const State* );
     
     virtual bool threadInit();
 	virtual void afterStart(bool s);

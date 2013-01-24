@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         for (int j=0; j<16; j++)
             thisState.push_back((double)rand()/RAND_MAX);
         Point_d q(thisState.size(),thisState.begin(),thisState.end());
-        learner.appendFullyConnectedState(q);
+        learner.appendState(q);
     }
     learner.print();
     
@@ -26,7 +26,12 @@ int main(int argc, char *argv[])
     // start a thread to keep track of the current state as the robot moves
     learner.start();
     
-    while(true);
+    sleep(3);
+    
+    while (true) {
+        learner.takeRandomAction();
+        learner.print();
+    }
     
     // choose an action from the current state
     
