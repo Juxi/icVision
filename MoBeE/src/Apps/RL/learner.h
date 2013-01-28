@@ -14,6 +14,7 @@
 #include <CGAL/Cartesian_d.h>
 #include <list>
 typedef CGAL::Cartesian_d<double>::Point_d Point_d;
+typedef CGAL::Cartesian_d<double>::Vector_d Vector_d;
 
 class Learner : public yarp::os::RateThread
 {
@@ -29,6 +30,7 @@ public:
                     if (*i==destination_state) transition_belief.push_back(S_Prime(*i,1.0,1));
                     else transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
+                printf("New Action destination: %p\n", destination_state);
             }
             ~Action(){}
         private:
@@ -97,6 +99,8 @@ private:
     
     State* currentState;
     State::Action* currentAction;
+    
+    yarp::os::Semaphore mutex;
     
 };
 #endif

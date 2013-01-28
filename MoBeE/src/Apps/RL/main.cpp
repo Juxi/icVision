@@ -21,17 +21,17 @@ int main(int argc, char *argv[])
     }
     learner.print();
     
-    sleep(1);
+    sleep(3);
     
     // start a thread to keep track of the current state as the robot moves
     learner.start();
     
     sleep(3);
     
-    while (true) {
+    //while (true) {
         learner.takeRandomAction();
-        learner.print();
-    }
+        //learner.print();
+    //}
     
     // choose an action from the current state
     
