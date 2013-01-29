@@ -36,13 +36,15 @@ public:
 private:
 	
 	yarp::os::Network							network;
-	yarp::os::BufferedPort<yarp::os::Bottle>	port;
+	yarp::os::BufferedPort<yarp::os::Bottle>	commandPort;
+    yarp::os::BufferedPort<yarp::os::Bottle>    statePort;
 	yarp::dev::PolyDriver						*dd;
 	yarp::dev::IVelocityControl					*vel;
 	yarp::dev::IEncoders						*enc;
     
 	int					numJoints;	// number of controllable DOFs
 	double				*q1,		// current pose
+                        //*qNorm,     // normalized robot pose
                         *q0,		// last pose
                         *v,			// velocity q1-q0
                         *e,			// the error vector x-q1

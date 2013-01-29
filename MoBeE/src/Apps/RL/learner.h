@@ -13,6 +13,7 @@
 #include <yarp/os/all.h>
 #include <CGAL/Cartesian_d.h>
 #include <list>
+
 typedef CGAL::Cartesian_d<double>::Point_d Point_d;
 typedef CGAL::Cartesian_d<double>::Vector_d Vector_d;
 
@@ -30,7 +31,7 @@ public:
                     if (*i==destination_state) transition_belief.push_back(S_Prime(*i,1.0,1));
                     else transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
-                printf("New Action destination: %p\n", destination_state);
+                //printf("New Action destination: %p\n", destination_state);
             }
             ~Action(){}
         private:
@@ -80,7 +81,7 @@ public:
     bool takeRandomAction();
     
     
-    void print();
+    void print(bool printall = false);
     
 private:
     
@@ -94,7 +95,7 @@ private:
     virtual void threadRelease();
     
     yarp::os::Network network;
-    yarp::os::Port statePort,commandPort;
+    yarp::os::BufferedPort<yarp::os::Bottle> statePort,commandPort;
     std::list<State*> states;
     
     State* currentState;

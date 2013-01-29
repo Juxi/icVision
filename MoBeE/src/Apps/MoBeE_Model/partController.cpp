@@ -62,6 +62,7 @@ PartController::PartController( const char* _robotName, const char* _partName, c
         // initialize control vars
         q1 = new double[numJoints];
         q0 = new double[numJoints];
+        //qNorm = new double[numJoints];
         v = new double[numJoints];
         e = new double[numJoints];
         
@@ -195,7 +196,8 @@ PartController::PartController( const char* _robotName, const char* _partName, c
         // open the control port
         portPrefix = "/MoBeE/";
         portPrefix += _partName;
-		port.open( portPrefix + "/cmd:i" );
+		commandPort.open( portPrefix + "/cmd:i" );
+        statePort.open( portPrefix + "/state:o" );
 		srand ( yarp::os::Time::now() );
 	} //else { throw("could not connect to robot!"); }
 }
@@ -240,16 +242,19 @@ double PartController::magnitude(yarp::os::Bottle* list)
 
 void PartController::setATT( yarp::os::Bottle* list )
 {
-    printf("setATT: %s\n",list->toString().c_str());
+    //printf("setATT: %s\n",list->toString().c_str());
+    //printf("q: ");
 	for ( int i = 0; i < numJoints; i++ ) {
         if (!list->get(i).isNull())
         {
             double normPos = list->get(i).asDouble();
-            if (normPos<0) normPos = 0.0;
-            else if (normPos>1) normPos = 1.0;
+            if (normPos<0.0) normPos = 0.0;
+            else if (normPos>1.0) normPos = 1.0;
             x[i] = min[i] + normPos*(max[i]-min[i]);
+            //printf("%f ",x[i]);
         }
     }
+    //printf("\n");
 }
 
 void PartController::setFCST(yarp::os::Bottle* list)
@@ -299,18 +304,18 @@ void PartController::run()
 	
 	// read control commands from socket and handle them
 	yarp::os::Bottle* b = NULL;
-	b = port.read(false);
+	b = commandPort.read(false);
 	if ( b ) {
 		printf("got a bottle: %s\n", b->toString().c_str());
         int cmd = b->get(0).asVocab();
         switch (cmd) {
             case VOCAB_QATTR:
                 setATT( b->get(1).asList() );
-                printf("\nSet attractor position!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
+                printf("  Set attractor position!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             case VOCAB_QFORCE:
                 setFRPC( b->get(1).asList() );
-                printf("\nSet joint-space force!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
+                printf("  Set joint-space force!!! (%s)\n\n", b->get(1).asList()->toString().c_str());
                 break;
             default:
                 handler(b);
@@ -318,19 +323,26 @@ void PartController::run()
         }
 	} //else { printf("got no bottle!\n"); }
 	
-    yarp::os::Bottle view0,view1,view2,view3,view4,view5;
+    yarp::os::Bottle view0,view1,view2,view3,view4,view5,view6,view7;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
     
     if ( getEncoders(q1) )
     {
+        
         // process encoder positions... (the derrived class "Controller" sets the robot position in KineamticModel)
         procEncoders(q1);
         
-        // compute the next control command
+        yarp::os::Bottle& normPose = statePort.prepare();
+        normPose.clear();
+        
+        // compute the current normalized state and the next control command
         for ( int i=0; i<numJoints; i++ )
         {
+            // normalize the current pose
+            normPose.addDouble( (q1[i]-min[i])/(max[i]-min[i]) );
+            
             // update error vector (to attractor) and velocity
             e[i] = w[i]*(x[i] - q1[i]);
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
@@ -354,6 +366,7 @@ void PartController::run()
             
             // compute next control command
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
+            if ( ctrl[i]*ctrl[i] < 0.1 ) ctrl[i] = 0.0;
             
             if (i<7) {
                 view0.addDouble(fX[i]);
@@ -362,17 +375,26 @@ void PartController::run()
                 view3.addDouble(fFld[i]);
                 view4.addDouble(fRPC[i]);
                 view5.addDouble(x[i]);
+                view6.addDouble(- c[i]*v[i]);
+                view7.addDouble(ctrl[i]);
             }
         }
+        
         //printf("x:    %s\n", view5.toString().c_str());
         //printf("fX:   %s\n", view0.toString().c_str());
+        
         //printf("fLim: %s\n", view1.toString().c_str());
         //printf("fCst: %s\n", view2.toString().c_str());
         //printf("fFld: %s\n", view3.toString().c_str());
         //printf("fRPC: %s\n", view4.toString().c_str());
+        
+        //printf("fd:   %s\n", view6.toString().c_str());
+        //printf("cmd:  %s\n", view7.toString().c_str());
         //printf("\n");
         
         vel->velocityMove( ctrl );
+        
+        statePort.write();
         
         publishState();
     }

@@ -4,9 +4,7 @@
 
 Learner::Learner( const char* _robotName, const char* _partName, int rate ) : yarp::os::RateThread(rate), currentState(NULL), currentAction(NULL)
 {
-    yarp::os::ConstString remoteStatePort("/");
-	remoteStatePort += _robotName;
-	remoteStatePort += "/";
+    yarp::os::ConstString remoteStatePort("/MoBeE/");
 	remoteStatePort += _partName;
 	remoteStatePort += "/state:o";
     yarp::os::ConstString localStatePort("/learner/");
@@ -118,21 +116,24 @@ void Learner::afterStart(bool s)
 
 void Learner::run()
 {
-    yarp::os::Bottle cmd,vec;
+    //printf("\nRUN\n\n");
     
     // get the current robot state and put it in a Point_d
-    yarp::os::Bottle b;
-    statePort.read(b);
+    yarp::os::Bottle* b = statePort.read();
+    //statePort.read(b);
     std::list<double> bList;
-    for (int i=0; i<b.size(); i++)
-        bList.push_back(b.get(i).asDouble());
+    for (int i=0; i<b->size(); i++)
+        bList.push_back(b->get(i).asDouble());
     Point_d q(bList.size(),bList.begin(),bList.end());
+    
+    //std::cout << "  q: " << q << std::endl;
     
     // set 'currentState' based on the nearest attractor to the actual robot state
     State* nearestState = NULL;
     if ( states.size() > 0 ) {
         nearestState = *states.begin();
         for (std::list<State*>::iterator j=states.begin(); j!=states.end(); ++j) {
+            //std::cout << "    j: " << **j << "\t\t" << (q-**j).squared_length() << std::endl;
             if ( (q-**j).squared_length() < (q-*nearestState).squared_length() ) {
                 nearestState = *j;
             }
@@ -140,41 +141,37 @@ void Learner::run()
     }
     currentState = nearestState;
     
+    //std::cout << "  Q: " << *currentState << "\t\t" << (q-*currentState).squared_length() << std::endl;
+    
+    // a vector for both the following commands
+    yarp::os::Bottle vec;
+    
     // activate the attractor at the current state
-    std::cout << "  state: " << *currentState << std::endl;
-    cmd.addVocab(yarp::os::Vocab::encode("qatt"));
+    yarp::os::Bottle& attractorCommand = commandPort.prepare();
+    attractorCommand.clear();
+    attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
     for (Point_d::Cartesian_const_iterator i=nearestState->cartesian_begin(); i!=nearestState->cartesian_end(); ++i)
         vec.addDouble(*i);
-    cmd.addList() = vec;
-    printf("sending: %s\n",cmd.toString().c_str());
-    commandPort.write(cmd);
+    attractorCommand.addList() = vec;
+    //printf("  attractorCommand: %s\n",attractorCommand.toString().c_str());
+    commandPort.writeStrict();
     
-    if ( currentAction != NULL ) {
-        std::cout << "  action: " << currentAction << std::endl;
-        printf("  action destination: %p\n", currentAction->destination_state);
-        //std::cout << "  action destination: " << currentAction->destination_state << std::endl;
-        //Vector_d f = *(currentAction->destination_state) - *currentState;
-        //std::cout << "  force: " << f << std::endl;
-    }
-    
-    // send the force resultant of the current action
-    /*if ( currentState != NULL && currentAction != NULL ) {
-        std::cout << "  state: " << currentState << std::endl;
-        std::cout << "  action: " << currentAction->destination_state << std::endl;
-        
-        Vector_d f = currentAction->destination_state - currentState;
-        std::cout << "  force: " << f << std::endl;
-        
-        yarp::os::Bottle cmd,vec;
-        cmd.addVocab(yarp::os::Vocab::encode("opsp"));
-        
+    // force the system toward the desired next state
+    yarp::os::Bottle& forceCommand = commandPort.prepare();
+    forceCommand.clear();
+    vec.clear();
+    forceCommand.addVocab(yarp::os::Vocab::encode("qfor"));
+    if ( currentAction != NULL && currentState != currentAction->destination_state) {
+        Vector_d f = 1000.0 * (*(currentAction->destination_state)-q);
         for (Vector_d::Cartesian_const_iterator i=f.cartesian_begin(); i!=f.cartesian_end(); ++i)
             vec.addDouble(*i);
-        cmd.addList() = vec;
-        printf("sending: %s\n",cmd.toString().c_str());
-        commandPort.write(cmd);
-    }*/
-
+    } else {
+        for (Vector_d::Cartesian_const_iterator i=q.cartesian_begin(); i!=q.cartesian_end(); ++i)
+            vec.addDouble(0.0);
+    }
+    forceCommand.addList() = vec;
+    //printf("  forceCommand: %s\n",forceCommand.toString().c_str());
+    commandPort.writeStrict();
 }
 
 void Learner::threadRelease()
@@ -205,7 +202,7 @@ bool Learner::deleteState( const State* s )
     delete s;
 }
 
-void Learner::print()
+void Learner::print(bool printAll)
 {
     int stateCount=0;
     for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i)
@@ -217,8 +214,8 @@ void Learner::print()
             printf("  Action %d, %p: ",actionCount++,j->destination_state);
             for (std::list< State::Action::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
             {
-                //printf("(%p %f) ", k->first, k->second);
-                printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
+                if (printAll) printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
+                else printf("%f (%d)   ", k->prob, k->num);
             }
             printf("\n");
         }

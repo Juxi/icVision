@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         torso.write();                                  // send it off to MoBeE
         
         // repeat the above for the right arm
-        yarp::os::Bottle& rBottle = right_arm.prepare();
+        /*yarp::os::Bottle& rBottle = right_arm.prepare();
         rBottle.clear();
         rBottle.addVocab(yarp::os::Vocab::encode("qatt"));
         yarp::os::Bottle rCmd;
@@ -63,16 +63,16 @@ int main(int argc, char *argv[])
         for (int i=0; i<16; i++)
             lCmd.addDouble((double)rand()/RAND_MAX);
         lBottle.addList() = lCmd;
-        left_arm.write();
+        left_arm.write();*/
         
         // inform the user
         printf("Torso: %s\n",tBottle.toString().c_str());
-        printf("Right: %s\n",rBottle.toString().c_str());
-        printf("Left:  %s\n",lBottle.toString().c_str());
+        //printf("Right: %s\n",rBottle.toString().c_str());
+        //printf("Left:  %s\n",lBottle.toString().c_str());
         printf("\n");
         
         // wait an arbitrary time for the motion to happen
-        sleep(1);
+        sleep(5);
         
         // increment the counter
         i++;

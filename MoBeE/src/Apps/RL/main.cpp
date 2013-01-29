@@ -7,31 +7,32 @@ int main(int argc, char *argv[])
     // prepare the random number generator
     srand(time(0));
     
-    Learner learner("icubSim","right_arm",200);
+    Learner learner("icubSim","torso",200);
 
     
     // make some random states
     Point_d q(3,CGAL::ORIGIN);
     for (int i=0; i<6; i++){
         std::list<double> thisState;
-        for (int j=0; j<16; j++)
+        for (int j=0; j<3; j++)
             thisState.push_back((double)rand()/RAND_MAX);
         Point_d q(thisState.size(),thisState.begin(),thisState.end());
         learner.appendState(q);
     }
-    learner.print();
+    //learner.print();
     
-    sleep(3);
     
     // start a thread to keep track of the current state as the robot moves
     learner.start();
     
-    sleep(3);
+    sleep(10);
     
-    //while (true) {
+    int i=0;
+    while (i<10) {
         learner.takeRandomAction();
-        //learner.print();
-    //}
+        learner.print();
+    }
+    
     
     // choose an action from the current state
     

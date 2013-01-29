@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
             
             for ( int i=0; i<yarpRobot->numBodyParts(); i++ )
             {
-                if ( i!=1 ) {   // don't control the head, because the eyes require more tuning
+                //if ( i!=1 ) {   // don't control the head, because the eyes require more tuning
+                if ( i<1 ) {   // just use the torso
                     Controller* c = new Controller( yarpRobot,
                                                     confDir,
                                                     i,
