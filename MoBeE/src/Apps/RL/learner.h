@@ -85,7 +85,7 @@ public:
     
 private:
     
-    double updateTransitionBelief( State::Action, State* );
+    double updateTransitionBelief( State::Action*, State* );
     
     bool deleteState( const State* );
     

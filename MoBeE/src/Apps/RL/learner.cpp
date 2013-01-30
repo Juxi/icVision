@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <time.h>
+//#include <cmath>
 #include "learner.h"
 
 Learner::Learner( const char* _robotName, const char* _partName, int rate ) : yarp::os::RateThread(rate), currentState(NULL), currentAction(NULL)
@@ -35,69 +36,55 @@ bool Learner::takeRandomAction()
         return false;
     }
     
+    // select a random action
     std::list<State::Action>::iterator a;
-    State* startingState = currentState;
-    int actionIdx = rand() % (startingState->actions.size());
-    a = startingState->actions.begin();
+    int actionIdx = rand() % (currentState->actions.size());
+    a = currentState->actions.begin();
     for (int j=0; j<actionIdx; j++)
         a++;
-    
     currentAction = &*a;
+    printf("\nTaking random action from: %p to: %p\n", currentState, currentAction->destination_state);
     
-    printf("\nTaking random action to state: %p\n",currentAction->destination_state);
     // while action is not complete
-    while ( true /*need a timeout here*/ )
-    {
-        // when the current state changes
-        if ( currentState != startingState )
-        {
-            printf("\nSTATE CHANGED!!!\n");
-            
-            // update transition probabilities for startingState->action (a)
-            updateTransitionBelief( *a, currentState );
-            
-            // find the action associated with the new current state that continues to take us to the desired goal state
-            for ( a=currentState->actions.begin(); a!=currentState->actions.end(); ++a ) {
-                if ( a->destination_state == currentAction->destination_state) {
-                    printf("  Found new action to continue toward %p", currentAction->destination_state);
-                    break;
-                }
-            }
-            
-            // an action such as is described above should exist.  if not, print a warning and we're done
-            if ( a->destination_state != currentAction->destination_state ) {
-                printf("  No action found to continue to %p!\n  ABORTING RANDOM ACTION!\n", currentAction->destination_state);
-                return false;
-            }
-            
-            // set starting state to current state
-            startingState = currentState;
-            
-            if ( currentState == currentAction->destination_state ) {
-                printf("\nGOAL REACHED!!! (%p)\n\n", currentAction->destination_state);
-                break;
-            }
-        }
-        
-        usleep(100000);
+    State* startingState = currentState;
+    int num = 0;
+    
+    while ( num < 20 && currentState == startingState ) {
+        printf("... %d ", num);
+        num++;
+        usleep(1000000);
     }
     
-    printf("ACTION COMPLETE\n");
-    currentAction = NULL;
+    printf("\nACTION ");
+    
+    if ( currentState == startingState ) {
+        printf("TIMED OUT...\n");
+    } else if ( currentState == currentAction->destination_state ) {
+        printf("SUCCEEDED...\n");
+    } else {
+        printf("ENDED UNEXPECTEDLY...\n");
+    }
+    
+    double deltaBelief = updateTransitionBelief( currentAction, currentState );
+    printf("Changed transtition belief: %f\n",deltaBelief);
     
     return true;
 }
 
-double Learner::updateTransitionBelief( State::Action a, State* s )
+double Learner::updateTransitionBelief( State::Action* a, State* s )
 {
+    printf("UPDATING TRANSITION BELIEFS for the action: %p -> %p\n");
     double delta = 0.0;
-    a.num++;
-    for ( std::list<State::Action::S_Prime>::iterator i=a.transition_belief.begin(); i!=a.transition_belief.end(); ++i){
+    a->num++;
+    
+    for ( std::list<State::Action::S_Prime>::iterator i=a->transition_belief.begin(); i!=a->transition_belief.end(); ++i){
         if ( i->s_prime == s ) i->num++;
-        double new_belief = (double)i->num/a.num;
-        delta += abs(new_belief - i->prob);
+        double new_belief = (double)i->num/a->num;
+        delta += fabs(new_belief - i->prob);
         i->prob = new_belief;
+        printf("  s_prime: %p happened %d times. transition prob is: %f\n",i->s_prime,i->num,i->prob);
     }
+
     return delta;
 }
 
@@ -120,15 +107,16 @@ void Learner::run()
     
     // get the current robot state and put it in a Point_d
     yarp::os::Bottle* b = statePort.read();
-    //statePort.read(b);
     std::list<double> bList;
     for (int i=0; i<b->size(); i++)
         bList.push_back(b->get(i).asDouble());
+    
+    // The current real-valued state from the robot's continuous state space
     Point_d q(bList.size(),bList.begin(),bList.end());
     
     //std::cout << "  q: " << q << std::endl;
     
-    // set 'currentState' based on the nearest attractor to the actual robot state
+    // set 'currentState' based on the nearest attractor to the actual robot state q
     State* nearestState = NULL;
     if ( states.size() > 0 ) {
         nearestState = *states.begin();
@@ -146,22 +134,22 @@ void Learner::run()
     // a vector for both the following commands
     yarp::os::Bottle vec;
     
-    // activate the attractor at the current state
+    // activate the attractor at currentState
     yarp::os::Bottle& attractorCommand = commandPort.prepare();
     attractorCommand.clear();
     attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
     for (Point_d::Cartesian_const_iterator i=nearestState->cartesian_begin(); i!=nearestState->cartesian_end(); ++i)
         vec.addDouble(*i);
     attractorCommand.addList() = vec;
-    //printf("  attractorCommand: %s\n",attractorCommand.toString().c_str());
     commandPort.writeStrict();
+    //printf("  attractorCommand: %s\n",attractorCommand.toString().c_str());
     
     // force the system toward the desired next state
     yarp::os::Bottle& forceCommand = commandPort.prepare();
     forceCommand.clear();
     vec.clear();
     forceCommand.addVocab(yarp::os::Vocab::encode("qfor"));
-    if ( currentAction != NULL && currentState != currentAction->destination_state) {
+    if ( currentAction != NULL /*&& currentState != currentAction->destination_state*/) {
         Vector_d f = 1000.0 * (*(currentAction->destination_state)-q);
         for (Vector_d::Cartesian_const_iterator i=f.cartesian_begin(); i!=f.cartesian_end(); ++i)
             vec.addDouble(*i);
