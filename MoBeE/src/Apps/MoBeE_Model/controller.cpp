@@ -1,6 +1,6 @@
 #include "controller.h"
 #include "robot.h"
-#include <iostream.h>
+#include <iostream>
 
 Controller::Controller( KinematicModel::Robot* _robot,
                        QString conf_dir,

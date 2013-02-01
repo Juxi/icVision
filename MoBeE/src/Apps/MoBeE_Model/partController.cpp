@@ -1,5 +1,5 @@
 #include "partController.h"
-#include <iostream.h>
+#include <iostream>
 
 PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r), 
 																							vel(NULL),
