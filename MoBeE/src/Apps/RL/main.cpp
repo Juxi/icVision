@@ -7,40 +7,30 @@ int main(int argc, char *argv[])
     // prepare the random number generator
     srand(time(0));
     
+    // instantiate a reinforcement learner for the torso, checking for state transition at 5Hz (200ms period)
     Learner learner("icubSim","torso",200);
 
-    
-    // make some random states
+    // pick some random states (poses) and add them to the state space of the learner
     Point_d q(3,CGAL::ORIGIN);
     for (int i=0; i<6; i++){
         std::list<double> thisState;
-        for (int j=0; j<3; j++)
-            thisState.push_back((double)rand()/RAND_MAX);
+        for (int j=0; j<3; j++) thisState.push_back((double)rand()/RAND_MAX);
         Point_d q(thisState.size(),thisState.begin(),thisState.end());
         learner.appendState(q);
     }
     //learner.print();
     
-    
-    // start a thread to keep track of the current state as the robot moves
+    // send control commands and keep track of the current state as the robot moves
     learner.start();
     
+    // wait for the robot to relax into the attractor for the current state
     sleep(10);
     
-    int i=0;
-    while (i<10) {
+    // take random actions... the learner will learn an MDP for the bodypart
+    while (true) {
         learner.takeRandomAction();
         //learner.print();
     }
-    
-    
-    // choose an action from the current state
-    
-    // execute the action
-    
-    // wait for a state change or for the robot to stop moving
-    
-    // update state transition probabilities
     
     learner.stop();
     

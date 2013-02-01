@@ -49,6 +49,7 @@ public:
             int num;    // number of times this action has been tried
             double val; // Q value of this action
             
+            
             friend class State;
             friend class Learner;
         };
