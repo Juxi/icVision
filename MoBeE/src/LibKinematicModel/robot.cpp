@@ -1,7 +1,7 @@
 #include "robot.h"
 #include "model.h"
 #include <time.h>
-#include <iostream.h>
+#include <iostream>
 
 using namespace KinematicModel;
 

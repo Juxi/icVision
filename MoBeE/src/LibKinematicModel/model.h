@@ -152,8 +152,9 @@ protected:
 	
 	uint numObjects, numPrimitives;
 	
-	QReadWriteLock mutex;
-	
+	QReadWriteLock mutexData;
+	QReadWriteLock mutexComputePose;
+
 	ObjectMover *objectMover;			//!< Object mover
 
 	friend class Robot;

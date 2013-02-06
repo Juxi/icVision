@@ -161,7 +161,7 @@ DT_ResponseClass Model::newResponseClass( DT_RespTableHandle table )
 
 Robot* Model::loadRobot( const QString& fileName, bool verbose)
 {	
-	mutex.lockForWrite();
+	mutexData.lockForWrite();
 
 	DT_ResponseClass newRobotClass     = newResponseClass( worldTable );
 	DT_ResponseClass newBaseClass      = newResponseClass( worldTable );
@@ -198,13 +198,13 @@ Robot* Model::loadRobot( const QString& fileName, bool verbose)
 		newBaseClass,
 		newFieldClass,
 		newBaseFieldClass );
-	mutex.unlock();
+	mutexData.unlock();
 
 	robot->open( fileName, verbose ); // open calls appendObject, which locks the mutex by itself
 
-	mutex.lockForWrite();
+	mutexData.lockForWrite();
 	robots.append( robot );
-	mutex.unlock();
+	mutexData.unlock();
 
 	robot->appendMarkersToModel();
 
@@ -241,7 +241,7 @@ void Model::loadWorld( const QString& fileName, bool verbose )
 
 void Model::appendObject( KinTreeNode* node )
 {
-	QWriteLocker locker(&mutex);
+	QWriteLocker locker(&mutexData);
 
 	//if ( verbose ) printf("  appending robot object.\n");
 	if ( !node || !node->getResponseClass() || !node->robot()->getResponseTable() || !node->robot()->getWorldRobotClass() )
@@ -299,7 +299,7 @@ void Model::appendObject( KinTreeNode* node )
 void Model::appendObject( CompositeObject* object )
 {
 	//if ( verbose ) printf("  appending world object.\n");
-	QWriteLocker locker(&mutex);
+	QWriteLocker locker(&mutexData);
 
 	if ( !object || !object->getResponseClass() )
 	{
@@ -329,7 +329,7 @@ void Model::appendObject( CompositeObject* object )
 
 bool Model::removeWorldObject( CompositeObject* object )
 {
-	QWriteLocker locker(&mutex);
+	QWriteLocker locker(&mutexData);
 
 	// remove the pointer to the object from the world vector
 	QVector<CompositeObject*>::iterator i;
@@ -362,7 +362,7 @@ bool Model::removeWorldObject( CompositeObject* object )
 
 QVector< QString > Model::listWorldObjects()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 
 	//uint count = 0;
 	QVector< QString > list;
@@ -390,14 +390,14 @@ QVector< QString > Model::listWorldObjects()
 
 
 void Model::grabObject( CompositeObject* object, Robot* robot, int markerIndex ) {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	objectMover->grabObject( object, robot, markerIndex );
 }
 
 
 CompositeObject* Model::getObject( const QString& _name )
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.begin(); i!=world.end(); i++ )
 	{
@@ -412,7 +412,7 @@ CompositeObject* Model::getObject( const QString& _name )
 
 Robot* Model::getRobot( const QString& _name )
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	QVector<Robot*>::iterator i;
 	for ( i=robots.begin(); i!=robots.end(); i++ )
 	{
@@ -467,7 +467,7 @@ void Model::cleanTheWorld()
 
 void Model::clearTheWorld()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.end(); i!=world.begin(); )
 	{
@@ -480,7 +480,7 @@ void Model::clearTheWorld()
 
 void Model::clearWorldObject(CompositeObject* object)
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	KinTreeNode* node = dynamic_cast<KinTreeNode*>(object);
 		if ( !node ) { object->kill(); }
 }
@@ -491,7 +491,9 @@ void Model::clearWorldObject(CompositeObject* object)
 ***********************/
 int Model::computePose()
 {
-	cleanTheWorld();		// remove stuff that has been flagged for deletion (this will lock the mutex itself)
+	QWriteLocker locker(&mutexComputePose); // only one thread may access computePose at a time
+
+	cleanTheWorld();		// remove stuff that has been flagged for deletion (this will lock the mutexData itself)
 	
 	// Prepare to do collision detection
 	col_count = 0;			// reset collision counter
@@ -517,7 +519,7 @@ int Model::computePose()
 
 void Model::computePoseSuffix()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	QVector<Robot*>::iterator i;
 	for ( i=robots.begin(); i!=robots.end(); ++i ) {
 		(*i)->publishState();
@@ -526,21 +528,21 @@ void Model::computePoseSuffix()
 
 /*void Model::evaluateRobotConstraints()
 {
-	//QWriteLocker locker(&mutex);
+	//QWriteLocker locker(&mutexData);
 	if (syncGraphics)
-		mutex.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
+		mutexData.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
 	else
-		mutex.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
+		mutexData.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
 	QVector<Robot*>::iterator i;
 	for ( i=robots.begin(); i!=robots.end(); ++i ) {
 		(*i)->evaluateConstraints();
 	}
-	mutex.unlock();
+	mutexData.unlock();
 }*/
 
 void Model::computeCollisions()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
     
     QVector<Robot*>::iterator i;
 	for ( i=robots.begin(); i!=robots.end(); ++i ) {
@@ -561,11 +563,11 @@ void Model::computeCollisions()
 
 void Model::updateWorldState()
 {
-	//QWriteLocker locker(&mutex);
+	//QWriteLocker locker(&mutexData);
 	if (syncGraphics)
-		mutex.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
+		mutexData.lockForWrite(); // the model has to wait untile the GL thread finishes, and the GL thread has to wait until we are finished updating the model
 	else
-		mutex.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
+		mutexData.lockForRead(); // The model thread doesn't have the wait for the GL thread to finish drawing, and the GL thread reads whatever values we have written so far
 	
 	// forward kinematics
 	QVector<Robot*>::iterator i;
@@ -573,13 +575,13 @@ void Model::updateWorldState()
 		(*i)->updatePose();
 	}
 	objectMover->update();  // update object positions that are attached to the robots' markers
-	mutex.unlock();
+	mutexData.unlock();
 }
 
 
 void Model::updateSolid()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	QVector<CompositeObject*>::iterator i;
 	for ( i=world.begin(); i!=world.end(); ++i ) {
 		(*i)->updateSolid();
@@ -601,7 +603,7 @@ void Model::run()
 
 void Model::stop()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	
 	keepRunning = false;
 	printf("KinematicModel main thread is shutting down ");
@@ -618,7 +620,7 @@ void Model::stop()
  ************/
 void Model::renderModel()
 {
-	QReadLocker locker(&mutex);
+	QReadLocker locker(&mutexData);
 	
 	QVector<CompositeObject*>::iterator i;
     for ( i=world.begin(); i!=world.end(); ++i )
