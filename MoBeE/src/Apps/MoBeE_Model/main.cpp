@@ -31,6 +31,10 @@ int main(int argc, char *argv[])
 		// whether or not to run the visualization
 		bool visualize = false;
 		if ( config.check("visualize") ) visualize = true;
+    
+        // whether or not to control the iCub
+        bool ctrl = true;
+        if ( config.check("nocontrol") ) ctrl = false;
 		
 		// print the configuration to the console
 		printf("Launching MoBeE... \n");
@@ -78,19 +82,11 @@ int main(int argc, char *argv[])
             
             for ( int i=0; i<yarpRobot->numBodyParts(); i++ )
             {
-                //if ( i!=1 ) {   // don't control the head, because the eyes require more tuning
-                if ( i<1 ) {   // just use the torso
-                    Controller* c = new Controller( yarpRobot,
-                                                    confDir,
-                                                    i,
-                                                    20);
-                    controllers.append(c);
-                }
+                Controller* c = new Controller( yarpRobot, confDir, i, 20 );
+                if (!ctrl || i==1 ) c->doControl(false); // never try to control the head
+                c->start();
+                controllers.append(c);
             }
-            
-            QVector<Controller*>::iterator it;
-            for ( it=controllers.begin(); it!=controllers.end(); ++it )
-                (*it)->start();
    
             
           #ifdef WIN32

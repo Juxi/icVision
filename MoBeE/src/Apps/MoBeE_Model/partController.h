@@ -32,6 +32,7 @@ public:
 	bool    isValid();								//!< Checks if the remote device is ready
 	int     getNumJoints() { return numJoints; }	//!< Returns the number of controllable axes
     bool    getEncoders( double* q ) { return enc->getEncoders(q); }
+    void    doControl( bool b ) { controllerIsOn = b; }
     
 private:
 	
@@ -41,6 +42,8 @@ private:
 	yarp::dev::PolyDriver						*dd;
 	yarp::dev::IVelocityControl					*vel;
 	yarp::dev::IEncoders						*enc;
+    
+    bool                controllerIsOn;
     
 	int					numJoints;	// number of controllable DOFs
 	double				*q1,		// current pose
@@ -77,7 +80,6 @@ private:
                         *fRPC,         // user defined force (from RPC)
                         *kfRPC,
                         *fRPCMax;
-    
     
 protected:
     

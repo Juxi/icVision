@@ -1,9 +1,10 @@
 #include "partController.h"
 #include <iostream.h>
 
-PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r), 
-																							vel(NULL),
-																							enc(NULL)
+PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r),
+                                                                                                                controllerIsOn(true),
+                                                                                                                vel(NULL),
+                                                                                                                enc(NULL)
 {
 	printf( "Opening Remote Control Board: %s %s\n", _robotName, _partName );
 	
@@ -179,10 +180,11 @@ PartController::PartController( const char* _robotName, const char* _partName, c
 		}
         
         // set the attractor to the current pose
+        printf("Getting motor encoder positions");
 		while (!enc->getEncoders(q1)) {
-            printf("Failed to get motor encoder positions... wil try again in 1 second.\n");
-            sleep(1);
+            printf(".");
         }
+        printf("\n");
         
         //std::cout << " q = [";
 		for ( int j=0; j<numJoints; j++ ) {
@@ -392,7 +394,8 @@ void PartController::run()
         //printf("cmd:  %s\n", view7.toString().c_str());
         //printf("\n");
         
-        vel->velocityMove( ctrl );
+        if ( controllerIsOn )
+            vel->velocityMove( ctrl );
         
         statePort.write();
         
