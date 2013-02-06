@@ -32,7 +32,7 @@ public:
 	bool    isValid();								//!< Checks if the remote device is ready
 	int     getNumJoints() { return numJoints; }	//!< Returns the number of controllable axes
     bool    getEncoders( double* q ) { return enc->getEncoders(q); }
-    void    doControl( bool b ) { controllerIsOn = b; }
+    //void    doControl( bool b ) { controllerIsOn = b; }
     
 private:
 	

@@ -105,7 +105,7 @@ void Robot::open(const QString& fileName, bool verbose) throw(KinematicModelExce
 	ignoreAdjacentPairs();
 	home();
 	
-	printf("Created Robot: %s (%d nodes, %d primitives)\n",getName().toStdString().c_str(), numCompositObjects, getNumPrimitives());
+	printf("Created Robot: %s (%d kinematic tree nodes, %d primitives)\n",getName().toStdString().c_str(), numCompositObjects, getNumPrimitives());
 
 	isConfigured = true;
 }

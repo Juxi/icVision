@@ -31,11 +31,7 @@ int main(int argc, char *argv[])
 		// whether or not to run the visualization
 		bool visualize = false;
 		if ( config.check("visualize") ) visualize = true;
-    
-        // whether or not to control the iCub
-        bool ctrl = true;
-        if ( config.check("nocontrol") ) ctrl = false;
-		
+
 		// print the configuration to the console
 		printf("Launching MoBeE... \n");
 		if ( visualize ) {	printf("  ...with visualization\n");		}
@@ -46,19 +42,10 @@ int main(int argc, char *argv[])
 	// Create the QApplication
 	QApplication app( argc, argv, visualize );	// create the QT application
 	
-	// we use either these
 	MoBeE::YarpModel* yarpModel = NULL;
 	MoBeE::YarpRobot* yarpRobot = NULL;
     QVector<Controller*> controllers;
-	//ReflexFilter*			filter	  = NULL;
 
-	// or these
-	//KinematicModel::Model* model = NULL;
-	//KinematicModel::Robot* nonYarpRobot = NULL;
-	
-	// according to this
-	//bool useYarp = true;
-	
 	int result = 0;
 	
 	try
@@ -80,20 +67,21 @@ int main(int argc, char *argv[])
             yarpRobot = yarpModel->loadYarpRobot( robotFile, false );
             //printf("done loading robot\n");
             
+            printf( "\nLOADING CONTROLLER CONFIG FILES FROM: %s\n", confDir.toStdString().c_str() );
             for ( int i=0; i<yarpRobot->numBodyParts(); i++ )
             {
-                Controller* c = new Controller( yarpRobot, confDir, i, 20 );
-                if (!ctrl || i==1 ) c->doControl(false); // never try to control the head
-                c->start();
+                QString config_file;
+                if (!confDir.isEmpty()) config_file = confDir + "/" + yarpRobot->getPart(i)->name() + ".ini";
+                Controller* c = new Controller( yarpRobot, config_file, i, 20 );
                 controllers.append(c);
+                c->start();
             }
-   
             
-          #ifdef WIN32
+          /*#ifdef WIN32
             Sleep(1);
           #else
             usleep(1000);
-          #endif
+          #endif*/
         }
 
 	

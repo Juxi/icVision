@@ -2,11 +2,10 @@
 #include <iostream>
 
 PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r),
-                                                                                                                controllerIsOn(true),
                                                                                                                 vel(NULL),
                                                                                                                 enc(NULL)
 {
-	printf( "Opening Remote Control Board: %s %s\n", _robotName, _partName );
+	printf( "\nOpening Remote Control Board: %s %s\n", _robotName, _partName );
 	
 	// make sure we can find a yarp server
 	if ( !network.checkNetwork() ) {
@@ -25,9 +24,7 @@ PartController::PartController( const char* _robotName, const char* _partName, c
 	localPort += "/control";
 	options.put( "local", localPort.c_str() );
 	options.put( "remote", remotePort.c_str() );
-	
-	//sleep(1);
-	
+
 	// connect to the iCub control board interface
 	dd = new yarp::dev::PolyDriver(options);
 	if (!dd->isValid()) {
@@ -48,17 +45,16 @@ PartController::PartController( const char* _robotName, const char* _partName, c
 	dd->view(lim);
 	dd->view(pos);
     
-    
-    
 	if ( !lim ) printf("Joint Limits Error!\n");
 	if ( !pos ) printf("IPositionControl Error!\n");
 	if ( pos && lim )
     {
         // get number of controllable DOFs
+        printf("Getting number of DOF...");
         while (!pos->getAxes(&numJoints)) {
-            printf("Failed to get number of DOF... wil try again in 1 second.\n");
-            sleep(1);
+            printf(".");
         }
+        printf(" %d\n",numJoints);
      
         // initialize control vars
         q1 = new double[numJoints];
@@ -97,8 +93,10 @@ PartController::PartController( const char* _robotName, const char* _partName, c
         a = new double[numJoints];
         ctrl = new double[numJoints];
         
+        printf("Getting control params from: %s\n",_fileName);
+        
         yarp::os::Property prop;
-        prop.fromConfigFile(_fileName);
+        bool configOK = prop.fromConfigFile(_fileName);
         yarp::os::Bottle* weight = prop.find("weight").asList();
         yarp::os::Bottle* spring_const = prop.find("spring_const").asList();
         yarp::os::Bottle* damping_const = prop.find("damping_const").asList();
@@ -126,18 +124,21 @@ PartController::PartController( const char* _robotName, const char* _partName, c
             !max_constraint_force || max_constraint_force->size()!=numJoints ||
             !max_rpc_force || max_rpc_force->size()!=numJoints )
         {
-            dd->close();
-            return;
+            //dd->close();
+            //return;
+            configOK = false;
         }
 
         // set control params
+        printf("Getting limits and setting control params for joint: ");
 		for ( int i = 0; i < numJoints; i++ )
         {
             double _min,_max;
+            printf("%d ...",i);
             while (!lim->getLimits( i, &_min, &_max )) {
-                printf("Failed to get joint limits... wil try again in 1 second.\n");
-                sleep(1);
+                printf(".");
             }
+            printf(" ");
             
             min[i]      = _min;
             max[i]      = _max;
@@ -145,42 +146,58 @@ PartController::PartController( const char* _robotName, const char* _partName, c
             q1[i]       = 0.0;
             q0[i]       = 0.0;
             e[i]        = 0.0;
-            
             x[i]        = 0.0;
             v[i]        = 0.0;
             a[i]        = 0.0;
-            
             ctrl[i]     = 0.0;
-            
-            w[i]        = weight->get(i).asDouble();
-            k[i]        = spring_const->get(i).asDouble();
-            c[i]        = damping_const->get(i).asDouble();
-            
-            
             fX[i]       = 0.0;
-            fXMax[i]    = max_constraint_force->get(i).asDouble();
-        
             fLim[i]     = 0.0;
-            kfLim[i]    = limit_const->get(i).asDouble();
-            fLimMax[i]  = max_limit_force->get(i).asDouble();
-            
             fCst[i]     = 0.0;
-            kfCst[i]    = constraint_const->get(i).asDouble();
-            fCstMax[i]  = max_constraint_force->get(i).asDouble();
-            
             fFld[i]     = 0.0;
-            kfFld[i]    = field_const->get(i).asDouble();
-            fFldMax[i]  = max_field_force->get(i).asDouble();
-            
             fRPC[i]     = 0.0;
-            kfRPC[i]    = rpc_force_const->get(i).asDouble();
-            fRPCMax[i]  = max_rpc_force->get(i).asDouble();
+            
+            if (configOK) {
+                w[i]        = weight->get(i).asDouble();
+                k[i]        = spring_const->get(i).asDouble();
+                c[i]        = damping_const->get(i).asDouble();
+                fXMax[i]    = max_constraint_force->get(i).asDouble();
+                kfLim[i]    = limit_const->get(i).asDouble();
+                fLimMax[i]  = max_limit_force->get(i).asDouble();
+                kfCst[i]    = constraint_const->get(i).asDouble();
+                fCstMax[i]  = max_constraint_force->get(i).asDouble();
+                kfFld[i]    = field_const->get(i).asDouble();
+                fFldMax[i]  = max_field_force->get(i).asDouble();
+                kfRPC[i]    = rpc_force_const->get(i).asDouble();
+                fRPCMax[i]  = max_rpc_force->get(i).asDouble();
+            } else {
+                w[i]        = 1.0;
+                k[i]        = 1.0;
+                c[i]        = 1.0;
+                fXMax[i]    = 1.0;
+                kfLim[i]    = 1.0;
+                fLimMax[i]  = 1.0;
+                kfCst[i]    = 1.0;
+                fCstMax[i]  = 1.0;
+                kfFld[i]    = 1.0;
+                fFldMax[i]  = 1.0;
+                kfRPC[i]    = 1.0;
+                fRPCMax[i]  = 1.0;
+            }
             
 			//printf("joint %d: min = %f max = %f\n",i,_min,_max);
 		}
+        printf("\n");
+        
+        if (configOK) {
+            printf("Controller configuration succeeded!!\n");
+            controllerIsOn = true;
+        } else {
+            printf("Controller configuration failed!!\n");
+            controllerIsOn = false;
+        }
         
         // set the attractor to the current pose
-        printf("Getting motor encoder positions");
+        printf("Getting motor encoder positions...");
 		while (!enc->getEncoders(q1)) {
             printf(".");
         }

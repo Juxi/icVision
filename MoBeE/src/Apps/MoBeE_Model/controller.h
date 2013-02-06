@@ -28,7 +28,7 @@ class Controller : public QObject, public PartController
 	
 public:
     
-    Controller( KinematicModel::Robot* robot, QString conf_dir, int partNum, int freq );
+    Controller( KinematicModel::Robot* robot, QString conf_file, int partNum, int freq );
     
 public slots:
     

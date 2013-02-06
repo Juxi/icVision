@@ -3,11 +3,11 @@
 #include <iostream>
 
 Controller::Controller( KinematicModel::Robot* _robot,
-                       QString conf_dir,
+                       QString _config_file,
                        int _partNum,
                        int freq ) : PartController( _robot->getName().toStdString().c_str(),
                                                     _robot->getPart(_partNum)->name().toStdString().c_str(),
-                                                    (conf_dir + "/" + _robot->getPart(_partNum)->name() + ".ini").toStdString().c_str(),
+                                                    _config_file.toStdString().c_str(),
                                                     freq),
                                     //rpcPort(this),
                                     robot(_robot),
