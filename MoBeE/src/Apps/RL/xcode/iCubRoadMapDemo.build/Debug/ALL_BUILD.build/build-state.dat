@@ -1,64 +1,0 @@
-TALL_BUILD
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-60359FDA4F394E69B1DDDA9E.sh
-c0000000050C9A4C700000000000000C4
-t1355392199
-s196
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-A145D13B3F224864A0D1392E.sh
-c0000000050C991A200000000000000C4
-t1355387298
-s196
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh
-c0000000050C9D89200000000000000C4
-t1355405458
-s196
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies4d4e0521107ab641^02820521107ab641^---0#1#0#--18"Check dependencies36"31AFF00C-8EDE-456E-A493-A707ECB7DCD4-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-60359FDA4F394E69B1DDDA9E.sh
-s377090455.591372
-e377090455.627136
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-60359FDA4F394E69B1DDDA9E.sh
-oecho ""
-o
-oecho Build\ all\ projects
-oBuild all projects
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'6de79797f179b641^ca8ba097f179b641^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-377090455#0#8#-0#-----2@26"echo Build\ all\ projects-377090455#9#26#-0#-----2@19"Build all projects-377090455#35#19#-0#-----0#0#0#--323"PhaseScriptExecution "CMake Rules" xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-60359FDA4F394E69B1DDDA9E.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-60359FDA4F394E69B1DDDA9E.sh36"9A9E7424-202D-4AD5-95F4-B907207A7038-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-A145D13B3F224864A0D1392E.sh
-s377081475.742383
-e377081475.783333
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-A145D13B3F224864A0D1392E.sh
-oecho ""
-o
-oecho Build\ all\ projects
-oBuild all projects
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'c3d8be83ce79b641^db87c883ce79b641^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-377081475#0#8#-0#-----2@26"echo Build\ all\ projects-377081475#9#26#-0#-----2@19"Build all projects-377081475#35#19#-0#-----0#0#0#--323"PhaseScriptExecution "CMake Rules" xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-A145D13B3F224864A0D1392E.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-A145D13B3F224864A0D1392E.sh36"862327C9-B63D-4589-A6D6-3D5A1C82F01B-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh
-s377098273.023028
-e377098273.057198
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh
-oecho ""
-o
-oecho Build\ all\ projects
-oBuild all projects
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'c2680621107ab641^33a40e21107ab641^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-377098273#0#8#-0#-----2@26"echo Build\ all\ projects-377098273#9#26#-0#-----2@19"Build all projects-377098273#35#19#-0#-----0#0#0#--323"PhaseScriptExecution "CMake Rules" xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ALL_BUILD.build/Script-C2AA192DCEE14522892D1DD3.sh36"EADBEB7C-3C75-4FEA-85CE-F0089DED2301-
-

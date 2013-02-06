@@ -1,39 +1,0 @@
-TZERO_CHECK
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh
-c0000000050C9916400000000000000C5
-t1355387236
-s197
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies0fd60be4c879b641^43ac0ee4c879b641^---0#1#0#--18"Check dependencies36"B2476453-9257-433A-AF05-11ADFAAD8682-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh
-s377080036.060503
-e377080036.475016
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh
-oecho ""
-o
-omake -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/ReRunCMake.make
-o/usr/local/Cellar/cmake/2.8.9/bin/cmake -H/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL -B/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode
-o-- Build type: Release
-o-- USING CXXFLAGS = '-Os -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8  -O3 -DNDEBUG'
-o-- USING EXEFLAGS = ' -L/usr/local/lib '
-o-- Targetting Xcode
-o-- Using /usr/bin/g++ compiler.
-o-- DARWIN_VERSION=12
-o-- Mac Leopard detected
-o-- Generator uses intermediate configuration directory: $(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-o-- Configuring done
-o-- Generating done
-o-- Build files have been written to: /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'761912e4c879b641^88b879e4c879b641^-744"echo ""make -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/ReRunCMake.make/usr/local/Cellar/cmake/2.8.9/bin/cmake -H/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL -B/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode-- Build type: Release-- USING CXXFLAGS = '-Os -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8  -O3 -DNDEBUG'-- USING EXEFLAGS = ' -L/usr/local/lib '-- Targetting Xcode-- Using /usr/bin/g++ compiler.-- DARWIN_VERSION=12-- Mac Leopard detected-- Generator uses intermediate configuration directory: $(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)-- Configuring done-- Generating done-- Build files have been written to: /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode14(21%IDEActivityLogMessage2@8"echo ""-377080036#0#8#-0#-----2@91"make -f /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/CMakeScripts/ReRunCMake.make-377080036#9#91#-0#-----2@146"/usr/local/Cellar/cmake/2.8.9/bin/cmake -H/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL -B/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode-377080036#100#146#-0#-----2@23"-- Build type: Release-377080036#246#23#-0#-----2@108"-- USING CXXFLAGS = '-Os -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8  -O3 -DNDEBUG'-377080036#269#108#-0#-----2@41"-- USING EXEFLAGS = ' -L/usr/local/lib '-377080036#377#41#-0#-----2@20"-- Targetting Xcode-377080036#418#20#-0#-----2@32"-- Using /usr/bin/g++ compiler.-377080036#438#32#-0#-----2@21"-- DARWIN_VERSION=12-377080036#470#21#-0#-----2@24"-- Mac Leopard detected-377080036#491#24#-0#-----2@99"-- Generator uses intermediate configuration directory: $(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)-377080036#515#99#-0#-----2@20"-- Configuring done-377080036#614#20#-0#-----2@19"-- Generating done-377080036#634#19#-0#-----2@91"-- Build files have been written to: /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode-377080036#653#91#-0#-----0#0#0#--325"PhaseScriptExecution "CMake Rules" xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh    cd /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/xcode/iCubRoadMapDemo.build/Debug/ZERO_CHECK.build/Script-235D6F20DE654602ABBB412E.sh36"B8D42BC8-DACA-4FD8-A9B4-90757052CCBD-
-
