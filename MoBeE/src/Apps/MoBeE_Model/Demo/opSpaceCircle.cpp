@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     
     // a port for sending commands to MoBeE
 	yarp::os::BufferedPort<yarp::os::Bottle> right_arm;
-    right_arm.open("/right_arm_cmd");
-    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd");
+    right_arm.open("/circle_demo/right_arm_cmd:o");
+    net.connect("/circle_demo/right_arm_cmd:o","/MoBeE/right_arm/cmd:i");
     
     // an oscillator for the y component of operational space control commands
     // note: this is the iCub's left/right direction

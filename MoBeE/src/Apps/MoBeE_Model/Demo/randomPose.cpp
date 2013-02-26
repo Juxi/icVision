@@ -23,14 +23,14 @@ int main(int argc, char *argv[])
 	yarp::os::BufferedPort<yarp::os::Bottle> torso, right_arm, left_arm;
     
     // fire up the threads
-	torso.open("/torso_cmd");           
-    right_arm.open("/right_arm_cmd");   
-    left_arm.open("/left_arm_cmd");
+	torso.open("/poses_demo/torso_cmd:o");
+    right_arm.open("/poses_demo/right_arm_cmd:o");
+    left_arm.open("/poses_demo/left_arm_cmd:o");
     
     // connect the ports to the MoBeE model
-    net.connect("/torso_cmd","/MoBeE/torso/cmd:i");
-    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd:i");
-    net.connect("/left_arm_cmd","/MoBeE/left_arm/cmd:i");
+    net.connect("/poses_demo/torso_cmd:o","/MoBeE/torso/cmd:i");
+    net.connect("/poses_demo/right_arm_cmd:o","/MoBeE/right_arm/cmd:i");
+    net.connect("/poses_demo/left_arm_cmd:o","/MoBeE/left_arm/cmd:i");
 	
     // control the robot through an arbitrary number of poses
 	int i = 0;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         torso.write();                                  // send it off to MoBeE
         
         // repeat the above for the right arm
-        /*yarp::os::Bottle& rBottle = right_arm.prepare();
+        yarp::os::Bottle& rBottle = right_arm.prepare();
         rBottle.clear();
         rBottle.addVocab(yarp::os::Vocab::encode("qatt"));
         yarp::os::Bottle rCmd;
@@ -63,12 +63,12 @@ int main(int argc, char *argv[])
         for (int i=0; i<16; i++)
             lCmd.addDouble((double)rand()/RAND_MAX);
         lBottle.addList() = lCmd;
-        left_arm.write();*/
+        left_arm.write();
         
         // inform the user
         printf("Torso: %s\n",tBottle.toString().c_str());
-        //printf("Right: %s\n",rBottle.toString().c_str());
-        //printf("Left:  %s\n",lBottle.toString().c_str());
+        printf("Right: %s\n",rBottle.toString().c_str());
+        printf("Left:  %s\n",lBottle.toString().c_str());
         printf("\n");
         
         // wait an arbitrary time for the motion to happen

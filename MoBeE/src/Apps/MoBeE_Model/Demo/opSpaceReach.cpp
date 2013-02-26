@@ -30,13 +30,13 @@ int main(int argc, char *argv[])
     
     // connect to the world model RPC port
     yarp::os::RpcClient world_rpc;
-    world_rpc.open("/world_port_rpc");
-    net.connect("/world_port_rpc","/MoBeE/world");
+    world_rpc.open("/reaches_demo/world_port_rpc");
+    net.connect("/reaches_demo/world_port_rpc","/MoBeE/world");
     
-    // connect to the controller RPC port
+    // connect to the controller RPC port to query state
     yarp::os::RpcClient right_arm_rpc;
-    right_arm_rpc.open("/right_arm_rpc");
-    net.connect("/right_arm_rpc","/MoBeE/right_arm/rpc");
+    right_arm_rpc.open("/reaches_demo/right_arm_rpc");
+    net.connect("/reaches_demo/right_arm_rpc","/MoBeE/right_arm/rpc");
     
     // prepare some bottles to poll the MoBeE model
     yarp::os::Bottle get,state;
@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
     
     // connect to the controller command port
     yarp::os::BufferedPort<yarp::os::Bottle> right_arm_cmd;
-    right_arm_cmd.open("/right_arm_cmd");
-    net.connect("/right_arm_cmd","/MoBeE/right_arm/cmd");
+    right_arm_cmd.open("/reaches_demo/right_arm_cmd:o");
+    net.connect("/reaches_demo/right_arm_cmd:o","/MoBeE/right_arm/cmd:i");
     
     // gains for the control signal
     double  forceMagnitude = 10000.0,
