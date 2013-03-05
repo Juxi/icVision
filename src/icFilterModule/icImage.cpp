@@ -7,6 +7,13 @@
 #include "GaborImage.h"
 
 
+icImage* icImage::equalizeHistogram() const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvEqualizeHist(Image, retImg);
+	return new icImage(retImg);
+}
+
+
 icImage* icImage::add (icImage* a) const {
 	Img retImg = (IplImage*) cvClone(Image);
 	cvAdd(Image, a->Image, retImg);
@@ -103,6 +110,14 @@ icImage* icImage::pow(double P) const {
 	cvPow(Image, retImg, P);
 	return new icImage(retImg);	
 }
+
+
+icImage* icImage::sqrt() const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvPow(Image, retImg, 0.5);
+	return new icImage(retImg);	
+}
+
 
 icImage* icImage::max(icImage* a) const { 
 	Img retImg = (IplImage*) cvClone(Image);

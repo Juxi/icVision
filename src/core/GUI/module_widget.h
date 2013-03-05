@@ -76,10 +76,7 @@ public slots:
 	void tryToStartTheModule();
 	void tryToStopTheModule();	
 	
-public:
-	static QString loadedStyleSheet;	
-	static void loadStyleSheet();	
-	
+public:	
 	ModuleWidget() { }
 	ModuleWidget(ModuleInfo &mod) {	
 		this->modInfo = &mod;
@@ -98,6 +95,8 @@ public:
 		delete layout;
 	}
 
+	ModuleInfo* getModuleInfo() { return modInfo; }
+	bool checkStatus(bool alsoSetStatus = true);
 	void setStatus(bool b, const char* msg = NULL);
 
 	// for drawing and stylesheeting

@@ -203,7 +203,8 @@ bool CoreModule::updateModule()
 	for ( itr = listOfModules.begin(); itr != listOfModules.end(); ++itr ) {
 
 		// check if we want this filters output in the output of the core
-		if( (*itr).isUsedInOutput ) {
+		if( itr->isUsedInOutput ) {
+			std::string sName = itr->shortName;
 			icImage *in = (*itr).port->getImage();
 			if(!in) continue;
 
@@ -220,7 +221,7 @@ bool CoreModule::updateModule()
 			}
 			
 			// paint on outputImg
-			drawBoxesAndCaption(outputImg, current, (*itr).shortName);	
+			drawBoxesAndCaption(outputImg, current, sName);	
 			
 //			// debug (save image)
 //			std::string s = (*itr).name + "-";
@@ -312,7 +313,7 @@ void CoreModule::drawBoxesAndCaption(icImage *output, icImage *filter, std::stri
 		CvRect boundbox = cvBoundingRect(seq);
 		
 		// do not do it on the small ones
-		if( boundbox.height * boundbox.width < 20 ) break;
+		if( boundbox.height * boundbox.width < 250 ) break;
 
 		CvPoint p1, p2;
 		p1.x = boundbox.x; p1.y = boundbox.y;

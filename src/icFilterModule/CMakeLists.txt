@@ -25,7 +25,9 @@ SET ( src_files icFilterModule.cpp
 		../evolvedFilters/blue_detector.cpp
 #		evolved_filters/glass_detector.cpp
 		../evolvedFilters/redblock_detector.cpp
-#		evolved_filters/teabox.cpp		
+		../evolvedFilters/teabox.cpp
+		../evolvedFilters/mars.cpp
+		face_detector.cpp		
 )
 
 SET ( hdr_files icFilterModule.h
@@ -34,11 +36,13 @@ SET ( hdr_files icFilterModule.h
 		icImage.h
 		GaborImage.h
 
+		face_detector.h
 # temporarily
 		../evolvedFilters/blue_detector.h
 #		evolved_filters/glass_detector.h
 		../evolvedFilters/redblock_detector.h
-#		evolved_filters/teabox.h
+		../evolvedFilters/teabox.h
+		../evolvedFilters/mars.h
 )
 
 ADD_LIBRARY ( icVisionModule STATIC ${hdr_files} ${src_files} )

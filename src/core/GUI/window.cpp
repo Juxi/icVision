@@ -49,8 +49,8 @@ Window::Window(QString &t_in, QString &v_in, CoreModule *m) : timer(NULL) {
 }
 
 void Window::initWindow() {	
-	ModuleWidget::loadStyleSheet();
-	qApp->setStyleSheet(ModuleWidget::loadedStyleSheet);		
+	loadStyleSheet();
+	qApp->setStyleSheet(loadedStyleSheet);		
 
 	// todo change to something?
 	// timer = new QTimer(this);
@@ -151,6 +151,43 @@ void Window::initWindow() {
 //	updateTimer();
 }
 
+void Window::loadStyleSheet() {
+	QString prev = QDir::currentPath();
+	int notGivingUp = 3;
+	/* Let's use QFile and point to a resource... */
+	QFile data("modules.css");
+	do {
+		if(data.open(QFile::ReadOnly)) {
+			/* ...read file to a string. */
+			QTextStream styleIn(&data);
+			loadedStyleSheet = styleIn.readAll();
+			data.close();
+			std::cout << "Loaded style file: " << QDir::currentPath().toStdString() << "/";
+			std::cout << data.fileName().toStdString() << std::endl;
+			
+		} else {
+			QDir::setCurrent("styles");
+			if(data.open(QFile::ReadOnly)) {
+				/* ...read file to a string. */
+				QTextStream styleIn(&data);
+				loadedStyleSheet = styleIn.readAll();
+				data.close();
+				std::cout << "Loaded style file: " << QDir::currentPath().toStdString() << "/";
+				std::cout << data.fileName().toStdString() << std::endl;
+				
+			} else {
+				std::cout << "Could not load file: " << QDir::currentPath().toStdString() << "/";
+				std::cout << data.fileName().toStdString() << std::endl;
+				QDir::setCurrent("..");
+			}
+			QDir::setCurrent("..");			
+		}
+	}while(notGivingUp--);
+	QDir::setCurrent(prev);	
+	std::cout << "-----------" << std::endl;	
+}
+
+
 void Window::createCoreModulesList() {
 	// widget and layout of list of filters
 	wdg_CoreModuleList = new QWidget(this);
@@ -184,7 +221,7 @@ Window::~Window() {
 	delete btn_refresh;
 	delete wdg_BottomButtons;
 
-	delete lbl_CoreModuleCount;
+//	delete lbl_CoreModuleCount;
 	delete lay_CoreModuleList;
 	delete wdg_CoreModuleList;
 
@@ -217,30 +254,97 @@ void Window::updateList() {
 	static unsigned int lastSize = 0;
 	
 	if(icVisionModule) {
-		// do this smarter!
-		if (lastSize == icVisionModule->listOfModules.size()) 
-			return;
+//		if (lastSize == icVisionModule->listOfModules.size()) 
+//			return;
 		
-		// Delete all the existing buttons in the layout
-		QLayoutItem *wItem;
-		while( (wItem = wdg_FilterModuleList->layout()->takeAt(0)) != 0) {
-			delete wItem->widget();
-			delete wItem;
+
+		// TODO		// do this smarter!
+
+		// Delete all the existing modules in the layout
+//		QLayoutItem *wItem;
+//		while( (wItem = wdg_FilterModuleList->layout()->takeAt(0)) != 0) {
+//			delete wItem->widget();
+//			delete wItem;
+//		}
+		vector<ModuleWidget*> listOfModulesGUI;				
+//		something like 
+//		// get list of widgets
+//		for (int i = 0; i < wdg_FilterModuleList->layout()->count(); i++) {
+//			std::cout << "wdg_FilterModuleList->layout()->count()" << wdg_FilterModuleList->layout()->count()<< std::endl;
+//			listOfModulesGUI.push_back((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i));
+//			// something wrong with getting the modulewidget from the layout back ..
+//			//std:;cout << ((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i))
+//			//	->getModuleInfo()->toStdString() << std::cout;
+//		}
+		
+		
+		vector<ModuleInfo> listOfModulesReg(icVisionModule->listOfModules);
+
+			
+		unsigned int idxReg = 0, idxGUI = 0;
+		std::cout << "------" << std::endl;		
+		while( listOfModulesGUI.size() > 0  ||
+			   listOfModulesReg.size() > 0 ) {
+			
+			std::cout << "GUIsize: " << listOfModulesGUI.size() << std::endl;
+			std::cout << "Regsize: " << listOfModulesReg.size() << std::endl;			
+			if(listOfModulesGUI.size() == 0) {
+				vector<ModuleInfo>::iterator it = listOfModulesReg.begin();
+				ModuleWidget *mod = new ModuleWidget(*it);
+				mod->setVisible(false);
+				if(mod->checkStatus()) {
+					wdg_FilterModuleList->layout()->addWidget(mod);
+					mod->setVisible(true);					
+				}
+				else {
+					delete mod;
+				}
+				
+				listOfModulesReg.erase(it);
+//			} else if(listOfModulesReg.size() == 0) {
+//				wdg_FilterModuleList->layout()->removeWidget(listOfModulesGUI[listOfModulesGUI.size()-1]);
+//				listOfModulesGUI.pop_back();
+//			} else {
+//				// now it depends on the ID value
+//
+//				void *a = listOfModulesGUI[listOfModulesGUI.size()-1];
+//				void *b = listOfModulesGUI[listOfModulesGUI.size()-1]->getModuleInfo();
+//				int guiID = listOfModulesGUI[listOfModulesGUI.size()-1]->getModuleInfo()->getID();		
+//				int regID = listOfModulesReg[listOfModulesReg.size()-1].getID();		
+//				
+//				if(guiID > regID) {
+//					wdg_FilterModuleList->layout()->removeWidget(listOfModulesGUI[listOfModulesGUI.size()-1]);
+//					listOfModulesGUI.pop_back();
+//				} else if(regID > guiID) {
+//					ModuleWidget *mod = new ModuleWidget(*listOfModulesReg.end());
+//					if(mod->checkStatus())
+//						wdg_FilterModuleList->layout()->addWidget(mod);
+//				
+//					listOfModulesReg.pop_back();
+//				}
+//				
+//				if(regID == guiID) {
+//					// could do ->checkStatus())
+//					listOfModulesReg.pop_back();
+//					listOfModulesGUI.pop_back();
+//				}
+			}
 		}
-			
-	//	lay_ModuleList = new QVBoxLayout(this);
-	//	wdg_ModuleList->setLayout(lay_ModuleList);
+		std::cout << "+++++" << std::endl;					   
 		
-		std::vector<ModuleInfo>::iterator itr;
-		for ( itr = icVisionModule->listOfModules.begin(); itr != icVisionModule->listOfModules.end(); ++itr ) {
-			std::cout << (*itr).toStdString() << std::endl;
-			
-	//		QLabel *lbl = new QLabel(this);
-	//		lbl->setText((*itr).toStdString().c_str());
-	//		wdg_ModuleList->layout()->addWidget(lbl);
-			ModuleWidget *mod = new ModuleWidget(*itr);
-			wdg_FilterModuleList->layout()->addWidget(mod);
-		}	
+//		for (itrReg = listOfModules.begin(); itr != listOfModules.end(); ++itr ) {
+//			std::cout << (*itr).toStdString() << std::endl;
+//			
+//	//		QLabel *lbl = new QLabel(this);
+//	//		lbl->setText((*itr).toStdString().c_str());
+//	//		wdg_ModuleList->layout()->addWidget(lbl);
+//			ModuleWidget *mod = new ModuleWidget(*itr);
+//			if(mod->checkStatus())
+//				wdg_FilterModuleList->layout()->addWidget(mod);
+//			else 
+//				wdg_FilterModuleList->layout()->removeWidget(mod);			
+//			
+//		}	
 	//	QFrame* line = new QFrame(this);
 	//	line->setFrameShape(QFrame::HLine);
 	//	line->setFrameShadow(QFrame::Sunken);

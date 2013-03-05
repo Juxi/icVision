@@ -44,7 +44,7 @@ public:
 	void set(const char* name_in, int in_ID = -1) {
 		ID = in_ID;
 		name = name_in;
-		// portname = "/icVision/" + name + "/rawoutput:o";
+		portname = "/icVision/" + name + "/rawoutput:o";
 		shortName = name.substr(0, 8);
 	}
 	
@@ -64,6 +64,7 @@ public:
 	
 	std::string getName() { return name; }
 	int getID() { return ID; }	
+	std::string getPortName() { return portname; }
 	
 }; 
 

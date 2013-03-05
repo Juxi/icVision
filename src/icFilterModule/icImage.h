@@ -64,6 +64,7 @@ public:
 	
 //	int getWidth()  { return Image->Width; } }
 //	int getHeight() { return Image->Height; } }
+	icImage* equalizeHistogram() const;
 	
 	icImage* add (icImage* a) const;
 	icImage* sub (icImage* a) const;

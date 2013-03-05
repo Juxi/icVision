@@ -47,9 +47,11 @@ private:
 	// Variables
 private:
 	CoreModule *icVisionModule;	
+	QString loadedStyleSheet;	
 
 	QTimer *timer;
 		
+	void loadStyleSheet();
 	
 /******** GUI Variables **********/
 private:

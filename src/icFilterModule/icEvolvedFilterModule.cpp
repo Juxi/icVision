@@ -20,17 +20,22 @@
 using namespace yarp::os;
 using namespace yarp::sig;
 
-EvolvedFilterModule::EvolvedFilterModule()
+EvolvedFilterModule::EvolvedFilterModule() :
+	rawImageToWrite(NULL), outputImageToWrite(NULL)
 {
 	//moduleName = "IM-CLeVeR::Vision::Reaching";
+	m_outOfSyncWarning = false;
 	setName("EvolvedFilter");
 	gray = red = green = blue =	h =	s = v = NULL;
 	
 	inDebugMode = false;
+	
+	m_ImageWidth = 640;
+	m_ImageHeight = 480;
 }
 
+
 EvolvedFilterModule::~EvolvedFilterModule() { 
-	
 	if( rawImageToWrite != NULL )
 		cvReleaseImage(&rawImageToWrite);
 	if( outputImageToWrite != NULL )
@@ -59,7 +64,6 @@ bool EvolvedFilterModule::updateModule()
 		//putchar('.'); std::cout.flush();
 	} else {
 		std::cout << "DEBUG: Run filter!" << std::endl;	
-//		start = clock();
 	}
 
 	IplImage* in = NULL;
@@ -68,10 +72,11 @@ bool EvolvedFilterModule::updateModule()
 	ImageOf<PixelBgr> *right_image = NULL;	
 	Stamp left_timeStamp, right_timeStamp, outbottleTS;
 	
-	
+	// reading input image(s)
 	if( isReadingFileFromHDD ) {
 		in = cvLoadImage(fileName.c_str());
-	} else {
+	} else
+	  if( runOnLeft == runOnRight == true ) {
 		int tries = 0;
 		// try to synchronize the image frames
 		do {
@@ -104,16 +109,21 @@ bool EvolvedFilterModule::updateModule()
 				std::cout << "Images still in buffer Left: " << leftInPort.getPendingReads();
 				std::cout << "\tRight: " << rightInPort.getPendingReads() << std::endl;				
 				// keep trying...
+				m_outOfSyncWarning = true;
 				return true;
 			}
-		} while(! checkTS(left_timeStamp.getTime(), right_timeStamp.getTime()));
+		} while(! checkTS(left_timeStamp.getTime(), right_timeStamp.getTime(), 0.1));
+		if(m_outOfSyncWarning) {
+			m_outOfSyncWarning = false;
+			std::cout << "Images in sync again!" << std::endl;
+		}
 	}
 	
-	bool allFramesDone = true;
-	if( runOnLeft == runOnRight == true ) {
-		allFramesDone = false;
-	}
+		
 	
+	// initialize some stuff
+	bool allFramesDone = false;
+
 	// TL .. top left point (of the rectange in the image plane)
 	// BR .. bottom right
 	// BC .. bottom centre
@@ -123,23 +133,45 @@ bool EvolvedFilterModule::updateModule()
 	frameLeft_BC.x = frameRight_BC.x = -1.0;
 	frameLeft_BC.y = frameRight_BC.y = -1.0;
 	
+	// ready to process images	
 	do {
 		frameLeft_TL.x = frameRight_TL.x = -1.0;
 		frameLeft_TL.y = frameRight_TL.y = -1.0;
 		frameLeft_BR.x = frameRight_BR.x = -1.0;
 		frameLeft_BR.y = frameRight_BR.y = -1.0;
 		
-		if(in == NULL) {
-			// first run 
-			in = (IplImage*) left_image->getIplImage();
-		}else{
+		if(! isReadingFileFromHDD ) {
+			if(runOnLeft == runOnRight == true) {
+				if(in == NULL) {
+					// first run 
+					in = (IplImage*) left_image->getIplImage();
+				}else{
+					allFramesDone = true;
+					in = (IplImage*) right_image->getIplImage();
+				}
+	//			 	if( runOnLeft == runOnRight == true ) {
+	//					allFramesDone = false;
+	//				}
+			
+			} else {
+				allFramesDone = true;
+				if(runOnLeft) {
+					left_image = leftInPort.read();  // read an image
+					in = (IplImage*) left_image->getIplImage();
+				}
+				if(runOnRight) {
+					right_image = rightInPort.read();  // read an image				
+					in = (IplImage*) right_image->getIplImage();
+				}
+			}
+		} else {
 			allFramesDone = true;
-			in = (IplImage*) right_image->getIplImage();
 		}
 
 		ImageWidth  = in->width * scalingFactor;
 		ImageHeight = in->height * scalingFactor;	
 		
+
 		static int index = 0;
 		if( inDebugMode) {
 			std::cout << "DEBUG: Got input image!" << std::endl;	
@@ -169,10 +201,22 @@ bool EvolvedFilterModule::updateModule()
 			}
 		}
 		
+		
+		// runtime info
+		clock_t start, end;
+		start = clock();	
+
+		
 		// run filter
 		icImage* filteredImg = this->runFilter();
-			
-		if( inDebugMode ) {
+		
+		
+		if( inDebugMode || isReadingFileFromHDD ) {
+            end = clock();
+            double diffms = (end-start)*1000.0/CLOCKS_PER_SEC;
+            // Debug
+            std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
+            
 			//DEBUG
 			filteredImg->Save("output.png");
 			std::cout << "DEBUG: Now yarping..." << std::endl;		
@@ -190,14 +234,18 @@ bool EvolvedFilterModule::updateModule()
 		cvCvtColor(filteredImg->Image, rgb, CV_GRAY2RGB);
 		cvConvertScale(rgb, out8, 1.0, 0.0);
 
-		if(allFramesDone && streamRawFilterOutput) {
+		if(!allFramesDone && streamRawFilterOutput) {
 			// check if we have allocated the to be written image already
 			if(rawImageToWrite == NULL)
-				rawImageToWrite = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
+				rawImageToWrite = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);				
 			cvCopy(out8, rawImageToWrite);
 			ImageOf<PixelBgr>& rawOutput = rawOutputPort.prepare();
 			rawOutput.wrapIplImage(rawImageToWrite); //output.copy ( *left_image );
 			rawOutputPort.writeStrict();
+
+			// cleanup
+			cvReleaseImage(&rawImageToWrite);
+			rawImageToWrite = NULL;
 		}		
 		
 		if(wewantoverlay) {
@@ -297,6 +345,10 @@ bool EvolvedFilterModule::updateModule()
 			output.wrapIplImage(outputImageToWrite); 
 			imgOutputPort.setEnvelope(outbottleTS);
 			imgOutputPort.write();	
+			
+			// cleanup
+			cvReleaseImage(&outputImageToWrite);
+			outputImageToWrite = NULL;
 		}
 			
 		// cleanup 
@@ -463,15 +515,21 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 	}
 		
 	// sanity check
-	if((int) fp1.x/scalingFactor < 0 || (int) fp1.x/scalingFactor > 640)  {
-		std::cout << "sanity 1 " << fp1.x  << std::endl;					
-		return false;
+	if( runOnLeft ) {
+		if((int) fp1.x/scalingFactor < 0 || (int) fp1.x/scalingFactor > 640)  {
+//			std::cout << "sanity 1 " << fp1.x  << std::endl;					
+			return false;
+		}
+		if((int) fp1.y/scalingFactor < 0 || (int) fp1.y/scalingFactor > 480) { 		std::cout << "sanity 3" << std::endl;					return false; }
 	}
-	if((int) fp2.x/scalingFactor < 0 || (int) fp2.x/scalingFactor > 640) { 		std::cout << "sanity 2 " << fp2.x << std::endl;					 return false;		}
-		
-	if((int) fp1.y/scalingFactor < 0 || (int) fp1.y/scalingFactor > 480) { 		std::cout << "sanity 3" << std::endl;					return false; }
-	if((int) fp2.y/scalingFactor < 0 || (int) fp2.y/scalingFactor > 480) { 		std::cout << "sanity 4" << std::endl;					return false;		}
-			
+	if( runOnRight ) {
+		if((int) fp2.x/scalingFactor < 0 || (int) fp2.x/scalingFactor > 640) { 
+//			std::cout << "sanity 2 " << fp2.x << std::endl;
+			return false;
+		}
+		if((int) fp2.y/scalingFactor < 0 || (int) fp2.y/scalingFactor > 480) { 		std::cout << "sanity 4" << std::endl;					return false;		}
+	}
+	
 	bool streamGazePos = true;
 	
 	if(streamGazePos) {
@@ -548,7 +606,7 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 		// TODO sanity check
 		Bottle *pos3d = in.get(2).asList();
 		if(!pos3d->isNull())
-			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1");
+			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1"); // "cup1");
 		
 	}
 
