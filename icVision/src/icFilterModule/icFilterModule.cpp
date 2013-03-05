@@ -174,7 +174,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	handlerPortName += getName();
 	
 	if (! handlerPort.open(handlerPortName.c_str())) {
-		std::cout << getName() << ": Unable to open port " << handlerPortName << std::endl;
+		std::cout << getName() << ": Unable to open port " << handlerPortName << std::endl << std::endl;
 		return false;
 	}
 	attach(handlerPort);
@@ -208,13 +208,14 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			std::cout << getName() << ": Unable to open port " << inputPortName << std::endl;
 			return false;
 		}
-		printf("Trying to connect to %s\n", inputPortName.c_str());
+		printf("Trying to connect %s ... ", inputPortName.c_str());
 		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
 			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
 			std::cout << " with " << inputPortName.c_str() << std::endl;
 			return false;
 		}
-		
+		printf("done!\n");
+
 		inputPortName = portPrefix;	serverPortName = "/";
 		inputPortName += getName(); serverPortName += robotName;
 		inputPortName += "/right";	serverPortName += "/cam/right";
@@ -224,35 +225,37 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			return false;
 		}
 		
-		printf("Trying to connect to %s\n", inputPortName.c_str());
+		printf("Trying to connect to %s ...", inputPortName.c_str());
 		if(! yarp.connect(serverPortName.c_str(), inputPortName.c_str()) ) {
 			std::cout << getName() << ": Unable to connect to port " << serverPortName.c_str();
 			std::cout << " with " << inputPortName.c_str() << std::endl;
 			return false;
 		}
-	
-	}
+		printf("done!\n");
 		
-	outputPortName  = portPrefix;
-	outputPortName += getName();
-	outputPortName += "/output:o";
-	if(! imgOutputPort.open( outputPortName.c_str() )){
-		return false;
-	}
+	
+		outputPortName  = portPrefix;
+		outputPortName += getName();
+		outputPortName += "/output:o";
+		if(! imgOutputPort.open( outputPortName.c_str() )){
+			return false;
+		}
 
-	rawOutputPortName  = portPrefix;
-	rawOutputPortName += getName();
-	rawOutputPortName += "/rawoutput:o";
-	if(! rawOutputPort.open( rawOutputPortName.c_str() )){
-		return false;
+		rawOutputPortName  = portPrefix;
+		rawOutputPortName += getName();
+		rawOutputPortName += "/rawoutput:o";
+		if(! rawOutputPort.open( rawOutputPortName.c_str() )){
+			return false;
+		}
+		
+		outputPortName  = portPrefix;
+		outputPortName += getName();
+		outputPortName += "/position:o";
+		if(! posOutputPort.open( outputPortName.c_str() )){
+			return false;
+		}
 	}
 	
-	outputPortName  = portPrefix;
-	outputPortName += getName();
-	outputPortName += "/position:o";
-	if(! posOutputPort.open( outputPortName.c_str() )){
-		return false;
-	}
 	/////////////////////////////////////
 
 
@@ -281,7 +284,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			return false;
 		}
 		
-		outputPortName = "/world";	
+		outputPortName = "/MoBeE/world";	
 		//	inputPortName += robotName; 
 		//	inputPortName += "F/world";
 		
@@ -388,7 +391,6 @@ bool icFilterModule::icVisionCoreIsAvailable() {
 }
 
 bool icFilterModule::registerModuleWithCore() {
-	std::cout << "registerWithCore... " <<std::endl;
 	yarp::os::Bottle cmd, response;
 	
 	cmd.addString("add");		// send to icVision::core
@@ -453,17 +455,20 @@ bool icFilterModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& 
 bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, const char *objName) {
 	yarp::os::Bottle cmd, response;
 	
+	if(std::isnan(x) || std::isnan(y) || std::isnan(z))
+		return false;
+	
 	// get information about the object from rpc
 	cmd.clear();
 	cmd.addString("set");
 	cmd.addString(objName);
 	
-	std::cout << "setting cup1 to : " << x <<"," << y <<"," << z << std::endl;
-	
 	cmd.addDouble(x);
 	cmd.addDouble(y);
 	cmd.addDouble(z);
 	
+    std::cout << "bottle: " << cmd.toString() << std::endl;
+    
 	bool r = vSkinPort.write(cmd, response);
 	std::cout << "response: " << response.toString() << std::endl;	
 	// return r;

@@ -14,7 +14,11 @@
 #include "../evolvedFilters/blue_detector.h"
 //#include "evolved_filters/glass_detector.h"
 #include "../evolvedFilters/redblock_detector.h"
-//#include "evolved_filters/teabox.h"
+#include "../evolvedFilters/teabox.h"
+
+#include "../evolvedFilters/mars.h"
+
+#include "face_detector.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
@@ -27,30 +31,39 @@ int main(int argc, char * argv[]) {
 		return 1;
 	}
 
-	std::string version = "v0.1";
+	std::string version = "v0.55";
 	printf("Launching icVision Test Module (%s)...\n", version.c_str());
 	
-	//TestModule *module = new TestModule();
-	
-	// TODO remove that, this is just testing
+
 //	RedBlockDetector *module = new RedBlockDetector();
-	BlueCupDetector *module = new BlueCupDetector();	
-	module->runOnBothImages();
-	module->localiseInThreeD(false);
+//	TeaBoxDetector *module = new TeaBoxDetector();	
+//	module->runOnOneImage(icFilterModule::LEFT_IMAGE);
+//	module->localiseInThreeD(false);
 
 	//	RedFilterModule* module = new RedFilterModule();		
 
 	
-	//BlueCupDetector *module = new BlueCupDetector();	
-	//module->runOnBothImages();
-	//module->localiseInThreeD(true);
+	// for localisation
+	BlueCupDetector *module = new BlueCupDetector();	
+	module->runOnBothImages();
+	module->localiseInThreeD(true);
 	
-	// TODO create possibility
+	//	module->runOnOneImage(icFilterModule::LEFT_IMAGE);
 
+	// TODO create possibility
 	// module->useThisForGazeCtrl(true);
 	
 //	module->runOnOneImage(EvolvedFilterModule::RIGHT_IMAGE);
 	/* run the module: runModule() calls configure first and, if successful, it then runs */
+	
+//	FaceDetector *module = new FaceDetector();
+//	module->runOnOneImage(EvolvedFilterModule::LEFT_IMAGE);
+
+	
+	
+//	MarsDetector *module = new MarsDetector();
+//	module->runOnOneImage(EvolvedFilterModule::LEFT_IMAGE);
+
 	module->runModule(argc, argv);
 	module->interrupt();
 	module->close();

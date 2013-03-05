@@ -60,14 +60,14 @@ GazeModule::GazeModule() : m_gazePeriod(0.1) {
 	
 	if(! gazePort.open( gazePortName.c_str() )){
 		std::cout << "ERROR: could not connect port to " << gazePortName.c_str() << "!" << std::endl;
-		exit(1);
+        std::exit(1);
 	}	
 	// trying to connect to the rpc ikin
 	printf("Trying to connect to %s\n", gazeServerName.c_str());
 	if(! yarp.connect(gazePortName.c_str(), gazeServerName.c_str()) )  {
 		std::cout << getName() << ": Unable to connect to port "; 
 		std::cout << gazeServerName.c_str() << std::endl;
-		exit(1);
+        std::exit(1);
 	}
 	
 	
@@ -78,13 +78,13 @@ GazeModule::GazeModule() : m_gazePeriod(0.1) {
 	
 	if(! filterPort.open( filterPortName.c_str() )){
 		std::cout << "ERROR: could not connect port to " << filterPortName.c_str() << "!" << std::endl;
-		exit(1);
+        std::exit(1);
 	}	
 	printf("Trying to connect to %s\n", filterServerName.c_str());
 	if(! yarp.connect(filterServerName.c_str(), filterPortName.c_str() ))  {
 		std::cout << getName() << ": Unable to connect to port "; 
 		std::cout << filterServerName.c_str() << std::endl;
-		exit(1);
+        std::exit(1);
 	}	
 		
 //	// start RPC thread
@@ -122,8 +122,6 @@ double GazeModule::getPeriod() {
 
 
 bool GazeModule::updateModule() {
-	std::cout << "in update " << std::endl;
-	
 	double WIDTH = 640.0, HEIGHT = 480.0;
 	// TODO check which filter/object we are supposed to look at	
 
@@ -133,14 +131,32 @@ bool GazeModule::updateModule() {
 	Bottle *input;
 	int tries = 0;
 	yarp::os::Stamp stamp, now;
-	now.update();	
+    
+    static yarp::os::Stamp prevTS;
+    
+	now.update();
 
-	input = filterPort.read();	
+	input = filterPort.read();
 	filterPort.getEnvelope(stamp);
-	if(! checkTS(stamp.getTime(), now.getTime(), 1.0)) {
-		std::cout << "stamp is not close enough" << stamp.getTime()-now.getTime();
-		return true;
-	}
+    
+    std::cout << "now stamp is: " << now.getTime() << std::endl;
+    std::cout << "stamp is: " << stamp.getTime() << std::endl;
+    std::cout << "diff is: " << stamp.getTime()-now.getTime() << std::endl;
+    std::cout << "prev is: " << prevTS.getTime() << std::endl;
+    
+    
+//	if(! checkTS(stamp.getTime(), now.getTime(), 1.0)) {
+//		std::cout << "stamp is not close enough" << stamp.getTime()-now.getTime() << std::endl;
+//		return true;
+//	}
+    if(checkTS(stamp.getTime(), prevTS.getTime(), 1.0)) {
+        std::cout << "stamp is too close to the previous one " << stamp.getTime()-prevTS.getTime() << std::endl;
+        return true;
+    }
+    prevTS = stamp;
+    
+    std::cout << "updating gaze " << std::endl;
+    
 
 	// quick sanity check
 	if(!input) {
@@ -189,14 +205,21 @@ bool GazeModule::updateModule() {
 		// write to bottle
 		Bottle &output = gazePort.prepare();//, response;
 		output.clear();
-//		output.addInt(input->get(0).asInt()/2+20);
+		output.addInt(input->get(0).asInt()/2+20);
+		output.addInt(input->get(1).asInt()/2);
+		output.addInt(input->get(2).asInt()/2+20);
+		output.addInt(input->get(3).asInt()/2);
+//		output.addInt(input->get(0).asInt());
+//		output.addInt(input->get(1).asInt());
+//		output.addInt(input->get(2).asInt());
+//		output.addInt(input->get(3).asInt());
+        
+        // needs that in 320 \times 240 pixel images
+//        output.addInt(input->get(0).asInt()/2);
 //		output.addInt(input->get(1).asInt()/2);
-//		output.addInt(input->get(2).asInt()/2+20);
+//		output.addInt(input->get(2).asInt()/2);
 //		output.addInt(input->get(3).asInt()/2);
-		output.addInt(input->get(0).asInt());
-		output.addInt(input->get(1).asInt());
-		output.addInt(input->get(2).asInt());
-		output.addInt(input->get(3).asInt());
+
 		
 
 		std::cout << "write bottle "  << output.toString() << std::endl;
@@ -209,7 +232,7 @@ bool GazeModule::updateModule() {
 }
 
 bool GazeModule::checkTS(double TSLeft, double TSRight, double th) {
-    double diff=fabs(TSLeft-TSRight);
+    double diff = fabs(TSLeft - TSRight);
     if(diff <th)
         return true;
     else return false;

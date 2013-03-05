@@ -16,7 +16,7 @@ ThreeDModule::ThreeDModule(iCubController *ctrl_in) {
 	setName("ThreeDModule");
 	if(ctrl_in == NULL) {
 		std::cout << "ERROR: iCub controller == NULL" << std::endl;
-		exit(1);
+        std::exit(1);
 	}
 
 	headIdx = 0;
@@ -66,7 +66,7 @@ ThreeDModule::ThreeDModule(iCubController *ctrl_in) {
 	
 	if(! posPort.open( posPortName.c_str() )){
 		std::cout << "ERROR: could not connect port to " << posPortName.c_str() << "!" << std::endl;
-		exit(1);
+        std::exit(1);
 	}	
 		
 	// start RPC thread
@@ -145,20 +145,20 @@ bool ThreeDModule::readEncoders() {
 
 	// Torso data
 	if(! iCubCtrl->torso->port) return false;
-	else yarp_port = iCubCtrl->torso->port;			
+	else yarp_port = iCubCtrl->torso->port;
 
 	yarp_port->read(input);
 	yarp_port->getEnvelope(ts);
 
 	if (input != NULL) {
 //		std::cout << "got " << input.toString().c_str() << endl;
-//		std::cout << "envelope time: " << ts.getTime() << endl;		
+//		std::cout << "envelope time: " << ts.getTime() << endl;
 	
 		//		if(! checkTS(headStamp[headIdx].getTime(), ts.getTime(), 0.05)) {
 		torsoIdx++; 
 		torsoIdx = torsoIdx % LIST_LENGTH;
 		torsoStamp[torsoIdx] = ts;
-		torsoState[torsoIdx] = input;			
+		torsoState[torsoIdx] = input;
 		
 //		std::cout << "Testing: ";
 //		for (int i = 0; i < LIST_LENGTH; i++) {
@@ -166,6 +166,7 @@ bool ThreeDModule::readEncoders() {
 //			if(b.isNull()) break;
 //			//std::cout << b.size();
 //			std::cout << b.get(0).asDouble() << ", ";//.get(0);
+//			std::cout << b.get(2).asDouble() << ", ";//.get(0);
 //		}
 //		std::cout << std::endl;					
 		
@@ -200,6 +201,10 @@ Bottle& ThreeDModule::calculatePosition(const Bottle &in, Stamp &stamp) {
 									  p1->get(0).asInt(), p1->get(1).asInt(),
 									  p2->get(0).asInt(), p2->get(1).asInt(),
 									  stamp );
+    
+//    x = -7;
+//    y = 0;
+//    z = -0.35;
 	
 	// create threeDpos Bottle
 	threeDpos->addDouble(x);
@@ -284,8 +289,16 @@ void ThreeDModule::calcuatePositionUsingSimonsMethod(double *retX, double *retY,
 //	
 	
 	double estimatedX = 17.453409 + 0.13380532*x[7] + 0.14905137*x[4] - 0.11798947*x[12] - 0.018469423*x[1];
+    double helper = pow(x[12], 0.18780835);
+    if(isnan(helper)) helper = 0.1;
+    if(helper < 0.1) helper = 0.1;
+    
 	double estimatedY = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/pow(x[12], 0.18780835) + log(x[12]) - 2.1461744;
-	
+
+    std::cout << "x[12]: " << x[12] << std::endl;
+    std::cout <<  "lala helper: " << helper << ", " << pow(x[12], 0.18780835) << std::endl;
+    std::cout <<  "lala helper: " << estimatedY << std::endl;
+
 	// lala
 	std::cout <<  "Prediction: " << round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
 	
@@ -336,23 +349,25 @@ void ThreeDModule::getEncoderPositions(double *headjnt_pos, double *torsojnt_pos
 	Bottle head, torso;
 	
 	// going through the circular buffer
-	for(int k = 0; k < LIST_LENGTH; k++) {
-		hT = (LIST_LENGTH + tIdx - k) % LIST_LENGTH;	
-		hH = (LIST_LENGTH + hIdx - k) % LIST_LENGTH;
-		
-		tDiff = fabs(stamp.getTime() - torsoStamp[hT].getTime());
+    idxH = 1;
+    idxT = 1;
+//	for(int k = 0; k < LIST_LENGTH; k++) {
+//		hT = (LIST_LENGTH + tIdx - k) % LIST_LENGTH;	
+//		hH = (LIST_LENGTH + hIdx - k) % LIST_LENGTH;
+//		
+//		tDiff = fabs(stamp.getTime() - torsoStamp[hT].getTime());
 //		std::cout << stamp.getTime() << " idx: " << hT <<  " getTime: " << torsoStamp[hT].getTime() << ", diffT: "<< tDiff << std::endl;		
-		if( tDiff < smallestDiffT ) {
-			idxT = hT;				
-			smallestDiffT = tDiff;
-		}
-
-		tDiff = fabs(stamp.getTime() - torsoStamp[hH].getTime());
-		if( tDiff < smallestDiffH ) { 
-			idxH = hH;		
-			smallestDiffH = tDiff;
-		}
-	}
+//		if( tDiff < smallestDiffT ) {
+//			idxT = hT;				
+//			smallestDiffT = tDiff;
+//		}
+//
+//		tDiff = fabs(stamp.getTime() - torsoStamp[hH].getTime());
+//		if( tDiff < smallestDiffH ) { 
+//			idxH = hH;		
+//			smallestDiffH = tDiff;
+//		}
+//	}
 	
 	if( idxH != -1 ) head = headState[idxH];	
 	if( idxT != -1 ) torso = torsoState[idxT];

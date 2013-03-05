@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -26,6 +26,11 @@ protected:
 	IplImage* h;
 	IplImage* s;
 	IplImage* v;
+	
+	// member vars
+	bool m_outOfSyncWarning;
+	int m_ImageWidth, m_ImageHeight;
+	
 	
 	// for evolved filter
 	boolList UsedInputs;
