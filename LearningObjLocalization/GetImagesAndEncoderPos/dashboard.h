@@ -10,6 +10,7 @@
 #ifndef DASHBOARD_H
 #define DASHBOARD_H
 
+#include <yarp/os/all.h>
 #include <QtGui>
 
 /**
@@ -21,7 +22,7 @@ class Dashboard : public QWidget {
 //	friend class Window;
 public:
 	// Constructor and Destructor
-	Dashboard();
+	Dashboard(const char *robot);
 	~Dashboard();	
 	
 	// Methods
@@ -36,6 +37,8 @@ private:
 	// Variables
 	bool iCub_accessible;
 	bool iCubSimulator_accessible;
+
+	QString robotName;
 	
 
 	// GUI

@@ -9,11 +9,12 @@
 
 #include "window.h"
 #include "iCub_controller.h"
+#include <yarp/os/all.h>
+#include <yarp/dev/all.h>
 
-// TODO:
 
 int main(int argc, char *argv[]) {
-	QString version = "v0.2";
+	QString version = "v0.21";
 	// first version on the real robot
 	QString title = "LearningObjLocalization";
 
@@ -23,17 +24,27 @@ int main(int argc, char *argv[]) {
 	
 	QThread ctrl_t;
 
+	yarp::os::Property config;
+        config.fromCommand(argc, argv);
+
+	bool isSimulation = false;
+        if ( !config.check("robot") )   // the name of the robot to connect to
+        {
+                printf("Please specify a robot name using '--robot yourRobotName'.\nNow using icubSim.\n");
+		isSimulation = true;
+        } else {
+		if(strcmp(config.find("robot").asString().c_str(), "icubSim")) isSimulation = true;
+	}
+
+
 	// Objects
-	bool isSimulation = true;
-	// TODO if --robot icub then no simulation
-	isSimulation = false;
-	iCubController ctrl(isSimulation);
+	iCubController ctrl(config.find("robot").asString().c_str(), isSimulation);
 	ctrl.moveToThread(&ctrl_t);
 	ctrl_t.start();
 	
 	// Main Window
 	Window window(title, version, &ctrl);
-    window.setFocusPolicy(Qt::StrongFocus);
+	window.setFocusPolicy(Qt::StrongFocus);
 	window.setupSignalsAndSlots();
 	window.show();
 	

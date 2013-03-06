@@ -42,6 +42,7 @@ public slots:
 	void toggleTimer();	
 	void timerTimeout();
 	void collectData();	
+	void toggleConnection();
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -69,7 +70,7 @@ private:
 	// GUI 
 	QString title;
 	QWidget *central, *vision_widget, *second_widget;
-    GLWidget *gl_widget;	
+	GLWidget *gl_widget;	
 	CVWidget *CV_left, *CV_right;
 	CVWidget *CV_left_dev, *CV_right_dev;
 	QHBoxLayout *central_layout;

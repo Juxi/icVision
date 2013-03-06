@@ -10,9 +10,9 @@
 #include "yarp/os/Network.h"
 #include <iostream>
 
-Dashboard::Dashboard() : iCubSimulator_accessible(false) {
+Dashboard::Dashboard(const char* robot) : iCubSimulator_accessible(false), robotName(robot) {
 	// initialize all labels
-	lbl_iCubSim_Status = new QLabel("<center> <b> iCubSim </b> </center>");
+	lbl_iCubSim_Status = new QLabel(QString("<center> <b> %1 </b> </center>").arg(robotName));
 	lbl_iCubSim_Status->setMinimumSize(80, 55);
 	lbl_iCubSim_Status->setMaximumHeight(55);	
 
@@ -66,8 +66,8 @@ void Dashboard::checkiCubSimulator() {
 		lbl_iCubSim_Status->setStyleSheet("background-color: green;");
     } else {
         iCubSimulator_accessible = false;
-        lbl_iCubSim_Status->setText("<center> <b> iCubSim </b><br/> (not found) </center>"); //<font color=red> <b>iCubSim not running</b> </font>");
-		lbl_iCubSim_Status->setStyleSheet("background-color: red;");
+//        lbl_iCubSim_Status->setText("<center> <b> iCubSim </b><br/> (not found) </center>"); //<font color=red> <b>iCubSim not running</b> </font>");
+//	lbl_iCubSim_Status->setStyleSheet("background-color: red;");
     }
 }
 
@@ -75,17 +75,27 @@ void Dashboard::checkiCubSimulator() {
  *@brief     checks if the iCub simulator is running and updates the labels accordingly
  */
 void Dashboard::checkiCub() {
-	if(yarp::os::NetworkBase::exists("/icubF/head/state:o")) {
+    /*if(yarp::os::NetworkBase::exists("/icubF/head/state:o")) {
         iCub_accessible = true;
         lbl_iCubSim_Status->setText("<center> <b> iCubF </b><br/> (running) </center>"); //<font color=green>running</b> </font>");
 		lbl_iCubSim_Status->setStyleSheet("background-color: green;");
     } else {
         iCub_accessible = false;
         checkiCubSimulator();
+    }*/
+    if(yarp::os::NetworkBase::exists(("/" + robotName + "/cam/left").toStdString().c_str())) {
+        iCub_accessible = true;
+        lbl_iCubSim_Status->setText("<center> <b> " + robotName + " </b><br/> (running) </center>"); 
+	lbl_iCubSim_Status->setStyleSheet("background-color: green;");
+    } else {
+        iCub_accessible = false;
+        lbl_iCubSim_Status->setText("<center> <b> " + robotName + " </b><br/> (not found) </center>"); 
+	lbl_iCubSim_Status->setStyleSheet("background-color: red;");
     }
 }
 
 void Dashboard::update() {
+	checkiCubSimulator();
 	checkiCub();
 }
 

@@ -52,48 +52,19 @@ Window::Window(QString &t_in, QString &v_in) {
     setWindowTitle(title);
 }
 
-Window::Window(QString &t_in, QString &v_in, iCubController *iCubCtrl_in) {
-	initWindow(); 
-	iCubCtrl = iCubCtrl_in;
-	
-	// connect to rpc	
-	// check whether we have F or not!! TODO
-	std::string clientPortName = "/learnpos/katanaCtrl/rpc:o";
-	if(! katanaCtrlPort.open( clientPortName.c_str() )){
-		exit(1);
-	}
-	
-	std::string remotePort = "/katanaCtrl"; //"/katana400F/arm/rpc:i";
-	
-	// trying to connect to the rpc server (world interface)
-	printf("Trying to connect to %s\n", remotePort.c_str());
-	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
-		std::cout << "window.cpp" << ": Unable to connect to port "; 
-		std::cout << remotePort.c_str() << std::endl;
-		exit(1);
-	}	
+Window::Window(QString &t_in, QString &v_in, iCubController *iCubCtrl_in)
+	: iCubCtrl(iCubCtrl_in)
+{
 
+	initWindow();
 	// connect to rpc	
 	// check whether we have F or not!! TODO
-	
-	clientPortName = "/learnpos/katana/rpc:o";
-	if(! katanaPort.open( clientPortName.c_str() )){
-		exit(1);
-	}
-	
-	remotePort = "/katana400F/arm/rpc:i";
-	
-	// trying to connect to the rpc server (world interface)
-	printf("Trying to connect to %s\n", remotePort.c_str());
-	if(! yarp::os::Network::connect(clientPortName.c_str(), remotePort.c_str()) ) {
-		std::cout << "window.cpp" << ": Unable to connect to port "; 
-		std::cout << remotePort.c_str() << std::endl;
-		exit(1);
-	}	
-	
+	std::string clientPortName;
+	std::string remotePort;
+
 	// set title
 	title = t_in + " - " + v_in;
-    setWindowTitle(title);
+   	setWindowTitle(title);
 }
 
 void Window::initWindow() {	
@@ -101,7 +72,8 @@ void Window::initWindow() {
 	
 	srand( time(NULL) );
 	
-	dash = new Dashboard();	dash->update();
+	dash = new Dashboard(iCubCtrl->robotName.toStdString().c_str());
+	dash->update();
 
 	vision_widget = new QWidget;
 	vision_layout = new QGridLayout;
@@ -313,7 +285,7 @@ void Window::setupSignalsAndSlots() {
 		QObject::connect(iCubCtrl, SIGNAL(connectionStatus(bool)),
 						 dash,	   SLOT(updateConnectionStatus(bool)));
 		QObject::connect(dash->btn_connect, SIGNAL(clicked()),
-						 iCubCtrl,			SLOT(toggleConnection()));		
+						 this,	   SLOT(toggleConnection()));		
 		QObject::connect(dash->btn_initialize, SIGNAL(clicked()),
 						 iCubCtrl,			SLOT(initializeRobot()));		
 
@@ -357,7 +329,8 @@ void Window::toggleTimer() {
 
 
 void Window::collectData() {
-	bool usingKatana = true;
+	bool usingKatana = false;
+	bool moveRobot = false;	// just collect images!
 	
 	int pointsPerRun = 1; //20;	// for katana learning
 	
@@ -425,92 +398,97 @@ void Window::collectData() {
 			btn_timer->setEnabled(false);
 			
 			std::cout << "Collecting Data! (" << collectedPoints << ")" << std::endl;
-			float nextposehead[iCubCtrl->head->ctrl->getNumJoints()];
-			float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
 			
-			// stop it
-			iCubCtrl->head->ctrl->stop();
-			iCubCtrl->torso->ctrl->stop();
+			if(moveRobot) {
+				float nextposehead[iCubCtrl->head->ctrl->getNumJoints()];
+				float nextposetorso[iCubCtrl->torso->ctrl->getNumJoints()];	
 			
-			// move to new position
-			// right now only joint 2 of head
-	//		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
-			int posCnt = 0;
-			int numPoses = 3 * 3 * 4 * 4 * 4 * 5;
+				// stop it
+				iCubCtrl->head->ctrl->stop();
+				iCubCtrl->torso->ctrl->stop();
 			
-			// joints for the torso
-			for(float j0 = -15; j0 <= 15; j0+= 15) {
-				nextposetorso[0] = j0;			
+				// move to new position
+				// right now only joint 2 of head
+		//		for(float v = -10; v <= 10; v += 5 ) {	// joint 2
+				int posCnt = 0;
+				int numPoses = 3 * 3 * 4 * 4 * 4 * 5;
+			
+				// joints for the torso
+				for(float j0 = -15; j0 <= 15; j0+= 15) {
+					nextposetorso[0] = j0;			
 				
-				// bending sideways
-				for(float j1 = -10; j1 <= 10; j1+= 10) {		
-					nextposetorso[1] = j1;			
+					// bending sideways
+					for(float j1 = -10; j1 <= 10; j1+= 10) {		
+						nextposetorso[1] = j1;			
 					
-					// tilt forward/backward
-					for(float v = 10; v <= 40; v+= 10) {
-						nextposetorso[2] = v;
+						// tilt forward/backward
+						for(float v = 10; v <= 40; v+= 10) {
+							nextposetorso[2] = v;
 						
-						if(15 == v) {
-							moveTheRobot(nextposetorso);
-							// wait longer for the resetting
-							sleep(5);	
-						}
+							if(15 == v) {
+								moveTheRobot(nextposetorso);
+								// wait longer for the resetting
+								sleep(5);	
+							}
 						
 											
-						// HEAD up down
-						for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
-							nextposehead[0] = hj0;
+							// HEAD up down
+							for(float hj0 = -30; hj0 <= 0; hj0+= 10) {
+								nextposehead[0] = hj0;
 
-							// HEAD left right
-							//for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
-	//							nextposehead[2] = hj2;
-								nextposehead[2] = 0;							
+								// HEAD left right
+								//for(float hj2 = -30; hj2 <= 30; hj2+= 10) {
+		//							nextposehead[2] = hj2;
+									nextposehead[2] = 0;							
 							
-								// HEAD eyes up down
-								for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
-									nextposehead[3] = hj3;						
+									// HEAD eyes up down
+									for(float hj3 = -20; hj3 <= 10; hj3+= 10) {
+										nextposehead[3] = hj3;						
 								
-									// HEAD eyes left right
-									for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
-										posCnt++;
+										// HEAD eyes left right
+										for(float hj4 = -20; hj4 <= 20; hj4+= 10) {
+											posCnt++;
 										
-										nextposehead[4] = hj4;
+											nextposehead[4] = hj4;
 										
-										if(rand() % 100 != 0) continue;
+											if(rand() % 100 != 0) continue;
 										
-										// try this one 
-										moveTheRobot(nextposetorso);
-										usleep(50*1000);										
-										moveTheRobotHead(nextposehead);
+											// try this one 
+											moveTheRobot(nextposetorso);
+											usleep(50*1000);										
+											moveTheRobotHead(nextposehead);
 										
-										waitForMotionDone();
+											waitForMotionDone();
 
-										getYarpStatus();			
-										writeCSV();	
+											getYarpStatus();			
+											writeCSV();	
 										
-										printf("%c   %d of %d = %3.2g percent\n", 'A' + collectedPoints, posCnt, numPoses, posCnt*1.0/(1.0*numPoses)*100.0);	
+											printf("%c   %d of %d = %3.2g percent\n", 'A' + collectedPoints, posCnt, numPoses, posCnt*1.0/(1.0*numPoses)*100.0);	
 										
+										}
 									}
-								}
-							//}	
+								//}	
+							}
 						}
 					}
 				}
-			}
 			
-			// move back to home position, original pose
-			nextposetorso[0] = 0;
-			nextposetorso[1] = 0;
-			nextposetorso[2] = 15;		
-			moveTheRobot(nextposetorso);
-			waitForMotionDone();
+				// move back to home position, original pose
+				nextposetorso[0] = 0;
+				nextposetorso[1] = 0;
+				nextposetorso[2] = 15;		
+				moveTheRobot(nextposetorso);
+				waitForMotionDone();
 			
-			// play sound!!!
-			QSound::play("../sounds/Drill.wav");
+				// play sound!!!
+				QSound::play("../sounds/Drill.wav");
 		
-		//ending for
-		}
+			//ending for
+			}
 				
+		}
+		getYarpStatus();
+		
 		btn_timer->setEnabled(true);
 		
 		// stop
@@ -581,6 +559,14 @@ void Window::timerTimeout() {
 	}
 }
 
+void Window::toggleConnection() {
+	QPushButton* btn = dash->btn_connect;
+	btn->setText("Connecting...");
+	btn->setEnabled(false);	
+	
+	iCubCtrl->toggleConnection();
+}
+
 void Window::getYarpStatus() {
 	QSound::play("../sounds/Drill.wav");
 	
@@ -590,7 +576,7 @@ void Window::getYarpStatus() {
 		if(iCubCtrl->simulation) showRedBall3DPosition();
 		showYarpImages();
 		
-		Bottle cmd, response;
+/*		Bottle cmd, response;
 		cmd.clear();
 		cmd.addString("get");
 		cmd.addString("encs");
@@ -598,11 +584,12 @@ void Window::getYarpStatus() {
 		katanaPort.write(cmd, response);
 		txt_BallPosition->setText( response.get(2).toString().c_str() );
 		//writeCSV();
+*/
 				
 	} else {
 		// error not connected
 		QMessageBox::warning( this, title,
-							 "It seems the yarp network is not yet connected"
+							 "It seems the YARP network is not yet connected"
 							 "to the iCub (Simulator)!\n"
 							 "Click on the connect button first!",
 							 "OK");

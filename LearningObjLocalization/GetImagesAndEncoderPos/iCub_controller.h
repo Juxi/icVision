@@ -31,14 +31,14 @@ class iCubController : public QObject {
 	
 public:
 	iCubController(); //Window *ptr_mw
-	iCubController(bool isSim);
+	iCubController(const char *robot, bool isSim);
 	~iCubController();
-
+	void toggleConnection();
+	
 signals:
 	void connectionStatus(bool);
 	
 public slots:
-	void toggleConnection();
 	void initializeRobot();
 	
 private:	//vars
@@ -50,8 +50,19 @@ private:	//vars
         ImageOf<PixelRgb>                   *last_image;
     };
 	
+  /* struct StereoCamera {
+        QString                             port_name;
+        BufferedPort<ImageOf<PixelRgb> >    *port;
+        bool                                initialised;
+        ImageOf<PixelRgb>                   *image;
+    };*/
+	
+
 	QString left_camera_port_name;
 	QString right_camera_port_name;
+	QString stereo_disparity_port_name;
+
+
 
 	struct Part {
         QString                 port_name;
@@ -66,11 +77,13 @@ private:	//vars
     };
 	
 public: // vars
-    Camera *left_camera;
+    	Camera *left_camera;
 	Camera *right_camera;
+	Camera *stereo_disparity;
 	Part *head;
 	Part *torso;	
 	bool simulation;	
+	QString robotName;	
 	
 
 private: // methods		
@@ -79,7 +92,7 @@ private: // methods
 	Network *yarp_network;
 
 	void initCameras();
-    void closeCameras();	
+   	void closeCameras();	
 	
 	void initRightCamera();
 	void initLeftCamera();

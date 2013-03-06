@@ -24,11 +24,12 @@ iCubController::iCubController() {
 	
 	torso = new Part;
 	torso->initialized = false;
+	robotName = "icubSim";
 	
 	yarp_network->init();
 }
 
-iCubController::iCubController(bool isSim) {
+iCubController::iCubController(const char* robot, bool isSim) {
 	simulation = isSim;
 	
 	left_camera = new Camera;	
@@ -46,6 +47,9 @@ iCubController::iCubController(bool isSim) {
 	torso = new Part;
 	torso->initialized = false;
 	
+	robotName = "";
+	robotName.append(robot);
+	
 	yarp_network->init();
 }
 
@@ -61,12 +65,11 @@ iCubController::~iCubController() {
 }
 
 void iCubController::toggleConnection() {
-	((QPushButton*) QObject::sender())->setEnabled(false);
-	((QPushButton*) QObject::sender())->setText("Connecting...");
-	
+	std::cout << "\nConnecting ... " << std::endl;	
 	initCameras();
-	initHead();
-	initTorso();
+	//just images initHead();
+	//just images initTorso();
+	std::cout << "done!" << std::endl;		
 }
 
 void iCubController::initializeRobot() {
@@ -129,10 +132,21 @@ void iCubController::initializeRobot() {
  *@brief     initialises camera
  */
 void iCubController::initCameras() {
+	std::cout << "in init cameras ... " << std::endl;	
+	
+
 	if(! (left_camera->initialized && right_camera->initialized)) {		
 		initLeftCamera();
+
+		std::cout << "right:" << right_camera << std::endl;	
+			
 		initRightCamera();
 	}
+	
+	std::cout << "tada" << left_camera << std::endl;	
+	
+		
+
 	emit connectionStatus(left_camera->initialized && right_camera->initialized);		
 
 	// single eye only
@@ -140,17 +154,19 @@ void iCubController::initCameras() {
 //		initLeftCamera();
 //	}
 //	emit connectionStatus(left_camera->initialized);		
+
 }
 
 void iCubController::initLeftCamera() {
     if(!left_camera->initialized) {	
-		std::cout << std::endl << "initialising left camera ..." << simulation;
+		std::cout << std::endl << "initialising left camera ..." << std::endl;
 		
         left_camera->port = new BufferedPort<ImageOf<PixelRgb> >;
         left_camera->port->open("/juxi/cam/left");
 		
 		if(simulation)	yarp_network->connect("/icubSim/cam/left", "/juxi/cam/left");	
 		else			yarp_network->connect("/icub/cam/left", "/juxi/cam/left");	
+		std::cout << std::endl << "read left camera ..." << std::endl;		
         left_camera->last_image = left_camera->port->read();
         left_camera->initialized = true;
 		

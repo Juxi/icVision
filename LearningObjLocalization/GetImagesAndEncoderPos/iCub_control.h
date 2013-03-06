@@ -44,6 +44,7 @@ class iCubControl : public QThread {
     };
     Camera *left_camera, *right_camera;
 
+ 
 //    struct Arm
 //    {
 //        IControlLimits                  *lim;

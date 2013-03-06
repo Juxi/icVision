@@ -8,6 +8,8 @@
  */
 
 #include "cv_widget.h"
+#include <GL/glut.h>
+
 
 
 /**
