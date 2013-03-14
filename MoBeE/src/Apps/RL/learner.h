@@ -79,6 +79,7 @@ public:
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
     //inline int getNumStates() { return states.size(); }
     
+    bool randomReach(yarp::os::ConstString);
     bool takeRandomAction();
     
     
@@ -97,6 +98,7 @@ private:
     
     yarp::os::Network network;
     yarp::os::BufferedPort<yarp::os::Bottle> statePort,commandPort;
+    yarp::os::RpcClient markerPortClient,worldPortClient;
     std::list<State*> states;
     
     State* currentState;
