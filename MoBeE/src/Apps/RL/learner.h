@@ -26,14 +26,26 @@ public:
         class Action
         {  
         public:
-            Action( State* _destination_state, Learner* parent ) : destination_state(_destination_state), num(1), val(0.0) {
+            Action() : num(0), val(0.0) {}
+            ~Action(){}
+            virtual double run(){ return 0; }
+        protected:
+            int num;    // number of times this action has been tried
+            double val; // Q value of this action
+        };
+        
+        class TransitionAction : public Action
+        {
+        public:
+            TransitionAction( State* _destination_state, Learner* parent ) : destination_state(_destination_state) {
                 for (std::list<State*>::iterator i=parent->states.begin(); i!=parent->states.end(); ++i ) {
-                    if (*i==destination_state) transition_belief.push_back(S_Prime(*i,1.0,1));
-                    else transition_belief.push_back(S_Prime(*i,0.0,0));
+                    //if (*i==destination_state) transition_belief.push_back(S_Prime(*i,1.0,1));
+                    //else
+                        transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
                 //printf("New Action destination: %p\n", destination_state);
             }
-            ~Action(){}
+            ~TransitionAction(){}
         private:
             const State* destination_state;
             struct S_Prime
@@ -41,34 +53,34 @@ public:
                 const State* s_prime;
                 double prob;
                 int num;
-                //Transition_Belief() : s_prime(NULL), prob(0.0), num(0){}
-                //Transition_Belief(State* s) : s_prime(s), prob(0.0), num(0){}
                 S_Prime(State* s, double p, int n) : s_prime(s), prob(p), num(n){}
             };
             std::list< S_Prime > transition_belief;
-            int num;    // number of times this action has been tried
-            double val; // Q value of this action
+        friend class State;
+        friend class Learner;
+        };
+        
+        class ReachAction : public Action
+        {
             
-            
-            friend class State;
-            friend class Learner;
         };
         
         State(Point_d q, Learner* parent) : Point_d( q.dimension(), q.cartesian_begin(), q.cartesian_end()) {
             parent->states.push_back(this);
             for (std::list<State*>::iterator i=parent->states.begin(); i!=parent->states.end(); ++i ) {
                 // add state transition probabilities for all state::actions to lead to this state
-                for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j )
-                    if (*i!=this) j->transition_belief.push_back(Action::S_Prime(this,0.0,0));
+                for (std::list<State::TransitionAction>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j )
+                    if (*i!=this) j->transition_belief.push_back(TransitionAction::S_Prime(this,0.0,0));
                 // append actions 'go to other state' (from here)
-                if (*i!=this) actions.push_back(Action(*i,parent));
+                if (*i!=this) transitionActions.push_back(TransitionAction(*i,parent));
                 // append actions 'go to this state' (from elsewhere)
-                (*i)->actions.push_back(Action(this,parent));
+                (*i)->transitionActions.push_back(TransitionAction(this,parent));
             }
         }
         ~State(){}
     private:
-        std::list<Action> actions;
+        std::list<TransitionAction> transitionActions;
+        ReachAction reachAction;
         friend class Learner;
     };
     
@@ -87,7 +99,7 @@ public:
     
 private:
     
-    double updateTransitionBelief( State::Action*, State* );
+    double updateTransitionBelief( State::TransitionAction*, State* );
     
     bool deleteState( const State* );
     
@@ -102,7 +114,7 @@ private:
     std::list<State*> states;
     
     State* currentState;
-    State::Action* currentAction;
+    State::TransitionAction* currentAction;
     
     yarp::os::Semaphore mutex;
     

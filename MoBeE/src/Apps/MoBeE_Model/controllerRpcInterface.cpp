@@ -70,6 +70,9 @@ bool ControllerRpcInterface::handler( const yarp::os::Bottle& command, yarp::os:
         case VOCAB_GET_MARKER:
             ok = getMarker(command,reply);
             break;
+        case VOCAB_IS_MOVING:
+            ok = isMoving(command,reply);
+            break;
         /*case VOCAB_GET_P:
             ok = getMarkerPoint(command,reply);
             break;
@@ -83,6 +86,17 @@ bool ControllerRpcInterface::handler( const yarp::os::Bottle& command, yarp::os:
     if (!ok)
         reply.addString("Handler encountered a problem :-(");
 	return true;
+}
+
+bool ControllerRpcInterface::isMoving( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )
+{
+    if ( controller->isMoving( cmd.get(1).asDouble(), cmd.get(2).asDouble() ) )
+        reply.addInt(1);
+    else
+        reply.addInt(0);
+    
+    printf("Robot is moving? %s\n",reply.toString().c_str());
+    return true;
 }
 
 bool ControllerRpcInterface::getMarker( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )

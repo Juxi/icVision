@@ -33,6 +33,7 @@ public:
 	int     getNumJoints() { return numJoints; }	//!< Returns the number of controllable axes
     bool    getEncoders( double* q ) { return enc->getEncoders(q); }
     //void    doControl( bool b ) { controllerIsOn = b; }
+    bool    isMoving( double aThresh, double vThresh ) { return aMag < aThresh && vMag < vThresh; }
     
 private:
 	
@@ -44,6 +45,7 @@ private:
 	yarp::dev::IEncoders						*enc;
     
     bool                controllerIsOn;
+    double              aMag,vMag;
     
 	int					numJoints;	// number of controllable DOFs
 	double				*q1,		// current pose

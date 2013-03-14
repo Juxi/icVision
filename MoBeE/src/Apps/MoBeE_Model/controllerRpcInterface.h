@@ -40,6 +40,7 @@ private:
 	
     #define VOCAB_LIST VOCAB4('l','i','s','t')
     #define VOCAB_GET_MARKER VOCAB3('g','e','t')
+    #define VOCAB_IS_MOVING VOCAB3('m','o','v')
     //#define VOCAB_GET_N VOCAB4('g','e','t','n')
     
 	void run();
@@ -47,6 +48,7 @@ private:
     
     bool getMarkerList( yarp::os::Bottle& reply );
     bool getMarker( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
+    bool isMoving( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
     //bool getMarkerPoint( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
     //bool getMarkerNormal( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply );
 	

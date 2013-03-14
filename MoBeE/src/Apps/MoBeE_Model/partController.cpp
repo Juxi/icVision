@@ -3,7 +3,9 @@
 
 PartController::PartController( const char* _robotName, const char* _partName, const char* _fileName, int r ) : yarp::os::RateThread(r),
                                                                                                                 vel(NULL),
-                                                                                                                enc(NULL)
+                                                                                                                enc(NULL),
+                                                                                                                aMag(0.0),
+                                                                                                                vMag(0.0)
 {
 	printf( "\nOpening Remote Control Board: %s %s\n", _robotName, _partName );
 	
@@ -349,12 +351,14 @@ void PartController::run()
     
     if ( getEncoders(q1) )
     {
-        
         // process encoder positions... (the derrived class "Controller" sets the robot position in KineamticModel)
         procEncoders(q1);
         
         yarp::os::Bottle& normPose = statePort.prepare();
         normPose.clear();
+        
+        aMag=0;
+        vMag=0;
         
         // compute the current normalized state and the next control command
         for ( int i=0; i<numJoints; i++ )
@@ -383,6 +387,10 @@ void PartController::run()
                     + fRPC[i]
                     ;
             
+            // compute magnitudes of a and v
+            aMag += a[i]*a[i];
+            vMag += v[i]*v[i];
+            
             // compute next control command
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             if ( ctrl[i]*ctrl[i] < 0.1 ) ctrl[i] = 0.0;
@@ -398,6 +406,10 @@ void PartController::run()
                 view7.addDouble(ctrl[i]);
             }
         }
+        
+        // determine if the robot is moving
+        aMag = sqrt(aMag);
+        vMag = sqrt(vMag);
         
         //printf("x:    %s\n", view5.toString().c_str());
         //printf("fX:   %s\n", view0.toString().c_str());

@@ -188,13 +188,13 @@ bool Learner::takeRandomAction()
     }
     
     // select a random action
-    std::list<State::Action>::iterator a;
-    int actionIdx = rand() % (currentState->actions.size());
-    a = currentState->actions.begin();
+    std::list<State::TransitionAction>::iterator a;
+    int actionIdx = rand() % (currentState->transitionActions.size());
+    a = currentState->transitionActions.begin();
     for (int j=0; j<actionIdx; j++)
         a++;
     currentAction = &*a;
-    printf("\nTaking random action from: %p to: %p\n", currentState, currentAction->destination_state);
+    printf("\nTaking random transition action from: %p to: %p\n", currentState, a->destination_state);
     
     // while action is not complete
     State* startingState = currentState;
@@ -210,25 +210,25 @@ bool Learner::takeRandomAction()
     
     if ( currentState == startingState ) {
         printf("TIMED OUT...\n");
-    } else if ( currentState == currentAction->destination_state ) {
+    } else if ( currentState == a->destination_state ) {
         printf("SUCCEEDED...\n");
     } else {
         printf("ENDED UNEXPECTEDLY...\n");
     }
     
-    double deltaBelief = updateTransitionBelief( currentAction, currentState );
+    double deltaBelief = updateTransitionBelief( &*a, currentState );
     printf("Changed transtition belief: %f\n",deltaBelief);
     
     return true;
 }
 
-double Learner::updateTransitionBelief( State::Action* a, State* s )
+double Learner::updateTransitionBelief( State::TransitionAction* a, State* s )
 {
     printf("UPDATING TRANSITION BELIEFS for the action: %p -> %p\n");
     double delta = 0.0;
     a->num++;
     
-    for ( std::list<State::Action::S_Prime>::iterator i=a->transition_belief.begin(); i!=a->transition_belief.end(); ++i){
+    for ( std::list<State::TransitionAction::S_Prime>::iterator i=a->transition_belief.begin(); i!=a->transition_belief.end(); ++i){
         if ( i->s_prime == s ) i->num++;
         double new_belief = (double)i->num/a->num;
         delta += fabs(new_belief - i->prob);
@@ -266,6 +266,8 @@ void Learner::run()
     Point_d q(bList.size(),bList.begin(),bList.end());
     
     //std::cout << "  q: " << q << std::endl;
+    
+    
     
     // set 'currentState' based on the nearest attractor to the actual robot state q
     State* nearestState = NULL;
@@ -321,16 +323,16 @@ void Learner::threadRelease()
 bool Learner::deleteState( const State* s )
 {
     for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
-        for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j) {
-            for (std::list< State::Action::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k) {
+        for (std::list<State::TransitionAction>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
+            for (std::list< State::TransitionAction::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k) {
                 if (k->s_prime==s) {
-                    std::list< State::Action::S_Prime >::iterator K=k;
+                    std::list< State::TransitionAction::S_Prime >::iterator K=k;
                     j->transition_belief.erase(k,++K);
                 }
             }
             if (j->destination_state == s) {
-                std::list<State::Action>::iterator J=j;
-                (*i)->actions.erase(j,++J);
+                std::list<State::TransitionAction>::iterator J=j;
+                (*i)->transitionActions.erase(j,++J);
             }
         }
         if (*i==s) {
@@ -348,10 +350,10 @@ void Learner::print(bool printAll)
     {
         printf("State %d: %p\n",stateCount++,*i);
         int actionCount=0;
-        for (std::list<State::Action>::iterator j=(*i)->actions.begin(); j!=(*i)->actions.end(); ++j)
+        for (std::list<State::TransitionAction>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
         {
             printf("  Action %d, %p: ",actionCount++,j->destination_state);
-            for (std::list< State::Action::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
+            for (std::list< State::TransitionAction::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
             {
                 if (printAll) printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
                 else printf("%f (%d)   ", k->prob, k->num);
