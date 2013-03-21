@@ -33,7 +33,10 @@ public:
 	int     getNumJoints() { return numJoints; }	//!< Returns the number of controllable axes
     bool    getEncoders( double* q ) { return enc->getEncoders(q); }
     //void    doControl( bool b ) { controllerIsOn = b; }
-    bool    isMoving( double aThresh, double vThresh ) { return aMag < aThresh && vMag < vThresh; }
+    bool    isStopped( double aThresh, double vThresh )
+    {
+        printf("aMag: %f, vMag: %f\n",aMag,vMag);
+        return aMag < aThresh && vMag < vThresh; }
     
 private:
 	

@@ -7,13 +7,13 @@ int main(int argc, char *argv[])
     // prepare the random number generator
     srand(time(0));
     
-    // instantiate a reinforcement learner for the torso, checking for state transition at 5Hz (200ms period)
-    Learner torso_learner("icubSim","torso",200);
-    Learner right_arm_learner("icubSim","right_arm",200);
-    Learner left_arm_learner("icubSim","left_arm",200);
+    // instantiate reinforcement learners, checking for state transition at 5Hz (200ms period)
+    Learner torso_learner("icubSim","torso",true);
+    Learner right_arm_learner("icubSim","right_arm",true);
+    Learner left_arm_learner("icubSim","left_arm",true);
 
     // pick some random states (poses) and add them to the state space of the learners
-    for (int i=0; i<10; i++)
+    for (int i=0; i<4; i++)
     {
         std::list<double> tState;
         for (int j=0; j<3; j++) tState.push_back((double)rand()/RAND_MAX);
@@ -32,36 +32,43 @@ int main(int argc, char *argv[])
         right_arm_learner.appendState(l);
         left_arm_learner.appendState(r);
     }
-    //learner.print();
     
-    // send control commands and keep track of the current state as the robot moves
-    torso_learner.start();
-    right_arm_learner.start();
-    left_arm_learner.start();
-    
-    // wait for the robot to relax into the attractor for the current state
-    sleep(10);
-    
-    // take random actions... the learner will learn an MDP for the bodypart
-    while (true) {
-        torso_learner.takeRandomAction();
-        left_arm_learner.takeRandomAction();
-        right_arm_learner.takeRandomAction();
-        //left_arm_learner.randomReach("left_hand");
-        //right_arm_learner.randomReach("right_hand");
+    int count = 0;
+    while ( count < 100) {
         
-        //learner.print();
+        printf("\n*****************************************************************************\n\n");
+        
+        Learner::State* ts = torso_learner.getDiscreteState();
+        Learner::State* ls = left_arm_learner.getDiscreteState();
+        Learner::State* rs = right_arm_learner.getDiscreteState();
+        
+        std::list<Learner::State::TransitionAction*>::iterator p = ts->transitionActions.begin();
+        std::list<Learner::State::TransitionAction*>::iterator q = ls->transitionActions.begin();
+        std::list<Learner::State::TransitionAction*>::iterator r = rs->transitionActions.begin();
+        int j=0,
+            tIdx = rand() % (ts->transitionActions.size()),
+            lIdx = rand() % (ls->transitionActions.size()),
+            rIdx = rand() % (rs->transitionActions.size());
+        while (j < tIdx) { p++; j++; } j=0;
+        while (j < lIdx) { q++; j++; } j=0;
+        while (j < rIdx) { r++; j++; }
+        
+        (*p)->start();
+        (*q)->start();
+        (*r)->start();
+        
+        count++;
+        yarp::os::Time::delay(1);
     }
     
-    torso_learner.stop();
-    left_arm_learner.stop();
-    right_arm_learner.stop();
+    torso_learner.mutex.wait();
+    right_arm_learner.mutex.wait();
+    left_arm_learner.mutex.wait();
     
+    printf("Torso Learner:\n");     torso_learner.print(true);
+    printf("Right Arm Learner:\n"); right_arm_learner.print(true);
+    printf("Left Arm Learner:\n");  left_arm_learner.print(true);
     
-    //printf("------------------------------------------------------------------------------\n");
-    //std::vector<const Learner::State*> states = learner.getStates();
-    //learner.deleteState(states.at(3));
-    //learner.print();
     
     printf("All finished\n");
     return 1;

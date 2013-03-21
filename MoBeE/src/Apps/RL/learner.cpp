@@ -3,53 +3,242 @@
 //#include <cmath>
 #include "learner.h"
 
-Learner::Learner( const char* _robotName, const char* _partName, int rate ) : yarp::os::RateThread(rate), currentState(NULL), currentAction(NULL)
+Learner::Learner( const char* _robotName, const char* _partName, bool connect ) //: currentState(NULL), currentAction(NULL)
 {
-    // streaming motor encoder positions
-    yarp::os::ConstString remoteStatePort("/MoBeE/");
-	remoteStatePort += _partName;
-	remoteStatePort += "/state:o";
-    yarp::os::ConstString localStatePort("/learner/");
-    localStatePort += _partName;
-    localStatePort += "/state:i";
-    
-    // streaming commands to the attractor dynamics
-    yarp::os::ConstString remoteCommandPort("/MoBeE/");
-	remoteCommandPort += _partName;
-	remoteCommandPort += "/cmd:i";
-    yarp::os::ConstString localCommandPort("/learner/");
-    localCommandPort += _partName;
-    localCommandPort += "/cmd:o";
-    
-    // to put objects into the world model to mark targets and such for debugging
-    yarp::os::ConstString remoteWorldPort("/MoBeE/world");
-    yarp::os::ConstString localWorldPort("/learner/");
-    localWorldPort += _partName;
-    localWorldPort += "/world";
-    worldPortClient.open(localWorldPort);
-    
-    // to query the state of markers on the robot model... maybe this should be a stream but it's not clear
-    yarp::os::ConstString remoteMarkerPort("/MoBeE/");
-    remoteMarkerPort += _partName;
-    remoteMarkerPort += "/rpc";
-    yarp::os::ConstString localMarkerPort("/learner/");
-    localMarkerPort += _partName;
-    localMarkerPort += "/rpc";
-    markerPortClient.open(localMarkerPort);
+    if (connect)
+    {
+        printf("Connecting to MoBeE model...\n");
+        
+        // streaming motor encoder positions
+        yarp::os::ConstString remoteStatePort("/MoBeE/");
+        remoteStatePort += _partName;
+        remoteStatePort += "/state:o";
+        yarp::os::ConstString localStatePort("/learner/");
+        localStatePort += _partName;
+        localStatePort += "/state:i";
+        
+        // streaming commands to the attractor dynamics
+        yarp::os::ConstString remoteCommandPort("/MoBeE/");
+        remoteCommandPort += _partName;
+        remoteCommandPort += "/cmd:i";
+        yarp::os::ConstString localCommandPort("/learner/");
+        localCommandPort += _partName;
+        localCommandPort += "/cmd:o";
+        
+        // to put objects into the world model to mark targets and such for debugging
+        yarp::os::ConstString remoteWorldPort("/MoBeE/world");
+        yarp::os::ConstString localWorldPort("/learner/");
+        localWorldPort += _partName;
+        localWorldPort += "/world";
+        worldClient.open(localWorldPort);
+        
+        // to query the state of markers on the robot model... maybe this should be a stream but it's not clear
+        yarp::os::ConstString remoteMarkerPort("/MoBeE/");
+        remoteMarkerPort += _partName;
+        remoteMarkerPort += "/rpc";
+        yarp::os::ConstString localMarkerPort("/learner/");
+        localMarkerPort += _partName;
+        localMarkerPort += "/rpc";
+        controllerClient.open(localMarkerPort);
 
-    statePort.open(localStatePort);
-    commandPort.open(localCommandPort);
-    yarp::os::Network::connect(remoteStatePort,localStatePort);
-    yarp::os::Network::connect(localCommandPort,remoteCommandPort);
-    yarp::os::Network::connect(localWorldPort,remoteWorldPort);
-    yarp::os::Network::connect(localMarkerPort,remoteMarkerPort);
+        statePort.open(localStatePort);
+        commandPort.open(localCommandPort);
+        yarp::os::Network::connect(remoteStatePort,localStatePort);
+        yarp::os::Network::connect(localCommandPort,remoteCommandPort);
+        yarp::os::Network::connect(localWorldPort,remoteWorldPort);
+        yarp::os::Network::connect(localMarkerPort,remoteMarkerPort);
+        
+        //currentState = getDiscreteState();
+    } else { printf("Not connected to MoBeE model."); }
     
     // prepare the random number generator
     srand(time(0));
 }
-
-bool Learner::randomReach(yarp::os::ConstString markerName)
+Learner::~Learner()
 {
+    mutex.wait();
+    statePort.interrupt();
+    commandPort.interrupt();
+    controllerClient.interrupt();
+    worldClient.interrupt();
+}
+
+Point_d Learner::getRealState() {
+    yarp::os::Bottle* b = statePort.read();
+    std::list<double> bList;
+    for (int i=0; i<b->size(); i++)
+        bList.push_back(b->get(i).asDouble());
+    return Point_d(bList.size(),bList.begin(),bList.end());
+}
+
+Learner::State* Learner::getDiscreteState() {
+    Point_d q = getRealState();
+    State* nearestState = NULL;
+    if ( states.size() > 0 ) {
+        nearestState = *(states).begin();
+        for (std::list<State*>::iterator j=states.begin(); j!=states.end(); ++j) {
+            //std::cout << "    j: " << **j << "\t\t" << (q-**j).squared_length() << std::endl;
+            if ( (q-**j).squared_length() < (q-*nearestState).squared_length() ) {
+                nearestState = *j;
+            }
+        }
+    }
+    return nearestState;
+}
+
+bool Learner::deleteState( const State* s )
+{
+    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
+        for (std::list<State::TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
+            for (std::list< State::TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k) {
+                if (k->s_prime==s) {
+                    std::list< State::TransitionAction::S_Prime >::iterator K=k;
+                    (*j)->transition_belief.erase(k,++K);
+                }
+            }
+            if ((*j)->destination_state == s) {
+                std::list<State::TransitionAction*>::iterator J=j,deadTransition=j;
+                (*i)->transitionActions.erase(j,++J);
+                delete *deadTransition;
+            }
+        }
+        if (*i==s) {
+            std::list<State*>::iterator I=i,deadState=i;
+            states.erase(i,++I);
+            delete *deadState;
+        }
+    }
+    delete s;
+}
+
+void Learner::print(bool printAll)
+{
+    //printf("\n\n");
+    int stateCount=0;
+    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i)
+    {
+        printf("State %d, id: %p, q: ",stateCount++,*i);
+        std::cout << **i << std::endl;
+        
+        int actionCount=0;
+        for (std::list<State::TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
+        {
+            printf("  Action %d, destination state: %p\n   Transition belief: ",actionCount++,(*j)->destination_state);
+            for (std::list< State::TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
+            {
+                if (printAll) printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
+                else printf("%f (%d)   ", k->prob, k->num);
+            }
+            printf("\n");
+            //printf("\n Starting Action.....\n");
+            //(*j)->start();
+            //(*j)->stop();
+        }
+    }
+    printf("\n");
+}
+
+/*********************
+ *** PARENT ACTION ***
+ ********************/
+
+bool Learner::State::Action::threadInit() {
+    //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
+    if (learner->mutex.check()) {
+        printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
+        /*printf("\tmutex.check() succeeded... ");*/ return 1; }
+    else { /*printf("\tmutex.check() failed... ");*/ return 0; }
+}
+void Learner::State::Action::afterStart(bool s) { if (s) printf("Running Action..."); printf("\n"); }
+void Learner::State::Action::threadRelease() {
+    printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
+    learner->mutex.post();
+}
+
+/******************************
+*** STATE TRANSITION ACTION ***
+******************************/
+
+void Learner::State::TransitionAction::threadRelease() {
+    updateTransitionBelief(current_discrete_state);
+    Action::threadRelease();
+}
+
+double Learner::State::TransitionAction::updateTransitionBelief( const State* s )
+{
+    printf("\tUPDATING TRANSITION BELIEFS for the action: %p -> %p\n",parentState,this);
+    double delta = 0.0;
+    num++;
+    //printf("num: %d\n",num);
+    for ( std::list<State::TransitionAction::S_Prime>::iterator i=transition_belief.begin(); i!=transition_belief.end(); ++i){
+        if ( i->s_prime == s ) i->num++;
+        //printf("inum: %d\n",i->num);
+        double new_belief = (double)i->num/(double)num;
+        delta += fabs(new_belief - i->prob);
+        i->prob = new_belief;
+        printf("\ts_prime: %p happened %d times. transition prob is: %f\n",i->s_prime,i->num,i->prob);
+    }
+    return delta;
+}
+
+void Learner::State::TransitionAction::run()
+{
+    current_real_state = learner->getRealState();
+    current_discrete_state = learner->getDiscreteState();
+    printf("\tcurrent_discrete_state = %p\n",current_discrete_state);
+    
+    // activate the attractor at currentState
+    yarp::os::Bottle vec;
+    yarp::os::Bottle& attractorCommand = learner->commandPort.prepare();
+    attractorCommand.clear();
+    attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
+    for (Point_d::Cartesian_const_iterator i=current_discrete_state->cartesian_begin(); i!=current_discrete_state->cartesian_end(); ++i)
+        vec.addDouble(*i);
+    attractorCommand.addList() = vec;
+    learner->commandPort.writeStrict();
+    
+    // force the system toward the desired next state
+    yarp::os::Bottle& forceCommand = learner->commandPort.prepare();
+    forceCommand.clear();
+    vec.clear();
+    forceCommand.addVocab(yarp::os::Vocab::encode("qfor"));
+    f += 5.0 * (*destination_state-current_real_state);                 //TODO: Look into controlling jerk in partController
+    //f = 1000.0 * (*destination_state-current_real_state);
+    for (Vector_d::Cartesian_const_iterator i=f.cartesian_begin(); i!=f.cartesian_end(); ++i)
+        vec.addDouble(*i);
+    forceCommand.addList() = vec;
+    //printf("  forceCommand: %s\n",forceCommand.toString().c_str());
+    learner->commandPort.writeStrict();
+    
+    // check if the robot is still moving
+    yarp::os::Bottle query,reply;
+    query.addVocab(yarp::os::Vocab::encode("stpd"));
+    query.addDouble(1.0); // acceleration threshold
+    query.addDouble(1.0); // velocity threshold
+    learner->controllerClient.write(query,reply);
+    //printf("query: %s\n",query.toString().c_str());
+    //printf("reply: %s\n",reply.toString().c_str());
+    
+    // stop if the robot is no longer moving
+    if (reply.get(0).asInt()==1) {
+        printf("\n\n\n\n\n*** ROBOT STOPPED ***\n\n\n\n\n\n");
+        stop();
+    }
+    
+    // stop if the robot changes state
+    else if ( current_discrete_state != parentState ) {
+        printf("STATE TRANSITION OCCURRED\n");
+        stop();
+        yarp::os::Time::delay(0.5);
+    }
+}
+
+/********************
+ *** REACH ACTION ***
+ *******************/
+
+void Learner::State::ReachAction::run()
+{/*
     // estimate limits of the reachable workspace
     double x_min = -0.5,
     x_max = 0.0,
@@ -65,7 +254,7 @@ bool Learner::randomReach(yarp::os::ConstString markerName)
     
     // position vector and normal of the hand marker
     double pMarker[3],nMarker[3],err[6];
-
+    
     // gains for the control signal
     double  forceMagnitude = 10000.0,
     torqueMagnitude = 10000.0;
@@ -87,7 +276,7 @@ bool Learner::randomReach(yarp::os::ConstString markerName)
         cmd.addDouble(p[0]);
         cmd.addDouble(p[1]);
         cmd.addDouble(p[2]);
-        worldPortClient.write(cmd,rsp);
+        worldClient.write(cmd,rsp);
         printf("\ncommand: %s\n", cmd.toString().c_str());
         printf("  response: %s\n\n", rsp.toString().c_str());
         
@@ -103,7 +292,7 @@ bool Learner::randomReach(yarp::os::ConstString markerName)
         while (count < 1000)
         {
             // get the state of the hand
-            worldPortClient.write(get,state);
+            worldClient.write(get,state);
             pMarker[0] = state.get(0).asDouble();
             pMarker[1] = state.get(1).asDouble();
             pMarker[2] = state.get(2).asDouble();
@@ -171,194 +360,9 @@ bool Learner::randomReach(yarp::os::ConstString markerName)
         // remove the sphere from the model
         cmd.addVocab(yarp::os::Vocab::encode("rm"));
         cmd.addString(objectName);
-        worldPortClient.write(cmd,rsp);
+        worldClient.write(cmd,rsp);
         printf("\ncommand: %s\n", cmd.toString().c_str());
         printf("  response: %s\n\n", rsp.toString().c_str());
         
     }
-	
-	return 1;
-}
-
-bool Learner::takeRandomAction()
-{
-    if (!currentState) {
-        printf("takeRandomAction FAILED!!\n");
-        return false;
-    }
-    
-    // select a random action
-    std::list<State::TransitionAction>::iterator a;
-    int actionIdx = rand() % (currentState->transitionActions.size());
-    a = currentState->transitionActions.begin();
-    for (int j=0; j<actionIdx; j++)
-        a++;
-    currentAction = &*a;
-    printf("\nTaking random transition action from: %p to: %p\n", currentState, a->destination_state);
-    
-    // while action is not complete
-    State* startingState = currentState;
-    int num = 0;
-    
-    while ( num < 20 && currentState == startingState ) {
-        printf("... %d ", num);
-        num++;
-        usleep(1000000);
-    }
-    
-    printf("\nACTION ");
-    
-    if ( currentState == startingState ) {
-        printf("TIMED OUT...\n");
-    } else if ( currentState == a->destination_state ) {
-        printf("SUCCEEDED...\n");
-    } else {
-        printf("ENDED UNEXPECTEDLY...\n");
-    }
-    
-    double deltaBelief = updateTransitionBelief( &*a, currentState );
-    printf("Changed transtition belief: %f\n",deltaBelief);
-    
-    return true;
-}
-
-double Learner::updateTransitionBelief( State::TransitionAction* a, State* s )
-{
-    printf("UPDATING TRANSITION BELIEFS for the action: %p -> %p\n");
-    double delta = 0.0;
-    a->num++;
-    
-    for ( std::list<State::TransitionAction::S_Prime>::iterator i=a->transition_belief.begin(); i!=a->transition_belief.end(); ++i){
-        if ( i->s_prime == s ) i->num++;
-        double new_belief = (double)i->num/a->num;
-        delta += fabs(new_belief - i->prob);
-        i->prob = new_belief;
-        printf("  s_prime: %p happened %d times. transition prob is: %f\n",i->s_prime,i->num,i->prob);
-    }
-
-    return delta;
-}
-
-bool Learner::threadInit()
-{
-	printf("Starting Reinforcement Learner\n");
-	return true;
-}
-
-//called by start after threadInit, s is true iff the thread started successfully
-void Learner::afterStart(bool s)
-{
-	if (!s)
-		printf("Reinforcement Learner did not start\n");
-}
-
-void Learner::run()
-{
-    //printf("\nRUN\n\n");
-    
-    // get the current robot state and put it in a Point_d
-    yarp::os::Bottle* b = statePort.read();
-    std::list<double> bList;
-    for (int i=0; i<b->size(); i++)
-        bList.push_back(b->get(i).asDouble());
-    
-    // The current real-valued state from the robot's continuous state space
-    Point_d q(bList.size(),bList.begin(),bList.end());
-    
-    //std::cout << "  q: " << q << std::endl;
-    
-    
-    
-    // set 'currentState' based on the nearest attractor to the actual robot state q
-    State* nearestState = NULL;
-    if ( states.size() > 0 ) {
-        nearestState = *states.begin();
-        for (std::list<State*>::iterator j=states.begin(); j!=states.end(); ++j) {
-            //std::cout << "    j: " << **j << "\t\t" << (q-**j).squared_length() << std::endl;
-            if ( (q-**j).squared_length() < (q-*nearestState).squared_length() ) {
-                nearestState = *j;
-            }
-        }
-    }
-    currentState = nearestState;
-    
-    //std::cout << "  Q: " << *currentState << "\t\t" << (q-*currentState).squared_length() << std::endl;
-    
-    // a vector for both the following commands
-    yarp::os::Bottle vec;
-    
-    // activate the attractor at currentState
-    yarp::os::Bottle& attractorCommand = commandPort.prepare();
-    attractorCommand.clear();
-    attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
-    for (Point_d::Cartesian_const_iterator i=nearestState->cartesian_begin(); i!=nearestState->cartesian_end(); ++i)
-        vec.addDouble(*i);
-    attractorCommand.addList() = vec;
-    commandPort.writeStrict();
-    //printf("  attractorCommand: %s\n",attractorCommand.toString().c_str());
-    
-    // force the system toward the desired next state
-    yarp::os::Bottle& forceCommand = commandPort.prepare();
-    forceCommand.clear();
-    vec.clear();
-    forceCommand.addVocab(yarp::os::Vocab::encode("qfor"));
-    if ( currentAction != NULL /*&& currentState != currentAction->destination_state*/) {
-        Vector_d f = 1000.0 * (*(currentAction->destination_state)-q);
-        for (Vector_d::Cartesian_const_iterator i=f.cartesian_begin(); i!=f.cartesian_end(); ++i)
-            vec.addDouble(*i);
-    } else {
-        for (Vector_d::Cartesian_const_iterator i=q.cartesian_begin(); i!=q.cartesian_end(); ++i)
-            vec.addDouble(0.0);
-    }
-    forceCommand.addList() = vec;
-    //printf("  forceCommand: %s\n",forceCommand.toString().c_str());
-    commandPort.writeStrict();
-}
-
-void Learner::threadRelease()
-{
-	printf("\n*** Goodbye from Reinforcement Learner ***\n\n");
-}
-
-bool Learner::deleteState( const State* s )
-{
-    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
-        for (std::list<State::TransitionAction>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
-            for (std::list< State::TransitionAction::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k) {
-                if (k->s_prime==s) {
-                    std::list< State::TransitionAction::S_Prime >::iterator K=k;
-                    j->transition_belief.erase(k,++K);
-                }
-            }
-            if (j->destination_state == s) {
-                std::list<State::TransitionAction>::iterator J=j;
-                (*i)->transitionActions.erase(j,++J);
-            }
-        }
-        if (*i==s) {
-            std::list<State*>::iterator I=i;
-            states.erase(i,++I);
-        }
-    }
-    delete s;
-}
-
-void Learner::print(bool printAll)
-{
-    int stateCount=0;
-    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i)
-    {
-        printf("State %d: %p\n",stateCount++,*i);
-        int actionCount=0;
-        for (std::list<State::TransitionAction>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
-        {
-            printf("  Action %d, %p: ",actionCount++,j->destination_state);
-            for (std::list< State::TransitionAction::S_Prime >::iterator k=j->transition_belief.begin(); k!=j->transition_belief.end(); ++k)
-            {
-                if (printAll) printf("(%p, %f, %d) ", k->s_prime, k->prob, k->num);
-                else printf("%f (%d)   ", k->prob, k->num);
-            }
-            printf("\n");
-        }
-    }
-}
+*/}

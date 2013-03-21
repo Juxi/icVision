@@ -89,6 +89,9 @@ int main(int argc, char *argv[])
         {
             // get the state of the hand
             right_arm_rpc.write(get,state);
+            printf("\nget: %s\n", get.toString().c_str());
+            printf("  state: %s\n\n", state.toString().c_str());
+            
             pHand[0] = state.get(0).asDouble();
             pHand[1] = state.get(1).asDouble();
             pHand[2] = state.get(2).asDouble();
