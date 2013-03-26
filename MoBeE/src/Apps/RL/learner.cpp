@@ -56,6 +56,7 @@ Learner::Learner( const char* _robotName, const char* _partName, bool connect ) 
         else for (int i=0; i<list.size(); i++) {
             markers.push_back( list.get(i).asString() );
         }
+        printf("Found %d markers.\n",markers.size());
         
         //currentState = getDiscreteState();
     } else { printf("Not connected to MoBeE model."); }
@@ -263,7 +264,7 @@ void Learner::State::ReachAction::run()
     Vector  n(state.get(3).asDouble(),
               state.get(4).asDouble(),
               state.get(5).asDouble());
-    Point   target(p+10*n);
+    Point   target(p+0.1*n);
     
     // visualize the target point in the world model
     yarp::os::Bottle worldCmd, worldRsp;
@@ -288,8 +289,11 @@ void Learner::State::ReachAction::run()
         
     // reach to the point p for an arbitrary amount of time
     int count = 0;
-    while (count < 1000)
+    yarp::os::Bottle robotStopped;
+    do
     {
+        printf("reaching ... \n");
+        
         // get the state of the hand
         state.clear();
         learner->controllerClient.write(get,state);
@@ -322,9 +326,6 @@ void Learner::State::ReachAction::run()
         printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
         learner->commandPort.writeStrict();
         
-        usleep(20000);
-        count++;
-        
         /*
         // angular error between hand normal and error vector (radians)
         //double theta = acos( err[0]*nHand[0] + err[1]*nHand[1] + err[2]*nHand[2] );
@@ -346,8 +347,23 @@ void Learner::State::ReachAction::run()
         //cmd.addDouble(torqueMagnitude*t[1]);
         //cmd.addDouble(torqueMagnitude*t[2]);
          */
+        
+        // check if the robot is still moving
+        yarp::os::Bottle query;
+        query.addVocab(yarp::os::Vocab::encode("stpd"));
+        query.addDouble(1.0); // acceleration threshold
+        query.addDouble(1.0); // velocity threshold
+        learner->controllerClient.write(query,robotStopped);
+        //printf("query: %s\n",query.toString().c_str());
+        printf("robotStopped(): %s\n",robotStopped.toString().c_str());
+        
+        usleep(20000);
+        count++;
       
-    }
+    } while ( robotStopped.get(0).asInt()==0 );
+    
+    printf("\n\n\n\n\n*** ROBOT STOPPED ***\n\n\n\n\n\n");
+    stop();
     
     // remove the target from the model
     worldCmd.clear();

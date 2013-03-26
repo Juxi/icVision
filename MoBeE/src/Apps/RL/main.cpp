@@ -5,7 +5,9 @@
 bool takeRandomAction(Learner& learner)
 {
     Learner::State* s = learner.getDiscreteState();
-    if (1 /*rand()%2*/ )
+    
+    int transitionIdx,reachIdx;
+    if ( rand()%2 )
     {   // Try a random state transition
         std::list<Learner::State::TransitionAction*>::iterator a = s->transitionActions.begin();
         int idx = rand()%(s->transitionActions.size());
@@ -14,13 +16,15 @@ bool takeRandomAction(Learner& learner)
     }
     else
     {   // Try a random reach
-        std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
-        int idx = rand()%(s->reachActions.size());
-        for ( int i=0; i<idx; i++ ) a++;
         
-        // select a random point to reach to
-        
-        (*a)->start();
+        printf("Reach Actions: %d\n", s->reachActions.size());
+        if ( s->reachActions.size() > 0 ) {
+            std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
+            int idx = rand()%(s->reachActions.size());
+            for ( int i=0; i<idx; i++ ) a++;
+            
+            (*a)->start();
+        }
     }
     
     
@@ -62,9 +66,10 @@ int main(int argc, char *argv[])
     {
         printf("\n*****************************************************************************\n\n");
         
-        takeRandomAction(torso_learner);
-        takeRandomAction(left_arm_learner);
+        //takeRandomAction(torso_learner);
+        //takeRandomAction(left_arm_learner);
         takeRandomAction(right_arm_learner);
+        
         
         count++;
         yarp::os::Time::delay(1);
