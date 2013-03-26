@@ -2,6 +2,30 @@
 #include <time.h>
 #include "learner.h"
 
+bool takeRandomAction(Learner& learner)
+{
+    Learner::State* s = learner.getDiscreteState();
+    if (1 /*rand()%2*/ )
+    {   // Try a random state transition
+        std::list<Learner::State::TransitionAction*>::iterator a = s->transitionActions.begin();
+        int idx = rand()%(s->transitionActions.size());
+        for ( int i=0; i<idx; i++ ) a++;
+        (*a)->start();
+    }
+    else
+    {   // Try a random reach
+        std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
+        int idx = rand()%(s->reachActions.size());
+        for ( int i=0; i<idx; i++ ) a++;
+        
+        // select a random point to reach to
+        
+        (*a)->start();
+    }
+    
+    
+}
+
 int main(int argc, char *argv[])
 {
     // prepare the random number generator
@@ -34,28 +58,13 @@ int main(int argc, char *argv[])
     }
     
     int count = 0;
-    while ( count < 100) {
-        
+    while ( count < 100)
+    {
         printf("\n*****************************************************************************\n\n");
         
-        Learner::State* ts = torso_learner.getDiscreteState();
-        Learner::State* ls = left_arm_learner.getDiscreteState();
-        Learner::State* rs = right_arm_learner.getDiscreteState();
-        
-        std::list<Learner::State::TransitionAction*>::iterator p = ts->transitionActions.begin();
-        std::list<Learner::State::TransitionAction*>::iterator q = ls->transitionActions.begin();
-        std::list<Learner::State::TransitionAction*>::iterator r = rs->transitionActions.begin();
-        int j=0,
-            tIdx = rand() % (ts->transitionActions.size()),
-            lIdx = rand() % (ls->transitionActions.size()),
-            rIdx = rand() % (rs->transitionActions.size());
-        while (j < tIdx) { p++; j++; } j=0;
-        while (j < lIdx) { q++; j++; } j=0;
-        while (j < rIdx) { r++; j++; }
-        
-        (*p)->start();
-        (*q)->start();
-        (*r)->start();
+        takeRandomAction(torso_learner);
+        takeRandomAction(left_arm_learner);
+        takeRandomAction(right_arm_learner);
         
         count++;
         yarp::os::Time::delay(1);

@@ -11,11 +11,17 @@
 #define LEARNER_H_
 
 #include <yarp/os/all.h>
+#include <CGAL/Cartesian.h>
 #include <CGAL/Cartesian_d.h>
+#include <CGAL/Point_3.h>
+#include <CGAL/Vector_3.h>
 #include <list>
 
 typedef CGAL::Cartesian_d<double>::Point_d Point_d;
 typedef CGAL::Cartesian_d<double>::Vector_d Vector_d;
+typedef CGAL::Point_3< CGAL::Cartesian<double> > Point;
+typedef CGAL::Vector_3< CGAL::Cartesian<double> > Vector;
+
 
 class Learner
 {
@@ -78,15 +84,16 @@ public:
         /* These actions reach for objects, and are responsible for rewarding the learner. In this way the learner learns which 
            states (roadmap nodes) are the good ones from which to reach for objects in the environment */
         public:
-            ReachAction( Learner* l, State* p, int rate ) : Action(l,p,rate) {}
+            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate), marker(m) {}
             ~ReachAction(){}
         private:
+            yarp::os::ConstString marker;
             void run();
         friend class State;
         friend class Learner;
         };
         
-        State(Point_d q, Learner* l) : Point_d( q.dimension(), q.cartesian_begin(), q.cartesian_end()), reachAction(l,this,200)
+        State(Point_d q, Learner* l) : Point_d( q.dimension(), q.cartesian_begin(), q.cartesian_end())
         {
             l->states.push_back(this);
             //if (parent->states.size()==1) parent->currentState = this;
@@ -97,17 +104,31 @@ public:
                 for (std::list<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j )
                     if (*i!=this) (*j)->transition_belief.push_back(TransitionAction::S_Prime(this,0.0,0));
                 
+                TransitionAction    *thereToHere = new TransitionAction(l,*i,this),
+                                    *hereToThere = new TransitionAction(l,this,*i);
+                
                 // append actions 'go to other state' (from here)
-                if (*i!=this) transitionActions.push_back(new TransitionAction(l,this,*i));
+                if (*i!=this) {
+                    transitionActions.push_back(hereToThere);
+                    //actions.push_back(hereToThere);
+                }
                 
                 // append actions 'go to this state' (from elsewhere)
-                if (*i!=this) (*i)->transitionActions.push_back(new TransitionAction(l,*i,this));
+                if (*i!=this){
+                    (*i)->transitionActions.push_back(thereToHere);
+                    //(*i)->actions.push_back(thereToHere);
+                }
             }
             
+            for (std::list<yarp::os::ConstString>::iterator i = l->markers.begin(); i!= l->markers.end(); ++i )
+            {
+                reachActions.push_back(new ReachAction(l,*i,this,200));
+            }
         }
         ~State(){}
-        std::list<TransitionAction*> transitionActions;
-        ReachAction reachAction;
+        //std::list<Action*> actions;
+        std::list<TransitionAction*> transitionActions; // Instead of keeping multiple lists here i could dynamic_cast...  dunno
+        std::list<ReachAction*> reachActions;
     friend class Learner;
     };
     
@@ -134,8 +155,12 @@ public:
 private:
     
     yarp::os::Network network;
-    yarp::os::BufferedPort<yarp::os::Bottle> statePort,commandPort;
-    yarp::os::RpcClient controllerClient,worldClient;
+    yarp::os::BufferedPort<yarp::os::Bottle>    statePort,
+                                                commandPort;
+    yarp::os::RpcClient controllerClient,
+                        worldClient;
+    
+    std::list< yarp::os::ConstString > markers;
     
 };
 #endif
