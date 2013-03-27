@@ -110,7 +110,7 @@ void Controller::handler( yarp::os::Bottle* b )
                     break;
                 }
                 setFRPC( &jointSpaceForce );
-                //printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
+                printf("Set joint-space force from op-space!!! (%s)\n", jointSpaceForce.toString().c_str());
                 break;
             default:
                 printf("Controller received unknown command! %s", b->toString().c_str());

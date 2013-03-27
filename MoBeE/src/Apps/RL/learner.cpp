@@ -155,8 +155,11 @@ void Learner::print(bool printAll)
 bool Learner::State::Action::threadInit() {
     //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
     if (learner->mutex.check()) {
+        /*printf("\tmutex.check() succeeded... ");*/
         printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
-        /*printf("\tmutex.check() succeeded... ");*/ return 1; }
+        timeStarted = yarp::os::Time::now();
+        return 1;
+    }
     else { /*printf("\tmutex.check() failed... ");*/ return 0; }
 }
 void Learner::State::Action::afterStart(bool s) { if (s) printf("Running Action..."); printf("\n"); }
@@ -264,7 +267,7 @@ void Learner::State::ReachAction::run()
     Vector  n(state.get(3).asDouble(),
               state.get(4).asDouble(),
               state.get(5).asDouble());
-    Point   target(p+0.1*n);
+    Point   target(p+0.2*n);
     
     // visualize the target point in the world model
     yarp::os::Bottle worldCmd, worldRsp;
@@ -281,16 +284,13 @@ void Learner::State::ReachAction::run()
     // get the name of the newly inserted object
     yarp::os::ConstString objectName = worldRsp.get(0).asString();
     
-    
     // gains for the control signal
     double  forceMagnitude = 10000.0,
             torqueMagnitude = 10000.0;
-    
         
     // reach to the point p for an arbitrary amount of time
-    int count = 0;
-    yarp::os::Bottle robotStopped;
-    do
+    //int count = 0;
+    while (true)
     {
         printf("reaching ... \n");
         
@@ -307,7 +307,7 @@ void Learner::State::ReachAction::run()
         // error vector from hand to target
         Vector err = target - p;
         
-        yarp::os::Bottle opSpaceForceAndTorque;
+        yarp::os::Bottle& opSpaceForceAndTorque = learner->commandPort.prepare();
         opSpaceForceAndTorque.clear();
         opSpaceForceAndTorque.addVocab(yarp::os::Vocab::encode("opsp"));
         opSpaceForceAndTorque.addString(marker);
@@ -351,18 +351,28 @@ void Learner::State::ReachAction::run()
         // check if the robot is still moving
         yarp::os::Bottle query;
         query.addVocab(yarp::os::Vocab::encode("stpd"));
-        query.addDouble(1.0); // acceleration threshold
-        query.addDouble(1.0); // velocity threshold
+        query.addDouble(100.0); // acceleration threshold
+        query.addDouble(5.0); // velocity threshold
+        yarp::os::Bottle robotStopped;
         learner->controllerClient.write(query,robotStopped);
-        //printf("query: %s\n",query.toString().c_str());
-        printf("robotStopped(): %s\n",robotStopped.toString().c_str());
         
-        usleep(20000);
-        count++;
+        //printf("query: %s\n",query.toString().c_str());
+        //printf("robotStopped(): %s\n",robotStopped.toString().c_str());
+        
+        yarp::os::Time::delay(0.2);
+        
+        if ( yarp::os::Time::now() - timeStarted > timeout ) {
+            printf("Reach timed out :-(\n");
+            break;
+        } else if ( robotStopped.get(0).asInt() == 1 ) {
+            printf("Robot stopped moving\n");
+            //check for success here?
+            break;
+        }
       
-    } while ( robotStopped.get(0).asInt()==0 );
+    }
     
-    printf("\n\n\n\n\n*** ROBOT STOPPED ***\n\n\n\n\n\n");
+    printf("Reach Action Returned!!!\n");
     stop();
     
     // remove the target from the model

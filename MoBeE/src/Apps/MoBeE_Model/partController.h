@@ -35,8 +35,10 @@ public:
     //void    doControl( bool b ) { controllerIsOn = b; }
     bool    isStopped( double aThresh, double vThresh )
     {
-        printf("aMag: %f, vMag: %f\n",aMag,vMag);
-        return aMag < aThresh && vMag < vThresh; }
+        yarp::os::Time::delay(0.5);
+        //printf("aMag: %f, vMag: %f\n",aMag,vMag);
+        return aMag < aThresh && vMag < vThresh;
+    }
     
 private:
 	

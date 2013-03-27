@@ -34,11 +34,12 @@ public:
         /* This abstract class provides a generic action that runs in a thread and is protected by a semaphor
            such that only one action can be running (per learner) at a time */
         public:
-            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), num(0), val(0.0) {}
+            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), timeStarted(0.0), num(0), val(0.0) {}
             ~Action(){}
         protected:
             Learner*        learner;
             State*          parentState;
+            double          timeStarted;
             int             num;    // number of times this action has been tried
             double          val; // Q value of this action
             virtual bool    threadInit();
@@ -84,10 +85,12 @@ public:
         /* These actions reach for objects, and are responsible for rewarding the learner. In this way the learner learns which 
            states (roadmap nodes) are the good ones from which to reach for objects in the environment */
         public:
-            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate), marker(m) {}
+            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate), marker(m), timeout(10.0), target(0,0,0) {}
             ~ReachAction(){}
         private:
             yarp::os::ConstString marker;
+            double timeout;
+            Point target;
             void run();
         friend class State;
         friend class Learner;

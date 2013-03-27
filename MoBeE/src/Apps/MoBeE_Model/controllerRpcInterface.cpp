@@ -90,13 +90,13 @@ bool ControllerRpcInterface::handler( const yarp::os::Bottle& command, yarp::os:
 
 bool ControllerRpcInterface::isStopped( const yarp::os::Bottle& cmd, yarp::os::Bottle& reply )
 {
-    printf("Robot is stopped? - %s\n",cmd.toString().c_str());
+    //printf("Robot is stopped? - %s\n",cmd.toString().c_str());
     if ( controller->isStopped( cmd.get(1).asDouble(), cmd.get(2).asDouble() ) )
         reply.addInt(1);
     else
         reply.addInt(0);
     
-    printf("Reply: %s\n",reply.toString().c_str());
+    //printf("Reply: %s\n",reply.toString().c_str());
     return true;
 }
 

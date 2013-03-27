@@ -16,18 +16,14 @@ bool takeRandomAction(Learner& learner)
     }
     else
     {   // Try a random reach
-        
         printf("Reach Actions: %d\n", s->reachActions.size());
         if ( s->reachActions.size() > 0 ) {
             std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
             int idx = rand()%(s->reachActions.size());
             for ( int i=0; i<idx; i++ ) a++;
-            
             (*a)->start();
         }
     }
-    
-    
 }
 
 int main(int argc, char *argv[])
@@ -64,7 +60,7 @@ int main(int argc, char *argv[])
     int count = 0;
     while ( count < 100)
     {
-        printf("\n*****************************************************************************\n\n");
+        //printf("\n*****************************************************************************\n\n");
         
         //takeRandomAction(torso_learner);
         //takeRandomAction(left_arm_learner);
@@ -72,7 +68,7 @@ int main(int argc, char *argv[])
         
         
         count++;
-        yarp::os::Time::delay(1);
+        yarp::os::Time::delay(.5);
     }
     
     torso_learner.mutex.wait();

@@ -344,7 +344,7 @@ void PartController::run()
         }
 	} //else { printf("got no bottle!\n"); }
 	
-    yarp::os::Bottle view0,view1,view2,view3,view4,view5,view6,view7;
+    yarp::os::Bottle view0,view1,view2,view3,view4,view5,view6,view7,view8;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -404,6 +404,7 @@ void PartController::run()
                 view5.addDouble(x[i]);
                 view6.addDouble(- c[i]*v[i]);
                 view7.addDouble(ctrl[i]);
+                view8.addDouble(a[i]);
             }
         }
         
@@ -411,20 +412,23 @@ void PartController::run()
         aMag = sqrt(aMag);
         vMag = sqrt(vMag);
         
-        //printf("x:    %s\n", view5.toString().c_str());
-        //printf("fX:   %s\n", view0.toString().c_str());
-        
-        //printf("fLim: %s\n", view1.toString().c_str());
-        //printf("fCst: %s\n", view2.toString().c_str());
-        //printf("fFld: %s\n", view3.toString().c_str());
-        //printf("fRPC: %s\n", view4.toString().c_str());
-        
-        //printf("fd:   %s\n", view6.toString().c_str());
-        //printf("cmd:  %s\n", view7.toString().c_str());
-        //printf("\n");
-        
         if ( controllerIsOn )
+        {
+            //printf("x:    %s\n", view5.toString().c_str());
+            //printf("fX:   %s\n", view0.toString().c_str());
+            
+            //printf("fLim: %s\n", view1.toString().c_str());
+            //printf("fCst: %s\n", view2.toString().c_str());
+            //printf("fFld: %s\n", view3.toString().c_str());
+            //printf("fRPC: %s\n", view4.toString().c_str());
+            
+            //printf("fd:   %s\n", view6.toString().c_str());
+            //printf("a:    %s\n", view8.toString().c_str());
+            //printf("cmd:  %s\n", view7.toString().c_str());
+            //printf("\n");
+        
             vel->velocityMove( ctrl );
+        }
         
         statePort.write();
         
