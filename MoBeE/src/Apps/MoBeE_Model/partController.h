@@ -36,7 +36,7 @@ public:
     bool    isStopped( double aThresh, double vThresh )
     {
         yarp::os::Time::delay(0.5);
-        //printf("aMag: %f, vMag: %f\n",aMag,vMag);
+        printf("aMag: %f, vMag: %f\n",aMag,vMag);
         return aMag < aThresh && vMag < vThresh;
     }
     

@@ -344,7 +344,7 @@ void PartController::run()
         }
 	} //else { printf("got no bottle!\n"); }
 	
-    yarp::os::Bottle view0,view1,view2,view3,view4,view5,view6,view7,view8;
+    yarp::os::Bottle view0,view1,view2,view3,view4,view5,view6,view7,view8,view9;
 
 	for ( int j=0; j<numJoints; j++ )
 		q0[j] = q1[j];
@@ -367,7 +367,7 @@ void PartController::run()
             normPose.addDouble( (q1[i]-min[i])/(max[i]-min[i]) );
             
             // update error vector (to attractor) and velocity
-            e[i] = w[i]*(x[i] - q1[i]);
+            e[i] = x[i] - q1[i];
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
             
             // compute sigmoidal spring force
@@ -380,11 +380,11 @@ void PartController::run()
       
             // compute acceleration (should squash this too?)
             a[i] =  - c[i]*v[i]
-                    + fX[i]
+                    + w[i]*fX[i]
                     + fLim[i]
                     + fCst[i]
                     + fFld[i]
-                    + fRPC[i]
+                    + w[i]*fRPC[i]
                     ;
             
             // compute magnitudes of a and v
@@ -395,7 +395,7 @@ void PartController::run()
             ctrl[i] = v[i] + a[i] * getRate()/1000.0;
             if ( ctrl[i]*ctrl[i] < 0.1 ) ctrl[i] = 0.0;
             
-            if (i<7) {
+            //if (i<7) {
                 view0.addDouble(fX[i]);
                 view1.addDouble(fLim[i]);
                 view2.addDouble(fCst[i]);
@@ -405,7 +405,8 @@ void PartController::run()
                 view6.addDouble(- c[i]*v[i]);
                 view7.addDouble(ctrl[i]);
                 view8.addDouble(a[i]);
-            }
+                view9.addDouble(e[i]);
+            //}
         }
         
         // determine if the robot is moving
@@ -425,6 +426,7 @@ void PartController::run()
             //printf("fd:   %s\n", view6.toString().c_str());
             //printf("a:    %s\n", view8.toString().c_str());
             //printf("cmd:  %s\n", view7.toString().c_str());
+            //printf("err:  %s\n", view9.toString().c_str());
             //printf("\n");
         
             vel->velocityMove( ctrl );

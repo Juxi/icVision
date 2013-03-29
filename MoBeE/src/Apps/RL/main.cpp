@@ -2,26 +2,48 @@
 #include <time.h>
 #include "learner.h"
 
-bool takeRandomAction(Learner& learner)
+Learner::State::Action* takeRandomAction(Learner& learner)
 {
     Learner::State* s = learner.getDiscreteState();
+    printf("CURRENT STATE: %p\n",s);
     
-    int transitionIdx,reachIdx;
-    if ( rand()%2 )
-    {   // Try a random state transition
+    //int transitionIdx,reachIdx;
+    if ( !true && rand()%2 )
+    {
+        // Try a random state transition
+        //int idx = rand() % s->transitionActions.size();
+        //printf("trying action %d\n",idx);
+        
+        
         std::list<Learner::State::TransitionAction*>::iterator a = s->transitionActions.begin();
-        int idx = rand()%(s->transitionActions.size());
-        for ( int i=0; i<idx; i++ ) a++;
-        (*a)->start();
+        Learner::State::TransitionAction* leastTriedAction = *s->transitionActions.begin();
+        for ( a = s->transitionActions.begin(); a != s->transitionActions.end(); ++a ) //a++;
+        {
+            std::pair<const Learner::State*,double> belief = (*a)->belief();
+            printf("  action: %p, %d tries, destination: %p it leads to state: %p with prob. %f\n",*a,(*a)->isTried(),(*a)->destination(),belief.first,belief.second);
+            if ( (*a)->isTried() < leastTriedAction->isTried() )
+                leastTriedAction = *a;
+        } 
+        
+        
+        printf("RUNNING LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
+        leastTriedAction->start();
+        
+        return leastTriedAction;
     }
     else
     {   // Try a random reach
-        printf("Reach Actions: %d\n", s->reachActions.size());
+        //printf("Reach Actions: %d\n", s->reachActions.size());
+        
+        printf("RUNNING A REACH\n");
         if ( s->reachActions.size() > 0 ) {
             std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
-            int idx = rand()%(s->reachActions.size());
-            for ( int i=0; i<idx; i++ ) a++;
-            (*a)->start();
+            //int idx = rand()%(s->reachActions.size());
+            //for ( int i=0; i<idx; i++ ) a++;
+            
+            Point p(-(double)rand()/RAND_MAX,(double)rand()/RAND_MAX-0.5,(double)rand()/RAND_MAX-0.5);
+            (*a)->reach(p);
+            return *a;
         }
     }
 }
@@ -37,7 +59,7 @@ int main(int argc, char *argv[])
     Learner left_arm_learner("icubSim","left_arm",true);
 
     // pick some random states (poses) and add them to the state space of the learners
-    for (int i=0; i<4; i++)
+    for (int i=0; i<5; i++)
     {
         std::list<double> tState;
         for (int j=0; j<3; j++) tState.push_back((double)rand()/RAND_MAX);
@@ -64,20 +86,26 @@ int main(int argc, char *argv[])
         
         //takeRandomAction(torso_learner);
         //takeRandomAction(left_arm_learner);
-        takeRandomAction(right_arm_learner);
+        
+        
+        printf("\nMain: COUNT = %d\n",count);
+        Learner::State::Action* a = takeRandomAction(right_arm_learner);
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        
+        
         
         
         count++;
-        yarp::os::Time::delay(.5);
     }
     
     torso_learner.mutex.wait();
     right_arm_learner.mutex.wait();
     left_arm_learner.mutex.wait();
     
-    printf("Torso Learner:\n");     torso_learner.print(true);
+    //printf("Torso Learner:\n");     torso_learner.print(true);
     printf("Right Arm Learner:\n"); right_arm_learner.print(true);
-    printf("Left Arm Learner:\n");  left_arm_learner.print(true);
+    //printf("Left Arm Learner:\n");  left_arm_learner.print(true);
     
     
     printf("All finished\n");

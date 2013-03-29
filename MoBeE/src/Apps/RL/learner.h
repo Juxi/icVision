@@ -34,14 +34,20 @@ public:
         /* This abstract class provides a generic action that runs in a thread and is protected by a semaphor
            such that only one action can be running (per learner) at a time */
         public:
-            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), timeStarted(0.0), num(0), val(0.0) {}
+            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), timeStarted(0.0), timeout(10.0), num(0), value(0.0), reward(0.0) {}
             ~Action(){}
+            int     isTried() { return num; }
+            bool    isStable();
+            
         protected:
             Learner*        learner;
             State*          parentState;
-            double          timeStarted;
+            double          timeStarted,timeout;
             int             num;    // number of times this action has been tried
-            double          val; // Q value of this action
+            double          value;  // value of this action under the current policy
+            double          reward; 
+            
+            void            relax();
             virtual bool    threadInit();
             virtual void    afterStart(bool s);
             virtual void    threadRelease();
@@ -52,13 +58,15 @@ public:
         /* These actions move the attractor in the MoBeE model. This corresponds to position control, and is used to implement deliberate
            motion planning through a roadmap graph (the nodes of which are "States") using reinforcement learning */
         public:
-            TransitionAction( Learner* l, State* a, State* b, int rate=200 ) : Action(l,a,rate), destination_state(b), f(*b-*b) {
+            TransitionAction( Learner* l, State* a, State* b, int rate=500 ) : Action(l,a,rate), destination_state(b) {
                 for (std::list<State*>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i ) {
                     transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
                 //printf("New Action destination: %p\n", destination_state);
             }
             ~TransitionAction(){}
+            const State* destination() { return destination_state; }
+            std::pair<const State*,double> belief();
         private:
             struct S_Prime
             {
@@ -68,14 +76,12 @@ public:
                 S_Prime(State* s, double p, int n) : s_prime(s), prob(p), num(n){}
             };
             std::list< S_Prime > transition_belief;
-            Point_d current_real_state;
-            const State* current_discrete_state;
             const State* destination_state;
-            Vector_d f;
             
-            void threadRelease();
-            double updateTransitionBelief( const State* endState );
-            void run();
+            bool    threadInit();
+            void    threadRelease();
+            double  updateTransitionBelief( const State* sPrime );
+            void    run();
         friend class State;
         friend class Learner;
         };
@@ -85,12 +91,24 @@ public:
         /* These actions reach for objects, and are responsible for rewarding the learner. In this way the learner learns which 
            states (roadmap nodes) are the good ones from which to reach for objects in the environment */
         public:
-            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate), marker(m), timeout(10.0), target(0,0,0) {}
+            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate),
+                                                                                    marker(m),
+                                                                                    target(0,0,0),
+                                                                                    forceGain(1.0),
+                                                                                    torqueGain(1.0),
+                                                                                    forceTimeout(timeout/2){}
             ~ReachAction(){}
+            void reach(Point p) { target = p; start(); }
         private:
             yarp::os::ConstString marker;
-            double timeout;
             Point target;
+            yarp::os::ConstString mobeeObjectName;
+            double forceGain,torqueGain;
+            double forceTimeout;
+            
+            void sendForceCommand(bool withTorque=false);
+            bool threadInit();
+            void threadRelease();
             void run();
         friend class State;
         friend class Learner;
