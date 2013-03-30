@@ -149,7 +149,11 @@ void KinTreeNode::removeReflexFromSubTree()
 		for ( j=nodeList.begin(); j!=nodeList.end(); ++j )
 		{
 			parentRobot->getModel()->removeReflexResponse( parentRobot->getResponseTable(), (*i)->getResponseClass(), (*j)->getResponseClass() );
-			//parentRobot->getModel()->setVisualResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
+			parentRobot->getModel()->removeForceResponse( parentRobot->getResponseTable(), (*i)->getResponseClass(), (*j)->getResponseClass() );
+            
+            parentRobot->getModel()->removeAllResponses( parentRobot->getFieldResponseTable(), (*i)->getFieldResponseClass(), (*j)->getFieldResponseClass() );
+            
+            //parentRobot->getModel()->setVisualResponse( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
 			//parentRobot->model->removePairResponses( parentRobot->responseTable, (*i)->getResponseClass(), (*j)->getResponseClass() );
 		}
 	}

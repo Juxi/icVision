@@ -322,6 +322,14 @@ void Learner::State::TransitionAction::run()
 /********************
  *** REACH ACTION ***
  *******************/
+Point Learner::State::ReachAction::easyReach()
+{
+    Point p;
+    Vector norm,noise((double)rand()/RAND_MAX,(double)rand()/RAND_MAX,(double)rand()/RAND_MAX);
+    getMarkerState(p, norm);
+    norm = norm/sqrt(norm.squared_length());
+    return p + 0.1*norm + 0.1*noise;
+}
 bool Learner::State::ReachAction::threadInit()
 {
     Action::threadInit();
@@ -330,10 +338,10 @@ bool Learner::State::ReachAction::threadInit()
     yarp::os::Bottle worldCmd, worldRsp;
     worldCmd.addVocab(yarp::os::Vocab::encode("mk"));
     worldCmd.addVocab(yarp::os::Vocab::encode("sph"));
-    worldCmd.addDouble(0.04);
-    worldCmd.addDouble(target.x());
-    worldCmd.addDouble(target.y());
-    worldCmd.addDouble(target.z());
+    worldCmd.addDouble(0.02);
+    worldCmd.addDouble(reachTarget.x());
+    worldCmd.addDouble(reachTarget.y());
+    worldCmd.addDouble(reachTarget.z());
     learner->worldClient.write(worldCmd,worldRsp);
     printf("  world command: %s\n", worldCmd.toString().c_str());
     printf("  world response: %s\n\n", worldRsp.toString().c_str());
@@ -367,7 +375,8 @@ void Learner::State::ReachAction::threadRelease()
     Action::threadRelease();
 }
 
-void Learner::State::ReachAction::sendForceCommand( bool withTorque )
+
+void Learner::State::ReachAction::getMarkerState(Point& p, Vector& n)
 {
     // get the state of the hand
     yarp::os::Bottle get,state;
@@ -375,58 +384,64 @@ void Learner::State::ReachAction::sendForceCommand( bool withTorque )
     get.addString(marker);
     learner->controllerClient.write(get,state);
     
-    // prepare to control the robot with operational space force/torque
-    yarp::os::Bottle& opSpaceForceAndTorque = learner->commandPort.prepare();
-    opSpaceForceAndTorque.clear();
-    opSpaceForceAndTorque.addVocab(yarp::os::Vocab::encode("opsp"));
-    opSpaceForceAndTorque.addString(marker);
-    
     // get the operational space position of the marker
-    Point p = Point(state.get(0).asDouble(),
-                    state.get(1).asDouble(),
-                    state.get(2).asDouble());
+    p = Point(state.get(0).asDouble(),
+              state.get(1).asDouble(),
+              state.get(2).asDouble());
+    n = Vector(state.get(3).asDouble(),
+               state.get(4).asDouble(),
+               state.get(5).asDouble());
+}
+
+void Learner::State::ReachAction::sendForceCommand( bool withTorque )
+{
+    // get the state of the hand
+    Point p;
+    Vector n;
+    getMarkerState(p,n);
     
     // error vector from marker to target
-    Vector err = target - p;
-    
-    // write the force component of the command into a bottle
-    yarp::os::Bottle forceCmd;
-    forceCmd.addDouble(forceGain*err.x());
-    forceCmd.addDouble(forceGain*err.y());
-    forceCmd.addDouble(forceGain*err.z());
-    //forceCmd.addDouble(0.0);
-    //forceCmd.addDouble(0.0);
-    //forceCmd.addDouble(0.0);
+    Vector err = reachTarget - p;
     
     // now for the torque component of the command
     Vector torque(CGAL::NULL_VECTOR);
-    if (withTorque)
-    {
-        // get the marker's normal vector 
-        Vector n = Vector(state.get(3).asDouble(),
-                          state.get(4).asDouble(),
-                          state.get(5).asDouble());
-        
-        // normalize
+    if (withTorque) {
+        // normalize stuff
         double errMag   = sqrt(err.squared_length());
         double nMag     = sqrt(n.squared_length());
         
         if (errMag > 0.001 && nMag > 0.001) {
             Vector eDir = err/errMag;
             Vector nDir = n/nMag;
-            printf("eDir %f, %f, %f\n",eDir.x(),eDir.y(),eDir.z());
-            printf("nDir %f, %f, %f\n",nDir.x(),nDir.y(),nDir.z());
-            double torqueMagnitude = -n*eDir + 1;
-            printf("torqueMagnitude: %f\n",torqueMagnitude);
+            //printf("eDir %f, %f, %f\n",eDir.x(),eDir.y(),eDir.z());
+            //printf("nDir %f, %f, %f\n",nDir.x(),nDir.y(),nDir.z());
+            double torqueMagnitude = -n*eDir;
+            //printf("torqueMagnitude: %f\n",torqueMagnitude);
             Vector direction = CGAL::cross_product(nDir,eDir);
-            printf("torqueDir %f, %f, %f\n",direction.x(),direction.y(),direction.z());
-            torque = torqueMagnitude*direction;
+            //printf("torqueDir %f, %f, %f\n",direction.x(),direction.y(),direction.z());
+            
+            //err = err * torqueMagnitude;
+            torque = (torqueMagnitude+1)/2*direction;
         }
     }
+    
+    // write the force component of the command into a bottle
+    yarp::os::Bottle forceCmd;
+    //forceCmd.addDouble(0);
+    //forceCmd.addDouble(0);
+    //forceCmd.addDouble(0);
+    forceCmd.addDouble(forceGain*err.x());
+    forceCmd.addDouble(forceGain*err.y());
+    forceCmd.addDouble(forceGain*err.z());
     forceCmd.addDouble(torqueGain*torque.x());
     forceCmd.addDouble(torqueGain*torque.y());
     forceCmd.addDouble(torqueGain*torque.z());
     
+    // prepare to control the robot with operational space force/torque
+    yarp::os::Bottle& opSpaceForceAndTorque = learner->commandPort.prepare();
+    opSpaceForceAndTorque.clear();
+    opSpaceForceAndTorque.addVocab(yarp::os::Vocab::encode("opsp"));
+    opSpaceForceAndTorque.addString(marker);
     opSpaceForceAndTorque.addList() = forceCmd;
     
     printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
@@ -438,17 +453,32 @@ void Learner::State::ReachAction::sendForceCommand( bool withTorque )
 void Learner::State::ReachAction::run()
 {
     sendForceCommand(true);
-        
+    
+    bool stopTheReach = false;
     // stop if the robot is no longer moving
     if (isStable()) {
-        printf("ROBOT STOPPED :-)\n");
-        relax();
-        stop();
+        printf("ROBOT REACHED STEADY STATE :-)\n");
+        stopTheReach = true;
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
         printf("REACH TIMED OUT :-(\n");
+        stopTheReach = true;
+    }
+    
+    if (stopTheReach) {
+        // get the residual error to target
+        Point p;
+        Vector n;
+        getMarkerState(p,n);
+        double err = (reachTarget - p).squared_length();
+        printf("STOPPING THE REACH, |err| = %f :-)\n", err);
+        
+        //if ( err < 0.01 )
+        //    history.push_back( std::pair<Point,bool>(reachTarget,true) );
+        
         relax();
         stop();
+
     }
     
 }

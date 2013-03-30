@@ -34,7 +34,7 @@ public:
         /* This abstract class provides a generic action that runs in a thread and is protected by a semaphor
            such that only one action can be running (per learner) at a time */
         public:
-            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), timeStarted(0.0), timeout(10.0), num(0), value(0.0), reward(0.0) {}
+            Action( Learner* l, State* p, int rate ) : yarp::os::RateThread(rate), learner(l), parentState(p), timeStarted(0.0), timeout(20.0), num(0), value(0.0), reward(0.0) {}
             ~Action(){}
             int     isTried() { return num; }
             bool    isStable();
@@ -93,19 +93,26 @@ public:
         public:
             ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate),
                                                                                     marker(m),
-                                                                                    target(0,0,0),
+                                                                                    reachTarget(0,0,0),
                                                                                     forceGain(1.0),
                                                                                     torqueGain(1.0),
                                                                                     forceTimeout(timeout/2){}
             ~ReachAction(){}
-            void reach(Point p) { target = p; start(); }
+            double predictReward(Point);
+            void runReach(Point p) { reachTarget = p; start(); }
+            Point easyReach();
         private:
             yarp::os::ConstString marker;
-            Point target;
-            yarp::os::ConstString mobeeObjectName;
             double forceGain,torqueGain;
             double forceTimeout;
             
+            Point reachTarget;
+            yarp::os::ConstString mobeeObjectName;
+            std::vector< std::pair<Point,bool> > history;
+            
+            void getMarkerState(Point& p, Vector& n);
+            
+            void start() { Action::start(); }
             void sendForceCommand(bool withTorque=false);
             bool threadInit();
             void threadRelease();

@@ -8,7 +8,7 @@ Learner::State::Action* takeRandomAction(Learner& learner)
     printf("CURRENT STATE: %p\n",s);
     
     //int transitionIdx,reachIdx;
-    if ( !true && rand()%2 )
+    if ( rand()%4 < 1 )
     {
         // Try a random state transition
         //int idx = rand() % s->transitionActions.size();
@@ -35,14 +35,10 @@ Learner::State::Action* takeRandomAction(Learner& learner)
     {   // Try a random reach
         //printf("Reach Actions: %d\n", s->reachActions.size());
         
-        printf("RUNNING A REACH\n");
+        printf("RUNNING AN EASY REACH\n");
         if ( s->reachActions.size() > 0 ) {
             std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
-            //int idx = rand()%(s->reachActions.size());
-            //for ( int i=0; i<idx; i++ ) a++;
-            
-            Point p(-(double)rand()/RAND_MAX,(double)rand()/RAND_MAX-0.5,(double)rand()/RAND_MAX-0.5);
-            (*a)->reach(p);
+            (*a)->runReach((*a)->easyReach());
             return *a;
         }
     }

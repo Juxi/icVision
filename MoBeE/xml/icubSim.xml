@@ -173,19 +173,20 @@
             <link z="-.1373" radius=".02" field=".06">
             
             <motor name="RightWristRoll" minPos="-90" maxPos="0">
-                <joint x="-1" minPos="-90" maxPos="0" radius="0">
+                <joint x="-1" minPos="-90" maxPos="0" radius="0" noSelfCollision="true">
                     
                     <sphere field="true" radius=".06"/>
             
             <motor name="RightWristPitch" minPos="-20" maxPos="40">
                 <joint y="-1" minPos="-20" maxPos="40" radius="0">
 
-                <link z="-.0645" y="-0.011" radius="0" noSelfCollision="true">
+                <link z="-.0645" y="-0.011" radius="0">
                 
                 <!-- HAND -->
                 <link y="-.03" radius="0">
                   <link y="1" radius="0">
                       <marker name="right_hand" ny="-1" tracer="30"/>
+                      
                   </link>
                   <!--<link y="-0.05" radius="0">
                     <marker name="right_handpalm"/>
@@ -199,23 +200,23 @@
                     <!-- THUMB -->
                     
                     <link x="-.015" z=".0275" radius="0">
-                        <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30">
+                        <motor name="RightThumbFirstKnuckleA" minPos="0" maxPos="90" home="30"> 
                         <joint z="1" minPos="20" maxPos="90" radius="0">
                         <link y="-.00375" radius=".0">
                         <link x="-.02" radius=".0075">
                         
                             <motor name="RightThumbFirstKnuckleB" minPos="0" maxPos="90">
-                            <joint y="-.015" minPos="0" maxPos="70" radius=".0075">
+                            <joint y="-.015" minPos="0" maxPos="70" radius=".0075"><sphere pz=".01" field="true" radius=".03"/>
                             <link x="-.026" radius=".0075">
                     
                                 <motor name="RightThumbSecondTwo" minPos="0" maxPos="180">
-                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075"><sphere pz=".01" field="true" radius=".03"/>
                                 <link x="-.022" radius=".0075">
-                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075">
+                                <joint y="-.015" minPos="0" maxPos="90" radius=".0075"><sphere pz=".01" field="true" radius=".03"/>
                                   
                                   <!--<link x="-.0125" radius="0"><link z="-1"><marker name="right_thumb"/></link></link>-->
                                   <link x="-.025" radius=".0075">
-                                    <sphere radius=".008" px="-.025"/>
+                                    <sphere radius=".008" px="-.025"/><sphere px="-.025" field="true" radius=".03"/>
                                   </link>
                                   
                                 </joint>
@@ -237,26 +238,27 @@
 
                     <!-- INDEX FINGER -->
                     <link x="-.029" z="-.0055" radius="0">
-                        <joint y="-.017" minPos="-10" maxPos="0" radius="0">
+                        <joint y="-.017" minPos="-10" maxPos="0" radius="0">  <sphere py="0.01" field="true" radius=".03"/>
                         <link z="-.012" radius=".0075">
+                            
                             
                             
                             
                         <cylinder height=".017" radius=".0075"/>
                         
                             <motor name="RightIndexFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.026" radius=".0075">
                                             
                                 <motor name="RightIndexSecondTwo" minPos="0" maxPos="180">
-                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                                 <link z="-.022" radius=".0075">
-                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                                   
                                   <!--<link z="-0.0125" radius="0"><link y="-1" radius="0"><marker name="right_index" /></link></link>
                                   -->
                                   <link z="-.025" radius=".0075">
-                                    <sphere radius=".008" pz="-.025"/>
+                                    <sphere radius=".008" pz="-.025"/><sphere pz="-.025" field="true" radius=".03"/>
                                   </link>
                                   
                                 </joint>
@@ -274,29 +276,29 @@
                     <!-- / INDEX -->
                     
                     <!-- MIDDLE FINGER -->
-                    <link x="-.012" z="-.0075" radius="0">
-                        <link z="-.012" radius=".0075">
+                    <link x="-.012" z="-.0075" radius="0">  
+                        <link z="-.012" radius=".0075">      <sphere py="0.01" field="true" radius=".03"/>
                             
-                        <!-- HAND FORCE FIELD -->
+                        <!-- HAND FORCE FIELD 
                         <link z="-.012" radius="0">
                             <link z="-1" radius="0">
                                 <sphere field="true" radius=".1"/>
                             </link>
-                        </link>
+                        </link>-->
                             
                         <cylinder height=".017" radius=".0075"/>
                         
-                            <motor name="RightMiddleFirstKnuckle" minPos="0" maxPos="90">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <motor name="RightMiddleFirstKnuckle" minPos="0" maxPos="90">   
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.028" radius=".0075">
                                             
                                 <motor name="RightMiddleSecondTwo" minPos="0" maxPos="180">
-                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075"> <sphere py="0.01" field="true" radius=".03"/>
                                 <link z="-.024" radius=".0075">
-                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                                <joint x="-.017" minPos="0" maxPos="90" radius=".0075">  <sphere py="0.01" field="true" radius=".03"/>
                                 <link z="-.025" radius=".0075">
                             
-                                    <sphere radius=".008" pz="-.025"/>
+                                    <sphere radius=".008" pz="-.025"/><sphere pz="-.025" field="true" radius=".03"/>
                                     
                                 </link>
                                 </joint>
@@ -314,19 +316,19 @@
 
                     <!-- RING FINGER -->
                     <link x=".005" z="-.0055" radius="0">
-                        <joint y=".017" minPos="-5" maxPos="0" radius="0">
+                        <joint y=".017" minPos="-5" maxPos="0" radius="0">  <sphere py="0.01" field="true" radius=".03"/>
                         <link z="-.012" radius=".0075">
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="RightRingAndPinky" minPos="0" maxPos="270">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.026" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.022" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.025" radius=".0075">
                                     
-                                    <sphere radius=".008" pz="-.025"/>
+                                    <sphere radius=".008" pz="-.025"/><sphere pz="-.025" field="true" radius=".03"/>
                                     
                             </link>
                             </joint>
@@ -343,19 +345,19 @@
                     
                     <!-- PINKY FINGER -->
                     <link x=".022" z="-.0045" radius="0">
-                        <joint y=".017" minPos="-10" maxPos="0" radius="0">
+                        <joint y=".017" minPos="-10" maxPos="0" radius="0">  <sphere py="0.01" field="true" radius=".03"/>
                         <link z="-.012" radius=".0075">
                         <cylinder height=".017" radius=".0075"/>
                     
                             <motor name="RightRingAndPinky">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.022" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.019" radius=".0075">
-                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075">
+                            <joint x="-.017" minPos="0" maxPos="90" radius=".0075"><sphere py="0.01" field="true" radius=".03"/>
                             <link z="-.025" radius=".0075">
                                     
-                                    <sphere radius=".008" pz="-.025"/>
+                                    <sphere radius=".008" pz="-.025"/><sphere pz="-.025" field="true" radius=".03"/>
                                     
                             </link>
                             </joint>
