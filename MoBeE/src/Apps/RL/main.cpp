@@ -35,10 +35,18 @@ Learner::State::Action* takeRandomAction(Learner& learner)
     {   // Try a random reach
         //printf("Reach Actions: %d\n", s->reachActions.size());
         
+        // sample near p
+        Point p(-0.3,0.1,0.0);
+         ;//+ 0.1*noise;
+        
         printf("RUNNING AN EASY REACH\n");
         if ( s->reachActions.size() > 0 ) {
             std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
-            (*a)->runReach((*a)->easyReach());
+            Vector noise((double)rand()/RAND_MAX,(double)rand()/RAND_MAX,0.0);
+            noise = noise/noise.squared_length();
+            
+            //(*a)->runReach((*a)->easyReach());
+            (*a)->runReach( p + 0.1*noise );
             return *a;
         }
     }

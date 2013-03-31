@@ -48,6 +48,11 @@ public:
             double          reward; 
             
             void            relax();
+            void            setAttractor( Point_d q );
+            void            setOpSpace( yarp::os::ConstString name, Vector, Vector );
+            void            stopForcing();
+            bool            waitForSteady();
+            
             virtual bool    threadInit();
             virtual void    afterStart(bool s);
             virtual void    threadRelease();
@@ -58,7 +63,7 @@ public:
         /* These actions move the attractor in the MoBeE model. This corresponds to position control, and is used to implement deliberate
            motion planning through a roadmap graph (the nodes of which are "States") using reinforcement learning */
         public:
-            TransitionAction( Learner* l, State* a, State* b, int rate=500 ) : Action(l,a,rate), destination_state(b) {
+            TransitionAction( Learner* l, State* a, State* b, int rate=200 ) : Action(l,a,rate), destination_state(b) {
                 for (std::list<State*>::iterator i=learner->states.begin(); i!=learner->states.end(); ++i ) {
                     transition_belief.push_back(S_Prime(*i,0.0,0));
                 }
@@ -91,7 +96,7 @@ public:
         /* These actions reach for objects, and are responsible for rewarding the learner. In this way the learner learns which 
            states (roadmap nodes) are the good ones from which to reach for objects in the environment */
         public:
-            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate ) : Action(l,p,rate),
+            ReachAction( Learner* l, yarp::os::ConstString m, State* p, int rate=50 ) : Action(l,p,rate),
                                                                                     marker(m),
                                                                                     reachTarget(0,0,0),
                                                                                     forceGain(1.0),
@@ -150,7 +155,7 @@ public:
             
             for (std::list<yarp::os::ConstString>::iterator i = l->markers.begin(); i!= l->markers.end(); ++i )
             {
-                reachActions.push_back(new ReachAction(l,*i,this,200));
+                reachActions.push_back(new ReachAction(l,*i,this));
             }
         }
         ~State(){}
