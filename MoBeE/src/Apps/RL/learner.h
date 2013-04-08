@@ -15,13 +15,14 @@
 #include <CGAL/Cartesian_d.h>
 #include <CGAL/Point_3.h>
 #include <CGAL/Vector_3.h>
+#include <CGAL/point_generators_d.h>
 #include <list>
 
 typedef CGAL::Cartesian_d<double>::Point_d Point_d;
 typedef CGAL::Cartesian_d<double>::Vector_d Vector_d;
 typedef CGAL::Point_3< CGAL::Cartesian<double> > Point;
 typedef CGAL::Vector_3< CGAL::Cartesian<double> > Vector;
-
+typedef CGAL::Creator_uniform_d<std::vector<double>::iterator,Point_d>  Creator_d;
 
 class Learner
 {
@@ -126,7 +127,7 @@ public:
         friend class Learner;
         };
         
-        State(Point_d q, Learner* l) : Point_d( q.dimension(), q.cartesian_begin(), q.cartesian_end())
+        State(Point_d q, Learner* l) : Point_d( q.dimension(), q.cartesian_begin(), q.cartesian_end()), value(0.0)
         {
             l->states.push_back(this);
             //if (parent->states.size()==1) parent->currentState = this;
@@ -160,6 +161,9 @@ public:
         }
         ~State(){}
         //std::list<Action*> actions;
+        double computeValue();
+        double getValue() { return value; }
+        double value;
         std::list<TransitionAction*> transitionActions; // Instead of keeping multiple lists here i could dynamic_cast...  dunno
         std::list<ReachAction*> reachActions;
     friend class Learner;
@@ -170,14 +174,18 @@ public:
     //State::TransitionAction* currentAction;
     yarp::os::Semaphore mutex;
     
-    Learner( const char* _robotName, const char* _partName, bool connect = true );
+    Learner( int dim, const char* _robotName, const char* _partName, bool connect = true );
     ~Learner();
     
     Point_d getRealState();
     State* getDiscreteState();
 
-    inline void appendState(Point_d& q) { new State(q,this); }
+    inline void appendState(Point_d& q) { new State( correctDimension(q),this); }
     bool deleteState( const State* );
+    
+    void doRL();
+    
+    //std::list< std::pair<
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
     //inline int getNumStates() { return states.size(); }
     
@@ -187,6 +195,9 @@ public:
     
 private:
     
+    
+    
+    int dimension;
     yarp::os::Network network;
     yarp::os::BufferedPort<yarp::os::Bottle>    statePort,
                                                 commandPort;
@@ -194,6 +205,8 @@ private:
                         worldClient;
     
     std::list< yarp::os::ConstString > markers;
+    
+    Point_d correctDimension(Point_d& p);
     
 };
 #endif

@@ -3,7 +3,7 @@
 //#include <cmath>
 #include "learner.h"
 
-Learner::Learner( const char* _robotName, const char* _partName, bool connect ) //: currentState(NULL), currentAction(NULL)
+Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d)//, currentState(NULL), currentAction(NULL)
 {
     if (connect)
     {
@@ -73,6 +73,22 @@ Learner::~Learner()
     worldClient.interrupt();
 }
 
+Point_d Learner::correctDimension(Point_d& p)
+{
+    int dimCount = 0;
+    std::vector<double> q;
+    Point_d::Cartesian_const_iterator i = p.cartesian_begin();
+    //std::cout << "Fixing: " << p << std::endl;
+    while ( dimCount < dimension ) {
+        if ( i != p.cartesian_end() ) {
+            q.push_back(*i);
+            ++i;
+        } else { q.push_back(0.5); }
+        dimCount++;
+    }
+    return Point_d(dimension,q.begin(),q.end());
+}
+
 Point_d Learner::getRealState() {
     yarp::os::Bottle* b = statePort.read();
     std::list<double> bList;
@@ -121,6 +137,26 @@ bool Learner::deleteState( const State* s )
     delete s;
 }
 
+void  Learner::doRL()
+{
+    mutex.wait();
+    printf("\nDOING RL...\n");
+    
+    double maxDelta;
+    do
+    {
+        maxDelta=0;
+        printf("***************************************************\n");
+        for (std::list<State*>::iterator i = states.begin(); i!=states.end(); ++i)
+        {
+            printf("State: %p\n",*i);
+            double delta = (*i)->computeValue();
+            if ( delta>maxDelta ) maxDelta = delta;
+        } 
+    } while ( maxDelta > 0.01 );
+    mutex.post();
+}
+
 void Learner::print(bool printAll)
 {
     //printf("\n\n");
@@ -128,7 +164,7 @@ void Learner::print(bool printAll)
     for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i)
     {
         printf("\nState %p",*i);
-        //std::cout << **i << std::endl;
+        std::cout << **i << std::endl;
         
         printf("\t\t\tsPrime:");
        
@@ -155,6 +191,49 @@ void Learner::print(bool printAll)
     printf("\n");
 }
 
+double Learner::State::computeValue()
+{
+    double maxValue = 0;
+    double maxDelta = 0;
+    
+    for ( std::list<State::ReachAction*>::iterator r = reachActions.begin(); r != reachActions.end(); ++r )
+    {
+        double newVal = (*r)->reward + 0.9 * (*r)->value;
+        double delta = newVal - (*r)->value;
+        (*r)->value = newVal;
+        
+        if ( (*r)->value > maxValue )
+            maxValue = (*r)->value;
+        
+        if ( delta > maxDelta )
+            maxDelta = delta;
+        //sum += (*r)->value;
+        
+        printf("  RAction: %p value: %f, reward: %f\n", *r, (*r)->value, (*r)->reward);
+    }
+    
+    for ( std::list<State::TransitionAction*>::iterator j = transitionActions.begin(); j != transitionActions.end(); ++j )
+    {
+        double  sum = 0.0;
+        for ( std::list< State::TransitionAction::S_Prime >::iterator k = (*j)->transition_belief.begin(); k !=(*j)->transition_belief.end(); ++k )
+        {
+            sum += k->prob * ((*j)->reward + 0.9 * k->s_prime->value);
+        }
+        double delta = sum - (*j)->value;
+        (*j)->value = sum;
+        
+        if ( (*j)->value > maxValue )
+            maxValue = (*j)->value;
+        if ( delta > maxDelta )
+            maxDelta = delta;
+        
+        std::pair<const State*, double> s_prime = (*j)->belief();
+        printf("  SAction: %p d: %p, p: %f v: %f, r: %f\n", *j, s_prime.first, s_prime.second, (*j)->value, (*j)->reward);
+    }
+    value = maxValue;
+    return maxDelta;
+}
+
 /*********************
  *** PARENT ACTION ***
  ********************/
@@ -169,11 +248,23 @@ bool Learner::State::Action::threadInit() {
     }
     else { /*printf("\tmutex.check() failed... ");*/ return 0; }
 }
-void Learner::State::Action::afterStart(bool s) { if (!s) printf("EPIC AVTION FAIL...\n"); }
+
+void Learner::State::Action::afterStart(bool s)
+{
+    if (!s)
+        printf("EPIC ACTION FAIL...\n");
+    //else
+        //reward = 0.0;
+}
+
 void Learner::State::Action::threadRelease() {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
+    
     learner->mutex.post();
 }
+
+
+
 bool Learner::State::Action::isStable()
 {
     // check if the robot is still moving
@@ -200,7 +291,7 @@ void Learner::State::Action::setAttractor( Point_d q )
     for (Point_d::Cartesian_const_iterator i=q.cartesian_begin(); i!=q.cartesian_end(); ++i)
         vec.addDouble(*i);
     attractorCommand.addList() = vec;
-    printf("Sending attractor command: %s\n", attractorCommand.toString().c_str());
+    //printf("Sending attractor command: %s\n", attractorCommand.toString().c_str());
     learner->commandPort.writeStrict();
 }
 
@@ -221,7 +312,7 @@ void Learner::State::Action::setOpSpace( yarp::os::ConstString name, Vector f, V
     opSpaceForceAndTorque.addString(name);
     opSpaceForceAndTorque.addList() = forceCmd;
     
-    printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
+    //printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
     learner->commandPort.writeStrict();
 }
 
@@ -234,7 +325,7 @@ void Learner::State::Action::stopForcing()
     for (int i=0; i<parentState->dimension(); i++)
         forceCmd.addDouble(0.0);
     stopBottle.addList() = forceCmd;
-    printf("Sending force command: %s\n", stopBottle.toString().c_str());
+    //printf("Sending force command: %s\n", stopBottle.toString().c_str());
     learner->commandPort.writeStrict();
 }
 
@@ -286,34 +377,18 @@ std::pair<const Learner::State*,double> Learner::State::TransitionAction::belief
 bool Learner::State::TransitionAction::threadInit()
 {
     Action::threadInit();
-    // activate the attractor at destination_state
-    yarp::os::Bottle& attractorCommand = learner->commandPort.prepare();
-    attractorCommand.clear();
-    attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
-    yarp::os::Bottle vec;
-    for (Point_d::Cartesian_const_iterator i=destination_state->cartesian_begin(); i!=destination_state->cartesian_end(); ++i)
-        vec.addDouble(*i);
-    attractorCommand.addList() = vec;
-    learner->commandPort.writeStrict();
+    setAttractor(*destination_state);
+    yarp::os::Time::delay(1);
     return 1;
 }
 
 void Learner::State::TransitionAction::threadRelease()
 {
     if ( learner->getDiscreteState() != parentState )
-    {
         printf("STATE TRANSITION OCCURRED\n");
-        
-        // activate the attractor at currentState
-        yarp::os::Bottle vec;
-        yarp::os::Bottle& attractorCommand = learner->commandPort.prepare();
-        attractorCommand.clear();
-        attractorCommand.addVocab(yarp::os::Vocab::encode("qatt"));
-        for (Point_d::Cartesian_const_iterator i=learner->getDiscreteState()->cartesian_begin(); i!=learner->getDiscreteState()->cartesian_end(); ++i)
-            vec.addDouble(*i);
-        attractorCommand.addList() = vec;
-        learner->commandPort.writeStrict();
-    }
+
+    setAttractor(*learner->getDiscreteState());
+    yarp::os::Time::delay(1);
     updateTransitionBelief(learner->getDiscreteState());
     Action::threadRelease();
 }
@@ -339,22 +414,17 @@ void Learner::State::TransitionAction::run()
 {
     printf("current state: %p\n",learner->getDiscreteState());
     
-    // check if the robot is still moving
-    yarp::os::Bottle query,reply;
-    query.addVocab(yarp::os::Vocab::encode("stpd"));
-    query.addDouble(50); // acceleration threshold
-    query.addDouble(1); // velocity threshold
-    learner->controllerClient.write(query,reply);
-    //printf("query: %s\n",query.toString().c_str());
-    //printf("reply: %s\n",reply.toString().c_str());
-    
-    // stop if the robot is no longer moving
-    if (reply.get(0).asInt()==1) {
-        printf("ROBOT STOPPED :-)\n");
+    if (isStable())
+    {
+        printf("\n STEADY STATE REACHED  :-)\n");
+        //if (learner->getDiscreteState() == *learner->states.begin()) {
+        //    printf("Got REWARD = 1 for being in STATE 0");
+        //    reward=1;
+        //}
         stop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
-        printf("STATE TRANSITION TIMED OUT :-(\n");
+        printf("REACH TIMED OUT :-(\n");
         stop();
     }
  
@@ -375,6 +445,9 @@ bool Learner::State::ReachAction::threadInit()
 {
     Action::threadInit();
     
+    setAttractor(*learner->getDiscreteState());
+    yarp::os::Time::delay(1);
+    
     // visualize the target point in the world model
     yarp::os::Bottle worldCmd, worldRsp;
     worldCmd.addVocab(yarp::os::Vocab::encode("mk"));
@@ -384,24 +457,26 @@ bool Learner::State::ReachAction::threadInit()
     worldCmd.addDouble(reachTarget.y());
     worldCmd.addDouble(reachTarget.z());
     learner->worldClient.write(worldCmd,worldRsp);
-    printf("  world command: %s\n", worldCmd.toString().c_str());
-    printf("  world response: %s\n\n", worldRsp.toString().c_str());
+    //printf("  world command: %s\n", worldCmd.toString().c_str());
+    //printf("  world response: %s\n\n", worldRsp.toString().c_str());
     
     // get the name of the newly inserted object
     mobeeObjectName = worldRsp.get(0).asString();
     
-    worldCmd.clear();
-    worldRsp.clear();
-    worldCmd.addVocab(yarp::os::Vocab::encode("def"));
-    worldCmd.addString(mobeeObjectName);
-    worldCmd.addVocab(yarp::os::Vocab::encode("tgt"));
-    learner->worldClient.write(worldCmd,worldRsp);
-    printf("  world command: %s\n", worldCmd.toString().c_str());
-    printf("  world response: %s\n\n", worldRsp.toString().c_str());
+    // make it a "target" object
+    //worldCmd.clear();
+    //worldRsp.clear();
+    //worldCmd.addVocab(yarp::os::Vocab::encode("def"));
+    //worldCmd.addString(mobeeObjectName);
+    //worldCmd.addVocab(yarp::os::Vocab::encode("tgt"));
+    //learner->worldClient.write(worldCmd,worldRsp);
+    
+    //printf("  world command: %s\n", worldCmd.toString().c_str());
+    //printf("  world response: %s\n\n", worldRsp.toString().c_str());
     
     // gains for the control signal
-    forceGain = 1000.0;
-    torqueGain = 1000.0;
+    forceGain = 5000.0;
+    torqueGain = 5000.0;
     
     //discreteTime = 0;
     
@@ -419,8 +494,8 @@ void Learner::State::ReachAction::threadRelease()
     worldCmd.addVocab(yarp::os::Vocab::encode("rm"));
     worldCmd.addString(mobeeObjectName);
     learner->worldClient.write(worldCmd,worldRsp);
-    printf("  world command: %s\n", worldCmd.toString().c_str());
-    printf("  world response: %s\n\n", worldRsp.toString().c_str());
+    //printf("  world command: %s\n", worldCmd.toString().c_str());
+    //printf("  world response: %s\n\n", worldRsp.toString().c_str());
     
     Action::threadRelease();
 }
@@ -492,32 +567,34 @@ void Learner::State::ReachAction::run()
     double err = (reachTarget - p).squared_length();
     printf("REACH |err| = %f \n", err);
     
-    if ( err < 0.015 )
-    {
-        //    history.push_back( std::pair<Point,bool>(reachTarget,true) );
-  
-        printf("\nFOUND REACH TARGET!!! Set Position pre-reach pose.\n");
-        setAttractor(*parentState);
-        //yarp::os::Time::delay(5.0);
-        
-        stopForcing();
-        if ( !waitForSteady() ) printf("RELAX TIMED OUT!!!! :-0\n");
+    if (isStable()) {
+        if ( err < 0.003 )
+        {
+            // GIVE REWARD
+            reward = 1.0; // history.push_back( std::pair<Point,bool>(reachTarget,true) );
+      
+            printf("\nFOUND REACH TARGET!!! Got reward: %f\n",reward);
+            //printf("\nFOUND REACH TARGET!!! Set Position pre-reach pose.\n");
+            //setAttractor(learner->getRealState());
+            
+            //for (int i=0; i<10; i++ ) {
+            //    printf("am i on the target???\n");
+            //    yarp::os::Time::delay(1.0);
+            //}
+            
+        } else
+            printf("\n STEADY STATE REACHED, STOP FORCING\n");
         
         //printf("\nRETURNING TO NEAREST STATE.\n");
         //setAttractor(*learner->getDiscreteState());
-        stop();
-    }
-    else if (isStable())
-    {
-        printf("\n STEADY STATE REACHED, STOP FORCING\n");
-        setAttractor(*parentState);
         stopForcing();
         if ( !waitForSteady() ) printf("RELAX TIMED OUT!!!! :-0\n");
         stop();
     }
-    else if ( yarp::os::Time::now() - timeStarted > timeout ) {
+    else if ( yarp::os::Time::now() - timeStarted > timeout )
+    {
         printf("REACH TIMED OUT, STOP FORCING :-(\n");
-        setAttractor(*parentState);
+        //setAttractor(*parentState);
         stopForcing();
         if ( !waitForSteady() ) printf("RELAX TIMED OUT!!!! :-0\n");
         stop();

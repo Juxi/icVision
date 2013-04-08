@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
         cmd.addDouble(p[1]);
         cmd.addDouble(p[2]);
         world_rpc.write(cmd,rsp);
-        printf("\ncommand: %s\n", cmd.toString().c_str());
-        printf("  response: %s\n\n", rsp.toString().c_str());
+        //printf("\ncommand: %s\n", cmd.toString().c_str());
+        //printf("  response: %s\n\n", rsp.toString().c_str());
         
         // get the name of the newly inserted object
         yarp::os::ConstString objectName = rsp.get(0).asString();
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
             
             opSpaceForceAndTorque.addList() = cmd;
             
-            printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
+            //printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
             right_arm_cmd.write();
             
             usleep(20000);
@@ -159,8 +159,8 @@ int main(int argc, char *argv[])
         cmd.addVocab(yarp::os::Vocab::encode("rm"));
         cmd.addString(objectName);
         world_rpc.write(cmd,rsp);
-        printf("\ncommand: %s\n", cmd.toString().c_str());
-        printf("  response: %s\n\n", rsp.toString().c_str());
+        //printf("\ncommand: %s\n", cmd.toString().c_str());
+        //printf("  response: %s\n\n", rsp.toString().c_str());
         
     }
 	
