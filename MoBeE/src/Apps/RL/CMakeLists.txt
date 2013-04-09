@@ -52,13 +52,13 @@ ENDIF ( WIN32 )
 
 SET ( src_files		main.cpp
 			learner.cpp
-			#state.cpp
-			#action.cpp
+			state.cpp
+			action.cpp
 )
 
 SET ( hdr_files		learner.h
-			#state.h
-			#action.h
+			state.h
+			action.h
 )
 
 

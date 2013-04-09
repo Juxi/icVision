@@ -25,56 +25,6 @@ std::vector<Point_d> gridSample( int dim, int num, double scaling )
     return points;
 }
 
-Learner::State::Action* takeRandomAction(Learner& learner)
-{
-    Learner::State* s = learner.getDiscreteState();
-    printf("CURRENT STATE: %p\n",s);
-    
-    //int transitionIdx,reachIdx;
-    if ( rand()%2 )
-    {
-        // Try a random state transition
-        //int idx = rand() % s->transitionActions.size();
-        //printf("trying action %d\n",idx);
- 
-        std::list<Learner::State::TransitionAction*>::iterator a = s->transitionActions.begin();
-        Learner::State::TransitionAction* leastTriedAction = *s->transitionActions.begin();
-        for ( a = s->transitionActions.begin(); a != s->transitionActions.end(); ++a ) //a++;
-        {
-            std::pair<const Learner::State*,double> belief = (*a)->belief();
-            printf("  action: %p, %d tries, destination: %p it leads to state: %p with prob. %f\n",*a,(*a)->isTried(),(*a)->destination(),belief.first,belief.second);
-            if ( (*a)->isTried() < leastTriedAction->isTried() )
-                leastTriedAction = *a;
-        } 
-   
-        printf("RUNNING LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
-        leastTriedAction->start();
-        
-        return leastTriedAction;
-    }
-    else
-    {   // Try a random reach
-        //printf("Reach Actions: %d\n", s->reachActions.size());
-        
-        // sample near p
-        Point p(-0.3,0.1,0.0);
-        //Vector noise(0.1*(double)rand()/RAND_MAX-0.05,
-        //             0.1*(double)rand()/RAND_MAX-0.05,
-        //             0);
-        
-        printf("RUNNING A REACH\n");
-        if ( s->reachActions.size() > 0 ) {
-            std::list<Learner::State::ReachAction*>::iterator a = s->reachActions.begin();
-            Vector noise((double)rand()/RAND_MAX,(double)rand()/RAND_MAX,0.0);
-            noise = noise/noise.squared_length();
-            
-            //(*a)->runReach((*a)->easyReach());
-            (*a)->runReach( p /*+ 0.1*noise*/ );
-            return *a;
-        }
-    }
-}
-
 int main(int argc, char *argv[])
 {
     // prepare the random number generator
@@ -84,15 +34,15 @@ int main(int argc, char *argv[])
     Learner learner(16,"icubSim","right_arm",true);
     
     std::vector<Point_d> samples = gridSample(4,33,0.5);
-    for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i )
-        learner.appendState(*i);
+    //for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i )
+    //    learner.appendState(*i);
     
     int count = 0;
     while ( count < 500)
     {
         printf("\nMain: COUNT = %d\n",count);
         
-        Learner::State::Action* a = takeRandomAction(learner);
+        learner.getDiscreteState()->takeRandomAction();
         learner.doRL();
         
         //printf("Waiting for Action to complete.\n");
@@ -102,7 +52,7 @@ int main(int argc, char *argv[])
     }
  
     printf("Right Arm Learner:\n");
-    learner.print(true);
+    //learner.print(true);
     
     
     printf("All finished\n");
