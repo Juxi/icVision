@@ -54,11 +54,17 @@ SET ( src_files		main.cpp
 			learner.cpp
 			state.cpp
 			action.cpp
+			actionTransition.cpp
+			actionReach.cpp
 )
 
 SET ( hdr_files		learner.h
 			state.h
 			action.h
+			actionTransition.h
+			actionReach.h
+			file_reader.h
+			types.h
 )
 
 

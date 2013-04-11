@@ -22,10 +22,19 @@ public:
     Point_d getRealState();
     State* getDiscreteState();
 
-    Point_d redimension(Point_d& p);
     
-    inline void appendState(State* state) { states.push_back(state); }
+    
+    //inline appendState(State* state) { states.push_back(state); }
+    
+    State*              appendState( Point_d& p );
+    TransitionAction*   appendTransitionAction( State* a, State* b, double val=0.0, double rew=0.0, int num=0 );
+    ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
+    
+    
     bool deleteState( const State* );
+    
+    void loadFile( std::string& fileName );
+    void writeFile( std::string& fileName );
     
     void getMarkerState( yarp::os::ConstString& markerName, Point_3& p, Vector_3& n);
     void setAttractor( Point_d q );
@@ -41,18 +50,22 @@ public:
     void postMutex() { mutex.post(); }
     void doRL();
     
-    //std::list< std::pair<
+    //std::vector< std::pair<
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
     //inline int getNumStates() { return states.size(); }
     
     //bool randomReach(yarp::os::ConstString);
     
-    //void print(bool printall = false);
+    void print(bool printall = false);
     
 private:
     
+    Point_d redimension(Point_d& p);
+    //State*  getState( int n );
+    //bool    isInList( State* );
+    
     int dimension;
-    std::list<State*> states;
+    std::vector<State*> states;
     //State* currentState;
     //State::TransitionAction* currentAction;
     yarp::os::Semaphore mutex;
@@ -63,8 +76,7 @@ private:
     yarp::os::RpcClient controllerClient,
                         worldClient;
     
-    std::list< yarp::os::ConstString > markers;
-    
+    std::vector< yarp::os::ConstString > markers;
 };
 #endif
 /** @} */

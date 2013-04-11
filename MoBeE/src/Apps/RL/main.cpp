@@ -27,11 +27,27 @@ std::vector<Point_d> gridSample( int dim, int num, double scaling )
 
 int main(int argc, char *argv[])
 {
+    yarp::os::Property config;
+    config.fromCommand(argc,argv);
+    
+    // path to the XML file that defines the robot model
+    std::string fileName = config.find("file").asString().c_str();
+    
+    printf("WTF!?!\n\n");
+    
     // prepare the random number generator
     srand(time(0));
     
     // instantiate reinforcement learner
-    Learner learner(16,"icubSim","right_arm",true);
+    Learner learner(16,"icubSim","right_arm",false);
+    
+    learner.loadFile(fileName);
+    
+    learner.print();
+    //std::string outFileName = "testFile.ini";
+    //learner.writeFile(outFileName);
+    
+    /*
     
     std::vector<Point_d> samples = gridSample(4,33,0.5);
     //for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i )
@@ -42,7 +58,7 @@ int main(int argc, char *argv[])
     {
         printf("\nMain: COUNT = %d\n",count);
         
-        learner.getDiscreteState()->takeRandomAction();
+        //learner.getDiscreteState()->takeRandomAction();
         learner.doRL();
         
         //printf("Waiting for Action to complete.\n");
@@ -53,7 +69,7 @@ int main(int argc, char *argv[])
  
     printf("Right Arm Learner:\n");
     //learner.print(true);
-    
+    */
     
     printf("All finished\n");
     return 1;

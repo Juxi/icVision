@@ -1,7 +1,11 @@
+#include <fstream>
 #include <unistd.h>
 #include <time.h>
 //#include <cmath>
 #include "learner.h"
+//#include "file_reader.h"
+#include "actionTransition.h"
+#include "actionReach.h"
 
 Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d)//, currentState(NULL), currentAction(NULL)
 {
@@ -73,6 +77,96 @@ Learner::~Learner()
     worldClient.interrupt();
 }
 
+
+State* Learner::appendState( Point_d& p )
+{
+    State* newState = new State( redimension(p) );
+    states.push_back(newState);
+    return newState;
+}
+
+TransitionAction* Learner::appendTransitionAction( State* a, State* b, double val, double rew, int num )
+{
+    if ( !a || !b ) return NULL;
+    TransitionAction* action = new TransitionAction( this, a, b, val, rew, num);
+    a->transitionActions.push_back( action );
+    //b->transitionActions.push_back( new TransitionAction( this, b, a) );
+    return action;
+}
+
+ReachAction* Learner::appendReachAction( State* s, yarp::os::ConstString m, double val, double rew, int num )
+{
+    if ( !s ) return NULL;
+    ReachAction* reach = new ReachAction(this,m,s,val,rew,num);
+    s->reachActions.push_back(reach);
+    return reach;
+}
+
+/*bool State::appendReachAction(Learner* learner,yarp::os::ConstString markerName )
+{
+    if ( !learner )
+        return false;
+    
+    reachActions.push_back(new ReachAction(learner,markerName,this));
+    return true;
+}
+
+bool Learner::loadFile( std::string& fileName )
+{
+    //std::vector<State*> statePointers; // we do this to avoid random access to the std::vector where the states are stored in the learner
+    Map_t fileMap = readFileIntoMap( fileName );
+    Map_t::iterator it = fileMap.find("STATES");
+    Vector_t &poses(it->second);
+    
+    std::map<int,State*> indexMap;
+    int idx = 0;
+    for (Vector_t::iterator j=poses.begin(); j != poses.end(); ++j) {
+        Point_d q(j->size(),j->begin(),j->end());
+        indexMap[idx] = appendState(q);
+        idx++;
+    }
+    
+    //it = fileMap.find("STATES");
+    //Vector_t &poses(it->second);
+    
+    return true;
+}
+
+
+void Learner::writeFile( std::string& fileName )
+{
+    Map_t map;
+    Vector_t vectors;
+    std::vector<State*>::iterator i;
+    Point_d::Cartesian_const_iterator j;
+    for ( i=states.begin(); i!=states.end(); ++i ) {
+        std::vector<double> v;
+        for ( j=(*i)->cartesian_begin(); j!=(*i)->cartesian_end(); ++j ) {
+            v.push_back(*j);
+        }
+        vectors.push_back(v);
+    }
+    map["STATES"] = vectors;
+    writeMapToFile(map,fileName);
+}*/
+
+/*State* Learner::getState( int n )
+{
+    if (states.size()==0) return NULL;
+    int i=0;
+    std::vector<State*>::iterator s = states.begin();
+    while ( i<n ) {
+        s++;
+        if (s==states.end()) return NULL;
+    }
+    return *s;
+}
+
+bool Learner::isInList( State* )
+{
+    
+}*/
+
 Point_d Learner::redimension(Point_d& p)
 {
     int dimCount = 0;
@@ -91,7 +185,7 @@ Point_d Learner::redimension(Point_d& p)
 
 Point_d Learner::getRealState() {
     yarp::os::Bottle* b = statePort.read();
-    std::list<double> bList;
+    std::vector<double> bList;
     for (int i=0; i<b->size(); i++)
         bList.push_back(b->get(i).asDouble());
     return Point_d(bList.size(),bList.begin(),bList.end());
@@ -102,7 +196,7 @@ State* Learner::getDiscreteState() {
     State* nearestState = NULL;
     if ( states.size() > 0 ) {
         nearestState = *(states).begin();
-        for (std::list<State*>::iterator j=states.begin(); j!=states.end(); ++j) {
+        for (std::vector<State*>::iterator j=states.begin(); j!=states.end(); ++j) {
             //std::cout << "    j: " << **j << "\t\t" << (q-**j).squared_length() << std::endl;
             if ( (q-**j).squared_length() < (q-*nearestState).squared_length() ) {
                 nearestState = *j;
@@ -114,22 +208,22 @@ State* Learner::getDiscreteState() {
 
 bool Learner::deleteState( const State* s )
 {
-    /*for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
-        for (std::list<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
-            for (std::list< TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k) {
+    /*for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
+        for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
+            for (std::vector< TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k) {
                 if (k->s_prime==s) {
-                    std::list< TransitionAction::S_Prime >::iterator K=k;
+                    std::vector< TransitionAction::S_Prime >::iterator K=k;
                     (*j)->transition_belief.erase(k,++K);
                 }
             }
             if ((*j)->destination_state == s) {
-                std::list<TransitionAction*>::iterator J=j,deadTransition=j;
+                std::vector<TransitionAction*>::iterator J=j,deadTransition=j;
                 (*i)->transitionActions.erase(j,++J);
                 delete *deadTransition;
             }
         }
         if (*i==s) {
-            std::list<State*>::iterator I=i,deadState=i;
+            std::vector<State*>::iterator I=i,deadState=i;
             states.erase(i,++I);
             delete *deadState;
         }
@@ -268,7 +362,7 @@ void  Learner::doRL()
     {
         maxDelta=0;
         printf("***************************************************\n");
-        for (std::list<State*>::iterator i = states.begin(); i!=states.end(); ++i)
+        for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i)
         {
             printf("State: %p\n",*i);
             double delta = (*i)->computeValue();
@@ -278,37 +372,134 @@ void  Learner::doRL()
     mutex.post();
 }
 
-/*
+
 void Learner::print(bool printAll)
 {
     //printf("\n\n");
     //int stateCount=0;
-    for (std::list<State*>::iterator i=states.begin(); i!=states.end(); ++i)
+    for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i)
     {
-        printf("\nState %p",*i);
+        printf("\nState %p - ",*i);
         std::cout << **i << std::endl;
         
-        printf("\t\t\tsPrime:");
+        //printf("\t\t\tsPrime:");
        
-           for (std::list< State::TransitionAction::S_Prime >::iterator k=(*(*i)->transitionActions.begin())->transition_belief.begin(); k!=(*(*i)->transitionActions.begin())->transition_belief.end(); ++k)
+           /*for (std::vector< S_Prime >::iterator k=(*(*i)->transitionActions.begin())->transition_belief.begin(); k!=(*(*i)->transitionActions.begin())->transition_belief.end(); ++k)
             {
                 printf("\t\t%p", k->s_prime);
             }
             printf("\n");
+        */
         
         int actionCount=0;
-        for (std::list<State::TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
+        for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
         {
             printf("  Action %p, dest: %p",*j,(*j)->destination_state);
-            for (std::list< State::TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
+            for (std::vector< S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
             {
-                printf("\t(%f, %d)", k->prob, k->num);
+                printf("\t(%p - %f, %d)", k->s_prime, k->prob, k->num);
             }
             printf("\n");
             //printf("\n Starting Action.....\n");
             //(*j)->start();
             //(*j)->stop();
         }
+        for (std::vector<ReachAction*>::iterator j=(*i)->reachActions.begin(); j!=(*i)->reachActions.end(); ++j)
+        {
+            printf("  ReachAction %p, marker: %s\n",*j,(*j)->marker.c_str());
+        }
     }
     printf("\n");
-}*/
+}
+
+void Learner::loadFile( std::string& filename )
+{
+    std::vector<TransitionAction*> transitionActions;
+    std::vector<ReachAction*> reachActions;
+    
+	std::ifstream in_file(filename.c_str());
+    
+	if (!in_file) {
+		std::cerr << "No File Found: " << filename << std::endl;
+		return;
+	}
+    
+    int doWhat = -1;
+    while ( in_file.good() )
+    {
+		std::string line;
+		getline(in_file, line);
+        //std::remove(line.begin(), line.end(), ' ');
+        
+        if ( line.empty() || line.compare(0,1,"#") == 0 ) { continue; }
+        else if ( line.compare("STATES")==0 ) { doWhat = 0; continue; }
+        else if ( line.compare("TRANSITION_ACTIONS")==0 ) { doWhat = 1; continue; }
+        else if ( line.compare("TRANSITION_BELIEFS")==0 ) { doWhat = 2; continue; }
+        else if ( line.compare("REACH_ACTIONS")==0 ) { doWhat = 3; continue; }
+        else if ( line.compare("REACH_BELIEFS")==0 ) { doWhat = 4; continue; }
+        
+        if ( doWhat == 0 ) // get the states/poses
+        {
+            std::istringstream line_reader(line);
+            std::vector<double> pose;
+            while (line_reader.good()) {
+                float number;
+                line_reader >> number;
+                pose.push_back(number);
+            }
+            if (!pose.size())
+                continue;
+            Point_d q(pose.size(),pose.begin(),pose.end());
+            appendState(q);
+        }
+        else if ( doWhat == 1 ) // connect the states with transition actions
+        {
+            int a,b,num;
+            double reward,value;
+            std::istringstream line_reader(line);
+            line_reader >> a;
+            line_reader >> b;
+            line_reader >> num;
+            line_reader >> reward;
+            line_reader >> value;
+            transitionActions.push_back( appendTransitionAction(states.at(a),states.at(b),value,reward,num) );
+        }
+        else if ( doWhat == 2 ) // initialize the state transition beliefs/probabilities
+        {
+            int action, s_prime, num;
+            double prob;
+            std::istringstream line_reader(line);
+            line_reader >> action;
+            line_reader >> s_prime;
+            line_reader >> num;
+            line_reader >> prob;
+            transitionActions.at(action)->appendSPrime(states.at(s_prime), num, prob);
+        }
+        else if ( doWhat == 3 ) // append reach actions to states
+        {
+            int stateIdx,num;
+            std::string m;
+            double reward,value;
+            std::istringstream line_reader(line);
+            line_reader >> stateIdx;
+            line_reader >> m;
+            line_reader >> num;
+            line_reader >> reward;
+            line_reader >> value;
+            reachActions.push_back( appendReachAction(states.at(stateIdx),m.c_str(),value,reward,num) );
+        }
+        else if ( doWhat == 4 ) // append reward beliefs to reach actions
+        {
+            int reachIdx;
+            double x,y,z;
+            std::istringstream line_reader(line);
+            line_reader >> reachIdx;
+            line_reader >> x;
+            line_reader >> y;
+            line_reader >> z;
+            Point_3 p(x,y,z);
+            reachActions.at(reachIdx)->appendToHistory(p);
+        }
+        
+    }
+}
