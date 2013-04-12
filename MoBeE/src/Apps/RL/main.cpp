@@ -33,8 +33,6 @@ int main(int argc, char *argv[])
     // path to the XML file that defines the robot model
     std::string fileName = config.find("file").asString().c_str();
     
-    printf("WTF!?!\n\n");
-    
     // prepare the random number generator
     srand(time(0));
     
@@ -44,8 +42,10 @@ int main(int argc, char *argv[])
     learner.loadFile(fileName);
     
     learner.print();
-    //std::string outFileName = "testFile.ini";
-    //learner.writeFile(outFileName);
+    
+    
+    std::string outFileName = "testFile.ini";
+    learner.writeFile(outFileName);
     
     /*
     

@@ -503,3 +503,79 @@ void Learner::loadFile( std::string& filename )
         
     }
 }
+
+void Learner::writeFile( std::string& filename )
+{
+	std::ofstream out_file(filename.c_str());
+	//out_file.precision(35);
+   
+    int stateCount = 0;
+    out_file << "STATES" << std::endl;
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        (*i)->tempIdx = stateCount;
+        for ( Point_d::Cartesian_const_iterator j = (*i)->cartesian_begin(); j != (*i)->cartesian_end(); ++j ) {
+            out_file << *j << " ";
+        }
+        out_file << std::endl;
+        stateCount++;
+    }
+    out_file << std::endl;
+    
+    int transitionCount = 0;
+    out_file << "TRANSITION_ACTIONS" << std::endl;
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
+            (*j)->tempIdx = transitionCount++;
+            out_file << (*j)->parentState->tempIdx << " "
+                     << (*j)->destination_state->tempIdx << " "
+                     << (*j)->num << " "
+                     << (*j)->r << " "
+                     << (*j)->v
+                     << std::endl;
+        }
+    }
+    out_file << std::endl;
+    
+    out_file << "TRANSITION_BELIEFS" << std::endl;
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
+            for ( std::vector<S_Prime>::iterator k = (*j)->transition_belief.begin(); k != (*j)->transition_belief.end(); ++k ) {
+                out_file << (*j)->tempIdx << " "
+                         << k->s_prime->tempIdx << " "
+                         << k->num << " "
+                << k->prob << std::endl;
+            }
+        }
+    }
+    out_file << std::endl;
+    
+    int reachCount = 0;
+    out_file << "REACH_ACTIONS" << std::endl;
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
+            (*j)->tempIdx = reachCount++;
+            out_file << (*j)->parentState->tempIdx << " "
+            << (*j)->marker << " "
+            << (*j)->num << " "
+            << (*j)->r << " "
+            << (*j)->v
+            << std::endl;
+        }
+    }
+    out_file << std::endl;
+    
+    out_file << "REACH_BELIEFS" << std::endl;
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
+            for ( std::vector<Point_3>::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
+                out_file << (*j)->tempIdx << " "
+                << k->cartesian(0) << " "
+                << k->cartesian(1) << " "
+                << k->cartesian(2)
+                << std::endl;
+            }
+            
+        }
+    }
+    out_file << std::endl;
+}
