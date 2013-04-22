@@ -29,7 +29,8 @@ public:
     State*              appendState( Point_d& p );
     TransitionAction*   appendTransitionAction( State* a, State* b, double val=0.0, double rew=0.0, int num=0 );
     ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
-    
+    std::vector< yarp::os::ConstString > getMarkers() { return markers; }
+    std::vector< State* > getStates() { return states; }
     
     bool deleteState( const State* );
     

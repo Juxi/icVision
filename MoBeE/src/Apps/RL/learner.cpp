@@ -395,9 +395,9 @@ void Learner::print(bool printAll)
         for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
         {
             printf("  Action %p, dest: %p",*j,(*j)->destination_state);
-            for (std::vector< S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
+            for (std::vector< S_Prime* >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
             {
-                printf("\t(%p - %f, %d)", k->s_prime, k->prob, k->num);
+                printf("\t(%p - %f, %d)", (*k)->s_prime, (*k)->prob, (*k)->num);
             }
             printf("\n");
             //printf("\n Starting Action.....\n");
@@ -521,29 +521,34 @@ void Learner::writeFile( std::string& filename )
     }
     out_file << std::endl;
     
+    printf("\n\n********************\n");
     int transitionCount = 0;
     out_file << "TRANSITION_ACTIONS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        printf("state: %p\n",*i);
         for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
-            (*j)->tempIdx = transitionCount++;
+            printf(" transition: %p\n",*j);
+            (*j)->tempIdx = transitionCount;
             out_file << (*j)->parentState->tempIdx << " "
                      << (*j)->destination_state->tempIdx << " "
-                     << (*j)->num << " "
-                     << (*j)->r << " "
-                     << (*j)->v
+                     << (*j)->isTried() << " "
+                     << (*j)->reward() << " "
+                     << (*j)->value()
                      << std::endl;
+            transitionCount++;
         }
     }
     out_file << std::endl;
+    printf("\n********************\n\n");
     
     out_file << "TRANSITION_BELIEFS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
-            for ( std::vector<S_Prime>::iterator k = (*j)->transition_belief.begin(); k != (*j)->transition_belief.end(); ++k ) {
+            for ( std::vector<S_Prime*>::iterator k = (*j)->transition_belief.begin(); k != (*j)->transition_belief.end(); ++k ) {
                 out_file << (*j)->tempIdx << " "
-                         << k->s_prime->tempIdx << " "
-                         << k->num << " "
-                << k->prob << std::endl;
+                         << (*k)->s_prime->tempIdx << " "
+                         << (*k)->num << " "
+                << (*k)->prob << std::endl;
             }
         }
     }
