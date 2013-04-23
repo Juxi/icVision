@@ -15,6 +15,27 @@ State::State(Point_d q) : Point_d(q), value(0.0)
 //bool State::connectToAll(){}
 //bool State::disconnectFromAll(){}
 
+
+Action* State::greedyAction()
+{
+    Action* greedy_action = NULL;
+    if ( transitionActions.size() > 0 ) {
+        std::vector<TransitionAction*>::iterator a = transitionActions.begin();
+        for ( a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
+            if ( !greedy_action || (*a)->value() > greedy_action->value() )
+                greedy_action = *a;
+        }
+    }
+    if ( reachActions.size() > 0 ) {
+        std::vector<ReachAction*>::iterator a = reachActions.begin();
+        for ( a = reachActions.begin(); a != reachActions.end(); ++a ) {
+            if ( !greedy_action || (*a)->value() > greedy_action->value() )
+                greedy_action = *a;
+        }
+    }
+    return greedy_action;
+}
+
 Action* State::exploreTransition()
 {
     // Try the least tried state transition
@@ -28,19 +49,18 @@ Action* State::exploreTransition()
             leastTriedAction = *a;
     }
     
-    printf("RUNNING LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
-    leastTriedAction->start();
+    printf("LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
+    //leastTriedAction->start();
     
     return leastTriedAction;
 }
 
-Action* State::reach( Point_3 p )
+Action* State::reach()
 {
-    printf("RUNNING A REACH\n");
+    printf("REACH\n");
     if ( reachActions.size() > 0 ) {
-        std::vector<ReachAction*>::iterator a = reachActions.begin();
-        (*a)->runReach( p );
-        return *a;
+        return *reachActions.begin();
+        //(*a)->runReach( p );
     }
     return NULL;
 }
@@ -61,7 +81,7 @@ double State::computeValue()
             maxDelta = delta;
         //sum += (*r)->value;
         
-        printf("  RAction: %p value: %f, reward: %f\n", *r, (*r)->value(), (*r)->reward());
+        //printf("  RAction: %p value: %f, reward: %f\n", *r, (*r)->value(), (*r)->reward());
     }
     
     for ( std::vector<TransitionAction*>::iterator j = transitionActions.begin(); j != transitionActions.end(); ++j )
@@ -74,7 +94,7 @@ double State::computeValue()
             maxDelta = delta;
         
         std::pair<const State*, double> s_prime = (*j)->getTransitionBelief();
-        printf("  SAction: %p d: %p, p: %f v: %f, r: %f\n", *j, s_prime.first, s_prime.second, (*j)->value(), (*j)->reward());
+        //printf("  SAction: %p d: %p, p: %f v: %f, r: %f\n", *j, s_prime.first, s_prime.second, (*j)->value(), (*j)->reward());
     }
     value = maxValue;
     return maxDelta;

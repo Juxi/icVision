@@ -33,6 +33,8 @@ public:
     double reward() { return r; }
     double value() { return v; }
     
+    virtual void start( Point_3 p ) { yarp::os::RateThread::start(); }
+    
 protected:
     
     Action( Learner* l,
@@ -48,7 +50,7 @@ protected:
                                 num(numTries),
                                 v(value),
                                 r(reward) {}
-    ~Action(){}
+    virtual ~Action(){}
     
     double updateValue();           // returns delta value
     

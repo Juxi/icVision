@@ -23,8 +23,11 @@ class State : public Point_d
 public:
     
     double  getValue() const { return value; }
+    
+    Action* greedyAction();
     Action* exploreTransition();
-    Action* reach( Point_3 p );
+    Action* reach();
+    //Action* explore();
     
 private:
      

@@ -361,10 +361,10 @@ void  Learner::doRL()
     do
     {
         maxDelta=0;
-        printf("***************************************************\n");
+        //printf("***************************************************\n");
         for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i)
         {
-            printf("State: %p\n",*i);
+            //printf("State: %p\n",*i);
             double delta = (*i)->computeValue();
             if ( delta>maxDelta ) maxDelta = delta;
         } 
@@ -525,9 +525,9 @@ void Learner::writeFile( std::string& filename )
     int transitionCount = 0;
     out_file << "TRANSITION_ACTIONS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
-        printf("state: %p\n",*i);
+        //printf("state: %p\n",*i);
         for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
-            printf(" transition: %p\n",*j);
+            //printf(" transition: %p\n",*j);
             (*j)->tempIdx = transitionCount;
             out_file << (*j)->parentState->tempIdx << " "
                      << (*j)->destination_state->tempIdx << " "
@@ -539,7 +539,7 @@ void Learner::writeFile( std::string& filename )
         }
     }
     out_file << std::endl;
-    printf("\n********************\n\n");
+    //printf("\n********************\n\n");
     
     out_file << "TRANSITION_BELIEFS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {

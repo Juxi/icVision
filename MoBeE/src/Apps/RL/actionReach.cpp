@@ -1,24 +1,24 @@
 #include "actionReach.h"
 #include "learner.h"
 
-Point_3 ReachAction::easyReach()
+/*Point_3 ReachAction::easyReach()
 {
     Point_3 p;
     Vector_3 norm,noise((double)rand()/RAND_MAX,(double)rand()/RAND_MAX,(double)rand()/RAND_MAX);
     parentLearner->getMarkerState(marker, p, norm);
     norm = norm/sqrt(norm.squared_length());
     return p + 0.15*norm ;//+ 0.1*noise;
-}
+}*/
 
 bool ReachAction::threadInit()
 {
     Action::threadInit();
     
-    parentLearner->setAttractor(*parentLearner->getDiscreteState());
-    yarp::os::Time::delay(1);
-    
     // visualize the target point in the world model
     mobeeObjectName = parentLearner->mkSphere(reachTarget.x(), reachTarget.y(), reachTarget.z(), 0.02);
+    
+    parentLearner->setAttractor(*parentLearner->getDiscreteState());
+    yarp::os::Time::delay(1);
     
     // gains for the control signal
     forceGain = 5000.0;

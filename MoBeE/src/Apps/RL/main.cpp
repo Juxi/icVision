@@ -71,14 +71,26 @@ int main(int argc, char *argv[])
     {
         printf("\nMain: COUNT = %d\n",count);
         
-        Point_3 reachPoint(-0.3,0.1,0.0);
+        Action* a = NULL;
+        if ( rand()%2 ) {
+            printf("Taking GREEDY Action.\n");
+            a = learner.getDiscreteState()->greedyAction();
+        } else {
+            if ( rand()%2 ) {
+                printf("Taking EXPLORATORY Action.\n");
+                a = learner.getDiscreteState()->exploreTransition();
+            }
+            else {
+                printf("Taking REACH Action.\n");
+                a = learner.getDiscreteState()->reach();
+            }
+        }
         
-        Action* a;
-        if ( rand()%2 )
-            a = learner.getDiscreteState()->exploreTransition();
-        else
-            a = learner.getDiscreteState()->reach(reachPoint);
-
+        if ( a ) {
+            Point_3 reachPoint(-0.3,0.1,0.0);
+            a->start( reachPoint );
+        }
+        
         while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
         
         learner.doRL();

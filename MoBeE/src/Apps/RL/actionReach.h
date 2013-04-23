@@ -19,6 +19,10 @@ class ReachAction : public Action
     friend class Learner;
     friend class State;
     
+public:
+    
+    void start( Point_3 p ) { reachTarget = p; yarp::os::RateThread::start(); }
+    
 private:
     
     ReachAction(    Learner* l,
@@ -36,9 +40,10 @@ private:
     ~ReachAction(){}
     
     void appendToHistory(Point_3 p){ history.push_back(p); }
-    double predictReward(Point_3);
-    void runReach(Point_3 p) { reachTarget = p; start(); }
-    Point_3 easyReach();
+    //double predictReward(Point_3);
+    
+    //void runReach(Point_3 p)
+    //Point_3 easyReach();
 
     int tempIdx;
     yarp::os::ConstString marker;
@@ -50,7 +55,7 @@ private:
     //std::vector< std::pair<Point_3,bool> > history;
     std::vector<Point_3> history;
     
-    void start() { Action::start(); }
+    //void start() { Action::start(); }
     void sendForceCommand(bool withTorque=false);
     bool threadInit();
     void threadRelease();
