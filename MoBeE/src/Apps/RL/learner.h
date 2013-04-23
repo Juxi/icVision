@@ -45,7 +45,7 @@ public:
     yarp::os::ConstString mkSphere( double x, double y, double z, double r );
     void rmGeom( yarp::os::ConstString& );
     
-    
+    void generateValueFunction(Point_3);
     
     bool checkMutex() { return mutex.check(); }
     void postMutex() { mutex.post(); }
@@ -78,6 +78,8 @@ private:
                         worldClient;
     
     std::vector< yarp::os::ConstString > markers;
+    
+    
 };
 #endif
 /** @} */

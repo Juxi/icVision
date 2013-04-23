@@ -10,12 +10,23 @@
     return p + 0.15*norm ;//+ 0.1*noise;
 }*/
 
+
+void ReachAction::predictReward( Point_3 p )
+{
+    r = 0.0;
+    if ( history.size()>0 ) {
+        for ( std::vector< std::pair<Point_3,double> >::iterator i = history.begin(); i != history.end(); ++i )
+            r += 1.0/((p-i->first).squared_length()+1) * i->second;
+        r /= history.size();
+    }
+}
+
 bool ReachAction::threadInit()
 {
     Action::threadInit();
     
     // visualize the target point in the world model
-    mobeeObjectName = parentLearner->mkSphere(reachTarget.x(), reachTarget.y(), reachTarget.z(), 0.02);
+    //mobeeObjectName = parentLearner->mkSphere(reachTarget.x(), reachTarget.y(), reachTarget.z(), 0.02);
     
     parentLearner->setAttractor(*parentLearner->getDiscreteState());
     yarp::os::Time::delay(1);
@@ -36,7 +47,14 @@ bool ReachAction::threadInit()
 void ReachAction::threadRelease()
 {
     num++;
-    parentLearner->rmGeom(mobeeObjectName);
+    history.push_back( std::pair<Point_3,double>(reachTarget,r) );
+    //parentLearner->rmGeom(mobeeObjectName);
+    
+    relax();
+    //parentLearner->stopForcing();
+    //if ( !waitForSteady() )
+    //    printf("RELAX TIMED OUT!!!! :-0\n");
+    
     Action::threadRelease();
 }
 
@@ -72,7 +90,7 @@ void ReachAction::sendForceCommand( bool withTorque )
             //printf("torqueDir %f, %f, %f\n",direction.x(),direction.y(),direction.z());
             
             //err = err * torqueMagnitude;
-            torque = (torqueMagnitude+1)/2*torqueDirection;
+            torque = torqueGain * (torqueMagnitude+1)/2*torqueDirection;
         }
     }
     parentLearner->setOpSpace(marker, force, torque);
@@ -91,34 +109,18 @@ void ReachAction::run()
     if (parentLearner->isStable()) {
         if ( err < 0.003 )
         {
-            // GIVE REWARD
             r = 1.0; 
-            history.push_back( reachTarget );
-      
             printf("\nFOUND REACH TARGET!!! Got reward: %f\n",r);
-            //printf("\nFOUND REACH TARGET!!! Set Position pre-reach pose.\n");
-            //setAttractor(learner->getRealState());
-            
-            //for (int i=0; i<10; i++ ) {
-            //    printf("am i on the target???\n");
-            //    yarp::os::Time::delay(1.0);
-            //}
-            
-        } else
-            printf("\n STEADY STATE REACHED, STOP FORCING\n");
-        
-        //printf("\nRETURNING TO NEAREST STATE.\n");
-        //setAttractor(*learner->getDiscreteState());
-        parentLearner->stopForcing();
-        if ( !waitForSteady() ) printf("RELAX TIMED OUT!!!! :-0\n");
+        } else {
+            r = -1.0;
+            printf("\n STEADY STATE REACHED!!! Got reward: %f\n",r);
+        }
         stop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout )
     {
-        printf("REACH TIMED OUT, STOP FORCING :-(\n");
-        //setAttractor(*parentState);
-        parentLearner->stopForcing();
-        if ( !waitForSteady() ) printf("RELAX TIMED OUT!!!! :-0\n");
+        r = -1.0;
+        printf("REACH TIMED OUT!!! Got reward: %f\n",r);
         stop();
     }
     

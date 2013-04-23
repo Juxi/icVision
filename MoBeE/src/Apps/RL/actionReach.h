@@ -21,6 +21,7 @@ class ReachAction : public Action
     
 public:
     
+    void predictReward( Point_3 p );
     void start( Point_3 p ) { reachTarget = p; yarp::os::RateThread::start(); }
     
 private:
@@ -39,7 +40,8 @@ private:
                                     forceTimeout(timeout/2){}
     ~ReachAction(){}
     
-    void appendToHistory(Point_3 p){ history.push_back(p); }
+    void appendToHistory( Point_3 p, double r ){ history.push_back( std::pair<Point_3,double>(p,r) ); }
+    
     //double predictReward(Point_3);
     
     //void runReach(Point_3 p)
@@ -52,8 +54,8 @@ private:
     
     Point_3 reachTarget;
     yarp::os::ConstString mobeeObjectName;
-    //std::vector< std::pair<Point_3,bool> > history;
-    std::vector<Point_3> history;
+    std::vector< std::pair<Point_3,double> > history;
+    //std::vector<Point_3> history;
     
     //void start() { Action::start(); }
     void sendForceCommand(bool withTorque=false);

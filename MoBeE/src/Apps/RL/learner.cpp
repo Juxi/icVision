@@ -167,6 +167,18 @@ bool Learner::isInList( State* )
     
 }*/
 
+
+void Learner::generateValueFunction(Point_3 p)
+{
+    for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
+            (*j)->predictReward(p);
+            printf("Reach action: %p - predicted reward %f\n",*j,(*j)->reward());
+        }
+    }
+    doRL();
+}
+
 Point_d Learner::redimension(Point_d& p)
 {
     int dimCount = 0;
@@ -491,14 +503,15 @@ void Learner::loadFile( std::string& filename )
         else if ( doWhat == 4 ) // append reward beliefs to reach actions
         {
             int reachIdx;
-            double x,y,z;
+            double x,y,z,reward;
             std::istringstream line_reader(line);
             line_reader >> reachIdx;
             line_reader >> x;
             line_reader >> y;
             line_reader >> z;
+            line_reader >> reward;
             Point_3 p(x,y,z);
-            reachActions.at(reachIdx)->appendToHistory(p);
+            reachActions.at(reachIdx)->appendToHistory(p,reward);
         }
         
     }
@@ -572,11 +585,12 @@ void Learner::writeFile( std::string& filename )
     out_file << "REACH_BELIEFS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
-            for ( std::vector<Point_3>::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
+            for ( std::vector< std::pair<Point_3,double> >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
                 out_file << (*j)->tempIdx << " "
-                << k->cartesian(0) << " "
-                << k->cartesian(1) << " "
-                << k->cartesian(2)
+                << k->first.cartesian(0) << " "
+                << k->first.cartesian(1) << " "
+                << k->first.cartesian(2) << " "
+                << k->second
                 << std::endl;
             }
             
