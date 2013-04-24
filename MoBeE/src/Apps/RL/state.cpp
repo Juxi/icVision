@@ -38,9 +38,15 @@ Action* State::greedyAction()
 
 Action* State::exploreTransition()
 {
-    // Try the least tried state transition
+    if (!transitionActions.size())
+        return NULL;
+    
+    // Random state transition
+    printf("RANDOM STATE TRANSITION...\n");
     std::vector<TransitionAction*>::iterator a = transitionActions.begin();
-    TransitionAction* leastTriedAction = *transitionActions.begin();
+    return transitionActions.at(rand()%transitionActions.size());
+    
+    /*TransitionAction* leastTriedAction = *transitionActions.begin();
     for ( a = transitionActions.begin(); a != transitionActions.end(); ++a ) //a++;
     {
         std::pair<const State*,double> belief = (*a)->getTransitionBelief();
@@ -50,19 +56,22 @@ Action* State::exploreTransition()
     }
     
     printf("LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
-    //leastTriedAction->start();
+     
+     return *a;
+     */
     
-    return leastTriedAction;
+    
 }
 
 Action* State::reach()
 {
-    printf("REACH\n");
-    if ( reachActions.size() > 0 ) {
-        return *reachActions.begin();
-        //(*a)->runReach( p );
-    }
-    return NULL;
+    if (!reachActions.size())
+        return NULL;
+    
+    // Random reach
+    printf("REACHING...\n");
+    std::vector<ReachAction*>::iterator a = reachActions.begin();
+    return reachActions.at(rand()%reachActions.size());
 }
 
 double State::computeValue()

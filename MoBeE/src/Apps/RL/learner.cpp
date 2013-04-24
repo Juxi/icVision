@@ -334,6 +334,25 @@ void Learner::rmGeom( yarp::os::ConstString& name )
     //printf("  world response: %s\n\n", worldRsp.toString().c_str());
 }
 
+
+void Learner::defTarget( yarp::os::ConstString& name )
+{
+    yarp::os::Bottle worldCmd, worldRsp;
+    worldCmd.addVocab(yarp::os::Vocab::encode("def"));
+    worldCmd.addString(name);
+    worldCmd.addVocab(yarp::os::Vocab::encode("tgt"));
+    worldClient.write(worldCmd,worldRsp);
+}
+
+void Learner::defObstacle( yarp::os::ConstString& name )
+{
+    yarp::os::Bottle worldCmd, worldRsp;
+    worldCmd.addVocab(yarp::os::Vocab::encode("def"));
+    worldCmd.addString(name);
+    worldCmd.addVocab(yarp::os::Vocab::encode("obs"));
+    worldClient.write(worldCmd,worldRsp);
+}
+
 void Learner::getMarkerState( yarp::os::ConstString& markerName, Point_3& p, Vector_3& n)
 {
     // get the state of the hand

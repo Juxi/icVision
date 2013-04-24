@@ -44,6 +44,8 @@ public:
     bool isStable();
     yarp::os::ConstString mkSphere( double x, double y, double z, double r );
     void rmGeom( yarp::os::ConstString& );
+    void defTarget( yarp::os::ConstString& );
+    void defObstacle( yarp::os::ConstString& );
     
     void generateValueFunction(Point_3);
     

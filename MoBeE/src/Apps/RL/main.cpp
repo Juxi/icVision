@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <time.h>
 #include "learner.h"
+#include "actionReach.h"
 
 std::vector<Point_d> gridSample( int dim, int num, double scaling )
 {
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
         learner.loadFile(fileName);
     } else {
         // append a grid of states
-        std::vector<Point_d> samples = gridSample(4,33,0.5);
+        std::vector<Point_d> samples = gridSample(4,81,0.5);
         //std::vector<Point_d> samples = gridSample(2,4,0.5);
         
         std::vector< yarp::os::ConstString > markers = learner.getMarkers();
@@ -66,21 +67,21 @@ int main(int argc, char *argv[])
     
     Point_3 p(-0.3,0.1,0.0);
     Point_3 q(-0.2,0.2,0.1);
-    Point_3* reachPoint = &p;
-    yarp::os::ConstString objectName;
-    objectName = learner.mkSphere(reachPoint->x(), reachPoint->y(), reachPoint->z(), 0.02);
+    Point_3* targetPoint = &q;
+    yarp::os::ConstString reachTarget;
+    reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
     
     // TAKE ACTIONS AND DO RL
     std::string outFileBaseName = "outFile";
-    while ( count < 1000)
+    while ( count < 10000)
     {
         printf("\nMain: COUNT = %d\n",count);
         
         Action* a = NULL;
-        if ( rand()%2 ) {
-            printf("Taking GREEDY Action.\n");
-            a = learner.getDiscreteState()->greedyAction();
-        } else {
+        //if ( rand()%2 ) {
+        //    printf("Taking GREEDY Action.\n");
+        //    a = learner.getDiscreteState()->greedyAction();
+        //} else {
             if ( rand()%2 ) {
                 printf("Taking EXPLORATORY Action.\n");
                 a = learner.getDiscreteState()->exploreTransition();
@@ -89,14 +90,15 @@ int main(int argc, char *argv[])
                 printf("Taking REACH Action.\n");
                 a = learner.getDiscreteState()->reach();
             }
-        }
+        //}
         
-        if ( a ) {
-            
-            a->start( *reachPoint );
-        }
+        ReachAction* reach = dynamic_cast<ReachAction*>(a);
+        //if ( reach ) learner.defTarget(reachTarget);
         
+        a->start(*targetPoint);
         while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        //if ( reach ) learner.defObstacle(reachTarget);
         
         learner.doRL();
         
@@ -106,12 +108,13 @@ int main(int argc, char *argv[])
             std::stringstream suffix;
             suffix << count << ".ini";
             std::string outFile = outFileBaseName + suffix.str();
+            
+            //learner.rmGeom(reachTarget);
+            //if ( targetPoint == &p ) targetPoint = &q;
+            //else if ( targetPoint == &q ) targetPoint = &p;
+            //reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
+            //learner.generateValueFunction(*targetPoint);
             learner.writeFile(outFile);
-            learner.rmGeom(objectName);
-            if ( reachPoint == &p ) reachPoint = &q;
-            else if ( reachPoint == &q ) reachPoint = &p;
-            objectName = learner.mkSphere(reachPoint->x(), reachPoint->y(), reachPoint->z(), 0.02);
-            learner.generateValueFunction(*reachPoint);
         }
     }
  
