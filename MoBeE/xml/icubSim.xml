@@ -183,9 +183,9 @@
                 <link z="-.0645" y="-0.011" radius="0">
                 
                 <!-- HAND -->
-                <link y="-.03" radius="0">
+                <link y="-0.03" z="-0.03" length="0.05" radius="0">
                   <link y="1" radius="0">
-                      <marker name="right_hand" ny="-1" tracer="30"/>
+                      <marker name="right_hand" nz="-1" ny="-1" tracer="30"/>
                       
                   </link>
                   <!--<link y="-0.05" radius="0">
@@ -483,7 +483,7 @@
                 <!-- HAND -->
                 <link y=".03" radius="0">
                     <link y="1" radius="0">
-                        <marker name="left_hand" ny="1" tracer="30"/>
+                        <marker name="left_hand" nz="-1" ny="1" tracer="30"/>
                     </link>
                     <!--<link y="0.05" radius="0">
                         <marker name="left_handpalm"/>

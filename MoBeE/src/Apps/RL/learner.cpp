@@ -77,6 +77,43 @@ Learner::~Learner()
     worldClient.interrupt();
 }
 
+void Learner::tryReaches( Point_3 p )
+{
+    std::string outFileBaseName = "outFile";
+    int count = 0;
+    //std::vector< State* > states = learner->getStates();
+    for (std::vector< State* >::iterator i = states.begin(); i!=states.end(); ++i)
+    {
+        printf("\nSTATE %d:\n\n",count);
+        State* s = getDiscreteState();
+        Action* a;
+        for (std::vector<TransitionAction*>::iterator j = s->transitionActions.begin(); j!=s->transitionActions.end(); ++j )
+        {
+            if ( (*j)->destination_state == *i ) {
+                a = *j;
+                break;
+            }
+        }
+
+        a->start(p);
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+            
+        a = getDiscreteState()->reach();
+        a->start(p);
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+            
+        doRL();
+       
+        
+        count++;
+        if (count%10 == 0) {
+            std::stringstream suffix;
+            suffix << count << ".ini";
+            std::string outFile = outFileBaseName + suffix.str();
+            writeFile(outFile);
+        }
+    }
+}
 
 State* Learner::appendState( Point_d& p )
 {

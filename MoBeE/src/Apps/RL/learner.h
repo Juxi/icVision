@@ -22,7 +22,7 @@ public:
     Point_d getRealState();
     State* getDiscreteState();
 
-    
+    void tryReaches(Point_3 p);
     
     //inline appendState(State* state) { states.push_back(state); }
     
@@ -43,6 +43,7 @@ public:
     void stopForcing();
     bool isStable();
     yarp::os::ConstString mkSphere( double x, double y, double z, double r );
+    //yarp::os::ConstString mkCyl( double r, double len, );
     void rmGeom( yarp::os::ConstString& );
     void defTarget( yarp::os::ConstString& );
     void defObstacle( yarp::os::ConstString& );

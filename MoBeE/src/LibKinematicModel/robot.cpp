@@ -378,6 +378,7 @@ void Robot::appendMarkersToModel()
 	for ( i=markers.begin(); i!=markers.end(); ++i ) {
 			model->appendObject( (*i)->getTracerObject() );
 	}
+    //model->appendObject(<#KinematicModel::KinTreeNode *#>)
 }
 
 int Robot::getNumPrimitives()

@@ -31,8 +31,8 @@ void TransitionAction::threadRelease()
     if ( parentLearner->getDiscreteState() != parentState )
         printf("STATE TRANSITION OCCURRED\n");
 
-    parentLearner->setAttractor(*parentLearner->getDiscreteState());
-    yarp::os::Time::delay(1);
+    //parentLearner->setAttractor(*parentLearner->getDiscreteState());
+    //yarp::os::Time::delay(1);
     updateTransitionBelief(parentLearner->getDiscreteState());
     Action::threadRelease();
 }

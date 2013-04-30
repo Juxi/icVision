@@ -67,11 +67,14 @@ int main(int argc, char *argv[])
     
     Point_3 p(-0.3,0.1,0.0);
     Point_3 q(-0.2,0.2,0.1);
-    Point_3* targetPoint = &q;
+    Point_3* targetPoint = &p;
     yarp::os::ConstString reachTarget;
-    reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
+    reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.03);
+    
+    learner.tryReaches(p);
     
     // TAKE ACTIONS AND DO RL
+    /*
     std::string outFileBaseName = "outFile";
     while ( count < 10000)
     {
@@ -92,7 +95,7 @@ int main(int argc, char *argv[])
             }
         //}
         
-        ReachAction* reach = dynamic_cast<ReachAction*>(a);
+        //ReachAction* reach = dynamic_cast<ReachAction*>(a);
         //if ( reach ) learner.defTarget(reachTarget);
         
         a->start(*targetPoint);
@@ -109,14 +112,14 @@ int main(int argc, char *argv[])
             suffix << count << ".ini";
             std::string outFile = outFileBaseName + suffix.str();
             
-            //learner.rmGeom(reachTarget);
-            //if ( targetPoint == &p ) targetPoint = &q;
-            //else if ( targetPoint == &q ) targetPoint = &p;
-            //reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
-            //learner.generateValueFunction(*targetPoint);
+            learner.rmGeom(reachTarget);
+            if ( targetPoint == &p ) targetPoint = &q;
+            else if ( targetPoint == &q ) targetPoint = &p;
+            reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
+            learner.generateValueFunction(*targetPoint);
             learner.writeFile(outFile);
         }
-    }
+    }*/
  
     printf("\n\nRight Arm Learner:\n");
     learner.print(true);

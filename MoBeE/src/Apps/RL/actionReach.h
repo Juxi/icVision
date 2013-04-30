@@ -11,6 +11,7 @@
 #define REACHACTION_H_ACTION_H_
 
 #include "action.h"
+//#include "primitiveObject.h"
 
 class ReachAction : public Action
 {
@@ -49,16 +50,20 @@ private:
 
     int tempIdx;
     yarp::os::ConstString marker;
+    //KinematicModel::PrimitiveObject* e,n;
+    
     double forceGain,torqueGain;
     double forceTimeout;
     
     Point_3 reachTarget;
-    yarp::os::ConstString mobeeObjectName;
+    yarp::os::ConstString mobeeObjectName,eName,nName;
     std::vector< std::pair<Point_3,double> > history;
     //std::vector<Point_3> history;
     
     //void start() { Action::start(); }
-    void sendForceCommand(bool withTorque=false);
+    
+    //double getErr();
+    bool sendForceCommand(); // false if the error is gone
     bool threadInit();
     void threadRelease();
     void run();
