@@ -29,10 +29,11 @@ class Action : public yarp::os::RateThread
     friend class Learner;
 public:
     
-    int    isTried() { return num; }
+    int    timesTried() { return num; }
     double reward() { return r; }
     double value() { return v; }
     
+    virtual void start() { yarp::os::RateThread::start(); }
     virtual void start( Point_3 p ) { yarp::os::RateThread::start(); }
     
 protected:

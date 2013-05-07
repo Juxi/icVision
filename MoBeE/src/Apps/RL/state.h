@@ -24,9 +24,15 @@ public:
     
     double  getValue() const { return value; }
     
-    Action* greedyAction();
-    Action* exploreTransition();
-    Action* reach();
+    
+    
+    Action* leastTriedTransition();
+    Action* leastTriedReach();
+    Action* explore();
+    Action* greedy();
+    
+    Action* randomTransition();
+    Action* randomReach();
     //Action* explore();
     
 private:

@@ -77,42 +77,52 @@ Learner::~Learner()
     worldClient.interrupt();
 }
 
+
+void Learner::tryStateTransitions( int num )
+{
+    for ( int count = 0; count < num; count++ )
+    {
+        printf("\nCOUNT: %d\n\n",count);
+        
+        if (count%10 == 0)
+            writeNumberedFile("outFile",count);
+    
+        Action* a = getDiscreteState()->leastTriedTransition();
+        
+        a->start();
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        doRL();
+    }
+    writeNumberedFile("lastFile");
+}
+
 void Learner::tryReaches( Point_3 p )
 {
-    std::string outFileBaseName = "outFile";
-    int count = 0;
-    //std::vector< State* > states = learner->getStates();
-    for (std::vector< State* >::iterator i = states.begin(); i!=states.end(); ++i)
+    for ( int count = 0; count < 1000; count++ )
     {
-        printf("\nSTATE %d:\n\n",count);
+        printf("\nCOUNT: %d\n\n",count);
+        
+        if (count%10==0)
+            writeNumberedFile("outFile",count);
+        
         State* s = getDiscreteState();
-        Action* a;
-        for (std::vector<TransitionAction*>::iterator j = s->transitionActions.begin(); j!=s->transitionActions.end(); ++j )
-        {
-            if ( (*j)->destination_state == *i ) {
-                a = *j;
-                break;
-            }
-        }
+        Action* a = s->explore();
 
         a->start(p);
         while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
             
-        a = getDiscreteState()->reach();
-        a->start(p);
-        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
-            
         doRL();
-       
-        
-        count++;
-        if (count%10 == 0) {
-            std::stringstream suffix;
-            suffix << count << ".ini";
-            std::string outFile = outFileBaseName + suffix.str();
-            writeFile(outFile);
-        }
     }
+    writeNumberedFile("lastFile");
+}
+
+void Learner::writeNumberedFile( std::string outFileBaseName, int num )
+{
+    std::stringstream suffix;
+    suffix << num << ".ini";
+    std::string outFile = outFileBaseName + suffix.str();
+    writeFile(outFile);
 }
 
 State* Learner::appendState( Point_d& p )
@@ -124,10 +134,17 @@ State* Learner::appendState( Point_d& p )
 
 TransitionAction* Learner::appendTransitionAction( State* a, State* b, double val, double rew, int num )
 {
-    if ( !a || !b ) return NULL;
+    if ( !a || !b ) {
+        printf("WARNING: Tried to connect non-existent states\n");
+        return NULL;
+    }
     TransitionAction* action = new TransitionAction( this, a, b, val, rew, num);
     a->transitionActions.push_back( action );
-    //b->transitionActions.push_back( new TransitionAction( this, b, a) );
+    
+    // optimistic initialization
+    action->appendSPrime( b, 1, 1.0);
+    action->num++;
+    
     return action;
 }
 
@@ -462,7 +479,7 @@ void Learner::print(bool printAll)
         int actionCount=0;
         for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j)
         {
-            printf("  Action %p, dest: %p",*j,(*j)->destination_state);
+            printf("  Action %p, dest: %p, times: %f",*j,(*j)->destination_state,(*j)->num);
             for (std::vector< S_Prime* >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
             {
                 printf("\t(%p - %f, %d)", (*k)->s_prime, (*k)->prob, (*k)->num);
@@ -600,7 +617,7 @@ void Learner::writeFile( std::string& filename )
             (*j)->tempIdx = transitionCount;
             out_file << (*j)->parentState->tempIdx << " "
                      << (*j)->destination_state->tempIdx << " "
-                     << (*j)->isTried() << " "
+                     << (*j)->timesTried() << " "
                      << (*j)->reward() << " "
                      << (*j)->value()
                      << std::endl;

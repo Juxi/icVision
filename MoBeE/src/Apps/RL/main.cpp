@@ -2,6 +2,7 @@
 #include <time.h>
 #include "learner.h"
 #include "actionReach.h"
+#include "actionTransition.h"
 
 std::vector<Point_d> gridSample( int dim, int num, double scaling )
 {
@@ -25,6 +26,12 @@ std::vector<Point_d> gridSample( int dim, int num, double scaling )
     
     return points;
 }
+
+struct StateDst {
+    State* s;
+    bool operator() (State* i,State* j) { return (*s-*i).squared_length() < (*s-*j).squared_length(); }
+    StateDst(State* state):s(state){}
+};
 
 int main(int argc, char *argv[])
 {
@@ -51,17 +58,46 @@ int main(int argc, char *argv[])
         
         std::vector< yarp::os::ConstString > markers = learner.getMarkers();
         for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i ) {
-            learner.appendState(*i);
+            State* s = learner.appendState(*i);
+            printf("appended state: %p\n",s);
         }
         // connect all the states to all the other states and add reach actions
+        printf("\nConnecting States...\n\n");
         std::vector<State*> states = learner.getStates();
-        for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i ) {
-            for ( std::vector<State*>::iterator j = states.begin(); j!=states.end(); ++j ) {
-                if ( *i != *j ) learner.appendTransitionAction(*i, *j);
+        std::vector<State*> nearestStates = states;
+        
+        //for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i )
+        //    printf("states: %p\n",*i);
+        //for ( std::vector<State*>::iterator i = nearestStates.begin(); i!=nearestStates.end(); ++i )
+        //    printf("nearest_states: %p\n",*i);
+        
+        
+        //std::sort (nearestStates.begin(), nearestStates.end(), StateDst(*states.begin()));
+        //for ( std::vector<State*>::iterator i = nearestStates.begin(); i!=nearestStates.end(); ++i )
+        //    printf("sorted_nearest_states: %p %f\n",*i,(**i-**states.begin()).squared_length());
+        
+        //printf("------------------------------------\n");
+        
+        for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i )
+        {
+            printf("state: %p\n",*i);
+            
+            std::sort (nearestStates.begin(), nearestStates.end(), StateDst(*i));
+            
+            for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end(); ++j )
+                printf("sorted_nearest_states: %p %f\n",*j,(**j-**i).squared_length());
+                
+            int num = 0;
+            for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end() && num<16; ++j ) {
+                if (*i!=*j) {
+                    printf("  connecting %p, %p\n",*i,*j);
+                    learner.appendTransitionAction(*i, *j);
+                    num++;
+                }
             }
-            for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j) {
+            
+            for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
                 learner.appendReachAction(*i, *j);
-            }
         }
     }
     
@@ -71,55 +107,10 @@ int main(int argc, char *argv[])
     yarp::os::ConstString reachTarget;
     reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.03);
     
-    learner.tryReaches(p);
     
-    // TAKE ACTIONS AND DO RL
-    /*
-    std::string outFileBaseName = "outFile";
-    while ( count < 10000)
-    {
-        printf("\nMain: COUNT = %d\n",count);
-        
-        Action* a = NULL;
-        //if ( rand()%2 ) {
-        //    printf("Taking GREEDY Action.\n");
-        //    a = learner.getDiscreteState()->greedyAction();
-        //} else {
-            if ( rand()%2 ) {
-                printf("Taking EXPLORATORY Action.\n");
-                a = learner.getDiscreteState()->exploreTransition();
-            }
-            else {
-                printf("Taking REACH Action.\n");
-                a = learner.getDiscreteState()->reach();
-            }
-        //}
-        
-        //ReachAction* reach = dynamic_cast<ReachAction*>(a);
-        //if ( reach ) learner.defTarget(reachTarget);
-        
-        a->start(*targetPoint);
-        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
-        
-        //if ( reach ) learner.defObstacle(reachTarget);
-        
-        learner.doRL();
-        
-        count++;
-        // write an output file 
-        if (count%10 == 0) {
-            std::stringstream suffix;
-            suffix << count << ".ini";
-            std::string outFile = outFileBaseName + suffix.str();
-            
-            learner.rmGeom(reachTarget);
-            if ( targetPoint == &p ) targetPoint = &q;
-            else if ( targetPoint == &q ) targetPoint = &p;
-            reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.02);
-            learner.generateValueFunction(*targetPoint);
-            learner.writeFile(outFile);
-        }
-    }*/
+    learner.tryReaches(p);
+    //learner.tryStateTransitions(1000);
+    
  
     printf("\n\nRight Arm Learner:\n");
     learner.print(true);

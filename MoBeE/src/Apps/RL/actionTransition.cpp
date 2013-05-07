@@ -31,8 +31,8 @@ void TransitionAction::threadRelease()
     if ( parentLearner->getDiscreteState() != parentState )
         printf("STATE TRANSITION OCCURRED\n");
 
-    //parentLearner->setAttractor(*parentLearner->getDiscreteState());
-    //yarp::os::Time::delay(1);
+    parentLearner->setAttractor(*parentLearner->getDiscreteState());
+    relax();
     updateTransitionBelief(parentLearner->getDiscreteState());
     Action::threadRelease();
 }
@@ -79,9 +79,9 @@ double TransitionAction::updateTransitionBelief( State* s )
     
     // if not, add this state to the list of possible outcomes
     if (!found_s_prime) {
-        appendSPrime(s);
+        *i = appendSPrime(s);
         //transition_belief.push_back( S_Prime(s,0.0,0.0) );
-        i = --transition_belief.end();
+        //i = --transition_belief.end();
     }
     
     num++;              //printf("num: %d\n",num);
@@ -106,14 +106,10 @@ void TransitionAction::run()
     if (parentLearner->isStable())
     {
         printf("\n STEADY STATE REACHED  :-)\n");
-        //if (learner->getDiscreteState() == *learner->states.begin()) {
-        //    printf("Got REWARD = 1 for being in STATE 0");
-        //    reward=1;
-        //}
         stop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
-        printf("REACH TIMED OUT :-(\n");
+        printf("TRANSITION TIMED OUT :-(\n");
         stop();
     }
  

@@ -16,7 +16,7 @@ State::State(Point_d q) : Point_d(q), value(0.0)
 //bool State::disconnectFromAll(){}
 
 
-Action* State::greedyAction()
+Action* State::greedy()
 {
     Action* greedy_action = NULL;
     if ( transitionActions.size() > 0 ) {
@@ -36,7 +36,41 @@ Action* State::greedyAction()
     return greedy_action;
 }
 
-Action* State::exploreTransition()
+Action* State::explore()
+{
+    Action* reach = leastTriedReach();
+    Action* transition = leastTriedTransition();
+    if ( reach->timesTried() > transition->timesTried() ) return transition;
+    else return reach;
+}
+
+Action* State::leastTriedReach()
+{
+    ReachAction* leastTriedReach = *reachActions.begin();
+    for ( std::vector<ReachAction*>::iterator a = reachActions.begin(); a != reachActions.end(); ++a ) {
+        if ( (*a)->timesTried() < leastTriedReach->timesTried() )
+            leastTriedReach = *a;
+    }
+    
+    printf("LEAST TRIED REACH: %p\n",leastTriedReach);
+    
+    return leastTriedReach;
+}
+
+Action* State::leastTriedTransition()
+{
+    TransitionAction* leastTriedAction = *transitionActions.begin();
+     for ( std::vector<TransitionAction*>::iterator a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
+         if ( (*a)->timesTried() < leastTriedAction->timesTried() )
+             leastTriedAction = *a;
+     }
+     
+     printf("LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
+     
+     return leastTriedAction;
+}
+
+Action* State::randomTransition()
 {
     if (!transitionActions.size())
         return NULL;
@@ -45,31 +79,15 @@ Action* State::exploreTransition()
     printf("RANDOM STATE TRANSITION...\n");
     std::vector<TransitionAction*>::iterator a = transitionActions.begin();
     return transitionActions.at(rand()%transitionActions.size());
-    
-    /*TransitionAction* leastTriedAction = *transitionActions.begin();
-    for ( a = transitionActions.begin(); a != transitionActions.end(); ++a ) //a++;
-    {
-        std::pair<const State*,double> belief = (*a)->getTransitionBelief();
-        printf("  action: %p, %d tries, destination: %p it leads to state: %p with prob. %f\n",*a,(*a)->isTried(),(*a)->getDestination(),belief.first,belief.second);
-        if ( (*a)->isTried() < leastTriedAction->isTried() )
-            leastTriedAction = *a;
-    }
-    
-    printf("LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
-     
-     return *a;
-     */
-    
-    
 }
 
-Action* State::reach()
+Action* State::randomReach()
 {
     if (!reachActions.size())
         return NULL;
     
     // Random reach
-    printf("REACHING...\n");
+    printf("RANDOM REACH...\n");
     std::vector<ReachAction*>::iterator a = reachActions.begin();
     return reachActions.at(rand()%reachActions.size());
 }

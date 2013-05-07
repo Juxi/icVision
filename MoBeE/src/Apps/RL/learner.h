@@ -22,7 +22,10 @@ public:
     Point_d getRealState();
     State* getDiscreteState();
 
+    void tryStateTransitions( int num = 10 );
     void tryReaches(Point_3 p);
+    
+    void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
     
     //inline appendState(State* state) { states.push_back(state); }
     

@@ -36,6 +36,7 @@ private:
                     int rate=50 ) : Action(l,p,value,reward,numTries,rate),
                                     marker(m),
                                     reachTarget(0,0,0),
+                                    markerPos(0,0,0),
                                     forceGain(1.0),
                                     torqueGain(1.0),
                                     forceTimeout(timeout/2){}
@@ -56,6 +57,8 @@ private:
     double forceTimeout;
     
     Point_3 reachTarget;
+    Point_3 markerPos;
+    
     yarp::os::ConstString mobeeObjectName,eName,nName;
     std::vector< std::pair<Point_3,double> > history;
     //std::vector<Point_3> history;
@@ -63,7 +66,7 @@ private:
     //void start() { Action::start(); }
     
     //double getErr();
-    bool sendForceCommand(); // false if the error is gone
+    Vector_3 sendForceCommand(); // returns error
     bool threadInit();
     void threadRelease();
     void run();
