@@ -117,6 +117,37 @@ void Learner::tryReaches( Point_3 p )
     writeNumberedFile("lastFile");
 }
 
+void Learner::reachTargets(std::vector<Point_3> targets)
+{
+    if (!targets.size()) return;
+    
+    /* CHOOSE AN RL PROBLEM
+        a) enumerate all reach targets
+        b) choose the next 'easiest' reach target
+            - should predict a high reward
+            - should not have been tried very much
+    */
+    
+    /*  SOLVE THE RL PROBLEM
+        a) work on the problem until it's done
+            - try every reach in the state space
+        b) work on the rl problem until it becomes boring
+            - the more state space is unexplored, the more likely it should be that we continue exploring/learning
+            - the better our best reach is, the more likely we move on
+    */
+    
+    // initially pick a random reach target
+    Point_3 reachTarget = targets.at(rand()%targets.size());
+    yarp::os::ConstString targetName;
+    
+    targetName = mkSphere(reachTarget.x(), reachTarget.y(), reachTarget.z(), 0.02);
+    
+    
+
+    
+    rmGeom(targetName);
+}
+
 void Learner::writeNumberedFile( std::string outFileBaseName, int num )
 {
     std::stringstream suffix;
@@ -156,81 +187,18 @@ ReachAction* Learner::appendReachAction( State* s, yarp::os::ConstString m, doub
     return reach;
 }
 
-/*bool State::appendReachAction(Learner* learner,yarp::os::ConstString markerName )
+double Learner::generateValueFunction(Point_3 p)
 {
-    if ( !learner )
-        return false;
-    
-    reachActions.push_back(new ReachAction(learner,markerName,this));
-    return true;
-}
-
-bool Learner::loadFile( std::string& fileName )
-{
-    //std::vector<State*> statePointers; // we do this to avoid random access to the std::vector where the states are stored in the learner
-    Map_t fileMap = readFileIntoMap( fileName );
-    Map_t::iterator it = fileMap.find("STATES");
-    Vector_t &poses(it->second);
-    
-    std::map<int,State*> indexMap;
-    int idx = 0;
-    for (Vector_t::iterator j=poses.begin(); j != poses.end(); ++j) {
-        Point_d q(j->size(),j->begin(),j->end());
-        indexMap[idx] = appendState(q);
-        idx++;
-    }
-    
-    //it = fileMap.find("STATES");
-    //Vector_t &poses(it->second);
-    
-    return true;
-}
-
-
-void Learner::writeFile( std::string& fileName )
-{
-    Map_t map;
-    Vector_t vectors;
-    std::vector<State*>::iterator i;
-    Point_d::Cartesian_const_iterator j;
-    for ( i=states.begin(); i!=states.end(); ++i ) {
-        std::vector<double> v;
-        for ( j=(*i)->cartesian_begin(); j!=(*i)->cartesian_end(); ++j ) {
-            v.push_back(*j);
-        }
-        vectors.push_back(v);
-    }
-    map["STATES"] = vectors;
-    writeMapToFile(map,fileName);
-}*/
-
-/*State* Learner::getState( int n )
-{
-    if (states.size()==0) return NULL;
-    int i=0;
-    std::vector<State*>::iterator s = states.begin();
-    while ( i<n ) {
-        s++;
-        if (s==states.end()) return NULL;
-    }
-    return *s;
-}
-
-bool Learner::isInList( State* )
-{
-    
-}*/
-
-
-void Learner::generateValueFunction(Point_3 p)
-{
+    double maxReward = 0.0;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
-            (*j)->predictReward(p);
+            if ( (*j)->predictReward(p) > maxReward )
+                maxReward = (*j)->reward();
             printf("Reach action: %p - predicted reward %f\n",*j,(*j)->reward());
         }
     }
     doRL();
+    return maxReward;
 }
 
 Point_d Learner::redimension(Point_d& p)
@@ -347,7 +315,6 @@ void Learner::setOpSpace( yarp::os::ConstString name, Vector_3 f, Vector_3 t )
     //printf("Sending control command: %s\n", opSpaceForceAndTorque.toString().c_str());
     commandPort.writeStrict();
 }
-
 
 yarp::os::ConstString Learner::mkSphere( double x, double y, double z, double r )
 {

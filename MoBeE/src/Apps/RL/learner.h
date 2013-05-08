@@ -24,6 +24,8 @@ public:
 
     void tryStateTransitions( int num = 10 );
     void tryReaches(Point_3 p);
+    void reachTargets(std::vector<Point_3>);
+    
     
     void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
     
@@ -51,7 +53,7 @@ public:
     void defTarget( yarp::os::ConstString& );
     void defObstacle( yarp::os::ConstString& );
     
-    void generateValueFunction(Point_3);
+    double generateValueFunction(Point_3);
     
     bool checkMutex() { return mutex.check(); }
     void postMutex() { mutex.post(); }

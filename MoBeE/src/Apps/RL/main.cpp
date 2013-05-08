@@ -4,6 +4,18 @@
 #include "actionReach.h"
 #include "actionTransition.h"
 
+std::vector<Point_3> tableSample( double xMin, double xMax, double yMin, double yMax, double z, double delta )
+{
+    // table height: z = -0.075
+    std::vector<Point_3> result;
+    for ( double x = xMin; x<=xMax; x+=delta ) {
+        for ( double y = yMin; y<=yMax; y+=delta ) {
+            result.push_back(Point_3(x,y,z));
+        }
+    }
+    return result;
+}
+
 std::vector<Point_d> gridSample( int dim, int num, double scaling )
 {
     // Sample num grid points from dim dimensional space in the cube between min and max
@@ -47,76 +59,62 @@ int main(int argc, char *argv[])
     int count = 0;
     if ( config.check("count") ) count = config.find("count").asInt();
     
+    // load the learner state from file
     if ( config.check("file") ) {
-        // load the learner state from file
         std::string fileName = config.find("file").asString().c_str();
         learner.loadFile(fileName);
-    } else {
-        // append a grid of states
+    }
+    
+    // create a grid of states
+    else {
         std::vector<Point_d> samples = gridSample(4,81,0.5);
-        //std::vector<Point_d> samples = gridSample(2,4,0.5);
-        
+            //std::vector<Point_d> samples = gridSample(2,4,0.5);
         std::vector< yarp::os::ConstString > markers = learner.getMarkers();
         for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i ) {
             State* s = learner.appendState(*i);
             printf("appended state: %p\n",s);
         }
-        // connect all the states to all the other states and add reach actions
+        
+        // connect all the states to n nearest neighbors
+        int n = 16;
         printf("\nConnecting States...\n\n");
         std::vector<State*> states = learner.getStates();
         std::vector<State*> nearestStates = states;
-        
-        //for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i )
-        //    printf("states: %p\n",*i);
-        //for ( std::vector<State*>::iterator i = nearestStates.begin(); i!=nearestStates.end(); ++i )
-        //    printf("nearest_states: %p\n",*i);
-        
-        
-        //std::sort (nearestStates.begin(), nearestStates.end(), StateDst(*states.begin()));
-        //for ( std::vector<State*>::iterator i = nearestStates.begin(); i!=nearestStates.end(); ++i )
-        //    printf("sorted_nearest_states: %p %f\n",*i,(**i-**states.begin()).squared_length());
-        
-        //printf("------------------------------------\n");
-        
-        for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i )
-        {
-            printf("state: %p\n",*i);
-            
+        for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i ) {
+                //printf("state: %p\n",*i);
             std::sort (nearestStates.begin(), nearestStates.end(), StateDst(*i));
-            
-            for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end(); ++j )
-                printf("sorted_nearest_states: %p %f\n",*j,(**j-**i).squared_length());
-                
-            int num = 0;
-            for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end() && num<16; ++j ) {
+                /*for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end(); ++j )
+                 printf("sorted_nearest_states: %p %f\n",*j,(**j-**i).squared_length());
+                 */  
+            int m = 0;
+            for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end() && m<n; ++j ) {
                 if (*i!=*j) {
                     printf("  connecting %p, %p\n",*i,*j);
                     learner.appendTransitionAction(*i, *j);
-                    num++;
+                    m++;
                 }
             }
-            
             for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
                 learner.appendReachAction(*i, *j);
         }
     }
     
-    Point_3 p(-0.3,0.1,0.0);
-    Point_3 q(-0.2,0.2,0.1);
-    Point_3* targetPoint = &p;
-    yarp::os::ConstString reachTarget;
-    reachTarget = learner.mkSphere(targetPoint->x(), targetPoint->y(), targetPoint->z(), 0.03);
-    
-    
-    learner.tryReaches(p);
+    // create a grid of reach targets in task space
+    std::vector<Point_3> reachTargets = tableSample( -0.4, -0.1, 0.0, 0.4, 0.0, 0.05 );
+    printf("made %d reach targets\n",reachTargets.size());
+    //Point_3 p(-0.3,0.1,0.0);
+    //Point_3 q(-0.2,0.2,0.1);
+    //learner.tryReaches(p);
     //learner.tryStateTransitions(1000);
     
+    /************************************************************************************************
+        1. LEARN STATE TRANSITION PROBABILITIES (in the presence of the table) AND PRINT A FILE 
+        2. LEARN REACHES
+    *************************************************************************************************/
+    
  
-    printf("\n\nRight Arm Learner:\n");
-    learner.print(true);
-    
-    
-    
+    //printf("\n\nRight Arm Learner:\n");
+    //learner.print(true);
     
     
     printf("All finished\n");

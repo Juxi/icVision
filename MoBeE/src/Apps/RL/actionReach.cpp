@@ -11,7 +11,7 @@
 }*/
 
 
-void ReachAction::predictReward( Point_3 p )
+double ReachAction::predictReward( Point_3 p )
 {
     r = 0.0;
     if ( history.size()>0 ) {
@@ -19,6 +19,7 @@ void ReachAction::predictReward( Point_3 p )
             r += 1.0/((p-i->first).squared_length()+1) * i->second;
         r /= history.size();
     }
+    return r;
 }
 
 bool ReachAction::threadInit()

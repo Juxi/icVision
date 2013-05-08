@@ -22,7 +22,7 @@ class ReachAction : public Action
     
 public:
     
-    void predictReward( Point_3 p );
+    double predictReward( Point_3 p );
     void start( Point_3 p ) { reachTarget = p; yarp::os::RateThread::start(); }
     
 private:
