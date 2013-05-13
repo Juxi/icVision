@@ -13,13 +13,16 @@
 
 double ReachAction::predictReward( Point_3 p )
 {
-    r = 0.0;
+    double r_predicted = 0.0;
     if ( history.size()>0 ) {
-        for ( std::vector< std::pair<Point_3,double> >::iterator i = history.begin(); i != history.end(); ++i )
-            r += 1.0/((p-i->first).squared_length()+1) * i->second;
-        r /= history.size();
+        for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
+            double d = (i->target-i->result).squared_length();
+            r_predicted += 1.0/((p-i->result).squared_length()+1) - d/((p-i->target).squared_length()+d);
+        }
+        r_predicted /= history.size();
     }
-    return r;
+    //r = r_predicted;
+    return r_predicted;
 }
 
 bool ReachAction::threadInit()
@@ -47,7 +50,7 @@ void ReachAction::threadRelease()
     num++;
     //parentLearner->rmGeom(mobeeObjectName);
     
-    relax();
+    //relax();
     
     Action::threadRelease();
 }
@@ -107,10 +110,14 @@ void ReachAction::run()
 {
     Vector_3 err = sendForceCommand();
         
-    if (parentLearner->isStable() && err.squared_length() != 0.0 ) {
-        r = 1/(100*err.squared_length());
-        history.push_back( std::pair<Point_3,double>(reachTarget,r) );
-        history.push_back( std::pair<Point_3,double>(markerPos,10*r) );
+    if (parentLearner->isStable() /*&& err.squared_length() != 0.0*/ ) {
+        Point_3 p;
+        Vector_3 n;
+        parentLearner->getMarkerState(marker,p,n);
+        
+        r = 1/(err.squared_length()+1);
+        history.push_back(HistoryItem(reachTarget,p,r));
+    
         printf("\n STEADY STATE REACHED!!! Got reward: %f\n",r);
         stop();
     }

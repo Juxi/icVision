@@ -61,10 +61,16 @@ bool Action::waitForSteady()
     return false;
 }
 
-void Action::relax()
+/*void Action::relax()
 {
-    printf("Waiting for robot to relax.");
+    //printf("Waiting for robot to relax.");
     parentLearner->stopForcing();
     if ( waitForSteady() ) printf("now relaxing...\n");
     else printf("RELAX TIMED OUT!!!! :-0\n");
+}*/
+
+void Action::onStop(){
+    parentLearner->stopForcing();
+    if ( waitForSteady() ) printf("STEADY STATE REACHED! :-)\n");
+    else printf("TIMED OUT!!!! :-0\n");
 }

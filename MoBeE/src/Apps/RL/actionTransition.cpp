@@ -1,6 +1,20 @@
 #include "actionTransition.h"
 #include "learner.h"
 
+TransitionAction::TransitionAction( Learner* l,
+                                    State* a,
+                                    State* b,
+                                    double value,
+                                    double reward,
+                                    int numTries,
+                                    int rate) : Action(l,a,value,reward,numTries,rate), destination_state(b)
+{
+    // optimistic initialization
+    S_Prime* new_s_prime = new S_Prime(b, 1.0, 1);
+    transition_belief.push_back( new_s_prime );
+    num++;
+}
+
 std::pair<const State*,double> TransitionAction::getTransitionBelief()
 {
     if (!transition_belief.size())
@@ -28,11 +42,11 @@ bool TransitionAction::threadInit()
 
 void TransitionAction::threadRelease()
 {
-    if ( parentLearner->getDiscreteState() != parentState )
-        printf("STATE TRANSITION OCCURRED\n");
-
-    parentLearner->setAttractor(*parentLearner->getDiscreteState());
-    relax();
+    //if ( parentLearner->getDiscreteState() != parentState )
+    //    printf("STATE TRANSITION OCCURRED\n");
+    //parentLearner->setAttractor(*parentLearner->getDiscreteState());
+    //relax();
+    
     updateTransitionBelief(parentLearner->getDiscreteState());
     Action::threadRelease();
 }
@@ -56,40 +70,43 @@ double TransitionAction::updateValue()
 }
 
 
-S_Prime* TransitionAction::appendSPrime( State* s_prime, int num, double prob )
+S_Prime* TransitionAction::getSPrime( State* s )
 {
-    S_Prime* new_s_prime = new S_Prime(s_prime, prob, num);
+    // look if the action has ended in this state before
+    std::vector<S_Prime*>::iterator i;
+    //bool found_s_prime = false;
+    
+    //printf("\t\tlooking for s_prime: %p\n",s);
+    for ( i=transition_belief.begin(); i!=transition_belief.end(); ++i)
+    {
+        //printf("\t\t%p =? %p\n", (*i)->s_prime, s);
+        if ( (*i)->s_prime == s ) {
+            //printf("\t\tYES\n");
+            //found_s_prime = true;
+            break;
+        }
+    }
+    
+    if ( i!=transition_belief.end() )
+        return *i;
+    
+    S_Prime* new_s_prime = new S_Prime(s, 0.0, 0);
     transition_belief.push_back( new_s_prime );
     return new_s_prime;
 }
 
 double TransitionAction::updateTransitionBelief( State* s )
 {
-    printf("\tUPDATING TRANSITION BELIEFS for the action: %p -> %p\n",parentState,this);
+    printf("\tUpdating transition beliefs for the state: %p, action: %p, dest: %p\n",parentState,this,destination_state);
     
-    // look if the action has ended in this state before
-    std::vector<S_Prime*>::iterator i;
-    bool found_s_prime = false;
-    for ( i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
-        if ( (*i)->s_prime == s ) {
-            found_s_prime = true;
-            break;
-        }
-    }
-    
-    // if not, add this state to the list of possible outcomes
-    if (!found_s_prime) {
-        *i = appendSPrime(s);
-        //transition_belief.push_back( S_Prime(s,0.0,0.0) );
-        //i = --transition_belief.end();
-    }
+    S_Prime* s_prime = getSPrime(s);
     
     num++;              //printf("num: %d\n",num);
-    (*i)->num++;           //printf("inum: %d\n",i->num);
+    (s_prime)->num++;           //printf("inum: %d\n",i->num);
     
     // recompute the probabilities
     double delta = 0.0;
-    for ( i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
+    for ( std::vector<S_Prime*>::iterator i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
         double new_belief = (double)(*i)->num/(double)num;
         delta += fabs(new_belief - (*i)->prob);
         (*i)->prob = new_belief;
@@ -101,11 +118,11 @@ double TransitionAction::updateTransitionBelief( State* s )
 
 void TransitionAction::run()
 {
-    printf("current state: %p\n",parentLearner->getDiscreteState());
+    printf("\tcurrent state: %p\n",parentLearner->getDiscreteState());
     
     if (parentLearner->isStable())
     {
-        printf("\n STEADY STATE REACHED  :-)\n");
+        printf("STEADY STATE REACHED :-)\n");
         stop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {

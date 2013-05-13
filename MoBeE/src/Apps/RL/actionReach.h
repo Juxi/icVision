@@ -42,16 +42,10 @@ private:
                                     forceTimeout(timeout/2){}
     ~ReachAction(){}
     
-    void appendToHistory( Point_3 p, double r ){ history.push_back( std::pair<Point_3,double>(p,r) ); }
-    
-    //double predictReward(Point_3);
-    
-    //void runReach(Point_3 p)
-    //Point_3 easyReach();
+    void appendToHistory( Point_3 p, Point_3 q, double r ){ history.push_back( HistoryItem(p,q,r) ); }
 
     int tempIdx;
     yarp::os::ConstString marker;
-    //KinematicModel::PrimitiveObject* e,n;
     
     double forceGain,torqueGain;
     double forceTimeout;
@@ -60,7 +54,15 @@ private:
     Point_3 markerPos;
     
     yarp::os::ConstString mobeeObjectName,eName,nName;
-    std::vector< std::pair<Point_3,double> > history;
+    
+    struct HistoryItem {
+        Point_3 target;
+        Point_3 result;
+        double reward;
+        HistoryItem(Point_3 p, Point_3 q, double r) : target(p), result(q), reward(r) {}
+    };
+    std::vector< HistoryItem > history;
+    
     //std::vector<Point_3> history;
     
     //void start() { Action::start(); }

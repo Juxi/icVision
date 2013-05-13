@@ -56,8 +56,8 @@ int main(int argc, char *argv[])
     // instantiate reinforcement learner
     Learner learner(16,"icubSim","right_arm",true);
     
-    int count = 0;
-    if ( config.check("count") ) count = config.find("count").asInt();
+    //int count = 0;
+    //if ( config.check("count") ) count = config.find("count").asInt();
     
     // load the learner state from file
     if ( config.check("file") ) {
@@ -71,8 +71,8 @@ int main(int argc, char *argv[])
             //std::vector<Point_d> samples = gridSample(2,4,0.5);
         std::vector< yarp::os::ConstString > markers = learner.getMarkers();
         for ( std::vector<Point_d>::iterator i = samples.begin(); i!=samples.end(); ++i ) {
-            State* s = learner.appendState(*i);
-            printf("appended state: %p\n",s);
+            State* s = learner.appendState(*i,0);
+            //printf("appended state: %p\n",s);
         }
         
         // connect all the states to n nearest neighbors
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
             int m = 0;
             for ( std::vector<State*>::iterator j = nearestStates.begin(); j!=nearestStates.end() && m<n; ++j ) {
                 if (*i!=*j) {
-                    printf("  connecting %p, %p\n",*i,*j);
+                    //printf("  connecting %p, %p\n",*i,*j);
                     learner.appendTransitionAction(*i, *j);
                     m++;
                 }
@@ -102,6 +102,8 @@ int main(int argc, char *argv[])
     // create a grid of reach targets in task space
     std::vector<Point_3> reachTargets = tableSample( -0.4, -0.1, 0.0, 0.4, 0.0, 0.05 );
     printf("made %d reach targets\n",reachTargets.size());
+    
+    
     //Point_3 p(-0.3,0.1,0.0);
     //Point_3 q(-0.2,0.2,0.1);
     //learner.tryReaches(p);
@@ -112,6 +114,13 @@ int main(int argc, char *argv[])
         2. LEARN REACHES
     *************************************************************************************************/
     
+    //learner.print();
+    
+    //std::string fileName("foo.ini");
+    //learner.writeFile(fileName);
+    
+    
+    learner.learnStateTransitions();
  
     //printf("\n\nRight Arm Learner:\n");
     //learner.print(true);

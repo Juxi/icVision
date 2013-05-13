@@ -29,7 +29,7 @@ class Action : public yarp::os::RateThread
     friend class Learner;
 public:
     
-    int    timesTried() { return num; }
+    virtual int timesTried() { return num; }
     double reward() { return r; }
     double value() { return v; }
     
@@ -63,12 +63,13 @@ protected:
     double          v;  // value of this action under the current policy
     double          r; 
     
-    void            relax();
+    //void            relax();
     bool            waitForSteady();
     
     virtual bool    threadInit();
     virtual void    afterStart(bool s);
     virtual void    threadRelease();
+    virtual void    onStop();
     
     //void start() { RateThread::start(); }
     

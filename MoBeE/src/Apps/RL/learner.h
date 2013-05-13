@@ -19,19 +19,30 @@ public:
     Learner( int dim, const char* _robotName, const char* _partName, bool connect = true );
     ~Learner();
     
+    void learnStateTransitions( int num = 1 );
+    
+    
+    
+    
+    
     Point_d getRealState();
     State* getDiscreteState();
+    
+    Action* leastTriedTransition();
 
-    void tryStateTransitions( int num = 10 );
+    
+    
     void tryReaches(Point_3 p);
     void reachTargets(std::vector<Point_3>);
+    
+    void workOnTarget(Point_3 p, bool endEarly = false);
     
     
     void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
     
     //inline appendState(State* state) { states.push_back(state); }
     
-    State*              appendState( Point_d& p );
+    State*              appendState( Point_d& p, int numVisits );
     TransitionAction*   appendTransitionAction( State* a, State* b, double val=0.0, double rew=0.0, int num=0 );
     ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
     std::vector< yarp::os::ConstString > getMarkers() { return markers; }
@@ -57,7 +68,7 @@ public:
     
     bool checkMutex() { return mutex.check(); }
     void postMutex() { mutex.post(); }
-    void doRL();
+    void valueIteration();
     
     //std::vector< std::pair<
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }

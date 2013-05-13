@@ -27,6 +27,10 @@ class TransitionAction : public Action
     friend class Learner;
     friend class State;
     
+public:
+    
+    int timesTried() { return num - 1; }
+    
 private:
     
     int tempIdx;
@@ -39,10 +43,10 @@ private:
                         double value = 0.0,
                         double reward = 0.0,
                         int numTries = 0,
-                        int rate = 200 ) : Action(l,a,value,reward,numTries,rate), destination_state(b) {}
+                        int rate = 200 );
     ~TransitionAction(){}
     
-    S_Prime*                        appendSPrime(State* s,int num = 0,double prob = 0.0);
+    S_Prime*                        getSPrime(State* s);
     const State*                    getDestination() { return destination_state; }
     std::pair<const State*,double>  getTransitionBelief();
     double                          updateValue();           // returns delta value

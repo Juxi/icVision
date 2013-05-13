@@ -7,7 +7,7 @@
  *** STATE ***
  ************/
 
-State::State(Point_d q) : Point_d(q), value(0.0)
+State::State(Point_d q) : Point_d(q), value(0.0), visits(0)
 {
 }
 
@@ -15,6 +15,15 @@ State::State(Point_d q) : Point_d(q), value(0.0)
 //bool State::connectToAll(){}
 //bool State::disconnectFromAll(){}
 
+double  State::exitBelief() {
+    std::pair<const State*,double> bestExit(NULL,0.0);
+    for ( std::vector<TransitionAction*>::iterator a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
+        std::pair<const State*,double> thisBelief = (*a)->getTransitionBelief();
+        if ( thisBelief.first != this && thisBelief.second > bestExit.second )
+            bestExit = thisBelief;
+    }
+    return bestExit.second;
+}
 
 Action* State::greedy()
 {
@@ -57,17 +66,17 @@ Action* State::leastTriedReach()
     return leastTriedReach;
 }
 
-Action* State::leastTriedTransition()
+TransitionAction* State::leastTriedTransition()
 {
-    TransitionAction* leastTriedAction = *transitionActions.begin();
-     for ( std::vector<TransitionAction*>::iterator a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
-         if ( (*a)->timesTried() < leastTriedAction->timesTried() )
-             leastTriedAction = *a;
-     }
-     
-     printf("LEAST TRIED STATE TRANSITION: %p\n",leastTriedAction);
-     
-     return leastTriedAction;
+    //printf("getting least tried action (of %d) for state %p\n",transitionActions.size(),this);
+    TransitionAction* leastTriedAction = NULL;//*transitionActions.begin();
+    for ( std::vector<TransitionAction*>::iterator a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
+        //printf("  action: %p, timesTried: %d\n", *a, (*a)->timesTried() );
+        if ( !leastTriedAction || (*a)->timesTried() < leastTriedAction->timesTried() )
+            leastTriedAction = *a;
+    }
+    printf("LEAST TRIED TRANSITION FROM STATE %p IS TO STATE %p\n",this,leastTriedAction->destination_state);
+    return leastTriedAction;
 }
 
 Action* State::randomTransition()

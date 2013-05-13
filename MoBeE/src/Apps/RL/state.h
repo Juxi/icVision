@@ -23,10 +23,9 @@ class State : public Point_d
 public:
     
     double  getValue() const { return value; }
+    double  exitBelief();
     
-    
-    
-    Action* leastTriedTransition();
+    TransitionAction* leastTriedTransition();
     Action* leastTriedReach();
     Action* explore();
     Action* greedy();
@@ -55,6 +54,7 @@ private:
     //Learner* parentLearner;
     int tempIdx;
     double value;
+    int visits;
     std::vector<TransitionAction*> transitionActions; // Instead of keeping multiple lists here i could dynamic_cast...  dunno
     std::vector<ReachAction*> reachActions;
 };

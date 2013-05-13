@@ -83,7 +83,13 @@ int main(int argc, char *argv[])
             usleep(1000);
           #endif*/
         }
-
+        
+        // Load a world config from file
+        if ( worldFile != "" )
+        {
+            printf( "\nLOADING WORLD MODEL FROM: %s\n", worldFile.toStdString().c_str() );
+            yarpModel->loadWorld( worldFile, false );
+        }
 	
 		// run the Qt application
 		result = app.exec();
