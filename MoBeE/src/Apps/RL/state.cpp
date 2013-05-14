@@ -69,13 +69,16 @@ Action* State::leastTriedReach()
 TransitionAction* State::leastTriedTransition()
 {
     //printf("getting least tried action (of %d) for state %p\n",transitionActions.size(),this);
+    std::vector<TransitionAction*> shuffleTransitions = transitionActions;
+    std::random_shuffle(shuffleTransitions.begin(), shuffleTransitions.end());
+    
     TransitionAction* leastTriedAction = NULL;//*transitionActions.begin();
-    for ( std::vector<TransitionAction*>::iterator a = transitionActions.begin(); a != transitionActions.end(); ++a ) {
+    for ( std::vector<TransitionAction*>::iterator a = shuffleTransitions.begin(); a != shuffleTransitions.end(); ++a ) {
         //printf("  action: %p, timesTried: %d\n", *a, (*a)->timesTried() );
         if ( !leastTriedAction || (*a)->timesTried() < leastTriedAction->timesTried() )
             leastTriedAction = *a;
     }
-    printf("LEAST TRIED TRANSITION FROM STATE %p IS TO STATE %p\n",this,leastTriedAction->destination_state);
+    printf("LEAST TRIED TRANSITION FROM STATE %p IS TO DESTINATION STATE %p\n",this,leastTriedAction->destination_state);
     return leastTriedAction;
 }
 

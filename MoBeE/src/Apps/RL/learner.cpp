@@ -108,7 +108,10 @@ Action* Learner::leastTriedTransition()
 {
     TransitionAction* a = NULL;
     State* origin = NULL;
-    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+    
+    std::vector<State*> shuffleStates = states;
+    std::random_shuffle(shuffleStates.begin(), shuffleStates.end());
+    for ( std::vector<State*>::iterator s = shuffleStates.begin(); s != shuffleStates.end(); ++s ){
         if ( (*s)->visits > 0 ) {
             TransitionAction* b = (*s)->leastTriedTransition();
             if ( !a || b->timesTried() < a->timesTried() ) {
