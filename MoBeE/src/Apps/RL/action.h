@@ -29,50 +29,48 @@ class Action : public yarp::os::RateThread
     friend class Learner;
 public:
     
-    virtual int timesTried() { return num; }
-    double reward() { return r; }
-    double value() { return v; }
+    inline int      getTimesTried() { return num; }
+    inline double   getReward() { return r; }
+    inline double   getValue() { return v; }
+    inline double   getNewValue() { return newv; }
     
-    virtual void start() { yarp::os::RateThread::start(); }
-    virtual void start( Point_3 p ) { yarp::os::RateThread::start(); }
+    virtual void    computeNewValue();
+    inline void     updateValue() { /*printf("\t\tUpdating value for action: %p... v: %f, newv: %f\n",this,v,newv);*/ v = newv; }
+    
+    virtual void    start() { yarp::os::RateThread::start(); }
+    virtual void    start( Point_3 p ) { yarp::os::RateThread::start(); }
     
 protected:
     
-    Action( Learner* l,
+    Action( //Learner* l,
             State* p,
             double value = 0.0,
             double reward = 0.0,
             int numTries = 0,
             int rate = 200 ) :  yarp::os::RateThread(rate),
-                                parentLearner(l),
+                                //parentLearner(l),
                                 parentState(p),
                                 timeStarted(0.0),
                                 timeout(20.0),
                                 num(numTries),
                                 v(value),
+                                newv(0.0),
                                 r(reward) {}
     virtual ~Action(){}
-    
-    double updateValue();           // returns delta value
-    
-    Learner*        parentLearner;
+
     State*          parentState;
     double          timeStarted,
                     timeout;
     int             num;    // number of times this action has been tried
-    double          v;  // value of this action under the current policy
+    double          v,newv; // value of this action under the current policy
     double          r; 
-    
-    //void            relax();
+
     bool            waitForSteady();
     
     virtual bool    threadInit();
     virtual void    afterStart(bool s);
     virtual void    threadRelease();
     virtual void    onStop();
-    
-    //void start() { RateThread::start(); }
-    
 };
 
 #endif

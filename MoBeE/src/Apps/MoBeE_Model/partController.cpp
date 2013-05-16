@@ -371,7 +371,7 @@ void PartController::run()
             v[i] = 1000.0 * (q1[i] - q0[i]) / getRate();
             
             // compute sigmoidal spring force
-            fX[i] = fXMax[i]*e[i]/(fXMax[i]/k[i]+abs(e[i]));
+            fX[i] = fXMax[i]*e[i]/(fXMax[i]/k[i]+fabs(e[i]));
             
             // compute joint limit repulsion
             if ( q1[i] < min[i] + kfLim[i] )         fLim[i] = fLimMax[i] * (min[i]+kfLim[i]-q1[i])/kfLim[i];

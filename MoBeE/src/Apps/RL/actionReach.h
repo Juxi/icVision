@@ -27,13 +27,13 @@ public:
     
 private:
     
-    ReachAction(    Learner* l,
+    ReachAction(    //Learner* l,
                     yarp::os::ConstString m,
                     State* p,
                     double value = 0.0,
                     double reward = 0.0,
                     int numTries = 0,
-                    int rate=50 ) : Action(l,p,value,reward,numTries,rate),
+                    int rate=50 ) : Action(p,value,reward,numTries,rate),
                                     marker(m),
                                     reachTarget(0,0,0),
                                     markerPos(0,0,0),

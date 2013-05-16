@@ -10,7 +10,7 @@
 
 bool Action::threadInit() {
     //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
-    if (parentLearner->checkMutex()) {
+    if (parentState->getLearner()->checkMutex()) {
         /*printf("\tmutex.check() succeeded... ");*/
         //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
         timeStarted = yarp::os::Time::now();
@@ -30,18 +30,13 @@ void Action::afterStart(bool s)
 void Action::threadRelease() {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
     
-    parentLearner->postMutex();
+    parentState->getLearner()->postMutex();
 }
 
-double Action::updateValue()
+void Action::computeNewValue()
 {
-    double newVal = r + 0.9 * v;
-    double delta = newVal - v;
-    v = newVal;
-    return delta;
+    newv = r + parentState->getLearner()->getDiscountFactor() * v;
 }
-
-
 
 bool Action::waitForSteady()
 {
@@ -51,13 +46,13 @@ bool Action::waitForSteady()
     while ( yarp::os::Time::now() - tShutdown < timeout)
     {
         printf(".");
-        if (parentLearner->isStable()) {
-            printf("\n");
+        if (parentState->getLearner()->isStable()) {
+            printf("\nSTEADY STATE REACHED! :-)\n");
             return true;
         }
         yarp::os::Time::delay(0.2);
     }
-    printf("\n");
+    printf("\nAction::WaitForSteady() TIMED OUT!!!! :-0\n");
     return false;
 }
 
@@ -70,7 +65,6 @@ bool Action::waitForSteady()
 }*/
 
 void Action::onStop(){
-    parentLearner->stopForcing();
-    if ( waitForSteady() ) printf("STEADY STATE REACHED! :-)\n");
-    else printf("TIMED OUT!!!! :-0\n");
+    parentState->getLearner()->stopForcing();
+    waitForSteady();
 }

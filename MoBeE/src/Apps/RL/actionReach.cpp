@@ -63,7 +63,7 @@ Vector_3 ReachAction::sendForceCommand()
     double  nMag,
             errMag;
     
-    parentLearner->getMarkerState(marker,markerPos,n);
+    parentState->getLearner()->getMarkerState(marker,markerPos,n);
     
     // error vector from marker to target
     err = reachTarget - markerPos;
@@ -101,7 +101,7 @@ Vector_3 ReachAction::sendForceCommand()
 
     
     Vector_3 zero(0,0,0);
-    parentLearner->setOpSpace(marker, force, zero);
+    parentState->getLearner()->setOpSpace(marker, force, zero);
     
     return err;
 }
@@ -110,10 +110,10 @@ void ReachAction::run()
 {
     Vector_3 err = sendForceCommand();
         
-    if (parentLearner->isStable() /*&& err.squared_length() != 0.0*/ ) {
+    if (parentState->getLearner()->isStable() /*&& err.squared_length() != 0.0*/ ) {
         Point_3 p;
         Vector_3 n;
-        parentLearner->getMarkerState(marker,p,n);
+        parentState->getLearner()->getMarkerState(marker,p,n);
         
         r = 1/(err.squared_length()+1);
         history.push_back(HistoryItem(reachTarget,p,r));

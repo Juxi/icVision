@@ -7,7 +7,7 @@
 #include "actionTransition.h"
 #include "actionReach.h"
 
-Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d)//, currentState(NULL), currentAction(NULL)
+Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d), modelUpdate(true), discountFactor(0.9), modelInterest(3.0), rlPrecision(0.001)
 {
     if (connect)
     {
@@ -77,7 +77,7 @@ Learner::~Learner()
     worldClient.interrupt();
 }
 
-void Learner::learnStateTransitions( int num )
+/*void Learner::learnStateTransitions( int timesToTryEach )
 {
     int count = 0;
     do {
@@ -100,8 +100,109 @@ void Learner::learnStateTransitions( int num )
         while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
         
         count++;
-    } while ( leastTriedTransition()->timesTried() < num );
+    } while ( leastTriedTransition()->timesTried() < timesToTryEach );
     writeNumberedFile("transitions",count);
+}*/
+
+void Learner::learnModel(int count)
+{
+    // all state transitions are untried
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            (*a)->r = 1.0;
+        }
+    }
+    
+    // mark the first state visited
+    State* s = getDiscreteState();
+    if (s) s->visits++;
+    
+    while (leastTriedTransition()->getTimesTried() < 1)
+    {
+        valueIteration();
+        
+        printf("\nCOUNT: %d\n\n",count);
+        if (count%10 == 0) writeNumberedFile("transitionsIM",count);
+        
+        s = getDiscreteState();
+        if (!s) break;
+
+        Action* a = s->greedyTransition();
+        if (!a) break;
+        
+        a->start();
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        State* lvs = leastVisitedState();
+        if (lvs && lvs->getVisits() > 0)
+            printf("\nALL STATES HAVE BEEN VISITED!!!\n\n");
+        
+        count++;
+    }
+    writeNumberedFile("transitionsIM",count);
+}
+
+void  Learner::valueIteration()
+{
+    mutex.wait();
+    printf("\nDOING RL...\n");
+    
+    double maxDelta;
+    int count = 0;
+    do
+    {
+        maxDelta=0;
+        //printf("*** ITERATION: %d ***\n",count);
+        for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i)
+        {
+            (*i)->computeNewValue();
+            
+            //printf("\tstate_new_value: %f\n",(*i)->getNewValue());
+            //printf("\tstate_value: %f\n",(*i)->getValue());
+            
+            double delta = fabs( (*i)->getNewValue() - (*i)->getValue() );
+            //printf("\tstate_delta: %f\n",delta);
+            if ( delta > maxDelta )
+                maxDelta = delta;
+        }
+        for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i)
+            (*i)->updateValue();
+        //printf("\tmax_delta: %f\n",maxDelta);
+        count++;
+    } while ( maxDelta > rlPrecision );
+    mutex.post();
+}
+
+
+/*void Learner::resetRewardMatrix(std::vector<Action*> rewardedActions)
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            (*a)->r = 0.0;
+            for ( std::vector<Action*>::iterator ra = rewardedActions.begin(); ra != rewardedActions.end(); ++ra ){
+                if ( *ra == *a ) (*a)->r = 1.0;
+            }
+        }
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            (*a)->r = 0.0;
+            for ( std::vector<Action*>::iterator ra = rewardedActions.begin(); ra != rewardedActions.end(); ++ra ){
+                if ( *ra == *a ) (*a)->r = 1.0;
+            }
+        }
+    }
+    
+}*/
+
+State* Learner::leastVisitedState()
+{
+    State* state = NULL;
+    std::vector<State*> shuffleStates = states;
+    std::random_shuffle(shuffleStates.begin(), shuffleStates.end());
+    for ( std::vector<State*>::iterator s = shuffleStates.begin(); s != shuffleStates.end(); ++s ){
+        if ( !state || (*s)->getVisits() < state->getVisits() )
+            state = *s;
+    }
+    return state;
 }
 
 Action* Learner::leastTriedTransition()
@@ -114,7 +215,7 @@ Action* Learner::leastTriedTransition()
     for ( std::vector<State*>::iterator s = shuffleStates.begin(); s != shuffleStates.end(); ++s ){
         if ( (*s)->visits > 0 ) {
             TransitionAction* b = (*s)->leastTriedTransition();
-            if ( !a || b->timesTried() < a->timesTried() ) {
+            if ( !a || b->getTimesTried() < a->getTimesTried() ) {
                 a = b;
                 origin = *s;
             }
@@ -122,11 +223,11 @@ Action* Learner::leastTriedTransition()
             //    return a;
         }
     }
-    printf("GLOBALLY LEAST TRIED STATE TRANSITION IS FROM %p TO %p (%d times)\n",origin,a->destination_state,a->timesTried());
+    printf("GLOBALLY LEAST TRIED STATE TRANSITION IS FROM %p TO %p (%d times)\n",origin,a->destination_state,a->getTimesTried());
     return a;
 }
 
-void Learner::tryReaches( Point_3 p )
+/*void Learner::tryReaches( Point_3 p )
 {
     for ( int count = 0; count < 1000; count++ )
     {
@@ -144,31 +245,31 @@ void Learner::tryReaches( Point_3 p )
         valueIteration();
     }
     writeNumberedFile("lastFile");
-}
+}*/
 
-void workOnTarget(Point_3 p, bool endEarly = false)
+/*void workOnTarget(Point_3 p, bool endEarly = false)
 {
     
-}
+}*/
 
-void Learner::reachTargets(std::vector<Point_3> targets)
+/*void Learner::reachTargets(std::vector<Point_3> targets)
 {
     if (!targets.size()) return;
     
-    /* CHOOSE AN RL PROBLEM
+     CHOOSE AN RL PROBLEM
         a) enumerate all reach targets
         b) choose the next 'easiest' reach target
             - should predict a high reward
             - should not have been tried very much
-    */
     
-    /*  SOLVE THE RL PROBLEM
+    
+      SOLVE THE RL PROBLEM
         a) work on the problem until it's done
             - try every reach in the state space
         b) work on the rl problem until it becomes boring
             - the more state space is unexplored, the more likely it should be that we continue exploring/learning
             - the better our best reach is, the more likely we move on
-    */
+ 
     
     // initially pick a random reach target
     Point_3 reachTarget = targets.at(rand()%targets.size());
@@ -180,7 +281,7 @@ void Learner::reachTargets(std::vector<Point_3> targets)
 
     
     rmGeom(targetName);
-}
+}*/
 
 void Learner::writeNumberedFile( std::string outFileBaseName, int num )
 {
@@ -192,7 +293,7 @@ void Learner::writeNumberedFile( std::string outFileBaseName, int num )
 
 State* Learner::appendState( Point_d& p, int numVisits )
 {
-    State* newState = new State( redimension(p) );
+    State* newState = new State( redimension(p), this );
     newState->visits = numVisits;
     states.push_back(newState);
     return newState;
@@ -204,7 +305,7 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
         printf("WARNING: Tried to connect non-existent states\n");
         return NULL;
     }
-    TransitionAction* action = new TransitionAction( this, a, b, val, rew, num);
+    TransitionAction* action = new TransitionAction( a, b, val, rew, num);
     a->transitionActions.push_back( action );
 
     return action;
@@ -213,12 +314,12 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
 ReachAction* Learner::appendReachAction( State* s, yarp::os::ConstString m, double val, double rew, int num )
 {
     if ( !s ) return NULL;
-    ReachAction* reach = new ReachAction(this,m,s,val,rew,num);
+    ReachAction* reach = new ReachAction( m, s, val, rew, num);
     s->reachActions.push_back(reach);
     return reach;
 }
 
-double Learner::generateValueFunction(Point_3 p)
+/*double Learner::generateValueFunction(Point_3 p)
 {
     double maxReward = 0.0;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
@@ -230,7 +331,7 @@ double Learner::generateValueFunction(Point_3 p)
     }
     valueIteration();
     return maxReward;
-}
+}*/
 
 Point_d Learner::redimension(Point_d& p)
 {
@@ -273,9 +374,9 @@ State* Learner::getDiscreteState() {
     return nearestState;
 }
 
-bool Learner::deleteState( const State* s )
+/*bool Learner::deleteState( const State* s )
 {
-    /*for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
+    for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i) {
         for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j) {
             for (std::vector< TransitionAction::S_Prime >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k) {
                 if (k->s_prime==s) {
@@ -295,16 +396,16 @@ bool Learner::deleteState( const State* s )
             delete *deadState;
         }
     }
-    delete s;*/
-}
+    delete s;
+}*/
 
 bool Learner::isStable()
 {
     // check if the robot is still moving
     yarp::os::Bottle query,reply;
     query.addVocab(yarp::os::Vocab::encode("stpd"));
-    query.addDouble(50); // acceleration threshold
-    query.addDouble(1.0); // velocity threshold
+    query.addDouble(100); // 50 acceleration threshold
+    query.addDouble(2); // 1.0 velocity threshold
     controllerClient.write(query,reply);
     //printf("query: %s\n",query.toString().c_str());
     //printf("reply: %s\n",reply.toString().c_str());
@@ -437,27 +538,6 @@ void Learner::stopForcing()
     commandPort.writeStrict();
 }
 
-void  Learner::valueIteration()
-{
-    mutex.wait();
-    printf("\nDOING RL...\n");
-    
-    double maxDelta;
-    do
-    {
-        maxDelta=0;
-        //printf("***************************************************\n");
-        for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i)
-        {
-            //printf("State: %p\n",*i);
-            double delta = (*i)->computeValue();
-            if ( delta>maxDelta ) maxDelta = delta;
-        } 
-    } while ( maxDelta > 0.01 );
-    mutex.post();
-}
-
-
 void Learner::print(bool printAll)
 {
     //printf("\n\n");
@@ -482,7 +562,7 @@ void Learner::print(bool printAll)
             printf("  Action %p, dest: %p, times: %f",*j,(*j)->destination_state,(*j)->num);
             for (std::vector< S_Prime* >::iterator k=(*j)->transition_belief.begin(); k!=(*j)->transition_belief.end(); ++k)
             {
-                printf("\t(%p - %f, %d)", (*k)->s_prime, (*k)->prob, (*k)->num);
+                printf("\t(%p - %f, %d)", (*k)->state, (*k)->prob, (*k)->num);
             }
             printf("\n");
             //printf("\n Starting Action.....\n");
@@ -562,7 +642,7 @@ void Learner::loadFile( std::string& filename )
             line_reader >> prob;
             
             printf("appending s_prime: %p to action: %p\n",states.at(s_prime),transitionActions.at(action));
-            S_Prime* sp = transitionActions.at(action)->getSPrime(states.at(s_prime));
+            S_Prime* sp = transitionActions.at(action)->findOrAppendSPrime(states.at(s_prime));
             sp->num = num;
             sp->prob = prob;
         }
@@ -607,7 +687,7 @@ void Learner::writeFile( std::string& filename )
     out_file << "STATES" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         (*i)->tempIdx = stateCount;
-        out_file << (*i)->visits << " ";
+        out_file << (*i)->visits << "\t";
         for ( Point_d::Cartesian_const_iterator j = (*i)->cartesian_begin(); j != (*i)->cartesian_end(); ++j ) {
             out_file << *j << " ";
         }
@@ -615,6 +695,9 @@ void Learner::writeFile( std::string& filename )
         stateCount++;
     }
     out_file << std::endl;
+    
+    
+    out_file << std::fixed << std::setprecision(10);
     
     printf("\n\n********************\n");
     int transitionCount = 0;
@@ -624,11 +707,11 @@ void Learner::writeFile( std::string& filename )
         for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
             //printf(" transition: %p\n",*j);
             (*j)->tempIdx = transitionCount;
-            out_file << (*j)->parentState->tempIdx << " "
-                     << (*j)->destination_state->tempIdx << " "
-                     << (*j)->timesTried() << " "
-                     << (*j)->reward() << " "
-                     << (*j)->value()
+            out_file << (*j)->parentState->tempIdx << "\t"
+                     << (*j)->destination_state->tempIdx << "\t"
+                     << (*j)->getTimesTried() << "\t"
+                     << (*j)->getReward() << "\t"
+                     << (*j)->getValue()
                      << std::endl;
             transitionCount++;
         }
@@ -640,9 +723,9 @@ void Learner::writeFile( std::string& filename )
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
             for ( std::vector<S_Prime*>::iterator k = (*j)->transition_belief.begin(); k != (*j)->transition_belief.end(); ++k ) {
-                out_file << (*j)->tempIdx << " "
-                         << (*k)->s_prime->tempIdx << " "
-                         << (*k)->num << " "
+                out_file << (*j)->tempIdx << "\t"
+                         << (*k)->state->tempIdx << "\t"
+                         << (*k)->num << "\t"
                 << (*k)->prob << std::endl;
             }
         }
@@ -654,10 +737,10 @@ void Learner::writeFile( std::string& filename )
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
             (*j)->tempIdx = reachCount++;
-            out_file << (*j)->parentState->tempIdx << " "
-            << (*j)->marker << " "
-            << (*j)->num << " "
-            << (*j)->r << " "
+            out_file << (*j)->parentState->tempIdx << "\t"
+            << (*j)->marker << "\t"
+            << (*j)->num << "\t"
+            << (*j)->r << "\t"
             << (*j)->v
             << std::endl;
         }
@@ -668,13 +751,13 @@ void Learner::writeFile( std::string& filename )
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
             for ( std::vector< ReachAction::HistoryItem >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
-                out_file << (*j)->tempIdx << " "
-                << k->target.cartesian(0) << " "
-                << k->target.cartesian(1) << " "
-                << k->target.cartesian(2) << " "
-                << k->result.cartesian(0) << " "
-                << k->result.cartesian(1) << " "
-                << k->result.cartesian(2) << " "
+                out_file << (*j)->tempIdx << "\t"
+                << k->target.cartesian(0) << "\t"
+                << k->target.cartesian(1) << "\t"
+                << k->target.cartesian(2) << "\t"
+                << k->result.cartesian(0) << "\t"
+                << k->result.cartesian(1) << "\t"
+                << k->result.cartesian(2) << "\t"
                 << k->reward
                 << std::endl;
             }

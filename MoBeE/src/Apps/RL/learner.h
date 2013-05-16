@@ -19,40 +19,53 @@ public:
     Learner( int dim, const char* _robotName, const char* _partName, bool connect = true );
     ~Learner();
     
-    void learnStateTransitions( int num = 1 );
+    // turn model learning on and off
+    void    setModelLearning(bool b) { modelUpdate = b; }
+    bool    isLearningModel() { return modelUpdate; }
+    
+    // learning params
+    void    setModelInterestingness(double i) { modelInterest = i; }
+    double  modelInterestingness() { return modelInterest; }
+    void    setRlPrecision( double p ) { rlPrecision = p; }
+    double  getRlPrecision() { return rlPrecision; }
+    void    setDiscountFactor( double f ) { discountFactor = f; }
+    double  getDiscountFactor() { return discountFactor; }
     
     
+    // run learning algorithms
+    void learnModel(int count = 0);
+    //void learnStateTransitions( int timesToTryEach = 1 );
+    void valueIteration();
+    //void tryReaches(Point_3 p);
+    //void reachTargets(std::vector<Point_3>);
+    //void workOnTarget(Point_3 p, bool endEarly = false);
+    //double generateValueFunction(Point_3);
     
-    
-    
+    // query the learner
     Point_d getRealState();
-    State* getDiscreteState();
-    
+    State*  getDiscreteState();
     Action* leastTriedTransition();
-
+    State*  leastVisitedState();
+    // these may be a const correctness problem
+    std::vector< State* > getStates() { return states; } 
+    std::vector< yarp::os::ConstString > getMarkers() { return markers; }
     
     
-    void tryReaches(Point_3 p);
-    void reachTargets(std::vector<Point_3>);
-    
-    void workOnTarget(Point_3 p, bool endEarly = false);
-    
-    
+    // file I/O
+    void loadFile( std::string& fileName );
+    void writeFile( std::string& fileName );
     void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
     
-    //inline appendState(State* state) { states.push_back(state); }
-    
+
+    // construct states and actions
     State*              appendState( Point_d& p, int numVisits );
     TransitionAction*   appendTransitionAction( State* a, State* b, double val=0.0, double rew=0.0, int num=0 );
     ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
-    std::vector< yarp::os::ConstString > getMarkers() { return markers; }
-    std::vector< State* > getStates() { return states; }
+    //bool deleteState( const State* );
     
-    bool deleteState( const State* );
     
-    void loadFile( std::string& fileName );
-    void writeFile( std::string& fileName );
     
+    // communicate with MoBeE model
     void getMarkerState( yarp::os::ConstString& markerName, Point_3& p, Vector_3& n);
     void setAttractor( Point_d q );
     void setOpSpace( yarp::os::ConstString name, Vector_3, Vector_3 );
@@ -64,11 +77,8 @@ public:
     void defTarget( yarp::os::ConstString& );
     void defObstacle( yarp::os::ConstString& );
     
-    double generateValueFunction(Point_3);
-    
     bool checkMutex() { return mutex.check(); }
     void postMutex() { mutex.post(); }
-    void valueIteration();
     
     //std::vector< std::pair<
     //inline std::vector<const State*> getStates() const { return std::vector<const State*>(states.begin(), states.end()); }
@@ -81,6 +91,9 @@ public:
 private:
     
     Point_d redimension(Point_d& p);
+    
+    //void resetRewardMatrix(std::vector<Action*>);
+    
     //State*  getState( int n );
     //bool    isInList( State* );
     
@@ -97,6 +110,11 @@ private:
                         worldClient;
     
     std::vector< yarp::os::ConstString > markers;
+    
+    bool    modelUpdate;
+    double  discountFactor;
+    double  modelInterest;
+    double  rlPrecision;
     
     
 };

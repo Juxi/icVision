@@ -56,8 +56,8 @@ int main(int argc, char *argv[])
     // instantiate reinforcement learner
     Learner learner(16,"icubSim","right_arm",true);
     
-    //int count = 0;
-    //if ( config.check("count") ) count = config.find("count").asInt();
+    int count = 0;
+    if ( config.check("count") ) count = config.find("count").asInt();
     
     // load the learner state from file
     if ( config.check("file") ) {
@@ -120,7 +120,9 @@ int main(int argc, char *argv[])
     //learner.writeFile(fileName);
     
     
-    learner.learnStateTransitions();
+    //learner.learnStateTransitions();
+    
+    learner.learnModel(count);
  
     //printf("\n\nRight Arm Learner:\n");
     //learner.print(true);

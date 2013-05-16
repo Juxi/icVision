@@ -18,25 +18,34 @@ class ReachAction;
 class State : public Point_d
 {
     friend class Learner;
-    //friend class TransitionAction;
+    friend class TransitionAction;
     
 public:
     
-    double  getValue() const { return value; }
-    double  exitBelief();
+    int     getVisits() { return visits; }
+    double  getValue() const { return v; }
+    double  getNewValue() { return newv; }
     
-    TransitionAction* leastTriedTransition();
-    Action* leastTriedReach();
-    Action* explore();
-    Action* greedy();
+    void    computeNewValue();
+    void    updateValue();
     
-    Action* randomTransition();
-    Action* randomReach();
+    //double  exitBelief();
+    
+    
+    //Action* leastTriedReach();
     //Action* explore();
+    
+    TransitionAction*   greedyTransition();
+    TransitionAction*   randomTransition();
+    TransitionAction*   leastTriedTransition();
+    ReachAction*        randomReach();
+    //Action* explore();
+    
+    Learner* getLearner() { return parentLearner; }
     
 private:
      
-    State( Point_d q );
+    State( Point_d q, Learner* l );
     ~State(){}
     
     //bool appendTransitionAction( State* );
@@ -47,13 +56,10 @@ private:
     //bool connectToAll();
     //bool disconnectFromAll();
     
-    
-    double  computeValue();
-    
 
-    //Learner* parentLearner;
+    Learner* parentLearner;
     int tempIdx;
-    double value;
+    double v,newv;
     int visits;
     std::vector<TransitionAction*> transitionActions; // Instead of keeping multiple lists here i could dynamic_cast...  dunno
     std::vector<ReachAction*> reachActions;
