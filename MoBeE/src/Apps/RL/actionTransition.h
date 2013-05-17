@@ -25,16 +25,12 @@ struct S_Prime
 class TransitionAction : public Action
 {
     friend class Learner;
-    //friend class State;
     
 public:
     
-    //int                             timesTried() { return num; }
     const State*                    getDestination() { return destination_state; }
     std::pair<const State*,double>  getTransitionBelief();
-    
-    
-    void                          computeNewValue();  
+    void                            computeNewValue();
     
 private:
     
@@ -42,8 +38,7 @@ private:
     const State*            destination_state;
     std::vector< S_Prime* > transition_belief;
     
-    TransitionAction(   //Learner* l,
-                        State* a,
+    TransitionAction(   State* a,
                         State* b,
                         double value = 0.0,
                         double reward = 0.0,
@@ -51,13 +46,12 @@ private:
                         int rate = 200 );
     ~TransitionAction(){}
     
-    S_Prime*                        findOrAppendSPrime(State* s);
-    
-    
-    bool                            threadInit();
-    void                            threadRelease();
-    double                          updateTransitionBelief();
-    void                            run();
+    S_Prime*    findOrAppendSPrime(State* s);
+    bool        threadInit();
+    void        threadRelease();
+    double      updateTransitionBelief();
+    void        run();
+    void        onStop();
 };
 
 #endif

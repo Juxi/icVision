@@ -64,7 +64,9 @@ bool Action::waitForSteady()
     else printf("RELAX TIMED OUT!!!! :-0\n");
 }*/
 
-void Action::onStop(){
+void Action::onStop()
+{
+    printf("called TransitionAction::onStop()\n");
     parentState->getLearner()->stopForcing();
     waitForSteady();
 }

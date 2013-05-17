@@ -104,15 +104,16 @@ Learner::~Learner()
     writeNumberedFile("transitions",count);
 }*/
 
-void Learner::learnModel(int count)
+void Learner::learnModel_IM(int count)
 {
-    // all state transitions are untried
-    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
-        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
-            (*a)->r = 1.0;
+    if (count == 0) {
+        // all state transitions are untried
+        for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+            for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+                (*a)->r = 1.0;
+            }
         }
     }
-    
     // mark the first state visited
     State* s = getDiscreteState();
     if (s) s->visits++;
@@ -140,6 +141,64 @@ void Learner::learnModel(int count)
         count++;
     }
     writeNumberedFile("transitionsIM",count);
+}
+
+void Learner::learnModel_LT(int count)
+{
+    // mark the first state visited
+    State* s = getDiscreteState();
+    if (s) s->visits++;
+    
+    while (leastTriedTransition()->getTimesTried() < 1)
+    {
+        printf("\nCOUNT: %d\n\n",count);
+        if (count%10 == 0) writeNumberedFile("transitionsLT",count);
+        
+        s = getDiscreteState();
+        if (!s) break;
+        
+        Action* a = s->leastTriedTransition();
+        if (!a) break;
+        
+        a->start();
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        State* lvs = leastVisitedState();
+        if (lvs && lvs->getVisits() > 0)
+            printf("\nALL STATES HAVE BEEN VISITED!!!\n\n");
+        
+        count++;
+    }
+    writeNumberedFile("transitionsLT",count);
+}
+
+void Learner::learnModel_Rand(int count)
+{
+    // mark the first state visited
+    State* s = getDiscreteState();
+    if (s) s->visits++;
+    
+    while (leastTriedTransition()->getTimesTried() < 1)
+    {
+        printf("\nCOUNT: %d\n\n",count);
+        if (count%10 == 0) writeNumberedFile("transitionsRand",count);
+        
+        s = getDiscreteState();
+        if (!s) break;
+        
+        Action* a = s->randomTransition();
+        if (!a) break;
+        
+        a->start();
+        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
+        
+        State* lvs = leastVisitedState();
+        if (lvs && lvs->getVisits() > 0)
+            printf("\nALL STATES HAVE BEEN VISITED!!!\n\n");
+        
+        count++;
+    }
+    writeNumberedFile("transitionsRand",count);
 }
 
 void  Learner::valueIteration()

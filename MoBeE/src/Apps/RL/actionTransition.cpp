@@ -64,6 +64,28 @@ void TransitionAction::threadRelease()
     Action::threadRelease();
 }
 
+void TransitionAction::onStop()
+{
+    printf("called TransitionAction::onStop()\n");
+    
+    State*  resultingState = parentState->getLearner()->getDiscreteState();
+    if (!resultingState) return;
+    S_Prime* s_prime = findOrAppendSPrime(resultingState);
+    
+    num++;
+    s_prime->num++;
+    s_prime->state->visits++;
+    
+    if (parentState->getLearner()->isLearningModel())
+    {
+        double delta = updateTransitionBelief();
+        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * delta;
+        printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),delta);
+    }
+    
+    Action::onStop();
+}
+
 /*bool TransitionAction::appendTransitionBelief( State* state )
 {
     if (!state)
@@ -108,6 +130,7 @@ S_Prime* TransitionAction::findOrAppendSPrime( State* s )
     if ( i!=transition_belief.end() )
         return *i;
     
+    printf("APPENDING S_PRIME!!!\n");
     S_Prime* new_s_prime = new S_Prime(s, 0.0, 0);
     transition_belief.push_back( new_s_prime );
     return new_s_prime;
@@ -122,13 +145,14 @@ double TransitionAction::updateTransitionBelief()
     for ( std::vector<S_Prime*>::iterator i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
         double new_belief = (double)(*i)->num/(double)num;
         delta += fabs(new_belief - (*i)->prob);
+        printf("\ts_prime: %p happened %d times. old_prob: %f, new_prob: %f\n",(*i)->state,(*i)->num,(*i)->prob,new_belief);
         (*i)->prob = new_belief;
-        printf("\ts_prime: %p happened %d times. transition prob is: %f\n",(*i)->state,(*i)->num,(*i)->prob);
+        
     }
     
     //printf("\tDelta = %f\n",delta);
     
-    return delta;
+    return delta/transition_belief.size();
 }
 
 void TransitionAction::run()

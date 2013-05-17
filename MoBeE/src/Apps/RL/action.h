@@ -42,13 +42,11 @@ public:
     
 protected:
     
-    Action( //Learner* l,
-            State* p,
+    Action( State* p,
             double value = 0.0,
             double reward = 0.0,
             int numTries = 0,
             int rate = 200 ) :  yarp::os::RateThread(rate),
-                                //parentLearner(l),
                                 parentState(p),
                                 timeStarted(0.0),
                                 timeout(20.0),

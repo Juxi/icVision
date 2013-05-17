@@ -33,7 +33,9 @@ public:
     
     
     // run learning algorithms
-    void learnModel(int count = 0);
+    void learnModel_IM(int count = 0);
+    void learnModel_LT(int count = 0);
+    void learnModel_Rand(int count = 0);
     //void learnStateTransitions( int timesToTryEach = 1 );
     void valueIteration();
     //void tryReaches(Point_3 p);

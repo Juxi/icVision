@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
     
     //learner.learnStateTransitions();
     
-    learner.learnModel(count);
+    learner.learnModel_Rand(count);
  
     //printf("\n\nRight Arm Learner:\n");
     //learner.print(true);
