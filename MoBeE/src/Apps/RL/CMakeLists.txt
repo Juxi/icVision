@@ -4,77 +4,29 @@
 
 CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
-PROJECT ( iCubRoadMapDemo )
+PROJECT ( iCubRL_Demos )
 
-SET ( rl_VERSION_MAJOR 1 )
-SET ( rl_VERSION_MINOR 0 )
+SET ( iCubRL_Demos_VERSION_MAJOR 1 )
+SET ( iCubRL_Demos_VERSION_MINOR 0 )
 
-FIND_PACKAGE ( YARP REQUIRED )
-INCLUDE_DIRECTORIES ( ${YARP_INCLUDE_DIRS} )
+MESSAGE(STATUS "*** iCub RL Demos ***")
 
-# 
-# FIND AND CONFIGURE CGAL
-#
-SET ( CGAL_DIR "/opt/local/lib/cmake" )
-set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-if ( COMMAND cmake_policy )
-  cmake_policy( SET CMP0003 NEW )  
-endif()
-find_package(CGAL QUIET COMPONENTS Core )
-if ( CGAL_FOUND )
-  include( ${CGAL_USE_FILE} )
-  include( CGAL_CreateSingleSourceCGALProgram )
-  include_directories (BEFORE "../include")
-else()
-  message(STATUS "This program requires the CGAL library, and will not be compiled.")
-endif()
+INCLUDE_DIRECTORIES ( "${CMAKE_CURRENT_SOURCE_DIR}/../../LibRL" )
 
+ADD_EXECUTABLE ( imrl imrl.cpp )
+ADD_EXECUTABLE ( least_tried least_tried.cpp )
+ADD_EXECUTABLE ( random random.cpp )
+ADD_EXECUTABLE ( parallel_imrl parallel_imrl.cpp )
 
-### Set some platform-specific variables ###
-SET (Q_WS_MAC FALSE)
-SET (Q_WS_X11 FALSE)
-SET (Q_WS_WIN FALSE)
-IF ( UNIX )
-	IF ( APPLE )
-		SET (Q_WS_MAC TRUE)
-		SET (QT_MAC_USE_COCOA TRUE)
-	ELSE ( APPLE )
-		SET (Q_WS_X11 TRUE)
-	ENDIF ( APPLE )
-ENDIF ( UNIX )
-IF ( WIN32 )
-	SET (Q_WS_WIN TRUE)
-	ADD_DEFINITIONS( /D "WIN32_LEAN_AND_MEAN" )
-ENDIF ( WIN32 )
+ADD_DEPENDENCIES( imrl		  iCubRL )
+ADD_DEPENDENCIES( least_tried	iCubRL )
+ADD_DEPENDENCIES( random	iCubRL )
+ADD_DEPENDENCIES( parallel_imrl	iCubRL ) 
 
-###############################################################
+TARGET_LINK_LIBRARIES( imrl		iCubRL )
+TARGET_LINK_LIBRARIES( least_tried	iCubRL )
+TARGET_LINK_LIBRARIES( random		iCubRL )
+TARGET_LINK_LIBRARIES( parallel_imrl	iCubRL ) 
 
-
-SET ( src_files		main.cpp
-			learner.cpp
-			state.cpp
-			action.cpp
-			actionTransition.cpp
-			actionReach.cpp
-)
-
-SET ( hdr_files		learner.h
-			state.h
-			action.h
-			actionTransition.h
-			actionReach.h
-			file_reader.h
-			types.h
-)
-
-
-ADD_EXECUTABLE ( rl ${hdr_files} ${src_files}
-)
-
-
-TARGET_LINK_LIBRARIES ( rl ${CGAL_LIBRARIES}
-			    ${YARP_LIBRARIES}
-)
-
-INSTALL ( TARGETS rl DESTINATION ${CMAKE_SOURCE_DIR}/bin )
+INSTALL ( TARGETS imrl least_tried random parallel_imrl DESTINATION ${CMAKE_SOURCE_DIR}/bin/learning )
 
