@@ -42,10 +42,11 @@ public:
     //Action* explore();
     
     Learner* getLearner() { return parentLearner; }
+    int getIdx() { return idx; }
     
 private:
      
-    State( Point_d q, Learner* l );
+    State( int _idx, Point_d q, Learner* l );
     ~State(){}
     
     //bool appendTransitionAction( State* );
@@ -58,7 +59,8 @@ private:
     
 
     Learner* parentLearner;
-    int tempIdx;
+    int idx;
+    //int tempIdx;    // for re-indexing
     double v,newv;
     int visits;
     std::vector<TransitionAction*> transitionActions; // Instead of keeping multiple lists here i could dynamic_cast...  dunno

@@ -29,7 +29,14 @@ void Action::afterStart(bool s)
 
 void Action::threadRelease() {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
-    
+    parentState->getLearner()->stopForcing();
+    parentState->getLearner()->writeHistoryFile( parentState->getLearner()->statesUnvisited(),
+                                                parentState->getLearner()->actionsUntried(),
+                                                parentState->getIdx(),
+                                                idx,
+                                                r,
+                                                v);
+    waitForSteady();
     parentState->getLearner()->postMutex();
 }
 
@@ -54,19 +61,4 @@ bool Action::waitForSteady()
     }
     printf("\nAction::WaitForSteady() TIMED OUT!!!! :-0\n");
     return false;
-}
-
-/*void Action::relax()
-{
-    //printf("Waiting for robot to relax.");
-    parentLearner->stopForcing();
-    if ( waitForSteady() ) printf("now relaxing...\n");
-    else printf("RELAX TIMED OUT!!!! :-0\n");
-}*/
-
-void Action::onStop()
-{
-    printf("called TransitionAction::onStop()\n");
-    parentState->getLearner()->stopForcing();
-    waitForSteady();
 }

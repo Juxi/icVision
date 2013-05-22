@@ -42,11 +42,13 @@ public:
     
 protected:
     
-    Action( State* p,
+    Action( int _idx,
+            State* p,
             double value = 0.0,
             double reward = 0.0,
             int numTries = 0,
             int rate = 200 ) :  yarp::os::RateThread(rate),
+                                idx(_idx),
                                 parentState(p),
                                 timeStarted(0.0),
                                 timeout(20.0),
@@ -56,6 +58,7 @@ protected:
                                 r(reward) {}
     virtual ~Action(){}
 
+    int             idx;
     State*          parentState;
     double          timeStarted,
                     timeout;
@@ -68,7 +71,6 @@ protected:
     virtual bool    threadInit();
     virtual void    afterStart(bool s);
     virtual void    threadRelease();
-    virtual void    onStop();
 };
 
 #endif

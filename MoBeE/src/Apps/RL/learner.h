@@ -30,12 +30,13 @@ public:
     double  getRlPrecision() { return rlPrecision; }
     void    setDiscountFactor( double f ) { discountFactor = f; }
     double  getDiscountFactor() { return discountFactor; }
+    int     getStateTransitionInit() { return stateTransitionInit; }
     
     
     // run learning algorithms
-    void learnModel_IM(int count = 0);
-    void learnModel_LT(int count = 0);
-    void learnModel_Rand(int count = 0);
+    void learnModel_IM();
+    void learnModel_LT();
+    void learnModel_Rand();
     //void learnStateTransitions( int timesToTryEach = 1 );
     void valueIteration();
     //void tryReaches(Point_3 p);
@@ -54,9 +55,10 @@ public:
     
     
     // file I/O
-    void loadFile( std::string& fileName );
-    void writeFile( std::string& fileName );
-    void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
+    bool loadStateFile( std::string& fileName );
+    void writeStateFile();
+    void writeHistoryFile(int,int,int,int,double,double);
+    //void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
     
 
     // construct states and actions
@@ -65,7 +67,10 @@ public:
     ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
     //bool deleteState( const State* );
     
+    void initializeReward(double);
     
+    int statesUnvisited();
+    int actionsUntried();
     
     // communicate with MoBeE model
     void getMarkerState( yarp::os::ConstString& markerName, Point_3& p, Vector_3& n);
@@ -94,6 +99,13 @@ private:
     
     Point_d redimension(Point_d& p);
     
+    State* getState(int);
+    TransitionAction* getTransitionAction(int);
+    ReachAction* getReachAction(int);
+    
+    bool checkStateIndex(State*);
+    bool checkActionIndex(Action*);
+    
     //void resetRewardMatrix(std::vector<Action*>);
     
     //State*  getState( int n );
@@ -118,7 +130,13 @@ private:
     double  modelInterest;
     double  rlPrecision;
     
+    int stateTransitionInit;
     
+    int nextStateIdx;
+    int nextActionIdx;
+    
+    std::string historyFileName;
+    std::string stateFileName;
 };
 #endif
 /** @} */

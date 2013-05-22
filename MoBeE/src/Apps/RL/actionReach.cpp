@@ -119,11 +119,11 @@ void ReachAction::run()
         history.push_back(HistoryItem(reachTarget,p,r));
     
         printf("\n STEADY STATE REACHED!!! Got reward: %f\n",r);
-        stop();
+        askToStop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
         r = 0;
         printf("REACH TIMED OUT!!! Got reward: %f\n",r);
-        stop();
+        askToStop();
     }
 }

@@ -47,6 +47,10 @@ struct StateDst {
 
 int main(int argc, char *argv[])
 {
+    bool connectToMoBeE     = true;
+    bool appendReaches      = false;
+    bool createReachTargets = false;
+    
     yarp::os::Property config;
     config.fromCommand(argc,argv);
     
@@ -54,19 +58,25 @@ int main(int argc, char *argv[])
     srand(time(0));
     
     // instantiate reinforcement learner
-    Learner learner(16,"icubSim","right_arm",true);
-    
-    int count = 0;
-    if ( config.check("count") ) count = config.find("count").asInt();
+    Learner learner(16,"icubSim","right_arm",connectToMoBeE);
     
     // load the learner state from file
+    bool readFile = false;
     if ( config.check("file") ) {
         std::string fileName = config.find("file").asString().c_str();
-        learner.loadFile(fileName);
+        if (!learner.loadStateFile(fileName)) {
+            printf("File read failed!!!\n");
+            return 0;
+        } else readFile = true;
     }
     
+    // start the counter from a number > 0
+    //int count = 0;
+    //if ( config.check("count") )
+    //    count = config.find("count").asInt();
+    
     // create a grid of states
-    else {
+    if (!readFile) {
         std::vector<Point_d> samples = gridSample(4,81,0.5);
             //std::vector<Point_d> samples = gridSample(2,4,0.5);
         std::vector< yarp::os::ConstString > markers = learner.getMarkers();
@@ -94,40 +104,29 @@ int main(int argc, char *argv[])
                     m++;
                 }
             }
-            for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
-                learner.appendReachAction(*i, *j);
+            if ( appendReaches ) {
+                for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
+                    learner.appendReachAction(*i, *j);
+            }
         }
+        
+        learner.initializeReward(1.0);
     }
     
-    // create a grid of reach targets in task space
-    std::vector<Point_3> reachTargets = tableSample( -0.4, -0.1, 0.0, 0.4, 0.0, 0.05 );
-    printf("made %d reach targets\n",reachTargets.size());
-    
+    if ( createReachTargets ) {
+        // create a grid of reach targets in task space
+        std::vector<Point_3> reachTargets = tableSample( -0.4, -0.1, 0.0, 0.4, 0.0, 0.05 );
+        printf("made %d reach targets\n",reachTargets.size());
+    }
     
     //Point_3 p(-0.3,0.1,0.0);
     //Point_3 q(-0.2,0.2,0.1);
-    //learner.tryReaches(p);
-    //learner.tryStateTransitions(1000);
-    
-    /************************************************************************************************
-        1. LEARN STATE TRANSITION PROBABILITIES (in the presence of the table) AND PRINT A FILE 
-        2. LEARN REACHES
-    *************************************************************************************************/
-    
     //learner.print();
+    //learner.writeStateFile();
     
-    //std::string fileName("foo.ini");
-    //learner.writeFile(fileName);
-    
-    
-    //learner.learnStateTransitions();
-    
-    learner.learnModel_Rand(count);
+    learner.learnModel_IM();
  
-    //printf("\n\nRight Arm Learner:\n");
-    //learner.print(true);
-    
-    
+
     printf("All finished\n");
     return 1;
 }

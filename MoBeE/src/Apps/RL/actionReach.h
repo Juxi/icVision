@@ -27,13 +27,13 @@ public:
     
 private:
     
-    ReachAction(    //Learner* l,
+    ReachAction(    int _idx,
                     yarp::os::ConstString m,
                     State* p,
                     double value = 0.0,
                     double reward = 0.0,
                     int numTries = 0,
-                    int rate=50 ) : Action(p,value,reward,numTries,rate),
+                    int rate=50 ) : Action( _idx,p,value,reward,numTries,rate),
                                     marker(m),
                                     reachTarget(0,0,0),
                                     markerPos(0,0,0),
@@ -44,7 +44,7 @@ private:
     
     void appendToHistory( Point_3 p, Point_3 q, double r ){ history.push_back( HistoryItem(p,q,r) ); }
 
-    int tempIdx;
+    //int tempIdx;
     yarp::os::ConstString marker;
     
     double forceGain,torqueGain;

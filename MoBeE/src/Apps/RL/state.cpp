@@ -7,7 +7,7 @@
  *** STATE ***
  ************/
 
-State::State(Point_d q, Learner* learner) : Point_d(q), parentLearner(learner), v(0.0), newv(0.0), visits(0)
+State::State( int _idx, Point_d q, Learner* learner) : Point_d(q), idx(_idx), parentLearner(learner), v(0.0), newv(0.0), visits(0)
 {
 }
 

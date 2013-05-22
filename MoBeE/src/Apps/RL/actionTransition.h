@@ -34,11 +34,8 @@ public:
     
 private:
     
-    int tempIdx;
-    const State*            destination_state;
-    std::vector< S_Prime* > transition_belief;
-    
-    TransitionAction(   State* a,
+    TransitionAction(   int idx,
+                        State* a,
                         State* b,
                         double value = 0.0,
                         double reward = 0.0,
@@ -46,12 +43,16 @@ private:
                         int rate = 200 );
     ~TransitionAction(){}
     
+    //int tempIdx;
+    const State*            destination_state;
+    State*                  resultingState;
+    std::vector< S_Prime* > transition_belief;
+    
     S_Prime*    findOrAppendSPrime(State* s);
     bool        threadInit();
     void        threadRelease();
     double      updateTransitionBelief();
     void        run();
-    void        onStop();
 };
 
 #endif
