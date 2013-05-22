@@ -13,7 +13,7 @@
 
 class Oscillator {                                          // a simple, reusable oscillator
 public:
-    Oscillator() : min(-1), max(1), freq(.1), phase(0) {}    // the default constructor
+    Oscillator() : min(-1), max(1), freq(1), phase(0) {}    // the default constructor
     double evaluate( double t ) {                           // a function to sample the oscillator
         double amplitude = (max-min)/2;
         double mean = min+amplitude;
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
         yarp::os::Bottle cmd;
         cmd.addDouble(0.0);
         cmd.addDouble(100*y.evaluate(t));
-        cmd.addDouble(0.0/*100*z.evaluate(t)*/);
+        cmd.addDouble(100*z.evaluate(t));
 		
         // nest the force vector inside our control command bottle
         msgR.addList() = cmd;
