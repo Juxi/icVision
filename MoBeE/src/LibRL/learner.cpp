@@ -236,7 +236,11 @@ Action* Learner::leastTriedTransition()
             //    return a;
         }
     }
-    printf("GLOBALLY LEAST TRIED STATE TRANSITION IS FROM %p TO %p (%d times)\n",origin,a->getDestination(),a->getTimesTried());
+    if (!a) {
+        origin = getDiscreteState();
+        a = origin->leastTriedTransition();
+    }
+    //printf("GLOBALLY LEAST TRIED STATE TRANSITION IS FROM %p TO %p (%d times)\n",origin,a->getDestination(),a->getTimesTried());
     return a;
 }
 
@@ -318,6 +322,8 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
         printf("WARNING: Tried to connect non-existent states\n");
         return NULL;
     }
+    
+    printf("creating transition action %d --> %d\n", a->getIdx(), b->getIdx());
     TransitionAction* action = new TransitionAction( nextActionIdx++, a, b, val, rew, num);
     a->transitionActions.push_back( action );
 

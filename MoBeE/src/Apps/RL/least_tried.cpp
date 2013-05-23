@@ -38,33 +38,30 @@ int main(int argc, char *argv[])
         learner.initializeReward(1.0);
     }
 
-    /*** DO INTRINSICALLY MOTIVATED MODEL LEARNING ***/
+    /*** DO LEAST TRIED ACTION MODEL LEARNING ***/
     
-    // mark the first state visited
-    State* s = learner.getDiscreteState();
-    if (!s) return 0;
-    s->appendVisit();
+    State* s = NULL;
+    TransitionAction* a = NULL;
     
     int count = 0;
     while (learner.leastTriedTransition()->getTimesTried() < 2)
     {
-        printf("\nCOUNT: %d\n\n",count);
+        if ( !a || !a->isRunning() )
+        {
+            printf("\nCOUNT: %d\n\n",count);
+            
+            s = learner.getDiscreteState();
+            if (!s) break;
+            
+            a = s->leastTriedTransition();
+            if (!a) break;
+            
+            a->start(&count);
+        }
         
-        learner.valueIteration();
-        learner.writeStateFile();
-        
-        s = learner.getDiscreteState();
-        if (!s) break;
-        
-        TransitionAction* a = s->leastTriedTransition();
-        if (!a) break;
-        
-        a->start();
-        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
- 
-        count++;
+        printf(".");
+        yarp::os::Time::delay(0.2);
     }
-    learner.writeStateFile();
  
 
     printf("All finished\n");
