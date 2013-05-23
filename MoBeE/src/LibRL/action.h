@@ -33,8 +33,8 @@ public:
     
     virtual void    computeNewValue();
     
-    virtual void    start() { yarp::os::RateThread::start(); }
-    virtual void    start( Point_3 p ) { yarp::os::RateThread::start(); }
+    virtual void    start( int* n = NULL ) { actionCounter = n; yarp::os::RateThread::start(); }
+    virtual void    start( Point_3 p, int* n = NULL ) { actionCounter = n; yarp::os::RateThread::start(); }
     
 protected:
     
@@ -60,7 +60,9 @@ protected:
                     timeout;
     int             num;    // number of times this action has been tried
     double          v,newv; // value of this action under the current policy
-    double          r; 
+    double          r;
+    
+    int*            actionCounter;
 
     bool            waitForSteady();
     

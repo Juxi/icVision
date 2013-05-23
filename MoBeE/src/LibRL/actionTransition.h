@@ -50,8 +50,8 @@ private:
     State*                  resultingState;
     std::vector< S_Prime* > transition_belief;
     
-    bool        threadInit();
-    void        threadRelease();
+    void        afterStart(bool s);
+    void        doModelLearning();
     double      updateTransitionBelief();
     void        run();
 };

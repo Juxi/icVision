@@ -16,14 +16,25 @@ int main(int argc, char *argv[])
         connectToMoBeE = false;
     
     // instantiate reinforcement learner
-    Learner learner(16,"icubSim","right_arm",connectToMoBeE);
+    Learner arm(16,"icubSim","right_arm",connectToMoBeE);
+    Learner torso(3,"icubSim","torso",connectToMoBeE);
     
     // initialize from file
-    bool initialized = false;
-    if ( config.check("file") ) {
-        std::string fileName = config.find("file").asString().c_str();
-        if (learner.loadStateFile(fileName))
-            initialized = true;
+    bool torso_initialized = false;
+    if ( config.check("torsofile") ) {
+        std::string fileName = config.find("torsofile").asString().c_str();
+        if (torso.loadStateFile(fileName))
+            torso_initialized = true;
+        else {
+            printf("File read failed!!!\n");
+            return 0;
+        }
+    }
+    bool arm_initialized = false;
+    if ( config.check("armfile") ) {
+        std::string fileName = config.find("armfile").asString().c_str();
+        if (arm.loadStateFile(fileName))
+            arm_initialized = true;
         else {
             printf("File read failed!!!\n");
             return 0;
@@ -31,41 +42,54 @@ int main(int argc, char *argv[])
     }
     
     // initialize from scratch
-    if (!initialized) {
-        learner.appendGrid(4,81,0.5);
-        learner.connectNearestNeighbors(16);
-        //learner.appendReaches();
-        learner.initializeReward(1.0);
+    if (!torso_initialized) {
+        torso.appendGrid(3,27,0.5);
+        torso.connectNearestNeighbors(6);
+        torso.initializeReward(1.0);
     }
-
-    /*** DO INTRINSICALLY MOTIVATED MODEL LEARNING ***/
+    if (!arm_initialized) {
+        arm.appendGrid(4,81,0.5);
+        arm.connectNearestNeighbors(16);
+        arm.initializeReward(1.0);
+    }
     
-    // mark the first state visited
-    State* s = learner.getDiscreteState();
-    if (!s) return 0;
-    s->appendVisit();
+    // name the output files
+    torso.setStateFileName("torso_state.dat");
+    torso.setHistoryFileName("torso_history.dat");
+    arm.setStateFileName("arm_state.dat");
+    arm.setHistoryFileName("arm_history.dat");
     
-    int count = 0;
-    while (learner.leastTriedTransition()->getTimesTried() < 2)
+    State   *ts = NULL, // torso state
+            *as = NULL; // arm ststa
+    
+    TransitionAction    *ta = NULL, // torso action
+                        *aa = NULL; // arm action
+    
+    int torso_count = 0;
+    int arm_count = 0;
+    while ( torso_count < 10000 || arm_count < 10000 )
     {
-        printf("\nCOUNT: %d\n\n",count);
+        if ( !ta || !ta->isRunning() ) {
+            printf("\nTORSO_COUNT: %d\n",torso_count);
+            ts = torso.getDiscreteState();
+            if (!ts) break;
+            ta = ts->greedyTransition();
+            if (!ta) break;
+            ta->start(&torso_count);
+        }
         
-        learner.valueIteration();
-        learner.writeStateFile();
+        if ( !aa || !aa->isRunning() ) {
+            printf("\nARM_COUNT: %d\n",arm_count++);
+            as = arm.getDiscreteState();
+            if (!as) break;
+            aa = as->greedyTransition();
+            if (!aa) break;
+            aa->start();
+        }
         
-        s = learner.getDiscreteState();
-        if (!s) break;
-        
-        TransitionAction* a = s->greedyTransition();
-        if (!a) break;
-        
-        a->start();
-        while ( a->isRunning() ) {yarp::os::Time::delay(1.0);}
- 
-        count++;
+        printf(".");
+        yarp::os::Time::delay(0.2);
     }
-    learner.writeStateFile();
- 
 
     printf("All finished\n");
     return 1;

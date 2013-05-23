@@ -9,34 +9,33 @@
  *****************************/
 
 bool Action::threadInit() {
-    //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
     if (parentState->getLearner()->checkMutex()) {
-        /*printf("\tmutex.check() succeeded... ");*/
-        //printf("\n*** Initializing thread for State::Action - %p::%p ***\n",parentState,this);
         timeStarted = yarp::os::Time::now();
         return 1;
     }
-    else { /*printf("\tmutex.check() failed... ");*/ return 0; }
+    return 0;
 }
 
 void Action::afterStart(bool s)
 {
-    if (!s)
+    if (s) {
+        if (actionCounter) (*actionCounter)++;
+    } else
         printf("EPIC ACTION FAIL...\n");
-    //else
-        //reward = 0.0;
 }
 
-void Action::threadRelease() {
+void Action::threadRelease()
+{
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
-    parentState->getLearner()->mobee.stopForcing(parentState->getLearner()->getDimension());
+    //parentState->getLearner()->mobee.stopForcing(parentState->getLearner()->getDimension());
+    //waitForSteady();
+    
+    parentState->getLearner()->valueIteration();
+    parentState->getLearner()->writeStateFile();
     parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
                                                 parentState->getLearner()->getUntriedActions(),
                                                 parentState->getIdx(),
-                                                idx,
-                                                r,
-                                                v);
-    waitForSteady();
+                                                idx, r, v);
     parentState->getLearner()->postMutex();
 }
 

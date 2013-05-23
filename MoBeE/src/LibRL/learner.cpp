@@ -18,6 +18,7 @@ Learner::Learner( int d, const char* _robotName, const char* _partName, bool con
     historyFileName("history.dat"),
     stateFileName("learnerState.dat")
 {
+    name = std::string(_partName);
     if (connect)
     {
         printf("Connecting to MoBeE model...\n");
@@ -156,7 +157,7 @@ int Learner::getUntriedActions()
 
 void  Learner::valueIteration()
 {
-    mutex.wait();
+    //mutex.wait();
     printf("\nDOING RL...\n");
     
     double maxDelta;
@@ -182,7 +183,7 @@ void  Learner::valueIteration()
         //printf("\tmax_delta: %f\n",maxDelta);
         count++;
     } while ( maxDelta > rlPrecision );
-    mutex.post();
+    //mutex.post();
 }
 
 
@@ -673,10 +674,8 @@ void Learner::writeStateFile()
     }
     out_file << std::endl;
     
-    
     out_file << std::fixed << std::setprecision(10);
     
-    printf("\n\n********************\n");
     int transitionCount = 0;
     out_file << "TRANSITION_ACTIONS" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {

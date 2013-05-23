@@ -17,10 +17,20 @@
 
 class Learner
 {
+    friend class Action;
+    friend class TransitionAction;
+    friend class ReachAction;
+    
 public:
+    
+    // TODO: protect most of this stuff with the mutex
         
     Learner( int dim, const char* _robotName, const char* _partName, bool connect = true );
     ~Learner();
+    
+    // set file names
+    void setStateFileName(const char* s) { stateFileName = std::string(s); }
+    void setHistoryFileName(const char* s) { historyFileName = std::string(s); }
     
     // construct states and actions
     void                appendGrid( int dim, int num, double scaling );
@@ -32,14 +42,15 @@ public:
     //bool              deleteState( const State* );
     
     // query the learner
-    int     getDimension() { return dimension; }
-    int     getUnvisitedStates();
-    int     getUntriedActions();
-    Point_d getRealState();
-    State*  getDiscreteState();
-    Action* leastTriedTransition();
-    State*  leastVisitedState();
-    void    print(bool printall = false);
+    std::string getName() { return name; }
+    int         getDimension() { return dimension; }
+    int         getUnvisitedStates();
+    int         getUntriedActions();
+    Point_d     getRealState();
+    State*      getDiscreteState();
+    Action*     leastTriedTransition();
+    State*      leastVisitedState();
+    void        print(bool printall = false);
     
     // turn model learning on and off
     void    setModelLearning(bool b) { modelUpdate = b; }
@@ -54,8 +65,26 @@ public:
     double  getDiscountFactor() { return discountFactor; }
     int     getStateTransitionInit() { return stateTransitionInit; }
     
+    // these may be a const correctness problem or a threading problem
+    std::vector< State* > getStates() { return states; } 
+    std::vector< yarp::os::ConstString > getMarkers() { return markers; }
+    
+    // config from file
+    bool loadStateFile( std::string& fileName );
+    
     // (re)initialize things
     void initializeReward(double);
+    
+private:
+
+    MoBeE_Interface mobee;
+    
+    bool checkMutex() { return mutex.check(); }
+    void postMutex() { mutex.post(); }
+    
+    // output files
+    void writeStateFile();
+    void writeHistoryFile(int,int,int,int,double,double);
     
     // bits of learning algorithms
     void valueIteration();
@@ -63,26 +92,6 @@ public:
     //void reachTargets(std::vector<Point_3>);
     //void workOnTarget(Point_3 p, bool endEarly = false);
     //double generateValueFunction(Point_3);
-    
-    // these may be a const correctness problem
-    std::vector< State* > getStates() { return states; } 
-    std::vector< yarp::os::ConstString > getMarkers() { return markers; }
-    
-    // file I/O
-    void writeStateFile();
-    bool loadStateFile( std::string& fileName );
-    void writeHistoryFile(int,int,int,int,double,double);
-    //void writeNumberedFile( std::string outFileBaseName = "outFile", int num = 0 );
-
-    
-    /***********************************************************************
-     ***  these should not really be public but the actions need access  ***
-     ***********************************************************************/
-    MoBeE_Interface mobee;
-    bool checkMutex() { return mutex.check(); }
-    void postMutex() { mutex.post(); }
-    
-private:
     
     Point_d             redimension(Point_d& p);
     
@@ -111,6 +120,7 @@ private:
     // names of data (output) files
     std::string historyFileName;
     std::string stateFileName;
+    std::string name;
     
     yarp::os::Semaphore mutex;
 };
