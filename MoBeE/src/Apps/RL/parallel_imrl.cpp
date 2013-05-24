@@ -69,22 +69,20 @@ int main(int argc, char *argv[])
     int arm_count = 0;
     while ( torso_count < 10000 || arm_count < 10000 )
     {
-        if ( !ta || !ta->isRunning() ) {
-            printf("\nTORSO_COUNT: %d\n",torso_count);
-            ts = torso.getDiscreteState();
-            if (!ts) break;
-            ta = ts->greedyTransition();
-            if (!ta) break;
+        if ( (!ta || !ta->isRunning()) && (!aa || !aa->isRunning()) )
+        {
+            printf("*************************************************************\n");
+            printf("TORSO_COUNT: %d\n",torso_count);
+            printf("ARM_COUNT: %d\n\n",arm_count);
+            
+            ts = torso.getDiscreteState(); if (!ts) break;
+            as = arm.getDiscreteState(); if (!as) break;
+            
+            ta = ts->greedyTransition(); if (!ta) break;
+            aa = as->greedyTransition(); if (!aa) break;
+            
             ta->start(&torso_count);
-        }
-        
-        if ( !aa || !aa->isRunning() ) {
-            printf("\nARM_COUNT: %d\n",arm_count++);
-            as = arm.getDiscreteState();
-            if (!as) break;
-            aa = as->greedyTransition();
-            if (!aa) break;
-            aa->start();
+            aa->start(&arm_count);
         }
         
         printf(".");
