@@ -42,6 +42,7 @@ public:
     void                            computeNewValue();
     S_Prime*                        findOrAppendSPrime(State* s);
     std::vector< S_Prime* > const&  getTransitionBeliefs() { return transition_belief; }
+    bool                            expectedTransition( State* s );
     
 private:
     
@@ -51,7 +52,7 @@ private:
     std::vector< S_Prime* > transition_belief;
     
     void        afterStart(bool s);
-    void        doModelLearning();
+    void        learnStuff();
     double      updateTransitionBelief();
     void        run();
 };

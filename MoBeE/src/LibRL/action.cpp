@@ -8,6 +8,13 @@
  *** ABSTRACT PARENT ACTION ***
  *****************************/
 
+void Action::start( Point_3 p, int* n )
+{
+    actionCounter = n;
+    target = p;
+    yarp::os::RateThread::start();
+}
+
 bool Action::threadInit() {
     if (parentState->getLearner()->checkMutex()) {
         timeStarted = yarp::os::Time::now();

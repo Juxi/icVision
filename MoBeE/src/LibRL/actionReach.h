@@ -23,8 +23,6 @@ public:
     
     double predictReward( Point_3 p );
     
-    void start( Point_3 p, int* n = NULL ) { actionCounter = n; reachTarget = p; yarp::os::RateThread::start(); }
-    
 private:
     
     ReachAction(    int _idx,
@@ -35,42 +33,36 @@ private:
                     int numTries = 0,
                     int rate=50 ) : Action( _idx,p,value,reward,numTries,rate),
                                     marker(m),
-                                    reachTarget(0,0,0),
+                                    //reachTarget(0,0,0),
                                     markerPos(0,0,0),
                                     forceGain(1.0),
                                     torqueGain(1.0),
                                     forceTimeout(timeout/2){}
     ~ReachAction(){}
     
-    void appendToHistory( Point_3 p, Point_3 q, double r ){ history.push_back( HistoryItem(p,q,r) ); }
-
+    //void appendToHistory( Point_3 p, Point_3 q, double r ){ history.push_back( HistoryItem(p,q,r) ); }
     //int tempIdx;
+    
     yarp::os::ConstString marker;
     
     double forceGain,torqueGain;
     double forceTimeout;
     
-    Point_3 reachTarget;
     Point_3 markerPos;
     
     yarp::os::ConstString mobeeObjectName,eName,nName;
     
-    struct HistoryItem {
+    /*struct HistoryItem {
         Point_3 target;
         Point_3 result;
         double reward;
         HistoryItem(Point_3 p, Point_3 q, double r) : target(p), result(q), reward(r) {}
     };
     std::vector< HistoryItem > history;
+    */
     
-    //std::vector<Point_3> history;
-    
-    //void start() { Action::start(); }
-    
-    //double getErr();
+
     Vector_3 sendForceCommand(); // returns error
-    //bool threadInit();
-    //void threadRelease();
     
     void afterStart(bool s);
     void relax();

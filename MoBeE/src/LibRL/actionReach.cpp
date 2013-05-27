@@ -16,8 +16,8 @@ double ReachAction::predictReward( Point_3 p )
     double r_predicted = 0.0;
     if ( history.size()>0 ) {
         for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
-            double d = (i->target-i->result).squared_length();
-            r_predicted += 1.0/((p-i->result).squared_length()+1) - d/((p-i->target).squared_length()+d);
+            //double d = (i->target-i->result).squared_length();
+            //r_predicted += 1.0/((p-i->result).squared_length()+1) - d/((p-i->target).squared_length()+d);
         }
         r_predicted /= history.size();
     }
@@ -86,7 +86,7 @@ Vector_3 ReachAction::sendForceCommand()
     parentState->getLearner()->mobee.getMarkerState(marker,markerPos,n);
     
     // error vector from marker to target
-    err = reachTarget - markerPos;
+    err = target - markerPos;
     errMag = sqrt(err.squared_length());
     nMag = sqrt(n.squared_length());
     //printf("raw n: %f,%f,%f\n",n.x(),n.y(),n.z());
@@ -137,7 +137,7 @@ void ReachAction::run()
         parentState->getLearner()->mobee.getMarkerState(marker,p,n);
         
         r = 1.0/(errMag +2);
-        history.push_back(HistoryItem(reachTarget,p,r));
+        history.push_back(HistoryItem(target,r));
     
         printf("\n STEADY STATE REACHED!!! errMag: %f, reward: %f\n",errMag,r);
         relax();

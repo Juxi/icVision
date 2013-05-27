@@ -565,7 +565,7 @@ bool Learner::loadStateFile( std::string& filename )
         else if ( line.compare("TRANSITION_ACTIONS")==0 ) { doWhat = 1; continue; }
         else if ( line.compare("TRANSITION_BELIEFS")==0 ) { doWhat = 2; continue; }
         else if ( line.compare("REACH_ACTIONS")==0 ) { doWhat = 3; continue; }
-        else if ( line.compare("REACH_BELIEFS")==0 ) { doWhat = 4; continue; }
+        else if ( line.compare("REWARD_HISTORY")==0 ) { doWhat = 4; continue; }
         
         if ( doWhat == 0 ) // get the states/poses
         {
@@ -678,10 +678,10 @@ bool Learner::loadStateFile( std::string& filename )
         }
         else if ( doWhat == 4 ) // append reward beliefs to reach actions
         {
-            int reachIdx;
+            int actionIdx;
             double x,y,z,a,b,c,r;
             std::istringstream line_reader(line);
-            line_reader >> reachIdx;
+            line_reader >> actionIdx;
             line_reader >> x;
             line_reader >> y;
             line_reader >> z;
@@ -690,17 +690,21 @@ bool Learner::loadStateFile( std::string& filename )
             line_reader >> c;
             line_reader >> r;
             
-            ReachAction* reach = getReachAction(reachIdx);
+            Action* action = getReachAction(actionIdx);
+            if (!action) getTransitionAction(actionIdx);
             
-            if (!reach) {
-                printf("FATAL FILE READ ERROR: Reach index not found.\n");
+            if (!action) {
+                printf("FATAL FILE READ ERROR: Action index not found.\n");
                 return false;
             }
-            reach->appendToHistory(Point_3(x,y,z),Point_3(a,b,c),r);
+            action->appendToHistory(Point_3(x,y,z),r);
         }
     }
     nextStateIdx = maxStateIdx + 1;
     nextActionIdx = maxActionIdx + 1;
+    
+    valueIteration();
+    
     return true;
 }
 
@@ -774,17 +778,25 @@ void Learner::writeStateFile()
     }
     out_file << std::endl;
     
-    out_file << "REACH_BELIEFS" << std::endl;
+    out_file << "REWARD_HISTORY" << std::endl;
     for ( std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i ) {
+        for ( std::vector<TransitionAction*>::iterator j = (*i)->transitionActions.begin(); j != (*i)->transitionActions.end(); ++j ) {
+            for ( std::vector< Action::HistoryItem >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
+                out_file << (*j)->idx << "\t"
+                << k->target.cartesian(0) << "\t"
+                << k->target.cartesian(1) << "\t"
+                << k->target.cartesian(2) << "\t"
+                << k->reward
+                << std::endl;
+            }
+            
+        }
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
-            for ( std::vector< ReachAction::HistoryItem >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
+            for ( std::vector< Action::HistoryItem >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
                 out_file << (*j)->idx << "\t"
                          << k->target.cartesian(0) << "\t"
                          << k->target.cartesian(1) << "\t"
                          << k->target.cartesian(2) << "\t"
-                         << k->result.cartesian(0) << "\t"
-                         << k->result.cartesian(1) << "\t"
-                         << k->result.cartesian(2) << "\t"
                          << k->reward
                          << std::endl;
             }

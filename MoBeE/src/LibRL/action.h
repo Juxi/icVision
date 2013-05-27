@@ -33,8 +33,9 @@ public:
     
     virtual void    computeNewValue();
     
-    virtual void    start( int* n = NULL ) { actionCounter = n; yarp::os::RateThread::start(); }
-    virtual void    start( Point_3 p, int* n = NULL ) { actionCounter = n; yarp::os::RateThread::start(); }
+    virtual void    start( Point_3 p = CGAL::ORIGIN, int* n = NULL );
+    
+    
     
 protected:
     
@@ -62,6 +63,7 @@ protected:
     double          v,newv; // value of this action under the current policy
     double          r;
     
+    Point_3         target;
     int*            actionCounter;
 
     bool            waitForSteady();
@@ -69,6 +71,16 @@ protected:
     virtual bool    threadInit();
     virtual void    afterStart(bool s);
     virtual void    threadRelease();
+    
+    struct HistoryItem {
+        Point_3 target;
+        //Point_3 result;
+        double reward;
+        HistoryItem(Point_3 p, double r) : target(p), reward(r) {}
+    };
+    std::vector< HistoryItem > history;
+    
+    void appendToHistory( Point_3 p, double r ){ history.push_back( HistoryItem(p,r) ); }
 };
 
 #endif

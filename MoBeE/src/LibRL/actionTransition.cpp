@@ -16,32 +16,12 @@ TransitionAction::TransitionAction( int idx,
     num=new_s_prime->num;
 }
 
-/*std::pair<const State*,double> TransitionAction::getTransitionBelief()
+bool TransitionAction::expectedTransition( State* s )
 {
-    if (!transition_belief.size())
-        return std::pair<const State*,double>(NULL,0.0);
-    
-    std::pair<const State*,double> max;
-    max.first = (*transition_belief.begin())->state;
-    max.second = (*transition_belief.begin())->prob;
-    for ( std::vector<S_Prime*>::iterator i = transition_belief.begin(); i != transition_belief.end(); ++i ) {
-        if ( (*i)->prob > max.second ) {
-            max.first = (*i)->state;
-            max.second = (*i)->prob;
-        }
-    }
-    return max;
-}*/
-
-/*bool TransitionAction::threadInit()
-{
-    Action::threadInit();
-    printf("RUNNING STATE TRANSITION ACTION.");
-    resultingState = NULL;
-    parentState->getLearner()->mobee.setAttractor(*destination_state);
-    yarp::os::Time::delay(0.2);
-    return 1;
-}*/
+    for ( std::vector<S_Prime*>::iterator i = transition_belief.begin(); i != transition_belief.end(); ++i )
+        if ( (*i)->state == s ) return true;
+    return false;
+}
 
 void TransitionAction::afterStart(bool s)
 {
@@ -55,30 +35,7 @@ void TransitionAction::afterStart(bool s)
     }
 }
 
-/*void TransitionAction::threadRelease()
-{
-    if (!resultingState) {
-        printf("There is no resulting state!!! WTF?!?\n");
-        return;
-    }
-    
-    S_Prime* s_prime = findOrAppendSPrime(resultingState);
-    
-    num++;
-    s_prime->num++;
-    s_prime->state->visits++;
-    
-    if (parentState->getLearner()->isLearningModel())
-    {
-        double kl = updateTransitionBelief();
-        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
-        printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),kl);
-    }
-    
-    Action::threadRelease();
-}*/
-
-void TransitionAction::doModelLearning()
+void TransitionAction::learnStuff()
 {
     resultingState = parentState->getLearner()->getDiscreteState();
     
@@ -94,11 +51,14 @@ void TransitionAction::doModelLearning()
     s_prime->state->visits++;
     
     double kl = 0.0;
-    if (parentState->getLearner()->isLearningModel())
+    if (parentState->getLearner()->isLearningModel()) {
         kl = updateTransitionBelief();
-    
-    r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
-    printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),kl);
+        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
+        printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),kl);
+    } else if (!expectedTransition(resultingState)) {
+        r = -1.0;
+        printf("\tState Transition Action Failed.  Got r = -1\n");
+    }
 }
 
 void TransitionAction::computeNewValue()
@@ -175,12 +135,12 @@ void TransitionAction::run()
     if (parentState->getLearner()->mobee.isStable())
     {
         printf("\nTRANSITION REACHED STEADY STATE (%s) :-)\n",parentState->getLearner()->getName().c_str());
-        doModelLearning();
+        learnStuff();
         askToStop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
         printf("\nTRANSITION TIMED OUT (%s) :-(\n",parentState->getLearner()->getName().c_str());
-        doModelLearning();
+        learnStuff();
         askToStop();
     }
 }
