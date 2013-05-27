@@ -19,10 +19,6 @@ class ReachAction : public Action
     friend class Learner;
     friend class State;
     
-public:
-    
-    double predictReward( Point_3 p );
-    
 private:
     
     ReachAction(    int _idx,
@@ -36,30 +32,17 @@ private:
                                     //reachTarget(0,0,0),
                                     markerPos(0,0,0),
                                     forceGain(1.0),
-                                    torqueGain(1.0),
-                                    forceTimeout(timeout/2){}
+                                    torqueGain(1.0){}
     ~ReachAction(){}
+
+    yarp::os::ConstString   marker;             // reference to the part of the robot we are controlling
+    yarp::os::ConstString   mobeeObjectName,    // visualize target point
+                            eName,              // visualize error vector
+                            nName;              // visualize marker's normal vector
+    double                  forceGain,
+                            torqueGain;
+    Point_3                 markerPos;
     
-    //void appendToHistory( Point_3 p, Point_3 q, double r ){ history.push_back( HistoryItem(p,q,r) ); }
-    //int tempIdx;
-    
-    yarp::os::ConstString marker;
-    
-    double forceGain,torqueGain;
-    double forceTimeout;
-    
-    Point_3 markerPos;
-    
-    yarp::os::ConstString mobeeObjectName,eName,nName;
-    
-    /*struct HistoryItem {
-        Point_3 target;
-        Point_3 result;
-        double reward;
-        HistoryItem(Point_3 p, Point_3 q, double r) : target(p), result(q), reward(r) {}
-    };
-    std::vector< HistoryItem > history;
-    */
     
 
     Vector_3 sendForceCommand(); // returns error

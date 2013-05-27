@@ -33,9 +33,11 @@ public:
     
     virtual void    computeNewValue();
     
-    virtual void    start( Point_3 p = CGAL::ORIGIN, int* n = NULL );
     
+    virtual void    start( Point_3 p, int* n = NULL );
+    virtual void    start( int* n = NULL ) { start(CGAL::ORIGIN,n); }
     
+    double          predictReward( Point_3 p );
     
 protected:
     
