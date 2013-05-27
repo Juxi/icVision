@@ -39,7 +39,11 @@ public:
     TransitionAction*   greedyTransition();
     TransitionAction*   randomTransition();
     TransitionAction*   leastTriedTransition();
+    ReachAction*        greedyReach();
     ReachAction*        randomReach();
+    ReachAction*        leastTriedReach();
+    
+    Action*             greedyAction();
     //Action* explore();
     
     Learner* getLearner() { return parentLearner; }

@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         learner.appendGrid(4,81,0.5);
         learner.connectNearestNeighbors(16);
         //learner.appendReaches();
-        learner.initializeReward(1.0);
+        learner.initializeTransitionReward(1.0);
     }
 
     /*** DO LEAST TRIED ACTION MODEL LEARNING ***/

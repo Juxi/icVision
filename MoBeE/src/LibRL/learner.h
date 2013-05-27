@@ -49,6 +49,7 @@ public:
     Point_d     getRealState();
     State*      getDiscreteState();
     Action*     leastTriedTransition();
+    Action*     leastTriedReach();
     State*      leastVisitedState();
     void        print(bool printall = false);
     
@@ -73,21 +74,27 @@ public:
     bool loadStateFile( std::string& fileName );
     
     // (re)initialize things
-    void initializeReward(double);
+    void initializeTransitionReward(double);
+    void initializeReachReward(double);
+    
+    void valueIteration();
+    
+    void writeStateFile();
+    
+    MoBeE_Interface mobee;
     
 private:
 
-    MoBeE_Interface mobee;
+    
     
     bool checkMutex() { return mutex.check(); }
     void postMutex() { mutex.post(); }
     
     // output files
-    void writeStateFile();
     void writeHistoryFile(int,int,int,int,double,double);
     
     // bits of learning algorithms
-    void valueIteration();
+    
     //void tryReaches(Point_3 p);
     //void reachTargets(std::vector<Point_3>);
     //void workOnTarget(Point_3 p, bool endEarly = false);

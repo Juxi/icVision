@@ -10,8 +10,6 @@ TransitionAction::TransitionAction( int idx,
                                     int rate) : Action(idx,a,value,reward,numTries,rate), destination_state(b)
 {
     // optimistic initialization
-    //S_Prime* new_s_prime = new S_Prime(b, 1.0, 1);
-    //transition_belief.push_back( new_s_prime );
     S_Prime* new_s_prime = findOrAppendSPrime(b);
     new_s_prime->prob = 1.0;
     new_s_prime->num = parentState->getLearner()->getStateTransitionInit();

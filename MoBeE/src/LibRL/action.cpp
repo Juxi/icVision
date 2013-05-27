@@ -27,9 +27,6 @@ void Action::afterStart(bool s)
 void Action::threadRelease()
 {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
-    //parentState->getLearner()->mobee.stopForcing(parentState->getLearner()->getDimension());
-    //waitForSteady();
-    
     parentState->getLearner()->valueIteration();
     parentState->getLearner()->writeStateFile();
     parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
@@ -41,6 +38,7 @@ void Action::threadRelease()
 
 void Action::computeNewValue()
 {
+    //printf("called Action::computeNewValue()\n");
     newv = r + parentState->getLearner()->getDiscountFactor() * v;
 }
 

@@ -116,16 +116,26 @@ void Learner::connectNearestNeighbors(int n)
 
 void Learner::appendReaches()
 {
+    printf("appending reaches\n");
     for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
             appendReachAction(*i, *j);
     }
 }
 
-void Learner::initializeReward(double rew)
+void Learner::initializeTransitionReward(double rew)
 {
     for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
         for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            (*a)->r = rew;
+        }
+    }
+}
+
+void Learner::initializeReachReward(double rew)
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
             (*a)->r = rew;
         }
     }
@@ -148,6 +158,10 @@ int Learner::getUntriedActions()
     for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
         for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
             if ((*a)->getTimesTried() == stateTransitionInit)
+                count++;
+        }
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            if ((*a)->getTimesTried() == 0)
                 count++;
         }
     }
@@ -244,6 +258,32 @@ Action* Learner::leastTriedTransition()
     return a;
 }
 
+Action* Learner::leastTriedReach()
+{
+    ReachAction* a = NULL;
+    State* origin = NULL;
+    
+    std::vector<State*> shuffleStates = states;
+    std::random_shuffle(shuffleStates.begin(), shuffleStates.end());
+    for ( std::vector<State*>::iterator s = shuffleStates.begin(); s != shuffleStates.end(); ++s ){
+        if ( (*s)->visits > 0 ) {
+            ReachAction* b = (*s)->leastTriedReach();
+            if ( !a || b->getTimesTried() < a->getTimesTried() ) {
+                a = b;
+                origin = *s;
+            }
+            //if ( a->timesTried() == 0 )
+            //    return a;
+        }
+    }
+    if (!a) {
+        origin = getDiscreteState();
+        a = origin->leastTriedReach();
+    }
+    //printf("GLOBALLY LEAST TRIED REACH IS FROM %p (%d times)\n",origin,a->getTimesTried());
+    return a;
+}
+
 /*void Learner::tryReaches( Point_3 p )
 {
     for ( int count = 0; count < 1000; count++ )
@@ -333,6 +373,7 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
 ReachAction* Learner::appendReachAction( State* s, yarp::os::ConstString m, double val, double rew, int num )
 {
     if ( !s ) return NULL;
+    printf("appending reach action to state: %d\n",s->getIdx());
     ReachAction* reach = new ReachAction( nextActionIdx++, m, s, val, rew, num);
     s->reachActions.push_back(reach);
     return reach;
@@ -569,8 +610,9 @@ bool Learner::loadStateFile( std::string& filename )
                 printf("FATAL FILE READ ERROR: State index (for a transition) not found.\n");
                 return false;
             }
-            TransitionAction* t = appendTransitionAction(stateA,stateB,value,reward,num);
+            TransitionAction* t = appendTransitionAction(stateA,stateB,value,reward);
             t->idx = idx;
+            t->num = num;
             if ( idx > maxActionIdx )
                 maxActionIdx = idx;
             if (!checkActionIndex(t)) {

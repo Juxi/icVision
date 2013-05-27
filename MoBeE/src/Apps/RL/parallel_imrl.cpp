@@ -45,12 +45,12 @@ int main(int argc, char *argv[])
     if (!torso_initialized) {
         torso.appendGrid(3,27,0.5);
         torso.connectNearestNeighbors(6);
-        torso.initializeReward(1.0);
+        torso.initializeTransitionReward(1.0);
     }
     if (!arm_initialized) {
         arm.appendGrid(4,81,0.5);
         arm.connectNearestNeighbors(16);
-        arm.initializeReward(1.0);
+        arm.initializeTransitionReward(1.0);
     }
     
     // name the output files

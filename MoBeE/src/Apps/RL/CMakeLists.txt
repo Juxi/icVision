@@ -17,16 +17,20 @@ ADD_EXECUTABLE ( imrl imrl.cpp )
 ADD_EXECUTABLE ( least_tried least_tried.cpp )
 ADD_EXECUTABLE ( random random.cpp )
 ADD_EXECUTABLE ( parallel_imrl parallel_imrl.cpp )
+ADD_EXECUTABLE ( reach reach.cpp )
 
 ADD_DEPENDENCIES( imrl		  iCubRL )
 ADD_DEPENDENCIES( least_tried	iCubRL )
 ADD_DEPENDENCIES( random	iCubRL )
 ADD_DEPENDENCIES( parallel_imrl	iCubRL ) 
+ADD_DEPENDENCIES( reach	iCubRL ) 
 
 TARGET_LINK_LIBRARIES( imrl		iCubRL )
 TARGET_LINK_LIBRARIES( least_tried	iCubRL )
 TARGET_LINK_LIBRARIES( random		iCubRL )
-TARGET_LINK_LIBRARIES( parallel_imrl	iCubRL ) 
+TARGET_LINK_LIBRARIES( parallel_imrl	iCubRL )
 
-INSTALL ( TARGETS imrl least_tried random parallel_imrl DESTINATION ${CMAKE_SOURCE_DIR}/bin/learning )
+TARGET_LINK_LIBRARIES( reach	iCubRL ) 
+
+INSTALL ( TARGETS imrl least_tried random parallel_imrl reach DESTINATION ${CMAKE_SOURCE_DIR}/bin/learning )
 

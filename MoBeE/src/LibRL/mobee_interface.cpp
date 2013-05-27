@@ -94,8 +94,8 @@ void MoBeE_Interface::rmGeom( yarp::os::ConstString& name )
     worldCmd.addVocab(yarp::os::Vocab::encode("rm"));
     worldCmd.addString(name);
     worldClient.write(worldCmd,worldRsp);
-    //printf("  world command: %s\n", worldCmd.toString().c_str());
-    //printf("  world response: %s\n\n", worldRsp.toString().c_str());
+    printf("  world command: %s\n", worldCmd.toString().c_str());
+    printf("  world response: %s\n\n", worldRsp.toString().c_str());
 }
 
 

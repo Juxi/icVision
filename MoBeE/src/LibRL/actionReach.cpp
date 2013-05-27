@@ -25,7 +25,7 @@ double ReachAction::predictReward( Point_3 p )
     return r_predicted;
 }
 
-bool ReachAction::threadInit()
+/*bool ReachAction::threadInit()
 {
     Action::threadInit();
     
@@ -43,9 +43,22 @@ bool ReachAction::threadInit()
         yarp::os::Time::delay(1);
     
     return 1;
+}*/
+
+void ReachAction::afterStart(bool s)
+{
+    Action::afterStart(s);
+    
+    if (s) {
+        printf(" RUNNING REACH ACTION %p from state %p (%s)",this,parentState,parentState->getLearner()->getName().c_str());
+        forceGain = 5000.0;
+        torqueGain = 5000.0;
+        sendForceCommand();
+        yarp::os::Time::delay(0.2);
+    }
 }
 
-void ReachAction::threadRelease()
+/*void ReachAction::threadRelease()
 {
     num++;
     //parentLearner->rmGeom(mobeeObjectName);
@@ -53,6 +66,13 @@ void ReachAction::threadRelease()
     //relax();
     
     Action::threadRelease();
+}*/
+
+void ReachAction::relax()
+{
+    num++;
+    parentState->getLearner()->mobee.stopForcing(parentState->getLearner()->getDimension());
+    waitForSteady();
 }
 
 Vector_3 ReachAction::sendForceCommand()
@@ -88,7 +108,7 @@ Vector_3 ReachAction::sendForceCommand()
     //printf("eDir.squaredlength() %f\n",eDir.squared_length());
     //printf("nDir.squaredlength() %f\n",nDir.squared_length());
     
-    printf("--------------------------\n");
+    /*printf("--------------------------\n");
     printf("err = %f \n", errMag );
     printf("angular err = %f \n", angularErrMag );
     printf("\n");
@@ -97,7 +117,7 @@ Vector_3 ReachAction::sendForceCommand()
     printf("|torque| = %f \n", sqrt(torque.squared_length()) );
     
     printf("\n");
-    printf("\n");
+    printf("\n");*/
 
     
     Vector_3 zero(0,0,0);
@@ -109,21 +129,24 @@ Vector_3 ReachAction::sendForceCommand()
 void ReachAction::run()
 {
     Vector_3 err = sendForceCommand();
-        
-    if (parentState->getLearner()->mobee.isStable() /*&& err.squared_length() != 0.0*/ ) {
+    double errMag = 100*sqrt(err.squared_length()); // in cm i think
+    
+    if (parentState->getLearner()->mobee.isStable()) {
         Point_3 p;
         Vector_3 n;
         parentState->getLearner()->mobee.getMarkerState(marker,p,n);
         
-        r = 1/(err.squared_length()+1);
+        r = 1.0/(errMag +2);
         history.push_back(HistoryItem(reachTarget,p,r));
     
-        printf("\n STEADY STATE REACHED!!! Got reward: %f\n",r);
+        printf("\n STEADY STATE REACHED!!! errMag: %f, reward: %f\n",errMag,r);
+        relax();
         askToStop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
-        r = 0;
-        printf("REACH TIMED OUT!!! Got reward: %f\n",r);
+        r = 0.0;
+        printf("REACH TIMED OUT!!! errMag: %f, reward: %f\n",errMag,r);
+        relax();
         askToStop();
     }
 }

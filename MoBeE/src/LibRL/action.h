@@ -29,7 +29,7 @@ public:
     inline double   getReward() { return r; }
     inline double   getValue() { return v; }
     inline double   getNewValue() { return newv; }
-    inline void     updateValue() { /*printf("\t\tUpdating value for action: %p... v: %f, newv: %f\n",this,v,newv);*/ v = newv; }
+    inline void     updateValue() { v = newv; }
     
     virtual void    computeNewValue();
     

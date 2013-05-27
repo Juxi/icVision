@@ -22,7 +22,8 @@ class ReachAction : public Action
 public:
     
     double predictReward( Point_3 p );
-    void start( Point_3 p ) { reachTarget = p; yarp::os::RateThread::start(); }
+    
+    void start( Point_3 p, int* n = NULL ) { actionCounter = n; reachTarget = p; yarp::os::RateThread::start(); }
     
 private:
     
@@ -68,8 +69,11 @@ private:
     
     //double getErr();
     Vector_3 sendForceCommand(); // returns error
-    bool threadInit();
-    void threadRelease();
+    //bool threadInit();
+    //void threadRelease();
+    
+    void afterStart(bool s);
+    void relax();
     void run();
     
 };
