@@ -38,21 +38,16 @@ void Action::threadRelease()
     parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
                                                 parentState->getLearner()->getUntriedActions(),
                                                 parentState->getIdx(),
-                                                idx, r, v);
+                                                idx, r);
     parentState->getLearner()->postMutex();
 }
 
-double Action::predictReward( Point_3 p )
+double Action::predictReward( Point_3 p, bool b )
 {
     double r_predicted = 0.0;
-    if ( history.size()>0 ) {
-        for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
-            //double d = (i->target-i->result).squared_length();
-            //r_predicted += 1.0/((p-i->result).squared_length()+1) - d/((p-i->target).squared_length()+d);
-        }
-        r_predicted /= history.size();
-    }
-    //r = r_predicted;
+    for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i )
+        r_predicted += i->reward/((p-i->target).squared_length()+1);
+    if (b) r = r_predicted;
     return r_predicted;
 }
 

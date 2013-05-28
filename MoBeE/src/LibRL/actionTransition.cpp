@@ -56,7 +56,8 @@ void TransitionAction::learnStuff()
         r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
         printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),kl);
     } else if (!expectedTransition(resultingState)) {
-        r = -1.0;
+        r -= 1.0;
+        appendToHistory(target, r);
         printf("\tState Transition Action Failed.  Got r = -1\n");
     }
 }

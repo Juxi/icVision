@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <time.h>
 #include "learner.h"
+#include "rl_problem.h"
 #include "util.h"
 
 int main(int argc, char *argv[])
@@ -32,46 +33,51 @@ int main(int argc, char *argv[])
         return 0;
     }
     
+    learner.setStateFileName("arm_state.dat");      // contains internal learner state
+    learner.setHistoryFileName("arm_history.dat");  // history of states visited, actions taken, and rewards received
+    learner.setModelLearning(false);                // don't mess with the state transition probabilities
+    
     /* INITIALIZE REACH ACTIONS */
     //learner.appendReaches();
     //learner.initializeTransitionReward(0.0);
     //learner.initializeReachReward(1.0);
+    //learner.valueIteration();
     //learner.writeStateFile();
     //return 1;
     
-    // create a grid of reach targets in task space
-    std::vector<Point_3> reachTargets = tableSample( -0.4, -0.1, 0.0, 0.4, 0.0, 0.05 );
-    printf("\nMade %d reach targets\n",reachTargets.size());
-    
-    learner.setStateFileName("arm_state.dat");
-    learner.setHistoryFileName("arm_history.dat");
-    
-    // don't mess with the state transition probabilities
-    learner.setModelLearning(false);
+    // reach targets in task space
+    RL_Problem_Set problems(&learner);
+    problems.sampleInit( -0.4, -0.1, 0.0, 0.4, 0.0, 0.0, 0.05 );
     
     State* s = NULL;
     Action* a = NULL;
     
-    int count = 0;          // counts actions executed
-    int targetCount = 0;    // counts reach targets 
-    for (std::vector<Point_3>::iterator i=reachTargets.begin(); i!=reachTargets.end(); ++i)
-    {
-        printf("\n\n\nNew Reach Target: (%f %f %f)\n\n",i->x(), i->y(), i->z());
-        yarp::os::ConstString sph = learner.mobee.mkSphere(i->x(), i->y(), i->z(), 0.02);
+    int targetCount = 0;    // counts reach targets
+    int numTries;
+    
+      
+    do {
+        // choose an RL problem
+        problems.evaluateInterest();
+        RL_Problem* prob = problems.mostInteresting();
         
-        learner.initializeTransitionReward(0.0);
-        learner.initializeReachReward(1.0);
+        printf("\n\n\nNew Reach Target: (%f %f %f)\n\n",prob->target.x(), prob->target.y(), prob->target.z());
+        yarp::os::ConstString sph = learner.mobee.mkSphere(prob->target.x(), prob->target.y(), prob->target.z(), 0.02);
         
-        int leastTried = 0;
-        while (leastTried <= targetCount)
+        learner.predictRewards(prob->target);
+        
+        //learner.randomTransitions(5); // if we don't do this, must run value iteration explicitly
+        //printf("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
+        
+        int count = prob->numActions; // counts actions executed
+        while ( prob->numActions - count < 10 )
         {
             if ( !a || !a->isRunning() )
             {
-                printf("\nTARGET: %d, ACTION_COUNT: %d\n\n",targetCount,count);
-                leastTried = learner.leastTriedReach()->getTimesTried();
+                printf("\nTARGET: %d, ACTION_COUNT: %d\n\n",targetCount,prob->numActions);
                 s = learner.getDiscreteState(); if (!s) break;
-                a = s->greedyAction(); if (!a) break;
-                a->start(*i,&count);
+                a = s->eGreedyAction(0.5); if (!a) break;
+                a->start( prob->target, &prob->numActions );
             }
             
             printf(".");
@@ -80,7 +86,7 @@ int main(int argc, char *argv[])
         //yarp::os::Time::delay(0.2);
         learner.mobee.rmGeom(sph);
         targetCount++;
-    }
+    } while ( problems.leastTried() < 10 );
  
     printf("All finished\n");
     return 1;

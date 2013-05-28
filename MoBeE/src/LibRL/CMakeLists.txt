@@ -59,6 +59,7 @@ SET ( src_files
 			actionTransition.cpp
 			actionReach.cpp
 			mobee_interface.cpp
+			rl_problem.cpp
 )
 
 SET ( hdr_files		learner.h
@@ -68,6 +69,7 @@ SET ( hdr_files		learner.h
 			actionReach.h
 			mobee_interface.h
 			util.h
+			rl_problem.h
 )
 
 ADD_LIBRARY ( iCubRL STATIC ${hdr_files} ${src_files} )

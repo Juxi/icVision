@@ -44,6 +44,7 @@ public:
     ReachAction*        leastTriedReach();
     
     Action*             greedyAction();
+    Action*             eGreedyAction(double e = 0.5);
     //Action* explore();
     
     Learner* getLearner() { return parentLearner; }

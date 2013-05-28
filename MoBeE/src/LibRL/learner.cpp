@@ -8,15 +8,15 @@
 #include "actionReach.h"
 
 Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d),
-    modelUpdate(true),
-    discountFactor(0.9),
-    modelInterest(100.0),
-    rlPrecision(0.001),
-    stateTransitionInit(1),
-    nextStateIdx(0),
-    nextActionIdx(0),
-    historyFileName("history.dat"),
-    stateFileName("learnerState.dat")
+                                                                                        modelUpdate(true),
+                                                                                        discountFactor(0.9),
+                                                                                        modelInterest(100.0),
+                                                                                        rlPrecision(0.001),
+                                                                                        stateTransitionInit(1),
+                                                                                        nextStateIdx(0),
+                                                                                        nextActionIdx(0),
+                                                                                        historyFileName("history.dat"),
+                                                                                        stateFileName("learnerState.dat")
 {
     name = std::string(_partName);
     if (connect)
@@ -167,6 +167,30 @@ int Learner::getUntriedActions()
     }
     printf("untried actions: %i\n",count);
     return count;
+}
+
+void Learner::predictRewards( Point_3 p )
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a )
+            (*a)->predictReward(p,true);
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a )
+            (*a)->predictReward(p,true);
+    }
+}
+
+double Learner::rewardIntegral( Point_3 p )
+{
+    double ri = 0.0;
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            ri += fabs((*a)->predictReward(p,false));
+        }
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            ri += fabs((*a)->predictReward(p,false));
+        }
+    }
+    return ri;
 }
 
 void  Learner::valueIteration()
@@ -679,20 +703,17 @@ bool Learner::loadStateFile( std::string& filename )
         else if ( doWhat == 4 ) // append reward beliefs to reach actions
         {
             int actionIdx;
-            double x,y,z,a,b,c,r;
+            double x,y,z,r;
             std::istringstream line_reader(line);
             line_reader >> actionIdx;
             line_reader >> x;
             line_reader >> y;
             line_reader >> z;
-            line_reader >> a;
-            line_reader >> b;
-            line_reader >> c;
             line_reader >> r;
             
             Action* action = getReachAction(actionIdx);
-            if (!action) getTransitionAction(actionIdx);
-            
+            if (!action)
+                action = getTransitionAction(actionIdx);
             if (!action) {
                 printf("FATAL FILE READ ERROR: Action index not found.\n");
                 return false;
@@ -706,6 +727,25 @@ bool Learner::loadStateFile( std::string& filename )
     valueIteration();
     
     return true;
+}
+
+void Learner::randomTransitions( int n )
+{
+    printf("DOING %d RANDOM STATE TRANSITIONS\n",n);
+    int i = 0;
+    State* s = NULL;
+    Action* a = NULL;
+    while (i<n)
+    {
+        if ( !a || !a->isRunning() ) {
+            s = getDiscreteState(); if (!s) break;
+            a = s->randomTransition(); if (!a) break;
+            a->start(&i);
+        }
+        
+        printf(".");
+        yarp::os::Time::delay(0.2);
+    }
 }
 
 void Learner::writeStateFile()
@@ -806,10 +846,10 @@ void Learner::writeStateFile()
     out_file << std::endl;
 }
 
-void Learner::writeHistoryFile( int unvisited, int untried, int state, int action, double reward, double value ) {
+void Learner::writeHistoryFile( int unvisited, int untried, int state, int action, double reward ) {
     std::ofstream myfile;
     myfile << std::fixed << std::setprecision(10);
     myfile.open (historyFileName.c_str(), std::ios_base::app);
-    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << "\t" << value << "\n";
+    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << "\n";
     myfile.close();
 }

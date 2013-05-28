@@ -125,7 +125,8 @@ void ReachAction::run()
         parentState->getLearner()->mobee.getMarkerState(marker,p,n);
         
         r = 1.0/(errMag +2);
-        history.push_back(HistoryItem(target,r));
+        //history.push_back(HistoryItem(target,r));
+        appendToHistory(target, r);
     
         printf("\n STEADY STATE REACHED!!! errMag: %f, reward: %f\n",errMag,r);
         relax();

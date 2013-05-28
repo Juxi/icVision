@@ -77,6 +77,9 @@ public:
     void initializeTransitionReward(double);
     void initializeReachReward(double);
     
+    void randomTransitions(int);
+    void predictRewards( Point_3 p );
+    double rewardIntegral( Point_3 p );
     void valueIteration();
     
     void writeStateFile();
@@ -91,7 +94,7 @@ private:
     void postMutex() { mutex.post(); }
     
     // output files
-    void writeHistoryFile(int,int,int,int,double,double);
+    void writeHistoryFile(int,int,int,int,double);
     
     // bits of learning algorithms
     
@@ -112,6 +115,7 @@ private:
     int dimension;
     std::vector<State*> states;
     std::vector< yarp::os::ConstString > markers;
+    //double cumulativeReward;
    
     // learning params
     bool    modelUpdate;

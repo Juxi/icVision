@@ -80,6 +80,21 @@ Action* State::greedyAction()
     return NULL;
 }
 
+Action* State::eGreedyAction(double e)
+{
+    if ( e>1.0 || e<0.0 ) {
+        printf("State::eGreedyAction(double e) requires a number between 0 and 1.\n");
+        return NULL;
+    }
+    double rand_val = (double)rand()/RAND_MAX;
+    if ( rand_val > e )
+        return greedyAction();
+    else if ( rand_val > e/2 )
+        return randomReach();
+    else
+        return randomTransition();
+}
+
 /*Action* State::explore()
 {
     Action* reach = leastTriedReach();

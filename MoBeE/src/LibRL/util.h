@@ -31,17 +31,9 @@ typedef CGAL::Creator_uniform_d<std::vector<double>::iterator,Point_d>  Creator_
 //typedef std::vector<Point_d>                PoseVector_t;
 //typedef std::map<std::string, PoseVector_t> PoseMap_t;
 
-static std::vector<Point_3> tableSample( double xMin, double xMax, double yMin, double yMax, double z, double delta )
-{
-    // table height: z = -0.075
-    std::vector<Point_3> result;
-    for ( double x = xMin; x<=xMax; x+=delta ) {
-        for ( double y = yMin; y<=yMax; y+=delta ) {
-            result.push_back(Point_3(x,y,z));
-        }
-    }
-    return result;
-}
+
+
+
 
 static std::vector<Point_d> gridSample( int dim, int num, double scaling )
 {
