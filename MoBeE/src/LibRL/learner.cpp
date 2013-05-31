@@ -141,6 +141,15 @@ void Learner::initializeReachReward(double rew)
     }
 }
 
+void Learner::initializeReachTries(int n)
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            (*a)->num = n;
+        }
+    }
+}
+
 int Learner::getUnvisitedStates()
 {
     int count = 0;

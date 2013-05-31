@@ -44,22 +44,21 @@ void TransitionAction::learnStuff()
         return;
     }
     
-    S_Prime* s_prime = findOrAppendSPrime(resultingState);
-    
-    num++;
-    s_prime->num++;
-    s_prime->state->visits++;
-    
-    double kl = 0.0;
-    if (parentState->getLearner()->isLearningModel()) {
-        kl = updateTransitionBelief();
-        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
-        printf("\tr = %f ... 1/(%d + %d) + %f * %f\n",r,num,s_prime->state->visits,parentState->getLearner()->modelInterestingness(),kl);
-    } else if (!expectedTransition(resultingState)) {
-        r -= 1.0;
+    else if (!parentState->getLearner()->isLearningModel() && !expectedTransition(resultingState)) {
+        r = -1.0;
         appendToHistory(target, r);
         printf("\tState Transition Action Failed.  Got r = -1\n");
     }
+    
+    else if (parentState->getLearner()->isLearningModel()) {
+        S_Prime* s_prime = findOrAppendSPrime(resultingState);
+        num++;
+        s_prime->num++;
+        s_prime->state->visits++;
+        double kl = updateTransitionBelief();
+        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
+        printf("\tGot kl = %f, r = %f\n",kl,r);
+    } 
 }
 
 void TransitionAction::computeNewValue()

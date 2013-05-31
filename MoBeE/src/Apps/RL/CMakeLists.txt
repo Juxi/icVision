@@ -37,5 +37,9 @@ ADD_EXECUTABLE ( powerPlayReach powerPlayReach.cpp )
 ADD_DEPENDENCIES( powerPlayReach	iCubRL ) 
 TARGET_LINK_LIBRARIES( powerPlayReach	iCubRL ) 
 
+ADD_EXECUTABLE ( exploitReach exploitReach.cpp )
+ADD_DEPENDENCIES( exploitReach	iCubRL ) 
+TARGET_LINK_LIBRARIES( exploitReach	iCubRL ) 
+
 INSTALL ( TARGETS imrl least_tried random parallel_imrl bruteForceReach powerPlayReach DESTINATION ${CMAKE_SOURCE_DIR}/bin/learning )
 

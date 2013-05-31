@@ -76,6 +76,7 @@ public:
     // (re)initialize things
     void initializeTransitionReward(double);
     void initializeReachReward(double);
+    void initializeReachTries(int);
     
     void randomTransitions(int);
     void predictRewards( Point_3 p );
