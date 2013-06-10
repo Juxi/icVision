@@ -33,20 +33,26 @@ void Action::afterStart(bool s)
 void Action::threadRelease()
 {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
-    parentState->getLearner()->valueIteration();
-    parentState->getLearner()->writeStateFile();
-    parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
-                                                parentState->getLearner()->getUntriedActions(),
-                                                parentState->getIdx(),
-                                                idx, r);
+    if ( parentState->getLearner()->isLearning() ) {
+        parentState->getLearner()->valueIteration();
+        parentState->getLearner()->writeStateFile();
+        parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
+                                                    parentState->getLearner()->getUntriedActions(),
+                                                    parentState->getIdx(),
+                                                    idx, r);
+    }
     parentState->getLearner()->postMutex();
 }
 
 double Action::predictReward( Point_3 p, bool b )
 {
+    printf("Predicting reward for action: %d (%f %f %f)\n",idx,p.x(),p.y(),p.z());
     double r_predicted = 0.0;
-    for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i )
-        r_predicted += i->reward/((p-i->target).squared_length()+1);
+    for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
+        double denom = (100*(p-i->target).squared_length()+1);
+        r_predicted += i->reward/denom;
+        printf("\t(%f %f %f) weight: %f, r: %f\n",idx,p.x(),p.y(),p.z(),1/denom,i->reward);
+    }
     if (b) r = r_predicted;
     return r_predicted;
 }

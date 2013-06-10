@@ -9,6 +9,7 @@
 
 Learner::Learner( int d, const char* _robotName, const char* _partName, bool connect ) : dimension(d),
                                                                                         modelUpdate(true),
+                                                                                        learnAfterActions(true),
                                                                                         discountFactor(0.9),
                                                                                         modelInterest(100.0),
                                                                                         rlPrecision(0.001),
@@ -178,14 +179,27 @@ int Learner::getUntriedActions()
     return count;
 }
 
-void Learner::predictRewards( Point_3 p )
+int Learner::predictRewards( Point_3 p )
 {
+    int idx;
+    double rew = 0.0;
     for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
-        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a )
-            (*a)->predictReward(p,true);
-        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a )
-            (*a)->predictReward(p,true);
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ) {
+            double this_r = (*a)->predictReward(p,true);
+            if ( this_r > rew ) {
+                rew = this_r;
+                idx = (*a)->idx;
+            }
+        }
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            double this_r = (*a)->predictReward(p,true);
+            if ( this_r > rew ) {
+                rew = this_r;
+                idx = (*a)->idx;
+            }
+        }
     }
+    return idx;
 }
 
 double Learner::rewardIntegral( Point_3 p )

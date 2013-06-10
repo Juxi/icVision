@@ -47,7 +47,7 @@ public:
 private:
     
     //int tempIdx;
-    const State*            destination_state;
+    State*            destination_state;
     State*                  resultingState;
     std::vector< S_Prime* > transition_belief;
     

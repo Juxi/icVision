@@ -28,7 +28,7 @@ void TransitionAction::afterStart(bool s)
     Action::afterStart(s);
     
     if (s) {
-        printf(" RUNNING STATE TRANSITION ACTION (%s)",parentState->getLearner()->getName().c_str());
+        printf(" RUNNING STATE TRANSITION ACTION (%d --> %d)",parentState->getIdx(),destination_state->getIdx());
         resultingState = NULL;
         parentState->getLearner()->mobee.setAttractor(*destination_state);
         yarp::os::Time::delay(0.2);

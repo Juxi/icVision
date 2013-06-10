@@ -38,7 +38,7 @@ void ReachAction::afterStart(bool s)
     Action::afterStart(s);
     
     if (s) {
-        printf(" RUNNING REACH ACTION %p from state %p (%s)",this,parentState,parentState->getLearner()->getName().c_str());
+        printf(" RUNNING REACH ACTION %d from state %d (%s)",idx,parentState->getIdx(),parentState->getLearner()->getName().c_str());
         forceGain = 5000.0;
         torqueGain = 5000.0;
         sendForceCommand();

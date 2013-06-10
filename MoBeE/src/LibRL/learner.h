@@ -57,6 +57,10 @@ public:
     void    setModelLearning(bool b) { modelUpdate = b; }
     bool    isLearningModel() { return modelUpdate; }
     
+    // turn rl on and off
+    void    setLearning(bool b) { learnAfterActions = b; }
+    bool    isLearning() { return learnAfterActions; }
+    
     // access to learning params
     void    setModelInterestingness(double i) { modelInterest = i; }
     double  modelInterestingness() { return modelInterest; }
@@ -79,7 +83,7 @@ public:
     void initializeReachTries(int);
     
     void randomTransitions(int);
-    void predictRewards( Point_3 p );
+    int predictRewards( Point_3 p );
     double rewardIntegral( Point_3 p );
     void valueIteration();
     
@@ -120,6 +124,7 @@ private:
    
     // learning params
     bool    modelUpdate;
+    bool    learnAfterActions;
     double  discountFactor;
     double  modelInterest;
     double  rlPrecision;
