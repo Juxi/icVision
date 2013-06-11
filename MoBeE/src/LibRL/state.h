@@ -44,6 +44,7 @@ public:
     ReachAction*        leastTriedReach();
     
     Action*             greedyAction();
+    Action*             randomAction();
     Action*             eGreedyAction(double e = 0.5);
     //Action* explore();
     

@@ -11,9 +11,9 @@ Learner::Learner( int d, const char* _robotName, const char* _partName, bool con
                                                                                         modelUpdate(true),
                                                                                         learnAfterActions(true),
                                                                                         discountFactor(0.9),
-                                                                                        modelInterest(100.0),
+                                                                                        //modelInterest(100.0),
                                                                                         rlPrecision(0.001),
-                                                                                        stateTransitionInit(1),
+                                                                                        //stateTransitionInit(1),
                                                                                         nextStateIdx(0),
                                                                                         nextActionIdx(0),
                                                                                         historyFileName("history.dat"),
@@ -158,7 +158,7 @@ int Learner::getUnvisitedStates()
         if ( (*s)->getVisits() == 0 )
             count++;
     }
-    printf("unvisited states: %i\n",count);
+    //printf("unvisited states: %i\n",count);
     return count;
 }
 
@@ -167,7 +167,7 @@ int Learner::getUntriedActions()
     int count = 0;
     for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
         for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
-            if ((*a)->getTimesTried() == stateTransitionInit)
+            if ((*a)->getTimesTried() == 0)
                 count++;
         }
         for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
@@ -175,7 +175,7 @@ int Learner::getUntriedActions()
                 count++;
         }
     }
-    printf("untried actions: %i\n",count);
+    //printf("untried actions: %i\n",count);
     return count;
 }
 
@@ -219,7 +219,7 @@ double Learner::rewardIntegral( Point_3 p )
 void  Learner::valueIteration()
 {
     //mutex.wait();
-    printf("\nDOING RL...\n");
+    printf("DOING RL...\n");
     
     double maxDelta;
     int count = 0;
@@ -399,6 +399,11 @@ State* Learner::appendState( Point_d& p, int numVisits )
 {
     State* newState = new State( nextStateIdx++,redimension(p), this );
     newState->visits = numVisits;
+    for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i){
+        for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j){
+            (*j)->appendSPrime(newState);
+        }
+    }
     states.push_back(newState);
     return newState;
 }
@@ -412,6 +417,9 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
     
     printf("creating transition action %d --> %d\n", a->getIdx(), b->getIdx());
     TransitionAction* action = new TransitionAction( nextActionIdx++, a, b, val, rew, num);
+    for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i) {
+        action->appendSPrime(*i);
+    }
     a->transitionActions.push_back( action );
 
     return action;
@@ -477,7 +485,7 @@ State* Learner::getDiscreteState() {
         }
     }
     if (!nearestState)
-        printf("\nFAILED TO GET DISCRETE STATE BECAUSE THERE ARE NO STATES IN THE LEARNER!!!\n\n");
+        printf("\nFAILED TO GET DISCRETE STATE!!! could be there are no states in the learner...\n\n");
     return nearestState;
 }
 
@@ -691,7 +699,7 @@ bool Learner::loadStateFile( std::string& filename )
             
             printf("appending s_prime: %p to action: %p\n",s,transition);
             
-            S_Prime* sp = transition->findOrAppendSPrime(s);
+            S_Prime* sp = transition->appendSPrime(s);
             sp->num = num;
             sp->prob = prob;
         }
@@ -869,10 +877,10 @@ void Learner::writeStateFile()
     out_file << std::endl;
 }
 
-void Learner::writeHistoryFile( int unvisited, int untried, int state, int action, double reward ) {
+void Learner::writeHistoryFile( int unvisited, int untried, int state, int action, double reward, double value ) {
     std::ofstream myfile;
     myfile << std::fixed << std::setprecision(10);
     myfile.open (historyFileName.c_str(), std::ios_base::app);
-    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << "\n";
+    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << value <<"\n";
     myfile.close();
 }

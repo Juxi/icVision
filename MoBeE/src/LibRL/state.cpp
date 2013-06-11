@@ -71,7 +71,28 @@ Action* State::greedyAction()
             return trans;
         else
             return reach;
-    } if ( reach && !trans )
+    }
+    else if ( reach && !trans )
+        return reach;
+    else if ( trans && !reach )
+        return trans;
+    
+    printf("No reach or transition found... we got problems!\n");
+    return NULL;
+}
+
+Action* State::randomAction()
+{
+    Action* random_action = NULL;
+    TransitionAction* trans = randomTransition();
+    ReachAction* reach = randomReach();
+    if ( reach && trans ) {
+        if ( (double)rand()/RAND_MAX > 0.5 )
+            return trans;
+        else
+            return reach;
+    }
+    else if ( reach && !trans )
         return reach;
     else if ( trans && !reach )
         return trans;
@@ -89,10 +110,8 @@ Action* State::eGreedyAction(double e)
     double rand_val = (double)rand()/RAND_MAX;
     if ( rand_val > e )
         return greedyAction();
-    else if ( rand_val > e/2 )
-        return randomReach();
     else
-        return randomTransition();
+        return randomAction();
 }
 
 /*Action* State::explore()

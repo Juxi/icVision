@@ -62,13 +62,13 @@ public:
     bool    isLearning() { return learnAfterActions; }
     
     // access to learning params
-    void    setModelInterestingness(double i) { modelInterest = i; }
-    double  modelInterestingness() { return modelInterest; }
+    //void    setModelInterestingness(double i) { modelInterest = i; }
+    //double  modelInterestingness() { return modelInterest; }
     void    setRlPrecision( double p ) { rlPrecision = p; }
     double  getRlPrecision() { return rlPrecision; }
     void    setDiscountFactor( double f ) { discountFactor = f; }
     double  getDiscountFactor() { return discountFactor; }
-    int     getStateTransitionInit() { return stateTransitionInit; }
+    //int     getStateTransitionInit() { return stateTransitionInit; }
     
     // these may be a const correctness problem or a threading problem
     std::vector< State* > getStates() { return states; } 
@@ -99,7 +99,7 @@ private:
     void postMutex() { mutex.post(); }
     
     // output files
-    void writeHistoryFile(int,int,int,int,double);
+    void writeHistoryFile(int,int,int,int,double,double);
     
     // bits of learning algorithms
     
@@ -126,9 +126,9 @@ private:
     bool    modelUpdate;
     bool    learnAfterActions;
     double  discountFactor;
-    double  modelInterest;
+    //double  modelInterest;
     double  rlPrecision;
-    int     stateTransitionInit;
+    //int     stateTransitionInit;
     
     // counters for indices
     int nextStateIdx;

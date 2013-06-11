@@ -39,7 +39,7 @@ void Action::threadRelease()
         parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),
                                                     parentState->getLearner()->getUntriedActions(),
                                                     parentState->getIdx(),
-                                                    idx, r);
+                                                    idx, r, v);
     }
     parentState->getLearner()->postMutex();
 }

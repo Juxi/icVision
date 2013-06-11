@@ -40,7 +40,8 @@ public:
     const State*                    getDestination() { return destination_state; }
     //std::pair<const State*,double>  getTransitionBelief();
     void                            computeNewValue();
-    S_Prime*                        findOrAppendSPrime(State* s);
+    S_Prime*                        getSPrime(State* s);
+    S_Prime*                        appendSPrime(State* s);
     std::vector< S_Prime* > const&  getTransitionBeliefs() { return transition_belief; }
     bool                            expectedTransition( State* s );
     
@@ -53,7 +54,7 @@ private:
     
     void        afterStart(bool s);
     void        learnStuff();
-    double      updateTransitionBelief();
+    double      updateTransitionBelief( bool verbose = false );
     void        run();
 };
 

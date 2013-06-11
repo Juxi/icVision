@@ -16,11 +16,12 @@ int main(int argc, char *argv[])
         connectToMoBeE = false;
     
     // instantiate reinforcement learner
-    Learner arm(16,"icubSim","right_arm",connectToMoBeE);
+    Learner right_arm(16,"icubSim","right_arm",connectToMoBeE);
+    Learner left_arm(16,"icubSim","left_arm",connectToMoBeE);
     Learner torso(3,"icubSim","torso",connectToMoBeE);
     
     // initialize from file
-    bool torso_initialized = false;
+    /*bool torso_initialized = false;
     if ( config.check("torsofile") ) {
         std::string fileName = config.find("torsofile").asString().c_str();
         if (torso.loadStateFile(fileName))
@@ -39,50 +40,61 @@ int main(int argc, char *argv[])
             printf("File read failed!!!\n");
             return 0;
         }
-    }
+    }*/
     
     // initialize from scratch
-    if (!torso_initialized) {
+    //if (!torso_initialized) {
         torso.appendGrid(3,27,0.5);
-        torso.connectNearestNeighbors(6);
-        torso.initializeTransitionReward(1.0);
-    }
-    if (!arm_initialized) {
-        arm.appendGrid(4,81,0.5);
-        arm.connectNearestNeighbors(16);
-        arm.initializeTransitionReward(1.0);
-    }
+        torso.connectNearestNeighbors(8);
+        //torso.initializeTransitionReward(1.0);
+    //}
+    //if (!arm_initialized) {
+        right_arm.appendGrid(4,81,0.5);
+        right_arm.connectNearestNeighbors(16);
+        //right_arm.initializeTransitionReward(1.0);
+    //}
+        left_arm.appendGrid(4,81,0.5);
+        left_arm.connectNearestNeighbors(16);
     
     // name the output files
     torso.setStateFileName("torso_state.dat");
     torso.setHistoryFileName("torso_history.dat");
-    arm.setStateFileName("arm_state.dat");
-    arm.setHistoryFileName("arm_history.dat");
+    right_arm.setStateFileName("right_arm_state.dat");
+    right_arm.setHistoryFileName("right_arm_history.dat");
+    left_arm.setStateFileName("left_arm_state.dat");
+    left_arm.setHistoryFileName("left_arm_history.dat");
     
     State   *ts = NULL, // torso state
-            *as = NULL; // arm ststa
+            *ls = NULL, 
+            *rs = NULL; // arm ststa
     
-    TransitionAction    *ta = NULL, // torso action
-                        *aa = NULL; // arm action
+    Action  *ta = NULL, // torso action
+            *la = NULL,
+            *ra = NULL; // arm action
     
     int torso_count = 0;
-    int arm_count = 0;
-    while ( torso_count < 10000 || arm_count < 10000 )
+    int left_arm_count = 0;
+    int right_arm_count = 0;
+    while ( true )
     {
-        if ( (!ta || !ta->isRunning()) && (!aa || !aa->isRunning()) )
+        if ( (!ta || !ta->isRunning()) && (!la || !la->isRunning()) && (!ra || !ra->isRunning()) )
         {
-            printf("*************************************************************\n");
+            printf("\n*************************************************************\n\n");
             printf("TORSO_COUNT: %d\n",torso_count);
-            printf("ARM_COUNT: %d\n\n",arm_count);
+            printf("LEFT_ARM_COUNT: %d\n",left_arm_count);
+            printf("RIGHT_ARM_COUNT: %d\n\n",right_arm_count);
             
             ts = torso.getDiscreteState(); if (!ts) break;
-            as = arm.getDiscreteState(); if (!as) break;
+            ls = left_arm.getDiscreteState(); if (!ls) break;
+            rs = right_arm.getDiscreteState(); if (!rs) break;
             
-            ta = ts->greedyTransition(); if (!ta) break;
-            aa = as->greedyTransition(); if (!aa) break;
+            ta = ts->eGreedyAction(0.1); if (!ta) break;
+            la = ls->eGreedyAction(0.1); if (!la) break;
+            ra = rs->eGreedyAction(0.1); if (!ra) break;
             
             ta->start(&torso_count);
-            aa->start(&arm_count);
+            la->start(&left_arm_count);
+            ra->start(&right_arm_count);
         }
         
         printf(".");
