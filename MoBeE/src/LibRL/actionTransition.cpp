@@ -10,8 +10,10 @@ TransitionAction::TransitionAction( int idx,
                                     int rate) : Action(idx,a,value,reward,numTries,rate), destination_state(b)
 {
     // optimistic initialization
-    //S_Prime* new_s_prime = findOrAppendSPrime(b);
-    //new_s_prime->prob = 1.0;
+    S_Prime* new_s_prime = appendSPrime(b);
+    new_s_prime->prob = 1.0;
+    new_s_prime->num = 1;
+    
     //new_s_prime->num = parentState->getLearner()->getStateTransitionInit();
     //num=new_s_prime->num;
 }
@@ -76,7 +78,7 @@ S_Prime* TransitionAction::appendSPrime( State* s )
         return *i;
     
     //printf("APPENDING S_PRIME!!!\n");
-    S_Prime* new_s_prime = new S_Prime(s, 0, 1);
+    S_Prime* new_s_prime = new S_Prime(s, 0, 0);
     transition_belief.push_back( new_s_prime );
     
     updateTransitionBelief();
@@ -86,39 +88,26 @@ S_Prime* TransitionAction::appendSPrime( State* s )
 
 double TransitionAction::updateTransitionBelief( bool verbose )
 {
-    if (verbose) printf("\tUpdating transition beliefs for the state: %p, action: %p, dest: %p, num: %d\n",parentState,this,destination_state,num);
-    
     // recompute the probabilities
     int num_sPrime = 0;
     for ( std::vector<S_Prime*>::iterator i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
         num_sPrime += (*i)->num;
     }
-    if (verbose) printf("\tDenom = %d\n",num_sPrime);
                         
-    double kl_div = 0.0;
-    double prob_sum = 0.0;
+    double kail_div = 0.0;
     for ( std::vector<S_Prime*>::iterator i=transition_belief.begin(); i!=transition_belief.end(); ++i) {
-        double p = (double)(*i)->num/num_sPrime;
-        double q = (*i)->prob;
-        //delta += fabs(new_belief - (*i)->prob);
+        double new_prob = (double)(*i)->num/num_sPrime;
+        kail_div += fabs(new_prob-(*i)->prob);
         
-        if (verbose) printf("\ts_prime: %p happened %d times. old_prob: %f, new_prob: %f\n",(*i)->state,(*i)->num,q,p);
-        if (verbose) printf("\t\tdiv += log(%f/%f)*%f",p,q,p);
-        if ( p!=0 && q!=0 ) {
-            double foo = log(p/q)*p;
-            if (verbose)printf(" = %f\n",foo);
-            kl_div += foo;
-        } else
-            if (verbose) printf(" skipped it\n");
-        
-        
-        (*i)->prob = p;
-        prob_sum += p;
+        if (verbose) printf("\ts_prime: %d happened %d times. old_prob: %f, new_prob: %f\n",(*i)->state->getIdx(),(*i)->num,(*i)->prob,new_prob);
+    
+        (*i)->prob = new_prob;
     }
+    kail_div /= transition_belief.size();
     
-    if (verbose) printf("\tKL Divergence = %f, prob_sum = %f\n",kl_div,prob_sum);
+    if (verbose) printf("\tKAIL Divergence = %f\n",kail_div);
     
-    return kl_div;
+    return kail_div;
 }
 
 void TransitionAction::run()
@@ -150,7 +139,7 @@ void TransitionAction::learnStuff()
         return;
     }
     
-    // expectedTransition(State*) NEEDS WORK IN LIGHT OF THE NEW KL DIVERGENCE
+    // TODO expectedTransition(State*) NEEDS WORK IN LIGHT OF THE NEW KL DIVERGENCE
     if (!parentState->getLearner()->isLearningModel() && !expectedTransition(resultingState)) {
         r = -1.0;
         appendToHistory(target, r);
@@ -159,14 +148,16 @@ void TransitionAction::learnStuff()
     
     else if (parentState->getLearner()->isLearningModel()) {
         S_Prime* s_prime = getSPrime(resultingState);
-        if (!s_prime) {
-            printf("There is no s_rpime for this resulting state!!! WTF?!?\n");
-            return;
-        }
+        if (!s_prime)
+            s_prime = appendSPrime(resultingState);
         
         s_prime->num++;
-        r = updateTransitionBelief(false);
-        //r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kl;
-        printf("\tGot r = kl = %f\n",r);
+        double kail_divergence = updateTransitionBelief(true);
+        r = 1.0/(num + resultingState->getVisits()) + parentState->getLearner()->modelInterestingness() * kail_divergence;
+        printf("\tr = 1/(sa_count + s'_count) + a*KAIL_Divergence) = 1/(%d + %d) + %f*%f = %f\n",num,
+               resultingState->getVisits(),
+               parentState->getLearner()->modelInterestingness(),
+               kail_divergence,
+               r);
     }
 }

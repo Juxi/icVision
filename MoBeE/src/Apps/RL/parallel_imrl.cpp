@@ -46,15 +46,17 @@ int main(int argc, char *argv[])
     //if (!torso_initialized) {
         torso.appendGrid(3,27,0.5);
         torso.connectNearestNeighbors(8);
-        //torso.initializeTransitionReward(1.0);
+        torso.initializeTransitionReward(1.0);
     //}
     //if (!arm_initialized) {
         right_arm.appendGrid(4,81,0.5);
         right_arm.connectNearestNeighbors(16);
-        //right_arm.initializeTransitionReward(1.0);
+        right_arm.initializeTransitionReward(1.0);
     //}
         left_arm.appendGrid(4,81,0.5);
         left_arm.connectNearestNeighbors(16);
+        left_arm.initializeTransitionReward(1.0);
+    
     
     // name the output files
     torso.setStateFileName("torso_state.dat");

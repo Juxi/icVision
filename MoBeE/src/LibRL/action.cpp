@@ -33,7 +33,9 @@ void Action::afterStart(bool s)
 void Action::threadRelease()
 {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
-    if ( parentState->getLearner()->isLearning() ) {
+    if ( parentState->getLearner()->isLearning() )
+    {
+        parentState->getLearner()->initializeValue(0.0);
         parentState->getLearner()->valueIteration();
         parentState->getLearner()->writeStateFile();
         parentState->getLearner()->writeHistoryFile( parentState->getLearner()->getUnvisitedStates(),

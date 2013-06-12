@@ -62,8 +62,8 @@ public:
     bool    isLearning() { return learnAfterActions; }
     
     // access to learning params
-    //void    setModelInterestingness(double i) { modelInterest = i; }
-    //double  modelInterestingness() { return modelInterest; }
+    void    setModelInterestingness(double i) { modelInterest = i; }
+    double  modelInterestingness() { return modelInterest; }
     void    setRlPrecision( double p ) { rlPrecision = p; }
     double  getRlPrecision() { return rlPrecision; }
     void    setDiscountFactor( double f ) { discountFactor = f; }
@@ -80,6 +80,7 @@ public:
     // (re)initialize things
     void initializeTransitionReward(double);
     void initializeReachReward(double);
+    void initializeValue(double);
     void initializeReachTries(int);
     
     void randomTransitions(int);
@@ -126,7 +127,7 @@ private:
     bool    modelUpdate;
     bool    learnAfterActions;
     double  discountFactor;
-    //double  modelInterest;
+    double  modelInterest;
     double  rlPrecision;
     //int     stateTransitionInit;
     

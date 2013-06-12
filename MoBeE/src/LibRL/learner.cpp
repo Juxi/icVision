@@ -11,13 +11,13 @@ Learner::Learner( int d, const char* _robotName, const char* _partName, bool con
                                                                                         modelUpdate(true),
                                                                                         learnAfterActions(true),
                                                                                         discountFactor(0.9),
-                                                                                        //modelInterest(100.0),
+                                                                                        modelInterest(10.0),
                                                                                         rlPrecision(0.001),
                                                                                         //stateTransitionInit(1),
                                                                                         nextStateIdx(0),
                                                                                         nextActionIdx(0),
                                                                                         historyFileName("history.dat"),
-                                                                                        stateFileName("learnerState.dat")
+                                                                                        stateFileName("state.dat")
 {
     name = std::string(_partName);
     if (connect)
@@ -138,6 +138,18 @@ void Learner::initializeReachReward(double rew)
     for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
         for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
             (*a)->r = rew;
+        }
+    }
+}
+
+void Learner::initializeValue(double val)
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            (*a)->v = val;
+        }
+        for ( std::vector<ReachAction*>::iterator a = (*s)->reachActions.begin(); a != (*s)->reachActions.end(); ++a ){
+            (*a)->v = val;
         }
     }
 }
@@ -399,11 +411,11 @@ State* Learner::appendState( Point_d& p, int numVisits )
 {
     State* newState = new State( nextStateIdx++,redimension(p), this );
     newState->visits = numVisits;
-    for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i){
-        for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j){
-            (*j)->appendSPrime(newState);
-        }
-    }
+    //for (std::vector<State*>::iterator i=states.begin(); i!=states.end(); ++i){
+    //    for (std::vector<TransitionAction*>::iterator j=(*i)->transitionActions.begin(); j!=(*i)->transitionActions.end(); ++j){
+    //        (*j)->appendSPrime(newState);
+    //    }
+    //}
     states.push_back(newState);
     return newState;
 }
@@ -417,9 +429,9 @@ TransitionAction* Learner::appendTransitionAction( State* a, State* b, double va
     
     printf("creating transition action %d --> %d\n", a->getIdx(), b->getIdx());
     TransitionAction* action = new TransitionAction( nextActionIdx++, a, b, val, rew, num);
-    for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i) {
-        action->appendSPrime(*i);
-    }
+    //for (std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i) {
+    //    action->appendSPrime(*i);
+    //}
     a->transitionActions.push_back( action );
 
     return action;
