@@ -46,16 +46,16 @@ int main(int argc, char *argv[])
     //if (!torso_initialized) {
         torso.appendGrid(3,27,0.5);
         torso.connectNearestNeighbors(8);
-        torso.initializeTransitionReward(1.0);
+        //torso.initializeTransitionReward(1.0);
     //}
     //if (!arm_initialized) {
         right_arm.appendGrid(4,81,0.5);
         right_arm.connectNearestNeighbors(16);
-        right_arm.initializeTransitionReward(1.0);
+        //right_arm.initializeTransitionReward(1.0);
     //}
         left_arm.appendGrid(4,81,0.5);
         left_arm.connectNearestNeighbors(16);
-        left_arm.initializeTransitionReward(1.0);
+        //left_arm.initializeTransitionReward(1.0);
     
     
     // name the output files
@@ -90,9 +90,9 @@ int main(int argc, char *argv[])
             ls = left_arm.getDiscreteState(); if (!ls) break;
             rs = right_arm.getDiscreteState(); if (!rs) break;
             
-            ta = ts->eGreedyAction(0.1); if (!ta) break;
-            la = ls->eGreedyAction(0.1); if (!la) break;
-            ra = rs->eGreedyAction(0.1); if (!ra) break;
+            ta = ts->greedyAction(); if (!ta) break;
+            la = ls->greedyAction(); if (!la) break;
+            ra = rs->greedyAction(); if (!ra) break;
             
             ta->start(&torso_count);
             la->start(&left_arm_count);

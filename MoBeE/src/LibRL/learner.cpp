@@ -593,7 +593,7 @@ void Learner::print(bool printAll)
             std::vector< S_Prime* > const& beliefs = (*j)->getTransitionBeliefs();
             for (std::vector< S_Prime* >::const_iterator k=beliefs.begin(); k!=beliefs.end(); ++k)
             {
-                printf("\t(%p - %f, %d)", (*k)->state, (*k)->prob, (*k)->num);
+                printf("\t(%p - %f, %d)", (*k)->state, (*k)->p, (*k)->n);
             }
             printf("\n");
             //printf("\n Starting Action.....\n");
@@ -711,9 +711,9 @@ bool Learner::loadStateFile( std::string& filename )
             
             printf("appending s_prime: %p to action: %p\n",s,transition);
             
-            S_Prime* sp = transition->appendSPrime(s);
-            sp->num = num;
-            sp->prob = prob;
+            S_Prime* sp = transition->get_sprime(s);
+            sp->n = num;
+            sp->p = prob;
         }
         else if ( doWhat == 3 ) // append reach actions to states
         {
@@ -838,8 +838,8 @@ void Learner::writeStateFile()
             for ( std::vector<S_Prime*>::const_iterator k = beliefs.begin(); k != beliefs.end(); ++k ) {
                 out_file << (*j)->idx << "\t"
                          << (*k)->state->idx << "\t"
-                         << (*k)->num << "\t"
-                << (*k)->prob << std::endl;
+                         << (*k)->n << "\t"
+                << (*k)->p << std::endl;
             }
         }
     }

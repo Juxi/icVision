@@ -15,9 +15,10 @@
 struct S_Prime
 {
     State* state;
-    double prob;
-    int num;
-    S_Prime(State* s, double p, int n) : state(s), prob(p), num(n){}
+    double p;
+    double q;
+    int n;
+    S_Prime(State* s) : state(s), p(1.0), q(1.0), n(1){}
 };
 
 /* These actions move the attractor in the MoBeE model. This corresponds to position control, and is used to implement deliberate
@@ -40,10 +41,10 @@ public:
     const State*                    getDestination() { return destination_state; }
     //std::pair<const State*,double>  getTransitionBelief();
     void                            computeNewValue();
-    S_Prime*                        getSPrime(State* s);
-    S_Prime*                        appendSPrime(State* s);
     std::vector< S_Prime* > const&  getTransitionBeliefs() { return transition_belief; }
     bool                            expectedTransition( State* s );
+    
+    S_Prime*    get_sprime(State* s);
     
 private:
     
@@ -54,7 +55,14 @@ private:
     
     void        afterStart(bool s);
     void        learnStuff();
-    double      updateTransitionBelief( bool verbose = false );
+    
+    
+    void        update_transition_probabilities(bool verbose = true);
+    double      compute_kl();
+
+    //double      updateTransitionBelief( bool verbose = false );
+    
+    double      observe(State*);
     void        run();
 };
 
