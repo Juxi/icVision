@@ -677,7 +677,7 @@ bool Learner::loadStateFile( std::string& filename )
                 printf("FATAL FILE READ ERROR: State index (for a transition) not found.\n");
                 return false;
             }
-            TransitionAction* t = appendTransitionAction(stateA,stateB,value,reward);
+            TransitionAction* t = appendTransitionAction(stateA,stateB,value,reward,false);
             t->idx = idx;
             t->num = num;
             if ( idx > maxActionIdx )
@@ -709,11 +709,16 @@ bool Learner::loadStateFile( std::string& filename )
                 return false;
             }
             
-            printf("appending s_prime: %p to action: %p\n",s,transition);
+            //for (int i=0; i<num; i++){
+            //    transition->observe(s);
+            //}
+            
+            //printf("appending s_prime: %p to action: %p\n",s,transition);
             
             S_Prime* sp = transition->get_sprime(s);
             sp->n = num;
             sp->p = prob;
+            transition->update_transition_probabilities();
         }
         else if ( doWhat == 3 ) // append reach actions to states
         {
@@ -767,7 +772,7 @@ bool Learner::loadStateFile( std::string& filename )
     nextStateIdx = maxStateIdx + 1;
     nextActionIdx = maxActionIdx + 1;
     
-    valueIteration();
+    //valueIteration();
     
     return true;
 }
@@ -893,6 +898,6 @@ void Learner::writeHistoryFile( int unvisited, int untried, int state, int actio
     std::ofstream myfile;
     myfile << std::fixed << std::setprecision(10);
     myfile.open (historyFileName.c_str(), std::ios_base::app);
-    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << value <<"\n";
+    myfile << unvisited << "\t" << untried << "\t" << state << "\t" << action << "\t" << reward << "\t" << value <<"\n";
     myfile.close();
 }

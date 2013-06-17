@@ -5,8 +5,9 @@
 <!-- TORSO -->
 <bodypart name="torso" >
 
-    <!-- BASE COLUMN FIELD -->
-    <link z="-.05" x="-.02" radius="0"><link x="1">
+    <!-- BASE COLUMN FIELD
+    <link z="-.05" x="-.02" radius="0"> -->
+        <link z="-.06" radius="0"><link x="1">
         <sphere field="true" radius=".11"/>
         <cylinder field="true" radius=".11" height="1" pz="-.5" hz="1"/>
     </link></link>

@@ -30,12 +30,16 @@ int main(int argc, char *argv[])
         }
     }
     
+    learner.writeStateFile();
+    return 0;
+    
+    
     // initialize from scratch
     if (!initialized) {
         learner.appendGrid(4,81,0.5);
         learner.connectNearestNeighbors(16);
         //learner.appendReaches();
-        learner.initializeTransitionReward(1.0);
+        //learner.initializeTransitionReward(1.0);
     }
 
     /*** DO INTRINSICALLY MOTIVATED MODEL LEARNING ***/
@@ -44,11 +48,12 @@ int main(int argc, char *argv[])
     TransitionAction* a = NULL;
     
     int count = 0;
-    while (learner.leastTriedTransition()->getTimesTried() < 2)
+    while (true)
     {
         if ( !a || !a->isRunning() )
         {
-            printf("\nCOUNT: %d\n\n",count);
+            printf("\nCOUNT: %d\n",count);
+            printf("least tried: %d\n\n",learner.leastTriedTransition()->getTimesTried());
             
             s = learner.getDiscreteState();
             if (!s) break;

@@ -35,6 +35,7 @@ public:
                         double value = 0.0,
                         double reward = 0.0,
                         int numTries = 0,
+                        bool initialize = false,
                         int rate = 200 );
     ~TransitionAction(){}
     
@@ -45,6 +46,8 @@ public:
     bool                            expectedTransition( State* s );
     
     S_Prime*    get_sprime(State* s);
+    void        update_transition_probabilities(bool verbose = true);
+    
     
 private:
     
@@ -57,12 +60,12 @@ private:
     void        learnStuff();
     
     
-    void        update_transition_probabilities(bool verbose = true);
+    
     double      compute_kl();
 
     //double      updateTransitionBelief( bool verbose = false );
-    
     double      observe(State*);
+    
     void        run();
 };
 

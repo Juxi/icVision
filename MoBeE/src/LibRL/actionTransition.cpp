@@ -7,12 +7,16 @@ TransitionAction::TransitionAction( int idx,
                                     double value,
                                     double reward,
                                     int numTries,
+                                    bool initialize,
                                     int rate) : Action(idx,a,value,reward,numTries,rate), destination_state(b)
 {
     // optimistic initialization
     //S_Prime* new_s_prime = get_sprime(b);
-    observe(a);
-    observe(b);
+    
+    if (initialize) {
+        observe(a);
+        observe(b);
+    }
     
     //new_s_prime->num = parentState->getLearner()->getStateTransitionInit();
     //num=new_s_prime->num;
@@ -71,7 +75,7 @@ S_Prime* TransitionAction::get_sprime( State* s )
     transition_belief.push_back( new_s_prime );
     
     printf("\tappended it\n");
-    update_transition_probabilities(false);
+    update_transition_probabilities(true);
     
     return new_s_prime;
 }
