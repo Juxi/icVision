@@ -13,7 +13,7 @@
 
 class Oscillator {                                          // a simple, reusable oscillator
 public:
-    Oscillator() : min(-1), max(1), freq(1), phase(0) {}    // the default constructor
+    Oscillator() : min(-1), max(1), freq(0.5), phase(0) {}    // the default constructor
     double evaluate( double t ) {                           // a function to sample the oscillator
         double amplitude = (max-min)/2;
         double mean = min+amplitude;
