@@ -1,8 +1,0 @@
-Makefile
-PoseFind
-PoseControl
-*~
-*#
-*cxx
-*.db
-*.cmake
