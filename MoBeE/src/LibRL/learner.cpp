@@ -11,7 +11,7 @@ Learner::Learner( int d, const char* _robotName, const char* _partName, bool con
                                                                                         modelUpdate(true),
                                                                                         learnAfterActions(true),
                                                                                         discountFactor(0.9),
-                                                                                        modelInterest(10.0),
+                                                                                        //modelInterest(10.0),
                                                                                         rlPrecision(0.001),
                                                                                         //stateTransitionInit(1),
                                                                                         nextStateIdx(0),
@@ -121,6 +121,17 @@ void Learner::appendReaches()
     for ( std::vector<State*>::iterator i = states.begin(); i!=states.end(); ++i ) {
         for ( std::vector<yarp::os::ConstString>::iterator j=markers.begin(); j!=markers.end(); ++j)
             appendReachAction(*i, *j);
+    }
+}
+
+
+void Learner::initializeTransitionProbs()
+{
+    for ( std::vector<State*>::iterator s = states.begin(); s != states.end(); ++s ){
+        for ( std::vector<TransitionAction*>::iterator a = (*s)->transitionActions.begin(); a != (*s)->transitionActions.end(); ++a ){
+            if ( !(*a)->expectedTransition((*a)->parentState) ) (*a)->observe((*a)->parentState);
+            if ( !(*a)->expectedTransition((*a)->getDestination()) ) (*a)->observe((*a)->parentState);
+        }
     }
 }
 
@@ -798,6 +809,8 @@ void Learner::randomTransitions( int n )
 
 void Learner::writeStateFile()
 {
+    
+    printf("writing state file!!!\n");
 	std::ofstream out_file(stateFileName.c_str());
    
     int stateCount = 0;
@@ -880,7 +893,9 @@ void Learner::writeStateFile()
             
         }
         for ( std::vector<ReachAction*>::iterator j = (*i)->reachActions.begin(); j != (*i)->reachActions.end(); ++j ) {
+            printf("  reach action history size: %d\n", (*j)->history.size());
             for ( std::vector< Action::HistoryItem >::iterator k=(*j)->history.begin(); k!=(*j)->history.end(); ++k ) {
+                printf("wtf?!?\n");
                 out_file << (*j)->idx << "\t"
                          << k->target.cartesian(0) << "\t"
                          << k->target.cartesian(1) << "\t"

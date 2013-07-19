@@ -27,39 +27,33 @@ int main(int argc, char *argv[])
             printf("File read failed!!!\n");
             return 0;
         }
-    }
-    if (!initialized) {
-        printf("ERROR: Need a model to begin learning reaches! Use --file 'filename'\n");
-        return 0;
+    } else {
+        learner.appendGrid(4,25,0.75);
+        learner.connectNearestNeighbors(8);
+        learner.initializeTransitionProbs();
+        learner.appendReaches();
     }
     
     learner.setStateFileName("arm_state.dat");      // contains internal learner state
     learner.setHistoryFileName("arm_history.dat");  // history of states visited, actions taken, and rewards received
     learner.setModelLearning(false);                // don't mess with the state transition probabilities
-    
-    /* INITIALIZE REACH ACTIONS */
-    //learner.appendReaches();
-    //learner.initializeTransitionReward(0.0);
-    //learner.initializeReachReward(1.0);
-    //learner.valueIteration();
-    //learner.writeStateFile();
-    //return 1;
+    learner.predictRewards(Point_3(0,0,0));
+    learner.writeStateFile();
     
     // reach targets in task space
     RL_Problem_Set problems(&learner);
-    problems.sampleInit( -0.4, -0.1, 0.0, 0.4, 0.0, 0.0, 0.05 );
+    problems.sampleInit( -0.4, -0.1, 0.0, 0.4, 0.0, 0.4, 0.1 );
     
     State* s = NULL;
     Action* a = NULL;
     
     int targetCount = 0;    // counts reach targets
     int numTries;
-    
       
     do {
         // choose an RL problem
-        problems.evaluateInterest();
-        RL_Problem* prob = problems.mostInteresting();
+        //problems.evaluateInterest();
+        RL_Problem* prob = problems.leastTriedProblem();
         
         printf("\n\n\nNew Reach Target: (%f %f %f)\n\n",prob->target.x(), prob->target.y(), prob->target.z());
         yarp::os::ConstString sph = learner.mobee.mkSphere(prob->target.x(), prob->target.y(), prob->target.z(), 0.02);

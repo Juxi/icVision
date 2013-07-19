@@ -41,6 +41,8 @@ public:
     ReachAction*        appendReachAction( State* s, yarp::os::ConstString m, double val=0.0, double rew=0.0, int num=0 );
     //bool              deleteState( const State* );
     
+    //void                verify();
+    
     // query the learner
     std::string getName() { return name; }
     int         getDimension() { return dimension; }
@@ -62,8 +64,8 @@ public:
     bool    isLearning() { return learnAfterActions; }
     
     // access to learning params
-    void    setModelInterestingness(double i) { modelInterest = i; }
-    double  modelInterestingness() { return modelInterest; }
+    //void    setModelInterestingness(double i) { modelInterest = i; }
+    //double  modelInterestingness() { return modelInterest; }
     void    setRlPrecision( double p ) { rlPrecision = p; }
     double  getRlPrecision() { return rlPrecision; }
     void    setDiscountFactor( double f ) { discountFactor = f; }
@@ -78,6 +80,7 @@ public:
     bool loadStateFile( std::string& fileName );
     
     // (re)initialize things
+    void initializeTransitionProbs();
     void initializeTransitionReward(double);
     void initializeReachReward(double);
     void initializeValue(double);
@@ -127,7 +130,7 @@ private:
     bool    modelUpdate;
     bool    learnAfterActions;
     double  discountFactor;
-    double  modelInterest;
+    //double  modelInterest;
     double  rlPrecision;
     //int     stateTransitionInit;
     

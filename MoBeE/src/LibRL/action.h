@@ -82,7 +82,7 @@ protected:
     };
     std::vector< HistoryItem > history;
     
-    void appendToHistory( Point_3 p, double r ){ history.push_back( HistoryItem(p,r) ); }
+    void appendToHistory( Point_3 p, double r ){ printf("APPENDING TO HISTORY\n"); history.push_back( HistoryItem(p,r) ); }
 };
 
 #endif

@@ -7,22 +7,22 @@ TransitionAction::TransitionAction( int idx,
                                     double value,
                                     double reward,
                                     int numTries,
-                                    bool initialize,
+                                    //bool initialize,
                                     int rate) : Action(idx,a,value,reward,numTries,rate), destination_state(b)
 {
     // optimistic initialization
     //S_Prime* new_s_prime = get_sprime(b);
     
-    if (initialize) {
+    //if (initialize) {
         observe(a);
         observe(b);
-    }
+    //}
     
     //new_s_prime->num = parentState->getLearner()->getStateTransitionInit();
     //num=new_s_prime->num;
 }
 
-bool TransitionAction::expectedTransition( State* s )
+bool TransitionAction::expectedTransition( const State* s )
 {
     for ( std::vector<S_Prime*>::iterator i = transition_belief.begin(); i != transition_belief.end(); ++i )
         if ( (*i)->state == s ) return true;
@@ -139,21 +139,15 @@ void TransitionAction::learnStuff()
     num++;
     resultingState = parentState->getLearner()->getDiscreteState();
     
-    if (resultingState) {
-        resultingState->visits++;
-    } else {
+    if (!resultingState) {
         printf("There is no resulting state!!! WTF?!?\n");
         return;
     }
-    
-    // TODO expectedTransition(State*) NEEDS WORK IN LIGHT OF THE NEW KL DIVERGENCE
-    //if (!parentState->getLearner()->isLearningModel() && !expectedTransition(resultingState)) {
-    //    r = -1.0;
-    //    appendToHistory(target, r);
-    //    printf("\tState Transition Action Failed.  Got r = -1\n");
-    //}
-    
-    if (parentState->getLearner()->isLearningModel()) {
+
+    resultingState->visits++;
+    if (parentState->getLearner()->isLearningModel())
         observe(resultingState);
-    }
+    if ( resultingState == parentState )
+        r = -1.0;
+        
 }

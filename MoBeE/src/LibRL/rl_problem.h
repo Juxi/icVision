@@ -33,6 +33,7 @@ public:
     void evaluateInterest();
     
     RL_Problem* mostInteresting();
+    RL_Problem* leastTriedProblem();
     int leastTried();
     
 private:

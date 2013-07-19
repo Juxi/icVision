@@ -35,19 +35,21 @@ public:
                         double value = 0.0,
                         double reward = 0.0,
                         int numTries = 0,
-                        bool initialize = false,
+                        //bool initialize = false,
                         int rate = 200 );
     ~TransitionAction(){}
     
     const State*                    getDestination() { return destination_state; }
+    bool                            expectedTransition( const State* s );
+    
     //std::pair<const State*,double>  getTransitionBelief();
     void                            computeNewValue();
     std::vector< S_Prime* > const&  getTransitionBeliefs() { return transition_belief; }
-    bool                            expectedTransition( State* s );
+    
     
     S_Prime*    get_sprime(State* s);
     void        update_transition_probabilities(bool verbose = true);
-    
+    double      observe(State*);
     
 private:
     
@@ -64,7 +66,7 @@ private:
     double      compute_kl();
 
     //double      updateTransitionBelief( bool verbose = false );
-    double      observe(State*);
+    
     
     void        run();
 };

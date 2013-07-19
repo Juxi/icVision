@@ -49,3 +49,15 @@ int RL_Problem_Set::leastTried()
     return fewestTries;
 }
 
+RL_Problem* RL_Problem_Set::leastTriedProblem()
+{
+    if ( size() == 0 ) return 0;
+    
+    RL_Problem* ans = *begin();
+    int fewestTries = ans->numActions;
+    for ( std::vector<RL_Problem*>::iterator i=begin()+1; i!=end(); ++i ) {
+        if ( (*i)->numActions < ans->numActions )
+            ans = *i;
+    }
+    return ans;
+}

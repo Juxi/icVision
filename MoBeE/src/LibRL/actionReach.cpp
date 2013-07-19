@@ -126,14 +126,14 @@ void ReachAction::run()
         
         r = 1.0/(errMag +2);
         //history.push_back(HistoryItem(target,r));
-        appendToHistory(target, r);
+        //appendToHistory(target, r);
     
         printf("\n STEADY STATE REACHED!!! errMag: %f, reward: %f\n",errMag,r);
         relax();
         askToStop();
     }
     else if ( yarp::os::Time::now() - timeStarted > timeout ) {
-        r = 0.0;
+        r = -1.0;
         printf("REACH TIMED OUT!!! errMag: %f, reward: %f\n",errMag,r);
         relax();
         askToStop();

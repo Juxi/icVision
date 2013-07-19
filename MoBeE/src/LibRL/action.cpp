@@ -33,6 +33,9 @@ void Action::afterStart(bool s)
 void Action::threadRelease()
 {
     //printf("*** Releasing thread for State::Action - %p::%p ***\n\n",parentState,this);
+    if ( r != 0 )
+        appendToHistory(target, r);
+    
     if ( parentState->getLearner()->isLearning() )
     {
         parentState->getLearner()->initializeValue(0.0);
@@ -43,19 +46,31 @@ void Action::threadRelease()
                                                     parentState->getIdx(),
                                                     idx, r, v);
     }
+
     parentState->getLearner()->postMutex();
 }
 
 double Action::predictReward( Point_3 p, bool b )
 {
     printf("Predicting reward for action: %d (%f %f %f)\n",idx,p.x(),p.y(),p.z());
+    printf("num=%d\n",num);
+    
     double r_predicted = 0.0;
-    for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
-        double denom = (100*(p-i->target).squared_length()+1);
-        r_predicted += i->reward/denom;
-        printf("\t(%f %f %f) weight: %f, r: %f\n",idx,p.x(),p.y(),p.z(),1/denom,i->reward);
+    if ( dynamic_cast<ReachAction*>(this) && num == 0 ) {
+        r_predicted=1.0;
+    } else {
+        for ( std::vector< HistoryItem >::iterator i = history.begin(); i != history.end(); ++i ) {
+            double denom = (100*(p-i->target).squared_length()+1);
+            r_predicted += i->reward/denom;
+            printf("\t(%f %f %f) weight: %f, r: %f\n",idx,p.x(),p.y(),p.z(),1/denom,i->reward);
+        }
     }
-    if (b) r = r_predicted;
+    printf("r_predicted=%f\n",r_predicted);
+    if (b) {
+        r = r_predicted;
+        printf("r=%f\n",r);
+    }
+    
     return r_predicted;
 }
 
