@@ -41,10 +41,12 @@ public:
     void stopForcing(int);
     bool isStable();
     yarp::os::ConstString mkSphere( double x, double y, double z, double r );
+    
     //yarp::os::ConstString mkCyl( double r, double len, );
     void rmGeom( yarp::os::ConstString& );
     void defTarget( yarp::os::ConstString& );
     void defObstacle( yarp::os::ConstString& );
+    void defGhost(yarp::os::ConstString& s);
     
 private:
 
