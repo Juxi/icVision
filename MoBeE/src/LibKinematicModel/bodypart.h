@@ -58,15 +58,20 @@ public:
 																	 It is the underlying KinTreeNode objects (Link, RevoluteJoint and PrismaticJoint) that
 																	 reflect the hierarchy of the kinematic tree */
     bool setEncPos( const QVector<qreal>& pos );				//!< Sets all motor positions by calling Motor.setEncPos( qreal ) on each motor
+    
+    QVector<qreal> getNormPose();
+    bool setNormPos( const QVector<qreal>& pos );
 																/**< \param pos A vector of encoder positions. If there are too few or too many
 																	 positions in the vector, a warning will be printed to the console, and all
 																	 valid motor positions will be set. */
-	bool verify();												//!< Returns 'true' if there are no void pointers in the QVector and 'false' otherwise
+	bool projectToJointSpace( QString name, QVector<double>& opSpaceFT, QVector<double>& jointSpaceF );
+    bool verify();												//!< Returns 'true' if there are no void pointers in the QVector and 'false' otherwise
     
     void appendConstraints( QVector<LinearConstraint> c ) { constraints.append(c); }
 	bool evaluateConstraints();
     
     QVector<Marker*> getMarkers() { return markers; }
+    
     
     void publishState();
     

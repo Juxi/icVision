@@ -98,11 +98,11 @@ signals:
 
 public slots:
 	
-	void setNormalPosition( qreal pos = 0.5 );							//!< Set the position of every joint on the robot.
+	void setNormalPosition( qreal pos = 0.0 );							//!< Set the position of every joint on the robot.
 																		/**< Position must be on the interval [0,1], if it is out of range, 0 or 1 will be used */
 	bool setNormalPosition( int partNum, int motorNum, qreal pos );		//!< Set the position of a single Motor.
 																		/**< If the value is out of range, the maximum or minimum value will be used accordingly.  */
-	void setEncoderPosition( qreal pos = 0 );							//!< Set the position of every joint on the robot.
+	void setEncoderPosition( qreal pos = 0.0 );							//!< Set the position of every joint on the robot.
 																		/**< If the value is out of range, the maximum or minimum value will be used accordingly. */
 	bool setEncoderPosition( int partNum, int motorNum, qreal pos );	//!< Set the position of a single Motor.
 																		/**< If the value is out of range, the maximum or minimum value will be used accordingly.  */

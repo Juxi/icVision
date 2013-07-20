@@ -49,4 +49,5 @@ ADD_SUBDIRECTORY ( KinematicModelDemo )
 ADD_SUBDIRECTORY ( RobotFilterDemo )
 ADD_SUBDIRECTORY ( MoBeE_Model )
 ADD_SUBDIRECTORY ( RL )
+ADD_SUBDIRECTORY ( PoseFinder )
 

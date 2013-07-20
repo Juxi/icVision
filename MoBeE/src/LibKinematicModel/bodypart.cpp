@@ -67,16 +67,73 @@ void BodyPart::printEvaluatedConstraints(){
     }
 }
 
+bool BodyPart::projectToJointSpace( QString name, QVector<double>& opSpaceFT, QVector<double>& jointSpaceF )
+{
+    QVector<double> ans;
+    if (opSpaceFT.size() != 6)
+        return false;
+    
+    KinTreeNode* node = NULL;
+    for ( QVector<KinematicModel::Marker*>::iterator i=markers.begin(); i!=markers.end(); ++i ) {
+        if ( (*i)->name() == name ) {
+            // we are gonna project some shit
+            node = (*i)->node();
+            break;
+        }
+    }
+
+    if (node) {
+        
+        QList< QPair<QVector3D, QVector3D> > jacobian = node->computeJacobian();
+        
+        //printf("%s Jacobian: \n",name.toStdString().c_str());
+        
+        for (size_t j=0; j<jacobian.size(); ++j)
+        {
+            qreal f = 0.0;
+            f += jacobian.at(j).first.x()  * opSpaceFT.at(0);
+            f += jacobian.at(j).first.y()  * opSpaceFT.at(1);
+            f += jacobian.at(j).first.z()  * opSpaceFT.at(2);
+            f += jacobian.at(j).second.x() * opSpaceFT.at(3);
+            f += jacobian.at(j).second.y() * opSpaceFT.at(4);
+            f += jacobian.at(j).second.z() * opSpaceFT.at(5);
+            jointSpaceF.append(f);
+        }
+        return true;
+    }
+    return false;
+}
+
+QVector<qreal> BodyPart::getNormPose()
+{
+    QVector<qreal> q;
+    QVector<Motor*>::iterator i;
+    for ( i=begin(); i!=end(); ++i ) {
+        q.append((*i)->normPos());
+    }
+    return q;
+}
+
+bool BodyPart::setNormPos( const QVector<qreal>& x )
+{
+    QVector<Motor*>::iterator i;
+    QVector<qreal>::const_iterator j;
+    for ( i=begin(),j=x.begin(); i!=end() && j!=x.end(); ++i,++j ) {
+        (*i)->setNormPos(*j);
+    }
+    return 1;
+}
+
 bool BodyPart::setEncPos( const QVector<qreal>& x )
 {
-    if ( x.size() > size() )
+    /*if ( x.size() > size() )
 	{
 		printf("WARNING: BodyPart %s - position vector size > %d. Some values will be ignored.\n", name().toStdString().c_str(), size() );
     }
 	else if ( x.size() < size() )
 	{
 		printf("WARNING: BodyPart %s - position vector size < %d. Some values will not be affected.\n", name().toStdString().c_str(), size() );
-    }
+    }*/
     QVector<Motor*>::iterator i;
     QVector<qreal>::const_iterator j;
     for ( i=begin(),j=x.begin(); i!=end() && j!=x.end(); ++i,++j ) {
