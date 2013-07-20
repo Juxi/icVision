@@ -49,6 +49,7 @@
 // object types
 #define VOCAB_OBSTACLE VOCAB3('o','b','s')	//!< an obstacle that triggers reflexive response 
 #define VOCAB_TARGET VOCAB3('t','g','t')
+#define VOCAB_GHOST VOCAB3('g','h','o')
 //#define VOCAB_BODY_PART VOCAB3('b','d','y')
 //#define VOCAB_NO_TYPE VOCAB2('g','h','o')	//!< gho for ghost
 

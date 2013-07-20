@@ -411,6 +411,20 @@ void WorldRpcInterface::respClass( const yarp::os::Bottle& command, yarp::os::Bo
 				reply.addString("Changed object type to 'target'.");
 				
 				break;
+                
+            case VOCAB_GHOST:
+				
+				freeColor = Qt::white;
+				freeColor.setAlphaF(0.3);
+				collidingColor = freeColor;
+				
+				object->setResponseClass(model->GHOST());
+				object->setFreeColor( freeColor );
+				object->setCollidingColor( collidingColor );
+                
+				reply.addString("Changed object type to 'ghost'.");
+				
+				break;
 				
 			default:
 				

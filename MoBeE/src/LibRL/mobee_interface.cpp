@@ -117,6 +117,16 @@ void MoBeE_Interface::defObstacle( yarp::os::ConstString& name )
     worldClient.write(worldCmd,worldRsp);
 }
 
+
+void MoBeE_Interface::defGhost(yarp::os::ConstString& name)
+{
+    yarp::os::Bottle worldCmd, worldRsp;
+    worldCmd.addVocab(yarp::os::Vocab::encode("def"));
+    worldCmd.addString(name);
+    worldCmd.addVocab(yarp::os::Vocab::encode("obs"));
+    worldClient.write(worldCmd,worldRsp);
+}
+
 void MoBeE_Interface::getMarkerState( yarp::os::ConstString& markerName, Point_3& p, Vector_3& n)
 {
     // get the state of the hand
