@@ -11,7 +11,15 @@ BodyPart::BodyPart( Robot* robot, BodyPart* parentPart ) : idx(0), parentPart(pa
 BodyPart::~BodyPart()
 {
 }
-
+/*QVector<Marker> BodyPart::copyMarkers()
+{
+    QVector<Marker> m;
+    for (QVector<Marker*>::iterator i=markers.begin(); i!=markers.end(); ++i ) {
+        Marker marker = **i;
+        //m.append(marker);
+    }
+    return m;
+}*/
 //void BodyPart::addConstraint( QStringList _a, QStringList _q, qreal _b )
 //{
 //	LinearConstraint c(this,_a,_q,_b);

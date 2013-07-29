@@ -301,6 +301,7 @@ bool ZPHandler::startElement( const QString & /* namespaceURI */,
             
 		// create the marker, attach it to the node, and make it known to the robot
 		Marker* marker = new Marker(node, name, norm);
+        
 		marker->createTracer( model->GHOST(), tracer, 0.008, Qt::yellow);
 		robot->markers.push_back(marker);
         robot->countCompositeObject();

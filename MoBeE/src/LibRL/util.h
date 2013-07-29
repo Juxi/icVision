@@ -44,7 +44,7 @@ static std::vector<Point_d> gridSample( int dim, int num, double scaling )
     
     CGAL::points_on_cube_grid_d( dim, scaling*0.5, (std::size_t)num, std::back_inserter(points), Creator_d(dim));
     
-    std::cout << "Using Samples: \n" <<std::endl;
+    //std::cout << "Using Samples: \n" <<std::endl;
     
     // shift the sample set to the interval [0,1]
     std::vector<double> v;
@@ -52,7 +52,7 @@ static std::vector<Point_d> gridSample( int dim, int num, double scaling )
     Vector_d shift(dim,v.begin(),v.end());
     for ( std::vector<Point_d>::iterator i=points.begin(); i!=points.end(); ++i ){
         *i += shift;
-        std::cout << *i << std::endl;
+        //std::cout << *i << std::endl;
     }
     
     return points;

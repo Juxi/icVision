@@ -62,6 +62,8 @@ public:
     const QVector<PrimitiveObject*>& getPrimitives() { return primitives; }
     const QVector<PrimitiveObject*>& getFieldPrimitives() { return fieldPrimitives; }
 	
+    QColor getCollidingColor() { return cc; }
+    QColor getFreeColor() { return fc; }
 	void setCollidingColor( QColor color );
 	void setFreeColor( QColor color );
 	
@@ -99,7 +101,7 @@ protected:
 	DT_ResponseClass	responseClass;
     DT_ResponseClass    fieldResponseClass;
 	
-	
+	QColor  fc,cc;
     GLfloat freeColor[4];
 	GLfloat collidingColor[4];
     GLfloat fieldColor[4];

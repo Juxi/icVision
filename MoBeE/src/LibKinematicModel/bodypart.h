@@ -71,6 +71,7 @@ public:
 	bool evaluateConstraints();
     
     QVector<Marker*> getMarkers() { return markers; }
+    //QVector<Marker> copyMarkers();
     
     
     void publishState();

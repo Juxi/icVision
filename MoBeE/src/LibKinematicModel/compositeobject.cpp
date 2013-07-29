@@ -133,11 +133,14 @@ void CompositeObject::updateSolid()
 }
 
 void CompositeObject::setCollidingColor( QColor c )
-{ 
+{
+    cc=c;
 	collidingColor[0] = c.redF();
 	collidingColor[1] = c.greenF();
 	collidingColor[2] = c.blueF();
 	collidingColor[3] = c.alphaF();
+    
+    //printf(" r: %f g: %f b: %f a: %f\n",collidingColor[0],collidingColor[1],collidingColor[2],collidingColor[3]);
 	
 	QVector<PrimitiveObject*>::const_iterator i;
 	for ( i=primitives.begin(); i!=primitives.end(); ++i )
@@ -147,7 +150,8 @@ void CompositeObject::setCollidingColor( QColor c )
 }
 
 void CompositeObject::setFreeColor( QColor c )
-{ 
+{
+    fc=c;
 	//printf("CALLED SET OBJECT>SETFREECOLOR()\n");
 	freeColor[0] = c.redF();
 	freeColor[1] = c.greenF();
