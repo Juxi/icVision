@@ -37,7 +37,7 @@ private:
     bool keepRunning;
     
 	void run();
-    
+    Point_d next(Point_d q, Vector_3 delta, QColor c = Qt::green );
     
     Vector_d dDelta( bool advance = true);
 };
