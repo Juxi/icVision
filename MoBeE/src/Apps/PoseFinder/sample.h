@@ -16,7 +16,7 @@
 
 //class KinematicModel::Model;
 
-class Sample : public QThread
+class Sample
 {
 	
 public:
@@ -60,9 +60,7 @@ private:
     
     CGAL::Random_points_on_sphere_d<Point_d> localSphere;
 	//CGAL::Random_points_on_sphere_d<Point_d> localSphere;
-    
-    
-	void run();
+  
     
     void setNormPose( Point_d q ) {
         int n = 0;

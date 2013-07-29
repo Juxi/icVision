@@ -32,7 +32,7 @@ Sample::Sample( KinematicModel::Model& m, KinematicModel::BodyPart* bp, Point_d 
     }
     
     // sample the joint-space neighborhood
-    for (int i=0; i<0; i++) {
+    for (int i=0; i<100; i++) {
         Vector_d dq = *localSphere++ - CGAL::ORIGIN;
         //std::cout << "dq: " << dq << std::endl;
         delta.append( dq );
@@ -176,7 +176,7 @@ void Sample::makeBalls()
         QVector<KinematicModel::CompositeObject*>::iterator cloud_it = new_clouds.begin();
         for ( ; marker_it!=markers.end() && cloud_it!=clouds.end(); ++marker_it, ++cloud_it )
         {
-            KinematicModel::PrimitiveObject* primitive = new KinematicModel::Sphere( 0.005 );
+            KinematicModel::PrimitiveObject* primitive = new KinematicModel::Sphere( 0.01 );
             QVector3D dx = (*marker_it)->node()->getPos() - (*cloud_it)->getPos();
             primitive->translate(dx);
             primitive->setCollidingColor( Qt::red );
@@ -297,44 +297,14 @@ void Sample::makeBalls()
   */
 void Sample::stop()
 {
-	printf("ObjectSoup thread is shutting down ");
+	/*printf("ObjectSoup thread is shutting down ");
 	keepRunning = false;
 	while ( isRunning() )
 	{
 		printf(".");
 		msleep(1);
-	}
+	}*/
 	printf("\n");
-}
-
-void Sample::run()
-{
-	QTime time = QTime::currentTime();
-	qsrand((uint)time.msec());
-	
-	
-	// fill the world with objects
-	KinematicModel::CompositeObject* obj[num];
-	for ( int i =0; i<num; ++i )
-	{
-		// make a new object
-		if (verbose) printf( "Composite Object: %d\n", i );	
-		//obj[i] = makeARandomObjectLikeAMothaFucka();
-	}
-	
-	/**/
-	int j;
-	time.start();
-	while ( keepRunning )
-	{
-		j = qrand() % (num);
-		if (verbose) printf( "replacing object: %d\n", j );
-		obj[j]->kill();
-		//obj[j] = makeARandomObjectLikeAMothaFucka();
-		msleep(20);
-	}
-	
-	//printf("ObjectSoup::run() returned\n");
 }
 
 

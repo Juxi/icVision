@@ -42,9 +42,11 @@ IF ( WIN32 )
 ENDIF ( WIN32 )
 	
 SET ( src_files main.cpp
-		 sample.cpp )
+		 pose_finder.cpp
+		sample.cpp )
 
-SET ( hdr_files sample.h )
+SET ( hdr_files pose_finder.h
+		sample.h )
 
 
 ADD_EXECUTABLE ( PoseFinder ${hdr_files} ${src_files} )
