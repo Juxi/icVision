@@ -107,18 +107,70 @@ void PoseFinder::run()
 	}
 }
 
-Vector_d PoseFinder::dDelta( bool advance ){
+Vector_d PoseFinder::dDelta( bool advance )
+{
     CGAL::Random_points_on_sphere_d<Point_d> localSphere(bodypart->size(), 0.01);
     return *localSphere++ - CGAL::ORIGIN;
 }
 
-void PoseFinder::setNormPose( Point_d q ) {
+void PoseFinder::setNormPose( Point_d q )
+{
     int n = 0;
     QVector<qreal> cmd;
     for ( Point_d::Cartesian_const_iterator i = q.cartesian_begin(); i != q.cartesian_end(); ++i )
         cmd.push_back(*i);
     bodypart->setNormPos(cmd);
     model.computePose();
+}
+
+bool PoseFinder::sample( Vector_d& x, Vector_d& y, Vector_d& z )
+{
+    QVector<qreal> pose = bodypart->getNormPose();
+    Point_d q(pose.size(),pose.begin(),pose.end());
+    QVector3D marker_pose = marker->node()->getPos();
+    
+    CGAL::Random_points_on_sphere_d<Point_d> localSphere(bodypart->size(), 0.1);
+    Vector_d x_winner = *localSphere - CGAL::ORIGIN;
+    Vector_d y_winner = *localSphere - CGAL::ORIGIN;
+    Vector_d z_winner = *localSphere - CGAL::ORIGIN;
+    QVector3D dx(0,0,0);
+    QVector3D dy(0,0,0);
+    QVector3D dz(0,0,0);
+    double xmax = -1.0;
+    double ymax = -1.0;
+    double zmax = -1.0;
+    
+    for (int n=0; n<1000; n++)
+    {
+                                                                        //printf("..%d",n);
+        Vector_d candidate = *localSphere++ - CGAL::ORIGIN;             //std::cout << "  candidate: " << candidate << std::endl;
+        
+        setNormPose(q + candidate);
+        
+        QVector3D new_marker_pose = marker->node()->getPos();
+        QVector3D delta = new_marker_pose - marker_pose;                   //printf(" dx(%f %f %f) = new_pose(%f %f %f) - old_pose(%f %f %f)\n",
+                                                                        //dx.x(),dx.y(),dx.z(),new_marker_pose.x(),new_marker_pose.y(),
+                                                                        //new_marker_pose.z(),marker_pose.x(),marker_pose.y(),marker_pose.z());
+                                                                        //printf("dx.len() = %f\n",dx.length());
+        double xdot = QVector3D::dotProduct(QVector3D(1,0,0), delta/delta.length());
+        double ydot = QVector3D::dotProduct(QVector3D(0,1,0), delta/delta.length());
+        double zdot = QVector3D::dotProduct(QVector3D(0,0,1), delta/delta.length());
+                                                                        //std::cout << "  dot_prod: " << dot_prod << std::endl;
+        if ( xdot > xmax) {
+            xmax = xdot;
+            x_winner = candidate;
+            dx = delta;
+        } else if ( ydot > ymax) {
+            ymax = ydot;
+            y_winner = candidate;
+            dy = delta;
+        } else if ( zdot > zmax) {
+            zmax = zdot;
+            z_winner = candidate;
+            dz = delta;
+        }
+    }
+    
 }
 
 Crawler::Crawler(PoseFinder* _finder, Point_d _q, Vector_3 _delta, QColor _c): finder(_finder),q(_q),delta(_delta),c(_c),len(0.0) //,localSphere(_q.dimension(), 0.1)

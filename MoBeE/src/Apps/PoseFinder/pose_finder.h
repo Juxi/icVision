@@ -54,6 +54,7 @@ public:
 	~PoseFinder() {}
     
     void setNormPose( Point_d q );
+    bool sample( Vector_d& x, Vector_d& y, Vector_d& z );
 	void stop();
 	
 private:

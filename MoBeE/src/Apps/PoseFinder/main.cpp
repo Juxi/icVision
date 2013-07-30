@@ -34,27 +34,8 @@ int main(int argc, char *argv[])
     
     CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
     finder.setNormPose(*globalCube++ + correction(dim,0.5));
+    //finder.sample();
     finder.start();
-    
-    //Sample q0(model,arm,q_arm);
-    
-    
-    
-    // one random pose
-    //CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
-    //Sample q1(model,arm, *globalCube++ + corr);
-    //q1.makeBalls();
-    
-    // other sampling options
-            // bend elbow
-            /*std::vector<double> mod;
-            mod.push_back(0.0);
-            mod.push_back(0.0);
-            mod.push_back(0.0);
-            mod.push_back(1.0);
-            Vector_d foo(4,mod.begin(),mod.end());*/
-            
-            //printf("-------------\n");
             
             // grid sample
             //std::vector<Point_d> samples = gridSample(dim,625,1);
