@@ -12,14 +12,6 @@ using namespace KinematicModel;
 #include <QThread>
 #include "model.h"
 
-Vector_d correction(int dim,double ammount)
-{
-    std::vector<double> correction;
-    for (int i=0; i<dim; i++) correction.push_back(ammount);
-    Vector_d c(dim,correction.begin(),correction.end());
-    return c;
-}
-
 int main(int argc, char *argv[])
 {
     
@@ -30,11 +22,15 @@ int main(int argc, char *argv[])
     PoseFinder finder(argv[1],"right_arm");
     
     // sample in dim dimensions
-    int dim = 4;
+    //int dim = 4;
     
-    CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
-    finder.setNormPose(*globalCube++ + correction(dim,0.5));
-    //finder.sample();
+    //Vector_d dx,dy,dz;
+    //CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
+    //finder.setNormPose(*globalCube++ + correction(dim,0.5));
+    //std::vector< std::pair<Vector_d,QVector3D> > basis = finder.basis();
+    
+    
+    
     finder.start();
             
             // grid sample

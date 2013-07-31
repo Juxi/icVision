@@ -14,6 +14,8 @@
 #include "model.h"
 #include "util.h"
 
+//typedef QList< QPair<QVector3D, QVector3D> > Jacobian;
+
 //class KinematicModel::Model;
 class PoseFinder;
 
@@ -53,8 +55,15 @@ public:
     PoseFinder( char* _robot, char* _part );
 	~PoseFinder() {}
     
+    enum Do_What { ARGMAX_BASIS, SUM_BASIS, GRID };
+    Do_What do_what;
+    
     void setNormPose( Point_d q );
-    bool sample( Vector_d& x, Vector_d& y, Vector_d& z );
+    
+    std::vector< std::pair<Vector_d,QVector3D> > jtBasis();
+    std::vector< std::pair<Vector_d,QVector3D> > sumBasis();
+    std::vector< std::pair<Vector_d,QVector3D> > argmaxBasis();
+    Vector_d project(std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dx);
 	void stop();
 	
 private:
@@ -70,9 +79,16 @@ private:
     bool keepRunning;
     
 	void run();
+    
+    void runGrid();
+    void runBasis( Do_What w );
+    void make_rose(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc);
     //Point_d next(Point_d q, Vector_3 delta, QColor c = Qt::green );
     
+    void make_ray(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c );
+    
     Vector_d dDelta( bool advance = true);
+    Vector_d correction(int dim,double ammount);
 };
 
 #endif
