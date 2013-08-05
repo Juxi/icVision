@@ -83,8 +83,6 @@ private:
     void runGrid();
     void runBasis( Do_What w );
     void make_rose(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc);
-    //Point_d next(Point_d q, Vector_3 delta, QColor c = Qt::green );
-    
     void make_ray(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c );
     
     Vector_d dDelta( bool advance = true);
