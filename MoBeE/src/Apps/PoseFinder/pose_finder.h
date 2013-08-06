@@ -19,7 +19,7 @@
 //class KinematicModel::Model;
 class PoseFinder;
 
-class Crawler
+/*class Crawler
 {
     
 public:
@@ -45,7 +45,7 @@ private:
     //KinematicModel::Model* model;
     //KinematicModel::BodyPart* bodypart;
     //CGAL::Random_points_on_sphere_d<Point_d> localSphere;
-};
+};*/
 
 
 class PoseFinder : public QThread
@@ -55,20 +55,25 @@ public:
     PoseFinder( char* _robot, char* _part );
 	~PoseFinder() {}
     
-    enum Do_What { ARGMAX_BASIS, SUM_BASIS, GRID };
+    enum Do_What { ARGMAX_BASIS, SUM_BASIS, JT_BASIS, RAND_SAMPLE, GRID };
     Do_What do_what;
     
-    void setNormPose( Point_d q );
+    int setNormPose( Point_d q );
     
+    std::vector< std::pair<Point_d, QVector3D> > random_sample(int n);
+    std::vector< std::pair<Vector_d, QVector3D> > sample_neighborhood( std::pair<Point_d, QVector3D>, int n, double r );
+    std::vector< std::pair<Vector_d,QVector3D> > argmaxBasis(std::vector< std::pair<Vector_d,QVector3D> >);
     std::vector< std::pair<Vector_d,QVector3D> > jtBasis();
+    
     std::vector< std::pair<Vector_d,QVector3D> > sumBasis();
-    std::vector< std::pair<Vector_d,QVector3D> > argmaxBasis();
+    
     Vector_d project(std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dx);
+    
 	void stop();
 	
 private:
     
-    friend class Crawler;
+    //friend class Crawler;
 
     KinematicModel::Model                       model;	// the world model
     KinematicModel::Robot*                      robot;
@@ -80,13 +85,16 @@ private:
     
 	void run();
     
-    void runGrid();
-    void runBasis( Do_What w );
-    void make_rose(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc);
-    void make_ray(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c );
+    //void runGrid();
+    void runBasis( Point_d q, Do_What w, QColor cx, QColor cy, QColor cz  );
+    
+    
+    std::pair<KinematicModel::CompositeObject*,double> make_rose( Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc);
+    double make_ray(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c, KinematicModel::CompositeObject* obj );
     
     Vector_d dDelta( bool advance = true);
     Vector_d correction(int dim,double ammount);
+    //Point_d resize(Point_d);
 };
 
 #endif

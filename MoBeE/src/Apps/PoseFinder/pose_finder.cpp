@@ -13,8 +13,8 @@ PoseFinder::PoseFinder( char* _robot, char* _part) : history( model.OBSTACLE(), 
     
     robot = model.loadRobot(QString(_robot), false );
     robot->home();
-    
     model.computePose();
+    printf("Home pose collisions: %d\n",model.getNumCollisions());    
     
     bodypart = robot->getPartByName(QString(_part));
     marker = *bodypart->getMarkers().begin();
@@ -49,69 +49,169 @@ void PoseFinder::stop()
 
 void PoseFinder::run()
 {
-    if ( do_what == GRID ) runGrid();
-    else if ( do_what == ARGMAX_BASIS ) runBasis(ARGMAX_BASIS);
-    else if ( do_what == SUM_BASIS ) runBasis(SUM_BASIS);
+    std::vector< std::pair<Point_d, QVector3D> > samples = random_sample( 20 );
+    std::vector< std::pair<Point_d, QVector3D> >::iterator i;
+    
+    std::list< std::pair<Point_d, double> > list;
+    std::list< std::pair<Point_d, double> >::iterator j;
+    
+    for (i=samples.begin(); i!=samples.end(); ++i) {
+        std::vector< std::pair<Vector_d,QVector3D> > local_basis = sample_neighborhood(*i, 100, 0.1);
+        //std::vector< std::pair<Vector_d,QVector3D> > basis = sumBasis();
+        //std::vector< std::pair<Vector_d,QVector3D> > jt_basis = jtBasis();
+        std::pair<KinematicModel::CompositeObject*,double> rose = make_rose(i->first, argmaxBasis(local_basis), Qt::blue, Qt::green, Qt::red);
+        std::pair<Point_d,double> q(i->first,rose.second);
+        
+        bool wrote_q = false;
+        for (j=list.begin(); j!=list.end(); ++j) {
+            if ( q.second > j->second ) {
+                list.insert(j,q);
+                wrote_q = true;
+                break;
+            }
+        }
+        if ( !wrote_q && q.second != 0.0 )
+            list.push_back(q);
+        
+        rose.first->kill();
+    }
+    
+    printf("Controlability values:\n");
+    for (j=list.begin(); j!=list.end(); ++j) {
+        printf("\t%f\n",j->second);
+    }
+    
 }
 
-void PoseFinder::runBasis( Do_What w )
+/*void PoseFinder::runBasis( Point_d _q, Do_What w, QColor cx, QColor cy, QColor cz )
 {
-    
-    
     // sample in dim dimensions
-    int dim = 4;
+    //int dim = 4;
+    //CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
+    //setNormPose(*globalCube++ + correction(dim,0.5));
     
-    CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
+    setNormPose(_q);
     
-    setNormPose(*globalCube++ + correction(dim,0.5));
+    printf("--------------------------\n");
+    //printf("collisions: %d\n",model.getNumCollisions());
+    if (model.getNumCollisions() != 0 || !bodypart->evaluateConstraints()) {
+        printf("runBasis() aborted because");
+        if (model.getNumCollisions() != 0) printf(" of self collision... ");
+        if (!bodypart->evaluateConstraints()) printf(" of joint angle constraints... ");
+        return;
+    }
     
     QVector<qreal> pose = bodypart->getNormPose();
     Point_d q(pose.size(),pose.begin(),pose.end());
     
-    std::vector< std::pair<Vector_d,QVector3D> > argmax_basis = argmaxBasis();
-    make_rose(q,argmax_basis,Qt::blue,Qt::green,Qt::red);
+    std::vector< std::pair<Vector_d,QVector3D> > basis;
+    //if ( w == ARGMAX_BASIS )        basis = argmaxBasis();
+    //else if ( w == SUM_BASIS )      basis = sumBasis();
+    //else if ( w == JT_BASIS )       basis = jtBasis();
+    //else                            basis = argmaxBasis();
+    
+    double controlability = make_rose(q,basis,cx,cy,cz);
+    
+    printf("Controlability: %f\n",controlability);
     
     setNormPose(q);
+    
     //std::vector< std::pair<Vector_d,QVector3D> > sum_basis = sumBasis();
     //visualize_mapping(q,sum_basis,Qt::cyan,Qt::cyan,Qt::cyan);
 
     //setNormPose(q);
     //std::vector< std::pair<Vector_d,QVector3D> > jt_basis = jtBasis();
     //visualize_mapping(q,jt_basis,Qt::magenta,Qt::magenta,Qt::magenta);
-}
+}*/
 
-void PoseFinder::make_ray( Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c )
+std::pair<KinematicModel::CompositeObject*,double> PoseFinder::make_rose(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc)
 {
     setNormPose(q);
-    QVector3D root_marker_pose = marker->node()->getPos();
     
-    KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( model.OBSTACLE(), model.GHOST() );
-    double err_sum = 0.0;
+    //printf("--------------------------\n");
+    //printf("collisions: %d\n",model.getNumCollisions());
+    //if (model.getNumCollisions() != 0 || !bodypart->evaluateConstraints()) {
+        //printf("runBasis() aborted because");
+        //if (model.getNumCollisions() != 0) printf(" of self collision... ");
+        //if (!bodypart->evaluateConstraints()) printf(" of joint angle constraints... ");
+    //    return;
+    //}
+    
+    KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( model.GHOST(), model.GHOST() );
+    
+    double xLen = make_ray(q, basis, QVector3D(1,0,0), xc, obj);
+    xLen += make_ray(q, basis, QVector3D(-1,0,0), xc, obj);
+    //printf("xLen: %f\n",xLen);
+    
+    double yLen = make_ray(q, basis, QVector3D(0,1,0), yc, obj);
+    yLen+= make_ray(q, basis, QVector3D(0,-1,0), yc, obj);
+    //printf("yLen: %f\n",yLen);
+    
+    double zLen = make_ray(q, basis, QVector3D(0,0,1), zc, obj);
+    zLen += make_ray(q, basis, QVector3D(0,0,-1), zc, obj);
+    //printf("zLen: %f\n",zLen);
+    
+    /*make_ray(q, basis, QVector3D(1,1,0), Qt::white);
+     make_ray(q, basis, QVector3D(1,0,1), Qt::white);
+     make_ray(q, basis, QVector3D(0,1,1), Qt::white);
+     make_ray(q, basis, QVector3D(1,1,1), Qt::white);
+     make_ray(q, basis, QVector3D(-1,-1,0), Qt::white);
+     make_ray(q, basis, QVector3D(-1,0,-1), Qt::white);
+     make_ray(q, basis, QVector3D(0,-1,-1), Qt::white);
+     make_ray(q, basis, QVector3D(-1,-1,-1), Qt::white);*/
+    
+    model.appendObject(obj);
+    model.computePose();
+    
+    double min=xLen,med=xLen,max=xLen;
+    
+    return std::pair<KinematicModel::CompositeObject*,double>(obj,xLen*yLen*zLen);
+}
+
+double PoseFinder::make_ray( Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dir, QColor c, KinematicModel::CompositeObject* obj )
+{    
+    setNormPose(q);
+    //if ( model.getNumCollisions() != 0 )
+    //    return 0.0;
+    
+    //KinematicModel::CompositeObject* obj = new KinematicModel::CompositeObject( model.GHOST(), model.GHOST() );
+    
+    QVector3D   root_marker_pose = marker->node()->getPos();
     QVector3D   pose0 = root_marker_pose,
                 pose1 = root_marker_pose;
-    for ( int i=0; i<30; i++ )
+    double      err_sum = 0.0,
+                len = 0.0;
+    
+    for ( int i=0; i<50; i++ )
     {
         double scale = (double)(i+1)/10;
-        Vector_d dq = project(basis, dir);   
-                    //std::cout << "q: " << q << std::endl;
-                    //std::cout << "dq: " << dq << std::endl;
-        setNormPose(q+scale*dq);                                          //printf(" x:%f, y:%f z:%f\n",
-                    //marker_pose.x(),marker_pose.y(),marker_pose.z());
+        Vector_d dq = project(basis, dir);   //std::cout << "q: " << q << std::endl; std::cout << "dq: " << dq << std::endl;
+        setNormPose(q+scale*dq);             //printf(" x:%f, y:%f z:%f\n", marker_pose.x(),marker_pose.y(),marker_pose.z());
+        if ( model.getNumCollisions() != 0 || !bodypart->evaluateConstraints() ) {
+            //printf("makeRay() returned because");
+            //if (model.getNumCollisions() != 0) printf(" of self collision... ");
+            //if (!bodypart->evaluateConstraints()) printf(" joint angle constraints... ");
+            //printf("\n");
+            break;
+        }
+        
         pose0 = pose1;
         pose1 = marker->node()->getPos();
         QVector3D delta = pose1-pose0;
         
-        // compare marker_pos to root_marker_pos
-        double this_err = pose1.distanceToLine(root_marker_pose, dir);
-        double this_dir_err = 1- QVector3D::dotProduct(dir/dir.length(), delta/delta.length());
-        
+        double this_err = pose1.distanceToLine(root_marker_pose, dir);  // compute error for marker_pos w.r.t root_marker_pos and dir
+        double this_dir_err = 1 - QVector3D::dotProduct(dir/dir.length(), delta/delta.length());
         err_sum += this_err + this_dir_err;
         
         QColor color;
-        if (err_sum < 1 )
+        if (err_sum < 1 ) {
             color = c;
-        else
+            len += QVector3D::dotProduct(dir/dir.length(), delta);  // keep track of the length of the ray (in the intended direction
+        }
+        else {
             color = Qt::white;
+            break;
+        }
         
         KinematicModel::PrimitiveObject* primitive = new KinematicModel::Sphere( 0.005 );
         primitive->setCollidingColor(color);
@@ -119,34 +219,10 @@ void PoseFinder::make_ray( Point_d q, std::vector< std::pair<Vector_d,QVector3D>
         primitive->translate(pose1);
         obj->appendPrimitive(primitive);
     }
-    model.appendObject(obj);
-        
+    return len;
 }
 
-void PoseFinder::make_rose(Point_d q, std::vector< std::pair<Vector_d,QVector3D> > basis, QColor xc, QColor yc, QColor zc)
-{
-    make_ray(q, basis, QVector3D(1,0,0), Qt::blue);
-    make_ray(q, basis, QVector3D(-1,0,0), Qt::darkBlue);
-    
-    make_ray(q, basis, QVector3D(0,1,0), Qt::green);
-    make_ray(q, basis, QVector3D(0,-1,0), Qt::darkGreen);
-    
-    make_ray(q, basis, QVector3D(0,0,1), Qt::red);
-    make_ray(q, basis, QVector3D(0,0,-1), Qt::darkRed);
-    
-    /*make_ray(q, basis, QVector3D(1,1,0), Qt::white);
-    make_ray(q, basis, QVector3D(1,0,1), Qt::white);
-    make_ray(q, basis, QVector3D(0,1,1), Qt::white);
-    make_ray(q, basis, QVector3D(1,1,1), Qt::white);
-    make_ray(q, basis, QVector3D(-1,-1,0), Qt::white);
-    make_ray(q, basis, QVector3D(-1,0,-1), Qt::white);
-    make_ray(q, basis, QVector3D(0,-1,-1), Qt::white);
-    make_ray(q, basis, QVector3D(-1,-1,-1), Qt::white);*/
-    
-    model.computePose();
-}
-
-void PoseFinder::setNormPose( Point_d q )
+int PoseFinder::setNormPose( Point_d q )
 {
     int n = 0;
     QVector<qreal> cmd;
@@ -202,9 +278,9 @@ std::vector< std::pair<Vector_d,QVector3D> > PoseFinder::jtBasis()
     dqy/=sqrt(dqz.squared_length());
     dqy/=sqrt(dqz.squared_length());
     
-    std::cout << "dqx: " << dqx << std::endl;
-    std::cout << "dqy: " << dqy << std::endl;
-    std::cout << "dqz: " << dqz << std::endl;
+    //std::cout << "dqx: " << dqx << std::endl;
+    //std::cout << "dqy: " << dqy << std::endl;
+    //std::cout << "dqz: " << dqz << std::endl;
     
     basis.push_back(std::pair<Vector_d,QVector3D>(dqx,x));
     basis.push_back(std::pair<Vector_d,QVector3D>(dqy,y));
@@ -213,52 +289,41 @@ std::vector< std::pair<Vector_d,QVector3D> > PoseFinder::jtBasis()
     return basis;
 }
 
-std::vector< std::pair<Vector_d,QVector3D> > PoseFinder::argmaxBasis()
+std::vector< std::pair<Vector_d,QVector3D> > PoseFinder::argmaxBasis( std::vector< std::pair<Vector_d,QVector3D> > big_basis )
 {
-    std::vector< std::pair<Vector_d,QVector3D> > bsis;
-    
     QVector<qreal> pose = bodypart->getNormPose();
     Point_d q(pose.size(),pose.begin(),pose.end());
     QVector3D marker_pose = marker->node()->getPos();
     
     Vector_d xdq,ydq,zdq;
     QVector3D xdx,ydx,zdx;
-    double xmax = 0.0, ymax = 0.0, zmax = 0.0;
+    
+    
+    double xmax = -1.0, ymax = -1.0, zmax = -1.0;
     double xdot,ydot,zdot;
-    CGAL::Random_points_on_sphere_d<Point_d> localSphere(bodypart->size(), 0.1); localSphere++;
-    for (int n=0; n<1000; n++)
+    
+    for (std::vector< std::pair<Vector_d,QVector3D> >::iterator i=big_basis.begin(); i!=big_basis.end(); i++)
     {
-                                                                        //printf("..%d",n);
-        Vector_d candidate = *localSphere++ - CGAL::ORIGIN;             //std::cout << "  candidate: " << candidate << std::endl;
-        setNormPose(q + candidate);
-        
-        QVector3D new_marker_pose = marker->node()->getPos();
-        QVector3D delta = new_marker_pose - marker_pose;
-        delta /= delta.length();        // normalize or no???
-        
-        xdot = QVector3D::dotProduct(delta, QVector3D(1,0,0));
-        ydot = QVector3D::dotProduct(delta, QVector3D(0,1,0));
-        zdot = QVector3D::dotProduct(delta, QVector3D(0,0,1));
+        xdot = QVector3D::dotProduct(i->second, QVector3D(1,0,0));
+        ydot = QVector3D::dotProduct(i->second, QVector3D(0,1,0));
+        zdot = QVector3D::dotProduct(i->second, QVector3D(0,0,1));
         
         if ( xdot > xmax ) {
             xmax = xdot;
-            xdq = candidate/sqrt(candidate.squared_length());
-            xdx = delta;
+            xdq = i->first;
+            xdx = i->second;
         } else if ( ydot > ymax ) {
             ymax = ydot;
-            ydq = candidate/sqrt(candidate.squared_length());
-            ydx = delta;
+            ydq = i->first;
+            ydx = i->second;
         } else if ( zdot > zmax ) {
             zmax = zdot;
-            zdq = candidate/sqrt(candidate.squared_length());
-            zdx = delta;
+            zdq = i->first;
+            zdx = i->second;
         }
     }
-    
-    //std::cout << "XDX: "<< xdx.x() << " " << xdx.y() << " " << xdx.z() << std::endl;
-    //std::cout << "YDX: "<< ydx.x() << " " << ydx.y() << " " << ydx.z() << std::endl;
-    //std::cout << "ZDX: "<< zdx.x() << " " << zdx.y() << " " << zdx.z() << std::endl;
-    
+ 
+    std::vector< std::pair<Vector_d,QVector3D> > bsis;
     bsis.push_back(std::pair<Vector_d,QVector3D>(xdq,xdx));
     bsis.push_back(std::pair<Vector_d,QVector3D>(ydq,ydx));
     bsis.push_back(std::pair<Vector_d,QVector3D>(zdq,zdx));
@@ -295,6 +360,42 @@ std::vector< std::pair<Vector_d,QVector3D> > PoseFinder::sumBasis()
     return bsis;
 }
 
+std::vector< std::pair<Point_d, QVector3D> > PoseFinder::random_sample(int n)
+{
+    // sample in dim dimensions
+    int dim = 4;
+    std::vector< std::pair<Point_d, QVector3D> > samples;
+    
+    for ( int i=0; i<n; i++ ) {
+        CGAL::Random_points_in_cube_d<Point_d> globalCube(dim,0.5);
+        Point_d s = *globalCube++ + correction(dim,0.5);
+        setNormPose(s);
+        QVector<qreal> pose = bodypart->getNormPose();
+        Point_d q(pose.size(),pose.begin(),pose.end());
+        QVector3D p = marker->node()->getPos();
+        samples.push_back(std::pair<Point_d,QVector3D>(q,p));
+    }
+    return samples;
+}
+
+std::vector< std::pair< Vector_d, QVector3D > > PoseFinder::sample_neighborhood( std::pair<Point_d, QVector3D> qp, int n, double r )
+{
+    setNormPose(qp.first);
+    
+    CGAL::Random_points_on_sphere_d<Point_d> localSphere(bodypart->size(), r); localSphere++;
+    std::vector< std::pair< Vector_d, QVector3D > > samples;
+    for ( int i=0; i<n; i++)
+    {
+        Point_d s = *localSphere++;
+        //std::cout << "s: " << s <<std::endl;
+        Vector_d delta = *localSphere++ - CGAL::ORIGIN;
+        setNormPose(qp.first+delta);
+        QVector3D marker_delta = marker->node()->getPos() - qp.second;
+        samples.push_back( std::pair<Vector_d,QVector3D>(delta/sqrt(delta.squared_length()), marker_delta/marker_delta.length()) );
+    }
+    return samples;
+}
+
 Vector_d PoseFinder::dDelta( bool advance )
 {
     CGAL::Random_points_on_sphere_d<Point_d> localSphere(bodypart->size(), 0.01);
@@ -311,11 +412,9 @@ Vector_d PoseFinder::correction(int dim,double ammount)
 
 
 
-
-
 /*******************************************************/
 
-void PoseFinder::runGrid()
+/*void PoseFinder::runGrid()
 {
     QVector<qreal> pose = bodypart->getNormPose();
     Point_d q(pose.size(),pose.begin(),pose.end());
@@ -424,4 +523,4 @@ Point_d Crawler::next()
     //printf("                len = %f\n",len);
     
     return q;
-}
+}*/

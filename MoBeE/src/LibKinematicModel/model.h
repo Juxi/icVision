@@ -85,6 +85,8 @@ public:
 	DT_ResponseClass	TARGET() const { return targetClass; }
 	DT_ResponseClass	GHOST() const { return ghostClass; }
 	DT_ResponseClass	FIELD() const { return fieldClass; }
+    
+    int getNumCollisions() { return col_count; }
 	
 public slots:
 	
