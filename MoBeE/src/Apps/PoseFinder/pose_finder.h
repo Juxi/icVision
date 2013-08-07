@@ -60,6 +60,7 @@ public:
     
     int setNormPose( Point_d q );
     
+    std::pair<Point_d, QVector3D> map_q( Point_d q );
     std::vector< std::pair<Point_d, QVector3D> > random_sample(int n);
     std::vector< std::pair<Vector_d, QVector3D> > sample_neighborhood( std::pair<Point_d, QVector3D>, int n, double r );
     std::vector< std::pair<Vector_d,QVector3D> > argmaxBasis(std::vector< std::pair<Vector_d,QVector3D> >);
