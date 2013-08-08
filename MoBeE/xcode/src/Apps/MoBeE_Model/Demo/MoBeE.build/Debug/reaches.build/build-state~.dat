@@ -1,113 +1,0 @@
-Treaches
-v5
-r1
-cCheck dependencies
-cCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
-c00000000509867D8000000000000178E
-t1352165336
-s6030
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
-c00000000509867D80000000000006762
-t1352165336
-s26466
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp
-c0000000051625BD7000000000000184F
-t1365400535
-s6223
-i<yarp/os/all.h>
-i<yarp/dev/all.h>
-i<yarp/sig/all.h>
-i<unistd.h>
-i<time.h>
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/reaches.LinkFileList
-c0000000051EAE8F10000000000000089
-t1374349553
-s137
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh
-c0000000051EAE8F100000000000000D8
-t1374349553
-s216
-
-N/usr/local/Cellar/yarp/HEAD/include/yarp/dev/all.h
-c000000004E8F21F90000000000000506
-t1318003193
-s1286
-
-N/usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h
-c000000004FC63F1200000000000005BC
-t1338392338
-s1468
-
-N/usr/local/Cellar/yarp/HEAD/include/yarp/sig/all.h
-c000000004E8F21F90000000000000264
-t1318003193
-s612
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies12a30b71209bb741^147b1c71209bb741^---0#1#0#--18"Check dependencies36"EF636323-97D9-4FF4-AEE5-9A3BFF6295C5-
-
-CCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042353.114332
-e396042353.499250
-r1
-xCompileC
-xxcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp5e691d71209bb741^31ce7f71209bb741^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp0000000000000000^3227"CompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceReach.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/opSpaceReach.o36"5CE05A59-6374-4A89-99FD-1DC833D84E5A-
-
-CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches normal x86_64
-s396042353.506056
-e396042353.798046
-r1
-xLd
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches76a98171209bb741^8c4ccc71209bb741^---0#0#0#--1807"Ld xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Objects-normal/x86_64/reaches.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/reaches36"5B307BDB-992E-4FCA-A607-564A41AF6D45-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh
-s396042353.806558
-e396042353.881205
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debug
-omake[1]: Nothing to be done for `PostBuild.reaches.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debug
-omake[1]: Nothing to be done for `PostBuild.reaches.Debug'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'3a07cf71209bb741^7995e171209bb741^-697"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debugmake[1]: Nothing to be done for `PostBuild.reaches.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debugmake[1]: Nothing to be done for `PostBuild.reaches.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042353#0#30#-0#-----2@23"Depend check for xcode-396042353#30#23#-0#-----2@205"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debug-396042353#53#205#-0#-----2@59"make[1]: Nothing to be done for `PostBuild.reaches.Debug'.-396042353#258#59#-0#-----2@30"echo "Depend check for xcode"-396042353#317#30#-0#-----2@23"Depend check for xcode-396042353#347#23#-0#-----2@268"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.reaches.Debug-396042353#370#268#-0#-----2@59"make[1]: Nothing to be done for `PostBuild.reaches.Debug'.-396042353#638#59#-0#-----0#0#0#--337"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/reaches.build/Script-E562B14B9A6E46AFA2AAF4ED.sh36"B7F6CA7D-0608-45CE-9C44-F57F66144516-
-

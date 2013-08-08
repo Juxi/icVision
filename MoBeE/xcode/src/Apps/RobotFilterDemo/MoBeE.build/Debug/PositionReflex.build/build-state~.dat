@@ -1,145 +1,0 @@
-TPositionReflex
-v5
-r1
-cCheck dependencies
-cCompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp
-c0000000050B6163000000000000013F6
-t1354110512
-s5110
-i<QApplication>
-i<yarp/os/Property.h>
-i"yarprobot.h"
-i"yarpModel.h"
-i"simSyncer.h"
-i"reflexFilter.h"
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp
-c0000000050B6163000000000000010EB
-t1354110512
-s4331
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.h
-c0000000050B616300000000000000535
-t1354110512
-s1333
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h
-c0000000050B6163100000000000006F4
-t1354110513
-s1780
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h
-c0000000050B616310000000000000BE8
-t1354110513
-s3048
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h
-c0000000050B616310000000000000969
-t1354110513
-s2409
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/PositionReflex.LinkFileList
-c0000000051EAE9060000000000000116
-t1374349574
-s278
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh
-c0000000051EAE90600000000000000DD
-t1374349574
-s221
-
-N/usr/local/Cellar/qt/4.8.2/include/QtGui/QApplication
-c00000000503BA06A000000000000001A
-t1346084970
-s26
-
-N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Property.h
-c000000004E1DD47600000000000022C3
-t1310577782
-s8899
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies04abe686209bb741^234ee786209bb741^---0#1#0#--18"Check dependencies36"35F88EB3-6FD5-4661-861E-ED44300C24FA-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042374.906510
-e396042378.446182
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cppe737e886209bb741^b6d8758a209bb741^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp0000000000000000^3388"CompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o src/Apps/RobotFilterDemo/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/main.o36"D17C5EE2-18EB-4475-BDD7-DABD450F9E89-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042376.432456
-e396042380.113826
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp83db6e88209bb741^69fd1d8c209bb741^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp0000000000000000^3436"CompileC xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o src/Apps/RobotFilterDemo/reflexFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/reflexFilter.o36"01A11211-F19D-48D5-988A-7377AEDF0C29-
-
-CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex normal x86_64
-s396042381.658724
-e396042382.317886
-r1
-xLd
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex0abfa88d209bb741^537b518e209bb741^---0#0#0#--2391"Ld xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Objects-normal/x86_64/PositionReflex.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/Debug/libRobotFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex36"BF356CB3-F785-451B-80F6-634E5C168986-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh
-s396042382.326028
-e396042382.434009
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debug
-omake[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debug
-omake[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'460b548e209bb741^b5196f8e209bb741^-737"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debugmake[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debugmake[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042382#0#30#-0#-----2@23"Depend check for xcode-396042382#30#23#-0#-----2@212"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debug-396042382#53#212#-0#-----2@66"make[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.-396042382#265#66#-0#-----2@30"echo "Depend check for xcode"-396042382#331#30#-0#-----2@23"Depend check for xcode-396042382#361#23#-0#-----2@287"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.PositionReflex.Debug-396042382#384#287#-0#-----2@66"make[1]: Nothing to be done for `PostBuild.PositionReflex.Debug'.-396042382#671#66#-0#-----0#0#0#--349"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/MoBeE.build/Debug/PositionReflex.build/Script-4FF91E63054343C4915B8132.sh36"819521AB-C6C7-4AE8-845E-D165769303CA-
-

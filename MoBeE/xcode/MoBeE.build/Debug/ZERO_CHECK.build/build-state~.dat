@@ -1,28 +1,0 @@
-TZERO_CHECK
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh
-c0000000051EAE95600000000000000AD
-t1374349654
-s173
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies34db0dd6209bb741^dfdc13d6209bb741^---0#1#0#--18"Check dependencies36"8AD3BBE1-FD07-4CFD-A8F1-2297178B1FFC-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh
-s396042454.079983
-e396042454.202785
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh
-oecho ""
-o
-omake -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/ReRunCMake.make
-omake[1]: `CMakeFiles/cmake.check_cache' is up to date.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'b56c15d6209bb741^73f133d6209bb741^-143"echo ""make -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/ReRunCMake.makemake[1]: `CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-396042454#0#8#-0#-----2@79"make -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/ReRunCMake.make-396042454#9#79#-0#-----2@55"make[1]: `CMakeFiles/cmake.check_cache' is up to date.-396042454#88#55#-0#-----0#0#0#--281"PhaseScriptExecution "CMake Rules" xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ZERO_CHECK.build/Script-D3C4AF486EF24F528B79C022.sh36"F6704BFF-AE78-499F-9861-5E08CA25FEBD-
-

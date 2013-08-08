@@ -1,28 +1,0 @@
-TALL_BUILD
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh
-c0000000051EAE95600000000000000AC
-t1374349654
-s172
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies5072cbd6209bb741^dcb9ccd6209bb741^---0#1#0#--18"Check dependencies36"4FD0762B-6ADE-47D0-92F2-748AF451F569-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh
-s396042454.801019
-e396042454.833568
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh
-oecho ""
-o
-oecho Build\ all\ projects
-oBuild all projects
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'268dcdd6209bb741^9963d5d6209bb741^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-396042454#0#8#-0#-----2@26"echo Build\ all\ projects-396042454#9#26#-0#-----2@19"Build all projects-396042454#35#19#-0#-----0#0#0#--279"PhaseScriptExecution "CMake Rules" xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/MoBeE.build/Debug/ALL_BUILD.build/Script-F95A44BB80AF4374BFF983A2.sh36"8B71A479-3052-438F-958C-4F0B3D5CD19D-
-

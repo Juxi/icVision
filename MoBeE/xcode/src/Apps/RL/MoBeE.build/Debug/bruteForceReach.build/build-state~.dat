@@ -1,113 +1,0 @@
-TbruteForceReach
-v5
-r1
-cCheck dependencies
-cCompileC xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
-c00000000509867D8000000000000178E
-t1352165336
-s6030
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
-c00000000509867D80000000000006762
-t1352165336
-s26466
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp
-c0000000051A4EC330000000000000C19
-t1369762867
-s3097
-i<unistd.h>
-i<time.h>
-i"learner.h"
-i"util.h"
-i"rl_problem.h"
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h
-c0000000051E941AB0000000000001291
-t1374241195
-s4753
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.h
-c0000000051E941AB00000000000005CB
-t1374241195
-s1483
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h
-c0000000051A4BDB7000000000000074F
-t1369750967
-s1871
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.LinkFileList
-c0000000051EAE9040000000000000086
-t1374349572
-s134
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh
-c0000000051EAE90400000000000000C4
-t1374349572
-s196
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesfbb20884209bb741^46980a84209bb741^---0#1#0#--18"Check dependencies36"5544C4A0-9145-40FB-9E1E-DDB13AFA7860-
-
-CCompileC xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042372.042262
-e396042374.472240
-r1
-xCompileC
-xxcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cppdcf50a84209bb741^21e47886209bb741^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp0000000000000000^2987"CompileC xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o src/Apps/RL/bruteForceReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../../LibRL -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/bruteForceReach.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.o36"E994DD77-97CB-44C3-881A-250C76457270-
-
-CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach normal x86_64
-s396042374.479051
-e396042374.732468
-r1
-xLd
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReachcbbf7a86209bb741^e482bb86209bb741^---0#0#0#--1907"Ld xcode/src/Apps/RL/Debug/bruteForceReach normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Objects-normal/x86_64/bruteForceReach.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach36"A66F58CC-1E7E-4D9D-8050-16ABD38C84A1-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh
-s396042374.741300
-e396042374.819746
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debug
-omake[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debug
-omake[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'5391be86209bb741^bedad186209bb741^-702"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debugmake[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debugmake[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042374#0#30#-0#-----2@23"Depend check for xcode-396042374#30#23#-0#-----2@213"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debug-396042374#53#213#-0#-----2@67"make[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.-396042374#266#67#-0#-----2@30"echo "Depend check for xcode"-396042374#333#30#-0#-----2@23"Depend check for xcode-396042374#363#23#-0#-----2@249"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.bruteForceReach.Debug-396042374#386#249#-0#-----2@67"make[1]: Nothing to be done for `PostBuild.bruteForceReach.Debug'.-396042374#635#67#-0#-----0#0#0#--325"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/bruteForceReach.build/Script-D0E954E56F194CECA403B518.sh36"901048E2-5BEA-430C-B921-8172C08A3770-
-

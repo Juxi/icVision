@@ -1,277 +1,0 @@
-TiCubRL
-v5
-r1
-cCheck dependencies
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
-c00000000509867D8000000000000178E
-t1352165336
-s6030
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
-c00000000509867D80000000000006762
-t1352165336
-s26466
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp
-c0000000051E941AB0000000000000B21
-t1374241195
-s2849
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp
-c0000000051E941AB0000000000000F49
-t1374241195
-s3913
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.h
-c0000000051A4BDB7000000000000076C
-t1369750967
-s1900
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp
-c0000000051E941AB00000000000013AA
-t1374241195
-s5034
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.h
-c0000000051E941AB000000000000084D
-t1374241195
-s2125
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp
-c0000000051E941AB0000000000008446
-t1374241195
-s33862
-i<fstream>
-i<unistd.h>
-i<time.h>
-i"learner.h"
-i"actionTransition.h"
-i"actionReach.h"
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h
-c0000000051E941AB0000000000001291
-t1374241195
-s4753
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp
-c0000000051EAE3D10000000000001521
-t1374348241
-s5409
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp
-c0000000051E941AB00000000000007BA
-t1374241195
-s1978
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp
-c0000000051D2DBF60000000000001F90
-t1372773366
-s8080
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/iCubRL.LinkFileList
-c0000000051F5698C000000000000033A
-t1375037836
-s826
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh
-c0000000051F5698C00000000000000B7
-t1375037836
-s183
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies658a310ca1a5b741^57973f0ca1a5b741^---0#1#0#--18"Check dependencies36"2DB39B56-C7E0-4648-A361-13B6C06A6462-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730639.155763
-e396730641.567474
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cppefff270fa1a5b741^b8589111a1a5b741^---0#0#0#-19%DVTDocumentLocation2@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp0000000000000000^2333"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o src/LibRL/action.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/action.o36"B96EB8FA-7701-46A5-831E-243FBA42089B-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730641.568816
-e396730644.223370
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection69"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp12c09111a1a5b741^0e2e3914a1a5b741^---0#0#0#-19%DVTDocumentLocation2@77"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp0000000000000000^2363"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o src/LibRL/actionReach.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionReach.o36"475B87CA-FCD1-45CB-A534-5ED21D0F7108-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730640.792381
-e396730643.512989
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cppc6faca10a1a5b741^a8528313a1a5b741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp0000000000000000^2393"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o src/LibRL/actionTransition.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/actionTransition.o36"700277A0-C980-4103-BC1C-08E97C14F252-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730636.251448
-e396730640.791093
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp247b400ca1a5b741^dd98ca10a1a5b741^---0#0#0#-19%DVTDocumentLocation2@73"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp0000000000000000^2339"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o src/LibRL/learner.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/learner.o36"5B446BCF-E3D6-4569-A850-A3B7856EB893-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730643.514297
-e396730645.810046
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp36c98313a1a5b741^745ecf15a1a5b741^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp0000000000000000^2387"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o src/LibRL/mobee_interface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/mobee_interface.o36"5374D6D6-AEF9-4E52-81E5-AB2EEB03A5B2-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730644.224759
-e396730646.800357
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection68"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp11a93914a1a5b741^ace3cc16a1a5b741^---0#0#0#-19%DVTDocumentLocation2@76"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp0000000000000000^2357"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o src/LibRL/rl_problem.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/rl_problem.o36"F30B0731-7A84-47DF-B5DB-25369E342BBB-
-
-CCompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730636.251617
-e396730639.154299
-r1
-xCompileC
-xxcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection63"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp3882400ca1a5b741^11c6270fa1a5b741^---0#0#0#-19%DVTDocumentLocation2@71"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp0000000000000000^2327"CompileC xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o src/LibRL/state.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -I/usr/local/Cellar/cgal/4.0.2/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/state.o36"5154CCBF-1760-47BC-AECC-ACD2DAE8D1CA-
-
-CLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a normal x86_64
-s396730647.136084
-e396730648.001195
-r1
-xLibtool
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Libtool xcode/src/LibRL/Debug/libiCubRL.a normal x86_649aed2217a1a5b741^2f4e0018a1a5b741^---0#0#0#--644"Libtool xcode/src/LibRL/Debug/libiCubRL.a normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Objects-normal/x86_64/iCubRL.LinkFileList -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a36"31ECB30F-B748-41DA-8500-E41396AEA339-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh
-s396730677.406071
-e396730677.590729
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debug
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/exploitReach
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/least_tried
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/parallel_imrl
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/powerPlayReach
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/random
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debug
-omake[1]: Nothing to be done for `PostBuild.iCubRL.Debug'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'bc226c35a1a5b741^f8389735a1a5b741^-1271"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debug/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/exploitReach/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/least_tried/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/parallel_imrl/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/powerPlayReach/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/random/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinderecho "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debugmake[1]: Nothing to be done for `PostBuild.iCubRL.Debug'.15(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396730677#0#30#-0#-----2@23"Depend check for xcode-396730677#30#23#-0#-----2@204"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debug-396730677#53#204#-0#-----2@87"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/bruteForceReach-396730677#257#87#-0#-----2@84"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/exploitReach-396730677#344#84#-0#-----2@76"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl-396730677#428#76#-0#-----2@83"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/least_tried-396730677#504#83#-0#-----2@85"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/parallel_imrl-396730677#587#85#-0#-----2@86"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/powerPlayReach-396730677#672#86#-0#-----2@78"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/random-396730677#758#78#-0#-----2@90"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder-396730677#836#90#-0#-----2@30"echo "Depend check for xcode"-396730677#926#30#-0#-----2@23"Depend check for xcode-396730677#956#23#-0#-----2@234"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.iCubRL.Debug-396730677#979#234#-0#-----2@58"make[1]: Nothing to be done for `PostBuild.iCubRL.Debug'.-396730677#1213#58#-0#-----0#0#0#--303"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MoBeE.build/Debug/iCubRL.build/Script-2ADF09AE8EB24880B897C772.sh36"3372E139-81D4-4BC1-8475-800A73E0B80E-
-

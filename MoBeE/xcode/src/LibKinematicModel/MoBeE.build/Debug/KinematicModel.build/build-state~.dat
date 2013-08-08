@@ -1,803 +1,0 @@
-TKinematicModel
-v5
-r1
-cCheck dependencies
-cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp
-c0000000051F1587F0000000000001459
-t1374771327
-s5209
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp
-c0000000050B616300000000000000AE5
-t1354110512
-s2789
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp
-c0000000051F27AF80000000000001609
-t1374845688
-s5641
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp
-c0000000050B616310000000000000D2B
-t1354110513
-s3371
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp
-c0000000050B6163100000000000013B0
-t1354110513
-s5040
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp
-c0000000050B616310000000000000416
-t1354110513
-s1046
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp
-c0000000050B616310000000000000586
-t1354110513
-s1414
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp
-c0000000050B6163100000000000001BA
-t1354110513
-s442
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp
-c0000000051625BD700000000000027F6
-t1365400535
-s10230
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp
-c0000000050B6163100000000000005B1
-t1354110513
-s1457
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp
-c0000000050B61631000000000000012C
-t1354110513
-s300
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp
-c00000000511266390000000000005152
-t1360160313
-s20818
-i"model.h"
-i"robot.h"
-i"worldhandler.h"
-i"modelwindow.h"
-i<iostream>
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.h
-c000000005112663900000000000027F2
-t1360160313
-s10226
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp
-c0000000050B616310000000000000169
-t1354110513
-s361
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp
-c0000000050B61631000000000000013F
-t1354110513
-s319
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.h
-c0000000050B616310000000000000353
-t1354110513
-s851
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp
-c0000000050B616310000000000000B60
-t1354110513
-s2912
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp
-c0000000050B616310000000000000A1F
-t1354110513
-s2591
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp
-c0000000050B616310000000000000F3A
-t1354110513
-s3898
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp
-c000000005190DA910000000000002F1E
-t1368447633
-s12062
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.h
-c0000000051EAA87D000000000000226C
-t1374333053
-s8812
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp
-c0000000050B6163100000000000009F3
-t1354110513
-s2547
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp
-c0000000050B616310000000000000EAA
-t1354110513
-s3754
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp
-c0000000050B616310000000000001AE6
-t1354110513
-s6886
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.h
-c0000000050B61631000000000000064E
-t1354110513
-s1614
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp
-c0000000051F1712E0000000000003EAA
-t1374777646
-s16042
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/KinematicModel.LinkFileList
-c0000000051F5698C0000000000000E87
-t1375037836
-s3719
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh
-c0000000051F5698C00000000000000D7
-t1375037836
-s215
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh
-c0000000051F5698C00000000000000DD
-t1375037836
-s221
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx
-c0000000051F158800000000000000F28
-t1374771328
-s3880
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx
-c0000000051EAE8C700000000000013E5
-t1374349511
-s5093
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx
-c0000000051EAE8C70000000000001010
-t1374349511
-s4112
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx
-c0000000051EAE8C70000000000000A2C
-t1374349511
-s2604
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx
-c0000000051EAE8C700000000000017ED
-t1374349511
-s6125
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies8882310ca1a5b741^62124a0ca1a5b741^---0#1#0#--18"Check dependencies36"DB2C79D8-3F4C-4630-91AA-04271FD95B7C-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730655.986087
-e396730659.120211
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection78"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp9f91fc1fa1a5b741^6dc51e23a1a5b741^---0#0#0#-19%DVTDocumentLocation2@86"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp0000000000000000^2656"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o src/LibKinematicModel/bodypart.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/bodypart.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/bodypart.o36"AB7E421C-F320-4EB0-BBC3-A4B9674E888D-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730654.743464
-e396730655.984777
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp1d73be1ea1a5b741^c119fc1fa1a5b741^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp0000000000000000^2626"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o src/LibKinematicModel/box.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/box.o36"D554BEE2-0952-4AA5-B25E-DA4730A293DC-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730651.890407
-e396730653.329380
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cppb115e41ba1a5b741^8369541da1a5b741^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp0000000000000000^2698"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o src/LibKinematicModel/compositeobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/compositeobject.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/compositeobject.o36"86279104-5953-4029-AE0F-296490FDF5CE-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730653.378560
-e396730654.865512
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection78"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp200b611da1a5b741^ac91dd1ea1a5b741^---0#0#0#-19%DVTDocumentLocation2@86"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp0000000000000000^2656"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o src/LibKinematicModel/cylinder.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/cylinder.o36"8DBA4984-2403-4E1C-83BE-A0CF36300D67-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730649.187099
-e396730651.889097
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection78"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp89073019a1a5b741^6da9e31ba1a5b741^---0#0#0#-19%DVTDocumentLocation2@86"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp0000000000000000^2656"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o src/LibKinematicModel/glwidget.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/glwidget.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/glwidget.o36"CFF86622-6F8A-4796-B67C-B6CA81986923-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730662.307100
-e396730664.118363
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection78"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cppf4c14e26a1a5b741^78b92028a1a5b741^---0#0#0#-19%DVTDocumentLocation2@86"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp0000000000000000^2656"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o src/LibKinematicModel/interval.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/interval.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/interval.o36"995094E5-8BAD-405B-981C-29CF88A5F656-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730664.531829
-e396730667.064519
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp84468828a1a5b741^cb83102ba1a5b741^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp0000000000000000^2638"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o src/LibKinematicModel/joint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint.o36"76092043-F365-44ED-B9D8-0BE1C8FA55B5-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730666.571404
-e396730668.887218
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp5969922aa1a5b741^ff1fe32ca1a5b741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp0000000000000000^2692"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o src/LibKinematicModel/joint_revolute.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/joint_revolute.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/joint_revolute.o36"F5B9847C-B045-48E8-8C16-0C3D9A3538AC-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730659.121523
-e396730662.305739
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp3a3d1f23a1a5b741^dee54e26a1a5b741^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp0000000000000000^2674"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o src/LibKinematicModel/kintreenode.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/kintreenode.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/kintreenode.o36"A9E7C48B-64AD-4F87-8568-FBF4ED0465FE-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730658.239162
-e396730661.741451
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp5f5d3d22a1a5b741^48e2bd25a1a5b741^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp0000000000000000^2704"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o src/LibKinematicModel/linearconstraint.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/linearconstraint.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/linearconstraint.o36"9CB10C62-DFA1-4B47-893F-031A1B8397B1-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730664.129431
-e396730666.570074
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp9e982128a1a5b741^7502922aa1a5b741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp0000000000000000^2632"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o src/LibKinematicModel/link.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/link.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/link.o36"B4ECC97D-7154-4FAC-8CBB-BD06981EEB94-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730676.393620
-e396730679.153125
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxxd1ea6434a1a5b741^df322737a1a5b741^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx0000000000000000^2692"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o xcode/src/LibKinematicModel/moc_bodypart.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_bodypart.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_bodypart.o36"B826223A-4856-45F3-AC7D-3EE6C7A2AE3C-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730674.857358
-e396730676.392258
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx1c99db32a1a5b741^6e6a6434a1a5b741^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx0000000000000000^2692"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o xcode/src/LibKinematicModel/moc_glwidget.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_glwidget.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_glwidget.o36"28D72A6B-2F55-4F62-9772-1FC9ECD1B2B7-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730672.127869
-e396730674.855998
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxxefe32030a1a5b741^8e22db32a1a5b741^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx0000000000000000^2674"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o xcode/src/LibKinematicModel/moc_model.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_model.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_model.o36"5E2D84F4-C5BC-47E1-80BA-ACDFD89EC60A-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730673.633871
-e396730674.863442
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxxa168a231a1a5b741^da1add32a1a5b741^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx0000000000000000^2710"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o xcode/src/LibKinematicModel/moc_modelwindow.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_modelwindow.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_modelwindow.o36"7D58AB3F-9E4D-4933-AE3A-38B60C0EE0B8-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730674.864746
-e396730677.381194
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx9d81dd32a1a5b741^6bf16135a1a5b741^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx0000000000000000^2674"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o xcode/src/LibKinematicModel/moc_robot.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/moc_robot.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/moc_robot.o36"4348E09C-CFE4-4883-AC20-C98D07BDBA77-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730645.903323
-e396730649.184571
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp5665e715a1a5b741^df512f19a1a5b741^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp0000000000000000^2638"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o src/LibKinematicModel/model.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/model.o36"9FA021FE-9C90-47EF-BE22-59C11B0DEC43-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730646.801741
-e396730647.134740
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cppa664cd16a1a5b741^9a7d2217a1a5b741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp0000000000000000^2692"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o src/LibKinematicModel/modelexception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelexception.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelexception.o36"E9D79CE6-4336-47D6-81B5-A067F012E912-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730648.002558
-e396730651.185827
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cppc0cb0018a1a5b741^2fa42f1ba1a5b741^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp0000000000000000^2674"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o src/LibKinematicModel/modelwindow.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/modelwindow.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/modelwindow.o36"DC652BEF-CCF4-404D-93EF-71EB453414B9-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730661.742784
-e396730664.530548
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cppcb47be25a1a5b741^6de38728a1a5b741^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp0000000000000000^2638"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o src/LibKinematicModel/motor.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/motor.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/motor.o36"40D09725-F16C-42EF-9718-983C40ED927F-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730670.848667
-e396730673.632495
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cppfe63d92ea1a5b741^bceaa131a1a5b741^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp0000000000000000^2674"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o src/LibKinematicModel/objectmover.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/objectmover.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/objectmover.o36"BAA379F2-C498-4857-A353-77B3E7A19C05-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730652.055277
-e396730653.377198
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp90490e1ca1a5b741^548f601da1a5b741^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp0000000000000000^2698"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o src/LibKinematicModel/primitiveobject.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/primitiveobject.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/primitiveobject.o36"67DDBA93-EE25-4450-8447-7BED052C6D46-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730654.866824
-e396730658.237022
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cppdc4bde1ea1a5b741^8ae73c22a1a5b741^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp0000000000000000^2638"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o src/LibKinematicModel/robot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/robot.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/robot.o36"07884B3B-A6D9-4803-8316-89325B271F9A-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730653.330714
-e396730654.742159
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp67d4541da1a5b741^43febd1ea1a5b741^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp0000000000000000^2644"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o src/LibKinematicModel/sphere.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/sphere.o36"072790D7-0297-415F-8F2E-9A83242A854F-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730651.187155
-e396730652.053544
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp6423301ba1a5b741^c4070e1ca1a5b741^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp0000000000000000^2686"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o src/LibKinematicModel/transformable.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/transformable.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/transformable.o36"8DEF3D7F-AD70-420C-B7F2-146C21085D49-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730668.888634
-e396730672.126551
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp94a0e32ca1a5b741^e6752030a1a5b741^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp0000000000000000^2680"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o src/LibKinematicModel/worldhandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/worldhandler.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/worldhandler.o36"11A125B7-2E3B-4E7B-9F02-03A7F3D53882-
-
-CCompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396730667.065857
-e396730670.847301
-r1
-xCompileC
-xxcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cppacfe102ba1a5b741^10e8d82ea1a5b741^---0#0#0#-19%DVTDocumentLocation2@87"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp0000000000000000^2662"CompileC xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o src/LibKinematicModel/zphandler.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/zphandler.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/zphandler.o36"E568B949-14B8-4135-812A-7A47087A3404-
-
-CLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a normal x86_64
-s396730679.160018
-e396730680.490466
-r1
-xLibtool
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Libtool xcode/src/LibKinematicModel/Debug/libKinematicModel.a normal x86_64a1102937a1a5b741^fc8e7d38a1a5b741^---0#0#0#--724"Libtool xcode/src/LibKinematicModel/Debug/libKinematicModel.a normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Objects-normal/x86_64/KinematicModel.LinkFileList -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a36"F07025EC-79AE-45C3-9A68-804B83D33614-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh
-s396730680.498669
-e396730680.582912
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debug
-omake[1]: Nothing to be done for `PostBuild.KinematicModel.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debug
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/Debug/KinematicModelDemo
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'cd3d8038a1a5b741^11399538a1a5b741^-1043"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debugmake[1]: Nothing to be done for `PostBuild.KinematicModel.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debug/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/Debug/KinematicModelDemo/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder11(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396730680#0#30#-0#-----2@23"Depend check for xcode-396730680#30#23#-0#-----2@278"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debug-396730680#53#278#-0#-----2@66"make[1]: Nothing to be done for `PostBuild.KinematicModel.Debug'.-396730680#331#66#-0#-----2@30"echo "Depend check for xcode"-396730680#397#30#-0#-----2@23"Depend check for xcode-396730680#427#23#-0#-----2@212"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.KinematicModel.Debug-396730680#450#212#-0#-----2@106"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/Debug/KinematicModelDemo-396730680#662#106#-0#-----2@99"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex-396730680#768#99#-0#-----2@86"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE-396730680#867#86#-0#-----2@90"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder-396730680#953#90#-0#-----0#0#0#--343"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-08971636A0224E129BB9BC4E.sh36"17357DFF-1B9F-405E-BA60-EFCE89B972B4-
-
-CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh
-s396730645.811441
-e396730645.895142
-r1
-xPhaseScriptExecution
-xCMake Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh
-omake: Nothing to be done for `all'.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'a54ed015a1a5b741^a73de515a1a5b741^-36"make: Nothing to be done for `all'.1(21%IDEActivityLogMessage2@36"make: Nothing to be done for `all'.-396730645#0#36#-0#-----0#0#0#--333"PhaseScriptExecution "CMake Rules" xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MoBeE.build/Debug/KinematicModel.build/Script-3020B2100FE24EAFA511EDBB.sh36"240DAD6F-7EAD-4491-8D2C-0D9879E3C8E1-
-

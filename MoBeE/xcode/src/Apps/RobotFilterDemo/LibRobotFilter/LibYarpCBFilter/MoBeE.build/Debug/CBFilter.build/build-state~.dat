@@ -1,201 +1,0 @@
-TCBFilter
-v5
-r1
-cCheck dependencies
-cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-cLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64
-cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-c00000000516D45FA00000000000000AA
-t1366115834
-s170
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
-c0000000050B616310000000000000A23
-t1354110513
-s2595
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
-c0000000050B61631000000000000058F
-t1354110513
-s1423
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
-c0000000050B61631000000000000168E
-t1354110513
-s5774
-i"./yarp/os/impl/RpcFilterImpl.h"
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
-c0000000050B616310000000000000466
-t1354110513
-s1126
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
-c0000000050B6163100000000000004E9
-t1354110513
-s1257
-
-N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h
-c0000000050B616310000000000000E43
-t1354110513
-s3651
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/CBFilter.LinkFileList
-c0000000051EAE8C60000000000000350
-t1374349510
-s848
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o
-t2
-s0
-
-N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
-c0000000051EAE8C60000000000000115
-t1374349510
-s277
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
-r0
-
-CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
-r0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies0b41b246209bb741^b401c446209bb741^---0#1#0#--18"Check dependencies36"75977586-8650-4A13-9840-3F455F4D7D90-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042312.956616
-e396042314.014756
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp130af548209bb741^65c6034a209bb741^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp0000000000000000^3968"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o36"DADF47C9-11BA-41DB-AA48-45F502F0225F-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042311.860067
-e396042312.953421
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp465cdc47209bb741^3d9cf448209bb741^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp0000000000000000^3914"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o36"AF2E9B47-6A69-43DA-B677-10ED8A35D4F8-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042310.747403
-e396042312.439682
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp5b7bbf46209bb741^c6a77048209bb741^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^3938"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o36"5CFE3504-1A92-4854-A64D-7D7680114FB1-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042312.723902
-e396042312.965217
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp4a79b948209bb741^1423f748209bb741^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp0000000000000000^3932"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o36"1FF44D4B-C287-4330-8F05-008481B1579B-
-
-CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
-s396042312.442121
-e396042312.721616
-r1
-xCompileC
-xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o
-x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cppef577148209bb741^0abbb848209bb741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp0000000000000000^3956"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o36"32ABCC6D-3EEF-486F-8ADD-3DAFFE13C3C2-
-
-CLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64
-s396042314.506353
-e396042314.540337
-r1
-xLibtool
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a
-xnormal
-xx86_64
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Libtool xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64edb8814a209bb741^22538a4a209bb741^---0#0#0#--836"Libtool xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/CBFilter.LinkFileList -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a36"86620898-60E8-4ABD-8873-781B878C32F3-
-
-CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
-s396042344.144394
-e396042344.270747
-r1
-xPhaseScriptExecution
-xCMake PostBuild Rules
-x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
-omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
-omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
-oecho "Depend check for xcode"
-oDepend check for xcode
-ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
-o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'3aca2568209bb741^9d664568209bb741^-1717"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflexecho "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex16(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042344#0#30#-0#-----2@23"Depend check for xcode-396042344#30#23#-0#-----2@374"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042344#53#374#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042344#427#60#-0#-----2@30"echo "Depend check for xcode"-396042344#487#30#-0#-----2@23"Depend check for xcode-396042344#517#23#-0#-----2@206"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042344#540#206#-0#-----2@99"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex-396042344#746#99#-0#-----2@30"echo "Depend check for xcode"-396042344#845#30#-0#-----2@23"Depend check for xcode-396042344#875#23#-0#-----2@326"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042344#898#326#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042344#1224#60#-0#-----2@30"echo "Depend check for xcode"-396042344#1284#30#-0#-----2@23"Depend check for xcode-396042344#1314#23#-0#-----2@281"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042344#1337#281#-0#-----2@99"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex-396042344#1618#99#-0#-----0#0#0#--399"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh36"909BB24D-1C36-4CBC-AA2C-AEAE87E6C886-
-
