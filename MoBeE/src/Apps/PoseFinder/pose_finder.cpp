@@ -252,7 +252,7 @@ int PoseFinder::setNormPose( Point_d q )
     bodypart->setNormPos(cmd);
     model.computePose();
 }
-
+ 
 Vector_d PoseFinder::project(std::vector< std::pair<Vector_d,QVector3D> > basis, QVector3D dx)
 {
     dx /= dx.length();
