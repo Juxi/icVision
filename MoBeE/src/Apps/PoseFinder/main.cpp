@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 	
 	QApplication app( argc, argv, visualize );	// create the QT application
     
+    
     PoseFinder finder(argv[1],"right_arm");
     
     // sample in dim dimensions

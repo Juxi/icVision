@@ -3,6 +3,7 @@
 #include "cylinder.h"
 #include "box.h"
 #include "util.h"
+#include "learner.h"
 
 PoseFinder::PoseFinder( char* _robot, char* _part) : history( model.OBSTACLE(), model.GHOST() )
 {
@@ -49,7 +50,7 @@ void PoseFinder::stop()
 
 void PoseFinder::run()
 {
-    std::vector< std::pair<Point_d, QVector3D> > samples = random_sample( 1000 );
+    std::vector< std::pair<Point_d, QVector3D> > samples = random_sample( 100 );
     std::vector< std::pair<Point_d, QVector3D> >::iterator i;
     
     std::list< std::pair<Point_d, double> > list;
@@ -78,16 +79,20 @@ void PoseFinder::run()
         rose.first->kill();
     }
     
+    
+    // instantiate reinforcement learner and don't try to connect to MoBeE
+    Learner learner(16,"icubSim","right_arm",false);
+    
     printf("Controlability values:\n");
     int k=0;
-    for (j=list.begin(); j!=list.end(); ++j, ++k)
+    for (j=list.begin(); j!=list.end() && k < 10; ++j, ++k)
     {
-        std::vector< std::pair<Vector_d,QVector3D> > local_basis = sample_neighborhood(map_q(j->first), 100, 0.1);
+        learner.appendState(j->first, 0);
+        std::vector< std::pair<Vector_d,QVector3D> > local_basis = sample_neighborhood(map_q(j->first), 1000, 0.1);
         std::pair<KinematicModel::CompositeObject*,double> rose = make_rose(j->first, argmaxBasis(local_basis), Qt::blue, Qt::green, Qt::red);
         printf("\t%f\n",j->second);
-        if ( k > 10 )
-            break;
     }
+    learner.writeStateFile();
 }
 
 /*void PoseFinder::runBasis( Point_d _q, Do_What w, QColor cx, QColor cy, QColor cz )
