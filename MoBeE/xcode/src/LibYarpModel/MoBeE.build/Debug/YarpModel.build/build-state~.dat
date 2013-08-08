@@ -1,0 +1,252 @@
+TYarpModel
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a normal x86_64
+cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp
+c0000000050B616310000000000000125
+t1354110513
+s293
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp
+c0000000050B616310000000000000DC5
+t1354110513
+s3525
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp
+c0000000050B616310000000000000DC5
+t1354110513
+s3525
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp
+c0000000051EAE3D20000000000004333
+t1374348242
+s17203
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp
+c00000000511266390000000000001C3D
+t1360160313
+s7229
+i"yarpModel.h"
+i"yarprobot.h"
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h
+c0000000050B616310000000000000BE8
+t1354110513
+s3048
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp
+c0000000050B61631000000000000036E
+t1354110513
+s878
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp
+c0000000050B616310000000000000AE5
+t1354110513
+s2789
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h
+c0000000050B616310000000000000969
+t1354110513
+s2409
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/YarpModel.LinkFileList
+c0000000051EAE8FC0000000000000388
+t1374349564
+s904
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh
+c0000000051EAE8FC00000000000000C8
+t1374349564
+s200
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies309b047c209bb741^c8b5057c209bb741^---0#1#0#--18"Check dependencies36"3CD16BDD-56D0-4F58-9C0D-D2D749C626A6-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042368.816836
+e396042369.143788
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp9b3cd180209bb741^a3ce2481209bb741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp0000000000000000^2717"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o src/LibYarpModel/exception.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/exception.o36"6939EA3C-F716-491C-A116-2C5F92C04A0A-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042370.546617
+e396042373.329402
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp3c158c82209bb741^09535485209bb741^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp0000000000000000^2729"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o src/LibYarpModel/robotSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/robotSyncer.o36"DA21582E-0159-45FC-8C02-2633E0BD7F52-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042369.145115
+e396042371.825486
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp0e492581209bb741^5452d383209bb741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp0000000000000000^2717"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o src/LibYarpModel/simSyncer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/simSyncer.o36"52F0F7C4-15EE-4745-9891-A6D1EBCA9BB0-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042367.317567
+e396042370.545276
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp596e517f209bb741^19a98b82209bb741^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp0000000000000000^2765"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o src/LibYarpModel/worldRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/worldRpcInterface.o36"B5335948-603D-419E-829E-07AEFB76C8C6-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042364.023796
+e396042366.986574
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp643c067c209bb741^758ffc7e209bb741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp0000000000000000^2717"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o src/LibYarpModel/yarpModel.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpModel.o36"904D8ED8-88F2-4D99-BC1A-57571CC2F3EF-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042368.252981
+e396042368.815516
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp0ce54080209bb741^00c5d080209bb741^---0#0#0#-19%DVTDocumentLocation2@87"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp0000000000000000^2747"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o src/LibYarpModel/yarpStreamPort.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarpStreamPort.o36"64D2E238-CE29-450E-B906-1547F916B031-
+
+CCompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042365.826157
+e396042368.250417
+r1
+xCompileC
+xxcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cppfd9fd37d209bb741^ac1a4080209bb741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp0000000000000000^2717"CompileC xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o src/LibYarpModel/yarprobot.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/yarprobot.o36"16E4BB5A-2FB0-4995-811A-EADACC531C80-
+
+CLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a normal x86_64
+s396042373.336264
+e396042373.743310
+r1
+xLibtool
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Libtool xcode/src/LibYarpModel/Debug/libYarpModel.a normal x86_64b62d5685209bb741^2959be85209bb741^---0#0#0#--684"Libtool xcode/src/LibYarpModel/Debug/libYarpModel.a normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Objects-normal/x86_64/YarpModel.LinkFileList -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a36"622BC25E-323A-4B4B-BB39-19789821795E-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh
+s396042373.751349
+e396042373.832861
+r1
+xPhaseScriptExecution
+xCMake PostBuild Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debug
+o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex
+o/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debug
+omake[1]: Nothing to be done for `PostBuild.YarpModel.Debug'.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'25ebc085209bb741^f034d585209bb741^-817"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debug/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeEecho "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debugmake[1]: Nothing to be done for `PostBuild.YarpModel.Debug'.9(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042373#0#30#-0#-----2@23"Depend check for xcode-396042373#30#23#-0#-----2@207"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debug-396042373#53#207#-0#-----2@99"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/Debug/PositionReflex-396042373#260#99#-0#-----2@86"/bin/rm -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE-396042373#359#86#-0#-----2@30"echo "Depend check for xcode"-396042373#445#30#-0#-----2@23"Depend check for xcode-396042373#475#23#-0#-----2@258"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.YarpModel.Debug-396042373#498#258#-0#-----2@61"make[1]: Nothing to be done for `PostBuild.YarpModel.Debug'.-396042373#756#61#-0#-----0#0#0#--323"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MoBeE.build/Debug/YarpModel.build/Script-84962D0317694192845A6D3C.sh36"A044DAEE-2B88-4365-BCE4-9552E4BDCCD5-
+

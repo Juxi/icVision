@@ -1,0 +1,865 @@
+// !$*UTF8*$!
+{
+       archiveVersion = 1;
+       classes = {
+       };
+       objectVersion = 46;
+       objects = {
+
+/* Begin PBXAggregateTarget section */
+              3CDD3E99258F4866A90D1751 /* ALL_BUILD */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 0ED7089D851E435E9FDA05C7 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildPhases = (
+                            4551071C7B7A4E34A3DBFAAA /* CMake Rules */,
+                     );
+                     dependencies = (
+                            4EBA64CA0FB44A928A65822D /* PBXTargetDependency */,
+                            083698EFD8484E358DA1EE97 /* PBXTargetDependency */,
+                     );
+                     name = ALL_BUILD;
+                     productName = ALL_BUILD;
+              };
+              EC331B223E5645C48F78D1DD /* ZERO_CHECK */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 28DDCA31C04B47B0985A13CF /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+                     buildPhases = (
+                            252DA493A00D4C6EA6A94CED /* CMake Rules */,
+                     );
+                     dependencies = (
+                     );
+                     name = ZERO_CHECK;
+                     productName = ZERO_CHECK;
+              };
+              A2FC27FEE1D6484E90B2C4AB /* install */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 4A8874D6D3CE4033A83A81D7 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildPhases = (
+                            5D0C4BA78E9E4F98AD3E87D1 /* CMake PostBuild Rules */,
+                     );
+                     dependencies = (
+                            254669FC15B34ABBAABCF6E8 /* PBXTargetDependency */,
+                     );
+                     name = install;
+                     productName = install;
+              };
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+A1AB896CB9404A1086340C9B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.h */ = {isa = PBXBuildFile; fileRef = 8CC86D13ED144058BEEEBD0C /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.h */; settings = { COMPILER_FLAGS = ""; }; };
+F227ECD11EFE4C0BB0161856 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.h */ = {isa = PBXBuildFile; fileRef = E9091F380CC04A8E833014F4 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.h */; settings = { COMPILER_FLAGS = ""; }; };
+825AE04F617D4CC6A74CBE65 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp */ = {isa = PBXBuildFile; fileRef = 13EF6F53C1C94C88A1B9286B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+CB4DC2B40CDA459CB5782662 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.cpp */ = {isa = PBXBuildFile; fileRef = 5A3936E320CB48479BFFEE3B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+A6D9DB504EF34BA388859B91 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp */ = {isa = PBXBuildFile; fileRef = 0923E92E27D44DDEAA475DE6 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+92539147F18A43F3B72A5227 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = F58E5A0D38434192952B4AA8 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+              A923DAFEEF914A9397D9E6C8 /*  */ = {
+                     isa = PBXBuildStyle;
+              };
+              E291C054FA5342FE835072B1 /* Debug */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Debug;
+              };
+              10A0F7E1934F4E4793343CBF /* Release */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Release;
+              };
+              5C5CCC6163424E92ACC7A2EA /* MinSizeRel */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = MinSizeRel;
+              };
+              1FCCB0D21C7D4C5682301948 /* RelWithDebInfo */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+              05B4FB7D2B2D4190BFE19C04 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3ABB4AEC07D242DEA50559DF /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 04625ABECCD5448FB28B1961;
+                     remoteInfo = PoseFinder;
+              };
+              572BBCA072BE48C8B95AECF3 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3ABB4AEC07D242DEA50559DF /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = EC331B223E5645C48F78D1DD;
+                     remoteInfo = ZERO_CHECK;
+              };
+              0395A99D44664C829035A1BE /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3ABB4AEC07D242DEA50559DF /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3CDD3E99258F4866A90D1751;
+                     remoteInfo = ALL_BUILD;
+              };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+F58E5A0D38434192952B4AA8 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+8CC86D13ED144058BEEEBD0C /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "pose_finder.h"; path = "pose_finder.h"; sourceTree = SOURCE_ROOT; };
+E9091F380CC04A8E833014F4 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "sample.h"; path = "sample.h"; sourceTree = SOURCE_ROOT; };
+13EF6F53C1C94C88A1B9286B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "main.cpp"; path = "main.cpp"; sourceTree = SOURCE_ROOT; };
+5A3936E320CB48479BFFEE3B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "pose_finder.cpp"; path = "pose_finder.cpp"; sourceTree = SOURCE_ROOT; };
+0923E92E27D44DDEAA475DE6 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "sample.cpp"; path = "sample.cpp"; sourceTree = SOURCE_ROOT; };
+E9D2740DFB194E0DBE46AE5E /* PoseFinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = PoseFinder; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+              54AD23667DB0433396A3B049  = {
+                     isa = PBXGroup;
+                     children = (
+                            451EE3B3FB5240289E528A51 /* Sources */,
+                            B992AA1AB16C4F80AAB40F35 /* Resources */,
+                            91F0E753103B42C6B13DF0B2 /* Products */,
+                     );
+                     sourceTree = "<group>";
+              };
+              451EE3B3FB5240289E528A51 /* Sources */ = {
+                     isa = PBXGroup;
+                     children = (
+                            5FCEBD08F25A4AD3B14D10ED /* ALL_BUILD */,
+                            2CB2F9EE1E7D4F14B3F2AD91 /* PoseFinder */,
+                            DC3C26522DFE4EB8AE4E52BC /* ZERO_CHECK */,
+                     );
+                     name = Sources;
+                     sourceTree = "<group>";
+              };
+              B992AA1AB16C4F80AAB40F35 /* Resources */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = Resources;
+                     sourceTree = "<group>";
+              };
+              5FCEBD08F25A4AD3B14D10ED /* ALL_BUILD */ = {
+                     isa = PBXGroup;
+                     children = (
+                            27918264B34747EEA7616330 /* CMake Rules */,
+                            F58E5A0D38434192952B4AA8 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */,
+                     );
+                     name = ALL_BUILD;
+                     sourceTree = "<group>";
+              };
+              27918264B34747EEA7616330 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              2CB2F9EE1E7D4F14B3F2AD91 /* PoseFinder */ = {
+                     isa = PBXGroup;
+                     children = (
+                            81B0A910C0104ABABA598FBA /* Header Files */,
+                            B4ED7D7B50564DAC87C7B7F4 /* Source Files */,
+                            F58E5A0D38434192952B4AA8 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */,
+                     );
+                     name = PoseFinder;
+                     sourceTree = "<group>";
+              };
+              81B0A910C0104ABABA598FBA /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            8CC86D13ED144058BEEEBD0C /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.h */,
+                            E9091F380CC04A8E833014F4 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              B4ED7D7B50564DAC87C7B7F4 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            13EF6F53C1C94C88A1B9286B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp */,
+                            5A3936E320CB48479BFFEE3B /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.cpp */,
+                            0923E92E27D44DDEAA475DE6 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              DC3C26522DFE4EB8AE4E52BC /* ZERO_CHECK */ = {
+                     isa = PBXGroup;
+                     children = (
+                            E6A1DFD13A354DC98F32A326 /* CMake Rules */,
+                            F58E5A0D38434192952B4AA8 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/CMakeLists.txt */,
+                     );
+                     name = ZERO_CHECK;
+                     sourceTree = "<group>";
+              };
+              E6A1DFD13A354DC98F32A326 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              91F0E753103B42C6B13DF0B2 /* Products */ = {
+                     isa = PBXGroup;
+                     children = (
+                            E9D2740DFB194E0DBE46AE5E /* PoseFinder */,
+                     );
+                     name = Products;
+                     sourceTree = "<group>";
+              };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+              04625ABECCD5448FB28B1961 /* PoseFinder */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 01C84E0B7C34434FB5269071 /* Build configuration list for PBXNativeTarget "PoseFinder" */;
+                     buildPhases = (
+                            72717F7C2DED45529C56CCBF /* Sources */,
+                            657875D603A24AAEA244104E /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            083698EFD8484E358DA1EE97 /* PBXTargetDependency */,
+                     );
+                     name = PoseFinder;
+                     productName = PoseFinder;
+                     productReference = E9D2740DFB194E0DBE46AE5E /* PoseFinder */;
+                     productType = "com.apple.product-type.tool";
+              };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+              3ABB4AEC07D242DEA50559DF /* Project object */ = {
+                     isa = PBXProject;
+                     attributes = {
+                            BuildIndependentTargetsInParallel = YES;
+                     };
+                     buildConfigurationList = B4C06C42681E46E8882FC6B1 /* Build configuration list for PBXProject  "PoseFinder" */;
+                     buildSettings = {
+                     };
+                     buildStyles = (
+                            E291C054FA5342FE835072B1 /* Debug */,
+                            10A0F7E1934F4E4793343CBF /* Release */,
+                            5C5CCC6163424E92ACC7A2EA /* MinSizeRel */,
+                            1FCCB0D21C7D4C5682301948 /* RelWithDebInfo */,
+                     );
+                     compatibilityVersion = "Xcode 3.2";
+                     hasScannedForEncodings = 0;
+                     mainGroup = 54AD23667DB0433396A3B049;
+                     projectDirPath = "../../../../src/Apps/PoseFinder";
+                     projectRoot = "";
+                     targets = (
+                            3CDD3E99258F4866A90D1751 /* ALL_BUILD */,
+                            04625ABECCD5448FB28B1961 /* PoseFinder */,
+                            EC331B223E5645C48F78D1DD /* ZERO_CHECK */,
+                            A2FC27FEE1D6484E90B2C4AB /* install */,
+                     );
+              };
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+              A60FB95EDF854C3298F64093 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              4551071C7B7A4E34A3DBFAAA /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              657875D603A24AAEA244104E /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/CMakeScripts/PoseFinder_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              5EA89344ED8C4608BF8D124F /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              252DA493A00D4C6EA6A94CED /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              FD15938A7AB4453C84D88711 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              5D0C4BA78E9E4F98AD3E87D1 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+              72717F7C2DED45529C56CCBF /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            825AE04F617D4CC6A74CBE65 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp */,
+                            CB4DC2B40CDA459CB5782662 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/pose_finder.cpp */,
+                            A6D9DB504EF34BA388859B91 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+              4EBA64CA0FB44A928A65822D /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 04625ABECCD5448FB28B1961 /* PoseFinder */;
+                     targetProxy = 05B4FB7D2B2D4190BFE19C04 /* PBXContainerItemProxy */;
+              };
+              083698EFD8484E358DA1EE97 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = EC331B223E5645C48F78D1DD /* ZERO_CHECK */;
+                     targetProxy = 572BBCA072BE48C8B95AECF3 /* PBXContainerItemProxy */;
+              };
+              254669FC15B34ABBAABCF6E8 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3CDD3E99258F4866A90D1751 /* ALL_BUILD */;
+                     targetProxy = 0395A99D44664C829035A1BE /* PBXContainerItemProxy */;
+              };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+              7EA3F13A29FB426E853E6798 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/build;
+                     };
+                     name = Debug;
+              };
+              C66C2DB286004A33B0A1803A /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/build;
+                     };
+                     name = Release;
+              };
+              BB6FFDEFC9FB4B8396C29BA6 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/build;
+                     };
+                     name = MinSizeRel;
+              };
+              D112543E6BEA4BDDBF9E84BE /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/build;
+                     };
+                     name = RelWithDebInfo;
+              };
+              1DB4371156314EFE9C82A069 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              9D307B7BF87B4FCA83E880CB /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              C2B990B0019C4D669A2820A1 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              90783CFDFA19443DA7A986A6 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              000BEC2A75C043AAA723EEB0 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PoseFinder;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              FB942EFE96974B8BAC8F5125 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Release/libKinematicModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Release/libiCubRL.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PoseFinder;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              1C4E7DB797D440DBBCBD5181 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MinSizeRel/libKinematicModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/MinSizeRel/libiCubRL.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PoseFinder;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              70D4531D70DD4E41BAF6D218 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/RelWithDebInfo/libKinematicModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/RelWithDebInfo/libiCubRL.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PoseFinder;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              20C45E28F97A453E82D1078B /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              2D865EA639BD4227ADF126A7 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              BF6196C835B04373A2A00C1F /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              5AE664A28FB84375BD43DC57 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              ED54E69E6601437AAA28B737 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              E1B36A683CEA4E6782111382 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              13D63357CFA44569884FFB78 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              74F28CB0F15C446191690564 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+              B4C06C42681E46E8882FC6B1 /* Build configuration list for PBXProject  "PoseFinder" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            7EA3F13A29FB426E853E6798 /* Debug */,
+                            C66C2DB286004A33B0A1803A /* Release */,
+                            BB6FFDEFC9FB4B8396C29BA6 /* MinSizeRel */,
+                            D112543E6BEA4BDDBF9E84BE /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              0ED7089D851E435E9FDA05C7 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            1DB4371156314EFE9C82A069 /* Debug */,
+                            9D307B7BF87B4FCA83E880CB /* Release */,
+                            C2B990B0019C4D669A2820A1 /* MinSizeRel */,
+                            90783CFDFA19443DA7A986A6 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              01C84E0B7C34434FB5269071 /* Build configuration list for PBXNativeTarget "PoseFinder" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            000BEC2A75C043AAA723EEB0 /* Debug */,
+                            FB942EFE96974B8BAC8F5125 /* Release */,
+                            1C4E7DB797D440DBBCBD5181 /* MinSizeRel */,
+                            70D4531D70DD4E41BAF6D218 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              28DDCA31C04B47B0985A13CF /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            20C45E28F97A453E82D1078B /* Debug */,
+                            2D865EA639BD4227ADF126A7 /* Release */,
+                            BF6196C835B04373A2A00C1F /* MinSizeRel */,
+                            5AE664A28FB84375BD43DC57 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              4A8874D6D3CE4033A83A81D7 /* Build configuration list for PBXAggregateTarget "install" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            ED54E69E6601437AAA28B737 /* Debug */,
+                            E1B36A683CEA4E6782111382 /* Release */,
+                            13D63357CFA44569884FFB78 /* MinSizeRel */,
+                            74F28CB0F15C446191690564 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+/* End XCConfigurationList section */
+       };
+       rootObject = 3ABB4AEC07D242DEA50559DF;
+}

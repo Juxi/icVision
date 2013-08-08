@@ -1,0 +1,145 @@
+TPoseFinder
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp
+c0000000051F56903000000000000095F
+t1375037699
+s2399
+i<QApplication>
+i"model.h"
+i"sphere.h"
+i"cylinder.h"
+i"box.h"
+i"sample.h"
+i"util.h"
+i<QThread>
+i"model.h"
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp
+c0000000051F5693C00000000000025ED
+t1375037756
+s9709
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.h
+c0000000051F5692300000000000008ED
+t1375037731
+s2285
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/box.h
+c0000000050B6163000000000000005B8
+t1354110512
+s1464
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/cylinder.h
+c0000000050B616310000000000000758
+t1354110513
+s1880
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/model.h
+c000000005112663900000000000027F2
+t1360160313
+s10226
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibKinematicModel/sphere.h
+c0000000050B6163100000000000006C3
+t1354110513
+s1731
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h
+c0000000051A4BDB7000000000000074F
+t1369750967
+s1871
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/PoseFinder.LinkFileList
+c0000000051F569B800000000000000FE
+t1375037880
+s254
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Script-7F62C52151C34BEC8A8861A6.sh
+c0000000051F569B800000000000000CF
+t1375037880
+s207
+
+N/usr/local/Cellar/qt/4.8.2/include/QtGui/QApplication
+c00000000503BA06A000000000000001A
+t1346084970
+s26
+
+N/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers/QThread
+c00000000503BA0670000000000000015
+t1346084967
+s21
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies3b89ac38a1a5b741^b517ad38a1a5b741^---0#1#0#--18"Check dependencies36"E4EEDECE-9EB6-4586-AF15-EC56B30F22C0-
+
+CCompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396730680.678315
+e396730684.413226
+r0
+xCompileC
+xxcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp:46:44: error: no matching constructor for initialization of 'CGAL::Random_points_in_cube_d<Point_d>'
+o    CGAL::Random_points_in_cube_d<Point_d> globalCube;
+o                                           ^
+o/usr/local/include/CGAL/point_generators_d.h:131:2: note: candidate constructor not viable: requires at least argument 'dim', but no arguments were provided
+o Random_points_in_cube_d( int dim, double a = 1, 
+o ^
+o/usr/local/include/CGAL/point_generators_d.h:126:7: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided
+oclass Random_points_in_cube_d : public Random_generator_base<P>{
+o      ^
+o1 error generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp82c9ad38a1a5b741^3bc6693ca1a5b741^-733"/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp:46:44: error: no matching constructor for initialization of 'CGAL::Random_points_in_cube_d<Point_d>'    CGAL::Random_points_in_cube_d<Point_d> globalCube;                                           ^/usr/local/include/CGAL/point_generators_d.h:131:2: note: candidate constructor not viable: requires at least argument 'dim', but no arguments were provided Random_points_in_cube_d( int dim, double a = 1,  ^/usr/local/include/CGAL/point_generators_d.h:126:7: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were providedclass Random_points_in_cube_d : public Random_generator_base<P>{      ^1 error generated.1(36%IDEClangDiagnosticActivityLogMessage2@86"No matching constructor for initialization of 'CGAL::Random_points_in_cube_d<Point_d>'-396730684#18446744073709551615#0#2(2@98"Candidate constructor not viable: requires at least argument 'dim', but no arguments were provided-396730684#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@60"file://localhost/usr/local/include/CGAL/point_generators_d.h0000000000000000^130#1#130#1#3969#0#14"Semantic Issue--2@106"Candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 0 were provided-396730684#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@60"file://localhost/usr/local/include/CGAL/point_generators_d.h0000000000000000^125#6#125#6#3810#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@80"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp0000000000000000^45#43#45#43#1173#0#14"Semantic Issue--0#0#0#-19%DVTDocumentLocation4@80"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp0000000000000000^3128"CompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o src/Apps/PoseFinder/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/main.o36"39CF5D9D-BE6C-46E0-9672-78954D42BD3B-
+
+CCompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396730680.678976
+e396730685.826206
+r1
+xCompileC
+xxcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp89eead38a1a5b741^6f82d33da1a5b741^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp0000000000000000^3140"CompileC xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o src/Apps/PoseFinder/sample.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/../../LibRL -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/PoseFinder/sample.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Objects-normal/x86_64/sample.o36"D2D2734A-3A63-4872-90E0-F5BEE02C7ECF-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/Debug/PoseFinder normal x86_64
+r0
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/PoseFinder/MoBeE.build/Debug/PoseFinder.build/Script-7F62C52151C34BEC8A8861A6.sh
+r0
+

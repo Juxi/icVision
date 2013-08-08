@@ -1,0 +1,107 @@
+Tcircle
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle normal x86_64
+cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
+c00000000509867D80000000000006762
+t1352165336
+s26466
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp
+c0000000051E6A31E0000000000000DAA
+t1374069534
+s3498
+i<yarp/os/all.h>
+i<yarp/dev/all.h>
+i<yarp/sig/all.h>
+i<unistd.h>
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/circle.LinkFileList
+c0000000051EAE9550000000000000089
+t1374349653
+s137
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh
+c0000000051EAE95500000000000000D7
+t1374349653
+s215
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/dev/all.h
+c000000004E8F21F90000000000000506
+t1318003193
+s1286
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h
+c000000004FC63F1200000000000005BC
+t1338392338
+s1468
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/sig/all.h
+c000000004E8F21F90000000000000264
+t1318003193
+s612
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies3c315bd5209bb741^5ebd6ed5209bb741^---0#1#0#--18"Check dependencies36"9A90B614-BAD1-4372-BB8F-D9F2F7933621-
+
+CCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042453.433696
+e396042453.767171
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cppae2a6fd5209bb741^7764c4d5209bb741^---0#0#0#-19%DVTDocumentLocation2@95"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp0000000000000000^3227"CompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/opSpaceCircle.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/opSpaceCircle.o36"28C57E28-C0AA-4327-8BB7-52E5A57D62F2-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle normal x86_64
+s396042453.774070
+e396042453.955813
+r1
+xLd
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle1746c6d5209bb741^08b0f4d5209bb741^---0#0#0#--1803"Ld xcode/src/Apps/MoBeE_Model/Demo/Debug/circle normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Objects-normal/x86_64/circle.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/circle36"BFC5D39D-9902-469A-9E9C-2390F194C0CC-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh
+s396042453.963849
+e396042454.036672
+r1
+xPhaseScriptExecution
+xCMake PostBuild Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debug
+omake[1]: Nothing to be done for `PostBuild.circle.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debug
+omake[1]: Nothing to be done for `PostBuild.circle.Debug'.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'0d53f7d5209bb741^f66109d6209bb741^-693"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debugmake[1]: Nothing to be done for `PostBuild.circle.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debugmake[1]: Nothing to be done for `PostBuild.circle.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042453#0#30#-0#-----2@23"Depend check for xcode-396042453#30#23#-0#-----2@204"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debug-396042453#53#204#-0#-----2@58"make[1]: Nothing to be done for `PostBuild.circle.Debug'.-396042454#257#58#-0#-----2@30"echo "Depend check for xcode"-396042454#315#30#-0#-----2@23"Depend check for xcode-396042454#345#23#-0#-----2@267"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.circle.Debug-396042454#368#267#-0#-----2@58"make[1]: Nothing to be done for `PostBuild.circle.Debug'.-396042454#635#58#-0#-----0#0#0#--335"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/circle.build/Script-75B6DC3CB317420CBB080E54.sh36"8562A975-BDC8-4D9A-9F7A-386B4A74395A-
+

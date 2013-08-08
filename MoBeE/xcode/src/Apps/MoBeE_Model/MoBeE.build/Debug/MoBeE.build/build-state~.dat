@@ -1,0 +1,224 @@
+TMoBeE
+v5
+r1
+cCheck dependencies
+cPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh
+cCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE normal x86_64
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp
+c0000000051625BD700000000000024DB
+t1365400535
+s9435
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.h
+c00000000514B2BBC00000000000008BF
+t1363880892
+s2239
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp
+c0000000051625BD70000000000001083
+t1365400535
+s4227
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp
+c000000005190DA910000000000000EE0
+t1368447633
+s3808
+i<QApplication>
+i<yarp/os/Property.h>
+i"yarprobot.h"
+i"yarpModel.h"
+i"controller.h"
+i"simSyncer.h"
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp
+c000000005193A7C70000000000003C94
+t1368631239
+s15508
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h
+c0000000050B6163100000000000006F4
+t1354110513
+s1780
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h
+c0000000050B616310000000000000BE8
+t1354110513
+s3048
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h
+c0000000050B616310000000000000969
+t1354110513
+s2409
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/MoBeE.LinkFileList
+c0000000051EAE90E000000000000028E
+t1374349582
+s654
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-65D5203624FC4CA1AF92A3B0.sh
+c0000000051EAE90E00000000000000CC
+t1374349582
+s204
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh
+c0000000051EAE90E00000000000000D2
+t1374349582
+s210
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx
+c00000000000000000000000000000000
+t2
+s0
+
+N/usr/local/Cellar/qt/4.8.2/include/QtGui/QApplication
+c00000000503BA06A000000000000001A
+t1346084970
+s26
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Property.h
+c000000004E1DD47600000000000022C3
+t1310577782
+s8899
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesf8187c8e209bb741^58e37c8e209bb741^---0#1#0#--18"Check dependencies36"BAE4C6E7-ACB8-4371-8FFB-54DA54CD0FB9-
+
+CCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042383.739510
+e396042386.883687
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp1d74bd8f209bb741^c349e292209bb741^---0#0#0#-19%DVTDocumentLocation2@87"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp0000000000000000^3153"CompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o src/Apps/MoBeE_Model/controller.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controller.o36"93F69CD4-ED4D-4BFE-9CCC-C37EEBEC3216-
+
+CCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042385.762703
+e396042388.309605
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp0b63c391209bb741^af414f94209bb741^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp0000000000000000^3225"CompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o src/Apps/MoBeE_Model/controllerRpcInterface.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controllerRpcInterface.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/controllerRpcInterface.o36"A758B259-AA3E-4155-9D4D-E50E86C20F32-
+
+CCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042382.873182
+e396042385.761362
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp54abdf8e209bb741^08e8c291209bb741^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp0000000000000000^3117"CompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o src/Apps/MoBeE_Model/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/main.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/main.o36"01BD8C8E-E463-4D49-B61C-75A55DE16542-
+
+CCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042386.884972
+e396042389.618407
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compile /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx4ab2e292209bb741^5b5d9e95209bb741^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx0000000000000000^3189"CompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o xcode/src/Apps/MoBeE_Model/moc_controller.cxx normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.dia -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/moc_controller.o36"42F0634D-BA69-4AFC-81FA-D9974277E264-
+
+CCompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042382.874167
+e396042383.738147
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp82e6df8e209bb741^7bf6bc8f209bb741^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp0000000000000000^3177"CompileC xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o src/Apps/MoBeE_Model/partController.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/partController.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/partController.o36"AA6A2E3B-E0F2-4A2B-B135-04A93C224A69-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE normal x86_64
+s396042392.710796
+e396042393.358894
+r1
+xLd
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE1b2eb698209bb741^ffec5b99209bb741^---0#0#0#--2112"Ld xcode/src/Apps/MoBeE_Model/Debug/MoBeE normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Objects-normal/x86_64/MoBeE.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Debug/MoBeE36"3EC73A3E-2500-4068-AE25-5EC4F2DA83D9-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-65D5203624FC4CA1AF92A3B0.sh
+r0
+
+CPhaseScriptExecution "CMake Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh
+s396042382.490397
+e396042382.865070
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh
+o/usr/local/Cellar/qt/4.8.2/bin/moc -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.h
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'57247e8e209bb741^446ee28e209bb741^-1396"/usr/local/Cellar/qt/4.8.2/bin/moc -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.h1(21%IDEActivityLogMessage2@1396"/usr/local/Cellar/qt/4.8.2/bin/moc -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/usr/local/Cellar/yarp/HEAD/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -F/usr/local/Cellar/qt/4.8.2/lib -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/moc_controller.cxx /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/controller.h-396042382#0#1396#-0#-----0#0#0#--313"PhaseScriptExecution "CMake Rules" xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/MoBeE.build/Debug/MoBeE.build/Script-A825910B3108413299BF2762.sh36"9C8E680E-1777-49F8-902F-43B342717807-
+

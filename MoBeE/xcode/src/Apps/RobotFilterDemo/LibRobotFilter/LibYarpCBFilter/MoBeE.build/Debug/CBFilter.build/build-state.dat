@@ -1,0 +1,1631 @@
+TCBFilter
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64
+cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/ControlBoardFilter.h
+c0000000050B616310000000000000EAF
+t1354110513
+s3759
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h
+c0000000050B616310000000000001384
+t1354110513
+s4996
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/StreamFilter.h
+c0000000050B6163100000000000008EE
+t1354110513
+s2286
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/../IObserver.h
+c0000000050B6163100000000000003AC
+t1354110513
+s940
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/../IReplier.h
+c0000000050B616310000000000000358
+t1354110513
+s856
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h
+c0000000050B616310000000000000E43
+t1354110513
+s3651
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/StreamFilterImpl.h
+c0000000050B616310000000000000541
+t1354110513
+s1345
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
+c0000000050B616310000000000000A23
+t1354110513
+s2595
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
+c0000000050B61631000000000000058F
+t1354110513
+s1423
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
+c0000000050B61631000000000000168E
+t1354110513
+s5774
+i"./yarp/os/impl/RpcFilterImpl.h"
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
+c0000000050B616310000000000000466
+t1354110513
+s1126
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
+c0000000050B6163100000000000004E9
+t1354110513
+s1257
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h
+c0000000050B616310000000000000E43
+t1354110513
+s3651
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a
+t1374349514
+s699528
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/CBFilter.LinkFileList
+c0000000051EAE8C60000000000000350
+t1374349510
+s848
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o
+t1374349514
+s93324
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o
+t1374349512
+s65652
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o
+t1374349512
+s263336
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o
+t1374349512
+s123816
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o
+t1374349512
+s124372
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
+c0000000051EAE8C60000000000000115
+t1374349510
+s277
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/ControlBoardFilter.plist
+t1374349892
+s5531
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilter.plist
+t1374349891
+s5531
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilterImpl.plist
+t1374349894
+s8553
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilter.plist
+t1374349891
+s382
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilterImpl.plist
+t1374349891
+s382
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/conf/api.h
+c000000005037D3760000000000000932
+t1345835894
+s2354
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/conf/system.h
+c000000005037D376000000000000042D
+t1345835894
+s1069
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/BinPortable.h
+c000000004E1DD4760000000000000652
+t1310577782
+s1618
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Bottle.h
+c000000005034A9440000000000002DDB
+t1345628484
+s11739
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/BufferedPort.h
+c000000004F57C4AD000000000000202E
+t1331152045
+s8238
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Bytes.h
+c000000004EC2A41A00000000000004BC
+t1321378842
+s1212
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionReader.h
+c000000004F7B730D00000000000013B4
+t1333490445
+s5044
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConnectionWriter.h
+c0000000050369679000000000000134B
+t1345754745
+s4939
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ConstString.h
+c000000005034A9150000000000000900
+t1345628437
+s2304
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Contact.h
+c000000004E1DD4760000000000001551
+t1310577782
+s5457
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ContactStyle.h
+c00000000502A6527000000000000031F
+t1344955687
+s799
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Contactable.h
+c000000004F57C4AD0000000000001ACA
+t1331152045
+s6858
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/DummyConnector.h
+c000000004C7D58BA0000000000000912
+t1283283130
+s2322
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Event.h
+c000000004E1DD47600000000000006C8
+t1310577782
+s1736
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/IConfig.h
+c000000004E67D2A30000000000000604
+t1315426979
+s1540
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/LocalReader.h
+c000000004E1DD476000000000000039B
+t1310577782
+s923
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Log.h
+c00000000502A652700000000000004E7
+t1344955687
+s1255
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ManagedBytes.h
+c000000004EC2FAA800000000000011EA
+t1321401000
+s4586
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Module.h
+c000000004E1DD4760000000000001D08
+t1310577782
+s7432
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NameStore.h
+c000000004E1DD476000000000000028F
+t1310577782
+s655
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NetFloat64.h
+c000000004E1DD4760000000000001620
+t1310577782
+s5664
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/NetInt32.h
+c00000000503696790000000000002068
+t1345754745
+s8296
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Network.h
+c000000005034A9150000000000004709
+t1345628437
+s18185
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Port.h
+c000000004F57C4AD0000000000001F7D
+t1331152045
+s8061
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReader.h
+c000000004E1DD47600000000000003EE
+t1310577782
+s1006
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderBuffer.h
+c000000004E1DD4760000000000003486
+t1310577782
+s13446
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReaderCreator.h
+c000000004E1DD476000000000000054D
+t1310577782
+s1357
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortReport.h
+c000000004EA173EB0000000000000974
+t1319203819
+s2420
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriter.h
+c000000005034A915000000000000067F
+t1345628437
+s1663
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortWriterBuffer.h
+c000000004E1DD476000000000000115C
+t1310577782
+s4444
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Portable.h
+c000000004E1DD4760000000000000383
+t1310577782
+s899
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/PortablePair.h
+c000000004E1DD4760000000000000DEA
+t1310577782
+s3562
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Property.h
+c000000004E1DD47600000000000022C3
+t1310577782
+s8899
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RFModule.h
+c000000004F4282E60000000000001A61
+t1329758950
+s6753
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Random.h
+c000000004E1DD4760000000000000665
+t1310577782
+s1637
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RateThread.h
+c000000004E2A87AE0000000000001996
+t1311410094
+s6550
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/ResourceFinder.h
+c00000000501299E2000000000000167D
+t1343396322
+s5757
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcClient.h
+c000000004F57C4AD000000000000106F
+t1331152045
+s4207
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/RpcServer.h
+c000000004EC41CF90000000000001500
+t1321475321
+s5376
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Runnable.h
+c000000005034A915000000000000086A
+t1345628437
+s2154
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Searchable.h
+c000000004E1DD476000000000000195E
+t1310577782
+s6494
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Semaphore.h
+c000000004ED541F300000000000006EC
+t1322598899
+s1772
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Stamp.h
+c000000004E1DD47600000000000008F8
+t1310577782
+s2296
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Terminator.h
+c000000005012962600000000000009DA
+t1343395366
+s2522
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Thread.h
+c000000004E2A87AE000000000000156D
+t1311410094
+s5485
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Time.h
+c000000004E1DD4760000000000000562
+t1310577782
+s1378
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Value.h
+c000000004F4E5B3F00000000000029FC
+t1330535231
+s10748
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Vocab.h
+c000000004E1DD47600000000000008C5
+t1310577782
+s2245
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/Wire.h
+c00000000502A6527000000000000029E
+t1344955687
+s670
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/WireLink.h
+c00000000502A65270000000000001007
+t1344955687
+s4103
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h
+c000000004FC63F1200000000000005BC
+t1338392338
+s1468
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/api.h
+c00000000502A652700000000000002A8
+t1344955687
+s680
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h
+c000000004E1DD4760000000000001AEA
+t1310577782
+s6890
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/AuthHMAC.h
+c00000000502A652700000000000005E4
+t1344955687
+s1508
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h
+c000000005034A9150000000000003623
+t1345628437
+s13859
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Carrier.h
+c000000004FA45724000000000000301A
+t1336170276
+s12314
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Carriers.h
+c000000004E1DD4760000000000000B68
+t1310577782
+s2920
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Face.h
+c000000004F6900EE00000000000007FC
+t1332281582
+s2044
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/IOException.h
+c000000004E1DD47600000000000002D4
+t1310577782
+s724
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/InputProtocol.h
+c000000004FA4572400000000000007D1
+t1336170276
+s2001
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/InputStream.h
+c000000004EC2CFD20000000000000C4D
+t1321390034
+s3149
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Logger.h
+c000000004EAE9E7800000000000010E3
+t1320066680
+s4323
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h
+c000000004E1DD47600000000000019EB
+t1310577782
+s6635
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NetType.h
+c000000004F18C90000000000000008B0
+t1327024384
+s2224
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/OutputProtocol.h
+c000000004EDE4E1500000000000006AE
+t1323191829
+s1710
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/OutputStream.h
+c000000004E1DD47600000000000009FC
+t1310577782
+s2556
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/PlatformSize.h
+c00000000502A65270000000000000220
+t1344955687
+s544
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/PlatformStdio.h
+c00000000502A6527000000000000028F
+t1344955687
+s655
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/PlatformStdlib.h
+c00000000502A65270000000000000369
+t1344955687
+s873
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/PlatformVector.h
+c00000000502A652700000000000002CC
+t1344955687
+s716
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/PortCommand.h
+c000000004E1DD47600000000000004D9
+t1310577782
+s1241
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Route.h
+c000000004E1DD4760000000000000BE2
+t1310577782
+s3042
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/ShiftStream.h
+c000000004E1DD4760000000000000D54
+t1310577782
+s3412
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/SizedWriter.h
+c000000004F7B730D00000000000006EE
+t1333490445
+s1774
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/StreamConnectionReader.h
+c000000004F7B730D0000000000001E20
+t1333490445
+s7712
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h
+c000000004E1DD4760000000000000851
+t1310577782
+s2129
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/StringInputStream.h
+c000000004EC2CFD200000000000006FB
+t1321390034
+s1787
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/StringOutputStream.h
+c000000004F7B730D00000000000004BE
+t1333490445
+s1214
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/TwoWayStream.h
+c000000004EC2CFD20000000000000D7E
+t1321390034
+s3454
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/hmac/hmac_sha2.h
+c00000000502A652700000000000014F1
+t1344955687
+s5361
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/hmac/sha2.h
+c00000000502A65270000000000000F16
+t1344955687
+s3862
+
+N/usr/local/include/ace/ACE.h
+c000000005037A3880000000000008AE9
+t1345823624
+s35561
+
+N/usr/local/include/ace/ACE.inl
+c000000005037A3870000000000001FCB
+t1345823623
+s8139
+
+N/usr/local/include/ace/ACE_export.h
+c000000005037A38800000000000009B9
+t1345823624
+s2489
+
+N/usr/local/include/ace/Array_Base.cpp
+c000000005037A3880000000000001778
+t1345823624
+s6008
+
+N/usr/local/include/ace/Array_Base.h
+c000000005037A3880000000000001C50
+t1345823624
+s7248
+
+N/usr/local/include/ace/Array_Base.inl
+c000000005037A3870000000000000CE4
+t1345823623
+s3300
+
+N/usr/local/include/ace/Assert.h
+c000000005037A38800000000000003EB
+t1345823624
+s1003
+
+N/usr/local/include/ace/Auto_Ptr.cpp
+c000000005037A38800000000000001A1
+t1345823624
+s417
+
+N/usr/local/include/ace/Auto_Ptr.h
+c000000005037A38800000000000016B8
+t1345823624
+s5816
+
+N/usr/local/include/ace/Auto_Ptr.inl
+c000000005037A3870000000000000F0D
+t1345823623
+s3853
+
+N/usr/local/include/ace/Base_Thread_Adapter.h
+c000000005037A38800000000000018EC
+t1345823624
+s6380
+
+N/usr/local/include/ace/Base_Thread_Adapter.inl
+c000000005037A387000000000000049A
+t1345823623
+s1178
+
+N/usr/local/include/ace/Basic_Types.h
+c000000005037A388000000000000577F
+t1345823624
+s22399
+
+N/usr/local/include/ace/Cleanup.h
+c000000005037A3880000000000000F69
+t1345823624
+s3945
+
+N/usr/local/include/ace/Cleanup.inl
+c000000005037A38700000000000001CF
+t1345823623
+s463
+
+N/usr/local/include/ace/Containers.h
+c000000005037A38800000000000006D4
+t1345823624
+s1748
+
+N/usr/local/include/ace/Containers.inl
+c000000005037A38800000000000001C9
+t1345823624
+s457
+
+N/usr/local/include/ace/Containers_T.cpp
+c000000005037A388000000000000B8FD
+t1345823624
+s47357
+
+N/usr/local/include/ace/Containers_T.h
+c000000005037A388000000000000E41F
+t1345823624
+s58399
+
+N/usr/local/include/ace/Containers_T.inl
+c000000005037A3870000000000002ACD
+t1345823623
+s10957
+
+N/usr/local/include/ace/Copy_Disabled.h
+c000000005037A3880000000000000658
+t1345823624
+s1624
+
+N/usr/local/include/ace/Default_Constants.h
+c000000005037A3880000000000004EAD
+t1345823624
+s20141
+
+N/usr/local/include/ace/Flag_Manip.h
+c000000005037A38800000000000005FD
+t1345823624
+s1533
+
+N/usr/local/include/ace/Flag_Manip.inl
+c000000005037A3870000000000000269
+t1345823623
+s617
+
+N/usr/local/include/ace/Global_Macros.h
+c000000005037A388000000000000924C
+t1345823624
+s37452
+
+N/usr/local/include/ace/Handle_Ops.h
+c000000005037A3880000000000000425
+t1345823624
+s1061
+
+N/usr/local/include/ace/If_Then_Else.h
+c000000005037A3880000000000000875
+t1345823624
+s2165
+
+N/usr/local/include/ace/Init_ACE.h
+c000000005037A3880000000000000798
+t1345823624
+s1944
+
+N/usr/local/include/ace/Intrusive_List.cpp
+c000000005037A3880000000000000888
+t1345823624
+s2184
+
+N/usr/local/include/ace/Intrusive_List.h
+c000000005037A3880000000000000DAC
+t1345823624
+s3500
+
+N/usr/local/include/ace/Intrusive_List.inl
+c000000005037A3880000000000000285
+t1345823624
+s645
+
+N/usr/local/include/ace/Intrusive_List_Node.cpp
+c000000005037A3880000000000000249
+t1345823624
+s585
+
+N/usr/local/include/ace/Intrusive_List_Node.h
+c000000005037A38800000000000007BB
+t1345823624
+s1979
+
+N/usr/local/include/ace/Intrusive_List_Node.inl
+c000000005037A3870000000000000231
+t1345823623
+s561
+
+N/usr/local/include/ace/Lib_Find.h
+c000000005037A3880000000000001336
+t1345823624
+s4918
+
+N/usr/local/include/ace/Lock.h
+c000000005037A3880000000000001289
+t1345823624
+s4745
+
+N/usr/local/include/ace/Lock.inl
+c000000005037A38700000000000000B6
+t1345823623
+s182
+
+N/usr/local/include/ace/Log_Msg.h
+c000000005037A38800000000000060E4
+t1345823624
+s24804
+
+N/usr/local/include/ace/Log_Msg.inl
+c000000005037A3870000000000000D78
+t1345823623
+s3448
+
+N/usr/local/include/ace/Log_Msg_Callback.h
+c000000005037A38800000000000008C1
+t1345823624
+s2241
+
+N/usr/local/include/ace/Log_Priority.h
+c000000005037A38800000000000008C3
+t1345823624
+s2243
+
+N/usr/local/include/ace/Log_Record.h
+c000000005037A3880000000000001729
+t1345823624
+s5929
+
+N/usr/local/include/ace/Log_Record.inl
+c000000005037A38700000000000006FD
+t1345823623
+s1789
+
+N/usr/local/include/ace/Malloc_Base.h
+c000000005037A3880000000000001608
+t1345823624
+s5640
+
+N/usr/local/include/ace/Min_Max.h
+c000000005037A38800000000000005C0
+t1345823624
+s1472
+
+N/usr/local/include/ace/Node.cpp
+c000000005037A388000000000000036D
+t1345823624
+s877
+
+N/usr/local/include/ace/Node.h
+c000000005037A3880000000000000907
+t1345823624
+s2311
+
+N/usr/local/include/ace/Numeric_Limits.h
+c000000005037A3880000000000001AAF
+t1345823624
+s6831
+
+N/usr/local/include/ace/OS_Errno.h
+c000000005037A3880000000000000AEB
+t1345823624
+s2795
+
+N/usr/local/include/ace/OS_Errno.inl
+c000000005037A38700000000000004F3
+t1345823623
+s1267
+
+N/usr/local/include/ace/OS_Log_Msg_Attributes.h
+c000000005037A3880000000000000949
+t1345823624
+s2377
+
+N/usr/local/include/ace/OS_Log_Msg_Attributes.inl
+c000000005037A387000000000000020B
+t1345823623
+s523
+
+N/usr/local/include/ace/OS_Memory.h
+c000000005037A3880000000000002CFD
+t1345823624
+s11517
+
+N/usr/local/include/ace/OS_NS_Thread.h
+c000000005037A388000000000000F88A
+t1345823624
+s63626
+
+N/usr/local/include/ace/OS_NS_Thread.inl
+c000000005037A388000000000001ACDF
+t1345823624
+s109791
+
+N/usr/local/include/ace/OS_NS_ctype.h
+c000000005037A388000000000000101B
+t1345823624
+s4123
+
+N/usr/local/include/ace/OS_NS_ctype.inl
+c000000005037A3870000000000001329
+t1345823623
+s4905
+
+N/usr/local/include/ace/OS_NS_dirent.h
+c000000005037A388000000000000119E
+t1345823624
+s4510
+
+N/usr/local/include/ace/OS_NS_dirent.inl
+c000000005037A387000000000000141D
+t1345823623
+s5149
+
+N/usr/local/include/ace/OS_NS_errno.h
+c000000005037A38800000000000009DA
+t1345823624
+s2522
+
+N/usr/local/include/ace/OS_NS_errno.inl
+c000000005037A387000000000000070B
+t1345823623
+s1803
+
+N/usr/local/include/ace/OS_NS_fcntl.h
+c000000005037A38800000000000008DC
+t1345823624
+s2268
+
+N/usr/local/include/ace/OS_NS_fcntl.inl
+c000000005037A3870000000000000200
+t1345823623
+s512
+
+N/usr/local/include/ace/OS_NS_macros.h
+c000000005037A3880000000000000E0E
+t1345823624
+s3598
+
+N/usr/local/include/ace/OS_NS_math.h
+c000000005037A3880000000000000C5C
+t1345823624
+s3164
+
+N/usr/local/include/ace/OS_NS_math.inl
+c000000005037A388000000000000010B
+t1345823624
+s267
+
+N/usr/local/include/ace/OS_NS_pwd.h
+c000000005037A38800000000000006D4
+t1345823624
+s1748
+
+N/usr/local/include/ace/OS_NS_pwd.inl
+c000000005037A3880000000000000642
+t1345823624
+s1602
+
+N/usr/local/include/ace/OS_NS_signal.h
+c000000005037A3880000000000001763
+t1345823624
+s5987
+
+N/usr/local/include/ace/OS_NS_signal.inl
+c000000005037A387000000000000160E
+t1345823623
+s5646
+
+N/usr/local/include/ace/OS_NS_stdio.h
+c000000005037A3880000000000003D2A
+t1345823624
+s15658
+
+N/usr/local/include/ace/OS_NS_stdio.inl
+c000000005037A38800000000000088BE
+t1345823624
+s35006
+
+N/usr/local/include/ace/OS_NS_stdlib.h
+c000000005037A38800000000000030B4
+t1345823624
+s12468
+
+N/usr/local/include/ace/OS_NS_stdlib.inl
+c000000005037A3870000000000003CDD
+t1345823623
+s15581
+
+N/usr/local/include/ace/OS_NS_string.h
+c000000005037A38800000000000041B9
+t1345823624
+s16825
+
+N/usr/local/include/ace/OS_NS_string.inl
+c000000005037A38700000000000034A7
+t1345823623
+s13479
+
+N/usr/local/include/ace/OS_NS_stropts.h
+c000000005037A38800000000000011FE
+t1345823624
+s4606
+
+N/usr/local/include/ace/OS_NS_stropts.inl
+c000000005037A387000000000000144D
+t1345823623
+s5197
+
+N/usr/local/include/ace/OS_NS_sys_mman.h
+c000000005037A3880000000000000978
+t1345823624
+s2424
+
+N/usr/local/include/ace/OS_NS_sys_mman.inl
+c000000005037A3880000000000002477
+t1345823624
+s9335
+
+N/usr/local/include/ace/OS_NS_sys_socket.h
+c000000005037A388000000000000247F
+t1345823624
+s9343
+
+N/usr/local/include/ace/OS_NS_sys_socket.inl
+c000000005037A3870000000000007ED0
+t1345823623
+s32464
+
+N/usr/local/include/ace/OS_NS_sys_stat.h
+c000000005037A3880000000000000FF4
+t1345823624
+s4084
+
+N/usr/local/include/ace/OS_NS_sys_stat.inl
+c000000005037A38700000000000021D4
+t1345823623
+s8660
+
+N/usr/local/include/ace/OS_NS_sys_time.h
+c000000005037A3880000000000000509
+t1345823624
+s1289
+
+N/usr/local/include/ace/OS_NS_sys_time.inl
+c000000005037A38700000000000008B7
+t1345823623
+s2231
+
+N/usr/local/include/ace/OS_NS_sys_uio.h
+c000000005037A38800000000000007D8
+t1345823624
+s2008
+
+N/usr/local/include/ace/OS_NS_sys_uio.inl
+c000000005037A3870000000000000695
+t1345823623
+s1685
+
+N/usr/local/include/ace/OS_NS_sys_utsname.h
+c000000005037A3880000000000000677
+t1345823624
+s1655
+
+N/usr/local/include/ace/OS_NS_unistd.h
+c000000005037A38800000000000025E3
+t1345823624
+s9699
+
+N/usr/local/include/ace/OS_NS_unistd.inl
+c000000005037A38700000000000084F4
+t1345823623
+s34036
+
+N/usr/local/include/ace/OS_NS_wchar.h
+c000000005037A38800000000000019DE
+t1345823624
+s6622
+
+N/usr/local/include/ace/OS_NS_wchar.inl
+c000000005037A3880000000000000631
+t1345823624
+s1585
+
+N/usr/local/include/ace/OS_QoS.h
+c000000005037A3880000000000003139
+t1345823624
+s12601
+
+N/usr/local/include/ace/OS_main.h
+c000000005037A3880000000000002497
+t1345823624
+s9367
+
+N/usr/local/include/ace/Object_Manager_Base.h
+c000000005037A3880000000000001D36
+t1345823624
+s7478
+
+N/usr/local/include/ace/Sock_Connect.h
+c000000005037A3880000000000000DE4
+t1345823624
+s3556
+
+N/usr/local/include/ace/String_Base.cpp
+c000000005037A38800000000000045C8
+t1345823624
+s17864
+
+N/usr/local/include/ace/String_Base.h
+c000000005037A388000000000000714C
+t1345823624
+s29004
+
+N/usr/local/include/ace/String_Base.inl
+c000000005037A388000000000000325A
+t1345823624
+s12890
+
+N/usr/local/include/ace/String_Base_Const.h
+c000000005037A38800000000000004E9
+t1345823624
+s1257
+
+N/usr/local/include/ace/Synch_Traits.h
+c000000005037A3880000000000000CE5
+t1345823624
+s3301
+
+N/usr/local/include/ace/Time_Value.h
+c000000005037A38800000000000030B4
+t1345823624
+s12468
+
+N/usr/local/include/ace/Time_Value.inl
+c000000005037A3870000000000002692
+t1345823623
+s9874
+
+N/usr/local/include/ace/Truncate.h
+c000000005037A38800000000000036A8
+t1345823624
+s13992
+
+N/usr/local/include/ace/Unbounded_Queue.cpp
+c000000005037A3880000000000002C45
+t1345823624
+s11333
+
+N/usr/local/include/ace/Unbounded_Queue.h
+c000000005037A3880000000000001D81
+t1345823624
+s7553
+
+N/usr/local/include/ace/Unbounded_Queue.inl
+c000000005037A3870000000000000294
+t1345823623
+s660
+
+N/usr/local/include/ace/Unbounded_Set.cpp
+c000000005037A38800000000000001A7
+t1345823624
+s423
+
+N/usr/local/include/ace/Unbounded_Set.h
+c000000005037A3880000000000000AA8
+t1345823624
+s2728
+
+N/usr/local/include/ace/Unbounded_Set.inl
+c000000005037A387000000000000048C
+t1345823623
+s1164
+
+N/usr/local/include/ace/Unbounded_Set_Ex.cpp
+c000000005037A3880000000000003528
+t1345823624
+s13608
+
+N/usr/local/include/ace/Unbounded_Set_Ex.h
+c000000005037A3880000000000002954
+t1345823624
+s10580
+
+N/usr/local/include/ace/Unbounded_Set_Ex.inl
+c000000005037A3880000000000000254
+t1345823624
+s596
+
+N/usr/local/include/ace/Vector_T.cpp
+c000000005037A38800000000000007CD
+t1345823624
+s1997
+
+N/usr/local/include/ace/Vector_T.h
+c000000005037A3880000000000001E56
+t1345823624
+s7766
+
+N/usr/local/include/ace/Vector_T.inl
+c000000005037A3870000000000000A3C
+t1345823623
+s2620
+
+N/usr/local/include/ace/Version.h
+c000000005037A3880000000000000105
+t1345823624
+s261
+
+N/usr/local/include/ace/Versioned_Namespace.h
+c000000005037A3880000000000000731
+t1345823624
+s1841
+
+N/usr/local/include/ace/ace_wchar.h
+c000000005037A388000000000000371F
+t1345823624
+s14111
+
+N/usr/local/include/ace/ace_wchar.inl
+c000000005037A387000000000000120F
+t1345823623
+s4623
+
+N/usr/local/include/ace/config-all.h
+c000000005037A3880000000000000B38
+t1345823624
+s2872
+
+N/usr/local/include/ace/config-g++-common.h
+c000000005037A3880000000000001ABC
+t1345823624
+s6844
+
+N/usr/local/include/ace/config-lite.h
+c000000005037A38800000000000016F1
+t1345823624
+s5873
+
+N/usr/local/include/ace/config-macosx-leopard.h
+c000000005037A388000000000000170C
+t1345823624
+s5900
+
+N/usr/local/include/ace/config-macros.h
+c000000005037A3880000000000004A81
+t1345823624
+s19073
+
+N/usr/local/include/ace/config.h
+c000000005037A3880000000000000179
+t1345823624
+s377
+
+N/usr/local/include/ace/iosfwd.h
+c000000005037A38800000000000009FE
+t1345823624
+s2558
+
+N/usr/local/include/ace/os_include/arpa/os_inet.h
+c000000005037A38800000000000007ED
+t1345823624
+s2029
+
+N/usr/local/include/ace/os_include/net/os_if.h
+c000000005037A3880000000000000D45
+t1345823624
+s3397
+
+N/usr/local/include/ace/os_include/netinet/os_in.h
+c000000005037A3880000000000001300
+t1345823624
+s4864
+
+N/usr/local/include/ace/os_include/os_ctype.h
+c000000005037A388000000000000046D
+t1345823624
+s1133
+
+N/usr/local/include/ace/os_include/os_dirent.h
+c000000005037A3880000000000000A77
+t1345823624
+s2679
+
+N/usr/local/include/ace/os_include/os_errno.h
+c000000005037A388000000000000358E
+t1345823624
+s13710
+
+N/usr/local/include/ace/os_include/os_fcntl.h
+c000000005037A3880000000000000943
+t1345823624
+s2371
+
+N/usr/local/include/ace/os_include/os_float.h
+c000000005037A38800000000000003C9
+t1345823624
+s969
+
+N/usr/local/include/ace/os_include/os_inttypes.h
+c000000005037A388000000000000045A
+t1345823624
+s1114
+
+N/usr/local/include/ace/os_include/os_limits.h
+c000000005037A3880000000000000F4B
+t1345823624
+s3915
+
+N/usr/local/include/ace/os_include/os_math.h
+c000000005037A38800000000000003F9
+t1345823624
+s1017
+
+N/usr/local/include/ace/os_include/os_pthread.h
+c000000005037A3880000000000003966
+t1345823624
+s14694
+
+N/usr/local/include/ace/os_include/os_pwd.h
+c000000005037A38800000000000003EB
+t1345823624
+s1003
+
+N/usr/local/include/ace/os_include/os_sched.h
+c000000005037A388000000000000055B
+t1345823624
+s1371
+
+N/usr/local/include/ace/os_include/os_search.h
+c000000005037A38800000000000003FE
+t1345823624
+s1022
+
+N/usr/local/include/ace/os_include/os_semaphore.h
+c000000005037A38800000000000008F1
+t1345823624
+s2289
+
+N/usr/local/include/ace/os_include/os_signal.h
+c000000005037A38800000000000015B1
+t1345823624
+s5553
+
+N/usr/local/include/ace/os_include/os_stdarg.h
+c000000005037A3880000000000000495
+t1345823624
+s1173
+
+N/usr/local/include/ace/os_include/os_stddef.h
+c000000005037A38800000000000008A8
+t1345823624
+s2216
+
+N/usr/local/include/ace/os_include/os_stdint.h
+c000000005037A3880000000000001036
+t1345823624
+s4150
+
+N/usr/local/include/ace/os_include/os_stdio.h
+c000000005037A3880000000000000790
+t1345823624
+s1936
+
+N/usr/local/include/ace/os_include/os_stdlib.h
+c000000005037A3880000000000000745
+t1345823624
+s1861
+
+N/usr/local/include/ace/os_include/os_string.h
+c000000005037A38800000000000004B5
+t1345823624
+s1205
+
+N/usr/local/include/ace/os_include/os_stropts.h
+c000000005037A3880000000000000B0E
+t1345823624
+s2830
+
+N/usr/local/include/ace/os_include/os_time.h
+c000000005037A3880000000000000D2F
+t1345823624
+s3375
+
+N/usr/local/include/ace/os_include/os_ucontext.h
+c000000005037A3880000000000000464
+t1345823624
+s1124
+
+N/usr/local/include/ace/os_include/os_unistd.h
+c000000005037A38800000000000014D7
+t1345823624
+s5335
+
+N/usr/local/include/ace/os_include/os_wchar.h
+c000000005037A38800000000000004CE
+t1345823624
+s1230
+
+N/usr/local/include/ace/os_include/os_wctype.h
+c000000005037A388000000000000045B
+t1345823624
+s1115
+
+N/usr/local/include/ace/os_include/sys/os_ipc.h
+c000000005037A3880000000000000661
+t1345823624
+s1633
+
+N/usr/local/include/ace/os_include/sys/os_mman.h
+c000000005037A3880000000000000B3D
+t1345823624
+s2877
+
+N/usr/local/include/ace/os_include/sys/os_resource.h
+c000000005037A38800000000000009AA
+t1345823624
+s2474
+
+N/usr/local/include/ace/os_include/sys/os_sem.h
+c000000005037A38800000000000007A8
+t1345823624
+s1960
+
+N/usr/local/include/ace/os_include/sys/os_socket.h
+c000000005037A3880000000000001FF4
+t1345823624
+s8180
+
+N/usr/local/include/ace/os_include/sys/os_stat.h
+c000000005037A388000000000000108C
+t1345823624
+s4236
+
+N/usr/local/include/ace/os_include/sys/os_time.h
+c000000005037A388000000000000053E
+t1345823624
+s1342
+
+N/usr/local/include/ace/os_include/sys/os_types.h
+c000000005037A3880000000000000FA0
+t1345823624
+s4000
+
+N/usr/local/include/ace/os_include/sys/os_uio.h
+c000000005037A388000000000000081F
+t1345823624
+s2079
+
+N/usr/local/include/ace/os_include/sys/os_utsname.h
+c000000005037A38800000000000003F9
+t1345823624
+s1017
+
+N/usr/local/include/ace/os_include/sys/os_wait.h
+c000000005037A3880000000000000A23
+t1345823624
+s2595
+
+N/usr/local/include/ace/post.h
+c000000005037A3880000000000000218
+t1345823624
+s536
+
+N/usr/local/include/ace/pre.h
+c000000005037A38800000000000002B9
+t1345823624
+s697
+
+N/usr/local/include/ace/streams.h
+c000000005037A3880000000000000E80
+t1345823624
+s3712
+
+CAnalyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
+s396042691.775306
+e396042692.606553
+r1
+xAnalyze
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp:18:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/ControlBoardFilter.h:28:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:
+oIn file included from /usr/local/include/ace/String_Base.h:878:
+oIn file included from /usr/local/include/ace/String_Base.inl:8:
+oIn file included from /usr/local/include/ace/OS_Memory.h:337:
+oIn file included from /usr/local/include/ace/OS_NS_stdlib.h:449:
+o/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  return ::mktemp (s);
+o         ^~~~~~~~
+o/usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  if (::mktemp (narrow_s.char_rep ()) == 0)
+o      ^~~~~~~~
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp:18:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/ControlBoardFilter.h:28:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:
+o/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read
+o            str += terminate;
+o            ^      ~~~~~~~~~
+o3 warnings generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cppb8acc6c3219bb741^a1679bc4219bb741^-2015"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp:18:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/ControlBoardFilter.h:28:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:In file included from /usr/local/include/ace/String_Base.h:878:In file included from /usr/local/include/ace/String_Base.inl:8:In file included from /usr/local/include/ace/OS_Memory.h:337:In file included from /usr/local/include/ace/OS_NS_stdlib.h:449:/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  return ::mktemp (s        /usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  if (::mktemp (narrow_s.char_rep ()) ==       ^~In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp:18:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/ControlBoardFilter.h:28:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read            str +            ^   3 warnings generated.3(35%IDEActivityLogAnalyzerResultMessage2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042692#18446744073709551615#0#1(38%IDEActivityLogAnalyzerEventStepMessage3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042692#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result23%DVTTextDocumentLocation4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042692#18446744073709551615#0#1(3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042692#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@35"Value stored to 'str' is never read-396042692#18446744073709551615#0#1(3@35"Value stored to 'str' is never read-396042692#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#-1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-35"Value stored to 'str' is never read0#1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#10"Dead store1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-14"Dead increment0#0#0#-19%DVTDocumentLocation5@94"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp0000000000000000^4180"Analyze src/LibYarpCBFilter/ControlBoardFilter.cpp    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -Xclang -analyzer-output=plist-multi-file -Xclang -analyzer-checker -Xclang security.insecureAPI.UncheckedReturn -Xclang -analyzer-checker -Xclang security.insecureAPI.getpw -Xclang -analyzer-checker -Xclang security.insecureAPI.gets -Xclang -analyzer-checker -Xclang security.insecureAPI.mkstemp -Xclang -analyzer-checker -Xclang security.insecureAPI.mktemp -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.rand -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.strcpy -Xclang -analyzer-checker -Xclang security.insecureAPI.vfork -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/ControlBoardFilter.d --analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/ControlBoardFilter.plist36"97F1BA28-CB34-4AB0-A6E2-FD8AEE5BBFEC-
+
+CAnalyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
+s396042690.690405
+e396042691.598149
+r1
+xAnalyze
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp:17:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:
+oIn file included from /usr/local/include/ace/String_Base.h:878:
+oIn file included from /usr/local/include/ace/String_Base.inl:8:
+oIn file included from /usr/local/include/ace/OS_Memory.h:337:
+oIn file included from /usr/local/include/ace/OS_NS_stdlib.h:449:
+o/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  return ::mktemp (s);
+o         ^~~~~~~~
+o/usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  if (::mktemp (narrow_s.char_rep ()) == 0)
+o      ^~~~~~~~
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp:17:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:
+o/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read
+o            str += terminate;
+o            ^      ~~~~~~~~~
+o3 warnings generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp4be6b0c2219bb741^793c99c3219bb741^-1757"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp:17:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:In file included from /usr/local/include/ace/String_Base.h:878:In file included from /usr/local/include/ace/String_Base.inl:8:In file included from /usr/local/include/ace/OS_Memory.h:337:In file included from /usr/local/include/ace/OS_NS_stdlib.h:449:/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  return ::mktemp (s        /usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  if (::mktemp (narrow_s.char_rep ()) ==       ^~In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp:17:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/RpcFilter.h:25:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read            str +            ^   3 warnings generated.3(35%IDEActivityLogAnalyzerResultMessage2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042691#18446744073709551615#0#1(38%IDEActivityLogAnalyzerEventStepMessage3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042691#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result23%DVTTextDocumentLocation4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042691#18446744073709551615#0#1(3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042691#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@35"Value stored to 'str' is never read-396042691#18446744073709551615#0#1(3@35"Value stored to 'str' is never read-396042691#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#-1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-35"Value stored to 'str' is never read0#1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#10"Dead store1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-14"Dead increment0#0#0#-19%DVTDocumentLocation5@85"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp0000000000000000^4144"Analyze src/LibYarpCBFilter/RpcFilter.cpp    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -Xclang -analyzer-output=plist-multi-file -Xclang -analyzer-checker -Xclang security.insecureAPI.UncheckedReturn -Xclang -analyzer-checker -Xclang security.insecureAPI.getpw -Xclang -analyzer-checker -Xclang security.insecureAPI.gets -Xclang -analyzer-checker -Xclang security.insecureAPI.mkstemp -Xclang -analyzer-checker -Xclang security.insecureAPI.mktemp -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.rand -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.strcpy -Xclang -analyzer-checker -Xclang security.insecureAPI.vfork -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilter.d --analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilter.plist36"912637E6-99B1-4C4F-BC21-FF390C192C09-
+
+CAnalyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
+s396042690.672723
+e396042694.994139
+r1
+xAnalyze
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:17:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:
+oIn file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:
+oIn file included from /usr/local/include/ace/String_Base.h:878:
+oIn file included from /usr/local/include/ace/String_Base.inl:8:
+oIn file included from /usr/local/include/ace/OS_Memory.h:337:
+oIn file included from /usr/local/include/ace/OS_NS_stdlib.h:449:
+o/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  return ::mktemp (s);
+o         ^~~~~~~~
+o/usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead
+o  if (::mktemp (narrow_s.char_rep ()) == 0)
+o      ^~~~~~~~
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:17:
+oIn file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:
+o/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read
+o            str += terminate;
+o            ^      ~~~~~~~~~
+o/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:201:4: warning: Value stored to 'err' is never read
+o                        err = true;
+o                        ^     ~~~~
+o/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:202:4: warning: Value stored to 'done' is never read
+o                        done = true;
+o                        ^      ~~~~
+o5 warnings generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cppa27faec2219bb741^d1aefec6219bb741^-1838"In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:17:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:26:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/NameClient.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/Address.h:13:In file included from /usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/String.h:67:In file included from /usr/local/include/ace/String_Base.h:878:In file included from /usr/local/include/ace/String_Base.inl:8:In file included from /usr/local/include/ace/OS_Memory.h:337:In file included from /usr/local/include/ace/OS_NS_stdlib.h:449:/usr/local/include/ace/OS_NS_stdlib.inl:277:10: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  return ::mktemp (s        /usr/local/include/ace/OS_NS_stdlib.inl:292:7: warning: Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead  if (::mktemp (narrow_s.char_rep ()) ==       ^~In file included from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:17:In file included from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter/./yarp/os/impl/RpcFilterImpl.h:30:/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h:250:13: warning: Value stored to 'str' is never read            str +            ^   /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:201:4: warning: Value stored to 'err' is never read                     /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp:202:4: warning: Value stored to 'done' is never read                       5 warnings generated.5(35%IDEActivityLogAnalyzerResultMessage2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042694#18446744073709551615#0#1(38%IDEActivityLogAnalyzerEventStepMessage3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042694#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result23%DVTTextDocumentLocation4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#9#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^276#9#276#17#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042694#18446744073709551615#0#1(3@114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead-396042694#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#-1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-114"Call to function 'mktemp' is insecure as it always creates or uses insecure temporary file.  Use 'mkstemp' instead0#1#32"com.apple.dt.IDE.analyzer.result4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#6#18446744073709551615#0#8"Security1(4@55"file://localhost/usr/local/include/ace/OS_NS_stdlib.inl0000000000000000^291#6#291#14#18446744073709551615#0#-50"Potential insecure temporary file in call 'mktemp'2@35"Value stored to 'str' is never read-396042694#18446744073709551615#0#1(3@35"Value stored to 'str' is never read-396042694#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#-1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-35"Value stored to 'str' is never read0#1#32"com.apple.dt.IDE.analyzer.result4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#12#249#12#18446744073709551615#0#10"Dead store1(4@91"file://localhost/usr/local/Cellar/yarp/HEAD/include/yarp/os/impl/BufferedConnectionWriter.h0000000000000000^249#19#249#28#18446744073709551615#0#-14"Dead increment2@35"Value stored to 'err' is never read-396042694#18446744073709551615#0#1(3@35"Value stored to 'err' is never read-396042694#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^200#3#200#3#18446744073709551615#0#-1(4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^200#9#200#13#18446744073709551615#0#-35"Value stored to 'err' is never read0#1#32"com.apple.dt.IDE.analyzer.result4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^200#3#200#3#18446744073709551615#0#10"Dead store1(4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^200#9#200#13#18446744073709551615#0#-15"Dead assignment2@36"Value stored to 'done' is never read-396042694#18446744073709551615#0#1(3@36"Value stored to 'done' is never read-396042694#18446744073709551615#0#-1#32"com.apple.dt.IDE.analyzer.result4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^201#3#201#3#18446744073709551615#0#-1(4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^201#10#201#14#18446744073709551615#0#-36"Value stored to 'done' is never read0#1#32"com.apple.dt.IDE.analyzer.result4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^201#3#201#3#18446744073709551615#0#10"Dead store1(4@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^201#10#201#14#18446744073709551615#0#-15"Dead assignment0#0#0#-19%DVTDocumentLocation5@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^4160"Analyze src/LibYarpCBFilter/RpcFilterImpl.cpp    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -Xclang -analyzer-output=plist-multi-file -Xclang -analyzer-checker -Xclang security.insecureAPI.UncheckedReturn -Xclang -analyzer-checker -Xclang security.insecureAPI.getpw -Xclang -analyzer-checker -Xclang security.insecureAPI.gets -Xclang -analyzer-checker -Xclang security.insecureAPI.mkstemp -Xclang -analyzer-checker -Xclang security.insecureAPI.mktemp -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.rand -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.strcpy -Xclang -analyzer-checker -Xclang security.insecureAPI.vfork -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilterImpl.d --analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/RpcFilterImpl.plist36"0DF0C279-EA87-4EE6-A141-A158340785DC-
+
+CAnalyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
+s396042691.694263
+e396042691.774018
+r1
+xAnalyze
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cppc1e5b1c3219bb741^2d26c6c3219bb741^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp0000000000000000^4156"Analyze src/LibYarpCBFilter/StreamFilter.cpp    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -Xclang -analyzer-output=plist-multi-file -Xclang -analyzer-checker -Xclang security.insecureAPI.UncheckedReturn -Xclang -analyzer-checker -Xclang security.insecureAPI.getpw -Xclang -analyzer-checker -Xclang security.insecureAPI.gets -Xclang -analyzer-checker -Xclang security.insecureAPI.mkstemp -Xclang -analyzer-checker -Xclang security.insecureAPI.mktemp -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.rand -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.strcpy -Xclang -analyzer-checker -Xclang security.insecureAPI.vfork -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilter.d --analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilter.plist36"8A311522-38F2-47E8-BCA2-E55CD7444C3C-
+
+CAnalyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
+s396042691.600895
+e396042691.692610
+r1
+xAnalyze
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp44fa99c3219bb741^295eb1c3219bb741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp0000000000000000^4172"Analyze src/LibYarpCBFilter/StreamFilterImpl.cpp    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -Xclang -analyzer-output=plist-multi-file -Xclang -analyzer-checker -Xclang security.insecureAPI.UncheckedReturn -Xclang -analyzer-checker -Xclang security.insecureAPI.getpw -Xclang -analyzer-checker -Xclang security.insecureAPI.gets -Xclang -analyzer-checker -Xclang security.insecureAPI.mkstemp -Xclang -analyzer-checker -Xclang security.insecureAPI.mktemp -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.rand -Xclang -analyzer-disable-checker -Xclang security.insecureAPI.strcpy -Xclang -analyzer-checker -Xclang security.insecureAPI.vfork -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilterImpl.d --analyze /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/StaticAnalyzer/MoBeE/CBFilter/normal/x86_64/StreamFilterImpl.plist36"DE578366-10CE-463B-B31F-D9CCA012311B-
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
+r0
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies29ccfb12229bb741^55121513229bb741^---0#1#0#--18"Check dependencies36"EAB797A2-CB9D-4943-AFB2-9852B61ACE26-
+
+CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042312.956616
+e396042314.014756
+r1
+xCompileC
+xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp130af548209bb741^65c6034a209bb741^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp0000000000000000^3968"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o src/LibYarpCBFilter/ControlBoardFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/ControlBoardFilter.o36"DADF47C9-11BA-41DB-AA48-45F502F0225F-
+
+CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042311.860067
+e396042312.953421
+r1
+xCompileC
+xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp465cdc47209bb741^3d9cf448209bb741^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp0000000000000000^3914"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o src/LibYarpCBFilter/RpcFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilter.o36"AF2E9B47-6A69-43DA-B677-10ED8A35D4F8-
+
+CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042310.747403
+e396042312.439682
+r1
+xCompileC
+xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp5b7bbf46209bb741^c6a77048209bb741^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp0000000000000000^3938"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o src/LibYarpCBFilter/RpcFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/RpcFilterImpl.o36"5CFE3504-1A92-4854-A64D-7D7680114FB1-
+
+CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042312.723902
+e396042312.965217
+r1
+xCompileC
+xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp4a79b948209bb741^1423f748209bb741^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp0000000000000000^3932"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o src/LibYarpCBFilter/StreamFilter.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilter.o36"1FF44D4B-C287-4330-8F05-008481B1579B-
+
+CCompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042312.442121
+e396042312.721616
+r1
+xCompileC
+xxcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cppef577148209bb741^0abbb848209bb741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp0000000000000000^3956"CompileC xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o src/LibYarpCBFilter/StreamFilterImpl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/StreamFilterImpl.o36"32ABCC6D-3EEF-486F-8ADD-3DAFFE13C3C2-
+
+CLibtool /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64
+s396042314.506353
+e396042314.540337
+r1
+xLibtool
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Libtool xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64edb8814a209bb741^22538a4a209bb741^---0#0#0#--836"Libtool xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Objects-normal/x86_64/CBFilter.LinkFileList -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a36"86620898-60E8-4ABD-8873-781B878C32F3-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
+s396042771.122229
+e396042771.367897
+r1
+xPhaseScriptExecution
+xCMake PostBuild Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
+omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
+omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
+omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug
+omake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'dfdc1f13229bb741^fe475e13229bb741^-1639"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debugmake[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.16(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042771#0#30#-0#-----2@23"Depend check for xcode-396042771#30#23#-0#-----2@374"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042771#53#374#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042771#427#60#-0#-----2@30"echo "Depend check for xcode"-396042771#487#30#-0#-----2@23"Depend check for xcode-396042771#517#23#-0#-----2@206"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042771#540#206#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042771#746#60#-0#-----2@30"echo "Depend check for xcode"-396042771#806#30#-0#-----2@23"Depend check for xcode-396042771#836#23#-0#-----2@326"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042771#859#326#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042771#1185#60#-0#-----2@30"echo "Depend check for xcode"-396042771#1245#30#-0#-----2@23"Depend check for xcode-396042771#1275#23#-0#-----2@281"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.CBFilter.Debug-396042771#1298#281#-0#-----2@60"make[1]: Nothing to be done for `PostBuild.CBFilter.Debug'.-396042771#1579#60#-0#-----0#0#0#--399"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MoBeE.build/Debug/CBFilter.build/Script-72974B1477334F759A7F5314.sh36"BB8AAF15-BC5D-4C19-A308-9F7F25F99352-
+

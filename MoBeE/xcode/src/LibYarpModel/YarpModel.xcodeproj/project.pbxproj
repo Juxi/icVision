@@ -1,0 +1,899 @@
+// !$*UTF8*$!
+{
+       archiveVersion = 1;
+       classes = {
+       };
+       objectVersion = 46;
+       objects = {
+
+/* Begin PBXAggregateTarget section */
+              3CDD3E99258F4866A90D1751 /* ALL_BUILD */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 5CC5B5F9F78841D29D180268 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildPhases = (
+                            8D4EE49B766C42CC84A7357B /* CMake Rules */,
+                     );
+                     dependencies = (
+                            DA3EBC8BFC424D8E971B1B1F /* PBXTargetDependency */,
+                            7DD58D47781B415AAE79DAFC /* PBXTargetDependency */,
+                     );
+                     name = ALL_BUILD;
+                     productName = ALL_BUILD;
+              };
+              EC331B223E5645C48F78D1DD /* ZERO_CHECK */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 7D03C4FDE996472291CEB31B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+                     buildPhases = (
+                            467016A272DB416D897AA50F /* CMake Rules */,
+                     );
+                     dependencies = (
+                     );
+                     name = ZERO_CHECK;
+                     productName = ZERO_CHECK;
+              };
+              A2FC27FEE1D6484E90B2C4AB /* install */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 5437F42670F64C0E89C1C488 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildPhases = (
+                            84F47BC280C64086AEEFE5D0 /* CMake PostBuild Rules */,
+                     );
+                     dependencies = (
+                            E6B95D3A39194B20AF950F7A /* PBXTargetDependency */,
+                     );
+                     name = install;
+                     productName = install;
+              };
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+31882CB8CA224EF3A4C01B7F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/constants.h */ = {isa = PBXBuildFile; fileRef = 659EB8C6FDD94274875A6B9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/constants.h */; settings = { COMPILER_FLAGS = ""; }; };
+200D304473054EF2AF140236 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.h */ = {isa = PBXBuildFile; fileRef = 1AF9300593C74F6982B43B7D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.h */; settings = { COMPILER_FLAGS = ""; }; };
+CBF041D806F7449C9286DA7C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h */ = {isa = PBXBuildFile; fileRef = 1C91EA9FD2CA488D804572B4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h */; settings = { COMPILER_FLAGS = ""; }; };
+4A589C41BD9144269E4E0F04 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h */ = {isa = PBXBuildFile; fileRef = 3FAC7EAAE824408FB3255E9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h */; settings = { COMPILER_FLAGS = ""; }; };
+DAE21C6EC0D54261AC0FBC7C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.h */ = {isa = PBXBuildFile; fileRef = FFB2CA5038254EF5A24F9912 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.h */; settings = { COMPILER_FLAGS = ""; }; };
+D41B8AC5594D42ABBBE4637B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.h */ = {isa = PBXBuildFile; fileRef = 52A4E9E5EE0B454E95BBD8A8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.h */; settings = { COMPILER_FLAGS = ""; }; };
+20A892AD48A94D7684237AC8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h */ = {isa = PBXBuildFile; fileRef = 36C12A56C96D44A4B679C72A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h */; settings = { COMPILER_FLAGS = ""; }; };
+7898B9E7D5C74986B25C1698 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.h */ = {isa = PBXBuildFile; fileRef = D68B425C35C14C9C9ED52941 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.h */; settings = { COMPILER_FLAGS = ""; }; };
+119679EB3ACC46E286EE6318 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp */ = {isa = PBXBuildFile; fileRef = D04272D233C44C01AD3F2C2C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+39DC6CE7578B4DFA8EC3640E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp */ = {isa = PBXBuildFile; fileRef = 23F46D45F5F04EAF95C2DD09 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+E2369FF1008D4D34B6407E35 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp */ = {isa = PBXBuildFile; fileRef = E0691546216341D7873E8B67 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+C560DD943F2A43A1BCD0B94B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp */ = {isa = PBXBuildFile; fileRef = 413FCF6909C541AAB19C18D3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+BC0B8FDDB48146BB8AF023C8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp */ = {isa = PBXBuildFile; fileRef = 77CBE60719F7465EAD88700A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+D5AFCE31CD7D41EFA81D1BF1 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp */ = {isa = PBXBuildFile; fileRef = 994B439C30CF4BAB94D26948 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+9231B91842EB42D38F0A7E7B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp */ = {isa = PBXBuildFile; fileRef = F5A039B37D5E4DAAB5458A1C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+83986E4240F44F44BF149C46 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 6BCF240B1EAB405E91E398FE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+              1455F43FB070444E86E9FD83 /*  */ = {
+                     isa = PBXBuildStyle;
+              };
+              035EA7392681421AAAF1C293 /* Debug */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Debug;
+              };
+              10F56D620BC44D7A8996467F /* Release */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Release;
+              };
+              6BF91594B93548F9B9C8DF30 /* MinSizeRel */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = MinSizeRel;
+              };
+              1E10A9760AFF4808903180F6 /* RelWithDebInfo */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+              5013FD735700454A999539E5 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3FE6C0A47ADA45F4BE1F3052 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = C158BA1C918D4B14A081483C;
+                     remoteInfo = YarpModel;
+              };
+              0622099FF759436E9F2BC996 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3FE6C0A47ADA45F4BE1F3052 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = EC331B223E5645C48F78D1DD;
+                     remoteInfo = ZERO_CHECK;
+              };
+              0126FC53AE37489CB52C3E8A /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 3FE6C0A47ADA45F4BE1F3052 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3CDD3E99258F4866A90D1751;
+                     remoteInfo = ALL_BUILD;
+              };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+6BCF240B1EAB405E91E398FE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+659EB8C6FDD94274875A6B9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "constants.h"; path = "constants.h"; sourceTree = SOURCE_ROOT; };
+1AF9300593C74F6982B43B7D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "exception.h"; path = "exception.h"; sourceTree = SOURCE_ROOT; };
+1C91EA9FD2CA488D804572B4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "yarpModel.h"; path = "yarpModel.h"; sourceTree = SOURCE_ROOT; };
+3FAC7EAAE824408FB3255E9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "yarprobot.h"; path = "yarprobot.h"; sourceTree = SOURCE_ROOT; };
+FFB2CA5038254EF5A24F9912 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "worldRpcInterface.h"; path = "worldRpcInterface.h"; sourceTree = SOURCE_ROOT; };
+52A4E9E5EE0B454E95BBD8A8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "yarpStreamPort.h"; path = "yarpStreamPort.h"; sourceTree = SOURCE_ROOT; };
+36C12A56C96D44A4B679C72A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "simSyncer.h"; path = "simSyncer.h"; sourceTree = SOURCE_ROOT; };
+D68B425C35C14C9C9ED52941 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robotSyncer.h"; path = "robotSyncer.h"; sourceTree = SOURCE_ROOT; };
+D04272D233C44C01AD3F2C2C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "yarpModel.cpp"; path = "yarpModel.cpp"; sourceTree = SOURCE_ROOT; };
+23F46D45F5F04EAF95C2DD09 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "yarprobot.cpp"; path = "yarprobot.cpp"; sourceTree = SOURCE_ROOT; };
+E0691546216341D7873E8B67 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "worldRpcInterface.cpp"; path = "worldRpcInterface.cpp"; sourceTree = SOURCE_ROOT; };
+413FCF6909C541AAB19C18D3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "yarpStreamPort.cpp"; path = "yarpStreamPort.cpp"; sourceTree = SOURCE_ROOT; };
+77CBE60719F7465EAD88700A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "exception.cpp"; path = "exception.cpp"; sourceTree = SOURCE_ROOT; };
+994B439C30CF4BAB94D26948 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "simSyncer.cpp"; path = "simSyncer.cpp"; sourceTree = SOURCE_ROOT; };
+F5A039B37D5E4DAAB5458A1C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robotSyncer.cpp"; path = "robotSyncer.cpp"; sourceTree = SOURCE_ROOT; };
+7B96A85221CC40D1AB6F40DF /* YarpModel */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libYarpModel.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+              13D5D10977CD49EAA90024E4  = {
+                     isa = PBXGroup;
+                     children = (
+                            C42D8D8E619841C3926C74C3 /* Sources */,
+                            F58ADF57E4CE4BA6BDFBD868 /* Resources */,
+                            67F7AB3EAA7F42288E1B52E1 /* Products */,
+                     );
+                     sourceTree = "<group>";
+              };
+              C42D8D8E619841C3926C74C3 /* Sources */ = {
+                     isa = PBXGroup;
+                     children = (
+                            2B5D38DAE2144B8097DA4C9A /* ALL_BUILD */,
+                            D9B3AC66367747ADB59B4D45 /* YarpModel */,
+                            54BD52BC1ED14B7DA54C8781 /* ZERO_CHECK */,
+                     );
+                     name = Sources;
+                     sourceTree = "<group>";
+              };
+              F58ADF57E4CE4BA6BDFBD868 /* Resources */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = Resources;
+                     sourceTree = "<group>";
+              };
+              2B5D38DAE2144B8097DA4C9A /* ALL_BUILD */ = {
+                     isa = PBXGroup;
+                     children = (
+                            0AD892E8D9A34AB1B8EF029A /* CMake Rules */,
+                            6BCF240B1EAB405E91E398FE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */,
+                     );
+                     name = ALL_BUILD;
+                     sourceTree = "<group>";
+              };
+              0AD892E8D9A34AB1B8EF029A /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              D9B3AC66367747ADB59B4D45 /* YarpModel */ = {
+                     isa = PBXGroup;
+                     children = (
+                            2F15260F7EE34685983682CE /* Header Files */,
+                            B87EA35B0AE449E786A72F27 /* Source Files */,
+                            6BCF240B1EAB405E91E398FE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */,
+                     );
+                     name = YarpModel;
+                     sourceTree = "<group>";
+              };
+              2F15260F7EE34685983682CE /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            659EB8C6FDD94274875A6B9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/constants.h */,
+                            1AF9300593C74F6982B43B7D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.h */,
+                            1C91EA9FD2CA488D804572B4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.h */,
+                            3FAC7EAAE824408FB3255E9A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.h */,
+                            FFB2CA5038254EF5A24F9912 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.h */,
+                            52A4E9E5EE0B454E95BBD8A8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.h */,
+                            36C12A56C96D44A4B679C72A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.h */,
+                            D68B425C35C14C9C9ED52941 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              B87EA35B0AE449E786A72F27 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            D04272D233C44C01AD3F2C2C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp */,
+                            23F46D45F5F04EAF95C2DD09 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp */,
+                            E0691546216341D7873E8B67 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp */,
+                            413FCF6909C541AAB19C18D3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp */,
+                            77CBE60719F7465EAD88700A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp */,
+                            994B439C30CF4BAB94D26948 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp */,
+                            F5A039B37D5E4DAAB5458A1C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              54BD52BC1ED14B7DA54C8781 /* ZERO_CHECK */ = {
+                     isa = PBXGroup;
+                     children = (
+                            043B0D04AEED4F02BF30B136 /* CMake Rules */,
+                            6BCF240B1EAB405E91E398FE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/CMakeLists.txt */,
+                     );
+                     name = ZERO_CHECK;
+                     sourceTree = "<group>";
+              };
+              043B0D04AEED4F02BF30B136 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              67F7AB3EAA7F42288E1B52E1 /* Products */ = {
+                     isa = PBXGroup;
+                     children = (
+                            7B96A85221CC40D1AB6F40DF /* YarpModel */,
+                     );
+                     name = Products;
+                     sourceTree = "<group>";
+              };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+              C158BA1C918D4B14A081483C /* YarpModel */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 2508B7793574417AA6360693 /* Build configuration list for PBXNativeTarget "YarpModel" */;
+                     buildPhases = (
+                            FBD9C6D209364CDB8E093D84 /* Sources */,
+                            6928AE5B8536428BB2388D9D /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            7DD58D47781B415AAE79DAFC /* PBXTargetDependency */,
+                     );
+                     name = YarpModel;
+                     productName = YarpModel;
+                     productReference = 7B96A85221CC40D1AB6F40DF /* YarpModel */;
+                     productType = "com.apple.product-type.library.static";
+              };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+              3FE6C0A47ADA45F4BE1F3052 /* Project object */ = {
+                     isa = PBXProject;
+                     attributes = {
+                            BuildIndependentTargetsInParallel = YES;
+                     };
+                     buildConfigurationList = BFD77F45471D4BC3AF96D922 /* Build configuration list for PBXProject  "YarpModel" */;
+                     buildSettings = {
+                     };
+                     buildStyles = (
+                            035EA7392681421AAAF1C293 /* Debug */,
+                            10F56D620BC44D7A8996467F /* Release */,
+                            6BF91594B93548F9B9C8DF30 /* MinSizeRel */,
+                            1E10A9760AFF4808903180F6 /* RelWithDebInfo */,
+                     );
+                     compatibilityVersion = "Xcode 3.2";
+                     hasScannedForEncodings = 0;
+                     mainGroup = 13D5D10977CD49EAA90024E4;
+                     projectDirPath = "../../../src/LibYarpModel";
+                     projectRoot = "";
+                     targets = (
+                            3CDD3E99258F4866A90D1751 /* ALL_BUILD */,
+                            C158BA1C918D4B14A081483C /* YarpModel */,
+                            EC331B223E5645C48F78D1DD /* ZERO_CHECK */,
+                            A2FC27FEE1D6484E90B2C4AB /* install */,
+                     );
+              };
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+              3B8E6A6295EF4BCBB49039F5 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              8D4EE49B766C42CC84A7357B /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              6928AE5B8536428BB2388D9D /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/YarpModel_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              9E520FE3A4E0460C807A2184 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              467016A272DB416D897AA50F /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              70AED5E319E44DA29AF2F929 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              84F47BC280C64086AEEFE5D0 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+              FBD9C6D209364CDB8E093D84 /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            119679EB3ACC46E286EE6318 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpModel.cpp */,
+                            39DC6CE7578B4DFA8EC3640E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarprobot.cpp */,
+                            E2369FF1008D4D34B6407E35 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/worldRpcInterface.cpp */,
+                            C560DD943F2A43A1BCD0B94B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/yarpStreamPort.cpp */,
+                            BC0B8FDDB48146BB8AF023C8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/exception.cpp */,
+                            D5AFCE31CD7D41EFA81D1BF1 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/simSyncer.cpp */,
+                            9231B91842EB42D38F0A7E7B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/robotSyncer.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+              DA3EBC8BFC424D8E971B1B1F /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = C158BA1C918D4B14A081483C /* YarpModel */;
+                     targetProxy = 5013FD735700454A999539E5 /* PBXContainerItemProxy */;
+              };
+              7DD58D47781B415AAE79DAFC /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = EC331B223E5645C48F78D1DD /* ZERO_CHECK */;
+                     targetProxy = 0622099FF759436E9F2BC996 /* PBXContainerItemProxy */;
+              };
+              E6B95D3A39194B20AF950F7A /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3CDD3E99258F4866A90D1751 /* ALL_BUILD */;
+                     targetProxy = 0126FC53AE37489CB52C3E8A /* PBXContainerItemProxy */;
+              };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+              C6BE6894028A48AFB29FE537 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/build;
+                     };
+                     name = Debug;
+              };
+              7F85E781BB0D4938AA8B8225 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/build;
+                     };
+                     name = Release;
+              };
+              273A955FAE054902857CB846 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/build;
+                     };
+                     name = MinSizeRel;
+              };
+              CC544F291FFF4CE585A7B4AC /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/build;
+                     };
+                     name = RelWithDebInfo;
+              };
+              8D8D819657C149519B170F3D /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              15E417C7F3F34B33BA55D1AC /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              8FDA0264CC3F4B8EB7C7ABB9 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              4A1FC6BA17494B928E7D883B /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              F7595CEB4A5740BC8541CD5E /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = YarpModel;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              80B85E200A4B41B58D5A7B36 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = YarpModel;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              9D0EF974C2AE491387DB2E25 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = YarpModel;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              F5C034980F06499E94A52B93 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = YarpModel;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              4A3E4A19F08B4A83B35C9B7D /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              1A9067D860E140E48C931351 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              CF7D3EC53A7C47DE84392AF8 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              3A138042CD2C4432A68F3769 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              B8ADFAD46D1A4A6191167164 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              7CC8AD91D7C44F8890608DF1 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              ACCC5E09657D4B339C9954C0 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              A763706AA76540AEA39A0F72 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/LibYarpModel/../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+              BFD77F45471D4BC3AF96D922 /* Build configuration list for PBXProject  "YarpModel" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            C6BE6894028A48AFB29FE537 /* Debug */,
+                            7F85E781BB0D4938AA8B8225 /* Release */,
+                            273A955FAE054902857CB846 /* MinSizeRel */,
+                            CC544F291FFF4CE585A7B4AC /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              5CC5B5F9F78841D29D180268 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            8D8D819657C149519B170F3D /* Debug */,
+                            15E417C7F3F34B33BA55D1AC /* Release */,
+                            8FDA0264CC3F4B8EB7C7ABB9 /* MinSizeRel */,
+                            4A1FC6BA17494B928E7D883B /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              2508B7793574417AA6360693 /* Build configuration list for PBXNativeTarget "YarpModel" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            F7595CEB4A5740BC8541CD5E /* Debug */,
+                            80B85E200A4B41B58D5A7B36 /* Release */,
+                            9D0EF974C2AE491387DB2E25 /* MinSizeRel */,
+                            F5C034980F06499E94A52B93 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              7D03C4FDE996472291CEB31B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            4A3E4A19F08B4A83B35C9B7D /* Debug */,
+                            1A9067D860E140E48C931351 /* Release */,
+                            CF7D3EC53A7C47DE84392AF8 /* MinSizeRel */,
+                            3A138042CD2C4432A68F3769 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              5437F42670F64C0E89C1C488 /* Build configuration list for PBXAggregateTarget "install" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            B8ADFAD46D1A4A6191167164 /* Debug */,
+                            7CC8AD91D7C44F8890608DF1 /* Release */,
+                            ACCC5E09657D4B339C9954C0 /* MinSizeRel */,
+                            A763706AA76540AEA39A0F72 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+/* End XCConfigurationList section */
+       };
+       rootObject = 3FE6C0A47ADA45F4BE1F3052;
+}

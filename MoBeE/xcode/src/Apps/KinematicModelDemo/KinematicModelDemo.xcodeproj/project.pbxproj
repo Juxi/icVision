@@ -1,0 +1,858 @@
+// !$*UTF8*$!
+{
+       archiveVersion = 1;
+       classes = {
+       };
+       objectVersion = 46;
+       objects = {
+
+/* Begin PBXAggregateTarget section */
+              3CDD3E99258F4866A90D1751 /* ALL_BUILD */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 5930731A8AFB41C7A4388F0B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildPhases = (
+                            148F4E1F23794C94ABA3DC44 /* CMake Rules */,
+                     );
+                     dependencies = (
+                            E6BFD2817F7A47AF8E5ECA69 /* PBXTargetDependency */,
+                            64DD2FA99A114B7DAFA42A1F /* PBXTargetDependency */,
+                     );
+                     name = ALL_BUILD;
+                     productName = ALL_BUILD;
+              };
+              EC331B223E5645C48F78D1DD /* ZERO_CHECK */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 3251E2CFAE124920AE243357 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+                     buildPhases = (
+                            AC6963843EFC4138A0077FB2 /* CMake Rules */,
+                     );
+                     dependencies = (
+                     );
+                     name = ZERO_CHECK;
+                     productName = ZERO_CHECK;
+              };
+              A2FC27FEE1D6484E90B2C4AB /* install */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 4BB142838E9A4AD794764FD9 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildPhases = (
+                            1F333AEFC3854902927C89AC /* CMake PostBuild Rules */,
+                     );
+                     dependencies = (
+                            CC037ECF6B844A6B8B40F897 /* PBXTargetDependency */,
+                     );
+                     name = install;
+                     productName = install;
+              };
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+CACBCD2A54C84F9A8B39179F /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.h */ = {isa = PBXBuildFile; fileRef = DADCBFD5449948FBAB839E45 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.h */; settings = { COMPILER_FLAGS = ""; }; };
+21F6728754A14719A3C7C42A /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/main.cpp */ = {isa = PBXBuildFile; fileRef = 82B1F83AEC4A489E80EDD521 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/main.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+C59AC12BC7134BE2AEE62B0C /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.cpp */ = {isa = PBXBuildFile; fileRef = EF76B2E9BEFB42659F37F76A /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+D79F952B6BD54D99AC74CA00 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = D055EDE787FC4531984B484D /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+              152766A22BF546A2B09F52CF /*  */ = {
+                     isa = PBXBuildStyle;
+              };
+              D944CB5FD0E3407E95ECCB1D /* Debug */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Debug;
+              };
+              7FA38D38BBBD4E0BA36BE9A8 /* Release */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Release;
+              };
+              DD48821A8D4A4391B91F8620 /* MinSizeRel */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = MinSizeRel;
+              };
+              C2B266C766524157964FEDF8 /* RelWithDebInfo */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+              D9C3775F908D4ADAAB49D0D0 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = FFD3006932E5429E8C98B0E9 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = EC331B223E5645C48F78D1DD;
+                     remoteInfo = ZERO_CHECK;
+              };
+              556F9E5F848F42ADB8B67A6D /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = FFD3006932E5429E8C98B0E9 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = D6569D187FD242C09C3E6234;
+                     remoteInfo = KinematicModelDemo;
+              };
+              71992BA75C554EFB8C1A18B7 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = FFD3006932E5429E8C98B0E9 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3CDD3E99258F4866A90D1751;
+                     remoteInfo = ALL_BUILD;
+              };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+D055EDE787FC4531984B484D /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+DADCBFD5449948FBAB839E45 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "objectsoup.h"; path = "objectsoup.h"; sourceTree = SOURCE_ROOT; };
+82B1F83AEC4A489E80EDD521 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "main.cpp"; path = "main.cpp"; sourceTree = SOURCE_ROOT; };
+EF76B2E9BEFB42659F37F76A /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "objectsoup.cpp"; path = "objectsoup.cpp"; sourceTree = SOURCE_ROOT; };
+258E92DCC4954617AEC25B54 /* KinematicModelDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = KinematicModelDemo; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+              A4618CF12A4E4E97953108ED  = {
+                     isa = PBXGroup;
+                     children = (
+                            213768330B594E428AE20DCE /* Sources */,
+                            0B9B61D983AC4BBA914CA2CC /* Resources */,
+                            18281742090A4DF1A0A6E4AE /* Products */,
+                     );
+                     sourceTree = "<group>";
+              };
+              213768330B594E428AE20DCE /* Sources */ = {
+                     isa = PBXGroup;
+                     children = (
+                            7E8350EE114646318F3B5250 /* ALL_BUILD */,
+                            7A44554ADC004CDE855FF50A /* KinematicModelDemo */,
+                            B0DFBE405BA74C538ACBA4E2 /* ZERO_CHECK */,
+                     );
+                     name = Sources;
+                     sourceTree = "<group>";
+              };
+              0B9B61D983AC4BBA914CA2CC /* Resources */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = Resources;
+                     sourceTree = "<group>";
+              };
+              7E8350EE114646318F3B5250 /* ALL_BUILD */ = {
+                     isa = PBXGroup;
+                     children = (
+                            933A46CCE89F414C81645E30 /* CMake Rules */,
+                            D055EDE787FC4531984B484D /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */,
+                     );
+                     name = ALL_BUILD;
+                     sourceTree = "<group>";
+              };
+              933A46CCE89F414C81645E30 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              7A44554ADC004CDE855FF50A /* KinematicModelDemo */ = {
+                     isa = PBXGroup;
+                     children = (
+                            84B14F6411C949FE8FCB71A4 /* Header Files */,
+                            D29E430760A44567A47996E5 /* Source Files */,
+                            D055EDE787FC4531984B484D /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */,
+                     );
+                     name = KinematicModelDemo;
+                     sourceTree = "<group>";
+              };
+              84B14F6411C949FE8FCB71A4 /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            DADCBFD5449948FBAB839E45 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              D29E430760A44567A47996E5 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            82B1F83AEC4A489E80EDD521 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/main.cpp */,
+                            EF76B2E9BEFB42659F37F76A /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              B0DFBE405BA74C538ACBA4E2 /* ZERO_CHECK */ = {
+                     isa = PBXGroup;
+                     children = (
+                            F4AD7A35EEC6468C86FF8D7A /* CMake Rules */,
+                            D055EDE787FC4531984B484D /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/CMakeLists.txt */,
+                     );
+                     name = ZERO_CHECK;
+                     sourceTree = "<group>";
+              };
+              F4AD7A35EEC6468C86FF8D7A /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              18281742090A4DF1A0A6E4AE /* Products */ = {
+                     isa = PBXGroup;
+                     children = (
+                            258E92DCC4954617AEC25B54 /* KinematicModelDemo */,
+                     );
+                     name = Products;
+                     sourceTree = "<group>";
+              };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+              D6569D187FD242C09C3E6234 /* KinematicModelDemo */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 7BC470BC02AF4A70A90BC988 /* Build configuration list for PBXNativeTarget "KinematicModelDemo" */;
+                     buildPhases = (
+                            AE7EFF5FCEF945C685E6B971 /* Sources */,
+                            FD0E2907AB54410EBF827BAD /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            E6BFD2817F7A47AF8E5ECA69 /* PBXTargetDependency */,
+                     );
+                     name = KinematicModelDemo;
+                     productName = KinematicModelDemo;
+                     productReference = 258E92DCC4954617AEC25B54 /* KinematicModelDemo */;
+                     productType = "com.apple.product-type.tool";
+              };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+              FFD3006932E5429E8C98B0E9 /* Project object */ = {
+                     isa = PBXProject;
+                     attributes = {
+                            BuildIndependentTargetsInParallel = YES;
+                     };
+                     buildConfigurationList = 954911B2A98448FA8878817F /* Build configuration list for PBXProject  "KinematicModelDemo" */;
+                     buildSettings = {
+                     };
+                     buildStyles = (
+                            D944CB5FD0E3407E95ECCB1D /* Debug */,
+                            7FA38D38BBBD4E0BA36BE9A8 /* Release */,
+                            DD48821A8D4A4391B91F8620 /* MinSizeRel */,
+                            C2B266C766524157964FEDF8 /* RelWithDebInfo */,
+                     );
+                     compatibilityVersion = "Xcode 3.2";
+                     hasScannedForEncodings = 0;
+                     mainGroup = A4618CF12A4E4E97953108ED;
+                     projectDirPath = "../../../../src/Apps/KinematicModelDemo";
+                     projectRoot = "";
+                     targets = (
+                            3CDD3E99258F4866A90D1751 /* ALL_BUILD */,
+                            D6569D187FD242C09C3E6234 /* KinematicModelDemo */,
+                            EC331B223E5645C48F78D1DD /* ZERO_CHECK */,
+                            A2FC27FEE1D6484E90B2C4AB /* install */,
+                     );
+              };
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+              2E1F7C90933C4C3E820E7E9B /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              148F4E1F23794C94ABA3DC44 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              FD0E2907AB54410EBF827BAD /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/CMakeScripts/KinematicModelDemo_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              51DDF533C744418AB81C6C37 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              AC6963843EFC4138A0077FB2 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              5B9C197EDFC947FB9B009DDD /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              1F333AEFC3854902927C89AC /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+              AE7EFF5FCEF945C685E6B971 /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            21F6728754A14719A3C7C42A /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/main.cpp */,
+                            C59AC12BC7134BE2AEE62B0C /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/objectsoup.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+              E6BFD2817F7A47AF8E5ECA69 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = EC331B223E5645C48F78D1DD /* ZERO_CHECK */;
+                     targetProxy = D9C3775F908D4ADAAB49D0D0 /* PBXContainerItemProxy */;
+              };
+              64DD2FA99A114B7DAFA42A1F /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = D6569D187FD242C09C3E6234 /* KinematicModelDemo */;
+                     targetProxy = 556F9E5F848F42ADB8B67A6D /* PBXContainerItemProxy */;
+              };
+              CC037ECF6B844A6B8B40F897 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3CDD3E99258F4866A90D1751 /* ALL_BUILD */;
+                     targetProxy = 71992BA75C554EFB8C1A18B7 /* PBXContainerItemProxy */;
+              };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+              DCA0A5905C3049DB9FB38706 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/build;
+                     };
+                     name = Debug;
+              };
+              86213985224640498474E944 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/build;
+                     };
+                     name = Release;
+              };
+              6281B712295A4274B9D61E2B /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/build;
+                     };
+                     name = MinSizeRel;
+              };
+              917EE6012D824B219310562A /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo/build;
+                     };
+                     name = RelWithDebInfo;
+              };
+              16189FFBAE584C3C9F2CDFB6 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              6DC504A1F33246EAA140CB08 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              3DFBCE5F90AD4E429CCA1D15 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              B46F5994ACB7448A953885D7 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              969407F1C741472DB2CFF6D1 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = KinematicModelDemo;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              EE8A9D98DBA245AAAD0F61EB /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Release/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = KinematicModelDemo;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              258E1DA90523447AAEBA1774 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MinSizeRel/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = KinematicModelDemo;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              71C6C5951E7F423BAD7B1656 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/RelWithDebInfo/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = KinematicModelDemo;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              B94731DC99B241B5B1F6B44B /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              1E3AC816DC394881A88B8358 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              B54DF7A3D4D8449988A4C6F8 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              47E8D9741E4E4E139F9737E2 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              7C49A6823AC44E8C88F2EB06 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              95AB90C74B5A4493903E040F /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              CF686E53B6694CF4A76A34E7 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              400A380311ED472980A41C63 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/KinematicModelDemo/../../LibKinematicModel", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/KinematicModelDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+              954911B2A98448FA8878817F /* Build configuration list for PBXProject  "KinematicModelDemo" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            DCA0A5905C3049DB9FB38706 /* Debug */,
+                            86213985224640498474E944 /* Release */,
+                            6281B712295A4274B9D61E2B /* MinSizeRel */,
+                            917EE6012D824B219310562A /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              5930731A8AFB41C7A4388F0B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            16189FFBAE584C3C9F2CDFB6 /* Debug */,
+                            6DC504A1F33246EAA140CB08 /* Release */,
+                            3DFBCE5F90AD4E429CCA1D15 /* MinSizeRel */,
+                            B46F5994ACB7448A953885D7 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              7BC470BC02AF4A70A90BC988 /* Build configuration list for PBXNativeTarget "KinematicModelDemo" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            969407F1C741472DB2CFF6D1 /* Debug */,
+                            EE8A9D98DBA245AAAD0F61EB /* Release */,
+                            258E1DA90523447AAEBA1774 /* MinSizeRel */,
+                            71C6C5951E7F423BAD7B1656 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              3251E2CFAE124920AE243357 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            B94731DC99B241B5B1F6B44B /* Debug */,
+                            1E3AC816DC394881A88B8358 /* Release */,
+                            B54DF7A3D4D8449988A4C6F8 /* MinSizeRel */,
+                            47E8D9741E4E4E139F9737E2 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              4BB142838E9A4AD794764FD9 /* Build configuration list for PBXAggregateTarget "install" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            7C49A6823AC44E8C88F2EB06 /* Debug */,
+                            95AB90C74B5A4493903E040F /* Release */,
+                            CF686E53B6694CF4A76A34E7 /* MinSizeRel */,
+                            400A380311ED472980A41C63 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+/* End XCConfigurationList section */
+       };
+       rootObject = FFD3006932E5429E8C98B0E9;
+}

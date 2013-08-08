@@ -1,0 +1,1369 @@
+// !$*UTF8*$!
+{
+       archiveVersion = 1;
+       classes = {
+       };
+       objectVersion = 46;
+       objects = {
+
+/* Begin PBXAggregateTarget section */
+              3CDD3E99258F4866A90D1751 /* ALL_BUILD */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = A6A6068DED0E4DAAAD758B2F /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildPhases = (
+                            99F7F0E6744F4B549BBAFE98 /* CMake Rules */,
+                     );
+                     dependencies = (
+                            A94C0D4551C745B887C5C01C /* PBXTargetDependency */,
+                            870DC1F3AD3C48018E012879 /* PBXTargetDependency */,
+                            5EE6DD96CEEE496C9C9AD1B9 /* PBXTargetDependency */,
+                            E6E61206BE404452B896F99D /* PBXTargetDependency */,
+                     );
+                     name = ALL_BUILD;
+                     productName = ALL_BUILD;
+              };
+              EC331B223E5645C48F78D1DD /* ZERO_CHECK */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = E71E8ECB499A45F990CD3CC9 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+                     buildPhases = (
+                            18BA2A20853F49C7B5A9913F /* CMake Rules */,
+                     );
+                     dependencies = (
+                     );
+                     name = ZERO_CHECK;
+                     productName = ZERO_CHECK;
+              };
+              A2FC27FEE1D6484E90B2C4AB /* install */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 7A13C82280F64527A96A1447 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildPhases = (
+                            F8A39EFDB2FE42AA882FC9D6 /* CMake PostBuild Rules */,
+                     );
+                     dependencies = (
+                            4DDF368E177E4BFD862042B5 /* PBXTargetDependency */,
+                     );
+                     name = install;
+                     productName = install;
+              };
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+B6434599A555418895DC6CAD /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.h */ = {isa = PBXBuildFile; fileRef = 2FCA94F24134431E8DA3BDB2 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+7AA0B2C7BE584FEA97105496 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp */ = {isa = PBXBuildFile; fileRef = 1319969D25F642EBBAB1C1AB /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+4A1B435CA95A40DD97931376 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp */ = {isa = PBXBuildFile; fileRef = 9CD803BFEBA94B7D801F6217 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+45837370CB534E5FABCE8B0F /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = CC0A8451323641B58BD4A434 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+DCD686B69D034D12B1FB6EB4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.h */ = {isa = PBXBuildFile; fileRef = DC51F426E5584BF0A3467EB4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
+88A15C34B7834D8BBC4A212F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.h */ = {isa = PBXBuildFile; fileRef = 690B2D8F7F2D49CBBD71F5BB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.h */; settings = { COMPILER_FLAGS = ""; }; };
+728E7F76056D42DB81C0AD50 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.h */ = {isa = PBXBuildFile; fileRef = 9B2210B9DEB14F41ADBC1657 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.h */; settings = { COMPILER_FLAGS = ""; }; };
+B75BCBDA5D06448D9627AAE5 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.h */ = {isa = PBXBuildFile; fileRef = 2E032FF0AF0C4D4B8DE34249 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
+21AB9477FB144844B5F96BD2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.h */ = {isa = PBXBuildFile; fileRef = 366D5A2BA49044898CEF0467 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+64AF89771D3C477884092B60 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.h */ = {isa = PBXBuildFile; fileRef = 9CF1F90D3C7845D8A84561DF /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
+7182052EEF6343EDAAB1F8C0 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.cpp */ = {isa = PBXBuildFile; fileRef = 4DD31E285761491887F9452B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+87D93D0ED67A4A788DE943C7 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.cpp */ = {isa = PBXBuildFile; fileRef = 6DA069F4CEA34C008EE83CCB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+3CC5F9B6EA6545E6AB4D1068 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.cpp */ = {isa = PBXBuildFile; fileRef = B071AD547BB64BB5AE1C054C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+84DA2B45CE01452FB3CA1768 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.cpp */ = {isa = PBXBuildFile; fileRef = 949881923DD448C1B42557C2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+8546DAF1BF564871955B044B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.cpp */ = {isa = PBXBuildFile; fileRef = 467D9FDF05E14E94BC1E089B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+E37C9E04EC07429E8F600975 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.cpp */ = {isa = PBXBuildFile; fileRef = 5F384978622D46B3B365AC0C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+108B036C6D654432B5D4DBB9 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx */ = {isa = PBXBuildFile; fileRef = 02DBE71840F944E4A06DE6A0 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+7AD9558D650747828010A937 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx */ = {isa = PBXBuildFile; fileRef = 9F62D616FD28465D8FACC547 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+F3E6965AA9EC4BA98F41BEF1 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx */ = {isa = PBXBuildFile; fileRef = 3C4BD985540A4B3083D5A269 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx */; settings = { COMPILER_FLAGS = ""; }; };
+E706D71CF9F043FAB4FCE595 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 8E5BE54A90CA4760BAF6C524 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+2499CCCE0F394FECA49F50E0 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx.rule */ = {isa = PBXBuildFile; fileRef = AC5840C487A342F08C5DEE3E /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+A82D0D48727C45FC89298013 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx.rule */ = {isa = PBXBuildFile; fileRef = 8B2FAEE0E8CF495689F7C52F /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+2D02D2CB55214110B7495AAD /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx.rule */ = {isa = PBXBuildFile; fileRef = 0DB6324B114E4B69B398C3AB /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx.rule */; settings = { COMPILER_FLAGS = ""; }; };
+DB36185D838441EA89B8387D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = F6721354C8CA45B8B4DFE7C8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+51459EB27BDE4431B11523DD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp */ = {isa = PBXBuildFile; fileRef = 8A23C51A00334FC384827752 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+ED4728DE67A840B1B97CD0FD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp */ = {isa = PBXBuildFile; fileRef = 07DAF6BB623046DC9993C66E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+98C6C049FA1E4261B523828B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp */ = {isa = PBXBuildFile; fileRef = F8C2C571F7284B089DED382B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+ED0F6F0CAF284E3E8C06786D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp */ = {isa = PBXBuildFile; fileRef = DB34A16DD93E4E09821B8F56 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+A0A1FFD061BD49A9A5CD7666 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXBuildFile; fileRef = EBEABADA054A4E6EBADEC00B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
+E861908C406C455B8CC52BF8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/RpcFilter.h */ = {isa = PBXBuildFile; fileRef = D4FC793AA15947E691923108 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/RpcFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+B4B20E28B4F640C6B7636A4E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXBuildFile; fileRef = 56B717FBB0E94076A44518AE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/StreamFilterImpl.h */; settings = { COMPILER_FLAGS = ""; }; };
+F3863200596F481180EDD76E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/StreamFilter.h */ = {isa = PBXBuildFile; fileRef = A129E97CE1804270A34E586D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/StreamFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+A4AFC2BE4950439683102639 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXBuildFile; fileRef = 5AD70CB32A154C8C87D6B6C1 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/ControlBoardFilter.h */; settings = { COMPILER_FLAGS = ""; }; };
+06BBAB50DEA543D99AEB4074 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IObserver.h */ = {isa = PBXBuildFile; fileRef = D992BBC0C6B64F169495F1DA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IObserver.h */; settings = { COMPILER_FLAGS = ""; }; };
+8528A21F9B8C4233BC2B36F9 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IReplier.h */ = {isa = PBXBuildFile; fileRef = 9C3C36C3CCFA4F5AB6094354 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IReplier.h */; settings = { COMPILER_FLAGS = ""; }; };
+8FFBC315B82D4E5DA2A6F72F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = B52A8078E9794148A32A65C0 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+              6BFC1EF5B4E240A78D0FBDA9 /*  */ = {
+                     isa = PBXBuildStyle;
+              };
+              F371459569C2493E8747E05F /* Debug */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Debug;
+              };
+              0B61AEC49A1B488FB77DE2C9 /* Release */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Release;
+              };
+              850C382B24D84820BB73DE5D /* MinSizeRel */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = MinSizeRel;
+              };
+              A51DDB3C92874A65B53CFA97 /* RelWithDebInfo */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+              DC26AA97EC5C4A909DC239C6 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 4F909ED785484C91A9F312F6 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 6C8DD419D1E24192A1746B20;
+                     remoteInfo = CBFilter;
+              };
+              84AC7C98DB3A462EA4F12841 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 4F909ED785484C91A9F312F6 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 226C32E0FB97469DA1374888;
+                     remoteInfo = PositionReflex;
+              };
+              C0D9DDC6161742D7B08A2535 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 4F909ED785484C91A9F312F6 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3A66F3BB039B433FA66EAF7A;
+                     remoteInfo = RobotFilter;
+              };
+              FD50BD54A565445298F5D1A2 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 4F909ED785484C91A9F312F6 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = EC331B223E5645C48F78D1DD;
+                     remoteInfo = ZERO_CHECK;
+              };
+              23B9F31A652743849EB84EF5 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = 4F909ED785484C91A9F312F6 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3CDD3E99258F4866A90D1751;
+                     remoteInfo = ALL_BUILD;
+              };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+CC0A8451323641B58BD4A434 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+2FCA94F24134431E8DA3BDB2 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "reflexFilter.h"; path = "reflexFilter.h"; sourceTree = SOURCE_ROOT; };
+1319969D25F642EBBAB1C1AB /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "main.cpp"; path = "main.cpp"; sourceTree = SOURCE_ROOT; };
+9CD803BFEBA94B7D801F6217 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "reflexFilter.cpp"; path = "reflexFilter.cpp"; sourceTree = SOURCE_ROOT; };
+787E777FBA714A8BAC8CC48F /* PositionReflex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = PositionReflex; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+DC51F426E5584BF0A3467EB4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "callObserver.h"; path = "../../LibRobotFilter/callObserver.h"; sourceTree = SOURCE_ROOT; };
+690B2D8F7F2D49CBBD71F5BB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "circularBuffer.h"; path = "../../LibRobotFilter/circularBuffer.h"; sourceTree = SOURCE_ROOT; };
+9B2210B9DEB14F41ADBC1657 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "filterRpcInterface.h"; path = "../../LibRobotFilter/filterRpcInterface.h"; sourceTree = SOURCE_ROOT; };
+2E032FF0AF0C4D4B8DE34249 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "responseObserver.h"; path = "../../LibRobotFilter/responseObserver.h"; sourceTree = SOURCE_ROOT; };
+366D5A2BA49044898CEF0467 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "robotFilter.h"; path = "../../LibRobotFilter/robotFilter.h"; sourceTree = SOURCE_ROOT; };
+9CF1F90D3C7845D8A84561DF /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "stateObserver.h"; path = "../../LibRobotFilter/stateObserver.h"; sourceTree = SOURCE_ROOT; };
+4DD31E285761491887F9452B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "callObserver.cpp"; path = "../../LibRobotFilter/callObserver.cpp"; sourceTree = SOURCE_ROOT; };
+6DA069F4CEA34C008EE83CCB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "circularBuffer.cpp"; path = "../../LibRobotFilter/circularBuffer.cpp"; sourceTree = SOURCE_ROOT; };
+B071AD547BB64BB5AE1C054C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "filterRpcInterface.cpp"; path = "../../LibRobotFilter/filterRpcInterface.cpp"; sourceTree = SOURCE_ROOT; };
+949881923DD448C1B42557C2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "responseObserver.cpp"; path = "../../LibRobotFilter/responseObserver.cpp"; sourceTree = SOURCE_ROOT; };
+467D9FDF05E14E94BC1E089B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "robotFilter.cpp"; path = "../../LibRobotFilter/robotFilter.cpp"; sourceTree = SOURCE_ROOT; };
+5F384978622D46B3B365AC0C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "stateObserver.cpp"; path = "../../LibRobotFilter/stateObserver.cpp"; sourceTree = SOURCE_ROOT; };
+02DBE71840F944E4A06DE6A0 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_robotFilter.cxx"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx"; sourceTree = SOURCE_ROOT; };
+9F62D616FD28465D8FACC547 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_responseObserver.cxx"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx"; sourceTree = SOURCE_ROOT; };
+3C4BD985540A4B3083D5A269 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "moc_stateObserver.cxx"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx"; sourceTree = SOURCE_ROOT; };
+8E5BE54A90CA4760BAF6C524 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "../../LibRobotFilter/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+AC5840C487A342F08C5DEE3E /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_robotFilter.cxx.rule"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx.rule"; sourceTree = SOURCE_ROOT; };
+8B2FAEE0E8CF495689F7C52F /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_responseObserver.cxx.rule"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx.rule"; sourceTree = SOURCE_ROOT; };
+0DB6324B114E4B69B398C3AB /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = "moc_stateObserver.cxx.rule"; path = "../../../xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx.rule"; sourceTree = SOURCE_ROOT; };
+D681BD78C8914D8296898E9C /* RobotFilter */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libRobotFilter.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+F6721354C8CA45B8B4DFE7C8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilterImpl.cpp"; path = "../../LibYarpCBFilter/RpcFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
+8A23C51A00334FC384827752 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "RpcFilter.cpp"; path = "../../LibYarpCBFilter/RpcFilter.cpp"; sourceTree = SOURCE_ROOT; };
+07DAF6BB623046DC9993C66E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilterImpl.cpp"; path = "../../LibYarpCBFilter/StreamFilterImpl.cpp"; sourceTree = SOURCE_ROOT; };
+F8C2C571F7284B089DED382B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "StreamFilter.cpp"; path = "../../LibYarpCBFilter/StreamFilter.cpp"; sourceTree = SOURCE_ROOT; };
+DB34A16DD93E4E09821B8F56 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "ControlBoardFilter.cpp"; path = "../../LibYarpCBFilter/ControlBoardFilter.cpp"; sourceTree = SOURCE_ROOT; };
+EBEABADA054A4E6EBADEC00B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilterImpl.h"; path = "../../LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h"; sourceTree = SOURCE_ROOT; };
+D4FC793AA15947E691923108 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/RpcFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "RpcFilter.h"; path = "../../LibYarpCBFilter/yarp/os/RpcFilter.h"; sourceTree = SOURCE_ROOT; };
+56B717FBB0E94076A44518AE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/StreamFilterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilterImpl.h"; path = "../../LibYarpCBFilter/yarp/os/impl/StreamFilterImpl.h"; sourceTree = SOURCE_ROOT; };
+A129E97CE1804270A34E586D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/StreamFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "StreamFilter.h"; path = "../../LibYarpCBFilter/yarp/os/StreamFilter.h"; sourceTree = SOURCE_ROOT; };
+5AD70CB32A154C8C87D6B6C1 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/ControlBoardFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "ControlBoardFilter.h"; path = "../../LibYarpCBFilter/yarp/os/ControlBoardFilter.h"; sourceTree = SOURCE_ROOT; };
+D992BBC0C6B64F169495F1DA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IObserver.h"; path = "../../LibYarpCBFilter/yarp/os/IObserver.h"; sourceTree = SOURCE_ROOT; };
+9C3C36C3CCFA4F5AB6094354 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IReplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "IReplier.h"; path = "../../LibYarpCBFilter/yarp/os/IReplier.h"; sourceTree = SOURCE_ROOT; };
+B52A8078E9794148A32A65C0 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "../../LibYarpCBFilter/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+4A203C84311E41B7883D7412 /* CBFilter */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libCBFilter.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+              C303CA85062C4A3EA517FD82  = {
+                     isa = PBXGroup;
+                     children = (
+                            BA2F633D25CA453C90E1509C /* Sources */,
+                            81449B7ED8FD4D0084C961F3 /* Resources */,
+                            447F232E346A40F486F81188 /* Products */,
+                     );
+                     sourceTree = "<group>";
+              };
+              BA2F633D25CA453C90E1509C /* Sources */ = {
+                     isa = PBXGroup;
+                     children = (
+                            E33606266A6C4CEAA8AFE10A /* ALL_BUILD */,
+                            F451F672CF5345E28365B281 /* PositionReflex */,
+                            BAD87012AF564D3EA5141033 /* ZERO_CHECK */,
+                            6EFFC0D39BE84403AD0C3473 /* RobotFilter */,
+                            46A4813BFE3D4E41A8F579AF /* CBFilter */,
+                     );
+                     name = Sources;
+                     sourceTree = "<group>";
+              };
+              81449B7ED8FD4D0084C961F3 /* Resources */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = Resources;
+                     sourceTree = "<group>";
+              };
+              E33606266A6C4CEAA8AFE10A /* ALL_BUILD */ = {
+                     isa = PBXGroup;
+                     children = (
+                            B6B3D9FDDDA641E781F160E3 /* CMake Rules */,
+                            CC0A8451323641B58BD4A434 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */,
+                     );
+                     name = ALL_BUILD;
+                     sourceTree = "<group>";
+              };
+              B6B3D9FDDDA641E781F160E3 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              F451F672CF5345E28365B281 /* PositionReflex */ = {
+                     isa = PBXGroup;
+                     children = (
+                            761C40290C8D4B4AA5516B85 /* Header Files */,
+                            F1B03A8B029D4A5AAC1F7A53 /* Source Files */,
+                            CC0A8451323641B58BD4A434 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */,
+                     );
+                     name = PositionReflex;
+                     sourceTree = "<group>";
+              };
+              761C40290C8D4B4AA5516B85 /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            2FCA94F24134431E8DA3BDB2 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              F1B03A8B029D4A5AAC1F7A53 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            1319969D25F642EBBAB1C1AB /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp */,
+                            9CD803BFEBA94B7D801F6217 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              BAD87012AF564D3EA5141033 /* ZERO_CHECK */ = {
+                     isa = PBXGroup;
+                     children = (
+                            F2361C5D9B8344AA90963572 /* CMake Rules */,
+                            CC0A8451323641B58BD4A434 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/CMakeLists.txt */,
+                     );
+                     name = ZERO_CHECK;
+                     sourceTree = "<group>";
+              };
+              F2361C5D9B8344AA90963572 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              6EFFC0D39BE84403AD0C3473 /* RobotFilter */ = {
+                     isa = PBXGroup;
+                     children = (
+                            CC9018CAFE2143658DBC03E4 /* Header Files */,
+                            B02C522206A64C1996728F81 /* Source Files */,
+                            F1A388CF00E945A09E994559 /* CMake Rules */,
+                            8E5BE54A90CA4760BAF6C524 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/CMakeLists.txt */,
+                     );
+                     name = RobotFilter;
+                     sourceTree = "<group>";
+              };
+              CC9018CAFE2143658DBC03E4 /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            DC51F426E5584BF0A3467EB4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.h */,
+                            690B2D8F7F2D49CBBD71F5BB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.h */,
+                            9B2210B9DEB14F41ADBC1657 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.h */,
+                            2E032FF0AF0C4D4B8DE34249 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.h */,
+                            366D5A2BA49044898CEF0467 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.h */,
+                            9CF1F90D3C7845D8A84561DF /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              B02C522206A64C1996728F81 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            4DD31E285761491887F9452B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.cpp */,
+                            6DA069F4CEA34C008EE83CCB /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.cpp */,
+                            B071AD547BB64BB5AE1C054C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.cpp */,
+                            949881923DD448C1B42557C2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.cpp */,
+                            467D9FDF05E14E94BC1E089B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.cpp */,
+                            5F384978622D46B3B365AC0C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.cpp */,
+                            02DBE71840F944E4A06DE6A0 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx */,
+                            9F62D616FD28465D8FACC547 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx */,
+                            3C4BD985540A4B3083D5A269 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              F1A388CF00E945A09E994559 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                            AC5840C487A342F08C5DEE3E /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx.rule */,
+                            8B2FAEE0E8CF495689F7C52F /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx.rule */,
+                            0DB6324B114E4B69B398C3AB /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx.rule */,
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              46A4813BFE3D4E41A8F579AF /* CBFilter */ = {
+                     isa = PBXGroup;
+                     children = (
+                            62EC66EEB15E4F1098EB9ED8 /* Source Files */,
+                            4454D259E9D042B6B3BBB380 /* Header Files */,
+                            B52A8078E9794148A32A65C0 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/CMakeLists.txt */,
+                     );
+                     name = CBFilter;
+                     sourceTree = "<group>";
+              };
+              62EC66EEB15E4F1098EB9ED8 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            F6721354C8CA45B8B4DFE7C8 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp */,
+                            8A23C51A00334FC384827752 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp */,
+                            07DAF6BB623046DC9993C66E /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp */,
+                            F8C2C571F7284B089DED382B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp */,
+                            DB34A16DD93E4E09821B8F56 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              4454D259E9D042B6B3BBB380 /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            EBEABADA054A4E6EBADEC00B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/RpcFilterImpl.h */,
+                            D4FC793AA15947E691923108 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/RpcFilter.h */,
+                            56B717FBB0E94076A44518AE /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/impl/StreamFilterImpl.h */,
+                            A129E97CE1804270A34E586D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/StreamFilter.h */,
+                            5AD70CB32A154C8C87D6B6C1 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/ControlBoardFilter.h */,
+                            D992BBC0C6B64F169495F1DA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IObserver.h */,
+                            9C3C36C3CCFA4F5AB6094354 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/yarp/os/IReplier.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              447F232E346A40F486F81188 /* Products */ = {
+                     isa = PBXGroup;
+                     children = (
+                            787E777FBA714A8BAC8CC48F /* PositionReflex */,
+                            D681BD78C8914D8296898E9C /* RobotFilter */,
+                            4A203C84311E41B7883D7412 /* CBFilter */,
+                     );
+                     name = Products;
+                     sourceTree = "<group>";
+              };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+              226C32E0FB97469DA1374888 /* PositionReflex */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 90A6042B4FAD4844BAA85F91 /* Build configuration list for PBXNativeTarget "PositionReflex" */;
+                     buildPhases = (
+                            88FCB3D58BB0424EA9ED57E5 /* Sources */,
+                            6A0A70D12C2C4B7092EE5705 /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            A94C0D4551C745B887C5C01C /* PBXTargetDependency */,
+                            5EE6DD96CEEE496C9C9AD1B9 /* PBXTargetDependency */,
+                            E6E61206BE404452B896F99D /* PBXTargetDependency */,
+                     );
+                     name = PositionReflex;
+                     productName = PositionReflex;
+                     productReference = 787E777FBA714A8BAC8CC48F /* PositionReflex */;
+                     productType = "com.apple.product-type.tool";
+              };
+              3A66F3BB039B433FA66EAF7A /* RobotFilter */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 534C64243BF749F285F397CC /* Build configuration list for PBXNativeTarget "RobotFilter" */;
+                     buildPhases = (
+                            6FD3C9C8225B420FB40A4890 /* CMake Rules */,
+                            A7D9CE5DE4F34FE4ADD743AF /* Sources */,
+                            C5793CE3D7444A56A6F4AE00 /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            A94C0D4551C745B887C5C01C /* PBXTargetDependency */,
+                     );
+                     name = RobotFilter;
+                     productName = RobotFilter;
+                     productReference = D681BD78C8914D8296898E9C /* RobotFilter */;
+                     productType = "com.apple.product-type.library.static";
+              };
+              6C8DD419D1E24192A1746B20 /* CBFilter */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 14E2F2F48D37429A8EF81A7F /* Build configuration list for PBXNativeTarget "CBFilter" */;
+                     buildPhases = (
+                            408DA5804984437DB1EDA9E0 /* Sources */,
+                            A9C96267A27C4389AF68FAA1 /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                     );
+                     name = CBFilter;
+                     productName = CBFilter;
+                     productReference = 4A203C84311E41B7883D7412 /* CBFilter */;
+                     productType = "com.apple.product-type.library.static";
+              };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+              4F909ED785484C91A9F312F6 /* Project object */ = {
+                     isa = PBXProject;
+                     attributes = {
+                            BuildIndependentTargetsInParallel = YES;
+                     };
+                     buildConfigurationList = E93AB67C3769467680422A2A /* Build configuration list for PBXProject  "RobotFilterDemo" */;
+                     buildSettings = {
+                     };
+                     buildStyles = (
+                            F371459569C2493E8747E05F /* Debug */,
+                            0B61AEC49A1B488FB77DE2C9 /* Release */,
+                            850C382B24D84820BB73DE5D /* MinSizeRel */,
+                            A51DDB3C92874A65B53CFA97 /* RelWithDebInfo */,
+                     );
+                     compatibilityVersion = "Xcode 3.2";
+                     hasScannedForEncodings = 0;
+                     mainGroup = C303CA85062C4A3EA517FD82;
+                     projectDirPath = "../../../../src/Apps/RobotFilterDemo";
+                     projectRoot = "";
+                     targets = (
+                            3CDD3E99258F4866A90D1751 /* ALL_BUILD */,
+                            226C32E0FB97469DA1374888 /* PositionReflex */,
+                            EC331B223E5645C48F78D1DD /* ZERO_CHECK */,
+                            A2FC27FEE1D6484E90B2C4AB /* install */,
+                            3A66F3BB039B433FA66EAF7A /* RobotFilter */,
+                            6C8DD419D1E24192A1746B20 /* CBFilter */,
+                     );
+              };
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+              DCD69A9C41AD4B10B7BFB55C /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              99F7F0E6744F4B549BBAFE98 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              6A0A70D12C2C4B7092EE5705 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/PositionReflex_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              BAD6136188AA47CDBE2D6D75 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              18BA2A20853F49C7B5A9913F /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              3AF2E58A9D524E71A09F2F36 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              F8A39EFDB2FE42AA882FC9D6 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              6FD3C9C8225B420FB40A4890 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/RobotFilter_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              C5793CE3D7444A56A6F4AE00 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/CMakeScripts/RobotFilter_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              A9C96267A27C4389AF68FAA1 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/CMakeScripts/CBFilter_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+              88FCB3D58BB0424EA9ED57E5 /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            7AA0B2C7BE584FEA97105496 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/main.cpp */,
+                            4A1B435CA95A40DD97931376 /* /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/reflexFilter.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+              A7D9CE5DE4F34FE4ADD743AF /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            7182052EEF6343EDAAB1F8C0 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/callObserver.cpp */,
+                            87D93D0ED67A4A788DE943C7 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/circularBuffer.cpp */,
+                            3CC5F9B6EA6545E6AB4D1068 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/filterRpcInterface.cpp */,
+                            84DA2B45CE01452FB3CA1768 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/responseObserver.cpp */,
+                            8546DAF1BF564871955B044B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/robotFilter.cpp */,
+                            E37C9E04EC07429E8F600975 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/stateObserver.cpp */,
+                            108B036C6D654432B5D4DBB9 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_robotFilter.cxx */,
+                            7AD9558D650747828010A937 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_responseObserver.cxx */,
+                            F3E6965AA9EC4BA98F41BEF1 /* /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/moc_stateObserver.cxx */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+              408DA5804984437DB1EDA9E0 /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            DB36185D838441EA89B8387D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilterImpl.cpp */,
+                            51459EB27BDE4431B11523DD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/RpcFilter.cpp */,
+                            ED4728DE67A840B1B97CD0FD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilterImpl.cpp */,
+                            98C6C049FA1E4261B523828B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/StreamFilter.cpp */,
+                            ED0F6F0CAF284E3E8C06786D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibYarpCBFilter/ControlBoardFilter.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+              A94C0D4551C745B887C5C01C /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 6C8DD419D1E24192A1746B20 /* CBFilter */;
+                     targetProxy = DC26AA97EC5C4A909DC239C6 /* PBXContainerItemProxy */;
+              };
+              870DC1F3AD3C48018E012879 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 226C32E0FB97469DA1374888 /* PositionReflex */;
+                     targetProxy = 84AC7C98DB3A462EA4F12841 /* PBXContainerItemProxy */;
+              };
+              5EE6DD96CEEE496C9C9AD1B9 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3A66F3BB039B433FA66EAF7A /* RobotFilter */;
+                     targetProxy = C0D9DDC6161742D7B08A2535 /* PBXContainerItemProxy */;
+              };
+              E6E61206BE404452B896F99D /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = EC331B223E5645C48F78D1DD /* ZERO_CHECK */;
+                     targetProxy = FD50BD54A565445298F5D1A2 /* PBXContainerItemProxy */;
+              };
+              4DDF368E177E4BFD862042B5 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3CDD3E99258F4866A90D1751 /* ALL_BUILD */;
+                     targetProxy = 23B9F31A652743849EB84EF5 /* PBXContainerItemProxy */;
+              };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+              E1BE32BA803A4C94AAFF2A20 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/build;
+                     };
+                     name = Debug;
+              };
+              5A0219B227414E63B90D563E /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/build;
+                     };
+                     name = Release;
+              };
+              2E242169E73D49B4932044C9 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/build;
+                     };
+                     name = MinSizeRel;
+              };
+              93A6D4C54C3C403BA7DF47C2 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/build;
+                     };
+                     name = RelWithDebInfo;
+              };
+              0679F929B49A472091AD20E3 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              22472E9D636C4DA7A180B73B /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              56BF253225A144F58BB3EFE7 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              1A73E5B511B14718A34D1821 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              E5761A3D773A45C2B42F121D /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/Debug/libRobotFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Debug/libCBFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Debug/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Debug/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PositionReflex;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              916D8A7D239B46EFA88F092E /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/Release/libRobotFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/Release/libCBFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/Release/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/Release/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PositionReflex;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              F1E9C4C946EF4C4EAD5542A9 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/MinSizeRel/libRobotFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/MinSizeRel/libCBFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/MinSizeRel/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/MinSizeRel/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PositionReflex;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              8130BC64E3714D3297709F5D /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = "";
+                            EXECUTABLE_SUFFIX = "";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_SEARCH_PATHS = "";
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = " -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/RelWithDebInfo/libRobotFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter/RelWithDebInfo/libCBFilter.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibYarpModel/RelWithDebInfo/libYarpModel.a /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibKinematicModel/RelWithDebInfo/libKinematicModel.a /usr/local/lib/libsolid.dylib -framework QtOpenGL -framework QtGui -framework QtXml -framework QtCore -framework AGL -framework OpenGL -framework AGL -framework OpenGL /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = PositionReflex;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              4E1A9A8382424D5FA070AD7D /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              D7AE27A6582C4777B4EA62B2 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              A284B647C9B94854A1490C81 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              14D567E890CF4A50B9A37892 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              057A7A03D8BB4E7EB3459ABD /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              1BD374E5661D4AED8D0AE2D9 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              06CE80A756BF4487B5B3D9AE /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              6536ADC758D444449FB9F6A0 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              23FF67A18DED40E7B586C14F /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = RobotFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              FCD59E82119443CBA3165E65 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = RobotFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              07FABAE9A2814147B383EB06 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = RobotFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              460C2DFD57994E85881EE97C /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = RobotFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              C16251CF7F8A4B8AA37B3F81 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_DEBUG, QT_DEBUG, QT_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = CBFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              1D96D8DE0D194408AEF462D8 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = CBFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              525368EE12684ED79C41F939 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = CBFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              9B6D615441B8406BAA7FA969 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            FRAMEWORK_SEARCH_PATHS = ("/usr/local/Cellar/qt/4.8.2/lib", );
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_OPENGL_LIB, QT_GUI_LIB, QT_XML_LIB, QT_CORE_LIB, QT_NO_DEBUG, QT_NO_DEBUG, QT_NO_DEBUG, );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = (/usr/local/include/SOLID, "/usr/local/Cellar/qt/4.8.2/include", "/usr/local/Cellar/qt/4.8.2/include/QtOpenGL", "/usr/local/Cellar/qt/4.8.2/include/QtGui", "/usr/local/Cellar/qt/4.8.2/include/QtXml", "/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers", /usr/local/Cellar/yarp/HEAD/include, /usr/local/include, "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibYarpCBFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RobotFilterDemo/../../LibRobotFilter", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibKinematicModel", "/Users/kailfrank/imClever/dev/MoBeE/src/LibRobotFilter/../LibYarpCBFilter", );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = CBFilter;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RobotFilterDemo/LibRobotFilter/LibYarpCBFilter;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+              E93AB67C3769467680422A2A /* Build configuration list for PBXProject  "RobotFilterDemo" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            E1BE32BA803A4C94AAFF2A20 /* Debug */,
+                            5A0219B227414E63B90D563E /* Release */,
+                            2E242169E73D49B4932044C9 /* MinSizeRel */,
+                            93A6D4C54C3C403BA7DF47C2 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              A6A6068DED0E4DAAAD758B2F /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            0679F929B49A472091AD20E3 /* Debug */,
+                            22472E9D636C4DA7A180B73B /* Release */,
+                            56BF253225A144F58BB3EFE7 /* MinSizeRel */,
+                            1A73E5B511B14718A34D1821 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              90A6042B4FAD4844BAA85F91 /* Build configuration list for PBXNativeTarget "PositionReflex" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            E5761A3D773A45C2B42F121D /* Debug */,
+                            916D8A7D239B46EFA88F092E /* Release */,
+                            F1E9C4C946EF4C4EAD5542A9 /* MinSizeRel */,
+                            8130BC64E3714D3297709F5D /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              E71E8ECB499A45F990CD3CC9 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            4E1A9A8382424D5FA070AD7D /* Debug */,
+                            D7AE27A6582C4777B4EA62B2 /* Release */,
+                            A284B647C9B94854A1490C81 /* MinSizeRel */,
+                            14D567E890CF4A50B9A37892 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              7A13C82280F64527A96A1447 /* Build configuration list for PBXAggregateTarget "install" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            057A7A03D8BB4E7EB3459ABD /* Debug */,
+                            1BD374E5661D4AED8D0AE2D9 /* Release */,
+                            06CE80A756BF4487B5B3D9AE /* MinSizeRel */,
+                            6536ADC758D444449FB9F6A0 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              534C64243BF749F285F397CC /* Build configuration list for PBXNativeTarget "RobotFilter" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            23FF67A18DED40E7B586C14F /* Debug */,
+                            FCD59E82119443CBA3165E65 /* Release */,
+                            07FABAE9A2814147B383EB06 /* MinSizeRel */,
+                            460C2DFD57994E85881EE97C /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              14E2F2F48D37429A8EF81A7F /* Build configuration list for PBXNativeTarget "CBFilter" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            C16251CF7F8A4B8AA37B3F81 /* Debug */,
+                            1D96D8DE0D194408AEF462D8 /* Release */,
+                            525368EE12684ED79C41F939 /* MinSizeRel */,
+                            9B6D615441B8406BAA7FA969 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+/* End XCConfigurationList section */
+       };
+       rootObject = 4F909ED785484C91A9F312F6;
+}

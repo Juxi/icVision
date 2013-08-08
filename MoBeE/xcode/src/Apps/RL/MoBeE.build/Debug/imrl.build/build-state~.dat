@@ -1,0 +1,107 @@
+Timrl
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl normal x86_64
+cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
+c00000000509867D8000000000000178E
+t1352165336
+s6030
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
+c00000000509867D80000000000006762
+t1352165336
+s26466
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp
+c0000000051D2DBF6000000000000081F
+t1372773366
+s2079
+i<unistd.h>
+i<time.h>
+i"learner.h"
+i"util.h"
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h
+c0000000051E941AB0000000000001291
+t1374241195
+s4753
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h
+c0000000051A4BDB7000000000000074F
+t1369750967
+s1871
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.LinkFileList
+c0000000051EAE94E0000000000000070
+t1374349646
+s112
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh
+c0000000051EAE94E00000000000000B9
+t1374349646
+s185
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies6add2ece209bb741^357c2fce209bb741^---0#1#0#--18"Check dependencies36"8A4CF71D-F353-4E81-8E4A-EBCAA0D1D462-
+
+CCompileC xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042446.187386
+e396042449.933314
+r1
+xCompileC
+xxcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp2a1d30ce209bb741^40faeed1209bb741^---0#0#0#-19%DVTDocumentLocation2@72"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp0000000000000000^2855"CompileC xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o src/Apps/RL/imrl.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/../../LibRL -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/RL/imrl.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.o36"5C9664DC-3522-40FD-9D29-3F92DC701719-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl normal x86_64
+s396042449.940126
+e396042450.161358
+r1
+xLd
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection69"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrleeccf0d1209bb741^c24e29d2209bb741^---0#0#0#--1863"Ld xcode/src/Apps/RL/Debug/imrl normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Objects-normal/x86_64/imrl.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/Debug/libiCubRL.a /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL_Core.dylib /usr/local/Cellar/cgal/4.0.2/lib/libCGAL.dylib /usr/local/lib/libgmpxx.dylib /usr/local/lib/libmpfr.dylib /usr/local/lib/libgmp.dylib /usr/local/lib/libboost_thread-mt.dylib /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/Debug/imrl36"CFF16000-2071-4B10-997D-559553D7D4F8-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh
+s396042450.169415
+e396042450.244511
+r1
+xPhaseScriptExecution
+xCMake PostBuild Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debug
+omake[1]: Nothing to be done for `PostBuild.imrl.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debug
+omake[1]: Nothing to be done for `PostBuild.imrl.Debug'.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'04392cd2209bb741^b3963ed2209bb741^-658"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debugmake[1]: Nothing to be done for `PostBuild.imrl.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debugmake[1]: Nothing to be done for `PostBuild.imrl.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042450#0#30#-0#-----2@23"Depend check for xcode-396042450#30#23#-0#-----2@202"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debug-396042450#53#202#-0#-----2@56"make[1]: Nothing to be done for `PostBuild.imrl.Debug'.-396042450#255#56#-0#-----2@30"echo "Depend check for xcode"-396042450#311#30#-0#-----2@23"Depend check for xcode-396042450#341#23#-0#-----2@238"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.imrl.Debug-396042450#364#238#-0#-----2@56"make[1]: Nothing to be done for `PostBuild.imrl.Debug'.-396042450#602#56#-0#-----0#0#0#--303"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/RL/MoBeE.build/Debug/imrl.build/Script-D0BC06A793F64423846DC8C5.sh36"42ABD387-E3A1-4468-9582-928CC9BC9ED3-
+

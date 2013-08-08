@@ -1,0 +1,113 @@
+Tposes
+v5
+r1
+cCheck dependencies
+cCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/poses normal x86_64
+cPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+c00000000516D45FA00000000000000AA
+t1366115834
+s170
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/time.h
+c00000000509867D8000000000000178E
+t1352165336
+s6030
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/unistd.h
+c00000000509867D80000000000006762
+t1352165336
+s26466
+
+N/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp
+c00000000512CB8B50000000000000CEA
+t1361885365
+s3306
+i<yarp/os/all.h>
+i<yarp/dev/all.h>
+i<yarp/sig/all.h>
+i<unistd.h>
+i<time.h>
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/poses
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/poses.LinkFileList
+c0000000051EAE94D0000000000000085
+t1374349645
+s133
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o
+t2
+s0
+
+N/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh
+c0000000051EAE94D00000000000000D6
+t1374349645
+s214
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/dev/all.h
+c000000004E8F21F90000000000000506
+t1318003193
+s1286
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/os/all.h
+c000000004FC63F1200000000000005BC
+t1338392338
+s1468
+
+N/usr/local/Cellar/yarp/HEAD/include/yarp/sig/all.h
+c000000004E8F21F90000000000000264
+t1318003193
+s612
+
+CBuild AST from /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies895f55cd209bb741^e2e555cd209bb741^---0#1#0#--18"Check dependencies36"85564208-92C4-47C5-86B6-080BE0200415-
+
+CCompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s396042445.337531
+e396042445.848002
+r1
+xCompileC
+xxcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o
+x/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cppda8d56cd209bb741^7b15d9cd209bb741^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp0000000000000000^3203"CompileC xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o src/Apps/MoBeE_Model/Demo/randomPose.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/kailfrank/imClever/dev/MoBeE    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions "-DCMAKE_INTDIR=\"Debug\"" -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_DEBUG -DQT_DEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -Wno-sign-conversion -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/include -I/usr/local/include/SOLID -I/usr/local/Cellar/qt/4.8.2/include -I/usr/local/Cellar/qt/4.8.2/include/QtOpenGL -I/usr/local/Cellar/qt/4.8.2/include/QtGui -I/usr/local/Cellar/qt/4.8.2/include/QtXml -I/usr/local/Cellar/qt/4.8.2/lib/QtCore.framework/Headers -I/usr/local/Cellar/yarp/HEAD/include -I/usr/local/include -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibRobotFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/../LibYarpCBFilter -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibYarpModel -I/Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/../../LibKinematicModel -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/DerivedSources/x86_64 -I/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8 -MMD -MT dependencies -MF /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.d --serialize-diagnostics /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.dia -c /Users/kailfrank/imClever/dev/MoBeE/src/Apps/MoBeE_Model/Demo/randomPose.cpp -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/randomPose.o36"4D2F43BA-F688-4B05-B6F9-EFE3F813CF22-
+
+CLd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/poses normal x86_64
+s396042445.854746
+e396042446.058525
+r1
+xLd
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/poses
+xnormal
+xx86_64
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Link /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/posesc0ecdacd209bb741^5dfb0ece209bb741^---0#0#0#--1799"Ld xcode/src/Apps/MoBeE_Model/Demo/Debug/poses normal x86_64    cd /Users/kailfrank/imClever/dev/MoBeE    setenv MACOSX_DEPLOYMENT_TARGET 10.8    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -L/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug -F/usr/local/Cellar/qt/4.8.2/lib -filelist /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Objects-normal/x86_64/poses.LinkFileList -mmacosx-version-min=10.8 -L/usr/local/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names /usr/local/lib/libYARP_OS.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_math.a /usr/local/lib/libYARP_dev.a /usr/local/lib/libyarpcar.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_init.a /usr/local/lib/libyarpcar.a /usr/local/lib/libxmlrpc_carrier.a /usr/local/lib/libtcpros_carrier.a /usr/local/lib/libmjpeg_carrier.a /usr/local/lib/libwire_rep_utils.a /usr/local/lib/libjpeg.dylib /usr/local/lib/libbayer_carrier.a /usr/local/lib/libpriority_carrier.a /usr/local/lib/libYARP_math.a /usr/local/lib/libgsl.dylib /usr/local/lib/libgslcblas.dylib /usr/local/lib/libYARP_dev.a /usr/local/lib/libYARP_sig.a /usr/local/lib/libYARP_name.a /usr/local/lib/libYARP_OS.a /usr/local/lib/libACE.dylib -o /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/Debug/poses36"805EE6B1-7E98-4312-9F2D-22259795DB59-
+
+CPhaseScriptExecution "CMake PostBuild Rules" /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh
+s396042446.067241
+e396042446.165038
+r1
+xPhaseScriptExecution
+xCMake PostBuild Rules
+x/Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debug
+omake[1]: Nothing to be done for `PostBuild.poses.Debug'.
+oecho "Depend check for xcode"
+oDepend check for xcode
+ocd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debug
+omake[1]: Nothing to be done for `PostBuild.poses.Debug'.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Run custom shell script 'CMake PostBuild Rules'e6cd11ce209bb741^9f3e2ace209bb741^-689"echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debugmake[1]: Nothing to be done for `PostBuild.poses.Debug'.echo "Depend check for xcode"Depend check for xcodecd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debugmake[1]: Nothing to be done for `PostBuild.poses.Debug'.8(21%IDEActivityLogMessage2@30"echo "Depend check for xcode"-396042446#0#30#-0#-----2@23"Depend check for xcode-396042446#30#23#-0#-----2@203"cd /Users/kailfrank/imClever/dev/MoBeE/xcode && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode -f /Users/kailfrank/imClever/dev/MoBeE/xcode/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debug-396042446#53#203#-0#-----2@57"make[1]: Nothing to be done for `PostBuild.poses.Debug'.-396042446#256#57#-0#-----2@30"echo "Depend check for xcode"-396042446#313#30#-0#-----2@23"Depend check for xcode-396042446#343#23#-0#-----2@266"cd /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model && make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/CMakeScripts/XCODE_DEPEND_HELPER.make PostBuild.poses.Debug-396042446#366#266#-0#-----2@57"make[1]: Nothing to be done for `PostBuild.poses.Debug'.-396042446#632#57#-0#-----0#0#0#--333"PhaseScriptExecution "CMake PostBuild Rules" xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh    cd /Users/kailfrank/imClever/dev/MoBeE    /bin/sh -c /Users/kailfrank/imClever/dev/MoBeE/xcode/src/Apps/MoBeE_Model/Demo/MoBeE.build/Debug/poses.build/Script-CE887B906D844F44ACB5B0FC.sh36"045557D1-E445-460E-83FE-521131637824-
+

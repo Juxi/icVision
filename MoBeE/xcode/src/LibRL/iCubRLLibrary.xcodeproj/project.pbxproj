@@ -1,0 +1,883 @@
+// !$*UTF8*$!
+{
+       archiveVersion = 1;
+       classes = {
+       };
+       objectVersion = 46;
+       objects = {
+
+/* Begin PBXAggregateTarget section */
+              3CDD3E99258F4866A90D1751 /* ALL_BUILD */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = EB5E896C72ED4648860DA715 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+                     buildPhases = (
+                            F1B8112F11014288BA4C64C3 /* CMake Rules */,
+                     );
+                     dependencies = (
+                            A8450B3A032745B3A9296DC0 /* PBXTargetDependency */,
+                            0D500D0EF0E844A1A5A97701 /* PBXTargetDependency */,
+                     );
+                     name = ALL_BUILD;
+                     productName = ALL_BUILD;
+              };
+              EC331B223E5645C48F78D1DD /* ZERO_CHECK */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 957B0F11A0544FF19060FCAD /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+                     buildPhases = (
+                            6E7538997C5847D498150445 /* CMake Rules */,
+                     );
+                     dependencies = (
+                     );
+                     name = ZERO_CHECK;
+                     productName = ZERO_CHECK;
+              };
+              A2FC27FEE1D6484E90B2C4AB /* install */ = {
+                     isa = PBXAggregateTarget;
+                     buildConfigurationList = 20B665B911E441BCB9308722 /* Build configuration list for PBXAggregateTarget "install" */;
+                     buildPhases = (
+                            C5FBA0DA4C974595964FEF74 /* CMake PostBuild Rules */,
+                     );
+                     dependencies = (
+                            E3A456ACA87541E3BF3618E3 /* PBXTargetDependency */,
+                     );
+                     name = install;
+                     productName = install;
+              };
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+D07BCC5425EE4796ABF9280C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h */ = {isa = PBXBuildFile; fileRef = F0333C69726E42838BFAA3FA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h */; settings = { COMPILER_FLAGS = ""; }; };
+998DE30555C94A2595DCCF73 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.h */ = {isa = PBXBuildFile; fileRef = 62D5BE7CA4E04723892D0AF9 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.h */; settings = { COMPILER_FLAGS = ""; }; };
+5E6E7F2329454CBCB6DD290D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.h */ = {isa = PBXBuildFile; fileRef = C4F5B1A6A3C1435B8D234231 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.h */; settings = { COMPILER_FLAGS = ""; }; };
+32D9F29D73664DD4B06BF797 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.h */ = {isa = PBXBuildFile; fileRef = 70336233C1624A54B58BDE4C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.h */; settings = { COMPILER_FLAGS = ""; }; };
+8162BB22E34B4CE2AB5FAFC4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.h */ = {isa = PBXBuildFile; fileRef = B82E30A114A4497EA9B6E72B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.h */; settings = { COMPILER_FLAGS = ""; }; };
+2D1F699823A449CEBA82E7AC /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.h */ = {isa = PBXBuildFile; fileRef = D186814A57DA46A8B01B626D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.h */; settings = { COMPILER_FLAGS = ""; }; };
+557DE507C72849278FC3BE4F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h */ = {isa = PBXBuildFile; fileRef = C0608F23D08D40A99975BA30 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h */; settings = { COMPILER_FLAGS = ""; }; };
+246B0A6BD77B4E3887969DC5 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.h */ = {isa = PBXBuildFile; fileRef = 15772046E6534ABF9D145D46 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.h */; settings = { COMPILER_FLAGS = ""; }; };
+D6655A48FAAD4DE8BB346676 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp */ = {isa = PBXBuildFile; fileRef = 71DD47AE25FA4E609A6D15F2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+FE2FB492A3BF4F83A621F45D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp */ = {isa = PBXBuildFile; fileRef = 0DAE393A83154AC5AA7E023F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+03D50275CEF04F1F86530401 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp */ = {isa = PBXBuildFile; fileRef = FF902DDD7609478C90AF87FD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+CE1DD3488944444AB8334C8C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp */ = {isa = PBXBuildFile; fileRef = 53D0DE97E6744AF68A803A3A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+7AF7A2186E5C418082EC2DA7 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp */ = {isa = PBXBuildFile; fileRef = 1C8706C1B88F4308A4A615B3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+CF0B69014BF4471583162300 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp */ = {isa = PBXBuildFile; fileRef = 9252E0ECB1A84B5D9145950C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+4BDDAAFD89FF4BB0955D05E4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp */ = {isa = PBXBuildFile; fileRef = 4CEA538FF42D4CCBBDBF8B76 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp */; settings = { COMPILER_FLAGS = ""; }; };
+DA05BE47E4B94E909388F8B3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = C16B25FBC03E4A1A9B6B495C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */; settings = { COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+              29FE8AD3CCCE48C998A60C82 /*  */ = {
+                     isa = PBXBuildStyle;
+              };
+              E7CCC70522D74D9AA22BF1DC /* Debug */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Debug;
+              };
+              AD30501B9F7E4C7BB570F955 /* Release */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = Release;
+              };
+              38A35EC1D1074A02B87D76FF /* MinSizeRel */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = MinSizeRel;
+              };
+              E3CB2FBEBD0C4CFDB2351588 /* RelWithDebInfo */ = {
+                     isa = PBXBuildStyle;
+                     buildSettings = {
+                            COPY_PHASE_STRIP = NO;
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+              F15AAA60BCF54E0E976E9468 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = AD6C7EFC048D488DA0E39CA0 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 38A70F35DBCF46BE8586E9EC;
+                     remoteInfo = iCubRL;
+              };
+              9898860DE73849BAA45506B4 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = AD6C7EFC048D488DA0E39CA0 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = EC331B223E5645C48F78D1DD;
+                     remoteInfo = ZERO_CHECK;
+              };
+              B7646A7B0FBF48619BC96C88 /* PBXContainerItemProxy */ = {
+                     isa = PBXContainerItemProxy;
+                     containerPortal = AD6C7EFC048D488DA0E39CA0 /* Project object */;
+                     proxyType = 1;
+                     remoteGlobalIDString = 3CDD3E99258F4866A90D1751;
+                     remoteInfo = ALL_BUILD;
+              };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+C16B25FBC03E4A1A9B6B495C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text"; name = "CMakeLists.txt"; path = "CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+F0333C69726E42838BFAA3FA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "learner.h"; path = "learner.h"; sourceTree = SOURCE_ROOT; };
+62D5BE7CA4E04723892D0AF9 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "state.h"; path = "state.h"; sourceTree = SOURCE_ROOT; };
+C4F5B1A6A3C1435B8D234231 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "action.h"; path = "action.h"; sourceTree = SOURCE_ROOT; };
+70336233C1624A54B58BDE4C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "actionTransition.h"; path = "actionTransition.h"; sourceTree = SOURCE_ROOT; };
+B82E30A114A4497EA9B6E72B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "actionReach.h"; path = "actionReach.h"; sourceTree = SOURCE_ROOT; };
+D186814A57DA46A8B01B626D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "mobee_interface.h"; path = "mobee_interface.h"; sourceTree = SOURCE_ROOT; };
+C0608F23D08D40A99975BA30 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "util.h"; path = "util.h"; sourceTree = SOURCE_ROOT; };
+15772046E6534ABF9D145D46 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.c.h"; name = "rl_problem.h"; path = "rl_problem.h"; sourceTree = SOURCE_ROOT; };
+71DD47AE25FA4E609A6D15F2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "learner.cpp"; path = "learner.cpp"; sourceTree = SOURCE_ROOT; };
+0DAE393A83154AC5AA7E023F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "state.cpp"; path = "state.cpp"; sourceTree = SOURCE_ROOT; };
+FF902DDD7609478C90AF87FD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "action.cpp"; path = "action.cpp"; sourceTree = SOURCE_ROOT; };
+53D0DE97E6744AF68A803A3A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "actionTransition.cpp"; path = "actionTransition.cpp"; sourceTree = SOURCE_ROOT; };
+1C8706C1B88F4308A4A615B3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "actionReach.cpp"; path = "actionReach.cpp"; sourceTree = SOURCE_ROOT; };
+9252E0ECB1A84B5D9145950C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "mobee_interface.cpp"; path = "mobee_interface.cpp"; sourceTree = SOURCE_ROOT; };
+4CEA538FF42D4CCBBDBF8B76 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.cpp.cpp"; name = "rl_problem.cpp"; path = "rl_problem.cpp"; sourceTree = SOURCE_ROOT; };
+180F0294F3D5496EA9F465DE /* iCubRL */ = {isa = PBXFileReference; explicitFileType = "archive.ar"; path = "libiCubRL.a"; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+              95FFC8F4E36449B7A22A4BFC  = {
+                     isa = PBXGroup;
+                     children = (
+                            AFA9FDE9979E4302843AC226 /* Sources */,
+                            CBF251EB3E5A4F659D178B1E /* Resources */,
+                            81047B75DF7F4CC1A1102F26 /* Products */,
+                     );
+                     sourceTree = "<group>";
+              };
+              AFA9FDE9979E4302843AC226 /* Sources */ = {
+                     isa = PBXGroup;
+                     children = (
+                            F1290E4DC0234169898AE65A /* ALL_BUILD */,
+                            A17B5F25A98F4154BF050F73 /* ZERO_CHECK */,
+                            08F2C77868B048068E95B3F7 /* iCubRL */,
+                     );
+                     name = Sources;
+                     sourceTree = "<group>";
+              };
+              CBF251EB3E5A4F659D178B1E /* Resources */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = Resources;
+                     sourceTree = "<group>";
+              };
+              F1290E4DC0234169898AE65A /* ALL_BUILD */ = {
+                     isa = PBXGroup;
+                     children = (
+                            1101E9558C704AC0B9A701B3 /* CMake Rules */,
+                            C16B25FBC03E4A1A9B6B495C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */,
+                     );
+                     name = ALL_BUILD;
+                     sourceTree = "<group>";
+              };
+              1101E9558C704AC0B9A701B3 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              A17B5F25A98F4154BF050F73 /* ZERO_CHECK */ = {
+                     isa = PBXGroup;
+                     children = (
+                            B38C1980521B4771B1508A24 /* CMake Rules */,
+                            C16B25FBC03E4A1A9B6B495C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */,
+                     );
+                     name = ZERO_CHECK;
+                     sourceTree = "<group>";
+              };
+              B38C1980521B4771B1508A24 /* CMake Rules */ = {
+                     isa = PBXGroup;
+                     children = (
+                     );
+                     name = "CMake Rules";
+                     sourceTree = "<group>";
+              };
+              08F2C77868B048068E95B3F7 /* iCubRL */ = {
+                     isa = PBXGroup;
+                     children = (
+                            3335EAFD1B3742FEAFC8E124 /* Header Files */,
+                            84373F6B29C64F45904168B5 /* Source Files */,
+                            C16B25FBC03E4A1A9B6B495C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/CMakeLists.txt */,
+                     );
+                     name = iCubRL;
+                     sourceTree = "<group>";
+              };
+              3335EAFD1B3742FEAFC8E124 /* Header Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            F0333C69726E42838BFAA3FA /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.h */,
+                            62D5BE7CA4E04723892D0AF9 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.h */,
+                            C4F5B1A6A3C1435B8D234231 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.h */,
+                            70336233C1624A54B58BDE4C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.h */,
+                            B82E30A114A4497EA9B6E72B /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.h */,
+                            D186814A57DA46A8B01B626D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.h */,
+                            C0608F23D08D40A99975BA30 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/util.h */,
+                            15772046E6534ABF9D145D46 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.h */,
+                     );
+                     name = "Header Files";
+                     sourceTree = "<group>";
+              };
+              84373F6B29C64F45904168B5 /* Source Files */ = {
+                     isa = PBXGroup;
+                     children = (
+                            71DD47AE25FA4E609A6D15F2 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp */,
+                            0DAE393A83154AC5AA7E023F /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp */,
+                            FF902DDD7609478C90AF87FD /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp */,
+                            53D0DE97E6744AF68A803A3A /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp */,
+                            1C8706C1B88F4308A4A615B3 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp */,
+                            9252E0ECB1A84B5D9145950C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp */,
+                            4CEA538FF42D4CCBBDBF8B76 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp */,
+                     );
+                     name = "Source Files";
+                     sourceTree = "<group>";
+              };
+              81047B75DF7F4CC1A1102F26 /* Products */ = {
+                     isa = PBXGroup;
+                     children = (
+                            180F0294F3D5496EA9F465DE /* iCubRL */,
+                     );
+                     name = Products;
+                     sourceTree = "<group>";
+              };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+              38A70F35DBCF46BE8586E9EC /* iCubRL */ = {
+                     isa = PBXNativeTarget;
+                     buildConfigurationList = 57873B9F209D4FDDB677561A /* Build configuration list for PBXNativeTarget "iCubRL" */;
+                     buildPhases = (
+                            AFEBDFE7412541B491BB5F6E /* Sources */,
+                            48D9AA9BF3CE467D838B0E33 /* CMake PostBuild Rules */,
+                     );
+                     buildRules = (
+                     );
+                     dependencies = (
+                            0D500D0EF0E844A1A5A97701 /* PBXTargetDependency */,
+                     );
+                     name = iCubRL;
+                     productName = iCubRL;
+                     productReference = 180F0294F3D5496EA9F465DE /* iCubRL */;
+                     productType = "com.apple.product-type.library.static";
+              };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+              AD6C7EFC048D488DA0E39CA0 /* Project object */ = {
+                     isa = PBXProject;
+                     attributes = {
+                            BuildIndependentTargetsInParallel = YES;
+                     };
+                     buildConfigurationList = 36225F20B3364147AFBDB9C6 /* Build configuration list for PBXProject  "iCubRLLibrary" */;
+                     buildSettings = {
+                     };
+                     buildStyles = (
+                            E7CCC70522D74D9AA22BF1DC /* Debug */,
+                            AD30501B9F7E4C7BB570F955 /* Release */,
+                            38A35EC1D1074A02B87D76FF /* MinSizeRel */,
+                            E3CB2FBEBD0C4CFDB2351588 /* RelWithDebInfo */,
+                     );
+                     compatibilityVersion = "Xcode 3.2";
+                     hasScannedForEncodings = 0;
+                     mainGroup = 95FFC8F4E36449B7A22A4BFC;
+                     projectDirPath = "../../../src/LibRL";
+                     projectRoot = "";
+                     targets = (
+                            3CDD3E99258F4866A90D1751 /* ALL_BUILD */,
+                            EC331B223E5645C48F78D1DD /* ZERO_CHECK */,
+                            38A70F35DBCF46BE8586E9EC /* iCubRL */,
+                            A2FC27FEE1D6484E90B2C4AB /* install */,
+                     );
+              };
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+              7048CB4F81284A739FF023D9 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              F1B8112F11014288BA4C64C3 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              F7230CCFC62F430D96F27103 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              6E7538997C5847D498150445 /* CMake Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              48D9AA9BF3CE467D838B0E33 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/iCubRL_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+              FB93BC9E6B534101AE84F075 /*  */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     inputPaths = (
+                     );
+                     outputPaths = (
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "# shell script goes here
+exit 0";
+                     showEnvVarsInLog = 0;
+              };
+              C5FBA0DA4C974595964FEF74 /* CMake PostBuild Rules */ = {
+                     isa = PBXShellScriptBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                     );
+                     name = "CMake PostBuild Rules";
+                     runOnlyForDeploymentPostprocessing = 0;
+                     shellPath = /bin/sh;
+                     shellScript = "make -C /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL -f /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+                     showEnvVarsInLog = 0;
+              };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+              AFEBDFE7412541B491BB5F6E /* Sources */ = {
+                     isa = PBXSourcesBuildPhase;
+                     buildActionMask = 2147483647;
+                     files = (
+                            D6655A48FAAD4DE8BB346676 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/learner.cpp */,
+                            FE2FB492A3BF4F83A621F45D /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/state.cpp */,
+                            03D50275CEF04F1F86530401 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/action.cpp */,
+                            CE1DD3488944444AB8334C8C /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionTransition.cpp */,
+                            7AF7A2186E5C418082EC2DA7 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/actionReach.cpp */,
+                            CF0B69014BF4471583162300 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/mobee_interface.cpp */,
+                            4BDDAAFD89FF4BB0955D05E4 /* /Users/kailfrank/imClever/dev/MoBeE/src/LibRL/rl_problem.cpp */,
+                     );
+                     runOnlyForDeploymentPostprocessing = 0;
+              };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+              A8450B3A032745B3A9296DC0 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 38A70F35DBCF46BE8586E9EC /* iCubRL */;
+                     targetProxy = F15AAA60BCF54E0E976E9468 /* PBXContainerItemProxy */;
+              };
+              0D500D0EF0E844A1A5A97701 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = EC331B223E5645C48F78D1DD /* ZERO_CHECK */;
+                     targetProxy = 9898860DE73849BAA45506B4 /* PBXContainerItemProxy */;
+              };
+              E3A456ACA87541E3BF3618E3 /* PBXTargetDependency */ = {
+                     isa = PBXTargetDependency;
+                     target = 3CDD3E99258F4866A90D1751 /* ALL_BUILD */;
+                     targetProxy = B7646A7B0FBF48619BC96C88 /* PBXContainerItemProxy */;
+              };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+              89246C651D6D4EA4B5301D54 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/build;
+                     };
+                     name = Debug;
+              };
+              A1BF4D5B1D9244DB814279DB /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/build;
+                     };
+                     name = Release;
+              };
+              152570C9FEC9441F9F4BD1F0 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/build;
+                     };
+                     name = MinSizeRel;
+              };
+              C6EC333B28DC437FAF3882DD /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+                            ONLY_ACTIVE_ARCH = YES;
+                            SDKROOT = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL/build;
+                     };
+                     name = RelWithDebInfo;
+              };
+              4A4C4DDC6C86405EB25A2200 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              2ABBB4145FB64561A6E8B4E0 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              85FFACADFEE742D296B37BC8 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              0FBB164B437944AFA56C23D4 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ALL_BUILD;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              397086D2CD19462E9C052C77 /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              972FABD818C948A2B7935FBD /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              77C00116D73543768FCED7D1 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              BD021DB2EC1341FEBB5EFBE5 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = ZERO_CHECK;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              E02E4F83F2EF4724BC86346B /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = iCubRL;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              17ED72E38C4E4F17A52534DB /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 3;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = iCubRL;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              39DFA6986F134ACF9CD56B8C /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = s;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "    -DNDEBUG  ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8      -DNDEBUG  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = iCubRL;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              C78E19A94817439EBE2167C3 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            EXECUTABLE_PREFIX = lib;
+                            EXECUTABLE_SUFFIX = ".a";
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 2;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            LIBRARY_STYLE = STATIC;
+                            OTHER_CFLAGS = "        ";
+                            OTHER_CPLUSPLUSFLAGS = "    -w -pipe -march=native -Qunused-arguments -mmacosx-version-min=10.8          ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = iCubRL;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+              882D582F424C4152ADC7F42B /* Debug */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Debug;
+              };
+              E10FD5B588504ED29879E8F1 /* Release */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = Release;
+              };
+              AD66F9711B3149578AE9CE18 /* MinSizeRel */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = MinSizeRel;
+              };
+              753AF5FC25534D93BB234174 /* RelWithDebInfo */ = {
+                     isa = XCBuildConfiguration;
+                     buildSettings = {
+                            GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+                            GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+                            GCC_OPTIMIZATION_LEVEL = 0;
+                            GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+                            GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+                            HEADER_SEARCH_PATHS = ("/Users/kailfrank/imClever/dev/MoBeE/src/LibRL/../include", /usr/local/Cellar/yarp/HEAD/include, /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL, "/usr/local/Cellar/cgal/4.0.2/include", /usr/local/include, );
+                            INSTALL_PATH = "";
+                            OTHER_CFLAGS = "  ";
+                            OTHER_LDFLAGS = "";
+                            OTHER_REZFLAGS = "";
+                            PRODUCT_NAME = install;
+                            SECTORDER_FLAGS = "";
+                            SYMROOT = /Users/kailfrank/imClever/dev/MoBeE/xcode/src/LibRL;
+                            USE_HEADERMAP = NO;
+                            WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", );
+                     };
+                     name = RelWithDebInfo;
+              };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+              36225F20B3364147AFBDB9C6 /* Build configuration list for PBXProject  "iCubRLLibrary" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            89246C651D6D4EA4B5301D54 /* Debug */,
+                            A1BF4D5B1D9244DB814279DB /* Release */,
+                            152570C9FEC9441F9F4BD1F0 /* MinSizeRel */,
+                            C6EC333B28DC437FAF3882DD /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              EB5E896C72ED4648860DA715 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            4A4C4DDC6C86405EB25A2200 /* Debug */,
+                            2ABBB4145FB64561A6E8B4E0 /* Release */,
+                            85FFACADFEE742D296B37BC8 /* MinSizeRel */,
+                            0FBB164B437944AFA56C23D4 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              957B0F11A0544FF19060FCAD /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            397086D2CD19462E9C052C77 /* Debug */,
+                            972FABD818C948A2B7935FBD /* Release */,
+                            77C00116D73543768FCED7D1 /* MinSizeRel */,
+                            BD021DB2EC1341FEBB5EFBE5 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              57873B9F209D4FDDB677561A /* Build configuration list for PBXNativeTarget "iCubRL" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            E02E4F83F2EF4724BC86346B /* Debug */,
+                            17ED72E38C4E4F17A52534DB /* Release */,
+                            39DFA6986F134ACF9CD56B8C /* MinSizeRel */,
+                            C78E19A94817439EBE2167C3 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+              20B665B911E441BCB9308722 /* Build configuration list for PBXAggregateTarget "install" */ = {
+                     isa = XCConfigurationList;
+                     buildConfigurations = (
+                            882D582F424C4152ADC7F42B /* Debug */,
+                            E10FD5B588504ED29879E8F1 /* Release */,
+                            AD66F9711B3149578AE9CE18 /* MinSizeRel */,
+                            753AF5FC25534D93BB234174 /* RelWithDebInfo */,
+                     );
+                     defaultConfigurationIsVisible = 0;
+                     defaultConfigurationName = Debug;
+              };
+/* End XCConfigurationList section */
+       };
+       rootObject = AD6C7EFC048D488DA0E39CA0;
+}
