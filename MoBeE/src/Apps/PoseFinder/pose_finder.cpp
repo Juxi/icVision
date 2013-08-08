@@ -50,7 +50,7 @@ void PoseFinder::stop()
 
 void PoseFinder::run()
 {
-    std::vector< std::pair<Point_d, QVector3D> > samples = random_sample( 100 );
+    std::vector< std::pair<Point_d, QVector3D> > samples = random_sample( 1 );
     std::vector< std::pair<Point_d, QVector3D> >::iterator i;
     
     std::list< std::pair<Point_d, double> > list;
