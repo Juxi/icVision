@@ -57,7 +57,7 @@ protected:
 	BufferedPort< ImageOf<PixelBgr> > imgOutputPort;
 	BufferedPort< Bottle >			  posOutputPort;
 	
-	RpcClient	vSkinPort;
+	RpcClient	mobeePort;
 	RpcClient	threeDPort;	
 	
 	//	HACK 	HACK
@@ -91,6 +91,7 @@ protected:
 	bool setWorldPositionOfObject(double x, double y, double z, const char *objName);
 	
 	void printDebug(const char* str);
+	void printWarning(const char* str);
 	
 public:
 	// Constructor

@@ -31,6 +31,11 @@ void icFilterModule::printDebug(const char* str)
 	printf("[icVision::Filter:%s] %s\n", getName().c_str(), str);
 }
 
+void icFilterModule::printWarning(const char* str)
+{
+	printf("\nWARNING!! [icVision::Filter:%s] %s\n\n", getName().c_str(), str);
+}
+
 
 double icFilterModule::getPeriod()
 {
@@ -138,7 +143,8 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		isReadingFileFromHDD = true;
 		
 		std::cout << "FileName specified: " << fileName << std::endl;
-		std::cout << "WARNING! Running only once on this image!" << std::endl;
+		//std::cout << "WARNING! Running only once on this image!" << std::endl;
+		printWarning("Running only once on this image!");
 	}
 	
 	if(! isReadingFileFromHDD ) {
@@ -156,6 +162,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		inDebugMode = true;
 		std::cout << "DEBUG: Debug mode enabled!" << std::endl;
 	} else {
+		std::cout << "DEBUG: Debug mode disabled!" << std::endl;		
 		std::cout << "DEBUG: Debug mode disabled!" << std::endl;		
 	}
 
@@ -270,32 +277,48 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		// trying to connect to the rpc icVision 3d localisation 
 		printf("Trying to connect to %s\n", outputPortName.c_str());
 		if(! yarp.connect((handlerPortName + "/3DCon").c_str(), outputPortName.c_str()) ) {
+
 			std::cout << getName() << ": Unable to connect to port "; 
 			std::cout << "/icVision/ThreeDModule/position:i" << std::endl;
-			return false;
+			
+			// return false;
+			//std::cout << std::endl << "WARNING! This module Will now run without localisation! "<< std::endl << std::endl;
+			shallLocaliseInThreeD = false;
+			printWarning("This module will now run without localisation!");
+
+		} else {
+
+			// HACK HACK TODO check
+			// connect to rpc	
+			// check whether we have F or not!! TODO
+			std::string clientPortName = "/evolvedfilter";
+			clientPortName += "/world-client";
+			if(! mobeePort.open( clientPortName.c_str() )){
+
+				std::cout << getName() << ": Unable to connect to port "; 
+				std::cout << clientPortName << std::endl;
+
+				shallLocaliseInThreeD = false;
+				printWarning("This module will now run without localisation!");
+
+			} else {
+			
+				outputPortName = "/MoBeE/world";	
+				//	inputPortName += robotName; 
+				//	inputPortName += "F/world";
+				
+				// trying to connect to the rpc server (world interface)
+				printf("Trying to connect to %s\n", outputPortName.c_str());
+				if(! yarp.connect(clientPortName.c_str(), outputPortName.c_str()) ) {
+
+					std::cout << getName() << ": Unable to connect to port "; 
+					std::cout << outputPortName.c_str() << std::endl;
+					
+					shallLocaliseInThreeD = false;
+					printWarning("This module will now run without localisation!");
+				}	
+			}
 		}
-		
-		// HACK HACK TODO check
-		// connect to rpc	
-		// check whether we have F or not!! TODO
-		std::string clientPortName = "/evolvedfilter";
-		clientPortName += "/world-client";
-		if(! vSkinPort.open( clientPortName.c_str() )){
-			return false;
-		}
-		
-		outputPortName = "/MoBeE/world";	
-		//	inputPortName += robotName; 
-		//	inputPortName += "F/world";
-		
-		// trying to connect to the rpc server (world interface)
-		printf("Trying to connect to %s\n", outputPortName.c_str());
-		if(! yarp.connect(clientPortName.c_str(), outputPortName.c_str()) ) {
-			std::cout << getName() << ": Unable to connect to port "; 
-			std::cout << outputPortName.c_str() << std::endl;
-			return false;
-		}	
-		
 	}
 	
 //	// TEMP Solution TODO change
@@ -469,7 +492,7 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	
     std::cout << "bottle: " << cmd.toString() << std::endl;
     
-	bool r = vSkinPort.write(cmd, response);
+	bool r = mobeePort.write(cmd, response);
 	std::cout << "response: " << response.toString() << std::endl;	
 	// return r;
 	return true;
