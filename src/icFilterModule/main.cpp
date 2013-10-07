@@ -30,6 +30,7 @@ int main(int argc, char * argv[]) {
 
 	std::string version = "v0.56";
 	printf("Launching icVision Test Module (%s)...\t", version.c_str());
+	printf("Launching icVision Test Module (%s)...\t", version.c_str());
 	printf("Using OpenCV %d.%d!\n\n", CV_MAJOR_VERSION, CV_MINOR_VERSION);
 	
 	
@@ -45,7 +46,7 @@ int main(int argc, char * argv[]) {
 	// for localisation
 	BlueCupDetector *module = new BlueCupDetector();	
 	module->runOnBothImages();
-	module->localiseInThreeD(false);
+	module->localiseInThreeD(true);
 	
 	//	module->runOnOneImage(icFilterModule::LEFT_IMAGE);
 
