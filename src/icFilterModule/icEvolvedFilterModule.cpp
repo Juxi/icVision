@@ -256,9 +256,9 @@ bool EvolvedFilterModule::updateModule()
 			IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 			
 			cvCvtColor(gray, rgb, CV_GRAY2RGB);
-			cvSplit(rgb, b, g, r, NULL);
-			cvAdd(r, filteredImg->Image, r);
-			cvMerge(b, g, r, NULL, rgb);	
+//			cvSplit(rgb, b, g, r, NULL);
+	//		cvAdd(r, filteredImg->Image, r);
+		//	cvMerge(b, g, r, NULL, rgb);	
 			
 			cvReleaseImage(&r);
 			cvReleaseImage(&g);	

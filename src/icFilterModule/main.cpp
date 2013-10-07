@@ -14,11 +14,8 @@
 #include "../evolvedFilters/blue_detector.h"
 //#include "evolved_filters/glass_detector.h"
 #include "../evolvedFilters/redblock_detector.h"
-#include "../evolvedFilters/teabox.h"
 
-#include "../evolvedFilters/mars.h"
 
-#include "face_detector.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;
@@ -31,22 +28,24 @@ int main(int argc, char * argv[]) {
 		return 1;
 	}
 
-	std::string version = "v0.55";
-	printf("Launching icVision Test Module (%s)...\n", version.c_str());
+	std::string version = "v0.56";
+	printf("Launching icVision Test Module (%s)...\t", version.c_str());
+	printf("Using OpenCV %d.%d!\n\n", CV_MAJOR_VERSION, CV_MINOR_VERSION);
 	
-
+	
+	
 //	RedBlockDetector *module = new RedBlockDetector();
 //	TeaBoxDetector *module = new TeaBoxDetector();	
 //	module->runOnOneImage(icFilterModule::LEFT_IMAGE);
 //	module->localiseInThreeD(false);
 
-	//	RedFilterModule* module = new RedFilterModule();		
+	//RedFilterModule* module = new RedFilterModule();		
 
 	
 	// for localisation
 	BlueCupDetector *module = new BlueCupDetector();	
 	module->runOnBothImages();
-	module->localiseInThreeD(true);
+	module->localiseInThreeD(false);
 	
 	//	module->runOnOneImage(icFilterModule::LEFT_IMAGE);
 

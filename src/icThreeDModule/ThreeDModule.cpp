@@ -170,7 +170,6 @@ bool ThreeDModule::readEncoders() {
 //		}
 //		std::cout << std::endl;					
 		
-
 	}
 
 	return true;
@@ -294,10 +293,14 @@ void ThreeDModule::calcuatePositionUsingSimonsMethod(double *retX, double *retY,
     if(helper < 0.1) helper = 0.1;
     
 	double estimatedY = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/pow(x[12], 0.18780835) + log(x[12]) - 2.1461744;
+	double estimatedYsafe = (0.031274121*x[0] + 0.2344905*x[10] + 0.21543403*x[8])/helper + log(x[12]) - 2.1461744;
 
     std::cout << "x[12]: " << x[12] << std::endl;
     std::cout <<  "lala helper: " << helper << ", " << pow(x[12], 0.18780835) << std::endl;
     std::cout <<  "lala helper: " << estimatedY << std::endl;
+    std::cout << ", " << estimatedYsafe << std::endl;
+    
+    if(isnan(estimatedY)) estimatedY=estimatedYsafe;
 
 	// lala
 	std::cout <<  "Prediction: " << round(estimatedX)<< ", "<< (char)(round(estimatedY)+'A') << std::endl;
