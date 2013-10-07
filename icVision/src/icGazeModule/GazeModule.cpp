@@ -149,7 +149,7 @@ bool GazeModule::updateModule() {
 //		std::cout << "stamp is not close enough" << stamp.getTime()-now.getTime() << std::endl;
 //		return true;
 //	}
-    if(checkTS(stamp.getTime(), prevTS.getTime(), 1.0)) {
+    if(checkTS(stamp.getTime(), prevTS.getTime(), 0.1)) {
         std::cout << "stamp is too close to the previous one " << stamp.getTime()-prevTS.getTime() << std::endl;
         return true;
     }
