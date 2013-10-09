@@ -218,7 +218,9 @@ bool EvolvedFilterModule::updateModule()
             std::cout << "Filter ran for: " << diffms << " ms" << std::endl;
             
 			//DEBUG
-			filteredImg->Save("output.png");
+            std::string outFileName = fileName;
+            outFileName.replace(outFileName.rfind(".png"), 4, "_output.png");
+			filteredImg->Save(outFileName);
 			std::cout << "DEBUG: Now yarping..." << std::endl;		
 		}
 
@@ -346,6 +348,13 @@ bool EvolvedFilterModule::updateModule()
 			imgOutputPort.setEnvelope(outbottleTS);
 			imgOutputPort.write();	
 			
+            
+            if(isReadingFileFromHDD) {
+                std::string outFileName = fileName;
+                outFileName.replace(outFileName.rfind(".png"), 4, "_output_overlay.png");
+                cvSaveImage(outFileName.c_str(), outputImageToWrite);
+            }
+
 			// cleanup
 			cvReleaseImage(&outputImageToWrite);
 			outputImageToWrite = NULL;

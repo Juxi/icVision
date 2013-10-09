@@ -29,6 +29,7 @@ private:
 	
 public:
 	GaborImage();
+	GaborImage(int, int);
 	~GaborImage();
 
 	Img GaborTransform(Img Image, int Frequency, int Orientation);

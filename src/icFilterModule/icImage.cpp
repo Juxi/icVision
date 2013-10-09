@@ -46,6 +46,13 @@ icImage* icImage::avg (icImage* a) const {
 	return new icImage(retImg);
 }
 
+// set full image to average of it all
+icImage* icImage::Avg(void) const {
+	Img retImg = (IplImage*) cvClone(Image);
+    cvSet(retImg, cvRealScalar(cvAvg(Image).val[0]));
+	return new icImage(retImg);
+}
+
 icImage* icImage::mulc(double v) const { 
 	Img retImg = (IplImage*) cvClone(Image);
 	Img unity  = (IplImage*) cvClone(Image);
@@ -74,7 +81,13 @@ icImage* icImage::absdiff(icImage* a) const {
 icImage* icImage::canny(double v) const {
 	//	Value = this.Image.Canny(new Gray(v), new Gray(10));
 	Img retImg = (IplImage*) cvClone(Image);
-	cvCanny(Image, retImg, v, 10);
+    Img gtempIn   = cvCreateImage(cvSize(m_width, m_height), IPL_DEPTH_8U, 1);
+    Img gtempOut  = cvCreateImage(cvSize(m_width, m_height), IPL_DEPTH_8U, 1);
+    cvScale(Image, gtempIn);
+	cvCanny(gtempIn, gtempOut, v, 10);
+    cvScale(gtempOut, retImg);
+    cvReleaseImage(&gtempIn);
+    cvReleaseImage(&gtempOut);
 	return new icImage(retImg);
 }
 
@@ -112,6 +125,12 @@ icImage* icImage::pow(double P) const {
 }
 
 
+icImage* icImage::exp() const {
+	Img retImg = (IplImage*) cvClone(Image);
+	cvExp(Image, retImg);
+	return new icImage(retImg);
+}
+
 icImage* icImage::sqrt() const {
 	Img retImg = (IplImage*) cvClone(Image);
 	cvPow(Image, retImg, 0.5);
@@ -119,17 +138,58 @@ icImage* icImage::sqrt() const {
 }
 
 
+icImage* icImage::Max(void) const {
+	Img retImg = (IplImage*) cvClone(Image);
+    double min, max = 0;
+    cvMinMaxLoc(Image, &min, &max);
+    cvSet(retImg, cvRealScalar(max));
+	return new icImage(retImg);
+}
+
 icImage* icImage::max(icImage* a) const { 
 	Img retImg = (IplImage*) cvClone(Image);
 	cvMax(Image, a->Image, retImg);
 	return new icImage(retImg);	
 }
+
+icImage* icImage::max(double val) const {
+	Img retImg = (IplImage*) cvClone(Image);
+    Img constant = (IplImage*) cvClone(Image);
+	cvSet(constant, cvRealScalar(val));
+	cvMax(Image, constant, retImg);
+    cvReleaseImage(&constant);
+	return new icImage(retImg);
+}
+
+
+icImage* icImage::Min(void) const {
+	Img retImg = (IplImage*) cvClone(Image);
+    double min = 0, max;
+    cvMinMaxLoc(Image, &min, &max);
+    cvSet(retImg, cvRealScalar(min));
+	return new icImage(retImg);
+}
+
+icImage* icImage::Min(double v) const {
+	Img retImg = (IplImage*) cvClone(Image);
+    cvSet(retImg, cvRealScalar(v));
+	cvMin(Image, retImg, retImg);
+	return new icImage(retImg);
+}
+
 icImage* icImage::min(icImage* a) const { 
 	Img retImg = (IplImage*) cvClone(Image);
 	cvMin(Image, a->Image, retImg);
 	return new icImage(retImg);	
 }
 	
+icImage* icImage::gauss(int x, int y) const {
+    //		Value = this.Image.SmoothGaussian(Apertrue);
+	Img retImg = (IplImage*) cvClone(Image);
+	cvSmooth(Image, retImg, CV_GAUSSIAN, x, y);
+	return new icImage(retImg);
+}
+
 icImage* icImage::gauss(int Aperture) const {
 //		Value = this.Image.SmoothGaussian(Apertrue);
 	Img retImg = (IplImage*) cvClone(Image);
@@ -143,11 +203,39 @@ icImage* icImage::sobelx(int Aperture) const {
 	return new icImage(retImg);	
 }
 icImage* icImage::sobely(int Aperture) const {
-	//		Value = this.Image.Sobel(1, 0, Apertrue);
 	Img retImg = (IplImage*) cvClone(Image);
 	cvSobel(Image, retImg, 0, 1, Aperture);
 	return new icImage(retImg);	
 }
+
+
+icImage* icImage::unsharpen(int x, int y) const {
+    //		Img blurred = this.Image.SmoothGaussian(Apertrue);
+    //		Img unsharpenmask = this.Image.Sub(blurred);
+    //		Img hicontrast = unsharpenmask.Mul(1.5);/
+    //		Value = this.Image.Add(hicontrast);
+	Img retImg = (IplImage*) cvClone(Image);
+    
+	Img blurred = (IplImage*) cvClone(Image);
+	Img unsharpenmask = (IplImage*) cvClone(Image);
+	Img hicontrast = (IplImage*) cvClone(Image);
+	Img cv1 = (IplImage*) cvClone(Image);
+	
+	cvSmooth(Image, blurred, CV_GAUSSIAN, x, y);
+	cvSub(Image, blurred, unsharpenmask);
+	cvSet(cv1, cvRealScalar(1.0));
+	cvMul(unsharpenmask, cv1, hicontrast, 1.5);
+	
+	cvAdd(Image, hicontrast, retImg);
+    
+	cvReleaseImage(&blurred);
+	cvReleaseImage(&unsharpenmask);
+	cvReleaseImage(&hicontrast);
+	cvReleaseImage(&cv1);
+	
+	return new icImage(retImg);
+}
+
 icImage* icImage::unsharpen(int Aperture) const {
 //		Img blurred = this.Image.SmoothGaussian(Apertrue);
 //		Img unsharpenmask = this.Image.Sub(blurred);
@@ -206,6 +294,14 @@ icImage* icImage::SmoothBlur(int Aperture) const {
 	return new icImage(retImg);			
 }
 
+
+icImage* icImage::gabor(int width, int height, int frequ, int orientation) const {
+	GaborImage *gab = new GaborImage(abs(width), abs(height));
+	Img retImg = gab->GaborTransform(Image, frequ, orientation);
+	delete gab;
+	return new icImage(retImg);
+}
+
 icImage* icImage::gabor(int frequ, int orientation) const {
 	GaborImage *gab = new GaborImage();
 	Img retImg = gab->GaborTransform(Image, frequ, orientation);
@@ -213,8 +309,27 @@ icImage* icImage::gabor(int frequ, int orientation) const {
 	return new icImage(retImg);
 }
 
+
+
+icImage* icImage::Shift(int Xshift, int Yshift) const {
+	Img retImg = (IplImage*) cvClone(Image);
+
+    int w = m_width;
+    int h = m_height;
+    
+    for (int x = 0; x < w; x++)
+        for (int y = 0; y < h; y++) {
+            int x2 = abs(x + Xshift) % w;
+            int y2 = abs(y + Yshift) % h;
+			CV_IMAGE_ELEM(retImg, float, y, x) = CV_IMAGE_ELEM(Image, float, y2, x2);
+        }
+    
+    return new icImage(retImg);
+}
+
+
 icImage* icImage::ShiftDown() const {
-	Img retImg = (IplImage*) cvClone(Image);	
+	Img retImg = (IplImage*) cvClone(Image);
 	
 	float down[] = { 0, 1, 0 , 0, 0, 0 , 0, 0, 0 };
 	CvMat* ShiftDownKernel = cvCreateMat(3, 3, CV_32F);;
@@ -329,7 +444,6 @@ icImage* icImage::ReScale(double S) const {
 	return new icImage(retImg);
 }
 
-
 icImage* icImage::LocalMax(int Aperture) const {
 	int width = Image->width;
 	int height = Image->height;
@@ -355,6 +469,58 @@ icImage* icImage::LocalMax(int Aperture) const {
 	}
 	return new icImage(retImg);
 }
+
+icImage* icImage::LocalMin(int Aperture) const {
+	int width = Image->width;
+	int height = Image->height;
+	
+	Img retImg = (IplImage*) cvClone(Image);
+	
+	for (int x = Aperture; x < width - Aperture; x++) {
+		for (int y = Aperture; y < height - Aperture; y++) {
+			float Acc = FLT_MAX;
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++) {
+					//					uchar* temp_ptr = &((uchar*)(img->imageData + img->widthStep*pt.y))[pt.x*3];
+					Acc = std::min(Acc, CV_IMAGE_ELEM(Image, float, y+j, x+i));
+					//					Acc = std::max(Acc, *((float*)(Image->imageData + Image->widthStep*(y + j))[x + i]));
+				}
+			
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++)
+					//					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
+					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;
+			//					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
+		}
+	}
+	return new icImage(retImg);
+}
+
+icImage* icImage::LocalAvg(int Aperture) const {
+	int width = Image->width;
+	int height = Image->height;
+	
+	Img retImg = (IplImage*) cvClone(Image);
+	
+	for (int x = Aperture; x < width - Aperture; x++) {
+		for (int y = Aperture; y < height - Aperture; y++) {
+			float Acc = 0;
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++) {
+					Acc += CV_IMAGE_ELEM(Image, float, y+j, x+i);
+				}
+			
+            Acc = Acc/((float)Aperture*Aperture);
+			for (int i = -Aperture; i <= Aperture; i++)
+				for (int j = -Aperture; j <= Aperture; j++)
+					//					*((float*)(retImg->imageData + retImg->widthStep*(y + j))[x + i]) = Acc;
+					CV_IMAGE_ELEM(Image, float, y+j, x+i) = Acc;
+			//					CV_MAT_ELEM(retImg, float, x + i, y + j) = Acc;
+		}
+	}
+	return new icImage(retImg);
+}
+
 
 
 
