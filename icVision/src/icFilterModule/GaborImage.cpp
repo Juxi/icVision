@@ -17,6 +17,18 @@ GaborImage::GaborImage() {
 	KernelImgData = cvCreateMat(GaborWidth, GaborHeight, CV_32F);
 }
 
+GaborImage::GaborImage(int gbWidth, int gbHeight) {
+	GaborWidth = gbWidth;
+	GaborHeight = gbHeight;
+	orientation = 8;
+	frequency = 3;
+	
+	// moved here from init
+	KernelRealData = cvCreateMat(GaborWidth, GaborHeight, CV_32F);
+	KernelImgData = cvCreateMat(GaborWidth, GaborHeight, CV_32F);
+}
+
+
 GaborImage::~GaborImage() {
 	cvReleaseMat(&KernelRealData);
 	cvReleaseMat(&KernelImgData);

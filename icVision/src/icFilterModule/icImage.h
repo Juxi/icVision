@@ -70,6 +70,7 @@ public:
 	icImage* sub (icImage* a) const;
 	icImage* mul (icImage* a) const;
 	icImage* avg (icImage* a) const;
+   	icImage* Avg () const;
 	icImage* mulc(double v) const;
 	icImage* addc(double v) const;
 	icImage* subc(double v) const;
@@ -86,12 +87,18 @@ public:
 	icImage* sqrt() const;	
 	
 	icImage* max (icImage* a) const;
+	icImage* max (double) const;
+   	icImage* Max () const;
 	icImage* min (icImage* a) const;
+   	icImage* Min () const;
+   	icImage* Min (double) const;
 	icImage* gauss (int) const;
+   	icImage* gauss (int, int) const;
 	
 	icImage* sobelx (int) const;
 	icImage* sobely(int) const;
 	icImage* unsharpen(int) const;
+	icImage* unsharpen(int, int) const;
 	icImage* threshold (double) const;
 	icImage* thresholdInv (double) const;
 
@@ -101,8 +108,10 @@ public:
 	icImage* Normalize(void) const;
 	
 	icImage* gabor(int, int) const;
+	icImage* gabor(int, int, int, int) const;
 	icImage* ResizeThenGabor(int, int, double Scale) const;
-	
+
+	icImage* Shift(int, int) const;
 	icImage* ShiftDown() const;
 	icImage* ShiftUp() const;
 	icImage* ShiftLeft() const;
@@ -110,11 +119,15 @@ public:
 		
 	icImage* ReScale(double) const;
 	icImage* LocalMax(int) const;
+	icImage* LocalMin(int) const;
+	icImage* LocalAvg(int) const;
 	
 	void Save(std::string FileName) const;
 	
 private:
 	int m_width, m_height;
+    
+    //    float getSum(void);
 	
 };
 
