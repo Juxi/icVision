@@ -148,6 +148,8 @@ void CoreModule::printDebug(const char* str)
 	printf("[icVision::Core] %s\n", str);
 }
 
+
+
 double CoreModule::getPeriod() {
 	return 0.1;
 }

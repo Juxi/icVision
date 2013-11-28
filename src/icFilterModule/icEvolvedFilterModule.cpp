@@ -947,17 +947,6 @@ bool EvolvedFilterModule::checkTS(double TSLeft, double TSRight, double th) {
     else return false;
 }
 
-
-/*
-* Message handler. Just echo all received messages.
-*/
-bool EvolvedFilterModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply)
-{
-	std::cout << "Message Received: (echo is on)" << endl;
-	std::cout << command.toString() << endl;
-	return true;
-}
-
 /*
 * Interrupt function.
 */

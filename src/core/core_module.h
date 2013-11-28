@@ -79,6 +79,7 @@ public:
 	virtual ~CoreModule();
 	
 	void printDebug(const char* str);
+	void printWarning(const char* str);
 	
 	// Module functions
 	double getPeriod();
