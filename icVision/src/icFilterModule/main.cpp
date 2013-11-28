@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
 		return 1;
 	}
 
-	std::string version = "v0.56";
+	std::string version = "v0.6";
 	printf("Launching icVision Test Module (%s)...\t", version.c_str());
 	printf("Launching icVision Test Module (%s)...\t", version.c_str());
 	printf("Using OpenCV %d.%d!\n\n", CV_MAJOR_VERSION, CV_MINOR_VERSION);
