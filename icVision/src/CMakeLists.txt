@@ -1,4 +1,4 @@
-# Copyright: (C) 2011 Juxi Leitner
+# Copyright: (C) 2011-2013 Juxi Leitner
 # Author: Juxi Leitner <juxi.leitner@gmail.com>
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -18,6 +18,9 @@ ENDIF ( LINK_ACE )
 
 # core and coreGUI
 ADD_SUBDIRECTORY (core)
+
+# add Simulated robot to connect to (for debugging and testing)
+ADD_SUBDIRECTORY (icSim)
 
 # core functionality: filter (base functionality), disparity
 ADD_SUBDIRECTORY (icFilterModule)
