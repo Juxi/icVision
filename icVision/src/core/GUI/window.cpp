@@ -281,7 +281,7 @@ void Window::updateList() {
 		vector<ModuleInfo> listOfModulesReg(icVisionModule->listOfModules);
 
 			
-		unsigned int idxReg = 0, idxGUI = 0;
+		//unsigned int idxReg = 0, idxGUI = 0;
 		std::cout << "------" << std::endl;		
 		while( listOfModulesGUI.size() > 0  ||
 			   listOfModulesReg.size() > 0 ) {
