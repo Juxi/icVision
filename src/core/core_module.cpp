@@ -356,12 +356,32 @@ bool CoreModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& repl
 	}
 	
 	reply.clear();
-	reply.addString("The command is not valid! Try: quit|list|add|del");	
+	reply.addString("The command is not valid! Try: quit|list|add|del|conf");
 
 	// nothing there
 	if( command.size() < 1 ) return true;
 	if( command.size() == 1 && command.get(0).asString() == "") return true;
 
+    
+    // access/spread global configuration and parametesr
+    if( command.get(0).asString() == "conf" ){
+        bool getall = false;
+
+        reply.clear();
+
+		if( command.size() < 2 ) {
+//			reply.addString("ERROR: The syntax should be:");
+//			reply.addString("conf <name>");
+            getall = true;
+		}
+        
+        // the robot's name used for the framework
+        if( getall || command.get(1).asString() == "robotName" ) {
+            reply.addString(robotName.c_str());
+        }
+        
+        // other global parameters... TBD
+    }
 
 	// LIST
 	if( command.get(0).asString() == "list" || command.get(0).asString() == "ls" ){
@@ -531,7 +551,6 @@ void CoreModule::remModuleFromList(int thisModuleID) {
 		}
 	}
 }
-
 
 
 

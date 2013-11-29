@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2013 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
@@ -17,8 +17,9 @@ int main(int argc, char * argv[]) {
 
 	//icVision::CoreModule
 	CoreModule module;
+    string version = "1.0";
 
-	printf("Launching icVision Core Module ...\n");
+	printf("Launching icVision Core Module (v%s) ...\n", version.c_str());
 
 	module.runModule(argc, argv);
 	module.close();
