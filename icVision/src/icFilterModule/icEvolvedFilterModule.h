@@ -60,7 +60,9 @@ public:
 	
 	virtual icImage* runFilter();
 	
-	bool respond		(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
+	// already defined in icfilter ... 
+	// bool respond		(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
+	
 	bool interruptModule();
 	bool close			();
 	
