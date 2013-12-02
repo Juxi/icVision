@@ -85,6 +85,7 @@ protected:
 	
 	// Private Methods
 	bool icVisionCoreIsAvailable();
+    bool setRobotNameFromCore();
 	bool registerModuleWithCore();
 	bool deregisterModuleWithCore();
 //	bool get3DPosition(Vector &v);

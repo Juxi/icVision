@@ -1,11 +1,10 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2013 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "icImage.h"
-#include "GaborImage.h"
-
+//#include "GaborImage.h"
 
 icImage* icImage::equalizeHistogram() const {
 	Img retImg = (IplImage*) cvClone(Image);
@@ -295,19 +294,19 @@ icImage* icImage::SmoothBlur(int Aperture) const {
 }
 
 
-icImage* icImage::gabor(int width, int height, int frequ, int orientation) const {
-	GaborImage *gab = new GaborImage(abs(width), abs(height));
-	Img retImg = gab->GaborTransform(Image, frequ, orientation);
-	delete gab;
-	return new icImage(retImg);
-}
-
-icImage* icImage::gabor(int frequ, int orientation) const {
-	GaborImage *gab = new GaborImage();
-	Img retImg = gab->GaborTransform(Image, frequ, orientation);
-	delete gab;
-	return new icImage(retImg);
-}
+//icImage* icImage::gabor(int width, int height, int frequ, int orientation) const {
+//	GaborImage *gab = new GaborImage(abs(width), abs(height));
+//	Img retImg = gab->GaborTransform(Image, frequ, orientation);
+//	delete gab;
+//	return new icImage(retImg);
+//}
+//
+//icImage* icImage::gabor(int frequ, int orientation) const {
+//	GaborImage *gab = new GaborImage();
+//	Img retImg = gab->GaborTransform(Image, frequ, orientation);
+//	delete gab;
+//	return new icImage(retImg);
+//}
 
 
 
@@ -402,25 +401,25 @@ icImage* icImage::Normalize() const {
 	return new icImage(retImg);
 }
 
-icImage* icImage::ResizeThenGabor(int Frequency, int Orientation, double Scale) const {
-	GaborImage *gab = new GaborImage();
-	
-	Img retImg = (IplImage*) cvClone(Image);
-	Img temp   = cvCreateImage(cvSize(Image->width*Scale, Image->height*Scale), IPL_DEPTH_32F, 1);
-	cvResize(Image, temp, CV_INTER_CUBIC);
+//icImage* icImage::ResizeThenGabor(int Frequency, int Orientation, double Scale) const {
+//	GaborImage *gab = new GaborImage();
+//	
+//	Img retImg = (IplImage*) cvClone(Image);
+//	Img temp   = cvCreateImage(cvSize(Image->width*Scale, Image->height*Scale), IPL_DEPTH_32F, 1);
+//	cvResize(Image, temp, CV_INTER_CUBIC);
+//
+//	Img temp2 = gab->GaborTransform(temp, Frequency, Orientation);
+//	
+//	cvResize(temp2, retImg, CV_INTER_CUBIC);
+//	
+//	delete gab;
+//	cvReleaseImage(&temp);
+//	cvReleaseImage(&temp2);	
+//	
+//	return new icImage(retImg);
+//
+//}
 
-	Img temp2 = gab->GaborTransform(temp, Frequency, Orientation);
-	
-	cvResize(temp2, retImg, CV_INTER_CUBIC);
-	
-	delete gab;
-	cvReleaseImage(&temp);
-	cvReleaseImage(&temp2);	
-	
-	return new icImage(retImg);
-
-}
-	
 icImage* icImage::ReScale(double S) const {
 	if (S >= 1) {
 		return Clone();

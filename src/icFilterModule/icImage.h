@@ -107,9 +107,9 @@ public:
 	icImage* SmoothBlur (int) const;
 	icImage* Normalize(void) const;
 	
-	icImage* gabor(int, int) const;
-	icImage* gabor(int, int, int, int) const;
-	icImage* ResizeThenGabor(int, int, double Scale) const;
+//	icImage* gabor(int, int) const;
+//	icImage* gabor(int, int, int, int) const;
+//	icImage* ResizeThenGabor(int, int, double Scale) const;
 
 	icImage* Shift(int, int) const;
 	icImage* ShiftDown() const;
