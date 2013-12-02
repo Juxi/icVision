@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
             SegmentObj->fileSave = false;
             SegmentObj->segmentObject(cvPoint(160,120),false);
 
-            //std::cout<<"segmentation done"<<endl;
+            std::cout<<"segmentation done"<<endl;
 #if TRAINING
             if (SegmentObj->numberfeatures>FEATURE_COUNT_TRESHOLD)
             {

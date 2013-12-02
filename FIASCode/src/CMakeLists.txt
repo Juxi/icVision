@@ -6,5 +6,6 @@ cmake_minimum_required(VERSION 2.6)
 
 add_subdirectory(MainCode)
 add_subdirectory(Motion)
-add_subdirectory(yarpImageToHTTP)
+
+#add_subdirectory(yarpImageToHTTP)
 

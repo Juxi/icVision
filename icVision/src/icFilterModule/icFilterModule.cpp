@@ -113,7 +113,7 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	
 
 	///////// icVision related /////////
-	
+	bool robotNameFromCore = false;     // did we get a robotName from core!
 	// define the icVision core name (usually part of the port the icVision core is running)
 	icVisionName = (config.find("core")).toString();
 	if( icVisionName.empty() ) {
@@ -122,12 +122,30 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 
 	// the name of the RPC port used by the core module
 	icVisionPortName = portPrefix + icVisionName + "/rpc:i";
-	std::cout << "Trying to connect to icVision Core at: " << icVisionPortName; // << std::endl;
+	std::cout << "Trying to connect to icVision Core at: " << icVisionPortName << std::endl;
 	
 	// check if icVision core is running
-	if( icVisionCoreIsAvailable() ) {
-		std::cout << " ... FOUND! " << std::endl;
+
+    if( icVisionCoreIsAvailable() ) {
+		// trying to connect to the rpc icVision core
+		if (! icVisionPort.open((handlerPortName + "/icVisionConnection").c_str())) {
+			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/icVisionConnection").c_str() << std::endl;
+			return false;
+		}
 		
+		// trying to connect to the rpc icVision core
+		printf("Trying to connect to %s\n", icVisionPortName.c_str());
+		if(! yarp.connect((handlerPortName + "/icVisionConnection").c_str(), icVisionPortName.c_str()) ) {
+			std::cout << getName() << ": Unable to connect to port ";
+			std::cout << icVisionPortName.c_str() << std::endl;
+			return false;
+		}
+
+        // set robotName from icVisionCore
+        if(setRobotNameFromCore()) robotNameFromCore = true;
+        else printWarning("Could not get robotName from icVision Core!");
+
+        
 		// change prefix to icVisionName for clearer overview in yarp
 		portPrefix += icVisionName + "/";
 	} else {
@@ -146,33 +164,47 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		//std::cout << "WARNING! Running only once on this image!" << std::endl;
 		printWarning("Running only once on this image!");
 	}
-	
-	if(! isReadingFileFromHDD ) {
+
+	// get robotName from parameters (if needed)
+	if( ! isReadingFileFromHDD ) {
 		
-		// this one should come from the icVision core
-		robotName = (config.find("robot")).toString();
-		if( robotName.empty() ) {
-			robotName = "icubSim";
-			std::cout << "WARNING! No robot name found using " << robotName << std::endl;
-		}
+
+        // we didn't get a name from the core
+        // let's see if the parameters provided have one
+        if ( !robotNameFromCore ) {
+            robotName = (config.find("robot")).toString();
+            if( robotName.empty() ) {
+                robotName = "icubSim";
+                std::cout << "WARNING! No robot name found using " << robotName << std::endl;
+            }
+        }
+
+        // we got a name from the core and also from the params!
+        if ( robotNameFromCore &&
+             (! ((std::string) config.find("robot").toString()).empty() ) ) {
+            printWarning("robot was set as a parameter but was also provided by the icVisionCore!");
+            std::cout << "RobotName used is " << robotName << std::endl;
+        }
+        
 	
 	}
 	
 	if ( config.check("debug") ) {
 		inDebugMode = true;
 		std::cout << "DEBUG: Debug mode enabled!" << std::endl;
-	} else {
-		std::cout << "DEBUG: Debug mode disabled!" << std::endl;		
-		std::cout << "DEBUG: Debug mode disabled!" << std::endl;		
-	}
+//	} else {
+//		std::cout << "DEBUG: Debug mode disabled!" << std::endl;
+    }
 
 	if ( config.check("scale") ) {
 		scalingFactor = (config.find("scale")).asDouble();
 	} else {
 		scalingFactor = 1.0;
 	}
-	std::cout << "Scaling input images with factor: " << scalingFactor << std::endl;		
-	
+	std::cout << "Scaling input images with factor: " << scalingFactor << std::endl;
+    
+    
+	std::cout << std::endl;
 	/////////////////////////////////////
 	// YARP port connections
 	// attaching a port of the same name as the module
@@ -185,22 +217,6 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 		return false;
 	}
 	attach(handlerPort);
-	
-	if( icVisionCoreIsAvailable() ) {
-		// trying to connect to the rpc icVision core 
-		if (! icVisionPort.open((handlerPortName + "/icVisionConnection").c_str())) {
-			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/icVisionConnection").c_str() << std::endl;
-			return false;
-		}
-		
-		// trying to connect to the rpc icVision core 
-		printf("Trying to connect to %s\n", icVisionPortName.c_str());
-		if(! yarp.connect((handlerPortName + "/icVisionConnection").c_str(), icVisionPortName.c_str()) ) {
-			std::cout << getName() << ": Unable to connect to port "; 
-			std::cout << icVisionPortName.c_str() << std::endl;
-			return false;
-		}	
-	}	
 	
 	// open the input ports from the cameras
 	if( ! isReadingFileFromHDD ) {
@@ -413,6 +429,22 @@ bool icFilterModule::icVisionCoreIsAvailable() {
 	return yarp.exists(icVisionPortName.c_str());
 }
 
+bool icFilterModule::setRobotNameFromCore() {
+	yarp::os::Bottle cmd, response;
+	
+	cmd.addString("conf");           // send to icVision::core
+	cmd.addString("robotName");		// send to icVision::core
+    
+	icVisionPort.write(cmd, response);
+	if( response.get(0).isString() ) {
+		robotName = response.get(0).asString();
+        std::cout << "RobotName used: " << robotName << std::endl;
+		return true;
+	}
+	
+	return false;
+}
+
 bool icFilterModule::registerModuleWithCore() {
 	yarp::os::Bottle cmd, response;
 	
@@ -492,8 +524,8 @@ bool icFilterModule::setWorldPositionOfObject(double x, double y, double z, cons
 	
     std::cout << "bottle: " << cmd.toString() << std::endl;
     
-	bool r = mobeePort.write(cmd, response);
-	std::cout << "response: " << response.toString() << std::endl;	
-	// return r;
+	if(mobeePort.write(cmd, response))
+        std::cout << "response: " << response.toString() << std::endl;
+
 	return true;
 }	

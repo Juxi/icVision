@@ -11,7 +11,7 @@
 
 //Saliency
 #define FOVEA 1
-#define FOVEA_BOUNDARY 160.0 //elliptic boundary condition for attention in the scene.
+#define FOVEA_BOUNDARY 120.0 //elliptic boundary condition for attention in the scene.
 #define SALIENCY_INHIBIT_CENTER 4 //How much you want to suppress the saliency in the center to move to a new location. Higher the number higher suppression and longer time taken. Note: You need not change this unless you really feel so.
 
 //Features
