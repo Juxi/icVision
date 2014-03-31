@@ -1,11 +1,9 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #include "blue_detector.h"
-//#include "../evolved_filter_module.h"
-//#include "icImage.h"
 
 // TODO:
 //		- check for memory leak
@@ -15,9 +13,19 @@
 using namespace yarp::os;
 using namespace yarp::sig;
 
+// default constructor
 BlueCupDetector::BlueCupDetector() {
-	//moduleName = "IM-CLeVeR::Vision::Reaching";
+	// moduleName = "IM-CLeVeR::Vision::Reaching";
 	setName("BlueDetector");
+
+    // default MoBeE object name
+	m_MoBeEObjectName = "cup1";
+}
+
+// new constructor
+BlueCupDetector::BlueCupDetector(const char *name) {
+	setName("BlueDetector");
+    m_MoBeEObjectName = name;
 }
 
 BlueCupDetector::~BlueCupDetector() { 

@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
@@ -127,6 +127,13 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 	// check if icVision core is running
 
     if( icVisionCoreIsAvailable() ) {
+        
+        // to allow for multiple ports to query at the same time
+        handlerPortName = portPrefix;
+        handlerPortName += getName();
+        
+        printf("handler: %s\n\n", handlerPortName.c_str());
+        
 		// trying to connect to the rpc icVision core
 		if (! icVisionPort.open((handlerPortName + "/icVisionConnection").c_str())) {
 			std::cout << getName() << ": Unable to open port " << (handlerPortName + "/icVisionConnection").c_str() << std::endl;
@@ -307,7 +314,11 @@ bool icFilterModule::configure(yarp::os::Searchable& config)
 			// HACK HACK TODO check
 			// connect to rpc	
 			// check whether we have F or not!! TODO
-			std::string clientPortName = "/evolvedfilter";
+            handlerPortName = portPrefix;
+            handlerPortName += getName();
+
+            // to allow for multiple filters to localise simultaneously
+            std::string clientPortName = handlerPortName + "/evolvedfilter";
 			clientPortName += "/world-client";
 			if(! mobeePort.open( clientPortName.c_str() )){
 
@@ -436,8 +447,10 @@ bool icFilterModule::setRobotNameFromCore() {
 	cmd.addString("robotName");		// send to icVision::core
     
 	icVisionPort.write(cmd, response);
-	if( response.get(0).isString() ) {
-		robotName = response.get(0).asString();
+
+	// check if we got a robot string (get(0) == 'OK')
+	if( response.get(1).isString() ) {
+		robotName = response.get(1).asString();
         std::cout << "RobotName used: " << robotName << std::endl;
 		return true;
 	}

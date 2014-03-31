@@ -1,4 +1,4 @@
-// Copyright: (C) 2011 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -24,7 +24,11 @@ protected:
 	virtual void setUsedInputs();	
 	
 public:
+    // Constructors
 	BlueCupDetector();
+    BlueCupDetector::BlueCupDetector(const char *name);
+
+    // Destructor
 	~BlueCupDetector();
 	
 	icImage* runFilter();
