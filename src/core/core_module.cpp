@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
@@ -370,6 +370,7 @@ bool CoreModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& repl
         bool getall = false;
 
         reply.clear();
+        reply.addString("OK");
 
 		if( command.size() < 2 ) {
 //			reply.addString("ERROR: The syntax should be:");
@@ -389,7 +390,7 @@ bool CoreModule::respond(const yarp::os::Bottle& command, yarp::os::Bottle& repl
 	if( command.get(0).asString() == "list" || command.get(0).asString() == "ls" ){
 		
 		reply.clear();
-		reply.addString("list");
+		reply.addString("OK");
 		
 		std::vector<ModuleInfo>::iterator itr;
 		for ( itr = listOfModules.begin(); itr != listOfModules.end(); ++itr ) {

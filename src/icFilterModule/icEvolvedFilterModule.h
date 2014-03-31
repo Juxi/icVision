@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
@@ -30,6 +30,7 @@ protected:
 	// member vars
 	bool m_outOfSyncWarning;
 	int m_ImageWidth, m_ImageHeight;
+	std::string m_MoBeEObjectName;  // "cup1"
 	
 	
 	// for evolved filter

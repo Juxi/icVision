@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2012 Juxi Leitner
+// Copyright: (C) 2011-2014 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
@@ -28,6 +28,7 @@ EvolvedFilterModule::EvolvedFilterModule() :
 	setName("EvolvedFilter");
 	gray = red = green = blue =	h =	s = v = NULL;
 	
+    m_MoBeEObjectName = "cup1";
 	inDebugMode = false;
 	
 	m_ImageWidth = 640;
@@ -615,7 +616,12 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 		// TODO sanity check
 		Bottle *pos3d = in.get(2).asList();
 		if(!pos3d->isNull())
-			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1"); // "cup1");
+//			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1"); // "cup1");
+ 			setWorldPositionOfObject(
+                 pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(),
+                 m_MoBeEObjectName.c_str()   // "cup1");
+             );
+
 		
 	}
 
