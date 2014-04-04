@@ -1,4 +1,4 @@
-// Copyright: (C) 2011-2014 Juxi Leitner
+// Copyright: (C) 2011-2012 Juxi Leitner
 // Author: Juxi Leitner <juxi.leitner@gmail.com>
 // find more information at http://Juxi.net/projects/icVision/
 // CopyPolicy: Released under the terms of the GNU GPL v2.0.
@@ -27,8 +27,9 @@ EvolvedFilterModule::EvolvedFilterModule() :
 	m_outOfSyncWarning = false;
 	setName("EvolvedFilter");
 	gray = red = green = blue =	h =	s = v = NULL;
-	
+    
     m_MoBeEObjectName = "cup1";
+	
 	inDebugMode = false;
 	
 	m_ImageWidth = 640;
@@ -209,8 +210,7 @@ bool EvolvedFilterModule::updateModule()
 
 		
 		// run filter
-		icImage* filteredImg = this->runFilter();
-		
+		icImage* filteredImg = this->runFilter();		
 		
 		if( inDebugMode || isReadingFileFromHDD ) {
             end = clock();
@@ -227,7 +227,9 @@ bool EvolvedFilterModule::updateModule()
 
 		
 		bool wewantoverlay = true;
-		bool wewanttothreshold = true;	
+		bool wewanttothreshold = true;
+        bool wewanttofindrect = true;
+        bool wewanttofindcirc = false;
 		
 		IplImage* rgb = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_32F, 3);	
 		IplImage* out8 = cvCreateImage(cvSize(ImageWidth, ImageHeight), IPL_DEPTH_8U, 3);
@@ -259,9 +261,9 @@ bool EvolvedFilterModule::updateModule()
 			IplImage* b = cvCreateImage(cvSize(in->width*scalingFactor, in->height*scalingFactor), IPL_DEPTH_32F, 1);
 			
 			cvCvtColor(gray, rgb, CV_GRAY2RGB);
-//			cvSplit(rgb, b, g, r, NULL);
-	//		cvAdd(r, filteredImg->Image, r);
-		//	cvMerge(b, g, r, NULL, rgb);	
+            cvSplit(rgb, b, g, r, NULL);
+            cvAdd(r, filteredImg->Image, r);
+			cvMerge(b, g, r, NULL, rgb);
 			
 			cvReleaseImage(&r);
 			cvReleaseImage(&g);	
@@ -272,65 +274,133 @@ bool EvolvedFilterModule::updateModule()
 		if(wewanttothreshold) {
 			cvThreshold(out8, out8, 250.0, 255.0, CV_THRESH_BINARY);
 			
-			// Blob detection
+            // Blob detection in gray scale
 			cvCvtColor(out8, out_single, CV_RGB2GRAY);
-			//Linked list of connected pixel sequences in a binary image
-			CvSeq* seq;
-			
-			//Array of bounding boxes
-			vector<CvRect> boxes;
-			
-			//Memory allocated for OpenCV function operations
-			CvMemStorage* storage = cvCreateMemStorage(0);
-			cvClearMemStorage(storage);
-			
-			//Find connected pixel sequences within a binary OpenGL image (diff), starting at the top-left corner (0,0)
-			cvFindContours(out_single, storage, &seq, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, cvPoint(0,0));
-			
-			//Iterate through segments
-			for(; seq; seq = seq->h_next) {
-				//Find minimal bounding box for each sequence
-				CvRect boundbox = cvBoundingRect(seq);
-				boxes.push_back(boundbox);
-			}
-			
-			cvReleaseMemStorage(&storage);
+            
+            //Linked list of connected pixel sequences in a binary image
+            CvSeq* seq;
+            
+            //Memory allocated for OpenCV function operations
+            CvMemStorage* storage = cvCreateMemStorage(0);
+            cvClearMemStorage(storage);
+            
+            //Find connected pixel sequences within a binary OpenGL image (diff), starting at the top-left corner (0,0)
+            cvFindContours(out_single, storage, &seq, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, cvPoint(0,0));
+            
 
-			for(unsigned int boxNr = 0; boxNr < boxes.size(); boxNr++) {
-				CvRect r = boxes[boxNr];
-				//std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
-				CvPoint p1, p2;
-				p1.x = r.x; p1.y = r.y;
-				p2.x = r.x + r.width; p2.y = r.y + r.height;
-				
-				int x = r.x + r.width/2;
-				int y = r.y + r.height;
+            if(wewanttofindrect) {
+                //Array of bounding boxes
+                vector<CvRect> boxes;
+                
+                //Iterate through segments
+                for(; seq; seq = seq->h_next) {
+                    //Find minimal bounding box for each sequence
+                    CvRect boundbox = cvBoundingRect(seq);
+                    boxes.push_back(boundbox);
+                }
+                
+                cvReleaseMemStorage(&storage);
 
-				if(wewantoverlay) {
-					cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
-					ph.x = x; ph.y = y;
-					cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
+                for(unsigned int boxNr = 0; boxNr < boxes.size(); boxNr++) {
+                    CvRect r = boxes[boxNr];
+                    if(r.width < 50 || r.height < 50 ) continue; //|| r.width * r.height < 750) continue;
+                    std::cout << "BOX Info: " << r.x << "," << r.y << "," << r.width << "," << r.height  << std::endl;
+                    CvPoint p1, p2;
+                    p1.x = r.x; p1.y = r.y;
+                    p2.x = r.x + r.width; p2.y = r.y + r.height;
+                    
+                    int x = r.x + r.width/2;
+                    int y = r.y + r.height;
 
-					// set bottom center
-					if(allFramesDone) frameRight_BC = ph;
-					else frameLeft_BC = ph;			
+                    if(wewantoverlay) {
+                        cvRectangle(rgb, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+                        ph.x = x; ph.y = y;
+                        cvCircle(rgb, ph, 2, CV_RGB(0,0,255), 2, 8, 0 );			
 
-				} else {
-					cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
-				}
-				
-				
-				if(allFramesDone) {
-					frameRight_TL = p1;
-					frameRight_BR = p2;
-				}else{
-					frameLeft_TL = p1;
-					frameLeft_BR = p2;
-				}
-				// only do for one block // HACK // TODO
-				break;
-			}
-			
+                        // set bottom center
+                        if(allFramesDone) frameRight_BC = ph;
+                        else frameLeft_BC = ph;			
+
+                    } else {
+                        cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+                    }
+                    
+                    if(allFramesDone) {
+                        frameRight_TL = p1;
+                        frameRight_BR = p2;
+                    }else{
+                        frameLeft_TL = p1;
+                        frameLeft_BR = p2;
+                    }
+                    // only do for one block // HACK // TODO
+                    // break;
+                }
+                
+			}else if(wewanttofindcirc) {
+//                vector<CvPoint2D32f*> centre;
+//                vector<float> radius;
+//                //Iterate through segments
+//                for(; seq; seq = seq->h_next) {
+//                    //Find minimal bounding box for each sequence
+//                    CvPoint2D32f *cp = new CvPoint2D32f;
+//                    float *rp = new float;
+//                    cvMinEnclosingCircle(seq, cp, rp);
+//                    
+//                    centre.push_back(cp);
+//                    radius.push_back(*rp);
+//                }
+//                
+//                cvReleaseMemStorage(&storage);
+//
+//                for(unsigned int circNr = 0; circNr < centre.size(); circNr++) {
+//                    // cvCircle(rgb, centre[circNr], radius[circNr], CV_RGB(0,0,255));
+//                    
+//                    cvCircle(rgb, cvPoint(centre[circNr]->x,centre[circNr]->y),
+//                                  (int)radius[circNr],
+//                                  CV_RGB(0,0,255));
+//                }
+
+                //Memory allocated for OpenCV function operations
+//                CvMemStorage* storage = cvCreateMemStorage(0);
+//                cvClearMemStorage(storage);
+//                
+//                // Apply the Hough Transform to find the circles
+//                CvSeq* seq = cvHoughCircles(out_single, storage, CV_HOUGH_GRADIENT, 1, 75);
+//
+//                printf("found some circles in there ... %d\n", seq->total);
+//                // iterate throught the circles
+//                for (int i = 0; i < seq->total; i++) {
+//                    float *c = (float *)cvGetSeqElem(seq, i);
+//                    unsigned x = cvRound(c[0]), y = cvRound(c[1]), r = cvRound(c[2]);
+//
+//                    if(wewantoverlay) {
+//                        // circle center
+//                        cvCircle(rgb, cvPoint(x,y), 2, CV_RGB(0,0,255), -1, 8, 0);
+//                        cvCircle(rgb, cvPoint(x,y), r, CV_RGB(255,0,0), 3, 8, 0 );
+//                        
+//                        // set bottom center
+//                        if(allFramesDone) frameRight_BC = ph;
+//                        else frameLeft_BC = ph;
+//                        
+//                    } else {
+//                        cvCircle(out8, cvPoint(x,y), r, CV_RGB(255,0,0), 2, 8, 0 );
+//                    }
+//                    
+//                }
+                
+                for(; seq; seq = seq->h_next) {
+                    CvSeq* poly = cvApproxPoly(seq, sizeof(CvContour), storage, CV_POLY_APPROX_DP, 2);
+                    if(poly->total > 10) {
+                        if(wewantoverlay) {
+                            cvDrawContours(rgb, seq, cvScalar(0), CV_RGB(255,0,0), -1);
+                            cvCircle(rgb, cvPoint(10, 10), 2, CV_RGB(255,0,0), 2, 8, 0);
+                        } else {
+                            // cvRectangle(out8, p1, p2, CV_RGB(255,0,0), 2, 8, 0 );
+                        }
+                    }
+                }
+                
+            }
 		}
 		
 		if(wewantoverlay) {
@@ -349,7 +419,6 @@ bool EvolvedFilterModule::updateModule()
 			imgOutputPort.setEnvelope(outbottleTS);
 			imgOutputPort.write();	
 			
-            
             if(isReadingFileFromHDD) {
                 std::string outFileName = fileName;
                 outFileName.replace(outFileName.rfind(".png"), 4, "_output_overlay.png");
@@ -616,12 +685,10 @@ bool EvolvedFilterModule::writePositionBottle(const CvPoint fp1, const CvPoint f
 		// TODO sanity check
 		Bottle *pos3d = in.get(2).asList();
 		if(!pos3d->isNull())
-//			setWorldPositionOfObject(pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(), "cup1"); // "cup1");
- 			setWorldPositionOfObject(
-                 pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(),
-                 m_MoBeEObjectName.c_str()   // "cup1");
-             );
-
+			setWorldPositionOfObject(
+                pos3d->get(0).asDouble(), pos3d->get(1).asDouble(), pos3d->get(2).asDouble(),
+                m_MoBeEObjectName.c_str()   // "cup1");
+            );
 		
 	}
 
