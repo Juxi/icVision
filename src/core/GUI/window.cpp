@@ -252,43 +252,38 @@ void Window::refreshClicked() {
 	
 void Window::updateList() {
 	static unsigned int lastSize = 0;
-	
-	if(icVisionModule) {
-//		if (lastSize == icVisionModule->listOfModules.size()) 
-//			return;
 		
-
+	if(icVisionModule) {
 		// TODO		// do this smarter!
 
-		// Delete all the existing modules in the layout
-//		QLayoutItem *wItem;
-//		while( (wItem = wdg_FilterModuleList->layout()->takeAt(0)) != 0) {
-//			delete wItem->widget();
-//			delete wItem;
-//		}
-		vector<ModuleWidget*> listOfModulesGUI;				
-//		something like 
-//		// get list of widgets
-//		for (int i = 0; i < wdg_FilterModuleList->layout()->count(); i++) {
-//			std::cout << "wdg_FilterModuleList->layout()->count()" << wdg_FilterModuleList->layout()->count()<< std::endl;
-//			listOfModulesGUI.push_back((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i));
-//			// something wrong with getting the modulewidget from the layout back ..
-//			//std:;cout << ((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i))
-//			//	->getModuleInfo()->toStdString() << std::cout;
-//		}
+		vector<ModuleWidget*> listOfModulesGUI;
+		// get list of widgets
+		for (int i = 0; i < wdg_FilterModuleList->layout()->count(); i++) {
+			std::cout << "wdg_FilterModuleList->layout()->count()" << wdg_FilterModuleList->layout()->count()<< std::endl;
+			listOfModulesGUI.push_back((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i));
+			// something wrong with getting the modulewidget from the layout back ..
+			//std:;cout << ((ModuleWidget*) wdg_FilterModuleList->layout()->takeAt(i))
+			//	->getModuleInfo()->toStdString() << std::cout;
+		}
 		
+        // Delete all the existing modules in the layout
+		QLayoutItem *wItem;
+		while( (wItem = wdg_FilterModuleList->layout()->takeAt(0)) != 0) {
+			delete wItem->widget();
+			delete wItem;
+		}
+		listOfModulesGUI.clear();
+
 		
 		vector<ModuleInfo> listOfModulesReg(icVisionModule->listOfModules);
 
 			
 		//unsigned int idxReg = 0, idxGUI = 0;
-		std::cout << "------" << std::endl;		
-		while( listOfModulesGUI.size() > 0  ||
-			   listOfModulesReg.size() > 0 ) {
+		std::cout << "------" << std::endl;	
+		while( //listOfModulesGUI.size() > 0  ||
+  		   listOfModulesReg.size() > 0 ) {
 			
-			std::cout << "GUIsize: " << listOfModulesGUI.size() << std::endl;
-			std::cout << "Regsize: " << listOfModulesReg.size() << std::endl;			
-			if(listOfModulesGUI.size() == 0) {
+			//std::cout << "GUIsize: " << listOfModulesGUI.size() << std::endl;	
 				vector<ModuleInfo>::iterator it = listOfModulesReg.begin();
 				ModuleWidget *mod = new ModuleWidget(*it);
 				mod->setVisible(false);
@@ -328,7 +323,7 @@ void Window::updateList() {
 //					listOfModulesReg.pop_back();
 //					listOfModulesGUI.pop_back();
 //				}
-			}
+//			}
 		}
 		std::cout << "+++++" << std::endl;					   
 		
