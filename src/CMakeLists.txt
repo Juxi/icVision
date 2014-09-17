@@ -28,7 +28,7 @@ ADD_SUBDIRECTORY (icGazeModule)
 ADD_SUBDIRECTORY (icThreeDModule)
 ADD_SUBDIRECTORY (icDisparityModule)
 
-ADD_SUBDIRECTORY (convexHull)
+# ADD_SUBDIRECTORY (convexHull)
 
 # # TBA localisation and saliency, http ...
 

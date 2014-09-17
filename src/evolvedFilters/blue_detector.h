@@ -25,8 +25,8 @@ protected:
 	
 public:
     // Constructors
-	BlueCupDetector();
-    BlueCupDetector::BlueCupDetector(const char *name);
+    BlueCupDetector();
+    BlueCupDetector(const char *name);
 
     // Destructor
 	~BlueCupDetector();
